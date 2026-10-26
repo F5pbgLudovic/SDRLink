@@ -1,0 +1,7 @@
+# Paquet WebView2 téléchargé automatiquement par build.ps1
+packages/
+
+# Résultats de compilation (l'exe est publié dans les Releases GitHub)
+bin/
+bin-test/
+dist/
