@@ -14,6 +14,9 @@ namespace SDRLink
         public string Name;
         public string Url;
         public int Volume = -1;   // volume mémorisé pour ce WebSDR, en %, -1 = jamais réglé
+        public int List;          // liste de favoris (0 à 3)
+
+        public const int ListCount = 4;
 
         public Favorite(string name, string url)
         {
@@ -42,11 +45,15 @@ namespace SDRLink
             return Uri.TryCreate(url, UriKind.Absolute, out u) ? u.Host + (u.IsDefaultPort ? "" : ":" + u.Port) : url;
         }
 
-        // Ligne du fichier de réglages : "Nom|URL|volume" (anciens formats : "Nom|URL", ou URL seule).
+        // Ligne du fichier de réglages : "Nom|URL|volume|liste" (volume -1 = jamais réglé).
+        // Anciens formats acceptés : "Nom|URL|volume", "Nom|URL", ou URL seule.
         public static Favorite FromSetting(string v)
         {
             string[] p = v.Split('|');
-            int vol;
+            int vol, list;
+            if (p.Length >= 4 && int.TryParse(p[p.Length - 2], out vol) && int.TryParse(p[p.Length - 1], out list))
+                return new Favorite(string.Join("|", p, 0, p.Length - 3), p[p.Length - 3])
+                    { Volume = vol < 0 ? -1 : Math.Min(100, vol), List = Math.Max(0, Math.Min(ListCount - 1, list)) };
             if (p.Length >= 3 && int.TryParse(p[p.Length - 1], out vol))
                 return new Favorite(string.Join("|", p, 0, p.Length - 2), p[p.Length - 2]) { Volume = Math.Max(0, Math.Min(100, vol)) };
             int bar = v.LastIndexOf('|');
@@ -55,7 +62,7 @@ namespace SDRLink
 
         public string ToSetting()
         {
-            return Name.Replace("|", "/") + "|" + Url + (Volume >= 0 ? "|" + Volume : "");
+            return Name.Replace("|", "/") + "|" + Url + "|" + Volume + "|" + List;
         }
 
         static bool LooksLikeUrl(string s)
@@ -125,6 +132,14 @@ namespace SDRLink
 
         public string FavName { get { return txtName.Text.Trim(); } }
         public string FavUrl { get { return txtUrl.Text.Trim(); } }
+        Label addressLabel;
+
+        // Saisie d'un nom seul (renommage d'une liste de favoris).
+        public void HideAddress()
+        {
+            addressLabel.Visible = txtUrl.Visible = false;
+            txtUrl.Text = "-";
+        }
 
         public FavoriteEditDialog(string title, string name, string url)
         {
@@ -149,6 +164,7 @@ namespace SDRLink
             AcceptButton = ok;
             CancelButton = cancel;
             Controls.AddRange(new Control[] { l1, l2, txtName, txtUrl, ok, cancel });
+            addressLabel = l2;
             Theme.Apply(this);
             FormClosing += delegate(object s, FormClosingEventArgs e)
             {
@@ -180,18 +196,46 @@ namespace SDRLink
         // Favori à ouvrir dans le WebSDR après fermeture (double-clic ou bouton Ouvrir).
         public Favorite ToOpen;
 
-        public FavoritesDialog(List<Favorite> favorites, Func<Favorite> currentPage)
+        readonly string[] listNames;
+        readonly ComboBox cbList = new ComboBox();
+        const int AllLists = Favorite.ListCount;   // dernier choix de la liste déroulante : toutes les listes
+
+        // Liste affichée (0 à 3, ou AllLists) ; c'est aussi la liste où vont les favoris ajoutés ou importés.
+        public int ShownList { get { return Math.Max(0, cbList.SelectedIndex); } }
+        int TargetList(int mainList) { return ShownList == AllLists ? mainList : ShownList; }
+        readonly int mainList;
+
+        // Nom affiché d'une liste : "Liste 1" devient "List 1" en anglais tant qu'elle n'a pas été renommée.
+        public static string ListLabel(string[] names, int i)
+        {
+            string def = "Liste " + (i + 1);
+            return names[i] == def ? Lang.T(def, "List " + (i + 1)) : names[i];
+        }
+
+        // Petite fenêtre de saisie d'un nom de liste.
+        public static string AskListName(IWin32Window owner, string current)
+        {
+            using (FavoriteEditDialog d = new FavoriteEditDialog(Lang.T("Renommer la liste", "Rename list"), current, "-"))
+            {
+                d.HideAddress();
+                return d.ShowDialog(owner) == DialogResult.OK ? d.FavName : null;
+            }
+        }
+
+        public FavoritesDialog(List<Favorite> favorites, Func<Favorite> currentPage, string[] listNames, int startList)
         {
             favs = favorites;
             this.currentPage = currentPage;
+            this.listNames = listNames;
+            mainList = Math.Max(0, Math.Min(Favorite.ListCount - 1, startList));
             Text = Lang.T("Gestion des favoris", "Favorite manager");
             FormBorderStyle = FormBorderStyle.Sizable;
             MaximizeBox = MinimizeBox = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
             Font = new Font("Segoe UI", 9f);
-            ClientSize = new Size(660, 600);
-            MinimumSize = new Size(676, 420);
+            ClientSize = new Size(700, 640);
+            MinimumSize = new Size(716, 460);
 
             Button add = Make(Lang.T("Ajouter un favori…", "Add favorite…"), 12, 26, 150, 34, delegate { AddFavorite(); });
             add.Font = new Font(Font, FontStyle.Bold);
@@ -210,11 +254,31 @@ namespace SDRLink
             chk.Controls.Add(btnCheck);
             chk.Controls.Add(Make(Lang.T("Tout décocher", "Uncheck all"), 10, 54, 162, 28, delegate { SetAllChecked(false); }));
 
+            // Liste affichée (clic droit : renommer) et déplacement des favoris vers une autre liste.
+            Label lList = new Label { Text = Lang.T("Liste :", "List:"), Location = new Point(12, 108), AutoSize = true };
+            cbList.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbList.SetBounds(80, 104, 200, 23);
+            FillListCombo(mainList);
+            cbList.SelectedIndexChanged += delegate { Refill(-1); };
+            ContextMenuStrip listMenu = new ContextMenuStrip();
+            ToolStripMenuItem rename = new ToolStripMenuItem();
+            listMenu.Items.Add(rename);
+            listMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e)
+            {
+                if (ShownList == AllLists) { e.Cancel = true; return; }
+                rename.Text = Lang.T("Renommer « ", "Rename \"") + ListLabel(listNames, ShownList) + Lang.T(" »…", "\"…");
+            };
+            rename.Click += delegate { RenameList(); };
+            cbList.ContextMenuStrip = listMenu;
+            Button btnMove = Make(Lang.T("Déplacer vers ▸", "Move to ▸"), 290, 102, 130, 27, null);
+            btnMove.Click += delegate { ShowMoveMenu(btnMove); };
+            Label hint = new Label { Text = Lang.T("(clic droit sur la liste pour la renommer)", "(right-click the list to rename it)"), Location = new Point(430, 108), AutoSize = true };
+
             // Nom et adresse du favori sélectionné, modifiables directement (la liste se met à jour en tapant).
-            Label lName = new Label { Text = Lang.T("Nom :", "Name:"), Location = new Point(12, 108), AutoSize = true };
-            Label lUrl = new Label { Text = Lang.T("Adresse :", "Address:"), Location = new Point(12, 138), AutoSize = true };
-            txtName.SetBounds(80, 104, 568, 23);
-            txtUrl.SetBounds(80, 134, 568, 23);
+            Label lName = new Label { Text = Lang.T("Nom :", "Name:"), Location = new Point(12, 142), AutoSize = true };
+            Label lUrl = new Label { Text = Lang.T("Adresse :", "Address:"), Location = new Point(12, 172), AutoSize = true };
+            txtName.SetBounds(80, 138, 608, 23);
+            txtUrl.SetBounds(80, 168, 608, 23);
             txtName.Anchor = txtUrl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtName.TextChanged += delegate { EditSelected(true); };
             txtUrl.TextChanged += delegate { EditSelected(false); };
@@ -222,16 +286,17 @@ namespace SDRLink
             txtName.Leave += delegate { ShowSelected(); };
             txtUrl.Leave += delegate { ShowSelected(); };
 
-            view.SetBounds(12, 166, 636, 382);
+            view.SetBounds(12, 200, 676, 388);
             view.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             view.View = View.Details;
             view.CheckBoxes = true;
             view.FullRowSelect = true;
             view.HideSelection = false;
             view.MultiSelect = false;
-            view.Columns.Add(Lang.T("Nom", "Name"), 230);
-            view.Columns.Add(Lang.T("Adresse", "Address"), 250);
-            view.Columns.Add(Lang.T("État", "Status"), 130);
+            view.Columns.Add(Lang.T("Nom", "Name"), 220);
+            view.Columns.Add(Lang.T("Adresse", "Address"), 235);
+            view.Columns.Add(Lang.T("État", "Status"), 120);
+            view.Columns.Add(Lang.T("Liste", "List"), 75);
             view.SelectedIndexChanged += delegate { if (!refreshing) ShowSelected(); };
             view.ItemChecked += delegate(object s, ItemCheckedEventArgs e)
             {
@@ -247,14 +312,14 @@ namespace SDRLink
                 else if (e.KeyCode == Keys.Enter) OpenSelected();
             };
 
-            lblStatus.SetBounds(12, 553, 462, 40);
+            lblStatus.SetBounds(12, 593, 502, 40);
             lblStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Button open = Make(Lang.T("Ouvrir", "Open"), 482, 558, 80, 30, delegate { OpenSelected(); });
-            Button close = Make(Lang.T("Fermer", "Close"), 568, 558, 80, 30, delegate { Close(); });
+            Button open = Make(Lang.T("Ouvrir", "Open"), 522, 598, 80, 30, delegate { OpenSelected(); });
+            Button close = Make(Lang.T("Fermer", "Close"), 608, 598, 80, 30, delegate { Close(); });
             open.Anchor = close.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CancelButton = close;
 
-            Controls.AddRange(new Control[] { add, imp, exp, sel, chk, lName, txtName, lUrl, txtUrl, view, lblStatus, open, close });
+            Controls.AddRange(new Control[] { add, imp, exp, sel, chk, lList, cbList, btnMove, hint, lName, txtName, lUrl, txtUrl, view, lblStatus, open, close });
             Theme.Apply(this);
             Refill(-1);
             ShowSelected();
@@ -264,8 +329,62 @@ namespace SDRLink
         {
             Button b = new Button { Text = text };
             b.SetBounds(x, y, w, h);
-            b.Click += click;
+            if (click != null) b.Click += click;
             return b;
+        }
+
+        void FillListCombo(int select)
+        {
+            cbList.Items.Clear();
+            for (int i = 0; i < Favorite.ListCount; i++) cbList.Items.Add(ListLabel(listNames, i));
+            cbList.Items.Add(Lang.T("Toutes les listes", "All lists"));
+            cbList.SelectedIndex = select;
+        }
+
+        void RenameList()
+        {
+            int i = ShownList;
+            if (i == AllLists) return;
+            string name = AskListName(this, listNames[i]);
+            if (string.IsNullOrEmpty(name)) return;
+            listNames[i] = name.Replace("|", "/");
+            refreshing = true;
+            FillListCombo(i);
+            refreshing = false;
+            Refill(-1);
+        }
+
+        // Déplace les favoris cochés (ou, à défaut, le favori sélectionné) vers la liste choisie.
+        void ShowMoveMenu(Control anchor)
+        {
+            ContextMenuStrip m = new ContextMenuStrip();
+            for (int i = 0; i < Favorite.ListCount; i++)
+            {
+                int target = i;
+                m.Items.Add(ListLabel(listNames, i), null, delegate { MoveToList(target); });
+            }
+            m.Show(anchor, new Point(0, anchor.Height));
+        }
+
+        void MoveToList(int target)
+        {
+            List<Favorite> items = CheckedShown();
+            if (items.Count == 0)
+            {
+                if (!NeedSelection()) return;
+                items.Add(Selected);
+            }
+            foreach (Favorite f in items) { f.List = target; checkedFavs.Remove(f); }
+            Refill(-1);
+            lblStatus.Text = Lang.T(items.Count + " favori(s) déplacé(s) vers « ", items.Count + " favorite(s) moved to \"")
+                + ListLabel(listNames, target) + Lang.T(" ».", "\".");
+        }
+
+        // Favoris de la liste affichée, dans l'ordre général.
+        List<Favorite> VisibleFavorites()
+        {
+            int l = ShownList;
+            return favs.FindAll(delegate(Favorite f) { return l == AllLists || f.List == l; });
         }
 
         void Refill(int select)
@@ -273,11 +392,11 @@ namespace SDRLink
             refreshing = true;
             view.BeginUpdate();
             view.Items.Clear();
-            foreach (Favorite f in favs)
+            foreach (Favorite f in VisibleFavorites())
             {
                 string st;
                 state.TryGetValue(f, out st);
-                ListViewItem it = new ListViewItem(new[] { f.Name, f.Url, st ?? "" });
+                ListViewItem it = new ListViewItem(new[] { f.Name, f.Url, st ?? "", ListLabel(listNames, f.List) });
                 it.Tag = f;
                 it.Checked = checkedFavs.ContainsKey(f);
                 if (problem.ContainsKey(f)) it.ForeColor = ProblemColor;
@@ -297,7 +416,7 @@ namespace SDRLink
         static readonly Color ProblemColor = Color.FromArgb(220, 60, 60);
 
         int SelectedIndex { get { return view.SelectedIndices.Count > 0 ? view.SelectedIndices[0] : -1; } }
-        Favorite Selected { get { int i = SelectedIndex; return i >= 0 ? favs[i] : null; } }
+        Favorite Selected { get { return view.SelectedItems.Count > 0 ? (Favorite)view.SelectedItems[0].Tag : null; } }
 
         bool NeedSelection()
         {
@@ -332,13 +451,20 @@ namespace SDRLink
         void UpdateStatus()
         {
             if (checking) return;
-            lblStatus.Text = Lang.T(favs.Count + " favori(s), " + checkedFavs.Count + " coché(s)", favs.Count + " favorite(s), " + checkedFavs.Count + " checked");
+            int shown = view.Items.Count, ticked = CheckedShown().Count;
+            lblStatus.Text = Lang.T(shown + " favori(s) affiché(s), " + ticked + " coché(s)", shown + " favorite(s) shown, " + ticked + " checked");
+        }
+
+        // Seuls les favoris visibles comptent : une case cochée dans une autre liste n'est pas touchée.
+        List<Favorite> CheckedShown()
+        {
+            return VisibleFavorites().FindAll(delegate(Favorite f) { return checkedFavs.ContainsKey(f); });
         }
 
         void SetAllChecked(bool on)
         {
             if (!on) checkedFavs.Clear();
-            else foreach (Favorite f in favs) checkedFavs[f] = true;
+            else foreach (Favorite f in VisibleFavorites()) checkedFavs[f] = true;
             Refill(SelectedIndex);
         }
 
@@ -349,15 +475,16 @@ namespace SDRLink
                 cur != null ? cur.Name : "", cur != null ? cur.Url : "http://"))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
-                favs.Add(new Favorite(d.FavName, d.FavUrl));
-                Refill(favs.Count - 1);
+                favs.Add(new Favorite(d.FavName, d.FavUrl) { List = TargetList(mainList) });
+                Refill(-1);
+                if (view.Items.Count > 0) { view.Items[view.Items.Count - 1].Selected = true; view.Items[view.Items.Count - 1].EnsureVisible(); }
             }
         }
 
         // Supprime les favoris cochés ; s'il n'y en a aucun, le favori sélectionné.
         void RemoveItems()
         {
-            List<Favorite> targets = favs.FindAll(delegate(Favorite f) { return checkedFavs.ContainsKey(f); });
+            List<Favorite> targets = CheckedShown();
             if (targets.Count == 0)
             {
                 if (!NeedSelection()) return;
@@ -375,7 +502,7 @@ namespace SDRLink
                 state.Remove(f);
                 problem.Remove(f);
             }
-            Refill(Math.Min(keep, favs.Count - 1));
+            Refill(Math.Min(keep, VisibleFavorites().Count - 1));
         }
 
         // Renommer : place le curseur dans le champ Nom, le texte sélectionné, prêt à être corrigé.
@@ -386,14 +513,17 @@ namespace SDRLink
             txtName.SelectAll();
         }
 
+        // Échange avec le voisin visible (même liste), dans l'ordre général des favoris.
         void MoveItem(int delta)
         {
             if (!NeedSelection()) return;
+            List<Favorite> shown = VisibleFavorites();
             int i = SelectedIndex, j = i + delta;
-            if (j < 0 || j >= favs.Count) return;
-            Favorite f = favs[i];
-            favs[i] = favs[j];
-            favs[j] = f;
+            if (j < 0 || j >= shown.Count) return;
+            int a = favs.IndexOf(shown[i]), b = favs.IndexOf(shown[j]);
+            Favorite f = favs[a];
+            favs[a] = favs[b];
+            favs[b] = f;
             Refill(j);
         }
 
@@ -410,7 +540,9 @@ namespace SDRLink
         // et celles qui ne répondent pas sont cochées pour une suppression manuelle.
         void VerifyAll()
         {
-            if (checking || favs.Count == 0) return;
+            // Vérifie les favoris affichés (la liste choisie, ou toutes les listes).
+            List<Favorite> scope = VisibleFavorites();
+            if (checking || scope.Count == 0) return;
             checking = true;
             btnCheck.Enabled = false;
             state.Clear();
@@ -419,7 +551,7 @@ namespace SDRLink
             Dictionary<string, Favorite> firstByKey = new Dictionary<string, Favorite>();
             List<Favorite> toTest = new List<Favorite>();
             int duplicates = 0;
-            foreach (Favorite f in favs)
+            foreach (Favorite f in scope)
             {
                 string key = WebSdrFinder.UrlKey(f.Url);
                 Favorite first;
@@ -460,13 +592,13 @@ namespace SDRLink
                             {
                                 state[f] = result;
                                 if (!alive) { checkedFavs[f] = true; problem[f] = true; dead++; }
-                                int i = favs.IndexOf(f);
-                                if (i >= 0 && i < view.Items.Count)
+                                foreach (ListViewItem it in view.Items)
                                 {
+                                    if (it.Tag != f) continue;
                                     refreshing = true;
-                                    view.Items[i].SubItems[2].Text = result;
-                                    view.Items[i].Checked = checkedFavs.ContainsKey(f);
-                                    view.Items[i].ForeColor = alive ? view.ForeColor : ProblemColor;
+                                    it.SubItems[2].Text = result;
+                                    it.Checked = checkedFavs.ContainsKey(f);
+                                    it.ForeColor = alive ? view.ForeColor : ProblemColor;
                                     refreshing = false;
                                 }
                                 if (--remaining == 0) FinishVerify(duplicates, dead);
@@ -554,6 +686,7 @@ namespace SDRLink
                 foreach (Favorite f in imported)
                 {
                     if (favs.Exists(delegate(Favorite x) { return string.Equals(x.Url, f.Url, StringComparison.OrdinalIgnoreCase); })) continue;
+                    f.List = TargetList(mainList);
                     favs.Add(f);
                     added++;
                 }

@@ -50,6 +50,46 @@ namespace SDRLink
     if (window.jQuery && jQuery.fn && jQuery.fn.demodulatorPanel && typeof window.center_freq === 'number') return 'owrx';
     return '';
   }
+  // OpenWebRX à plusieurs profils (un par bande) : une fréquence hors du profil actif ne peut pas être réglée.
+  // On choisit le profil qui la couvre d'après son nom ('HF_7MHz', 'VHF_144-146MHz', '40m'...), on bascule,
+  // puis on règle la fréquence une fois le nouveau profil chargé.
+  var BANDS = { '160m': [1.8, 2.0], '80m': [3.5, 3.8], '60m': [5.3, 5.45], '40m': [7.0, 7.2], '30m': [10.1, 10.15],
+    '20m': [14.0, 14.35], '17m': [18.068, 18.168], '15m': [21.0, 21.45], '12m': [24.89, 24.99], '10m': [28.0, 29.7],
+    '6m': [50, 52], '4m': [70, 70.5], '2m': [144, 146], '70cm': [430, 440], '23cm': [1240, 1300] };
+  function profileRange(name) {
+    var n = (name || '').replace(/,/g, '.'), m = n.match(/(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\s*MHz/i);
+    if (m) return [parseFloat(m[1]), parseFloat(m[2])];
+    m = n.match(/(\d+(?:\.\d+)?)\s*MHz/i);
+    if (m) { var c = parseFloat(m[1]); return [c - 1, c + 2]; }
+    m = n.toLowerCase().match(/(\d+)\s*(cm|m)\b/);
+    if (m && BANDS[m[1] + m[2]]) return BANDS[m[1] + m[2]];
+    return null;
+  }
+  function owrxInRange(hz) {
+    return typeof window.center_freq === 'number' && typeof window.bandwidth === 'number'
+      && Math.abs(hz - center_freq) <= bandwidth / 2 - 1000;
+  }
+  function findProfile(hz) {
+    var mhz = hz / 1e6, best = null, bestWidth = 1e9;
+    var opts = document.querySelectorAll('#openwebrx-sdr-profiles-listbox option');
+    for (var i = 0; i < opts.length; i++) {
+      var r = profileRange(opts[i].textContent);
+      if (r && mhz >= r[0] && mhz <= r[1] && r[1] - r[0] < bestWidth) { best = opts[i].value; bestWidth = r[1] - r[0]; }
+    }
+    return best;
+  }
+  function owrxTune(k, hz, mode) {
+    var m = mode === 'fm' ? 'nfm' : mode;
+    if (k === 'owrx+') {
+      if (m) UI.setModulation(m);
+      if (hz) UI.setFrequency(hz, false);
+    } else {
+      if (m) jQuery('#openwebrx-panel-receiver').demodulatorPanel().setMode(m);
+      var d = owrxDemod();
+      if (hz && d) d.set_offset_frequency(hz - center_freq);
+    }
+  }
+
   function owrxDemod() {
     var p = jQuery('#openwebrx-panel-receiver').demodulatorPanel();
     return p ? p.getDemodulator() : null;
@@ -104,19 +144,43 @@ namespace SDRLink
       } else if (k === 'websdr') {
         if (mode && mode.toUpperCase() !== String(window.mode).toUpperCase()) set_mode(mode);
         if (hz) setfreqb(hz / 1000);
-      } else if (k === 'owrx+') {
-        if (mode) UI.setModulation(mode === 'fm' ? 'nfm' : mode);
-        if (hz) UI.setFrequency(hz, false);
-      } else if (k === 'owrx') {
-        if (mode) jQuery('#openwebrx-panel-receiver').demodulatorPanel().setMode(mode === 'fm' ? 'nfm' : mode);
-        var d = owrxDemod();
-        if (hz && d) d.set_offset_frequency(hz - center_freq);
+      } else if (k === 'owrx+' || k === 'owrx') {
+        if (hz && !owrxInRange(hz)) {
+          var prof = findProfile(hz), sel = document.getElementById('openwebrx-sdr-profiles-listbox');
+          if (prof && sel && typeof window.sdr_profile_changed === 'function') {
+            // Mode à remettre après la bascule (le nouveau profil a son propre mode par défaut).
+            var cur = L.get();
+            L.pending = { hz: hz, mode: mode || (cur ? Modes(cur.m) : ''), until: Date.now() + 12000 };
+            if (sel.value !== prof) { sel.value = prof; sdr_profile_changed(); }
+            return;
+          }
+        }
+        owrxTune(k, hz, mode);
       }
     } catch (e) { }
     L.poll();
   };
 
+  // Mode OpenWebRX ramené à la famille comprise par owrxTune.
+  function Modes(m) {
+    m = String(m || '').toLowerCase();
+    return m === 'nfm' || m === 'wfm' ? 'fm' : m;
+  }
+
   L.poll = function () {
+    // Bascule de profil OpenWebRX en cours : rien n'est signalé à SDRLink (la fréquence transitoire du nouveau
+    // profil ne doit pas être recopiée sur le poste) ; on règle la fréquence dès que le profil est chargé.
+    if (L.pending) {
+      var k = detect();
+      if (Date.now() > L.pending.until) { L.pending = null; return; }
+      var ready = k === 'owrx+' ? !!UI.getDemodulator() : k === 'owrx' && !!owrxDemod();
+      if (!ready || !owrxInRange(L.pending.hz)) return;
+      try { owrxTune(k, L.pending.hz, L.pending.mode); } catch (e) { }
+      // Terminé seulement quand la page affiche bien la fréquence voulue (sinon nouvel essai au tour suivant).
+      var now = L.get();
+      if (!now || Math.abs(now.f - L.pending.hz) > 50) return;
+      L.pending = null;
+    }
     // Éléments <audio>/<video> créés après le dernier réglage (sortie vers un autre périphérique, par ex.).
     if (L.volume !== 1) {
       var media = document.querySelectorAll('audio,video'), mv = Math.min(1, L.volume);

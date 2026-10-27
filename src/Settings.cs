@@ -36,6 +36,10 @@ namespace SDRLink
         public long OffsetHz;
         public string LastUrl = "http://websdr.ewi.utwente.nl:8901/";
         public string Language = "fr";
+        // Listes de favoris : noms modifiables et liste affichée dans la barre WebSDR.
+        public string[] ListNames = { "Liste 1", "Liste 2", "Liste 3", "Liste 4" };
+        public int CurrentList;
+        public int PttTimeoutSec;          // délai de sécurité du bouton PTT (0 = désactivé)
         public bool DarkMode;
         public string DarkBase = "", LightBase = "";   // couleurs de palette choisies (RRGGBB, vide = par défaut)
         // Position et taille de la fenêtre en affichage normal (0 = jamais enregistrées).
@@ -102,6 +106,11 @@ namespace SDRLink
                     case "LastUrl": s.LastUrl = v; break;
                     case "Fav": if (v.Length > 0) favs.Add(Favorite.FromSetting(v)); break;
                     case "Language": s.Language = v == "en" ? "en" : "fr"; break;
+                    case "List1": case "List2": case "List3": case "List4":
+                        if (v.Length > 0) s.ListNames[k[4] - '1'] = v;
+                        break;
+                    case "CurrentList": s.CurrentList = Math.Max(0, Math.Min(3, Int(v, 0))); break;
+                    case "PttTimeout": s.PttTimeoutSec = Math.Max(0, Int(v, 0)); break;
                     case "DarkMode": s.DarkMode = v == "1"; break;
                     case "DarkBase": s.DarkBase = v; break;
                     case "LightBase": s.LightBase = v; break;
@@ -147,6 +156,9 @@ namespace SDRLink
             Line(sb, "Offset", OffsetHz);
             Line(sb, "LastUrl", LastUrl);
             Line(sb, "Language", Language);
+            for (int i = 0; i < ListNames.Length; i++) Line(sb, "List" + (i + 1), ListNames[i]);
+            Line(sb, "CurrentList", CurrentList);
+            Line(sb, "PttTimeout", PttTimeoutSec);
             Line(sb, "DarkMode", DarkMode ? 1 : 0);
             Line(sb, "DarkBase", DarkBase);
             Line(sb, "LightBase", LightBase);

@@ -29,6 +29,7 @@ namespace SDRLink
         TrackBar trkVolume, trkRigVolume;
         Label lblVolume, lblRigVolume;
         PaletteButton btnPalette;
+        ComboBox cbFavList;
         Button btnMuteSdr, btnMuteRig;
         bool sdrMuted, rigMuted;
         int rigAfSupported = -1;    // -1 inconnu (pas connecté), 0 non pris en charge, 1 disponible
@@ -42,6 +43,9 @@ namespace SDRLink
         ToolStripStatusLabel status;
         WebView2 web;
         readonly Timer unmuteTimer = new Timer();
+        readonly Timer syncTimer = new Timer();
+        DateTime divergedSince = DateTime.MinValue;   // depuis quand le WebSDR n'est plus sur la fréquence du poste
+        DateTime pttSince;                            // début de l'émission lancée par le bouton PTT
         bool rigTx;
         bool pttActive;   // émission lancée par le bouton PTT de SDRLink
 
@@ -69,7 +73,7 @@ namespace SDRLink
         {
             settings = Settings.Load();
             Lang.English = settings.Language == "en";
-            Text = "SDRLink V1.0 @F5PBG 2026 - WebSDR ⇄ Transceiver";
+            Text = "SDRLink V" + Program.Version + " @F5PBG 2026 - WebSDR ⇄ Transceiver";
             Size = DefaultWindowSize();
             StartPosition = FormStartPosition.CenterScreen;
             RestoreWindowBounds();
@@ -80,6 +84,10 @@ namespace SDRLink
                 unmuteTimer.Stop();
                 if (!Transmitting) SetMuted(false);
             };
+            // Surveillance de la synchro (toutes les secondes) et délai de sécurité du PTT.
+            syncTimer.Interval = 1000;
+            syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); };
+            syncTimer.Start();
             LoadSettingsIntoUi();
             Load += delegate
             {
@@ -266,6 +274,13 @@ namespace SDRLink
             FlowLayoutPanel row3 = Row();
             cbDirection = Combo(160, new[] { "Bidirectionnelle", "Poste → WebSDR", "WebSDR → Poste", "Désactivée" },
                                      new[] { "Both ways", "Rig → WebSDR", "WebSDR → Rig", "Off" });
+            // Passage en "Bidirectionnelle" ou "Poste → WebSDR" : le WebSDR est recalé tout de suite sur le poste.
+            cbDirection.SelectedIndexChanged += delegate
+            {
+                if (loading) return;
+                Log.Write("Synchro : " + cbDirection.Text);
+                if (RigToSdr && rigOnline) PushToSdr();
+            };
             chkMode = Check("Synchroniser le mode", "Sync mode");
             numOffset = new NumericUpDown();
             numOffset.Minimum = -2000000000;
@@ -299,6 +314,7 @@ namespace SDRLink
             btnPtt.FlatAppearance.BorderSize = 2;
             btnPtt.Click += delegate { SetPttButton(!pttActive); };
             btnPtt.Tag = Theme.Custom;
+            btnPtt.ContextMenuStrip = BuildPttMenu();
             lblRig = FreqLabel();
             lblSdr = FreqLabel();
             rowDisplay.Controls.Add(btnPtt);
@@ -379,6 +395,25 @@ namespace SDRLink
             };
             rowUrl.Controls.Add(Lbl("WebSDR :", "WebSDR:"));
             rowUrl.Controls.Add(cbUrl);
+
+            // Liste de favoris affichée dans la liste déroulante des WebSDR (clic droit : renommer).
+            cbFavList = Combo(110);
+            cbFavList.SelectedIndexChanged += delegate
+            {
+                if (loading) return;
+                settings.CurrentList = Math.Max(0, cbFavList.SelectedIndex);
+                RefillUrlCombo();
+            };
+            ContextMenuStrip listMenu = new ContextMenuStrip();
+            ToolStripMenuItem renameList = new ToolStripMenuItem();
+            listMenu.Items.Add(renameList);
+            listMenu.Opening += delegate
+            {
+                renameList.Text = Lang.T("Renommer « ", "Rename \"") + FavoritesDialog.ListLabel(settings.ListNames, settings.CurrentList) + Lang.T(" »…", "\"…");
+            };
+            renameList.Click += delegate { RenameFavoriteList(); };
+            cbFavList.ContextMenuStrip = listMenu;
+            rowUrl.Controls.Add(cbFavList);
             rowUrl.Controls.Add(Btn("Aller", "Go", delegate { NavigateFromBar(); }));
             rowUrl.Controls.Add(Btn("◀ Retour", "◀ Back", delegate { if (web.CoreWebView2 != null && web.CanGoBack) web.GoBack(); }));
             rowUrl.Controls.Add(Btn("Recharger", "Reload", delegate { if (web.CoreWebView2 != null) web.Reload(); }));
@@ -606,6 +641,7 @@ namespace SDRLink
             loading = wasLoading;
             UpdateConnectButton();
             SizeFreqLabels();
+            if (cbFavList.Items.Count > 0) FillFavListCombo();
             if (worker == null) status.Text = Lang.T("Déconnecté", "Disconnected");
             UpdateDisplays();
             if (chkCompact.Checked && web.Visible == false)
@@ -706,6 +742,7 @@ namespace SDRLink
             cbDirection.SelectedIndex = Math.Max(0, Math.Min(3, settings.Direction));
             chkMode.Checked = settings.SyncMode;
             numOffset.Value = settings.OffsetHz;
+            FillFavListCombo();
             RefillUrlCombo();
             cbUrl.Text = settings.LastUrl;
             UpdateInterfacePanels();
@@ -910,9 +947,63 @@ namespace SDRLink
 
         // Bouton PTT : bascule émission/réception, comme le MOX de HRD. Le son est coupé tout de suite,
         // sans attendre que le poste confirme l'émission.
+        // Clic droit sur PTT : délai de sécurité au bout duquel une émission lancée par le bouton est coupée.
+        static readonly int[] PttTimeouts = { 0, 30, 60, 120, 180, 300, 600 };
+
+        ContextMenuStrip BuildPttMenu()
+        {
+            ContextMenuStrip m = new ContextMenuStrip();
+            m.Opening += delegate
+            {
+                m.Items.Clear();
+                ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Délai de sécurité TX (bouton PTT)", "TX safety timeout (PTT button)"));
+                title.Enabled = false;
+                m.Items.Add(title);
+                m.Items.Add(new ToolStripSeparator());
+                foreach (int s in PttTimeouts)
+                {
+                    int sec = s;
+                    ToolStripMenuItem it = new ToolStripMenuItem(TimeoutLabel(sec));
+                    it.Checked = settings.PttTimeoutSec == sec;
+                    it.Click += delegate
+                    {
+                        settings.PttTimeoutSec = sec;
+                        Log.Write("Délai de sécurité TX : " + TimeoutLabel(sec));
+                        UpdatePttButton();
+                    };
+                    m.Items.Add(it);
+                }
+            };
+            m.Items.Add("-");   // contenu construit à l'ouverture (langue et choix en cours)
+            return m;
+        }
+
+        static string TimeoutLabel(int sec)
+        {
+            if (sec == 0) return Lang.T("Désactivé", "Off");
+            return sec < 60 ? sec + " s" : (sec / 60) + " min";
+        }
+
+        // Appelé chaque seconde : compte à rebours sur le bouton et coupure à l'échéance.
+        void CheckPttTimeout()
+        {
+            if (!pttActive || settings.PttTimeoutSec <= 0) return;
+            if ((DateTime.UtcNow - pttSince).TotalSeconds >= settings.PttTimeoutSec)
+            {
+                SetPttButton(false);
+                string msg = Lang.T("Émission coupée automatiquement après ", "Transmission stopped automatically after ")
+                    + TimeoutLabel(settings.PttTimeoutSec) + Lang.T(" (délai de sécurité, clic droit sur PTT pour le régler)", " (safety timeout, right-click PTT to change it)");
+                status.Text = msg;
+                Log.Write(msg);
+                return;
+            }
+            UpdatePttButton();
+        }
+
         void SetPttButton(bool on)
         {
             if (on && (worker == null || !rigOnline)) { status.Text = Lang.T("PTT : connectez d'abord le poste", "PTT: connect the rig first"); return; }
+            if (on) pttSince = DateTime.UtcNow;
             pttActive = on;
             if (worker != null) worker.SetPtt(on);
             UpdatePttButton();
@@ -923,7 +1014,17 @@ namespace SDRLink
         void UpdatePttButton()
         {
             // Au repos : jaune clair sur fond sombre, bien visible sur tous les écrans et dans les deux thèmes.
-            btnPtt.Text = pttActive ? "● TX" : "PTT";
+            string text = "PTT";
+            if (pttActive)
+            {
+                text = "● TX";
+                if (settings.PttTimeoutSec > 0)
+                {
+                    int left = Math.Max(0, settings.PttTimeoutSec - (int)(DateTime.UtcNow - pttSince).TotalSeconds);
+                    text += " " + (left / 60) + ":" + (left % 60).ToString("00");
+                }
+            }
+            if (btnPtt.Text != text) btnPtt.Text = text;
             btnPtt.BackColor = pttActive ? Color.FromArgb(210, 0, 0) : Color.FromArgb(55, 55, 60);
             btnPtt.ForeColor = pttActive ? Color.White : Color.FromArgb(255, 235, 110);
             btnPtt.FlatAppearance.BorderColor = Color.FromArgb(180, 0, 0);
@@ -1199,6 +1300,21 @@ namespace SDRLink
             if ((freqChanged || modeChanged) && SdrToRig) PushToRig(freqChanged, modeChanged);
         }
 
+        // Le poste fait foi : en "Bidirectionnelle" ou "Poste → WebSDR", un WebSDR resté décalé de plus de 3 s
+        // (réglage perdu, page lente, clic dans la cascade en mode "Poste → WebSDR") est recalé sur le poste.
+        void CheckSync()
+        {
+            bool diverged = worker != null && rigOnline && RigToSdr && sdrKind != "" && rigF > 0 && !WheelActive
+                && DateTime.UtcNow > ignoreSdrUntil && DateTime.UtcNow > ignoreRigUntil
+                && Math.Abs(rigF + Offset - sdrF) > Tolerance;
+            if (!diverged) { divergedSince = DateTime.MinValue; return; }
+            if (divergedSince == DateTime.MinValue) { divergedSince = DateTime.UtcNow; return; }
+            if ((DateTime.UtcNow - divergedSince).TotalSeconds < 3) return;
+            Log.Write("Synchro : WebSDR recalé sur le poste (" + FormatFreq(sdrF) + " -> " + FormatFreq(rigF + Offset) + ")");
+            divergedSince = DateTime.MinValue;
+            PushToSdr();
+        }
+
         void PushToSdr()
         {
             if (sdrKind == "" || rigF <= 0 || web.CoreWebView2 == null) return;
@@ -1435,14 +1551,37 @@ namespace SDRLink
 
         // ---------------------------------------------------------------- Favoris
 
+        // Liste déroulante des WebSDR : seulement les favoris de la liste choisie.
         void RefillUrlCombo()
         {
             string text = cbUrl.Text;
             cbUrl.BeginUpdate();
             cbUrl.Items.Clear();
-            foreach (Favorite f in settings.Favorites) cbUrl.Items.Add(f);
+            foreach (Favorite f in settings.Favorites)
+                if (f.List == settings.CurrentList) cbUrl.Items.Add(f);
             cbUrl.EndUpdate();
             cbUrl.Text = text;
+        }
+
+        // Noms des listes (ils changent quand on les renomme ou qu'on change de langue).
+        void FillFavListCombo()
+        {
+            bool was = loading;
+            loading = true;
+            cbFavList.Items.Clear();
+            for (int i = 0; i < Favorite.ListCount; i++) cbFavList.Items.Add(FavoritesDialog.ListLabel(settings.ListNames, i));
+            cbFavList.SelectedIndex = Math.Max(0, Math.Min(Favorite.ListCount - 1, settings.CurrentList));
+            loading = was;
+        }
+
+        void RenameFavoriteList()
+        {
+            int i = settings.CurrentList;
+            string name = FavoritesDialog.AskListName(this, settings.ListNames[i]);
+            if (string.IsNullOrEmpty(name)) return;
+            settings.ListNames[i] = name.Replace("|", "/");
+            FillFavListCombo();
+            settings.Save();
         }
 
         // Page affichée, proposée comme nouveau favori (nom = titre de la page).
@@ -1462,6 +1601,7 @@ namespace SDRLink
                 // Le nouveau favori garde le volume actuel ; s'il s'agit de la page affichée, il devient le favori courant.
                 Favorite f = new Favorite(d.FavName, d.FavUrl);
                 f.Volume = trkVolume.Value;
+                f.List = settings.CurrentList;
                 settings.Favorites.Add(f);
                 if (web.CoreWebView2 != null && f.Matches(web.CoreWebView2.Source)) currentFav = f;
                 RefillUrlCombo();
@@ -1490,6 +1630,7 @@ namespace SDRLink
         {
             using (WebSdrSearchDialog d = new WebSdrSearchDialog(settings.Favorites, delegate(string url) { Navigate(url); }))
             {
+                d.TargetList = settings.CurrentList;
                 d.ShowDialog(this);
                 if (d.Added == 0) return;
             }
@@ -1501,9 +1642,10 @@ namespace SDRLink
 
         void ManageFavorites()
         {
-            using (FavoritesDialog d = new FavoritesDialog(settings.Favorites, CurrentPage))
+            using (FavoritesDialog d = new FavoritesDialog(settings.Favorites, CurrentPage, settings.ListNames, settings.CurrentList))
             {
                 d.ShowDialog(this);
+                FillFavListCombo();
                 RefillUrlCombo();
                 // Favoris modifiés (supprimé, adresse changée...) : on retrouve celui de la page affichée.
                 if (web.CoreWebView2 != null) OnPageChanged(web.CoreWebView2.Source);

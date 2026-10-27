@@ -276,6 +276,7 @@ namespace SDRLink
         bool sortDesc;
 
         public int Added;
+        public int TargetList;      // liste de favoris où vont les récepteurs ajoutés
 
         public WebSdrSearchDialog(List<Favorite> favorites, Action<string> listen)
         {
@@ -491,7 +492,7 @@ namespace SDRLink
                 if (!checkedKeys.ContainsKey(WebSdrFinder.UrlKey(s.Url)) || IsFavorite(s)) continue;
                 string name = s.Name.Length > 90 ? s.Name.Substring(0, 90).Trim() + "…" : s.Name;
                 if (s.Country != "" && name.IndexOf(s.Country, StringComparison.OrdinalIgnoreCase) < 0) name += " (" + s.Country + ")";
-                favs.Add(new Favorite(name, s.Url));
+                favs.Add(new Favorite(name, s.Url) { List = TargetList });
                 n++;
             }
             Added += n;

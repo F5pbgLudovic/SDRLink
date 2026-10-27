@@ -6,6 +6,9 @@ namespace SDRLink
 {
     static class Program
     {
+        // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
+        public const string Version = "1.1";
+
         [STAThread]
         static void Main()
         {

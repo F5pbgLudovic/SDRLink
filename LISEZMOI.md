@@ -59,6 +59,14 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
 ## Favoris
 
 - La liste déroulante de la barre WebSDR affiche les favoris par leur **nom**. En choisir un ouvre le WebSDR.
+- **Listes de favoris** : 4 listes (Liste 1 à Liste 4) pour trier les WebSDR.
+  - Le menu juste à droite de la liste des WebSDR choisit la liste affichée.
+  - **Clic droit** sur ce menu pour renommer la liste (par ex. « HF France », « VHF »…).
+  - Les favoris ajoutés (★, recherche, import) vont dans la liste choisie. Les favoris existants sont dans la liste 1.
+  - Dans « Gérer les favoris… » :
+    - le menu **Liste** filtre l'affichage (ou « Toutes les listes ») ; clic droit dessus pour la renommer ;
+    - **Déplacer vers ▸** range les favoris cochés (ou, à défaut, le favori sélectionné) dans une autre liste ;
+    - une colonne « Liste » indique la liste de chaque favori.
 - **★ Ajouter aux favoris** : ajoute la page affichée, nommée d'après le titre de la page (modifiable).
 - **Retirer des favoris** : retire la page affichée des favoris, après confirmation.
 - **Gérer les favoris…** ouvre le gestionnaire :
@@ -139,6 +147,9 @@ Le menu **Langue / Language**, sur la 2ᵉ ligne, bascule toute l'interface entr
 ## Synchronisation
 
 - **Bidirectionnelle** / **Poste → WebSDR** / **WebSDR → Poste** / **Désactivée**
+- En choisissant **Bidirectionnelle** ou **Poste → WebSDR**, le WebSDR est aussitôt recalé sur la fréquence du poste.
+- Dans ces deux modes, le **poste fait foi** : si le WebSDR reste décalé de plus de 3 secondes, il est recalé sur le poste. C'est le cas si un réglage est perdu, si la page est lente, ou après un clic dans la cascade en mode « Poste → WebSDR ».
+- **OpenWebRX à plusieurs profils** (un profil par bande, par ex. « HF_7MHz », « VHF_144-146MHz ») : si la fréquence demandée est hors du profil actif, SDRLink bascule automatiquement sur le profil qui la couvre, d'après son nom, puis règle la fréquence. Le changement de profil s'applique à tous les auditeurs de ce récepteur, comme lorsqu'on le fait à la main.
 - **Décalage WebSDR (Hz)** : ajouté à la fréquence du poste côté WebSDR (transverter, écart de calibration…)
 - **◀ Retour** (barre WebSDR) : revient à la page précédente, comme la flèche retour d'un navigateur. Utile après avoir suivi un lien, par exemple dans un annuaire de WebSDR.
 - Si le poste est en DATA-U et le WebSDR en USB, SDRLink ne change pas le mode du poste (même famille).
@@ -150,6 +161,10 @@ Le gros bouton **PTT**, à gauche de « POSTE », fait passer le poste en émiss
 - Avec OmniRig, il agit sur la propriété `Tx` ; avec HRD, sur le bouton MOX.
 - Le son du WebSDR est coupé dès le clic, même si le poste ne signale pas son état d'émission (si « Couper le son du WebSDR en émission » est cochée).
 - Par sécurité, si on se déconnecte ou si on ferme SDRLink pendant une émission lancée par ce bouton, le poste repasse en réception.
+- **Délai de sécurité TX** (clic droit sur PTT) : Désactivé, 30 s, 1, 2, 3, 5 ou 10 min.
+  - Pendant l'émission, le bouton affiche le temps restant (« ● TX 1:45 »).
+  - À l'échéance, SDRLink repasse en réception et l'indique en bas de la fenêtre.
+  - Ce délai concerne l'émission lancée par le bouton PTT de SDRLink, pas la pédale ni le micro.
 - **Émission sans modulation** (constaté sur un FTdx10) : le PTT par CAT met bien le poste en émission, mais le son émis dépend de la **source de modulation** du poste. Si elle est réglée sur l'arrière ou l'USB (« REAR », souvent le cas pour le FT8), le micro n'est pas transmis. Sur le FTdx10, vérifier dans les menus de réglage de l'émission (TX AUDIO) la source de modulation SSB (MOD SOURCE : MIC) et le gain micro. Les autres logiciels qui passent en émission par CAT, comme WSJT-X, rencontrent le même comportement.
 
 ## Coupure du son en émission
@@ -214,3 +229,12 @@ Ces deux réglages sont conservés au prochain lancement.
 ## Dépannage
 
 Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrlink.log`. Le journal est remis à zéro à chaque lancement et contient l'état de la connexion et, pour HRD, la liste des modes reçue.
+
+## Historique des versions
+
+- **1.1**
+  - listes de favoris (4 listes renommables, déplacement entre listes) ;
+  - délai de sécurité TX par clic droit sur PTT ;
+  - recalage du WebSDR au choix de la synchro et surveillance du décalage ;
+  - bascule automatique de profil sur les OpenWebRX à plusieurs bandes.
+- **1.0** — première version.
