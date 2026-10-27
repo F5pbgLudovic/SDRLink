@@ -16,7 +16,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 
 ## Télécharger
 
-L'exe prêt à l'emploi se trouve dans la section **Releases** de ce dépôt. C'est un seul fichier, pour Windows 10 et 11.
+**[Télécharger la dernière version](https://github.com/F5pbgLudovic/SDRLink/releases/latest)** (`SDRLink.exe`, ou le `.zip` qui contient aussi la notice). C'est un seul fichier, sans installation, pour Windows 10 et 11.
 
 ## Notice
 
@@ -31,3 +31,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
 Le script télécharge le paquet WebView2 (NuGet) au premier lancement et produit `dist\SDRLink.exe`.
+
+## English
+
+SDRLink keeps a **WebSDR** (websdr.org, KiwiSDR, OpenWebRX, UberSDR, PhantomSDR) in sync with your **transceiver**: frequency, mode and PTT, both ways. Rig control through a COM port (CAT), OmniRig, TCI, Ham Radio Deluxe or Hamlib (rigctld). The WebSDR audio can be sent to a virtual audio cable (SDRLINK) for WSJT-X. The interface is available in 23 European languages (menu on the 2nd line). Single exe, no installation, Windows 10/11: see **[Releases](https://github.com/F5pbgLudovic/SDRLink/releases/latest)**.
