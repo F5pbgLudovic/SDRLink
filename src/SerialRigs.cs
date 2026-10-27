@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO.Ports;
@@ -311,7 +311,7 @@ namespace SDRLink
         }
     }
 
-    // Yaesu FT-817/818 : ancien protocole CAT binaire, commandes de 5 octets [P1 P2 P3 P4 CMD],
+    // Yaesu FT-817/818/857/897 : ancien protocole CAT binaire, commandes de 5 octets [P1 P2 P3 P4 CMD],
     // fréquence en BCD sur 4 octets (unité 10 Hz, chiffre de poids fort en premier).
     public class Ft817Rig : SerialRig
     {

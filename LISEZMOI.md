@@ -41,7 +41,7 @@ Hamlib est la bibliothèque libre de télécommande des postes utilisée par WSJ
 
 ## Postes en CAT direct
 
-- **Yaesu** : FT-2000, FTdx10, FTdx101, FT-991/A, FT-891, FT-710, FTdx5000, FTdx3000, FTdx1200, FT-950, FT-450, FT-817, FT-817ND, FT-818, FT-818ND
+- **Yaesu** : FT-2000, FTdx10, FTdx101, FT-991/A, FT-891, FT-710, FTdx5000, FTdx3000, FTdx1200, FT-950, FT-450, FT-817, FT-817ND, FT-818, FT-818ND, FT-857, FT-857D, FT-897, FT-897D
 - **Icom** : IC-7000, IC-7760, IC-7300, IC-7610, IC-705, IC-9700, IC-7100, IC-7200, IC-7410, IC-7600, IC-7700, IC-7800, IC-7851, IC-756PROIII, IC-746PRO, IC-718, IC-706, IC-706MKII, IC-706MKIIG
 - **Kenwood** : TS-590, TS-890, TS-990, TS-2000, TS-480, TS-870, TS-570, TS-850S
 - **Elecraft** : K4, K3/K3S, KX3, KX2, K2
@@ -52,7 +52,7 @@ Quand on choisit un modèle, la vitesse et l'adresse CI-V se règlent sur les va
 - **FT-2000** : menu CAT RATE (4800 par défaut). Testé chez toi : 38400, 1 bit de stop, RTS décoché.
 - **FTdx10** : menu CAT RATE ; sur l'USB, prendre le port COM « Enhanced ». Si rien ne répond, essayer RTS coché/décoché.
 - **IC-7000** : adresse CI-V 70 (hex), vitesse CI-V du menu (souvent 19200 ou Auto). CI-V Transceive peut rester sur ON.
-- **FT-817/818** : ancien protocole CAT binaire de Yaesu, 2 bits de stop, vitesse selon le menu CAT RATE (4800 par défaut).
+- **FT-817/818, FT-857/857D, FT-897/897D** : ancien protocole CAT binaire de Yaesu, 2 bits de stop, vitesse selon le menu CAT RATE du poste (4800 par défaut). Le volume du poste (Mute TX, Volume TX) n'est pas réglable par ce protocole.
 - **TS-850S** : 4800 bauds, 2 bits de stop.
 - **IC-7760** : adresse B2. **IC-706** : adresse 48. **IC-706MKII** : adresse 4E.
 - **Xiegu** : l'adresse CI-V dépend du firmware. Si le poste ne répond pas, essayer une autre adresse :
@@ -142,7 +142,7 @@ Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 - **Icom / Xiegu** : CI-V `14 01`, valeur de 0000 à 0255.
 - **TCI** : `volume:` de −60 à 0 dB.
 - **HRD** : curseur « AF gain (main) » de HRD Rig Control (sinon « AF gain » ou « Volume »), par `get/set slider-pos`. Il est recherché à la connexion ; le journal l'indique par la ligne « HRD curseur volume … ». Si HRD n'a pas ce curseur pour le poste, la barre est grisée.
-- **Non disponible** avec FT-817/818 (pas de commande) et OmniRig (pas de réglage de volume). La barre est alors grisée et un message l'explique.
+- **Non disponible** avec FT-817/818/857/897 (pas de commande) et OmniRig (pas de réglage de volume). La barre est alors grisée et un message l'explique.
 
 ## Mode sombre
 
@@ -284,6 +284,7 @@ Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrli
 
 ## Historique des versions
 
+- **1.4.1** : Yaesu FT-857, FT-857D, FT-897 et FT-897D.
 - **1.4**
   - interface **Hamlib (rigctld)**, avec lancement automatique de rigctld ;
   - 23 langues européennes ;

@@ -60,11 +60,15 @@ namespace SDRLink
             new RigModel("Yaesu", "FTdx1200",     RigProtocol.Yaesu, 8, 0, 4800, 2),
             new RigModel("Yaesu", "FT-950",       RigProtocol.Yaesu, 8, 0, 4800, 2),
             new RigModel("Yaesu", "FT-450/450D",  RigProtocol.Yaesu, 8, 0, 4800, 2),
-            // Yaesu FT-817/818 (ancien protocole binaire 5 octets)
+            // Yaesu FT-817/818/857/897 (ancien protocole binaire 5 octets, mêmes commandes sur les quatre)
             new RigModel("Yaesu", "FT-817",       RigProtocol.Yaesu817, 0, 0, 4800, 2),
             new RigModel("Yaesu", "FT-817ND",     RigProtocol.Yaesu817, 0, 0, 4800, 2),
             new RigModel("Yaesu", "FT-818",       RigProtocol.Yaesu817, 0, 0, 4800, 2),
             new RigModel("Yaesu", "FT-818ND",     RigProtocol.Yaesu817, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-857",       RigProtocol.Yaesu817, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-857D",      RigProtocol.Yaesu817, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-897",       RigProtocol.Yaesu817, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-897D",      RigProtocol.Yaesu817, 0, 0, 4800, 2),
 
             // Icom (CI-V binaire)
             new RigModel("Icom", "IC-7000",       RigProtocol.Icom, 0, 0x70, 19200, 1),
