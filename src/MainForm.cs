@@ -43,7 +43,7 @@ namespace SDRLink
         bool rigVolumeLoading;
         Favorite currentFav;        // favori correspondant à la page affichée (porte son volume), null sinon
         bool volumeLoading;
-        FlowLayoutPanel pnlModel, pnlCom, pnlOmni, pnlNet, pnlHrdTx, rowDisplay, rowUrl, rowConn, rowParams;
+        FlowLayoutPanel pnlModel, pnlCom, pnlOmni, pnlNet, pnlHrdTx, rowDisplay, rowUrl, rowConn, rowParams, rowHamlib;
         Button btnConnect, btnPtt;
         Label lblRig, lblSdr;
         StatusStrip strip;
@@ -171,8 +171,8 @@ namespace SDRLink
             TableLayoutPanel table = new TableLayoutPanel();
             table.Dock = DockStyle.Fill;
             table.ColumnCount = 1;
-            table.RowCount = 6;
-            for (int i = 0; i < 5; i++) table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            table.RowCount = 7;
+            for (int i = 0; i < 6; i++) table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
             // Ligne 1 : interface, marque, modèle, connexion
@@ -284,7 +284,9 @@ namespace SDRLink
             pnlHamlib.Controls.Add(Lbl("N° de modèle Hamlib :", "Hamlib model no.:"));
             pnlHamlib.Controls.Add(numHamlibModel);
             pnlHamlib.Controls.Add(Btn("Télécharger Hamlib…", "Download Hamlib…", delegate { OpenHamlibDownload(); }));
-            row2.Controls.Add(pnlHamlib);
+            // Ligne à part (sous la ligne du port COM), affichée seulement pour Hamlib.
+            rowHamlib = Row();
+            rowHamlib.Controls.Add(pnlHamlib);
             pnlHrdTx.Controls.Add(cbHrdTx);
             row2.Controls.Add(pnlHrdTx);
             // Réglage lu à la connexion : on reconnecte pour l'appliquer tout de suite.
@@ -526,10 +528,11 @@ namespace SDRLink
 
             table.Controls.Add(row1, 0, 0);
             table.Controls.Add(row2, 0, 1);
-            table.Controls.Add(row3, 0, 2);
-            table.Controls.Add(rowDisplay, 0, 3);
-            table.Controls.Add(rowUrl, 0, 4);
-            table.Controls.Add(web, 0, 5);
+            table.Controls.Add(rowHamlib, 0, 2);
+            table.Controls.Add(row3, 0, 3);
+            table.Controls.Add(rowDisplay, 0, 4);
+            table.Controls.Add(rowUrl, 0, 5);
+            table.Controls.Add(web, 0, 6);
 
             strip = new StatusStrip();
             status = new ToolStripStatusLabel();
@@ -721,6 +724,7 @@ namespace SDRLink
             pnlNet.Visible = i >= 2;
             pnlHrdTx.Visible = i == 3;
             pnlHamlib.Visible = i == 4;
+            rowHamlib.Visible = i == 4 && !InCompactView;
             if (i != lastInterfaceShown && i >= 2)
             {
                 if (lastInterfaceShown >= 2) StoreNetSettings(lastInterfaceShown);
@@ -1052,6 +1056,9 @@ namespace SDRLink
 
         // Affichage réduit : de la ligne "Synchro" jusqu'à la ligne du volume (connexion, réglages et page masqués).
         // Le WebSDR continue de jouer et de suivre le poste.
+        // Affichage réduit demandé (Visible n'est pas fiable avant l'affichage de la fenêtre).
+        bool InCompactView { get { return chkCompact != null && chkCompact.Checked; } }
+
         void ApplyCompact()
         {
             bool compact = chkCompact.Checked;
@@ -1071,7 +1078,7 @@ namespace SDRLink
                 }
                 normalSize = Size;
                 // De la ligne "Synchro" à la ligne du volume : connexion, réglages de l'interface et page masqués.
-                rowConn.Visible = rowParams.Visible = web.Visible = false;
+                rowConn.Visible = rowParams.Visible = rowHamlib.Visible = web.Visible = false;
                 PerformLayout();
                 int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
                 MaximumSize = new Size(10000, h);
@@ -1081,6 +1088,7 @@ namespace SDRLink
             {
                 MaximumSize = Size.Empty;
                 rowConn.Visible = rowParams.Visible = web.Visible = true;
+                rowHamlib.Visible = cbInterface.SelectedIndex == 4;
                 Size = normalSize.IsEmpty ? DefaultWindowSize() : normalSize;
                 if (wasMaximized) WindowState = FormWindowState.Maximized;
                 wasMaximized = false;
