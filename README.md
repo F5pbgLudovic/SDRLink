@@ -1,4 +1,4 @@
-# SDRLink V1.1 — @F5PBG 2026
+﻿# SDRLink V1.2 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 

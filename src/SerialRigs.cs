@@ -303,8 +303,9 @@ namespace SDRLink
                 case Modes.CWR: return '7';
                 case Modes.RTTY: return elecraft ? '9' : '6';
                 case Modes.RTTYR: return elecraft ? '6' : '9';
-                case Modes.DATAU: return '6';
-                case Modes.DATAL: return '9';
+                // Mode données (FT8, WSJT...) : DATA sur Elecraft ; USB/LSB sur Kenwood (6/9 y sont le FSK, pas les données).
+                case Modes.DATAU: return elecraft ? '6' : '2';
+                case Modes.DATAL: return elecraft ? '9' : '1';
             }
             return '\0';
         }

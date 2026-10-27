@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
@@ -7,7 +7,7 @@ namespace SDRLink
     static class Program
     {
         // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
-        public const string Version = "1.1";
+        public const string Version = "1.2";
 
         [STAThread]
         static void Main()

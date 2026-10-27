@@ -36,7 +36,7 @@ namespace SDRLink
         bool rigVolumeLoading;
         Favorite currentFav;        // favori correspondant à la page affichée (porte son volume), null sinon
         bool volumeLoading;
-        FlowLayoutPanel pnlModel, pnlCom, pnlOmni, pnlNet, pnlHrdTx, rowDisplay, rowUrl;
+        FlowLayoutPanel pnlModel, pnlCom, pnlOmni, pnlNet, pnlHrdTx, rowDisplay, rowUrl, rowConn, rowParams;
         Button btnConnect, btnPtt;
         Label lblRig, lblSdr;
         StatusStrip strip;
@@ -51,7 +51,10 @@ namespace SDRLink
 
         ComboBox cbStep, cbFreq;
         Button[] modeButtons;
-        static readonly string[] ModeButtonModes = { Modes.USB, Modes.LSB, Modes.AM, Modes.FM };
+        static readonly string[] ModeButtonModes = { Modes.USB, Modes.LSB, Modes.AM, Modes.FM, Modes.DATAU };
+        bool digiActive;            // bouton DIGI enfoncé
+        bool tapShown;              // dérivation DIGI actuellement demandée à la page
+        AudioSink digiSink;         // sortie Windows (câble virtuel) recevant le son du WebSDR
         string shownModeFamily;     // mode mis en surbrillance sur les boutons
         static readonly long[] Steps = { 100, 250, 500, 1000, 2500, 5000, 10000 };
         long wheelTarget;           // fréquence poste visée par la molette
@@ -97,7 +100,14 @@ namespace SDRLink
             Shown += delegate { ApplyCompact(); };
             Application.AddMessageFilter(new WheelFilter(this));
             Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyCompact(); };
-            FormClosing += delegate { Disconnect(); SaveUiToSettings(); SaveWindowBounds(); settings.Save(); };
+            FormClosing += delegate
+            {
+                Disconnect();
+                if (digiSink != null) { digiSink.Dispose(); digiSink = null; }
+                SaveUiToSettings();
+                SaveWindowBounds();
+                settings.Save();
+            };
         }
 
         static Size DefaultWindowSize()
@@ -157,7 +167,7 @@ namespace SDRLink
             table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
             // Ligne 1 : interface, marque, modèle, connexion
-            FlowLayoutPanel row1 = Row();
+            FlowLayoutPanel row1 = rowConn = Row();
             cbInterface = Combo(170, new[] { "Port COM (CAT direct)", "OmniRig", "TCI", "Ham Radio Deluxe" },
                                      new[] { "COM port (direct CAT)", "OmniRig", "TCI", "Ham Radio Deluxe" });
             cbInterface.SelectedIndexChanged += delegate { UpdateInterfacePanels(); };
@@ -195,7 +205,7 @@ namespace SDRLink
             row1.Controls.Add(btnPalette);
 
             // Ligne 2 : paramètres propres à l'interface choisie
-            FlowLayoutPanel row2 = Row();
+            FlowLayoutPanel row2 = rowParams = Row();
             pnlCom = SubRow();
             cbPort = Combo(80);
             cbPort.DropDownStyle = ComboBoxStyle.DropDown;
@@ -280,6 +290,8 @@ namespace SDRLink
                 if (loading) return;
                 Log.Write("Synchro : " + cbDirection.Text);
                 if (RigToSdr && rigOnline) PushToSdr();
+                // "WebSDR → Poste" : le poste est aussitôt réglé sur la fréquence et le mode du WebSDR.
+                else if (Dir == Direction.SdrToRig) PushToRig(true, true);
             };
             chkMode = Check("Synchroniser le mode", "Sync mode");
             numOffset = new NumericUpDown();
@@ -327,14 +339,20 @@ namespace SDRLink
             {
                 string mode = ModeButtonModes[i];
                 Button b = new Button();
-                b.Text = Modes.Display(mode);
+                b.Text = mode == Modes.DATAU ? "DIGI" : Modes.Display(mode);
                 b.Size = new Size(44, 30);
                 b.Margin = new Padding(i == 0 ? 8 : 2, 5, 0, 0);
                 b.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
                 b.FlatStyle = FlatStyle.Flat;
                 b.FlatAppearance.BorderColor = Color.FromArgb(0, 150, 75);
                 b.Tag = Theme.Custom;
-                b.Click += delegate { SetModeBoth(mode); };
+                b.Click += delegate
+                {
+                    digiActive = mode == Modes.DATAU;
+                    SetModeBoth(mode);
+                    ApplyDigi();
+                };
+                if (mode == Modes.DATAU) b.ContextMenuStrip = BuildDigiMenu();
                 modeButtons[i] = b;
                 rowDisplay.Controls.Add(b);
             }
@@ -907,7 +925,7 @@ namespace SDRLink
             UpdateDisplays();
         }
 
-        // Affichage réduit : la fenêtre s'arrête juste après la ligne PTT/fréquences (barre d'adresse et page masquées).
+        // Affichage réduit : de la ligne "Synchro" jusqu'à la ligne du volume (connexion, réglages et page masqués).
         // Le WebSDR continue de jouer et de suivre le poste.
         void ApplyCompact()
         {
@@ -927,16 +945,17 @@ namespace SDRLink
                     WindowState = FormWindowState.Normal;
                 }
                 normalSize = Size;
-                rowUrl.Visible = web.Visible = false;
+                // De la ligne "Synchro" à la ligne du volume : connexion, réglages de l'interface et page masqués.
+                rowConn.Visible = rowParams.Visible = web.Visible = false;
                 PerformLayout();
-                int h = SizeFromClientSize(new Size(ClientSize.Width, rowDisplay.Bottom + strip.Height + 4)).Height;
+                int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
                 MaximumSize = new Size(10000, h);
                 Height = h;
             }
             else
             {
                 MaximumSize = Size.Empty;
-                rowUrl.Visible = web.Visible = true;
+                rowConn.Visible = rowParams.Visible = web.Visible = true;
                 Size = normalSize.IsEmpty ? DefaultWindowSize() : normalSize;
                 if (wasMaximized) WindowState = FormWindowState.Maximized;
                 wasMaximized = false;
@@ -948,7 +967,7 @@ namespace SDRLink
         // Bouton PTT : bascule émission/réception, comme le MOX de HRD. Le son est coupé tout de suite,
         // sans attendre que le poste confirme l'émission.
         // Clic droit sur PTT : délai de sécurité au bout duquel une émission lancée par le bouton est coupée.
-        static readonly int[] PttTimeouts = { 0, 30, 60, 120, 180, 300, 600 };
+        static readonly int[] PttTimeouts = { 0, 30, 60, 120, 180, 300, 600, 900, 1200, 1500 };
 
         ContextMenuStrip BuildPttMenu()
         {
@@ -1085,8 +1104,9 @@ namespace SDRLink
                 // Position écran du curseur au moment du cran, fournie par le message.
                 long lp = (long)m.LParam;
                 Point p = new Point((short)(lp & 0xFFFF), (short)((lp >> 16) & 0xFFFF));
-                if (!form.IsOver(form.lblRig, p) && !form.IsOver(form.lblSdr, p)) return false;
-                form.TuneByWheel((short)(((long)m.WParam >> 16) & 0xFFFF));
+                bool overRig = form.IsOver(form.lblRig, p), overSdr = form.IsOver(form.lblSdr, p);
+                if (!overRig && !overSdr) return false;
+                form.TuneByWheel((short)(((long)m.WParam >> 16) & 0xFFFF), overSdr);
                 return true;
             }
         }
@@ -1108,8 +1128,12 @@ namespace SDRLink
 
         bool WheelActive { get { return DateTime.UtcNow < wheelActiveUntil; } }
 
-        // Poste ET WebSDR bougent ensemble, quel que soit le sens de synchronisation choisi.
-        void TuneByWheel(int delta)
+        // Ce que bouge la molette dépend du sens de synchronisation :
+        //   Bidirectionnelle : poste et WebSDR ensemble, quelle que soit la fréquence survolée ;
+        //   Poste → WebSDR   : sur POSTE, les deux (le WebSDR suit) ; sur WEBSDR, le WebSDR seul ;
+        //   WebSDR → Poste   : sur WEBSDR, les deux (le poste suit) ; sur POSTE, le poste seul ;
+        //   Désactivée       : chaque fréquence ne bouge que la sienne.
+        void TuneByWheel(int delta, bool overSdr)
         {
             wheelRemainder += delta;
             int notches = wheelRemainder / 120;
@@ -1121,11 +1145,48 @@ namespace SDRLink
             wheelLast = now;
             long step = Accelerate(Steps[Math.Max(0, cbStep.SelectedIndex)], msPerNotch);
 
-            // Pendant qu'on tourne, on part de la dernière cible plutôt que de la fréquence relue, qui a du retard.
+            bool sdrOnly = overSdr && (Dir == Direction.RigToSdr || Dir == Direction.Off);
+            bool rigOnly = !overSdr && (Dir == Direction.SdrToRig || Dir == Direction.Off);
+            if (sdrOnly)
+            {
+                // Pendant qu'on tourne, on part de la dernière cible plutôt que de la fréquence relue, qui a du retard.
+                long baseSdr = SdrWheelActive && sdrWheelTarget > 0 ? sdrWheelTarget : sdrF;
+                if (baseSdr <= 0 || sdrKind == "") return;
+                TuneSdrOnly((long)Math.Round((double)baseSdr / step) * step + notches * step);
+                return;
+            }
             long baseF = WheelActive && wheelTarget > 0 ? wheelTarget : CurrentFreq();
             if (baseF <= 0) return;
-            TuneBoth((long)Math.Round((double)baseF / step) * step + notches * step);
+            long target = (long)Math.Round((double)baseF / step) * step + notches * step;
+            if (rigOnly) TuneRigOnly(target); else TuneBoth(target);
         }
+
+        long sdrWheelTarget;
+        DateTime sdrWheelUntil;
+        bool SdrWheelActive { get { return DateTime.UtcNow < sdrWheelUntil; } }
+
+        void TuneSdrOnly(long sdrHz)
+        {
+            if (sdrHz <= 0) return;
+            sdrWheelTarget = sdrHz;
+            sdrWheelUntil = DateTime.UtcNow.AddMilliseconds(1000);
+            SetSdr(sdrHz, "");
+            UpdateDisplays();
+        }
+
+        void TuneRigOnly(long rigHz)
+        {
+            if (rigHz <= 0 || worker == null || !rigOnline) return;
+            DateTime now = DateTime.UtcNow;
+            wheelTarget = rigHz;
+            wheelActiveUntil = now.AddMilliseconds(1000);
+            rigOnlyWheel = true;
+            ignoreRigUntil = now.AddMilliseconds(EchoIgnoreMs);
+            worker.SetFreq(rigHz);
+            UpdateDisplays();
+        }
+
+        bool rigOnlyWheel;   // la cible de molette en cours ne concerne que le poste (l'affichage WebSDR reste réel)
 
         // Fréquence actuelle côté poste (ou déduite du WebSDR si aucun poste n'est connecté), 0 si inconnue.
         long CurrentFreq()
@@ -1141,6 +1202,7 @@ namespace SDRLink
             DateTime now = DateTime.UtcNow;
             wheelTarget = rigHz;
             wheelActiveUntil = now.AddMilliseconds(1000);
+            rigOnlyWheel = false;
             if (worker != null && rigOnline)
             {
                 ignoreRigUntil = now.AddMilliseconds(EchoIgnoreMs);
@@ -1277,6 +1339,7 @@ namespace SDRLink
             {
                 Log.Write("WebSDR détecté : " + kind + " " + f + " Hz " + m);
                 ApplyVolume();
+                if (tapShown) SetPageTap(true);
             }
             sdrKind = kind;
             sdrF = f;
@@ -1304,7 +1367,8 @@ namespace SDRLink
         // (réglage perdu, page lente, clic dans la cascade en mode "Poste → WebSDR") est recalé sur le poste.
         void CheckSync()
         {
-            bool diverged = worker != null && rigOnline && RigToSdr && sdrKind != "" && rigF > 0 && !WheelActive
+            // Seulement en "Bidirectionnelle" : en "Poste → WebSDR", on peut maintenant régler le WebSDR seul (molette).
+            bool diverged = worker != null && rigOnline && Dir == Direction.Both && sdrKind != "" && rigF > 0 && !WheelActive && !SdrWheelActive
                 && DateTime.UtcNow > ignoreSdrUntil && DateTime.UtcNow > ignoreRigUntil
                 && Math.Abs(rigF + Offset - sdrF) > Tolerance;
             if (!diverged) { divergedSince = DateTime.MinValue; return; }
@@ -1351,7 +1415,7 @@ namespace SDRLink
             // Pendant la molette, on affiche la cible : les relectures arrivent avec un temps de retard.
             bool wheel = WheelActive;
             long shownRig = wheel ? wheelTarget : rigF;
-            long shownSdr = wheel ? wheelTarget + Offset : sdrF;
+            long shownSdr = SdrWheelActive ? sdrWheelTarget : wheel && !rigOnlyWheel ? wheelTarget + Offset : sdrF;
             SetFreqText(lblRig, Lang.T("POSTE ", "RIG ") + (worker != null && rigF > 0 ? FormatFreq(shownRig) + " " + Modes.Display(rigM) : "---"));
             // L'émission est signalée par la couleur (et le bouton PTT) : la largeur du texte ne change pas.
             Color c = Transmitting ? Theme.TxFreq : Theme.RigFreq;
@@ -1361,14 +1425,15 @@ namespace SDRLink
             string sdrMode = fam != "" ? fam.ToUpperInvariant() : (sdrM ?? "").ToUpperInvariant();
             SetFreqText(lblSdr, "WEBSDR " + (sdrKind != "" ? FormatFreq(shownSdr) + " " + sdrMode : "---"));
 
-            // Bouton de mode en surbrillance : mode du poste s'il est connecté, sinon celui du WebSDR.
-            string active = worker != null && rigM != null ? Modes.ToSdr(rigM) : fam;
+            // Bouton de mode en surbrillance : mode du poste s'il est connecté, sinon celui du WebSDR ; DIGI prime sur USB/LSB.
+            string active = DigiOn ? "digi" : worker != null && rigM != null ? Modes.ToSdr(rigM) : fam;
             if (active != shownModeFamily)
             {
                 shownModeFamily = active;
                 for (int i = 0; i < modeButtons.Length; i++)
                 {
-                    bool on = Modes.ToSdr(ModeButtonModes[i]) == active;
+                    string key = ModeButtonModes[i] == Modes.DATAU ? "digi" : Modes.ToSdr(ModeButtonModes[i]);
+                    bool on = key == active;
                     modeButtons[i].BackColor = on ? Color.FromArgb(0, 120, 60) : Theme.IdleButton;
                     modeButtons[i].ForeColor = on ? Color.White : Theme.ModeIdleText;
                 }
@@ -1417,7 +1482,7 @@ namespace SDRLink
                     OnPageChanged(core.Source);
                 };
                 // Dès que la page est chargée : son volume (les gains audio créés plus tard le reprennent aussi).
-                core.DOMContentLoaded += delegate { ApplyVolume(); };
+                core.DOMContentLoaded += delegate { ApplyVolume(); if (tapShown) SetPageTap(true); };
                 Navigate(settings.LastUrl);
             }
             catch (Exception ex)
@@ -1431,6 +1496,7 @@ namespace SDRLink
         {
             string msg;
             try { msg = e.TryGetWebMessageAsString(); } catch { return; }
+            if (msg != null && msg.StartsWith("pcm|")) { OnPcm(msg); return; }
             string[] p = (msg ?? "").Split('|');
             long f;
             if (p.Length < 3 || !long.TryParse(p[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out f)) return;
@@ -1453,6 +1519,101 @@ namespace SDRLink
             Favorite f = settings.Favorites.Find(delegate(Favorite x) { return x.Name == text; });
             Navigate(f != null ? f.Url : text);
         }
+
+        // ---------------------------------------------------------------- Mode DIGI (son vers le câble audio virtuel)
+
+        // DIGI actif : bouton enfoncé, ou poste passé lui-même en mode données (par ex. par WSJT).
+        bool DigiOn { get { return digiActive || (worker != null && (rigM == Modes.DATAU || rigM == Modes.DATAL)); } }
+
+        // Ouvre ou ferme la recopie du son du WebSDR vers la sortie DIGI, et le demande à la page.
+        void ApplyDigi()
+        {
+            bool on = DigiOn;
+            if (on && digiSink == null)
+            {
+                string dev = DigiDeviceName();
+                if (dev == null)
+                {
+                    status.Text = Lang.T("DIGI : aucun câble audio virtuel trouvé. Installez VB-CABLE (gratuit, vb-audio.com/Cable) ou choisissez une sortie par clic droit sur DIGI.",
+                                         "DIGI: no virtual audio cable found. Install VB-CABLE (free, vb-audio.com/Cable) or pick an output by right-clicking DIGI.");
+                    on = false;
+                }
+                else
+                {
+                    digiSink = new AudioSink(dev);
+                    shownDigiError = null;
+                    status.Text = Lang.T("DIGI : son du WebSDR envoyé vers « ", "DIGI: WebSDR audio sent to \"") + dev
+                        + Lang.T(" ». Dans WSJT-X, choisissez l'entrée audio correspondante (CABLE Output).", "\". In WSJT-X, select the matching audio input (CABLE Output).");
+                }
+            }
+            if (!on && digiSink != null) { digiSink.Dispose(); digiSink = null; }
+            SetPageTap(on);
+            shownModeFamily = null;
+            UpdateDisplays();
+        }
+
+        void SetPageTap(bool on)
+        {
+            tapShown = on;
+            if (web.CoreWebView2 != null)
+                web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setTap && window.__sdrlink.setTap(" + (on ? "true" : "false") + ");");
+        }
+
+        string DigiDeviceName()
+        {
+            List<string> devs = AudioSink.OutputDevices();
+            if (settings.DigiDevice != "" && devs.Contains(settings.DigiDevice)) return settings.DigiDevice;
+            return AudioSink.DefaultDevice();
+        }
+
+        // Clic droit sur DIGI : choix de la sortie audio (câble virtuel) recevant le son du WebSDR.
+        ContextMenuStrip BuildDigiMenu()
+        {
+            ContextMenuStrip m = new ContextMenuStrip();
+            m.Opening += delegate
+            {
+                m.Items.Clear();
+                ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Sortie audio DIGI (vers WSJT-X…)", "DIGI audio output (to WSJT-X…)"));
+                title.Enabled = false;
+                m.Items.Add(title);
+                m.Items.Add(new ToolStripSeparator());
+                string current = DigiDeviceName();
+                foreach (string d in AudioSink.OutputDevices())
+                {
+                    string dev = d;
+                    ToolStripMenuItem it = new ToolStripMenuItem(dev);
+                    it.Checked = dev == current;
+                    it.Click += delegate
+                    {
+                        settings.DigiDevice = dev;
+                        if (digiSink != null) { digiSink.Dispose(); digiSink = null; }
+                        ApplyDigi();
+                    };
+                    m.Items.Add(it);
+                }
+            };
+            m.Items.Add("-");   // contenu construit à l'ouverture (liste des sorties à jour)
+            return m;
+        }
+
+        // Bloc audio de la page ("pcm|fréquence|base64") à recopier vers la sortie DIGI.
+        void OnPcm(string msg)
+        {
+            if (digiSink == null) return;
+            int a = msg.IndexOf('|'), b = msg.IndexOf('|', a + 1);
+            int rate;
+            if (b < 0 || !int.TryParse(msg.Substring(a + 1, b - a - 1), out rate)) return;
+            try { digiSink.Write(rate, Convert.FromBase64String(msg.Substring(b + 1))); }
+            catch (FormatException) { }
+            if (digiSink.Error != shownDigiError)
+            {
+                shownDigiError = digiSink.Error;
+                status.Text = shownDigiError == null
+                    ? Lang.T("DIGI : son du WebSDR envoyé vers « ", "DIGI: WebSDR audio sent to \"") + digiSink.DeviceName + Lang.T(" »", "\"")
+                    : "DIGI : " + digiSink.DeviceName + " : " + shownDigiError + Lang.T(" (clic droit sur DIGI pour choisir une autre sortie)", " (right-click DIGI to pick another output)");
+            }
+        }
+        string shownDigiError;
 
         // ---------------------------------------------------------------- Volume du WebSDR
 

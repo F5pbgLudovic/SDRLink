@@ -71,6 +71,7 @@ namespace SDRLink
             if (txDetect == TxDetect.ButtonsAndVox && Array.IndexOf(allButtons, "VOX") >= 0)
                 voxBaseline = (Command("get button-select VOX") ?? "").Trim();
 
+            ProbeAfSlider();
             Log.Write("HRD " + Command("get radio") + " : liste des modes [" + modeDropdown + "], boutons émission [" +
                 string.Join(", ", txButtons) + "]" + (voxBaseline != null ? ", VOX en réception = " + voxBaseline : ""));
         }
@@ -120,10 +121,60 @@ namespace SDRLink
             return result;
         }
 
-        // Le serveur IP de HRD a un curseur "AF gain", mais la syntaxe de sa commande n'est pas documentée :
-        // on ne l'utilise pas plutôt que d'envoyer une commande incertaine.
-        public int ReadAfGain() { return -1; }
-        public void SetAfGain(int percent) { }
+        // Volume du poste via le curseur "AF gain" de HRD : commandes "get/set slider-pos <poste> <curseur> [valeur]"
+        // et "get slider-range <poste> <curseur>" (espaces remplacés par '~'). Le format est vérifié à la connexion
+        // par des lectures seules ; s'il n'est pas reconnu, le volume reste indisponible.
+        string afSlider, radioName;
+        int afMin, afMax = -1;
+
+        void ProbeAfSlider()
+        {
+            radioName = (Command("get radio") ?? "").Trim();
+            string[] sliders = Distinct(Command("get sliders"));
+            foreach (string pref in new[] { "AF gain (main)", "AF gain", "AF Gain", "Volume" })
+                foreach (string s in sliders)
+                    if (afSlider == null && s.Equals(pref, StringComparison.OrdinalIgnoreCase)) afSlider = s;
+            if (afSlider == null)
+                foreach (string s in sliders)
+                    if (s.IndexOf("AF", StringComparison.OrdinalIgnoreCase) >= 0 && s.IndexOf("gain", StringComparison.OrdinalIgnoreCase) >= 0
+                        && s.IndexOf("sub", StringComparison.OrdinalIgnoreCase) < 0) { afSlider = s; break; }
+            if (afSlider == null || radioName == "") { Log.Write("HRD : pas de curseur de volume (AF gain) pour ce poste"); return; }
+
+            string range = Command("get slider-range " + SliderArgs()) ?? "";
+            string pos = Command("get slider-pos " + SliderArgs()) ?? "";
+            Log.Write("HRD curseur volume [" + afSlider + "] : plage = [" + range + "], position = [" + pos + "]");
+            int[] r = Ints(range);
+            if (r.Length >= 2 && r[1] > r[0]) { afMin = r[0]; afMax = r[1]; }
+            else if (Ints(pos).Length >= 1) { afMin = 0; afMax = 255; }   // plage non donnée : échelle habituelle de HRD
+        }
+
+        string SliderArgs() { return radioName.Replace(' ', '~') + " " + afSlider.Replace(' ', '~'); }
+
+        static int[] Ints(string s)
+        {
+            List<int> r = new List<int>();
+            foreach (string p in (s ?? "").Split(',', ' '))
+            {
+                int v;
+                if (int.TryParse(p.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out v)) r.Add(v);
+            }
+            return r.ToArray();
+        }
+
+        public int ReadAfGain()
+        {
+            if (afMax <= afMin) return -1;
+            int[] v = Ints(Command("get slider-pos " + SliderArgs()));
+            if (v.Length == 0) return -1;
+            return (int)Math.Round((Math.Max(afMin, Math.Min(afMax, v[0])) - afMin) * 100.0 / (afMax - afMin));
+        }
+
+        public void SetAfGain(int percent)
+        {
+            if (afMax <= afMin) return;
+            int v = afMin + (int)Math.Round(Math.Max(0, Math.Min(100, percent)) * (afMax - afMin) / 100.0);
+            Command("set slider-pos " + SliderArgs() + " " + v.ToString(CultureInfo.InvariantCulture));
+        }
 
         // Même action que le bouton MOX de HRD (ou TX s'il n'y a pas de MOX).
         public void SetPtt(bool tx)

@@ -77,7 +77,7 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
     - interroge chaque adresse (10 à la fois, 8 s maximum chacune) et affiche l'état dans la colonne État ;
     - les **liens morts** (pas de réponse, nom inconnu, connexion refusée, page introuvable 404) et les **doublons** (même adresse) sont **cochés automatiquement** et affichés en rouge ;
     - il ne reste qu'à cliquer sur « Supprimer… ». Un serveur qui répond, même par un refus d'accès, est considéré comme vivant.
-  - **Tout décocher** ;
+  - **Tout cocher** / **Tout décocher** (favoris affichés) ;
   - champs **Nom** et **Adresse** : ils affichent le favori sélectionné et se corrigent directement. La liste se met à jour en tapant. Un champ laissé vide n'est pas appliqué.
   - **Ouvrir** ou double-clic : ouvre le WebSDR. La touche Suppr supprime, Entrée ouvre.
   - **Importer…** :
@@ -127,7 +127,8 @@ Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 - **Elecraft** : `AGnnn;`, de 000 à 250 (K3, KX3, KX2) ou de 000 à 060 (K4).
 - **Icom / Xiegu** : CI-V `14 01`, valeur de 0000 à 0255.
 - **TCI** : `volume:` de −60 à 0 dB.
-- **Non disponible** avec FT-817/818 (pas de commande), OmniRig (pas de réglage de volume) et HRD (commande non documentée). La barre est alors grisée et un message l'explique.
+- **HRD** : curseur « AF gain (main) » de HRD Rig Control (sinon « AF gain » ou « Volume »), par `get/set slider-pos`. Il est recherché à la connexion ; le journal l'indique par la ligne « HRD curseur volume … ». Si HRD n'a pas ce curseur pour le poste, la barre est grisée.
+- **Non disponible** avec FT-817/818 (pas de commande) et OmniRig (pas de réglage de volume). La barre est alors grisée et un message l'explique.
 
 ## Mode sombre
 
@@ -148,7 +149,8 @@ Le menu **Langue / Language**, sur la 2ᵉ ligne, bascule toute l'interface entr
 
 - **Bidirectionnelle** / **Poste → WebSDR** / **WebSDR → Poste** / **Désactivée**
 - En choisissant **Bidirectionnelle** ou **Poste → WebSDR**, le WebSDR est aussitôt recalé sur la fréquence du poste.
-- Dans ces deux modes, le **poste fait foi** : si le WebSDR reste décalé de plus de 3 secondes, il est recalé sur le poste. C'est le cas si un réglage est perdu, si la page est lente, ou après un clic dans la cascade en mode « Poste → WebSDR ».
+- En choisissant **WebSDR → Poste**, c'est le poste qui se cale aussitôt sur la fréquence et le mode du WebSDR.
+- En **Bidirectionnelle**, le **poste fait foi** : si le WebSDR reste décalé de plus de 3 secondes, il est recalé sur le poste. C'est le cas si un réglage est perdu ou si la page est lente. En « Poste → WebSDR », on peut au contraire écarter le WebSDR du poste (molette ou clic dans la cascade) : il n'est recalé qu'au prochain mouvement du VFO.
 - **OpenWebRX à plusieurs profils** (un profil par bande, par ex. « HF_7MHz », « VHF_144-146MHz ») : si la fréquence demandée est hors du profil actif, SDRLink bascule automatiquement sur le profil qui la couvre, d'après son nom, puis règle la fréquence. Le changement de profil s'applique à tous les auditeurs de ce récepteur, comme lorsqu'on le fait à la main.
 - **Décalage WebSDR (Hz)** : ajouté à la fréquence du poste côté WebSDR (transverter, écart de calibration…)
 - **◀ Retour** (barre WebSDR) : revient à la page précédente, comme la flèche retour d'un navigateur. Utile après avoir suivi un lien, par exemple dans un annuaire de WebSDR.
@@ -161,7 +163,7 @@ Le gros bouton **PTT**, à gauche de « POSTE », fait passer le poste en émiss
 - Avec OmniRig, il agit sur la propriété `Tx` ; avec HRD, sur le bouton MOX.
 - Le son du WebSDR est coupé dès le clic, même si le poste ne signale pas son état d'émission (si « Couper le son du WebSDR en émission » est cochée).
 - Par sécurité, si on se déconnecte ou si on ferme SDRLink pendant une émission lancée par ce bouton, le poste repasse en réception.
-- **Délai de sécurité TX** (clic droit sur PTT) : Désactivé, 30 s, 1, 2, 3, 5 ou 10 min.
+- **Délai de sécurité TX** (clic droit sur PTT) : Désactivé, 30 s, 1, 2, 3, 5, 10, 15, 20 ou 25 min.
   - Pendant l'émission, le bouton affiche le temps restant (« ● TX 1:45 »).
   - À l'échéance, SDRLink repasse en réception et l'indique en bas de la fenêtre.
   - Ce délai concerne l'émission lancée par le bouton PTT de SDRLink, pas la pédale ni le micro.
@@ -196,7 +198,19 @@ Changer de choix reconnecte automatiquement à HRD.
 
 ## Boutons de mode
 
-Les boutons **USB, LSB, AM, FM**, à droite de la fréquence WEBSDR, changent le mode du poste **et** du WebSDR en même temps. Le bouton du mode en cours est en vert.
+Les boutons **USB, LSB, AM, FM, DIGI**, à droite de la fréquence WEBSDR, changent le mode du poste **et** du WebSDR en même temps. Le bouton du mode en cours est en vert.
+
+## Mode DIGI (FT8, WSJT-X…)
+
+**DIGI** met le poste en DATA-USB (PKT-U, USB-D… selon la marque) et le WebSDR en USB. Le son du WebSDR est en plus **recopié vers une carte son virtuelle**, que WSJT-X (ou JTDX, fldigi…) prend comme entrée pour décoder.
+- Le son reste présent sur la carte virtuelle même avec **Mute WebSDR**, le volume à 0 ou la coupure en émission : on peut décoder sans entendre le WebSDR.
+- Le bouton DIGI s'allume aussi si le poste passe lui-même en mode DATA (par ex. commandé par WSJT-X). Un clic sur USB, LSB, AM ou FM arrête la recopie.
+- **Clic droit sur DIGI** : choix de la sortie audio qui reçoit le son. Le choix est mémorisé.
+- **Carte son virtuelle** : SDRLink ne peut pas créer lui-même une carte son, il faut un pilote. Installer **VB-CABLE** (gratuit, vb-audio.com/Cable). SDRLink choisit ensuite automatiquement « CABLE Input », et WSJT-X doit prendre en entrée « CABLE Output ».
+- Pour qu'elle s'appelle **SDRLINK** : Paramètres de Windows › Système › Son › Panneau de configuration Son. Dans l'onglet Lecture, propriétés de « CABLE Input », renommer en `SDRLINK` ; faire de même dans l'onglet Enregistrement pour « CABLE Output ». SDRLink choisit en priorité une sortie nommée SDRLINK.
+- Si la barre d'état indique « sortie déjà utilisée en mode exclusif », un autre logiciel s'est réservé le câble : décocher « Autoriser les applications à prendre le contrôle exclusif » dans l'onglet Avancé des propriétés du câble, ou fermer ce logiciel.
+- Les sorties « VoiceMeeter Input » fonctionnent aussi.
+- Ne jamais choisir la carte son d'**émission** du poste (par ex. « Emission FT2000 ») : le son du WebSDR serait émis.
 
 Les boutons gardent toujours la même place : les zones POSTE et WEBSDR ont une largeur fixe. Le mode du WebSDR y est affiché en forme courte (USB, LSB, CW, AM, FM). L'émission est signalée par la fréquence POSTE en rouge et par le bouton PTT. La FM devient NBFM sur KiwiSDR et NFM sur UberSDR et OpenWebRX.
 
@@ -210,7 +224,15 @@ Les boutons gardent toujours la même place : les zones POSTE et WEBSDR ont une 
 
 ## Molette sur les fréquences
 
-Laisser la souris sur **POSTE** ou **WEBSDR** et tourner la molette : le poste **et** le WebSDR changent de fréquence ensemble, quel que soit le sens de synchronisation choisi.
+Laisser la souris sur **POSTE** ou **WEBSDR** et tourner la molette. Ce qui bouge dépend de la synchronisation :
+
+| Synchro | Molette sur POSTE | Molette sur WEBSDR |
+|---|---|---|
+| Bidirectionnelle | poste et WebSDR | poste et WebSDR |
+| Poste → WebSDR | poste et WebSDR | WebSDR seul |
+| WebSDR → Poste | poste seul | poste et WebSDR |
+| Désactivée | poste seul | WebSDR seul |
+
 - Le **pas** se choisit dans le menu « Pas » de la même ligne : 100 Hz, 250 Hz, 500 Hz, 1 kHz, 2,5 kHz, 5 kHz ou 10 kHz.
 - La fréquence est arrondie au pas : au pas de 1 kHz, on tombe sur des kHz ronds.
 - **Accélération** si le pas est inférieur à 1 kHz, selon le temps entre deux crans :
@@ -220,7 +242,7 @@ Laisser la souris sur **POSTE** ou **WEBSDR** et tourner la molette : le poste *
 
 ## Affichage
 
-- **Affichage réduit** : la fenêtre s'arrête juste après la ligne PTT / POSTE / WEBSDR. La barre d'adresse et la page du WebSDR sont masquées, mais le WebSDR continue de jouer et de suivre le poste. Décocher pour retrouver la grande fenêtre.
+- **Affichage réduit** : la fenêtre ne garde que les lignes « Synchro » à « Volume » (PTT, fréquences, modes, barre WebSDR, volumes). Les lignes de connexion et la page du WebSDR sont masquées, mais le WebSDR continue de jouer et de suivre le poste. Décocher pour retrouver la grande fenêtre.
 - La position et la taille de la fenêtre en affichage normal sont mémorisées à la fermeture, même si on ferme en affichage réduit. Au prochain lancement, décocher « Affichage réduit » redonne la taille d'avant. Si la fenêtre était en plein écran avant l'affichage réduit, elle y revient.
 - **Avant plan** : SDRLink reste au-dessus des autres fenêtres.
 
@@ -232,6 +254,13 @@ Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrli
 
 ## Historique des versions
 
+- **1.2**
+  - mode DIGI avec recopie du son du WebSDR vers une carte son virtuelle (WSJT-X) ;
+  - molette selon le sens de synchronisation ; en « WebSDR → Poste », le poste se cale sur le WebSDR ;
+  - volume du poste via HRD (curseur AF gain) ;
+  - affichage réduit de « Synchro » à « Volume » ;
+  - délais TX de 15, 20 et 25 min ; « Tout cocher » dans les favoris ;
+  - correction du mode DATA sur les Kenwood.
 - **1.1**
   - listes de favoris (4 listes renommables, déplacement entre listes) ;
   - délai de sécurité TX par clic droit sur PTT ;

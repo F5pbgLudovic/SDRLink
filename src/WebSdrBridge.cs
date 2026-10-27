@@ -7,29 +7,64 @@ namespace SDRLink
         public const string Script = @"
 (function () {
   if (window.top !== window || window.__sdrlink) return;
-  var L = window.__sdrlink = { last: '', volume: 1, gains: [] };
+  var L = window.__sdrlink = { last: '', volume: 1, gains: [], ctxs: [], tapOn: false };
 
-  // Volume propre au WebSDR : tout ce que la page envoie vers la sortie audio passe par un gain réglable.
+  // Son du WebSDR : tout ce que la page envoie vers la sortie audio passe par une entrée commune, puis
+  //   - vers le haut-parleur, à travers le gain réglable (volume, Mute WebSDR) ;
+  //   - en mode DIGI, vers une dérivation à plein niveau qui envoie les échantillons à SDRLink
+  //     (recopiés vers le câble audio virtuel pour WSJT-X, même quand le haut-parleur est coupé).
   // Installé avant les scripts de la page, donc valable pour tous les types de WebSDR.
   if (window.AudioNode && window.AudioDestinationNode) {
     var origConnect = AudioNode.prototype.connect, origDisconnect = AudioNode.prototype.disconnect;
     var master = function (ctx) {
-      if (!ctx.__sdrlinkGain) {
-        var g = ctx.createGain();
+      if (!ctx.__sdrlinkIn) {
+        var input = ctx.createGain(), g = ctx.createGain();
         g.gain.value = L.volume;
+        origConnect.call(input, g);
         origConnect.call(g, ctx.destination);
-        ctx.__sdrlinkGain = g;
+        ctx.__sdrlinkIn = input;
         L.gains.push(g);
+        L.ctxs.push(ctx);
+        if (L.tapOn) tap(ctx);
       }
-      return ctx.__sdrlinkGain;
+      return ctx.__sdrlinkIn;
     };
     AudioNode.prototype.connect = function (dest) {
       if (dest instanceof AudioDestinationNode) arguments[0] = master(dest.context);
       return origConnect.apply(this, arguments);
     };
     AudioNode.prototype.disconnect = function (dest) {
-      if (dest instanceof AudioDestinationNode && dest.context.__sdrlinkGain) arguments[0] = dest.context.__sdrlinkGain;
+      if (dest instanceof AudioDestinationNode && dest.context.__sdrlinkIn) arguments[0] = dest.context.__sdrlinkIn;
       return origDisconnect.apply(this, arguments);
+    };
+
+    // Dérivation DIGI : blocs de 4096 échantillons mono 16 bits, envoyés en base64 (pcm|fréquence|données).
+    var tap = function (ctx) {
+      if (ctx.__sdrlinkTap || !ctx.createScriptProcessor) return;
+      var sp = ctx.createScriptProcessor(4096, 1, 1), silent = ctx.createGain();
+      sp.channelCount = 1;
+      sp.channelCountMode = 'explicit';
+      silent.gain.value = 0;
+      origConnect.call(ctx.__sdrlinkIn, sp);
+      origConnect.call(sp, silent);
+      origConnect.call(silent, ctx.destination);   // un ScriptProcessor ne tourne que s'il est relié à la sortie
+      sp.onaudioprocess = function (e) {
+        if (!L.tapOn) return;
+        var d = e.inputBuffer.getChannelData(0), b = new Uint8Array(d.length * 2);
+        for (var i = 0; i < d.length; i++) {
+          var v = Math.max(-1, Math.min(1, d[i])) * 32767 | 0;
+          b[2 * i] = v & 255;
+          b[2 * i + 1] = (v >> 8) & 255;
+        }
+        var s = '';
+        for (var j = 0; j < b.length; j += 8192) s += String.fromCharCode.apply(null, b.subarray(j, j + 8192));
+        try { window.chrome.webview.postMessage('pcm|' + ctx.sampleRate + '|' + btoa(s)); } catch (x) { }
+      };
+      ctx.__sdrlinkTap = sp;
+    };
+    L.setTap = function (on) {
+      L.tapOn = !!on;
+      if (on) for (var i = 0; i < L.ctxs.length; i++) tap(L.ctxs[i]);
     };
   }
   // v : 0 à 1. Agit aussi sur les éléments <audio>/<video> éventuels.

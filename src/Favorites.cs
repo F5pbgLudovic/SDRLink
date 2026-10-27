@@ -248,11 +248,12 @@ namespace SDRLink
             sel.Controls.Add(Make(Lang.T("Monter", "Move up"), 145, 22, 125, 28, delegate { MoveItem(-1); }));
             sel.Controls.Add(Make(Lang.T("Descendre", "Move down"), 145, 54, 125, 28, delegate { MoveItem(1); }));
 
-            GroupBox chk = new GroupBox { Text = Lang.T("Vérification", "Check"), Location = new Point(466, 4), Size = new Size(182, 90) };
-            btnCheck = Make(Lang.T("Vérifier les favoris", "Check favorites"), 10, 22, 162, 28, delegate { VerifyAll(); });
+            GroupBox chk = new GroupBox { Text = Lang.T("Vérification", "Check"), Location = new Point(466, 4), Size = new Size(222, 90) };
+            btnCheck = Make(Lang.T("Vérifier les favoris", "Check favorites"), 10, 22, 202, 28, delegate { VerifyAll(); });
             btnCheck.Font = new Font(Font, FontStyle.Bold);
             chk.Controls.Add(btnCheck);
-            chk.Controls.Add(Make(Lang.T("Tout décocher", "Uncheck all"), 10, 54, 162, 28, delegate { SetAllChecked(false); }));
+            chk.Controls.Add(Make(Lang.T("Tout cocher", "Check all"), 10, 54, 99, 28, delegate { SetAllChecked(true); }));
+            chk.Controls.Add(Make(Lang.T("Tout décocher", "Uncheck all"), 113, 54, 99, 28, delegate { SetAllChecked(false); }));
 
             // Liste affichée (clic droit : renommer) et déplacement des favoris vers une autre liste.
             Label lList = new Label { Text = Lang.T("Liste :", "List:"), Location = new Point(12, 108), AutoSize = true };
