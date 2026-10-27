@@ -147,10 +147,10 @@ Le menu **Langue / Language**, sur la 2ᵉ ligne, bascule toute l'interface entr
 
 ## Synchronisation
 
-- **Bidirectionnelle** / **Poste → WebSDR** / **WebSDR → Poste** / **Désactivée**
-- En choisissant **Bidirectionnelle** ou **Poste → WebSDR**, le WebSDR est aussitôt recalé sur la fréquence du poste.
-- En choisissant **WebSDR → Poste**, c'est le poste qui se cale aussitôt sur la fréquence et le mode du WebSDR.
-- En **Bidirectionnelle**, le **poste fait foi** : si le WebSDR reste décalé de plus de 3 secondes, il est recalé sur le poste. C'est le cas si un réglage est perdu ou si la page est lente. En « Poste → WebSDR », on peut au contraire écarter le WebSDR du poste (molette ou clic dans la cascade) : il n'est recalé qu'au prochain mouvement du VFO.
+- **Bidirectionnelle** / **Radio → WebSDR** / **WebSDR → Radio** / **Désactivée**
+- En choisissant **Bidirectionnelle** ou **Radio → WebSDR**, le WebSDR est aussitôt recalé sur la fréquence du poste.
+- En choisissant **WebSDR → Radio**, c'est le poste qui se cale aussitôt sur la fréquence et le mode du WebSDR.
+- En **Bidirectionnelle**, le **poste fait foi** : si le WebSDR reste décalé de plus de 3 secondes, il est recalé sur le poste. C'est le cas si un réglage est perdu ou si la page est lente. En « Radio → WebSDR », on peut au contraire écarter le WebSDR du poste (molette ou clic dans la cascade) : il n'est recalé qu'au prochain mouvement du VFO.
 - **OpenWebRX à plusieurs profils** (un profil par bande, par ex. « HF_7MHz », « VHF_144-146MHz ») : si la fréquence demandée est hors du profil actif, SDRLink bascule automatiquement sur le profil qui la couvre, d'après son nom, puis règle la fréquence. Le changement de profil s'applique à tous les auditeurs de ce récepteur, comme lorsqu'on le fait à la main.
 - **Décalage WebSDR (Hz)** : ajouté à la fréquence du poste côté WebSDR (transverter, écart de calibration…)
 - **◀ Retour** (barre WebSDR) : revient à la page précédente, comme la flèche retour d'un navigateur. Utile après avoir suivi un lien, par exemple dans un annuaire de WebSDR.
@@ -158,7 +158,7 @@ Le menu **Langue / Language**, sur la 2ᵉ ligne, bascule toute l'interface entr
 
 ## Bouton PTT
 
-Le gros bouton **PTT**, à gauche de « POSTE », fait passer le poste en émission par CAT : un clic pour émettre (le bouton devient rouge « ● TX »), un second clic pour revenir en réception. C'est l'équivalent du bouton MOX de HRD.
+Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émission par CAT : un clic pour émettre (le bouton devient rouge « ● TX »), un second clic pour revenir en réception. C'est l'équivalent du bouton MOX de HRD.
 - Il envoie `TX1;`/`TX0;` aux Yaesu, `TX;`/`RX;` aux Kenwood et Elecraft, `1C 00` aux Icom, `trx` en TCI.
 - Avec OmniRig, il agit sur la propriété `Tx` ; avec HRD, sur le bouton MOX.
 - Le son du WebSDR est coupé dès le clic, même si le poste ne signale pas son état d'émission (si « Couper le son du WebSDR en émission » est cochée).
@@ -171,7 +171,7 @@ Le gros bouton **PTT**, à gauche de « POSTE », fait passer le poste en émiss
 
 ## Coupure du son en émission
 
-Coche **« Couper le son du WebSDR en émission »** (activée par défaut) : pendant que le poste émet, le son du WebSDR est coupé pour ne pas s'entendre. L'indication **● TX** s'affiche alors en rouge à côté de « POSTE ». Décocher pour garder le son en émission.
+Coche **« Couper le son du WebSDR en émission »** (activée par défaut) : pendant que le poste émet, le son du WebSDR est coupé pour ne pas s'entendre. L'indication **● TX** s'affiche alors en rouge à côté de « RADIO ». Décocher pour garder le son en émission.
 
 **« rétablir après (ms) »** (1000 par défaut) : le son d'un WebSDR arrive avec 0,5 à 2 s de retard, il contient donc encore la fin de ton émission après le relâchement du PTT. Augmente cette valeur si tu entends la fin de tes passages, mets 0 pour rétablir le son tout de suite.
 
@@ -198,21 +198,33 @@ Changer de choix reconnecte automatiquement à HRD.
 
 ## Boutons de mode
 
-Les boutons **USB, LSB, AM, FM, DIGI**, à droite de la fréquence WEBSDR, changent le mode du poste **et** du WebSDR en même temps. Le bouton du mode en cours est en vert.
+Les boutons **USB, LSB, AM, FM, DIGI, CW**, à droite de la fréquence WEBSDR, changent le mode de la radio **et** du WebSDR en même temps. Le bouton du mode en cours est en vert.
+- **DIGI** : mode données de la radio (PKT, DATA, USB-D… selon la marque), USB ou LSB côté WebSDR. Un nouveau clic sur DIGI déjà allumé bascule entre **DIGI U** (DATA-USB) et **DIGI L** (DATA-LSB).
+- **CW** : un nouveau clic sur CW déjà allumé bascule entre **CW U** (CW normale) et **CW L** (CW-R). Les WebSDR n'ont qu'un mode CW. En TCI, il n'y a qu'un mode CW.
+- Icom en CAT direct : le mode DATA ne se commande pas par cette interface, DIGI met la radio en USB ou LSB.
 
-## Mode DIGI (FT8, WSJT-X…)
+## Câble SDRLINK (son du WebSDR vers WSJT-X…)
 
-**DIGI** met le poste en DATA-USB (PKT-U, USB-D… selon la marque) et le WebSDR en USB. Le son du WebSDR est en plus **recopié vers une carte son virtuelle**, que WSJT-X (ou JTDX, fldigi…) prend comme entrée pour décoder.
-- Le son reste présent sur la carte virtuelle même avec **Mute WebSDR**, le volume à 0 ou la coupure en émission : on peut décoder sans entendre le WebSDR.
-- Le bouton DIGI s'allume aussi si le poste passe lui-même en mode DATA (par ex. commandé par WSJT-X). Un clic sur USB, LSB, AM ou FM arrête la recopie.
-- **Clic droit sur DIGI** : choix de la sortie audio qui reçoit le son. Le choix est mémorisé.
-- **Carte son virtuelle** : SDRLink ne peut pas créer lui-même une carte son, il faut un pilote. Installer **VB-CABLE** (gratuit, vb-audio.com/Cable). SDRLink choisit ensuite automatiquement « CABLE Input », et WSJT-X doit prendre en entrée « CABLE Output ».
-- Pour qu'elle s'appelle **SDRLINK** : Paramètres de Windows › Système › Son › Panneau de configuration Son. Dans l'onglet Lecture, propriétés de « CABLE Input », renommer en `SDRLINK` ; faire de même dans l'onglet Enregistrement pour « CABLE Output ». SDRLink choisit en priorité une sortie nommée SDRLINK.
-- Si la barre d'état indique « sortie déjà utilisée en mode exclusif », un autre logiciel s'est réservé le câble : décocher « Autoriser les applications à prendre le contrôle exclusif » dans l'onglet Avancé des propriétés du câble, ou fermer ce logiciel.
-- Les sorties « VoiceMeeter Input » fonctionnent aussi.
-- Ne jamais choisir la carte son d'**émission** du poste (par ex. « Emission FT2000 ») : le son du WebSDR serait émis.
+Le son du WebSDR est recopié **en permanence, dans tous les modes**, vers un câble audio virtuel. L'autre bout du câble, nommé **SDRLINK**, apparaît dans la liste des **entrées audio** de WSJT-X, JTDX, fldigi…
+- La recopie n'est pas touchée par **Mute WebSDR**, le volume à 0, la coupure en émission ni le notch : on peut décoder sans entendre le WebSDR.
+- **Il faut un pilote de câble virtuel.** SDRLink ne peut pas créer lui-même un câble : Windows exige pour cela un pilote signé. Installer **VB-CABLE** de VB-Audio, gratuit : bouton **Câble SDRLINK ▾** › « Télécharger VB-CABLE ».
+  - Si VB-CABLE sert déjà à autre chose, VB-Audio propose aussi des câbles supplémentaires (« VB-CABLE A+B », « C+D »).
+- **Bouton Câble SDRLINK ▾** (2ᵉ ligne) :
+  - choix de la sortie qui reçoit le son (le bout « lecture » du câble, par ex. « CABLE Input »), ou **Désactivé** ;
+  - **Nommer « SDRLINK » l'autre bout du câble** : renomme le bout « enregistrement » (« CABLE Output ») en `SDRLINK`, comme le panneau Son de Windows. Windows demande l'autorisation d'administrateur. Redémarrer ensuite WSJT-X et choisir l'entrée **SDRLINK**.
+- Choix automatique : le câble dont l'autre bout s'appelle SDRLINK, sinon un câble VB-Audio qui a gardé son nom d'origine (CABLE Input, CABLE-A Input…). Un câble déjà renommé, les haut-parleurs ou une carte son de radio ne sont **jamais** pris automatiquement. Les choisir à la main demande une confirmation.
+- Ne jamais choisir la carte son d'**émission** d'une radio (par ex. « Emission FT2000 ») : le son du WebSDR serait émis.
+- Si la barre d'état indique « sortie déjà utilisée en mode exclusif », un autre logiciel s'est réservé le câble. Dans le panneau Son, ouvrir les propriétés du câble, onglet Avancé, et décocher « Autoriser les applications à prendre le contrôle exclusif ». Sinon, fermer ce logiciel.
 
-Les boutons gardent toujours la même place : les zones POSTE et WEBSDR ont une largeur fixe. Le mode du WebSDR y est affiché en forme courte (USB, LSB, CW, AM, FM). L'émission est signalée par la fréquence POSTE en rouge et par le bouton PTT. La FM devient NBFM sur KiwiSDR et NFM sur UberSDR et OpenWebRX.
+## Notch automatique (DNF)
+
+Case **Notch auto (DNF)**, au bout de la ligne Synchro : comme le DNF du FT-2000, elle supprime automatiquement les **porteuses et sifflements stables** du son du WebSDR.
+- Jusqu'à 4 raies à la fois. Chaque raie est repérée en environ 0,6 s, puis suivie si elle glisse. L'atténuation mesurée est d'environ 48 dB, jusqu'au niveau du bruit.
+- La parole bouge trop pour être retenue. Une **CW** stable est en revanche supprimée, comme avec le DNF du poste : décocher en CW.
+- Seul le son entendu est filtré, le câble SDRLINK reçoit le son brut (les décodeurs en ont besoin).
+- Le choix est mémorisé.
+
+Les boutons gardent toujours la même place : les zones RADIO et WEBSDR ont une largeur fixe. Le mode du WebSDR y est affiché en forme courte (USB, LSB, CW, AM, FM). L'émission est signalée par la fréquence RADIO en rouge et par le bouton PTT. La FM devient NBFM sur KiwiSDR et NFM sur UberSDR et OpenWebRX.
 
 ## Saisie d'une fréquence
 
@@ -224,14 +236,14 @@ Les boutons gardent toujours la même place : les zones POSTE et WEBSDR ont une 
 
 ## Molette sur les fréquences
 
-Laisser la souris sur **POSTE** ou **WEBSDR** et tourner la molette. Ce qui bouge dépend de la synchronisation :
+Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui bouge dépend de la synchronisation :
 
-| Synchro | Molette sur POSTE | Molette sur WEBSDR |
+| Synchro | Molette sur RADIO | Molette sur WEBSDR |
 |---|---|---|
-| Bidirectionnelle | poste et WebSDR | poste et WebSDR |
-| Poste → WebSDR | poste et WebSDR | WebSDR seul |
-| WebSDR → Poste | poste seul | poste et WebSDR |
-| Désactivée | poste seul | WebSDR seul |
+| Bidirectionnelle | radio et WebSDR | radio et WebSDR |
+| Radio → WebSDR | radio et WebSDR | WebSDR seul |
+| WebSDR → Radio | radio seule | radio et WebSDR |
+| Désactivée | radio seule | WebSDR seul |
 
 - Le **pas** se choisit dans le menu « Pas » de la même ligne : 100 Hz, 250 Hz, 500 Hz, 1 kHz, 2,5 kHz, 5 kHz ou 10 kHz.
 - La fréquence est arrondie au pas : au pas de 1 kHz, on tombe sur des kHz ronds.
@@ -254,9 +266,16 @@ Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrli
 
 ## Historique des versions
 
+- **1.3**
+  - « POSTE » devient « RADIO » (bandeau et menu Synchro) ;
+  - les listes de favoris vides ne sont plus proposées dans la barre WebSDR ;
+  - câble SDRLINK actif dans tous les modes, bouton « Câble SDRLINK » et renommage de l'entrée en SDRLINK ;
+  - bouton CW ; DIGI et CW basculent entre bande latérale haute et basse ;
+  - notch automatique (DNF).
+
 - **1.2**
   - mode DIGI avec recopie du son du WebSDR vers une carte son virtuelle (WSJT-X) ;
-  - molette selon le sens de synchronisation ; en « WebSDR → Poste », le poste se cale sur le WebSDR ;
+  - molette selon le sens de synchronisation ; en « WebSDR → Radio », le poste se cale sur le WebSDR ;
   - volume du poste via HRD (curseur AF gain) ;
   - affichage réduit de « Synchro » à « Volume » ;
   - délais TX de 15, 20 et 25 min ; « Tout cocher » dans les favoris ;

@@ -23,12 +23,121 @@ namespace SDRLink
         origConnect.call(input, g);
         origConnect.call(g, ctx.destination);
         ctx.__sdrlinkIn = input;
+        ctx.__sdrlinkOut = g;
         L.gains.push(g);
         L.ctxs.push(ctx);
         if (L.tapOn) tap(ctx);
+        if (L.notchOn) notch(ctx, true);
       }
       return ctx.__sdrlinkIn;
     };
+
+    // Notch automatique (comme le DNF des Yaesu) : un analyseur repère les raies stables (porteuses, sifflements)
+    // et jusqu'à 4 filtres coupe-bande étroits les suivent. Le chant et la parole bougent trop pour être retenus.
+    // Seul le haut-parleur est filtré : le câble SDRLINK reçoit le son brut, pour les logiciels de décodage.
+    var NOTCHES = 4, HOLD = 6, RELEASE = 10, ABOVE = 18;
+    var notch = function (ctx, on) {
+      var n = ctx.__sdrlinkNotch, input = ctx.__sdrlinkIn, out = ctx.__sdrlinkOut;
+      if (!input || !ctx.createBiquadFilter || !ctx.createAnalyser) return;
+      if (!n) {
+        n = ctx.__sdrlinkNotch = { on: false, an: ctx.createAnalyser(), f: [], slots: [] };
+        n.an.fftSize = 4096;
+        n.an.smoothingTimeConstant = 0;
+        origConnect.call(input, n.an);
+        for (var i = 0; i < NOTCHES; i++) {
+          var b = ctx.createBiquadFilter();
+          b.type = 'notch';
+          b.frequency.value = ctx.sampleRate * 0.49;   // au repos : tout en haut du spectre, hors de la bande audio utile
+          b.Q.value = 30;
+          if (i > 0) origConnect.call(n.f[i - 1], b);
+          n.f.push(b);
+          n.slots.push({ bin: -1, miss: 0 });
+        }
+      }
+      if (on === n.on) return;
+      n.on = on;
+      if (on) {
+        origDisconnect.call(input, out);
+        origConnect.call(input, n.f[0]);
+        origConnect.call(n.f[NOTCHES - 1], out);
+      } else {
+        origDisconnect.call(input, n.f[0]);
+        origDisconnect.call(n.f[NOTCHES - 1], out);
+        origConnect.call(input, out);
+        for (var j = 0; j < NOTCHES; j++) release(ctx, n, j);
+      }
+    };
+    var release = function (ctx, n, i) {
+      n.slots[i].bin = -1;
+      n.slots[i].placed = false;   // le prochain placement saute directement à la nouvelle fréquence
+      n.f[i].frequency.setTargetAtTime(ctx.sampleRate * 0.49, ctx.currentTime, 0.01);
+    };
+    var analyse = function (ctx, n) {
+      var an = n.an, N = an.frequencyBinCount, hz = ctx.sampleRate / an.fftSize;
+      if (!n.cur) { n.cur = new Float32Array(N); n.avg = new Float32Array(N); n.cnt = new Float32Array(N); n.first = true; }
+      an.getFloatFrequencyData(n.cur);
+      var lo = Math.max(2, Math.ceil(150 / hz)), hi = Math.min(N - 3, Math.floor(4000 / hz)), i, v;
+      for (i = lo - 1; i <= hi + 1; i++) {
+        v = n.cur[i] > -160 ? n.cur[i] : -160;
+        n.avg[i] = n.first ? v : 0.6 * n.avg[i] + 0.4 * v;
+      }
+      n.first = false;
+      var sorted = Array.prototype.slice.call(n.avg, lo, hi + 1).sort(function (a, b) { return a - b; });
+      var floor = sorted[sorted.length >> 1];
+      if (floor < -140) return;   // silence
+      // Raie candidate : pic local nettement au-dessus du bruit ; compteur de présence, toléré à un bin près.
+      var cnt = new Float32Array(N), peaks = [];
+      for (i = lo; i <= hi; i++) {
+        if (n.avg[i] > floor + ABOVE && n.avg[i] >= n.avg[i - 1] && n.avg[i] >= n.avg[i + 1]) {
+          cnt[i] = Math.max(n.cnt[i - 1], n.cnt[i], n.cnt[i + 1]) + 1;
+          if (cnt[i] >= HOLD) peaks.push(i);
+        }
+      }
+      n.cnt = cnt;
+      peaks.sort(function (a, b) { return n.avg[b] - n.avg[a]; });
+      var used = [];
+      for (var s = 0; s < NOTCHES; s++) {
+        var sl = n.slots[s];
+        if (sl.bin < 0) continue;
+        var best = -1;
+        for (var p = 0; p < peaks.length; p++) if (Math.abs(peaks[p] - sl.bin) <= 3 && used.indexOf(peaks[p]) < 0) { best = peaks[p]; break; }
+        if (best < 0) { if (++sl.miss > RELEASE) release(ctx, n, s); continue; }
+        sl.miss = 0;
+        used.push(best);
+        place(ctx, n, s, best, hz);
+      }
+      for (var q = 0; q < peaks.length; q++) {
+        if (used.indexOf(peaks[q]) >= 0) continue;
+        for (var t = 0; t < NOTCHES; t++) {
+          if (n.slots[t].bin >= 0) continue;
+          used.push(peaks[q]);
+          place(ctx, n, t, peaks[q], hz);
+          break;
+        }
+      }
+    };
+    // Fréquence affinée par interpolation entre bins voisins ; largeur d'environ 40 Hz.
+    var place = function (ctx, n, s, bin, hz) {
+      var a = n.avg[bin - 1], b = n.avg[bin], c = n.avg[bin + 1], d = a - 2 * b + c;
+      var f = (bin + (d !== 0 ? 0.5 * (a - c) / d : 0)) * hz;
+      n.slots[s].bin = bin;
+      n.slots[s].miss = 0;
+      n.f[s].frequency.setTargetAtTime(f, ctx.currentTime, n.slots[s].placed ? 0.05 : 0.005);
+      n.f[s].Q.value = Math.max(5, f / 40);
+      n.slots[s].placed = true;
+    };
+    L.notchOn = false;
+    L.setNotch = function (on) {
+      L.notchOn = !!on;
+      for (var i = 0; i < L.ctxs.length; i++) notch(L.ctxs[i], L.notchOn);
+    };
+    setInterval(function () {
+      if (!L.notchOn) return;
+      for (var i = 0; i < L.ctxs.length; i++) {
+        var n = L.ctxs[i].__sdrlinkNotch;
+        if (n && n.on && L.ctxs[i].state === 'running') { try { analyse(L.ctxs[i], n); } catch (e) { } }
+      }
+    }, 100);
     AudioNode.prototype.connect = function (dest) {
       if (dest instanceof AudioDestinationNode) arguments[0] = master(dest.context);
       return origConnect.apply(this, arguments);

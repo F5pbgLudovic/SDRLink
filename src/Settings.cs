@@ -40,7 +40,9 @@ namespace SDRLink
         public string[] ListNames = { "Liste 1", "Liste 2", "Liste 3", "Liste 4" };
         public int CurrentList;
         public int PttTimeoutSec;          // délai de sécurité du bouton PTT (0 = désactivé)
-        public string DigiDevice = "";     // sortie audio du mode DIGI (câble virtuel), vide = choix automatique
+        public string CableDevice = "";    // sortie audio recevant le son du WebSDR (câble virtuel), vide = choix automatique
+        public bool CableEnabled = true;
+        public bool AutoNotch;             // notch automatique (comme le DNF) sur le son du WebSDR
         public bool DarkMode;
         public string DarkBase = "", LightBase = "";   // couleurs de palette choisies (RRGGBB, vide = par défaut)
         // Position et taille de la fenêtre en affichage normal (0 = jamais enregistrées).
@@ -112,7 +114,9 @@ namespace SDRLink
                         break;
                     case "CurrentList": s.CurrentList = Math.Max(0, Math.Min(3, Int(v, 0))); break;
                     case "PttTimeout": s.PttTimeoutSec = Math.Max(0, Int(v, 0)); break;
-                    case "DigiDevice": s.DigiDevice = v; break;
+                    case "DigiDevice": case "CableDevice": s.CableDevice = v; break;
+                    case "Cable": s.CableEnabled = v != "0"; break;
+                    case "AutoNotch": s.AutoNotch = v == "1"; break;
                     case "DarkMode": s.DarkMode = v == "1"; break;
                     case "DarkBase": s.DarkBase = v; break;
                     case "LightBase": s.LightBase = v; break;
@@ -161,7 +165,9 @@ namespace SDRLink
             for (int i = 0; i < ListNames.Length; i++) Line(sb, "List" + (i + 1), ListNames[i]);
             Line(sb, "CurrentList", CurrentList);
             Line(sb, "PttTimeout", PttTimeoutSec);
-            Line(sb, "DigiDevice", DigiDevice);
+            Line(sb, "CableDevice", CableDevice);
+            Line(sb, "Cable", CableEnabled ? 1 : 0);
+            Line(sb, "AutoNotch", AutoNotch ? 1 : 0);
             Line(sb, "DarkMode", DarkMode ? 1 : 0);
             Line(sb, "DarkBase", DarkBase);
             Line(sb, "LightBase", LightBase);

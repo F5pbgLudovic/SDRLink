@@ -69,14 +69,34 @@ namespace SDRLink
             return r;
         }
 
-        // Sortie proposée par défaut : celle renommée "SDRLINK", sinon un câble virtuel connu.
+        // Sortie choisie automatiquement : le câble dont l'autre bout s'appelle "SDRLINK", sinon un câble VB-Audio
+        // portant encore son nom d'origine (donc a priori libre). Un câble renommé ou toute autre sortie
+        // (haut-parleurs, carte son d'émission d'un poste...) n'est jamais pris sans un choix explicite.
         public static string DefaultDevice()
         {
             List<string> devs = OutputDevices();
-            foreach (string key in new[] { "SDRLINK", "CABLE Input", "VB-Audio Virtual", "Virtual Cable", "Virtual Audio", "VoiceMeeter Input" })
+            try
+            {
+                List<AudioEndpoints.Endpoint> eps = AudioEndpoints.All();
+                AudioEndpoints.Endpoint cap = eps.Find(delegate(AudioEndpoints.Endpoint e) { return e.Capture && e.Name == "SDRLINK"; });
+                if (cap != null && !string.IsNullOrEmpty(cap.Adapter))
+                    foreach (AudioEndpoints.Endpoint e in eps)
+                        if (!e.Capture && e.Adapter == cap.Adapter && e.FullName != null)
+                            foreach (string d in devs)
+                                if (d.Length > 0 && e.FullName.StartsWith(d, StringComparison.Ordinal)) return d;
+            }
+            catch (Exception ex) { Log.Write("Câble SDRLINK : lecture des périphériques audio impossible : " + ex.Message); }
+            foreach (string key in new[] { "SDRLINK", "CABLE Input", "CABLE-A Input", "CABLE-B Input", "CABLE-C Input", "CABLE-D Input" })
                 foreach (string d in devs)
-                    if (d.IndexOf(key, StringComparison.OrdinalIgnoreCase) >= 0) return d;
+                    if (d.StartsWith(key, StringComparison.OrdinalIgnoreCase)) return d;
             return null;
+        }
+
+        // Sortie qui ressemble à un câble virtuel (sinon, le son du WebSDR serait joué ou émis pour de vrai).
+        public static bool LooksVirtual(string name)
+        {
+            string n = (name ?? "").ToUpperInvariant();
+            return n.Contains("CABLE") || n.Contains("SDRLINK") || n.Contains("VB-AUDIO") || n.Contains("VIRTUAL");
         }
 
         public AudioSink(string deviceName) { device = deviceName; }

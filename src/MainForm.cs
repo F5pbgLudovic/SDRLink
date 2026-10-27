@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
@@ -30,6 +31,8 @@ namespace SDRLink
         Label lblVolume, lblRigVolume;
         PaletteButton btnPalette;
         ComboBox cbFavList;
+        Button btnCable;
+        CheckBox chkNotch;
         Button btnMuteSdr, btnMuteRig;
         bool sdrMuted, rigMuted;
         int rigAfSupported = -1;    // -1 inconnu (pas connecté), 0 non pris en charge, 1 disponible
@@ -51,10 +54,12 @@ namespace SDRLink
 
         ComboBox cbStep, cbFreq;
         Button[] modeButtons;
-        static readonly string[] ModeButtonModes = { Modes.USB, Modes.LSB, Modes.AM, Modes.FM, Modes.DATAU };
-        bool digiActive;            // bouton DIGI enfoncé
-        bool tapShown;              // dérivation DIGI actuellement demandée à la page
-        AudioSink digiSink;         // sortie Windows (câble virtuel) recevant le son du WebSDR
+        static readonly string[] ModeButtonModes = { Modes.USB, Modes.LSB, Modes.AM, Modes.FM, Modes.DATAU, Modes.CW };
+        // DIGI et CW : un nouveau clic sur le bouton déjà actif passe de la bande latérale haute à la basse et inversement.
+        string digiMode = Modes.DATAU, cwMode = Modes.CW;
+        bool digiActive;            // bouton DIGI choisi (sert quand aucun poste n'indique son mode)
+        bool tapShown;              // recopie du son demandée à la page
+        AudioSink cableSink;        // sortie Windows (câble virtuel) recevant le son du WebSDR
         string shownModeFamily;     // mode mis en surbrillance sur les boutons
         static readonly long[] Steps = { 100, 250, 500, 1000, 2500, 5000, 10000 };
         long wheelTarget;           // fréquence poste visée par la molette
@@ -89,7 +94,7 @@ namespace SDRLink
             };
             // Surveillance de la synchro (toutes les secondes) et délai de sécurité du PTT.
             syncTimer.Interval = 1000;
-            syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); };
+            syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); UpdateDisplays(); };
             syncTimer.Start();
             LoadSettingsIntoUi();
             Load += delegate
@@ -103,7 +108,7 @@ namespace SDRLink
             FormClosing += delegate
             {
                 Disconnect();
-                if (digiSink != null) { digiSink.Dispose(); digiSink = null; }
+                if (cableSink != null) { cableSink.Dispose(); cableSink = null; }
                 SaveUiToSettings();
                 SaveWindowBounds();
                 settings.Save();
@@ -279,10 +284,15 @@ namespace SDRLink
             };
             row2.Controls.Add(Lbl("Langue :", "Language:"));
             row2.Controls.Add(cbLang);
+            // Câble SDRLINK : le son du WebSDR recopié vers un câble audio virtuel (entrée de WSJT-X...).
+            btnCable = Btn("Câble SDRLINK ▾", "SDRLINK cable ▾", null);
+            btnCable.ContextMenuStrip = BuildCableMenu();
+            btnCable.Click += delegate { btnCable.ContextMenuStrip.Show(btnCable, new Point(0, btnCable.Height)); };
+            row2.Controls.Add(btnCable);
 
             // Ligne 3 : synchronisation
             FlowLayoutPanel row3 = Row();
-            cbDirection = Combo(160, new[] { "Bidirectionnelle", "Poste → WebSDR", "WebSDR → Poste", "Désactivée" },
+            cbDirection = Combo(160, new[] { "Bidirectionnelle", "Radio → WebSDR", "WebSDR → Radio", "Désactivée" },
                                      new[] { "Both ways", "Rig → WebSDR", "WebSDR → Rig", "Off" });
             // Passage en "Bidirectionnelle" ou "Poste → WebSDR" : le WebSDR est recalé tout de suite sur le poste.
             cbDirection.SelectedIndexChanged += delegate
@@ -315,6 +325,9 @@ namespace SDRLink
             row3.Controls.Add(chkMute);
             row3.Controls.Add(Lbl("rétablir après (ms) :", "restore after (ms):"));
             row3.Controls.Add(numUnmute);
+            chkNotch = Check("Notch auto (DNF)", "Auto notch (DNF)");
+            chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; SetPageNotch(); };
+            row3.Controls.Add(chkNotch);
 
             // Ligne 4 : PTT, fréquences, modes, saisie ; l'affichage réduit coupe la fenêtre juste après cette ligne.
             rowDisplay = Row();
@@ -339,20 +352,17 @@ namespace SDRLink
             {
                 string mode = ModeButtonModes[i];
                 Button b = new Button();
-                b.Text = mode == Modes.DATAU ? "DIGI" : Modes.Display(mode);
-                b.Size = new Size(44, 30);
-                b.Margin = new Padding(i == 0 ? 8 : 2, 5, 0, 0);
-                b.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+                b.Text = ModeButtonText(mode, false);
+                // DIGI et CW affichent aussi la bande latérale (DIGI U, CW L...) : police un peu plus petite.
+                bool sided = mode == Modes.DATAU || mode == Modes.CW;
+                b.Size = new Size(mode == Modes.DATAU ? 54 : mode == Modes.CW ? 46 : 44, 30);
+                b.Margin = new Padding(i == 0 ? 8 : 1, 5, 0, 0);
+                b.Padding = Padding.Empty;
+                b.Font = new Font("Segoe UI", sided ? 8f : 9f, FontStyle.Bold);
                 b.FlatStyle = FlatStyle.Flat;
                 b.FlatAppearance.BorderColor = Color.FromArgb(0, 150, 75);
                 b.Tag = Theme.Custom;
-                b.Click += delegate
-                {
-                    digiActive = mode == Modes.DATAU;
-                    SetModeBoth(mode);
-                    ApplyDigi();
-                };
-                if (mode == Modes.DATAU) b.ContextMenuStrip = BuildDigiMenu();
+                b.Click += delegate { OnModeButton(mode); };
                 modeButtons[i] = b;
                 rowDisplay.Controls.Add(b);
             }
@@ -360,7 +370,7 @@ namespace SDRLink
             // Saisie d'une fréquence en kHz, avec l'historique des valeurs précédentes.
             cbFreq = new ComboBox();
             cbFreq.DropDownStyle = ComboBoxStyle.DropDown;
-            cbFreq.Width = 85;
+            cbFreq.Width = 75;
             cbFreq.MaxDropDownItems = 25;
             cbFreq.Margin = new Padding(2, 6, 2, 0);
             cbFreq.KeyDown += delegate(object s, KeyEventArgs e)
@@ -419,7 +429,8 @@ namespace SDRLink
             cbFavList.SelectedIndexChanged += delegate
             {
                 if (loading) return;
-                settings.CurrentList = Math.Max(0, cbFavList.SelectedIndex);
+                if (cbFavList.SelectedIndex < 0 || cbFavList.SelectedIndex >= favListShown.Count) return;
+                settings.CurrentList = favListShown[cbFavList.SelectedIndex];
                 RefillUrlCombo();
             };
             ContextMenuStrip listMenu = new ContextMenuStrip();
@@ -639,7 +650,7 @@ namespace SDRLink
         // ne bougent plus quand le mode change (USB, AM...). Une fréquence plus longue (VHF, GHz) élargit la zone une fois.
         void SizeFreqLabels()
         {
-            FitWidth(lblRig, Lang.T("POSTE", "RIG") + " 14.074.000 RTTY-R", true);
+            FitWidth(lblRig, Lang.T("RADIO", "RIG") + " 14.074.000 RTTY-R", true);
             FitWidth(lblSdr, "WEBSDR 14.074.000 USB", true);
         }
 
@@ -660,6 +671,7 @@ namespace SDRLink
             UpdateConnectButton();
             SizeFreqLabels();
             if (cbFavList.Items.Count > 0) FillFavListCombo();
+            UpdateCableButton();
             if (worker == null) status.Text = Lang.T("Déconnecté", "Disconnected");
             UpdateDisplays();
             if (chkCompact.Checked && web.Visible == false)
@@ -756,6 +768,7 @@ namespace SDRLink
             chkDark.Checked = settings.DarkMode;
             trkVolume.Value = settings.DefaultVolume;
             chkMute.Checked = settings.MuteOnTx;
+            chkNotch.Checked = settings.AutoNotch;
             numUnmute.Value = Math.Max(0, Math.Min(10000, settings.UnmuteDelayMs));
             cbDirection.SelectedIndex = Math.Max(0, Math.Min(3, settings.Direction));
             chkMode.Checked = settings.SyncMode;
@@ -1340,6 +1353,7 @@ namespace SDRLink
                 Log.Write("WebSDR détecté : " + kind + " " + f + " Hz " + m);
                 ApplyVolume();
                 if (tapShown) SetPageTap(true);
+                SetPageNotch();
             }
             sdrKind = kind;
             sdrF = f;
@@ -1416,7 +1430,7 @@ namespace SDRLink
             bool wheel = WheelActive;
             long shownRig = wheel ? wheelTarget : rigF;
             long shownSdr = SdrWheelActive ? sdrWheelTarget : wheel && !rigOnlyWheel ? wheelTarget + Offset : sdrF;
-            SetFreqText(lblRig, Lang.T("POSTE ", "RIG ") + (worker != null && rigF > 0 ? FormatFreq(shownRig) + " " + Modes.Display(rigM) : "---"));
+            SetFreqText(lblRig, Lang.T("RADIO ", "RIG ") + (worker != null && rigF > 0 ? FormatFreq(shownRig) + " " + Modes.Display(rigM) : "---"));
             // L'émission est signalée par la couleur (et le bouton PTT) : la largeur du texte ne change pas.
             Color c = Transmitting ? Theme.TxFreq : Theme.RigFreq;
             if (lblRig.ForeColor != c) lblRig.ForeColor = c;
@@ -1425,19 +1439,80 @@ namespace SDRLink
             string sdrMode = fam != "" ? fam.ToUpperInvariant() : (sdrM ?? "").ToUpperInvariant();
             SetFreqText(lblSdr, "WEBSDR " + (sdrKind != "" ? FormatFreq(shownSdr) + " " + sdrMode : "---"));
 
-            // Bouton de mode en surbrillance : mode du poste s'il est connecté, sinon celui du WebSDR ; DIGI prime sur USB/LSB.
-            string active = DigiOn ? "digi" : worker != null && rigM != null ? Modes.ToSdr(rigM) : fam;
+            // Bouton de mode en surbrillance : mode du poste s'il est connecté, sinon celui du WebSDR.
+            string active = ActiveModeKey(fam);
             if (active != shownModeFamily)
             {
                 shownModeFamily = active;
+                string activeKey = active.Split('|')[0];
                 for (int i = 0; i < modeButtons.Length; i++)
                 {
-                    string key = ModeButtonModes[i] == Modes.DATAU ? "digi" : Modes.ToSdr(ModeButtonModes[i]);
-                    bool on = key == active;
+                    bool on = ModeKey(ModeButtonModes[i]) == activeKey;
                     modeButtons[i].BackColor = on ? Color.FromArgb(0, 120, 60) : Theme.IdleButton;
                     modeButtons[i].ForeColor = on ? Color.White : Theme.ModeIdleText;
+                    modeButtons[i].Text = ModeButtonText(ModeButtonModes[i], on);
                 }
             }
+        }
+
+        // Famille d'un mode pour les boutons : usb, lsb, am, fm, cw ou digi.
+        static string ModeKey(string mode)
+        {
+            if (mode == Modes.DATAU || mode == Modes.DATAL) return "digi";
+            return Modes.ToSdr(mode);
+        }
+
+        string ActiveModeKey(string sdrFamily)
+        {
+            if (worker != null && rigOnline && rigM != null)
+            {
+                // Le poste dit lui-même de quel côté il est (CW/CW-R, DATA-U/DATA-L), une fois la commande arrivée.
+                bool settled = DateTime.UtcNow > modeClickUntil;
+                if (!settled) return ModeKey(clickedMode) + "|" + digiMode + cwMode;
+                if (settled && (rigM == Modes.DATAU || rigM == Modes.DATAL)) digiMode = rigM;
+                if (settled && (rigM == Modes.CW || rigM == Modes.CWR)) cwMode = rigM;
+                // Postes qui ne signalent pas le mode DATA (Icom...) : DIGI reste allumé tant que la bande latérale correspond.
+                if (digiActive && ModeKey(rigM) != "digi" && settled)
+                {
+                    if (Modes.ToSdr(rigM) == Modes.ToSdr(digiMode)) return "digi|" + digiMode + cwMode;
+                    digiActive = false;
+                }
+                return ModeKey(rigM) + "|" + digiMode + cwMode;
+            }
+            if (digiActive && (sdrFamily == "usb" || sdrFamily == "lsb")) return "digi|" + digiMode + cwMode;
+            return sdrFamily + "|" + digiMode + cwMode;
+        }
+
+        DateTime modeClickUntil;   // jusqu'à cette heure, le mode relu du poste peut encore être l'ancien
+        string clickedMode;
+
+        string ModeButtonText(string mode, bool on)
+        {
+            if (mode == Modes.DATAU) return on ? (digiMode == Modes.DATAL ? "DIGI L" : "DIGI U") : "DIGI";
+            if (mode == Modes.CW) return on ? (cwMode == Modes.CWR ? "CW L" : "CW U") : "CW";
+            return Modes.Display(mode);
+        }
+
+        // Clic sur un bouton de mode. DIGI et CW déjà actifs : bascule bande latérale haute / basse.
+        void OnModeButton(string mode)
+        {
+            bool wasOn = shownModeFamily != null && shownModeFamily.StartsWith(ModeKey(mode) + "|");
+            if (mode == Modes.DATAU)
+            {
+                if (wasOn) digiMode = digiMode == Modes.DATAU ? Modes.DATAL : Modes.DATAU;
+                mode = digiMode;
+            }
+            else if (mode == Modes.CW)
+            {
+                if (wasOn) cwMode = cwMode == Modes.CW ? Modes.CWR : Modes.CW;
+                mode = cwMode;
+            }
+            digiActive = ModeKey(mode) == "digi";
+            modeClickUntil = DateTime.UtcNow.AddSeconds(2);
+            clickedMode = mode;
+            SetModeBoth(mode);
+            shownModeFamily = null;
+            UpdateDisplays();
         }
 
         static void SetFreqText(Label l, string text)
@@ -1482,7 +1557,9 @@ namespace SDRLink
                     OnPageChanged(core.Source);
                 };
                 // Dès que la page est chargée : son volume (les gains audio créés plus tard le reprennent aussi).
-                core.DOMContentLoaded += delegate { ApplyVolume(); if (tapShown) SetPageTap(true); };
+                core.DOMContentLoaded += delegate { ApplyVolume(); if (tapShown) SetPageTap(true); SetPageNotch(); };
+                ApplyCable();
+                UpdateCableButton();
                 Navigate(settings.LastUrl);
             }
             catch (Exception ex)
@@ -1520,36 +1597,25 @@ namespace SDRLink
             Navigate(f != null ? f.Url : text);
         }
 
-        // ---------------------------------------------------------------- Mode DIGI (son vers le câble audio virtuel)
+        // ---------------------------------------------------------------- Câble SDRLINK (son du WebSDR vers un câble audio virtuel)
 
-        // DIGI actif : bouton enfoncé, ou poste passé lui-même en mode données (par ex. par WSJT).
-        bool DigiOn { get { return digiActive || (worker != null && (rigM == Modes.DATAU || rigM == Modes.DATAL)); } }
-
-        // Ouvre ou ferme la recopie du son du WebSDR vers la sortie DIGI, et le demande à la page.
-        void ApplyDigi()
+        // Le son du WebSDR est recopié en permanence (tous modes) vers la sortie choisie, typiquement l'entrée
+        // d'un câble virtuel (VB-CABLE) ; l'autre bout du câble, nommé SDRLINK, sert d'entrée audio à WSJT-X & co.
+        // La recopie se fait avant le volume et les coupures : Mute WebSDR ne la coupe pas.
+        void ApplyCable()
         {
-            bool on = DigiOn;
-            if (on && digiSink == null)
+            string dev = settings.CableEnabled ? CableDeviceName() : null;
+            if (cableSink != null && cableSink.DeviceName != dev) { cableSink.Dispose(); cableSink = null; }
+            if (dev != null && cableSink == null)
             {
-                string dev = DigiDeviceName();
-                if (dev == null)
-                {
-                    status.Text = Lang.T("DIGI : aucun câble audio virtuel trouvé. Installez VB-CABLE (gratuit, vb-audio.com/Cable) ou choisissez une sortie par clic droit sur DIGI.",
-                                         "DIGI: no virtual audio cable found. Install VB-CABLE (free, vb-audio.com/Cable) or pick an output by right-clicking DIGI.");
-                    on = false;
-                }
-                else
-                {
-                    digiSink = new AudioSink(dev);
-                    shownDigiError = null;
-                    status.Text = Lang.T("DIGI : son du WebSDR envoyé vers « ", "DIGI: WebSDR audio sent to \"") + dev
-                        + Lang.T(" ». Dans WSJT-X, choisissez l'entrée audio correspondante (CABLE Output).", "\". In WSJT-X, select the matching audio input (CABLE Output).");
-                }
+                cableSink = new AudioSink(dev);
+                shownCableError = null;
+                Log.Write("Câble SDRLINK : sortie « " + dev + " »");
             }
-            if (!on && digiSink != null) { digiSink.Dispose(); digiSink = null; }
-            SetPageTap(on);
-            shownModeFamily = null;
-            UpdateDisplays();
+            if (settings.CableEnabled && dev == null)
+                status.Text = Lang.T("Câble SDRLINK : aucun câble audio virtuel trouvé. Installez VB-CABLE (gratuit) : bouton « Câble SDRLINK ».",
+                                     "SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): \"SDRLINK cable\" button.");
+            SetPageTap(cableSink != null);
         }
 
         void SetPageTap(bool on)
@@ -1559,25 +1625,29 @@ namespace SDRLink
                 web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setTap && window.__sdrlink.setTap(" + (on ? "true" : "false") + ");");
         }
 
-        string DigiDeviceName()
+        string CableDeviceName()
         {
             List<string> devs = AudioSink.OutputDevices();
-            if (settings.DigiDevice != "" && devs.Contains(settings.DigiDevice)) return settings.DigiDevice;
+            if (settings.CableDevice != "" && devs.Contains(settings.CableDevice)) return settings.CableDevice;
             return AudioSink.DefaultDevice();
         }
 
-        // Clic droit sur DIGI : choix de la sortie audio (câble virtuel) recevant le son du WebSDR.
-        ContextMenuStrip BuildDigiMenu()
+        // Bouton "Câble SDRLINK" : sortie utilisée, nom SDRLINK du bout enregistrement, installation de VB-CABLE.
+        ContextMenuStrip BuildCableMenu()
         {
             ContextMenuStrip m = new ContextMenuStrip();
-            m.Opening += delegate
+            m.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e)
             {
+                e.Cancel = false;
                 m.Items.Clear();
-                ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Sortie audio DIGI (vers WSJT-X…)", "DIGI audio output (to WSJT-X…)"));
+                ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Sortie recevant le son du WebSDR :", "Output receiving the WebSDR audio:"));
                 title.Enabled = false;
                 m.Items.Add(title);
-                m.Items.Add(new ToolStripSeparator());
-                string current = DigiDeviceName();
+                ToolStripMenuItem off = new ToolStripMenuItem(Lang.T("Désactivé", "Off"));
+                off.Checked = !settings.CableEnabled;
+                off.Click += delegate { settings.CableEnabled = false; ApplyCable(); UpdateCableButton(); };
+                m.Items.Add(off);
+                string current = settings.CableEnabled ? CableDeviceName() : null;
                 foreach (string d in AudioSink.OutputDevices())
                 {
                     string dev = d;
@@ -1585,35 +1655,122 @@ namespace SDRLink
                     it.Checked = dev == current;
                     it.Click += delegate
                     {
-                        settings.DigiDevice = dev;
-                        if (digiSink != null) { digiSink.Dispose(); digiSink = null; }
-                        ApplyDigi();
+                        if (!AudioSink.LooksVirtual(dev) && MessageBox.Show(this, Lang.T(
+                                "« " + dev + " » ne semble pas être un câble virtuel : le son du WebSDR y sera joué en permanence " +
+                                "(et émis, s'il s'agit de la carte son d'émission d'un poste).\n\nUtiliser quand même cette sortie ?",
+                                "\"" + dev + "\" does not look like a virtual cable: the WebSDR audio will be played there all the time " +
+                                "(and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?"),
+                                "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+                        settings.CableDevice = dev;
+                        settings.CableEnabled = true;
+                        ApplyCable();
+                        UpdateCableButton();
                     };
                     m.Items.Add(it);
                 }
+                m.Items.Add(new ToolStripSeparator());
+                AudioEndpoints.Endpoint cap = null;
+                try { cap = AudioEndpoints.CaptureOf(current); } catch (Exception ex) { Log.Write("Câble SDRLINK : " + ex.Message); }
+                ToolStripMenuItem name = new ToolStripMenuItem(cap == null
+                    ? Lang.T("Nommer « SDRLINK » l'autre bout du câble (choisir d'abord un câble virtuel)", "Name the other end of the cable \"SDRLINK\" (pick a virtual cable first)")
+                    : Lang.T("Nommer « SDRLINK » l'autre bout du câble (« ", "Name the other end of the cable \"SDRLINK\" (\"") + cap.FullName + Lang.T(" »)…", "\")…"));
+                name.Enabled = cap != null && cap.Name != CableName;
+                AudioEndpoints.Endpoint target = cap;
+                name.Click += delegate { NameCableEnd(target); };
+                m.Items.Add(name);
+                ToolStripMenuItem get = new ToolStripMenuItem(Lang.T("Télécharger VB-CABLE (gratuit, vb-audio.com)…", "Download VB-CABLE (free, vb-audio.com)…"));
+                get.Click += delegate
+                {
+                    try { System.Diagnostics.Process.Start("https://vb-audio.com/Cable/"); } catch { }
+                };
+                m.Items.Add(get);
             };
             m.Items.Add("-");   // contenu construit à l'ouverture (liste des sorties à jour)
             return m;
         }
 
-        // Bloc audio de la page ("pcm|fréquence|base64") à recopier vers la sortie DIGI.
+        const string CableName = "SDRLINK";
+
+        // Renomme le bout "enregistrement" du câble, comme le panneau Son de Windows (droits d'administrateur si besoin).
+        void NameCableEnd(AudioEndpoints.Endpoint cap)
+        {
+            // Câble déjà renommé par l'utilisateur : il sert sans doute déjà à autre chose.
+            if (!(cap.Name ?? "").StartsWith("CABLE", StringComparison.OrdinalIgnoreCase) && MessageBox.Show(this, Lang.T(
+                    "Ce câble a déjà été renommé « " + cap.Name + " » : il sert peut-être déjà à un autre logiciel (VoiceMeeter…). " +
+                    "Le renommer en « " + CableName + " » obligera à le choisir à nouveau dans ces logiciels.\n\nContinuer ?",
+                    "This cable was already renamed \"" + cap.Name + "\": it may already be used by other software (VoiceMeeter…). " +
+                    "Renaming it \"" + CableName + "\" means selecting it again in that software.\n\nContinue?"),
+                    "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            if (MessageBox.Show(this, Lang.T(
+                    "Le périphérique d'enregistrement « " + cap.FullName + " » va être renommé « " + CableName + " ».\n\n" +
+                    "Il apparaîtra sous ce nom dans les entrées audio de WSJT-X, JTDX, fldigi… (à redémarrer). " +
+                    "Windows peut demander l'autorisation d'administrateur.\n\nContinuer ?",
+                    "The recording device \"" + cap.FullName + "\" will be renamed \"" + CableName + "\".\n\n" +
+                    "It will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). " +
+                    "Windows may ask for administrator permission.\n\nContinue?"),
+                    "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+            int hr;
+            try { hr = AudioEndpoints.SetName(cap.Id, CableName); }
+            catch (Exception ex) { hr = Marshal.GetHRForException(ex); }
+            if (hr == AudioEndpoints.E_ACCESSDENIED)
+            {
+                try
+                {
+                    System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(Application.ExecutablePath,
+                        "--name-endpoint \"" + cap.Id + "\" " + CableName);
+                    psi.Verb = "runas";
+                    psi.UseShellExecute = true;
+                    using (System.Diagnostics.Process p = System.Diagnostics.Process.Start(psi))
+                    {
+                        p.WaitForExit(30000);
+                        hr = p.HasExited ? p.ExitCode : -1;
+                    }
+                }
+                catch (System.ComponentModel.Win32Exception) { hr = AudioEndpoints.E_ACCESSDENIED; }   // autorisation refusée
+            }
+            Log.Write("Câble SDRLINK : renommage de « " + cap.FullName + " » -> " + (hr == 0 ? "OK" : "erreur 0x" + hr.ToString("X8")));
+            if (hr == 0)
+                MessageBox.Show(this, Lang.T("C'est fait : l'entrée audio s'appelle maintenant « " + CableName + " ». Redémarrez WSJT-X pour la voir.",
+                                             "Done: the audio input is now called \"" + CableName + "\". Restart WSJT-X to see it."),
+                    "SDRLink", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show(this, Lang.T("Le renommage n'a pas abouti (" + (hr == AudioEndpoints.E_ACCESSDENIED ? "autorisation refusée" : "erreur 0x" + hr.ToString("X8")) + ").\n\n" +
+                                             "À la main : Panneau de configuration Son › onglet Enregistrement › « " + cap.FullName + " » › Propriétés › nom.",
+                                             "Renaming failed (" + (hr == AudioEndpoints.E_ACCESSDENIED ? "permission denied" : "error 0x" + hr.ToString("X8")) + ").\n\n" +
+                                             "By hand: Sound control panel › Recording tab › \"" + cap.FullName + "\" › Properties › name."),
+                    "SDRLink", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        void UpdateCableButton()
+        {
+            btnCable.Text = Lang.T("Câble SDRLINK", "SDRLINK cable") + (settings.CableEnabled && cableSink != null ? " ▾" : Lang.T(" (arrêt) ▾", " (off) ▾"));
+        }
+
+        // Bloc audio de la page ("pcm|fréquence|base64") à recopier vers le câble.
         void OnPcm(string msg)
         {
-            if (digiSink == null) return;
+            if (cableSink == null) return;
             int a = msg.IndexOf('|'), b = msg.IndexOf('|', a + 1);
             int rate;
             if (b < 0 || !int.TryParse(msg.Substring(a + 1, b - a - 1), out rate)) return;
-            try { digiSink.Write(rate, Convert.FromBase64String(msg.Substring(b + 1))); }
+            try { cableSink.Write(rate, Convert.FromBase64String(msg.Substring(b + 1))); }
             catch (FormatException) { }
-            if (digiSink.Error != shownDigiError)
+            if (cableSink.Error != shownCableError)
             {
-                shownDigiError = digiSink.Error;
-                status.Text = shownDigiError == null
-                    ? Lang.T("DIGI : son du WebSDR envoyé vers « ", "DIGI: WebSDR audio sent to \"") + digiSink.DeviceName + Lang.T(" »", "\"")
-                    : "DIGI : " + digiSink.DeviceName + " : " + shownDigiError + Lang.T(" (clic droit sur DIGI pour choisir une autre sortie)", " (right-click DIGI to pick another output)");
+                shownCableError = cableSink.Error;
+                status.Text = shownCableError == null
+                    ? Lang.T("Câble SDRLINK : son du WebSDR envoyé vers « ", "SDRLINK cable: WebSDR audio sent to \"") + cableSink.DeviceName + Lang.T(" »", "\"")
+                    : Lang.T("Câble SDRLINK : « ", "SDRLINK cable: \"") + cableSink.DeviceName + Lang.T(" » : ", "\": ") + shownCableError;
             }
         }
-        string shownDigiError;
+        string shownCableError;
+
+        // Notch automatique (comme le DNF des Yaesu) : supprime les porteuses et sifflements stables du son du WebSDR.
+        void SetPageNotch()
+        {
+            if (web.CoreWebView2 != null)
+                web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setNotch && window.__sdrlink.setNotch(" + (chkNotch.Checked ? "true" : "false") + ");");
+        }
 
         // ---------------------------------------------------------------- Volume du WebSDR
 
@@ -1715,6 +1872,7 @@ namespace SDRLink
         // Liste déroulante des WebSDR : seulement les favoris de la liste choisie.
         void RefillUrlCombo()
         {
+            FillFavListCombo();   // une liste a pu se vider ou se remplir
             string text = cbUrl.Text;
             cbUrl.BeginUpdate();
             cbUrl.Items.Clear();
@@ -1724,14 +1882,24 @@ namespace SDRLink
             cbUrl.Text = text;
         }
 
-        // Noms des listes (ils changent quand on les renomme ou qu'on change de langue).
+        // Numéro de liste de chaque ligne du menu des listes (les listes vides n'y figurent pas).
+        readonly List<int> favListShown = new List<int>();
+
+        // Noms des listes (ils changent quand on les renomme ou qu'on change de langue). Seules les listes
+        // contenant des favoris sont proposées ; si la liste choisie s'est vidée, on passe à la première non vide.
         void FillFavListCombo()
         {
+            favListShown.Clear();
+            for (int i = 0; i < Favorite.ListCount; i++)
+                if (settings.Favorites.Exists(delegate(Favorite f) { return f.List == i; })) favListShown.Add(i);
+            if (favListShown.Count == 0) favListShown.Add(Math.Max(0, Math.Min(Favorite.ListCount - 1, settings.CurrentList)));
+            if (!favListShown.Contains(settings.CurrentList)) settings.CurrentList = favListShown[0];
+
             bool was = loading;
             loading = true;
             cbFavList.Items.Clear();
-            for (int i = 0; i < Favorite.ListCount; i++) cbFavList.Items.Add(FavoritesDialog.ListLabel(settings.ListNames, i));
-            cbFavList.SelectedIndex = Math.Max(0, Math.Min(Favorite.ListCount - 1, settings.CurrentList));
+            foreach (int i in favListShown) cbFavList.Items.Add(FavoritesDialog.ListLabel(settings.ListNames, i));
+            cbFavList.SelectedIndex = favListShown.IndexOf(settings.CurrentList);
             loading = was;
         }
 

@@ -7,18 +7,21 @@ namespace SDRLink
     static class Program
     {
         // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
-        public const string Version = "1.2";
+        public const string Version = "1.3";
 
         [STAThread]
-        static void Main()
+        static int Main(string[] args)
         {
+            // Relancé avec les droits d'administrateur pour renommer un périphérique audio (câble SDRLINK).
+            if (args.Length == 3 && args[0] == "--name-endpoint") return AudioEndpoints.SetName(args[1], args[2]);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Langue lue dès le départ pour que les messages de vérification soient dans la bonne langue.
             try { Lang.English = Settings.Load().Language == "en"; } catch { }
-            if (!Prerequisites.CheckDotNet()) return;
+            if (!Prerequisites.CheckDotNet()) return 1;
             Prerequisites.InstallEmbeddedLibraries();
             Run();
+            return 0;
         }
 
         // Méthode séparée : les types WebView2 ne doivent être résolus qu'une fois les DLL intégrées disponibles.
