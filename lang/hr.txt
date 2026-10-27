@@ -1,0 +1,208 @@
+output not found	izlaz nije pronađen
+output already used in exclusive mode by another program	izlaz već koristi drugi program u isključivom načinu
+cannot open, error 	nije moguće otvoriti, pogreška 
+Name:	Naziv:
+Address:	Adresa:
+Cancel	Odustani
+Please enter a name and an address.	Unesite naziv i adresu.
+Rename list	Preimenuj popis
+Favorite manager	Upravitelj favorita
+Add favorite…	Dodaj favorit…
+Import…	Uvezi…
+Export…	Izvezi…
+Selected / checked items	Odabrane / označene stavke
+Remove…	Ukloni…
+Rename…	Preimenuj…
+Move up	Pomakni gore
+Move down	Pomakni dolje
+Check	Provjera
+Check favorites	Provjeri favorite
+Check all	Označi sve
+Uncheck all	Odznači sve
+List:	Popis:
+Move to ▸	Premjesti u ▸
+(right-click the list to rename it)	(desni klik na popis za preimenovanje)
+Name	Naziv
+Address	Adresa
+Status	Status
+List	Popis
+Open	Otvori
+Close	Zatvori
+All lists	Svi popisi
+Please select a favorite in the list first.	Najprije odaberite favorit na popisu.
+Add favorite	Dodaj favorit
+checking…	provjera…
+OK	U redu
+invalid address	nevažeća adresa
+answers	odgovara
+not found	nije pronađeno
+answers (certificate)	odgovara (certifikat)
+no answer	nema odgovora
+unknown host	nepoznat host
+connection refused	veza odbijena
+unreachable	nedostupno
+Import favorites	Uvezi favorite
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favoriti (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Sve datoteke (*.*)|*.*
+Export favorites	Izvezi favorite
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, čitljivo u Excelu (*.csv)|*.csv|Oznake preglednika (*.html)|*.html|Tekst (*.txt)|*.txt
+List {0}	Popis {0}
+Rename "{0}"…	Preimenuj „{0}”…
+{0} favorite(s) moved to "{1}".	Favoriti premješteni u „{1}”: {0}.
+{0} favorite(s) shown, {1} checked	Prikazani favoriti: {0}, označeni: {1}
+Remove favorite "{0}"?	Ukloniti favorit „{0}”?
+Remove the {0} checked favorites?	Ukloniti označene favorite ({0})?
+duplicate of "{0}"	duplikat od „{0}”
+Checking {0} address(es)…	Provjera adresa ({0})…
+Checking… {0} left	Provjera… preostalo: {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Provjera završena. Označeno – neispravne poveznice: {0}, duplikati: {1}. Kliknite „Ukloni…” da ih izbrišete.
+{0} favorite(s) imported, {1} already present.	Uvezeni favoriti: {0}, već postojeći: {1}.
+{0} favorite(s) exported.	Izvezeni favoriti: {0}.
+rigctld connection closed	Veza s rigctld zatvorena
+stopped	zaustavljeno
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nema rigctld na {0}:{1} (pokrenite rigctld ili označite „Pokreni rigctld”).
+Invalid HRD answer	Nevažeći odgovor HRD-a
+HRD connection closed	Veza s HRD-om zatvorena
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nema HRD poslužitelja na {0}:{1} (omogućite IP poslužitelj u HRD Rig Control).
+Cannot open the log: 	Nije moguće otvoriti dnevnik: 
+Save: no known frequency (rig or WebSDR)	Spremi: nema poznate frekvencije (TRX ili WebSDR)
+RIG	TRX
+Disconnected	Odspojeno
+Connect	Spoji
+Disconnect	Odspoji
+Location of rigctld.exe (Hamlib)	Lokacija rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Programi (*.exe)|*.exe
+Please choose a rig model.	Odaberite model uređaja.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Nevažeća CI-V adresa (npr. 70 za IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) nije pronađen. Postavite njegovu lokaciju gumbom „…” ili instalirajte Hamlib (besplatno).\n\nOtvoriti stranicu za preuzimanje Hamliba?
+Please choose the rig's COM port.	Odaberite COM priključak uređaja.
+Cannot start rigctld: 	Nije moguće pokrenuti rigctld: 
+TX safety timeout (PTT button)	Sigurnosno vremensko ograničenje TX (gumb PTT)
+Off	Isklj.
+PTT: connect the rig first	PTT: najprije spojite uređaj
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nevažeća frekvencija: upišite vrijednost u kHz, npr. 7074 ili 14074.5
+Remove this value (pick it in the list first)	Ukloni ovu vrijednost (najprije je odaberite na popisu)
+RIG 	TRX 
+Cannot start WebView2 (Edge):\n	Nije moguće pokrenuti WebView2 (Edge):\n
+Invalid address: 	Nevažeća adresa: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kabel: nije pronađen virtualni audio kabel. Instalirajte VB-CABLE (besplatno): gumb „SDRLINK kabel”.
+Output receiving the WebSDR audio:	Izlaz koji prima zvuk WebSDR-a:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nazovi drugi kraj kabela „SDRLINK” (najprije odaberite virtualni kabel)
+Download VB-CABLE (free, vb-audio.com)…	Preuzmi VB-CABLE (besplatno, vb-audio.com)…
+permission denied	pristup odbijen
+error	pogreška
+SDRLINK cable	SDRLINK kabel
+ (off) ▾	 (isklj.) ▾
+Mute TRX: connect the rig first	Utišaj TRX: najprije spojite uređaj
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnoća uređaja nije dostupna s ovim uređajem ili sučeljem (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Odašiljanje automatski zaustavljeno nakon {0} (sigurnosno ograničenje, desni klik na PTT za promjenu)
+Remove "{0}" from the list	Ukloni „{0}” s popisa
+Remove all ({0} values)	Ukloni sve (vrijednosti: {0})
+Remove all {0} frequencies from the list?	Ukloniti sve frekvencije s popisa ({0})?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}” ne izgleda kao virtualni kabel: zvuk WebSDR-a ondje će se stalno reproducirati (i odašiljati, ako je to odašiljačka zvučna kartica uređaja).\n\nIpak koristiti ovaj izlaz?
+Name the other end of the cable "SDRLINK" ("{0}")…	Nazovi drugi kraj kabela „SDRLINK” („{0}”)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Ovaj je kabel već preimenovan u „{0}”: možda ga već koristi drugi softver (VoiceMeeter…). Nakon preimenovanja u „{1}” morat ćete ga ponovno odabrati u tom softveru.\n\nNastaviti?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Uređaj za snimanje „{0}” bit će preimenovan u „{1}”.\n\nPod tim će se nazivom prikazivati među audio ulazima programa WSJT-X, JTDX, fldigi… (ponovno ih pokrenite). Windows može zatražiti administratorsko dopuštenje.\n\nNastaviti?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gotovo: audio ulaz sada se zove „{0}”. Ponovno pokrenite WSJT-X da biste ga vidjeli.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Preimenovanje nije uspjelo ({0}).\n\nRučno: Upravljačka ploča Zvuk › kartica Snimanje › „{1}” › Svojstva › naziv.
+SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabel: zvuk WebSDR-a šalje se na „{0}”
+SDRLINK cable: "{0}": {1}	SDRLINK kabel: „{0}”: {1}
+This page is already in "{0}".	Ova je stranica već u „{0}”.
+Add favorite to "{0}"	Dodaj favorit u „{0}”
+This page is not in "{0}".	Ova stranica nije u „{0}”.
+Remove "{0}" from "{1}"?	Ukloniti „{0}” iz „{1}”?
+Interface:	Sučelje:
+Brand:	Marka:
+Model:	Model:
+Port:	Priključak:
+Baud rate:	Brzina:
+Stop bits:	Stop bitovi:
+CI-V address (hex):	CI-V adresa (hex):
+OmniRig rig:	OmniRig uređaj:
+Host:	Host:
+TX detection (HRD):	Detekcija TX (HRD):
+Hamlib model no.:	Br. modela Hamlib:
+Language:	Jezik:
+Sync:	Sinkr.:
+WebSDR offset (Hz):	Pomak WebSDR (Hz):
+restore after (ms):	vrati nakon (ms):
+kHz:	kHz:
+Step:	Korak:
+WebSDR:	WebSDR:
+Volume:	Glasnoća:
+TRX volume:	Glasnoća TRX:
+Open log	Otvori dnevnik
+…	…
+Download Hamlib…	Preuzmi Hamlib…
+SDRLINK cable ▾	SDRLINK kabel ▾
+QSY	QSY
+Save	Spremi
+Go	Idi
+◀ Back	◀ Natrag
+Reload	Ponovno učitaj
+★ Add to favorites	★ Dodaj u favorite
+Remove from favorites	Ukloni iz favorita
+Manage favorites…	Upravljaj favoritima…
+Find WebSDRs…	Pronađi WebSDR…
+Mute WebSDR	Utišaj WebSDR
+Mute TRX	Utišaj TRX
+Auto-connect at startup	Automatsko spajanje pri pokretanju
+Dark mode	Tamni način
+RTS	RTS
+DTR	DTR
+Start rigctld:	Pokreni rigctld:
+Sync mode	Sinkroniziraj način rada
+Mute WebSDR while transmitting	Utišaj WebSDR tijekom odašiljanja
+Auto notch (DNF)	Automatski notch (DNF)
+Compact view	Kompaktni prikaz
+Always on top	Uvijek na vrhu
+COM port (direct CAT)	COM priključak (izravni CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	Gumbi MOX/TX/PTT
+MOX/VOX/TX/PTT buttons	Gumbi MOX/VOX/TX/PTT
+Both ways	Dvosmjerno
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nije instaliran (OmniRig.OmniRigX nije pronađen).
+Dark mode colour	Boja tamnog načina
+Light mode colour	Boja svijetlog načina
+Default	Zadano
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink zahtijeva Microsoft .NET Framework 4.6.2 ili noviji (preporučuje se 4.8).\nNije instaliran na ovom računalu.\n\nPreuzeti i instalirati .NET Framework 4.8 sada?\n(možda će biti potrebno ponovno pokretanje računala, zatim ponovno pokrenite SDRLink)
+SDRLink - missing component	SDRLink - nedostaje komponenta
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink za prikaz WebSDR-ova treba Microsoft Edge WebView2 Runtime.\nNije instaliran na ovom računalu.\n\nPreuzeti i instalirati WebView2 sada? (besplatno, oko 2 MB)
+Download or installation failed:\n	Preuzimanje ili instalacija nije uspjela:\n
+\n\nThe official download page will open:\n	\n\nOtvorit će se službena stranica za preuzimanje:\n
+Connecting...	Spajanje...
+Connected, waiting for the rig...	Spojeno, čekanje na uređaj...
+Rig online	Uređaj spojen
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Uređaj ne odgovara (provjerite priključak, brzinu, CI-V adresu, CAT izbornik)
+Error: 	Pogreška: 
+No TCI server at 	Nema TCI poslužitelja na 
+TCI connection lost	TCI veza izgubljena
+unavailable	nedostupno
+unexpected format	neočekivani format
+Find WebSDRs (France and neighbouring countries)	Pronađi WebSDR (Francuska i susjedne zemlje)
+All	Sve
+Hide those already in favorites	Sakrij one koji su već u favoritima
+Max distance from the centre of France (km):	Najv. udaljenost od središta Francuske (km):
+Filter:	Filtar:
+Type:	Vrsta:
+Location	Lokacija
+Country	Država
+Users	Korisn.
+Listen to selection	Slušaj odabrano
+Add checked to favorites	Dodaj označene u favorite
+Refresh	Osvježi
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Pretraživanje imenika (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Najprije odaberite prijemnik na popisu.
+{0} receiver(s) shown, {1} checked   —   sources: 	Prikazani prijemnici: {0}, označeni: {1}   —   izvori: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Dodani favoriti: {0}. Možete ih preimenovati u „Upravljaj favoritima…”.

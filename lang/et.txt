@@ -1,0 +1,208 @@
+output not found	väljundit ei leitud
+output already used in exclusive mode by another program	väljundit kasutab juba teine programm ainurežiimis
+cannot open, error 	ei saa avada, viga 
+Name:	Nimi:
+Address:	Aadress:
+Cancel	Loobu
+Please enter a name and an address.	Sisestage nimi ja aadress.
+Rename list	Nimeta loend ümber
+Favorite manager	Lemmikute haldur
+Add favorite…	Lisa lemmik…
+Import…	Impordi…
+Export…	Ekspordi…
+Selected / checked items	Valitud / märgitud üksused
+Remove…	Eemalda…
+Rename…	Nimeta ümber…
+Move up	Nihuta üles
+Move down	Nihuta alla
+Check	Kontroll
+Check favorites	Kontrolli lemmikuid
+Check all	Märgi kõik
+Uncheck all	Tühjenda kõik
+List:	Loend:
+Move to ▸	Teisalda ▸
+(right-click the list to rename it)	(loendi ümbernimetamiseks paremklõpsake seda)
+Name	Nimi
+Address	Aadress
+Status	Olek
+List	Loend
+Open	Ava
+Close	Sulge
+All lists	Kõik loendid
+Please select a favorite in the list first.	Valige esmalt loendist lemmik.
+Add favorite	Lisa lemmik
+checking…	kontrollimine…
+OK	OK
+invalid address	vigane aadress
+answers	vastab
+not found	ei leitud
+answers (certificate)	vastab (sertifikaat)
+no answer	ei vasta
+unknown host	tundmatu host
+connection refused	ühendus keelati
+unreachable	kättesaamatu
+Import favorites	Impordi lemmikud
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Lemmikud (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Kõik failid (*.*)|*.*
+Export favorites	Ekspordi lemmikud
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, Excelis loetav (*.csv)|*.csv|Brauseri järjehoidjad (*.html)|*.html|Tekst (*.txt)|*.txt
+List {0}	Loend {0}
+Rename "{0}"…	Nimeta „{0}“ ümber…
+{0} favorite(s) moved to "{1}".	{0} lemmik(ut) teisaldati loendisse „{1}“.
+{0} favorite(s) shown, {1} checked	Kuvatud {0} lemmik(ut), märgitud {1}
+Remove favorite "{0}"?	Kas eemaldada lemmik „{0}“?
+Remove the {0} checked favorites?	Kas eemaldada {0} märgitud lemmikut?
+duplicate of "{0}"	duplikaat: „{0}“
+Checking {0} address(es)…	Kontrollitakse {0} aadressi…
+Checking… {0} left	Kontrollimine… jäänud {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Kontroll valmis: märgiti {0} surnud link(i) ja {1} duplikaat(i). Nende kustutamiseks klõpsake „Eemalda…“.
+{0} favorite(s) imported, {1} already present.	Imporditi {0} lemmik(ut), {1} oli juba olemas.
+{0} favorite(s) exported.	Eksporditi {0} lemmik(ut).
+rigctld connection closed	rigctld ühendus suleti
+stopped	peatatud
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Aadressil {0}:{1} pole rigctld-d (käivitage rigctld või märkige „Käivita rigctld“).
+Invalid HRD answer	Vigane HRD vastus
+HRD connection closed	HRD ühendus suleti
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Aadressil {0}:{1} pole HRD serverit (lubage IP-server programmis HRD Rig Control).
+Cannot open the log: 	Logi ei saa avada: 
+Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
+RIG	RAADIO
+Disconnected	Ühendus puudub
+Connect	Ühenda
+Disconnect	Katkesta
+Location of rigctld.exe (Hamlib)	rigctld.exe asukoht (Hamlib)
+Programs (*.exe)|*.exe	Programmid (*.exe)|*.exe
+Please choose a rig model.	Valige raadio mudel.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Vigane CI-V aadress (nt 70 IC-7000 jaoks).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) ei leitud. Määrake selle asukoht nupuga „…“ või installige Hamlib (tasuta).\n\nKas avada Hamlibi allalaadimisleht?
+Please choose the rig's COM port.	Valige raadio COM-port.
+Cannot start rigctld: 	rigctld ei saa käivitada: 
+TX safety timeout (PTT button)	TX ohutuse ajalõpp (PTT nupp)
+Off	Väljas
+PTT: connect the rig first	PTT: ühendage esmalt raadio
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Vigane sagedus: sisestage väärtus kHz-des, nt 7074 või 14074.5
+Remove this value (pick it in the list first)	Eemalda see väärtus (valige see esmalt loendist)
+RIG 	RAADIO 
+Cannot start WebView2 (Edge):\n	WebView2 (Edge) ei saa käivitada:\n
+Invalid address: 	Vigane aadress: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kaabel: virtuaalset helikaablit ei leitud. Installige VB-CABLE (tasuta): nupp „SDRLINK kaabel“.
+Output receiving the WebSDR audio:	WebSDR-i heli vastuvõttev väljund:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nimeta kaabli teine ots „SDRLINK“ (valige esmalt virtuaalne kaabel)
+Download VB-CABLE (free, vb-audio.com)…	Laadi alla VB-CABLE (tasuta, vb-audio.com)…
+permission denied	juurdepääs keelatud
+error	viga
+SDRLINK cable	SDRLINK kaabel
+ (off) ▾	 (väljas) ▾
+Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Saade peatati automaatselt, kestus {0} (ohutuse ajalõpp, muutmiseks paremklõpsake PTT-d)
+Remove "{0}" from the list	Eemalda „{0}“ loendist
+Remove all ({0} values)	Eemalda kõik ({0} väärtust)
+Remove all {0} frequencies from the list?	Kas eemaldada loendist kõik {0} sagedust?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}“ ei paista olevat virtuaalne kaabel: WebSDR-i heli mängitakse seal kogu aeg (ja see läheb eetrisse, kui see on raadio saatja helikaart).\n\nKas kasutada seda väljundit siiski?
+Name the other end of the cable "SDRLINK" ("{0}")…	Nimeta kaabli teine ots „SDRLINK“ („{0}“)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	See kaabel on juba ümber nimetatud („{0}“): seda võib juba kasutada mõni muu tarkvara (VoiceMeeter…). Kui nimetate selle ümber („{1}“), tuleb see selles tarkvaras uuesti valida.\n\nKas jätkata?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Salvestusseadme „{0}“ uus nimi on „{1}“.\n\nSee kuvatakse selle nimega WSJT-X, JTDX, fldigi… helisisendites (taaskäivitage need). Windows võib küsida administraatori luba.\n\nKas jätkata?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Valmis: helisisendi nimi on nüüd „{0}“. Selle nägemiseks taaskäivitage WSJT-X.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Ümbernimetamine nurjus ({0}).\n\nKäsitsi: Heli juhtpaneel › vahekaart Salvestamine › „{1}“ › Atribuudid › nimi.
+SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kaabel: WebSDR-i heli saadetakse seadmesse „{0}“
+SDRLINK cable: "{0}": {1}	SDRLINK kaabel: „{0}“: {1}
+This page is already in "{0}".	See leht on juba loendis „{0}“.
+Add favorite to "{0}"	Lisa lemmik loendisse „{0}“
+This page is not in "{0}".	Seda lehte pole loendis „{0}“.
+Remove "{0}" from "{1}"?	Kas eemaldada „{0}“ loendist „{1}“?
+Interface:	Liides:
+Brand:	Tootja:
+Model:	Mudel:
+Port:	Port:
+Baud rate:	Bodikiirus:
+Stop bits:	Stoppbitid:
+CI-V address (hex):	CI-V aadress (hex):
+OmniRig rig:	OmniRigi raadio:
+Host:	Host:
+TX detection (HRD):	TX tuvastus (HRD):
+Hamlib model no.:	Hamlibi mudeli nr:
+Language:	Keel:
+Sync:	Sünkr.:
+WebSDR offset (Hz):	WebSDR nihe (Hz):
+restore after (ms):	taasta pärast (ms):
+kHz:	kHz:
+Step:	Samm:
+WebSDR:	WebSDR:
+Volume:	Helitugevus:
+TRX volume:	TRX helitugevus:
+Open log	Ava logi
+…	…
+Download Hamlib…	Laadi alla Hamlib…
+SDRLINK cable ▾	SDRLINK kaabel ▾
+QSY	QSY
+Save	Salvesta
+Go	Mine
+◀ Back	◀ Tagasi
+Reload	Laadi uuesti
+★ Add to favorites	★ Lisa lemmikutesse
+Remove from favorites	Eemalda lemmikutest
+Manage favorites…	Halda lemmikuid…
+Find WebSDRs…	Otsi WebSDR-e…
+Mute WebSDR	Vaigista WebSDR
+Mute TRX	Vaigista TRX
+Auto-connect at startup	Ühenda käivitamisel automaatselt
+Dark mode	Tume režiim
+RTS	RTS
+DTR	DTR
+Start rigctld:	Käivita rigctld:
+Sync mode	Sünkrooni töörežiim
+Mute WebSDR while transmitting	Vaigista WebSDR saatmise ajal
+Auto notch (DNF)	Automaatne notch (DNF)
+Compact view	Kompaktvaade
+Always on top	Alati pealmine
+COM port (direct CAT)	COM-port (otse CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	MOX/TX/PTT nupud
+MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT nupud
+Both ways	Mõlemas suunas
+Rig → WebSDR	Raadio → WebSDR
+WebSDR → Rig	WebSDR → Raadio
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig pole installitud (OmniRig.OmniRigX ei leitud).
+Dark mode colour	Tumeda režiimi värv
+Light mode colour	Heleda režiimi värv
+Default	Vaikimisi
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink vajab Microsoft .NET Framework 4.6.2 või uuemat versiooni (soovitatav 4.8).\nSee pole selles arvutis installitud.\n\nKas laadida alla ja installida .NET Framework 4.8 kohe?\n(võib olla vaja arvuti taaskäivitada, seejärel käivitage SDRLink uuesti)
+SDRLink - missing component	SDRLink - puuduv komponent
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink vajab WebSDR-ide kuvamiseks komponenti Microsoft Edge WebView2 Runtime.\nSee pole selles arvutis installitud.\n\nKas laadida alla ja installida WebView2 kohe? (tasuta, umbes 2 MB)
+Download or installation failed:\n	Allalaadimine või installimine nurjus:\n
+\n\nThe official download page will open:\n	\n\nAvaneb ametlik allalaadimisleht:\n
+Connecting...	Ühendamine...
+Connected, waiting for the rig...	Ühendatud, raadio ootamine...
+Rig online	Raadio võrgus
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raadio ei vasta (kontrollige porti, bodikiirust, CI-V aadressi, CAT menüüd)
+Error: 	Viga: 
+No TCI server at 	TCI serverit pole aadressil 
+TCI connection lost	TCI ühendus katkes
+unavailable	pole saadaval
+unexpected format	ootamatu vorming
+Find WebSDRs (France and neighbouring countries)	Otsi WebSDR-e (Prantsusmaa ja naaberriigid)
+All	Kõik
+Hide those already in favorites	Peida juba lemmikutes olevad
+Max distance from the centre of France (km):	Max kaugus Prantsusmaa keskpunktist (km):
+Filter:	Filter:
+Type:	Tüüp:
+Location	Asukoht
+Country	Riik
+Users	Kasut.
+Listen to selection	Kuula valitut
+Add checked to favorites	Lisa märgitud lemmikutesse
+Refresh	Värskenda
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Kataloogidest otsimine (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Valige esmalt loendist vastuvõtja.
+{0} receiver(s) shown, {1} checked   —   sources: 	Kuvatud {0} vastuvõtja(t), märgitud {1}   —   allikad: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Lisati {0} lemmik(ut). Saate need ümber nimetada jaotises „Halda lemmikuid…“.

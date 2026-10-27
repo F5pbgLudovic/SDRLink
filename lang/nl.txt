@@ -1,0 +1,208 @@
+output not found	uitvoerapparaat niet gevonden
+output already used in exclusive mode by another program	uitvoerapparaat al in exclusieve modus in gebruik door een ander programma
+cannot open, error 	kan niet openen, fout 
+Name:	Naam:
+Address:	Adres:
+Cancel	Annuleren
+Please enter a name and an address.	Voer een naam en een adres in.
+Rename list	Lijst hernoemen
+Favorite manager	Favorietenbeheer
+Add favorite…	Favoriet toevoegen…
+Import…	Importeren…
+Export…	Exporteren…
+Selected / checked items	Geselecteerde / aangevinkte items
+Remove…	Verwijderen…
+Rename…	Hernoemen…
+Move up	Omhoog
+Move down	Omlaag
+Check	Controle
+Check favorites	Favorieten controleren
+Check all	Alles aanvinken
+Uncheck all	Alles uitvinken
+List:	Lijst:
+Move to ▸	Verplaatsen naar ▸
+(right-click the list to rename it)	(rechtsklik op de lijst om te hernoemen)
+Name	Naam
+Address	Adres
+Status	Status
+List	Lijst
+Open	Openen
+Close	Sluiten
+All lists	Alle lijsten
+Please select a favorite in the list first.	Selecteer eerst een favoriet in de lijst.
+Add favorite	Favoriet toevoegen
+checking…	controleren…
+OK	OK
+invalid address	ongeldig adres
+answers	antwoordt
+not found	niet gevonden
+answers (certificate)	antwoordt (certificaat)
+no answer	geen antwoord
+unknown host	onbekende host
+connection refused	verbinding geweigerd
+unreachable	onbereikbaar
+Import favorites	Favorieten importeren
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favorieten (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Alle bestanden (*.*)|*.*
+Export favorites	Favorieten exporteren
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, leesbaar in Excel (*.csv)|*.csv|Browserbladwijzers (*.html)|*.html|Tekst (*.txt)|*.txt
+List {0}	Lijst {0}
+Rename "{0}"…	"{0}" hernoemen…
+{0} favorite(s) moved to "{1}".	{0} favoriet(en) verplaatst naar "{1}".
+{0} favorite(s) shown, {1} checked	{0} favoriet(en) getoond, {1} aangevinkt
+Remove favorite "{0}"?	Favoriet "{0}" verwijderen?
+Remove the {0} checked favorites?	De {0} aangevinkte favorieten verwijderen?
+duplicate of "{0}"	duplicaat van "{0}"
+Checking {0} address(es)…	{0} adres(sen) controleren…
+Checking… {0} left	Controleren… nog {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Controle klaar: {0} dode link(s), {1} duplica(a)t(en) aangevinkt. Klik op "Verwijderen…" om ze te wissen.
+{0} favorite(s) imported, {1} already present.	{0} favoriet(en) geïmporteerd, {1} al aanwezig.
+{0} favorite(s) exported.	{0} favoriet(en) geëxporteerd.
+rigctld connection closed	rigctld-verbinding gesloten
+stopped	gestopt
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Geen rigctld op {0}:{1} (start rigctld, of vink "rigctld starten" aan).
+Invalid HRD answer	Ongeldig HRD-antwoord
+HRD connection closed	HRD-verbinding gesloten
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Geen HRD-server op {0}:{1} (schakel de IP-server in HRD Rig Control in).
+Cannot open the log: 	Kan het logboek niet openen: 
+Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
+RIG	TRX
+Disconnected	Niet verbonden
+Connect	Verbinden
+Disconnect	Verbreken
+Location of rigctld.exe (Hamlib)	Locatie van rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Programma's (*.exe)|*.exe
+Please choose a rig model.	Kies een transceivermodel.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Ongeldig CI-V-adres (bijv. 70 voor de IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) is niet gevonden. Geef de locatie op met de knop "…", of installeer Hamlib (gratis).\n\nDe downloadpagina van Hamlib openen?
+Please choose the rig's COM port.	Kies de COM-poort van de transceiver.
+Cannot start rigctld: 	Kan rigctld niet starten: 
+TX safety timeout (PTT button)	TX-veiligheidstijd (PTT-knop)
+Off	Uit
+PTT: connect the rig first	PTT: verbind eerst de transceiver
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ongeldige frequentie: typ een waarde in kHz, bijv. 7074 of 14074.5
+Remove this value (pick it in the list first)	Deze waarde verwijderen (kies hem eerst in de lijst)
+RIG 	TRX 
+Cannot start WebView2 (Edge):\n	Kan WebView2 (Edge) niet starten:\n
+Invalid address: 	Ongeldig adres: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kabel: geen virtuele audiokabel gevonden. Installeer VB-CABLE (gratis): knop "SDRLINK-kabel".
+Output receiving the WebSDR audio:	Uitvoer voor het WebSDR-geluid:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Andere kant van de kabel "SDRLINK" noemen (kies eerst een virtuele kabel)
+Download VB-CABLE (free, vb-audio.com)…	VB-CABLE downloaden (gratis, vb-audio.com)…
+permission denied	toegang geweigerd
+error	fout
+SDRLINK cable	SDRLINK-kabel
+ (off) ▾	 (uit) ▾
+Mute TRX: connect the rig first	TRX dempen: verbind eerst de transceiver
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-volume niet beschikbaar met deze transceiver of interface (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Zenden automatisch gestopt na {0} (veiligheidstijd, rechtsklik op PTT om te wijzigen)
+Remove "{0}" from the list	"{0}" uit de lijst verwijderen
+Remove all ({0} values)	Alles verwijderen ({0} waarden)
+Remove all {0} frequencies from the list?	Alle {0} frequenties uit de lijst verwijderen?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	"{0}" lijkt geen virtuele kabel te zijn: het WebSDR-geluid wordt daar voortdurend afgespeeld (en uitgezonden, als het de zendgeluidskaart van een transceiver is).\n\nDeze uitvoer toch gebruiken?
+Name the other end of the cable "SDRLINK" ("{0}")…	Andere kant van de kabel "SDRLINK" noemen ("{0}")…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Deze kabel is al hernoemd naar "{0}": mogelijk wordt hij al door andere software gebruikt (VoiceMeeter…). Als je hem hernoemt naar "{1}", moet je hem daar opnieuw selecteren.\n\nDoorgaan?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Het opnameapparaat "{0}" wordt hernoemd naar "{1}".\n\nHet verschijnt onder deze naam bij de audio-ingangen van WSJT-X, JTDX, fldigi… (herstart deze). Windows kan om beheerdersrechten vragen.\n\nDoorgaan?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Klaar: de audio-ingang heet nu "{0}". Herstart WSJT-X om hem te zien.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Hernoemen mislukt ({0}).\n\nHandmatig: Configuratiescherm Geluid › tabblad Opnemen › "{1}" › Eigenschappen › naam.
+SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-geluid naar "{0}" gestuurd
+SDRLINK cable: "{0}": {1}	SDRLINK-kabel: "{0}": {1}
+This page is already in "{0}".	Deze pagina staat al in "{0}".
+Add favorite to "{0}"	Favoriet toevoegen aan "{0}"
+This page is not in "{0}".	Deze pagina staat niet in "{0}".
+Remove "{0}" from "{1}"?	"{0}" uit "{1}" verwijderen?
+Interface:	Interface:
+Brand:	Merk:
+Model:	Model:
+Port:	Poort:
+Baud rate:	Baudrate:
+Stop bits:	Stopbits:
+CI-V address (hex):	CI-V-adres (hex):
+OmniRig rig:	OmniRig-rig:
+Host:	Host:
+TX detection (HRD):	TX-detectie (HRD):
+Hamlib model no.:	Hamlib-modelnr.:
+Language:	Taal:
+Sync:	Sync:
+WebSDR offset (Hz):	WebSDR-offset (Hz):
+restore after (ms):	herstel na (ms):
+kHz:	kHz:
+Step:	Stap:
+WebSDR:	WebSDR:
+Volume:	Volume:
+TRX volume:	TRX-volume:
+Open log	Log openen
+…	…
+Download Hamlib…	Hamlib downloaden…
+SDRLINK cable ▾	SDRLINK-kabel ▾
+QSY	QSY
+Save	Save
+Go	Ga
+◀ Back	◀ Terug
+Reload	Vernieuwen
+★ Add to favorites	★ Aan favorieten
+Remove from favorites	Uit favorieten verwijderen
+Manage favorites…	Favorieten beheren…
+Find WebSDRs…	WebSDR's zoeken…
+Mute WebSDR	WebSDR dempen
+Mute TRX	TRX dempen
+Auto-connect at startup	Automatisch verbinden bij start
+Dark mode	Donkere modus
+RTS	RTS
+DTR	DTR
+Start rigctld:	rigctld starten:
+Sync mode	Mode synchroniseren
+Mute WebSDR while transmitting	WebSDR dempen tijdens zenden
+Auto notch (DNF)	Auto-notch (DNF)
+Compact view	Compacte weergave
+Always on top	Altijd bovenaan
+COM port (direct CAT)	COM-poort (direct CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	MOX/TX/PTT-knoppen
+MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT-knoppen
+Both ways	Beide richtingen
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig is niet geïnstalleerd (OmniRig.OmniRigX niet gevonden).
+Dark mode colour	Kleur donkere modus
+Light mode colour	Kleur lichte modus
+Default	Standaard
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink heeft Microsoft .NET Framework 4.6.2 of hoger nodig (4.8 aanbevolen).\nHet is niet geïnstalleerd op deze pc.\n\n.NET Framework 4.8 nu downloaden en installeren?\n(mogelijk is een herstart nodig, start daarna SDRLink opnieuw)
+SDRLink - missing component	SDRLink - ontbrekend onderdeel
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink heeft de Microsoft Edge WebView2 Runtime nodig om WebSDR's weer te geven.\nDeze is niet geïnstalleerd op deze pc.\n\nWebView2 nu downloaden en installeren? (gratis, ca. 2 MB)
+Download or installation failed:\n	Downloaden of installeren mislukt:\n
+\n\nThe official download page will open:\n	\n\nDe officiële downloadpagina wordt geopend:\n
+Connecting...	Verbinden...
+Connected, waiting for the rig...	Verbonden, wachten op de transceiver...
+Rig online	TRX online
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	De transceiver antwoordt niet (controleer poort, baudrate, CI-V-adres, CAT-menu)
+Error: 	Fout: 
+No TCI server at 	Geen TCI-server op 
+TCI connection lost	TCI-verbinding verbroken
+unavailable	niet beschikbaar
+unexpected format	onverwacht formaat
+Find WebSDRs (France and neighbouring countries)	WebSDR's zoeken (Frankrijk en buurlanden)
+All	Alle
+Hide those already in favorites	Verberg wat al in favorieten staat
+Max distance from the centre of France (km):	Max. afstand tot het midden van Frankrijk (km):
+Filter:	Filter:
+Type:	Type:
+Location	Locatie
+Country	Land
+Users	Gebr.
+Listen to selection	Selectie beluisteren
+Add checked to favorites	Aangevinkte aan favorieten
+Refresh	Vernieuwen
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Zoeken in overzichten (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Selecteer eerst een ontvanger in de lijst.
+{0} receiver(s) shown, {1} checked   —   sources: 	{0} ontvanger(s) getoond, {1} aangevinkt   —   bronnen: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favoriet(en) toegevoegd. Je kunt ze hernoemen via "Favorieten beheren…".

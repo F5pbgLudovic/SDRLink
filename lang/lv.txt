@@ -1,0 +1,208 @@
+output not found	izeja nav atrasta
+output already used in exclusive mode by another program	izeju ekskluzīvajā režīmā jau izmanto cita programma
+cannot open, error 	nevar atvērt, kļūda 
+Name:	Nosaukums:
+Address:	Adrese:
+Cancel	Atcelt
+Please enter a name and an address.	Lūdzu, ievadiet nosaukumu un adresi.
+Rename list	Pārdēvēt sarakstu
+Favorite manager	Izlases pārvaldnieks
+Add favorite…	Pievienot izlasei…
+Import…	Importēt…
+Export…	Eksportēt…
+Selected / checked items	Atlasītie / atzīmētie vienumi
+Remove…	Noņemt…
+Rename…	Pārdēvēt…
+Move up	Uz augšu
+Move down	Uz leju
+Check	Pārbaude
+Check favorites	Pārbaudīt izlasi
+Check all	Atzīmēt visus
+Uncheck all	Noņemt atzīmes
+List:	Saraksts:
+Move to ▸	Pārvietot uz ▸
+(right-click the list to rename it)	(ar peles labo pogu noklikšķiniet uz saraksta, lai to pārdēvētu)
+Name	Nosaukums
+Address	Adrese
+Status	Statuss
+List	Saraksts
+Open	Atvērt
+Close	Aizvērt
+All lists	Visi saraksti
+Please select a favorite in the list first.	Vispirms sarakstā atlasiet izlases vienumu.
+Add favorite	Pievienot izlasei
+checking…	pārbauda…
+OK	OK
+invalid address	nederīga adrese
+answers	atbild
+not found	nav atrasts
+answers (certificate)	atbild (sertifikāts)
+no answer	neatbild
+unknown host	nezināms resursdators
+connection refused	savienojums atteikts
+unreachable	nav sasniedzams
+Import favorites	Importēt izlasi
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Izlase (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Visi faili (*.*)|*.*
+Export favorites	Eksportēt izlasi
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, lasāms ar Excel (*.csv)|*.csv|Pārlūka grāmatzīmes (*.html)|*.html|Teksts (*.txt)|*.txt
+List {0}	Saraksts {0}
+Rename "{0}"…	Pārdēvēt "{0}"…
+{0} favorite(s) moved to "{1}".	Uz "{1}" pārvietoti izlases vienumi: {0}.
+{0} favorite(s) shown, {1} checked	Parādīti izlases vienumi: {0}, atzīmēti: {1}
+Remove favorite "{0}"?	Vai noņemt izlases vienumu "{0}"?
+Remove the {0} checked favorites?	Vai noņemt atzīmētos izlases vienumus ({0})?
+duplicate of "{0}"	"{0}" dublikāts
+Checking {0} address(es)…	Pārbauda adreses: {0}…
+Checking… {0} left	Pārbauda… atlicis: {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Pārbaude pabeigta, atzīmēti: nedarbīgas saites – {0}, dublikāti – {1}. Noklikšķiniet uz "Noņemt…", lai tos dzēstu.
+{0} favorite(s) imported, {1} already present.	Importēti izlases vienumi: {0}, jau bija: {1}.
+{0} favorite(s) exported.	Eksportēti izlases vienumi: {0}.
+rigctld connection closed	rigctld savienojums aizvērts
+stopped	apturēts
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nav rigctld adresē {0}:{1} (palaidiet rigctld vai atzīmējiet "Palaist rigctld").
+Invalid HRD answer	Nederīga HRD atbilde
+HRD connection closed	HRD savienojums aizvērts
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nav HRD servera adresē {0}:{1} (iespējojiet IP serveri programmā HRD Rig Control).
+Cannot open the log: 	Nevar atvērt žurnālu: 
+Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
+RIG	RADIO
+Disconnected	Atvienots
+Connect	Savienot
+Disconnect	Atvienot
+Location of rigctld.exe (Hamlib)	rigctld.exe (Hamlib) atrašanās vieta
+Programs (*.exe)|*.exe	Programmas (*.exe)|*.exe
+Please choose a rig model.	Lūdzu, izvēlieties raiduztvērēja modeli.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Nederīga CI-V adrese (piem., 70 modelim IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) netika atrasts. Norādiet tā atrašanās vietu ar pogu "…" vai instalējiet Hamlib (bez maksas).\n\nVai atvērt Hamlib lejupielādes lapu?
+Please choose the rig's COM port.	Lūdzu, izvēlieties raiduztvērēja COM portu.
+Cannot start rigctld: 	Nevar palaist rigctld: 
+TX safety timeout (PTT button)	TX drošības taimauts (poga PTT)
+Off	Izslēgts
+PTT: connect the rig first	PTT: vispirms pievienojiet raiduztvērēju
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nederīga frekvence: ievadiet vērtību kHz, piem., 7074 vai 14074.5
+Remove this value (pick it in the list first)	Noņemt šo vērtību (vispirms izvēlieties to sarakstā)
+RIG 	RADIO 
+Cannot start WebView2 (Edge):\n	Nevar palaist WebView2 (Edge):\n
+Invalid address: 	Nederīga adrese: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kabelis: virtuālais audio kabelis nav atrasts. Instalējiet VB-CABLE (bez maksas): poga "SDRLINK kabelis".
+Output receiving the WebSDR audio:	Izeja, kas saņem WebSDR skaņu:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nosaukt kabeļa otru galu "SDRLINK" (vispirms izvēlieties virtuālo kabeli)
+Download VB-CABLE (free, vb-audio.com)…	Lejupielādēt VB-CABLE (bez maksas, vb-audio.com)…
+permission denied	atļauja liegta
+error	kļūda
+SDRLINK cable	SDRLINK kabelis
+ (off) ▾	 (izsl.) ▾
+Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Raidīšana automātiski apturēta pēc {0} (drošības taimauts; lai to mainītu, ar peles labo pogu noklikšķiniet uz PTT)
+Remove "{0}" from the list	Noņemt "{0}" no saraksta
+Remove all ({0} values)	Noņemt visu (vērtības: {0})
+Remove all {0} frequencies from the list?	Vai noņemt no saraksta visas frekvences ({0})?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	"{0}" neizskatās pēc virtuālā kabeļa: WebSDR skaņa tur tiks atskaņota visu laiku (un pārraidīta ēterā, ja tā ir raiduztvērēja raidīšanas skaņas karte).\n\nVai tomēr izmantot šo izeju?
+Name the other end of the cable "SDRLINK" ("{0}")…	Nosaukt kabeļa otru galu "SDRLINK" ("{0}")…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Šis kabelis jau ir pārdēvēts par "{0}": to, iespējams, jau izmanto cita programmatūra (VoiceMeeter…). Ja to pārdēvēsiet par "{1}", tas šajā programmatūrā būs jāizvēlas no jauna.\n\nVai turpināt?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Ierakstīšanas ierīce "{0}" tiks pārdēvēta par "{1}".\n\nAr šo nosaukumu tā būs redzama WSJT-X, JTDX, fldigi… audio ieejās (restartējiet tās). Windows var pieprasīt administratora atļauju.\n\nVai turpināt?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gatavs: audio ieeja tagad saucas "{0}". Restartējiet WSJT-X, lai to redzētu.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pārdēvēšana neizdevās ({0}).\n\nManuāli: skaņas vadības panelis › cilne Ierakstīšana › "{1}" › Rekvizīti › nosaukums.
+SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR skaņa tiek sūtīta uz "{0}"
+SDRLINK cable: "{0}": {1}	SDRLINK kabelis: "{0}": {1}
+This page is already in "{0}".	Šī lapa jau ir sarakstā "{0}".
+Add favorite to "{0}"	Pievienot sarakstam "{0}"
+This page is not in "{0}".	Šīs lapas nav sarakstā "{0}".
+Remove "{0}" from "{1}"?	Vai noņemt "{0}" no "{1}"?
+Interface:	Saskarne:
+Brand:	Ražotājs:
+Model:	Modelis:
+Port:	Ports:
+Baud rate:	Bodu ātrums:
+Stop bits:	Stopbiti:
+CI-V address (hex):	CI-V adrese (hex):
+OmniRig rig:	OmniRig iekārta:
+Host:	Hosts:
+TX detection (HRD):	TX noteikšana (HRD):
+Hamlib model no.:	Hamlib modeļa nr.:
+Language:	Valoda:
+Sync:	Sinhr.:
+WebSDR offset (Hz):	WebSDR nobīde (Hz):
+restore after (ms):	atjaunot pēc (ms):
+kHz:	kHz:
+Step:	Solis:
+WebSDR:	WebSDR:
+Volume:	Skaļums:
+TRX volume:	TRX skaļums:
+Open log	Atvērt žurnālu
+…	…
+Download Hamlib…	Lejupielādēt Hamlib…
+SDRLINK cable ▾	SDRLINK kabelis ▾
+QSY	QSY
+Save	Saglabāt
+Go	Atvērt
+◀ Back	◀ Atpakaļ
+Reload	Pārlādēt
+★ Add to favorites	★ Pievienot izlasei
+Remove from favorites	Noņemt no izlases
+Manage favorites…	Pārvaldīt izlasi…
+Find WebSDRs…	Meklēt WebSDR…
+Mute WebSDR	Klusināt WebSDR
+Mute TRX	Klusināt TRX
+Auto-connect at startup	Autom. savienot startējot
+Dark mode	Tumšais režīms
+RTS	RTS
+DTR	DTR
+Start rigctld:	Palaist rigctld:
+Sync mode	Sinhronizēt režīmu
+Mute WebSDR while transmitting	Klusināt WebSDR raidīšanas laikā
+Auto notch (DNF)	Autom. notch (DNF)
+Compact view	Kompakts skats
+Always on top	Vienmēr virspusē
+COM port (direct CAT)	COM ports (tiešais CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	MOX/TX/PTT pogas
+MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT pogas
+Both ways	Abos virzienos
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nav instalēts (OmniRig.OmniRigX nav atrasts).
+Dark mode colour	Tumšā režīma krāsa
+Light mode colour	Gaišā režīma krāsa
+Default	Noklusējums
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink nepieciešams Microsoft .NET Framework 4.6.2 vai jaunāks (ieteicams 4.8).\nTas nav instalēts šajā datorā.\n\nVai lejupielādēt un instalēt .NET Framework 4.8 tagad?\n(var būt nepieciešama restartēšana, pēc tam vēlreiz palaidiet SDRLink)
+SDRLink - missing component	SDRLink - trūkst komponenta
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink nepieciešams Microsoft Edge WebView2 Runtime, lai parādītu WebSDR.\nTas nav instalēts šajā datorā.\n\nVai lejupielādēt un instalēt WebView2 tagad? (bez maksas, apm. 2 MB)
+Download or installation failed:\n	Lejupielāde vai instalēšana neizdevās:\n
+\n\nThe official download page will open:\n	\n\nTiks atvērta oficiālā lejupielādes lapa:\n
+Connecting...	Savieno...
+Connected, waiting for the rig...	Savienots, gaida raiduztvērēju...
+Rig online	Raiduztvērējs tiešsaistē
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raiduztvērējs neatbild (pārbaudiet portu, bodu ātrumu, CI-V adresi, CAT izvēlni)
+Error: 	Kļūda: 
+No TCI server at 	Nav TCI servera adresē 
+TCI connection lost	TCI savienojums zaudēts
+unavailable	nav pieejams
+unexpected format	negaidīts formāts
+Find WebSDRs (France and neighbouring countries)	Meklēt WebSDR (Francija un kaimiņvalstis)
+All	Visi
+Hide those already in favorites	Slēpt tos, kas jau ir izlasē
+Max distance from the centre of France (km):	Maks. attālums no Francijas centra (km):
+Filter:	Filtrs:
+Type:	Tips:
+Location	Vieta
+Country	Valsts
+Users	Lietot.
+Listen to selection	Klausīties atlasīto
+Add checked to favorites	Pievienot atzīmētos izlasei
+Refresh	Atsvaidzināt
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Meklē katalogos (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Vispirms sarakstā atlasiet uztvērēju.
+{0} receiver(s) shown, {1} checked   —   sources: 	Parādīti uztvērēji: {0}, atzīmēti: {1}   —   avoti: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Pievienoti izlases vienumi: {0}. Tos var pārdēvēt sadaļā "Pārvaldīt izlasi…".

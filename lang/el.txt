@@ -1,0 +1,208 @@
+output not found	η έξοδος δεν βρέθηκε
+output already used in exclusive mode by another program	η έξοδος χρησιμοποιείται ήδη σε αποκλειστική λειτουργία από άλλο πρόγραμμα
+cannot open, error 	αδυναμία ανοίγματος, σφάλμα 
+Name:	Όνομα:
+Address:	Διεύθυνση:
+Cancel	Άκυρο
+Please enter a name and an address.	Εισαγάγετε όνομα και διεύθυνση.
+Rename list	Μετονομασία λίστας
+Favorite manager	Διαχείριση αγαπημένων
+Add favorite…	Προσθήκη αγαπημένου…
+Import…	Εισαγωγή…
+Export…	Εξαγωγή…
+Selected / checked items	Επιλεγμένα / σημειωμένα στοιχεία
+Remove…	Αφαίρεση…
+Rename…	Μετονομασία…
+Move up	Πάνω
+Move down	Κάτω
+Check	Έλεγχος
+Check favorites	Έλεγχος αγαπημένων
+Check all	Σήμανση όλων
+Uncheck all	Αποσήμανση όλων
+List:	Λίστα:
+Move to ▸	Μετακίνηση σε ▸
+(right-click the list to rename it)	(δεξί κλικ στη λίστα για μετονομασία)
+Name	Όνομα
+Address	Διεύθυνση
+Status	Κατάσταση
+List	Λίστα
+Open	Άνοιγμα
+Close	Κλείσιμο
+All lists	Όλες οι λίστες
+Please select a favorite in the list first.	Επιλέξτε πρώτα ένα αγαπημένο από τη λίστα.
+Add favorite	Προσθήκη αγαπημένου
+checking…	έλεγχος…
+OK	OK
+invalid address	μη έγκυρη διεύθυνση
+answers	απαντά
+not found	δεν βρέθηκε
+answers (certificate)	απαντά (πιστοποιητικό)
+no answer	δεν απαντά
+unknown host	άγνωστος κεντρικός υπολογιστής
+connection refused	η σύνδεση απορρίφθηκε
+unreachable	μη προσβάσιμο
+Import favorites	Εισαγωγή αγαπημένων
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Αγαπημένα (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Όλα τα αρχεία (*.*)|*.*
+Export favorites	Εξαγωγή αγαπημένων
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, αναγνώσιμο από Excel (*.csv)|*.csv|Σελιδοδείκτες προγράμματος περιήγησης (*.html)|*.html|Κείμενο (*.txt)|*.txt
+List {0}	Λίστα {0}
+Rename "{0}"…	Μετονομασία «{0}»…
+{0} favorite(s) moved to "{1}".	{0} αγαπημένα μετακινήθηκαν στο «{1}».
+{0} favorite(s) shown, {1} checked	{0} αγαπημένα εμφανίζονται, {1} σημειωμένα
+Remove favorite "{0}"?	Αφαίρεση του αγαπημένου «{0}»;
+Remove the {0} checked favorites?	Αφαίρεση των {0} σημειωμένων αγαπημένων;
+duplicate of "{0}"	διπλότυπο του «{0}»
+Checking {0} address(es)…	Έλεγχος {0} διευθύνσεων…
+Checking… {0} left	Έλεγχος… απομένουν {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Ο έλεγχος ολοκληρώθηκε: σημειώθηκαν {0} νεκροί σύνδεσμοι, {1} διπλότυπα. Κάντε κλικ στο «Αφαίρεση…» για να διαγραφούν.
+{0} favorite(s) imported, {1} already present.	Εισήχθησαν {0} αγαπημένα, {1} υπήρχαν ήδη.
+{0} favorite(s) exported.	Εξήχθησαν {0} αγαπημένα.
+rigctld connection closed	Η σύνδεση rigctld έκλεισε
+stopped	διακόπηκε
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Δεν υπάρχει rigctld στο {0}:{1} (εκκινήστε το rigctld ή επιλέξτε «Εκκίνηση rigctld»).
+Invalid HRD answer	Μη έγκυρη απάντηση HRD
+HRD connection closed	Η σύνδεση HRD έκλεισε
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Δεν υπάρχει διακομιστής HRD στο {0}:{1} (ενεργοποιήστε τον διακομιστή IP στο HRD Rig Control).
+Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
+Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
+RIG	TRX
+Disconnected	Αποσυνδέθηκε
+Connect	Σύνδεση
+Disconnect	Αποσύνδεση
+Location of rigctld.exe (Hamlib)	Θέση του rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Προγράμματα (*.exe)|*.exe
+Please choose a rig model.	Επιλέξτε μοντέλο πομποδέκτη.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Μη έγκυρη διεύθυνση CI-V (π.χ. 70 για το IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	Το rigctld.exe (Hamlib) δεν βρέθηκε. Ορίστε τη θέση του με το κουμπί «…» ή εγκαταστήστε το Hamlib (δωρεάν).\n\nΆνοιγμα της σελίδας λήψης του Hamlib;
+Please choose the rig's COM port.	Επιλέξτε τη θύρα COM του πομποδέκτη.
+Cannot start rigctld: 	Αδυναμία εκκίνησης rigctld: 
+TX safety timeout (PTT button)	Χρονικό όριο ασφαλείας TX (κουμπί PTT)
+Off	Ανενεργό
+PTT: connect the rig first	PTT: συνδέστε πρώτα τον πομποδέκτη
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Μη έγκυρη συχνότητα: πληκτρολογήστε τιμή σε kHz, π.χ. 7074 ή 14074.5
+Remove this value (pick it in the list first)	Αφαίρεση αυτής της τιμής (επιλέξτε την πρώτα στη λίστα)
+RIG 	TRX 
+Cannot start WebView2 (Edge):\n	Αδυναμία εκκίνησης WebView2 (Edge):\n
+Invalid address: 	Μη έγκυρη διεύθυνση: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Καλώδιο SDRLINK: δεν βρέθηκε εικονικό καλώδιο ήχου. Εγκαταστήστε το VB-CABLE (δωρεάν): κουμπί «Καλώδιο SDRLINK».
+Output receiving the WebSDR audio:	Έξοδος που λαμβάνει τον ήχο του WebSDR:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Ονομασία «SDRLINK» στο άλλο άκρο του καλωδίου (επιλέξτε πρώτα εικονικό καλώδιο)
+Download VB-CABLE (free, vb-audio.com)…	Λήψη VB-CABLE (δωρεάν, vb-audio.com)…
+permission denied	δεν επιτρέπεται η πρόσβαση
+error	σφάλμα
+SDRLINK cable	Καλώδιο SDRLINK
+ (off) ▾	 (ανενεργό) ▾
+Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Η εκπομπή διακόπηκε αυτόματα μετά από {0} (χρονικό όριο ασφαλείας, δεξί κλικ στο PTT για αλλαγή)
+Remove "{0}" from the list	Αφαίρεση του «{0}» από τη λίστα
+Remove all ({0} values)	Αφαίρεση όλων ({0} τιμές)
+Remove all {0} frequencies from the list?	Αφαίρεση και των {0} συχνοτήτων από τη λίστα;
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	Το «{0}» δεν μοιάζει με εικονικό καλώδιο: ο ήχος του WebSDR θα αναπαράγεται εκεί συνεχώς (και θα εκπέμπεται, αν είναι η κάρτα ήχου εκπομπής ενός πομποδέκτη).\n\nΧρήση αυτής της εξόδου παρ' όλα αυτά;
+Name the other end of the cable "SDRLINK" ("{0}")…	Ονομασία «SDRLINK» στο άλλο άκρο του καλωδίου («{0}»)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Αυτό το καλώδιο έχει ήδη μετονομαστεί σε «{0}»: ίσως χρησιμοποιείται ήδη από άλλο λογισμικό (VoiceMeeter…). Αν το μετονομάσετε σε «{1}», θα πρέπει να το επιλέξετε ξανά σε εκείνο το λογισμικό.\n\nΣυνέχεια;
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Η συσκευή εγγραφής «{0}» θα μετονομαστεί σε «{1}».\n\nΘα εμφανίζεται με αυτό το όνομα στις εισόδους ήχου των WSJT-X, JTDX, fldigi… (επανεκκινήστε τα). Τα Windows ενδέχεται να ζητήσουν δικαίωμα διαχειριστή.\n\nΣυνέχεια;
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Ολοκληρώθηκε: η είσοδος ήχου ονομάζεται πλέον «{0}». Επανεκκινήστε το WSJT-X για να την δείτε.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Η μετονομασία απέτυχε ({0}).\n\nΧειροκίνητα: Πίνακας Ελέγχου Ήχος › καρτέλα Εγγραφή › «{1}» › Ιδιότητες › όνομα.
+SDRLINK cable: WebSDR audio sent to "{0}"	Καλώδιο SDRLINK: ο ήχος του WebSDR στέλνεται στο «{0}»
+SDRLINK cable: "{0}": {1}	Καλώδιο SDRLINK: «{0}»: {1}
+This page is already in "{0}".	Αυτή η σελίδα υπάρχει ήδη στο «{0}».
+Add favorite to "{0}"	Προσθήκη αγαπημένου στο «{0}»
+This page is not in "{0}".	Αυτή η σελίδα δεν υπάρχει στο «{0}».
+Remove "{0}" from "{1}"?	Αφαίρεση του «{0}» από το «{1}»;
+Interface:	Διασύνδεση:
+Brand:	Μάρκα:
+Model:	Μοντέλο:
+Port:	Θύρα:
+Baud rate:	Ταχύτητα:
+Stop bits:	Bit διακοπής:
+CI-V address (hex):	Διεύθυνση CI-V (hex):
+OmniRig rig:	Πομποδέκτης OmniRig:
+Host:	Κεντρ. υπολογ.:
+TX detection (HRD):	Ανίχνευση TX (HRD):
+Hamlib model no.:	Αρ. μοντέλου Hamlib:
+Language:	Γλώσσα:
+Sync:	Συγχρ.:
+WebSDR offset (Hz):	Μετατόπιση WebSDR (Hz):
+restore after (ms):	επαναφορά μετά (ms):
+kHz:	kHz:
+Step:	Βήμα:
+WebSDR:	WebSDR:
+Volume:	Ένταση:
+TRX volume:	Ένταση TRX:
+Open log	Άνοιγμα ημερολογίου
+…	…
+Download Hamlib…	Λήψη Hamlib…
+SDRLINK cable ▾	Καλώδιο SDRLINK ▾
+QSY	QSY
+Save	Αποθήκ.
+Go	Μετάβαση
+◀ Back	◀ Πίσω
+Reload	Ανανέωση
+★ Add to favorites	★ Προσθήκη στα αγαπημένα
+Remove from favorites	Αφαίρεση από τα αγαπημένα
+Manage favorites…	Διαχείριση αγαπημένων…
+Find WebSDRs…	Εύρεση WebSDR…
+Mute WebSDR	Σίγαση WebSDR
+Mute TRX	Σίγαση TRX
+Auto-connect at startup	Αυτόματη σύνδεση κατά την εκκίνηση
+Dark mode	Σκούρα λειτουργία
+RTS	RTS
+DTR	DTR
+Start rigctld:	Εκκίνηση rigctld:
+Sync mode	Συγχρ. διαμόρφωσης
+Mute WebSDR while transmitting	Σίγαση WebSDR κατά την εκπομπή
+Auto notch (DNF)	Αυτόματο notch (DNF)
+Compact view	Συμπαγής προβολή
+Always on top	Πάντα στην κορυφή
+COM port (direct CAT)	Θύρα COM (άμεσο CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	Κουμπιά MOX/TX/PTT
+MOX/VOX/TX/PTT buttons	Κουμπιά MOX/VOX/TX/PTT
+Both ways	Αμφίδρομα
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	Το OmniRig δεν είναι εγκατεστημένο (δεν βρέθηκε το OmniRig.OmniRigX).
+Dark mode colour	Χρώμα σκούρας λειτουργίας
+Light mode colour	Χρώμα φωτεινής λειτουργίας
+Default	Προεπιλογή
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	Το SDRLink απαιτεί Microsoft .NET Framework 4.6.2 ή νεότερο (συνιστάται το 4.8).\nΔεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή.\n\nΛήψη και εγκατάσταση του .NET Framework 4.8 τώρα;\n(ίσως απαιτηθεί επανεκκίνηση· στη συνέχεια ξεκινήστε ξανά το SDRLink)
+SDRLink - missing component	SDRLink - λείπει στοιχείο
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Το SDRLink απαιτεί το Microsoft Edge WebView2 Runtime για την εμφάνιση των WebSDR.\nΔεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή.\n\nΛήψη και εγκατάσταση του WebView2 τώρα; (δωρεάν, περίπου 2 MB)
+Download or installation failed:\n	Η λήψη ή η εγκατάσταση απέτυχε:\n
+\n\nThe official download page will open:\n	\n\nΘα ανοίξει η επίσημη σελίδα λήψης:\n
+Connecting...	Σύνδεση...
+Connected, waiting for the rig...	Συνδέθηκε, αναμονή για τον πομποδέκτη...
+Rig online	Πομποδέκτης σε σύνδεση
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Ο πομποδέκτης δεν απαντά (ελέγξτε θύρα, ταχύτητα, διεύθυνση CI-V, μενού CAT)
+Error: 	Σφάλμα: 
+No TCI server at 	Δεν υπάρχει διακομιστής TCI στο 
+TCI connection lost	Η σύνδεση TCI χάθηκε
+unavailable	μη διαθέσιμο
+unexpected format	μη αναμενόμενη μορφή
+Find WebSDRs (France and neighbouring countries)	Εύρεση WebSDR (Γαλλία και γειτονικές χώρες)
+All	Όλα
+Hide those already in favorites	Απόκρυψη όσων είναι ήδη στα αγαπημένα
+Max distance from the centre of France (km):	Μέγ. απόσταση από το κέντρο της Γαλλίας (km):
+Filter:	Φίλτρο:
+Type:	Τύπος:
+Location	Τοποθεσία
+Country	Χώρα
+Users	Χρήστες
+Listen to selection	Ακρόαση επιλογής
+Add checked to favorites	Προσθήκη σημειωμένων στα αγαπημένα
+Refresh	Ανανέωση
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Αναζήτηση σε καταλόγους (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Επιλέξτε πρώτα έναν δέκτη από τη λίστα.
+{0} receiver(s) shown, {1} checked   —   sources: 	{0} δέκτες εμφανίζονται, {1} σημειωμένοι   —   πηγές: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Προστέθηκαν {0} αγαπημένα. Μπορείτε να τα μετονομάσετε στη «Διαχείριση αγαπημένων…».

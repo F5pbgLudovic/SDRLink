@@ -33,6 +33,10 @@ namespace SDRLink
         ComboBox cbFavList;
         Button btnCable;
         CheckBox chkNotch;
+        FlowLayoutPanel pnlHamlib;
+        CheckBox chkHamlibLaunch;
+        TextBox txtRigctld;
+        NumericUpDown numHamlibModel;
         Button btnMuteSdr, btnMuteRig;
         bool sdrMuted, rigMuted;
         int rigAfSupported = -1;    // -1 inconnu (pas connecté), 0 non pris en charge, 1 disponible
@@ -80,7 +84,7 @@ namespace SDRLink
         public MainForm()
         {
             settings = Settings.Load();
-            Lang.English = settings.Language == "en";
+            Lang.Code = settings.Language;
             Text = "SDRLink V" + Program.Version + " @F5PBG 2026 - WebSDR ⇄ Transceiver";
             Size = DefaultWindowSize();
             StartPosition = FormStartPosition.CenterScreen;
@@ -173,8 +177,8 @@ namespace SDRLink
 
             // Ligne 1 : interface, marque, modèle, connexion
             FlowLayoutPanel row1 = rowConn = Row();
-            cbInterface = Combo(170, new[] { "Port COM (CAT direct)", "OmniRig", "TCI", "Ham Radio Deluxe" },
-                                     new[] { "COM port (direct CAT)", "OmniRig", "TCI", "Ham Radio Deluxe" });
+            cbInterface = Combo(170, new[] { "Port COM (CAT direct)", "OmniRig", "TCI", "Ham Radio Deluxe", "Hamlib (rigctld)" },
+                                     new[] { "COM port (direct CAT)", "OmniRig", "TCI", "Ham Radio Deluxe", "Hamlib (rigctld)" });
             cbInterface.SelectedIndexChanged += delegate { UpdateInterfacePanels(); };
             row1.Controls.Add(Lbl("Interface :", "Interface:"));
             row1.Controls.Add(cbInterface);
@@ -263,6 +267,24 @@ namespace SDRLink
             cbHrdTx = Combo(190, new[] { "Boutons MOX/TX/PTT", "Boutons MOX/VOX/TX/PTT" },
                                  new[] { "MOX/TX/PTT buttons", "MOX/VOX/TX/PTT buttons" });
             pnlHrdTx.Controls.Add(Lbl("Détection TX (HRD) :", "TX detection (HRD):"));
+            // Hamlib : rigctld déjà lancé (hôte/port), ou lancé par SDRLink avec le poste, le port COM et la vitesse choisis.
+            pnlHamlib = SubRow();
+            chkHamlibLaunch = Check("Lancer rigctld :", "Start rigctld:");
+            chkHamlibLaunch.CheckedChanged += delegate { UpdateInterfacePanels(); };
+            txtRigctld = new TextBox();
+            txtRigctld.Width = 230;
+            Button btnRigctld = Btn("…", "…", delegate { BrowseRigctld(); });
+            numHamlibModel = new NumericUpDown();
+            numHamlibModel.Minimum = 1;
+            numHamlibModel.Maximum = 99999;
+            numHamlibModel.Width = 65;
+            pnlHamlib.Controls.Add(chkHamlibLaunch);
+            pnlHamlib.Controls.Add(txtRigctld);
+            pnlHamlib.Controls.Add(btnRigctld);
+            pnlHamlib.Controls.Add(Lbl("N° de modèle Hamlib :", "Hamlib model no.:"));
+            pnlHamlib.Controls.Add(numHamlibModel);
+            pnlHamlib.Controls.Add(Btn("Télécharger Hamlib…", "Download Hamlib…", delegate { OpenHamlibDownload(); }));
+            row2.Controls.Add(pnlHamlib);
             pnlHrdTx.Controls.Add(cbHrdTx);
             row2.Controls.Add(pnlHrdTx);
             // Réglage lu à la connexion : on reconnecte pour l'appliquer tout de suite.
@@ -274,12 +296,13 @@ namespace SDRLink
                 Connect();
             };
 
-            cbLang = Combo(85, "Français", "English");
+            cbLang = Combo(110, Lang.Names);
+            cbLang.MaxDropDownItems = Lang.Names.Length;
             cbLang.SelectedIndexChanged += delegate
             {
                 if (loading) return;
-                Lang.English = cbLang.SelectedIndex == 1;
-                settings.Language = Lang.English ? "en" : "fr";
+                Lang.Code = Lang.Codes[Math.Max(0, cbLang.SelectedIndex)];
+                settings.Language = Lang.Code;
                 ApplyLanguage();
             };
             row2.Controls.Add(Lbl("Langue :", "Language:"));
@@ -438,7 +461,7 @@ namespace SDRLink
             listMenu.Items.Add(renameList);
             listMenu.Opening += delegate
             {
-                renameList.Text = Lang.T("Renommer « ", "Rename \"") + FavoritesDialog.ListLabel(settings.ListNames, settings.CurrentList) + Lang.T(" »…", "\"…");
+                renameList.Text = Lang.F("Renommer « {0} »…", "Rename \"{0}\"…", FavoritesDialog.ListLabel(settings.ListNames, settings.CurrentList));
             };
             renameList.Click += delegate { RenameFavoriteList(); };
             cbFavList.ContextMenuStrip = listMenu;
@@ -573,7 +596,7 @@ namespace SDRLink
             {
                 int sel = c.SelectedIndex;
                 c.Items.Clear();
-                c.Items.AddRange(Lang.English ? en : fr);
+                for (int i = 0; i < fr.Length; i++) c.Items.Add(Lang.T(fr[i], en[i]));
                 if (sel >= 0) c.SelectedIndex = sel;
             });
             return c;
@@ -692,15 +715,45 @@ namespace SDRLink
         void UpdateInterfacePanels()
         {
             int i = cbInterface.SelectedIndex;
-            pnlModel.Visible = pnlCom.Visible = i == 0;
+            // Hamlib avec rigctld lancé par SDRLink : il faut aussi le poste, le port COM et la vitesse.
+            pnlModel.Visible = pnlCom.Visible = i == 0 || (i == 4 && chkHamlibLaunch.Checked);
             pnlOmni.Visible = i == 1;
-            pnlNet.Visible = i == 2 || i == 3;
+            pnlNet.Visible = i >= 2;
             pnlHrdTx.Visible = i == 3;
-            if (!loading && (i == 2 || i == 3))
+            pnlHamlib.Visible = i == 4;
+            if (i != lastInterfaceShown && i >= 2)
             {
-                txtHost.Text = i == 2 ? settings.TciHost : settings.HrdHost;
-                numNetPort.Value = i == 2 ? settings.TciPort : settings.HrdPort;
+                if (lastInterfaceShown >= 2) StoreNetSettings(lastInterfaceShown);
+                txtHost.Text = i == 2 ? settings.TciHost : i == 3 ? settings.HrdHost : settings.HamlibHost;
+                numNetPort.Value = i == 2 ? settings.TciPort : i == 3 ? settings.HrdPort : settings.HamlibPort;
             }
+            lastInterfaceShown = i;
+        }
+
+        int lastInterfaceShown = -1;
+
+        // Hôte et port affichés : ceux de l'interface réseau choisie (TCI, HRD ou Hamlib).
+        void StoreNetSettings(int i)
+        {
+            if (i == 2) { settings.TciHost = txtHost.Text.Trim(); settings.TciPort = (int)numNetPort.Value; }
+            if (i == 3) { settings.HrdHost = txtHost.Text.Trim(); settings.HrdPort = (int)numNetPort.Value; }
+            if (i == 4) { settings.HamlibHost = txtHost.Text.Trim(); settings.HamlibPort = (int)numNetPort.Value; }
+        }
+
+        void BrowseRigctld()
+        {
+            using (OpenFileDialog d = new OpenFileDialog())
+            {
+                d.Title = Lang.T("Emplacement de rigctld.exe (Hamlib)", "Location of rigctld.exe (Hamlib)");
+                d.Filter = "rigctld (rigctld*.exe)|rigctld*.exe|" + Lang.T("Programmes (*.exe)|*.exe", "Programs (*.exe)|*.exe");
+                if (txtRigctld.Text != "" && File.Exists(txtRigctld.Text)) d.InitialDirectory = Path.GetDirectoryName(txtRigctld.Text);
+                if (d.ShowDialog(this) == DialogResult.OK) txtRigctld.Text = d.FileName;
+            }
+        }
+
+        void OpenHamlibDownload()
+        {
+            try { System.Diagnostics.Process.Start("https://github.com/Hamlib/Hamlib/releases/latest"); } catch { }
         }
 
         void FillModels()
@@ -717,6 +770,8 @@ namespace SDRLink
             cbBaud.Text = m.Baud.ToString(CultureInfo.InvariantCulture);
             cbStop.SelectedItem = m.StopBits.ToString(CultureInfo.InvariantCulture);
             txtCiv.Text = m.Protocol == RigProtocol.Icom ? m.CivAddress.ToString("X2") : "";
+            int hamlibId;
+            if (HamlibRig.ModelIds.TryGetValue(m.Name, out hamlibId)) numHamlibModel.Value = hamlibId;
             txtCiv.Enabled = m.Protocol == RigProtocol.Icom;
         }
 
@@ -739,8 +794,9 @@ namespace SDRLink
         void LoadSettingsIntoUi()
         {
             loading = true;
-            cbLang.SelectedIndex = Lang.English ? 1 : 0;
-            cbInterface.SelectedIndex = Math.Max(0, Math.Min(3, settings.Interface));
+            cbLang.SelectedIndex = Math.Max(0, Array.IndexOf(Lang.Codes, Lang.Code));
+            chkHamlibLaunch.Checked = settings.HamlibLaunch;
+            cbInterface.SelectedIndex = Math.Max(0, Math.Min(4, settings.Interface));
             cbBrand.SelectedItem = settings.Brand;
             if (cbBrand.SelectedIndex < 0) cbBrand.SelectedIndex = 0;
             FillModels();
@@ -755,9 +811,11 @@ namespace SDRLink
             chkRts.Checked = settings.Rts;
             chkDtr.Checked = settings.Dtr;
             cbOmni.SelectedIndex = settings.OmniRigNumber == 2 ? 1 : 0;
-            bool tci = settings.Interface == 2;
-            txtHost.Text = tci ? settings.TciHost : settings.HrdHost;
-            numNetPort.Value = tci ? settings.TciPort : settings.HrdPort;
+            int hamlibDefault;
+            if (!HamlibRig.ModelIds.TryGetValue(settings.Model, out hamlibDefault)) hamlibDefault = 1;
+            numHamlibModel.Value = Math.Max(1, Math.Min(99999, settings.HamlibModel > 0 ? settings.HamlibModel : hamlibDefault));
+            txtRigctld.Text = Rigctld.FindExe(settings.RigctldPath) ?? settings.RigctldPath;
+            lastInterfaceShown = -1;
             chkAuto.Checked = settings.AutoConnect;
             cbHrdTx.SelectedIndex = Math.Max(0, Math.Min(cbHrdTx.Items.Count - 1, settings.HrdTxDetect));
             foreach (string f in settings.FreqHistory) cbFreq.Items.Add(f);
@@ -796,11 +854,13 @@ namespace SDRLink
             settings.Rts = chkRts.Checked;
             settings.Dtr = chkDtr.Checked;
             settings.OmniRigNumber = cbOmni.SelectedIndex + 1;
-            if (settings.Interface == 2) { settings.TciHost = txtHost.Text.Trim(); settings.TciPort = (int)numNetPort.Value; }
-            if (settings.Interface == 3) { settings.HrdHost = txtHost.Text.Trim(); settings.HrdPort = (int)numNetPort.Value; }
+            StoreNetSettings(settings.Interface);
+            settings.HamlibLaunch = chkHamlibLaunch.Checked;
+            settings.RigctldPath = txtRigctld.Text.Trim();
+            settings.HamlibModel = (int)numHamlibModel.Value;
             settings.AutoConnect = chkAuto.Checked;
             settings.HrdTxDetect = cbHrdTx.SelectedIndex;
-            settings.Language = Lang.English ? "en" : "fr";
+            settings.Language = Lang.Code;
             settings.TuneStepHz = Steps[Math.Max(0, cbStep.SelectedIndex)];
             settings.FreqHistory.Clear();
             foreach (object o in cbFreq.Items) settings.FreqHistory.Add(o.ToString());
@@ -865,6 +925,9 @@ namespace SDRLink
                     factory = delegate { return new TciRig(h, p); };
                     break;
                 }
+                case 4:
+                    if (!PrepareHamlib(out factory)) return;
+                    break;
                 default:
                 {
                     string h = settings.HrdHost; int p = settings.HrdPort;
@@ -892,6 +955,54 @@ namespace SDRLink
             SetConfigEnabled(false);
         }
 
+        // Hamlib : lance rigctld si demandé (poste, port COM, vitesse de la ligne de réglages), puis s'y connecte.
+        bool PrepareHamlib(out Func<IRig> factory)
+        {
+            factory = null;
+            string host = settings.HamlibHost;
+            int port = settings.HamlibPort;
+            if (settings.HamlibLaunch)
+            {
+                string exe = Rigctld.FindExe(settings.RigctldPath);
+                if (exe == null)
+                {
+                    if (MessageBox.Show(this, Lang.T("rigctld.exe (Hamlib) est introuvable. Indiquez son emplacement avec le bouton « … », " +
+                            "ou installez Hamlib (gratuit).\n\nOuvrir la page de téléchargement de Hamlib ?",
+                            "rigctld.exe (Hamlib) was not found. Set its location with the \"…\" button, " +
+                            "or install Hamlib (free).\n\nOpen the Hamlib download page?"),
+                            "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) OpenHamlibDownload();
+                    return false;
+                }
+                txtRigctld.Text = settings.RigctldPath = exe;
+                if (settings.Port == "")
+                {
+                    MessageBox.Show(this, Lang.T("Choisissez le port COM du poste.", "Please choose the rig's COM port."), "SDRLink");
+                    return false;
+                }
+                // Options série : celles de la ligne de réglages (RTS/DTR seulement s'ils sont cochés).
+                List<string> conf = new List<string>();
+                conf.Add("stop_bits=" + settings.StopBits);
+                if (settings.Rts) conf.Add("rts_state=ON");
+                if (settings.Dtr) conf.Add("dtr_state=ON");
+                string args = string.Format(CultureInfo.InvariantCulture, "-m {0} -r {1} -s {2} -T 127.0.0.1 -t {3} -C {4}",
+                    settings.HamlibModel, settings.Port, settings.Baud, port, string.Join(",", conf.ToArray()));
+                RigModel model = cbModel.SelectedItem as RigModel;
+                byte civ;
+                if (model != null && model.Protocol == RigProtocol.Icom &&
+                    byte.TryParse(settings.Civ.Replace("0x", ""), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out civ))
+                    args += " -c 0x" + civ.ToString("X2");
+                try { Rigctld.Start(exe, args); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, Lang.T("Impossible de lancer rigctld : ", "Cannot start rigctld: ") + ex.Message, "SDRLink");
+                    return false;
+                }
+                host = "127.0.0.1";
+            }
+            factory = delegate { return new HamlibRig(host, port); };
+            return true;
+        }
+
         void Disconnect()
         {
             if (worker == null) return;
@@ -900,6 +1011,7 @@ namespace SDRLink
             if (rigMuted) w.SetAfGain(trkRigVolume.Value);
             worker = null;
             w.Stop();
+            Rigctld.Stop();
             rigMuted = false;
             rigAfSupported = -1;
             UpdateRigVolumeControls();
@@ -1023,8 +1135,8 @@ namespace SDRLink
             if ((DateTime.UtcNow - pttSince).TotalSeconds >= settings.PttTimeoutSec)
             {
                 SetPttButton(false);
-                string msg = Lang.T("Émission coupée automatiquement après ", "Transmission stopped automatically after ")
-                    + TimeoutLabel(settings.PttTimeoutSec) + Lang.T(" (délai de sécurité, clic droit sur PTT pour le régler)", " (safety timeout, right-click PTT to change it)");
+                string msg = Lang.F("Émission coupée automatiquement après {0} (délai de sécurité, clic droit sur PTT pour le régler)",
+                    "Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)", TimeoutLabel(settings.PttTimeoutSec));
                 status.Text = msg;
                 Log.Write(msg);
                 return;
@@ -1302,17 +1414,17 @@ namespace SDRLink
                 string k = cbFreq.Text.Trim();
                 bool present = cbFreq.Items.Contains(k);
                 removeOne.Text = present
-                    ? Lang.T("Supprimer « " + k + " » de la liste", "Remove \"" + k + "\" from the list")
+                    ? Lang.F("Supprimer « {0} » de la liste", "Remove \"{0}\" from the list", k)
                     : Lang.T("Supprimer cette valeur (choisissez-la d'abord dans la liste)", "Remove this value (pick it in the list first)");
                 removeOne.Enabled = present;
-                removeAll.Text = Lang.T("Tout supprimer (" + cbFreq.Items.Count + " valeurs)", "Remove all (" + cbFreq.Items.Count + " values)");
+                removeAll.Text = Lang.F("Tout supprimer ({0} valeurs)", "Remove all ({0} values)", cbFreq.Items.Count);
                 removeAll.Enabled = cbFreq.Items.Count > 0;
             };
             removeOne.Click += delegate { cbFreq.Items.Remove(cbFreq.Text.Trim()); cbFreq.Text = ""; };
             removeAll.Click += delegate
             {
-                if (MessageBox.Show(Lang.T("Supprimer les " + cbFreq.Items.Count + " fréquences de la liste ?",
-                                           "Remove all " + cbFreq.Items.Count + " frequencies from the list?"), "SDRLink",
+                if (MessageBox.Show(Lang.F("Supprimer les {0} fréquences de la liste ?",
+                                           "Remove all {0} frequencies from the list?", cbFreq.Items.Count), "SDRLink",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     cbFreq.Items.Clear();
@@ -1655,11 +1767,11 @@ namespace SDRLink
                     it.Checked = dev == current;
                     it.Click += delegate
                     {
-                        if (!AudioSink.LooksVirtual(dev) && MessageBox.Show(this, Lang.T(
-                                "« " + dev + " » ne semble pas être un câble virtuel : le son du WebSDR y sera joué en permanence " +
+                        if (!AudioSink.LooksVirtual(dev) && MessageBox.Show(this, Lang.F(
+                                "« {0} » ne semble pas être un câble virtuel : le son du WebSDR y sera joué en permanence " +
                                 "(et émis, s'il s'agit de la carte son d'émission d'un poste).\n\nUtiliser quand même cette sortie ?",
-                                "\"" + dev + "\" does not look like a virtual cable: the WebSDR audio will be played there all the time " +
-                                "(and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?"),
+                                "\"{0}\" does not look like a virtual cable: the WebSDR audio will be played there all the time " +
+                                "(and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?", dev),
                                 "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
                         settings.CableDevice = dev;
                         settings.CableEnabled = true;
@@ -1673,7 +1785,7 @@ namespace SDRLink
                 try { cap = AudioEndpoints.CaptureOf(current); } catch (Exception ex) { Log.Write("Câble SDRLINK : " + ex.Message); }
                 ToolStripMenuItem name = new ToolStripMenuItem(cap == null
                     ? Lang.T("Nommer « SDRLINK » l'autre bout du câble (choisir d'abord un câble virtuel)", "Name the other end of the cable \"SDRLINK\" (pick a virtual cable first)")
-                    : Lang.T("Nommer « SDRLINK » l'autre bout du câble (« ", "Name the other end of the cable \"SDRLINK\" (\"") + cap.FullName + Lang.T(" »)…", "\")…"));
+                    : Lang.F("Nommer « SDRLINK » l'autre bout du câble (« {0} »)…", "Name the other end of the cable \"SDRLINK\" (\"{0}\")…", cap.FullName));
                 name.Enabled = cap != null && cap.Name != CableName;
                 AudioEndpoints.Endpoint target = cap;
                 name.Click += delegate { NameCableEnd(target); };
@@ -1695,19 +1807,19 @@ namespace SDRLink
         void NameCableEnd(AudioEndpoints.Endpoint cap)
         {
             // Câble déjà renommé par l'utilisateur : il sert sans doute déjà à autre chose.
-            if (!(cap.Name ?? "").StartsWith("CABLE", StringComparison.OrdinalIgnoreCase) && MessageBox.Show(this, Lang.T(
-                    "Ce câble a déjà été renommé « " + cap.Name + " » : il sert peut-être déjà à un autre logiciel (VoiceMeeter…). " +
-                    "Le renommer en « " + CableName + " » obligera à le choisir à nouveau dans ces logiciels.\n\nContinuer ?",
-                    "This cable was already renamed \"" + cap.Name + "\": it may already be used by other software (VoiceMeeter…). " +
-                    "Renaming it \"" + CableName + "\" means selecting it again in that software.\n\nContinue?"),
+            if (!(cap.Name ?? "").StartsWith("CABLE", StringComparison.OrdinalIgnoreCase) && MessageBox.Show(this, Lang.F(
+                    "Ce câble a déjà été renommé « {0} » : il sert peut-être déjà à un autre logiciel (VoiceMeeter…). " +
+                    "Le renommer en « {1} » obligera à le choisir à nouveau dans ces logiciels.\n\nContinuer ?",
+                    "This cable was already renamed \"{0}\": it may already be used by other software (VoiceMeeter…). " +
+                    "Renaming it \"{1}\" means selecting it again in that software.\n\nContinue?", cap.Name, CableName),
                     "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            if (MessageBox.Show(this, Lang.T(
-                    "Le périphérique d'enregistrement « " + cap.FullName + " » va être renommé « " + CableName + " ».\n\n" +
+            if (MessageBox.Show(this, Lang.F(
+                    "Le périphérique d'enregistrement « {0} » va être renommé « {1} ».\n\n" +
                     "Il apparaîtra sous ce nom dans les entrées audio de WSJT-X, JTDX, fldigi… (à redémarrer). " +
                     "Windows peut demander l'autorisation d'administrateur.\n\nContinuer ?",
-                    "The recording device \"" + cap.FullName + "\" will be renamed \"" + CableName + "\".\n\n" +
+                    "The recording device \"{0}\" will be renamed \"{1}\".\n\n" +
                     "It will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). " +
-                    "Windows may ask for administrator permission.\n\nContinue?"),
+                    "Windows may ask for administrator permission.\n\nContinue?", cap.FullName, CableName),
                     "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
             int hr;
             try { hr = AudioEndpoints.SetName(cap.Id, CableName); }
@@ -1730,14 +1842,16 @@ namespace SDRLink
             }
             Log.Write("Câble SDRLINK : renommage de « " + cap.FullName + " » -> " + (hr == 0 ? "OK" : "erreur 0x" + hr.ToString("X8")));
             if (hr == 0)
-                MessageBox.Show(this, Lang.T("C'est fait : l'entrée audio s'appelle maintenant « " + CableName + " ». Redémarrez WSJT-X pour la voir.",
-                                             "Done: the audio input is now called \"" + CableName + "\". Restart WSJT-X to see it."),
+                MessageBox.Show(this, Lang.F("C'est fait : l'entrée audio s'appelle maintenant « {0} ». Redémarrez WSJT-X pour la voir.",
+                                             "Done: the audio input is now called \"{0}\". Restart WSJT-X to see it.", CableName),
                     "SDRLink", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show(this, Lang.T("Le renommage n'a pas abouti (" + (hr == AudioEndpoints.E_ACCESSDENIED ? "autorisation refusée" : "erreur 0x" + hr.ToString("X8")) + ").\n\n" +
-                                             "À la main : Panneau de configuration Son › onglet Enregistrement › « " + cap.FullName + " » › Propriétés › nom.",
-                                             "Renaming failed (" + (hr == AudioEndpoints.E_ACCESSDENIED ? "permission denied" : "error 0x" + hr.ToString("X8")) + ").\n\n" +
-                                             "By hand: Sound control panel › Recording tab › \"" + cap.FullName + "\" › Properties › name."),
+                MessageBox.Show(this, Lang.F("Le renommage n'a pas abouti ({0}).\n\n" +
+                                             "À la main : Panneau de configuration Son › onglet Enregistrement › « {1} » › Propriétés › nom.",
+                                             "Renaming failed ({0}).\n\n" +
+                                             "By hand: Sound control panel › Recording tab › \"{1}\" › Properties › name.",
+                                             hr == AudioEndpoints.E_ACCESSDENIED ? Lang.T("autorisation refusée", "permission denied") : Lang.T("erreur", "error") + " 0x" + hr.ToString("X8"),
+                                             cap.FullName),
                     "SDRLink", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
@@ -1759,8 +1873,8 @@ namespace SDRLink
             {
                 shownCableError = cableSink.Error;
                 status.Text = shownCableError == null
-                    ? Lang.T("Câble SDRLINK : son du WebSDR envoyé vers « ", "SDRLINK cable: WebSDR audio sent to \"") + cableSink.DeviceName + Lang.T(" »", "\"")
-                    : Lang.T("Câble SDRLINK : « ", "SDRLINK cable: \"") + cableSink.DeviceName + Lang.T(" » : ", "\": ") + shownCableError;
+                    ? Lang.F("Câble SDRLINK : son du WebSDR envoyé vers « {0} »", "SDRLINK cable: WebSDR audio sent to \"{0}\"", cableSink.DeviceName)
+                    : Lang.F("Câble SDRLINK : « {0} » : {1}", "SDRLINK cable: \"{0}\": {1}", cableSink.DeviceName, shownCableError);
             }
         }
         string shownCableError;
@@ -1777,7 +1891,8 @@ namespace SDRLink
         // Nouvelle page : on reprend le volume mémorisé de ce favori (ou le volume des pages hors favoris).
         void OnPageChanged(string url)
         {
-            currentFav = settings.Favorites.Find(delegate(Favorite f) { return f.Matches(url); });
+            // Volume mémorisé : celui du favori de la liste affichée, sinon celui d'une autre liste.
+            currentFav = FavoriteInCurrentList(url) ?? settings.Favorites.Find(delegate(Favorite f) { return f.Matches(url); });
             int v = currentFav != null && currentFav.Volume >= 0 ? currentFav.Volume : settings.DefaultVolume;
             volumeLoading = true;
             trkVolume.Value = Math.Max(0, Math.Min(100, v));
@@ -1923,7 +2038,14 @@ namespace SDRLink
         void AddFavorite()
         {
             Favorite cur = CurrentPage();
-            using (FavoriteEditDialog d = new FavoriteEditDialog(Lang.T("Ajouter un favori", "Add favorite"),
+            string listName = FavoritesDialog.ListLabel(settings.ListNames, settings.CurrentList);
+            // Seule la liste affichée compte : la même page peut figurer dans plusieurs listes.
+            if (cur != null && FavoriteInCurrentList(cur.Url) != null)
+            {
+                status.Text = Lang.F("Cette page est déjà dans « {0} ».", "This page is already in \"{0}\".", listName);
+                return;
+            }
+            using (FavoriteEditDialog d = new FavoriteEditDialog(Lang.F("Ajouter un favori à « {0} »", "Add favorite to \"{0}\"", listName),
                 cur != null ? cur.Name : "", cur != null ? cur.Url : cbUrl.Text.Trim()))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
@@ -1937,17 +2059,25 @@ namespace SDRLink
             }
         }
 
-        // Retire des favoris la page affichée.
+        // Favori de la liste affichée correspondant à cette adresse (null si la page n'y figure pas).
+        Favorite FavoriteInCurrentList(string url)
+        {
+            return settings.Favorites.Find(delegate(Favorite f) { return f.List == settings.CurrentList && f.Matches(url); });
+        }
+
+        // Retire la page affichée de la liste de favoris affichée seulement (elle reste dans les autres listes).
         void RemoveCurrentFavorite()
         {
-            if (currentFav == null)
+            string listName = FavoritesDialog.ListLabel(settings.ListNames, settings.CurrentList);
+            Favorite fav = web.CoreWebView2 != null ? FavoriteInCurrentList(web.CoreWebView2.Source) : null;
+            if (fav == null)
             {
-                status.Text = Lang.T("Cette page n'est pas dans les favoris.", "This page is not in the favorites.");
+                status.Text = Lang.F("Cette page n'est pas dans « {0} ».", "This page is not in \"{0}\".", listName);
                 return;
             }
-            if (MessageBox.Show(Lang.T("Retirer « " + currentFav.Name + " » des favoris ?", "Remove \"" + currentFav.Name + "\" from favorites?"),
+            if (MessageBox.Show(Lang.F("Retirer « {0} » de « {1} » ?", "Remove \"{0}\" from \"{1}\"?", fav.Name, listName),
                     "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
-            settings.Favorites.Remove(currentFav);
+            settings.Favorites.Remove(fav);
             RefillUrlCombo();
             if (web.CoreWebView2 != null) OnPageChanged(web.CoreWebView2.Source);
             SaveUiToSettings();

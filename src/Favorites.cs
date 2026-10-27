@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -209,7 +209,7 @@ namespace SDRLink
         public static string ListLabel(string[] names, int i)
         {
             string def = "Liste " + (i + 1);
-            return names[i] == def ? Lang.T(def, "List " + (i + 1)) : names[i];
+            return names[i] == def ? Lang.F("Liste {0}", "List {0}", i + 1) : names[i];
         }
 
         // Petite fenêtre de saisie d'un nom de liste.
@@ -267,7 +267,7 @@ namespace SDRLink
             listMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e)
             {
                 if (ShownList == AllLists) { e.Cancel = true; return; }
-                rename.Text = Lang.T("Renommer « ", "Rename \"") + ListLabel(listNames, ShownList) + Lang.T(" »…", "\"…");
+                rename.Text = Lang.F("Renommer « {0} »…", "Rename \"{0}\"…", ListLabel(listNames, ShownList));
             };
             rename.Click += delegate { RenameList(); };
             cbList.ContextMenuStrip = listMenu;
@@ -377,8 +377,7 @@ namespace SDRLink
             }
             foreach (Favorite f in items) { f.List = target; checkedFavs.Remove(f); }
             Refill(-1);
-            lblStatus.Text = Lang.T(items.Count + " favori(s) déplacé(s) vers « ", items.Count + " favorite(s) moved to \"")
-                + ListLabel(listNames, target) + Lang.T(" ».", "\".");
+            lblStatus.Text = Lang.F("{0} favori(s) déplacé(s) vers « {1} ».", "{0} favorite(s) moved to \"{1}\".", items.Count, ListLabel(listNames, target));
         }
 
         // Favoris de la liste affichée, dans l'ordre général.
@@ -453,7 +452,7 @@ namespace SDRLink
         {
             if (checking) return;
             int shown = view.Items.Count, ticked = CheckedShown().Count;
-            lblStatus.Text = Lang.T(shown + " favori(s) affiché(s), " + ticked + " coché(s)", shown + " favorite(s) shown, " + ticked + " checked");
+            lblStatus.Text = Lang.F("{0} favori(s) affiché(s), {1} coché(s)", "{0} favorite(s) shown, {1} checked", shown, ticked);
         }
 
         // Seuls les favoris visibles comptent : une case cochée dans une autre liste n'est pas touchée.
@@ -492,8 +491,8 @@ namespace SDRLink
                 targets.Add(Selected);
             }
             string question = targets.Count == 1
-                ? Lang.T("Supprimer le favori « " + targets[0].Name + " » ?", "Remove favorite \"" + targets[0].Name + "\"?")
-                : Lang.T("Supprimer les " + targets.Count + " favoris cochés ?", "Remove the " + targets.Count + " checked favorites?");
+                ? Lang.F("Supprimer le favori « {0} » ?", "Remove favorite \"{0}\"?", targets[0].Name)
+                : Lang.F("Supprimer les {0} favoris cochés ?", "Remove the {0} checked favorites?", targets.Count);
             if (MessageBox.Show(this, question, "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
             int keep = SelectedIndex;
             foreach (Favorite f in targets)
@@ -558,7 +557,7 @@ namespace SDRLink
                 Favorite first;
                 if (key != null && firstByKey.TryGetValue(key, out first))
                 {
-                    state[f] = Lang.T("doublon de « ", "duplicate of \"") + first.Name + Lang.T(" »", "\"");
+                    state[f] = Lang.F("doublon de « {0} »", "duplicate of \"{0}\"", first.Name);
                     checkedFavs[f] = true;
                     problem[f] = true;
                     duplicates++;
@@ -571,7 +570,7 @@ namespace SDRLink
             Refill(SelectedIndex);
 
             int remaining = toTest.Count, dead = 0;
-            lblStatus.Text = Lang.T("Vérification de " + remaining + " adresse(s)…", "Checking " + remaining + " address(es)…");
+            lblStatus.Text = Lang.F("Vérification de {0} adresse(s)…", "Checking {0} address(es)…", remaining);
             if (remaining == 0) { FinishVerify(duplicates, 0); return; }
 
             // 10 vérifications en parallèle : rapide sans saturer la connexion.
@@ -603,7 +602,7 @@ namespace SDRLink
                                     refreshing = false;
                                 }
                                 if (--remaining == 0) FinishVerify(duplicates, dead);
-                                else lblStatus.Text = Lang.T("Vérification… encore " + remaining, "Checking… " + remaining + " left");
+                                else lblStatus.Text = Lang.F("Vérification… encore {0}", "Checking… {0} left", remaining);
                             });
                         }
                         catch (InvalidOperationException) { return; }   // fenêtre fermée pendant la vérification
@@ -619,8 +618,8 @@ namespace SDRLink
             checking = false;
             btnCheck.Enabled = true;
             Refill(SelectedIndex);
-            lblStatus.Text = Lang.T("Vérification terminée : " + dead + " lien(s) mort(s), " + duplicates + " doublon(s) cochés. Cliquez sur « Supprimer… » pour les retirer.",
-                                    "Check done: " + dead + " dead link(s), " + duplicates + " duplicate(s) checked. Click \"Remove…\" to delete them.");
+            lblStatus.Text = Lang.F("Vérification terminée : {0} lien(s) mort(s), {1} doublon(s) cochés. Cliquez sur « Supprimer… » pour les retirer.",
+                                    "Check done: {0} dead link(s), {1} duplicate(s) checked. Click \"Remove…\" to delete them.", dead, duplicates);
             Log.Write("Vérification des favoris : " + dead + " lien(s) mort(s), " + duplicates + " doublon(s)");
         }
 
@@ -692,8 +691,8 @@ namespace SDRLink
                     added++;
                 }
                 Refill(-1);
-                MessageBox.Show(this, Lang.T(added + " favori(s) importé(s), " + (imported.Count - added) + " déjà présent(s).",
-                                             added + " favorite(s) imported, " + (imported.Count - added) + " already present."), "SDRLink");
+                MessageBox.Show(this, Lang.F("{0} favori(s) importé(s), {1} déjà présent(s).",
+                                             "{0} favorite(s) imported, {1} already present.", added, imported.Count - added), "SDRLink");
             }
         }
 
@@ -709,7 +708,7 @@ namespace SDRLink
                 try
                 {
                     Favorite.Export(d.FileName, favs);
-                    MessageBox.Show(this, Lang.T(favs.Count + " favori(s) exporté(s).", favs.Count + " favorite(s) exported."), "SDRLink");
+                    MessageBox.Show(this, Lang.F("{0} favori(s) exporté(s).", "{0} favorite(s) exported.", favs.Count), "SDRLink");
                 }
                 catch (Exception ex) { MessageBox.Show(this, ex.Message, "SDRLink"); }
             }

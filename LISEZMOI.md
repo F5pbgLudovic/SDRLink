@@ -24,6 +24,20 @@ Pour recompiler après une modification : `powershell -ExecutionPolicy Bypass -F
 | OmniRig | Rig 1 / Rig 2 | Le poste se configure dans OmniRig ; permet de partager le poste avec d'autres logiciels |
 | TCI | Hôte / port (40001 par défaut) | ExpertSDR (SunSDR), Thetis… activer le serveur TCI |
 | Ham Radio Deluxe | Hôte / port (7809 par défaut) | Activer le serveur IP dans HRD Rig Control |
+| Hamlib (rigctld) | Hôte / port (4532 par défaut), « Lancer rigctld », n° de modèle Hamlib | Voir ci-dessous |
+
+## Hamlib
+
+Hamlib est la bibliothèque libre de télécommande des postes utilisée par WSJT-X, fldigi, JTDX… Elle reconnaît plus de 300 modèles. SDRLink dialogue avec **rigctld**, le petit serveur réseau de Hamlib.
+- **Lancer rigctld** (coché par défaut) : SDRLink démarre lui-même rigctld à la connexion et l'arrête à la déconnexion. Il utilise le poste, le port COM, la vitesse, les bits de stop (et RTS/DTR s'ils sont cochés) de la ligne de réglages, qui s'affiche alors.
+  - L'emplacement de `rigctld.exe` est trouvé automatiquement (installation de Hamlib, PATH, puis WSJT-X/JTDX). Sinon, le bouton **…** permet de l'indiquer.
+  - **Télécharger Hamlib…** ouvre la page officielle (github.com/Hamlib/Hamlib/releases). Prendre `hamlib-w64-….exe` (installeur) ou le `.zip`.
+  - Le `rigctld-wsjtx.exe` fourni avec WSJT-X ou WSJT-Z ne démarre pas toujours seul, hors de WSJT : dans ce cas, installer Hamlib.
+- **N° de modèle Hamlib** : rempli d'après le modèle choisi (FT-2000 = 1029, FTdx10 = 1042, IC-7000 = 3060…). Pour un autre poste, taper le numéro de la liste Hamlib (`rigctl -l`).
+- **Décoché** : SDRLink se connecte à un rigctld déjà lancé, à l'adresse **Hôte / Port** indiquée (même sur un autre PC).
+- Le port COM ne peut servir qu'à un seul logiciel : ne pas lancer rigctld sur le port déjà ouvert par HRD ou OmniRig.
+- Fonctions : fréquence, mode (le mode DIGI passe par PKTUSB/PKTLSB, aussi sur les Icom), PTT, état émission, volume (Mute TX, Volume TX) si le poste le permet.
+- En cas d'erreur (port COM occupé, modèle inconnu…), le message de rigctld s'affiche dans la barre d'état et dans le journal.
 
 ## Postes en CAT direct
 
@@ -67,8 +81,8 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
     - le menu **Liste** filtre l'affichage (ou « Toutes les listes ») ; clic droit dessus pour la renommer ;
     - **Déplacer vers ▸** range les favoris cochés (ou, à défaut, le favori sélectionné) dans une autre liste ;
     - une colonne « Liste » indique la liste de chaque favori.
-- **★ Ajouter aux favoris** : ajoute la page affichée, nommée d'après le titre de la page (modifiable).
-- **Retirer des favoris** : retire la page affichée des favoris, après confirmation.
+- **★ Ajouter aux favoris** : ajoute la page affichée à la **liste affichée**, nommée d'après le titre de la page (modifiable). Si elle y est déjà, la barre d'état l'indique. La même page peut figurer dans plusieurs listes.
+- **Retirer des favoris** : retire la page affichée de la **liste affichée seulement**, après confirmation. Elle reste dans les autres listes.
 - **Gérer les favoris…** ouvre le gestionnaire :
   - **Ajouter un favori…** ;
   - une **case à cocher** devant chaque favori. **Supprimer…** retire tous les favoris cochés en une fois, ou le favori sélectionné si aucun n'est coché.
@@ -143,7 +157,11 @@ La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'int
 
 ## Langue
 
-Le menu **Langue / Language**, sur la 2ᵉ ligne, bascule toute l'interface entre français et anglais, immédiatement et sans redémarrer. Le choix est conservé. Le journal de diagnostic reste en français.
+Le menu **Langue**, sur la 2ᵉ ligne, change la langue de toute l'interface, immédiatement et sans redémarrer. Le choix est conservé.
+- Langues : français, anglais, allemand, espagnol, italien, néerlandais, portugais, polonais, tchèque, slovaque, slovène, croate, hongrois, roumain, bulgare, grec, suédois, danois, norvégien, finnois, estonien, letton et lituanien.
+- Les langues autres que le français et l'anglais sont traduites à partir de l'anglais. Un texte manquant s'affiche en anglais.
+- Le journal de diagnostic reste en français.
+- Pour corriger une traduction : fichier `lang\<code>.txt` (texte anglais, tabulation, traduction), puis `tools\langgen.ps1` et recompiler.
 
 ## Synchronisation
 
@@ -266,6 +284,10 @@ Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrli
 
 ## Historique des versions
 
+- **1.4**
+  - interface **Hamlib (rigctld)**, avec lancement automatique de rigctld ;
+  - 23 langues européennes ;
+  - « Ajouter aux favoris » et « Retirer des favoris » ne concernent que la liste affichée.
 - **1.3**
   - « POSTE » devient « RADIO » (bandeau et menu Synchro) ;
   - les listes de favoris vides ne sont plus proposées dans la barre WebSDR ;

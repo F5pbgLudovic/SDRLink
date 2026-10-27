@@ -7,7 +7,7 @@ namespace SDRLink
     static class Program
     {
         // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
-        public const string Version = "1.3";
+        public const string Version = "1.4";
 
         [STAThread]
         static int Main(string[] args)
@@ -17,7 +17,7 @@ namespace SDRLink
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Langue lue dès le départ pour que les messages de vérification soient dans la bonne langue.
-            try { Lang.English = Settings.Load().Language == "en"; } catch { }
+            try { Lang.Code = Settings.Load().Language; } catch { }
             if (!Prerequisites.CheckDotNet()) return 1;
             Prerequisites.InstallEmbeddedLibraries();
             Run();

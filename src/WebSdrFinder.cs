@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -463,8 +463,8 @@ namespace SDRLink
         void UpdateStatus()
         {
             if (found.Count == 0 && sourcesReport == "") return;
-            lblStatus.Text = Lang.T(view.Items.Count + " récepteur(s) affiché(s), " + checkedKeys.Count + " coché(s)   —   sources : ",
-                                    view.Items.Count + " receiver(s) shown, " + checkedKeys.Count + " checked   —   sources: ") + sourcesReport;
+            lblStatus.Text = Lang.F("{0} récepteur(s) affiché(s), {1} coché(s)   —   sources : ",
+                                    "{0} receiver(s) shown, {1} checked   —   sources: ", view.Items.Count, checkedKeys.Count) + sourcesReport;
         }
 
         void SetAll(bool on)
@@ -498,8 +498,8 @@ namespace SDRLink
             Added += n;
             checkedKeys.Clear();
             Fill();
-            MessageBox.Show(this, Lang.T(n + " favori(s) ajouté(s). Vous pouvez les renommer dans « Gérer les favoris… ».",
-                                         n + " favorite(s) added. You can rename them in \"Manage favorites…\"."), "SDRLink");
+            MessageBox.Show(this, Lang.F("{0} favori(s) ajouté(s). Vous pouvez les renommer dans « Gérer les favoris… ».",
+                                         "{0} favorite(s) added. You can rename them in \"Manage favorites…\".", n), "SDRLink");
         }
     }
 }

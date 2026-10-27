@@ -1,0 +1,208 @@
+output not found	nie znaleziono wyjścia
+output already used in exclusive mode by another program	wyjście jest już używane w trybie wyłącznym przez inny program
+cannot open, error 	nie można otworzyć, błąd 
+Name:	Nazwa:
+Address:	Adres:
+Cancel	Anuluj
+Please enter a name and an address.	Podaj nazwę i adres.
+Rename list	Zmień nazwę listy
+Favorite manager	Menedżer ulubionych
+Add favorite…	Dodaj ulubiony…
+Import…	Importuj…
+Export…	Eksportuj…
+Selected / checked items	Wybrane / zaznaczone elementy
+Remove…	Usuń…
+Rename…	Zmień nazwę…
+Move up	Przenieś w górę
+Move down	Przenieś w dół
+Check	Sprawdzanie
+Check favorites	Sprawdź ulubione
+Check all	Zaznacz wszystko
+Uncheck all	Odznacz wszystko
+List:	Lista:
+Move to ▸	Przenieś do ▸
+(right-click the list to rename it)	(kliknij listę prawym przyciskiem, aby zmienić jej nazwę)
+Name	Nazwa
+Address	Adres
+Status	Stan
+List	Lista
+Open	Otwórz
+Close	Zamknij
+All lists	Wszystkie listy
+Please select a favorite in the list first.	Najpierw wybierz ulubiony z listy.
+Add favorite	Dodaj ulubiony
+checking…	sprawdzanie…
+OK	OK
+invalid address	nieprawidłowy adres
+answers	odpowiada
+not found	nie znaleziono
+answers (certificate)	odpowiada (certyfikat)
+no answer	brak odpowiedzi
+unknown host	nieznany host
+connection refused	połączenie odrzucone
+unreachable	nieosiągalny
+Import favorites	Importuj ulubione
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Ulubione (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Wszystkie pliki (*.*)|*.*
+Export favorites	Eksportuj ulubione
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, do odczytu w Excelu (*.csv)|*.csv|Zakładki przeglądarki (*.html)|*.html|Tekst (*.txt)|*.txt
+List {0}	Lista {0}
+Rename "{0}"…	Zmień nazwę „{0}”…
+{0} favorite(s) moved to "{1}".	Przeniesione ulubione do „{1}”: {0}.
+{0} favorite(s) shown, {1} checked	Wyświetlone ulubione: {0}, zaznaczone: {1}
+Remove favorite "{0}"?	Usunąć ulubiony „{0}”?
+Remove the {0} checked favorites?	Usunąć zaznaczone ulubione ({0})?
+duplicate of "{0}"	duplikat „{0}”
+Checking {0} address(es)…	Sprawdzanie adresów ({0})…
+Checking… {0} left	Sprawdzanie… pozostało: {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Sprawdzanie zakończone. Zaznaczono martwe linki: {0}, duplikaty: {1}. Kliknij „Usuń…”, aby je usunąć.
+{0} favorite(s) imported, {1} already present.	Zaimportowane ulubione: {0}, już istniejące: {1}.
+{0} favorite(s) exported.	Wyeksportowane ulubione: {0}.
+rigctld connection closed	Połączenie rigctld zamknięte
+stopped	zatrzymano
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Brak rigctld pod adresem {0}:{1} (uruchom rigctld lub zaznacz „Uruchom rigctld”).
+Invalid HRD answer	Nieprawidłowa odpowiedź HRD
+HRD connection closed	Połączenie HRD zamknięte
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Brak serwera HRD pod adresem {0}:{1} (włącz serwer IP w HRD Rig Control).
+Cannot open the log: 	Nie można otworzyć dziennika: 
+Save: no known frequency (rig or WebSDR)	Zapisz: brak znanej częstotliwości (TRX lub WebSDR)
+RIG	TRX
+Disconnected	Rozłączono
+Connect	Połącz
+Disconnect	Rozłącz
+Location of rigctld.exe (Hamlib)	Lokalizacja rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Programy (*.exe)|*.exe
+Please choose a rig model.	Wybierz model radiostacji.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Nieprawidłowy adres CI-V (np. 70 dla IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	Nie znaleziono rigctld.exe (Hamlib). Wskaż jego lokalizację przyciskiem „…” lub zainstaluj Hamlib (bezpłatny).\n\nOtworzyć stronę pobierania Hamlib?
+Please choose the rig's COM port.	Wybierz port COM radiostacji.
+Cannot start rigctld: 	Nie można uruchomić rigctld: 
+TX safety timeout (PTT button)	Limit czasu TX dla bezpieczeństwa (przycisk PTT)
+Off	Wył.
+PTT: connect the rig first	PTT: najpierw połącz radiostację
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nieprawidłowa częstotliwość: wpisz wartość w kHz, np. 7074 lub 14074.5
+Remove this value (pick it in the list first)	Usuń tę wartość (najpierw wybierz ją z listy)
+RIG 	TRX 
+Cannot start WebView2 (Edge):\n	Nie można uruchomić WebView2 (Edge):\n
+Invalid address: 	Nieprawidłowy adres: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Kabel SDRLINK: nie znaleziono wirtualnego kabla audio. Zainstaluj VB-CABLE (bezpłatny): przycisk „Kabel SDRLINK”.
+Output receiving the WebSDR audio:	Wyjście odbierające dźwięk z WebSDR:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nazwij drugi koniec kabla „SDRLINK” (najpierw wybierz kabel wirtualny)
+Download VB-CABLE (free, vb-audio.com)…	Pobierz VB-CABLE (bezpłatny, vb-audio.com)…
+permission denied	odmowa dostępu
+error	błąd
+SDRLINK cable	Kabel SDRLINK
+ (off) ▾	 (wył.) ▾
+Mute TRX: connect the rig first	Wycisz TRX: najpierw połącz radiostację
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Głośność radiostacji niedostępna dla tej radiostacji lub interfejsu (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Nadawanie zatrzymane automatycznie po {0} (limit bezpieczeństwa; kliknij PTT prawym przyciskiem, aby go zmienić)
+Remove "{0}" from the list	Usuń „{0}” z listy
+Remove all ({0} values)	Usuń wszystkie (wartości: {0})
+Remove all {0} frequencies from the list?	Usunąć wszystkie częstotliwości z listy ({0})?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}” nie wygląda na kabel wirtualny: dźwięk z WebSDR będzie tam odtwarzany cały czas (i nadawany, jeśli to nadawcza karta dźwiękowa radiostacji).\n\nUżyć mimo to tego wyjścia?
+Name the other end of the cable "SDRLINK" ("{0}")…	Nazwij drugi koniec kabla „SDRLINK” („{0}”)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Nazwa tego kabla została już zmieniona na „{0}”: może być używany przez inne oprogramowanie (VoiceMeeter…). Zmiana nazwy na „{1}” oznacza konieczność ponownego wybrania go w tym oprogramowaniu.\n\nKontynuować?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Nazwa urządzenia nagrywającego „{0}” zostanie zmieniona na „{1}”.\n\nBędzie widoczne pod tą nazwą w wejściach audio WSJT-X, JTDX, fldigi… (uruchom je ponownie). System Windows może poprosić o uprawnienia administratora.\n\nKontynuować?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gotowe: wejście audio nazywa się teraz „{0}”. Uruchom ponownie WSJT-X, aby je zobaczyć.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Zmiana nazwy nie powiodła się ({0}).\n\nRęcznie: Panel sterowania Dźwięk › karta Nagrywanie › „{1}” › Właściwości › nazwa.
+SDRLINK cable: WebSDR audio sent to "{0}"	Kabel SDRLINK: dźwięk z WebSDR wysyłany do „{0}”
+SDRLINK cable: "{0}": {1}	Kabel SDRLINK: „{0}”: {1}
+This page is already in "{0}".	Ta strona jest już na liście „{0}”.
+Add favorite to "{0}"	Dodaj ulubiony do „{0}”
+This page is not in "{0}".	Tej strony nie ma na liście „{0}”.
+Remove "{0}" from "{1}"?	Usunąć „{0}” z „{1}”?
+Interface:	Interfejs:
+Brand:	Marka:
+Model:	Model:
+Port:	Port:
+Baud rate:	Prędkość:
+Stop bits:	Bity stopu:
+CI-V address (hex):	Adres CI-V (hex):
+OmniRig rig:	Radio OmniRig:
+Host:	Host:
+TX detection (HRD):	Wykrywanie TX (HRD):
+Hamlib model no.:	Nr modelu Hamlib:
+Language:	Język:
+Sync:	Synchr.:
+WebSDR offset (Hz):	Przesunięcie WebSDR (Hz):
+restore after (ms):	przywróć po (ms):
+kHz:	kHz:
+Step:	Krok:
+WebSDR:	WebSDR:
+Volume:	Głośność:
+TRX volume:	Głośność TRX:
+Open log	Otwórz dziennik
+…	…
+Download Hamlib…	Pobierz Hamlib…
+SDRLINK cable ▾	Kabel SDRLINK ▾
+QSY	QSY
+Save	Zapisz
+Go	Przejdź
+◀ Back	◀ Wstecz
+Reload	Przeładuj
+★ Add to favorites	★ Dodaj do ulubionych
+Remove from favorites	Usuń z ulubionych
+Manage favorites…	Zarządzaj ulubionymi…
+Find WebSDRs…	Znajdź WebSDR…
+Mute WebSDR	Wycisz WebSDR
+Mute TRX	Wycisz TRX
+Auto-connect at startup	Połącz automatycznie przy starcie
+Dark mode	Tryb ciemny
+RTS	RTS
+DTR	DTR
+Start rigctld:	Uruchom rigctld:
+Sync mode	Synchronizuj emisję
+Mute WebSDR while transmitting	Wycisz WebSDR podczas nadawania
+Auto notch (DNF)	Autom. notch (DNF)
+Compact view	Widok kompaktowy
+Always on top	Zawsze na wierzchu
+COM port (direct CAT)	Port COM (bezpośredni CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	Przyciski MOX/TX/PTT
+MOX/VOX/TX/PTT buttons	Przyciski MOX/VOX/TX/PTT
+Both ways	Dwukierunkowo
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nie jest zainstalowany (nie znaleziono OmniRig.OmniRigX).
+Dark mode colour	Kolor trybu ciemnego
+Light mode colour	Kolor trybu jasnego
+Default	Domyślny
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink wymaga Microsoft .NET Framework 4.6.2 lub nowszego (zalecany 4.8).\nNie jest on zainstalowany na tym komputerze.\n\nPobrać i zainstalować teraz .NET Framework 4.8?\n(może być wymagany restart komputera, potem ponownie uruchom SDRLink)
+SDRLink - missing component	SDRLink - brak składnika
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink wymaga Microsoft Edge WebView2 Runtime do wyświetlania WebSDR.\nNie jest on zainstalowany na tym komputerze.\n\nPobrać i zainstalować teraz WebView2? (bezpłatny, ok. 2 MB)
+Download or installation failed:\n	Pobieranie lub instalacja nie powiodła się:\n
+\n\nThe official download page will open:\n	\n\nZostanie otwarta oficjalna strona pobierania:\n
+Connecting...	Łączenie...
+Connected, waiting for the rig...	Połączono, oczekiwanie na radiostację...
+Rig online	Radiostacja połączona
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radiostacja nie odpowiada (sprawdź port, prędkość, adres CI-V, menu CAT)
+Error: 	Błąd: 
+No TCI server at 	Brak serwera TCI pod adresem 
+TCI connection lost	Utracono połączenie TCI
+unavailable	niedostępne
+unexpected format	nieoczekiwany format
+Find WebSDRs (France and neighbouring countries)	Znajdź WebSDR (Francja i kraje sąsiednie)
+All	Wszystkie
+Hide those already in favorites	Ukryj te, które są już w ulubionych
+Max distance from the centre of France (km):	Maks. odległość od środka Francji (km):
+Filter:	Filtr:
+Type:	Typ:
+Location	Lokalizacja
+Country	Kraj
+Users	Użytk.
+Listen to selection	Słuchaj wybranego
+Add checked to favorites	Dodaj zaznaczone do ulubionych
+Refresh	Odśwież
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Przeszukiwanie katalogów (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Najpierw wybierz odbiornik z listy.
+{0} receiver(s) shown, {1} checked   —   sources: 	Wyświetlone odbiorniki: {0}, zaznaczone: {1}   —   źródła: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Dodane ulubione: {0}. Możesz zmienić ich nazwy w „Zarządzaj ulubionymi…”.

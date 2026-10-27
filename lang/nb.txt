@@ -1,0 +1,208 @@
+output not found	utgang ikke funnet
+output already used in exclusive mode by another program	utgangen brukes allerede i eksklusiv modus av et annet program
+cannot open, error 	kan ikke åpnes, feil 
+Name:	Navn:
+Address:	Adresse:
+Cancel	Avbryt
+Please enter a name and an address.	Skriv inn et navn og en adresse.
+Rename list	Gi listen nytt navn
+Favorite manager	Favorittbehandling
+Add favorite…	Legg til favoritt…
+Import…	Importer…
+Export…	Eksporter…
+Selected / checked items	Valgte / avkryssede elementer
+Remove…	Fjern…
+Rename…	Gi nytt navn…
+Move up	Flytt opp
+Move down	Flytt ned
+Check	Kontroll
+Check favorites	Kontroller favoritter
+Check all	Kryss av alle
+Uncheck all	Fjern alle kryss
+List:	Liste:
+Move to ▸	Flytt til ▸
+(right-click the list to rename it)	(høyreklikk på listen for å gi den nytt navn)
+Name	Navn
+Address	Adresse
+Status	Status
+List	Liste
+Open	Åpne
+Close	Lukk
+All lists	Alle lister
+Please select a favorite in the list first.	Velg først en favoritt i listen.
+Add favorite	Legg til favoritt
+checking…	kontrollerer…
+OK	OK
+invalid address	ugyldig adresse
+answers	svarer
+not found	ikke funnet
+answers (certificate)	svarer (sertifikat)
+no answer	ingen svar
+unknown host	ukjent vert
+connection refused	tilkobling avvist
+unreachable	kan ikke nås
+Import favorites	Importer favoritter
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favoritter (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Alle filer (*.*)|*.*
+Export favorites	Eksporter favoritter
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, kan leses i Excel (*.csv)|*.csv|Nettleserbokmerker (*.html)|*.html|Tekst (*.txt)|*.txt
+List {0}	Liste {0}
+Rename "{0}"…	Gi «{0}» nytt navn…
+{0} favorite(s) moved to "{1}".	{0} favoritt(er) flyttet til «{1}».
+{0} favorite(s) shown, {1} checked	{0} favoritt(er) vist, {1} avkrysset
+Remove favorite "{0}"?	Fjerne favoritten «{0}»?
+Remove the {0} checked favorites?	Fjerne de {0} avkryssede favorittene?
+duplicate of "{0}"	duplikat av «{0}»
+Checking {0} address(es)…	Kontrollerer {0} adresse(r)…
+Checking… {0} left	Kontrollerer… {0} igjen
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Kontroll fullført: {0} død(e) lenke(r), {1} duplikat(er) avkrysset. Klikk på «Fjern…» for å slette dem.
+{0} favorite(s) imported, {1} already present.	{0} favoritt(er) importert, {1} fantes fra før.
+{0} favorite(s) exported.	{0} favoritt(er) eksportert.
+rigctld connection closed	rigctld-tilkobling lukket
+stopped	stoppet
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Ingen rigctld på {0}:{1} (start rigctld, eller kryss av for «Start rigctld»).
+Invalid HRD answer	Ugyldig HRD-svar
+HRD connection closed	HRD-tilkobling lukket
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktiver IP-serveren i HRD Rig Control).
+Cannot open the log: 	Kan ikke åpne loggen: 
+Save: no known frequency (rig or WebSDR)	Save: ingen kjent frekvens (rigg eller WebSDR)
+RIG	RIGG
+Disconnected	Frakoblet
+Connect	Koble til
+Disconnect	Koble fra
+Location of rigctld.exe (Hamlib)	Plassering av rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Programmer (*.exe)|*.exe
+Please choose a rig model.	Velg en riggmodell.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Ugyldig CI-V-adresse (f.eks. 70 for IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	Finner ikke rigctld.exe (Hamlib). Angi plasseringen med «…»-knappen, eller installer Hamlib (gratis).\n\nÅpne nedlastingssiden for Hamlib?
+Please choose the rig's COM port.	Velg riggens COM-port.
+Cannot start rigctld: 	Kan ikke starte rigctld: 
+TX safety timeout (PTT button)	TX-sikkerhetstid (PTT-knapp)
+Off	Av
+PTT: connect the rig first	PTT: koble til riggen først
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: skriv en verdi i kHz, f.eks. 7074 eller 14074.5
+Remove this value (pick it in the list first)	Fjern denne verdien (velg den i listen først)
+RIG 	RIGG 
+Cannot start WebView2 (Edge):\n	Kan ikke starte WebView2 (Edge):\n
+Invalid address: 	Ugyldig adresse: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kabel: fant ingen virtuell lydkabel. Installer VB-CABLE (gratis): knappen «SDRLINK-kabel».
+Output receiving the WebSDR audio:	Utgang som mottar WebSDR-lyden:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Gi kabelens andre ende navnet «SDRLINK» (velg en virtuell kabel først)
+Download VB-CABLE (free, vb-audio.com)…	Last ned VB-CABLE (gratis, vb-audio.com)…
+permission denied	tilgang nektet
+error	feil
+SDRLINK cable	SDRLINK-kabel
+ (off) ▾	 (av) ▾
+Mute TRX: connect the rig first	Demp rigg: koble til riggen først
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolum er ikke tilgjengelig med denne riggen eller dette grensesnittet (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Sending stoppet automatisk etter {0} (sikkerhetstid, høyreklikk på PTT for å endre)
+Remove "{0}" from the list	Fjern «{0}» fra listen
+Remove all ({0} values)	Fjern alle ({0} verdier)
+Remove all {0} frequencies from the list?	Fjerne alle {0} frekvenser fra listen?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	«{0}» ser ikke ut som en virtuell kabel: WebSDR-lyden vil spilles av der hele tiden (og sendes ut, hvis det er lydkortet en rigg sender med).\n\nBruke denne utgangen likevel?
+Name the other end of the cable "SDRLINK" ("{0}")…	Gi kabelens andre ende navnet «SDRLINK» («{0}»)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Denne kabelen har allerede fått navnet «{0}»: den kan allerede være i bruk av annen programvare (VoiceMeeter…). Hvis du gir den navnet «{1}», må du velge den på nytt i den programvaren.\n\nFortsette?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Opptaksenheten «{0}» får det nye navnet «{1}».\n\nDen vises med dette navnet blant lydinngangene i WSJT-X, JTDX, fldigi… (start dem på nytt). Windows kan be om administratortillatelse.\n\nFortsette?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Ferdig: lydinngangen heter nå «{0}». Start WSJT-X på nytt for å se den.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Navnebytte mislyktes ({0}).\n\nManuelt: Kontrollpanelet Lyd › fanen Innspilling › «{1}» › Egenskaper › navn.
+SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-lyd sendes til «{0}»
+SDRLINK cable: "{0}": {1}	SDRLINK-kabel: «{0}»: {1}
+This page is already in "{0}".	Denne siden er allerede i «{0}».
+Add favorite to "{0}"	Legg til favoritt i «{0}»
+This page is not in "{0}".	Denne siden er ikke i «{0}».
+Remove "{0}" from "{1}"?	Fjerne «{0}» fra «{1}»?
+Interface:	Grensesnitt:
+Brand:	Merke:
+Model:	Modell:
+Port:	Port:
+Baud rate:	Baudrate:
+Stop bits:	Stoppbiter:
+CI-V address (hex):	CI-V-adresse (hex):
+OmniRig rig:	OmniRig-rigg:
+Host:	Vert:
+TX detection (HRD):	TX-deteksjon (HRD):
+Hamlib model no.:	Hamlib-modellnr.:
+Language:	Språk:
+Sync:	Synk:
+WebSDR offset (Hz):	WebSDR-offset (Hz):
+restore after (ms):	gjenopprett etter (ms):
+kHz:	kHz:
+Step:	Steg:
+WebSDR:	WebSDR:
+Volume:	Volum:
+TRX volume:	Riggvolum:
+Open log	Åpne logg
+…	…
+Download Hamlib…	Last ned Hamlib…
+SDRLINK cable ▾	SDRLINK-kabel ▾
+QSY	QSY
+Save	Save
+Go	Gå
+◀ Back	◀ Tilbake
+Reload	Last inn på nytt
+★ Add to favorites	★ Legg til favoritt
+Remove from favorites	Fjern fra favoritter
+Manage favorites…	Behandle favoritter…
+Find WebSDRs…	Finn WebSDR-er…
+Mute WebSDR	Demp WebSDR
+Mute TRX	Demp rigg
+Auto-connect at startup	Koble til automatisk ved oppstart
+Dark mode	Mørk modus
+RTS	RTS
+DTR	DTR
+Start rigctld:	Start rigctld:
+Sync mode	Synk mode
+Mute WebSDR while transmitting	Demp WebSDR under sending
+Auto notch (DNF)	Auto-notch (DNF)
+Compact view	Kompakt visning
+Always on top	Alltid øverst
+COM port (direct CAT)	COM-port (direkte CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	MOX/TX/PTT-knapper
+MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT-knapper
+Both ways	Begge veier
+Rig → WebSDR	Rigg → WebSDR
+WebSDR → Rig	WebSDR → Rigg
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig er ikke installert (finner ikke OmniRig.OmniRigX).
+Dark mode colour	Farge i mørk modus
+Light mode colour	Farge i lys modus
+Default	Standard
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink krever Microsoft .NET Framework 4.6.2 eller nyere (4.8 anbefales).\nDet er ikke installert på denne PC-en.\n\nLaste ned og installere .NET Framework 4.8 nå?\n(en omstart kan være nødvendig, start deretter SDRLink på nytt)
+SDRLink - missing component	SDRLink - komponent mangler
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink krever Microsoft Edge WebView2 Runtime for å vise WebSDR-er.\nDen er ikke installert på denne PC-en.\n\nLaste ned og installere WebView2 nå? (gratis, ca. 2 MB)
+Download or installation failed:\n	Nedlasting eller installasjon mislyktes:\n
+\n\nThe official download page will open:\n	\n\nDen offisielle nedlastingssiden åpnes:\n
+Connecting...	Kobler til...
+Connected, waiting for the rig...	Tilkoblet, venter på riggen...
+Rig online	Riggen er tilkoblet
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Riggen svarer ikke (kontroller port, baudrate, CI-V-adresse, CAT-meny)
+Error: 	Feil: 
+No TCI server at 	Ingen TCI-server på 
+TCI connection lost	TCI-tilkobling brutt
+unavailable	utilgjengelig
+unexpected format	uventet format
+Find WebSDRs (France and neighbouring countries)	Finn WebSDR-er (Frankrike og naboland)
+All	Alle
+Hide those already in favorites	Skjul de som er favoritter
+Max distance from the centre of France (km):	Maks avstand fra midten av Frankrike (km):
+Filter:	Filter:
+Type:	Type:
+Location	Sted
+Country	Land
+Users	Bruk.
+Listen to selection	Lytt til valgt
+Add checked to favorites	Legg avkryssede i favoritter
+Refresh	Oppdater
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Søker i kataloger (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Velg først en mottaker i listen.
+{0} receiver(s) shown, {1} checked   —   sources: 	{0} mottaker(e) vist, {1} avkrysset   —   kilder: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favoritt(er) lagt til. Du kan gi dem nye navn i «Behandle favoritter…».

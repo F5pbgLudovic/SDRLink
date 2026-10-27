@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -24,6 +24,11 @@ namespace SDRLink
         public string HrdHost = "127.0.0.1";
         public int HrdPort = 7809;
         public int HrdTxDetect;            // HrdRig.TxDetect
+        public string HamlibHost = "127.0.0.1";
+        public int HamlibPort = 4532;
+        public bool HamlibLaunch = true;   // SDRLink lance rigctld lui-même (poste, port COM et vitesse ci-dessus)
+        public string RigctldPath = "";
+        public int HamlibModel;            // numéro de modèle Hamlib (0 = d'après le modèle choisi)
         public long TuneStepHz = 100;
         public List<string> FreqHistory = new List<string>();   // kHz, la plus récente en premier
         public bool Compact;
@@ -97,6 +102,11 @@ namespace SDRLink
                     case "HrdPort": s.HrdPort = Int(v, 7809); break;
                     case "HrdVoxTx": if (v == "1") s.HrdTxDetect = 1; break;   // ancien réglage (case à cocher VOX)
                     case "HrdTxDetect": s.HrdTxDetect = Int(v, 0) > 0 ? 1 : 0; break;
+                    case "HamlibHost": s.HamlibHost = v; break;
+                    case "HamlibPort": s.HamlibPort = Int(v, 4532); break;
+                    case "HamlibLaunch": s.HamlibLaunch = v == "1"; break;
+                    case "RigctldPath": s.RigctldPath = v; break;
+                    case "HamlibModel": s.HamlibModel = Int(v, 0); break;
                     case "TuneStep": s.TuneStepHz = Int(v, 100); break;
                     case "Compact": s.Compact = v == "1"; break;
                     case "TopMost": s.TopMost = v == "1"; break;
@@ -108,7 +118,7 @@ namespace SDRLink
                     case "Offset": long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out s.OffsetHz); break;
                     case "LastUrl": s.LastUrl = v; break;
                     case "Fav": if (v.Length > 0) favs.Add(Favorite.FromSetting(v)); break;
-                    case "Language": s.Language = v == "en" ? "en" : "fr"; break;
+                    case "Language": s.Language = Array.IndexOf(Lang.Codes, v) >= 0 ? v : "fr"; break;
                     case "List1": case "List2": case "List3": case "List4":
                         if (v.Length > 0) s.ListNames[k[4] - '1'] = v;
                         break;
@@ -151,6 +161,11 @@ namespace SDRLink
             Line(sb, "HrdHost", HrdHost);
             Line(sb, "HrdPort", HrdPort);
             Line(sb, "HrdTxDetect", HrdTxDetect);
+            Line(sb, "HamlibHost", HamlibHost);
+            Line(sb, "HamlibPort", HamlibPort);
+            Line(sb, "HamlibLaunch", HamlibLaunch ? 1 : 0);
+            Line(sb, "RigctldPath", RigctldPath);
+            Line(sb, "HamlibModel", HamlibModel);
             Line(sb, "TuneStep", TuneStepHz);
             Line(sb, "Compact", Compact ? 1 : 0);
             Line(sb, "TopMost", TopMost ? 1 : 0);

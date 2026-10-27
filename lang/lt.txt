@@ -1,0 +1,208 @@
+output not found	išvestis nerasta
+output already used in exclusive mode by another program	išvestį išskirtiniu režimu jau naudoja kita programa
+cannot open, error 	nepavyksta atidaryti, klaida 
+Name:	Pavadinimas:
+Address:	Adresas:
+Cancel	Atšaukti
+Please enter a name and an address.	Įveskite pavadinimą ir adresą.
+Rename list	Pervardyti sąrašą
+Favorite manager	Parankinių tvarkytuvė
+Add favorite…	Įtraukti į parankinius…
+Import…	Importuoti…
+Export…	Eksportuoti…
+Selected / checked items	Pasirinkti / pažymėti elementai
+Remove…	Šalinti…
+Rename…	Pervardyti…
+Move up	Aukštyn
+Move down	Žemyn
+Check	Tikrinimas
+Check favorites	Tikrinti parankinius
+Check all	Žymėti visus
+Uncheck all	Nužymėti visus
+List:	Sąrašas:
+Move to ▸	Perkelti į ▸
+(right-click the list to rename it)	(spustelėkite sąrašą dešiniuoju pelės mygtuku, kad jį pervardytumėte)
+Name	Pavadinimas
+Address	Adresas
+Status	Būsena
+List	Sąrašas
+Open	Atidaryti
+Close	Uždaryti
+All lists	Visi sąrašai
+Please select a favorite in the list first.	Pirmiausia sąraše pasirinkite parankinį.
+Add favorite	Įtraukti į parankinius
+checking…	tikrinama…
+OK	OK
+invalid address	netinkamas adresas
+answers	atsako
+not found	nerasta
+answers (certificate)	atsako (sertifikatas)
+no answer	neatsako
+unknown host	nežinomas serveris
+connection refused	ryšys atmestas
+unreachable	nepasiekiamas
+Import favorites	Importuoti parankinius
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Parankiniai (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Visi failai (*.*)|*.*
+Export favorites	Eksportuoti parankinius
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, skaitomas Excel (*.csv)|*.csv|Naršyklės žymės (*.html)|*.html|Tekstas (*.txt)|*.txt
+List {0}	Sąrašas {0}
+Rename "{0}"…	Pervardyti „{0}“…
+{0} favorite(s) moved to "{1}".	Į „{1}“ perkelta parankinių: {0}.
+{0} favorite(s) shown, {1} checked	Rodoma parankinių: {0}, pažymėta: {1}
+Remove favorite "{0}"?	Šalinti parankinį „{0}“?
+Remove the {0} checked favorites?	Šalinti pažymėtus parankinius ({0})?
+duplicate of "{0}"	„{0}“ dublikatas
+Checking {0} address(es)…	Tikrinama adresų: {0}…
+Checking… {0} left	Tikrinama… liko {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Tikrinimas baigtas, pažymėta: neveikiančių nuorodų – {0}, dublikatų – {1}. Spustelėkite „Šalinti…“, kad juos ištrintumėte.
+{0} favorite(s) imported, {1} already present.	Importuota parankinių: {0}, jau buvo: {1}.
+{0} favorite(s) exported.	Eksportuota parankinių: {0}.
+rigctld connection closed	rigctld ryšys uždarytas
+stopped	sustabdyta
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nėra rigctld adresu {0}:{1} (paleiskite rigctld arba pažymėkite „Paleisti rigctld“).
+Invalid HRD answer	Netinkamas HRD atsakymas
+HRD connection closed	HRD ryšys uždarytas
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nėra HRD serverio adresu {0}:{1} (įjunkite IP serverį programoje HRD Rig Control).
+Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
+Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
+RIG	STOTIS
+Disconnected	Atsijungta
+Connect	Prisijungti
+Disconnect	Atsijungti
+Location of rigctld.exe (Hamlib)	rigctld.exe (Hamlib) vieta
+Programs (*.exe)|*.exe	Programos (*.exe)|*.exe
+Please choose a rig model.	Pasirinkite stoties modelį.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Netinkamas CI-V adresas (pvz., 70 modeliui IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) nerastas. Nurodykite jo vietą mygtuku „…“ arba įdiekite Hamlib (nemokamai).\n\nAtidaryti Hamlib atsisiuntimo puslapį?
+Please choose the rig's COM port.	Pasirinkite stoties COM prievadą.
+Cannot start rigctld: 	Nepavyksta paleisti rigctld: 
+TX safety timeout (PTT button)	TX saugos laikmatis (mygtukas PTT)
+Off	Išjungta
+PTT: connect the rig first	PTT: pirmiausia prijunkite stotį
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Netinkamas dažnis: įveskite reikšmę kHz, pvz., 7074 arba 14074.5
+Remove this value (pick it in the list first)	Šalinti šią reikšmę (pirmiausia pasirinkite ją sąraše)
+RIG 	STOTIS 
+Cannot start WebView2 (Edge):\n	Nepavyksta paleisti WebView2 (Edge):\n
+Invalid address: 	Netinkamas adresas: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kabelis: virtualus garso kabelis nerastas. Įdiekite VB-CABLE (nemokamai): mygtukas „SDRLINK kabelis“.
+Output receiving the WebSDR audio:	Išvestis, gaunanti WebSDR garsą:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Kitą kabelio galą pavadinti „SDRLINK“ (pirmiausia pasirinkite virtualų kabelį)
+Download VB-CABLE (free, vb-audio.com)…	Atsisiųsti VB-CABLE (nemokamai, vb-audio.com)…
+permission denied	prieiga uždrausta
+error	klaida
+SDRLINK cable	SDRLINK kabelis
+ (off) ▾	 (išj.) ▾
+Mute TRX: connect the rig first	Nutildyti TRX: pirmiausia prijunkite stotį
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Stoties garsumas nepasiekiamas su šia stotimi ar sąsaja (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Siuntimas automatiškai sustabdytas po {0} (saugos laikmatis; norėdami pakeisti, spustelėkite PTT dešiniuoju mygtuku)
+Remove "{0}" from the list	Šalinti „{0}“ iš sąrašo
+Remove all ({0} values)	Šalinti viską (reikšmių: {0})
+Remove all {0} frequencies from the list?	Šalinti visus dažnius iš sąrašo ({0})?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}“ neatrodo kaip virtualus kabelis: WebSDR garsas ten bus grojamas nuolat (ir transliuojamas eteryje, jei tai stoties siuntimo garso plokštė).\n\nVis tiek naudoti šią išvestį?
+Name the other end of the cable "SDRLINK" ("{0}")…	Kitą kabelio galą pavadinti „SDRLINK“ („{0}“)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Šis kabelis jau pervardytas į „{0}“: galbūt jį jau naudoja kita programinė įranga (VoiceMeeter…). Pervardijus jį į „{1}“, toje programinėje įrangoje jį reikės pasirinkti iš naujo.\n\nTęsti?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Įrašymo įrenginys „{0}“ bus pervardytas į „{1}“.\n\nŠiuo pavadinimu jis bus rodomas WSJT-X, JTDX, fldigi… garso įvestyse (paleiskite jas iš naujo). Windows gali paprašyti administratoriaus leidimo.\n\nTęsti?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Atlikta: garso įvestis dabar vadinasi „{0}“. Paleiskite WSJT-X iš naujo, kad ją matytumėte.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pervardyti nepavyko ({0}).\n\nRankiniu būdu: Garso valdymo skydas › skirtukas Įrašymas › „{1}“ › Ypatybės › pavadinimas.
+SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR garsas siunčiamas į „{0}“
+SDRLINK cable: "{0}": {1}	SDRLINK kabelis: „{0}“: {1}
+This page is already in "{0}".	Šis puslapis jau yra sąraše „{0}“.
+Add favorite to "{0}"	Įtraukti į sąrašą „{0}“
+This page is not in "{0}".	Šio puslapio nėra sąraše „{0}“.
+Remove "{0}" from "{1}"?	Šalinti „{0}“ iš „{1}“?
+Interface:	Sąsaja:
+Brand:	Gamintojas:
+Model:	Modelis:
+Port:	Prievadas:
+Baud rate:	Sparta (bod):
+Stop bits:	Stop bitai:
+CI-V address (hex):	CI-V adresas (hex):
+OmniRig rig:	OmniRig stotis:
+Host:	Serveris:
+TX detection (HRD):	TX aptikimas (HRD):
+Hamlib model no.:	Hamlib modelio nr.:
+Language:	Kalba:
+Sync:	Sinchr.:
+WebSDR offset (Hz):	WebSDR poslinkis (Hz):
+restore after (ms):	atkurti po (ms):
+kHz:	kHz:
+Step:	Žingsnis:
+WebSDR:	WebSDR:
+Volume:	Garsumas:
+TRX volume:	TRX garsumas:
+Open log	Atidaryti žurnalą
+…	…
+Download Hamlib…	Atsisiųsti Hamlib…
+SDRLINK cable ▾	SDRLINK kabelis ▾
+QSY	QSY
+Save	Įrašyti
+Go	Eiti
+◀ Back	◀ Atgal
+Reload	Įkelti iš naujo
+★ Add to favorites	★ Į parankinius
+Remove from favorites	Šalinti iš parankinių
+Manage favorites…	Tvarkyti parankinius…
+Find WebSDRs…	Ieškoti WebSDR…
+Mute WebSDR	Nutildyti WebSDR
+Mute TRX	Nutildyti TRX
+Auto-connect at startup	Autom. jungtis paleidžiant
+Dark mode	Tamsus režimas
+RTS	RTS
+DTR	DTR
+Start rigctld:	Paleisti rigctld:
+Sync mode	Sinchronizuoti režimą
+Mute WebSDR while transmitting	Nutildyti WebSDR siunčiant
+Auto notch (DNF)	Autom. notch (DNF)
+Compact view	Kompaktiškas rodinys
+Always on top	Visada viršuje
+COM port (direct CAT)	COM prievadas (tiesioginis CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	Mygtukai MOX/TX/PTT
+MOX/VOX/TX/PTT buttons	Mygtukai MOX/VOX/TX/PTT
+Both ways	Abiem kryptimis
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig neįdiegtas (OmniRig.OmniRigX nerastas).
+Dark mode colour	Tamsaus režimo spalva
+Light mode colour	Šviesaus režimo spalva
+Default	Numatytoji
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink reikia Microsoft .NET Framework 4.6.2 arba naujesnės versijos (rekomenduojama 4.8).\nŠiame kompiuteryje ji neįdiegta.\n\nAtsisiųsti ir įdiegti .NET Framework 4.8 dabar?\n(gali reikėti paleisti kompiuterį iš naujo, tada vėl paleiskite SDRLink)
+SDRLink - missing component	SDRLink - trūksta komponento
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink reikia Microsoft Edge WebView2 Runtime, kad būtų rodomi WebSDR.\nŠiame kompiuteryje jis neįdiegtas.\n\nAtsisiųsti ir įdiegti WebView2 dabar? (nemokamai, apie 2 MB)
+Download or installation failed:\n	Nepavyko atsisiųsti arba įdiegti:\n
+\n\nThe official download page will open:\n	\n\nBus atidarytas oficialus atsisiuntimo puslapis:\n
+Connecting...	Jungiamasi...
+Connected, waiting for the rig...	Prisijungta, laukiama stoties...
+Rig online	Stotis prisijungusi
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stotis neatsako (patikrinkite prievadą, spartą, CI-V adresą, CAT meniu)
+Error: 	Klaida: 
+No TCI server at 	Nėra TCI serverio adresu 
+TCI connection lost	TCI ryšys nutrūko
+unavailable	nepasiekiama
+unexpected format	netikėtas formatas
+Find WebSDRs (France and neighbouring countries)	Ieškoti WebSDR (Prancūzija ir kaimyninės šalys)
+All	Visi
+Hide those already in favorites	Slėpti jau esančius parankiniuose
+Max distance from the centre of France (km):	Didž. atstumas nuo Prancūzijos centro (km):
+Filter:	Filtras:
+Type:	Tipas:
+Location	Vieta
+Country	Šalis
+Users	Naud.
+Listen to selection	Klausyti pasirinkto
+Add checked to favorites	Pažymėtus į parankinius
+Refresh	Atnaujinti
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Ieškoma kataloguose (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Pirmiausia sąraše pasirinkite imtuvą.
+{0} receiver(s) shown, {1} checked   —   sources: 	Rodoma imtuvų: {0}, pažymėta: {1}   —   šaltiniai: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Įtraukta parankinių: {0}. Juos galite pervardyti lange „Tvarkyti parankinius…“.

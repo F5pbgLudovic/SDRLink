@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -43,7 +43,7 @@ namespace SDRLink
             client.NoDelay = true;
             IAsyncResult ar = client.BeginConnect(host, port, null, null);
             if (!ar.AsyncWaitHandle.WaitOne(5000) || !client.Connected)
-                throw new Exception(Lang.T("Pas de serveur HRD sur ", "No HRD server at ") + host + ":" + port + Lang.T(" (activez le serveur IP dans HRD Rig Control).", " (enable the IP server in HRD Rig Control)."));
+                throw new Exception(Lang.F("Pas de serveur HRD sur {0}:{1} (activez le serveur IP dans HRD Rig Control).", "No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).", host, port));
             client.EndConnect(ar);
             client.ReceiveTimeout = 3000;
             stream = client.GetStream();

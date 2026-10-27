@@ -1,0 +1,208 @@
+output not found	ieșire negăsită
+output already used in exclusive mode by another program	ieșire deja folosită în mod exclusiv de alt program
+cannot open, error 	nu se poate deschide, eroare 
+Name:	Nume:
+Address:	Adresă:
+Cancel	Anulare
+Please enter a name and an address.	Introduceți un nume și o adresă.
+Rename list	Redenumire listă
+Favorite manager	Gestionare favorite
+Add favorite…	Adăugare favorit…
+Import…	Import…
+Export…	Export…
+Selected / checked items	Elemente selectate / bifate
+Remove…	Eliminare…
+Rename…	Redenumire…
+Move up	Mutare sus
+Move down	Mutare jos
+Check	Verificare
+Check favorites	Verificare favorite
+Check all	Bifează tot
+Uncheck all	Debifează tot
+List:	Listă:
+Move to ▸	Mutare în ▸
+(right-click the list to rename it)	(clic dreapta pe listă pentru a o redenumi)
+Name	Nume
+Address	Adresă
+Status	Stare
+List	Listă
+Open	Deschidere
+Close	Închidere
+All lists	Toate listele
+Please select a favorite in the list first.	Selectați mai întâi un favorit din listă.
+Add favorite	Adăugare favorit
+checking…	verificare…
+OK	OK
+invalid address	adresă nevalidă
+answers	răspunde
+not found	negăsit
+answers (certificate)	răspunde (certificat)
+no answer	nu răspunde
+unknown host	gazdă necunoscută
+connection refused	conexiune refuzată
+unreachable	inaccesibil
+Import favorites	Import favorite
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favorite (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Toate fișierele (*.*)|*.*
+Export favorites	Export favorite
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, compatibil Excel (*.csv)|*.csv|Marcaje browser (*.html)|*.html|Text (*.txt)|*.txt
+List {0}	Lista {0}
+Rename "{0}"…	Redenumire „{0}”…
+{0} favorite(s) moved to "{1}".	{0} favorit(e) mutat(e) în „{1}”.
+{0} favorite(s) shown, {1} checked	{0} favorit(e) afișat(e), {1} bifat(e)
+Remove favorite "{0}"?	Eliminați favoritul „{0}”?
+Remove the {0} checked favorites?	Eliminați cele {0} favorite bifate?
+duplicate of "{0}"	duplicat al „{0}”
+Checking {0} address(es)…	Verificare {0} adresă(e)…
+Checking… {0} left	Verificare… mai rămân {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Verificare terminată: {0} link(uri) inactiv(e), {1} duplicat(e) bifate. Faceți clic pe „Eliminare…” pentru a le șterge.
+{0} favorite(s) imported, {1} already present.	{0} favorit(e) importat(e), {1} deja existent(e).
+{0} favorite(s) exported.	{0} favorit(e) exportat(e).
+rigctld connection closed	Conexiune rigctld închisă
+stopped	oprit
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Niciun rigctld la {0}:{1} (porniți rigctld sau bifați „Pornire rigctld”).
+Invalid HRD answer	Răspuns HRD nevalid
+HRD connection closed	Conexiune HRD închisă
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Niciun server HRD la {0}:{1} (activați serverul IP în HRD Rig Control).
+Cannot open the log: 	Nu se poate deschide jurnalul: 
+Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
+RIG	STAȚIE
+Disconnected	Deconectat
+Connect	Conectare
+Disconnect	Deconectare
+Location of rigctld.exe (Hamlib)	Locația rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Programe (*.exe)|*.exe
+Please choose a rig model.	Alegeți un model de stație.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Adresă CI-V nevalidă (de ex. 70 pentru IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) nu a fost găsit. Indicați locația cu butonul „…” sau instalați Hamlib (gratuit).\n\nDeschideți pagina de descărcare Hamlib?
+Please choose the rig's COM port.	Alegeți portul COM al stației.
+Cannot start rigctld: 	Nu se poate porni rigctld: 
+TX safety timeout (PTT button)	Limită de siguranță TX (buton PTT)
+Off	Dezactivat
+PTT: connect the rig first	PTT: conectați mai întâi stația
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frecvență nevalidă: introduceți o valoare în kHz, de ex. 7074 sau 14074.5
+Remove this value (pick it in the list first)	Eliminare valoare (alegeți-o mai întâi din listă)
+RIG 	STAȚIE 
+Cannot start WebView2 (Edge):\n	Nu se poate porni WebView2 (Edge):\n
+Invalid address: 	Adresă nevalidă: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Cablu SDRLINK: nu s-a găsit niciun cablu audio virtual. Instalați VB-CABLE (gratuit): butonul „Cablu SDRLINK”.
+Output receiving the WebSDR audio:	Ieșirea care primește sunetul WebSDR:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Numește „SDRLINK” celălalt capăt al cablului (alegeți mai întâi un cablu virtual)
+Download VB-CABLE (free, vb-audio.com)…	Descărcare VB-CABLE (gratuit, vb-audio.com)…
+permission denied	permisiune refuzată
+error	eroare
+SDRLINK cable	Cablu SDRLINK
+ (off) ▾	 (oprit) ▾
+Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Emisie oprită automat după {0} (limită de siguranță, clic dreapta pe PTT pentru a o modifica)
+Remove "{0}" from the list	Eliminare „{0}” din listă
+Remove all ({0} values)	Eliminare toate ({0} valori)
+Remove all {0} frequencies from the list?	Eliminați toate cele {0} frecvențe din listă?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}” nu pare a fi un cablu virtual: sunetul WebSDR va fi redat acolo permanent (și emis, dacă este placa de sunet de emisie a unei stații).\n\nFolosiți totuși această ieșire?
+Name the other end of the cable "SDRLINK" ("{0}")…	Numește „SDRLINK” celălalt capăt al cablului („{0}”)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Acest cablu a fost deja redenumit „{0}”: poate fi deja folosit de alt program (VoiceMeeter…). Redenumirea în „{1}” va necesita selectarea lui din nou în acel program.\n\nContinuați?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Dispozitivul de înregistrare „{0}” va fi redenumit „{1}”.\n\nVa apărea cu acest nume în intrările audio din WSJT-X, JTDX, fldigi… (reporniți-le). Windows poate cere permisiune de administrator.\n\nContinuați?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gata: intrarea audio se numește acum „{0}”. Reporniți WSJT-X pentru a o vedea.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Redenumirea a eșuat ({0}).\n\nManual: Panou de control Sunet › fila Înregistrare › „{1}” › Proprietăți › nume.
+SDRLINK cable: WebSDR audio sent to "{0}"	Cablu SDRLINK: sunetul WebSDR trimis la „{0}”
+SDRLINK cable: "{0}": {1}	Cablu SDRLINK: „{0}”: {1}
+This page is already in "{0}".	Această pagină este deja în „{0}”.
+Add favorite to "{0}"	Adăugare favorit în „{0}”
+This page is not in "{0}".	Această pagină nu este în „{0}”.
+Remove "{0}" from "{1}"?	Eliminați „{0}” din „{1}”?
+Interface:	Interfață:
+Brand:	Marcă:
+Model:	Model:
+Port:	Port:
+Baud rate:	Viteză:
+Stop bits:	Biți de stop:
+CI-V address (hex):	Adresă CI-V (hex):
+OmniRig rig:	Stație OmniRig:
+Host:	Gazdă:
+TX detection (HRD):	Detecție TX (HRD):
+Hamlib model no.:	Nr. model Hamlib:
+Language:	Limbă:
+Sync:	Sincr.:
+WebSDR offset (Hz):	Decalaj WebSDR (Hz):
+restore after (ms):	revenire după (ms):
+kHz:	kHz:
+Step:	Pas:
+WebSDR:	WebSDR:
+Volume:	Volum:
+TRX volume:	Volum TRX:
+Open log	Deschidere jurnal
+…	…
+Download Hamlib…	Descărcare Hamlib…
+SDRLINK cable ▾	Cablu SDRLINK ▾
+QSY	QSY
+Save	Salvare
+Go	Mergi
+◀ Back	◀ Înapoi
+Reload	Reîncărcare
+★ Add to favorites	★ Adăugare la favorite
+Remove from favorites	Eliminare din favorite
+Manage favorites…	Gestionare favorite…
+Find WebSDRs…	Căutare WebSDR…
+Mute WebSDR	Mut WebSDR
+Mute TRX	Mut TRX
+Auto-connect at startup	Conectare automată la pornire
+Dark mode	Mod întunecat
+RTS	RTS
+DTR	DTR
+Start rigctld:	Pornire rigctld:
+Sync mode	Sincronizare mod
+Mute WebSDR while transmitting	Mut WebSDR în emisie
+Auto notch (DNF)	Notch auto (DNF)
+Compact view	Vizualizare compactă
+Always on top	Mereu deasupra
+COM port (direct CAT)	Port COM (CAT direct)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	Butoane MOX/TX/PTT
+MOX/VOX/TX/PTT buttons	Butoane MOX/VOX/TX/PTT
+Both ways	Bidirecțional
+Rig → WebSDR	Stație → WebSDR
+WebSDR → Rig	WebSDR → Stație
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nu este instalat (OmniRig.OmniRigX negăsit).
+Dark mode colour	Culoare mod întunecat
+Light mode colour	Culoare mod luminos
+Default	Implicit
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink necesită Microsoft .NET Framework 4.6.2 sau mai nou (recomandat 4.8).\nNu este instalat pe acest PC.\n\nDescărcați și instalați .NET Framework 4.8 acum?\n(poate fi necesară o repornire, apoi porniți din nou SDRLink)
+SDRLink - missing component	SDRLink - componentă lipsă
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink necesită Microsoft Edge WebView2 Runtime pentru a afișa WebSDR-urile.\nNu este instalat pe acest PC.\n\nDescărcați și instalați WebView2 acum? (gratuit, circa 2 MB)
+Download or installation failed:\n	Descărcarea sau instalarea a eșuat:\n
+\n\nThe official download page will open:\n	\n\nSe va deschide pagina oficială de descărcare:\n
+Connecting...	Conectare...
+Connected, waiting for the rig...	Conectat, se așteaptă stația...
+Rig online	Stație online
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stația nu răspunde (verificați portul, viteza, adresa CI-V, meniul CAT)
+Error: 	Eroare: 
+No TCI server at 	Niciun server TCI la 
+TCI connection lost	Conexiune TCI pierdută
+unavailable	indisponibil
+unexpected format	format neașteptat
+Find WebSDRs (France and neighbouring countries)	Căutare WebSDR (Franța și țările vecine)
+All	Toate
+Hide those already in favorites	Ascunde cele deja în favorite
+Max distance from the centre of France (km):	Distanța max. față de centrul Franței (km):
+Filter:	Filtru:
+Type:	Tip:
+Location	Locație
+Country	Țară
+Users	Utiliz.
+Listen to selection	Ascultare selecție
+Add checked to favorites	Adăugare bifate la favorite
+Refresh	Reîmprospătare
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Căutare în directoare (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Selectați mai întâi un receptor din listă.
+{0} receiver(s) shown, {1} checked   —   sources: 	{0} receptor(i) afișat(i), {1} bifat(i)   —   surse: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favorit(e) adăugat(e). Le puteți redenumi în „Gestionare favorite…”.

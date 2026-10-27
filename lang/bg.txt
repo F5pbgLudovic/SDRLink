@@ -1,0 +1,208 @@
+output not found	изходът не е намерен
+output already used in exclusive mode by another program	изходът вече се използва в монополен режим от друга програма
+cannot open, error 	не може да се отвори, грешка 
+Name:	Име:
+Address:	Адрес:
+Cancel	Отказ
+Please enter a name and an address.	Въведете име и адрес.
+Rename list	Преименуване на списък
+Favorite manager	Управление на предпочитани
+Add favorite…	Добави в предпочитани…
+Import…	Импорт…
+Export…	Експорт…
+Selected / checked items	Избрани / отметнати елементи
+Remove…	Премахни…
+Rename…	Преименувай…
+Move up	Нагоре
+Move down	Надолу
+Check	Проверка
+Check favorites	Провери предпочитаните
+Check all	Отметни всички
+Uncheck all	Махни отметките
+List:	Списък:
+Move to ▸	Премести в ▸
+(right-click the list to rename it)	(десен клик върху списъка, за да го преименувате)
+Name	Име
+Address	Адрес
+Status	Състояние
+List	Списък
+Open	Отвори
+Close	Затвори
+All lists	Всички списъци
+Please select a favorite in the list first.	Първо изберете запис от списъка.
+Add favorite	Добавяне в предпочитани
+checking…	проверка…
+OK	OK
+invalid address	невалиден адрес
+answers	отговаря
+not found	не е намерен
+answers (certificate)	отговаря (сертификат)
+no answer	няма отговор
+unknown host	неизвестен хост
+connection refused	връзката е отказана
+unreachable	недостъпен
+Import favorites	Импорт на предпочитани
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Предпочитани (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Всички файлове (*.*)|*.*
+Export favorites	Експорт на предпочитани
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, за Excel (*.csv)|*.csv|Отметки на браузър (*.html)|*.html|Текст (*.txt)|*.txt
+List {0}	Списък {0}
+Rename "{0}"…	Преименувай „{0}“…
+{0} favorite(s) moved to "{1}".	Преместени записи в „{1}“: {0}.
+{0} favorite(s) shown, {1} checked	Показани записи: {0}, отметнати: {1}
+Remove favorite "{0}"?	Да се премахне ли „{0}“ от предпочитаните?
+Remove the {0} checked favorites?	Да се премахнат ли отметнатите записи ({0})?
+duplicate of "{0}"	дубликат на „{0}“
+Checking {0} address(es)…	Проверка на адреси: {0}…
+Checking… {0} left	Проверка… остават {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Проверката завърши, отметнати са: мъртви връзки – {0}, дубликати – {1}. Щракнете „Премахни…“, за да ги изтриете.
+{0} favorite(s) imported, {1} already present.	Импортирани записи: {0}, вече налични: {1}.
+{0} favorite(s) exported.	Експортирани записи: {0}.
+rigctld connection closed	Връзката с rigctld е затворена
+stopped	спрян
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Няма rigctld на {0}:{1} (стартирайте rigctld или отметнете „Старт rigctld“).
+Invalid HRD answer	Невалиден отговор от HRD
+HRD connection closed	Връзката с HRD е затворена
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Няма HRD сървър на {0}:{1} (включете IP сървъра в HRD Rig Control).
+Cannot open the log: 	Дневникът не може да се отвори: 
+Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
+RIG	РАДИО
+Disconnected	Няма връзка
+Connect	Свържи
+Disconnect	Прекъсни
+Location of rigctld.exe (Hamlib)	Местоположение на rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Програми (*.exe)|*.exe
+Please choose a rig model.	Изберете модел на трансивъра.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Невалиден CI-V адрес (напр. 70 за IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) не е намерен. Задайте местоположението му с бутона „…“ или инсталирайте Hamlib (безплатно).\n\nДа се отвори ли страницата за изтегляне на Hamlib?
+Please choose the rig's COM port.	Изберете COM порта на трансивъра.
+Cannot start rigctld: 	rigctld не може да се стартира: 
+TX safety timeout (PTT button)	Предпазен таймер за TX (бутон PTT)
+Off	Изкл.
+PTT: connect the rig first	PTT: първо свържете трансивъра
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Невалидна честота: въведете стойност в kHz, напр. 7074 или 14074.5
+Remove this value (pick it in the list first)	Премахни тази стойност (първо я изберете от списъка)
+RIG 	РАДИО 
+Cannot start WebView2 (Edge):\n	WebView2 (Edge) не може да се стартира:\n
+Invalid address: 	Невалиден адрес: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Кабел SDRLINK: не е намерен виртуален аудиокабел. Инсталирайте VB-CABLE (безплатно): бутон „Кабел SDRLINK“.
+Output receiving the WebSDR audio:	Изход, който получава звука от WebSDR:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Наименувай другия край на кабела „SDRLINK“ (първо изберете виртуален кабел)
+Download VB-CABLE (free, vb-audio.com)…	Изтегли VB-CABLE (безплатно, vb-audio.com)…
+permission denied	достъпът е отказан
+error	грешка
+SDRLINK cable	Кабел SDRLINK
+ (off) ▾	 (изкл.) ▾
+Mute TRX: connect the rig first	Без звук TRX: първо свържете трансивъра
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Силата на звука на трансивъра не е достъпна с този трансивър или интерфейс (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Предаването е спряно автоматично след {0} (предпазен таймер; десен клик върху PTT за промяна)
+Remove "{0}" from the list	Премахни „{0}“ от списъка
+Remove all ({0} values)	Премахни всички (стойности: {0})
+Remove all {0} frequencies from the list?	Да се премахнат ли всички честоти от списъка ({0})?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}“ не прилича на виртуален кабел: звукът от WebSDR ще се възпроизвежда там постоянно (и ще се излъчва, ако това е звуковата карта за предаване на трансивър).\n\nДа се използва ли все пак този изход?
+Name the other end of the cable "SDRLINK" ("{0}")…	Наименувай другия край на кабела „SDRLINK“ („{0}“)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Този кабел вече е преименуван на „{0}“: възможно е да се използва от друг софтуер (VoiceMeeter…). Ако го преименувате на „{1}“, ще трябва да го изберете отново в този софтуер.\n\nПродължаване?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Записващото устройство „{0}“ ще бъде преименувано на „{1}“.\n\nТо ще се показва с това име в аудиовходовете на WSJT-X, JTDX, fldigi… (рестартирайте ги). Windows може да поиска администраторско разрешение.\n\nПродължаване?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Готово: аудиовходът вече се казва „{0}“. Рестартирайте WSJT-X, за да го видите.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Преименуването не успя ({0}).\n\nРъчно: контролен панел Звук › раздел Записване › „{1}“ › Свойства › име.
+SDRLINK cable: WebSDR audio sent to "{0}"	Кабел SDRLINK: звукът от WebSDR се изпраща към „{0}“
+SDRLINK cable: "{0}": {1}	Кабел SDRLINK: „{0}“: {1}
+This page is already in "{0}".	Тази страница вече е в „{0}“.
+Add favorite to "{0}"	Добави запис в „{0}“
+This page is not in "{0}".	Тази страница не е в „{0}“.
+Remove "{0}" from "{1}"?	Да се премахне ли „{0}“ от „{1}“?
+Interface:	Интерфейс:
+Brand:	Марка:
+Model:	Модел:
+Port:	Порт:
+Baud rate:	Скорост:
+Stop bits:	Стоп битове:
+CI-V address (hex):	CI-V адрес (hex):
+OmniRig rig:	OmniRig трансивър:
+Host:	Хост:
+TX detection (HRD):	Откриване на TX (HRD):
+Hamlib model no.:	№ на модел Hamlib:
+Language:	Език:
+Sync:	Синхр.:
+WebSDR offset (Hz):	Отместване WebSDR (Hz):
+restore after (ms):	възстанови след (мс):
+kHz:	kHz:
+Step:	Стъпка:
+WebSDR:	WebSDR:
+Volume:	Звук:
+TRX volume:	Звук TRX:
+Open log	Отвори дневника
+…	…
+Download Hamlib…	Изтегли Hamlib…
+SDRLINK cable ▾	Кабел SDRLINK ▾
+QSY	QSY
+Save	Запис
+Go	Отиди
+◀ Back	◀ Назад
+Reload	Презареди
+★ Add to favorites	★ Добави в предпочитани
+Remove from favorites	Махни от предпочитани
+Manage favorites…	Управление на предпочитани…
+Find WebSDRs…	Търсене на WebSDR…
+Mute WebSDR	Без звук WebSDR
+Mute TRX	Без звук TRX
+Auto-connect at startup	Автосвързване при старт
+Dark mode	Тъмен режим
+RTS	RTS
+DTR	DTR
+Start rigctld:	Старт rigctld:
+Sync mode	Синхр. на режима
+Mute WebSDR while transmitting	Без звук WebSDR при предаване
+Auto notch (DNF)	Авто notch (DNF)
+Compact view	Компактен изглед
+Always on top	Винаги отгоре
+COM port (direct CAT)	COM порт (директен CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	Бутони MOX/TX/PTT
+MOX/VOX/TX/PTT buttons	Бутони MOX/VOX/TX/PTT
+Both ways	Двупосочно
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig не е инсталиран (OmniRig.OmniRigX не е намерен).
+Dark mode colour	Цвят на тъмния режим
+Light mode colour	Цвят на светлия режим
+Default	По подразбиране
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink изисква Microsoft .NET Framework 4.6.2 или по-нова версия (препоръчва се 4.8).\nТой не е инсталиран на този компютър.\n\nДа се изтегли и инсталира ли .NET Framework 4.8 сега?\n(може да е необходимо рестартиране, след което стартирайте SDRLink отново)
+SDRLink - missing component	SDRLink - липсващ компонент
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink изисква Microsoft Edge WebView2 Runtime, за да показва WebSDR.\nТой не е инсталиран на този компютър.\n\nДа се изтегли и инсталира ли WebView2 сега? (безплатно, около 2 MB)
+Download or installation failed:\n	Изтеглянето или инсталирането не успя:\n
+\n\nThe official download page will open:\n	\n\nЩе се отвори официалната страница за изтегляне:\n
+Connecting...	Свързване...
+Connected, waiting for the rig...	Свързан, изчакване на трансивъра...
+Rig online	Трансивърът е на линия
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Трансивърът не отговаря (проверете порта, скоростта, CI-V адреса, менюто CAT)
+Error: 	Грешка: 
+No TCI server at 	Няма TCI сървър на 
+TCI connection lost	Връзката с TCI е изгубена
+unavailable	недостъпно
+unexpected format	неочакван формат
+Find WebSDRs (France and neighbouring countries)	Търсене на WebSDR (Франция и съседни страни)
+All	Всички
+Hide those already in favorites	Скрий вече добавените в предпочитани
+Max distance from the centre of France (km):	Макс. разстояние от центъра на Франция (km):
+Filter:	Филтър:
+Type:	Тип:
+Location	Място
+Country	Държава
+Users	Потреб.
+Listen to selection	Слушай избрания
+Add checked to favorites	Добави отметнатите в предпочитани
+Refresh	Обнови
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Търсене в каталозите (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Първо изберете приемник от списъка.
+{0} receiver(s) shown, {1} checked   —   sources: 	Показани приемници: {0}, отметнати: {1}   —   източници: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Добавени записи: {0}. Можете да ги преименувате в „Управление на предпочитани…“.

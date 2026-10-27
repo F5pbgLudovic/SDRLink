@@ -1,0 +1,208 @@
+output not found	a kimenet nem található
+output already used in exclusive mode by another program	a kimenetet egy másik program már kizárólagos módban használja
+cannot open, error 	nem nyitható meg, hiba 
+Name:	Név:
+Address:	Cím:
+Cancel	Mégse
+Please enter a name and an address.	Adjon meg egy nevet és egy címet.
+Rename list	Lista átnevezése
+Favorite manager	Kedvencek kezelése
+Add favorite…	Kedvenc hozzáadása…
+Import…	Importálás…
+Export…	Exportálás…
+Selected / checked items	Kijelölt / bejelölt elemek
+Remove…	Eltávolítás…
+Rename…	Átnevezés…
+Move up	Feljebb
+Move down	Lejjebb
+Check	Ellenőrzés
+Check favorites	Kedvencek ellenőrzése
+Check all	Összes bejelölése
+Uncheck all	Jelölések törlése
+List:	Lista:
+Move to ▸	Áthelyezés ▸
+(right-click the list to rename it)	(az átnevezéshez kattintson jobb gombbal a listára)
+Name	Név
+Address	Cím
+Status	Állapot
+List	Lista
+Open	Megnyitás
+Close	Bezárás
+All lists	Összes lista
+Please select a favorite in the list first.	Először válasszon ki egy kedvencet a listában.
+Add favorite	Kedvenc hozzáadása
+checking…	ellenőrzés…
+OK	OK
+invalid address	érvénytelen cím
+answers	válaszol
+not found	nem található
+answers (certificate)	válaszol (tanúsítvány)
+no answer	nem válaszol
+unknown host	ismeretlen gazdagép
+connection refused	kapcsolat elutasítva
+unreachable	nem érhető el
+Import favorites	Kedvencek importálása
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Kedvencek (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Minden fájl (*.*)|*.*
+Export favorites	Kedvencek exportálása
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, Excellel olvasható (*.csv)|*.csv|Böngésző-könyvjelzők (*.html)|*.html|Szöveg (*.txt)|*.txt
+List {0}	Lista {0}
+Rename "{0}"…	„{0}” átnevezése…
+{0} favorite(s) moved to "{1}".	{0} kedvenc áthelyezve a(z) „{1}” listába.
+{0} favorite(s) shown, {1} checked	{0} kedvenc látható, {1} bejelölve
+Remove favorite "{0}"?	Eltávolítja a(z) „{0}” kedvencet?
+Remove the {0} checked favorites?	Eltávolítja a {0} bejelölt kedvencet?
+duplicate of "{0}"	ismétlődés: „{0}”
+Checking {0} address(es)…	{0} cím ellenőrzése…
+Checking… {0} left	Ellenőrzés… még {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Ellenőrzés kész: {0} halott link, {1} ismétlődés bejelölve. Az „Eltávolítás…” gombbal törölheti őket.
+{0} favorite(s) imported, {1} already present.	{0} kedvenc importálva, {1} már megvolt.
+{0} favorite(s) exported.	{0} kedvenc exportálva.
+rigctld connection closed	A rigctld-kapcsolat bezárult
+stopped	leállítva
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nincs rigctld itt: {0}:{1} (indítsa el a rigctld-t, vagy jelölje be a „rigctld indítása” opciót).
+Invalid HRD answer	Érvénytelen HRD-válasz
+HRD connection closed	A HRD-kapcsolat bezárult
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nincs HRD-szerver itt: {0}:{1} (engedélyezze az IP-szervert a HRD Rig Control programban).
+Cannot open the log: 	A napló nem nyitható meg: 
+Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
+RIG	RÁDIÓ
+Disconnected	Nincs kapcsolat
+Connect	Csatlakozás
+Disconnect	Bontás
+Location of rigctld.exe (Hamlib)	A rigctld.exe helye (Hamlib)
+Programs (*.exe)|*.exe	Programok (*.exe)|*.exe
+Please choose a rig model.	Válasszon rádiómodellt.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Érvénytelen CI-V cím (pl. 70 az IC-7000 esetén).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	A rigctld.exe (Hamlib) nem található. Adja meg a helyét a „…” gombbal, vagy telepítse a Hamlibet (ingyenes).\n\nMegnyitja a Hamlib letöltési oldalát?
+Please choose the rig's COM port.	Válassza ki a rádió COM portját.
+Cannot start rigctld: 	A rigctld nem indítható: 
+TX safety timeout (PTT button)	TX biztonsági időkorlát (PTT gomb)
+Off	Ki
+PTT: connect the rig first	PTT: előbb csatlakoztassa a rádiót
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Érvénytelen frekvencia: adjon meg egy értéket kHz-ben, pl. 7074 vagy 14074.5
+Remove this value (pick it in the list first)	Érték eltávolítása (előbb válassza ki a listában)
+RIG 	RÁDIÓ 
+Cannot start WebView2 (Edge):\n	A WebView2 (Edge) nem indítható:\n
+Invalid address: 	Érvénytelen cím: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kábel: nem található virtuális audiokábel. Telepítse a VB-CABLE-t (ingyenes): „SDRLINK kábel” gomb.
+Output receiving the WebSDR audio:	A WebSDR hangját fogadó kimenet:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	A kábel másik végének elnevezése „SDRLINK” névre (előbb válasszon virtuális kábelt)
+Download VB-CABLE (free, vb-audio.com)…	VB-CABLE letöltése (ingyenes, vb-audio.com)…
+permission denied	hozzáférés megtagadva
+error	hiba
+SDRLINK cable	SDRLINK kábel
+ (off) ▾	 (ki) ▾
+Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Az adás automatikusan leállt ennyi idő után: {0} (biztonsági időkorlát, a módosításhoz kattintson jobb gombbal a PTT-re)
+Remove "{0}" from the list	„{0}” eltávolítása a listából
+Remove all ({0} values)	Összes eltávolítása ({0} érték)
+Remove all {0} frequencies from the list?	Eltávolítja a listából mind a {0} frekvenciát?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}” nem tűnik virtuális kábelnek: a WebSDR hangja folyamatosan ott fog szólni (és adásba kerül, ha ez egy rádió adási hangkártyája).\n\nMégis ezt a kimenetet használja?
+Name the other end of the cable "SDRLINK" ("{0}")…	A kábel másik végének elnevezése „SDRLINK” névre („{0}”)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Ez a kábel már át lett nevezve („{0}”): lehet, hogy már más szoftver használja (VoiceMeeter…). Ha átnevezi („{1}”), abban a szoftverben újra ki kell választani.\n\nFolytatja?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	A(z) „{0}” felvevőeszköz új neve „{1}” lesz.\n\nEzen a néven jelenik meg a WSJT-X, JTDX, fldigi… hangbemenetei között (indítsa újra őket). A Windows rendszergazdai engedélyt kérhet.\n\nFolytatja?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Kész: a hangbemenet neve mostantól „{0}”. Indítsa újra a WSJT-X programot, hogy megjelenjen.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Az átnevezés nem sikerült ({0}).\n\nKézzel: Hang vezérlőpult › Felvétel lap › „{1}” › Tulajdonságok › név.
+SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kábel: a WebSDR hangja ide megy: „{0}”
+SDRLINK cable: "{0}": {1}	SDRLINK kábel: „{0}”: {1}
+This page is already in "{0}".	Ez az oldal már szerepel a(z) „{0}” listában.
+Add favorite to "{0}"	Kedvenc hozzáadása a(z) „{0}” listához
+This page is not in "{0}".	Ez az oldal nem szerepel a(z) „{0}” listában.
+Remove "{0}" from "{1}"?	Eltávolítja a(z) „{0}” elemet a(z) „{1}” listából?
+Interface:	Interfész:
+Brand:	Gyártó:
+Model:	Modell:
+Port:	Port:
+Baud rate:	Sebesség:
+Stop bits:	Stopbitek:
+CI-V address (hex):	CI-V cím (hex):
+OmniRig rig:	OmniRig rádió:
+Host:	Gazdagép:
+TX detection (HRD):	TX-érzékelés (HRD):
+Hamlib model no.:	Hamlib modellszám:
+Language:	Nyelv:
+Sync:	Szinkron:
+WebSDR offset (Hz):	WebSDR eltolás (Hz):
+restore after (ms):	visszaállítás (ms):
+kHz:	kHz:
+Step:	Lépés:
+WebSDR:	WebSDR:
+Volume:	Hangerő:
+TRX volume:	TRX hangerő:
+Open log	Napló megnyitása
+…	…
+Download Hamlib…	Hamlib letöltése…
+SDRLINK cable ▾	SDRLINK kábel ▾
+QSY	QSY
+Save	Mentés
+Go	Ugrás
+◀ Back	◀ Vissza
+Reload	Újratöltés
+★ Add to favorites	★ Hozzáadás a kedvencekhez
+Remove from favorites	Eltávolítás a kedvencekből
+Manage favorites…	Kedvencek kezelése…
+Find WebSDRs…	WebSDR-ek keresése…
+Mute WebSDR	WebSDR némítás
+Mute TRX	TRX némítás
+Auto-connect at startup	Automatikus csatlakozás indításkor
+Dark mode	Sötét mód
+RTS	RTS
+DTR	DTR
+Start rigctld:	rigctld indítása:
+Sync mode	Üzemmód szinkronizálása
+Mute WebSDR while transmitting	WebSDR némítása adás közben
+Auto notch (DNF)	Auto notch (DNF)
+Compact view	Kompakt nézet
+Always on top	Mindig felül
+COM port (direct CAT)	COM port (közvetlen CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	MOX/TX/PTT gombok
+MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT gombok
+Both ways	Kétirányú
+Rig → WebSDR	Rádió → WebSDR
+WebSDR → Rig	WebSDR → Rádió
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	Az OmniRig nincs telepítve (az OmniRig.OmniRigX nem található).
+Dark mode colour	Sötét mód színe
+Light mode colour	Világos mód színe
+Default	Alapértelmezett
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	Az SDRLink működéséhez Microsoft .NET Framework 4.6.2 vagy újabb szükséges (4.8 ajánlott).\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a .NET Framework 4.8-at?\n(újraindításra lehet szükség, utána indítsa el újra az SDRLinket)
+SDRLink - missing component	SDRLink - hiányzó összetevő
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Az SDRLinknek a WebSDR-ek megjelenítéséhez szüksége van a Microsoft Edge WebView2 Runtime összetevőre.\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a WebView2-t? (ingyenes, kb. 2 MB)
+Download or installation failed:\n	A letöltés vagy a telepítés nem sikerült:\n
+\n\nThe official download page will open:\n	\n\nMegnyílik a hivatalos letöltési oldal:\n
+Connecting...	Csatlakozás...
+Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
+Rig online	Rádió online
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	A rádió nem válaszol (ellenőrizze a portot, a sebességet, a CI-V címet, a CAT menüt)
+Error: 	Hiba: 
+No TCI server at 	Nincs TCI-szerver itt: 
+TCI connection lost	A TCI-kapcsolat megszakadt
+unavailable	nem elérhető
+unexpected format	váratlan formátum
+Find WebSDRs (France and neighbouring countries)	WebSDR-ek keresése (Franciaország és szomszédos országok)
+All	Mind
+Hide those already in favorites	A már kedvencek közt lévők elrejtése
+Max distance from the centre of France (km):	Max. távolság Franciaország közepétől (km):
+Filter:	Szűrő:
+Type:	Típus:
+Location	Hely
+Country	Ország
+Users	Felh.
+Listen to selection	Kijelölt hallgatása
+Add checked to favorites	Bejelöltek a kedvencekhez
+Refresh	Frissítés
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Keresés a címtárakban (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Először válasszon ki egy vevőt a listában.
+{0} receiver(s) shown, {1} checked   —   sources: 	{0} vevő látható, {1} bejelölve   —   források: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} kedvenc hozzáadva. Átnevezheti őket a „Kedvencek kezelése…” menüpontban.

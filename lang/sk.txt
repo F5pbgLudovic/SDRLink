@@ -1,0 +1,208 @@
+output not found	výstup sa nenašiel
+output already used in exclusive mode by another program	výstup už používa iný program vo výhradnom režime
+cannot open, error 	nedá sa otvoriť, chyba 
+Name:	Názov:
+Address:	Adresa:
+Cancel	Zrušiť
+Please enter a name and an address.	Zadajte názov a adresu.
+Rename list	Premenovať zoznam
+Favorite manager	Správca obľúbených
+Add favorite…	Pridať obľúbené…
+Import…	Importovať…
+Export…	Exportovať…
+Selected / checked items	Vybrané / začiarknuté položky
+Remove…	Odstrániť…
+Rename…	Premenovať…
+Move up	Posunúť nahor
+Move down	Posunúť nadol
+Check	Kontrola
+Check favorites	Skontrolovať obľúbené
+Check all	Začiarknuť všetko
+Uncheck all	Odčiarknuť všetko
+List:	Zoznam:
+Move to ▸	Presunúť do ▸
+(right-click the list to rename it)	(zoznam premenujete kliknutím pravým tlačidlom)
+Name	Názov
+Address	Adresa
+Status	Stav
+List	Zoznam
+Open	Otvoriť
+Close	Zavrieť
+All lists	Všetky zoznamy
+Please select a favorite in the list first.	Najprv vyberte obľúbenú položku v zozname.
+Add favorite	Pridať obľúbené
+checking…	kontrola…
+OK	OK
+invalid address	neplatná adresa
+answers	odpovedá
+not found	nenašlo sa
+answers (certificate)	odpovedá (certifikát)
+no answer	bez odpovede
+unknown host	neznámy hostiteľ
+connection refused	spojenie odmietnuté
+unreachable	nedostupné
+Import favorites	Importovať obľúbené
+Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Obľúbené (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Všetky súbory (*.*)|*.*
+Export favorites	Exportovať obľúbené
+CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, čitateľné v Exceli (*.csv)|*.csv|Záložky prehliadača (*.html)|*.html|Text (*.txt)|*.txt
+List {0}	Zoznam {0}
+Rename "{0}"…	Premenovať „{0}“…
+{0} favorite(s) moved to "{1}".	Obľúbené položky presunuté do „{1}“: {0}.
+{0} favorite(s) shown, {1} checked	Zobrazené obľúbené: {0}, začiarknuté: {1}
+Remove favorite "{0}"?	Odstrániť obľúbenú položku „{0}“?
+Remove the {0} checked favorites?	Odstrániť začiarknuté obľúbené položky ({0})?
+duplicate of "{0}"	duplikát „{0}“
+Checking {0} address(es)…	Kontrola adries ({0})…
+Checking… {0} left	Kontrola… zostáva: {0}
+Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Kontrola dokončená. Začiarknuté – nefunkčné odkazy: {0}, duplikáty: {1}. Vymažete ich tlačidlom „Odstrániť…“.
+{0} favorite(s) imported, {1} already present.	Importované obľúbené: {0}, už existujúce: {1}.
+{0} favorite(s) exported.	Exportované obľúbené: {0}.
+rigctld connection closed	Spojenie s rigctld ukončené
+stopped	zastavené
+No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Na {0}:{1} nebeží rigctld (spustite rigctld alebo začiarknite „Spustiť rigctld“).
+Invalid HRD answer	Neplatná odpoveď HRD
+HRD connection closed	Spojenie s HRD ukončené
+No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} nie je server HRD (povoľte IP server v HRD Rig Control).
+Cannot open the log: 	Nedá sa otvoriť denník: 
+Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
+RIG	TRX
+Disconnected	Odpojené
+Connect	Pripojiť
+Disconnect	Odpojiť
+Location of rigctld.exe (Hamlib)	Umiestnenie rigctld.exe (Hamlib)
+Programs (*.exe)|*.exe	Programy (*.exe)|*.exe
+Please choose a rig model.	Vyberte model transceivera.
+Invalid CI-V address (e.g. 70 for the IC-7000).	Neplatná adresa CI-V (napr. 70 pre IC-7000).
+rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) sa nenašiel. Nastavte jeho umiestnenie tlačidlom „…“ alebo nainštalujte Hamlib (zadarmo).\n\nOtvoriť stránku na stiahnutie Hamlib?
+Please choose the rig's COM port.	Vyberte COM port transceivera.
+Cannot start rigctld: 	Nedá sa spustiť rigctld: 
+TX safety timeout (PTT button)	Bezpečnostný časový limit TX (tlačidlo PTT)
+Off	Vyp.
+PTT: connect the rig first	PTT: najprv pripojte transceiver
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Neplatná frekvencia: zadajte hodnotu v kHz, napr. 7074 alebo 14074.5
+Remove this value (pick it in the list first)	Odstrániť túto hodnotu (najprv ju vyberte v zozname)
+RIG 	TRX 
+Cannot start WebView2 (Edge):\n	Nedá sa spustiť WebView2 (Edge):\n
+Invalid address: 	Neplatná adresa: 
+SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Kábel SDRLINK: nenašiel sa žiadny virtuálny audio kábel. Nainštalujte VB-CABLE (zadarmo): tlačidlo „Kábel SDRLINK“.
+Output receiving the WebSDR audio:	Výstup prijímajúci zvuk WebSDR:
+Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Pomenovať druhý koniec kábla „SDRLINK“ (najprv vyberte virtuálny kábel)
+Download VB-CABLE (free, vb-audio.com)…	Stiahnuť VB-CABLE (zadarmo, vb-audio.com)…
+permission denied	prístup odmietnutý
+error	chyba
+SDRLINK cable	Kábel SDRLINK
+ (off) ▾	 (vyp.) ▾
+Mute TRX: connect the rig first	Stlmiť TRX: najprv pripojte transceiver
+Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním (OmniRig, HRD, FT-817/818…)
+Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Vysielanie automaticky zastavené po {0} (bezpečnostný limit, zmeníte ho kliknutím pravým tlačidlom na PTT)
+Remove "{0}" from the list	Odstrániť „{0}“ zo zoznamu
+Remove all ({0} values)	Odstrániť všetko (hodnoty: {0})
+Remove all {0} frequencies from the list?	Odstrániť zo zoznamu všetky frekvencie ({0})?
+"{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}“ nevyzerá ako virtuálny kábel: zvuk WebSDR sa tam bude prehrávať neustále (a vysielať, ak ide o vysielaciu zvukovú kartu transceivera).\n\nNapriek tomu použiť tento výstup?
+Name the other end of the cable "SDRLINK" ("{0}")…	Pomenovať druhý koniec kábla „SDRLINK“ („{0}“)…
+This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Tento kábel už bol premenovaný na „{0}“: možno ho už používa iný softvér (VoiceMeeter…). Po premenovaní na „{1}“ ho bude nutné v tomto softvéri vybrať znova.\n\nPokračovať?
+The recording device "{0}" will be renamed "{1}".\n\nIt will show under this name in the audio inputs of WSJT-X, JTDX, fldigi… (restart them). Windows may ask for administrator permission.\n\nContinue?	Záznamové zariadenie „{0}“ bude premenované na „{1}“.\n\nPod týmto názvom sa zobrazí vo zvukových vstupoch WSJT-X, JTDX, fldigi… (reštartujte ich). Systém Windows môže požiadať o povolenie správcu.\n\nPokračovať?
+Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Hotovo: zvukový vstup sa teraz volá „{0}“. Reštartujte WSJT-X, aby sa zobrazil.
+Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Premenovanie zlyhalo ({0}).\n\nRučne: Ovládací panel Zvuk › karta Nahrávanie › „{1}“ › Vlastnosti › názov.
+SDRLINK cable: WebSDR audio sent to "{0}"	Kábel SDRLINK: zvuk WebSDR sa odosiela do „{0}“
+SDRLINK cable: "{0}": {1}	Kábel SDRLINK: „{0}“: {1}
+This page is already in "{0}".	Táto stránka už je v „{0}“.
+Add favorite to "{0}"	Pridať obľúbené do „{0}“
+This page is not in "{0}".	Táto stránka nie je v „{0}“.
+Remove "{0}" from "{1}"?	Odstrániť „{0}“ z „{1}“?
+Interface:	Rozhranie:
+Brand:	Značka:
+Model:	Model:
+Port:	Port:
+Baud rate:	Rýchlosť:
+Stop bits:	Stop bity:
+CI-V address (hex):	Adresa CI-V (hex):
+OmniRig rig:	TRX OmniRig:
+Host:	Hostiteľ:
+TX detection (HRD):	Detekcia TX (HRD):
+Hamlib model no.:	Č. modelu Hamlib:
+Language:	Jazyk:
+Sync:	Synchr.:
+WebSDR offset (Hz):	Posun WebSDR (Hz):
+restore after (ms):	obnoviť po (ms):
+kHz:	kHz:
+Step:	Krok:
+WebSDR:	WebSDR:
+Volume:	Hlasitosť:
+TRX volume:	Hlasitosť TRX:
+Open log	Otvoriť denník
+…	…
+Download Hamlib…	Stiahnuť Hamlib…
+SDRLINK cable ▾	Kábel SDRLINK ▾
+QSY	QSY
+Save	Uložiť
+Go	Prejsť
+◀ Back	◀ Späť
+Reload	Znova načítať
+★ Add to favorites	★ Pridať do obľúbených
+Remove from favorites	Odstrániť z obľúbených
+Manage favorites…	Spravovať obľúbené…
+Find WebSDRs…	Nájsť WebSDR…
+Mute WebSDR	Stlmiť WebSDR
+Mute TRX	Stlmiť TRX
+Auto-connect at startup	Automaticky pripojiť pri štarte
+Dark mode	Tmavý režim
+RTS	RTS
+DTR	DTR
+Start rigctld:	Spustiť rigctld:
+Sync mode	Synchronizovať mód
+Mute WebSDR while transmitting	Stlmiť WebSDR pri vysielaní
+Auto notch (DNF)	Automatický notch (DNF)
+Compact view	Kompaktné zobrazenie
+Always on top	Vždy navrchu
+COM port (direct CAT)	COM port (priamy CAT)
+OmniRig	OmniRig
+TCI	TCI
+Ham Radio Deluxe	Ham Radio Deluxe
+Hamlib (rigctld)	Hamlib (rigctld)
+MOX/TX/PTT buttons	Tlačidlá MOX/TX/PTT
+MOX/VOX/TX/PTT buttons	Tlačidlá MOX/VOX/TX/PTT
+Both ways	Obojsmerne
+Rig → WebSDR	TRX → WebSDR
+WebSDR → Rig	WebSDR → TRX
+100 Hz	100 Hz
+250 Hz	250 Hz
+500 Hz	500 Hz
+1 kHz	1 kHz
+2.5 kHz	2,5 kHz
+5 kHz	5 kHz
+10 kHz	10 kHz
+OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nie je nainštalovaný (OmniRig.OmniRigX sa nenašiel).
+Dark mode colour	Farba tmavého režimu
+Light mode colour	Farba svetlého režimu
+Default	Predvolené
+SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink vyžaduje Microsoft .NET Framework 4.6.2 alebo novší (odporúča sa 4.8).\nNa tomto počítači nie je nainštalovaný.\n\nStiahnuť a nainštalovať .NET Framework 4.8 teraz?\n(môže byť potrebný reštart, potom SDRLink spustite znova)
+SDRLink - missing component	SDRLink - chýbajúci komponent
+SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink potrebuje na zobrazenie WebSDR modul Microsoft Edge WebView2 Runtime.\nNa tomto počítači nie je nainštalovaný.\n\nStiahnuť a nainštalovať WebView2 teraz? (zadarmo, asi 2 MB)
+Download or installation failed:\n	Stiahnutie alebo inštalácia zlyhala:\n
+\n\nThe official download page will open:\n	\n\nOtvorí sa oficiálna stránka na stiahnutie:\n
+Connecting...	Pripája sa...
+Connected, waiting for the rig...	Pripojené, čaká sa na transceiver...
+Rig online	Transceiver online
+The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Transceiver neodpovedá (skontrolujte port, rýchlosť, adresu CI-V, menu CAT)
+Error: 	Chyba: 
+No TCI server at 	Žiadny server TCI na 
+TCI connection lost	Spojenie TCI stratené
+unavailable	nedostupné
+unexpected format	neočakávaný formát
+Find WebSDRs (France and neighbouring countries)	Nájsť WebSDR (Francúzsko a susedné krajiny)
+All	Všetky
+Hide those already in favorites	Skryť tie, ktoré už sú v obľúbených
+Max distance from the centre of France (km):	Max. vzdialenosť od stredu Francúzska (km):
+Filter:	Filter:
+Type:	Typ:
+Location	Umiestnenie
+Country	Krajina
+Users	Použ.
+Listen to selection	Počúvať výber
+Add checked to favorites	Pridať začiarknuté do obľúbených
+Refresh	Obnoviť
+Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Prehľadávanie adresárov (websdr.org, KiwiSDR, ReceiverBook)…
+Please select a receiver in the list first.	Najprv vyberte prijímač v zozname.
+{0} receiver(s) shown, {1} checked   —   sources: 	Zobrazené prijímače: {0}, začiarknuté: {1}   —   zdroje: 
+{0} favorite(s) added. You can rename them in "Manage favorites…".	Pridané obľúbené: {0}. Môžete ich premenovať v „Spravovať obľúbené…“.

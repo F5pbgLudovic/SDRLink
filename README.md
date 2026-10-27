@@ -1,8 +1,8 @@
-﻿# SDRLink V1.3 — @F5PBG 2026
+# SDRLink V1.4 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
-- **Interfaces** : port COM (CAT direct), OmniRig, TCI, Ham Radio Deluxe.
+- **Interfaces** : port COM (CAT direct), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld).
 - **Postes** : Yaesu (FT-2000, FTdx10, FTdx101, FT-991, FT-817/818…), Icom (IC-7000, IC-7300, IC-7760, IC-706…), Kenwood, Elecraft, Xiegu (G90, X6100, X6200).
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
 - **Fonctions** :
@@ -10,7 +10,9 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
   - favoris avec vérification des liens, recherche des WebSDR proches de la France ;
   - volume du WebSDR et du poste ;
-  - mode sombre et palette, français et anglais.
+  - câble audio SDRLINK pour WSJT-X, notch automatique ;
+  - interface en 23 langues européennes ;
+  - mode sombre et palette.
 
 ## Télécharger
 
