@@ -27,14 +27,8 @@ namespace SDRLink
         // Même WebSDR si hôte, port et chemin sont identiques (sans tenir compte de ?tune=... ni de la casse).
         public bool Matches(string url)
         {
-            return Key(url) != null && Key(url) == Key(Url);
-        }
-
-        static string Key(string url)
-        {
-            Uri u;
-            if (!Uri.TryCreate((url ?? "").Trim(), UriKind.Absolute, out u)) return null;
-            return (u.Host + ":" + u.Port + u.AbsolutePath.TrimEnd('/')).ToLowerInvariant();
+            string k = WebSdrFinder.UrlKey(url);
+            return k != null && k == WebSdrFinder.UrlKey(Url);
         }
 
         public override string ToString() { return Name; }
@@ -141,7 +135,16 @@ namespace SDRLink
             txtUrl.Text = "-";
         }
 
-        public FavoriteEditDialog(string title, string name, string url)
+        public FavoriteEditDialog(string title, string name, string url) : this(title, name, url, null, 0, null) { }
+
+        readonly ComboBox cbList = new ComboBox();
+
+        // Liste de favoris choisie (seulement si la fenêtre propose le choix de la liste).
+        public int FavList { get { return Math.Max(0, cbList.SelectedIndex); } }
+
+        // Avec listNames : choix de la liste où enregistrer le favori. existsIn(adresse, liste) refuse
+        // une adresse déjà présente dans la liste choisie, la fenêtre restant ouverte.
+        public FavoriteEditDialog(string title, string name, string url, string[] listNames, int list, Func<string, int, bool> existsIn)
         {
             Text = title;
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -149,7 +152,8 @@ namespace SDRLink
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
             Font = new Font("Segoe UI", 9f);
-            ClientSize = new Size(480, 128);
+            int extra = listNames != null ? 34 : 0;
+            ClientSize = new Size(480, 128 + extra);
 
             Label l1 = new Label { Text = Lang.T("Nom :", "Name:"), Location = new Point(12, 16), AutoSize = true };
             Label l2 = new Label { Text = Lang.T("Adresse :", "Address:"), Location = new Point(12, 50), AutoSize = true };
@@ -159,21 +163,65 @@ namespace SDRLink
             txtUrl.Text = url;
             Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
             Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
-            ok.SetBounds(300, 88, 80, 28);
-            cancel.SetBounds(386, 88, 80, 28);
+            ok.SetBounds(300, 88 + extra, 80, 28);
+            cancel.SetBounds(386, 88 + extra, 80, 28);
             AcceptButton = ok;
             CancelButton = cancel;
             Controls.AddRange(new Control[] { l1, l2, txtName, txtUrl, ok, cancel });
+            if (listNames != null)
+            {
+                Label l3 = new Label { Text = Lang.T("Liste :", "List:"), Location = new Point(12, 84), AutoSize = true };
+                cbList.DropDownStyle = ComboBoxStyle.DropDownList;
+                cbList.SetBounds(90, 80, 200, 23);
+                for (int i = 0; i < Favorite.ListCount; i++) cbList.Items.Add(FavoritesDialog.ListLabel(listNames, i));
+                cbList.SelectedIndex = Math.Max(0, Math.Min(Favorite.ListCount - 1, list));
+                Controls.AddRange(new Control[] { l3, cbList });
+            }
             addressLabel = l2;
             Theme.Apply(this);
             FormClosing += delegate(object s, FormClosingEventArgs e)
             {
-                if (DialogResult == DialogResult.OK && (FavName == "" || FavUrl == ""))
+                if (DialogResult != DialogResult.OK) return;
+                if (FavName == "" || FavUrl == "")
                 {
                     MessageBox.Show(this, Lang.T("Indiquez un nom et une adresse.", "Please enter a name and an address."), "SDRLink");
                     e.Cancel = true;
                 }
+                else if (existsIn != null && existsIn(FavUrl, FavList))
+                {
+                    MessageBox.Show(this, Lang.F("Ce WebSDR est déjà dans « {0} ».", "This WebSDR is already in \"{0}\".", cbList.Text), "SDRLink");
+                    e.Cancel = true;
+                }
             };
+        }
+
+        // Choix d'une liste de favoris seule (ajout depuis la recherche). Retourne -1 si annulé.
+        public static int AskList(IWin32Window owner, string title, string[] listNames, int list)
+        {
+            using (Form f = new Form())
+            {
+                f.Text = title;
+                f.FormBorderStyle = FormBorderStyle.FixedDialog;
+                f.MaximizeBox = f.MinimizeBox = false;
+                f.ShowInTaskbar = false;
+                f.StartPosition = FormStartPosition.CenterParent;
+                f.Font = new Font("Segoe UI", 9f);
+                f.ClientSize = new Size(400, 92);
+                Label l = new Label { Text = Lang.T("Enregistrer dans la liste :", "Save to list:"), Location = new Point(12, 18), AutoSize = true };
+                ComboBox cb = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList };
+                cb.SetBounds(186, 14, 200, 23);
+                for (int i = 0; i < Favorite.ListCount; i++) cb.Items.Add(FavoritesDialog.ListLabel(listNames, i));
+                cb.SelectedIndex = Math.Max(0, Math.Min(Favorite.ListCount - 1, list));
+                Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
+                Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
+                ok.SetBounds(220, 52, 80, 28);
+                cancel.SetBounds(306, 52, 80, 28);
+                f.AcceptButton = ok;
+                f.CancelButton = cancel;
+                f.Controls.AddRange(new Control[] { l, cb, ok, cancel });
+                Theme.Apply(f);
+                return f.ShowDialog(owner) == DialogResult.OK ? cb.SelectedIndex : -1;
+            }
         }
     }
 
@@ -184,6 +232,7 @@ namespace SDRLink
         readonly List<Favorite> favs;
         readonly ListView view = new ListView();
         readonly Func<Favorite> currentPage;
+        readonly Action<string> listen;
         readonly TextBox txtName = new TextBox(), txtUrl = new TextBox();
         readonly Label lblStatus = new Label();
         readonly Button btnCheck;
@@ -222,10 +271,11 @@ namespace SDRLink
             }
         }
 
-        public FavoritesDialog(List<Favorite> favorites, Func<Favorite> currentPage, string[] listNames, int startList)
+        public FavoritesDialog(List<Favorite> favorites, Func<Favorite> currentPage, string[] listNames, int startList, Action<string> listen)
         {
             favs = favorites;
             this.currentPage = currentPage;
+            this.listen = listen;
             this.listNames = listNames;
             mainList = Math.Max(0, Math.Min(Favorite.ListCount - 1, startList));
             Text = Lang.T("Gestion des favoris", "Favorite manager");
@@ -313,14 +363,16 @@ namespace SDRLink
                 else if (e.KeyCode == Keys.Enter) OpenSelected();
             };
 
-            lblStatus.SetBounds(12, 593, 502, 40);
+            lblStatus.SetBounds(12, 593, 378, 40);
             lblStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            // Écoute dans la fenêtre principale sans fermer le gestionnaire, comme dans la recherche des WebSDR.
+            Button btnListen = Make(Lang.T("Écouter la sélection", "Listen to selection"), 396, 598, 120, 30, delegate { ListenSelected(); });
             Button open = Make(Lang.T("Ouvrir", "Open"), 522, 598, 80, 30, delegate { OpenSelected(); });
             Button close = Make(Lang.T("Fermer", "Close"), 608, 598, 80, 30, delegate { Close(); });
-            open.Anchor = close.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnListen.Anchor = open.Anchor = close.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CancelButton = close;
 
-            Controls.AddRange(new Control[] { add, imp, exp, sel, chk, lList, cbList, btnMove, hint, lName, txtName, lUrl, txtUrl, view, lblStatus, open, close });
+            Controls.AddRange(new Control[] { add, imp, exp, sel, chk, lList, cbList, btnMove, hint, lName, txtName, lUrl, txtUrl, view, lblStatus, btnListen, open, close });
             Theme.Apply(this);
             Refill(-1);
             ShowSelected();
@@ -472,13 +524,20 @@ namespace SDRLink
         {
             Favorite cur = currentPage();
             using (FavoriteEditDialog d = new FavoriteEditDialog(Lang.T("Ajouter un favori", "Add favorite"),
-                cur != null ? cur.Name : "", cur != null ? cur.Url : "http://"))
+                cur != null ? cur.Name : "", cur != null ? cur.Url : "http://", listNames, TargetList(mainList), InList))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
-                favs.Add(new Favorite(d.FavName, d.FavUrl) { List = TargetList(mainList) });
+                favs.Add(new Favorite(d.FavName, d.FavUrl) { List = d.FavList });
+                // Le nouveau favori n'est visible que si sa liste est affichée.
+                if (ShownList != AllLists && ShownList != d.FavList) cbList.SelectedIndex = d.FavList;
                 Refill(-1);
                 if (view.Items.Count > 0) { view.Items[view.Items.Count - 1].Selected = true; view.Items[view.Items.Count - 1].EnsureVisible(); }
             }
+        }
+
+        bool InList(string url, int list)
+        {
+            return favs.Exists(delegate(Favorite f) { return f.List == list && f.Matches(url); });
         }
 
         // Supprime les favoris cochés ; s'il n'y en a aucun, le favori sélectionné.
@@ -527,6 +586,12 @@ namespace SDRLink
             Refill(j);
         }
 
+        void ListenSelected()
+        {
+            if (!NeedSelection()) return;
+            listen(Selected.Url);
+        }
+
         void OpenSelected()
         {
             if (!NeedSelection()) return;
@@ -536,7 +601,7 @@ namespace SDRLink
 
         // ---------------------------------------------------------------- Vérification des liens et des doublons
 
-        // Doublons cochés tout de suite ; chaque adresse est ensuite interrogée en arrière-plan,
+        // Doublons supprimés tout de suite ; chaque adresse est ensuite interrogée en arrière-plan,
         // et celles qui ne répondent pas sont cochées pour une suppression manuelle.
         void VerifyAll()
         {
@@ -548,26 +613,26 @@ namespace SDRLink
             state.Clear();
             problem.Clear();
 
-            Dictionary<string, Favorite> firstByKey = new Dictionary<string, Favorite>();
+            // Doublons (même adresse dans la même liste) supprimés d'office : on garde le premier.
+            Dictionary<string, bool> seen = new Dictionary<string, bool>();
             List<Favorite> toTest = new List<Favorite>();
             int duplicates = 0;
             foreach (Favorite f in scope)
             {
                 string key = WebSdrFinder.UrlKey(f.Url);
-                Favorite first;
-                if (key != null && firstByKey.TryGetValue(key, out first))
+                if (key != null && seen.ContainsKey(key + "#" + f.List))
                 {
-                    state[f] = Lang.F("doublon de « {0} »", "duplicate of \"{0}\"", first.Name);
-                    checkedFavs[f] = true;
-                    problem[f] = true;
+                    favs.Remove(f);
+                    checkedFavs.Remove(f);
                     duplicates++;
                     continue;
                 }
-                if (key != null) firstByKey[key] = f;
+                if (key != null) seen[key + "#" + f.List] = true;
                 state[f] = Lang.T("vérification…", "checking…");
                 toTest.Add(f);
             }
-            Refill(SelectedIndex);
+            if (duplicates > 0) Log.Write("Vérification des favoris : " + duplicates + " doublon(s) supprimé(s)");
+            Refill(-1);
 
             int remaining = toTest.Count, dead = 0;
             lblStatus.Text = Lang.F("Vérification de {0} adresse(s)…", "Checking {0} address(es)…", remaining);
@@ -618,9 +683,9 @@ namespace SDRLink
             checking = false;
             btnCheck.Enabled = true;
             Refill(SelectedIndex);
-            lblStatus.Text = Lang.F("Vérification terminée : {0} lien(s) mort(s), {1} doublon(s) cochés. Cliquez sur « Supprimer… » pour les retirer.",
-                                    "Check done: {0} dead link(s), {1} duplicate(s) checked. Click \"Remove…\" to delete them.", dead, duplicates);
-            Log.Write("Vérification des favoris : " + dead + " lien(s) mort(s), " + duplicates + " doublon(s)");
+            lblStatus.Text = Lang.F("Vérification terminée : {1} doublon(s) supprimé(s), {0} lien(s) mort(s) cochés. Cliquez sur « Supprimer… » pour les retirer.",
+                                    "Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click \"Remove…\" to delete them.", dead, duplicates);
+            Log.Write("Vérification des favoris : " + dead + " lien(s) mort(s)");
         }
 
         // Le lien est "vivant" si le serveur répond, même par une erreur d'accès (401, 403...) ou un certificat imparfait :

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Net.WebSockets;
 using System.Text;
@@ -6,6 +6,107 @@ using System.Threading;
 
 namespace SDRLink
 {
+    // Liaison TCI permanente avec ExpertSDR pour sa coupure ("mute") et son volume ("volume", -60 à 0 dB), quand
+    // ExpertSDR ne passe pas par le son de Windows (son sorti par le poste lui-même, MB1, ou par ASIO).
+    // Connexion à part, à côté de celle du poste ; l'état est suivi en direct (réglages faits dans ExpertSDR compris).
+    public class ExpertSdrTci : IDisposable
+    {
+        ClientWebSocket ws;
+        volatile bool running;
+        readonly object sendLock = new object(), sync = new object();
+        bool? mute;
+        int volumeDb = int.MinValue;
+
+        // null si le serveur TCI ne répond pas.
+        public static ExpertSdrTci TryConnect(string host, int port)
+        {
+            ExpertSdrTci t = new ExpertSdrTci();
+            t.ws = new ClientWebSocket();
+            t.ws.Options.Proxy = null;   // liaison locale : pas de recherche de proxy (WPAD), qui peut prendre plusieurs secondes
+            try
+            {
+                // Hors du fil de l'interface : appelé depuis WinForms, Wait() sur l'opération réseau se bloquerait.
+                Uri uri = new Uri("ws://" + host + ":" + port + "/");
+                if (!System.Threading.Tasks.Task.Run(delegate { return t.ws.ConnectAsync(uri, CancellationToken.None); }).Wait(1500)
+                    || t.ws.State != WebSocketState.Open) { t.Dispose(); return null; }
+            }
+            catch (Exception) { t.Dispose(); return null; }
+            t.running = true;
+            new Thread(t.ReceiveLoop) { IsBackground = true }.Start();
+            t.Send("mute;");
+            t.Send("volume;");
+            return t;
+        }
+
+        public bool Connected { get { return running && ws != null && ws.State == WebSocketState.Open; } }
+
+        // État annoncé par ExpertSDR (null tant qu'il ne l'a pas donné).
+        public bool? Mute { get { lock (sync) return mute; } }
+
+        // Volume en % (même échelle que la liaison TCI du poste), -1 s'il n'est pas encore connu.
+        public int VolumePercent
+        {
+            get { lock (sync) return volumeDb == int.MinValue ? -1 : (int)Math.Round((Math.Max(-60, Math.Min(0, volumeDb)) + 60) * 100 / 60.0); }
+        }
+
+        public void SetMute(bool on)
+        {
+            lock (sync) mute = on;
+            Send("mute:" + (on ? "true" : "false") + ";");
+        }
+
+        public void SetVolumePercent(int percent)
+        {
+            int db = (int)Math.Round(Math.Max(0, Math.Min(100, percent)) * 60 / 100.0) - 60;
+            lock (sync) volumeDb = db;
+            Send("volume:" + db.ToString(CultureInfo.InvariantCulture) + ";");
+        }
+
+        void Send(string text)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(text);
+            try { lock (sendLock) System.Threading.Tasks.Task.Run(delegate { return ws.SendAsync(new ArraySegment<byte>(data), WebSocketMessageType.Text, true, CancellationToken.None); }).Wait(2000); }
+            catch (Exception) { running = false; }
+        }
+
+        void ReceiveLoop()
+        {
+            byte[] buf = new byte[65536];
+            StringBuilder msg = new StringBuilder();
+            try
+            {
+                while (running && ws.State == WebSocketState.Open)
+                {
+                    WebSocketReceiveResult r = ws.ReceiveAsync(new ArraySegment<byte>(buf), CancellationToken.None).Result;
+                    if (r.MessageType == WebSocketMessageType.Close) break;
+                    if (r.MessageType != WebSocketMessageType.Text) continue;
+                    msg.Append(Encoding.UTF8.GetString(buf, 0, r.Count));
+                    if (!r.EndOfMessage) continue;
+                    foreach (string cmd in msg.ToString().Split(';'))
+                    {
+                        string c = cmd.Trim().ToLowerInvariant();
+                        double db;
+                        if (c.StartsWith("mute:")) lock (sync) mute = c.Substring(5).Trim() == "true";
+                        else if (c.StartsWith("volume:") && double.TryParse(c.Substring(7), NumberStyles.Float, CultureInfo.InvariantCulture, out db))
+                            lock (sync) volumeDb = (int)Math.Round(db);
+                    }
+                    msg.Length = 0;
+                }
+            }
+            catch { }
+            running = false;
+        }
+
+        public void Dispose()
+        {
+            running = false;
+            if (ws == null) return;
+            ClientWebSocket w = ws;
+            try { if (w.State == WebSocketState.Open) System.Threading.Tasks.Task.Run(delegate { return w.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None); }).Wait(1000); } catch { }
+            w.Dispose();
+        }
+    }
+
     // Protocole TCI (Expert Electronics SunSDR, Thetis, ...) : WebSocket texte, commandes "nom:args;".
     public class TciRig : IRig
     {

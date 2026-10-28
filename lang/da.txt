@@ -4,7 +4,9 @@ cannot open, error 	kan ikke åbnes, fejl
 Name:	Navn:
 Address:	Adresse:
 Cancel	Annuller
+List:	Liste:
 Please enter a name and an address.	Angiv et navn og en adresse.
+Save to list:	Gem på liste:
 Rename list	Omdøb liste
 Favorite manager	Favoritstyring
 Add favorite…	Tilføj favorit…
@@ -19,13 +21,13 @@ Check	Kontrol
 Check favorites	Kontrollér favoritter
 Check all	Afkryds alle
 Uncheck all	Fjern alle krydser
-List:	Liste:
 Move to ▸	Flyt til ▸
 (right-click the list to rename it)	(højreklik på listen for at omdøbe den)
 Name	Navn
 Address	Adresse
 Status	Status
 List	Liste
+Listen to selection	Lyt til valgte
 Open	Åbn
 Close	Luk
 All lists	Alle lister
@@ -45,16 +47,16 @@ Import favorites	Importér favoritter
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favoritter (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Alle filer (*.*)|*.*
 Export favorites	Eksportér favoritter
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, kan læses i Excel (*.csv)|*.csv|Browserbogmærker (*.html)|*.html|Tekst (*.txt)|*.txt
+This WebSDR is already in "{0}".	Denne WebSDR er allerede i ”{0}”.
 List {0}	Liste {0}
 Rename "{0}"…	Omdøb ”{0}”…
 {0} favorite(s) moved to "{1}".	{0} favorit(ter) flyttet til ”{1}”.
 {0} favorite(s) shown, {1} checked	{0} favorit(ter) vist, {1} afkrydset
 Remove favorite "{0}"?	Fjern favoritten ”{0}”?
 Remove the {0} checked favorites?	Fjern de {0} afkrydsede favoritter?
-duplicate of "{0}"	dublet af ”{0}”
 Checking {0} address(es)…	Kontrollerer {0} adresse(r)…
 Checking… {0} left	Kontrollerer… {0} tilbage
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Kontrol færdig: {0} død(e) link(s), {1} dublet(ter) afkrydset. Klik på ”Fjern…” for at slette dem.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontrol færdig: {1} dublet(ter) fjernet, {0} død(e) link(s) afkrydset. Klik på ”Fjern…” for at slette dem.
 {0} favorite(s) imported, {1} already present.	{0} favorit(ter) importeret, {1} fandtes allerede.
 {0} favorite(s) exported.	{0} favorit(ter) eksporteret.
 rigctld connection closed	rigctld-forbindelse lukket
@@ -65,6 +67,7 @@ HRD connection closed	HRD-forbindelse lukket
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktivér IP-serveren i HRD Rig Control).
 Cannot open the log: 	Kan ikke åbne loggen: 
 Save: no known frequency (rig or WebSDR)	Save: ingen kendt frekvens (radio eller WebSDR)
+Toggle Mute WebSDR and Mute TRX	Skift Lydløs WebSDR og Lydløs TRX
 RIG	TRX
 Disconnected	Afbrudt
 Connect	Forbind
@@ -94,6 +97,9 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (fra) ▾
 Mute TRX: connect the rig first	Lydløs TRX: forbind radioen først
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radiolydstyrke er ikke tilgængelig med denne radio eller grænseflade (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	TCI-port for ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	TCI-port for ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Sending stoppet automatisk efter {0} (sikkerhedstid, højreklik på PTT for at ændre)
 Remove "{0}" from the list	Fjern ”{0}” fra listen
 Remove all ({0} values)	Fjern alle ({0} værdier)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Færdig: ly
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Omdøbning mislykkedes ({0}).\n\nManuelt: Kontrolpanelet Lyd › fanen Optagelse › ”{1}” › Egenskaber › navn.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-lyd sendes til ”{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK-kabel: ”{0}”: {1}
-This page is already in "{0}".	Denne side er allerede i ”{0}”.
-Add favorite to "{0}"	Tilføj favorit til ”{0}”
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink kan ikke slå lyden fra i ExpertSDR: ExpertSDR afspiller ikke lyden via Windows (lyden kommer fra radioen eller via ASIO), og dens TCI-server svarer ikke på port {0}.\n\nAktivér TCI-serveren i ExpertSDR (Options > TCI). Hvis dens port ikke er {0}, skal du højreklikke på ”Lydløs ExpertSDR” for at angive den.
+"{0}" added to "{1}".	”{0}” føjet til ”{1}”.
 This page is not in "{0}".	Denne side er ikke i ”{0}”.
 Remove "{0}" from "{1}"?	Fjern ”{0}” fra ”{1}”?
 Interface:	Grænseflade:
@@ -130,6 +136,7 @@ Step:	Trin:
 WebSDR:	WebSDR:
 Volume:	Lydstyrke:
 TRX volume:	TRX-lydstyrke:
+ExpertSDR volume:	ExpertSDR-lydstyrke:
 Open log	Åbn log
 …	…
 Download Hamlib…	Download Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Administrér favoritter…
 Find WebSDRs…	Find WebSDR'er…
 Mute WebSDR	Lydløs WebSDR
 Mute TRX	Lydløs TRX
+⇄	⇄
+Mute ExpertSDR	Lydløs ExpertSDR
 Auto-connect at startup	Forbind automatisk ved start
 Dark mode	Mørk tilstand
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	ikke tilgængelig
 unexpected format	uventet format
 Find WebSDRs (France and neighbouring countries)	Find WebSDR'er (Frankrig og nabolande)
 All	Alle
-Hide those already in favorites	Skjul dem, der er favoritter
 Max distance from the centre of France (km):	Maks. afstand fra Frankrigs midte (km):
 Filter:	Filter:
 Type:	Type:
 Location	Sted
 Country	Land
 Users	Brug.
-Listen to selection	Lyt til valgte
 Add checked to favorites	Føj afkrydsede til favoritter
 Refresh	Opdater
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Søger i kataloger (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Vælg først en modtager på listen.
-{0} receiver(s) shown, {1} checked   —   sources: 	{0} modtager(e) vist, {1} afkrydset   —   kilder: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favorit(ter) tilføjet. Du kan omdøbe dem i ”Administrér favoritter…”.
+Please check the receivers to add first.	Afkryds først de modtagere, der skal tilføjes.
+Add to favorites	Føj til favoritter
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} modtager(e) vist, {1} afkrydset, {2} allerede i favoritter skjult   —   kilder: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favorit(ter) føjet til ”{1}”. Du kan omdøbe dem i ”Administrér favoritter…”.

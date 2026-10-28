@@ -4,7 +4,9 @@ cannot open, error 	не може да се отвори, грешка
 Name:	Име:
 Address:	Адрес:
 Cancel	Отказ
+List:	Списък:
 Please enter a name and an address.	Въведете име и адрес.
+Save to list:	Запис в списък:
 Rename list	Преименуване на списък
 Favorite manager	Управление на предпочитани
 Add favorite…	Добави в предпочитани…
@@ -19,13 +21,13 @@ Check	Проверка
 Check favorites	Провери предпочитаните
 Check all	Отметни всички
 Uncheck all	Махни отметките
-List:	Списък:
 Move to ▸	Премести в ▸
 (right-click the list to rename it)	(десен клик върху списъка, за да го преименувате)
 Name	Име
 Address	Адрес
 Status	Състояние
 List	Списък
+Listen to selection	Слушай избрания
 Open	Отвори
 Close	Затвори
 All lists	Всички списъци
@@ -45,16 +47,16 @@ Import favorites	Импорт на предпочитани
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Предпочитани (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Всички файлове (*.*)|*.*
 Export favorites	Експорт на предпочитани
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, за Excel (*.csv)|*.csv|Отметки на браузър (*.html)|*.html|Текст (*.txt)|*.txt
+This WebSDR is already in "{0}".	Този WebSDR вече е в „{0}“.
 List {0}	Списък {0}
 Rename "{0}"…	Преименувай „{0}“…
 {0} favorite(s) moved to "{1}".	Преместени записи в „{1}“: {0}.
 {0} favorite(s) shown, {1} checked	Показани записи: {0}, отметнати: {1}
 Remove favorite "{0}"?	Да се премахне ли „{0}“ от предпочитаните?
 Remove the {0} checked favorites?	Да се премахнат ли отметнатите записи ({0})?
-duplicate of "{0}"	дубликат на „{0}“
 Checking {0} address(es)…	Проверка на адреси: {0}…
 Checking… {0} left	Проверка… остават {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Проверката завърши, отметнати са: мъртви връзки – {0}, дубликати – {1}. Щракнете „Премахни…“, за да ги изтриете.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Проверката завърши: премахнати дубликати – {1}, отметнати мъртви връзки – {0}. Щракнете „Премахни…“, за да ги изтриете.
 {0} favorite(s) imported, {1} already present.	Импортирани записи: {0}, вече налични: {1}.
 {0} favorite(s) exported.	Експортирани записи: {0}.
 rigctld connection closed	Връзката с rigctld е затворена
@@ -65,6 +67,7 @@ HRD connection closed	Връзката с HRD е затворена
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Няма HRD сървър на {0}:{1} (включете IP сървъра в HRD Rig Control).
 Cannot open the log: 	Дневникът не може да се отвори: 
 Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
+Toggle Mute WebSDR and Mute TRX	Превключване на „Без звук WebSDR“ и „Без звук TRX“
 RIG	РАДИО
 Disconnected	Няма връзка
 Connect	Свържи
@@ -94,6 +97,9 @@ SDRLINK cable	Кабел SDRLINK
  (off) ▾	 (изкл.) ▾
 Mute TRX: connect the rig first	Без звук TRX: първо свържете трансивъра
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Силата на звука на трансивъра не е достъпна с този трансивър или интерфейс (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	TCI порт на ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	Порт на TCI сървъра (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	TCI порт на ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Предаването е спряно автоматично след {0} (предпазен таймер; десен клик върху PTT за промяна)
 Remove "{0}" from the list	Премахни „{0}“ от списъка
 Remove all ({0} values)	Премахни всички (стойности: {0})
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Готов�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Преименуването не успя ({0}).\n\nРъчно: контролен панел Звук › раздел Записване › „{1}“ › Свойства › име.
 SDRLINK cable: WebSDR audio sent to "{0}"	Кабел SDRLINK: звукът от WebSDR се изпраща към „{0}“
 SDRLINK cable: "{0}": {1}	Кабел SDRLINK: „{0}“: {1}
-This page is already in "{0}".	Тази страница вече е в „{0}“.
-Add favorite to "{0}"	Добави запис в „{0}“
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink не може да спре звука на ExpertSDR: ExpertSDR не възпроизвежда звука през Windows (звукът излиза от радиостанцията или през ASIO), а неговият TCI сървър не отговаря на порт {0}.\n\nВ ExpertSDR включете TCI сървъра (Options > TCI). Ако портът му не е {0}, задайте го с десен бутон върху „Без звук ExpertSDR“.
+"{0}" added to "{1}".	„{0}“ е добавен в „{1}“.
 This page is not in "{0}".	Тази страница не е в „{0}“.
 Remove "{0}" from "{1}"?	Да се премахне ли „{0}“ от „{1}“?
 Interface:	Интерфейс:
@@ -130,6 +136,7 @@ Step:	Стъпка:
 WebSDR:	WebSDR:
 Volume:	Звук:
 TRX volume:	Звук TRX:
+ExpertSDR volume:	Сила на звука ExpertSDR:
 Open log	Отвори дневника
 …	…
 Download Hamlib…	Изтегли Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Управление на предпочитани…
 Find WebSDRs…	Търсене на WebSDR…
 Mute WebSDR	Без звук WebSDR
 Mute TRX	Без звук TRX
+⇄	⇄
+Mute ExpertSDR	Без звук ExpertSDR
 Auto-connect at startup	Автосвързване при старт
 Dark mode	Тъмен режим
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	недостъпно
 unexpected format	неочакван формат
 Find WebSDRs (France and neighbouring countries)	Търсене на WebSDR (Франция и съседни страни)
 All	Всички
-Hide those already in favorites	Скрий вече добавените в предпочитани
 Max distance from the centre of France (km):	Макс. разстояние от центъра на Франция (km):
 Filter:	Филтър:
 Type:	Тип:
 Location	Място
 Country	Държава
 Users	Потреб.
-Listen to selection	Слушай избрания
 Add checked to favorites	Добави отметнатите в предпочитани
 Refresh	Обнови
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Търсене в каталозите (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Първо изберете приемник от списъка.
-{0} receiver(s) shown, {1} checked   —   sources: 	Показани приемници: {0}, отметнати: {1}   —   източници: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	Добавени записи: {0}. Можете да ги преименувате в „Управление на предпочитани…“.
+Please check the receivers to add first.	Първо отметнете приемниците за добавяне.
+Add to favorites	Добавяне в предпочитани
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Показани приемници: {0}, отметнати: {1}, скрити (вече в предпочитани) – {2}   —   източници: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Добавени записи в „{1}“: {0}. Можете да ги преименувате в „Управление на предпочитани…“.

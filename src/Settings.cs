@@ -21,6 +21,7 @@ namespace SDRLink
         public int OmniRigNumber = 1;
         public string TciHost = "127.0.0.1";
         public int TciPort = 40001;
+        public int EsdrTciPort = 40001;    // serveur TCI d'ExpertSDR pour Mute / Volume ExpertSDR (clic droit sur Mute ExpertSDR)
         public string HrdHost = "127.0.0.1";
         public int HrdPort = 7809;
         public int HrdTxDetect;            // HrdRig.TxDetect
@@ -54,6 +55,8 @@ namespace SDRLink
         public int WinX, WinY, WinW, WinH;
         public bool WinMax;
         public int DefaultVolume = 100;   // volume des WebSDR qui ne sont pas en favoris
+        // Recherche des WebSDR lancée une seule fois, au premier démarrage (pas encore de fichier de réglages).
+        public bool FirstSearchDone;
         public List<Favorite> Favorites = new List<Favorite>
         {
             new Favorite("Liste des WebSDR (websdr.org)", "http://www.websdr.org/"),
@@ -78,6 +81,7 @@ namespace SDRLink
         {
             Settings s = new Settings();
             if (!File.Exists(FilePath)) return s;
+            s.FirstSearchDone = true;   // réglages déjà présents : l'application a déjà démarré
             List<Favorite> favs = new List<Favorite>();
             foreach (string line in File.ReadAllLines(FilePath, Encoding.UTF8))
             {
@@ -98,6 +102,7 @@ namespace SDRLink
                     case "OmniRig": s.OmniRigNumber = Int(v, 1); break;
                     case "TciHost": s.TciHost = v; break;
                     case "TciPort": s.TciPort = Int(v, 40001); break;
+                    case "EsdrTciPort": s.EsdrTciPort = Math.Max(1, Math.Min(65535, Int(v, 40001))); break;
                     case "HrdHost": s.HrdHost = v; break;
                     case "HrdPort": s.HrdPort = Int(v, 7809); break;
                     case "HrdVoxTx": if (v == "1") s.HrdTxDetect = 1; break;   // ancien réglage (case à cocher VOX)
@@ -136,6 +141,7 @@ namespace SDRLink
                     case "WinH": s.WinH = Int(v, 0); break;
                     case "WinMax": s.WinMax = v == "1"; break;
                     case "Volume": s.DefaultVolume = Math.Max(0, Math.Min(100, Int(v, 100))); break;
+                    case "FirstSearch": s.FirstSearchDone = v != "0"; break;
                     case "Freq": if (s.FreqHistory.Count < 100) s.FreqHistory.Add(v); break;
                 }
             }
@@ -158,6 +164,7 @@ namespace SDRLink
             Line(sb, "OmniRig", OmniRigNumber);
             Line(sb, "TciHost", TciHost);
             Line(sb, "TciPort", TciPort);
+            Line(sb, "EsdrTciPort", EsdrTciPort);
             Line(sb, "HrdHost", HrdHost);
             Line(sb, "HrdPort", HrdPort);
             Line(sb, "HrdTxDetect", HrdTxDetect);
@@ -192,6 +199,7 @@ namespace SDRLink
             Line(sb, "WinH", WinH);
             Line(sb, "WinMax", WinMax ? 1 : 0);
             Line(sb, "Volume", DefaultVolume);
+            Line(sb, "FirstSearch", FirstSearchDone ? 1 : 0);
             foreach (Favorite f in Favorites) Line(sb, "Fav", f.ToSetting());
             foreach (string f in FreqHistory) Line(sb, "Freq", f);
             try { File.WriteAllText(FilePath, sb.ToString(), Encoding.UTF8); } catch { }

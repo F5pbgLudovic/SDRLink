@@ -4,7 +4,9 @@ cannot open, error 	ei saa avada, viga
 Name:	Nimi:
 Address:	Aadress:
 Cancel	Loobu
+List:	Loend:
 Please enter a name and an address.	Sisestage nimi ja aadress.
+Save to list:	Salvesta loendisse:
 Rename list	Nimeta loend ümber
 Favorite manager	Lemmikute haldur
 Add favorite…	Lisa lemmik…
@@ -19,13 +21,13 @@ Check	Kontroll
 Check favorites	Kontrolli lemmikuid
 Check all	Märgi kõik
 Uncheck all	Tühjenda kõik
-List:	Loend:
 Move to ▸	Teisalda ▸
 (right-click the list to rename it)	(loendi ümbernimetamiseks paremklõpsake seda)
 Name	Nimi
 Address	Aadress
 Status	Olek
 List	Loend
+Listen to selection	Kuula valitut
 Open	Ava
 Close	Sulge
 All lists	Kõik loendid
@@ -45,16 +47,16 @@ Import favorites	Impordi lemmikud
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Lemmikud (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Kõik failid (*.*)|*.*
 Export favorites	Ekspordi lemmikud
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, Excelis loetav (*.csv)|*.csv|Brauseri järjehoidjad (*.html)|*.html|Tekst (*.txt)|*.txt
+This WebSDR is already in "{0}".	See WebSDR on juba loendis „{0}“.
 List {0}	Loend {0}
 Rename "{0}"…	Nimeta „{0}“ ümber…
 {0} favorite(s) moved to "{1}".	{0} lemmik(ut) teisaldati loendisse „{1}“.
 {0} favorite(s) shown, {1} checked	Kuvatud {0} lemmik(ut), märgitud {1}
 Remove favorite "{0}"?	Kas eemaldada lemmik „{0}“?
 Remove the {0} checked favorites?	Kas eemaldada {0} märgitud lemmikut?
-duplicate of "{0}"	duplikaat: „{0}“
 Checking {0} address(es)…	Kontrollitakse {0} aadressi…
 Checking… {0} left	Kontrollimine… jäänud {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Kontroll valmis: märgiti {0} surnud link(i) ja {1} duplikaat(i). Nende kustutamiseks klõpsake „Eemalda…“.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontroll valmis: eemaldati {1} duplikaat(i), märgiti {0} surnud link(i). Nende kustutamiseks klõpsake „Eemalda…“.
 {0} favorite(s) imported, {1} already present.	Imporditi {0} lemmik(ut), {1} oli juba olemas.
 {0} favorite(s) exported.	Eksporditi {0} lemmik(ut).
 rigctld connection closed	rigctld ühendus suleti
@@ -65,6 +67,7 @@ HRD connection closed	HRD ühendus suleti
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Aadressil {0}:{1} pole HRD serverit (lubage IP-server programmis HRD Rig Control).
 Cannot open the log: 	Logi ei saa avada: 
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
+Toggle Mute WebSDR and Mute TRX	Lülita Vaigista WebSDR ja Vaigista TRX
 RIG	RAADIO
 Disconnected	Ühendus puudub
 Connect	Ühenda
@@ -94,6 +97,9 @@ SDRLINK cable	SDRLINK kaabel
  (off) ▾	 (väljas) ▾
 Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	ExpertSDR-i TCI-port
+TCI server port (ExpertSDR, Options > TCI):	TCI-serveri port (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Saade peatati automaatselt, kestus {0} (ohutuse ajalõpp, muutmiseks paremklõpsake PTT-d)
 Remove "{0}" from the list	Eemalda „{0}“ loendist
 Remove all ({0} values)	Eemalda kõik ({0} väärtust)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Valmis: hel
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Ümbernimetamine nurjus ({0}).\n\nKäsitsi: Heli juhtpaneel › vahekaart Salvestamine › „{1}“ › Atribuudid › nimi.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kaabel: WebSDR-i heli saadetakse seadmesse „{0}“
 SDRLINK cable: "{0}": {1}	SDRLINK kaabel: „{0}“: {1}
-This page is already in "{0}".	See leht on juba loendis „{0}“.
-Add favorite to "{0}"	Lisa lemmik loendisse „{0}“
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink ei saa ExpertSDR-i vaigistada: ExpertSDR ei esita heli Windowsi kaudu (heli tuleb raadiojaamast või ASIO kaudu) ja selle TCI-server ei vasta pordil {0}.\n\nLülitage ExpertSDR-is TCI-server sisse (Options > TCI). Kui selle port pole {0}, määrake see paremklõpsuga nupul „Vaigista ExpertSDR“.
+"{0}" added to "{1}".	„{0}“ lisati loendisse „{1}“.
 This page is not in "{0}".	Seda lehte pole loendis „{0}“.
 Remove "{0}" from "{1}"?	Kas eemaldada „{0}“ loendist „{1}“?
 Interface:	Liides:
@@ -130,6 +136,7 @@ Step:	Samm:
 WebSDR:	WebSDR:
 Volume:	Helitugevus:
 TRX volume:	TRX helitugevus:
+ExpertSDR volume:	ExpertSDR-i helitugevus:
 Open log	Ava logi
 …	…
 Download Hamlib…	Laadi alla Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Halda lemmikuid…
 Find WebSDRs…	Otsi WebSDR-e…
 Mute WebSDR	Vaigista WebSDR
 Mute TRX	Vaigista TRX
+⇄	⇄
+Mute ExpertSDR	Vaigista ExpertSDR
 Auto-connect at startup	Ühenda käivitamisel automaatselt
 Dark mode	Tume režiim
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	pole saadaval
 unexpected format	ootamatu vorming
 Find WebSDRs (France and neighbouring countries)	Otsi WebSDR-e (Prantsusmaa ja naaberriigid)
 All	Kõik
-Hide those already in favorites	Peida juba lemmikutes olevad
 Max distance from the centre of France (km):	Max kaugus Prantsusmaa keskpunktist (km):
 Filter:	Filter:
 Type:	Tüüp:
 Location	Asukoht
 Country	Riik
 Users	Kasut.
-Listen to selection	Kuula valitut
 Add checked to favorites	Lisa märgitud lemmikutesse
 Refresh	Värskenda
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Kataloogidest otsimine (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Valige esmalt loendist vastuvõtja.
-{0} receiver(s) shown, {1} checked   —   sources: 	Kuvatud {0} vastuvõtja(t), märgitud {1}   —   allikad: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	Lisati {0} lemmik(ut). Saate need ümber nimetada jaotises „Halda lemmikuid…“.
+Please check the receivers to add first.	Märkige esmalt lisatavad vastuvõtjad.
+Add to favorites	Lisa lemmikutesse
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Kuvatud {0} vastuvõtja(t), märgitud {1}, {2} juba lemmikutes peidetud   —   allikad: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Loendisse „{1}“ lisati {0} lemmik(ut). Saate need ümber nimetada jaotises „Halda lemmikuid…“.

@@ -4,7 +4,9 @@ cannot open, error 	não é possível abrir, erro
 Name:	Nome:
 Address:	Endereço:
 Cancel	Cancelar
+List:	Lista:
 Please enter a name and an address.	Introduza um nome e um endereço.
+Save to list:	Guardar na lista:
 Rename list	Mudar nome da lista
 Favorite manager	Gestor de favoritos
 Add favorite…	Adicionar favorito…
@@ -19,13 +21,13 @@ Check	Verificar
 Check favorites	Verificar favoritos
 Check all	Marcar tudo
 Uncheck all	Desmarcar tudo
-List:	Lista:
 Move to ▸	Mover para ▸
 (right-click the list to rename it)	(clique direito na lista para lhe mudar o nome)
 Name	Nome
 Address	Endereço
 Status	Estado
 List	Lista
+Listen to selection	Ouvir seleção
 Open	Abrir
 Close	Fechar
 All lists	Todas as listas
@@ -45,16 +47,16 @@ Import favorites	Importar favoritos
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favoritos (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Todos os ficheiros (*.*)|*.*
 Export favorites	Exportar favoritos
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, legível no Excel (*.csv)|*.csv|Marcadores do browser (*.html)|*.html|Texto (*.txt)|*.txt
+This WebSDR is already in "{0}".	Este WebSDR já está em «{0}».
 List {0}	Lista {0}
 Rename "{0}"…	Mudar nome de «{0}»…
 {0} favorite(s) moved to "{1}".	{0} favorito(s) movido(s) para «{1}».
 {0} favorite(s) shown, {1} checked	{0} favorito(s) apresentado(s), {1} marcado(s)
 Remove favorite "{0}"?	Remover o favorito «{0}»?
 Remove the {0} checked favorites?	Remover os {0} favoritos marcados?
-duplicate of "{0}"	duplicado de «{0}»
 Checking {0} address(es)…	A verificar {0} endereço(s)…
 Checking… {0} left	A verificar… faltam {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Verificação concluída: {0} ligação(ões) inativa(s), {1} duplicado(s) marcados. Clique em «Remover…» para os eliminar.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Verificação concluída: {1} duplicado(s) removido(s), {0} ligação(ões) inativa(s) marcadas. Clique em «Remover…» para as eliminar.
 {0} favorite(s) imported, {1} already present.	{0} favorito(s) importado(s), {1} já existente(s).
 {0} favorite(s) exported.	{0} favorito(s) exportado(s).
 rigctld connection closed	Ligação rigctld fechada
@@ -65,6 +67,7 @@ HRD connection closed	Ligação HRD fechada
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nenhum servidor HRD em {0}:{1} (ative o servidor IP no HRD Rig Control).
 Cannot open the log: 	Não é possível abrir o log: 
 Save: no known frequency (rig or WebSDR)	Gravar: nenhuma frequência conhecida (rádio ou WebSDR)
+Toggle Mute WebSDR and Mute TRX	Alternar Silenciar WebSDR e Silenciar TRX
 RIG	RÁDIO
 Disconnected	Desligado
 Connect	Ligar
@@ -94,6 +97,9 @@ SDRLINK cable	Cabo SDRLINK
  (off) ▾	 (desat.) ▾
 Mute TRX: connect the rig first	Silenciar TRX: ligue primeiro o rádio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume do rádio indisponível com este rádio ou interface (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	Porta TCI do ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	Porta do servidor TCI (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	Porta TCI do ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Emissão parada automaticamente após {0} (tempo limite de segurança, clique direito em PTT para o alterar)
 Remove "{0}" from the list	Remover «{0}» da lista
 Remove all ({0} values)	Remover tudo ({0} valores)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Concluído:
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Falha ao mudar o nome ({0}).\n\nManualmente: Painel de Controlo de Som › separador Gravação › «{1}» › Propriedades › nome.
 SDRLINK cable: WebSDR audio sent to "{0}"	Cabo SDRLINK: áudio do WebSDR enviado para «{0}»
 SDRLINK cable: "{0}": {1}	Cabo SDRLINK: «{0}»: {1}
-This page is already in "{0}".	Esta página já está em «{0}».
-Add favorite to "{0}"	Adicionar favorito a «{0}»
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	O SDRLink não consegue silenciar o ExpertSDR: o ExpertSDR não reproduz o som através do Windows (o som sai do equipamento ou por ASIO) e o seu servidor TCI não responde na porta {0}.\n\nNo ExpertSDR, ative o servidor TCI (Options > TCI). Se a porta não for {0}, clique com o botão direito em «Silenciar ExpertSDR» para a indicar.
+"{0}" added to "{1}".	«{0}» adicionado a «{1}».
 This page is not in "{0}".	Esta página não está em «{0}».
 Remove "{0}" from "{1}"?	Remover «{0}» de «{1}»?
 Interface:	Interface:
@@ -130,6 +136,7 @@ Step:	Passo:
 WebSDR:	WebSDR:
 Volume:	Volume:
 TRX volume:	Volume TRX:
+ExpertSDR volume:	Volume ExpertSDR:
 Open log	Abrir log
 …	…
 Download Hamlib…	Transferir Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Gerir favoritos…
 Find WebSDRs…	Procurar WebSDR…
 Mute WebSDR	Silenciar WebSDR
 Mute TRX	Silenciar TRX
+⇄	⇄
+Mute ExpertSDR	Silenciar ExpertSDR
 Auto-connect at startup	Ligar automaticamente ao arrancar
 Dark mode	Modo escuro
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	indisponível
 unexpected format	formato inesperado
 Find WebSDRs (France and neighbouring countries)	Procurar WebSDR (França e países vizinhos)
 All	Todos
-Hide those already in favorites	Ocultar os que já estão nos favoritos
 Max distance from the centre of France (km):	Distância máx. ao centro de França (km):
 Filter:	Filtro:
 Type:	Tipo:
 Location	Local
 Country	País
 Users	Utiliz.
-Listen to selection	Ouvir seleção
 Add checked to favorites	Adicionar marcados aos favoritos
 Refresh	Atualizar
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	A pesquisar nos diretórios (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Selecione primeiro um recetor na lista.
-{0} receiver(s) shown, {1} checked   —   sources: 	{0} recetor(es) apresentado(s), {1} marcado(s)   —   fontes: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favorito(s) adicionado(s). Pode mudar-lhes o nome em «Gerir favoritos…».
+Please check the receivers to add first.	Marque primeiro os recetores a adicionar.
+Add to favorites	Adicionar aos favoritos
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} recetor(es) apresentado(s), {1} marcado(s), {2} já nos favoritos ocultado(s)   —   fontes: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favorito(s) adicionado(s) a «{1}». Pode mudar-lhes o nome em «Gerir favoritos…».

@@ -4,7 +4,9 @@ cannot open, error 	kan niet openen, fout
 Name:	Naam:
 Address:	Adres:
 Cancel	Annuleren
+List:	Lijst:
 Please enter a name and an address.	Voer een naam en een adres in.
+Save to list:	Opslaan in lijst:
 Rename list	Lijst hernoemen
 Favorite manager	Favorietenbeheer
 Add favorite…	Favoriet toevoegen…
@@ -19,13 +21,13 @@ Check	Controle
 Check favorites	Favorieten controleren
 Check all	Alles aanvinken
 Uncheck all	Alles uitvinken
-List:	Lijst:
 Move to ▸	Verplaatsen naar ▸
 (right-click the list to rename it)	(rechtsklik op de lijst om te hernoemen)
 Name	Naam
 Address	Adres
 Status	Status
 List	Lijst
+Listen to selection	Selectie beluisteren
 Open	Openen
 Close	Sluiten
 All lists	Alle lijsten
@@ -45,16 +47,16 @@ Import favorites	Favorieten importeren
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favorieten (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Alle bestanden (*.*)|*.*
 Export favorites	Favorieten exporteren
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, leesbaar in Excel (*.csv)|*.csv|Browserbladwijzers (*.html)|*.html|Tekst (*.txt)|*.txt
+This WebSDR is already in "{0}".	Deze WebSDR staat al in "{0}".
 List {0}	Lijst {0}
 Rename "{0}"…	"{0}" hernoemen…
 {0} favorite(s) moved to "{1}".	{0} favoriet(en) verplaatst naar "{1}".
 {0} favorite(s) shown, {1} checked	{0} favoriet(en) getoond, {1} aangevinkt
 Remove favorite "{0}"?	Favoriet "{0}" verwijderen?
 Remove the {0} checked favorites?	De {0} aangevinkte favorieten verwijderen?
-duplicate of "{0}"	duplicaat van "{0}"
 Checking {0} address(es)…	{0} adres(sen) controleren…
 Checking… {0} left	Controleren… nog {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Controle klaar: {0} dode link(s), {1} duplica(a)t(en) aangevinkt. Klik op "Verwijderen…" om ze te wissen.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Controle klaar: {1} duplica(a)t(en) verwijderd, {0} dode link(s) aangevinkt. Klik op "Verwijderen…" om ze te wissen.
 {0} favorite(s) imported, {1} already present.	{0} favoriet(en) geïmporteerd, {1} al aanwezig.
 {0} favorite(s) exported.	{0} favoriet(en) geëxporteerd.
 rigctld connection closed	rigctld-verbinding gesloten
@@ -65,6 +67,7 @@ HRD connection closed	HRD-verbinding gesloten
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Geen HRD-server op {0}:{1} (schakel de IP-server in HRD Rig Control in).
 Cannot open the log: 	Kan het logboek niet openen: 
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
+Toggle Mute WebSDR and Mute TRX	WebSDR dempen en TRX dempen omschakelen
 RIG	TRX
 Disconnected	Niet verbonden
 Connect	Verbinden
@@ -94,6 +97,9 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (uit) ▾
 Mute TRX: connect the rig first	TRX dempen: verbind eerst de transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-volume niet beschikbaar met deze transceiver of interface (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	TCI-poort van ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	TCI-poort van ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Zenden automatisch gestopt na {0} (veiligheidstijd, rechtsklik op PTT om te wijzigen)
 Remove "{0}" from the list	"{0}" uit de lijst verwijderen
 Remove all ({0} values)	Alles verwijderen ({0} waarden)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Klaar: de a
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Hernoemen mislukt ({0}).\n\nHandmatig: Configuratiescherm Geluid › tabblad Opnemen › "{1}" › Eigenschappen › naam.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-geluid naar "{0}" gestuurd
 SDRLINK cable: "{0}": {1}	SDRLINK-kabel: "{0}": {1}
-This page is already in "{0}".	Deze pagina staat al in "{0}".
-Add favorite to "{0}"	Favoriet toevoegen aan "{0}"
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink kan ExpertSDR niet dempen: ExpertSDR speelt geen geluid af via Windows (het geluid komt uit de radio of via ASIO) en de TCI-server antwoordt niet op poort {0}.\n\nSchakel in ExpertSDR de TCI-server in (Options > TCI). Is de poort niet {0}, klik dan met de rechtermuisknop op "ExpertSDR dempen" om hem in te stellen.
+"{0}" added to "{1}".	"{0}" toegevoegd aan "{1}".
 This page is not in "{0}".	Deze pagina staat niet in "{0}".
 Remove "{0}" from "{1}"?	"{0}" uit "{1}" verwijderen?
 Interface:	Interface:
@@ -130,6 +136,7 @@ Step:	Stap:
 WebSDR:	WebSDR:
 Volume:	Volume:
 TRX volume:	TRX-volume:
+ExpertSDR volume:	ExpertSDR-volume:
 Open log	Log openen
 …	…
 Download Hamlib…	Hamlib downloaden…
@@ -145,6 +152,8 @@ Manage favorites…	Favorieten beheren…
 Find WebSDRs…	WebSDR's zoeken…
 Mute WebSDR	WebSDR dempen
 Mute TRX	TRX dempen
+⇄	⇄
+Mute ExpertSDR	ExpertSDR dempen
 Auto-connect at startup	Automatisch verbinden bij start
 Dark mode	Donkere modus
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	niet beschikbaar
 unexpected format	onverwacht formaat
 Find WebSDRs (France and neighbouring countries)	WebSDR's zoeken (Frankrijk en buurlanden)
 All	Alle
-Hide those already in favorites	Verberg wat al in favorieten staat
 Max distance from the centre of France (km):	Max. afstand tot het midden van Frankrijk (km):
 Filter:	Filter:
 Type:	Type:
 Location	Locatie
 Country	Land
 Users	Gebr.
-Listen to selection	Selectie beluisteren
 Add checked to favorites	Aangevinkte aan favorieten
 Refresh	Vernieuwen
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Zoeken in overzichten (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Selecteer eerst een ontvanger in de lijst.
-{0} receiver(s) shown, {1} checked   —   sources: 	{0} ontvanger(s) getoond, {1} aangevinkt   —   bronnen: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favoriet(en) toegevoegd. Je kunt ze hernoemen via "Favorieten beheren…".
+Please check the receivers to add first.	Vink eerst de ontvangers aan die je wilt toevoegen.
+Add to favorites	Toevoegen aan favorieten
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} ontvanger(s) getoond, {1} aangevinkt, {2} al in favorieten verborgen   —   bronnen: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favoriet(en) toegevoegd aan "{1}". Je kunt ze hernoemen via "Favorieten beheren…".

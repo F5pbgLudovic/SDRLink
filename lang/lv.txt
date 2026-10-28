@@ -4,7 +4,9 @@ cannot open, error 	nevar atvērt, kļūda
 Name:	Nosaukums:
 Address:	Adrese:
 Cancel	Atcelt
+List:	Saraksts:
 Please enter a name and an address.	Lūdzu, ievadiet nosaukumu un adresi.
+Save to list:	Saglabāt sarakstā:
 Rename list	Pārdēvēt sarakstu
 Favorite manager	Izlases pārvaldnieks
 Add favorite…	Pievienot izlasei…
@@ -19,13 +21,13 @@ Check	Pārbaude
 Check favorites	Pārbaudīt izlasi
 Check all	Atzīmēt visus
 Uncheck all	Noņemt atzīmes
-List:	Saraksts:
 Move to ▸	Pārvietot uz ▸
 (right-click the list to rename it)	(ar peles labo pogu noklikšķiniet uz saraksta, lai to pārdēvētu)
 Name	Nosaukums
 Address	Adrese
 Status	Statuss
 List	Saraksts
+Listen to selection	Klausīties atlasīto
 Open	Atvērt
 Close	Aizvērt
 All lists	Visi saraksti
@@ -45,16 +47,16 @@ Import favorites	Importēt izlasi
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Izlase (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Visi faili (*.*)|*.*
 Export favorites	Eksportēt izlasi
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, lasāms ar Excel (*.csv)|*.csv|Pārlūka grāmatzīmes (*.html)|*.html|Teksts (*.txt)|*.txt
+This WebSDR is already in "{0}".	Šis WebSDR jau ir sarakstā "{0}".
 List {0}	Saraksts {0}
 Rename "{0}"…	Pārdēvēt "{0}"…
 {0} favorite(s) moved to "{1}".	Uz "{1}" pārvietoti izlases vienumi: {0}.
 {0} favorite(s) shown, {1} checked	Parādīti izlases vienumi: {0}, atzīmēti: {1}
 Remove favorite "{0}"?	Vai noņemt izlases vienumu "{0}"?
 Remove the {0} checked favorites?	Vai noņemt atzīmētos izlases vienumus ({0})?
-duplicate of "{0}"	"{0}" dublikāts
 Checking {0} address(es)…	Pārbauda adreses: {0}…
 Checking… {0} left	Pārbauda… atlicis: {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Pārbaude pabeigta, atzīmēti: nedarbīgas saites – {0}, dublikāti – {1}. Noklikšķiniet uz "Noņemt…", lai tos dzēstu.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Pārbaude pabeigta: noņemti dublikāti – {1}, atzīmētas nedarbīgas saites – {0}. Noklikšķiniet uz "Noņemt…", lai tās dzēstu.
 {0} favorite(s) imported, {1} already present.	Importēti izlases vienumi: {0}, jau bija: {1}.
 {0} favorite(s) exported.	Eksportēti izlases vienumi: {0}.
 rigctld connection closed	rigctld savienojums aizvērts
@@ -65,6 +67,7 @@ HRD connection closed	HRD savienojums aizvērts
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nav HRD servera adresē {0}:{1} (iespējojiet IP serveri programmā HRD Rig Control).
 Cannot open the log: 	Nevar atvērt žurnālu: 
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
+Toggle Mute WebSDR and Mute TRX	Pārslēgt Klusināt WebSDR un Klusināt TRX
 RIG	RADIO
 Disconnected	Atvienots
 Connect	Savienot
@@ -94,6 +97,9 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (izsl.) ▾
 Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	ExpertSDR TCI ports
+TCI server port (ExpertSDR, Options > TCI):	TCI servera ports (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	ExpertSDR TCI ports: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Raidīšana automātiski apturēta pēc {0} (drošības taimauts; lai to mainītu, ar peles labo pogu noklikšķiniet uz PTT)
 Remove "{0}" from the list	Noņemt "{0}" no saraksta
 Remove all ({0} values)	Noņemt visu (vērtības: {0})
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gatavs: aud
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pārdēvēšana neizdevās ({0}).\n\nManuāli: skaņas vadības panelis › cilne Ierakstīšana › "{1}" › Rekvizīti › nosaukums.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR skaņa tiek sūtīta uz "{0}"
 SDRLINK cable: "{0}": {1}	SDRLINK kabelis: "{0}": {1}
-This page is already in "{0}".	Šī lapa jau ir sarakstā "{0}".
-Add favorite to "{0}"	Pievienot sarakstam "{0}"
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nevar klusināt ExpertSDR: ExpertSDR neatskaņo skaņu caur Windows (skaņa nāk no raidītāja vai caur ASIO), un tā TCI serveris neatbild portā {0}.\n\nExpertSDR ieslēdziet TCI serveri (Options > TCI). Ja tā ports nav {0}, iestatiet to, ar peles labo pogu noklikšķinot uz "Klusināt ExpertSDR".
+"{0}" added to "{1}".	"{0}" pievienots sarakstam "{1}".
 This page is not in "{0}".	Šīs lapas nav sarakstā "{0}".
 Remove "{0}" from "{1}"?	Vai noņemt "{0}" no "{1}"?
 Interface:	Saskarne:
@@ -130,6 +136,7 @@ Step:	Solis:
 WebSDR:	WebSDR:
 Volume:	Skaļums:
 TRX volume:	TRX skaļums:
+ExpertSDR volume:	ExpertSDR skaļums:
 Open log	Atvērt žurnālu
 …	…
 Download Hamlib…	Lejupielādēt Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Pārvaldīt izlasi…
 Find WebSDRs…	Meklēt WebSDR…
 Mute WebSDR	Klusināt WebSDR
 Mute TRX	Klusināt TRX
+⇄	⇄
+Mute ExpertSDR	Klusināt ExpertSDR
 Auto-connect at startup	Autom. savienot startējot
 Dark mode	Tumšais režīms
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	nav pieejams
 unexpected format	negaidīts formāts
 Find WebSDRs (France and neighbouring countries)	Meklēt WebSDR (Francija un kaimiņvalstis)
 All	Visi
-Hide those already in favorites	Slēpt tos, kas jau ir izlasē
 Max distance from the centre of France (km):	Maks. attālums no Francijas centra (km):
 Filter:	Filtrs:
 Type:	Tips:
 Location	Vieta
 Country	Valsts
 Users	Lietot.
-Listen to selection	Klausīties atlasīto
 Add checked to favorites	Pievienot atzīmētos izlasei
 Refresh	Atsvaidzināt
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Meklē katalogos (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Vispirms sarakstā atlasiet uztvērēju.
-{0} receiver(s) shown, {1} checked   —   sources: 	Parādīti uztvērēji: {0}, atzīmēti: {1}   —   avoti: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	Pievienoti izlases vienumi: {0}. Tos var pārdēvēt sadaļā "Pārvaldīt izlasi…".
+Please check the receivers to add first.	Vispirms atzīmējiet pievienojamos uztvērējus.
+Add to favorites	Pievienot izlasei
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Parādīti uztvērēji: {0}, atzīmēti: {1}, paslēpti (jau izlasē) – {2}   —   avoti: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Sarakstam "{1}" pievienoti izlases vienumi: {0}. Tos var pārdēvēt sadaļā "Pārvaldīt izlasi…".

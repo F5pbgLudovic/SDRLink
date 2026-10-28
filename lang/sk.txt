@@ -4,7 +4,9 @@ cannot open, error 	nedá sa otvoriť, chyba
 Name:	Názov:
 Address:	Adresa:
 Cancel	Zrušiť
+List:	Zoznam:
 Please enter a name and an address.	Zadajte názov a adresu.
+Save to list:	Uložiť do zoznamu:
 Rename list	Premenovať zoznam
 Favorite manager	Správca obľúbených
 Add favorite…	Pridať obľúbené…
@@ -19,13 +21,13 @@ Check	Kontrola
 Check favorites	Skontrolovať obľúbené
 Check all	Začiarknuť všetko
 Uncheck all	Odčiarknuť všetko
-List:	Zoznam:
 Move to ▸	Presunúť do ▸
 (right-click the list to rename it)	(zoznam premenujete kliknutím pravým tlačidlom)
 Name	Názov
 Address	Adresa
 Status	Stav
 List	Zoznam
+Listen to selection	Počúvať výber
 Open	Otvoriť
 Close	Zavrieť
 All lists	Všetky zoznamy
@@ -45,16 +47,16 @@ Import favorites	Importovať obľúbené
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Obľúbené (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Všetky súbory (*.*)|*.*
 Export favorites	Exportovať obľúbené
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, čitateľné v Exceli (*.csv)|*.csv|Záložky prehliadača (*.html)|*.html|Text (*.txt)|*.txt
+This WebSDR is already in "{0}".	Tento WebSDR už je v „{0}“.
 List {0}	Zoznam {0}
 Rename "{0}"…	Premenovať „{0}“…
 {0} favorite(s) moved to "{1}".	Obľúbené položky presunuté do „{1}“: {0}.
 {0} favorite(s) shown, {1} checked	Zobrazené obľúbené: {0}, začiarknuté: {1}
 Remove favorite "{0}"?	Odstrániť obľúbenú položku „{0}“?
 Remove the {0} checked favorites?	Odstrániť začiarknuté obľúbené položky ({0})?
-duplicate of "{0}"	duplikát „{0}“
 Checking {0} address(es)…	Kontrola adries ({0})…
 Checking… {0} left	Kontrola… zostáva: {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Kontrola dokončená. Začiarknuté – nefunkčné odkazy: {0}, duplikáty: {1}. Vymažete ich tlačidlom „Odstrániť…“.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontrola dokončená. Odstránené duplikáty: {1}, začiarknuté nefunkčné odkazy: {0}. Vymažete ich tlačidlom „Odstrániť…“.
 {0} favorite(s) imported, {1} already present.	Importované obľúbené: {0}, už existujúce: {1}.
 {0} favorite(s) exported.	Exportované obľúbené: {0}.
 rigctld connection closed	Spojenie s rigctld ukončené
@@ -65,6 +67,7 @@ HRD connection closed	Spojenie s HRD ukončené
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} nie je server HRD (povoľte IP server v HRD Rig Control).
 Cannot open the log: 	Nedá sa otvoriť denník: 
 Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
+Toggle Mute WebSDR and Mute TRX	Prepnúť Stlmiť WebSDR a Stlmiť TRX
 RIG	TRX
 Disconnected	Odpojené
 Connect	Pripojiť
@@ -94,6 +97,9 @@ SDRLINK cable	Kábel SDRLINK
  (off) ▾	 (vyp.) ▾
 Mute TRX: connect the rig first	Stlmiť TRX: najprv pripojte transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	Port TCI programu ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	Port servera TCI (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Vysielanie automaticky zastavené po {0} (bezpečnostný limit, zmeníte ho kliknutím pravým tlačidlom na PTT)
 Remove "{0}" from the list	Odstrániť „{0}“ zo zoznamu
 Remove all ({0} values)	Odstrániť všetko (hodnoty: {0})
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Hotovo: zvu
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Premenovanie zlyhalo ({0}).\n\nRučne: Ovládací panel Zvuk › karta Nahrávanie › „{1}“ › Vlastnosti › názov.
 SDRLINK cable: WebSDR audio sent to "{0}"	Kábel SDRLINK: zvuk WebSDR sa odosiela do „{0}“
 SDRLINK cable: "{0}": {1}	Kábel SDRLINK: „{0}“: {1}
-This page is already in "{0}".	Táto stránka už je v „{0}“.
-Add favorite to "{0}"	Pridať obľúbené do „{0}“
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nemôže stlmiť ExpertSDR: ExpertSDR neprehráva zvuk cez Windows (zvuk vychádza z rádia alebo cez ASIO) a jeho server TCI neodpovedá na porte {0}.\n\nV ExpertSDR zapnite server TCI (Options > TCI). Ak jeho port nie je {0}, nastavte ho kliknutím pravým tlačidlom na „Stlmiť ExpertSDR“.
+"{0}" added to "{1}".	„{0}“ pridané do „{1}“.
 This page is not in "{0}".	Táto stránka nie je v „{0}“.
 Remove "{0}" from "{1}"?	Odstrániť „{0}“ z „{1}“?
 Interface:	Rozhranie:
@@ -130,6 +136,7 @@ Step:	Krok:
 WebSDR:	WebSDR:
 Volume:	Hlasitosť:
 TRX volume:	Hlasitosť TRX:
+ExpertSDR volume:	Hlasitosť ExpertSDR:
 Open log	Otvoriť denník
 …	…
 Download Hamlib…	Stiahnuť Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Spravovať obľúbené…
 Find WebSDRs…	Nájsť WebSDR…
 Mute WebSDR	Stlmiť WebSDR
 Mute TRX	Stlmiť TRX
+⇄	⇄
+Mute ExpertSDR	Stlmiť ExpertSDR
 Auto-connect at startup	Automaticky pripojiť pri štarte
 Dark mode	Tmavý režim
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	nedostupné
 unexpected format	neočakávaný formát
 Find WebSDRs (France and neighbouring countries)	Nájsť WebSDR (Francúzsko a susedné krajiny)
 All	Všetky
-Hide those already in favorites	Skryť tie, ktoré už sú v obľúbených
 Max distance from the centre of France (km):	Max. vzdialenosť od stredu Francúzska (km):
 Filter:	Filter:
 Type:	Typ:
 Location	Umiestnenie
 Country	Krajina
 Users	Použ.
-Listen to selection	Počúvať výber
 Add checked to favorites	Pridať začiarknuté do obľúbených
 Refresh	Obnoviť
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Prehľadávanie adresárov (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Najprv vyberte prijímač v zozname.
-{0} receiver(s) shown, {1} checked   —   sources: 	Zobrazené prijímače: {0}, začiarknuté: {1}   —   zdroje: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	Pridané obľúbené: {0}. Môžete ich premenovať v „Spravovať obľúbené…“.
+Please check the receivers to add first.	Najprv začiarknite prijímače, ktoré chcete pridať.
+Add to favorites	Pridať do obľúbených
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Zobrazené prijímače: {0}, začiarknuté: {1}, skryté (už v obľúbených): {2}   —   zdroje: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Pridané obľúbené: {0} (zoznam „{1}“). Môžete ich premenovať v „Spravovať obľúbené…“.

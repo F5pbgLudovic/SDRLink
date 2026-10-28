@@ -4,7 +4,9 @@ cannot open, error 	nem nyitható meg, hiba
 Name:	Név:
 Address:	Cím:
 Cancel	Mégse
+List:	Lista:
 Please enter a name and an address.	Adjon meg egy nevet és egy címet.
+Save to list:	Mentés listába:
 Rename list	Lista átnevezése
 Favorite manager	Kedvencek kezelése
 Add favorite…	Kedvenc hozzáadása…
@@ -19,13 +21,13 @@ Check	Ellenőrzés
 Check favorites	Kedvencek ellenőrzése
 Check all	Összes bejelölése
 Uncheck all	Jelölések törlése
-List:	Lista:
 Move to ▸	Áthelyezés ▸
 (right-click the list to rename it)	(az átnevezéshez kattintson jobb gombbal a listára)
 Name	Név
 Address	Cím
 Status	Állapot
 List	Lista
+Listen to selection	Kijelölt hallgatása
 Open	Megnyitás
 Close	Bezárás
 All lists	Összes lista
@@ -45,16 +47,16 @@ Import favorites	Kedvencek importálása
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Kedvencek (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Minden fájl (*.*)|*.*
 Export favorites	Kedvencek exportálása
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, Excellel olvasható (*.csv)|*.csv|Böngésző-könyvjelzők (*.html)|*.html|Szöveg (*.txt)|*.txt
+This WebSDR is already in "{0}".	Ez a WebSDR már szerepel a(z) „{0}” listában.
 List {0}	Lista {0}
 Rename "{0}"…	„{0}” átnevezése…
 {0} favorite(s) moved to "{1}".	{0} kedvenc áthelyezve a(z) „{1}” listába.
 {0} favorite(s) shown, {1} checked	{0} kedvenc látható, {1} bejelölve
 Remove favorite "{0}"?	Eltávolítja a(z) „{0}” kedvencet?
 Remove the {0} checked favorites?	Eltávolítja a {0} bejelölt kedvencet?
-duplicate of "{0}"	ismétlődés: „{0}”
 Checking {0} address(es)…	{0} cím ellenőrzése…
 Checking… {0} left	Ellenőrzés… még {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Ellenőrzés kész: {0} halott link, {1} ismétlődés bejelölve. Az „Eltávolítás…” gombbal törölheti őket.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Ellenőrzés kész: {1} ismétlődés eltávolítva, {0} halott link bejelölve. Az „Eltávolítás…” gombbal törölheti őket.
 {0} favorite(s) imported, {1} already present.	{0} kedvenc importálva, {1} már megvolt.
 {0} favorite(s) exported.	{0} kedvenc exportálva.
 rigctld connection closed	A rigctld-kapcsolat bezárult
@@ -65,6 +67,7 @@ HRD connection closed	A HRD-kapcsolat bezárult
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nincs HRD-szerver itt: {0}:{1} (engedélyezze az IP-szervert a HRD Rig Control programban).
 Cannot open the log: 	A napló nem nyitható meg: 
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
+Toggle Mute WebSDR and Mute TRX	WebSDR némítás és TRX némítás váltása
 RIG	RÁDIÓ
 Disconnected	Nincs kapcsolat
 Connect	Csatlakozás
@@ -94,6 +97,9 @@ SDRLINK cable	SDRLINK kábel
  (off) ▾	 (ki) ▾
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	ExpertSDR TCI-portja
+TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Az adás automatikusan leállt ennyi idő után: {0} (biztonsági időkorlát, a módosításhoz kattintson jobb gombbal a PTT-re)
 Remove "{0}" from the list	„{0}” eltávolítása a listából
 Remove all ({0} values)	Összes eltávolítása ({0} érték)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Kész: a ha
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Az átnevezés nem sikerült ({0}).\n\nKézzel: Hang vezérlőpult › Felvétel lap › „{1}” › Tulajdonságok › név.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kábel: a WebSDR hangja ide megy: „{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK kábel: „{0}”: {1}
-This page is already in "{0}".	Ez az oldal már szerepel a(z) „{0}” listában.
-Add favorite to "{0}"	Kedvenc hozzáadása a(z) „{0}” listához
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	Az SDRLink nem tudja elnémítani az ExpertSDR-t: az ExpertSDR nem a Windowson keresztül szól (a hang a rádióból vagy ASIO-n keresztül jön), és a TCI-kiszolgálója nem válaszol a(z) {0} porton.\n\nAz ExpertSDR-ben kapcsolja be a TCI-kiszolgálót (Options > TCI). Ha a portja nem {0}, állítsa be az „ExpertSDR némítás” gombra jobb gombbal kattintva.
+"{0}" added to "{1}".	„{0}” hozzáadva a(z) „{1}” listához.
 This page is not in "{0}".	Ez az oldal nem szerepel a(z) „{0}” listában.
 Remove "{0}" from "{1}"?	Eltávolítja a(z) „{0}” elemet a(z) „{1}” listából?
 Interface:	Interfész:
@@ -130,6 +136,7 @@ Step:	Lépés:
 WebSDR:	WebSDR:
 Volume:	Hangerő:
 TRX volume:	TRX hangerő:
+ExpertSDR volume:	ExpertSDR hangerő:
 Open log	Napló megnyitása
 …	…
 Download Hamlib…	Hamlib letöltése…
@@ -145,6 +152,8 @@ Manage favorites…	Kedvencek kezelése…
 Find WebSDRs…	WebSDR-ek keresése…
 Mute WebSDR	WebSDR némítás
 Mute TRX	TRX némítás
+⇄	⇄
+Mute ExpertSDR	ExpertSDR némítás
 Auto-connect at startup	Automatikus csatlakozás indításkor
 Dark mode	Sötét mód
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	nem elérhető
 unexpected format	váratlan formátum
 Find WebSDRs (France and neighbouring countries)	WebSDR-ek keresése (Franciaország és szomszédos országok)
 All	Mind
-Hide those already in favorites	A már kedvencek közt lévők elrejtése
 Max distance from the centre of France (km):	Max. távolság Franciaország közepétől (km):
 Filter:	Szűrő:
 Type:	Típus:
 Location	Hely
 Country	Ország
 Users	Felh.
-Listen to selection	Kijelölt hallgatása
 Add checked to favorites	Bejelöltek a kedvencekhez
 Refresh	Frissítés
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Keresés a címtárakban (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Először válasszon ki egy vevőt a listában.
-{0} receiver(s) shown, {1} checked   —   sources: 	{0} vevő látható, {1} bejelölve   —   források: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} kedvenc hozzáadva. Átnevezheti őket a „Kedvencek kezelése…” menüpontban.
+Please check the receivers to add first.	Előbb jelölje be a hozzáadandó vevőket.
+Add to favorites	Hozzáadás a kedvencekhez
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} vevő látható, {1} bejelölve, {2} már kedvencként elrejtve   —   források: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} kedvenc hozzáadva a(z) „{1}” listához. Átnevezheti őket a „Kedvencek kezelése…” menüpontban.

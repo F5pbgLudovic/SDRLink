@@ -4,7 +4,9 @@ cannot open, error 	nepavyksta atidaryti, klaida
 Name:	Pavadinimas:
 Address:	Adresas:
 Cancel	Atšaukti
+List:	Sąrašas:
 Please enter a name and an address.	Įveskite pavadinimą ir adresą.
+Save to list:	Įrašyti į sąrašą:
 Rename list	Pervardyti sąrašą
 Favorite manager	Parankinių tvarkytuvė
 Add favorite…	Įtraukti į parankinius…
@@ -19,13 +21,13 @@ Check	Tikrinimas
 Check favorites	Tikrinti parankinius
 Check all	Žymėti visus
 Uncheck all	Nužymėti visus
-List:	Sąrašas:
 Move to ▸	Perkelti į ▸
 (right-click the list to rename it)	(spustelėkite sąrašą dešiniuoju pelės mygtuku, kad jį pervardytumėte)
 Name	Pavadinimas
 Address	Adresas
 Status	Būsena
 List	Sąrašas
+Listen to selection	Klausyti pasirinkto
 Open	Atidaryti
 Close	Uždaryti
 All lists	Visi sąrašai
@@ -45,16 +47,16 @@ Import favorites	Importuoti parankinius
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Parankiniai (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Visi failai (*.*)|*.*
 Export favorites	Eksportuoti parankinius
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, skaitomas Excel (*.csv)|*.csv|Naršyklės žymės (*.html)|*.html|Tekstas (*.txt)|*.txt
+This WebSDR is already in "{0}".	Šis WebSDR jau yra sąraše „{0}“.
 List {0}	Sąrašas {0}
 Rename "{0}"…	Pervardyti „{0}“…
 {0} favorite(s) moved to "{1}".	Į „{1}“ perkelta parankinių: {0}.
 {0} favorite(s) shown, {1} checked	Rodoma parankinių: {0}, pažymėta: {1}
 Remove favorite "{0}"?	Šalinti parankinį „{0}“?
 Remove the {0} checked favorites?	Šalinti pažymėtus parankinius ({0})?
-duplicate of "{0}"	„{0}“ dublikatas
 Checking {0} address(es)…	Tikrinama adresų: {0}…
 Checking… {0} left	Tikrinama… liko {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Tikrinimas baigtas, pažymėta: neveikiančių nuorodų – {0}, dublikatų – {1}. Spustelėkite „Šalinti…“, kad juos ištrintumėte.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Tikrinimas baigtas: pašalinta dublikatų – {1}, pažymėta neveikiančių nuorodų – {0}. Spustelėkite „Šalinti…“, kad jas ištrintumėte.
 {0} favorite(s) imported, {1} already present.	Importuota parankinių: {0}, jau buvo: {1}.
 {0} favorite(s) exported.	Eksportuota parankinių: {0}.
 rigctld connection closed	rigctld ryšys uždarytas
@@ -65,6 +67,7 @@ HRD connection closed	HRD ryšys uždarytas
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nėra HRD serverio adresu {0}:{1} (įjunkite IP serverį programoje HRD Rig Control).
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
 Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
+Toggle Mute WebSDR and Mute TRX	Perjungti Nutildyti WebSDR ir Nutildyti TRX
 RIG	STOTIS
 Disconnected	Atsijungta
 Connect	Prisijungti
@@ -94,6 +97,9 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (išj.) ▾
 Mute TRX: connect the rig first	Nutildyti TRX: pirmiausia prijunkite stotį
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Stoties garsumas nepasiekiamas su šia stotimi ar sąsaja (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	ExpertSDR TCI prievadas
+TCI server port (ExpertSDR, Options > TCI):	TCI serverio prievadas (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	ExpertSDR TCI prievadas: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Siuntimas automatiškai sustabdytas po {0} (saugos laikmatis; norėdami pakeisti, spustelėkite PTT dešiniuoju mygtuku)
 Remove "{0}" from the list	Šalinti „{0}“ iš sąrašo
 Remove all ({0} values)	Šalinti viską (reikšmių: {0})
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Atlikta: ga
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pervardyti nepavyko ({0}).\n\nRankiniu būdu: Garso valdymo skydas › skirtukas Įrašymas › „{1}“ › Ypatybės › pavadinimas.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR garsas siunčiamas į „{0}“
 SDRLINK cable: "{0}": {1}	SDRLINK kabelis: „{0}“: {1}
-This page is already in "{0}".	Šis puslapis jau yra sąraše „{0}“.
-Add favorite to "{0}"	Įtraukti į sąrašą „{0}“
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink negali nutildyti ExpertSDR: ExpertSDR garso neleidžia per Windows (garsas sklinda iš radijo stoties arba per ASIO), o jo TCI serveris neatsako prievade {0}.\n\nExpertSDR įjunkite TCI serverį (Options > TCI). Jei jo prievadas nėra {0}, nustatykite jį dešiniuoju pelės mygtuku spustelėję „Nutildyti ExpertSDR“.
+"{0}" added to "{1}".	„{0}“ įtrauktas į „{1}“.
 This page is not in "{0}".	Šio puslapio nėra sąraše „{0}“.
 Remove "{0}" from "{1}"?	Šalinti „{0}“ iš „{1}“?
 Interface:	Sąsaja:
@@ -130,6 +136,7 @@ Step:	Žingsnis:
 WebSDR:	WebSDR:
 Volume:	Garsumas:
 TRX volume:	TRX garsumas:
+ExpertSDR volume:	ExpertSDR garsumas:
 Open log	Atidaryti žurnalą
 …	…
 Download Hamlib…	Atsisiųsti Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Tvarkyti parankinius…
 Find WebSDRs…	Ieškoti WebSDR…
 Mute WebSDR	Nutildyti WebSDR
 Mute TRX	Nutildyti TRX
+⇄	⇄
+Mute ExpertSDR	Nutildyti ExpertSDR
 Auto-connect at startup	Autom. jungtis paleidžiant
 Dark mode	Tamsus režimas
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	nepasiekiama
 unexpected format	netikėtas formatas
 Find WebSDRs (France and neighbouring countries)	Ieškoti WebSDR (Prancūzija ir kaimyninės šalys)
 All	Visi
-Hide those already in favorites	Slėpti jau esančius parankiniuose
 Max distance from the centre of France (km):	Didž. atstumas nuo Prancūzijos centro (km):
 Filter:	Filtras:
 Type:	Tipas:
 Location	Vieta
 Country	Šalis
 Users	Naud.
-Listen to selection	Klausyti pasirinkto
 Add checked to favorites	Pažymėtus į parankinius
 Refresh	Atnaujinti
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Ieškoma kataloguose (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Pirmiausia sąraše pasirinkite imtuvą.
-{0} receiver(s) shown, {1} checked   —   sources: 	Rodoma imtuvų: {0}, pažymėta: {1}   —   šaltiniai: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	Įtraukta parankinių: {0}. Juos galite pervardyti lange „Tvarkyti parankinius…“.
+Please check the receivers to add first.	Pirmiausia pažymėkite norimus įtraukti imtuvus.
+Add to favorites	Įtraukti į parankinius
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Rodoma imtuvų: {0}, pažymėta: {1}, paslėpta (jau parankiniuose) – {2}   —   šaltiniai: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Į sąrašą „{1}“ įtraukta parankinių: {0}. Juos galite pervardyti lange „Tvarkyti parankinius…“.

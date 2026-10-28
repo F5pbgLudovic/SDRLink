@@ -166,12 +166,15 @@ namespace SDRLink
             return list;
         }
 
-        // Clé de comparaison d'adresses (doublons entre annuaires) : hôte + port + chemin.
+        // Clé de comparaison d'adresses (doublons entre annuaires, favoris) : hôte + port + chemin.
+        // Les relais xxx.proxy.kiwisdr.com répondent sur le port 80 comme sur 8073 : le port n'y compte pas.
         public static string UrlKey(string url)
         {
             Uri u;
             if (!Uri.TryCreate((url ?? "").Trim(), UriKind.Absolute, out u)) return null;
-            return (u.Host + ":" + u.Port + u.AbsolutePath.TrimEnd('/')).ToLowerInvariant();
+            string host = u.Host.ToLowerInvariant();
+            string port = host.EndsWith(".proxy.kiwisdr.com") ? "" : ":" + u.Port;
+            return (host + port + u.AbsolutePath.TrimEnd('/')).ToLowerInvariant();
         }
 
         public static double Distance(double lat1, double lon1, double lat2, double lon2)
@@ -268,7 +271,6 @@ namespace SDRLink
         readonly NumericUpDown numDist = new NumericUpDown();
         readonly TextBox txtFilter = new TextBox();
         readonly ComboBox cbType = new ComboBox();
-        readonly CheckBox chkHideFav = new CheckBox();
         readonly Label lblStatus = new Label();
         List<FoundSdr> found = new List<FoundSdr>();
         readonly Dictionary<string, bool> checkedKeys = new Dictionary<string, bool>();
@@ -276,11 +278,13 @@ namespace SDRLink
         bool sortDesc;
 
         public int Added;
-        public int TargetList;      // liste de favoris où vont les récepteurs ajoutés
+        public int TargetList;      // liste proposée pour les récepteurs ajoutés (choix demandé à chaque ajout)
+        readonly string[] listNames;
 
-        public WebSdrSearchDialog(List<Favorite> favorites, Action<string> listen)
+        public WebSdrSearchDialog(List<Favorite> favorites, string[] listNames, Action<string> listen)
         {
             favs = favorites;
+            this.listNames = listNames;
             this.listen = listen;
             Text = Lang.T("Rechercher des WebSDR (France et pays voisins)", "Find WebSDRs (France and neighbouring countries)");
             StartPosition = FormStartPosition.CenterParent;
@@ -297,20 +301,15 @@ namespace SDRLink
             cbType.Width = 120;
             cbType.Items.AddRange(new object[] { Lang.T("Tous", "All"), "websdr.org", "KiwiSDR", "OpenWebRX", "WebSDR" });
             cbType.SelectedIndex = 0;
-            chkHideFav.Text = Lang.T("Masquer ceux déjà en favoris", "Hide those already in favorites");
-            chkHideFav.AutoSize = true;
-            chkHideFav.Checked = true;
             top.Controls.Add(L(Lang.T("Distance max du centre de la France (km) :", "Max distance from the centre of France (km):")));
             top.Controls.Add(numDist);
             top.Controls.Add(L(Lang.T("Filtre :", "Filter:")));
             top.Controls.Add(txtFilter);
             top.Controls.Add(L(Lang.T("Type :", "Type:")));
             top.Controls.Add(cbType);
-            top.Controls.Add(chkHideFav);
             numDist.ValueChanged += delegate { Fill(); };
             txtFilter.TextChanged += delegate { Fill(); };
             cbType.SelectedIndexChanged += delegate { Fill(); };
-            chkHideFav.CheckedChanged += delegate { Fill(); };
 
             view.Dock = DockStyle.Fill;
             view.View = View.Details;
@@ -405,16 +404,20 @@ namespace SDRLink
         }
 
         // Applique les filtres et le tri, sans perdre les cases déjà cochées.
+        int hiddenFavs;   // récepteurs masqués parce qu'ils sont déjà en favoris (dans la distance et les filtres)
+
         void Fill()
         {
+            int hidden = 0;
             string filter = txtFilter.Text.Trim().ToLowerInvariant();
             string type = cbType.SelectedIndex > 0 ? (string)cbType.SelectedItem : null;
             List<FoundSdr> shown = found.FindAll(delegate(FoundSdr s)
             {
                 if (s.DistanceKm > (double)numDist.Value) return false;
                 if (type != null && !string.Equals(s.Type, type, StringComparison.OrdinalIgnoreCase)) return false;
-                if (chkHideFav.Checked && IsFavorite(s)) return false;
-                return filter == "" || (s.Name + " " + s.Location + " " + s.Country + " " + s.Url).ToLowerInvariant().Contains(filter);
+                if (filter != "" && !(s.Name + " " + s.Location + " " + s.Country + " " + s.Url).ToLowerInvariant().Contains(filter)) return false;
+                if (IsFavorite(s)) { hidden++; return false; }   // déjà dans une liste de favoris : jamais proposé
+                return true;
             });
             shown.Sort(delegate(FoundSdr a, FoundSdr b)
             {
@@ -439,6 +442,7 @@ namespace SDRLink
                 view.Items.Add(it);
             }
             view.EndUpdate();
+            hiddenFavs = hidden;
             UpdateStatus();
         }
 
@@ -463,8 +467,8 @@ namespace SDRLink
         void UpdateStatus()
         {
             if (found.Count == 0 && sourcesReport == "") return;
-            lblStatus.Text = Lang.F("{0} récepteur(s) affiché(s), {1} coché(s)   —   sources : ",
-                                    "{0} receiver(s) shown, {1} checked   —   sources: ", view.Items.Count, checkedKeys.Count) + sourcesReport;
+            lblStatus.Text = Lang.F("{0} récepteur(s) affiché(s), {1} coché(s), {2} déjà en favoris masqué(s)   —   sources : ",
+                                    "{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: ", view.Items.Count, checkedKeys.Count, hiddenFavs) + sourcesReport;
         }
 
         void SetAll(bool on)
@@ -486,20 +490,30 @@ namespace SDRLink
 
         void AddChecked()
         {
+            if (checkedKeys.Count == 0)
+            {
+                MessageBox.Show(this, Lang.T("Cochez d'abord les récepteurs à ajouter.", "Please check the receivers to add first."), "SDRLink");
+                return;
+            }
+            int list = FavoriteEditDialog.AskList(this, Lang.T("Ajouter aux favoris", "Add to favorites"), listNames, TargetList);
+            if (list < 0) return;
+            TargetList = list;
             int n = 0;
             foreach (FoundSdr s in found)
             {
-                if (!checkedKeys.ContainsKey(WebSdrFinder.UrlKey(s.Url)) || IsFavorite(s)) continue;
+                // Déjà présent dans la liste choisie : pas ajouté une seconde fois.
+                if (!checkedKeys.ContainsKey(WebSdrFinder.UrlKey(s.Url))
+                    || favs.Exists(delegate(Favorite f) { return f.List == list && f.Matches(s.Url); })) continue;
                 string name = s.Name.Length > 90 ? s.Name.Substring(0, 90).Trim() + "…" : s.Name;
                 if (s.Country != "" && name.IndexOf(s.Country, StringComparison.OrdinalIgnoreCase) < 0) name += " (" + s.Country + ")";
-                favs.Add(new Favorite(name, s.Url) { List = TargetList });
+                favs.Add(new Favorite(name, s.Url) { List = list });
                 n++;
             }
             Added += n;
             checkedKeys.Clear();
             Fill();
-            MessageBox.Show(this, Lang.F("{0} favori(s) ajouté(s). Vous pouvez les renommer dans « Gérer les favoris… ».",
-                                         "{0} favorite(s) added. You can rename them in \"Manage favorites…\".", n), "SDRLink");
+            MessageBox.Show(this, Lang.F("{0} favori(s) ajouté(s) à « {1} ». Vous pouvez les renommer dans « Gérer les favoris… ».",
+                                         "{0} favorite(s) added to \"{1}\". You can rename them in \"Manage favorites…\".", n, FavoritesDialog.ListLabel(listNames, list)), "SDRLink");
         }
     }
 }

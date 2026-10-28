@@ -1,11 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace SDRLink
 {
     // Périphériques audio de Windows (Core Audio) : retrouve les deux bouts d'un câble virtuel et renomme
-    // le bout "enregistrement" (celui que WSJT-X choisit comme entrée), comme le fait le panneau Son de Windows.
+    // le bout "enregistrement" (celui que WSJT-X choisit comme entrée), comme le fait le panneau Son de Windows ;
+    // coupe aussi le son d'un autre logiciel (ExpertSDR) dans le mélangeur de volume.
     public static class AudioEndpoints
     {
         public class Endpoint
@@ -108,6 +109,91 @@ namespace SDRLink
             }
         }
 
+        // Coupure du son d'un logiciel dans le mélangeur de volume de Windows (toutes les sorties) :
+        // mute = null lit l'état, sinon l'applique. Retourne true si toutes ses sessions sont coupées,
+        // false sinon, null s'il n'a aucune session audio.
+        public static bool? ProcessMute(Predicate<int> isProcess, bool? mute)
+        {
+            bool allMuted = true;
+            bool any = ForEachSession(isProcess, delegate(ISimpleAudioVolume vol)
+            {
+                if (mute.HasValue) vol.SetMute(mute.Value ? 1 : 0, IntPtr.Zero);
+                int m;
+                vol.GetMute(out m);
+                if (m == 0) allMuted = false;
+            });
+            return any ? allMuted : (bool?)null;
+        }
+
+        // Volume d'un logiciel dans le mélangeur (0 à 100 %) : percent = null le lit (le plus fort de ses sessions),
+        // sinon l'applique à toutes ses sessions. Retourne -1 s'il n'a aucune session audio.
+        public static int ProcessVolume(Predicate<int> isProcess, int? percent)
+        {
+            float max = -1;
+            ForEachSession(isProcess, delegate(ISimpleAudioVolume vol)
+            {
+                if (percent.HasValue) vol.SetMasterVolume(Math.Max(0, Math.Min(100, percent.Value)) / 100f, IntPtr.Zero);
+                float level;
+                if (vol.GetMasterVolume(out level) == 0 && level > max) max = level;
+            });
+            return max < 0 ? -1 : (int)Math.Round(max * 100);
+        }
+
+        delegate void SessionAction(ISimpleAudioVolume vol);
+
+        // Applique l'action à chaque session audio (toutes les sorties) des processus choisis ; false s'il n'y en a aucune.
+        static bool ForEachSession(Predicate<int> isProcess, SessionAction action)
+        {
+            bool any = false;
+            IMMDeviceEnumerator en = (IMMDeviceEnumerator)new MMDeviceEnumeratorCom();
+            try
+            {
+                IMMDeviceCollection col;
+                if (en.EnumAudioEndpoints(eRender, DEVICE_STATE_ACTIVE, out col) != 0) return false;
+                int n;
+                col.GetCount(out n);
+                for (int i = 0; i < n; i++)
+                {
+                    IMMDevice d;
+                    if (col.Item(i, out d) != 0) continue;
+                    Guid iid = typeof(IAudioSessionManager2).GUID;
+                    IntPtr p;
+                    if (d.Activate(ref iid, CLSCTX_ALL, IntPtr.Zero, out p) == 0)
+                    {
+                        IAudioSessionManager2 mgr = (IAudioSessionManager2)Marshal.GetObjectForIUnknown(p);
+                        Marshal.Release(p);
+                        IAudioSessionEnumerator sessions;
+                        if (mgr.GetSessionEnumerator(out sessions) == 0)
+                        {
+                            int count;
+                            sessions.GetCount(out count);
+                            for (int k = 0; k < count; k++)
+                            {
+                                object o;
+                                if (sessions.GetSession(k, out o) != 0) continue;
+                                IAudioSessionControl2 ctl = o as IAudioSessionControl2;
+                                int pid;
+                                if (ctl != null && ctl.GetProcessId(out pid) == 0 && isProcess(pid))
+                                {
+                                    action((ISimpleAudioVolume)o);
+                                    any = true;
+                                }
+                                Marshal.ReleaseComObject(o);
+                            }
+                            Marshal.ReleaseComObject(sessions);
+                        }
+                        Marshal.ReleaseComObject(mgr);
+                    }
+                    Marshal.ReleaseComObject(d);
+                }
+                Marshal.ReleaseComObject(col);
+            }
+            finally { Marshal.ReleaseComObject(en); }
+            return any;
+        }
+
+        const int CLSCTX_ALL = 23;
+
         static string GetString(IPropertyStore ps, PropertyKey key)
         {
             PropVariant v;
@@ -168,6 +254,48 @@ namespace SDRLink
             [PreserveSig] int GetValue(ref PropertyKey key, out PropVariant value);
             [PreserveSig] int SetValue(ref PropertyKey key, ref PropVariant value);
             [PreserveSig] int Commit();
+        }
+
+        [ComImport, Guid("77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        interface IAudioSessionManager2
+        {
+            [PreserveSig] int GetAudioSessionControl(IntPtr sessionGuid, int flags, out IntPtr control);
+            [PreserveSig] int GetSimpleAudioVolume(IntPtr sessionGuid, int flags, out IntPtr volume);
+            [PreserveSig] int GetSessionEnumerator(out IAudioSessionEnumerator sessions);
+        }
+
+        [ComImport, Guid("E2F5BB11-0570-40CA-ACDD-3AA01277DEE8"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        interface IAudioSessionEnumerator
+        {
+            [PreserveSig] int GetCount(out int count);
+            [PreserveSig] int GetSession(int index, [MarshalAs(UnmanagedType.IUnknown)] out object session);
+        }
+
+        // IAudioSessionControl puis IAudioSessionControl2 : seules les méthodes de lecture du processus servent.
+        [ComImport, Guid("bfb7ff88-7239-4fc9-8fa2-07c950be9c6d"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        interface IAudioSessionControl2
+        {
+            [PreserveSig] int GetState(out int state);
+            [PreserveSig] int GetDisplayName(out IntPtr name);
+            [PreserveSig] int SetDisplayName(IntPtr name, IntPtr context);
+            [PreserveSig] int GetIconPath(out IntPtr path);
+            [PreserveSig] int SetIconPath(IntPtr path, IntPtr context);
+            [PreserveSig] int GetGroupingParam(out Guid group);
+            [PreserveSig] int SetGroupingParam(IntPtr group, IntPtr context);
+            [PreserveSig] int RegisterAudioSessionNotification(IntPtr client);
+            [PreserveSig] int UnregisterAudioSessionNotification(IntPtr client);
+            [PreserveSig] int GetSessionIdentifier(out IntPtr id);
+            [PreserveSig] int GetSessionInstanceIdentifier(out IntPtr id);
+            [PreserveSig] int GetProcessId(out int pid);
+        }
+
+        [ComImport, Guid("87CE5498-68D6-44E5-9215-6DA47EF883D8"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        interface ISimpleAudioVolume
+        {
+            [PreserveSig] int SetMasterVolume(float level, IntPtr context);
+            [PreserveSig] int GetMasterVolume(out float level);
+            [PreserveSig] int SetMute(int mute, IntPtr context);
+            [PreserveSig] int GetMute(out int mute);
         }
     }
 }

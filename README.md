@@ -1,4 +1,4 @@
-﻿# SDRLink V1.4.1 — @F5PBG 2026
+# SDRLink V1.5 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -8,8 +8,8 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 - **Fonctions** :
   - bouton PTT et coupure du son du WebSDR en émission ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
-  - favoris avec vérification des liens, recherche des WebSDR proches de la France ;
-  - volume du WebSDR et du poste ;
+  - favoris en 4 listes avec vérification des liens et des doublons, recherche des WebSDR proches de la France ;
+  - volume du WebSDR, du poste et d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
   - interface en 23 langues européennes ;
   - mode sombre et palette.

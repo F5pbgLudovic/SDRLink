@@ -48,6 +48,18 @@ namespace SDRLink
             client.ReceiveTimeout = 3000;
             stream = client.GetStream();
 
+            Probe();
+        }
+
+        // Liste des modes, boutons d'émission et curseur de volume du poste affiché dans HRD. Refait quand on
+        // change de poste dans HRD sans reconnecter SDRLink (FT-2000, puis FTdx10...).
+        void Probe()
+        {
+            prefix = "";
+            afSlider = null;
+            afMin = 0;
+            afMax = -1;
+            voxBaseline = null;
             string ctx = Command("get context");
             if (!string.IsNullOrEmpty(ctx) && ctx.Trim() != "0") prefix = "[" + ctx.Trim() + "] ";
 
@@ -83,9 +95,22 @@ namespace SDRLink
 
         public void Dispose() { Close(); }
 
+        DateTime nextRadioCheck;
+
         public bool Read(out long freqHz, out string mode)
         {
             mode = null;
+            // Toutes les 5 s : poste changé dans HRD ? On relit alors ses modes, boutons et curseur de volume.
+            if (DateTime.UtcNow >= nextRadioCheck)
+            {
+                nextRadioCheck = DateTime.UtcNow.AddSeconds(5);
+                string radio = (Command("get radio") ?? "").Trim();
+                if (radio != "" && radio != radioName)
+                {
+                    Log.Write("HRD : changement de poste [" + radioName + "] -> [" + radio + "]");
+                    Probe();
+                }
+            }
             string f = Command("get frequency");
             if (!long.TryParse((f ?? "").Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out freqHz) || freqHz <= 0)
                 return false;
@@ -131,14 +156,22 @@ namespace SDRLink
         {
             radioName = (Command("get radio") ?? "").Trim();
             string[] sliders = Distinct(Command("get sliders"));
-            foreach (string pref in new[] { "AF gain (main)", "AF gain", "AF Gain", "Volume" })
+            foreach (string pref in new[] { "AF gain (main)", "AF gain", "AF Gain", "Main AF gain", "AF gain main", "Volume" })
                 foreach (string s in sliders)
                     if (afSlider == null && s.Equals(pref, StringComparison.OrdinalIgnoreCase)) afSlider = s;
+            // Sinon : un curseur "AF..." (AF gain, AF-Gain, AF level...) ou "Volume...", hors réception secondaire (sub).
             if (afSlider == null)
                 foreach (string s in sliders)
-                    if (s.IndexOf("AF", StringComparison.OrdinalIgnoreCase) >= 0 && s.IndexOf("gain", StringComparison.OrdinalIgnoreCase) >= 0
-                        && s.IndexOf("sub", StringComparison.OrdinalIgnoreCase) < 0) { afSlider = s; break; }
-            if (afSlider == null || radioName == "") { Log.Write("HRD : pas de curseur de volume (AF gain) pour ce poste"); return; }
+                {
+                    string l = s.ToLowerInvariant();
+                    if (l.Contains("sub") || l.Contains("rf") || l.Contains("mic") || l.Contains("monitor")) continue;
+                    if (l.StartsWith("af") || l.Contains(" af") || l.Contains("volume")) { afSlider = s; break; }
+                }
+            if (afSlider == null || radioName == "")
+            {
+                Log.Write("HRD : pas de curseur de volume pour [" + radioName + "], curseurs disponibles : " + string.Join(", ", sliders));
+                return;
+            }
 
             string range = Command("get slider-range " + SliderArgs()) ?? "";
             string pos = Command("get slider-pos " + SliderArgs()) ?? "";

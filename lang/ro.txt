@@ -4,7 +4,9 @@ cannot open, error 	nu se poate deschide, eroare
 Name:	Nume:
 Address:	Adresă:
 Cancel	Anulare
+List:	Listă:
 Please enter a name and an address.	Introduceți un nume și o adresă.
+Save to list:	Salvare în listă:
 Rename list	Redenumire listă
 Favorite manager	Gestionare favorite
 Add favorite…	Adăugare favorit…
@@ -19,13 +21,13 @@ Check	Verificare
 Check favorites	Verificare favorite
 Check all	Bifează tot
 Uncheck all	Debifează tot
-List:	Listă:
 Move to ▸	Mutare în ▸
 (right-click the list to rename it)	(clic dreapta pe listă pentru a o redenumi)
 Name	Nume
 Address	Adresă
 Status	Stare
 List	Listă
+Listen to selection	Ascultare selecție
 Open	Deschidere
 Close	Închidere
 All lists	Toate listele
@@ -45,16 +47,16 @@ Import favorites	Import favorite
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favorite (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Toate fișierele (*.*)|*.*
 Export favorites	Export favorite
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, compatibil Excel (*.csv)|*.csv|Marcaje browser (*.html)|*.html|Text (*.txt)|*.txt
+This WebSDR is already in "{0}".	Acest WebSDR este deja în „{0}”.
 List {0}	Lista {0}
 Rename "{0}"…	Redenumire „{0}”…
 {0} favorite(s) moved to "{1}".	{0} favorit(e) mutat(e) în „{1}”.
 {0} favorite(s) shown, {1} checked	{0} favorit(e) afișat(e), {1} bifat(e)
 Remove favorite "{0}"?	Eliminați favoritul „{0}”?
 Remove the {0} checked favorites?	Eliminați cele {0} favorite bifate?
-duplicate of "{0}"	duplicat al „{0}”
 Checking {0} address(es)…	Verificare {0} adresă(e)…
 Checking… {0} left	Verificare… mai rămân {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Verificare terminată: {0} link(uri) inactiv(e), {1} duplicat(e) bifate. Faceți clic pe „Eliminare…” pentru a le șterge.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Verificare terminată: {1} duplicat(e) eliminat(e), {0} link(uri) inactiv(e) bifate. Faceți clic pe „Eliminare…” pentru a le șterge.
 {0} favorite(s) imported, {1} already present.	{0} favorit(e) importat(e), {1} deja existent(e).
 {0} favorite(s) exported.	{0} favorit(e) exportat(e).
 rigctld connection closed	Conexiune rigctld închisă
@@ -65,6 +67,7 @@ HRD connection closed	Conexiune HRD închisă
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Niciun server HRD la {0}:{1} (activați serverul IP în HRD Rig Control).
 Cannot open the log: 	Nu se poate deschide jurnalul: 
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
+Toggle Mute WebSDR and Mute TRX	Comutare Mut WebSDR și Mut TRX
 RIG	STAȚIE
 Disconnected	Deconectat
 Connect	Conectare
@@ -94,6 +97,9 @@ SDRLINK cable	Cablu SDRLINK
  (off) ▾	 (oprit) ▾
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	Portul TCI al ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	Portul serverului TCI (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Emisie oprită automat după {0} (limită de siguranță, clic dreapta pe PTT pentru a o modifica)
 Remove "{0}" from the list	Eliminare „{0}” din listă
 Remove all ({0} values)	Eliminare toate ({0} valori)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gata: intra
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Redenumirea a eșuat ({0}).\n\nManual: Panou de control Sunet › fila Înregistrare › „{1}” › Proprietăți › nume.
 SDRLINK cable: WebSDR audio sent to "{0}"	Cablu SDRLINK: sunetul WebSDR trimis la „{0}”
 SDRLINK cable: "{0}": {1}	Cablu SDRLINK: „{0}”: {1}
-This page is already in "{0}".	Această pagină este deja în „{0}”.
-Add favorite to "{0}"	Adăugare favorit în „{0}”
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nu poate opri sunetul ExpertSDR: ExpertSDR nu redă sunetul prin Windows (sunetul iese din aparat sau prin ASIO), iar serverul său TCI nu răspunde pe portul {0}.\n\nÎn ExpertSDR, activați serverul TCI (Options > TCI). Dacă portul său nu este {0}, faceți clic dreapta pe „Mut ExpertSDR” pentru a-l indica.
+"{0}" added to "{1}".	„{0}” adăugat în „{1}”.
 This page is not in "{0}".	Această pagină nu este în „{0}”.
 Remove "{0}" from "{1}"?	Eliminați „{0}” din „{1}”?
 Interface:	Interfață:
@@ -130,6 +136,7 @@ Step:	Pas:
 WebSDR:	WebSDR:
 Volume:	Volum:
 TRX volume:	Volum TRX:
+ExpertSDR volume:	Volum ExpertSDR:
 Open log	Deschidere jurnal
 …	…
 Download Hamlib…	Descărcare Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Gestionare favorite…
 Find WebSDRs…	Căutare WebSDR…
 Mute WebSDR	Mut WebSDR
 Mute TRX	Mut TRX
+⇄	⇄
+Mute ExpertSDR	Mut ExpertSDR
 Auto-connect at startup	Conectare automată la pornire
 Dark mode	Mod întunecat
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	indisponibil
 unexpected format	format neașteptat
 Find WebSDRs (France and neighbouring countries)	Căutare WebSDR (Franța și țările vecine)
 All	Toate
-Hide those already in favorites	Ascunde cele deja în favorite
 Max distance from the centre of France (km):	Distanța max. față de centrul Franței (km):
 Filter:	Filtru:
 Type:	Tip:
 Location	Locație
 Country	Țară
 Users	Utiliz.
-Listen to selection	Ascultare selecție
 Add checked to favorites	Adăugare bifate la favorite
 Refresh	Reîmprospătare
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Căutare în directoare (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Selectați mai întâi un receptor din listă.
-{0} receiver(s) shown, {1} checked   —   sources: 	{0} receptor(i) afișat(i), {1} bifat(i)   —   surse: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favorit(e) adăugat(e). Le puteți redenumi în „Gestionare favorite…”.
+Please check the receivers to add first.	Bifați mai întâi receptoarele de adăugat.
+Add to favorites	Adăugare la favorite
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} receptor(i) afișat(i), {1} bifat(i), {2} deja în favorite ascuns(e)   —   surse: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favorit(e) adăugat(e) în „{1}”. Le puteți redenumi în „Gestionare favorite…”.

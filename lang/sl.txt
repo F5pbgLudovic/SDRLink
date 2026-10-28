@@ -4,7 +4,9 @@ cannot open, error 	ni mogoče odpreti, napaka
 Name:	Ime:
 Address:	Naslov:
 Cancel	Prekliči
+List:	Seznam:
 Please enter a name and an address.	Vnesite ime in naslov.
+Save to list:	Shrani na seznam:
 Rename list	Preimenuj seznam
 Favorite manager	Upravitelj priljubljenih
 Add favorite…	Dodaj priljubljeno…
@@ -19,13 +21,13 @@ Check	Preverjanje
 Check favorites	Preveri priljubljene
 Check all	Označi vse
 Uncheck all	Odznači vse
-List:	Seznam:
 Move to ▸	Premakni v ▸
 (right-click the list to rename it)	(seznam preimenujete z desnim klikom nanj)
 Name	Ime
 Address	Naslov
 Status	Stanje
 List	Seznam
+Listen to selection	Poslušaj izbrano
 Open	Odpri
 Close	Zapri
 All lists	Vsi seznami
@@ -45,16 +47,16 @@ Import favorites	Uvozi priljubljene
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Priljubljene (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Vse datoteke (*.*)|*.*
 Export favorites	Izvozi priljubljene
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, berljiv v Excelu (*.csv)|*.csv|Zaznamki brskalnika (*.html)|*.html|Besedilo (*.txt)|*.txt
+This WebSDR is already in "{0}".	Ta WebSDR je že v »{0}«.
 List {0}	Seznam {0}
 Rename "{0}"…	Preimenuj »{0}«…
 {0} favorite(s) moved to "{1}".	Premaknjene priljubljene v »{1}«: {0}.
 {0} favorite(s) shown, {1} checked	Prikazane priljubljene: {0}, označene: {1}
 Remove favorite "{0}"?	Odstranim priljubljeno »{0}«?
 Remove the {0} checked favorites?	Odstranim označene priljubljene ({0})?
-duplicate of "{0}"	dvojnik »{0}«
 Checking {0} address(es)…	Preverjanje naslovov ({0})…
 Checking… {0} left	Preverjanje… preostalo: {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Preverjanje končano. Označeno – mrtve povezave: {0}, dvojniki: {1}. Kliknite »Odstrani…«, da jih izbrišete.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Preverjanje končano. Odstranjeni dvojniki: {1}, označene mrtve povezave: {0}. Kliknite »Odstrani…«, da jih izbrišete.
 {0} favorite(s) imported, {1} already present.	Uvožene priljubljene: {0}, že obstoječe: {1}.
 {0} favorite(s) exported.	Izvožene priljubljene: {0}.
 rigctld connection closed	Povezava z rigctld zaprta
@@ -65,6 +67,7 @@ HRD connection closed	Povezava s HRD zaprta
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} ni strežnika HRD (omogočite strežnik IP v HRD Rig Control).
 Cannot open the log: 	Dnevnika ni mogoče odpreti: 
 Save: no known frequency (rig or WebSDR)	Shrani: frekvenca ni znana (TRX ali WebSDR)
+Toggle Mute WebSDR and Mute TRX	Preklopi Utišaj WebSDR in Utišaj TRX
 RIG	TRX
 Disconnected	Prekinjeno
 Connect	Poveži
@@ -94,6 +97,9 @@ SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (izkl.) ▾
 Mute TRX: connect the rig first	Utišaj TRX: najprej povežite postajo
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnost postaje ni na voljo pri tej postaji ali vmesniku (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	Vrata TCI programa ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	Vrata strežnika TCI (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	Vrata TCI programa ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Oddajanje samodejno ustavljeno po {0} (varnostna omejitev, spremenite jo z desnim klikom na PTT)
 Remove "{0}" from the list	Odstrani »{0}« s seznama
 Remove all ({0} values)	Odstrani vse (vrednosti: {0})
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Končano: z
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Preimenovanje ni uspelo ({0}).\n\nRočno: Nadzorna plošča Zvok › zavihek Snemanje › »{1}« › Lastnosti › ime.
 SDRLINK cable: WebSDR audio sent to "{0}"	Kabel SDRLINK: zvok WebSDR se pošilja v »{0}«
 SDRLINK cable: "{0}": {1}	Kabel SDRLINK: »{0}«: {1}
-This page is already in "{0}".	Ta stran je že v »{0}«.
-Add favorite to "{0}"	Dodaj priljubljeno v »{0}«
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink ne more utišati programa ExpertSDR: ExpertSDR ne predvaja zvoka prek sistema Windows (zvok prihaja iz radijske postaje ali prek ASIO), njegov strežnik TCI pa se ne odziva na vratih {0}.\n\nV programu ExpertSDR vklopite strežnik TCI (Options > TCI). Če njegova vrata niso {0}, jih nastavite z desnim klikom na »Utišaj ExpertSDR«.
+"{0}" added to "{1}".	»{0}« dodano v »{1}«.
 This page is not in "{0}".	Te strani ni v »{0}«.
 Remove "{0}" from "{1}"?	Odstranim »{0}« iz »{1}«?
 Interface:	Vmesnik:
@@ -130,6 +136,7 @@ Step:	Korak:
 WebSDR:	WebSDR:
 Volume:	Glasnost:
 TRX volume:	Glasnost TRX:
+ExpertSDR volume:	Glasnost ExpertSDR:
 Open log	Odpri dnevnik
 …	…
 Download Hamlib…	Prenesi Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Upravljaj priljubljene…
 Find WebSDRs…	Poišči WebSDR…
 Mute WebSDR	Utišaj WebSDR
 Mute TRX	Utišaj TRX
+⇄	⇄
+Mute ExpertSDR	Utišaj ExpertSDR
 Auto-connect at startup	Samodejno poveži ob zagonu
 Dark mode	Temni način
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	ni na voljo
 unexpected format	nepričakovana oblika
 Find WebSDRs (France and neighbouring countries)	Poišči WebSDR (Francija in sosednje države)
 All	Vse
-Hide those already in favorites	Skrij tiste, ki so že med priljubljenimi
 Max distance from the centre of France (km):	Najv. razdalja od središča Francije (km):
 Filter:	Filter:
 Type:	Vrsta:
 Location	Lokacija
 Country	Država
 Users	Upor.
-Listen to selection	Poslušaj izbrano
 Add checked to favorites	Dodaj označene med priljubljene
 Refresh	Osveži
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Iskanje po imenikih (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Najprej izberite sprejemnik na seznamu.
-{0} receiver(s) shown, {1} checked   —   sources: 	Prikazani sprejemniki: {0}, označeni: {1}   —   viri: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	Dodane priljubljene: {0}. Preimenujete jih lahko v »Upravljaj priljubljene…«.
+Please check the receivers to add first.	Najprej označite sprejemnike, ki jih želite dodati.
+Add to favorites	Dodaj med priljubljene
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Prikazani sprejemniki: {0}, označeni: {1}, skrite (že med priljubljenimi): {2}   —   viri: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Dodane priljubljene: {0} (seznam »{1}«). Preimenujete jih lahko v »Upravljaj priljubljene…«.

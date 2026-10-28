@@ -37,8 +37,17 @@ namespace SDRLink
         CheckBox chkHamlibLaunch;
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
-        Button btnMuteSdr, btnMuteRig;
+        Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr;
         bool sdrMuted, rigMuted;
+        bool esdrMuted, esdrMutedByUs;   // son d'ExpertSDR coupé, et coupé par SDRLink
+        bool esdrRunning, esdrWin;       // ExpertSDR lancé ; il joue par le son de Windows (sinon : liaison TCI)
+        ExpertSdrTci esdrTci;            // liaison TCI permanente avec ExpertSDR (mute, volume)
+        DateTime esdrTciRetry;
+        bool esdrConnecting, esdrVolumeLoading;
+        int esdrPoll;
+        Label lblRigVolumeCaption, lblEsdrVolumeCaption, lblEsdrVolume;
+        TrackBar trkEsdrVolume;
+        readonly ToolTip tips = new ToolTip();
         int rigAfSupported = -1;    // -1 inconnu (pas connecté), 0 non pris en charge, 1 disponible
         bool rigVolumeLoading;
         Favorite currentFav;        // favori correspondant à la page affichée (porte son volume), null sinon
@@ -98,7 +107,7 @@ namespace SDRLink
             };
             // Surveillance de la synchro (toutes les secondes) et délai de sécurité du PTT.
             syncTimer.Interval = 1000;
-            syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); UpdateDisplays(); };
+            syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); UpdateDisplays(); if (++esdrPoll % 3 == 0) CheckExpertSdr(); else RefreshExpertSdr(); };
             syncTimer.Start();
             LoadSettingsIntoUi();
             Load += delegate
@@ -106,13 +115,16 @@ namespace SDRLink
                 InitWebView();
                 if (settings.AutoConnect) Connect();
             };
-            Shown += delegate { ApplyCompact(); };
+            Shown += delegate { ApplyCompact(); FirstRunSearch(); };
             Application.AddMessageFilter(new WheelFilter(this));
             Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyCompact(); };
             FormClosing += delegate
             {
                 Disconnect();
                 if (cableSink != null) { cableSink.Dispose(); cableSink = null; }
+                // ExpertSDR coupé par SDRLink : son rétabli (Windows garde la coupure d'un logiciel d'une fois sur l'autre).
+                try { if (esdrMutedByUs) SetExpertSdrMute(false); } catch { }
+                if (esdrTci != null) { esdrTci.Dispose(); esdrTci = null; }
                 SaveUiToSettings();
                 SaveWindowBounds();
                 settings.Save();
@@ -501,8 +513,23 @@ namespace SDRLink
             // Coupures du son : WebSDR (dans la page) et poste (gain BF mis à zéro puis rétabli), et volume du poste.
             btnMuteSdr = Btn("Mute WebSDR", "Mute WebSDR", delegate { sdrMuted = !sdrMuted; ApplyVolume(); UpdateMuteButtons(); });
             btnMuteRig = Btn("Mute TX", "Mute TRX", delegate { ToggleRigMute(); });
-            btnMuteSdr.Tag = btnMuteRig.Tag = Theme.Custom;
-            btnMuteSdr.FlatStyle = btnMuteRig.FlatStyle = FlatStyle.Flat;
+            // Inverse les deux coupures d'un coup (Mute TX seulement si le volume du poste est télécommandé).
+            btnMuteSwap = Btn("⇄", "⇄", delegate { SwapMutes(); });
+            btnMuteSwap.AutoSize = false;
+            btnMuteSwap.MinimumSize = btnMuteSwap.Size = new Size(25, 25);
+            Tr(delegate { tips.SetToolTip(btnMuteSwap, Lang.T("Inverser Mute WebSDR et Mute TX", "Toggle Mute WebSDR and Mute TRX")); });
+            // Visible seulement quand ExpertSDR tourne : coupe son son dans le mélangeur de volume de Windows.
+            btnMuteEsdr = Btn("Mute ExpertSDR", "Mute ExpertSDR", delegate { ToggleExpertSdrMute(); });
+            btnMuteEsdr.Visible = false;
+            // Clic droit : port du serveur TCI d'ExpertSDR (40001 par défaut).
+            ContextMenuStrip esdrMenu = new ContextMenuStrip();
+            ToolStripMenuItem esdrPort = new ToolStripMenuItem();
+            esdrMenu.Items.Add(esdrPort);
+            esdrMenu.Opening += delegate { esdrPort.Text = Lang.F("Port TCI d'ExpertSDR : {0}…", "ExpertSDR TCI port: {0}…", settings.EsdrTciPort); };
+            esdrPort.Click += delegate { AskExpertSdrPort(); };
+            btnMuteEsdr.ContextMenuStrip = esdrMenu;
+            btnMuteSdr.Tag = btnMuteRig.Tag = btnMuteSwap.Tag = btnMuteEsdr.Tag = Theme.Custom;
+            btnMuteSdr.FlatStyle = btnMuteRig.FlatStyle = btnMuteSwap.FlatStyle = btnMuteEsdr.FlatStyle = FlatStyle.Flat;
             trkRigVolume = new TrackBar();
             trkRigVolume.Minimum = 0;
             trkRigVolume.Maximum = 100;
@@ -517,11 +544,36 @@ namespace SDRLink
             lblRigVolume.AutoSize = false;
             lblRigVolume.Size = new Size(44, 20);
             lblRigVolume.Margin = new Padding(0, 7, 2, 0);
+            audio.Controls.Add(btnMuteSwap);
             audio.Controls.Add(btnMuteSdr);
             audio.Controls.Add(btnMuteRig);
-            audio.Controls.Add(Lbl("Volume TX :", "TRX volume:"));
+            audio.Controls.Add(btnMuteEsdr);
+            // Volume TX et Mute TX ne sont affichés que si le volume du poste est télécommandé.
+            lblRigVolumeCaption = Lbl("Volume TX :", "TRX volume:");
+            lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = false;
+            audio.Controls.Add(lblRigVolumeCaption);
             audio.Controls.Add(trkRigVolume);
             audio.Controls.Add(lblRigVolume);
+            // Volume d'ExpertSDR (mélangeur de Windows ou TCI), affiché quand ExpertSDR tourne.
+            trkEsdrVolume = new TrackBar();
+            trkEsdrVolume.Minimum = 0;
+            trkEsdrVolume.Maximum = 100;
+            trkEsdrVolume.TickStyle = TickStyle.None;
+            trkEsdrVolume.AutoSize = false;
+            trkEsdrVolume.Size = new Size(110, 28);
+            trkEsdrVolume.SmallChange = 5;
+            trkEsdrVolume.LargeChange = 10;
+            trkEsdrVolume.Margin = new Padding(2, 2, 0, 0);
+            trkEsdrVolume.ValueChanged += delegate { OnEsdrVolumeChanged(); };
+            lblEsdrVolume = new Label();
+            lblEsdrVolume.AutoSize = false;
+            lblEsdrVolume.Size = new Size(44, 20);
+            lblEsdrVolume.Margin = new Padding(0, 7, 2, 0);
+            lblEsdrVolumeCaption = Lbl("Volume ExpertSDR :", "ExpertSDR volume:");
+            lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = false;
+            audio.Controls.Add(lblEsdrVolumeCaption);
+            audio.Controls.Add(trkEsdrVolume);
+            audio.Controls.Add(lblEsdrVolume);
 
             web = new WebView2();
             web.Dock = DockStyle.Fill;
@@ -1972,6 +2024,8 @@ namespace SDRLink
         {
             bool on = worker != null && rigAfSupported == 1;
             trkRigVolume.Enabled = on;
+            if (lblRigVolumeCaption.Visible != on)
+                lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = on;
             lblRigVolume.Text = on ? trkRigVolume.Value + " %" : "—";
             UpdateMuteButtons();
         }
@@ -1980,6 +2034,197 @@ namespace SDRLink
         {
             StyleToggle(btnMuteSdr, sdrMuted, true);
             StyleToggle(btnMuteRig, rigMuted, worker != null && rigAfSupported == 1);
+            StyleToggle(btnMuteSwap, false, true);
+            StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable);
+        }
+
+        // Bouton ⇄ : chaque coupure change d'état (coupée devient active et inversement).
+        void SwapMutes()
+        {
+            sdrMuted = !sdrMuted;
+            ApplyVolume();
+            if (worker != null && rigAfSupported == 1) ToggleRigMute();
+            UpdateMuteButtons();
+        }
+
+        // ---------------------------------------------------------------- ExpertSDR
+
+        // Processus ExpertSDR2, ExpertSDR3… (identifiants relevés à chaque surveillance).
+        readonly Dictionary<int, bool> esdrPids = new Dictionary<int, bool>();
+
+        bool IsExpertSdr(int pid) { return esdrPids.ContainsKey(pid); }
+
+        bool EsdrAvailable { get { return esdrWin || (esdrTci != null && esdrTci.Connected); } }
+
+        // Toutes les 3 secondes : Mute et Volume ExpertSDR affichés si le logiciel tourne. Son par Windows : état lu
+        // dans le mélangeur ; sinon liaison TCI (tentée en arrière-plan toutes les 10 s tant qu'elle ne répond pas).
+        void CheckExpertSdr()
+        {
+            esdrPids.Clear();
+            foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses())
+            {
+                try { if (p.ProcessName.StartsWith("ExpertSDR", StringComparison.OrdinalIgnoreCase)) esdrPids[p.Id] = true; }
+                catch { }
+                p.Dispose();
+            }
+            esdrRunning = esdrPids.Count > 0;
+            if (!esdrRunning)
+            {
+                if (esdrTci != null) { esdrTci.Dispose(); esdrTci = null; }
+                esdrWin = esdrMuted = esdrMutedByUs = false;
+                UpdateEsdrControls();
+                return;
+            }
+            bool? m = null;
+            try { m = AudioEndpoints.ProcessMute(IsExpertSdr, null); } catch (Exception ex) { Log.Write("ExpertSDR, lecture du son : " + ex.Message); }
+            esdrWin = m.HasValue;
+            if (esdrWin)
+            {
+                esdrMuted = m.Value;
+                try { ShowEsdrVolume(AudioEndpoints.ProcessVolume(IsExpertSdr, null)); } catch { }
+            }
+            else
+            {
+                ConnectExpertSdrTci();
+                RefreshExpertSdr();
+            }
+            UpdateEsdrControls();
+        }
+
+        // Chaque seconde : état annoncé par ExpertSDR sur la liaison TCI (réglages faits dans ExpertSDR compris).
+        void RefreshExpertSdr()
+        {
+            if (!esdrRunning || esdrWin || esdrTci == null) return;
+            if (esdrTci.Connected)
+            {
+                bool? m = esdrTci.Mute;
+                if (m.HasValue) esdrMuted = m.Value;
+                ShowEsdrVolume(esdrTci.VolumePercent);
+            }
+            UpdateEsdrControls();
+        }
+
+        void ConnectExpertSdrTci()
+        {
+            if ((esdrTci != null && esdrTci.Connected) || esdrConnecting || DateTime.UtcNow < esdrTciRetry) return;
+            esdrConnecting = true;
+            esdrTciRetry = DateTime.UtcNow.AddSeconds(10);
+            int port = settings.EsdrTciPort;
+            System.Threading.Thread t = new System.Threading.Thread(delegate()
+            {
+                ExpertSdrTci c = ExpertSdrTci.TryConnect("127.0.0.1", port);
+                try
+                {
+                    BeginInvoke((Action)delegate
+                    {
+                        esdrConnecting = false;
+                        if (esdrTci != null) esdrTci.Dispose();
+                        esdrTci = c;
+                        if (c != null) Log.Write("ExpertSDR : liaison TCI établie sur le port " + port);
+                        RefreshExpertSdr();
+                    });
+                }
+                catch (InvalidOperationException) { if (c != null) c.Dispose(); }   // fenêtre fermée entre-temps
+            });
+            t.IsBackground = true;
+            t.Start();
+        }
+
+        void UpdateEsdrControls()
+        {
+            if (btnMuteEsdr.Visible != esdrRunning)
+                btnMuteEsdr.Visible = lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = esdrRunning;
+            bool avail = EsdrAvailable;
+            trkEsdrVolume.Enabled = avail;
+            lblEsdrVolume.Text = avail ? trkEsdrVolume.Value + " %" : "—";
+            UpdateMuteButtons();
+        }
+
+        void ShowEsdrVolume(int pct)
+        {
+            if (pct < 0 || trkEsdrVolume.Capture || trkEsdrVolume.Value == pct) return;   // pas pendant que l'on fait glisser le curseur
+            esdrVolumeLoading = true;
+            trkEsdrVolume.Value = Math.Max(0, Math.Min(100, pct));
+            esdrVolumeLoading = false;
+        }
+
+        void OnEsdrVolumeChanged()
+        {
+            lblEsdrVolume.Text = EsdrAvailable ? trkEsdrVolume.Value + " %" : "—";
+            if (esdrVolumeLoading) return;
+            if (esdrWin) { try { AudioEndpoints.ProcessVolume(IsExpertSdr, trkEsdrVolume.Value); } catch { } }
+            else if (esdrTci != null && esdrTci.Connected) esdrTci.SetVolumePercent(trkEsdrVolume.Value);
+        }
+
+        void ToggleExpertSdrMute()
+        {
+            // Pas encore de liaison TCI : on la tente tout de suite.
+            if (!EsdrAvailable)
+            {
+                Cursor = Cursors.WaitCursor;
+                if (esdrTci != null) esdrTci.Dispose();
+                esdrTci = ExpertSdrTci.TryConnect("127.0.0.1", settings.EsdrTciPort);
+                Cursor = Cursors.Default;
+            }
+            bool? r = SetExpertSdrMute(!esdrMuted);
+            if (!r.HasValue)
+            {
+                Log.Write("ExpertSDR : ni son Windows ni serveur TCI sur le port " + settings.EsdrTciPort);
+                MessageBox.Show(this, Lang.F("SDRLink ne peut pas couper le son d'ExpertSDR : ExpertSDR ne passe pas par le son de Windows (son sorti par le poste ou par ASIO), et son serveur TCI ne répond pas sur le port {0}.\n\nDans ExpertSDR, activez le serveur TCI (Options > TCI). Si son port n'est pas {0}, faites un clic droit sur Mute ExpertSDR pour l'indiquer.",
+                    "SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.",
+                    settings.EsdrTciPort), "SDRLink", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UpdateEsdrControls();
+                return;
+            }
+            esdrMuted = r.Value;
+            esdrMutedByUs = esdrMuted;
+            Log.Write((esdrMuted ? "Son d'ExpertSDR coupé" : "Son d'ExpertSDR rétabli") + (esdrWin ? " (mélangeur Windows)" : " (TCI)"));
+            UpdateEsdrControls();
+        }
+
+        // Mélangeur de volume de Windows si ExpertSDR y joue, sinon commande TCI "mute". null si aucun des deux.
+        bool? SetExpertSdrMute(bool mute)
+        {
+            if (esdrWin)
+            {
+                try { bool? r = AudioEndpoints.ProcessMute(IsExpertSdr, mute); if (r.HasValue) return r; }
+                catch (Exception ex) { Log.Write("ExpertSDR, coupure du son : " + ex.Message); }
+            }
+            if (esdrTci != null && esdrTci.Connected) { esdrTci.SetMute(mute); return mute; }
+            return null;
+        }
+
+        // Clic droit sur Mute ExpertSDR : port du serveur TCI d'ExpertSDR.
+        void AskExpertSdrPort()
+        {
+            using (Form f = new Form())
+            {
+                f.Text = Lang.T("Port TCI d'ExpertSDR", "ExpertSDR TCI port");
+                f.FormBorderStyle = FormBorderStyle.FixedDialog;
+                f.MaximizeBox = f.MinimizeBox = false;
+                f.ShowInTaskbar = false;
+                f.StartPosition = FormStartPosition.CenterParent;
+                f.Font = Font;
+                f.ClientSize = new Size(360, 92);
+                Label l = new Label { Text = Lang.T("Port du serveur TCI (ExpertSDR, Options > TCI) :", "TCI server port (ExpertSDR, Options > TCI):"), Location = new Point(12, 18), AutoSize = true };
+                NumericUpDown n = new NumericUpDown { Minimum = 1, Maximum = 65535, Value = settings.EsdrTciPort, Location = new Point(270, 14), Width = 76 };
+                Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
+                Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
+                ok.SetBounds(180, 52, 80, 28);
+                cancel.SetBounds(266, 52, 80, 28);
+                f.AcceptButton = ok;
+                f.CancelButton = cancel;
+                f.Controls.AddRange(new Control[] { l, n, ok, cancel });
+                Theme.Apply(f);
+                if (f.ShowDialog(this) != DialogResult.OK || (int)n.Value == settings.EsdrTciPort) return;
+                settings.EsdrTciPort = (int)n.Value;
+            }
+            Log.Write("ExpertSDR : port TCI changé en " + settings.EsdrTciPort);
+            settings.Save();
+            // Reconnexion sur le nouveau port.
+            if (esdrTci != null) { esdrTci.Dispose(); esdrTci = null; }
+            esdrTciRetry = DateTime.MinValue;
+            CheckExpertSdr();
         }
 
         // Bouton de coupure : rouge quand le son est coupé ; grisé à la main (pas désactivé, pour rester lisible).
@@ -2046,25 +2291,24 @@ namespace SDRLink
         void AddFavorite()
         {
             Favorite cur = CurrentPage();
-            string listName = FavoritesDialog.ListLabel(settings.ListNames, settings.CurrentList);
-            // Seule la liste affichée compte : la même page peut figurer dans plusieurs listes.
-            if (cur != null && FavoriteInCurrentList(cur.Url) != null)
-            {
-                status.Text = Lang.F("Cette page est déjà dans « {0} ».", "This page is already in \"{0}\".", listName);
-                return;
-            }
-            using (FavoriteEditDialog d = new FavoriteEditDialog(Lang.F("Ajouter un favori à « {0} »", "Add favorite to \"{0}\"", listName),
-                cur != null ? cur.Name : "", cur != null ? cur.Url : cbUrl.Text.Trim()))
+            // La liste est demandée à chaque ajout (la liste affichée est proposée) ; une page déjà présente
+            // dans la liste choisie est refusée. La même page peut figurer dans plusieurs listes.
+            using (FavoriteEditDialog d = new FavoriteEditDialog(Lang.T("Ajouter un favori", "Add favorite"),
+                cur != null ? cur.Name : "", cur != null ? cur.Url : cbUrl.Text.Trim(), settings.ListNames, settings.CurrentList,
+                delegate(string url, int list) { return settings.Favorites.Exists(delegate(Favorite x) { return x.List == list && x.Matches(url); }); }))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
-                // Le nouveau favori garde le volume actuel ; s'il s'agit de la page affichée, il devient le favori courant.
+                // Le nouveau favori garde le volume actuel ; s'il s'agit de la page affichée dans la liste affichée, il devient le favori courant.
                 Favorite f = new Favorite(d.FavName, d.FavUrl);
                 f.Volume = trkVolume.Value;
-                f.List = settings.CurrentList;
+                f.List = d.FavList;
                 settings.Favorites.Add(f);
-                if (web.CoreWebView2 != null && f.Matches(web.CoreWebView2.Source)) currentFav = f;
+                if (f.List == settings.CurrentList && web.CoreWebView2 != null && f.Matches(web.CoreWebView2.Source)) currentFav = f;
                 RefillUrlCombo();
+                status.Text = Lang.F("« {0} » ajouté à « {1} ».", "\"{0}\" added to \"{1}\".", f.Name, FavoritesDialog.ListLabel(settings.ListNames, f.List));
             }
+            SaveUiToSettings();
+            settings.Save();
         }
 
         // Favori de la liste affichée correspondant à cette adresse (null si la page n'y figure pas).
@@ -2095,7 +2339,7 @@ namespace SDRLink
         // Recherche dans les annuaires publics ; les récepteurs cochés sont ajoutés aux favoris.
         void SearchWebSdrs()
         {
-            using (WebSdrSearchDialog d = new WebSdrSearchDialog(settings.Favorites, delegate(string url) { Navigate(url); }))
+            using (WebSdrSearchDialog d = new WebSdrSearchDialog(settings.Favorites, settings.ListNames, delegate(string url) { Navigate(url); }))
             {
                 d.TargetList = settings.CurrentList;
                 d.ShowDialog(this);
@@ -2107,9 +2351,49 @@ namespace SDRLink
             settings.Save();
         }
 
+        // Premier démarrage : recherche des WebSDR pour remplir les favoris, si Internet répond. Faite une seule fois ;
+        // sans connexion, elle est retentée au démarrage suivant.
+        void FirstRunSearch()
+        {
+            if (settings.FirstSearchDone) return;
+            System.Threading.Thread t = new System.Threading.Thread(delegate()
+            {
+                bool online = InternetAvailable();
+                try
+                {
+                    BeginInvoke((Action)delegate
+                    {
+                        if (!online) { Log.Write("Premier démarrage : pas de connexion Internet, recherche des WebSDR reportée"); return; }
+                        settings.FirstSearchDone = true;
+                        settings.Save();
+                        Log.Write("Premier démarrage : recherche des WebSDR");
+                        SearchWebSdrs();
+                    });
+                }
+                catch (InvalidOperationException) { }   // fenêtre fermée entre-temps
+            });
+            t.IsBackground = true;
+            t.Start();
+        }
+
+        static bool InternetAvailable()
+        {
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) return false;
+            try
+            {
+                System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("http://rx.linkfanel.net/");
+                req.Method = "HEAD";
+                req.Timeout = 6000;
+                req.UserAgent = "SDRLink/1.0 (F5PBG)";
+                using (req.GetResponse()) return true;
+            }
+            catch (System.Net.WebException ex) { return ex.Response != null; }   // le serveur a répondu, même par une erreur
+            catch (Exception) { return false; }
+        }
+
         void ManageFavorites()
         {
-            using (FavoritesDialog d = new FavoritesDialog(settings.Favorites, CurrentPage, settings.ListNames, settings.CurrentList))
+            using (FavoritesDialog d = new FavoritesDialog(settings.Favorites, CurrentPage, settings.ListNames, settings.CurrentList, delegate(string url) { Navigate(url); }))
             {
                 d.ShowDialog(this);
                 FillFavListCombo();

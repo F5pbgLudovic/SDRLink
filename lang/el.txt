@@ -4,7 +4,9 @@ cannot open, error 	αδυναμία ανοίγματος, σφάλμα
 Name:	Όνομα:
 Address:	Διεύθυνση:
 Cancel	Άκυρο
+List:	Λίστα:
 Please enter a name and an address.	Εισαγάγετε όνομα και διεύθυνση.
+Save to list:	Αποθήκευση στη λίστα:
 Rename list	Μετονομασία λίστας
 Favorite manager	Διαχείριση αγαπημένων
 Add favorite…	Προσθήκη αγαπημένου…
@@ -19,13 +21,13 @@ Check	Έλεγχος
 Check favorites	Έλεγχος αγαπημένων
 Check all	Σήμανση όλων
 Uncheck all	Αποσήμανση όλων
-List:	Λίστα:
 Move to ▸	Μετακίνηση σε ▸
 (right-click the list to rename it)	(δεξί κλικ στη λίστα για μετονομασία)
 Name	Όνομα
 Address	Διεύθυνση
 Status	Κατάσταση
 List	Λίστα
+Listen to selection	Ακρόαση επιλογής
 Open	Άνοιγμα
 Close	Κλείσιμο
 All lists	Όλες οι λίστες
@@ -45,16 +47,16 @@ Import favorites	Εισαγωγή αγαπημένων
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Αγαπημένα (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Όλα τα αρχεία (*.*)|*.*
 Export favorites	Εξαγωγή αγαπημένων
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, αναγνώσιμο από Excel (*.csv)|*.csv|Σελιδοδείκτες προγράμματος περιήγησης (*.html)|*.html|Κείμενο (*.txt)|*.txt
+This WebSDR is already in "{0}".	Αυτό το WebSDR υπάρχει ήδη στο «{0}».
 List {0}	Λίστα {0}
 Rename "{0}"…	Μετονομασία «{0}»…
 {0} favorite(s) moved to "{1}".	{0} αγαπημένα μετακινήθηκαν στο «{1}».
 {0} favorite(s) shown, {1} checked	{0} αγαπημένα εμφανίζονται, {1} σημειωμένα
 Remove favorite "{0}"?	Αφαίρεση του αγαπημένου «{0}»;
 Remove the {0} checked favorites?	Αφαίρεση των {0} σημειωμένων αγαπημένων;
-duplicate of "{0}"	διπλότυπο του «{0}»
 Checking {0} address(es)…	Έλεγχος {0} διευθύνσεων…
 Checking… {0} left	Έλεγχος… απομένουν {0}
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Ο έλεγχος ολοκληρώθηκε: σημειώθηκαν {0} νεκροί σύνδεσμοι, {1} διπλότυπα. Κάντε κλικ στο «Αφαίρεση…» για να διαγραφούν.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Ο έλεγχος ολοκληρώθηκε: αφαιρέθηκαν {1} διπλότυπα, σημειώθηκαν {0} νεκροί σύνδεσμοι. Κάντε κλικ στο «Αφαίρεση…» για να διαγραφούν.
 {0} favorite(s) imported, {1} already present.	Εισήχθησαν {0} αγαπημένα, {1} υπήρχαν ήδη.
 {0} favorite(s) exported.	Εξήχθησαν {0} αγαπημένα.
 rigctld connection closed	Η σύνδεση rigctld έκλεισε
@@ -65,6 +67,7 @@ HRD connection closed	Η σύνδεση HRD έκλεισε
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Δεν υπάρχει διακομιστής HRD στο {0}:{1} (ενεργοποιήστε τον διακομιστή IP στο HRD Rig Control).
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
+Toggle Mute WebSDR and Mute TRX	Εναλλαγή Σίγασης WebSDR και Σίγασης TRX
 RIG	TRX
 Disconnected	Αποσυνδέθηκε
 Connect	Σύνδεση
@@ -94,6 +97,9 @@ SDRLINK cable	Καλώδιο SDRLINK
  (off) ▾	 (ανενεργό) ▾
 Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	Θύρα TCI του ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Η εκπομπή διακόπηκε αυτόματα μετά από {0} (χρονικό όριο ασφαλείας, δεξί κλικ στο PTT για αλλαγή)
 Remove "{0}" from the list	Αφαίρεση του «{0}» από τη λίστα
 Remove all ({0} values)	Αφαίρεση όλων ({0} τιμές)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Ολοκλ�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Η μετονομασία απέτυχε ({0}).\n\nΧειροκίνητα: Πίνακας Ελέγχου Ήχος › καρτέλα Εγγραφή › «{1}» › Ιδιότητες › όνομα.
 SDRLINK cable: WebSDR audio sent to "{0}"	Καλώδιο SDRLINK: ο ήχος του WebSDR στέλνεται στο «{0}»
 SDRLINK cable: "{0}": {1}	Καλώδιο SDRLINK: «{0}»: {1}
-This page is already in "{0}".	Αυτή η σελίδα υπάρχει ήδη στο «{0}».
-Add favorite to "{0}"	Προσθήκη αγαπημένου στο «{0}»
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	Το SDRLink δεν μπορεί να κάνει σίγαση στο ExpertSDR: το ExpertSDR δεν αναπαράγει ήχο μέσω των Windows (ο ήχος βγαίνει από τον πομποδέκτη ή μέσω ASIO) και ο διακομιστής TCI του δεν απαντά στη θύρα {0}.\n\nΣτο ExpertSDR ενεργοποιήστε τον διακομιστή TCI (Options > TCI). Αν η θύρα του δεν είναι {0}, ορίστε την με δεξί κλικ στη «Σίγαση ExpertSDR».
+"{0}" added to "{1}".	Το «{0}» προστέθηκε στο «{1}».
 This page is not in "{0}".	Αυτή η σελίδα δεν υπάρχει στο «{0}».
 Remove "{0}" from "{1}"?	Αφαίρεση του «{0}» από το «{1}»;
 Interface:	Διασύνδεση:
@@ -130,6 +136,7 @@ Step:	Βήμα:
 WebSDR:	WebSDR:
 Volume:	Ένταση:
 TRX volume:	Ένταση TRX:
+ExpertSDR volume:	Ένταση ExpertSDR:
 Open log	Άνοιγμα ημερολογίου
 …	…
 Download Hamlib…	Λήψη Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Διαχείριση αγαπημένων…
 Find WebSDRs…	Εύρεση WebSDR…
 Mute WebSDR	Σίγαση WebSDR
 Mute TRX	Σίγαση TRX
+⇄	⇄
+Mute ExpertSDR	Σίγαση ExpertSDR
 Auto-connect at startup	Αυτόματη σύνδεση κατά την εκκίνηση
 Dark mode	Σκούρα λειτουργία
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	μη διαθέσιμο
 unexpected format	μη αναμενόμενη μορφή
 Find WebSDRs (France and neighbouring countries)	Εύρεση WebSDR (Γαλλία και γειτονικές χώρες)
 All	Όλα
-Hide those already in favorites	Απόκρυψη όσων είναι ήδη στα αγαπημένα
 Max distance from the centre of France (km):	Μέγ. απόσταση από το κέντρο της Γαλλίας (km):
 Filter:	Φίλτρο:
 Type:	Τύπος:
 Location	Τοποθεσία
 Country	Χώρα
 Users	Χρήστες
-Listen to selection	Ακρόαση επιλογής
 Add checked to favorites	Προσθήκη σημειωμένων στα αγαπημένα
 Refresh	Ανανέωση
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Αναζήτηση σε καταλόγους (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Επιλέξτε πρώτα έναν δέκτη από τη λίστα.
-{0} receiver(s) shown, {1} checked   —   sources: 	{0} δέκτες εμφανίζονται, {1} σημειωμένοι   —   πηγές: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	Προστέθηκαν {0} αγαπημένα. Μπορείτε να τα μετονομάσετε στη «Διαχείριση αγαπημένων…».
+Please check the receivers to add first.	Επιλέξτε πρώτα τους δέκτες που θα προστεθούν.
+Add to favorites	Προσθήκη στα αγαπημένα
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} δέκτες εμφανίζονται, {1} σημειωμένοι, {2} ήδη στα αγαπημένα κρυμμένα   —   πηγές: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Προστέθηκαν {0} αγαπημένα στο «{1}». Μπορείτε να τα μετονομάσετε στη «Διαχείριση αγαπημένων…».

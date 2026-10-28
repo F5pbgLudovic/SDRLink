@@ -76,12 +76,12 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
 - **Listes de favoris** : 4 listes (Liste 1 à Liste 4) pour trier les WebSDR.
   - Le menu juste à droite de la liste des WebSDR choisit la liste affichée.
   - **Clic droit** sur ce menu pour renommer la liste (par ex. « HF France », « VHF »…).
-  - Les favoris ajoutés (★, recherche, import) vont dans la liste choisie. Les favoris existants sont dans la liste 1.
+  - À chaque ajout (★, gestionnaire, recherche), SDRLink **demande la liste** où enregistrer (la liste affichée est proposée). Les favoris importés vont dans la liste affichée du gestionnaire. Les favoris existants sont dans la liste 1.
   - Dans « Gérer les favoris… » :
     - le menu **Liste** filtre l'affichage (ou « Toutes les listes ») ; clic droit dessus pour la renommer ;
     - **Déplacer vers ▸** range les favoris cochés (ou, à défaut, le favori sélectionné) dans une autre liste ;
     - une colonne « Liste » indique la liste de chaque favori.
-- **★ Ajouter aux favoris** : ajoute la page affichée à la **liste affichée**, nommée d'après le titre de la page (modifiable). Si elle y est déjà, la barre d'état l'indique. La même page peut figurer dans plusieurs listes.
+- **★ Ajouter aux favoris** : ajoute la page affichée, nommée d'après le titre de la page (modifiable), à la liste choisie dans la fenêtre. Si elle est déjà dans cette liste, elle n'est pas ajoutée une seconde fois (un message l'indique). La même page peut figurer dans plusieurs listes.
 - **Retirer des favoris** : retire la page affichée de la **liste affichée seulement**, après confirmation. Elle reste dans les autres listes.
 - **Gérer les favoris…** ouvre le gestionnaire :
   - **Ajouter un favori…** ;
@@ -89,11 +89,13 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
   - **Renommer…**, **Monter**, **Descendre** pour le favori sélectionné ;
   - **Vérifier les favoris** :
     - interroge chaque adresse (10 à la fois, 8 s maximum chacune) et affiche l'état dans la colonne État ;
-    - les **liens morts** (pas de réponse, nom inconnu, connexion refusée, page introuvable 404) et les **doublons** (même adresse) sont **cochés automatiquement** et affichés en rouge ;
+    - les **doublons** (même adresse dans la même liste) sont **supprimés d'office** : seul le premier est gardé ;
+    - les **liens morts** (pas de réponse, nom inconnu, connexion refusée, page introuvable 404) sont **cochés automatiquement** et affichés en rouge ;
     - il ne reste qu'à cliquer sur « Supprimer… ». Un serveur qui répond, même par un refus d'accès, est considéré comme vivant.
   - **Tout cocher** / **Tout décocher** (favoris affichés) ;
   - champs **Nom** et **Adresse** : ils affichent le favori sélectionné et se corrigent directement. La liste se met à jour en tapant. Un champ laissé vide n'est pas appliqué.
-  - **Ouvrir** ou double-clic : ouvre le WebSDR. La touche Suppr supprime, Entrée ouvre.
+  - **Écouter la sélection** : ouvre le favori sélectionné dans SDRLink pour l'écouter, sans fermer le gestionnaire (comme dans la recherche des WebSDR).
+  - **Ouvrir** ou double-clic : ouvre le WebSDR et ferme le gestionnaire. La touche Suppr supprime, Entrée ouvre.
   - **Importer…** :
     - favoris exportés d'un navigateur (Edge, Chrome, Firefox : fichier `.html`) ;
     - fichier CSV `nom;adresse` ;
@@ -112,11 +114,13 @@ Le bouton **Rechercher des WebSDR…** (barre WebSDR) consulte trois annuaires p
 Les doublons sont retirés. La liste s'affiche **triée par distance depuis le centre de la France**.
 - **Distance max** (1000 km par défaut) : France, Belgique, Luxembourg, Suisse, nord de l'Italie et de l'Espagne, ouest de l'Allemagne, Pays-Bas, sud de l'Angleterre… À augmenter ou réduire à volonté.
 - **Filtre** : texte libre (ville, indicatif, département…). **Type** : websdr.org, KiwiSDR, OpenWebRX…
-- **Masquer ceux déjà en favoris** (coché par défaut).
+- Les récepteurs **déjà en favoris** (dans n'importe quelle liste) ne sont pas proposés ; le bas de la fenêtre indique combien sont ainsi masqués. Les relais KiwiSDR (xxx.proxy.kiwisdr.com) avec ou sans :8073 comptent comme un seul récepteur.
 - Clic sur un titre de colonne : tri par cette colonne.
 - **Pays** : estimé d'après le nom (pays cité, indicatif français F…/TK…) ou, pour la France, d'après la position GPS. Vide si inconnu.
 - **Écouter la sélection** (ou double-clic) : ouvre le récepteur dans SDRLink pour l'essayer.
-- Cocher ceux qui intéressent, puis **Ajouter les cochés aux favoris**. Ils se renomment ensuite dans « Gérer les favoris… ».
+- Cocher ceux qui intéressent, puis **Ajouter les cochés aux favoris** : SDRLink demande dans quelle liste les enregistrer. Ils se renomment ensuite dans « Gérer les favoris… ».
+
+**Premier démarrage** : la recherche s'ouvre d'elle-même, une seule fois, si Internet répond, pour remplir les favoris. Sans connexion, elle est retentée au démarrage suivant.
 
 Il faut un accès Internet. Si un annuaire ne répond pas, les autres sont quand même affichés : le bas de la fenêtre indique le résultat de chaque source.
 
@@ -131,9 +135,17 @@ Le curseur **Volume**, à droite de « Gérer les favoris… », règle uniqueme
 ## Coupure du son et volume du poste
 
 À droite du volume du WebSDR :
+- **⇄** (petit bouton carré) : inverse d'un coup **Mute WebSDR** et **Mute TX** (chacun passe de coupé à actif, et inversement). Si le volume du poste n'est pas télécommandé, il n'agit que sur Mute WebSDR.
 - **Mute WebSDR** : coupe le son du WebSDR (bouton rouge), un second clic le rétablit au volume réglé.
 - **Mute TX** : coupe le son du **transceiver** en mettant son gain BF à zéro par CAT, puis rétablit le volume au second clic. Le son est aussi rétabli à la déconnexion.
+- **Mute ExpertSDR** : n'apparaît que lorsque le logiciel **ExpertSDR** (2 ou 3) tourne. Il coupe et rétablit le son d'ExpertSDR sans aller dans ExpertSDR :
+  - par le **mélangeur de volume de Windows** si ExpertSDR joue par le son de Windows ;
+  - sinon (son sorti par le poste lui-même, MB1, ou par ASIO) par la commande **TCI** `mute` : il faut alors activer le serveur TCI dans ExpertSDR (Options > TCI). SDRLink garde une liaison TCI avec ExpertSDR tant qu'il tourne, même si le poste est relié autrement (HRD…) : une coupure ou un volume réglé dans ExpertSDR s'affiche aussi dans SDRLink. Un message l'explique si le serveur TCI ne répond pas.
+  - **Clic droit** sur Mute ExpertSDR : port du serveur TCI d'ExpertSDR (**40001** par défaut), à régler comme dans ExpertSDR.
+  - Si SDRLink a coupé ExpertSDR, le son est rétabli à la fermeture de SDRLink.
 - **Volume TX** : règle le volume du transceiver (gain BF, en %). La barre suit aussi le bouton du poste : elle est relue toutes les 2 secondes environ.
+- **Volume TX** et **Mute TX** ne s'affichent que si le volume du poste est télécommandé (poste connecté, et interface qui le permet).
+- **Volume ExpertSDR** (à droite de Volume TX) : volume d'ExpertSDR, par le mélangeur de Windows ou par TCI (`volume:` de −60 à 0 dB) comme Mute ExpertSDR. Affiché quand ExpertSDR tourne ; grisé tant qu'aucune des deux voies ne répond.
 
 Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 - **Yaesu** : `AG0nnn;`, de 000 à 255.
@@ -141,8 +153,8 @@ Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 - **Elecraft** : `AGnnn;`, de 000 à 250 (K3, KX3, KX2) ou de 000 à 060 (K4).
 - **Icom / Xiegu** : CI-V `14 01`, valeur de 0000 à 0255.
 - **TCI** : `volume:` de −60 à 0 dB.
-- **HRD** : curseur « AF gain (main) » de HRD Rig Control (sinon « AF gain » ou « Volume »), par `get/set slider-pos`. Il est recherché à la connexion ; le journal l'indique par la ligne « HRD curseur volume … ». Si HRD n'a pas ce curseur pour le poste, la barre est grisée.
-- **Non disponible** avec FT-817/818/857/897 (pas de commande) et OmniRig (pas de réglage de volume). La barre est alors grisée et un message l'explique.
+- **HRD** : curseur « AF gain (main) » de HRD Rig Control (sinon « AF gain » ou « Volume »), par `get/set slider-pos`. Il est recherché à la connexion, et de nouveau quand on change de poste dans HRD (FT-2000, FTdx10, FTdx5000…) sans reconnecter SDRLink ; le journal l'indique par la ligne « HRD curseur volume … ». Si HRD n'a pas de curseur de volume pour le poste, Volume TX et Mute TX sont masqués et le journal liste les curseurs disponibles.
+- **Non disponible** avec FT-817/818/857/897 (pas de commande) et OmniRig (pas de réglage de volume) : Volume TX et Mute TX sont alors masqués.
 
 ## Mode sombre
 
@@ -284,6 +296,16 @@ Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrli
 
 ## Historique des versions
 
+- **1.5**
+  - premier démarrage : recherche des WebSDR lancée une fois, si Internet répond ;
+  - la liste où enregistrer est demandée à chaque ajout de favori, et un favori déjà présent dans la liste n'est pas ajouté ;
+  - « Vérifier les favoris » supprime les doublons ;
+  - la recherche ne propose plus les WebSDR déjà en favoris ;
+  - « Écouter la sélection » dans le gestionnaire de favoris ;
+  - bouton ⇄ qui inverse Mute WebSDR et Mute TX ;
+  - bouton Mute ExpertSDR et barre Volume ExpertSDR quand ExpertSDR tourne (mélangeur de Windows ou TCI), port TCI par clic droit ;
+  - Volume TX et Mute TX masqués quand le volume du poste n'est pas télécommandé ;
+  - HRD : volume du poste suivi quand on change de poste dans HRD ; Hamlib : le volume n'est plus grisé après une seule lecture manquée.
 - **1.4.1** : Yaesu FT-857, FT-857D, FT-897 et FT-897D.
 - **1.4**
   - interface **Hamlib (rigctld)**, avec lancement automatique de rigctld ;

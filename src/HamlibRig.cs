@@ -18,6 +18,7 @@ namespace SDRLink
         NetworkStream stream;
         StreamReader reader;
         bool afUnsupported, passbandNoChange = true;
+        int afFailures;
 
         public HamlibRig(string host, int port)
         {
@@ -79,7 +80,13 @@ namespace SDRLink
             if (afUnsupported) return -1;
             string[] a = Command("l AF", 1);
             double v;
-            if (a == null || !double.TryParse(a[0], NumberStyles.Float, CultureInfo.InvariantCulture, out v)) { afUnsupported = true; return -1; }
+            // Abandon après 3 échecs de suite seulement : une réponse perdue ne doit pas griser le volume.
+            if (a == null || !double.TryParse(a[0], NumberStyles.Float, CultureInfo.InvariantCulture, out v))
+            {
+                if (++afFailures >= 3) { afUnsupported = true; Log.Write("Hamlib : volume (l AF) non pris en charge par ce poste"); }
+                return -1;
+            }
+            afFailures = 0;
             return (int)Math.Round(Math.Max(0, Math.Min(1, v)) * 100);
         }
 

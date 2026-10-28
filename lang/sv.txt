@@ -4,7 +4,9 @@ cannot open, error 	kan inte öppnas, fel
 Name:	Namn:
 Address:	Adress:
 Cancel	Avbryt
+List:	Lista:
 Please enter a name and an address.	Ange ett namn och en adress.
+Save to list:	Spara i lista:
 Rename list	Byt namn på listan
 Favorite manager	Favorithanterare
 Add favorite…	Lägg till favorit…
@@ -19,13 +21,13 @@ Check	Kontroll
 Check favorites	Kontrollera favoriter
 Check all	Bocka alla
 Uncheck all	Avbocka alla
-List:	Lista:
 Move to ▸	Flytta till ▸
 (right-click the list to rename it)	(högerklicka på listan för att byta namn)
 Name	Namn
 Address	Adress
 Status	Status
 List	Lista
+Listen to selection	Lyssna på markerad
 Open	Öppna
 Close	Stäng
 All lists	Alla listor
@@ -45,16 +47,16 @@ Import favorites	Importera favoriter
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favoriter (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Alla filer (*.*)|*.*
 Export favorites	Exportera favoriter
 CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, läsbar i Excel (*.csv)|*.csv|Webbläsarbokmärken (*.html)|*.html|Text (*.txt)|*.txt
+This WebSDR is already in "{0}".	Denna WebSDR finns redan i ”{0}”.
 List {0}	Lista {0}
 Rename "{0}"…	Byt namn på ”{0}”…
 {0} favorite(s) moved to "{1}".	{0} favorit(er) flyttade till ”{1}”.
 {0} favorite(s) shown, {1} checked	{0} favorit(er) visas, {1} bockade
 Remove favorite "{0}"?	Ta bort favoriten ”{0}”?
 Remove the {0} checked favorites?	Ta bort de {0} bockade favoriterna?
-duplicate of "{0}"	dubblett av ”{0}”
 Checking {0} address(es)…	Kontrollerar {0} adress(er)…
 Checking… {0} left	Kontrollerar… {0} kvar
-Check done: {0} dead link(s), {1} duplicate(s) checked. Click "Remove…" to delete them.	Kontroll klar: {0} död(a) länk(ar), {1} dubblett(er) bockade. Klicka på ”Ta bort…” för att radera dem.
+Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontroll klar: {1} dubblett(er) borttagna, {0} död(a) länk(ar) bockade. Klicka på ”Ta bort…” för att radera dem.
 {0} favorite(s) imported, {1} already present.	{0} favorit(er) importerade, {1} fanns redan.
 {0} favorite(s) exported.	{0} favorit(er) exporterade.
 rigctld connection closed	rigctld-anslutningen stängd
@@ -65,6 +67,7 @@ HRD connection closed	HRD-anslutningen stängd
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktivera IP-servern i HRD Rig Control).
 Cannot open the log: 	Kan inte öppna loggen: 
 Save: no known frequency (rig or WebSDR)	Save: ingen känd frekvens (rigg eller WebSDR)
+Toggle Mute WebSDR and Mute TRX	Växla Tysta WebSDR och Tysta rigg
 RIG	RIGG
 Disconnected	Frånkopplad
 Connect	Anslut
@@ -94,6 +97,9 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (av) ▾
 Mute TRX: connect the rig first	Tysta rigg: anslut riggen först
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolym är inte tillgänglig med denna rigg eller detta gränssnitt (OmniRig, HRD, FT-817/818…)
+ExpertSDR TCI port	TCI-port för ExpertSDR
+TCI server port (ExpertSDR, Options > TCI):	TCI-serverns port (ExpertSDR, Options > TCI):
+ExpertSDR TCI port: {0}…	TCI-port för ExpertSDR: {0}…
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Sändningen stoppades automatiskt efter {0} (säkerhetstid, högerklicka på PTT för att ändra)
 Remove "{0}" from the list	Ta bort ”{0}” från listan
 Remove all ({0} values)	Ta bort alla ({0} värden)
@@ -106,8 +112,8 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Klart: ljud
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Namnbytet misslyckades ({0}).\n\nManuellt: Kontrollpanelen Ljud › fliken Inspelning › ”{1}” › Egenskaper › namn.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-ljud skickas till ”{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK-kabel: ”{0}”: {1}
-This page is already in "{0}".	Denna sida finns redan i ”{0}”.
-Add favorite to "{0}"	Lägg till favorit i ”{0}”
+SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink kan inte tysta ExpertSDR: ExpertSDR spelar inte upp ljudet via Windows (ljudet kommer från radion eller via ASIO), och dess TCI-server svarar inte på port {0}.\n\nAktivera TCI-servern i ExpertSDR (Options > TCI). Om dess port inte är {0}, högerklicka på ”Tysta ExpertSDR” för att ange den.
+"{0}" added to "{1}".	”{0}” har lagts till i ”{1}”.
 This page is not in "{0}".	Denna sida finns inte i ”{0}”.
 Remove "{0}" from "{1}"?	Ta bort ”{0}” från ”{1}”?
 Interface:	Gränssnitt:
@@ -130,6 +136,7 @@ Step:	Steg:
 WebSDR:	WebSDR:
 Volume:	Volym:
 TRX volume:	Riggvolym:
+ExpertSDR volume:	ExpertSDR-volym:
 Open log	Öppna logg
 …	…
 Download Hamlib…	Ladda ned Hamlib…
@@ -145,6 +152,8 @@ Manage favorites…	Hantera favoriter…
 Find WebSDRs…	Sök WebSDR…
 Mute WebSDR	Tysta WebSDR
 Mute TRX	Tysta rigg
+⇄	⇄
+Mute ExpertSDR	Tysta ExpertSDR
 Auto-connect at startup	Anslut automatiskt vid start
 Dark mode	Mörkt läge
 RTS	RTS
@@ -192,17 +201,17 @@ unavailable	ej tillgänglig
 unexpected format	oväntat format
 Find WebSDRs (France and neighbouring countries)	Sök WebSDR (Frankrike och grannländer)
 All	Alla
-Hide those already in favorites	Dölj de som redan är favoriter
 Max distance from the centre of France (km):	Max avstånd från Frankrikes mitt (km):
 Filter:	Filter:
 Type:	Typ:
 Location	Plats
 Country	Land
 Users	Anv.
-Listen to selection	Lyssna på markerad
 Add checked to favorites	Lägg bockade i favoriter
 Refresh	Uppdatera
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Söker i kataloger (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Välj först en mottagare i listan.
-{0} receiver(s) shown, {1} checked   —   sources: 	{0} mottagare visas, {1} bockade   —   källor: 
-{0} favorite(s) added. You can rename them in "Manage favorites…".	{0} favorit(er) tillagda. Du kan byta namn på dem i ”Hantera favoriter…”.
+Please check the receivers to add first.	Bocka först för mottagarna som ska läggas till.
+Add to favorites	Lägg till i favoriter
+{0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} mottagare visas, {1} bockade, {2} redan i favoriter dolda   —   källor: 
+{0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favorit(er) tillagda i ”{1}”. Du kan byta namn på dem i ”Hantera favoriter…”.
