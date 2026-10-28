@@ -34,4 +34,34 @@ Le script télécharge le paquet WebView2 (NuGet) au premier lancement et produi
 
 ## English
 
-SDRLink keeps a **WebSDR** (websdr.org, KiwiSDR, OpenWebRX, UberSDR, PhantomSDR) in sync with your **transceiver**: frequency, mode and PTT, both ways. Rig control through a COM port (CAT), OmniRig, TCI, Ham Radio Deluxe or Hamlib (rigctld). The WebSDR audio can be sent to a virtual audio cable (SDRLINK) for WSJT-X. The interface is available in 23 European languages (menu on the 2nd line). Single exe, no installation, Windows 10/11: see **[Releases](https://github.com/F5pbgLudovic/SDRLink/releases/latest)**.
+SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows the rig's VFO and the rig follows the WebSDR waterfall. The mode is synchronised too.
+
+- **Interfaces**: COM port (direct CAT), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld).
+- **Rigs**: Yaesu (FT-2000, FTdx10, FTdx101, FT-991, FT-817/818, FT-857, FT-897…), Icom (IC-7000, IC-7300, IC-7760, IC-706…), Kenwood, Elecraft, Xiegu (G90, X6100, X6200).
+- **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
+- **Features**:
+  - PTT button, WebSDR audio muted while transmitting;
+  - mouse wheel on the frequencies, kHz entry with history, mode buttons;
+  - favorites in 4 lists with dead-link and duplicate checks, search for WebSDRs near France;
+  - WebSDR, rig and ExpertSDR volume (Mute ExpertSDR, through Windows or TCI);
+  - SDRLINK audio cable for WSJT-X, automatic notch;
+  - interface in 23 European languages (menu on the 2nd line);
+  - dark mode and colour palette.
+
+### Download
+
+**[Download the latest version](https://github.com/F5pbgLudovic/SDRLink/releases/latest)** (`SDRLink.exe`, or the `.zip` that also contains the manual). It is a single file, no installation, for Windows 10 and 11. On first launch, SDRLink checks for .NET Framework 4.6.2+ and Microsoft Edge WebView2 and offers to install them if they are missing.
+
+### Manual
+
+The full manual is in French: see [LISEZMOI.md](LISEZMOI.md).
+
+### Building
+
+No Visual Studio needed: the C# compiler shipped with Windows (.NET Framework 4.x) is enough.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File build.ps1
+```
+
+On first run, the script downloads the WebView2 package (NuGet) and produces `dist\SDRLink.exe`.
