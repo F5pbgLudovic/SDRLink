@@ -67,7 +67,7 @@ HRD connection closed	HRD ühendus suleti
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Aadressil {0}:{1} pole HRD serverit (lubage IP-server programmis HRD Rig Control).
 Cannot open the log: 	Logi ei saa avada: 
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
-Toggle Mute WebSDR and Mute TRX	Lülita Vaigista WebSDR ja Vaigista TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Lülita heli järgmisele vastuvõtjale (paremklõps: vastuvõtja, mis jääb vaigistatuks)
 RIG	RAADIO
 Disconnected	Ühendus puudub
 Connect	Ühenda
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK kaabel
  (off) ▾	 (väljas) ▾
 Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Vaigistus, mida ⇄ eirab (jääb vaigistatuks):
+None	Puudub
 ExpertSDR TCI port	ExpertSDR-i TCI-port
 TCI server port (ExpertSDR, Options > TCI):	TCI-serveri port (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
+⚠ Update V{0} available: click to download it	⚠ Saadaval on uuendus V{0}: klõpsake allalaadimiseks
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Saade peatati automaatselt, kestus {0} (ohutuse ajalõpp, muutmiseks paremklõpsake PTT-d)
 Remove "{0}" from the list	Eemalda „{0}“ loendist
 Remove all ({0} values)	Eemalda kõik ({0} väärtust)
@@ -156,6 +159,7 @@ Mute TRX	Vaigista TRX
 Mute ExpertSDR	Vaigista ExpertSDR
 Auto-connect at startup	Ühenda käivitamisel automaatselt
 Dark mode	Tume režiim
+Check for updates	Kontrolli uuendusi
 RTS	RTS
 DTR	DTR
 Start rigctld:	Käivita rigctld:

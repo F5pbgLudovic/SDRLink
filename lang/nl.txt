@@ -67,7 +67,7 @@ HRD connection closed	HRD-verbinding gesloten
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Geen HRD-server op {0}:{1} (schakel de IP-server in HRD Rig Control in).
 Cannot open the log: 	Kan het logboek niet openen: 
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
-Toggle Mute WebSDR and Mute TRX	WebSDR dempen en TRX dempen omschakelen
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Geluid naar de volgende ontvanger schakelen (rechtsklik: ontvanger die gedempt blijft)
 RIG	TRX
 Disconnected	Niet verbonden
 Connect	Verbinden
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (uit) ▾
 Mute TRX: connect the rig first	TRX dempen: verbind eerst de transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-volume niet beschikbaar met deze transceiver of interface (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Demping die ⇄ negeert (blijft gedempt):
+None	Geen
 ExpertSDR TCI port	TCI-poort van ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	TCI-poort van ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Update V{0} beschikbaar: klik om te downloaden
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Zenden automatisch gestopt na {0} (veiligheidstijd, rechtsklik op PTT om te wijzigen)
 Remove "{0}" from the list	"{0}" uit de lijst verwijderen
 Remove all ({0} values)	Alles verwijderen ({0} waarden)
@@ -156,6 +159,7 @@ Mute TRX	TRX dempen
 Mute ExpertSDR	ExpertSDR dempen
 Auto-connect at startup	Automatisch verbinden bij start
 Dark mode	Donkere modus
+Check for updates	Controleren op updates
 RTS	RTS
 DTR	DTR
 Start rigctld:	rigctld starten:

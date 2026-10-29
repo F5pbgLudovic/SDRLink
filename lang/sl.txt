@@ -67,7 +67,7 @@ HRD connection closed	Povezava s HRD zaprta
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} ni strežnika HRD (omogočite strežnik IP v HRD Rig Control).
 Cannot open the log: 	Dnevnika ni mogoče odpreti: 
 Save: no known frequency (rig or WebSDR)	Shrani: frekvenca ni znana (TRX ali WebSDR)
-Toggle Mute WebSDR and Mute TRX	Preklopi Utišaj WebSDR in Utišaj TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Preklopi zvok na naslednji sprejemnik (desni klik: sprejemnik, ki ostane utišan)
 RIG	TRX
 Disconnected	Prekinjeno
 Connect	Poveži
@@ -97,9 +97,12 @@ SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (izkl.) ▾
 Mute TRX: connect the rig first	Utišaj TRX: najprej povežite postajo
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnost postaje ni na voljo pri tej postaji ali vmesniku (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Utišanje, ki ga ⇄ prezre (ostane utišano):
+None	Brez
 ExpertSDR TCI port	Vrata TCI programa ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Vrata strežnika TCI (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	Vrata TCI programa ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Na voljo je posodobitev V{0}: kliknite za prenos
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Oddajanje samodejno ustavljeno po {0} (varnostna omejitev, spremenite jo z desnim klikom na PTT)
 Remove "{0}" from the list	Odstrani »{0}« s seznama
 Remove all ({0} values)	Odstrani vse (vrednosti: {0})
@@ -156,6 +159,7 @@ Mute TRX	Utišaj TRX
 Mute ExpertSDR	Utišaj ExpertSDR
 Auto-connect at startup	Samodejno poveži ob zagonu
 Dark mode	Temni način
+Check for updates	Preveri posodobitve
 RTS	RTS
 DTR	DTR
 Start rigctld:	Zaženi rigctld:

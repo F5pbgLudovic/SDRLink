@@ -4,7 +4,10 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
@@ -35,6 +38,9 @@ namespace SDRLink
         CheckBox chkNotch;
         FlowLayoutPanel pnlHamlib;
         CheckBox chkHamlibLaunch;
+        CheckBox chkUpdates;
+        ToolStripStatusLabel lblUpdate;   // nouvelle version disponible (clic : page de téléchargement)
+        string updateVersion, updateUrl;
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
         Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr;
@@ -115,7 +121,7 @@ namespace SDRLink
                 InitWebView();
                 if (settings.AutoConnect) Connect();
             };
-            Shown += delegate { ApplyCompact(); FirstRunSearch(); };
+            Shown += delegate { ApplyCompact(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); };
             Application.AddMessageFilter(new WheelFilter(this));
             Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyCompact(); };
             FormClosing += delegate
@@ -224,6 +230,9 @@ namespace SDRLink
             btnPalette = new PaletteButton();
             btnPalette.Click += delegate { ShowPalette(); };
             row1.Controls.Add(btnPalette);
+            chkUpdates = Check("Vérifier les mises à jour", "Check for updates");
+            chkUpdates.CheckedChanged += delegate { if (!loading && chkUpdates.Checked) CheckForUpdate(); };
+            row1.Controls.Add(chkUpdates);
 
             // Ligne 2 : paramètres propres à l'interface choisie
             FlowLayoutPanel row2 = rowParams = Row();
@@ -514,10 +523,15 @@ namespace SDRLink
             btnMuteSdr = Btn("Mute WebSDR", "Mute WebSDR", delegate { sdrMuted = !sdrMuted; ApplyVolume(); UpdateMuteButtons(); });
             btnMuteRig = Btn("Mute TX", "Mute TRX", delegate { ToggleRigMute(); });
             // Inverse les deux coupures d'un coup (Mute TX seulement si le volume du poste est télécommandé).
+            // Bouton ⇄ : passe le son d'une réception à la suivante (WebSDR, poste, ExpertSDR).
             btnMuteSwap = Btn("⇄", "⇄", delegate { SwapMutes(); });
             btnMuteSwap.AutoSize = false;
             btnMuteSwap.MinimumSize = btnMuteSwap.Size = new Size(25, 25);
-            Tr(delegate { tips.SetToolTip(btnMuteSwap, Lang.T("Inverser Mute WebSDR et Mute TX", "Toggle Mute WebSDR and Mute TRX")); });
+            Tr(delegate { tips.SetToolTip(btnMuteSwap, Lang.T("Passer le son à la réception suivante (clic droit : réception à laisser coupée)", "Switch the audio to the next receiver (right-click: receiver to keep muted)")); });
+            // Clic droit : coupure dont le bouton ⇄ ne tient pas compte (elle reste coupée).
+            ContextMenuStrip swapMenu = new ContextMenuStrip();
+            swapMenu.Opening += delegate { FillSwapMenu(swapMenu); };
+            btnMuteSwap.ContextMenuStrip = swapMenu;
             // Visible seulement quand ExpertSDR tourne : coupe son son dans le mélangeur de volume de Windows.
             btnMuteEsdr = Btn("Mute ExpertSDR", "Mute ExpertSDR", delegate { ToggleExpertSdrMute(); });
             btnMuteEsdr.Visible = false;
@@ -588,7 +602,16 @@ namespace SDRLink
 
             strip = new StatusStrip();
             status = new ToolStripStatusLabel();
+            status.Spring = true;
+            status.TextAlign = ContentAlignment.MiddleLeft;
             strip.Items.Add(status);
+            lblUpdate = new ToolStripStatusLabel();
+            lblUpdate.Visible = false;
+            lblUpdate.IsLink = true;
+            lblUpdate.Font = new Font(Font, FontStyle.Bold);
+            lblUpdate.Click += delegate { OpenUpdatePage(); };
+            Tr(delegate { if (updateVersion != null) lblUpdate.Text = Lang.F("⚠ Mise à jour V{0} disponible : cliquez pour la télécharger", "⚠ Update V{0} available: click to download it", updateVersion); });
+            strip.Items.Add(lblUpdate);
 
             Controls.Add(table);
             Controls.Add(strip);
@@ -722,6 +745,7 @@ namespace SDRLink
             UpdatePttButton();
             UpdateMuteButtons();
             UpdateDisplays();
+            StyleUpdateLabel();
         }
 
         // Largeur fixe des fréquences, calculée sur une fréquence HF avec le mode le plus long : les boutons à droite
@@ -880,6 +904,7 @@ namespace SDRLink
             chkCompact.Checked = settings.Compact;
             chkTop.Checked = settings.TopMost;
             chkDark.Checked = settings.DarkMode;
+            chkUpdates.Checked = settings.CheckUpdates;
             trkVolume.Value = settings.DefaultVolume;
             chkMute.Checked = settings.MuteOnTx;
             chkNotch.Checked = settings.AutoNotch;
@@ -922,6 +947,7 @@ namespace SDRLink
             foreach (object o in cbFreq.Items) settings.FreqHistory.Add(o.ToString());
             settings.Compact = chkCompact.Checked;
             settings.TopMost = chkTop.Checked;
+            settings.CheckUpdates = chkUpdates.Checked;
             settings.MuteOnTx = chkMute.Checked;
             settings.UnmuteDelayMs = (int)numUnmute.Value;
             settings.Direction = cbDirection.SelectedIndex;
@@ -2038,13 +2064,86 @@ namespace SDRLink
             StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable);
         }
 
-        // Bouton ⇄ : chaque coupure change d'état (coupée devient active et inversement).
+        // ---------------------------------------------------------------- Bouton ⇄
+
+        // Coupures parcourues par le bouton ⇄ : 0 WebSDR, 1 poste (volume télécommandé), 2 ExpertSDR (s'il répond).
+        static readonly string[] SwapNamesFr = { "Mute WebSDR", "Mute TX", "Mute ExpertSDR" };
+        static readonly string[] SwapNamesEn = { "Mute WebSDR", "Mute TRX", "Mute ExpertSDR" };
+
+        bool SwapAvailable(int i)
+        {
+            if (i == 0) return true;
+            if (i == 1) return worker != null && rigAfSupported == 1;
+            return EsdrAvailable;
+        }
+
+        bool SwapMuted(int i) { return i == 0 ? sdrMuted : i == 1 ? rigMuted : esdrMuted; }
+
+        void SetSwapMute(int i, bool mute)
+        {
+            if (SwapMuted(i) == mute) return;
+            if (i == 0) { sdrMuted = mute; ApplyVolume(); }
+            else if (i == 1) ToggleRigMute();
+            else
+            {
+                bool? r = SetExpertSdrMute(mute);
+                if (!r.HasValue) return;
+                esdrMuted = esdrMutedByUs = r.Value;
+                Log.Write((esdrMuted ? "Son d'ExpertSDR coupé" : "Son d'ExpertSDR rétabli") + (esdrWin ? " (mélangeur Windows)" : " (TCI)"));
+            }
+        }
+
+        // Aucune coupure : toutes coupées. Une seule réception audible : elle est coupée et la suivante rétablie.
+        // Tout coupé : la première est rétablie. Plusieurs audibles (sans l'être toutes) : toutes coupées.
+        // La coupure laissée de côté (clic droit) reste coupée, pour n'entendre qu'une réception.
         void SwapMutes()
         {
-            sdrMuted = !sdrMuted;
-            ApplyVolume();
-            if (worker != null && rigAfSupported == 1) ToggleRigMute();
-            UpdateMuteButtons();
+            List<int> used = new List<int>();
+            for (int i = 0; i < 3; i++)
+            {
+                if (!SwapAvailable(i)) continue;
+                if (i == settings.SwapIgnore) SetSwapMute(i, true);
+                else used.Add(i);
+            }
+            if (used.Count == 1) SetSwapMute(used[0], !SwapMuted(used[0]));
+            else if (used.Count > 1)
+            {
+                List<int> on = used.FindAll(delegate(int i) { return !SwapMuted(i); });
+                if (on.Count == 1)
+                {
+                    int k = used.IndexOf(on[0]);
+                    SetSwapMute(on[0], true);
+                    SetSwapMute(used[(k + 1) % used.Count], false);
+                }
+                else if (on.Count == 0) SetSwapMute(used[0], false);
+                else foreach (int i in used) SetSwapMute(i, true);
+            }
+            UpdateEsdrControls();
+        }
+
+        void FillSwapMenu(ContextMenuStrip menu)
+        {
+            menu.Items.Clear();
+            ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Coupure dont ⇄ ne tient pas compte (reste coupée) :", "Mute ignored by ⇄ (stays muted):"));
+            title.Enabled = false;
+            menu.Items.Add(title);
+            for (int i = -1; i < 3; i++)
+            {
+                int idx = i;
+                ToolStripMenuItem it = new ToolStripMenuItem(i < 0 ? Lang.T("Aucune", "None") : Lang.T(SwapNamesFr[i], SwapNamesEn[i]));
+                it.Checked = settings.SwapIgnore == i;
+                it.Click += delegate { SetSwapIgnore(idx); };
+                menu.Items.Add(it);
+            }
+        }
+
+        void SetSwapIgnore(int i)
+        {
+            settings.SwapIgnore = i;
+            settings.Save();
+            Log.Write("Bouton ⇄ : coupure laissée de côté = " + (i < 0 ? "aucune" : SwapNamesFr[i]));
+            if (i >= 0 && SwapAvailable(i)) SetSwapMute(i, true);
+            UpdateEsdrControls();
         }
 
         // ---------------------------------------------------------------- ExpertSDR
@@ -2391,6 +2490,69 @@ namespace SDRLink
             catch (Exception) { return false; }
         }
 
+        // ---------------------------------------------------------------- Mise à jour
+
+        // Au démarrage (case cochée) : dernière version publiée sur GitHub ; si elle est plus récente, lien dans la barre d'état.
+        void CheckForUpdate()
+        {
+            System.Threading.Thread t = new System.Threading.Thread(delegate()
+            {
+                string tag = null, url = null;
+                try
+                {
+                    ServicePointManager.SecurityProtocol |= (SecurityProtocolType)3072;   // TLS 1.2
+                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/F5pbgLudovic/SDRLink/releases/latest");
+                    req.Timeout = 8000;
+                    req.UserAgent = "SDRLink/" + Program.Version + " (F5PBG)";
+                    req.Accept = "application/vnd.github+json";
+                    string json;
+                    using (WebResponse resp = req.GetResponse())
+                    using (StreamReader r = new StreamReader(resp.GetResponseStream(), Encoding.UTF8)) json = r.ReadToEnd();
+                    Match m = Regex.Match(json, "\"tag_name\"\\s*:\\s*\"v?([0-9][0-9.]*)\"");
+                    if (m.Success) tag = m.Groups[1].Value.TrimEnd('.');
+                    m = Regex.Match(json, "\"html_url\"\\s*:\\s*\"(https://github\\.com/[^\"]+/releases/tag/[^\"]+)\"");
+                    url = m.Success ? m.Groups[1].Value : "https://github.com/F5pbgLudovic/SDRLink/releases/latest";
+                }
+                catch (Exception ex) { Log.Write("Mise à jour : vérification impossible (" + ex.Message + ")"); }
+                if (tag == null) return;
+                try
+                {
+                    BeginInvoke((Action)delegate
+                    {
+                        if (!IsNewer(tag, Program.Version)) { Log.Write("Mise à jour : V" + Program.Version + " est la dernière version"); return; }
+                        Log.Write("Mise à jour : V" + tag + " disponible");
+                        updateVersion = tag;
+                        updateUrl = url;
+                        lblUpdate.Text = Lang.F("⚠ Mise à jour V{0} disponible : cliquez pour la télécharger", "⚠ Update V{0} available: click to download it", updateVersion);
+                        lblUpdate.Visible = true;
+                        StyleUpdateLabel();
+                    });
+                }
+                catch (InvalidOperationException) { }   // fenêtre fermée entre-temps
+            });
+            t.IsBackground = true;
+            t.Start();
+        }
+
+        static bool IsNewer(string latest, string current)
+        {
+            Version a, b;
+            if (!Version.TryParse(latest.Contains(".") ? latest : latest + ".0", out a)) return false;
+            if (!Version.TryParse(current.Contains(".") ? current : current + ".0", out b)) return false;
+            return a > b;
+        }
+
+        void OpenUpdatePage()
+        {
+            try { System.Diagnostics.Process.Start(updateUrl ?? "https://github.com/F5pbgLudovic/SDRLink/releases/latest"); }
+            catch (Exception ex) { MessageBox.Show(this, ex.Message, "SDRLink"); }
+        }
+
+        void StyleUpdateLabel()
+        {
+            if (lblUpdate == null) return;
+            lblUpdate.LinkColor = lblUpdate.ActiveLinkColor = lblUpdate.VisitedLinkColor = Theme.Dark ? Color.FromArgb(255, 170, 60) : Color.FromArgb(200, 80, 0);
+        }
         void ManageFavorites()
         {
             using (FavoritesDialog d = new FavoritesDialog(settings.Favorites, CurrentPage, settings.ListNames, settings.CurrentList, delegate(string url) { Navigate(url); }))

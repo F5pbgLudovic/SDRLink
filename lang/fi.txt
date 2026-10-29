@@ -67,7 +67,7 @@ HRD connection closed	HRD-yhteys suljettu
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	HRD-palvelinta ei löydy osoitteesta {0}:{1} (ota IP-palvelin käyttöön HRD Rig Control -ohjelmassa).
 Cannot open the log: 	Lokia ei voi avata: 
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
-Toggle Mute WebSDR and Mute TRX	Vaihda Mykistä WebSDR ja Mykistä TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Siirrä ääni seuraavaan vastaanottimeen (hiiren oikea painike: vastaanotin, joka pysyy mykistettynä)
 RIG	RADIO
 Disconnected	Ei yhteyttä
 Connect	Yhdistä
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK-kaapeli
  (off) ▾	 (pois) ▾
 Mute TRX: connect the rig first	Mykistä TRX: yhdistä ensin radio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radion äänenvoimakkuutta ei voi säätää tällä radiolla tai liitännällä (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Mykistys, jonka ⇄ ohittaa (pysyy mykistettynä):
+None	Ei mitään
 ExpertSDR TCI port	ExpertSDR:n TCI-portti
 TCI server port (ExpertSDR, Options > TCI):	TCI-palvelimen portti (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	ExpertSDR:n TCI-portti: {0}…
+⚠ Update V{0} available: click to download it	⚠ Päivitys V{0} saatavilla: lataa napsauttamalla
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Lähetys pysäytettiin automaattisesti, kesto {0} (turva-aikakatkaisu, muuta napsauttamalla PTT:tä hiiren kakkospainikkeella)
 Remove "{0}" from the list	Poista ”{0}” luettelosta
 Remove all ({0} values)	Poista kaikki ({0} arvoa)
@@ -156,6 +159,7 @@ Mute TRX	Mykistä TRX
 Mute ExpertSDR	Mykistä ExpertSDR
 Auto-connect at startup	Yhdistä automaattisesti käynnistettäessä
 Dark mode	Tumma tila
+Check for updates	Tarkista päivitykset
 RTS	RTS
 DTR	DTR
 Start rigctld:	Käynnistä rigctld:

@@ -1,4 +1,4 @@
-# SDRLink V1.5 — @F5PBG 2026
+# SDRLink V1.6 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -7,12 +7,14 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
 - **Fonctions** :
   - bouton PTT et coupure du son du WebSDR en émission ;
+  - bouton ⇄ qui passe le son d'une réception à l'autre (WebSDR, poste, ExpertSDR) ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
   - favoris en 4 listes avec vérification des liens et des doublons, recherche des WebSDR proches de la France ;
   - volume du WebSDR, du poste et d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
   - interface en 23 langues européennes ;
-  - mode sombre et palette.
+  - mode sombre et palette ;
+  - vérification des mises à jour au démarrage.
 
 ## Télécharger
 
@@ -41,12 +43,14 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
 - **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
 - **Features**:
   - PTT button, WebSDR audio muted while transmitting;
+  - ⇄ button that switches the audio from one receiver to the next (WebSDR, rig, ExpertSDR);
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
   - favorites in 4 lists with dead-link and duplicate checks, search for WebSDRs near France;
   - WebSDR, rig and ExpertSDR volume (Mute ExpertSDR, through Windows or TCI);
   - SDRLINK audio cable for WSJT-X, automatic notch;
   - interface in 23 European languages (menu on the 2nd line);
-  - dark mode and colour palette.
+  - dark mode and colour palette;
+  - update check at startup.
 
 ### Download
 

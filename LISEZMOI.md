@@ -135,7 +135,11 @@ Le curseur **Volume**, à droite de « Gérer les favoris… », règle uniqueme
 ## Coupure du son et volume du poste
 
 À droite du volume du WebSDR :
-- **⇄** (petit bouton carré) : inverse d'un coup **Mute WebSDR** et **Mute TX** (chacun passe de coupé à actif, et inversement). Si le volume du poste n'est pas télécommandé, il n'agit que sur Mute WebSDR.
+- **⇄** (petit bouton carré) : passe le son d'une réception à l'autre parmi **Mute WebSDR**, **Mute TX** et **Mute ExpertSDR** (seulement celles qui sont disponibles : Mute TX si le volume du poste est télécommandé, Mute ExpertSDR si ExpertSDR répond) :
+  - aucun son coupé : un clic les coupe tous ;
+  - un seul son actif : il est coupé et le suivant est rétabli ; chaque clic passe au suivant (WebSDR → TX → ExpertSDR → WebSDR…) ;
+  - tout coupé : le premier est rétabli ; plusieurs sons actifs (sans l'être tous) : tous coupés.
+  - **Clic droit** sur ⇄ : choisir la coupure dont ⇄ ne tient pas compte (ou « Aucune »). Elle est coupée tout de suite et le reste, pour n'entendre qu'une réception ; ⇄ ne permute alors qu'entre les deux autres. Le choix est conservé.
 - **Mute WebSDR** : coupe le son du WebSDR (bouton rouge), un second clic le rétablit au volume réglé.
 - **Mute TX** : coupe le son du **transceiver** en mettant son gain BF à zéro par CAT, puis rétablit le volume au second clic. Le son est aussi rétabli à la déconnexion.
 - **Mute ExpertSDR** : n'apparaît que lorsque le logiciel **ExpertSDR** (2 ou 3) tourne. Il coupe et rétablit le son d'ExpertSDR sans aller dans ExpertSDR :
@@ -290,12 +294,19 @@ Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui boug
 
 Ces deux réglages sont conservés au prochain lancement.
 
+## Mises à jour
+
+Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au démarrage, si Internet répond, SDRLink regarde la dernière version publiée sur GitHub. S'il en existe une plus récente, un lien orange « ⚠ Mise à jour Vx.y disponible » apparaît en bas à droite de la fenêtre, dans la barre d'état (visible aussi en affichage réduit) : un clic ouvre la page de téléchargement. Cocher la case lance la vérification tout de suite.
+
 ## Dépannage
 
 Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrlink.log`. Le journal est remis à zéro à chaque lancement et contient l'état de la connexion et, pour HRD, la liste des modes reçue.
 
 ## Historique des versions
 
+- **1.6**
+  - bouton ⇄ : le son passe d'une réception à la suivante (WebSDR, TX, ExpertSDR) ; clic droit pour laisser une coupure de côté ;
+  - case « Vérifier les mises à jour » et lien vers la nouvelle version dans la barre d'état.
 - **1.5**
   - premier démarrage : recherche des WebSDR lancée une fois, si Internet répond ;
   - la liste où enregistrer est demandée à chaque ajout de favori, et un favori déjà présent dans la liste n'est pas ajouté ;

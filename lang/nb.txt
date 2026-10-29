@@ -67,7 +67,7 @@ HRD connection closed	HRD-tilkobling lukket
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktiver IP-serveren i HRD Rig Control).
 Cannot open the log: 	Kan ikke åpne loggen: 
 Save: no known frequency (rig or WebSDR)	Save: ingen kjent frekvens (rigg eller WebSDR)
-Toggle Mute WebSDR and Mute TRX	Veksle Demp WebSDR og Demp rigg
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Bytt lyden til neste mottaker (høyreklikk: mottaker som forblir dempet)
 RIG	RIGG
 Disconnected	Frakoblet
 Connect	Koble til
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (av) ▾
 Mute TRX: connect the rig first	Demp rigg: koble til riggen først
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolum er ikke tilgjengelig med denne riggen eller dette grensesnittet (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Demping som ⇄ ignorerer (forblir dempet):
+None	Ingen
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	TCI-port for ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Oppdatering V{0} tilgjengelig: klikk for å laste den ned
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Sending stoppet automatisk etter {0} (sikkerhetstid, høyreklikk på PTT for å endre)
 Remove "{0}" from the list	Fjern «{0}» fra listen
 Remove all ({0} values)	Fjern alle ({0} verdier)
@@ -156,6 +159,7 @@ Mute TRX	Demp rigg
 Mute ExpertSDR	Demp ExpertSDR
 Auto-connect at startup	Koble til automatisk ved oppstart
 Dark mode	Mørk modus
+Check for updates	Se etter oppdateringer
 RTS	RTS
 DTR	DTR
 Start rigctld:	Start rigctld:

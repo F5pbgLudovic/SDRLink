@@ -67,7 +67,7 @@ HRD connection closed	Conexiune HRD închisă
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Niciun server HRD la {0}:{1} (activați serverul IP în HRD Rig Control).
 Cannot open the log: 	Nu se poate deschide jurnalul: 
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
-Toggle Mute WebSDR and Mute TRX	Comutare Mut WebSDR și Mut TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Comută sunetul la receptorul următor (clic dreapta: receptor care rămâne fără sunet)
 RIG	STAȚIE
 Disconnected	Deconectat
 Connect	Conectare
@@ -97,9 +97,12 @@ SDRLINK cable	Cablu SDRLINK
  (off) ▾	 (oprit) ▾
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Dezactivare sunet ignorată de ⇄ (rămâne fără sunet):
+None	Niciuna
 ExpertSDR TCI port	Portul TCI al ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Portul serverului TCI (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Actualizarea V{0} este disponibilă: faceți clic pentru a o descărca
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Emisie oprită automat după {0} (limită de siguranță, clic dreapta pe PTT pentru a o modifica)
 Remove "{0}" from the list	Eliminare „{0}” din listă
 Remove all ({0} values)	Eliminare toate ({0} valori)
@@ -156,6 +159,7 @@ Mute TRX	Mut TRX
 Mute ExpertSDR	Mut ExpertSDR
 Auto-connect at startup	Conectare automată la pornire
 Dark mode	Mod întunecat
+Check for updates	Caută actualizări
 RTS	RTS
 DTR	DTR
 Start rigctld:	Pornire rigctld:

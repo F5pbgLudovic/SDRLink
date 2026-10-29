@@ -67,7 +67,7 @@ HRD connection closed	HRD-forbindelse lukket
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktivér IP-serveren i HRD Rig Control).
 Cannot open the log: 	Kan ikke åbne loggen: 
 Save: no known frequency (rig or WebSDR)	Save: ingen kendt frekvens (radio eller WebSDR)
-Toggle Mute WebSDR and Mute TRX	Skift Lydløs WebSDR og Lydløs TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Skift lyden til næste modtager (højreklik: modtager, der forbliver slået fra)
 RIG	TRX
 Disconnected	Afbrudt
 Connect	Forbind
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (fra) ▾
 Mute TRX: connect the rig first	Lydløs TRX: forbind radioen først
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radiolydstyrke er ikke tilgængelig med denne radio eller grænseflade (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Lydløs, som ⇄ ignorerer (forbliver slået fra):
+None	Ingen
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	TCI-port for ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Opdatering V{0} tilgængelig: klik for at hente den
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Sending stoppet automatisk efter {0} (sikkerhedstid, højreklik på PTT for at ændre)
 Remove "{0}" from the list	Fjern ”{0}” fra listen
 Remove all ({0} values)	Fjern alle ({0} værdier)
@@ -156,6 +159,7 @@ Mute TRX	Lydløs TRX
 Mute ExpertSDR	Lydløs ExpertSDR
 Auto-connect at startup	Forbind automatisk ved start
 Dark mode	Mørk tilstand
+Check for updates	Søg efter opdateringer
 RTS	RTS
 DTR	DTR
 Start rigctld:	Start rigctld:

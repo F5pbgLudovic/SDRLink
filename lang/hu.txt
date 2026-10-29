@@ -67,7 +67,7 @@ HRD connection closed	A HRD-kapcsolat bezárult
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nincs HRD-szerver itt: {0}:{1} (engedélyezze az IP-szervert a HRD Rig Control programban).
 Cannot open the log: 	A napló nem nyitható meg: 
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
-Toggle Mute WebSDR and Mute TRX	WebSDR némítás és TRX némítás váltása
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
 RIG	RÁDIÓ
 Disconnected	Nincs kapcsolat
 Connect	Csatlakozás
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK kábel
  (off) ▾	 (ki) ▾
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	A ⇄ által figyelmen kívül hagyott némítás (némítva marad):
+None	Nincs
 ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
+⚠ Update V{0} available: click to download it	⚠ Elérhető a V{0} frissítés: kattintson a letöltéshez
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Az adás automatikusan leállt ennyi idő után: {0} (biztonsági időkorlát, a módosításhoz kattintson jobb gombbal a PTT-re)
 Remove "{0}" from the list	„{0}” eltávolítása a listából
 Remove all ({0} values)	Összes eltávolítása ({0} érték)
@@ -156,6 +159,7 @@ Mute TRX	TRX némítás
 Mute ExpertSDR	ExpertSDR némítás
 Auto-connect at startup	Automatikus csatlakozás indításkor
 Dark mode	Sötét mód
+Check for updates	Frissítések keresése
 RTS	RTS
 DTR	DTR
 Start rigctld:	rigctld indítása:

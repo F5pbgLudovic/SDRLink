@@ -57,6 +57,8 @@ namespace SDRLink
         public int DefaultVolume = 100;   // volume des WebSDR qui ne sont pas en favoris
         // Recherche des WebSDR lancée une seule fois, au premier démarrage (pas encore de fichier de réglages).
         public bool FirstSearchDone;
+        public bool CheckUpdates = true;   // recherche d'une nouvelle version sur GitHub au démarrage
+        public int SwapIgnore = -1;        // coupure laissée de côté par le bouton ⇄ (-1 aucune, 0 WebSDR, 1 TX, 2 ExpertSDR)
         public List<Favorite> Favorites = new List<Favorite>
         {
             new Favorite("Liste des WebSDR (websdr.org)", "http://www.websdr.org/"),
@@ -142,6 +144,8 @@ namespace SDRLink
                     case "WinMax": s.WinMax = v == "1"; break;
                     case "Volume": s.DefaultVolume = Math.Max(0, Math.Min(100, Int(v, 100))); break;
                     case "FirstSearch": s.FirstSearchDone = v != "0"; break;
+                    case "CheckUpdates": s.CheckUpdates = v != "0"; break;
+                    case "SwapIgnore": s.SwapIgnore = Math.Max(-1, Math.Min(2, Int(v, -1))); break;
                     case "Freq": if (s.FreqHistory.Count < 100) s.FreqHistory.Add(v); break;
                 }
             }
@@ -200,6 +204,8 @@ namespace SDRLink
             Line(sb, "WinMax", WinMax ? 1 : 0);
             Line(sb, "Volume", DefaultVolume);
             Line(sb, "FirstSearch", FirstSearchDone ? 1 : 0);
+            Line(sb, "CheckUpdates", CheckUpdates ? 1 : 0);
+            Line(sb, "SwapIgnore", SwapIgnore);
             foreach (Favorite f in Favorites) Line(sb, "Fav", f.ToSetting());
             foreach (string f in FreqHistory) Line(sb, "Freq", f);
             try { File.WriteAllText(FilePath, sb.ToString(), Encoding.UTF8); } catch { }

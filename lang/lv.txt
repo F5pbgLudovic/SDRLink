@@ -67,7 +67,7 @@ HRD connection closed	HRD savienojums aizvērts
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nav HRD servera adresē {0}:{1} (iespējojiet IP serveri programmā HRD Rig Control).
 Cannot open the log: 	Nevar atvērt žurnālu: 
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
-Toggle Mute WebSDR and Mute TRX	Pārslēgt Klusināt WebSDR un Klusināt TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Pārslēgt skaņu uz nākamo uztvērēju (labais klikšķis: uztvērējs, kas paliek apklusināts)
 RIG	RADIO
 Disconnected	Atvienots
 Connect	Savienot
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (izsl.) ▾
 Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Apklusināšana, ko ⇄ ignorē (paliek apklusināta):
+None	Nav
 ExpertSDR TCI port	ExpertSDR TCI ports
 TCI server port (ExpertSDR, Options > TCI):	TCI servera ports (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	ExpertSDR TCI ports: {0}…
+⚠ Update V{0} available: click to download it	⚠ Pieejams atjauninājums V{0}: noklikšķiniet, lai lejupielādētu
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Raidīšana automātiski apturēta pēc {0} (drošības taimauts; lai to mainītu, ar peles labo pogu noklikšķiniet uz PTT)
 Remove "{0}" from the list	Noņemt "{0}" no saraksta
 Remove all ({0} values)	Noņemt visu (vērtības: {0})
@@ -156,6 +159,7 @@ Mute TRX	Klusināt TRX
 Mute ExpertSDR	Klusināt ExpertSDR
 Auto-connect at startup	Autom. savienot startējot
 Dark mode	Tumšais režīms
+Check for updates	Pārbaudīt atjauninājumus
 RTS	RTS
 DTR	DTR
 Start rigctld:	Palaist rigctld:

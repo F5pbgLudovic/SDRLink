@@ -67,7 +67,7 @@ HRD connection closed	HRD ryšys uždarytas
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nėra HRD serverio adresu {0}:{1} (įjunkite IP serverį programoje HRD Rig Control).
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
 Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
-Toggle Mute WebSDR and Mute TRX	Perjungti Nutildyti WebSDR ir Nutildyti TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Perjungti garsą į kitą imtuvą (dešinysis spustelėjimas: imtuvas, kuris lieka nutildytas)
 RIG	STOTIS
 Disconnected	Atsijungta
 Connect	Prisijungti
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (išj.) ▾
 Mute TRX: connect the rig first	Nutildyti TRX: pirmiausia prijunkite stotį
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Stoties garsumas nepasiekiamas su šia stotimi ar sąsaja (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Nutildymas, kurio ⇄ nepaiso (lieka nutildytas):
+None	Jokio
 ExpertSDR TCI port	ExpertSDR TCI prievadas
 TCI server port (ExpertSDR, Options > TCI):	TCI serverio prievadas (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	ExpertSDR TCI prievadas: {0}…
+⚠ Update V{0} available: click to download it	⚠ Yra atnaujinimas V{0}: spustelėkite, kad atsisiųstumėte
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Siuntimas automatiškai sustabdytas po {0} (saugos laikmatis; norėdami pakeisti, spustelėkite PTT dešiniuoju mygtuku)
 Remove "{0}" from the list	Šalinti „{0}“ iš sąrašo
 Remove all ({0} values)	Šalinti viską (reikšmių: {0})
@@ -156,6 +159,7 @@ Mute TRX	Nutildyti TRX
 Mute ExpertSDR	Nutildyti ExpertSDR
 Auto-connect at startup	Autom. jungtis paleidžiant
 Dark mode	Tamsus režimas
+Check for updates	Tikrinti atnaujinimus
 RTS	RTS
 DTR	DTR
 Start rigctld:	Paleisti rigctld:

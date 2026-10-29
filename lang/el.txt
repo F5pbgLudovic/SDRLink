@@ -67,7 +67,7 @@ HRD connection closed	Η σύνδεση HRD έκλεισε
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Δεν υπάρχει διακομιστής HRD στο {0}:{1} (ενεργοποιήστε τον διακομιστή IP στο HRD Rig Control).
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
-Toggle Mute WebSDR and Mute TRX	Εναλλαγή Σίγασης WebSDR και Σίγασης TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Μεταφορά του ήχου στον επόμενο δέκτη (δεξί κλικ: δέκτης που μένει σε σίγαση)
 RIG	TRX
 Disconnected	Αποσυνδέθηκε
 Connect	Σύνδεση
@@ -97,9 +97,12 @@ SDRLINK cable	Καλώδιο SDRLINK
  (off) ▾	 (ανενεργό) ▾
 Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Σίγαση που αγνοεί το ⇄ (μένει σε σίγαση):
+None	Καμία
 ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Διαθέσιμη ενημέρωση V{0}: κάντε κλικ για λήψη
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Η εκπομπή διακόπηκε αυτόματα μετά από {0} (χρονικό όριο ασφαλείας, δεξί κλικ στο PTT για αλλαγή)
 Remove "{0}" from the list	Αφαίρεση του «{0}» από τη λίστα
 Remove all ({0} values)	Αφαίρεση όλων ({0} τιμές)
@@ -156,6 +159,7 @@ Mute TRX	Σίγαση TRX
 Mute ExpertSDR	Σίγαση ExpertSDR
 Auto-connect at startup	Αυτόματη σύνδεση κατά την εκκίνηση
 Dark mode	Σκούρα λειτουργία
+Check for updates	Έλεγχος για ενημερώσεις
 RTS	RTS
 DTR	DTR
 Start rigctld:	Εκκίνηση rigctld:

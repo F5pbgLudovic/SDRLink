@@ -67,7 +67,7 @@ HRD connection closed	Spojenie s HRD ukončené
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} nie je server HRD (povoľte IP server v HRD Rig Control).
 Cannot open the log: 	Nedá sa otvoriť denník: 
 Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
-Toggle Mute WebSDR and Mute TRX	Prepnúť Stlmiť WebSDR a Stlmiť TRX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Prepnúť zvuk na ďalší prijímač (pravé tlačidlo: prijímač, ktorý zostane stlmený)
 RIG	TRX
 Disconnected	Odpojené
 Connect	Pripojiť
@@ -97,9 +97,12 @@ SDRLINK cable	Kábel SDRLINK
  (off) ▾	 (vyp.) ▾
 Mute TRX: connect the rig first	Stlmiť TRX: najprv pripojte transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Stlmenie, ktoré ⇄ preskakuje (zostane stlmené):
+None	Žiadne
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port servera TCI (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ K dispozícii je aktualizácia V{0}: kliknite na stiahnutie
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Vysielanie automaticky zastavené po {0} (bezpečnostný limit, zmeníte ho kliknutím pravým tlačidlom na PTT)
 Remove "{0}" from the list	Odstrániť „{0}“ zo zoznamu
 Remove all ({0} values)	Odstrániť všetko (hodnoty: {0})
@@ -156,6 +159,7 @@ Mute TRX	Stlmiť TRX
 Mute ExpertSDR	Stlmiť ExpertSDR
 Auto-connect at startup	Automaticky pripojiť pri štarte
 Dark mode	Tmavý režim
+Check for updates	Kontrolovať aktualizácie
 RTS	RTS
 DTR	DTR
 Start rigctld:	Spustiť rigctld:

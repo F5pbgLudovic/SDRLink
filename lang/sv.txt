@@ -67,7 +67,7 @@ HRD connection closed	HRD-anslutningen stängd
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktivera IP-servern i HRD Rig Control).
 Cannot open the log: 	Kan inte öppna loggen: 
 Save: no known frequency (rig or WebSDR)	Save: ingen känd frekvens (rigg eller WebSDR)
-Toggle Mute WebSDR and Mute TRX	Växla Tysta WebSDR och Tysta rigg
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Växla ljudet till nästa mottagare (högerklick: mottagare som förblir avstängd)
 RIG	RIGG
 Disconnected	Frånkopplad
 Connect	Anslut
@@ -97,9 +97,12 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (av) ▾
 Mute TRX: connect the rig first	Tysta rigg: anslut riggen först
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolym är inte tillgänglig med denna rigg eller detta gränssnitt (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Ljudavstängning som ⇄ ignorerar (förblir avstängd):
+None	Ingen
 ExpertSDR TCI port	TCI-port för ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverns port (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	TCI-port för ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Uppdatering V{0} tillgänglig: klicka för att ladda ner den
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Sändningen stoppades automatiskt efter {0} (säkerhetstid, högerklicka på PTT för att ändra)
 Remove "{0}" from the list	Ta bort ”{0}” från listan
 Remove all ({0} values)	Ta bort alla ({0} värden)
@@ -156,6 +159,7 @@ Mute TRX	Tysta rigg
 Mute ExpertSDR	Tysta ExpertSDR
 Auto-connect at startup	Anslut automatiskt vid start
 Dark mode	Mörkt läge
+Check for updates	Sök efter uppdateringar
 RTS	RTS
 DTR	DTR
 Start rigctld:	Starta rigctld:

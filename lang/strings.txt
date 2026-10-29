@@ -67,7 +67,7 @@ HRD connection closed	Connexion HRD fermée
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Pas de serveur HRD sur {0}:{1} (activez le serveur IP dans HRD Rig Control).
 Cannot open the log: 	Impossible d'ouvrir le journal : 
 Save: no known frequency (rig or WebSDR)	Save : aucune fréquence connue (poste ou WebSDR)
-Toggle Mute WebSDR and Mute TRX	Inverser Mute WebSDR et Mute TX
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Passer le son à la réception suivante (clic droit : réception à laisser coupée)
 RIG	RADIO
 Disconnected	Déconnecté
 Connect	Connecter
@@ -97,9 +97,12 @@ SDRLINK cable	Câble SDRLINK
  (off) ▾	 (arrêt) ▾
 Mute TRX: connect the rig first	Mute TX : connectez d'abord le poste
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume du poste non disponible avec ce poste ou cette interface (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Coupure dont ⇄ ne tient pas compte (reste coupée) :
+None	Aucune
 ExpertSDR TCI port	Port TCI d'ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port du serveur TCI (ExpertSDR, Options > TCI) :
 ExpertSDR TCI port: {0}…	Port TCI d'ExpertSDR : {0}…
+⚠ Update V{0} available: click to download it	⚠ Mise à jour V{0} disponible : cliquez pour la télécharger
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Émission coupée automatiquement après {0} (délai de sécurité, clic droit sur PTT pour le régler)
 Remove "{0}" from the list	Supprimer « {0} » de la liste
 Remove all ({0} values)	Tout supprimer ({0} valeurs)
@@ -156,6 +159,7 @@ Mute TRX	Mute TX
 Mute ExpertSDR	Mute ExpertSDR
 Auto-connect at startup	Connexion auto au démarrage
 Dark mode	Mode sombre
+Check for updates	Vérifier les mises à jour
 RTS	RTS
 DTR	DTR
 Start rigctld:	Lancer rigctld :

@@ -67,7 +67,7 @@ HRD connection closed	Връзката с HRD е затворена
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Няма HRD сървър на {0}:{1} (включете IP сървъра в HRD Rig Control).
 Cannot open the log: 	Дневникът не може да се отвори: 
 Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
-Toggle Mute WebSDR and Mute TRX	Превключване на „Без звук WebSDR“ и „Без звук TRX“
+Switch the audio to the next receiver (right-click: receiver to keep muted)	Превключване на звука към следващия приемник (десен бутон: приемник, който остава заглушен)
 RIG	РАДИО
 Disconnected	Няма връзка
 Connect	Свържи
@@ -97,9 +97,12 @@ SDRLINK cable	Кабел SDRLINK
  (off) ▾	 (изкл.) ▾
 Mute TRX: connect the rig first	Без звук TRX: първо свържете трансивъра
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Силата на звука на трансивъра не е достъпна с този трансивър или интерфейс (OmniRig, HRD, FT-817/818…)
+Mute ignored by ⇄ (stays muted):	Заглушаване, пренебрегвано от ⇄ (остава заглушено):
+None	Няма
 ExpertSDR TCI port	TCI порт на ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Порт на TCI сървъра (ExpertSDR, Options > TCI):
 ExpertSDR TCI port: {0}…	TCI порт на ExpertSDR: {0}…
+⚠ Update V{0} available: click to download it	⚠ Налична е актуализация V{0}: щракнете, за да я изтеглите
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Предаването е спряно автоматично след {0} (предпазен таймер; десен клик върху PTT за промяна)
 Remove "{0}" from the list	Премахни „{0}“ от списъка
 Remove all ({0} values)	Премахни всички (стойности: {0})
@@ -156,6 +159,7 @@ Mute TRX	Без звук TRX
 Mute ExpertSDR	Без звук ExpertSDR
 Auto-connect at startup	Автосвързване при старт
 Dark mode	Тъмен режим
+Check for updates	Проверка за актуализации
 RTS	RTS
 DTR	DTR
 Start rigctld:	Старт rigctld:
