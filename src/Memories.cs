@@ -13,6 +13,7 @@ namespace SDRLink
         public long Hz;
         public string Mode = "";
         public int List;
+        public bool Scan;   // cochée dans « Conf scan » (scan des mémoires)
 
         public const int MaxLists = 10;
 
@@ -32,8 +33,8 @@ namespace SDRLink
 
         public bool Same(Memory m) { return m != null && m.Hz == Hz && m.Name == Name && m.Mode == Mode; }
 
-        // Ligne du fichier de réglages : "nom|Hz|mode|liste".
-        public string ToSetting() { return Name.Replace("|", "/") + "|" + Hz.ToString(CultureInfo.InvariantCulture) + "|" + Mode + "|" + List; }
+        // Ligne du fichier de réglages : "nom|Hz|mode|liste|scan" (scan : 1 si cochée pour le scan).
+        public string ToSetting() { return Name.Replace("|", "/") + "|" + Hz.ToString(CultureInfo.InvariantCulture) + "|" + Mode + "|" + List + (Scan ? "|1" : ""); }
 
         public static Memory FromSetting(string v)
         {
@@ -43,6 +44,7 @@ namespace SDRLink
             Memory m = new Memory(p[0], hz, p.Length >= 3 ? p[2] : "");
             int list;
             if (p.Length >= 4 && int.TryParse(p[3], out list)) m.List = Math.Max(0, Math.Min(MaxLists - 1, list));
+            m.Scan = p.Length >= 5 && p[4] == "1";
             return m;
         }
     }

@@ -89,6 +89,7 @@ Cannot start rigctld: 	Nu se poate porni rigctld:
 TX safety timeout (PTT button)	Limită de siguranță TX (buton PTT)
 Off	Dezactivat
 PTT: connect the rig first	PTT: conectați mai întâi stația
+transmitting	emisie
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frecvență nevalidă: introduceți o valoare în kHz, de ex. 7074 sau 14074.5
 Remove this value (pick it in the list first)	Eliminare valoare (alegeți-o mai întâi din listă)
 RIG 	STAȚIE 
@@ -109,6 +110,11 @@ None	Niciuna
 ExpertSDR TCI port	Portul TCI al ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Portul serverului TCI (ExpertSDR, Options > TCI):
 Add memory	Adaugă memorie
+No scan while transmitting	Nu se poate scana în timpul emisiei
+Scan: set the start and end frequencies in "Scan setup"	Scanare: indicați frecvențele de început și de sfârșit în „Configurare scanare”
+Scan: check memories in "Scan setup"	Scanare: bifați memorii în „Configurare scanare”
+Scan stopped	Scanare oprită
+■ Stop scan	■ Oprește scanarea
 (no memory used yet)	(nicio memorie folosită încă)
 Memories…	Memorii…
 Clear this list	Golește această listă
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Eliminați „{0}” din „{1}”?
 Unexpected error, written to the log: {0}	Eroare neașteptată, notată în jurnal: {0}
 Memory "{0}" added to "{1}".	Memoria „{0}” a fost adăugată la „{1}”.
 Memory "{0}": {1} kHz	Memoria „{0}”: {1} kHz
+Scan stopped: {0}	Scanare oprită: {0}
+Scan: {0}	Scanare: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ultimele {0} mesaje (clic: ascundeți sau reafișați acest tip de mesaj, ✓ = ascuns)
 Show all hidden messages again ({0})	Reafișează toate mesajele ascunse ({0})
 Interface:	Interfață:
@@ -165,6 +173,8 @@ Text size…	Dimensiunea textului…
 …	…
 Download Hamlib…	Descărcare Hamlib…
 SDRLINK cable ▾	Cablu SDRLINK ▾
+Scan setup	Configurare scanare
+▶ Scan	▶ Scanare
 QSY	QSY
 Save	Salvare
 Memories	Memorii
@@ -189,7 +199,8 @@ Start rigctld:	Pornire rigctld:
 Sync mode	Sincronizare mod
 Mute WebSDR while transmitting	Mut WebSDR în emisie
 Auto notch (DNF)	Notch auto (DNF)
-Compact view	Vizualizare compactă
+Reduced view	Afișare redusă
+Mini view	Afișare mini
 Always on top	Mereu deasupra
 COM port (direct CAT)	Port COM (CAT direct)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Conectat, se așteaptă stația...
 Rig online	Stație online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stația nu răspunde (verificați portul, viteza, adresa CI-V, meniul CAT)
 Error: 	Eroare: 
+Scan type:	Tip de scanare:
+Frequencies	Frecvențe
+Start (kHz):	Început (kHz):
+End (kHz):	Sfârșit (kHz):
+Time on each frequency:	Timp pe fiecare frecvență:
+Memories to scan:	Memorii de scanat:
+Time on each memory:	Timp pe fiecare memorie:
+(no memory: Memories button)	(nicio memorie: butonul Memorii)
+Reset	Resetare
+Start scan	Pornește scanarea
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Indicați frecvențe de început și de sfârșit diferite, în kHz (de ex. 7000 și 7200).
+Check at least one memory to scan.	Bifați cel puțin o memorie de scanat.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Niciun server TCI la 
 TCI connection lost	Conexiune TCI pierdută
 unavailable	indisponibil

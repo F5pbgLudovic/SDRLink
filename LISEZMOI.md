@@ -191,6 +191,7 @@ Le menu **Langue**, sur la 2ᵉ ligne, change la langue de toute l'interface, im
 - **Bidirectionnelle** / **Radio → WebSDR** / **WebSDR → Radio** / **Désactivée**
 - En choisissant **Bidirectionnelle** ou **Radio → WebSDR**, le WebSDR est aussitôt recalé sur la fréquence du poste.
 - En choisissant **WebSDR → Radio**, c'est le poste qui se cale aussitôt sur la fréquence et le mode du WebSDR.
+- **Au démarrage de SDRLink, le poste ne change jamais** de fréquence ni de mode : en Bidirectionnelle ou Radio → WebSDR, c'est le WebSDR qui se cale sur le poste ; en WebSDR → Radio ou Désactivée, rien ne change. De même, pendant les 8 secondes qui suivent le chargement d'une page ou la connexion du poste, le WebSDR ne commande pas le poste : une page encore en train de s'installer annonce parfois son ancienne fréquence, qui était auparavant renvoyée au poste.
 - En **Bidirectionnelle**, le **poste fait foi** : si le WebSDR reste décalé de plus de 3 secondes, il est recalé sur le poste. C'est le cas si un réglage est perdu ou si la page est lente. En « Radio → WebSDR », on peut au contraire écarter le WebSDR du poste (molette ou clic dans la cascade) : il n'est recalé qu'au prochain mouvement du VFO.
 - **OpenWebRX à plusieurs profils** (un profil par bande, par ex. « HF_7MHz », « VHF_144-146MHz ») : si la fréquence demandée est hors du profil actif, SDRLink bascule automatiquement sur le profil qui la couvre, d'après son nom, puis règle la fréquence. Le changement de profil s'applique à tous les auditeurs de ce récepteur, comme lorsqu'on le fait à la main.
 - **Décalage WebSDR (Hz)** : ajouté à la fréquence du poste côté WebSDR (transverter, écart de calibration…)
@@ -295,12 +296,26 @@ Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui boug
 
 ## Affichage
 
-- **Affichage réduit** : la fenêtre ne garde que les lignes « Synchro » à « Volume » (PTT, fréquences, modes, barre WebSDR, volumes). Les lignes de connexion et la page du WebSDR sont masquées, mais le WebSDR continue de jouer et de suivre le poste. Décocher pour retrouver la grande fenêtre.
-- La position et la taille de la fenêtre en affichage normal sont mémorisées à la fermeture, même si on ferme en affichage réduit. Au prochain lancement, décocher « Affichage réduit » redonne la taille d'avant. Si la fenêtre était en plein écran avant l'affichage réduit, elle y revient.
+- **Affichage réduit** : la fenêtre commence à la ligne « Synchro » et garde **tout le bas**, page du WebSDR comprise. Les lignes de connexion et de réglage de l'interface sont masquées ; la fenêtre perd leur hauteur, la page garde sa taille. La fenêtre peut être redimensionnée.
+- **Affichage mini** (l'ancien « Affichage réduit ») : la fenêtre ne garde que les lignes « Synchro » à « Volume » (PTT, fréquences, modes, barre WebSDR, volumes), à hauteur fixe. La page du WebSDR est masquée, mais le WebSDR continue de jouer et de suivre le poste.
+- En affichages réduit et mini, la ligne PTT / fréquences / modes / cases reste **sur une seule ligne** : la fenêtre ne peut pas devenir plus étroite qu'elle (sauf écran trop petit), seule la hauteur se règle. La fenêtre est aussi gardée entière dans l'écran (bas visible, au-dessus de la barre des tâches) ; en plein écran, l'affichage réduit reste en plein écran (toute la page du WebSDR est visible) et le retour à l'affichage normal aussi ; le mini, lui, est toujours une petite fenêtre.
+- Une seule des deux cases à la fois. **Décocher** revient à l'affichage précédent : du mini au réduit si l'on venait du réduit, sinon à l'affichage normal.
+- Chaque affichage retrouve la taille qu'il avait quand on l'a quitté (normal et réduit), y compris d'une fois sur l'autre : les tailles sont mémorisées à la fermeture, avec l'affichage en cours. Si la fenêtre était en plein écran en affichage normal, elle y revient.
 - **Avant plan** : SDRLink reste au-dessus des autres fenêtres.
 - **Taille du texte…** (1re ligne) : agrandit ou réduit le texte de la fenêtre principale, de 70 à 200 % (100 % = taille d'origine), avec le curseur ou les boutons − / +. Le changement se voit tout de suite ; **Annuler** revient à la taille d'avant, **100 %** à la taille d'origine. Les boutons et curseurs de taille fixe suivent. La taille est conservée au prochain lancement.
 
 Ces deux réglages sont conservés au prochain lancement.
+
+## Scan
+
+Sur la ligne « Synchro », après « Notch auto (DNF) » :
+- **Conf scan** : choix du type de scan.
+  - **Fréquences** : fréquence de **début** et de **fin** en kHz (dans n'importe quel ordre), **pas** (100 Hz à 100 kHz), **durée** sur chaque fréquence : 1 s, 2 s, 5 s, 10 s, 30 s, 1 min, 2 min, 5 min ou 10 min. Arrivé à la fin, le scan repart du début.
+  - **Mémoires** : liste des mémoires avec une **case à cocher** pour chacune (Tout cocher / Tout décocher), et la **durée** sur chaque mémoire (mêmes choix). Le mode mémorisé est appliqué.
+  - Chaque type garde ses réglages : en repassant de Mémoires à Fréquences (ou l'inverse), les choix précédents sont toujours là. **Réinitialiser** remet à zéro le type affiché (l'autre garde les siens).
+  - **OK** enregistre ; **Lancer le scan** enregistre et démarre.
+- **▶ Scan** : démarre le scan configuré ; le bouton devient rouge « ■ Arrêter le scan ». La barre d'état indique la fréquence ou la mémoire en cours (sans remplir l'historique des messages).
+- Le scan règle le poste et le WebSDR, comme une saisie de fréquence. Il s'arrête dès que le poste passe en **émission** (PTT de SDRLink ou du poste) ; il ne peut pas démarrer en émission.
 
 ## Mémoires de fréquences
 
@@ -322,7 +337,7 @@ Ces deux réglages sont conservés au prochain lancement.
 
 ## Mises à jour
 
-Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au démarrage, si Internet répond, SDRLink regarde la dernière version publiée sur GitHub. S'il en existe une plus récente, un lien orange « ⚠ Mise à jour Vx.y disponible » apparaît en bas à droite de la fenêtre, dans la barre d'état (visible aussi en affichage réduit) : un clic ouvre la page de téléchargement. Cocher la case lance la vérification tout de suite.
+Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au démarrage, si Internet répond, SDRLink regarde la dernière version publiée sur GitHub. S'il en existe une plus récente, un lien orange « ⚠ Mise à jour Vx.y disponible » apparaît en bas à droite de la fenêtre, dans la barre d'état (visible aussi en affichages réduit et mini) : un clic ouvre la page de téléchargement. Cocher la case lance la vérification tout de suite.
 
 ## Dépannage
 
@@ -332,6 +347,11 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.9**
+  - au démarrage, le poste ne change plus de fréquence ni de mode : seul le WebSDR se cale sur lui (si la synchro le prévoit) ;
+  - **scan** de fréquences ou de mémoires : boutons « Conf scan » et « ▶ Scan » ;
+  - « Affichage réduit » renommé **Affichage mini** ; nouvel **Affichage réduit** à partir de la ligne Synchro, page comprise ; chaque affichage retrouve sa taille.
+  - correction : avec un texte agrandi (plus de 100 %) et la fenêtre en plein écran, la fenêtre se rouvrait coupée en hauteur.
 - **1.8**
   - **mémoires de fréquences** : nom (pseudo), fréquence, mode, jusqu'à 10 listes ; accord immédiat d'un clic ; bouton ▾ des 20 dernières utilisées ;
   - fenêtre **Taille du texte** (70 à 200 %) ;

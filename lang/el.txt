@@ -89,6 +89,7 @@ Cannot start rigctld: 	Αδυναμία εκκίνησης rigctld:
 TX safety timeout (PTT button)	Χρονικό όριο ασφαλείας TX (κουμπί PTT)
 Off	Ανενεργό
 PTT: connect the rig first	PTT: συνδέστε πρώτα τον πομποδέκτη
+transmitting	εκπομπή
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Μη έγκυρη συχνότητα: πληκτρολογήστε τιμή σε kHz, π.χ. 7074 ή 14074.5
 Remove this value (pick it in the list first)	Αφαίρεση αυτής της τιμής (επιλέξτε την πρώτα στη λίστα)
 RIG 	TRX 
@@ -109,6 +110,11 @@ None	Καμία
 ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
 Add memory	Προσθήκη μνήμης
+No scan while transmitting	Δεν γίνεται σάρωση κατά την εκπομπή
+Scan: set the start and end frequencies in "Scan setup"	Σάρωση: ορίστε αρχική και τελική συχνότητα στη «Ρύθμιση σάρωσης»
+Scan: check memories in "Scan setup"	Σάρωση: επιλέξτε μνήμες στη «Ρύθμιση σάρωσης»
+Scan stopped	Η σάρωση σταμάτησε
+■ Stop scan	■ Διακοπή σάρωσης
 (no memory used yet)	(δεν έχει χρησιμοποιηθεί μνήμη)
 Memories…	Μνήμες…
 Clear this list	Εκκαθάριση αυτής της λίστας
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Αφαίρεση του «{0}» από το «{1}»;
 Unexpected error, written to the log: {0}	Απρόσμενο σφάλμα, καταγράφηκε στο αρχείο καταγραφής: {0}
 Memory "{0}" added to "{1}".	Η μνήμη «{0}» προστέθηκε στο «{1}».
 Memory "{0}": {1} kHz	Μνήμη «{0}»: {1} kHz
+Scan stopped: {0}	Η σάρωση σταμάτησε: {0}
+Scan: {0}	Σάρωση: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Τελευταία {0} μηνύματα (κλικ: απόκρυψη ή επανεμφάνιση αυτού του είδους μηνύματος, ✓ = κρυφό)
 Show all hidden messages again ({0})	Επανεμφάνιση όλων των κρυφών μηνυμάτων ({0})
 Interface:	Διασύνδεση:
@@ -165,6 +173,8 @@ Text size…	Μέγεθος κειμένου…
 …	…
 Download Hamlib…	Λήψη Hamlib…
 SDRLINK cable ▾	Καλώδιο SDRLINK ▾
+Scan setup	Ρύθμιση σάρωσης
+▶ Scan	▶ Σάρωση
 QSY	QSY
 Save	Αποθήκ.
 Memories	Μνήμες
@@ -189,7 +199,8 @@ Start rigctld:	Εκκίνηση rigctld:
 Sync mode	Συγχρ. διαμόρφωσης
 Mute WebSDR while transmitting	Σίγαση WebSDR κατά την εκπομπή
 Auto notch (DNF)	Αυτόματο notch (DNF)
-Compact view	Συμπαγής προβολή
+Reduced view	Μειωμένη προβολή
+Mini view	Μίνι προβολή
 Always on top	Πάντα στην κορυφή
 COM port (direct CAT)	Θύρα COM (άμεσο CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Συνδέθηκε, αναμονή για το
 Rig online	Πομποδέκτης σε σύνδεση
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Ο πομποδέκτης δεν απαντά (ελέγξτε θύρα, ταχύτητα, διεύθυνση CI-V, μενού CAT)
 Error: 	Σφάλμα: 
+Scan type:	Τύπος σάρωσης:
+Frequencies	Συχνότητες
+Start (kHz):	Αρχή (kHz):
+End (kHz):	Τέλος (kHz):
+Time on each frequency:	Χρόνος σε κάθε συχνότητα:
+Memories to scan:	Μνήμες για σάρωση:
+Time on each memory:	Χρόνος σε κάθε μνήμη:
+(no memory: Memories button)	(καμία μνήμη: κουμπί Μνήμες)
+Reset	Επαναφορά
+Start scan	Έναρξη σάρωσης
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Δώστε διαφορετική αρχική και τελική συχνότητα σε kHz (π.χ. 7000 και 7200).
+Check at least one memory to scan.	Επιλέξτε τουλάχιστον μία μνήμη για σάρωση.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Δεν υπάρχει διακομιστής TCI στο 
 TCI connection lost	Η σύνδεση TCI χάθηκε
 unavailable	μη διαθέσιμο

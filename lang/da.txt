@@ -89,6 +89,7 @@ Cannot start rigctld: 	Kan ikke starte rigctld:
 TX safety timeout (PTT button)	TX-sikkerhedstid (PTT-knap)
 Off	Fra
 PTT: connect the rig first	PTT: forbind radioen først
+transmitting	sender
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: skriv en værdi i kHz, f.eks. 7074 eller 14074.5
 Remove this value (pick it in the list first)	Fjern denne værdi (vælg den først på listen)
 RIG 	TRX 
@@ -109,6 +110,11 @@ None	Ingen
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 Add memory	Tilføj hukommelse
+No scan while transmitting	Ingen scanning under sending
+Scan: set the start and end frequencies in "Scan setup"	Scanning: angiv start- og slutfrekvens i “Scanningsopsætning”
+Scan: check memories in "Scan setup"	Scanning: markér hukommelser i “Scanningsopsætning”
+Scan stopped	Scanning stoppet
+■ Stop scan	■ Stop scanning
 (no memory used yet)	(ingen hukommelse brugt endnu)
 Memories…	Hukommelser…
 Clear this list	Ryd denne liste
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Fjern ”{0}” fra ”{1}”?
 Unexpected error, written to the log: {0}	Uventet fejl, skrevet i loggen: {0}
 Memory "{0}" added to "{1}".	Hukommelsen “{0}” tilføjet til “{1}”.
 Memory "{0}": {1} kHz	Hukommelse “{0}”: {1} kHz
+Scan stopped: {0}	Scanning stoppet: {0}
+Scan: {0}	Scanning: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Seneste {0} meddelelser (klik: skjul eller vis denne type meddelelse igen, ✓ = skjult)
 Show all hidden messages again ({0})	Vis alle skjulte meddelelser igen ({0})
 Interface:	Grænseflade:
@@ -165,6 +173,8 @@ Text size…	Tekststørrelse…
 …	…
 Download Hamlib…	Download Hamlib…
 SDRLINK cable ▾	SDRLINK-kabel ▾
+Scan setup	Scanningsopsætning
+▶ Scan	▶ Scan
 QSY	QSY
 Save	Save
 Memories	Hukommelser
@@ -189,7 +199,8 @@ Start rigctld:	Start rigctld:
 Sync mode	Synk mode
 Mute WebSDR while transmitting	Lydløs WebSDR under sending
 Auto notch (DNF)	Auto-notch (DNF)
-Compact view	Kompakt visning
+Reduced view	Reduceret visning
+Mini view	Minivisning
 Always on top	Altid øverst
 COM port (direct CAT)	COM-port (direkte CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Forbundet, venter på radioen...
 Rig online	Radio online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radioen svarer ikke (kontrollér port, baudrate, CI-V-adresse, CAT-menu)
 Error: 	Fejl: 
+Scan type:	Scanningstype:
+Frequencies	Frekvenser
+Start (kHz):	Start (kHz):
+End (kHz):	Slut (kHz):
+Time on each frequency:	Tid på hver frekvens:
+Memories to scan:	Hukommelser der skal scannes:
+Time on each memory:	Tid på hver hukommelse:
+(no memory: Memories button)	(ingen hukommelser: knappen Hukommelser)
+Reset	Nulstil
+Start scan	Start scanning
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Angiv forskellige start- og slutfrekvenser i kHz (f.eks. 7000 og 7200).
+Check at least one memory to scan.	Markér mindst én hukommelse, der skal scannes.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Ingen TCI-server på 
 TCI connection lost	TCI-forbindelse mistet
 unavailable	ikke tilgængelig

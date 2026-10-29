@@ -89,6 +89,7 @@ Cannot start rigctld: 	A rigctld nem indítható:
 TX safety timeout (PTT button)	TX biztonsági időkorlát (PTT gomb)
 Off	Ki
 PTT: connect the rig first	PTT: előbb csatlakoztassa a rádiót
+transmitting	adás
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Érvénytelen frekvencia: adjon meg egy értéket kHz-ben, pl. 7074 vagy 14074.5
 Remove this value (pick it in the list first)	Érték eltávolítása (előbb válassza ki a listában)
 RIG 	RÁDIÓ 
@@ -109,6 +110,11 @@ None	Nincs
 ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
 Add memory	Memória hozzáadása
+No scan while transmitting	Adás közben nincs pásztázás
+Scan: set the start and end frequencies in "Scan setup"	Pásztázás: adja meg a kezdő és záró frekvenciát a „Pásztázás beállítása” ablakban
+Scan: check memories in "Scan setup"	Pásztázás: jelöljön be memóriákat a „Pásztázás beállítása” ablakban
+Scan stopped	Pásztázás leállítva
+■ Stop scan	■ Pásztázás leállítása
 (no memory used yet)	(még nem használt memóriát)
 Memories…	Memóriák…
 Clear this list	A lista törlése
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Eltávolítja a(z) „{0}” elemet a(z) „{1}” list
 Unexpected error, written to the log: {0}	Váratlan hiba, a naplóba írva: {0}
 Memory "{0}" added to "{1}".	A(z) „{0}” memória hozzáadva ide: „{1}”.
 Memory "{0}": {1} kHz	Memória: „{0}”: {1} kHz
+Scan stopped: {0}	Pásztázás leállítva: {0}
+Scan: {0}	Pásztázás: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Utolsó {0} üzenet (kattintás: az ilyen típusú üzenet elrejtése vagy újbóli megjelenítése, ✓ = rejtett)
 Show all hidden messages again ({0})	Minden rejtett üzenet újbóli megjelenítése ({0})
 Interface:	Interfész:
@@ -165,6 +173,8 @@ Text size…	Szövegméret…
 …	…
 Download Hamlib…	Hamlib letöltése…
 SDRLINK cable ▾	SDRLINK kábel ▾
+Scan setup	Pásztázás beállítása
+▶ Scan	▶ Pásztázás
 QSY	QSY
 Save	Mentés
 Memories	Memóriák
@@ -189,7 +199,8 @@ Start rigctld:	rigctld indítása:
 Sync mode	Üzemmód szinkronizálása
 Mute WebSDR while transmitting	WebSDR némítása adás közben
 Auto notch (DNF)	Auto notch (DNF)
-Compact view	Kompakt nézet
+Reduced view	Csökkentett nézet
+Mini view	Mini nézet
 Always on top	Mindig felül
 COM port (direct CAT)	COM port (közvetlen CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
 Rig online	Rádió online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	A rádió nem válaszol (ellenőrizze a portot, a sebességet, a CI-V címet, a CAT menüt)
 Error: 	Hiba: 
+Scan type:	Pásztázás típusa:
+Frequencies	Frekvenciák
+Start (kHz):	Kezdet (kHz):
+End (kHz):	Vége (kHz):
+Time on each frequency:	Idő minden frekvencián:
+Memories to scan:	Pásztázandó memóriák:
+Time on each memory:	Idő minden memórián:
+(no memory: Memories button)	(nincs memória: Memóriák gomb)
+Reset	Alaphelyzet
+Start scan	Pásztázás indítása
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Adjon meg eltérő kezdő és záró frekvenciát kHz-ben (pl. 7000 és 7200).
+Check at least one memory to scan.	Jelöljön be legalább egy pásztázandó memóriát.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Nincs TCI-szerver itt: 
 TCI connection lost	A TCI-kapcsolat megszakadt
 unavailable	nem elérhető

@@ -89,6 +89,7 @@ Cannot start rigctld: 	Kan rigctld niet starten:
 TX safety timeout (PTT button)	TX-veiligheidstijd (PTT-knop)
 Off	Uit
 PTT: connect the rig first	PTT: verbind eerst de transceiver
+transmitting	zenden
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ongeldige frequentie: typ een waarde in kHz, bijv. 7074 of 14074.5
 Remove this value (pick it in the list first)	Deze waarde verwijderen (kies hem eerst in de lijst)
 RIG 	TRX 
@@ -109,6 +110,11 @@ None	Geen
 ExpertSDR TCI port	TCI-poort van ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
 Add memory	Geheugen toevoegen
+No scan while transmitting	Niet scannen tijdens het zenden
+Scan: set the start and end frequencies in "Scan setup"	Scannen: geef begin- en eindfrequentie op in "Scan instellen"
+Scan: check memories in "Scan setup"	Scannen: vink geheugens aan in "Scan instellen"
+Scan stopped	Scannen gestopt
+■ Stop scan	■ Scannen stoppen
 (no memory used yet)	(nog geen geheugen gebruikt)
 Memories…	Geheugens…
 Clear this list	Deze lijst leegmaken
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	"{0}" uit "{1}" verwijderen?
 Unexpected error, written to the log: {0}	Onverwachte fout, in het logboek gezet: {0}
 Memory "{0}" added to "{1}".	Geheugen "{0}" toegevoegd aan "{1}".
 Memory "{0}": {1} kHz	Geheugen "{0}": {1} kHz
+Scan stopped: {0}	Scannen gestopt: {0}
+Scan: {0}	Scannen: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Laatste {0} meldingen (klik: dit soort melding verbergen of weer tonen, ✓ = verborgen)
 Show all hidden messages again ({0})	Alle verborgen meldingen weer tonen ({0})
 Interface:	Interface:
@@ -165,6 +173,8 @@ Text size…	Tekstgrootte…
 …	…
 Download Hamlib…	Hamlib downloaden…
 SDRLINK cable ▾	SDRLINK-kabel ▾
+Scan setup	Scan instellen
+▶ Scan	▶ Scannen
 QSY	QSY
 Save	Save
 Memories	Geheugens
@@ -189,7 +199,8 @@ Start rigctld:	rigctld starten:
 Sync mode	Mode synchroniseren
 Mute WebSDR while transmitting	WebSDR dempen tijdens zenden
 Auto notch (DNF)	Auto-notch (DNF)
-Compact view	Compacte weergave
+Reduced view	Verkleinde weergave
+Mini view	Mini-weergave
 Always on top	Altijd bovenaan
 COM port (direct CAT)	COM-poort (direct CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Verbonden, wachten op de transceiver...
 Rig online	TRX online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	De transceiver antwoordt niet (controleer poort, baudrate, CI-V-adres, CAT-menu)
 Error: 	Fout: 
+Scan type:	Soort scan:
+Frequencies	Frequenties
+Start (kHz):	Begin (kHz):
+End (kHz):	Einde (kHz):
+Time on each frequency:	Tijd op elke frequentie:
+Memories to scan:	Te scannen geheugens:
+Time on each memory:	Tijd op elk geheugen:
+(no memory: Memories button)	(geen geheugens: knop Geheugens)
+Reset	Herstellen
+Start scan	Scan starten
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Geef verschillende begin- en eindfrequenties in kHz op (bijv. 7000 en 7200).
+Check at least one memory to scan.	Vink minstens één te scannen geheugen aan.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Geen TCI-server op 
 TCI connection lost	TCI-verbinding verbroken
 unavailable	niet beschikbaar

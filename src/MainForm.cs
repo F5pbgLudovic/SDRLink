@@ -17,7 +17,8 @@ namespace SDRLink
     public class MainForm : Form
     {
         const long Tolerance = 10;        // Hz : écart en dessous duquel on considère les fréquences égales
-        const int EchoIgnoreMs = 800;     // durée pendant laquelle on ignore le retour d'un ordre qu'on vient d'envoyer
+        const int EchoIgnoreMs = 800;
+        const int SettleMs = 8000;          // après le chargement d'une page ou la connexion du poste : pas de WebSDR → poste     // durée pendant laquelle on ignore le retour d'un ordre qu'on vient d'envoyer
 
         enum Direction { Both, RigToSdr, SdrToRig, Off }
 
@@ -29,7 +30,7 @@ namespace SDRLink
         ComboBox cbInterface, cbBrand, cbModel, cbPort, cbBaud, cbStop, cbOmni, cbDirection, cbUrl, cbHrdTx, cbLang;
         TextBox txtCiv, txtHost;
         NumericUpDown numNetPort, numOffset, numUnmute;
-        CheckBox chkRts, chkDtr, chkMode, chkAuto, chkMute, chkCompact, chkTop, chkDark;
+        CheckBox chkRts, chkDtr, chkMode, chkAuto, chkMute, chkMini, chkReduced, chkTop, chkDark;
         TrackBar trkVolume, trkRigVolume;
         Label lblVolume, lblRigVolume;
         PaletteButton btnPalette;
@@ -44,7 +45,7 @@ namespace SDRLink
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
         Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr;
-        Button btnMemRecent;
+        Button btnMemRecent, btnScan;
         bool sdrMuted, rigMuted;
         bool esdrMuted, esdrMutedByUs;   // son d'ExpertSDR coupé, et coupé par SDRLink
         bool esdrRunning, esdrWin;       // ExpertSDR lancé ; il joue par le son de Windows (sinon : liaison TCI)
@@ -85,9 +86,14 @@ namespace SDRLink
         long wheelTarget;           // fréquence poste visée par la molette
         DateTime wheelLast, wheelActiveUntil;
         int wheelRemainder;         // molettes "haute résolution" : fractions de cran accumulées
-        Size normalSize;            // taille de la fenêtre avant passage en affichage réduit
+        // Affichages : 0 normal, 1 réduit (à partir de la ligne Synchro, page comprise), 2 mini (de Synchro au volume).
+        int viewShown;              // affichage en place
+        Size normalSize;            // taille de la fenêtre en affichage normal (pour y revenir)
+        Size reducedSize;           // taille en affichage réduit (pour y revenir)
+        int topRowsHeight;          // hauteur des lignes masquées par les affichages réduit et mini
         bool compactPending;
-        bool wasMaximized;          // plein écran avant le passage en affichage réduit
+        bool wasMaximized;          // plein écran en affichage normal, à rétablir en y revenant
+        FlowLayoutPanel rowSync;
 
         RigWorker worker;
         bool rigOnline;
@@ -96,6 +102,8 @@ namespace SDRLink
         long lastRigF; string lastRigFam;
         long lastSdrF; string lastSdrFam;
         DateTime ignoreRigUntil, ignoreSdrUntil;
+        DateTime syncSettleUntil;   // jusqu'à cette heure, le WebSDR ne commande pas le poste (mise en place)
+        bool firstPage = true;      // première page depuis le lancement de SDRLink
 
         public MainForm()
         {
@@ -116,15 +124,16 @@ namespace SDRLink
             syncTimer.Interval = 1000;
             syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); UpdateDisplays(); if (++esdrPoll % 3 == 0) CheckExpertSdr(); else RefreshExpertSdr(); };
             syncTimer.Start();
+            scanTimer.Tick += delegate { ScanNext(); };
             LoadSettingsIntoUi();
             Load += delegate
             {
                 InitWebView();
                 if (settings.AutoConnect) Connect();
             };
-            Shown += delegate { ApplyCompact(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); };
+            Shown += delegate { ApplyView(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); };
             Application.AddMessageFilter(new WheelFilter(this));
-            Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyCompact(); };
+            Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyView(); };
             FormClosing += delegate
             {
                 Disconnect();
@@ -152,6 +161,7 @@ namespace SDRLink
             Rectangle r = new Rectangle(settings.WinX, settings.WinY, settings.WinW, settings.WinH);
             normalSize = r.Size;
             Size = r.Size;
+            if (settings.RedW >= 300 && settings.RedH >= 100) reducedSize = new Size(settings.RedW, settings.RedH);
             // Position reprise seulement si la fenêtre reste visible (écran débranché depuis, par exemple).
             foreach (Screen s in Screen.AllScreens)
             {
@@ -166,7 +176,7 @@ namespace SDRLink
             // Plein écran à la fermeture : rétabli tout de suite, ou au retour de l'affichage réduit.
             if (settings.WinMax)
             {
-                if (settings.Compact) wasMaximized = true;
+                if (settings.ViewMode != 0) wasMaximized = true;
                 else WindowState = FormWindowState.Maximized;
             }
         }
@@ -174,13 +184,16 @@ namespace SDRLink
         void SaveWindowBounds()
         {
             Rectangle b = WindowState == FormWindowState.Normal ? Bounds : RestoreBounds;
-            // En affichage réduit, la taille à retenir est celle d'avant la réduction.
-            Size normal = !web.Visible ? (normalSize.IsEmpty ? DefaultWindowSize() : normalSize) : b.Size;
+            // Hors affichage normal, la taille à retenir est celle de l'affichage normal ; de même pour le réduit.
+            Size normal = viewShown != 0 ? (normalSize.IsEmpty ? DefaultWindowSize() : normalSize) : b.Size;
+            Size reduced = viewShown == 1 ? b.Size : reducedSize;
             settings.WinX = b.X;
             settings.WinY = b.Y;
             settings.WinW = normal.Width;
             settings.WinH = normal.Height;
-            settings.WinMax = WindowState == FormWindowState.Maximized || (!web.Visible && wasMaximized);
+            settings.RedW = reduced.Width;
+            settings.RedH = reduced.Height;
+            settings.WinMax = viewShown == 0 ? WindowState == FormWindowState.Maximized : wasMaximized;
         }
 
         // ---------------------------------------------------------------- Interface
@@ -339,7 +352,7 @@ namespace SDRLink
             row2.Controls.Add(btnCable);
 
             // Ligne 3 : synchronisation
-            FlowLayoutPanel row3 = Row();
+            FlowLayoutPanel row3 = rowSync = Row();
             cbDirection = Combo(160, new[] { "Bidirectionnelle", "Radio → WebSDR", "WebSDR → Radio", "Désactivée" },
                                      new[] { "Both ways", "Rig → WebSDR", "WebSDR → Rig", "Off" });
             // Passage en "Bidirectionnelle" ou "Poste → WebSDR" : le WebSDR est recalé tout de suite sur le poste.
@@ -376,9 +389,16 @@ namespace SDRLink
             chkNotch = Check("Notch auto (DNF)", "Auto notch (DNF)");
             chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; SetPageNotch(); };
             row3.Controls.Add(chkNotch);
+            // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
+            row3.Controls.Add(Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); }));
+            btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else StartScan(); });
+            btnScan.Tag = Theme.Custom;
+            btnScan.FlatStyle = FlatStyle.Flat;
+            row3.Controls.Add(btnScan);
 
             // Ligne 4 : PTT, fréquences, modes, saisie ; l'affichage réduit coupe la fenêtre juste après cette ligne.
             rowDisplay = Row();
+            rowDisplay.Layout += delegate { OnRowDisplayLayout(); };
             btnPtt = new Button();
             btnPtt.Size = new Size(130, 44);
             btnPtt.Margin = new Padding(8, 0, 0, 0);
@@ -430,8 +450,11 @@ namespace SDRLink
             BuildFreqMenu();
             cbStep = Combo(70, new[] { "100 Hz", "250 Hz", "500 Hz", "1 kHz", "2,5 kHz", "5 kHz", "10 kHz" },
                                new[] { "100 Hz", "250 Hz", "500 Hz", "1 kHz", "2.5 kHz", "5 kHz", "10 kHz" });
-            chkCompact = Check("Affichage réduit", "Compact view");
-            chkCompact.CheckedChanged += delegate { if (!loading) ApplyCompact(); };
+            // Affichage réduit (à partir de la ligne Synchro, page comprise) et mini (de Synchro au volume) : l'un ou l'autre.
+            chkReduced = Check("Affichage réduit", "Reduced view");
+            chkMini = Check("Affichage mini", "Mini view");
+            chkReduced.CheckedChanged += delegate { OnViewBox(chkReduced, chkMini, 1); };
+            chkMini.CheckedChanged += delegate { OnViewBox(chkMini, chkReduced, 2); };
             chkTop = Check("Avant plan", "Always on top");
             chkTop.CheckedChanged += delegate { TopMost = chkTop.Checked; };
             rowDisplay.Controls.Add(Lbl("kHz :", "kHz:"));
@@ -460,14 +483,17 @@ namespace SDRLink
             rowDisplay.Controls.Add(btnMemRecent);
             rowDisplay.Controls.Add(Lbl("Pas :", "Step:"));
             rowDisplay.Controls.Add(cbStep);
-            // Les deux cases l'une sous l'autre : elles tiennent dans la hauteur du bouton PTT.
+            // Les cases deux par deux, l'une sous l'autre : elles tiennent dans la hauteur du bouton PTT.
             FlowLayoutPanel views = SubRow();
             views.FlowDirection = FlowDirection.TopDown;
-            chkCompact.Margin = new Padding(8, 2, 2, 0);
-            chkTop.Margin = new Padding(8, 2, 2, 0);
-            views.Controls.Add(chkCompact);
-            views.Controls.Add(chkTop);
+            chkReduced.Margin = chkMini.Margin = chkTop.Margin = new Padding(8, 2, 2, 0);
+            views.Controls.Add(chkReduced);
+            views.Controls.Add(chkMini);
             rowDisplay.Controls.Add(views);
+            FlowLayoutPanel views2 = SubRow();
+            views2.FlowDirection = FlowDirection.TopDown;
+            views2.Controls.Add(chkTop);
+            rowDisplay.Controls.Add(views2);
 
             // Ligne 5 : barre d'adresse WebSDR et favoris
             rowUrl = Row();
@@ -769,6 +795,7 @@ namespace SDRLink
             UpdateMuteButtons();
             UpdateDisplays();
             StyleUpdateLabel();
+            UpdateScanButton();
         }
 
         // Largeur fixe des fréquences, calculée sur une fréquence HF avec le mode le plus long : les boutons à droite
@@ -797,16 +824,12 @@ namespace SDRLink
             SizeFreqLabels();
             if (cbFavList.Items.Count > 0) FillFavListCombo();
             UpdateCableButton();
+            UpdateScanButton();
             if (worker == null) ShowStatus(Lang.T("Déconnecté", "Disconnected"));
             UpdateDisplays();
-            if (chkCompact.Checked && web.Visible == false)
-            {
-                // Les textes ont changé de longueur : on recalcule la hauteur de l'affichage réduit.
-                chkCompact.Checked = false;
-                ApplyCompact();
-                chkCompact.Checked = true;
-                ApplyCompact();
-            }
+            // Les textes ont changé de longueur : on recalcule la hauteur de l'affichage mini.
+            if (viewShown != 0) KeepRowWhole();
+            if (viewShown == 2) FitMiniHeight();
         }
 
         void UpdateConnectButton()
@@ -823,7 +846,7 @@ namespace SDRLink
             pnlNet.Visible = i >= 2;
             pnlHrdTx.Visible = i == 3;
             pnlHamlib.Visible = i == 4;
-            rowHamlib.Visible = i == 4 && !InCompactView;
+            rowHamlib.Visible = i == 4 && !TopRowsHidden;
             if (i != lastInterfaceShown && i >= 2)
             {
                 if (lastInterfaceShown >= 2) StoreNetSettings(lastInterfaceShown);
@@ -924,7 +947,8 @@ namespace SDRLink
             foreach (string f in settings.FreqHistory) cbFreq.Items.Add(f);
             int stepIndex = Array.IndexOf(Steps, settings.TuneStepHz);
             cbStep.SelectedIndex = stepIndex >= 0 ? stepIndex : 0;
-            chkCompact.Checked = settings.Compact;
+            chkReduced.Checked = settings.ViewMode == 1;
+            chkMini.Checked = settings.ViewMode == 2;
             chkTop.Checked = settings.TopMost;
             chkDark.Checked = settings.DarkMode;
             chkUpdates.Checked = settings.CheckUpdates;
@@ -969,7 +993,7 @@ namespace SDRLink
             settings.TuneStepHz = Steps[Math.Max(0, cbStep.SelectedIndex)];
             settings.FreqHistory.Clear();
             foreach (object o in cbFreq.Items) settings.FreqHistory.Add(o.ToString());
-            settings.Compact = chkCompact.Checked;
+            settings.ViewMode = WantedView;
             settings.TopMost = chkTop.Checked;
             settings.CheckUpdates = chkUpdates.Checked;
             settings.MuteOnTx = chkMute.Checked;
@@ -1156,47 +1180,152 @@ namespace SDRLink
             UpdateDisplays();
         }
 
-        // Affichage réduit : de la ligne "Synchro" jusqu'à la ligne du volume (connexion, réglages et page masqués).
-        // Le WebSDR continue de jouer et de suivre le poste.
-        // Affichage réduit demandé (Visible n'est pas fiable avant l'affichage de la fenêtre).
-        bool InCompactView { get { return chkCompact != null && chkCompact.Checked; } }
+        // Affichages traversés (le plus récent en dernier) : décocher l'affichage en place ramène au précédent
+        // (du mini au réduit si l'on venait du réduit), sinon à l'affichage normal.
+        readonly List<int> viewStack = new List<int>();
+        bool viewSwitching;
 
-        void ApplyCompact()
+        void OnViewBox(CheckBox box, CheckBox other, int view)
         {
-            bool compact = chkCompact.Checked;
-            if (compact == !web.Visible) return;
+            if (loading || viewSwitching) return;
+            viewSwitching = true;
+            if (box.Checked)
+            {
+                other.Checked = false;
+                if (viewShown != view) viewStack.Add(viewShown);
+            }
+            else
+            {
+                int back = viewStack.Count > 0 ? viewStack[viewStack.Count - 1] : 0;
+                if (viewStack.Count > 0) viewStack.RemoveAt(viewStack.Count - 1);
+                if (back == view) back = 0;
+                chkReduced.Checked = back == 1;
+                chkMini.Checked = back == 2;
+            }
+            viewSwitching = false;
+            if (WantedView == 0) viewStack.Clear();
+            ApplyView();
+        }
+
+        // Affichage demandé par les cases (Visible n'est pas fiable avant l'affichage de la fenêtre).
+        int WantedView { get { return chkMini != null && chkMini.Checked ? 2 : chkReduced != null && chkReduced.Checked ? 1 : 0; } }
+        bool TopRowsHidden { get { return WantedView != 0; } }
+
+        // Passe à l'affichage demandé. Normal : tout. Réduit : à partir de la ligne Synchro, page du WebSDR comprise
+        // (la fenêtre perd la hauteur des lignes masquées). Mini : de Synchro à la ligne du volume, page masquée (le WebSDR
+        // continue de jouer et de suivre le poste). Chaque affichage retrouve la taille qu'il avait en le quittant.
+        void ApplyView()
+        {
+            int want = WantedView;
+            if (want == viewShown) return;
             // Fenêtre réduite dans la barre des tâches : Windows ignore le redimensionnement, on attend sa réapparition.
             if (WindowState == FormWindowState.Minimized) { compactPending = true; return; }
             compactPending = false;
-            if (compact)
+            if (viewShown == 0)
             {
-                // Fenêtre en plein écran : on le retient pour y revenir en quittant l'affichage réduit.
-                // (remis à zéro seulement au retour en affichage normal : au démarrage en mode réduit,
-                // il vient des réglages enregistrés).
+                // Plein écran : retenu pour y revenir en repassant en affichage normal (au démarrage dans un autre
+                // affichage, il vient des réglages enregistrés).
                 if (WindowState == FormWindowState.Maximized)
                 {
                     wasMaximized = true;
                     WindowState = FormWindowState.Normal;
                 }
                 normalSize = Size;
-                // De la ligne "Synchro" à la ligne du volume : connexion, réglages de l'interface et page masqués.
-                rowConn.Visible = rowParams.Visible = rowHamlib.Visible = web.Visible = false;
-                PerformLayout();
-                int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
-                MaximumSize = new Size(10000, h);
-                Height = h;
+                topRowsHeight = rowSync.Top;
             }
-            else
+            else if (viewShown == 1)
             {
-                MaximumSize = Size.Empty;
-                rowConn.Visible = rowParams.Visible = web.Visible = true;
-                rowHamlib.Visible = cbInterface.SelectedIndex == 4;
+                // Réduit en plein écran : on n'en retient pas la taille (celle-ci ne vaut que hors plein écran).
+                if (WindowState == FormWindowState.Maximized) WindowState = FormWindowState.Normal;
+                else reducedSize = Size;
+            }
+            MaximumSize = Size.Empty;
+            bool top = want == 0;
+            rowConn.Visible = rowParams.Visible = top;
+            rowHamlib.Visible = top && cbInterface.SelectedIndex == 4;
+            web.Visible = want != 2;
+            viewShown = want;
+            Log.Write("Affichage : " + (want == 0 ? "normal" : want == 1 ? "réduit" : "mini"));
+            if (want == 0)
+            {
+                MinimumSize = Size.Empty;
+                rowNeed = 0;
                 Size = normalSize.IsEmpty ? DefaultWindowSize() : normalSize;
                 if (wasMaximized) WindowState = FormWindowState.Maximized;
                 wasMaximized = false;
+                FitOnScreen();
+                return;
             }
+            if (want == 1)
+            {
+                Size baseSize = normalSize.IsEmpty ? DefaultWindowSize() : normalSize;
+                if (wasMaximized)
+                {
+                    // Venu du plein écran : le réduit reste en plein écran, toute la page du WebSDR est visible.
+                    KeepRowWhole();
+                    WindowState = FormWindowState.Maximized;
+                    return;
+                }
+                if (!reducedSize.IsEmpty) Size = reducedSize;
+                else Size = new Size(baseSize.Width, Math.Max(300, baseSize.Height - topRowsHeight));
+            }
+            KeepRowWhole();
+            if (want == 2) FitMiniHeight();
+            FitOnScreen();
         }
 
+        // Écran où se trouve la fenêtre (zone de travail, sans la barre des tâches). Les tests en donnent une autre.
+        Rectangle workAreaOverride;
+        Rectangle WorkArea { get { return !workAreaOverride.IsEmpty ? workAreaOverride : Screen.FromControl(this).WorkingArea; } }
+
+        // Affichages réduit et mini : la ligne PTT / fréquences / modes / cases reste sur une seule ligne ; la fenêtre
+        // est au moins assez large pour elle (dans la limite de l'écran).
+        void KeepRowWhole()
+        {
+            if (viewShown == 0) return;
+            PerformLayout();
+            // Largeur de la ligne posée sur une seule rangée (largeur proposée sans limite).
+            int w = rowDisplay.GetPreferredSize(new Size(100000, 0)).Width + rowDisplay.Margin.Horizontal + 2;
+            int need = Math.Min(SizeFromClientSize(new Size(w, 10)).Width, WorkArea.Width);
+            // Windows peut plafonner la largeur minimale (taille de l'écran) : on ne la redemande que si elle change.
+            if (need != rowNeed || MinimumSize.Width == 0) { rowNeed = need; MinimumSize = new Size(need, 0); }
+            if (Width < need) Width = need;
+        }
+        int rowNeed;
+
+        // La ligne s'élargit (fréquence plus longue, texte agrandi…) : la fenêtre suit, après la mise en page.
+        bool rowCheckQueued;
+        void OnRowDisplayLayout()
+        {
+            if (viewShown == 0 || rowCheckQueued || !IsHandleCreated) return;
+            rowCheckQueued = true;
+            BeginInvoke((Action)delegate
+            {
+                rowCheckQueued = false;
+                KeepRowWhole();
+                if (viewShown == 2) FitMiniHeight();
+            });
+        }
+
+        // La fenêtre reste entière dans l'écran : bas de fenêtre visible, sans passer sous la barre des tâches.
+        void FitOnScreen()
+        {
+            if (WindowState != FormWindowState.Normal) return;
+            Rectangle a = WorkArea;
+            int w = Math.Min(Width, a.Width), h = Math.Min(Height, a.Height);
+            if (w != Width || h != Height) Size = new Size(w, h);
+            Location = new Point(Math.Max(a.Left, Math.Min(Left, a.Right - Width)), Math.Max(a.Top, Math.Min(Top, a.Bottom - Height)));
+        }
+
+        // Affichage mini : hauteur fixe, juste ce qu'il faut pour les lignes affichées.
+        void FitMiniHeight()
+        {
+            MaximumSize = Size.Empty;
+            PerformLayout();
+            int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
+            MaximumSize = new Size(10000, h);
+            Height = h;
+        }
         // ---------------------------------------------------------------- Coupure du son en émission
 
         // Bouton PTT : bascule émission/réception, comme le MOX de HRD. Le son est coupé tout de suite,
@@ -1258,6 +1387,7 @@ namespace SDRLink
         {
             if (on && (worker == null || !rigOnline)) { ShowStatus(Lang.T("PTT : connectez d'abord le poste", "PTT: connect the rig first")); return; }
             if (on) pttSince = DateTime.UtcNow;
+            if (on && scanning) StopScan(Lang.T("émission", "transmitting"));
             pttActive = on;
             if (worker != null) worker.SetPtt(on);
             UpdatePttButton();
@@ -1560,6 +1690,8 @@ namespace SDRLink
 
             string fam = Modes.ToSdr(rigM);
             bool changed = Math.Abs(f - lastRigF) > Tolerance || fam != lastRigFam;
+            // Première relecture du poste (connexion) : le WebSDR se cale sur lui, sans retour vers le poste un moment.
+            if (lastRigF == 0) syncSettleUntil = DateTime.UtcNow.AddMilliseconds(SettleMs);
             lastRigF = f;
             lastRigFam = fam;
             // Pendant qu'on vient de commander le poste, on n'en renvoie pas l'écho vers le WebSDR.
@@ -1590,9 +1722,19 @@ namespace SDRLink
 
             if (first)
             {
-                // Page qui vient de se charger : le poste impose sa fréquence s'il est connecté.
+                // Page qui vient de se charger : le poste impose sa fréquence s'il est connecté. Au démarrage de
+                // SDRLink, le poste ne change jamais (en "WebSDR → Radio" non plus) : seul le WebSDR suit.
+                syncSettleUntil = DateTime.UtcNow.AddMilliseconds(SettleMs);
                 if (RigToSdr && rigOnline && rigF > 0) PushToSdr();
-                else if (Dir == Direction.SdrToRig) PushToRig(true, true);
+                else if (Dir == Direction.SdrToRig && !firstPage) PushToRig(true, true);
+                firstPage = false;
+                return;
+            }
+            // Page en cours de mise en place (elle annonce parfois encore son ancienne fréquence après notre réglage) :
+            // rien n'est envoyé au poste ; le WebSDR est recalé sur le poste si la synchro va dans ce sens.
+            if (DateTime.UtcNow < syncSettleUntil)
+            {
+                if (RigToSdr && rigOnline && rigF > 0) PushToSdr();
                 return;
             }
             if (DateTime.UtcNow < ignoreSdrUntil) return;
@@ -2557,6 +2699,17 @@ namespace SDRLink
         void TuneMemory(Memory m)
         {
             if (m == null || m.Hz <= 0) return;
+            ApplyMemory(m);
+            AddToHistory(m.Hz);
+            settings.Memories.Used(m);
+            Log.Write("Mémoire : " + m.Label + " (" + Memory.KHz(m.Hz) + " kHz" + (m.Mode != "" ? " " + m.Mode : "") + ")");
+            ShowStatus(Lang.F("Mémoire « {0} » : {1} kHz", "Memory \"{0}\": {1} kHz", m.Label, Memory.KHz(m.Hz)));
+            settings.Save();
+        }
+
+        // Fréquence (poste et WebSDR) et mode de la mémoire, sans la noter (sert aussi au scan).
+        void ApplyMemory(Memory m)
+        {
             TuneBoth(m.Hz);
             if (m.Mode != "")
             {
@@ -2569,11 +2722,95 @@ namespace SDRLink
                 shownModeFamily = null;
                 UpdateDisplays();
             }
-            AddToHistory(m.Hz);
-            settings.Memories.Used(m);
-            Log.Write("Mémoire : " + m.Label + " (" + Memory.KHz(m.Hz) + " kHz" + (m.Mode != "" ? " " + m.Mode : "") + ")");
-            ShowStatus(Lang.F("Mémoire « {0} » : {1} kHz", "Memory \"{0}\": {1} kHz", m.Label, Memory.KHz(m.Hz)));
-            settings.Save();
+        }
+
+        // ---------------------------------------------------------------- Scan
+
+        readonly Timer scanTimer = new Timer();
+        bool scanning;
+        long scanHz, scanLo, scanHi;
+        int scanIndex;
+        List<Memory> scanMems;
+
+        void ConfigureScan()
+        {
+            DialogResult r;
+            using (ScanDialog d = new ScanDialog(settings)) r = d.ShowDialog(this);
+            if (r == DialogResult.OK || r == DialogResult.Yes) settings.Save();
+            if (r == DialogResult.Yes) { if (scanning) StopScan(null); StartScan(); }
+        }
+
+        // Fréquences : de la plus basse à la plus haute, par pas, puis on recommence. Mémoires : les cochées, dans l'ordre.
+        // Chaque fréquence ou mémoire est gardée la durée choisie. L'émission arrête le scan.
+        void StartScan()
+        {
+            if (Transmitting) { ShowStatus(Lang.T("Scan impossible en émission", "No scan while transmitting")); return; }
+            if (settings.ScanType == 0)
+            {
+                scanLo = Math.Min(settings.ScanStartHz, settings.ScanEndHz);
+                scanHi = Math.Max(settings.ScanStartHz, settings.ScanEndHz);
+                if (scanLo <= 0 || scanLo == scanHi) { ShowStatus(Lang.T("Scan : indiquez les fréquences de début et de fin dans « Conf scan »", "Scan: set the start and end frequencies in \"Scan setup\"")); return; }
+                scanHz = scanLo;
+                scanTimer.Interval = Math.Max(1, settings.ScanFreqDwell) * 1000;
+            }
+            else
+            {
+                scanMems = settings.Memories.Items.FindAll(delegate(Memory m) { return m.Scan; });
+                if (scanMems.Count == 0) { ShowStatus(Lang.T("Scan : cochez des mémoires dans « Conf scan »", "Scan: check memories in \"Scan setup\"")); return; }
+                scanIndex = 0;
+                scanTimer.Interval = Math.Max(1, settings.ScanMemDwell) * 1000;
+            }
+            scanning = true;
+            Log.Write("Scan : départ (" + (settings.ScanType == 0 ? FormatFreq(scanLo) + " à " + FormatFreq(scanHi) + ", pas " + settings.ScanStepHz + " Hz" : scanMems.Count + " mémoire(s)")
+                + ", " + scanTimer.Interval / 1000 + " s)");
+            ScanTune();
+            scanTimer.Start();
+            UpdateScanButton();
+        }
+
+        void StopScan(string reason)
+        {
+            if (!scanning) return;
+            scanning = false;
+            scanTimer.Stop();
+            Log.Write("Scan : arrêt" + (reason != null ? " (" + reason + ")" : ""));
+            ShowStatus(reason != null ? Lang.F("Scan arrêté : {0}", "Scan stopped: {0}", reason) : Lang.T("Scan arrêté", "Scan stopped"));
+            UpdateScanButton();
+        }
+
+        void ScanNext()
+        {
+            if (!scanning) return;
+            if (Transmitting) { StopScan(Lang.T("émission", "transmitting")); return; }
+            if (settings.ScanType == 0)
+            {
+                scanHz += Math.Max(1, settings.ScanStepHz);
+                if (scanHz > scanHi) scanHz = scanLo;
+            }
+            else scanIndex = (scanIndex + 1) % scanMems.Count;
+            ScanTune();
+        }
+
+        // Le texte du scan va directement dans la barre d'état, sans remplir l'historique des messages.
+        void ScanTune()
+        {
+            string what;
+            if (settings.ScanType == 0) { TuneBoth(scanHz); what = Memory.KHz(scanHz) + " kHz"; }
+            else
+            {
+                Memory m = scanMems[scanIndex];
+                ApplyMemory(m);
+                what = m.Label + (m.Name.Length > 0 ? " (" + Memory.KHz(m.Hz) + " kHz)" : "");
+            }
+            status.Text = Lang.F("Scan : {0}", "Scan: {0}", what);
+        }
+
+        void UpdateScanButton()
+        {
+            btnScan.Text = scanning ? Lang.T("■ Arrêter le scan", "■ Stop scan") : "▶ Scan";
+            btnScan.BackColor = scanning ? Color.FromArgb(200, 0, 0) : Theme.ButtonBack;
+            btnScan.ForeColor = scanning ? Color.White : Theme.Fore;
+            btnScan.FlatAppearance.BorderColor = scanning ? Color.FromArgb(150, 0, 0) : Theme.Border;
         }
 
         // Bouton ▾ : les 20 dernières mémoires utilisées (nom s'il y en a un, sinon fréquence).
@@ -2654,15 +2891,10 @@ namespace SDRLink
             foreach (KeyValuePair<Control, int> kv in baseWidths) kv.Key.Width = (int)Math.Round(kv.Value * f);
             ResumeLayout(true);
             SizeFreqLabels();
-            // Affichage réduit : la hauteur de la fenêtre suit celle des lignes.
-            if (!web.Visible)
-            {
-                MaximumSize = Size.Empty;
-                PerformLayout();
-                int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
-                MaximumSize = new Size(10000, h);
-                Height = h;
-            }
+            // Affichages réduit et mini : la ligne PTT reste entière ; en mini, la hauteur de la fenêtre suit celle des lignes.
+            if (viewShown != 0) KeepRowWhole();
+            if (viewShown == 2) FitMiniHeight();
+            if (viewShown != 0) FitOnScreen();
         }
 
         // Petite fenêtre « Taille du texte » : 70 à 200 %, appliquée en direct ; Annuler revient à la taille d'avant.

@@ -89,6 +89,7 @@ Cannot start rigctld: 	Nedá sa spustiť rigctld:
 TX safety timeout (PTT button)	Bezpečnostný časový limit TX (tlačidlo PTT)
 Off	Vyp.
 PTT: connect the rig first	PTT: najprv pripojte transceiver
+transmitting	vysielanie
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Neplatná frekvencia: zadajte hodnotu v kHz, napr. 7074 alebo 14074.5
 Remove this value (pick it in the list first)	Odstrániť túto hodnotu (najprv ju vyberte v zozname)
 RIG 	TRX 
@@ -109,6 +110,11 @@ None	Žiadne
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port servera TCI (ExpertSDR, Options > TCI):
 Add memory	Pridať pamäť
+No scan while transmitting	Počas vysielania nie je možné prehľadávať
+Scan: set the start and end frequencies in "Scan setup"	Prehľadávanie: nastavte počiatočný a koncový kmitočet v „Nastavenie prehľadávania“
+Scan: check memories in "Scan setup"	Prehľadávanie: zaškrtnite pamäte v „Nastavenie prehľadávania“
+Scan stopped	Prehľadávanie zastavené
+■ Stop scan	■ Zastaviť prehľadávanie
 (no memory used yet)	(zatiaľ žiadna použitá pamäť)
 Memories…	Pamäte…
 Clear this list	Vymazať tento zoznam
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Odstrániť „{0}“ z „{1}“?
 Unexpected error, written to the log: {0}	Neočakávaná chyba, zapísaná do protokolu: {0}
 Memory "{0}" added to "{1}".	Pamäť „{0}“ pridaná do „{1}“.
 Memory "{0}": {1} kHz	Pamäť „{0}“: {1} kHz
+Scan stopped: {0}	Prehľadávanie zastavené: {0}
+Scan: {0}	Prehľadávanie: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Posledných {0} správ (kliknutie: skryť alebo znova zobraziť tento druh správy, ✓ = skryté)
 Show all hidden messages again ({0})	Znova zobraziť všetky skryté správy ({0})
 Interface:	Rozhranie:
@@ -165,6 +173,8 @@ Text size…	Veľkosť textu…
 …	…
 Download Hamlib…	Stiahnuť Hamlib…
 SDRLINK cable ▾	Kábel SDRLINK ▾
+Scan setup	Nastavenie prehľadávania
+▶ Scan	▶ Prehľadávanie
 QSY	QSY
 Save	Uložiť
 Memories	Pamäte
@@ -189,7 +199,8 @@ Start rigctld:	Spustiť rigctld:
 Sync mode	Synchronizovať mód
 Mute WebSDR while transmitting	Stlmiť WebSDR pri vysielaní
 Auto notch (DNF)	Automatický notch (DNF)
-Compact view	Kompaktné zobrazenie
+Reduced view	Zmenšené zobrazenie
+Mini view	Mini zobrazenie
 Always on top	Vždy navrchu
 COM port (direct CAT)	COM port (priamy CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Pripojené, čaká sa na transceiver...
 Rig online	Transceiver online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Transceiver neodpovedá (skontrolujte port, rýchlosť, adresu CI-V, menu CAT)
 Error: 	Chyba: 
+Scan type:	Druh prehľadávania:
+Frequencies	Kmitočty
+Start (kHz):	Začiatok (kHz):
+End (kHz):	Koniec (kHz):
+Time on each frequency:	Čas na každom kmitočte:
+Memories to scan:	Pamäte na prehľadanie:
+Time on each memory:	Čas na každej pamäti:
+(no memory: Memories button)	(žiadne pamäte: tlačidlo Pamäte)
+Reset	Obnoviť predvolené
+Start scan	Spustiť prehľadávanie
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Zadajte rozdielny počiatočný a koncový kmitočet v kHz (napr. 7000 a 7200).
+Check at least one memory to scan.	Zaškrtnite aspoň jednu pamäť na prehľadanie.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Žiadny server TCI na 
 TCI connection lost	Spojenie TCI stratené
 unavailable	nedostupné

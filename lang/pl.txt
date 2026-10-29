@@ -89,6 +89,7 @@ Cannot start rigctld: 	Nie można uruchomić rigctld:
 TX safety timeout (PTT button)	Limit czasu TX dla bezpieczeństwa (przycisk PTT)
 Off	Wył.
 PTT: connect the rig first	PTT: najpierw połącz radiostację
+transmitting	nadawanie
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nieprawidłowa częstotliwość: wpisz wartość w kHz, np. 7074 lub 14074.5
 Remove this value (pick it in the list first)	Usuń tę wartość (najpierw wybierz ją z listy)
 RIG 	TRX 
@@ -109,6 +110,11 @@ None	Brak
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port serwera TCI (ExpertSDR, Options > TCI):
 Add memory	Dodaj pamięć
+No scan while transmitting	Skanowanie niemożliwe podczas nadawania
+Scan: set the start and end frequencies in "Scan setup"	Skanowanie: podaj częstotliwość początkową i końcową w „Ustawienia skanowania”
+Scan: check memories in "Scan setup"	Skanowanie: zaznacz pamięci w „Ustawienia skanowania”
+Scan stopped	Skanowanie zatrzymane
+■ Stop scan	■ Zatrzymaj skanowanie
 (no memory used yet)	(nie użyto jeszcze żadnej pamięci)
 Memories…	Pamięci…
 Clear this list	Wyczyść tę listę
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Usunąć „{0}” z „{1}”?
 Unexpected error, written to the log: {0}	Nieoczekiwany błąd, zapisany w dzienniku: {0}
 Memory "{0}" added to "{1}".	Pamięć „{0}” dodana do „{1}”.
 Memory "{0}": {1} kHz	Pamięć „{0}”: {1} kHz
+Scan stopped: {0}	Skanowanie zatrzymane: {0}
+Scan: {0}	Skanowanie: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ostatnie {0} komunikatów (kliknięcie: ukryj lub pokaż ponownie ten rodzaj komunikatu, ✓ = ukryty)
 Show all hidden messages again ({0})	Pokaż ponownie wszystkie ukryte komunikaty ({0})
 Interface:	Interfejs:
@@ -165,6 +173,8 @@ Text size…	Rozmiar tekstu…
 …	…
 Download Hamlib…	Pobierz Hamlib…
 SDRLINK cable ▾	Kabel SDRLINK ▾
+Scan setup	Ustawienia skanowania
+▶ Scan	▶ Skanuj
 QSY	QSY
 Save	Zapisz
 Memories	Pamięci
@@ -189,7 +199,8 @@ Start rigctld:	Uruchom rigctld:
 Sync mode	Synchronizuj emisję
 Mute WebSDR while transmitting	Wycisz WebSDR podczas nadawania
 Auto notch (DNF)	Autom. notch (DNF)
-Compact view	Widok kompaktowy
+Reduced view	Widok zmniejszony
+Mini view	Widok mini
 Always on top	Zawsze na wierzchu
 COM port (direct CAT)	Port COM (bezpośredni CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Połączono, oczekiwanie na radiostację...
 Rig online	Radiostacja połączona
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radiostacja nie odpowiada (sprawdź port, prędkość, adres CI-V, menu CAT)
 Error: 	Błąd: 
+Scan type:	Rodzaj skanowania:
+Frequencies	Częstotliwości
+Start (kHz):	Początek (kHz):
+End (kHz):	Koniec (kHz):
+Time on each frequency:	Czas na każdej częstotliwości:
+Memories to scan:	Pamięci do skanowania:
+Time on each memory:	Czas na każdej pamięci:
+(no memory: Memories button)	(brak pamięci: przycisk Pamięci)
+Reset	Resetuj
+Start scan	Rozpocznij skanowanie
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Podaj różne częstotliwości początkową i końcową w kHz (np. 7000 i 7200).
+Check at least one memory to scan.	Zaznacz co najmniej jedną pamięć do skanowania.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Brak serwera TCI pod adresem 
 TCI connection lost	Utracono połączenie TCI
 unavailable	niedostępne

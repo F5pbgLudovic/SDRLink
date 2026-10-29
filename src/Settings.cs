@@ -32,7 +32,13 @@ namespace SDRLink
         public int HamlibModel;            // numéro de modèle Hamlib (0 = d'après le modèle choisi)
         public long TuneStepHz = 100;
         public List<string> FreqHistory = new List<string>();   // kHz, la plus récente en premier
-        public bool Compact;
+        public int ViewMode;               // affichage : 0 normal, 1 réduit, 2 mini
+        public int RedW, RedH;             // taille de la fenêtre en affichage réduit
+        // Scan : 0 fréquences, 1 mémoires (mémoires à parcourir : Memory.Scan) ; durées en secondes.
+        public int ScanType;
+        public long ScanStartHz, ScanEndHz;
+        public long ScanStepHz = 1000;
+        public int ScanFreqDwell = 5, ScanMemDwell = 5;
         public bool TopMost;
         public bool AutoConnect;
         public bool MuteOnTx = true;
@@ -129,7 +135,16 @@ namespace SDRLink
                     case "RigctldPath": s.RigctldPath = v; break;
                     case "HamlibModel": s.HamlibModel = Int(v, 0); break;
                     case "TuneStep": s.TuneStepHz = Int(v, 100); break;
-                    case "Compact": s.Compact = v == "1"; break;
+                    case "Compact": if (v == "1") s.ViewMode = 2; break;   // ancien réglage : l'affichage réduit est devenu « mini »
+                    case "View": s.ViewMode = Math.Max(0, Math.Min(2, Int(v, 0))); break;
+                    case "RedW": s.RedW = Int(v, 0); break;
+                    case "RedH": s.RedH = Int(v, 0); break;
+                    case "ScanType": s.ScanType = Int(v, 0) == 1 ? 1 : 0; break;
+                    case "ScanStart": long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out s.ScanStartHz); break;
+                    case "ScanEnd": long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out s.ScanEndHz); break;
+                    case "ScanStep": { long st; if (long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out st) && st > 0) s.ScanStepHz = st; } break;
+                    case "ScanFreqDwell": s.ScanFreqDwell = Math.Max(1, Int(v, 5)); break;
+                    case "ScanMemDwell": s.ScanMemDwell = Math.Max(1, Int(v, 5)); break;
                     case "TopMost": s.TopMost = v == "1"; break;
                     case "AutoConnect": s.AutoConnect = v == "1"; break;
                     case "MuteOnTx": s.MuteOnTx = v == "1"; break;
@@ -211,7 +226,15 @@ namespace SDRLink
             Line(sb, "RigctldPath", RigctldPath);
             Line(sb, "HamlibModel", HamlibModel);
             Line(sb, "TuneStep", TuneStepHz);
-            Line(sb, "Compact", Compact ? 1 : 0);
+            Line(sb, "View", ViewMode);
+            Line(sb, "RedW", RedW);
+            Line(sb, "RedH", RedH);
+            Line(sb, "ScanType", ScanType);
+            Line(sb, "ScanStart", ScanStartHz);
+            Line(sb, "ScanEnd", ScanEndHz);
+            Line(sb, "ScanStep", ScanStepHz);
+            Line(sb, "ScanFreqDwell", ScanFreqDwell);
+            Line(sb, "ScanMemDwell", ScanMemDwell);
             Line(sb, "TopMost", TopMost ? 1 : 0);
             Line(sb, "AutoConnect", AutoConnect ? 1 : 0);
             Line(sb, "MuteOnTx", MuteOnTx ? 1 : 0);

@@ -89,6 +89,7 @@ Cannot start rigctld: 	Nije moguće pokrenuti rigctld:
 TX safety timeout (PTT button)	Sigurnosno vremensko ograničenje TX (gumb PTT)
 Off	Isklj.
 PTT: connect the rig first	PTT: najprije spojite uređaj
+transmitting	odašiljanje
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nevažeća frekvencija: upišite vrijednost u kHz, npr. 7074 ili 14074.5
 Remove this value (pick it in the list first)	Ukloni ovu vrijednost (najprije je odaberite na popisu)
 RIG 	TRX 
@@ -109,6 +110,11 @@ None	Nijedno
 ExpertSDR TCI port	TCI priključak ExpertSDR-a
 TCI server port (ExpertSDR, Options > TCI):	Priključak TCI poslužitelja (ExpertSDR, Options > TCI):
 Add memory	Dodaj memoriju
+No scan while transmitting	Pretraživanje nije moguće tijekom odašiljanja
+Scan: set the start and end frequencies in "Scan setup"	Pretraživanje: unesite početnu i krajnju frekvenciju u „Postavke pretraživanja”
+Scan: check memories in "Scan setup"	Pretraživanje: označite memorije u „Postavke pretraživanja”
+Scan stopped	Pretraživanje zaustavljeno
+■ Stop scan	■ Zaustavi pretraživanje
 (no memory used yet)	(još nije korištena memorija)
 Memories…	Memorije…
 Clear this list	Isprazni ovaj popis
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Ukloniti „{0}” iz „{1}”?
 Unexpected error, written to the log: {0}	Neočekivana pogreška, zapisana u dnevnik: {0}
 Memory "{0}" added to "{1}".	Memorija „{0}” dodana u „{1}”.
 Memory "{0}": {1} kHz	Memorija „{0}”: {1} kHz
+Scan stopped: {0}	Pretraživanje zaustavljeno: {0}
+Scan: {0}	Pretraživanje: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Zadnjih {0} poruka (klik: sakrij ili ponovno prikaži ovu vrstu poruke, ✓ = skriveno)
 Show all hidden messages again ({0})	Ponovno prikaži sve skrivene poruke ({0})
 Interface:	Sučelje:
@@ -165,6 +173,8 @@ Text size…	Veličina teksta…
 …	…
 Download Hamlib…	Preuzmi Hamlib…
 SDRLINK cable ▾	SDRLINK kabel ▾
+Scan setup	Postavke pretraživanja
+▶ Scan	▶ Pretraživanje
 QSY	QSY
 Save	Spremi
 Memories	Memorije
@@ -189,7 +199,8 @@ Start rigctld:	Pokreni rigctld:
 Sync mode	Sinkroniziraj način rada
 Mute WebSDR while transmitting	Utišaj WebSDR tijekom odašiljanja
 Auto notch (DNF)	Automatski notch (DNF)
-Compact view	Kompaktni prikaz
+Reduced view	Smanjeni prikaz
+Mini view	Mini prikaz
 Always on top	Uvijek na vrhu
 COM port (direct CAT)	COM priključak (izravni CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Spojeno, čekanje na uređaj...
 Rig online	Uređaj spojen
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Uređaj ne odgovara (provjerite priključak, brzinu, CI-V adresu, CAT izbornik)
 Error: 	Pogreška: 
+Scan type:	Vrsta pretraživanja:
+Frequencies	Frekvencije
+Start (kHz):	Početak (kHz):
+End (kHz):	Kraj (kHz):
+Time on each frequency:	Vrijeme na svakoj frekvenciji:
+Memories to scan:	Memorije za pretraživanje:
+Time on each memory:	Vrijeme na svakoj memoriji:
+(no memory: Memories button)	(nema memorija: gumb Memorije)
+Reset	Vrati početno
+Start scan	Pokreni pretraživanje
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Unesite različite početnu i krajnju frekvenciju u kHz (npr. 7000 i 7200).
+Check at least one memory to scan.	Označite barem jednu memoriju za pretraživanje.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	Nema TCI poslužitelja na 
 TCI connection lost	TCI veza izgubljena
 unavailable	nedostupno

@@ -89,6 +89,7 @@ Cannot start rigctld: 	rigctld-ohjelmaa ei voi käynnistää:
 TX safety timeout (PTT button)	TX-turva-aikakatkaisu (PTT-painike)
 Off	Pois
 PTT: connect the rig first	PTT: yhdistä ensin radio
+transmitting	lähetys
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Virheellinen taajuus: anna arvo kHz:nä, esim. 7074 tai 14074.5
 Remove this value (pick it in the list first)	Poista tämä arvo (valitse se ensin luettelosta)
 RIG 	RADIO 
@@ -109,6 +110,11 @@ None	Ei mitään
 ExpertSDR TCI port	ExpertSDR:n TCI-portti
 TCI server port (ExpertSDR, Options > TCI):	TCI-palvelimen portti (ExpertSDR, Options > TCI):
 Add memory	Lisää muisti
+No scan while transmitting	Ei pyyhkäisyä lähetyksen aikana
+Scan: set the start and end frequencies in "Scan setup"	Pyyhkäisy: anna alku- ja lopputaajuus kohdassa ”Pyyhkäisyn asetukset”
+Scan: check memories in "Scan setup"	Pyyhkäisy: valitse muistit kohdassa ”Pyyhkäisyn asetukset”
+Scan stopped	Pyyhkäisy pysäytetty
+■ Stop scan	■ Pysäytä pyyhkäisy
 (no memory used yet)	(muistia ei ole vielä käytetty)
 Memories…	Muistit…
 Clear this list	Tyhjennä tämä luettelo
@@ -137,6 +143,8 @@ Remove "{0}" from "{1}"?	Poistetaanko ”{0}” luettelosta ”{1}”?
 Unexpected error, written to the log: {0}	Odottamaton virhe, kirjattu lokiin: {0}
 Memory "{0}" added to "{1}".	Muisti ”{0}” lisätty luetteloon ”{1}”.
 Memory "{0}": {1} kHz	Muisti ”{0}”: {1} kHz
+Scan stopped: {0}	Pyyhkäisy pysäytetty: {0}
+Scan: {0}	Pyyhkäisy: {0}
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Viimeiset {0} viestiä (napsautus: piilota tai näytä tämäntyyppiset viestit uudelleen, ✓ = piilotettu)
 Show all hidden messages again ({0})	Näytä kaikki piilotetut viestit uudelleen ({0})
 Interface:	Liitäntä:
@@ -165,6 +173,8 @@ Text size…	Tekstin koko…
 …	…
 Download Hamlib…	Lataa Hamlib…
 SDRLINK cable ▾	SDRLINK-kaapeli ▾
+Scan setup	Pyyhkäisyn asetukset
+▶ Scan	▶ Pyyhkäisy
 QSY	QSY
 Save	Tallenna
 Memories	Muistit
@@ -189,7 +199,8 @@ Start rigctld:	Käynnistä rigctld:
 Sync mode	Synkronoi lähetelaji
 Mute WebSDR while transmitting	Mykistä WebSDR lähetyksen ajaksi
 Auto notch (DNF)	Auto-notch (DNF)
-Compact view	Tiivis näkymä
+Reduced view	Pienennetty näkymä
+Mini view	Mininäkymä
 Always on top	Aina päällimmäisenä
 COM port (direct CAT)	COM-portti (suora CAT)
 OmniRig	OmniRig
@@ -234,6 +245,20 @@ Connected, waiting for the rig...	Yhdistetty, odotetaan radiota...
 Rig online	Radio yhteydessä
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radio ei vastaa (tarkista portti, nopeus, CI-V-osoite, CAT-valikko)
 Error: 	Virhe: 
+Scan type:	Pyyhkäisyn tyyppi:
+Frequencies	Taajuudet
+Start (kHz):	Alku (kHz):
+End (kHz):	Loppu (kHz):
+Time on each frequency:	Aika kullakin taajuudella:
+Memories to scan:	Pyyhkäistävät muistit:
+Time on each memory:	Aika kussakin muistissa:
+(no memory: Memories button)	(ei muisteja: Muistit-painike)
+Reset	Palauta
+Start scan	Aloita pyyhkäisy
+Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Anna eri alku- ja lopputaajuus kHz:inä (esim. 7000 ja 7200).
+Check at least one memory to scan.	Valitse vähintään yksi pyyhkäistävä muisti.
+{0} s	{0} s
+{0} min	{0} min
 No TCI server at 	TCI-palvelinta ei löydy osoitteesta 
 TCI connection lost	TCI-yhteys katkesi
 unavailable	ei käytettävissä
