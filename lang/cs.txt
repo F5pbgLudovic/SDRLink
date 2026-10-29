@@ -46,7 +46,7 @@ unreachable	nedostupné
 Import favorites	Importovat oblíbené
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Oblíbené (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Všechny soubory (*.*)|*.*
 Export favorites	Exportovat oblíbené
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, čitelné v Excelu (*.csv)|*.csv|Záložky prohlížeče (*.html)|*.html|Text (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Záložky prohlížeče (*.html)|*.html|CSV, čitelné v Excelu (*.csv)|*.csv|Text (*.txt)|*.txt
 This WebSDR is already in "{0}".	Tento WebSDR již je v „{0}“.
 List {0}	Seznam {0}
 Rename "{0}"…	Přejmenovat „{0}“…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	„{0}“ přidáno do „{1}“.
 This page is not in "{0}".	Tato stránka není v „{0}“.
 Remove "{0}" from "{1}"?	Odebrat „{0}“ z „{1}“?
+Unexpected error, written to the log: {0}	Neočekávaná chyba, zapsaná do protokolu: {0}
 Interface:	Rozhraní:
 Brand:	Značka:
 Model:	Model:

@@ -46,7 +46,7 @@ unreachable	kan inte nås
 Import favorites	Importera favoriter
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favoriter (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Alla filer (*.*)|*.*
 Export favorites	Exportera favoriter
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, läsbar i Excel (*.csv)|*.csv|Webbläsarbokmärken (*.html)|*.html|Text (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Webbläsarbokmärken (*.html)|*.html|CSV, läsbar i Excel (*.csv)|*.csv|Text (*.txt)|*.txt
 This WebSDR is already in "{0}".	Denna WebSDR finns redan i ”{0}”.
 List {0}	Lista {0}
 Rename "{0}"…	Byt namn på ”{0}”…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	”{0}” har lagts till i ”{1}”.
 This page is not in "{0}".	Denna sida finns inte i ”{0}”.
 Remove "{0}" from "{1}"?	Ta bort ”{0}” från ”{1}”?
+Unexpected error, written to the log: {0}	Oväntat fel, skrivet i loggen: {0}
 Interface:	Gränssnitt:
 Brand:	Märke:
 Model:	Modell:

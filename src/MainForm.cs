@@ -2490,6 +2490,11 @@ namespace SDRLink
             catch (Exception) { return false; }
         }
 
+        public void ShowError(string message)
+        {
+            try { status.Text = Lang.F("Erreur inattendue, notée dans le journal : {0}", "Unexpected error, written to the log: {0}", message); } catch { }
+        }
+
         // ---------------------------------------------------------------- Mise à jour
 
         // Au démarrage (case cochée) : dernière version publiée sur GitHub ; si elle est plus récente, lien dans la barre d'état.

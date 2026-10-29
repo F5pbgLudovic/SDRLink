@@ -7,7 +7,7 @@ namespace SDRLink
     static class Program
     {
         // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
-        public const string Version = "1.6";
+        public const string Version = "1.7";
 
         [STAThread]
         static int Main(string[] args)
@@ -30,7 +30,17 @@ namespace SDRLink
         {
             if (!Prerequisites.CheckWebView2()) return;
             Log.Reset();
-            Application.Run(new MainForm());
+            // Erreur imprévue dans la fenêtre : notée en entier dans le journal et signalée dans la barre d'état,
+            // au lieu de la boîte « Unhandled exception » de .NET.
+            MainForm form = null;
+            Application.ThreadException += delegate(object s, System.Threading.ThreadExceptionEventArgs e)
+            {
+                Log.Write("Erreur inattendue : " + e.Exception);
+                if (form != null) form.ShowError(e.Exception.Message);
+            };
+            AppDomain.CurrentDomain.UnhandledException += delegate(object s, UnhandledExceptionEventArgs e) { Log.Write("Erreur fatale : " + e.ExceptionObject); };
+            form = new MainForm();
+            Application.Run(form);
         }
     }
 }

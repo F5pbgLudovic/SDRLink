@@ -65,21 +65,87 @@ namespace SDRLink
             return s.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || s.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
         }
 
-        // Import : favoris HTML d'un navigateur (<A HREF="...">nom</A>), ou lignes "nom;URL", "nom<tab>URL", "nom|URL", "URL".
-        public static List<Favorite> Import(string path)
+        // Numéro de la liste portant ce nom (nom donné par l'utilisateur, ou "Liste 2" / "List 2" / nom traduit), -1 sinon.
+        static int ListIndexOf(string name, string[] listNames)
+        {
+            name = (name ?? "").Trim();
+            for (int i = 0; i < ListCount; i++)
+                if (string.Equals(name, listNames[i], StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(name, "Liste " + (i + 1), StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(name, "List " + (i + 1), StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(name, FavoritesDialog.ListLabel(listNames, i), StringComparison.OrdinalIgnoreCase)) return i;
+            return -1;
+        }
+
+        static bool IsDefaultListName(string[] listNames, int i) { return listNames[i] == "Liste " + (i + 1); }
+
+        // Import : favoris HTML d'un navigateur (Firefox, Edge, Chrome : <H3>dossier</H3><DL>… <A HREF="...">nom</A>),
+        // ou lignes "nom;URL;volume;liste", "nom<tab>URL", "nom|URL", "URL". Chaque favori reçoit sa liste :
+        // - dossier « SDRLink » (export de SDRLink, repris tel quel ou après un passage par Firefox) : seul son contenu
+        //   est importé, chaque sous-dossier allant dans la liste de même nom, sinon dans la liste de même rang ;
+        //   une liste jamais renommée prend alors le nom du sous-dossier ;
+        // - autre fichier : le dossier qui porte le nom d'une liste y va, le reste dans defaultList.
+        public static List<Favorite> Import(string path, string[] listNames, int defaultList)
         {
             string text = File.ReadAllText(path, Encoding.UTF8);
             List<Favorite> list = new List<Favorite>();
-            MatchCollection links = Regex.Matches(text, "<a[^>]+href\\s*=\\s*\"([^\"]+)\"[^>]*>(.*?)</a>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-            if (links.Count > 0)
+            List<List<string>> paths = new List<List<string>>();
+            List<string> stack = new List<string>();
+            string pending = null;
+            bool html = false;
+            foreach (Match m in Regex.Matches(text, "<DL\\b[^>]*>|</DL\\s*>|<H3\\b[^>]*>(.*?)</H3\\s*>|<A\\s([^>]*)>(.*?)</A\\s*>", RegexOptions.IgnoreCase | RegexOptions.Singleline))
             {
-                foreach (Match m in links)
+                string tag = m.Value.Substring(0, Math.Min(3, m.Value.Length)).ToUpperInvariant();
+                if (tag == "<DL") { stack.Add(pending ?? ""); pending = null; }
+                else if (tag == "</D") { if (stack.Count > 0) stack.RemoveAt(stack.Count - 1); }
+                else if (tag == "<H3") pending = WebUtility.HtmlDecode(Regex.Replace(m.Groups[1].Value, "<[^>]*>", "")).Trim();
+                else
                 {
-                    string url = WebUtility.HtmlDecode(m.Groups[1].Value);
-                    string name = WebUtility.HtmlDecode(Regex.Replace(m.Groups[2].Value, "<[^>]*>", "")).Trim();
-                    if (LooksLikeUrl(url)) list.Add(new Favorite(name, url));
+                    html = true;
+                    Match href = Regex.Match(m.Groups[2].Value, "HREF\\s*=\\s*\"([^\"]*)\"", RegexOptions.IgnoreCase);
+                    if (!href.Success) continue;
+                    string url = WebUtility.HtmlDecode(href.Groups[1].Value);
+                    if (!LooksLikeUrl(url)) continue;
+                    Favorite f = new Favorite(WebUtility.HtmlDecode(Regex.Replace(m.Groups[3].Value, "<[^>]*>", "")).Trim(), url);
+                    Match vol = Regex.Match(m.Groups[2].Value, "SDRLINK_VOLUME\\s*=\\s*\"(\\d+)\"", RegexOptions.IgnoreCase);
+                    if (vol.Success) f.Volume = Math.Min(100, int.Parse(vol.Groups[1].Value));
+                    list.Add(f);
+                    paths.Add(new List<string>(stack));
                 }
-                return list;
+            }
+            if (html)
+            {
+                bool sdrlink = paths.Exists(delegate(List<string> fp) { return fp.Exists(IsSdrLinkFolder); });
+                List<string> subfolders = new List<string>();   // sous-dossiers du dossier SDRLink, dans l'ordre du fichier
+                List<Favorite> kept = new List<Favorite>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    List<string> fp = paths[i];
+                    int root = fp.FindLastIndex(IsSdrLinkFolder);
+                    if (sdrlink)
+                    {
+                        if (root < 0) continue;   // hors du dossier SDRLink (autres marque-pages du navigateur)
+                        if (root + 1 >= fp.Count) { list[i].List = defaultList; kept.Add(list[i]); continue; }
+                        string sub = fp[root + 1];
+                        int k = subfolders.IndexOf(sub);
+                        if (k < 0) { subfolders.Add(sub); k = subfolders.Count - 1; }
+                        int idx = ListIndexOf(sub, listNames);
+                        if (idx < 0 && k < ListCount)
+                        {
+                            idx = k;
+                            if (IsDefaultListName(listNames, k) && sub.Length > 0) listNames[k] = sub.Replace("|", "/");
+                        }
+                        list[i].List = idx >= 0 ? idx : defaultList;
+                    }
+                    else
+                    {
+                        int idx = -1;
+                        for (int j = fp.Count - 1; j >= 0 && idx < 0; j--) idx = ListIndexOf(fp[j], listNames);
+                        list[i].List = idx >= 0 ? idx : defaultList;
+                    }
+                    kept.Add(list[i]);
+                }
+                return kept;
             }
             foreach (string raw in text.Split('\n'))
             {
@@ -87,33 +153,56 @@ namespace SDRLink
                 if (line.Length == 0) continue;
                 string[] p = line.Split(new[] { ';', '\t', '|' });
                 int vol;
+                Favorite f = null;
                 if (p.Length >= 2 && LooksLikeUrl(p[1]))
                 {
-                    Favorite f = new Favorite(p[0].Trim('"', ' '), p[1].Trim('"', ' '));
+                    f = new Favorite(p[0].Trim('"', ' '), p[1].Trim('"', ' '));
                     if (p.Length >= 3 && int.TryParse(p[2].Trim('"', ' '), out vol)) f.Volume = Math.Max(0, Math.Min(100, vol));
-                    list.Add(f);
                 }
-                else if (LooksLikeUrl(p[0])) list.Add(new Favorite(null, p[0].Trim('"', ' ')));
+                else if (LooksLikeUrl(p[0])) f = new Favorite(null, p[0].Trim('"', ' '));
+                if (f == null) continue;
+                int idx = p.Length >= 4 ? ListIndexOf(p[3].Trim('"', ' '), listNames) : -1;
+                f.List = idx >= 0 ? idx : defaultList;
+                list.Add(f);
             }
             return list;
         }
 
-        // Export : .html au format "favoris de navigateur" (importable dans Edge, Chrome, Firefox), sinon CSV "nom;URL;volume".
-        public static void Export(string path, IList<Favorite> favs)
+        static bool IsSdrLinkFolder(string name) { return string.Equals(name, "SDRLink", StringComparison.OrdinalIgnoreCase); }
+
+        // Export de tous les favoris. .html : marque-pages au format Netscape de Firefox (importable aussi dans Edge
+        // et Chrome), dossier « SDRLink » avec un sous-dossier par liste, même vide (l'import s'appuie sur leur rang) ; le volume est gardé dans SDRLINK_VOLUME
+        // (ignoré par les navigateurs). Sinon CSV "nom;URL;volume;liste".
+        public static void Export(string path, IList<Favorite> favs, string[] listNames)
         {
             StringBuilder sb = new StringBuilder();
             if (path.EndsWith(".htm", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
             {
-                sb.Append("<!DOCTYPE NETSCAPE-Bookmark-file-1>\r\n<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=UTF-8\">\r\n");
-                sb.Append("<TITLE>SDRLink</TITLE>\r\n<H1>SDRLink</H1>\r\n<DL><p>\r\n");
-                foreach (Favorite f in favs)
-                    sb.Append("    <DT><A HREF=\"").Append(WebUtility.HtmlEncode(f.Url)).Append("\">").Append(WebUtility.HtmlEncode(f.Name)).Append("</A>\r\n");
-                sb.Append("</DL><p>\r\n");
+                string now = ((long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                sb.Append("<!DOCTYPE NETSCAPE-Bookmark-file-1>\r\n<!-- This is an automatically generated file.\r\n     It will be read and overwritten.\r\n     DO NOT EDIT! -->\r\n");
+                sb.Append("<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=UTF-8\">\r\n");
+                sb.Append("<TITLE>Bookmarks</TITLE>\r\n<H1>Bookmarks Menu</H1>\r\n\r\n<DL><p>\r\n");
+                sb.Append("    <DT><H3 ADD_DATE=\"").Append(now).Append("\" LAST_MODIFIED=\"").Append(now).Append("\">SDRLink</H3>\r\n    <DL><p>\r\n");
+                for (int l = 0; l < ListCount; l++)
+                {
+                    sb.Append("        <DT><H3 ADD_DATE=\"").Append(now).Append("\" LAST_MODIFIED=\"").Append(now).Append("\">")
+                      .Append(WebUtility.HtmlEncode(FavoritesDialog.ListLabel(listNames, l))).Append("</H3>\r\n        <DL><p>\r\n");
+                    foreach (Favorite f in favs)
+                    {
+                        if (f.List != l) continue;
+                        sb.Append("            <DT><A HREF=\"").Append(WebUtility.HtmlEncode(f.Url)).Append("\" ADD_DATE=\"").Append(now).Append('"');
+                        if (f.Volume >= 0) sb.Append(" SDRLINK_VOLUME=\"").Append(f.Volume).Append('"');
+                        sb.Append('>').Append(WebUtility.HtmlEncode(f.Name)).Append("</A>\r\n");
+                    }
+                    sb.Append("        </DL><p>\r\n");
+                }
+                sb.Append("    </DL><p>\r\n</DL>\r\n");
             }
             else
             {
                 foreach (Favorite f in favs)
-                    sb.Append(f.Name.Replace(";", ",")).Append(';').Append(f.Url).Append(f.Volume >= 0 ? ";" + f.Volume : "").Append("\r\n");
+                    sb.Append(f.Name.Replace(";", ",")).Append(';').Append(f.Url).Append(';').Append(f.Volume >= 0 ? f.Volume.ToString() : "")
+                      .Append(';').Append(FavoritesDialog.ListLabel(listNames, f.List).Replace(";", ",")).Append("\r\n");
             }
             File.WriteAllText(path, sb.ToString(), new UTF8Encoding(true));
         }
@@ -744,20 +833,27 @@ namespace SDRLink
                 d.Filter = Lang.T("Favoris (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Tous les fichiers (*.*)|*.*",
                                   "Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*");
                 if (d.ShowDialog(this) != DialogResult.OK) return;
+                // Chaque favori va dans sa liste (dossiers du fichier) ; ceux sans liste vont dans la liste affichée.
                 List<Favorite> imported;
-                try { imported = Favorite.Import(d.FileName); }
+                try { imported = Favorite.Import(d.FileName, listNames, TargetList(mainList)); }
                 catch (Exception ex) { MessageBox.Show(this, ex.Message, "SDRLink"); return; }
                 int added = 0;
+                int[] perList = new int[Favorite.ListCount];
                 foreach (Favorite f in imported)
                 {
-                    if (favs.Exists(delegate(Favorite x) { return string.Equals(x.Url, f.Url, StringComparison.OrdinalIgnoreCase); })) continue;
-                    f.List = TargetList(mainList);
+                    Favorite n = f;
+                    if (favs.Exists(delegate(Favorite x) { return x.List == n.List && x.Matches(n.Url); })) continue;
                     favs.Add(f);
+                    perList[f.List]++;
                     added++;
                 }
+                FillListCombo(cbList.SelectedIndex);   // listes renommées d'après le fichier
                 Refill(-1);
+                StringBuilder detail = new StringBuilder();
+                for (int i = 0; i < Favorite.ListCount; i++)
+                    if (perList[i] > 0) detail.Append("\n").Append(ListLabel(listNames, i)).Append(" : ").Append(perList[i]);
                 MessageBox.Show(this, Lang.F("{0} favori(s) importé(s), {1} déjà présent(s).",
-                                             "{0} favorite(s) imported, {1} already present.", added, imported.Count - added), "SDRLink");
+                                             "{0} favorite(s) imported, {1} already present.", added, imported.Count - added) + detail, "SDRLink");
             }
         }
 
@@ -767,12 +863,12 @@ namespace SDRLink
             {
                 d.Title = Lang.T("Exporter les favoris", "Export favorites");
                 d.FileName = "SDRLink-favoris";
-                d.Filter = Lang.T("CSV, lisible par Excel (*.csv)|*.csv|Favoris de navigateur (*.html)|*.html|Texte (*.txt)|*.txt",
-                                  "CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt");
+                d.Filter = Lang.T("Marque-pages Firefox / navigateur (*.html)|*.html|CSV, lisible par Excel (*.csv)|*.csv|Texte (*.txt)|*.txt",
+                                  "Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt");
                 if (d.ShowDialog(this) != DialogResult.OK) return;
                 try
                 {
-                    Favorite.Export(d.FileName, favs);
+                    Favorite.Export(d.FileName, favs, listNames);
                     MessageBox.Show(this, Lang.F("{0} favori(s) exporté(s).", "{0} favorite(s) exported.", favs.Count), "SDRLink");
                 }
                 catch (Exception ex) { MessageBox.Show(this, ex.Message, "SDRLink"); }

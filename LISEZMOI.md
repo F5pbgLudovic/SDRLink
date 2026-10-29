@@ -76,7 +76,7 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
 - **Listes de favoris** : 4 listes (Liste 1 à Liste 4) pour trier les WebSDR.
   - Le menu juste à droite de la liste des WebSDR choisit la liste affichée.
   - **Clic droit** sur ce menu pour renommer la liste (par ex. « HF France », « VHF »…).
-  - À chaque ajout (★, gestionnaire, recherche), SDRLink **demande la liste** où enregistrer (la liste affichée est proposée). Les favoris importés vont dans la liste affichée du gestionnaire. Les favoris existants sont dans la liste 1.
+  - À chaque ajout (★, gestionnaire, recherche), SDRLink **demande la liste** où enregistrer (la liste affichée est proposée). Les favoris importés vont dans leur liste (voir Importer). Les favoris existants sont dans la liste 1.
   - Dans « Gérer les favoris… » :
     - le menu **Liste** filtre l'affichage (ou « Toutes les listes ») ; clic droit dessus pour la renommer ;
     - **Déplacer vers ▸** range les favoris cochés (ou, à défaut, le favori sélectionné) dans une autre liste ;
@@ -96,12 +96,16 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
   - champs **Nom** et **Adresse** : ils affichent le favori sélectionné et se corrigent directement. La liste se met à jour en tapant. Un champ laissé vide n'est pas appliqué.
   - **Écouter la sélection** : ouvre le favori sélectionné dans SDRLink pour l'écouter, sans fermer le gestionnaire (comme dans la recherche des WebSDR).
   - **Ouvrir** ou double-clic : ouvre le WebSDR et ferme le gestionnaire. La touche Suppr supprime, Entrée ouvre.
-  - **Importer…** :
-    - favoris exportés d'un navigateur (Edge, Chrome, Firefox : fichier `.html`) ;
-    - fichier CSV `nom;adresse` ;
-    - simple liste d'adresses.
-    Les adresses déjà présentes sont ignorées.
-  - **Exporter…** : CSV (lisible par Excel) ou HTML (importable dans un navigateur).
+  - **Exporter…** : **tous** les favoris, des 4 listes :
+    - **HTML** (choix proposé d'abord) : fichier de marque-pages au format de **Firefox**, importable aussi dans Edge et Chrome. Il contient un dossier **SDRLink** avec un sous-dossier par liste, au nom de la liste (les 4 listes, même vides). Le volume de chaque WebSDR y est gardé pour SDRLink ; les navigateurs l'ignorent.
+    - **CSV** (lisible par Excel) : `nom;adresse;volume;liste`.
+    - Dans Firefox : Marque-pages > Gérer les marque-pages (Ctrl+Maj+O) > Importation et sauvegarde > **Importer des marque-pages au format HTML**. Le dossier SDRLink arrive dans le menu des marque-pages.
+  - **Importer…** : chaque favori va **dans sa liste** :
+    - fichier exporté par SDRLink, ou exporté par Firefox (Importation et sauvegarde > **Exporter des marque-pages au format HTML**) : seul le contenu du dossier **SDRLink** est importé, où qu'il se trouve dans les marque-pages (barre personnelle, menu…). Chaque sous-dossier va dans la liste de même nom, sinon dans la liste de même rang (1er sous-dossier → liste 1…). Une liste jamais renommée prend le nom de son sous-dossier.
+    - marque-pages d'un navigateur sans dossier SDRLink : un dossier qui porte le nom d'une liste va dans cette liste ; le reste va dans la liste affichée du gestionnaire.
+    - fichier CSV `nom;adresse;volume;liste`, ou `nom;adresse`, ou simple liste d'adresses : la 4e colonne donne la liste ; sans elle, liste affichée.
+    - un WebSDR déjà présent dans sa liste n'est pas ajouté une seconde fois. Le message final donne le nombre importé par liste.
+    - le volume est repris d'un export SDRLink (HTML ou CSV) ; Firefox ne le garde pas.
 - Les favoris de départ comprennent les annuaires websdr.org, KiwiSDR et OpenWebRX, ainsi que Twente, Wessex et French Alps.
 
 ## Rechercher des WebSDR
@@ -130,7 +134,7 @@ Le curseur **Volume**, à droite de « Gérer les favoris… », règle uniqueme
 - Il agit sur tous les types de WebSDR. Sur UberSDR, le son ne démarre qu'après un clic sur « Click to start » dans la page.
 - Le volume est **mémorisé pour chaque favori** : en rouvrant un favori, on retrouve son volume.
 - Les WebSDR qui ne sont pas en favoris partagent un même volume, lui aussi mémorisé.
-- Un favori ajouté garde le volume du moment. L'export CSV inclut le volume, et l'import le reprend.
+- Un favori ajouté garde le volume du moment. L'export (HTML ou CSV) inclut le volume, et l'import le reprend.
 
 ## Coupure du son et volume du poste
 
@@ -302,8 +306,13 @@ Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au déma
 
 Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrlink.log`. Le journal est remis à zéro à chaque lancement et contient l'état de la connexion et, pour HRD, la liste des modes reçue.
 
+Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier .html dans la fenêtre « Importer des favoris » : il vient de l'aperçu **Monaco** de **PowerToys**, pas de SDRLink (cliquer sur Continue, l'import fonctionne). Pour l'éviter : **Alt+P** dans la fenêtre d'ouverture (masque le volet d'aperçu), ou dans PowerToys > Extensions de l'Explorateur de fichiers, désactiver l'aperçu du code source (Monaco).
+
 ## Historique des versions
 
+- **1.7**
+  - favoris : export et import compatibles avec **Firefox**, par listes (dossier SDRLink avec un sous-dossier par liste) ; l'import remet chaque favori dans sa liste au lieu de tout mettre dans une seule.
+  - une erreur imprévue est notée en détail dans le journal (ligne « Erreur inattendue ») et signalée en bas de la fenêtre, sans boîte de dialogue.
 - **1.6**
   - bouton ⇄ : le son passe d'une réception à la suivante (WebSDR, TX, ExpertSDR) ; clic droit pour laisser une coupure de côté ;
   - case « Vérifier les mises à jour » et lien vers la nouvelle version dans la barre d'état.

@@ -46,7 +46,7 @@ unreachable	kättesaamatu
 Import favorites	Impordi lemmikud
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Lemmikud (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Kõik failid (*.*)|*.*
 Export favorites	Ekspordi lemmikud
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, Excelis loetav (*.csv)|*.csv|Brauseri järjehoidjad (*.html)|*.html|Tekst (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Brauseri järjehoidjad (*.html)|*.html|CSV, Excelis loetav (*.csv)|*.csv|Tekst (*.txt)|*.txt
 This WebSDR is already in "{0}".	See WebSDR on juba loendis „{0}“.
 List {0}	Loend {0}
 Rename "{0}"…	Nimeta „{0}“ ümber…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	„{0}“ lisati loendisse „{1}“.
 This page is not in "{0}".	Seda lehte pole loendis „{0}“.
 Remove "{0}" from "{1}"?	Kas eemaldada „{0}“ loendist „{1}“?
+Unexpected error, written to the log: {0}	Ootamatu viga, kirjutatud logisse: {0}
 Interface:	Liides:
 Brand:	Tootja:
 Model:	Mudel:

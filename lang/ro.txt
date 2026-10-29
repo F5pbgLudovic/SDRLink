@@ -46,7 +46,7 @@ unreachable	inaccesibil
 Import favorites	Import favorite
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favorite (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Toate fișierele (*.*)|*.*
 Export favorites	Export favorite
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, compatibil Excel (*.csv)|*.csv|Marcaje browser (*.html)|*.html|Text (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Marcaje browser (*.html)|*.html|CSV, compatibil Excel (*.csv)|*.csv|Text (*.txt)|*.txt
 This WebSDR is already in "{0}".	Acest WebSDR este deja în „{0}”.
 List {0}	Lista {0}
 Rename "{0}"…	Redenumire „{0}”…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	„{0}” adăugat în „{1}”.
 This page is not in "{0}".	Această pagină nu este în „{0}”.
 Remove "{0}" from "{1}"?	Eliminați „{0}” din „{1}”?
+Unexpected error, written to the log: {0}	Eroare neașteptată, notată în jurnal: {0}
 Interface:	Interfață:
 Brand:	Marcă:
 Model:	Model:

@@ -46,7 +46,7 @@ unreachable	ei tavoitettavissa
 Import favorites	Tuo suosikit
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Suosikit (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Kaikki tiedostot (*.*)|*.*
 Export favorites	Vie suosikit
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, Excel-yhteensopiva (*.csv)|*.csv|Selaimen kirjanmerkit (*.html)|*.html|Teksti (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Selaimen kirjanmerkit (*.html)|*.html|CSV, Excel-yhteensopiva (*.csv)|*.csv|Teksti (*.txt)|*.txt
 This WebSDR is already in "{0}".	Tämä WebSDR on jo luettelossa ”{0}”.
 List {0}	Luettelo {0}
 Rename "{0}"…	Nimeä ”{0}” uudelleen…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	”{0}” lisätty luetteloon ”{1}”.
 This page is not in "{0}".	Tämä sivu ei ole luettelossa ”{0}”.
 Remove "{0}" from "{1}"?	Poistetaanko ”{0}” luettelosta ”{1}”?
+Unexpected error, written to the log: {0}	Odottamaton virhe, kirjattu lokiin: {0}
 Interface:	Liitäntä:
 Brand:	Merkki:
 Model:	Malli:

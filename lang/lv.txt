@@ -46,7 +46,7 @@ unreachable	nav sasniedzams
 Import favorites	Importēt izlasi
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Izlase (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Visi faili (*.*)|*.*
 Export favorites	Eksportēt izlasi
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, lasāms ar Excel (*.csv)|*.csv|Pārlūka grāmatzīmes (*.html)|*.html|Teksts (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Pārlūka grāmatzīmes (*.html)|*.html|CSV, lasāms ar Excel (*.csv)|*.csv|Teksts (*.txt)|*.txt
 This WebSDR is already in "{0}".	Šis WebSDR jau ir sarakstā "{0}".
 List {0}	Saraksts {0}
 Rename "{0}"…	Pārdēvēt "{0}"…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	"{0}" pievienots sarakstam "{1}".
 This page is not in "{0}".	Šīs lapas nav sarakstā "{0}".
 Remove "{0}" from "{1}"?	Vai noņemt "{0}" no "{1}"?
+Unexpected error, written to the log: {0}	Negaidīta kļūda, ierakstīta žurnālā: {0}
 Interface:	Saskarne:
 Brand:	Ražotājs:
 Model:	Modelis:

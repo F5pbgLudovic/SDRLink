@@ -46,7 +46,7 @@ unreachable	nem érhető el
 Import favorites	Kedvencek importálása
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Kedvencek (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Minden fájl (*.*)|*.*
 Export favorites	Kedvencek exportálása
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, Excellel olvasható (*.csv)|*.csv|Böngésző-könyvjelzők (*.html)|*.html|Szöveg (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Böngésző-könyvjelzők (*.html)|*.html|CSV, Excellel olvasható (*.csv)|*.csv|Szöveg (*.txt)|*.txt
 This WebSDR is already in "{0}".	Ez a WebSDR már szerepel a(z) „{0}” listában.
 List {0}	Lista {0}
 Rename "{0}"…	„{0}” átnevezése…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	„{0}” hozzáadva a(z) „{1}” listához.
 This page is not in "{0}".	Ez az oldal nem szerepel a(z) „{0}” listában.
 Remove "{0}" from "{1}"?	Eltávolítja a(z) „{0}” elemet a(z) „{1}” listából?
+Unexpected error, written to the log: {0}	Váratlan hiba, a naplóba írva: {0}
 Interface:	Interfész:
 Brand:	Gyártó:
 Model:	Modell:

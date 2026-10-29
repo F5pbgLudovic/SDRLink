@@ -46,7 +46,7 @@ unreachable	injoignable
 Import favorites	Importer des favoris
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Favoris (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Tous les fichiers (*.*)|*.*
 Export favorites	Exporter les favoris
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, lisible par Excel (*.csv)|*.csv|Favoris de navigateur (*.html)|*.html|Texte (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Marque-pages Firefox / navigateur (*.html)|*.html|CSV, lisible par Excel (*.csv)|*.csv|Texte (*.txt)|*.txt
 This WebSDR is already in "{0}".	Ce WebSDR est déjà dans « {0} ».
 List {0}	Liste {0}
 Rename "{0}"…	Renommer « {0} »…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	« {0} » ajouté à « {1} ».
 This page is not in "{0}".	Cette page n'est pas dans « {0} ».
 Remove "{0}" from "{1}"?	Retirer « {0} » de « {1} » ?
+Unexpected error, written to the log: {0}	Erreur inattendue, notée dans le journal : {0}
 Interface:	Interface :
 Brand:	Marque :
 Model:	Modèle :

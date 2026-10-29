@@ -46,7 +46,7 @@ unreachable	nepasiekiamas
 Import favorites	Importuoti parankinius
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Parankiniai (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Visi failai (*.*)|*.*
 Export favorites	Eksportuoti parankinius
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, skaitomas Excel (*.csv)|*.csv|Naršyklės žymės (*.html)|*.html|Tekstas (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Naršyklės žymės (*.html)|*.html|CSV, skaitomas Excel (*.csv)|*.csv|Tekstas (*.txt)|*.txt
 This WebSDR is already in "{0}".	Šis WebSDR jau yra sąraše „{0}“.
 List {0}	Sąrašas {0}
 Rename "{0}"…	Pervardyti „{0}“…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	„{0}“ įtrauktas į „{1}“.
 This page is not in "{0}".	Šio puslapio nėra sąraše „{0}“.
 Remove "{0}" from "{1}"?	Šalinti „{0}“ iš „{1}“?
+Unexpected error, written to the log: {0}	Netikėta klaida, įrašyta į žurnalą: {0}
 Interface:	Sąsaja:
 Brand:	Gamintojas:
 Model:	Modelis:

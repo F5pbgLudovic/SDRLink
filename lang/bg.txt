@@ -46,7 +46,7 @@ unreachable	недостъпен
 Import favorites	Импорт на предпочитани
 Favorites (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|All files (*.*)|*.*	Предпочитани (*.csv;*.txt;*.html;*.htm)|*.csv;*.txt;*.html;*.htm|Всички файлове (*.*)|*.*
 Export favorites	Експорт на предпочитани
-CSV, Excel-readable (*.csv)|*.csv|Browser bookmarks (*.html)|*.html|Text (*.txt)|*.txt	CSV, за Excel (*.csv)|*.csv|Отметки на браузър (*.html)|*.html|Текст (*.txt)|*.txt
+Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Text (*.txt)|*.txt	Firefox / Отметки на браузър (*.html)|*.html|CSV, за Excel (*.csv)|*.csv|Текст (*.txt)|*.txt
 This WebSDR is already in "{0}".	Този WebSDR вече е в „{0}“.
 List {0}	Списък {0}
 Rename "{0}"…	Преименувай „{0}“…
@@ -119,6 +119,7 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 "{0}" added to "{1}".	„{0}“ е добавен в „{1}“.
 This page is not in "{0}".	Тази страница не е в „{0}“.
 Remove "{0}" from "{1}"?	Да се премахне ли „{0}“ от „{1}“?
+Unexpected error, written to the log: {0}	Неочаквана грешка, записана в дневника: {0}
 Interface:	Интерфейс:
 Brand:	Марка:
 Model:	Модел:
