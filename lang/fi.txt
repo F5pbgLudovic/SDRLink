@@ -136,6 +136,7 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Valmis: ä�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Uudelleennimeäminen epäonnistui ({0}).\n\nKäsin: Ääni-ohjauspaneeli › Tallennus-välilehti › ”{1}” › Ominaisuudet › nimi.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kaapeli: WebSDR-ääni ohjataan laitteeseen ”{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK-kaapeli: ”{0}”: {1}
+ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR on käynnissä, mutta ei vastaa TCI-portissa {0}: vaihda portti napsauttamalla hiiren oikealla kohtaa ”WebSDR:n äänenvoimakkuus”.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink ei voi mykistää ExpertSDR:ää: ExpertSDR ei toista ääntä Windowsin kautta (ääni tulee radiosta tai ASIOn kautta), eikä sen TCI-palvelin vastaa portissa {0}.\n\nOta ExpertSDR:ssä TCI-palvelin käyttöön (Options > TCI). Jos sen portti ei ole {0}, aseta se napsauttamalla hiiren kakkospainikkeella ”Mykistä ExpertSDR”.
 "{0}" added to "{1}".	”{0}” lisätty luetteloon ”{1}”.
 This page is not in "{0}".	Tämä sivu ei ole luettelossa ”{0}”.
@@ -165,7 +166,7 @@ restore after (ms):	palautusviive (ms):
 kHz:	kHz:
 Step:	Askel:
 WebSDR:	WebSDR:
-Volume:	Voimakkuus:
+WebSDR volume:	WebSDR:n äänenvoimakkuus:
 TRX volume:	TRX-voimakkuus:
 ExpertSDR volume:	ExpertSDR:n äänenvoimakkuus:
 Open log	Avaa loki

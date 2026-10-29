@@ -136,6 +136,7 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gata: intra
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Redenumirea a eșuat ({0}).\n\nManual: Panou de control Sunet › fila Înregistrare › „{1}” › Proprietăți › nume.
 SDRLINK cable: WebSDR audio sent to "{0}"	Cablu SDRLINK: sunetul WebSDR trimis la „{0}”
 SDRLINK cable: "{0}": {1}	Cablu SDRLINK: „{0}”: {1}
+ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR rulează, dar nu răspunde pe portul TCI {0}: clic dreapta pe „Volum WebSDR” pentru a schimba portul.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nu poate opri sunetul ExpertSDR: ExpertSDR nu redă sunetul prin Windows (sunetul iese din aparat sau prin ASIO), iar serverul său TCI nu răspunde pe portul {0}.\n\nÎn ExpertSDR, activați serverul TCI (Options > TCI). Dacă portul său nu este {0}, faceți clic dreapta pe „Mut ExpertSDR” pentru a-l indica.
 "{0}" added to "{1}".	„{0}” adăugat în „{1}”.
 This page is not in "{0}".	Această pagină nu este în „{0}”.
@@ -165,7 +166,7 @@ restore after (ms):	revenire după (ms):
 kHz:	kHz:
 Step:	Pas:
 WebSDR:	WebSDR:
-Volume:	Volum:
+WebSDR volume:	Volum WebSDR:
 TRX volume:	Volum TRX:
 ExpertSDR volume:	Volum ExpertSDR:
 Open log	Deschidere jurnal

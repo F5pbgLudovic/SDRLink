@@ -1,9 +1,9 @@
-# SDRLink V1.9 — @F5PBG 2026
+# SDRLink V1.10 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
 - **Interfaces** : port COM (CAT direct), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld).
-- **Postes** : Yaesu (FT-2000, FTdx10, FTdx101, FT-991, FT-817/818, FT-857, FT-897…), Icom (IC-7000, IC-7300, IC-7760, IC-706…), Kenwood, Elecraft, Xiegu (G90, X6100, X6200).
+- **Postes** : Yaesu (FT-2000, FTdx10, FTdx101, FT-991, FT-817/818, FT-857, FT-897, FT-990, FT-1000/1000D, FT-1000MP, Mark-V…), Icom (IC-7000, IC-7300, IC-7760, IC-706…), Kenwood, Elecraft, Xiegu (G90, X6100, X6200).
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
 - **Fonctions** :
   - bouton PTT et coupure du son du WebSDR en émission ;
@@ -43,7 +43,7 @@ Le script télécharge le paquet WebView2 (NuGet) au premier lancement et produi
 SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows the rig's VFO and the rig follows the WebSDR waterfall. The mode is synchronised too.
 
 - **Interfaces**: COM port (direct CAT), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld).
-- **Rigs**: Yaesu (FT-2000, FTdx10, FTdx101, FT-991, FT-817/818, FT-857, FT-897…), Icom (IC-7000, IC-7300, IC-7760, IC-706…), Kenwood, Elecraft, Xiegu (G90, X6100, X6200).
+- **Rigs**: Yaesu (FT-2000, FTdx10, FTdx101, FT-991, FT-817/818, FT-857, FT-897, FT-990, FT-1000/1000D, FT-1000MP, Mark-V…), Icom (IC-7000, IC-7300, IC-7760, IC-706…), Kenwood, Elecraft, Xiegu (G90, X6100, X6200).
 - **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
 - **Features**:
   - PTT button, WebSDR audio muted while transmitting;

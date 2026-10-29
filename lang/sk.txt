@@ -136,6 +136,7 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Hotovo: zvu
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Premenovanie zlyhalo ({0}).\n\nRučne: Ovládací panel Zvuk › karta Nahrávanie › „{1}“ › Vlastnosti › názov.
 SDRLINK cable: WebSDR audio sent to "{0}"	Kábel SDRLINK: zvuk WebSDR sa odosiela do „{0}“
 SDRLINK cable: "{0}": {1}	Kábel SDRLINK: „{0}“: {1}
+ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR beží, ale neodpovedá na porte TCI {0}: port zmeníte kliknutím pravým tlačidlom na „Hlasitosť WebSDR“.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nemôže stlmiť ExpertSDR: ExpertSDR neprehráva zvuk cez Windows (zvuk vychádza z rádia alebo cez ASIO) a jeho server TCI neodpovedá na porte {0}.\n\nV ExpertSDR zapnite server TCI (Options > TCI). Ak jeho port nie je {0}, nastavte ho kliknutím pravým tlačidlom na „Stlmiť ExpertSDR“.
 "{0}" added to "{1}".	„{0}“ pridané do „{1}“.
 This page is not in "{0}".	Táto stránka nie je v „{0}“.
@@ -165,7 +166,7 @@ restore after (ms):	obnoviť po (ms):
 kHz:	kHz:
 Step:	Krok:
 WebSDR:	WebSDR:
-Volume:	Hlasitosť:
+WebSDR volume:	Hlasitosť WebSDR:
 TRX volume:	Hlasitosť TRX:
 ExpertSDR volume:	Hlasitosť ExpertSDR:
 Open log	Otvoriť denník

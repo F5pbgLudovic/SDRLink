@@ -136,6 +136,7 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gatavs: aud
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pārdēvēšana neizdevās ({0}).\n\nManuāli: skaņas vadības panelis › cilne Ierakstīšana › "{1}" › Rekvizīti › nosaukums.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR skaņa tiek sūtīta uz "{0}"
 SDRLINK cable: "{0}": {1}	SDRLINK kabelis: "{0}": {1}
+ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR darbojas, bet neatbild TCI portā {0}: lai mainītu portu, ar peles labo pogu noklikšķiniet uz “WebSDR skaļums”.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nevar klusināt ExpertSDR: ExpertSDR neatskaņo skaņu caur Windows (skaņa nāk no raidītāja vai caur ASIO), un tā TCI serveris neatbild portā {0}.\n\nExpertSDR ieslēdziet TCI serveri (Options > TCI). Ja tā ports nav {0}, iestatiet to, ar peles labo pogu noklikšķinot uz "Klusināt ExpertSDR".
 "{0}" added to "{1}".	"{0}" pievienots sarakstam "{1}".
 This page is not in "{0}".	Šīs lapas nav sarakstā "{0}".
@@ -165,7 +166,7 @@ restore after (ms):	atjaunot pēc (ms):
 kHz:	kHz:
 Step:	Solis:
 WebSDR:	WebSDR:
-Volume:	Skaļums:
+WebSDR volume:	WebSDR skaļums:
 TRX volume:	TRX skaļums:
 ExpertSDR volume:	ExpertSDR skaļums:
 Open log	Atvērt žurnālu

@@ -282,6 +282,9 @@ namespace SDRLink
         static string FromHrd(string s)
         {
             string m = s.Trim().ToUpperInvariant();
+            // FT-990/1000/1000MP : « PKT » est côté LSB, « PKT-FM » est de la FM.
+            if (m == "PKT") return Modes.DATAL;
+            if (m.StartsWith("PKT") && m.Contains("FM")) return Modes.FM;
             if (m.Contains("PKT") || m.Contains("DATA") || m.EndsWith("-D") || m.StartsWith("DIG"))
                 return (m.Contains("L")) && !m.Contains("USB") ? Modes.DATAL : Modes.DATAU;
             if (m.StartsWith("RTTY") || m.StartsWith("FSK"))
@@ -307,7 +310,7 @@ namespace SDRLink
                 case Modes.FM: return new[] { "FM", "FM-N" };
                 case Modes.RTTY: return new[] { "RTTY", "RTTY-L", "RTTY-LSB", "FSK" };
                 case Modes.RTTYR: return new[] { "RTTY-R", "RTTY-U", "RTTY-USB", "FSK-R" };
-                case Modes.DATAL: return new[] { "PKT-L", "DATA-L", "LSB-D", "DATA-LSB", "PKT-LSB" };
+                case Modes.DATAL: return new[] { "PKT-L", "DATA-L", "LSB-D", "DATA-LSB", "PKT-LSB", "PKT" };
                 case Modes.DATAU: return new[] { "PKT-U", "DATA-U", "USB-D", "DATA-USB", "PKT-USB" };
             }
             return new string[0];

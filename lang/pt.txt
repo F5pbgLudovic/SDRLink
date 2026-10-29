@@ -136,6 +136,7 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Concluído:
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Falha ao mudar o nome ({0}).\n\nManualmente: Painel de Controlo de Som › separador Gravação › «{1}» › Propriedades › nome.
 SDRLINK cable: WebSDR audio sent to "{0}"	Cabo SDRLINK: áudio do WebSDR enviado para «{0}»
 SDRLINK cable: "{0}": {1}	Cabo SDRLINK: «{0}»: {1}
+ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	O ExpertSDR está em execução mas não responde na porta TCI {0}: clique com o botão direito em «Volume WebSDR» para mudar a porta.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	O SDRLink não consegue silenciar o ExpertSDR: o ExpertSDR não reproduz o som através do Windows (o som sai do equipamento ou por ASIO) e o seu servidor TCI não responde na porta {0}.\n\nNo ExpertSDR, ative o servidor TCI (Options > TCI). Se a porta não for {0}, clique com o botão direito em «Silenciar ExpertSDR» para a indicar.
 "{0}" added to "{1}".	«{0}» adicionado a «{1}».
 This page is not in "{0}".	Esta página não está em «{0}».
@@ -165,7 +166,7 @@ restore after (ms):	repor após (ms):
 kHz:	kHz:
 Step:	Passo:
 WebSDR:	WebSDR:
-Volume:	Volume:
+WebSDR volume:	Volume WebSDR:
 TRX volume:	Volume TRX:
 ExpertSDR volume:	Volume ExpertSDR:
 Open log	Abrir log

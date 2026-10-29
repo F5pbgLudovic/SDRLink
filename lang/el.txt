@@ -136,6 +136,7 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Ολοκλ�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Η μετονομασία απέτυχε ({0}).\n\nΧειροκίνητα: Πίνακας Ελέγχου Ήχος › καρτέλα Εγγραφή › «{1}» › Ιδιότητες › όνομα.
 SDRLINK cable: WebSDR audio sent to "{0}"	Καλώδιο SDRLINK: ο ήχος του WebSDR στέλνεται στο «{0}»
 SDRLINK cable: "{0}": {1}	Καλώδιο SDRLINK: «{0}»: {1}
+ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	Το ExpertSDR εκτελείται αλλά δεν απαντά στη θύρα TCI {0}: δεξί κλικ στο «Ένταση WebSDR» για αλλαγή της θύρας.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	Το SDRLink δεν μπορεί να κάνει σίγαση στο ExpertSDR: το ExpertSDR δεν αναπαράγει ήχο μέσω των Windows (ο ήχος βγαίνει από τον πομποδέκτη ή μέσω ASIO) και ο διακομιστής TCI του δεν απαντά στη θύρα {0}.\n\nΣτο ExpertSDR ενεργοποιήστε τον διακομιστή TCI (Options > TCI). Αν η θύρα του δεν είναι {0}, ορίστε την με δεξί κλικ στη «Σίγαση ExpertSDR».
 "{0}" added to "{1}".	Το «{0}» προστέθηκε στο «{1}».
 This page is not in "{0}".	Αυτή η σελίδα δεν υπάρχει στο «{0}».
@@ -165,7 +166,7 @@ restore after (ms):	επαναφορά μετά (ms):
 kHz:	kHz:
 Step:	Βήμα:
 WebSDR:	WebSDR:
-Volume:	Ένταση:
+WebSDR volume:	Ένταση WebSDR:
 TRX volume:	Ένταση TRX:
 ExpertSDR volume:	Ένταση ExpertSDR:
 Open log	Άνοιγμα ημερολογίου

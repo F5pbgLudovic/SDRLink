@@ -21,7 +21,7 @@ namespace SDRLink
         void SetMode(string mode);
     }
 
-    public enum RigProtocol { Yaesu, Yaesu817, Icom, Kenwood, Elecraft }
+    public enum RigProtocol { Yaesu, Yaesu817, YaesuOld, Icom, Kenwood, Elecraft }
 
     public class RigModel
     {
@@ -69,6 +69,13 @@ namespace SDRLink
             new RigModel("Yaesu", "FT-857D",      RigProtocol.Yaesu817, 0, 0, 4800, 2),
             new RigModel("Yaesu", "FT-897",       RigProtocol.Yaesu817, 0, 0, 4800, 2),
             new RigModel("Yaesu", "FT-897D",      RigProtocol.Yaesu817, 0, 0, 4800, 2),
+            // Yaesu FT-990/1000/1000D/1000MP (ancien protocole binaire 5 octets, lecture par bloc d'état)
+            new RigModel("Yaesu", "FT-990",       RigProtocol.YaesuOld, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-1000",      RigProtocol.YaesuOld, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-1000D",     RigProtocol.YaesuOld, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-1000MP",    RigProtocol.YaesuOld, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-1000MP Mark-V", RigProtocol.YaesuOld, 0, 0, 4800, 2),
+            new RigModel("Yaesu", "FT-1000MP Mark-V Field", RigProtocol.YaesuOld, 0, 0, 4800, 2),
 
             // Icom (CI-V binaire)
             new RigModel("Icom", "IC-7000",       RigProtocol.Icom, 0, 0x70, 19200, 1),

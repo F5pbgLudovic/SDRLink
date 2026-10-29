@@ -55,6 +55,10 @@ namespace SDRLink
         int esdrPoll;
         Label lblRigVolumeCaption, lblEsdrVolumeCaption, lblEsdrVolume;
         TrackBar trkEsdrVolume;
+        FlowLayoutPanel audioRow;
+        Control[] audioOrder;
+        bool? audioShownRig, audioShownEsdr;   // ce qui est affiché sur la ligne de son (null : pas encore réglé)
+        bool esdrUnreachableShown;             // message « ExpertSDR ne répond pas » déjà donné pour ce lancement
         readonly ToolTip tips = new ToolTip();
         int rigAfSupported = -1;    // -1 inconnu (pas connecté), 0 non pris en charge, 1 disponible
         bool rigVolumeLoading;
@@ -219,6 +223,7 @@ namespace SDRLink
             cbBrand = Combo(90, RigCatalog.Brands);
             cbBrand.SelectedIndexChanged += delegate { FillModels(); };
             cbModel = Combo(130);
+            cbModel.DropDownWidth = 180;   // « FT-1000MP Mark-V Field »
             cbModel.SelectedIndexChanged += delegate { ApplyModelDefaults(); };
             pnlModel.Controls.Add(Lbl("Marque :", "Brand:"));
             pnlModel.Controls.Add(cbBrand);
@@ -557,9 +562,10 @@ namespace SDRLink
             lblVolume.Margin = new Padding(0, 7, 2, 0);
             // Réglages de son regroupés : ils passent à la ligne d'un seul bloc si la fenêtre est étroite.
             FlowLayoutPanel audio = SubRow();
-            audio.Controls.Add(Lbl("Volume :", "Volume:"));
-            audio.Controls.Add(trkVolume);
-            audio.Controls.Add(lblVolume);
+            audioRow = audio;
+            Label lblVolumeCaption = Lbl("Volume WebSDR :", "WebSDR volume:");
+            // La ligne de son commence toujours une nouvelle ligne, même quand elle tiendrait après les boutons.
+            rowUrl.SetFlowBreak(rowUrl.Controls[rowUrl.Controls.Count - 1], true);
             rowUrl.Controls.Add(audio);
 
             // Coupures du son : WebSDR (dans la page) et poste (gain BF mis à zéro puis rétabli), et volume du poste.
@@ -586,6 +592,9 @@ namespace SDRLink
             esdrMenu.Opening += delegate { esdrPort.Text = Lang.F("Port TCI d'ExpertSDR : {0}…", "ExpertSDR TCI port: {0}…", settings.EsdrTciPort); };
             esdrPort.Click += delegate { AskExpertSdrPort(); };
             btnMuteEsdr.ContextMenuStrip = esdrMenu;
+            // Mute ExpertSDR est masqué tant qu'ExpertSDR ne répond pas : le port se règle aussi par clic droit sur « Volume WebSDR ».
+            lblVolumeCaption.ContextMenuStrip = audio.ContextMenuStrip = esdrMenu;
+            btnMuteSwap.Visible = false;
             btnMuteSdr.Tag = btnMuteRig.Tag = btnMuteSwap.Tag = btnMuteEsdr.Tag = Theme.Custom;
             btnMuteSdr.FlatStyle = btnMuteRig.FlatStyle = btnMuteSwap.FlatStyle = btnMuteEsdr.FlatStyle = FlatStyle.Flat;
             trkRigVolume = new TrackBar();
@@ -602,16 +611,9 @@ namespace SDRLink
             lblRigVolume.AutoSize = false;
             lblRigVolume.Size = new Size(44, 20);
             lblRigVolume.Margin = new Padding(0, 7, 2, 0);
-            audio.Controls.Add(btnMuteSwap);
-            audio.Controls.Add(btnMuteSdr);
-            audio.Controls.Add(btnMuteRig);
-            audio.Controls.Add(btnMuteEsdr);
             // Volume TX et Mute TX ne sont affichés que si le volume du poste est télécommandé.
             lblRigVolumeCaption = Lbl("Volume TX :", "TRX volume:");
             lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = false;
-            audio.Controls.Add(lblRigVolumeCaption);
-            audio.Controls.Add(trkRigVolume);
-            audio.Controls.Add(lblRigVolume);
             // Volume d'ExpertSDR (mélangeur de Windows ou TCI), affiché quand ExpertSDR tourne.
             trkEsdrVolume = new TrackBar();
             trkEsdrVolume.Minimum = 0;
@@ -629,9 +631,15 @@ namespace SDRLink
             lblEsdrVolume.Margin = new Padding(0, 7, 2, 0);
             lblEsdrVolumeCaption = Lbl("Volume ExpertSDR :", "ExpertSDR volume:");
             lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = false;
-            audio.Controls.Add(lblEsdrVolumeCaption);
-            audio.Controls.Add(trkEsdrVolume);
-            audio.Controls.Add(lblEsdrVolume);
+            // Ordre : ⇄, les trois Mute, puis chaque volume (libellé, réglette, valeur).
+            audioOrder = new Control[]
+            {
+                btnMuteSwap, btnMuteSdr, btnMuteRig, btnMuteEsdr,
+                lblVolumeCaption, trkVolume, lblVolume,
+                lblRigVolumeCaption, trkRigVolume, lblRigVolume,
+                lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
+            };
+            audio.Controls.AddRange(audioOrder);
 
             web = new WebView2();
             web.Dock = DockStyle.Fill;
@@ -1035,6 +1043,7 @@ namespace SDRLink
                         {
                             case RigProtocol.Yaesu: return new YaesuRig(ss, model.FreqDigits);
                             case RigProtocol.Yaesu817: return new Ft817Rig(ss);
+                            case RigProtocol.YaesuOld: return new YaesuOldRig(ss, model.Name);
                             case RigProtocol.Icom: return new IcomRig(ss, civ);
                             // Gain BF Elecraft : 000-250, sauf K4 : 000-060 (Hamlib).
                             case RigProtocol.Elecraft: return new KenwoodRig(ss, true) { AfMax = model.Name == "K4" ? 60 : 250 };
@@ -1180,30 +1189,17 @@ namespace SDRLink
             UpdateDisplays();
         }
 
-        // Affichages traversés (le plus récent en dernier) : décocher l'affichage en place ramène au précédent
-        // (du mini au réduit si l'on venait du réduit), sinon à l'affichage normal.
-        readonly List<int> viewStack = new List<int>();
+        // Cocher une case passe à cet affichage (l'autre case se décoche) ; décocher la case en place ramène toujours
+        // à l'affichage normal, les deux cases décochées.
         bool viewSwitching;
 
         void OnViewBox(CheckBox box, CheckBox other, int view)
         {
             if (loading || viewSwitching) return;
             viewSwitching = true;
-            if (box.Checked)
-            {
-                other.Checked = false;
-                if (viewShown != view) viewStack.Add(viewShown);
-            }
-            else
-            {
-                int back = viewStack.Count > 0 ? viewStack[viewStack.Count - 1] : 0;
-                if (viewStack.Count > 0) viewStack.RemoveAt(viewStack.Count - 1);
-                if (back == view) back = 0;
-                chkReduced.Checked = back == 1;
-                chkMini.Checked = back == 2;
-            }
+            if (box.Checked) other.Checked = false;
+            else chkReduced.Checked = chkMini.Checked = false;
             viewSwitching = false;
-            if (WantedView == 0) viewStack.Clear();
             ApplyView();
         }
 
@@ -2217,8 +2213,7 @@ namespace SDRLink
         {
             bool on = worker != null && rigAfSupported == 1;
             trkRigVolume.Enabled = on;
-            if (lblRigVolumeCaption.Visible != on)
-                lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = on;
+            UpdateAudioRow();
             lblRigVolume.Text = on ? trkRigVolume.Value + " %" : "—";
             UpdateMuteButtons();
         }
@@ -2339,7 +2334,7 @@ namespace SDRLink
             if (!esdrRunning)
             {
                 if (esdrTci != null) { esdrTci.Dispose(); esdrTci = null; }
-                esdrWin = esdrMuted = esdrMutedByUs = false;
+                esdrWin = esdrMuted = esdrMutedByUs = esdrUnreachableShown = false;
                 UpdateEsdrControls();
                 return;
             }
@@ -2389,6 +2384,13 @@ namespace SDRLink
                         if (esdrTci != null) esdrTci.Dispose();
                         esdrTci = c;
                         if (c != null) Log.Write("ExpertSDR : liaison TCI établie sur le port " + port);
+                        else if (esdrRunning && !esdrWin && !esdrUnreachableShown)
+                        {
+                            // Mute et Volume ExpertSDR restent masqués : on dit où changer le port.
+                            esdrUnreachableShown = true;
+                            ShowStatus(Lang.F("ExpertSDR est lancé mais ne répond pas sur le port TCI {0} : clic droit sur « Volume WebSDR » pour changer le port.",
+                                "ExpertSDR is running but does not answer on TCI port {0}: right-click \"WebSDR volume\" to change the port.", port));
+                        }
                         RefreshExpertSdr();
                     });
                 }
@@ -2398,10 +2400,33 @@ namespace SDRLink
             t.Start();
         }
 
+        // Windows Forms peut changer la place d'une commande cachée quand elle s'affiche pour la première fois
+        // (création de sa fenêtre) : on remet l'ordre voulu de la ligne de son à chaque affichage ou masquage.
+        void OrderAudioRow()
+        {
+            audioRow.SuspendLayout();
+            for (int i = 0; i < audioOrder.Length; i++) audioRow.Controls.SetChildIndex(audioOrder[i], i);
+            audioRow.ResumeLayout(true);
+        }
+
+        // Ligne de son : Mute TX et Volume TX seulement si le volume du poste est télécommandé, Mute et Volume ExpertSDR
+        // seulement si ExpertSDR répond, ⇄ seulement s'il y a au moins deux sons à permuter. Les commandes masquées ne
+        // laissent pas de place vide (la ligne se resserre à gauche).
+        void UpdateAudioRow()
+        {
+            bool rig = worker != null && rigAfSupported == 1, esdr = EsdrAvailable;
+            if (audioShownRig == rig && audioShownEsdr == esdr) return;
+            audioShownRig = rig;
+            audioShownEsdr = esdr;
+            lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = rig;
+            btnMuteEsdr.Visible = lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = esdr;
+            btnMuteSwap.Visible = rig || esdr;
+            OrderAudioRow();
+        }
+
         void UpdateEsdrControls()
         {
-            if (btnMuteEsdr.Visible != esdrRunning)
-                btnMuteEsdr.Visible = lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = esdrRunning;
+            UpdateAudioRow();
             bool avail = EsdrAvailable;
             trkEsdrVolume.Enabled = avail;
             lblEsdrVolume.Text = avail ? trkEsdrVolume.Value + " %" : "—";
@@ -2462,7 +2487,7 @@ namespace SDRLink
             return null;
         }
 
-        // Clic droit sur Mute ExpertSDR : port du serveur TCI d'ExpertSDR.
+        // Clic droit sur Mute ExpertSDR ou sur « Volume WebSDR » : port du serveur TCI d'ExpertSDR.
         void AskExpertSdrPort()
         {
             using (Form f = new Form())

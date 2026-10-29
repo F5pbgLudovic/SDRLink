@@ -136,6 +136,7 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Valmis: hel
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Ümbernimetamine nurjus ({0}).\n\nKäsitsi: Heli juhtpaneel › vahekaart Salvestamine › „{1}“ › Atribuudid › nimi.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kaabel: WebSDR-i heli saadetakse seadmesse „{0}“
 SDRLINK cable: "{0}": {1}	SDRLINK kaabel: „{0}“: {1}
+ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR töötab, kuid ei vasta TCI-pordil {0}: pordi muutmiseks paremklõpsake „WebSDR-i helitugevus“.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink ei saa ExpertSDR-i vaigistada: ExpertSDR ei esita heli Windowsi kaudu (heli tuleb raadiojaamast või ASIO kaudu) ja selle TCI-server ei vasta pordil {0}.\n\nLülitage ExpertSDR-is TCI-server sisse (Options > TCI). Kui selle port pole {0}, määrake see paremklõpsuga nupul „Vaigista ExpertSDR“.
 "{0}" added to "{1}".	„{0}“ lisati loendisse „{1}“.
 This page is not in "{0}".	Seda lehte pole loendis „{0}“.
@@ -165,7 +166,7 @@ restore after (ms):	taasta pärast (ms):
 kHz:	kHz:
 Step:	Samm:
 WebSDR:	WebSDR:
-Volume:	Helitugevus:
+WebSDR volume:	WebSDR-i helitugevus:
 TRX volume:	TRX helitugevus:
 ExpertSDR volume:	ExpertSDR-i helitugevus:
 Open log	Ava logi

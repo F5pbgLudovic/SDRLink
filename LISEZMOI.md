@@ -41,7 +41,7 @@ Hamlib est la bibliothèque libre de télécommande des postes utilisée par WSJ
 
 ## Postes en CAT direct
 
-- **Yaesu** : FT-2000, FTdx10, FTdx101, FT-991/A, FT-891, FT-710, FTdx5000, FTdx3000, FTdx1200, FT-950, FT-450, FT-817, FT-817ND, FT-818, FT-818ND, FT-857, FT-857D, FT-897, FT-897D
+- **Yaesu** : FT-2000, FTdx10, FTdx101, FT-991/A, FT-891, FT-710, FTdx5000, FTdx3000, FTdx1200, FT-950, FT-450, FT-817, FT-817ND, FT-818, FT-818ND, FT-857, FT-857D, FT-897, FT-897D, FT-990, FT-1000, FT-1000D, FT-1000MP, FT-1000MP Mark-V, FT-1000MP Mark-V Field
 - **Icom** : IC-7000, IC-7760, IC-7300, IC-7610, IC-705, IC-9700, IC-7100, IC-7200, IC-7410, IC-7600, IC-7700, IC-7800, IC-7851, IC-756PROIII, IC-746PRO, IC-718, IC-706, IC-706MKII, IC-706MKIIG
 - **Kenwood** : TS-590, TS-890, TS-990, TS-2000, TS-480, TS-870, TS-570, TS-850S
 - **Elecraft** : K4, K3/K3S, KX3, KX2, K2
@@ -53,6 +53,7 @@ Quand on choisit un modèle, la vitesse et l'adresse CI-V se règlent sur les va
 - **FTdx10** : menu CAT RATE ; sur l'USB, prendre le port COM « Enhanced ». Si rien ne répond, essayer RTS coché/décoché.
 - **IC-7000** : adresse CI-V 70 (hex), vitesse CI-V du menu (souvent 19200 ou Auto). CI-V Transceive peut rester sur ON.
 - **FT-817/818, FT-857/857D, FT-897/897D** : ancien protocole CAT binaire de Yaesu, 2 bits de stop, vitesse selon le menu CAT RATE du poste (4800 par défaut). Le volume du poste (Mute TX, Volume TX) n'est pas réglable par ce protocole.
+- **FT-990, FT-1000, FT-1000D, FT-1000MP, Mark-V** : ancien protocole CAT binaire (le même que Hamlib), 4800 bauds, 2 bits de stop, sans réglage de vitesse sur le poste. Fréquence au pas de 10 Hz. Pas de PKT côté USB : un mode données USB du WebSDR met le poste en USB. Le volume du poste (Mute TX, Volume TX) n'est pas réglable. Le FT-1000MP et le Mark-V ne disent pas de façon sûre par CAT s'ils émettent : en CAT direct, la coupure automatique du son à l'émission ne marche donc pas avec eux (le FT-990 et le FT-1000/1000D, eux, le disent). Le FT-990 est lent à recevoir les commandes (50 ms par octet, comme dans Hamlib), le suivi du VFO y est donc un peu plus lent. Par OmniRig ou HRD, choisir le poste dans ces logiciels ; par Hamlib, le numéro de modèle se remplit tout seul (FT-990 : 1016 ; si votre FT-990 a une ancienne ROM et ne répond pas, essayer 1048).
 - **TS-850S** : 4800 bauds, 2 bits de stop.
 - **IC-7760** : adresse B2. **IC-706** : adresse 48. **IC-706MKII** : adresse 4E.
 - **Xiegu** : l'adresse CI-V dépend du firmware. Si le poste ne répond pas, essayer une autre adresse :
@@ -132,7 +133,7 @@ Il faut un accès Internet. Si un annuaire ne répond pas, les autres sont quand
 
 ## Volume du WebSDR
 
-Le curseur **Volume**, à droite de « Gérer les favoris… », règle uniquement le son du WebSDR, pas celui de Windows ni des autres logiciels.
+La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gauche à droite : le bouton ⇄, Mute WebSDR, Mute TX, Mute ExpertSDR, puis Volume WebSDR, Volume TX et Volume ExpertSDR, chacun avec sa réglette et sa valeur en %. Mute TX et Volume TX n'apparaissent que si le volume du poste est télécommandé, Mute ExpertSDR et Volume ExpertSDR que si ExpertSDR est lancé et répond (son Windows ou TCI), et ⇄ que s'il y a au moins deux sons à permuter. Les commandes absentes ne laissent pas de vide : la ligne se resserre à gauche. Le curseur **Volume WebSDR** règle uniquement le son du WebSDR, pas celui de Windows ni des autres logiciels.
 - Il agit sur tous les types de WebSDR. Sur UberSDR, le son ne démarre qu'après un clic sur « Click to start » dans la page.
 - Le volume est **mémorisé pour chaque favori** : en rouvrant un favori, on retrouve son volume.
 - Les WebSDR qui ne sont pas en favoris partagent un même volume, lui aussi mémorisé.
@@ -149,10 +150,10 @@ Le curseur **Volume**, à droite de « Gérer les favoris… », règle uniqueme
 - Couleurs des boutons Mute : **vert, écriture blanche** quand le son passe (comme le bouton de mode choisi), **rouge, écriture blanche** quand il est coupé, gris quand la coupure n'est pas disponible.
 - **Mute WebSDR** : coupe le son du WebSDR (bouton rouge), un second clic le rétablit au volume réglé.
 - **Mute TX** : coupe le son du **transceiver** en mettant son gain BF à zéro par CAT, puis rétablit le volume au second clic. Le son est aussi rétabli à la déconnexion.
-- **Mute ExpertSDR** : n'apparaît que lorsque le logiciel **ExpertSDR** (2 ou 3) tourne. Il coupe et rétablit le son d'ExpertSDR sans aller dans ExpertSDR :
+- **Mute ExpertSDR** : n'apparaît que lorsque le logiciel **ExpertSDR** (2 ou 3) tourne et répond. Il coupe et rétablit le son d'ExpertSDR sans aller dans ExpertSDR :
   - par le **mélangeur de volume de Windows** si ExpertSDR joue par le son de Windows ;
   - sinon (son sorti par le poste lui-même, MB1, ou par ASIO) par la commande **TCI** `mute` : il faut alors activer le serveur TCI dans ExpertSDR (Options > TCI). SDRLink garde une liaison TCI avec ExpertSDR tant qu'il tourne, même si le poste est relié autrement (HRD…) : une coupure ou un volume réglé dans ExpertSDR s'affiche aussi dans SDRLink. Un message l'explique si le serveur TCI ne répond pas.
-  - **Clic droit** sur Mute ExpertSDR : port du serveur TCI d'ExpertSDR (**40001** par défaut), à régler comme dans ExpertSDR.
+  - **Clic droit** sur Mute ExpertSDR, ou sur « Volume WebSDR » : port du serveur TCI d'ExpertSDR (**40001** par défaut), à régler comme dans ExpertSDR. Tant qu'ExpertSDR ne répond pas, Mute et Volume ExpertSDR sont masqués et la barre d'état indique de passer par « Volume WebSDR ».
   - Si SDRLink a coupé ExpertSDR, le son est rétabli à la fermeture de SDRLink.
 - **Volume TX** : règle le volume du transceiver (gain BF, en %). La barre suit aussi le bouton du poste : elle est relue toutes les 2 secondes environ.
 - **Volume TX** et **Mute TX** ne s'affichent que si le volume du poste est télécommandé (poste connecté, et interface qui le permet).
@@ -165,7 +166,7 @@ Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 - **Icom / Xiegu** : CI-V `14 01`, valeur de 0000 à 0255.
 - **TCI** : `volume:` de −60 à 0 dB.
 - **HRD** : curseur « AF gain (main) » de HRD Rig Control (sinon « AF gain » ou « Volume »), par `get/set slider-pos`. Il est recherché à la connexion, et de nouveau quand on change de poste dans HRD (FT-2000, FTdx10, FTdx5000…) sans reconnecter SDRLink ; le journal l'indique par la ligne « HRD curseur volume … ». Si HRD n'a pas de curseur de volume pour le poste, Volume TX et Mute TX sont masqués et le journal liste les curseurs disponibles.
-- **Non disponible** avec FT-817/818/857/897 (pas de commande) et OmniRig (pas de réglage de volume) : Volume TX et Mute TX sont alors masqués.
+- **Non disponible** avec FT-817/818/857/897, FT-990 et FT-1000/1000D/1000MP (pas de commande) et OmniRig (pas de réglage de volume) : Volume TX et Mute TX sont alors masqués.
 
 ## Mode sombre
 
@@ -297,9 +298,9 @@ Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui boug
 ## Affichage
 
 - **Affichage réduit** : la fenêtre commence à la ligne « Synchro » et garde **tout le bas**, page du WebSDR comprise. Les lignes de connexion et de réglage de l'interface sont masquées ; la fenêtre perd leur hauteur, la page garde sa taille. La fenêtre peut être redimensionnée.
-- **Affichage mini** (l'ancien « Affichage réduit ») : la fenêtre ne garde que les lignes « Synchro » à « Volume » (PTT, fréquences, modes, barre WebSDR, volumes), à hauteur fixe. La page du WebSDR est masquée, mais le WebSDR continue de jouer et de suivre le poste.
+- **Affichage mini** (l'ancien « Affichage réduit ») : la fenêtre ne garde que les lignes « Synchro » à « Volume WebSDR » (PTT, fréquences, modes, barre WebSDR, volumes), à hauteur fixe. La page du WebSDR est masquée, mais le WebSDR continue de jouer et de suivre le poste.
 - En affichages réduit et mini, la ligne PTT / fréquences / modes / cases reste **sur une seule ligne** : la fenêtre ne peut pas devenir plus étroite qu'elle (sauf écran trop petit), seule la hauteur se règle. La fenêtre est aussi gardée entière dans l'écran (bas visible, au-dessus de la barre des tâches) ; en plein écran, l'affichage réduit reste en plein écran (toute la page du WebSDR est visible) et le retour à l'affichage normal aussi ; le mini, lui, est toujours une petite fenêtre.
-- Une seule des deux cases à la fois. **Décocher** revient à l'affichage précédent : du mini au réduit si l'on venait du réduit, sinon à l'affichage normal.
+- Une seule des deux cases à la fois. **Décocher** la case cochée revient toujours à l'affichage normal (les deux cases décochées), même si l'on était passé du réduit au mini ou du mini au réduit.
 - Chaque affichage retrouve la taille qu'il avait quand on l'a quitté (normal et réduit), y compris d'une fois sur l'autre : les tailles sont mémorisées à la fermeture, avec l'affichage en cours. Si la fenêtre était en plein écran en affichage normal, elle y revient.
 - **Avant plan** : SDRLink reste au-dessus des autres fenêtres.
 - **Taille du texte…** (1re ligne) : agrandit ou réduit le texte de la fenêtre principale, de 70 à 200 % (100 % = taille d'origine), avec le curseur ou les boutons − / +. Le changement se voit tout de suite ; **Annuler** revient à la taille d'avant, **100 %** à la taille d'origine. Les boutons et curseurs de taille fixe suivent. La taille est conservée au prochain lancement.
@@ -347,6 +348,10 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.10**
+  - décocher « Affichage réduit » ou « Affichage mini » revient toujours à l'affichage normal ;
+  - ligne de son réorganisée : ⇄, Mute WebSDR, Mute TX, Mute ExpertSDR, puis Volume WebSDR, Volume TX, Volume ExpertSDR (chaque libellé avant sa réglette ; l'ordre ne se mélange plus quand le poste ou ExpertSDR apparaissent) ; n'y figurent que les sons disponibles, sans place vide, et ⇄ seulement s'il y a au moins deux sons ;
+  - nouveaux postes Yaesu : FT-990, FT-1000, FT-1000D, FT-1000MP, FT-1000MP Mark-V et Mark-V Field (CAT direct, Hamlib, et HRD / OmniRig par leur propre choix de poste).
 - **1.9**
   - au démarrage, le poste ne change plus de fréquence ni de mode : seul le WebSDR se cale sur lui (si la synchro le prévoit) ;
   - **scan** de fréquences ou de mémoires : boutons « Conf scan » et « ▶ Scan » ;

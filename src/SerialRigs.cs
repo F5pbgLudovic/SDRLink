@@ -421,6 +421,144 @@ namespace SDRLink
         }
     }
 
+    // Yaesu FT-990, FT-1000, FT-1000D, FT-1000MP et Mark-V : ancien protocole binaire, 5 octets [P4 P3 P2 P1 CMD]
+    // (d'après Hamlib ft990.c, ft1000d.c, ft1000mp.c). Fréquence et mode lus dans le bloc « données de trafic » (10h, P1 = 2).
+    public class YaesuOldRig : SerialRig
+    {
+        readonly bool mp;          // FT-1000MP / Mark-V : fréquence sur 4 octets en pas de 0,625 Hz
+        readonly int blockLength;  // taille du bloc renvoyé : 32 (FT-990), 16 (FT-1000/1000D/1000MP)
+        readonly int byteDelayMs;  // pause entre octets envoyés : 50 ms pour le FT-990, 5 ms pour le MP
+
+        public YaesuOldRig(SerialSettings s, string model) : base(s)
+        {
+            mp = model.Contains("1000MP");
+            blockLength = model == "FT-990" ? 32 : 16;
+            byteDelayMs = model == "FT-990" ? 50 : mp ? 5 : 0;
+        }
+
+        public override bool Read(out long freqHz, out string mode)
+        {
+            freqHz = 0;
+            mode = null;
+            byte[] r = Command(2, 0x10, blockLength, 16);
+            if (r == null) return false;
+            Decode(r, mp, out freqHz, out mode);
+            return freqHz > 0;
+        }
+
+        // Bloc de données : octet 0 bande, 1-3 fréquence en 10 Hz (MP : 1-4 en 0,625 Hz), 7 mode, 8 filtre.
+        public static void Decode(byte[] r, bool mp, out long freqHz, out string mode)
+        {
+            bool ext = (r[8] & 0x80) != 0;
+            if (mp) freqHz = ((((long)r[1] << 24) | ((long)r[2] << 16) | ((long)r[3] << 8) | r[4]) * 10) / 16;
+            else freqHz = (((long)r[1] << 16) | ((long)r[2] << 8) | r[3]) * 10;
+            mode = CodeToMode(r[7] & 0x07, ext, mp);
+        }
+
+        // Drapeaux d'état (FAh) : octet 1, bit 7 = émission. Le FT-1000MP ne le donne pas de façon sûre : inconnu.
+        public override int ReadTx()
+        {
+            if (mp) return -1;
+            byte[] r = Command(0, 0xFA, 5, 5);
+            if (r == null) return -1;
+            return (r[0] & 0x80) != 0 ? 1 : 0;
+        }
+
+        public override void SetPtt(bool tx)
+        {
+            Command((byte)(tx ? 1 : 0), 0x0F, 0, 0);
+        }
+
+        // Fréquence en BCD, unité 10 Hz, octet de poids faible en premier.
+        public override void SetFreq(long freqHz)
+        {
+            Write(FreqCommand(freqHz));
+        }
+
+        public static byte[] FreqCommand(long freqHz)
+        {
+            long v = (freqHz + 5) / 10;
+            byte[] cmd = new byte[5];
+            for (int i = 0; i < 4; i++)
+            {
+                int lo = (int)(v % 10); v /= 10;
+                int hi = (int)(v % 10); v /= 10;
+                cmd[i] = (byte)((hi << 4) | lo);
+            }
+            cmd[4] = 0x0A;
+            return cmd;
+        }
+
+        public override void SetMode(string mode)
+        {
+            int code = ModeToCode(mode, mp);
+            if (code >= 0) Command((byte)code, 0x0C, 0, 0);
+        }
+
+        // Envoie [0 0 0 p1 cmd] ; attend `length` octets, accepte la réponse dès `minimum` octets reçus.
+        byte[] Command(byte p1, byte cmd, int length, int minimum)
+        {
+            port.DiscardInBuffer();
+            Write(new byte[] { 0, 0, 0, p1, cmd });
+            if (length == 0) return null;
+            byte[] r = new byte[length];
+            DateTime deadline = DateTime.UtcNow.AddMilliseconds(800);
+            int got = 0;
+            while (got < length && DateTime.UtcNow < deadline)
+            {
+                try { got += port.Read(r, got, length - got); }
+                catch (TimeoutException) { break; }
+            }
+            return got >= minimum ? r : null;
+        }
+
+        void Write(byte[] cmd)
+        {
+            if (byteDelayMs == 0) { port.Write(cmd, 0, cmd.Length); return; }
+            for (int i = 0; i < cmd.Length; i++)
+            {
+                port.Write(cmd, i, 1);
+                Thread.Sleep(byteDelayMs);
+            }
+        }
+
+        // Mode du bloc : 0 LSB, 1 USB, 2 CW, 3 AM, 4 FM, 5 RTTY, 6 PKT ; `ext` = bit 7 de l'octet filtre
+        // (MP : CW côté USB, AM synchro, RTTY-USB, PKT-FM ; 990/1000 : RTTY-USB, PKT-FM).
+        static string CodeToMode(int c, bool ext, bool mp)
+        {
+            switch (c)
+            {
+                case 0: return Modes.LSB;
+                case 1: return Modes.USB;
+                case 2: return mp && !ext ? Modes.CWR : Modes.CW;
+                case 3: return Modes.AM;
+                case 4: return Modes.FM;
+                case 5: return ext ? Modes.RTTYR : Modes.RTTY;
+                case 6: return ext ? Modes.FM : Modes.DATAL;
+            }
+            return null;
+        }
+
+        // Codes de la commande 0Ch : 0 LSB, 1 USB, 2 CW, 3 CW-LSB (MP ; CW étroit sur 990/1000), 4 AM, 6 FM,
+        // 8 RTTY-LSB, 9 RTTY-USB, 0Ah PKT-LSB. Pas de PKT-USB : les données côté USB passent en USB.
+        public static int ModeToCode(string m, bool mp)
+        {
+            switch (m)
+            {
+                case Modes.LSB: return 0x00;
+                case Modes.USB: case Modes.DATAU: return 0x01;
+                case Modes.CW: return 0x02;
+                case Modes.CWR: return mp ? 0x03 : 0x02;
+                case Modes.AM: return 0x04;
+                case Modes.FM: return 0x06;
+                case Modes.RTTY: return 0x08;
+                case Modes.RTTYR: return 0x09;
+                case Modes.DATAL: return 0x0A;
+            }
+            return -1;
+        }
+    }
+
     // Icom CI-V : trames FE FE <dest> <src> <cmd> [données] FD.
     public class IcomRig : SerialRig
     {
