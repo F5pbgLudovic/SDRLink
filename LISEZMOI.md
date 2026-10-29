@@ -73,12 +73,14 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
 ## Favoris
 
 - La liste déroulante de la barre WebSDR affiche les favoris par leur **nom**. En choisir un ouvre le WebSDR.
-- **Listes de favoris** : 4 listes (Liste 1 à Liste 4) pour trier les WebSDR.
+- **Listes de favoris** : de 1 à **10 listes** (4 au départ : Liste 1 à Liste 4) pour trier les WebSDR.
   - Le menu juste à droite de la liste des WebSDR choisit la liste affichée.
   - **Clic droit** sur ce menu pour renommer la liste (par ex. « HF France », « VHF »…).
   - À chaque ajout (★, gestionnaire, recherche), SDRLink **demande la liste** où enregistrer (la liste affichée est proposée). Les favoris importés vont dans leur liste (voir Importer). Les favoris existants sont dans la liste 1.
   - Dans « Gérer les favoris… » :
     - le menu **Liste** filtre l'affichage (ou « Toutes les listes ») ; clic droit dessus pour la renommer ;
+    - **Nouvelle liste** ajoute une liste à la fin (10 au maximum) et demande son nom ;
+    - **Supprimer la liste…** supprime la liste affichée **et ses favoris**, après confirmation (il reste toujours au moins une liste). Les listes suivantes remontent d'un rang ; une liste jamais renommée prend le nom de son nouveau rang (« Liste 5 » devient « Liste 4 ») ;
     - **Déplacer vers ▸** range les favoris cochés (ou, à défaut, le favori sélectionné) dans une autre liste ;
     - une colonne « Liste » indique la liste de chaque favori.
 - **★ Ajouter aux favoris** : ajoute la page affichée, nommée d'après le titre de la page (modifiable), à la liste choisie dans la fenêtre. Si elle est déjà dans cette liste, elle n'est pas ajoutée une seconde fois (un message l'indique). La même page peut figurer dans plusieurs listes.
@@ -96,14 +98,14 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
   - champs **Nom** et **Adresse** : ils affichent le favori sélectionné et se corrigent directement. La liste se met à jour en tapant. Un champ laissé vide n'est pas appliqué.
   - **Écouter la sélection** : ouvre le favori sélectionné dans SDRLink pour l'écouter, sans fermer le gestionnaire (comme dans la recherche des WebSDR).
   - **Ouvrir** ou double-clic : ouvre le WebSDR et ferme le gestionnaire. La touche Suppr supprime, Entrée ouvre.
-  - **Exporter…** : **tous** les favoris, des 4 listes :
-    - **HTML** (choix proposé d'abord) : fichier de marque-pages au format de **Firefox**, importable aussi dans Edge et Chrome. Il contient un dossier **SDRLink** avec un sous-dossier par liste, au nom de la liste (les 4 listes, même vides). Le volume de chaque WebSDR y est gardé pour SDRLink ; les navigateurs l'ignorent.
-    - **CSV** (lisible par Excel) : `nom;adresse;volume;liste`.
+  - **Exporter…** : **tous** les favoris, de toutes les listes :
+    - **HTML** (choix proposé d'abord) : fichier de marque-pages au format de **Firefox**, importable aussi dans Edge et Chrome. Il contient un dossier **SDRLink** avec un sous-dossier par liste, au nom de la liste (toutes les listes, même vides). Le volume de chaque WebSDR y est gardé pour SDRLink ; les navigateurs l'ignorent.
+    - **CSV** (lisible par Excel) : `nom;adresse;volume;liste;numéro de liste`.
     - Dans Firefox : Marque-pages > Gérer les marque-pages (Ctrl+Maj+O) > Importation et sauvegarde > **Importer des marque-pages au format HTML**. Le dossier SDRLink arrive dans le menu des marque-pages.
   - **Importer…** : chaque favori va **dans sa liste** :
-    - fichier exporté par SDRLink, ou exporté par Firefox (Importation et sauvegarde > **Exporter des marque-pages au format HTML**) : seul le contenu du dossier **SDRLink** est importé, où qu'il se trouve dans les marque-pages (barre personnelle, menu…). Chaque sous-dossier va dans la liste de même nom, sinon dans la liste de même rang (1er sous-dossier → liste 1…). Une liste jamais renommée prend le nom de son sous-dossier.
+    - fichier exporté par SDRLink, ou exporté par Firefox (Importation et sauvegarde > **Exporter des marque-pages au format HTML**) : seul le contenu du dossier **SDRLink** est importé, où qu'il se trouve dans les marque-pages (barre personnelle, menu…). Chaque sous-dossier va dans la liste de même nom, sinon dans la liste de même rang (1er sous-dossier → liste 1…), créée si besoin (jusqu'à 10 listes). Une liste jamais renommée prend le nom de son sous-dossier.
     - marque-pages d'un navigateur sans dossier SDRLink : un dossier qui porte le nom d'une liste va dans cette liste ; le reste va dans la liste affichée du gestionnaire.
-    - fichier CSV `nom;adresse;volume;liste`, ou `nom;adresse`, ou simple liste d'adresses : la 4e colonne donne la liste ; sans elle, liste affichée.
+    - fichier CSV `nom;adresse;volume;liste;numéro`, ou `nom;adresse`, ou simple liste d'adresses : la liste de même nom, sinon celle du numéro (créée si besoin) ; un nom de liste inconnu sans numéro crée une nouvelle liste s'il reste de la place ; sans colonne de liste, liste affichée.
     - un WebSDR déjà présent dans sa liste n'est pas ajouté une seconde fois. Le message final donne le nombre importé par liste.
     - le volume est repris d'un export SDRLink (HTML ou CSV) ; Firefox ne le garde pas.
 - Les favoris de départ comprennent les annuaires websdr.org, KiwiSDR et OpenWebRX, ainsi que Twente, Wessex et French Alps.
@@ -144,6 +146,7 @@ Le curseur **Volume**, à droite de « Gérer les favoris… », règle uniqueme
   - un seul son actif : il est coupé et le suivant est rétabli ; chaque clic passe au suivant (WebSDR → TX → ExpertSDR → WebSDR…) ;
   - tout coupé : le premier est rétabli ; plusieurs sons actifs (sans l'être tous) : tous coupés.
   - **Clic droit** sur ⇄ : choisir la coupure dont ⇄ ne tient pas compte (ou « Aucune »). Elle est coupée tout de suite et le reste, pour n'entendre qu'une réception ; ⇄ ne permute alors qu'entre les deux autres. Le choix est conservé.
+- Couleurs des boutons Mute : **vert, écriture blanche** quand le son passe (comme le bouton de mode choisi), **rouge, écriture blanche** quand il est coupé, gris quand la coupure n'est pas disponible.
 - **Mute WebSDR** : coupe le son du WebSDR (bouton rouge), un second clic le rétablit au volume réglé.
 - **Mute TX** : coupe le son du **transceiver** en mettant son gain BF à zéro par CAT, puis rétablit le volume au second clic. Le son est aussi rétabli à la déconnexion.
 - **Mute ExpertSDR** : n'apparaît que lorsque le logiciel **ExpertSDR** (2 ou 3) tourne. Il coupe et rétablit le son d'ExpertSDR sans aller dans ExpertSDR :
@@ -295,8 +298,27 @@ Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui boug
 - **Affichage réduit** : la fenêtre ne garde que les lignes « Synchro » à « Volume » (PTT, fréquences, modes, barre WebSDR, volumes). Les lignes de connexion et la page du WebSDR sont masquées, mais le WebSDR continue de jouer et de suivre le poste. Décocher pour retrouver la grande fenêtre.
 - La position et la taille de la fenêtre en affichage normal sont mémorisées à la fermeture, même si on ferme en affichage réduit. Au prochain lancement, décocher « Affichage réduit » redonne la taille d'avant. Si la fenêtre était en plein écran avant l'affichage réduit, elle y revient.
 - **Avant plan** : SDRLink reste au-dessus des autres fenêtres.
+- **Taille du texte…** (1re ligne) : agrandit ou réduit le texte de la fenêtre principale, de 70 à 200 % (100 % = taille d'origine), avec le curseur ou les boutons − / +. Le changement se voit tout de suite ; **Annuler** revient à la taille d'avant, **100 %** à la taille d'origine. Les boutons et curseurs de taille fixe suivent. La taille est conservée au prochain lancement.
 
 Ces deux réglages sont conservés au prochain lancement.
+
+## Mémoires de fréquences
+
+- Bouton **Mémoires** (ligne des fréquences, après Save) : ouvre la fenêtre des mémoires.
+  - **Mémoriser la fréquence actuelle…** : même fenêtre que l'ajout d'un favori, avec **Nom** (pseudo, facultatif), **Fréquence** en kHz, **Mode** (ou « mode inchangé ») et **Liste**.
+  - **Cliquer sur une mémoire** change tout de suite la fréquence (poste et WebSDR) et le mode s'il est mémorisé ; la fenêtre reste ouverte pour passer à une autre. Entrée fait de même.
+  - **Modifier…**, **Supprimer…** (ou touche Suppr).
+  - Listes de mémoires comme pour les favoris : menu **Liste** (ou « Toutes les listes »), clic droit pour renommer, **Nouvelle liste** (10 au maximum), **Supprimer la liste…** (avec ses mémoires, après confirmation).
+- **Clic droit** sur Mémoires : mémoriser la fréquence actuelle sans ouvrir la fenêtre.
+- Bouton **▾** à droite : les **20 dernières mémoires utilisées**, la plus récente en haut. Une mémoire qui a un nom (pseudo) est affichée par son nom, sinon par sa fréquence. Un clic y va. En bas : Mémoires… et Effacer cette liste.
+- Les mémoires sont gardées dans les réglages (`settings.ini`, lignes `Mem=`).
+
+## Barre d'état (messages en bas de la fenêtre)
+
+- **Clic droit** sur la barre d'état : les **20 derniers messages**, le plus récent en haut, avec leur heure.
+- Cliquer sur un message **masque ce type de message** (coché ✓) : il ne s'affiche plus dans la barre, mais reste dans la liste des derniers messages. Les messages qui ne diffèrent que par un nom ou un nombre (« « A » ajouté à « HF » », « « B » ajouté à « VHF » ») sont du même type. Cliquer de nouveau le réaffiche.
+- **Réafficher tous les messages masqués** : annule tous les masquages. Les types masqués sont conservés au prochain lancement.
+- Le message « Câble SDRLINK : aucun câble audio virtuel trouvé » disparaît dès que le câble est mis sur **Désactivé**.
 
 ## Mises à jour
 
@@ -306,10 +328,17 @@ Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au déma
 
 Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrlink.log`. Le journal est remis à zéro à chaque lancement et contient l'état de la connexion et, pour HRD, la liste des modes reçue.
 
-Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier .html dans la fenêtre « Importer des favoris » : il vient de l'aperçu **Monaco** de **PowerToys**, pas de SDRLink (cliquer sur Continue, l'import fonctionne). Pour l'éviter : **Alt+P** dans la fenêtre d'ouverture (masque le volet d'aperçu), ou dans PowerToys > Extensions de l'Explorateur de fichiers, désactiver l'aperçu du code source (Monaco).
+Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.html` dans la fenêtre « Importer des favoris » : il vient de l'aperçu **Monaco** de **PowerToys**, pas de SDRLink (cliquer sur Continue, l'import fonctionne). Pour l'éviter : **Alt+P** dans la fenêtre d'ouverture (masque le volet d'aperçu), ou dans PowerToys > Extensions de l'Explorateur de fichiers, désactiver l'aperçu du code source (Monaco).
 
 ## Historique des versions
 
+- **1.8**
+  - **mémoires de fréquences** : nom (pseudo), fréquence, mode, jusqu'à 10 listes ; accord immédiat d'un clic ; bouton ▾ des 20 dernières utilisées ;
+  - fenêtre **Taille du texte** (70 à 200 %) ;
+  - boutons Mute verts quand le son passe, rouges quand il est coupé (écriture blanche) ; bouton ⇄ vraiment carré ;
+  - jusqu'à **10 listes de favoris**, boutons « Nouvelle liste » et « Supprimer la liste… » ; export et import (HTML Firefox, CSV) avec toutes les listes, listes créées à l'import si besoin ;
+  - clic droit sur la barre d'état : 20 derniers messages, types de messages masquables ;
+  - le message « aucun câble audio virtuel trouvé » ne reste plus affiché quand le câble SDRLINK est désactivé.
 - **1.7**
   - favoris : export et import compatibles avec **Firefox**, par listes (dossier SDRLink avec un sous-dossier par liste) ; l'import remet chaque favori dans sa liste au lieu de tout mettre dans une seule.
   - une erreur imprévue est notée en détail dans le journal (ligne « Erreur inattendue ») et signalée en bas de la fenêtre, sans boîte de dialogue.

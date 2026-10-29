@@ -22,6 +22,8 @@ Check favorites	Kedvencek ellenőrzése
 Check all	Összes bejelölése
 Uncheck all	Jelölések törlése
 Move to ▸	Áthelyezés ▸
+New list	Új lista
+Delete list…	Lista törlése…
 (right-click the list to rename it)	(az átnevezéshez kattintson jobb gombbal a listára)
 Name	Név
 Address	Cím
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Ez a WebSDR már szerepel a(z) „{0}” listában.
 List {0}	Lista {0}
 Rename "{0}"…	„{0}” átnevezése…
+List "{0}" added ({1}/{2}).	A(z) „{0}” lista hozzáadva ({1}/{2}).
+Delete the list "{0}" (empty)?	Törli a(z) „{0}” listát (üres)?
+Delete the list "{0}" and its {1} favorite(s)?	Törli a(z) „{0}” listát és {1} kedvencét?
+List "{0}" deleted.	A(z) „{0}” lista törölve.
 {0} favorite(s) moved to "{1}".	{0} kedvenc áthelyezve a(z) „{1}” listába.
 {0} favorite(s) shown, {1} checked	{0} kedvenc látható, {1} bejelölve
 Remove favorite "{0}"?	Eltávolítja a(z) „{0}” kedvencet?
@@ -67,6 +73,7 @@ HRD connection closed	A HRD-kapcsolat bezárult
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nincs HRD-szerver itt: {0}:{1} (engedélyezze az IP-szervert a HRD Rig Control programban).
 Cannot open the log: 	A napló nem nyitható meg: 
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
+Store the current frequency…	Az aktuális frekvencia tárolása…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
 RIG	RÁDIÓ
 Disconnected	Nincs kapcsolat
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	A ⇄ által figyelmen kívül hagyott némí
 None	Nincs
 ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
+Add memory	Memória hozzáadása
+(no memory used yet)	(még nem használt memóriát)
+Memories…	Memóriák…
+Clear this list	A lista törlése
+Text size	Szövegméret
+Window text size (100% = original size):	Az ablak szövegmérete (100 % = eredeti méret):
+(no message)	(nincs üzenet)
+Last {0} memories used	Utolsó {0} használt memória
 ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Elérhető a V{0} frissítés: kattintson a letöltéshez
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Az adás automatikusan leállt ennyi idő után: {0} (biztonsági időkorlát, a módosításhoz kattintson jobb gombbal a PTT-re)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Ez az oldal nem szerepel a(z) „{0}” listában.
 Remove "{0}" from "{1}"?	Eltávolítja a(z) „{0}” elemet a(z) „{1}” listából?
 Unexpected error, written to the log: {0}	Váratlan hiba, a naplóba írva: {0}
+Memory "{0}" added to "{1}".	A(z) „{0}” memória hozzáadva ide: „{1}”.
+Memory "{0}": {1} kHz	Memória: „{0}”: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Utolsó {0} üzenet (kattintás: az ilyen típusú üzenet elrejtése vagy újbóli megjelenítése, ✓ = rejtett)
+Show all hidden messages again ({0})	Minden rejtett üzenet újbóli megjelenítése ({0})
 Interface:	Interfész:
 Brand:	Gyártó:
 Model:	Modell:
@@ -142,11 +161,14 @@ Volume:	Hangerő:
 TRX volume:	TRX hangerő:
 ExpertSDR volume:	ExpertSDR hangerő:
 Open log	Napló megnyitása
+Text size…	Szövegméret…
 …	…
 Download Hamlib…	Hamlib letöltése…
 SDRLINK cable ▾	SDRLINK kábel ▾
 QSY	QSY
 Save	Mentés
+Memories	Memóriák
+▾	▾
 Go	Ugrás
 ◀ Back	◀ Vissza
 Reload	Újratöltés
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → Rádió
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Frekvencia (kHz):
+Mode:	Üzemmód:
+(mode unchanged)	(üzemmód változatlan)
+Edit…	Szerkesztés…
+Frequency (kHz)	Frekvencia (kHz)
+Mode	Üzemmód
+Select a memory first.	Először válasszon memóriát.
+Edit memory	Memória szerkesztése
+{0} memory(ies). Click a memory to go there.	{0} memória. Kattintson egy memóriára, hogy oda hangoljon.
+Tuned to "{0}" ({1} kHz).	Hangolva: „{0}” ({1} kHz).
+Remove the memory "{0}"?	Eltávolítja a(z) „{0}” memóriát?
+Delete the list "{0}" and its {1} memory(ies)?	Törli a(z) „{0}” listát és {1} memóriáját?
 OmniRig is not installed (OmniRig.OmniRigX not found).	Az OmniRig nincs telepítve (az OmniRig.OmniRigX nem található).
 Dark mode colour	Sötét mód színe
 Light mode colour	Világos mód színe

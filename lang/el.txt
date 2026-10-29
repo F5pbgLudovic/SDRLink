@@ -22,6 +22,8 @@ Check favorites	Έλεγχος αγαπημένων
 Check all	Σήμανση όλων
 Uncheck all	Αποσήμανση όλων
 Move to ▸	Μετακίνηση σε ▸
+New list	Νέα λίστα
+Delete list…	Διαγραφή λίστας…
 (right-click the list to rename it)	(δεξί κλικ στη λίστα για μετονομασία)
 Name	Όνομα
 Address	Διεύθυνση
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Αυτό το WebSDR υπάρχει ήδη στο «{0}».
 List {0}	Λίστα {0}
 Rename "{0}"…	Μετονομασία «{0}»…
+List "{0}" added ({1}/{2}).	Η λίστα «{0}» προστέθηκε ({1}/{2}).
+Delete the list "{0}" (empty)?	Διαγραφή της λίστας «{0}» (κενή);
+Delete the list "{0}" and its {1} favorite(s)?	Διαγραφή της λίστας «{0}» και των {1} αγαπημένων της;
+List "{0}" deleted.	Η λίστα «{0}» διαγράφηκε.
 {0} favorite(s) moved to "{1}".	{0} αγαπημένα μετακινήθηκαν στο «{1}».
 {0} favorite(s) shown, {1} checked	{0} αγαπημένα εμφανίζονται, {1} σημειωμένα
 Remove favorite "{0}"?	Αφαίρεση του αγαπημένου «{0}»;
@@ -67,6 +73,7 @@ HRD connection closed	Η σύνδεση HRD έκλεισε
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Δεν υπάρχει διακομιστής HRD στο {0}:{1} (ενεργοποιήστε τον διακομιστή IP στο HRD Rig Control).
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
+Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Μεταφορά του ήχου στον επόμενο δέκτη (δεξί κλικ: δέκτης που μένει σε σίγαση)
 RIG	TRX
 Disconnected	Αποσυνδέθηκε
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Σίγαση που αγνοεί το ⇄ (μ
 None	Καμία
 ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
+Add memory	Προσθήκη μνήμης
+(no memory used yet)	(δεν έχει χρησιμοποιηθεί μνήμη)
+Memories…	Μνήμες…
+Clear this list	Εκκαθάριση αυτής της λίστας
+Text size	Μέγεθος κειμένου
+Window text size (100% = original size):	Μέγεθος κειμένου του παραθύρου (100 % = αρχικό μέγεθος):
+(no message)	(κανένα μήνυμα)
+Last {0} memories used	Τελευταίες {0} μνήμες που χρησιμοποιήθηκαν
 ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Διαθέσιμη ενημέρωση V{0}: κάντε κλικ για λήψη
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Η εκπομπή διακόπηκε αυτόματα μετά από {0} (χρονικό όριο ασφαλείας, δεξί κλικ στο PTT για αλλαγή)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Αυτή η σελίδα δεν υπάρχει στο «{0}».
 Remove "{0}" from "{1}"?	Αφαίρεση του «{0}» από το «{1}»;
 Unexpected error, written to the log: {0}	Απρόσμενο σφάλμα, καταγράφηκε στο αρχείο καταγραφής: {0}
+Memory "{0}" added to "{1}".	Η μνήμη «{0}» προστέθηκε στο «{1}».
+Memory "{0}": {1} kHz	Μνήμη «{0}»: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Τελευταία {0} μηνύματα (κλικ: απόκρυψη ή επανεμφάνιση αυτού του είδους μηνύματος, ✓ = κρυφό)
+Show all hidden messages again ({0})	Επανεμφάνιση όλων των κρυφών μηνυμάτων ({0})
 Interface:	Διασύνδεση:
 Brand:	Μάρκα:
 Model:	Μοντέλο:
@@ -142,11 +161,14 @@ Volume:	Ένταση:
 TRX volume:	Ένταση TRX:
 ExpertSDR volume:	Ένταση ExpertSDR:
 Open log	Άνοιγμα ημερολογίου
+Text size…	Μέγεθος κειμένου…
 …	…
 Download Hamlib…	Λήψη Hamlib…
 SDRLINK cable ▾	Καλώδιο SDRLINK ▾
 QSY	QSY
 Save	Αποθήκ.
+Memories	Μνήμες
+▾	▾
 Go	Μετάβαση
 ◀ Back	◀ Πίσω
 Reload	Ανανέωση
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Συχνότητα (kHz):
+Mode:	Τρόπος:
+(mode unchanged)	(τρόπος αμετάβλητος)
+Edit…	Επεξεργασία…
+Frequency (kHz)	Συχνότητα (kHz)
+Mode	Τρόπος
+Select a memory first.	Επιλέξτε πρώτα μια μνήμη.
+Edit memory	Επεξεργασία μνήμης
+{0} memory(ies). Click a memory to go there.	{0} μνήμη(ες). Κάντε κλικ σε μια μνήμη για να μεταβείτε σε αυτή.
+Tuned to "{0}" ({1} kHz).	Συντονισμός στο «{0}» ({1} kHz).
+Remove the memory "{0}"?	Αφαίρεση της μνήμης «{0}»;
+Delete the list "{0}" and its {1} memory(ies)?	Διαγραφή της λίστας «{0}» και των {1} μνημών της;
 OmniRig is not installed (OmniRig.OmniRigX not found).	Το OmniRig δεν είναι εγκατεστημένο (δεν βρέθηκε το OmniRig.OmniRigX).
 Dark mode colour	Χρώμα σκούρας λειτουργίας
 Light mode colour	Χρώμα φωτεινής λειτουργίας

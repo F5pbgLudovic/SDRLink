@@ -22,6 +22,8 @@ Check favorites	Tarkista suosikit
 Check all	Merkitse kaikki
 Uncheck all	Poista merkinnät
 Move to ▸	Siirrä ▸
+New list	Uusi luettelo
+Delete list…	Poista luettelo…
 (right-click the list to rename it)	(nimeä luettelo uudelleen napsauttamalla sitä hiiren kakkospainikkeella)
 Name	Nimi
 Address	Osoite
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Tämä WebSDR on jo luettelossa ”{0}”.
 List {0}	Luettelo {0}
 Rename "{0}"…	Nimeä ”{0}” uudelleen…
+List "{0}" added ({1}/{2}).	Luettelo ”{0}” lisätty ({1}/{2}).
+Delete the list "{0}" (empty)?	Poistetaanko luettelo ”{0}” (tyhjä)?
+Delete the list "{0}" and its {1} favorite(s)?	Poistetaanko luettelo ”{0}” ja sen {1} suosikkia?
+List "{0}" deleted.	Luettelo ”{0}” poistettu.
 {0} favorite(s) moved to "{1}".	{0} suosikki(a) siirretty luetteloon ”{1}”.
 {0} favorite(s) shown, {1} checked	{0} suosikki(a) näkyvissä, {1} merkitty
 Remove favorite "{0}"?	Poistetaanko suosikki ”{0}”?
@@ -67,6 +73,7 @@ HRD connection closed	HRD-yhteys suljettu
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	HRD-palvelinta ei löydy osoitteesta {0}:{1} (ota IP-palvelin käyttöön HRD Rig Control -ohjelmassa).
 Cannot open the log: 	Lokia ei voi avata: 
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
+Store the current frequency…	Tallenna nykyinen taajuus…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Siirrä ääni seuraavaan vastaanottimeen (hiiren oikea painike: vastaanotin, joka pysyy mykistettynä)
 RIG	RADIO
 Disconnected	Ei yhteyttä
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Mykistys, jonka ⇄ ohittaa (pysyy mykistetty
 None	Ei mitään
 ExpertSDR TCI port	ExpertSDR:n TCI-portti
 TCI server port (ExpertSDR, Options > TCI):	TCI-palvelimen portti (ExpertSDR, Options > TCI):
+Add memory	Lisää muisti
+(no memory used yet)	(muistia ei ole vielä käytetty)
+Memories…	Muistit…
+Clear this list	Tyhjennä tämä luettelo
+Text size	Tekstin koko
+Window text size (100% = original size):	Ikkunan tekstin koko (100 % = alkuperäinen koko):
+(no message)	(ei viestejä)
+Last {0} memories used	Viimeiset {0} käytettyä muistia
 ExpertSDR TCI port: {0}…	ExpertSDR:n TCI-portti: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Päivitys V{0} saatavilla: lataa napsauttamalla
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Lähetys pysäytettiin automaattisesti, kesto {0} (turva-aikakatkaisu, muuta napsauttamalla PTT:tä hiiren kakkospainikkeella)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Tämä sivu ei ole luettelossa ”{0}”.
 Remove "{0}" from "{1}"?	Poistetaanko ”{0}” luettelosta ”{1}”?
 Unexpected error, written to the log: {0}	Odottamaton virhe, kirjattu lokiin: {0}
+Memory "{0}" added to "{1}".	Muisti ”{0}” lisätty luetteloon ”{1}”.
+Memory "{0}": {1} kHz	Muisti ”{0}”: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Viimeiset {0} viestiä (napsautus: piilota tai näytä tämäntyyppiset viestit uudelleen, ✓ = piilotettu)
+Show all hidden messages again ({0})	Näytä kaikki piilotetut viestit uudelleen ({0})
 Interface:	Liitäntä:
 Brand:	Merkki:
 Model:	Malli:
@@ -142,11 +161,14 @@ Volume:	Voimakkuus:
 TRX volume:	TRX-voimakkuus:
 ExpertSDR volume:	ExpertSDR:n äänenvoimakkuus:
 Open log	Avaa loki
+Text size…	Tekstin koko…
 …	…
 Download Hamlib…	Lataa Hamlib…
 SDRLINK cable ▾	SDRLINK-kaapeli ▾
 QSY	QSY
 Save	Tallenna
+Memories	Muistit
+▾	▾
 Go	Siirry
 ◀ Back	◀ Takaisin
 Reload	Lataa uudelleen
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → Radio
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Taajuus (kHz):
+Mode:	Lähetelaji:
+(mode unchanged)	(lähetelaji ennallaan)
+Edit…	Muokkaa…
+Frequency (kHz)	Taajuus (kHz)
+Mode	Lähetelaji
+Select a memory first.	Valitse ensin muisti.
+Edit memory	Muokkaa muistia
+{0} memory(ies). Click a memory to go there.	{0} muistia. Siirry muistiin napsauttamalla sitä.
+Tuned to "{0}" ({1} kHz).	Viritetty: ”{0}” ({1} kHz).
+Remove the memory "{0}"?	Poistetaanko muisti ”{0}”?
+Delete the list "{0}" and its {1} memory(ies)?	Poistetaanko luettelo ”{0}” ja sen {1} muistia?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRigiä ei ole asennettu (OmniRig.OmniRigX ei löytynyt).
 Dark mode colour	Tumman tilan väri
 Light mode colour	Vaalean tilan väri

@@ -43,7 +43,19 @@ namespace SDRLink
         public string LastUrl = "http://websdr.ewi.utwente.nl:8901/";
         public string Language = "fr";
         // Listes de favoris : noms modifiables et liste affichée dans la barre WebSDR.
-        public string[] ListNames = { "Liste 1", "Liste 2", "Liste 3", "Liste 4" };
+        // Noms des listes de favoris (Favorite.MaxLists places ; seules les Favorite.ListCount premières sont utilisées).
+        public string[] ListNames = DefaultListNames();
+        public List<string> HiddenMessages = new List<string>();
+        public MemoryBook Memories = new MemoryBook();   // mémoires de fréquences (bouton Mémoires)
+        public int FontScale = 100;                        // taille du texte de la fenêtre principale, en %
+        public const int FontScaleMin = 70, FontScaleMax = 200;   // types de messages de la barre d'état masqués (clic droit)
+
+        static string[] DefaultListNames()
+        {
+            string[] n = new string[Favorite.MaxLists];
+            for (int i = 0; i < n.Length; i++) n[i] = "Liste " + (i + 1);
+            return n;
+        }
         public int CurrentList;
         public int PttTimeoutSec;          // délai de sécurité du bouton PTT (0 = désactivé)
         public string CableDevice = "";    // sortie audio recevant le son du WebSDR (câble virtuel), vide = choix automatique
@@ -82,7 +94,9 @@ namespace SDRLink
         public static Settings Load()
         {
             Settings s = new Settings();
+            Favorite.ListCount = 4;
             if (!File.Exists(FilePath)) return s;
+            int listCount = 4;
             s.FirstSearchDone = true;   // réglages déjà présents : l'application a déjà démarré
             List<Favorite> favs = new List<Favorite>();
             foreach (string line in File.ReadAllLines(FilePath, Encoding.UTF8))
@@ -126,10 +140,14 @@ namespace SDRLink
                     case "LastUrl": s.LastUrl = v; break;
                     case "Fav": if (v.Length > 0) favs.Add(Favorite.FromSetting(v)); break;
                     case "Language": s.Language = Array.IndexOf(Lang.Codes, v) >= 0 ? v : "fr"; break;
-                    case "List1": case "List2": case "List3": case "List4":
-                        if (v.Length > 0) s.ListNames[k[4] - '1'] = v;
-                        break;
-                    case "CurrentList": s.CurrentList = Math.Max(0, Math.Min(3, Int(v, 0))); break;
+                    case "ListCount": listCount = Math.Max(1, Math.Min(Favorite.MaxLists, Int(v, 4))); break;
+                    case "CurrentList": s.CurrentList = Math.Max(0, Math.Min(Favorite.MaxLists - 1, Int(v, 0))); break;
+                    case "Mem": { Memory m = Memory.FromSetting(v); if (m != null) s.Memories.Items.Add(m); } break;
+                    case "MemRecent": { Memory m = Memory.FromSetting(v); if (m != null && s.Memories.Recent.Count < MemoryBook.RecentSize) s.Memories.Recent.Add(m); } break;
+                    case "MemListCount": s.Memories.ListCount = Math.Max(1, Math.Min(Memory.MaxLists, Int(v, 1))); break;
+                    case "MemCurrentList": s.Memories.CurrentList = Math.Max(0, Math.Min(Memory.MaxLists - 1, Int(v, 0))); break;
+                    case "FontScale": s.FontScale = Math.Max(FontScaleMin, Math.Min(FontScaleMax, Int(v, 100))); break;
+                    case "HideMsg": if (v.Length > 0 && !s.HiddenMessages.Contains(v)) s.HiddenMessages.Add(v); break;
                     case "PttTimeout": s.PttTimeoutSec = Math.Max(0, Int(v, 0)); break;
                     case "DigiDevice": case "CableDevice": s.CableDevice = v; break;
                     case "Cable": s.CableEnabled = v != "0"; break;
@@ -147,9 +165,24 @@ namespace SDRLink
                     case "CheckUpdates": s.CheckUpdates = v != "0"; break;
                     case "SwapIgnore": s.SwapIgnore = Math.Max(-1, Math.Min(2, Int(v, -1))); break;
                     case "Freq": if (s.FreqHistory.Count < 100) s.FreqHistory.Add(v); break;
+                    default:
+                        // List1 à List10 : noms des listes de favoris.
+                        int li;
+                        if (k.StartsWith("List") && int.TryParse(k.Substring(4), NumberStyles.None, CultureInfo.InvariantCulture, out li)
+                            && li >= 1 && li <= Favorite.MaxLists && v.Length > 0) s.ListNames[li - 1] = v;
+                        // MemList1 à MemList10 : noms des listes de mémoires.
+                        else if (k.StartsWith("MemList") && int.TryParse(k.Substring(7), NumberStyles.None, CultureInfo.InvariantCulture, out li)
+                            && li >= 1 && li <= Memory.MaxLists && v.Length > 0) s.Memories.ListNames[li - 1] = v;
+                        break;
                 }
             }
             if (favs.Count > 0) s.Favorites = favs;
+            // Nombre de listes : celui enregistré (4 avant la 1.8), agrandi si un favori est rangé plus loin.
+            foreach (Favorite f in s.Favorites) listCount = Math.Max(listCount, f.List + 1);
+            Favorite.ListCount = listCount;
+            s.CurrentList = Math.Min(s.CurrentList, listCount - 1);
+            foreach (Memory m in s.Memories.Items) s.Memories.ListCount = Math.Max(s.Memories.ListCount, m.List + 1);
+            s.Memories.CurrentList = Math.Min(s.Memories.CurrentList, s.Memories.ListCount - 1);
             return s;
         }
 
@@ -188,7 +221,15 @@ namespace SDRLink
             Line(sb, "Offset", OffsetHz);
             Line(sb, "LastUrl", LastUrl);
             Line(sb, "Language", Language);
-            for (int i = 0; i < ListNames.Length; i++) Line(sb, "List" + (i + 1), ListNames[i]);
+            Line(sb, "ListCount", Favorite.ListCount);
+            for (int i = 0; i < Favorite.ListCount; i++) Line(sb, "List" + (i + 1), ListNames[i]);
+            foreach (string h in HiddenMessages) Line(sb, "HideMsg", h);
+            Line(sb, "FontScale", FontScale);
+            Line(sb, "MemListCount", Memories.ListCount);
+            Line(sb, "MemCurrentList", Memories.CurrentList);
+            for (int i = 0; i < Memories.ListCount; i++) Line(sb, "MemList" + (i + 1), Memories.ListNames[i]);
+            foreach (Memory m in Memories.Items) Line(sb, "Mem", m.ToSetting());
+            foreach (Memory m in Memories.Recent) Line(sb, "MemRecent", m.ToSetting());
             Line(sb, "CurrentList", CurrentList);
             Line(sb, "PttTimeout", PttTimeoutSec);
             Line(sb, "CableDevice", CableDevice);

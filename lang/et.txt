@@ -22,6 +22,8 @@ Check favorites	Kontrolli lemmikuid
 Check all	Märgi kõik
 Uncheck all	Tühjenda kõik
 Move to ▸	Teisalda ▸
+New list	Uus loend
+Delete list…	Kustuta loend…
 (right-click the list to rename it)	(loendi ümbernimetamiseks paremklõpsake seda)
 Name	Nimi
 Address	Aadress
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	See WebSDR on juba loendis „{0}“.
 List {0}	Loend {0}
 Rename "{0}"…	Nimeta „{0}“ ümber…
+List "{0}" added ({1}/{2}).	Loend „{0}“ lisatud ({1}/{2}).
+Delete the list "{0}" (empty)?	Kas kustutada loend „{0}“ (tühi)?
+Delete the list "{0}" and its {1} favorite(s)?	Kas kustutada loend „{0}“ ja selle {1} lemmikut?
+List "{0}" deleted.	Loend „{0}“ kustutatud.
 {0} favorite(s) moved to "{1}".	{0} lemmik(ut) teisaldati loendisse „{1}“.
 {0} favorite(s) shown, {1} checked	Kuvatud {0} lemmik(ut), märgitud {1}
 Remove favorite "{0}"?	Kas eemaldada lemmik „{0}“?
@@ -67,6 +73,7 @@ HRD connection closed	HRD ühendus suleti
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Aadressil {0}:{1} pole HRD serverit (lubage IP-server programmis HRD Rig Control).
 Cannot open the log: 	Logi ei saa avada: 
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
+Store the current frequency…	Salvesta praegune sagedus…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Lülita heli järgmisele vastuvõtjale (paremklõps: vastuvõtja, mis jääb vaigistatuks)
 RIG	RAADIO
 Disconnected	Ühendus puudub
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Vaigistus, mida ⇄ eirab (jääb vaigistatuk
 None	Puudub
 ExpertSDR TCI port	ExpertSDR-i TCI-port
 TCI server port (ExpertSDR, Options > TCI):	TCI-serveri port (ExpertSDR, Options > TCI):
+Add memory	Lisa mälu
+(no memory used yet)	(mälu pole veel kasutatud)
+Memories…	Mälud…
+Clear this list	Tühjenda see loend
+Text size	Teksti suurus
+Window text size (100% = original size):	Akna teksti suurus (100 % = algne suurus):
+(no message)	(teateid pole)
+Last {0} memories used	Viimased {0} kasutatud mälu
 ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Saadaval on uuendus V{0}: klõpsake allalaadimiseks
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Saade peatati automaatselt, kestus {0} (ohutuse ajalõpp, muutmiseks paremklõpsake PTT-d)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Seda lehte pole loendis „{0}“.
 Remove "{0}" from "{1}"?	Kas eemaldada „{0}“ loendist „{1}“?
 Unexpected error, written to the log: {0}	Ootamatu viga, kirjutatud logisse: {0}
+Memory "{0}" added to "{1}".	Mälu „{0}“ lisatud loendisse „{1}“.
+Memory "{0}": {1} kHz	Mälu „{0}“: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Viimased {0} teadet (klõps: peida või näita seda tüüpi teateid uuesti, ✓ = peidetud)
+Show all hidden messages again ({0})	Näita kõiki peidetud teateid uuesti ({0})
 Interface:	Liides:
 Brand:	Tootja:
 Model:	Mudel:
@@ -142,11 +161,14 @@ Volume:	Helitugevus:
 TRX volume:	TRX helitugevus:
 ExpertSDR volume:	ExpertSDR-i helitugevus:
 Open log	Ava logi
+Text size…	Teksti suurus…
 …	…
 Download Hamlib…	Laadi alla Hamlib…
 SDRLINK cable ▾	SDRLINK kaabel ▾
 QSY	QSY
 Save	Salvesta
+Memories	Mälud
+▾	▾
 Go	Mine
 ◀ Back	◀ Tagasi
 Reload	Laadi uuesti
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → Raadio
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Sagedus (kHz):
+Mode:	Režiim:
+(mode unchanged)	(režiim muutmata)
+Edit…	Muuda…
+Frequency (kHz)	Sagedus (kHz)
+Mode	Režiim
+Select a memory first.	Valige esmalt mälu.
+Edit memory	Muuda mälu
+{0} memory(ies). Click a memory to go there.	{0} mälu. Klõpsake mälul, et sinna minna.
+Tuned to "{0}" ({1} kHz).	Häälestatud: „{0}“ ({1} kHz).
+Remove the memory "{0}"?	Kas eemaldada mälu „{0}“?
+Delete the list "{0}" and its {1} memory(ies)?	Kas kustutada loend „{0}“ ja selle {1} mälu?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig pole installitud (OmniRig.OmniRigX ei leitud).
 Dark mode colour	Tumeda režiimi värv
 Light mode colour	Heleda režiimi värv

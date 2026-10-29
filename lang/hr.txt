@@ -22,6 +22,8 @@ Check favorites	Provjeri favorite
 Check all	Označi sve
 Uncheck all	Odznači sve
 Move to ▸	Premjesti u ▸
+New list	Novi popis
+Delete list…	Izbriši popis…
 (right-click the list to rename it)	(desni klik na popis za preimenovanje)
 Name	Naziv
 Address	Adresa
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Ovaj je WebSDR već u „{0}”.
 List {0}	Popis {0}
 Rename "{0}"…	Preimenuj „{0}”…
+List "{0}" added ({1}/{2}).	Popis „{0}” dodan ({1}/{2}).
+Delete the list "{0}" (empty)?	Izbrisati popis „{0}” (prazan)?
+Delete the list "{0}" and its {1} favorite(s)?	Izbrisati popis „{0}” i njegovih {1} favorita?
+List "{0}" deleted.	Popis „{0}” izbrisan.
 {0} favorite(s) moved to "{1}".	Favoriti premješteni u „{1}”: {0}.
 {0} favorite(s) shown, {1} checked	Prikazani favoriti: {0}, označeni: {1}
 Remove favorite "{0}"?	Ukloniti favorit „{0}”?
@@ -67,6 +73,7 @@ HRD connection closed	Veza s HRD-om zatvorena
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nema HRD poslužitelja na {0}:{1} (omogućite IP poslužitelj u HRD Rig Control).
 Cannot open the log: 	Nije moguće otvoriti dnevnik: 
 Save: no known frequency (rig or WebSDR)	Spremi: nema poznate frekvencije (TRX ili WebSDR)
+Store the current frequency…	Spremi trenutačnu frekvenciju…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prebaci zvuk na sljedeći prijemnik (desni klik: prijemnik koji ostaje utišan)
 RIG	TRX
 Disconnected	Odspojeno
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Utišavanje koje ⇄ preskače (ostaje utiša
 None	Nijedno
 ExpertSDR TCI port	TCI priključak ExpertSDR-a
 TCI server port (ExpertSDR, Options > TCI):	Priključak TCI poslužitelja (ExpertSDR, Options > TCI):
+Add memory	Dodaj memoriju
+(no memory used yet)	(još nije korištena memorija)
+Memories…	Memorije…
+Clear this list	Isprazni ovaj popis
+Text size	Veličina teksta
+Window text size (100% = original size):	Veličina teksta prozora (100 % = izvorna veličina):
+(no message)	(nema poruka)
+Last {0} memories used	Zadnjih {0} korištenih memorija
 ExpertSDR TCI port: {0}…	TCI priključak ExpertSDR-a: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Dostupno je ažuriranje V{0}: kliknite za preuzimanje
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Odašiljanje automatski zaustavljeno nakon {0} (sigurnosno ograničenje, desni klik na PTT za promjenu)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Ova stranica nije u „{0}”.
 Remove "{0}" from "{1}"?	Ukloniti „{0}” iz „{1}”?
 Unexpected error, written to the log: {0}	Neočekivana pogreška, zapisana u dnevnik: {0}
+Memory "{0}" added to "{1}".	Memorija „{0}” dodana u „{1}”.
+Memory "{0}": {1} kHz	Memorija „{0}”: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Zadnjih {0} poruka (klik: sakrij ili ponovno prikaži ovu vrstu poruke, ✓ = skriveno)
+Show all hidden messages again ({0})	Ponovno prikaži sve skrivene poruke ({0})
 Interface:	Sučelje:
 Brand:	Marka:
 Model:	Model:
@@ -142,11 +161,14 @@ Volume:	Glasnoća:
 TRX volume:	Glasnoća TRX:
 ExpertSDR volume:	Glasnoća ExpertSDR-a:
 Open log	Otvori dnevnik
+Text size…	Veličina teksta…
 …	…
 Download Hamlib…	Preuzmi Hamlib…
 SDRLINK cable ▾	SDRLINK kabel ▾
 QSY	QSY
 Save	Spremi
+Memories	Memorije
+▾	▾
 Go	Idi
 ◀ Back	◀ Natrag
 Reload	Ponovno učitaj
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Frekvencija (kHz):
+Mode:	Način rada:
+(mode unchanged)	(način rada nepromijenjen)
+Edit…	Uredi…
+Frequency (kHz)	Frekvencija (kHz)
+Mode	Način rada
+Select a memory first.	Najprije odaberite memoriju.
+Edit memory	Uredi memoriju
+{0} memory(ies). Click a memory to go there.	{0} memorija. Kliknite memoriju da biste prešli na nju.
+Tuned to "{0}" ({1} kHz).	Ugođeno na „{0}” ({1} kHz).
+Remove the memory "{0}"?	Ukloniti memoriju „{0}”?
+Delete the list "{0}" and its {1} memory(ies)?	Izbrisati popis „{0}” i njegovih {1} memorija?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nije instaliran (OmniRig.OmniRigX nije pronađen).
 Dark mode colour	Boja tamnog načina
 Light mode colour	Boja svijetlog načina

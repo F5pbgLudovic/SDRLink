@@ -22,6 +22,8 @@ Check favorites	Pārbaudīt izlasi
 Check all	Atzīmēt visus
 Uncheck all	Noņemt atzīmes
 Move to ▸	Pārvietot uz ▸
+New list	Jauns saraksts
+Delete list…	Dzēst sarakstu…
 (right-click the list to rename it)	(ar peles labo pogu noklikšķiniet uz saraksta, lai to pārdēvētu)
 Name	Nosaukums
 Address	Adrese
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Šis WebSDR jau ir sarakstā "{0}".
 List {0}	Saraksts {0}
 Rename "{0}"…	Pārdēvēt "{0}"…
+List "{0}" added ({1}/{2}).	Saraksts “{0}” pievienots ({1}/{2}).
+Delete the list "{0}" (empty)?	Dzēst sarakstu “{0}” (tukšs)?
+Delete the list "{0}" and its {1} favorite(s)?	Dzēst sarakstu “{0}” un tā {1} izlases vienumus?
+List "{0}" deleted.	Saraksts “{0}” dzēsts.
 {0} favorite(s) moved to "{1}".	Uz "{1}" pārvietoti izlases vienumi: {0}.
 {0} favorite(s) shown, {1} checked	Parādīti izlases vienumi: {0}, atzīmēti: {1}
 Remove favorite "{0}"?	Vai noņemt izlases vienumu "{0}"?
@@ -67,6 +73,7 @@ HRD connection closed	HRD savienojums aizvērts
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nav HRD servera adresē {0}:{1} (iespējojiet IP serveri programmā HRD Rig Control).
 Cannot open the log: 	Nevar atvērt žurnālu: 
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
+Store the current frequency…	Saglabāt pašreizējo frekvenci…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Pārslēgt skaņu uz nākamo uztvērēju (labais klikšķis: uztvērējs, kas paliek apklusināts)
 RIG	RADIO
 Disconnected	Atvienots
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Apklusināšana, ko ⇄ ignorē (paliek apklu
 None	Nav
 ExpertSDR TCI port	ExpertSDR TCI ports
 TCI server port (ExpertSDR, Options > TCI):	TCI servera ports (ExpertSDR, Options > TCI):
+Add memory	Pievienot atmiņu
+(no memory used yet)	(atmiņa vēl nav izmantota)
+Memories…	Atmiņas…
+Clear this list	Notīrīt šo sarakstu
+Text size	Teksta lielums
+Window text size (100% = original size):	Loga teksta lielums (100 % = sākotnējais lielums):
+(no message)	(nav ziņojumu)
+Last {0} memories used	Pēdējās {0} izmantotās atmiņas
 ExpertSDR TCI port: {0}…	ExpertSDR TCI ports: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Pieejams atjauninājums V{0}: noklikšķiniet, lai lejupielādētu
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Raidīšana automātiski apturēta pēc {0} (drošības taimauts; lai to mainītu, ar peles labo pogu noklikšķiniet uz PTT)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Šīs lapas nav sarakstā "{0}".
 Remove "{0}" from "{1}"?	Vai noņemt "{0}" no "{1}"?
 Unexpected error, written to the log: {0}	Negaidīta kļūda, ierakstīta žurnālā: {0}
+Memory "{0}" added to "{1}".	Atmiņa “{0}” pievienota sarakstam “{1}”.
+Memory "{0}": {1} kHz	Atmiņa “{0}”: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Pēdējie {0} ziņojumi (klikšķis: paslēpt vai atkal rādīt šāda veida ziņojumu, ✓ = paslēpts)
+Show all hidden messages again ({0})	Atkal rādīt visus paslēptos ziņojumus ({0})
 Interface:	Saskarne:
 Brand:	Ražotājs:
 Model:	Modelis:
@@ -142,11 +161,14 @@ Volume:	Skaļums:
 TRX volume:	TRX skaļums:
 ExpertSDR volume:	ExpertSDR skaļums:
 Open log	Atvērt žurnālu
+Text size…	Teksta lielums…
 …	…
 Download Hamlib…	Lejupielādēt Hamlib…
 SDRLINK cable ▾	SDRLINK kabelis ▾
 QSY	QSY
 Save	Saglabāt
+Memories	Atmiņas
+▾	▾
 Go	Atvērt
 ◀ Back	◀ Atpakaļ
 Reload	Pārlādēt
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Frekvence (kHz):
+Mode:	Režīms:
+(mode unchanged)	(režīms nemainīts)
+Edit…	Rediģēt…
+Frequency (kHz)	Frekvence (kHz)
+Mode	Režīms
+Select a memory first.	Vispirms izvēlieties atmiņu.
+Edit memory	Rediģēt atmiņu
+{0} memory(ies). Click a memory to go there.	{0} atmiņa(s). Noklikšķiniet uz atmiņas, lai pārietu uz to.
+Tuned to "{0}" ({1} kHz).	Noskaņots uz “{0}” ({1} kHz).
+Remove the memory "{0}"?	Noņemt atmiņu “{0}”?
+Delete the list "{0}" and its {1} memory(ies)?	Dzēst sarakstu “{0}” un tā {1} atmiņas?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nav instalēts (OmniRig.OmniRigX nav atrasts).
 Dark mode colour	Tumšā režīma krāsa
 Light mode colour	Gaišā režīma krāsa

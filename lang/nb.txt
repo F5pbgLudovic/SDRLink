@@ -22,6 +22,8 @@ Check favorites	Kontroller favoritter
 Check all	Kryss av alle
 Uncheck all	Fjern alle kryss
 Move to ▸	Flytt til ▸
+New list	Ny liste
+Delete list…	Slett listen…
 (right-click the list to rename it)	(høyreklikk på listen for å gi den nytt navn)
 Name	Navn
 Address	Adresse
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Denne WebSDR er allerede i «{0}».
 List {0}	Liste {0}
 Rename "{0}"…	Gi «{0}» nytt navn…
+List "{0}" added ({1}/{2}).	Listen «{0}» lagt til ({1}/{2}).
+Delete the list "{0}" (empty)?	Slette listen «{0}» (tom)?
+Delete the list "{0}" and its {1} favorite(s)?	Slette listen «{0}» og dens {1} favoritt(er)?
+List "{0}" deleted.	Listen «{0}» slettet.
 {0} favorite(s) moved to "{1}".	{0} favoritt(er) flyttet til «{1}».
 {0} favorite(s) shown, {1} checked	{0} favoritt(er) vist, {1} avkrysset
 Remove favorite "{0}"?	Fjerne favoritten «{0}»?
@@ -67,6 +73,7 @@ HRD connection closed	HRD-tilkobling lukket
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktiver IP-serveren i HRD Rig Control).
 Cannot open the log: 	Kan ikke åpne loggen: 
 Save: no known frequency (rig or WebSDR)	Save: ingen kjent frekvens (rigg eller WebSDR)
+Store the current frequency…	Lagre gjeldende frekvens…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Bytt lyden til neste mottaker (høyreklikk: mottaker som forblir dempet)
 RIG	RIGG
 Disconnected	Frakoblet
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Demping som ⇄ ignorerer (forblir dempet):
 None	Ingen
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
+Add memory	Legg til minne
+(no memory used yet)	(ingen minner brukt ennå)
+Memories…	Minner…
+Clear this list	Tøm denne listen
+Text size	Tekststørrelse
+Window text size (100% = original size):	Vinduets tekststørrelse (100 % = opprinnelig størrelse):
+(no message)	(ingen meldinger)
+Last {0} memories used	Siste {0} brukte minner
 ExpertSDR TCI port: {0}…	TCI-port for ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Oppdatering V{0} tilgjengelig: klikk for å laste den ned
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Sending stoppet automatisk etter {0} (sikkerhetstid, høyreklikk på PTT for å endre)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Denne siden er ikke i «{0}».
 Remove "{0}" from "{1}"?	Fjerne «{0}» fra «{1}»?
 Unexpected error, written to the log: {0}	Uventet feil, skrevet i loggen: {0}
+Memory "{0}" added to "{1}".	Minnet «{0}» lagt til i «{1}».
+Memory "{0}": {1} kHz	Minne «{0}»: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Siste {0} meldinger (klikk: skjul eller vis denne typen melding igjen, ✓ = skjult)
+Show all hidden messages again ({0})	Vis alle skjulte meldinger igjen ({0})
 Interface:	Grensesnitt:
 Brand:	Merke:
 Model:	Modell:
@@ -142,11 +161,14 @@ Volume:	Volum:
 TRX volume:	Riggvolum:
 ExpertSDR volume:	ExpertSDR-volum:
 Open log	Åpne logg
+Text size…	Tekststørrelse…
 …	…
 Download Hamlib…	Last ned Hamlib…
 SDRLINK cable ▾	SDRLINK-kabel ▾
 QSY	QSY
 Save	Save
+Memories	Minner
+▾	▾
 Go	Gå
 ◀ Back	◀ Tilbake
 Reload	Last inn på nytt
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → Rigg
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Frekvens (kHz):
+Mode:	Modus:
+(mode unchanged)	(modus uendret)
+Edit…	Rediger…
+Frequency (kHz)	Frekvens (kHz)
+Mode	Modus
+Select a memory first.	Velg et minne først.
+Edit memory	Rediger minne
+{0} memory(ies). Click a memory to go there.	{0} minne(r). Klikk på et minne for å gå dit.
+Tuned to "{0}" ({1} kHz).	Innstilt på «{0}» ({1} kHz).
+Remove the memory "{0}"?	Fjerne minnet «{0}»?
+Delete the list "{0}" and its {1} memory(ies)?	Slette listen «{0}» og dens {1} minne(r)?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig er ikke installert (finner ikke OmniRig.OmniRigX).
 Dark mode colour	Farge i mørk modus
 Light mode colour	Farge i lys modus

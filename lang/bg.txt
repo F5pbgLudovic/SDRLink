@@ -22,6 +22,8 @@ Check favorites	Провери предпочитаните
 Check all	Отметни всички
 Uncheck all	Махни отметките
 Move to ▸	Премести в ▸
+New list	Нов списък
+Delete list…	Изтриване на списъка…
 (right-click the list to rename it)	(десен клик върху списъка, за да го преименувате)
 Name	Име
 Address	Адрес
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Този WebSDR вече е в „{0}“.
 List {0}	Списък {0}
 Rename "{0}"…	Преименувай „{0}“…
+List "{0}" added ({1}/{2}).	Списъкът „{0}“ е добавен ({1}/{2}).
+Delete the list "{0}" (empty)?	Да се изтрие ли списъкът „{0}“ (празен)?
+Delete the list "{0}" and its {1} favorite(s)?	Да се изтрие ли списъкът „{0}“ и неговите {1} любими?
+List "{0}" deleted.	Списъкът „{0}“ е изтрит.
 {0} favorite(s) moved to "{1}".	Преместени записи в „{1}“: {0}.
 {0} favorite(s) shown, {1} checked	Показани записи: {0}, отметнати: {1}
 Remove favorite "{0}"?	Да се премахне ли „{0}“ от предпочитаните?
@@ -67,6 +73,7 @@ HRD connection closed	Връзката с HRD е затворена
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Няма HRD сървър на {0}:{1} (включете IP сървъра в HRD Rig Control).
 Cannot open the log: 	Дневникът не може да се отвори: 
 Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
+Store the current frequency…	Запомняне на текущата честота…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Превключване на звука към следващия приемник (десен бутон: приемник, който остава заглушен)
 RIG	РАДИО
 Disconnected	Няма връзка
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Заглушаване, пренебрегв�
 None	Няма
 ExpertSDR TCI port	TCI порт на ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Порт на TCI сървъра (ExpertSDR, Options > TCI):
+Add memory	Добавяне на памет
+(no memory used yet)	(няма използвани памети)
+Memories…	Памети…
+Clear this list	Изчистване на списъка
+Text size	Размер на текста
+Window text size (100% = original size):	Размер на текста на прозореца (100 % = първоначален размер):
+(no message)	(няма съобщения)
+Last {0} memories used	Последните {0} използвани памети
 ExpertSDR TCI port: {0}…	TCI порт на ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Налична е актуализация V{0}: щракнете, за да я изтеглите
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Предаването е спряно автоматично след {0} (предпазен таймер; десен клик върху PTT за промяна)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Тази страница не е в „{0}“.
 Remove "{0}" from "{1}"?	Да се премахне ли „{0}“ от „{1}“?
 Unexpected error, written to the log: {0}	Неочаквана грешка, записана в дневника: {0}
+Memory "{0}" added to "{1}".	Паметта „{0}“ е добавена към „{1}“.
+Memory "{0}": {1} kHz	Памет „{0}“: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Последните {0} съобщения (щракване: скриване или показване на този вид съобщение, ✓ = скрито)
+Show all hidden messages again ({0})	Показване отново на всички скрити съобщения ({0})
 Interface:	Интерфейс:
 Brand:	Марка:
 Model:	Модел:
@@ -142,11 +161,14 @@ Volume:	Звук:
 TRX volume:	Звук TRX:
 ExpertSDR volume:	Сила на звука ExpertSDR:
 Open log	Отвори дневника
+Text size…	Размер на текста…
 …	…
 Download Hamlib…	Изтегли Hamlib…
 SDRLINK cable ▾	Кабел SDRLINK ▾
 QSY	QSY
 Save	Запис
+Memories	Памети
+▾	▾
 Go	Отиди
 ◀ Back	◀ Назад
 Reload	Презареди
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Честота (kHz):
+Mode:	Режим:
+(mode unchanged)	(режимът не се променя)
+Edit…	Редактиране…
+Frequency (kHz)	Честота (kHz)
+Mode	Режим
+Select a memory first.	Първо изберете памет.
+Edit memory	Редактиране на паметта
+{0} memory(ies). Click a memory to go there.	{0} памет(и). Щракнете върху памет, за да отидете на нея.
+Tuned to "{0}" ({1} kHz).	Настроено на „{0}“ ({1} kHz).
+Remove the memory "{0}"?	Да се премахне ли паметта „{0}“?
+Delete the list "{0}" and its {1} memory(ies)?	Да се изтрие ли списъкът „{0}“ и неговите {1} памети?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig не е инсталиран (OmniRig.OmniRigX не е намерен).
 Dark mode colour	Цвят на тъмния режим
 Light mode colour	Цвят на светлия режим

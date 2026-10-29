@@ -44,6 +44,7 @@ namespace SDRLink
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
         Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr;
+        Button btnMemRecent;
         bool sdrMuted, rigMuted;
         bool esdrMuted, esdrMutedByUs;   // son d'ExpertSDR coupé, et coupé par SDRLink
         bool esdrRunning, esdrWin;       // ExpertSDR lancé ; il joue par le son de Windows (sinon : liaison TCI)
@@ -230,6 +231,7 @@ namespace SDRLink
             btnPalette = new PaletteButton();
             btnPalette.Click += delegate { ShowPalette(); };
             row1.Controls.Add(btnPalette);
+            row1.Controls.Add(Btn("Taille du texte…", "Text size…", delegate { AskFontScale(); }));
             chkUpdates = Check("Vérifier les mises à jour", "Check for updates");
             chkUpdates.CheckedChanged += delegate { if (!loading && chkUpdates.Checked) CheckForUpdate(); };
             row1.Controls.Add(chkUpdates);
@@ -439,8 +441,23 @@ namespace SDRLink
             {
                 long f = CurrentFreq();
                 if (f > 0) AddToHistory(f);
-                else status.Text = Lang.T("Save : aucune fréquence connue (poste ou WebSDR)", "Save: no known frequency (rig or WebSDR)");
+                else ShowStatus(Lang.T("Save : aucune fréquence connue (poste ou WebSDR)", "Save: no known frequency (rig or WebSDR)"));
             }));
+            // Mémoires de fréquences : fenêtre de gestion, et menu des 20 dernières utilisées.
+            Button btnMem = Btn("Mémoires", "Memories", delegate { ShowMemories(); });
+            ContextMenuStrip memMenu = new ContextMenuStrip();
+            ToolStripMenuItem memAdd = new ToolStripMenuItem();
+            memMenu.Items.Add(memAdd);
+            memMenu.Opening += delegate { memAdd.Text = Lang.T("Mémoriser la fréquence actuelle…", "Store the current frequency…"); };
+            memAdd.Click += delegate { AddMemoryHere(); };
+            btnMem.ContextMenuStrip = memMenu;
+            btnMemRecent = Btn("▾", "▾", null);
+            btnMemRecent.Margin = new Padding(0, 3, 3, 3);
+            btnMemRecent.MinimumSize = new Size(22, 25);
+            btnMemRecent.Click += delegate { ShowRecentMemories(); };
+            Tr(delegate { tips.SetToolTip(btnMemRecent, Lang.F("{0} dernières mémoires utilisées", "Last {0} memories used", MemoryBook.RecentSize)); });
+            rowDisplay.Controls.Add(btnMem);
+            rowDisplay.Controls.Add(btnMemRecent);
             rowDisplay.Controls.Add(Lbl("Pas :", "Step:"));
             rowDisplay.Controls.Add(cbStep);
             // Les deux cases l'une sous l'autre : elles tiennent dans la hauteur du bouton PTT.
@@ -526,7 +543,8 @@ namespace SDRLink
             // Bouton ⇄ : passe le son d'une réception à la suivante (WebSDR, poste, ExpertSDR).
             btnMuteSwap = Btn("⇄", "⇄", delegate { SwapMutes(); });
             btnMuteSwap.AutoSize = false;
-            btnMuteSwap.MinimumSize = btnMuteSwap.Size = new Size(25, 25);
+            btnMuteSwap.MinimumSize = new Size(25, 25);   // d'abord le minimum : celui de Btn (30 de large) empêcherait le carré
+            btnMuteSwap.Size = new Size(25, 25);
             Tr(delegate { tips.SetToolTip(btnMuteSwap, Lang.T("Passer le son à la réception suivante (clic droit : réception à laisser coupée)", "Switch the audio to the next receiver (right-click: receiver to keep muted)")); });
             // Clic droit : coupure dont le bouton ⇄ ne tient pas compte (elle reste coupée).
             ContextMenuStrip swapMenu = new ContextMenuStrip();
@@ -605,6 +623,11 @@ namespace SDRLink
             status.Spring = true;
             status.TextAlign = ContentAlignment.MiddleLeft;
             strip.Items.Add(status);
+            // Clic droit sur la barre d'état : derniers messages, et types de messages à ne plus afficher.
+            ContextMenuStrip history = new ContextMenuStrip();
+            history.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillStatusHistory(history); };
+            history.Items.Add("-");
+            strip.ContextMenuStrip = history;
             lblUpdate = new ToolStripStatusLabel();
             lblUpdate.Visible = false;
             lblUpdate.IsLink = true;
@@ -774,7 +797,7 @@ namespace SDRLink
             SizeFreqLabels();
             if (cbFavList.Items.Count > 0) FillFavListCombo();
             UpdateCableButton();
-            if (worker == null) status.Text = Lang.T("Déconnecté", "Disconnected");
+            if (worker == null) ShowStatus(Lang.T("Déconnecté", "Disconnected"));
             UpdateDisplays();
             if (chkCompact.Checked && web.Visible == false)
             {
@@ -920,6 +943,7 @@ namespace SDRLink
             ApplyLanguage();
             ApplyTheme();
             UpdateRigVolumeControls();
+            if (settings.FontScale != 100) ApplyFontScale(settings.FontScale);
         }
 
         void SaveUiToSettings()
@@ -1104,7 +1128,7 @@ namespace SDRLink
             ApplyMute();
             UpdatePttButton();
             UpdateConnectButton();
-            status.Text = Lang.T("Déconnecté", "Disconnected");
+            ShowStatus(Lang.T("Déconnecté", "Disconnected"));
             SetConfigEnabled(true);
             UpdateDisplays();
         }
@@ -1128,7 +1152,7 @@ namespace SDRLink
         {
             if (worker == null) return;
             rigOnline = online;
-            status.Text = msg;
+            ShowStatus(msg);
             UpdateDisplays();
         }
 
@@ -1223,7 +1247,7 @@ namespace SDRLink
                 SetPttButton(false);
                 string msg = Lang.F("Émission coupée automatiquement après {0} (délai de sécurité, clic droit sur PTT pour le régler)",
                     "Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)", TimeoutLabel(settings.PttTimeoutSec));
-                status.Text = msg;
+                ShowStatus(msg);
                 Log.Write(msg);
                 return;
             }
@@ -1232,7 +1256,7 @@ namespace SDRLink
 
         void SetPttButton(bool on)
         {
-            if (on && (worker == null || !rigOnline)) { status.Text = Lang.T("PTT : connectez d'abord le poste", "PTT: connect the rig first"); return; }
+            if (on && (worker == null || !rigOnline)) { ShowStatus(Lang.T("PTT : connectez d'abord le poste", "PTT: connect the rig first")); return; }
             if (on) pttSince = DateTime.UtcNow;
             pttActive = on;
             if (worker != null) worker.SetPtt(on);
@@ -1468,8 +1492,8 @@ namespace SDRLink
             long hz = ParseFreq(cbFreq.Text);
             if (hz <= 0)
             {
-                status.Text = Lang.T("Fréquence invalide : tapez une valeur en kHz, par ex. 7074 ou 14074.5",
-                                     "Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5");
+                ShowStatus(Lang.T("Fréquence invalide : tapez une valeur en kHz, par ex. 7074 ou 14074.5",
+                                     "Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5"));
                 return;
             }
             TuneBoth(hz);
@@ -1784,7 +1808,7 @@ namespace SDRLink
             if (url == "" || web.CoreWebView2 == null) return;
             if (!url.Contains("://")) url = "http://" + url;
             try { web.CoreWebView2.Navigate(url); }
-            catch (ArgumentException) { status.Text = Lang.T("Adresse invalide : ", "Invalid address: ") + url; }
+            catch (ArgumentException) { ShowStatus(Lang.T("Adresse invalide : ", "Invalid address: ") + url); }
         }
 
         // Le texte de la barre peut être une adresse, ou le nom d'un favori choisi dans la liste.
@@ -1810,9 +1834,10 @@ namespace SDRLink
                 shownCableError = null;
                 Log.Write("Câble SDRLINK : sortie « " + dev + " »");
             }
-            if (settings.CableEnabled && dev == null)
-                status.Text = Lang.T("Câble SDRLINK : aucun câble audio virtuel trouvé. Installez VB-CABLE (gratuit) : bouton « Câble SDRLINK ».",
-                                     "SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): \"SDRLINK cable\" button.");
+            string missing = Lang.T("Câble SDRLINK : aucun câble audio virtuel trouvé. Installez VB-CABLE (gratuit) : bouton « Câble SDRLINK ».",
+                                    "SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): \"SDRLINK cable\" button.");
+            if (settings.CableEnabled && dev == null) ShowStatus(missing);
+            else if (status.Text == missing) ShowStatus("");   // câble désactivé ou trouvé : le message ne vaut plus
             SetPageTap(cableSink != null);
         }
 
@@ -1958,9 +1983,9 @@ namespace SDRLink
             if (cableSink.Error != shownCableError)
             {
                 shownCableError = cableSink.Error;
-                status.Text = shownCableError == null
+                ShowStatus(shownCableError == null
                     ? Lang.F("Câble SDRLINK : son du WebSDR envoyé vers « {0} »", "SDRLINK cable: WebSDR audio sent to \"{0}\"", cableSink.DeviceName)
-                    : Lang.F("Câble SDRLINK : « {0} » : {1}", "SDRLINK cable: \"{0}\": {1}", cableSink.DeviceName, shownCableError);
+                    : Lang.F("Câble SDRLINK : « {0} » : {1}", "SDRLINK cable: \"{0}\": {1}", cableSink.DeviceName, shownCableError));
             }
         }
         string shownCableError;
@@ -2008,11 +2033,11 @@ namespace SDRLink
 
         void ToggleRigMute()
         {
-            if (worker == null) { status.Text = Lang.T("Mute TX : connectez d'abord le poste", "Mute TRX: connect the rig first"); return; }
+            if (worker == null) { ShowStatus(Lang.T("Mute TX : connectez d'abord le poste", "Mute TRX: connect the rig first")); return; }
             if (rigAfSupported != 1)
             {
-                status.Text = Lang.T("Volume du poste non disponible avec ce poste ou cette interface (OmniRig, HRD, FT-817/818…)",
-                                     "Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)");
+                ShowStatus(Lang.T("Volume du poste non disponible avec ce poste ou cette interface (OmniRig, HRD, FT-817/818…)",
+                                     "Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)"));
                 return;
             }
             rigMuted = !rigMuted;
@@ -2060,7 +2085,9 @@ namespace SDRLink
         {
             StyleToggle(btnMuteSdr, sdrMuted, true);
             StyleToggle(btnMuteRig, rigMuted, worker != null && rigAfSupported == 1);
-            StyleToggle(btnMuteSwap, false, true);
+            btnMuteSwap.BackColor = Theme.ButtonBack;   // ⇄ n'est pas une coupure : couleurs ordinaires
+            btnMuteSwap.ForeColor = Theme.Fore;
+            btnMuteSwap.FlatAppearance.BorderColor = Theme.Border;
             StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable);
         }
 
@@ -2326,12 +2353,13 @@ namespace SDRLink
             CheckExpertSdr();
         }
 
-        // Bouton de coupure : rouge quand le son est coupé ; grisé à la main (pas désactivé, pour rester lisible).
+        // Bouton de coupure : rouge quand le son est coupé, vert quand il passe (comme le bouton de mode choisi),
+        // écriture blanche ; grisé à la main s'il est indisponible (pas désactivé, pour rester lisible).
         static void StyleToggle(Button b, bool active, bool available)
         {
-            b.BackColor = active ? Color.FromArgb(200, 0, 0) : Theme.ButtonBack;
-            b.ForeColor = active ? Color.White : available ? Theme.Fore : Color.FromArgb(140, 140, 140);
-            b.FlatAppearance.BorderColor = active ? Color.FromArgb(150, 0, 0) : Theme.Border;
+            b.BackColor = active ? Color.FromArgb(200, 0, 0) : available ? Color.FromArgb(0, 120, 60) : Theme.ButtonBack;
+            b.ForeColor = active || available ? Color.White : Color.FromArgb(140, 140, 140);
+            b.FlatAppearance.BorderColor = active ? Color.FromArgb(150, 0, 0) : available ? Color.FromArgb(0, 150, 75) : Theme.Border;
         }
 
         // ---------------------------------------------------------------- Favoris
@@ -2404,7 +2432,7 @@ namespace SDRLink
                 settings.Favorites.Add(f);
                 if (f.List == settings.CurrentList && web.CoreWebView2 != null && f.Matches(web.CoreWebView2.Source)) currentFav = f;
                 RefillUrlCombo();
-                status.Text = Lang.F("« {0} » ajouté à « {1} ».", "\"{0}\" added to \"{1}\".", f.Name, FavoritesDialog.ListLabel(settings.ListNames, f.List));
+                ShowStatus(Lang.F("« {0} » ajouté à « {1} ».", "\"{0}\" added to \"{1}\".", f.Name, FavoritesDialog.ListLabel(settings.ListNames, f.List)));
             }
             SaveUiToSettings();
             settings.Save();
@@ -2423,7 +2451,7 @@ namespace SDRLink
             Favorite fav = web.CoreWebView2 != null ? FavoriteInCurrentList(web.CoreWebView2.Source) : null;
             if (fav == null)
             {
-                status.Text = Lang.F("Cette page n'est pas dans « {0} ».", "This page is not in \"{0}\".", listName);
+                ShowStatus(Lang.F("Cette page n'est pas dans « {0} ».", "This page is not in \"{0}\".", listName));
                 return;
             }
             if (MessageBox.Show(Lang.F("Retirer « {0} » de « {1} » ?", "Remove \"{0}\" from \"{1}\"?", fav.Name, listName),
@@ -2492,7 +2520,270 @@ namespace SDRLink
 
         public void ShowError(string message)
         {
-            try { status.Text = Lang.F("Erreur inattendue, notée dans le journal : {0}", "Unexpected error, written to the log: {0}", message); } catch { }
+            try { ShowStatus(Lang.F("Erreur inattendue, notée dans le journal : {0}", "Unexpected error, written to the log: {0}", message)); } catch { }
+        }
+
+        // ---------------------------------------------------------------- Mémoires de fréquences
+
+        // Fréquence et mode actuels, proposés pour une nouvelle mémoire.
+        Memory CurrentMemory()
+        {
+            string mode = worker != null && rigM != null ? rigM : (clickedMode ?? "");
+            return new Memory("", CurrentFreq(), mode);
+        }
+
+        void ShowMemories()
+        {
+            using (MemoriesDialog d = new MemoriesDialog(settings.Memories, CurrentMemory, TuneMemory))
+                d.ShowDialog(this);
+            settings.Save();
+        }
+
+        void AddMemoryHere()
+        {
+            Memory m = CurrentMemory();
+            m.List = settings.Memories.CurrentList;
+            using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Ajouter une mémoire", "Add memory"), m, settings.Memories))
+            {
+                if (d.ShowDialog(this) != DialogResult.OK) return;
+                settings.Memories.Items.Add(d.Result);
+                ShowStatus(Lang.F("Mémoire « {0} » ajoutée à « {1} ».", "Memory \"{0}\" added to \"{1}\".", d.Result.Label,
+                    FavoritesDialog.ListLabel(settings.Memories.ListNames, d.Result.List)));
+            }
+            settings.Save();
+        }
+
+        // Accord immédiat sur une mémoire (poste et WebSDR), avec son mode s'il est mémorisé.
+        void TuneMemory(Memory m)
+        {
+            if (m == null || m.Hz <= 0) return;
+            TuneBoth(m.Hz);
+            if (m.Mode != "")
+            {
+                if (ModeKey(m.Mode) == "digi") digiMode = m.Mode;
+                else if (m.Mode == Modes.CW || m.Mode == Modes.CWR) cwMode = m.Mode;
+                digiActive = ModeKey(m.Mode) == "digi";
+                modeClickUntil = DateTime.UtcNow.AddSeconds(2);
+                clickedMode = m.Mode;
+                SetModeBoth(m.Mode);
+                shownModeFamily = null;
+                UpdateDisplays();
+            }
+            AddToHistory(m.Hz);
+            settings.Memories.Used(m);
+            Log.Write("Mémoire : " + m.Label + " (" + Memory.KHz(m.Hz) + " kHz" + (m.Mode != "" ? " " + m.Mode : "") + ")");
+            ShowStatus(Lang.F("Mémoire « {0} » : {1} kHz", "Memory \"{0}\": {1} kHz", m.Label, Memory.KHz(m.Hz)));
+            settings.Save();
+        }
+
+        // Bouton ▾ : les 20 dernières mémoires utilisées (nom s'il y en a un, sinon fréquence).
+        void ShowRecentMemories()
+        {
+            BuildRecentMenu().Show(btnMemRecent, new Point(0, btnMemRecent.Height));
+        }
+
+        ContextMenuStrip BuildRecentMenu()
+        {
+            ContextMenuStrip m = new ContextMenuStrip();
+            if (settings.Memories.Recent.Count == 0)
+            {
+                ToolStripMenuItem none = new ToolStripMenuItem(Lang.T("(aucune mémoire utilisée)", "(no memory used yet)"));
+                none.Enabled = false;
+                m.Items.Add(none);
+            }
+            foreach (Memory r in settings.Memories.Recent.ToArray())
+            {
+                Memory mem = r;
+                ToolStripMenuItem it = new ToolStripMenuItem(mem.Label);
+                it.ToolTipText = Memory.KHz(mem.Hz) + " kHz" + (mem.Mode != "" ? "  " + Modes.Display(mem.Mode) : "");
+                it.Click += delegate { TuneMemory(mem); };
+                m.Items.Add(it);
+            }
+            m.Items.Add(new ToolStripSeparator());
+            ToolStripMenuItem open = new ToolStripMenuItem(Lang.T("Mémoires…", "Memories…"));
+            open.Click += delegate { ShowMemories(); };
+            m.Items.Add(open);
+            ToolStripMenuItem clear = new ToolStripMenuItem(Lang.T("Effacer cette liste", "Clear this list"));
+            clear.Enabled = settings.Memories.Recent.Count > 0;
+            clear.Click += delegate { settings.Memories.Recent.Clear(); settings.Save(); };
+            m.Items.Add(clear);
+            return m;
+        }
+
+        // ---------------------------------------------------------------- Taille du texte
+
+        // Tailles d'origine (100 %) des polices et des contrôles de taille fixe, relevées au premier changement.
+        readonly Dictionary<Control, Font> baseFonts = new Dictionary<Control, Font>();
+        readonly Dictionary<Control, Size> baseSizes = new Dictionary<Control, Size>();
+        readonly Dictionary<Control, int> baseWidths = new Dictionary<Control, int>();
+        readonly Dictionary<ToolStripItem, Font> baseItemFonts = new Dictionary<ToolStripItem, Font>();
+        Font baseFormFont;
+
+        void CaptureBaseSizes(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c is WebView2) continue;
+                baseFonts[c] = c.Font;
+                // Zones de saisie et listes : la hauteur suit la police, seule la largeur est agrandie.
+                if (c is TextBoxBase || c is ComboBox || c is UpDownBase) baseWidths[c] = c.Width;
+                else if (!c.AutoSize && c.Dock == DockStyle.None && !(c is FlowLayoutPanel) && !(c is TableLayoutPanel)) baseSizes[c] = c.Size;
+                ToolStrip ts = c as ToolStrip;
+                if (ts != null) foreach (ToolStripItem i in ts.Items) baseItemFonts[i] = i.Font;
+                CaptureBaseSizes(c);
+            }
+        }
+
+        // Taille du texte de la fenêtre principale (100 % = taille d'origine) ; les boutons et curseurs de taille fixe suivent.
+        void ApplyFontScale(int percent)
+        {
+            if (baseFormFont == null) { baseFormFont = Font; CaptureBaseSizes(this); }
+            float f = percent / 100f;
+            SuspendLayout();
+            Font = new Font(baseFormFont.FontFamily, baseFormFont.Size * f, baseFormFont.Style);
+            foreach (KeyValuePair<Control, Font> kv in baseFonts) kv.Key.Font = new Font(kv.Value.FontFamily, kv.Value.Size * f, kv.Value.Style);
+            foreach (KeyValuePair<ToolStripItem, Font> kv in baseItemFonts) kv.Key.Font = new Font(kv.Value.FontFamily, kv.Value.Size * f, kv.Value.Style);
+            foreach (KeyValuePair<Control, Size> kv in baseSizes)
+            {
+                // Taille minimale égale à la taille (bouton ⇄) : levée le temps du changement, sinon il ne rapetisserait pas.
+                bool fixedMin = kv.Key.MinimumSize.Width > 0;
+                if (fixedMin) kv.Key.MinimumSize = Size.Empty;
+                kv.Key.Size = new Size((int)Math.Round(kv.Value.Width * f), (int)Math.Round(kv.Value.Height * f));
+                if (fixedMin) kv.Key.MinimumSize = kv.Key.Size;
+            }
+            foreach (KeyValuePair<Control, int> kv in baseWidths) kv.Key.Width = (int)Math.Round(kv.Value * f);
+            ResumeLayout(true);
+            SizeFreqLabels();
+            // Affichage réduit : la hauteur de la fenêtre suit celle des lignes.
+            if (!web.Visible)
+            {
+                MaximumSize = Size.Empty;
+                PerformLayout();
+                int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
+                MaximumSize = new Size(10000, h);
+                Height = h;
+            }
+        }
+
+        // Petite fenêtre « Taille du texte » : 70 à 200 %, appliquée en direct ; Annuler revient à la taille d'avant.
+        void AskFontScale()
+        {
+            int before = settings.FontScale;
+            using (Form d = new Form())
+            {
+                d.Text = Lang.T("Taille du texte", "Text size");
+                d.FormBorderStyle = FormBorderStyle.FixedDialog;
+                d.MaximizeBox = d.MinimizeBox = false;
+                d.ShowInTaskbar = false;
+                d.StartPosition = FormStartPosition.CenterParent;
+                d.Font = new Font("Segoe UI", 9f);
+                d.ClientSize = new Size(420, 132);
+                Label l = new Label { Text = Lang.T("Taille du texte de la fenêtre (100 % = taille d'origine) :", "Window text size (100% = original size):"), Location = new Point(12, 14), AutoSize = true };
+                TrackBar tb = new TrackBar { Minimum = Settings.FontScaleMin / 5, Maximum = Settings.FontScaleMax / 5, TickFrequency = 2, SmallChange = 1, LargeChange = 2, Value = before / 5 };
+                tb.SetBounds(46, 38, 270, 40);
+                Button minus = new Button { Text = "−" }, plus = new Button { Text = "+" }, reset = new Button { Text = "100 %" };
+                minus.SetBounds(12, 40, 30, 28);
+                plus.SetBounds(320, 40, 30, 28);
+                Label value = new Label { Location = new Point(356, 46), AutoSize = true };
+                reset.SetBounds(12, 90, 80, 28);
+                Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
+                Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
+                ok.SetBounds(240, 90, 80, 28);
+                cancel.SetBounds(326, 90, 80, 28);
+                d.AcceptButton = ok;
+                d.CancelButton = cancel;
+                Action show = delegate { value.Text = tb.Value * 5 + " %"; };
+                tb.ValueChanged += delegate { show(); ApplyFontScale(tb.Value * 5); };
+                minus.Click += delegate { tb.Value = Math.Max(tb.Minimum, tb.Value - 1); };
+                plus.Click += delegate { tb.Value = Math.Min(tb.Maximum, tb.Value + 1); };
+                reset.Click += delegate { tb.Value = 20; };
+                show();
+                d.Controls.AddRange(new Control[] { l, minus, tb, plus, value, reset, ok, cancel });
+                Theme.Apply(d);
+                if (d.ShowDialog(this) == DialogResult.OK) settings.FontScale = tb.Value * 5;
+                else if (tb.Value * 5 != before) ApplyFontScale(before);
+            }
+            Log.Write("Taille du texte : " + settings.FontScale + " %");
+            settings.Save();
+        }
+
+        // ---------------------------------------------------------------- Barre d'état et historique des messages
+
+        // 20 derniers messages (le plus récent en tête) ; un type de message masqué reste dans l'historique
+        // mais ne s'affiche plus dans la barre.
+        const int HistorySize = 20;
+        readonly List<DateTime> historyTimes = new List<DateTime>();
+        readonly List<string> historyTexts = new List<string>();
+
+        void ShowStatus(string text)
+        {
+            text = text ?? "";
+            if (text.Length > 0)
+            {
+                if (historyTexts.Count > 0 && historyTexts[0] == text) historyTimes[0] = DateTime.Now;   // message répété
+                else
+                {
+                    historyTimes.Insert(0, DateTime.Now);
+                    historyTexts.Insert(0, text);
+                    if (historyTexts.Count > HistorySize) { historyTimes.RemoveAt(HistorySize); historyTexts.RemoveAt(HistorySize); }
+                }
+                if (settings.HiddenMessages.Contains(MessageKey(text))) return;
+            }
+            status.Text = text;
+        }
+
+        // Type d'un message : son texte sans les nombres ni les noms entre guillemets (fréquences, appareils, favoris…).
+        public static string MessageKey(string text)
+        {
+            string k = Regex.Replace(text ?? "", "«[^»]*»|\"[^\"]*\"|“[^”]*”|„[^“”]*[“”]", "«…»");
+            k = Regex.Replace(k, "\\d+([.,]\\d+)*", "#");
+            return k.Replace("|", "/").Trim();
+        }
+
+        void FillStatusHistory(ContextMenuStrip m)
+        {
+            m.Items.Clear();
+            ToolStripMenuItem title = new ToolStripMenuItem(Lang.F("{0} derniers messages (clic : masquer ou réafficher ce type de message, ✓ = masqué)",
+                "Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)", HistorySize));
+            title.Enabled = false;
+            m.Items.Add(title);
+            if (historyTexts.Count == 0)
+            {
+                ToolStripMenuItem none = new ToolStripMenuItem(Lang.T("(aucun message)", "(no message)"));
+                none.Enabled = false;
+                m.Items.Add(none);
+            }
+            for (int i = 0; i < historyTexts.Count; i++)
+            {
+                string text = historyTexts[i], key = MessageKey(text);
+                ToolStripMenuItem it = new ToolStripMenuItem(historyTimes[i].ToString("HH:mm:ss") + "   " + (text.Length > 140 ? text.Substring(0, 137) + "…" : text));
+                it.Checked = settings.HiddenMessages.Contains(key);
+                it.ToolTipText = text;
+                it.Click += delegate { ToggleHiddenMessage(key); };
+                m.Items.Add(it);
+            }
+            m.Items.Add(new ToolStripSeparator());
+            ToolStripMenuItem showAll = new ToolStripMenuItem(Lang.F("Réafficher tous les messages masqués ({0})", "Show all hidden messages again ({0})", settings.HiddenMessages.Count));
+            showAll.Enabled = settings.HiddenMessages.Count > 0;
+            showAll.Click += delegate
+            {
+                settings.HiddenMessages.Clear();
+                settings.Save();
+                Log.Write("Barre d'état : tous les messages réaffichés");
+            };
+            m.Items.Add(showAll);
+        }
+
+        void ToggleHiddenMessage(string key)
+        {
+            if (settings.HiddenMessages.Remove(key)) Log.Write("Barre d'état : messages réaffichés [" + key + "]");
+            else
+            {
+                settings.HiddenMessages.Add(key);
+                Log.Write("Barre d'état : messages masqués [" + key + "]");
+                if (MessageKey(status.Text) == key) status.Text = "";
+            }
+            settings.Save();
         }
 
         // ---------------------------------------------------------------- Mise à jour

@@ -22,6 +22,8 @@ Check favorites	Verificar favoritos
 Check all	Marcar todo
 Uncheck all	Desmarcar todo
 Move to ▸	Mover a ▸
+New list	Nueva lista
+Delete list…	Eliminar la lista…
 (right-click the list to rename it)	(clic derecho en la lista para cambiarle el nombre)
 Name	Nombre
 Address	Dirección
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Este WebSDR ya está en «{0}».
 List {0}	Lista {0}
 Rename "{0}"…	Cambiar nombre de «{0}»…
+List "{0}" added ({1}/{2}).	Lista «{0}» añadida ({1}/{2}).
+Delete the list "{0}" (empty)?	¿Eliminar la lista «{0}» (vacía)?
+Delete the list "{0}" and its {1} favorite(s)?	¿Eliminar la lista «{0}» y sus {1} favorito(s)?
+List "{0}" deleted.	Lista «{0}» eliminada.
 {0} favorite(s) moved to "{1}".	{0} favorito(s) movido(s) a «{1}».
 {0} favorite(s) shown, {1} checked	{0} favorito(s) mostrado(s), {1} marcado(s)
 Remove favorite "{0}"?	¿Eliminar el favorito «{0}»?
@@ -67,6 +73,7 @@ HRD connection closed	Conexión HRD cerrada
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	No hay servidor HRD en {0}:{1} (active el servidor IP en HRD Rig Control).
 Cannot open the log: 	No se puede abrir el registro: 
 Save: no known frequency (rig or WebSDR)	Guardar: ninguna frecuencia conocida (equipo o WebSDR)
+Store the current frequency…	Memorizar la frecuencia actual…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Pasar el sonido al receptor siguiente (clic derecho: receptor que permanece silenciado)
 RIG	EQUIPO
 Disconnected	Desconectado
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Silencio que ⇄ ignora (permanece silenciado
 None	Ninguno
 ExpertSDR TCI port	Puerto TCI de ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Puerto del servidor TCI (ExpertSDR, Options > TCI):
+Add memory	Añadir memoria
+(no memory used yet)	(ninguna memoria usada aún)
+Memories…	Memorias…
+Clear this list	Vaciar esta lista
+Text size	Tamaño del texto
+Window text size (100% = original size):	Tamaño del texto de la ventana (100 % = tamaño original):
+(no message)	(ningún mensaje)
+Last {0} memories used	Últimas {0} memorias usadas
 ExpertSDR TCI port: {0}…	Puerto TCI de ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualización V{0} disponible: haga clic para descargarla
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Transmisión detenida automáticamente tras {0} (tiempo límite de seguridad, clic derecho en PTT para cambiarlo)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Esta página no está en «{0}».
 Remove "{0}" from "{1}"?	¿Quitar «{0}» de «{1}»?
 Unexpected error, written to the log: {0}	Error inesperado, anotado en el registro: {0}
+Memory "{0}" added to "{1}".	Memoria «{0}» añadida a «{1}».
+Memory "{0}": {1} kHz	Memoria «{0}»: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Últimos {0} mensajes (clic: ocultar o volver a mostrar este tipo de mensaje, ✓ = oculto)
+Show all hidden messages again ({0})	Volver a mostrar todos los mensajes ocultos ({0})
 Interface:	Interfaz:
 Brand:	Marca:
 Model:	Modelo:
@@ -142,11 +161,14 @@ Volume:	Volumen:
 TRX volume:	Volumen TRX:
 ExpertSDR volume:	Volumen ExpertSDR:
 Open log	Abrir registro
+Text size…	Tamaño del texto…
 …	…
 Download Hamlib…	Descargar Hamlib…
 SDRLINK cable ▾	Cable SDRLINK ▾
 QSY	QSY
 Save	Guardar
+Memories	Memorias
+▾	▾
 Go	Ir
 ◀ Back	◀ Atrás
 Reload	Recargar
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → Equipo
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Frecuencia (kHz):
+Mode:	Modo:
+(mode unchanged)	(modo sin cambios)
+Edit…	Modificar…
+Frequency (kHz)	Frecuencia (kHz)
+Mode	Modo
+Select a memory first.	Seleccione primero una memoria.
+Edit memory	Modificar la memoria
+{0} memory(ies). Click a memory to go there.	{0} memoria(s). Haga clic en una memoria para ir a ella.
+Tuned to "{0}" ({1} kHz).	Sintonizado en «{0}» ({1} kHz).
+Remove the memory "{0}"?	¿Eliminar la memoria «{0}»?
+Delete the list "{0}" and its {1} memory(ies)?	¿Eliminar la lista «{0}» y sus {1} memoria(s)?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig no está instalado (no se encontró OmniRig.OmniRigX).
 Dark mode colour	Color del modo oscuro
 Light mode colour	Color del modo claro

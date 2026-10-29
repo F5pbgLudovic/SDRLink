@@ -16,7 +16,8 @@ namespace SDRLink
         public int Volume = -1;   // volume mémorisé pour ce WebSDR, en %, -1 = jamais réglé
         public int List;          // liste de favoris (0 à 3)
 
-        public const int ListCount = 4;
+        public const int MaxLists = 10;
+        public static int ListCount = 4;   // listes utilisées (1 à MaxLists), lu et enregistré avec les réglages
 
         public Favorite(string name, string url)
         {
@@ -47,7 +48,7 @@ namespace SDRLink
             int vol, list;
             if (p.Length >= 4 && int.TryParse(p[p.Length - 2], out vol) && int.TryParse(p[p.Length - 1], out list))
                 return new Favorite(string.Join("|", p, 0, p.Length - 3), p[p.Length - 3])
-                    { Volume = vol < 0 ? -1 : Math.Min(100, vol), List = Math.Max(0, Math.Min(ListCount - 1, list)) };
+                    { Volume = vol < 0 ? -1 : Math.Min(100, vol), List = Math.Max(0, Math.Min(MaxLists - 1, list)) };
             if (p.Length >= 3 && int.TryParse(p[p.Length - 1], out vol))
                 return new Favorite(string.Join("|", p, 0, p.Length - 2), p[p.Length - 2]) { Volume = Math.Max(0, Math.Min(100, vol)) };
             int bar = v.LastIndexOf('|');
@@ -91,12 +92,19 @@ namespace SDRLink
             List<Favorite> list = new List<Favorite>();
             List<List<string>> paths = new List<List<string>>();
             List<string> stack = new List<string>();
+            List<string> subfolders = new List<string>();   // sous-dossiers du dossier SDRLink, dans l'ordre du fichier (vides compris)
             string pending = null;
             bool html = false;
             foreach (Match m in Regex.Matches(text, "<DL\\b[^>]*>|</DL\\s*>|<H3\\b[^>]*>(.*?)</H3\\s*>|<A\\s([^>]*)>(.*?)</A\\s*>", RegexOptions.IgnoreCase | RegexOptions.Singleline))
             {
                 string tag = m.Value.Substring(0, Math.Min(3, m.Value.Length)).ToUpperInvariant();
-                if (tag == "<DL") { stack.Add(pending ?? ""); pending = null; }
+                if (tag == "<DL")
+                {
+                    string folder = pending ?? "";
+                    if (stack.Count > 0 && IsSdrLinkFolder(stack[stack.Count - 1]) && folder.Length > 0 && !subfolders.Contains(folder)) subfolders.Add(folder);
+                    stack.Add(folder);
+                    pending = null;
+                }
                 else if (tag == "</D") { if (stack.Count > 0) stack.RemoveAt(stack.Count - 1); }
                 else if (tag == "<H3") pending = WebUtility.HtmlDecode(Regex.Replace(m.Groups[1].Value, "<[^>]*>", "")).Trim();
                 else
@@ -116,7 +124,10 @@ namespace SDRLink
             if (html)
             {
                 bool sdrlink = paths.Exists(delegate(List<string> fp) { return fp.Exists(IsSdrLinkFolder); });
-                List<string> subfolders = new List<string>();   // sous-dossiers du dossier SDRLink, dans l'ordre du fichier
+                // Chaque sous-dossier du dossier SDRLink devient une liste (créée si besoin, jusqu'à MaxLists).
+                Dictionary<string, int> folderList = new Dictionary<string, int>();
+                if (sdrlink)
+                    for (int k = 0; k < subfolders.Count; k++) folderList[subfolders[k]] = ListForName(subfolders[k], k + 1, listNames);
                 List<Favorite> kept = new List<Favorite>();
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -126,16 +137,8 @@ namespace SDRLink
                     {
                         if (root < 0) continue;   // hors du dossier SDRLink (autres marque-pages du navigateur)
                         if (root + 1 >= fp.Count) { list[i].List = defaultList; kept.Add(list[i]); continue; }
-                        string sub = fp[root + 1];
-                        int k = subfolders.IndexOf(sub);
-                        if (k < 0) { subfolders.Add(sub); k = subfolders.Count - 1; }
-                        int idx = ListIndexOf(sub, listNames);
-                        if (idx < 0 && k < ListCount)
-                        {
-                            idx = k;
-                            if (IsDefaultListName(listNames, k) && sub.Length > 0) listNames[k] = sub.Replace("|", "/");
-                        }
-                        list[i].List = idx >= 0 ? idx : defaultList;
+                        int idx;
+                        list[i].List = folderList.TryGetValue(fp[root + 1], out idx) && idx >= 0 ? idx : defaultList;
                     }
                     else
                     {
@@ -161,18 +164,39 @@ namespace SDRLink
                 }
                 else if (LooksLikeUrl(p[0])) f = new Favorite(null, p[0].Trim('"', ' '));
                 if (f == null) continue;
-                int idx = p.Length >= 4 ? ListIndexOf(p[3].Trim('"', ' '), listNames) : -1;
+                // 4e colonne : nom de la liste ; 5e : son numéro (depuis la 1.8).
+                int number;
+                if (p.Length < 5 || !int.TryParse(p[4].Trim('"', ' '), out number)) number = 0;
+                int idx = p.Length >= 4 ? ListForName(p[3].Trim('"', ' '), number, listNames) : -1;
                 f.List = idx >= 0 ? idx : defaultList;
                 list.Add(f);
             }
             return list;
         }
 
+        // Liste d'un dossier ou d'une colonne du fichier importé : celle qui porte ce nom ; sinon celle de ce rang
+        // (1 à MaxLists, créée si besoin ; une liste jamais renommée prend alors ce nom) ; sans rang, une nouvelle liste
+        // à ce nom s'il reste de la place. -1 si aucune.
+        static int ListForName(string name, int number, string[] listNames)
+        {
+            name = (name ?? "").Trim();
+            int idx = ListIndexOf(name, listNames);
+            if (idx >= 0 || name.Length == 0) return idx;
+            Match def = Regex.Match(name, "^Lis(?:te|t) (\\d+)$", RegexOptions.IgnoreCase);   // "Liste 7" : 7e liste
+            if (def.Success) number = int.Parse(def.Groups[1].Value);
+            if (number < 1) { if (ListCount >= MaxLists) return -1; number = ListCount + 1; }
+            if (number > MaxLists) return -1;
+            idx = number - 1;
+            while (ListCount <= idx) { listNames[ListCount] = "Liste " + (ListCount + 1); ListCount++; }
+            if (IsDefaultListName(listNames, idx)) listNames[idx] = name.Replace("|", "/");
+            return idx;
+        }
+
         static bool IsSdrLinkFolder(string name) { return string.Equals(name, "SDRLink", StringComparison.OrdinalIgnoreCase); }
 
         // Export de tous les favoris. .html : marque-pages au format Netscape de Firefox (importable aussi dans Edge
         // et Chrome), dossier « SDRLink » avec un sous-dossier par liste, même vide (l'import s'appuie sur leur rang) ; le volume est gardé dans SDRLINK_VOLUME
-        // (ignoré par les navigateurs). Sinon CSV "nom;URL;volume;liste".
+        // (ignoré par les navigateurs). Sinon CSV "nom;URL;volume;liste;numéro de liste".
         public static void Export(string path, IList<Favorite> favs, string[] listNames)
         {
             StringBuilder sb = new StringBuilder();
@@ -202,7 +226,7 @@ namespace SDRLink
             {
                 foreach (Favorite f in favs)
                     sb.Append(f.Name.Replace(";", ",")).Append(';').Append(f.Url).Append(';').Append(f.Volume >= 0 ? f.Volume.ToString() : "")
-                      .Append(';').Append(FavoritesDialog.ListLabel(listNames, f.List).Replace(";", ",")).Append("\r\n");
+                      .Append(';').Append(FavoritesDialog.ListLabel(listNames, f.List).Replace(";", ",")).Append(';').Append(f.List + 1).Append("\r\n");
             }
             File.WriteAllText(path, sb.ToString(), new UTF8Encoding(true));
         }
@@ -336,9 +360,9 @@ namespace SDRLink
 
         readonly string[] listNames;
         readonly ComboBox cbList = new ComboBox();
-        const int AllLists = Favorite.ListCount;   // dernier choix de la liste déroulante : toutes les listes
+        int AllLists { get { return Favorite.ListCount; } }   // dernier choix de la liste déroulante : toutes les listes
 
-        // Liste affichée (0 à 3, ou AllLists) ; c'est aussi la liste où vont les favoris ajoutés ou importés.
+        // Liste affichée (0 à ListCount - 1, ou AllLists) ; c'est aussi la liste où vont les favoris ajoutés ou importés.
         public int ShownList { get { return Math.Max(0, cbList.SelectedIndex); } }
         int TargetList(int mainList) { return ShownList == AllLists ? mainList : ShownList; }
         readonly int mainList;
@@ -399,7 +423,7 @@ namespace SDRLink
             cbList.DropDownStyle = ComboBoxStyle.DropDownList;
             cbList.SetBounds(80, 104, 200, 23);
             FillListCombo(mainList);
-            cbList.SelectedIndexChanged += delegate { Refill(-1); };
+            cbList.SelectedIndexChanged += delegate { Refill(-1); UpdateListButtons(); };
             ContextMenuStrip listMenu = new ContextMenuStrip();
             ToolStripMenuItem rename = new ToolStripMenuItem();
             listMenu.Items.Add(rename);
@@ -412,7 +436,12 @@ namespace SDRLink
             cbList.ContextMenuStrip = listMenu;
             Button btnMove = Make(Lang.T("Déplacer vers ▸", "Move to ▸"), 290, 102, 130, 27, null);
             btnMove.Click += delegate { ShowMoveMenu(btnMove); };
-            Label hint = new Label { Text = Lang.T("(clic droit sur la liste pour la renommer)", "(right-click the list to rename it)"), Location = new Point(430, 108), AutoSize = true };
+            // Ajout et suppression de listes (1 à Favorite.MaxLists).
+            btnAddList = Make(Lang.T("Nouvelle liste", "New list"), 430, 102, 120, 27, delegate { AddList(); });
+            btnRemoveList = Make(Lang.T("Supprimer la liste…", "Delete list…"), 556, 102, 132, 27, delegate { RemoveList(); });
+            ToolTip tips = new ToolTip();
+            tips.SetToolTip(cbList, Lang.T("(clic droit sur la liste pour la renommer)", "(right-click the list to rename it)"));
+            UpdateListButtons();
 
             // Nom et adresse du favori sélectionné, modifiables directement (la liste se met à jour en tapant).
             Label lName = new Label { Text = Lang.T("Nom :", "Name:"), Location = new Point(12, 142), AutoSize = true };
@@ -461,7 +490,7 @@ namespace SDRLink
             btnListen.Anchor = open.Anchor = close.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CancelButton = close;
 
-            Controls.AddRange(new Control[] { add, imp, exp, sel, chk, lList, cbList, btnMove, hint, lName, txtName, lUrl, txtUrl, view, lblStatus, btnListen, open, close });
+            Controls.AddRange(new Control[] { add, imp, exp, sel, chk, lList, cbList, btnMove, btnAddList, btnRemoveList, lName, txtName, lUrl, txtUrl, view, lblStatus, btnListen, open, close });
             Theme.Apply(this);
             Refill(-1);
             ShowSelected();
@@ -481,6 +510,62 @@ namespace SDRLink
             for (int i = 0; i < Favorite.ListCount; i++) cbList.Items.Add(ListLabel(listNames, i));
             cbList.Items.Add(Lang.T("Toutes les listes", "All lists"));
             cbList.SelectedIndex = select;
+        }
+
+        Button btnAddList, btnRemoveList;
+
+        void UpdateListButtons()
+        {
+            if (btnAddList == null) return;
+            btnAddList.Enabled = Favorite.ListCount < Favorite.MaxLists;
+            btnRemoveList.Enabled = ShownList != AllLists && Favorite.ListCount > 1;
+        }
+
+        // Nouvelle liste à la fin (nommée "Liste N", à renommer par clic droit), affichée tout de suite.
+        void AddList()
+        {
+            if (Favorite.ListCount >= Favorite.MaxLists) return;
+            int i = Favorite.ListCount++;
+            listNames[i] = "Liste " + (i + 1);
+            string name = AskListName(this, listNames[i]);
+            if (!string.IsNullOrEmpty(name)) listNames[i] = name.Replace("|", "/");
+            refreshing = true;
+            FillListCombo(i);
+            refreshing = false;
+            Refill(-1);
+            UpdateListButtons();
+            lblStatus.Text = Lang.F("Liste « {0} » ajoutée ({1}/{2}).", "List \"{0}\" added ({1}/{2}).", ListLabel(listNames, i), Favorite.ListCount, Favorite.MaxLists);
+        }
+
+        // Supprime la liste affichée et ses favoris (après confirmation) ; les listes suivantes remontent d'un rang.
+        void RemoveList()
+        {
+            int i = ShownList;
+            if (i == AllLists || Favorite.ListCount <= 1) return;
+            string label = ListLabel(listNames, i);
+            int count = favs.FindAll(delegate(Favorite f) { return f.List == i; }).Count;
+            string q = count == 0
+                ? Lang.F("Supprimer la liste « {0} » (vide) ?", "Delete the list \"{0}\" (empty)?", label)
+                : Lang.F("Supprimer la liste « {0} » et ses {1} favori(s) ?", "Delete the list \"{0}\" and its {1} favorite(s)?", label, count);
+            if (MessageBox.Show(this, q, "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            DeleteList(favs, listNames, i);
+            refreshing = true;
+            FillListCombo(Math.Min(i, Favorite.ListCount - 1));
+            refreshing = false;
+            Refill(-1);
+            UpdateListButtons();
+            lblStatus.Text = Lang.F("Liste « {0} » supprimée.", "List \"{0}\" deleted.", label);
+        }
+
+        // Retire la liste i : ses favoris sont supprimés, ceux des listes suivantes et les noms remontent d'un rang.
+        public static void DeleteList(List<Favorite> favs, string[] listNames, int i)
+        {
+            favs.RemoveAll(delegate(Favorite f) { return f.List == i; });
+            foreach (Favorite f in favs) if (f.List > i) f.List--;
+            // Une liste jamais renommée (« Liste 5 ») prend le nom de son nouveau rang (« Liste 4 »).
+            for (int j = i; j < Favorite.ListCount - 1; j++) listNames[j] = listNames[j + 1] == "Liste " + (j + 2) ? "Liste " + (j + 1) : listNames[j + 1];
+            Favorite.ListCount--;
+            for (int j = Favorite.ListCount; j < Favorite.MaxLists; j++) listNames[j] = "Liste " + (j + 1);
         }
 
         void RenameList()
@@ -835,10 +920,11 @@ namespace SDRLink
                 if (d.ShowDialog(this) != DialogResult.OK) return;
                 // Chaque favori va dans sa liste (dossiers du fichier) ; ceux sans liste vont dans la liste affichée.
                 List<Favorite> imported;
+                bool wasAll = ShownList == AllLists;   // l'import peut créer des listes : "Toutes les listes" change de rang
                 try { imported = Favorite.Import(d.FileName, listNames, TargetList(mainList)); }
                 catch (Exception ex) { MessageBox.Show(this, ex.Message, "SDRLink"); return; }
                 int added = 0;
-                int[] perList = new int[Favorite.ListCount];
+                int[] perList = new int[Favorite.MaxLists];
                 foreach (Favorite f in imported)
                 {
                     Favorite n = f;
@@ -847,7 +933,10 @@ namespace SDRLink
                     perList[f.List]++;
                     added++;
                 }
-                FillListCombo(cbList.SelectedIndex);   // listes renommées d'après le fichier
+                refreshing = true;
+                FillListCombo(wasAll ? AllLists : ShownList);   // listes créées ou renommées d'après le fichier
+                refreshing = false;
+                UpdateListButtons();
                 Refill(-1);
                 StringBuilder detail = new StringBuilder();
                 for (int i = 0; i < Favorite.ListCount; i++)

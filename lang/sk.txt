@@ -22,6 +22,8 @@ Check favorites	Skontrolovať obľúbené
 Check all	Začiarknuť všetko
 Uncheck all	Odčiarknuť všetko
 Move to ▸	Presunúť do ▸
+New list	Nový zoznam
+Delete list…	Odstrániť zoznam…
 (right-click the list to rename it)	(zoznam premenujete kliknutím pravým tlačidlom)
 Name	Názov
 Address	Adresa
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Tento WebSDR už je v „{0}“.
 List {0}	Zoznam {0}
 Rename "{0}"…	Premenovať „{0}“…
+List "{0}" added ({1}/{2}).	Zoznam „{0}“ pridaný ({1}/{2}).
+Delete the list "{0}" (empty)?	Odstrániť zoznam „{0}“ (prázdny)?
+Delete the list "{0}" and its {1} favorite(s)?	Odstrániť zoznam „{0}“ a jeho {1} obľúbené položky?
+List "{0}" deleted.	Zoznam „{0}“ odstránený.
 {0} favorite(s) moved to "{1}".	Obľúbené položky presunuté do „{1}“: {0}.
 {0} favorite(s) shown, {1} checked	Zobrazené obľúbené: {0}, začiarknuté: {1}
 Remove favorite "{0}"?	Odstrániť obľúbenú položku „{0}“?
@@ -67,6 +73,7 @@ HRD connection closed	Spojenie s HRD ukončené
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} nie je server HRD (povoľte IP server v HRD Rig Control).
 Cannot open the log: 	Nedá sa otvoriť denník: 
 Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
+Store the current frequency…	Uložiť aktuálny kmitočet…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prepnúť zvuk na ďalší prijímač (pravé tlačidlo: prijímač, ktorý zostane stlmený)
 RIG	TRX
 Disconnected	Odpojené
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Stlmenie, ktoré ⇄ preskakuje (zostane stlm
 None	Žiadne
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port servera TCI (ExpertSDR, Options > TCI):
+Add memory	Pridať pamäť
+(no memory used yet)	(zatiaľ žiadna použitá pamäť)
+Memories…	Pamäte…
+Clear this list	Vymazať tento zoznam
+Text size	Veľkosť textu
+Window text size (100% = original size):	Veľkosť textu okna (100 % = pôvodná veľkosť):
+(no message)	(žiadna správa)
+Last {0} memories used	Posledných {0} použitých pamätí
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ K dispozícii je aktualizácia V{0}: kliknite na stiahnutie
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Vysielanie automaticky zastavené po {0} (bezpečnostný limit, zmeníte ho kliknutím pravým tlačidlom na PTT)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Táto stránka nie je v „{0}“.
 Remove "{0}" from "{1}"?	Odstrániť „{0}“ z „{1}“?
 Unexpected error, written to the log: {0}	Neočakávaná chyba, zapísaná do protokolu: {0}
+Memory "{0}" added to "{1}".	Pamäť „{0}“ pridaná do „{1}“.
+Memory "{0}": {1} kHz	Pamäť „{0}“: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Posledných {0} správ (kliknutie: skryť alebo znova zobraziť tento druh správy, ✓ = skryté)
+Show all hidden messages again ({0})	Znova zobraziť všetky skryté správy ({0})
 Interface:	Rozhranie:
 Brand:	Značka:
 Model:	Model:
@@ -142,11 +161,14 @@ Volume:	Hlasitosť:
 TRX volume:	Hlasitosť TRX:
 ExpertSDR volume:	Hlasitosť ExpertSDR:
 Open log	Otvoriť denník
+Text size…	Veľkosť textu…
 …	…
 Download Hamlib…	Stiahnuť Hamlib…
 SDRLINK cable ▾	Kábel SDRLINK ▾
 QSY	QSY
 Save	Uložiť
+Memories	Pamäte
+▾	▾
 Go	Prejsť
 ◀ Back	◀ Späť
 Reload	Znova načítať
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Kmitočet (kHz):
+Mode:	Druh prevádzky:
+(mode unchanged)	(druh prevádzky bez zmeny)
+Edit…	Upraviť…
+Frequency (kHz)	Kmitočet (kHz)
+Mode	Druh prevádzky
+Select a memory first.	Najprv vyberte pamäť.
+Edit memory	Upraviť pamäť
+{0} memory(ies). Click a memory to go there.	{0} pamätí. Kliknutím na pamäť sa na ňu preladíte.
+Tuned to "{0}" ({1} kHz).	Preladené na „{0}“ ({1} kHz).
+Remove the memory "{0}"?	Odstrániť pamäť „{0}“?
+Delete the list "{0}" and its {1} memory(ies)?	Odstrániť zoznam „{0}“ a jeho {1} pamätí?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nie je nainštalovaný (OmniRig.OmniRigX sa nenašiel).
 Dark mode colour	Farba tmavého režimu
 Light mode colour	Farba svetlého režimu

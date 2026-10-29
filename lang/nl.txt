@@ -22,6 +22,8 @@ Check favorites	Favorieten controleren
 Check all	Alles aanvinken
 Uncheck all	Alles uitvinken
 Move to ▸	Verplaatsen naar ▸
+New list	Nieuwe lijst
+Delete list…	Lijst verwijderen…
 (right-click the list to rename it)	(rechtsklik op de lijst om te hernoemen)
 Name	Naam
 Address	Adres
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Deze WebSDR staat al in "{0}".
 List {0}	Lijst {0}
 Rename "{0}"…	"{0}" hernoemen…
+List "{0}" added ({1}/{2}).	Lijst "{0}" toegevoegd ({1}/{2}).
+Delete the list "{0}" (empty)?	Lijst "{0}" (leeg) verwijderen?
+Delete the list "{0}" and its {1} favorite(s)?	Lijst "{0}" en de {1} favoriet(en) verwijderen?
+List "{0}" deleted.	Lijst "{0}" verwijderd.
 {0} favorite(s) moved to "{1}".	{0} favoriet(en) verplaatst naar "{1}".
 {0} favorite(s) shown, {1} checked	{0} favoriet(en) getoond, {1} aangevinkt
 Remove favorite "{0}"?	Favoriet "{0}" verwijderen?
@@ -67,6 +73,7 @@ HRD connection closed	HRD-verbinding gesloten
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Geen HRD-server op {0}:{1} (schakel de IP-server in HRD Rig Control in).
 Cannot open the log: 	Kan het logboek niet openen: 
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
+Store the current frequency…	Huidige frequentie opslaan…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Geluid naar de volgende ontvanger schakelen (rechtsklik: ontvanger die gedempt blijft)
 RIG	TRX
 Disconnected	Niet verbonden
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Demping die ⇄ negeert (blijft gedempt):
 None	Geen
 ExpertSDR TCI port	TCI-poort van ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
+Add memory	Geheugen toevoegen
+(no memory used yet)	(nog geen geheugen gebruikt)
+Memories…	Geheugens…
+Clear this list	Deze lijst leegmaken
+Text size	Tekstgrootte
+Window text size (100% = original size):	Tekstgrootte van het venster (100 % = oorspronkelijke grootte):
+(no message)	(geen meldingen)
+Last {0} memories used	Laatste {0} gebruikte geheugens
 ExpertSDR TCI port: {0}…	TCI-poort van ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Update V{0} beschikbaar: klik om te downloaden
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Zenden automatisch gestopt na {0} (veiligheidstijd, rechtsklik op PTT om te wijzigen)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Deze pagina staat niet in "{0}".
 Remove "{0}" from "{1}"?	"{0}" uit "{1}" verwijderen?
 Unexpected error, written to the log: {0}	Onverwachte fout, in het logboek gezet: {0}
+Memory "{0}" added to "{1}".	Geheugen "{0}" toegevoegd aan "{1}".
+Memory "{0}": {1} kHz	Geheugen "{0}": {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Laatste {0} meldingen (klik: dit soort melding verbergen of weer tonen, ✓ = verborgen)
+Show all hidden messages again ({0})	Alle verborgen meldingen weer tonen ({0})
 Interface:	Interface:
 Brand:	Merk:
 Model:	Model:
@@ -142,11 +161,14 @@ Volume:	Volume:
 TRX volume:	TRX-volume:
 ExpertSDR volume:	ExpertSDR-volume:
 Open log	Log openen
+Text size…	Tekstgrootte…
 …	…
 Download Hamlib…	Hamlib downloaden…
 SDRLINK cable ▾	SDRLINK-kabel ▾
 QSY	QSY
 Save	Save
+Memories	Geheugens
+▾	▾
 Go	Ga
 ◀ Back	◀ Terug
 Reload	Vernieuwen
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Frequentie (kHz):
+Mode:	Mode:
+(mode unchanged)	(mode ongewijzigd)
+Edit…	Wijzigen…
+Frequency (kHz)	Frequentie (kHz)
+Mode	Mode
+Select a memory first.	Kies eerst een geheugen.
+Edit memory	Geheugen wijzigen
+{0} memory(ies). Click a memory to go there.	{0} geheugen(s). Klik op een geheugen om erheen te gaan.
+Tuned to "{0}" ({1} kHz).	Afgestemd op "{0}" ({1} kHz).
+Remove the memory "{0}"?	Geheugen "{0}" verwijderen?
+Delete the list "{0}" and its {1} memory(ies)?	Lijst "{0}" en de {1} geheugen(s) verwijderen?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig is niet geïnstalleerd (OmniRig.OmniRigX niet gevonden).
 Dark mode colour	Kleur donkere modus
 Light mode colour	Kleur lichte modus

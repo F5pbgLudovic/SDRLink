@@ -22,6 +22,8 @@ Check favorites	Verificare favorite
 Check all	Bifează tot
 Uncheck all	Debifează tot
 Move to ▸	Mutare în ▸
+New list	Listă nouă
+Delete list…	Șterge lista…
 (right-click the list to rename it)	(clic dreapta pe listă pentru a o redenumi)
 Name	Nume
 Address	Adresă
@@ -50,6 +52,10 @@ Firefox / browser bookmarks (*.html)|*.html|CSV, Excel-readable (*.csv)|*.csv|Te
 This WebSDR is already in "{0}".	Acest WebSDR este deja în „{0}”.
 List {0}	Lista {0}
 Rename "{0}"…	Redenumire „{0}”…
+List "{0}" added ({1}/{2}).	Lista „{0}” a fost adăugată ({1}/{2}).
+Delete the list "{0}" (empty)?	Ștergeți lista „{0}” (goală)?
+Delete the list "{0}" and its {1} favorite(s)?	Ștergeți lista „{0}” și cele {1} favorite ale ei?
+List "{0}" deleted.	Lista „{0}” a fost ștearsă.
 {0} favorite(s) moved to "{1}".	{0} favorit(e) mutat(e) în „{1}”.
 {0} favorite(s) shown, {1} checked	{0} favorit(e) afișat(e), {1} bifat(e)
 Remove favorite "{0}"?	Eliminați favoritul „{0}”?
@@ -67,6 +73,7 @@ HRD connection closed	Conexiune HRD închisă
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Niciun server HRD la {0}:{1} (activați serverul IP în HRD Rig Control).
 Cannot open the log: 	Nu se poate deschide jurnalul: 
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
+Store the current frequency…	Memorează frecvența actuală…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Comută sunetul la receptorul următor (clic dreapta: receptor care rămâne fără sunet)
 RIG	STAȚIE
 Disconnected	Deconectat
@@ -101,6 +108,14 @@ Mute ignored by ⇄ (stays muted):	Dezactivare sunet ignorată de ⇄ (rămâne 
 None	Niciuna
 ExpertSDR TCI port	Portul TCI al ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Portul serverului TCI (ExpertSDR, Options > TCI):
+Add memory	Adaugă memorie
+(no memory used yet)	(nicio memorie folosită încă)
+Memories…	Memorii…
+Clear this list	Golește această listă
+Text size	Dimensiunea textului
+Window text size (100% = original size):	Dimensiunea textului ferestrei (100 % = dimensiunea inițială):
+(no message)	(niciun mesaj)
+Last {0} memories used	Ultimele {0} memorii folosite
 ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualizarea V{0} este disponibilă: faceți clic pentru a o descărca
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Emisie oprită automat după {0} (limită de siguranță, clic dreapta pe PTT pentru a o modifica)
@@ -120,6 +135,10 @@ SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (au
 This page is not in "{0}".	Această pagină nu este în „{0}”.
 Remove "{0}" from "{1}"?	Eliminați „{0}” din „{1}”?
 Unexpected error, written to the log: {0}	Eroare neașteptată, notată în jurnal: {0}
+Memory "{0}" added to "{1}".	Memoria „{0}” a fost adăugată la „{1}”.
+Memory "{0}": {1} kHz	Memoria „{0}”: {1} kHz
+Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ultimele {0} mesaje (clic: ascundeți sau reafișați acest tip de mesaj, ✓ = ascuns)
+Show all hidden messages again ({0})	Reafișează toate mesajele ascunse ({0})
 Interface:	Interfață:
 Brand:	Marcă:
 Model:	Model:
@@ -142,11 +161,14 @@ Volume:	Volum:
 TRX volume:	Volum TRX:
 ExpertSDR volume:	Volum ExpertSDR:
 Open log	Deschidere jurnal
+Text size…	Dimensiunea textului…
 …	…
 Download Hamlib…	Descărcare Hamlib…
 SDRLINK cable ▾	Cablu SDRLINK ▾
 QSY	QSY
 Save	Salvare
+Memories	Memorii
+▾	▾
 Go	Mergi
 ◀ Back	◀ Înapoi
 Reload	Reîncărcare
@@ -186,6 +208,18 @@ WebSDR → Rig	WebSDR → Stație
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Frequency (kHz):	Frecvență (kHz):
+Mode:	Mod:
+(mode unchanged)	(mod neschimbat)
+Edit…	Modifică…
+Frequency (kHz)	Frecvență (kHz)
+Mode	Mod
+Select a memory first.	Selectați mai întâi o memorie.
+Edit memory	Modifică memoria
+{0} memory(ies). Click a memory to go there.	{0} memorie(i). Faceți clic pe o memorie pentru a merge la ea.
+Tuned to "{0}" ({1} kHz).	Acordat pe „{0}” ({1} kHz).
+Remove the memory "{0}"?	Eliminați memoria „{0}”?
+Delete the list "{0}" and its {1} memory(ies)?	Ștergeți lista „{0}” și cele {1} memorii ale ei?
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nu este instalat (OmniRig.OmniRigX negăsit).
 Dark mode colour	Culoare mod întunecat
 Light mode colour	Culoare mod luminos
