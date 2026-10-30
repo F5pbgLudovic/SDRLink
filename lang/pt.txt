@@ -119,12 +119,30 @@ Scan stopped	Varrimento parado
 ■ Stop scan	■ Parar o varrimento
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Placa de som do rádio, gravada quando Mute WebSDR e Mute ExpertSDR estão ativos:
 None (always the speakers)	Nenhuma (sempre os altifalantes)
+REC button width	Largura do botão REC
+Narrow	Estreito
+Wide	Largo
+Navy blue (default)	Azul-marinho (predefinição)
+Blue	Azul
+Sky blue	Azul-celeste
+Teal	Azul-petróleo
+Green	Verde
+Red	Vermelho
+Burgundy	Bordô
+Purple	Roxo
+Pink	Rosa
+Brown	Castanho
+Grey	Cinzento
+Black	Preto
+Yellow	Amarelo
+REC button colour	Cor do botão REC
+Other colour…	Outra cor…
 REC: recording the speakers	REC: gravação dos altifalantes
 Empty recording: nothing to save	Gravação vazia: nada para guardar
 Recording deleted	Gravação eliminada
 The file could not be written: 	Não foi possível escrever o ficheiro: 
 Stop recording and save the sound	Parar a gravação e guardar o som
-Record the sound heard in the speakers (right-click: rig sound card)	Gravar o som ouvido nos altifalantes (clique direito: placa de som do rádio)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Gravar o som ouvido nos altifalantes (clique direito: placa de som do rádio, cor)
 (no memory used yet)	(nenhuma memória usada ainda)
 Memories…	Memórias…
 Clear this list	Limpar esta lista

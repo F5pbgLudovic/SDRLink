@@ -119,12 +119,30 @@ Scan stopped	Iskanje ustavljeno
 ■ Stop scan	■ Ustavi iskanje
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Zvočna kartica postaje, posneta ko sta vklopljena Mute WebSDR in Mute ExpertSDR:
 None (always the speakers)	Nobena (vedno zvočniki)
+REC button width	Širina gumba REC
+Narrow	Ozko
+Wide	Široko
+Navy blue (default)	Mornarsko modra (privzeto)
+Blue	Modra
+Sky blue	Nebesno modra
+Teal	Modrozelena
+Green	Zelena
+Red	Rdeča
+Burgundy	Bordo
+Purple	Vijolična
+Pink	Rožnata
+Brown	Rjava
+Grey	Siva
+Black	Črna
+Yellow	Rumena
+REC button colour	Barva gumba REC
+Other colour…	Druga barva…
 REC: recording the speakers	REC: snemanje zvočnikov
 Empty recording: nothing to save	Prazen posnetek: nič za shranjevanje
 Recording deleted	Posnetek izbrisan
 The file could not be written: 	Datoteke ni bilo mogoče zapisati: 
 Stop recording and save the sound	Ustavi snemanje in shrani zvok
-Record the sound heard in the speakers (right-click: rig sound card)	Posnemi zvok, ki se sliši v zvočnikih (desni klik: zvočna kartica postaje)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Posnemi zvok, ki se sliši v zvočnikih (desni klik: zvočna kartica postaje, barva)
 (no memory used yet)	(noben pomnilnik še ni bil uporabljen)
 Memories…	Pomnilniki…
 Clear this list	Počisti ta seznam

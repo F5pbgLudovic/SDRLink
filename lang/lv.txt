@@ -119,12 +119,30 @@ Scan stopped	Skenēšana apturēta
 ■ Stop scan	■ Apturēt skenēšanu
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Raidītāja skaņas karte, ierakstīta, kad ieslēgti Mute WebSDR un Mute ExpertSDR:
 None (always the speakers)	Nav (vienmēr skaļruņi)
+REC button width	REC pogas platums
+Narrow	Šaurs
+Wide	Plats
+Navy blue (default)	Tumši zila (noklusējums)
+Blue	Zila
+Sky blue	Debeszila
+Teal	Zilganzaļa
+Green	Zaļa
+Red	Sarkana
+Burgundy	Bordo
+Purple	Violeta
+Pink	Rozā
+Brown	Brūna
+Grey	Pelēka
+Black	Melna
+Yellow	Dzeltena
+REC button colour	REC pogas krāsa
+Other colour…	Cita krāsa…
 REC: recording the speakers	REC: ieraksta skaļruņus
 Empty recording: nothing to save	Tukšs ieraksts: nav ko saglabāt
 Recording deleted	Ieraksts izdzēsts
 The file could not be written: 	Failu neizdevās ierakstīt: 
 Stop recording and save the sound	Apturēt ierakstīšanu un saglabāt skaņu
-Record the sound heard in the speakers (right-click: rig sound card)	Ierakstīt skaļruņos dzirdamo skaņu (labais klikšķis: raidītāja skaņas karte)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Ierakstīt skaļruņos dzirdamo skaņu (labais klikšķis: raidītāja skaņas karte, krāsa)
 (no memory used yet)	(atmiņa vēl nav izmantota)
 Memories…	Atmiņas…
 Clear this list	Notīrīt šo sarakstu

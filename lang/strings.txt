@@ -119,12 +119,30 @@ Scan stopped	Scan arrêté
 ■ Stop scan	■ Arrêter le scan
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Carte son du poste, enregistrée quand Mute WebSDR et Mute ExpertSDR sont actifs :
 None (always the speakers)	Aucune (toujours les haut-parleurs)
+REC button width	Largeur du bouton REC
+Narrow	Étroit
+Wide	Large
+Navy blue (default)	Bleu marine (par défaut)
+Blue	Bleu
+Sky blue	Bleu ciel
+Teal	Bleu canard
+Green	Vert
+Red	Rouge
+Burgundy	Bordeaux
+Purple	Violet
+Pink	Rose
+Brown	Marron
+Grey	Gris
+Black	Noir
+Yellow	Jaune
+REC button colour	Couleur du bouton REC
+Other colour…	Autre couleur…
 REC: recording the speakers	REC : enregistrement des haut-parleurs
 Empty recording: nothing to save	Enregistrement vide : rien à sauvegarder
 Recording deleted	Enregistrement supprimé
 The file could not be written: 	Le fichier n'a pas pu être écrit : 
 Stop recording and save the sound	Arrêter l'enregistrement et sauvegarder le son
-Record the sound heard in the speakers (right-click: rig sound card)	Enregistrer le son entendu dans les haut-parleurs (clic droit : carte son du poste)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Enregistrer le son entendu dans les haut-parleurs (clic droit : carte son du poste, couleur)
 (no memory used yet)	(aucune mémoire utilisée)
 Memories…	Mémoires…
 Clear this list	Effacer cette liste

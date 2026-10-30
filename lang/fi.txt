@@ -119,12 +119,30 @@ Scan stopped	Pyyhkäisy pysäytetty
 ■ Stop scan	■ Pysäytä pyyhkäisy
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radion äänikortti, tallennetaan kun Mute WebSDR ja Mute ExpertSDR ovat päällä:
 None (always the speakers)	Ei mitään (aina kaiuttimet)
+REC button width	REC-painikkeen leveys
+Narrow	Kapea
+Wide	Leveä
+Navy blue (default)	Laivastonsininen (oletus)
+Blue	Sininen
+Sky blue	Taivaansininen
+Teal	Sinivihreä
+Green	Vihreä
+Red	Punainen
+Burgundy	Viininpunainen
+Purple	Violetti
+Pink	Vaaleanpunainen
+Brown	Ruskea
+Grey	Harmaa
+Black	Musta
+Yellow	Keltainen
+REC button colour	REC-painikkeen väri
+Other colour…	Muu väri…
 REC: recording the speakers	REC: tallennetaan kaiuttimet
 Empty recording: nothing to save	Tyhjä tallenne: ei mitään tallennettavaa
 Recording deleted	Tallenne poistettu
 The file could not be written: 	Tiedostoa ei voitu kirjoittaa: 
 Stop recording and save the sound	Lopeta tallennus ja tallenna ääni
-Record the sound heard in the speakers (right-click: rig sound card)	Tallenna kaiuttimista kuuluva ääni (hiiren oikea: radion äänikortti)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Tallenna kaiuttimista kuuluva ääni (hiiren oikea: radion äänikortti, väri)
 (no memory used yet)	(muistia ei ole vielä käytetty)
 Memories…	Muistit…
 Clear this list	Tyhjennä tämä luettelo

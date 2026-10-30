@@ -119,12 +119,30 @@ Scan stopped	Skanning stoppet
 ■ Stop scan	■ Stopp skanning
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radioens lydkort, tas opp når Mute WebSDR og Mute ExpertSDR er på:
 None (always the speakers)	Ingen (alltid høyttalerne)
+REC button width	Bredde på REC-knappen
+Narrow	Smal
+Wide	Bred
+Navy blue (default)	Marineblå (standard)
+Blue	Blå
+Sky blue	Himmelblå
+Teal	Petrolblå
+Green	Grønn
+Red	Rød
+Burgundy	Burgunder
+Purple	Lilla
+Pink	Rosa
+Brown	Brun
+Grey	Grå
+Black	Svart
+Yellow	Gul
+REC button colour	Farge på REC-knappen
+Other colour…	Annen farge…
 REC: recording the speakers	REC: tar opp høyttalerne
 Empty recording: nothing to save	Tomt opptak: ingenting å lagre
 Recording deleted	Opptak slettet
 The file could not be written: 	Filen kunne ikke skrives: 
 Stop recording and save the sound	Stopp opptaket og lagre lyden
-Record the sound heard in the speakers (right-click: rig sound card)	Ta opp lyden fra høyttalerne (høyreklikk: radioens lydkort)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Ta opp lyden fra høyttalerne (høyreklikk: radioens lydkort, farge)
 (no memory used yet)	(ingen minner brukt ennå)
 Memories…	Minner…
 Clear this list	Tøm denne listen

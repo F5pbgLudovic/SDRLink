@@ -119,12 +119,30 @@ Scan stopped	Η σάρωση σταμάτησε
 ■ Stop scan	■ Διακοπή σάρωσης
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Κάρτα ήχου του πομποδέκτη, εγγράφεται όταν είναι ενεργά τα Mute WebSDR και Mute ExpertSDR:
 None (always the speakers)	Καμία (πάντα τα ηχεία)
+REC button width	Πλάτος του κουμπιού REC
+Narrow	Στενό
+Wide	Φαρδύ
+Navy blue (default)	Μπλε μαρέν (προεπιλογή)
+Blue	Μπλε
+Sky blue	Γαλάζιο
+Teal	Πετρόλ
+Green	Πράσινο
+Red	Κόκκινο
+Burgundy	Μπορντό
+Purple	Μωβ
+Pink	Ροζ
+Brown	Καφέ
+Grey	Γκρι
+Black	Μαύρο
+Yellow	Κίτρινο
+REC button colour	Χρώμα του κουμπιού REC
+Other colour…	Άλλο χρώμα…
 REC: recording the speakers	REC: εγγραφή των ηχείων
 Empty recording: nothing to save	Κενή εγγραφή: τίποτα για αποθήκευση
 Recording deleted	Η εγγραφή διαγράφηκε
 The file could not be written: 	Δεν ήταν δυνατή η εγγραφή του αρχείου: 
 Stop recording and save the sound	Διακοπή εγγραφής και αποθήκευση του ήχου
-Record the sound heard in the speakers (right-click: rig sound card)	Εγγραφή του ήχου των ηχείων (δεξί κλικ: κάρτα ήχου του πομποδέκτη)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Εγγραφή του ήχου των ηχείων (δεξί κλικ: κάρτα ήχου του πομποδέκτη, χρώμα)
 (no memory used yet)	(δεν έχει χρησιμοποιηθεί μνήμη)
 Memories…	Μνήμες…
 Clear this list	Εκκαθάριση αυτής της λίστας

@@ -42,6 +42,8 @@ namespace SDRLink
         public string RecFolder = "";      // dossier des enregistrements (bouton REC), vide = Musique\SDRLink
         // Carte son du poste (entrée Windows) enregistrée par REC quand seul le poste est écouté ; vide = aucune.
         public string RecCardId = "", RecCardName = "";
+        public int RecColor = 0x000080;    // fond du bouton REC au repos (RVB), bleu marine par défaut
+        public int RecWidth = 1;           // largeur du bouton REC : 1 étroit (2 fois la hauteur), 2 large (4 fois)
         public bool TopMost;
         public bool AutoConnect;
         public bool MuteOnTx = true;
@@ -151,6 +153,8 @@ namespace SDRLink
                     case "RecFolder": s.RecFolder = v; break;
                     case "RecCardId": s.RecCardId = v; break;
                     case "RecCardName": s.RecCardName = v; break;
+                    case "RecColor": s.RecColor = Int(v, 0x000080) & 0xFFFFFF; break;
+                    case "RecWidth": s.RecWidth = Math.Max(1, Math.Min(2, Int(v, 1))); break;
                     case "TopMost": s.TopMost = v == "1"; break;
                     case "AutoConnect": s.AutoConnect = v == "1"; break;
                     case "MuteOnTx": s.MuteOnTx = v == "1"; break;
@@ -244,6 +248,8 @@ namespace SDRLink
             Line(sb, "RecFolder", RecFolder);
             Line(sb, "RecCardId", RecCardId);
             Line(sb, "RecCardName", RecCardName);
+            Line(sb, "RecColor", RecColor);
+            Line(sb, "RecWidth", RecWidth);
             Line(sb, "TopMost", TopMost ? 1 : 0);
             Line(sb, "AutoConnect", AutoConnect ? 1 : 0);
             Line(sb, "MuteOnTx", MuteOnTx ? 1 : 0);

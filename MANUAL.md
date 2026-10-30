@@ -322,7 +322,7 @@ On the "Sync" row, after "Auto notch (DNF)":
 
 ## Recording (REC)
 
-- Square **REC** button, on the "Sync" row just after "▶ Scan": **navy blue** when idle, **orange** while recording.
+- **REC** button, on the audio row, right after the last volume shown (it moves left when TRX volume or ExpertSDR volume are not shown): **navy blue** when idle (colour can be changed), **orange** while recording.
 - One click starts recording **everything heard in the speakers** (Windows default audio output): WebSDR, ExpertSDR, rig connected to the PC, Windows sounds… The Windows volume and the Mute buttons do not change what is captured before them: what the output plays is what gets recorded.
 - Another click stops and opens the **Save the recording** window:
   - **Name**: suggested from the date, time, frequency and mode at the start (editable);
@@ -331,6 +331,8 @@ On the "Sync" row, after "Auto notch (DNF)":
   - **Delete** discards the recording (after confirmation).
 - The file is written in the background; the status bar shows the progress, then "Recording saved". If it fails, the window comes back: the audio is not lost.
 - **Right-click REC**: choice of the **rig's sound card** (its input in Windows, for example "USB AUDIO CODEC" or "USB Sound Device"), or "None (always the speakers)". This card is recorded **instead of the speakers** only if you are listening to the rig alone when you press REC: **Mute WebSDR** on (red) and **Mute ExpertSDR** on (red) if ExpertSDR is running. Otherwise, the speakers are recorded. If the card is unplugged, the speakers are recorded and the status bar says so. The choice is kept.
+- **Right-click REC > REC button colour**: colour of the button when idle (navy blue by default, blue, sky blue, teal, green, red, burgundy, purple, pink, brown, grey, black, yellow, or any colour with "Other colour…"). The text turns black on light colours; while recording, the button stays orange. The choice is kept.
+- **Right-click REC > REC button width**: **Narrow** (a rectangle twice as wide as it is high, default) or **Wide** (four times as wide as it is high), always as high as the Mute buttons, with "REC" centred. The choice is kept.
 - Silences are kept (the file length is the real duration). Closing SDRLink during a recording offers to save it before quitting.
 
 ## Frequency memories
@@ -365,6 +367,10 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.12**
+  - **REC** button moved to the audio row, right after the last volume shown (no empty space when ExpertSDR or the rig volume are not shown), with the same look and height as the Mute buttons;
+  - right-click REC: **button colour** when idle (navy blue by default) and **width** (narrow or wide);
+  - **SDR / LINK** icon in the taskbar, the title bar and File Explorer.
 - **1.11**
   - **REC** button: records the audio heard in the speakers, then saves it as MP3, WAV or FLAC (name, folder and format of your choice); right-click: rig sound card, recorded when only the rig is being listened to (Mute WebSDR and Mute ExpertSDR on);
   - **PTT view** box: a very small window with only the PTT button, returning to the previous view exactly as it was;

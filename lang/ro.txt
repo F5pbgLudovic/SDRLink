@@ -119,12 +119,30 @@ Scan stopped	Scanare oprită
 ■ Stop scan	■ Oprește scanarea
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Placa de sunet a stației, înregistrată când Mute WebSDR și Mute ExpertSDR sunt active:
 None (always the speakers)	Niciuna (întotdeauna difuzoarele)
+REC button width	Lățimea butonului REC
+Narrow	Îngust
+Wide	Lat
+Navy blue (default)	Bleumarin (implicit)
+Blue	Albastru
+Sky blue	Bleu
+Teal	Verde-albăstrui
+Green	Verde
+Red	Roșu
+Burgundy	Bordo
+Purple	Violet
+Pink	Roz
+Brown	Maro
+Grey	Gri
+Black	Negru
+Yellow	Galben
+REC button colour	Culoarea butonului REC
+Other colour…	Altă culoare…
 REC: recording the speakers	REC: înregistrarea difuzoarelor
 Empty recording: nothing to save	Înregistrare goală: nimic de salvat
 Recording deleted	Înregistrare ștearsă
 The file could not be written: 	Fișierul nu a putut fi scris: 
 Stop recording and save the sound	Oprește înregistrarea și salvează sunetul
-Record the sound heard in the speakers (right-click: rig sound card)	Înregistrează sunetul auzit în difuzoare (clic dreapta: placa de sunet a stației)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Înregistrează sunetul auzit în difuzoare (clic dreapta: placa de sunet a stației, culoare)
 (no memory used yet)	(nicio memorie folosită încă)
 Memories…	Memorii…
 Clear this list	Golește această listă

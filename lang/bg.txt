@@ -119,12 +119,30 @@ Scan stopped	Сканирането е спряно
 ■ Stop scan	■ Спиране на сканирането
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Звукова карта на радиостанцията, записвана при включени Mute WebSDR и Mute ExpertSDR:
 None (always the speakers)	Няма (винаги високоговорителите)
+REC button width	Ширина на бутона REC
+Narrow	Тесен
+Wide	Широк
+Navy blue (default)	Тъмносин (по подразбиране)
+Blue	Син
+Sky blue	Небесносин
+Teal	Синьозелен
+Green	Зелен
+Red	Червен
+Burgundy	Бордо
+Purple	Лилав
+Pink	Розов
+Brown	Кафяв
+Grey	Сив
+Black	Черен
+Yellow	Жълт
+REC button colour	Цвят на бутона REC
+Other colour…	Друг цвят…
 REC: recording the speakers	REC: запис на високоговорителите
 Empty recording: nothing to save	Празен запис: няма нищо за запазване
 Recording deleted	Записът е изтрит
 The file could not be written: 	Файлът не можа да бъде записан: 
 Stop recording and save the sound	Спиране на записа и запазване на звука
-Record the sound heard in the speakers (right-click: rig sound card)	Запис на звука от високоговорителите (десен бутон: звукова карта на радиостанцията)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Запис на звука от високоговорителите (десен бутон: звукова карта на радиостанцията, цвят)
 (no memory used yet)	(няма използвани памети)
 Memories…	Памети…
 Clear this list	Изчистване на списъка

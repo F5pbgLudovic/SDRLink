@@ -119,12 +119,30 @@ Scan stopped	Skanowanie zatrzymane
 ■ Stop scan	■ Zatrzymaj skanowanie
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Karta dźwiękowa radiostacji, nagrywana gdy Mute WebSDR i Mute ExpertSDR są włączone:
 None (always the speakers)	Brak (zawsze głośniki)
+REC button width	Szerokość przycisku REC
+Narrow	Wąski
+Wide	Szeroki
+Navy blue (default)	Granatowy (domyślny)
+Blue	Niebieski
+Sky blue	Błękitny
+Teal	Morski
+Green	Zielony
+Red	Czerwony
+Burgundy	Bordowy
+Purple	Fioletowy
+Pink	Różowy
+Brown	Brązowy
+Grey	Szary
+Black	Czarny
+Yellow	Żółty
+REC button colour	Kolor przycisku REC
+Other colour…	Inny kolor…
 REC: recording the speakers	REC: nagrywanie głośników
 Empty recording: nothing to save	Puste nagranie: nie ma czego zapisać
 Recording deleted	Nagranie usunięte
 The file could not be written: 	Nie można zapisać pliku: 
 Stop recording and save the sound	Zatrzymaj nagrywanie i zapisz dźwięk
-Record the sound heard in the speakers (right-click: rig sound card)	Nagrywaj dźwięk słyszany w głośnikach (prawy przycisk: karta dźwiękowa radiostacji)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Nagrywaj dźwięk słyszany w głośnikach (prawy przycisk: karta dźwiękowa radiostacji, kolor)
 (no memory used yet)	(nie użyto jeszcze żadnej pamięci)
 Memories…	Pamięci…
 Clear this list	Wyczyść tę listę

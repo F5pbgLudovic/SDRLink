@@ -119,12 +119,30 @@ Scan stopped	Pásztázás leállítva
 ■ Stop scan	■ Pásztázás leállítása
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	A rádió hangkártyája, felvétel ha a Mute WebSDR és a Mute ExpertSDR be van kapcsolva:
 None (always the speakers)	Nincs (mindig a hangszórók)
+REC button width	A REC gomb szélessége
+Narrow	Keskeny
+Wide	Széles
+Navy blue (default)	Tengerészkék (alapértelmezett)
+Blue	Kék
+Sky blue	Égszínkék
+Teal	Kékeszöld
+Green	Zöld
+Red	Piros
+Burgundy	Bordó
+Purple	Lila
+Pink	Rózsaszín
+Brown	Barna
+Grey	Szürke
+Black	Fekete
+Yellow	Sárga
+REC button colour	A REC gomb színe
+Other colour…	Más szín…
 REC: recording the speakers	REC: a hangszórók felvétele
 Empty recording: nothing to save	Üres felvétel: nincs mit menteni
 Recording deleted	Felvétel törölve
 The file could not be written: 	A fájlt nem sikerült kiírni: 
 Stop recording and save the sound	Felvétel leállítása és a hang mentése
-Record the sound heard in the speakers (right-click: rig sound card)	A hangszórókból szóló hang felvétele (jobb gomb: a rádió hangkártyája)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	A hangszórókból szóló hang felvétele (jobb gomb: a rádió hangkártyája, szín)
 (no memory used yet)	(még nem használt memóriát)
 Memories…	Memóriák…
 Clear this list	A lista törlése

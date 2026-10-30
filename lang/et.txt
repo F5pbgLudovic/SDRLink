@@ -119,12 +119,30 @@ Scan stopped	Skaneerimine peatatud
 ■ Stop scan	■ Peata skaneerimine
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Raadiojaama helikaart, salvestatakse kui Mute WebSDR ja Mute ExpertSDR on sees:
 None (always the speakers)	Puudub (alati kõlarid)
+REC button width	REC-nupu laius
+Narrow	Kitsas
+Wide	Lai
+Navy blue (default)	Meresinine (vaikimisi)
+Blue	Sinine
+Sky blue	Taevasinine
+Teal	Sinakasroheline
+Green	Roheline
+Red	Punane
+Burgundy	Veinipunane
+Purple	Lilla
+Pink	Roosa
+Brown	Pruun
+Grey	Hall
+Black	Must
+Yellow	Kollane
+REC button colour	REC-nupu värv
+Other colour…	Muu värv…
 REC: recording the speakers	REC: kõlarite salvestamine
 Empty recording: nothing to save	Tühi salvestis: pole midagi salvestada
 Recording deleted	Salvestis kustutatud
 The file could not be written: 	Faili ei saanud kirjutada: 
 Stop recording and save the sound	Peata salvestamine ja salvesta heli
-Record the sound heard in the speakers (right-click: rig sound card)	Salvesta kõlaritest kostev heli (paremklõps: raadiojaama helikaart)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Salvesta kõlaritest kostev heli (paremklõps: raadiojaama helikaart, värv)
 (no memory used yet)	(mälu pole veel kasutatud)
 Memories…	Mälud…
 Clear this list	Tühjenda see loend

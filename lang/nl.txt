@@ -119,12 +119,30 @@ Scan stopped	Scannen gestopt
 ■ Stop scan	■ Scannen stoppen
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Geluidskaart van de transceiver, opgenomen wanneer Mute WebSDR en Mute ExpertSDR aan staan:
 None (always the speakers)	Geen (altijd de luidsprekers)
+REC button width	Breedte van de REC-knop
+Narrow	Smal
+Wide	Breed
+Navy blue (default)	Marineblauw (standaard)
+Blue	Blauw
+Sky blue	Hemelsblauw
+Teal	Petrolblauw
+Green	Groen
+Red	Rood
+Burgundy	Bordeaux
+Purple	Paars
+Pink	Roze
+Brown	Bruin
+Grey	Grijs
+Black	Zwart
+Yellow	Geel
+REC button colour	Kleur van de REC-knop
+Other colour…	Andere kleur…
 REC: recording the speakers	REC: opname van de luidsprekers
 Empty recording: nothing to save	Lege opname: niets op te slaan
 Recording deleted	Opname verwijderd
 The file could not be written: 	Het bestand kon niet worden geschreven: 
 Stop recording and save the sound	Opname stoppen en het geluid opslaan
-Record the sound heard in the speakers (right-click: rig sound card)	Het geluid uit de luidsprekers opnemen (rechtsklik: geluidskaart van de transceiver)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Het geluid uit de luidsprekers opnemen (rechtsklik: geluidskaart van de transceiver, kleur)
 (no memory used yet)	(nog geen geheugen gebruikt)
 Memories…	Geheugens…
 Clear this list	Deze lijst leegmaken

@@ -1,4 +1,4 @@
-# SDRLink V1.11 — @F5PBG 2026
+# SDRLink V1.12 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -11,7 +11,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
   - mémoires de fréquences nommées, en listes, avec les 20 dernières utilisées ;
   - scan de fréquences ou de mémoires ;
-  - bouton REC : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC ;
+  - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, couleur et largeur réglables ;
   - affichages réduit, mini et ptt (bouton PTT seul) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de la France ;
   - volume du WebSDR, du poste et d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) ;
@@ -52,7 +52,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
   - named frequency memories, in lists, with the last 20 used;
   - frequency or memory scan;
-  - REC button: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC;
+  - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, with adjustable colour and width;
   - reduced, mini and PTT (PTT button only) views;
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near France;
   - WebSDR, rig and ExpertSDR volume (Mute ExpertSDR, through Windows or TCI);

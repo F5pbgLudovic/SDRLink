@@ -119,12 +119,30 @@ Scan stopped	Exploración detenida
 ■ Stop scan	■ Detener la exploración
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Tarjeta de sonido del equipo, grabada cuando Mute WebSDR y Mute ExpertSDR están activos:
 None (always the speakers)	Ninguna (siempre los altavoces)
+REC button width	Ancho del botón REC
+Narrow	Estrecho
+Wide	Ancho
+Navy blue (default)	Azul marino (predeterminado)
+Blue	Azul
+Sky blue	Azul cielo
+Teal	Verde azulado
+Green	Verde
+Red	Rojo
+Burgundy	Burdeos
+Purple	Violeta
+Pink	Rosa
+Brown	Marrón
+Grey	Gris
+Black	Negro
+Yellow	Amarillo
+REC button colour	Color del botón REC
+Other colour…	Otro color…
 REC: recording the speakers	REC: grabación de los altavoces
 Empty recording: nothing to save	Grabación vacía: nada que guardar
 Recording deleted	Grabación eliminada
 The file could not be written: 	No se pudo escribir el archivo: 
 Stop recording and save the sound	Detener la grabación y guardar el sonido
-Record the sound heard in the speakers (right-click: rig sound card)	Grabar el sonido que se oye en los altavoces (clic derecho: tarjeta de sonido del equipo)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Grabar el sonido que se oye en los altavoces (clic derecho: tarjeta de sonido del equipo, color)
 (no memory used yet)	(ninguna memoria usada aún)
 Memories…	Memorias…
 Clear this list	Vaciar esta lista

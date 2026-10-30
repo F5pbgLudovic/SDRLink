@@ -321,7 +321,7 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 
 ## Enregistrement (REC)
 
-- Bouton carré **REC**, sur la ligne « Synchro » juste après « ▶ Scan » : **bleu marine** au repos, **orange** pendant l'enregistrement.
+- Bouton **REC**, sur la ligne de son, juste après le dernier volume affiché (il se rapproche quand Volume TX ou Volume ExpertSDR sont absents) : **bleu marine** au repos (couleur réglable), **orange** pendant l'enregistrement.
 - Un clic lance l'enregistrement de **tout ce qu'on entend dans les haut-parleurs** (sortie audio par défaut de Windows) : WebSDR, ExpertSDR, poste relié au PC, sons de Windows… Le volume de Windows et les Mute ne changent rien à ce qui est capté avant eux : on enregistre ce que la sortie joue.
 - Un nouveau clic arrête et ouvre la fenêtre **Enregistrer le son** :
   - **Nom** : proposé d'après la date, l'heure, la fréquence et le mode au départ (modifiable) ;
@@ -330,6 +330,8 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
   - **Supprimer** abandonne l'enregistrement (après confirmation).
 - Le fichier est écrit en arrière-plan ; la barre d'état indique la progression puis « Enregistrement sauvegardé ». En cas d'échec, la fenêtre revient : le son n'est pas perdu.
 - **Clic droit sur REC** : choix de la **carte son du poste** (son entrée dans Windows, par exemple « USB AUDIO CODEC » ou « USB Sound Device »), ou « Aucune (toujours les haut-parleurs) ». Cette carte est enregistrée **à la place des haut-parleurs** seulement si l'on écoute le poste seul au moment d'appuyer sur REC : **Mute WebSDR** actif (rouge) et **Mute ExpertSDR** actif (rouge) si ExpertSDR est lancé. Sinon, ce sont les haut-parleurs. Si la carte est débranchée, les haut-parleurs sont enregistrés et la barre d'état le signale. Le choix est conservé.
+- **Clic droit sur REC > Couleur du bouton REC** : couleur du bouton au repos (bleu marine par défaut, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, ou « Autre couleur… » au choix). Le texte passe en noir sur les couleurs claires ; pendant l'enregistrement, le bouton reste orange. Le choix est conservé.
+- **Clic droit sur REC > Largeur du bouton REC** : **Étroit** (rectangle deux fois plus large que haut, par défaut) ou **Large** (quatre fois plus large que haut), toujours à la hauteur des boutons Mute, « REC » centré. Le choix est conservé.
 - Les silences sont gardés (la durée du fichier est la durée réelle). Fermer SDRLink pendant un enregistrement propose de le sauvegarder avant de quitter.
 ## Mémoires de fréquences
 
@@ -363,6 +365,10 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.12**
+  - bouton **REC** déplacé sur la ligne de son, juste après le dernier volume affiché (sans espace vide quand ExpertSDR ou le volume du poste sont absents), avec la même allure et la même hauteur que les boutons Mute ;
+  - clic droit sur REC : **couleur du bouton** au repos (bleu marine par défaut) et **largeur** (étroit ou large) ;
+  - icône **SDR / LINK** dans la barre des tâches, la barre de titre et l'Explorateur.
 - **1.11**
   - bouton **REC** : enregistre le son entendu dans les haut-parleurs, puis le sauvegarde en MP3, WAV ou FLAC (nom, dossier et format au choix) ; clic droit : carte son du poste, enregistrée quand seul le poste est écouté (Mute WebSDR et Mute ExpertSDR actifs) ;
   - case **Affichage ptt** : toute petite fenêtre avec le seul bouton PTT, retour à l'affichage d'avant à l'identique ;

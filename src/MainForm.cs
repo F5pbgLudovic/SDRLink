@@ -115,6 +115,13 @@ namespace SDRLink
             settings = Settings.Load();
             Lang.Code = settings.Language;
             Text = "SDRLink V" + Program.Version + " @F5PBG 2026 - WebSDR ⇄ Transceiver";
+            // Icône « SDR / LINK » (barre des tâches, titre) : toutes les tailles de l'ico, chacune dessinée pour sa taille.
+            try
+            {
+                using (Stream ico = typeof(MainForm).Assembly.GetManifestResourceStream("SDRLink.ico"))
+                    if (ico != null) Icon = new Icon(ico);
+            }
+            catch (Exception ex) { Log.Write("Icône : " + ex.Message); }
             Size = DefaultWindowSize();
             StartPosition = FormStartPosition.CenterScreen;
             RestoreWindowBounds();
@@ -406,22 +413,23 @@ namespace SDRLink
             btnScan.FlatStyle = FlatStyle.Flat;
             row3.Controls.Add(btnScan);
             // REC : enregistre le son entendu dans les haut-parleurs ; à l'arrêt, fenêtre pour sauvegarder le fichier.
+            // Même allure que les boutons Mute : même police, même hauteur (30), mêmes marges, bordure qui fait contour.
+            // « REC » est dessiné en image : en texte, il passerait à la ligne dans un carré de 30.
             btnRec = new Button();
-            btnRec.Text = "REC";
-            btnRec.Font = new Font("Segoe UI", 7.5f, FontStyle.Bold);
-            btnRec.MinimumSize = btnRec.Size = new Size(34, 34);
-            btnRec.Margin = new Padding(6, 2, 3, 0);
+            btnRec.AccessibleName = "REC";
+            btnRec.MinimumSize = btnRec.Size = RecSize();
+            btnRec.Margin = new Padding(6, 3, 3, 3);
             btnRec.Padding = Padding.Empty;
             btnRec.Tag = Theme.Custom;
             btnRec.FlatStyle = FlatStyle.Flat;
             btnRec.Click += delegate { if (recorder == null) StartRecording(); else StopRecording(false); };
             Tr(delegate { UpdateRecButton(); });
-            // Clic droit : carte son du poste, enregistrée à la place des haut-parleurs quand seul le poste est écouté.
+            // Clic droit : carte son du poste (enregistrée à la place des haut-parleurs quand seul le poste est écouté)
+            // et couleur du bouton au repos. Le bouton est placé sur la ligne de son, après le dernier volume affiché.
             ContextMenuStrip recMenu = new ContextMenuStrip();
             recMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillRecCardMenu(recMenu); };
             recMenu.Items.Add("-");
             btnRec.ContextMenuStrip = recMenu;
-            row3.Controls.Add(btnRec);
 
             // Ligne 4 : PTT, fréquences, modes, saisie ; l'affichage réduit coupe la fenêtre juste après cette ligne.
             rowDisplay = Row();
@@ -597,6 +605,9 @@ namespace SDRLink
 
             // Coupures du son : WebSDR (dans la page) et poste (gain BF mis à zéro puis rétabli), et volume du poste.
             btnMuteSdr = Btn("Mute WebSDR", "Mute WebSDR", delegate { sdrMuted = !sdrMuted; ApplyVolume(); UpdateMuteButtons(); });
+            // REC suit la hauteur des Mute (taille du texte) et redessine « REC » quand sa police change.
+            btnMuteSdr.SizeChanged += delegate { ResizeRecButton(); };
+            btnRec.FontChanged += delegate { UpdateRecButton(); };
             btnMuteRig = Btn("Mute TX", "Mute TRX", delegate { ToggleRigMute(); });
             // Inverse les deux coupures d'un coup (Mute TX seulement si le volume du poste est télécommandé).
             // Bouton ⇄ : passe le son d'une réception à la suivante (WebSDR, poste, ExpertSDR).
@@ -658,13 +669,15 @@ namespace SDRLink
             lblEsdrVolume.Margin = new Padding(0, 7, 2, 0);
             lblEsdrVolumeCaption = Lbl("Volume ExpertSDR :", "ExpertSDR volume:");
             lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = false;
-            // Ordre : ⇄, les trois Mute, puis chaque volume (libellé, réglette, valeur).
+            // Ordre : ⇄, les trois Mute, puis chaque volume (libellé, réglette, valeur), et REC.
+            // Les volumes masqués ne prennent pas de place : REC suit toujours le dernier volume affiché.
             audioOrder = new Control[]
             {
                 btnMuteSwap, btnMuteSdr, btnMuteRig, btnMuteEsdr,
                 lblVolumeCaption, trkVolume, lblVolume,
                 lblRigVolumeCaption, trkRigVolume, lblRigVolume,
                 lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
+                btnRec,
             };
             audio.Controls.AddRange(audioOrder);
 
@@ -3021,6 +3034,105 @@ namespace SDRLink
                 gone.Enabled = false;
                 m.Items.Add(gone);
             }
+            m.Items.Add(new ToolStripSeparator());
+            m.Items.Add(BuildRecColorMenu());
+            // Largeur : étroit (rectangle deux fois plus large que haut, par défaut) ou large (quatre fois), même hauteur.
+            ToolStripMenuItem width = new ToolStripMenuItem(Lang.T("Largeur du bouton REC", "REC button width"));
+            string[] widths = { Lang.T("Étroit", "Narrow"), Lang.T("Large", "Wide") };
+            for (int i = 0; i < widths.Length; i++)
+            {
+                int n = i + 1;
+                ToolStripMenuItem it = new ToolStripMenuItem(widths[i]);
+                it.Checked = settings.RecWidth == n;
+                it.Click += delegate { SetRecWidth(n); };
+                width.DropDownItems.Add(it);
+            }
+            m.Items.Add(width);
+        }
+
+        // Hauteur des boutons Mute (30 à la taille de texte normale) ; largeur : 2 (étroit) ou 4 (large) fois la hauteur.
+        Size RecSize()
+        {
+            int h = btnMuteSdr != null && btnMuteSdr.Height > 0 ? btnMuteSdr.Height : 30;
+            return new Size(h << settings.RecWidth, h);
+        }
+
+        void SetRecWidth(int w)
+        {
+            settings.RecWidth = w;
+            settings.Save();
+            ResizeRecButton();
+        }
+
+        void ResizeRecButton()
+        {
+            Size s = RecSize();
+            if (btnRec.Size == s && btnRec.Image != null) return;
+            btnRec.MinimumSize = Size.Empty;   // d'abord le minimum, sinon il empêche de rétrécir
+            btnRec.Size = btnRec.MinimumSize = s;
+            UpdateRecButton();
+        }
+
+        // Couleurs proposées pour le fond de REC au repos (pas d'orange : c'est la couleur de l'enregistrement en cours).
+        static readonly int[] RecColors = { 0x000080, 0x1E5AC8, 0x4FA3E0, 0x008080, 0x1E7D32, 0xB71C1C, 0x6D1028, 0x6A1B9A, 0xD81B60, 0x6D4C41, 0x607080, 0x000000, 0xF2C200 };
+
+        ToolStripMenuItem BuildRecColorMenu()
+        {
+            string[] names =
+            {
+                Lang.T("Bleu marine (par défaut)", "Navy blue (default)"), Lang.T("Bleu", "Blue"), Lang.T("Bleu ciel", "Sky blue"),
+                Lang.T("Bleu canard", "Teal"), Lang.T("Vert", "Green"), Lang.T("Rouge", "Red"), Lang.T("Bordeaux", "Burgundy"),
+                Lang.T("Violet", "Purple"), Lang.T("Rose", "Pink"), Lang.T("Marron", "Brown"), Lang.T("Gris", "Grey"),
+                Lang.T("Noir", "Black"), Lang.T("Jaune", "Yellow"),
+            };
+            ToolStripMenuItem menu = new ToolStripMenuItem(Lang.T("Couleur du bouton REC", "REC button colour"));
+            menu.Image = ColorSwatch(settings.RecColor);
+            bool found = false;
+            for (int i = 0; i < RecColors.Length; i++)
+            {
+                int rgb = RecColors[i];
+                ToolStripMenuItem it = new ToolStripMenuItem(names[i], ColorSwatch(rgb));
+                it.Checked = rgb == settings.RecColor;
+                found |= it.Checked;
+                it.Click += delegate { SetRecColor(rgb); };
+                menu.DropDownItems.Add(it);
+            }
+            menu.DropDownItems.Add(new ToolStripSeparator());
+            ToolStripMenuItem other = new ToolStripMenuItem(Lang.T("Autre couleur…", "Other colour…"), found ? null : ColorSwatch(settings.RecColor));
+            other.Checked = !found;
+            other.Click += delegate
+            {
+                using (ColorDialog d = new ColorDialog())
+                {
+                    d.FullOpen = true;
+                    d.Color = Color.FromArgb(settings.RecColor);
+                    d.CustomColors = new int[] { ToBgr(settings.RecColor) };
+                    if (d.ShowDialog(this) == DialogResult.OK) SetRecColor(d.Color.ToArgb() & 0xFFFFFF);
+                }
+            };
+            menu.DropDownItems.Add(other);
+            return menu;
+        }
+
+        // ColorDialog.CustomColors est en BGR.
+        static int ToBgr(int rgb) { return ((rgb & 0xFF) << 16) | (rgb & 0xFF00) | ((rgb >> 16) & 0xFF); }
+
+        static Bitmap ColorSwatch(int rgb)
+        {
+            Bitmap b = new Bitmap(16, 16);
+            using (Graphics g = Graphics.FromImage(b))
+            {
+                using (SolidBrush br = new SolidBrush(Color.FromArgb(255, Color.FromArgb(rgb)))) g.FillRectangle(br, 1, 1, 14, 14);
+                g.DrawRectangle(Pens.Gray, 1, 1, 13, 13);
+            }
+            return b;
+        }
+
+        void SetRecColor(int rgb)
+        {
+            settings.RecColor = rgb & 0xFFFFFF;
+            settings.Save();
+            UpdateRecButton();
         }
 
         void SetRecCard(string id, string name)
@@ -3122,12 +3234,40 @@ namespace SDRLink
         void UpdateRecButton()
         {
             bool on = recorder != null;
-            btnRec.BackColor = on ? Color.FromArgb(255, 140, 0) : Color.FromArgb(0, 0, 128);
-            btnRec.ForeColor = Color.White;
-            btnRec.FlatAppearance.BorderColor = on ? Color.FromArgb(205, 100, 0) : Color.FromArgb(0, 0, 80);
+            Color idle = Color.FromArgb(255, Color.FromArgb(settings.RecColor));
+            btnRec.BackColor = on ? Color.FromArgb(255, 140, 0) : idle;
+            // Texte blanc, noir sur les fonds clairs (jaune, bleu ciel…).
+            btnRec.ForeColor = !on && idle.R * 299 + idle.G * 587 + idle.B * 114 > 160000 ? Color.Black : Color.White;
+            // Bordure comme les Mute : plus claire que le fond au repos (vert 0,120,60 → 0,150,75), plus foncée en marche
+            // (rouge 200,0,0 → 150,0,0).
+            btnRec.FlatAppearance.BorderColor = on ? Color.FromArgb(190, 105, 0) : Lighter(idle);
+            Image old = btnRec.Image;
+            btnRec.Image = RecLabel(btnRec.ClientSize, btnRec.ForeColor);
+            if (old != null) old.Dispose();
             tips.SetToolTip(btnRec, on
                 ? Lang.T("Arrêter l'enregistrement et sauvegarder le son", "Stop recording and save the sound")
-                : Lang.T("Enregistrer le son entendu dans les haut-parleurs (clic droit : carte son du poste)", "Record the sound heard in the speakers (right-click: rig sound card)"));
+                : Lang.T("Enregistrer le son entendu dans les haut-parleurs (clic droit : carte son du poste, couleur)", "Record the sound heard in the speakers (right-click: rig sound card, colour)"));
+        }
+
+        // Bordure d'un quart plus claire (au moins un peu pour le noir).
+        static Color Lighter(Color c)
+        {
+            return Color.FromArgb(Math.Min(255, c.R * 5 / 4 + 15), Math.Min(255, c.G * 5 / 4 + 15), Math.Min(255, c.B * 5 / 4 + 15));
+        }
+
+        // « REC » dans la police des boutons Mute, centré, sans retour à la ligne.
+        Bitmap RecLabel(Size size, Color fore)
+        {
+            Bitmap b = new Bitmap(Math.Max(1, size.Width - 2), Math.Max(1, size.Height - 2));
+            using (Graphics g = Graphics.FromImage(b))
+            using (SolidBrush br = new SolidBrush(fore))
+            using (StringFormat sf = new StringFormat(StringFormatFlags.NoWrap | StringFormatFlags.NoClip))
+            {
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                sf.Alignment = sf.LineAlignment = StringAlignment.Center;
+                g.DrawString("REC", btnRec.Font, br, new RectangleF(0, 0, b.Width, b.Height), sf);
+            }
+            return b;
         }
 
         // Bouton ▾ : les 20 dernières mémoires utilisées (nom s'il y en a un, sinon fréquence).

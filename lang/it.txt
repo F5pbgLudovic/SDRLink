@@ -119,12 +119,30 @@ Scan stopped	Scansione arrestata
 ■ Stop scan	■ Arresta la scansione
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Scheda audio dell'apparato, registrata quando Mute WebSDR e Mute ExpertSDR sono attivi:
 None (always the speakers)	Nessuna (sempre gli altoparlanti)
+REC button width	Larghezza del pulsante REC
+Narrow	Stretto
+Wide	Largo
+Navy blue (default)	Blu marino (predefinito)
+Blue	Blu
+Sky blue	Azzurro
+Teal	Verde acqua
+Green	Verde
+Red	Rosso
+Burgundy	Bordeaux
+Purple	Viola
+Pink	Rosa
+Brown	Marrone
+Grey	Grigio
+Black	Nero
+Yellow	Giallo
+REC button colour	Colore del pulsante REC
+Other colour…	Altro colore…
 REC: recording the speakers	REC: registrazione degli altoparlanti
 Empty recording: nothing to save	Registrazione vuota: niente da salvare
 Recording deleted	Registrazione eliminata
 The file could not be written: 	Impossibile scrivere il file: 
 Stop recording and save the sound	Interrompi la registrazione e salva l'audio
-Record the sound heard in the speakers (right-click: rig sound card)	Registra l'audio che si sente dagli altoparlanti (clic destro: scheda audio dell'apparato)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Registra l'audio che si sente dagli altoparlanti (clic destro: scheda audio dell'apparato, colore)
 (no memory used yet)	(nessuna memoria ancora usata)
 Memories…	Memorie…
 Clear this list	Svuota questo elenco

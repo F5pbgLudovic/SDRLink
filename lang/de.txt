@@ -119,12 +119,30 @@ Scan stopped	Suchlauf beendet
 ■ Stop scan	■ Suchlauf beenden
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Soundkarte des Funkgeräts, aufgenommen wenn Mute WebSDR und Mute ExpertSDR aktiv sind:
 None (always the speakers)	Keine (immer die Lautsprecher)
+REC button width	Breite der REC-Taste
+Narrow	Schmal
+Wide	Breit
+Navy blue (default)	Marineblau (Standard)
+Blue	Blau
+Sky blue	Himmelblau
+Teal	Petrol
+Green	Grün
+Red	Rot
+Burgundy	Bordeaux
+Purple	Violett
+Pink	Rosa
+Brown	Braun
+Grey	Grau
+Black	Schwarz
+Yellow	Gelb
+REC button colour	Farbe der REC-Taste
+Other colour…	Andere Farbe…
 REC: recording the speakers	REC: Aufnahme der Lautsprecher
 Empty recording: nothing to save	Leere Aufnahme: nichts zu speichern
 Recording deleted	Aufnahme gelöscht
 The file could not be written: 	Die Datei konnte nicht geschrieben werden: 
 Stop recording and save the sound	Aufnahme beenden und Ton speichern
-Record the sound heard in the speakers (right-click: rig sound card)	Den Ton aus den Lautsprechern aufnehmen (Rechtsklick: Soundkarte des Funkgeräts)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Den Ton aus den Lautsprechern aufnehmen (Rechtsklick: Soundkarte des Funkgeräts, Farbe)
 (no memory used yet)	(noch kein Speicher verwendet)
 Memories…	Speicher…
 Clear this list	Diese Liste leeren

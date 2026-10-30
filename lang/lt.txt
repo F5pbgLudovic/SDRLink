@@ -119,12 +119,30 @@ Scan stopped	Skenavimas sustabdytas
 ■ Stop scan	■ Stabdyti skenavimą
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radijo stoties garso plokštė, įrašoma kai įjungti Mute WebSDR ir Mute ExpertSDR:
 None (always the speakers)	Jokia (visada garsiakalbiai)
+REC button width	REC mygtuko plotis
+Narrow	Siauras
+Wide	Platus
+Navy blue (default)	Tamsiai mėlyna (numatytoji)
+Blue	Mėlyna
+Sky blue	Žydra
+Teal	Žalsvai mėlyna
+Green	Žalia
+Red	Raudona
+Burgundy	Bordo
+Purple	Violetinė
+Pink	Rožinė
+Brown	Ruda
+Grey	Pilka
+Black	Juoda
+Yellow	Geltona
+REC button colour	REC mygtuko spalva
+Other colour…	Kita spalva…
 REC: recording the speakers	REC: įrašomi garsiakalbiai
 Empty recording: nothing to save	Tuščias įrašas: nėra ką išsaugoti
 Recording deleted	Įrašas ištrintas
 The file could not be written: 	Failo įrašyti nepavyko: 
 Stop recording and save the sound	Sustabdyti įrašymą ir išsaugoti garsą
-Record the sound heard in the speakers (right-click: rig sound card)	Įrašyti garsiakalbiuose girdimą garsą (dešinysis spustelėjimas: radijo stoties garso plokštė)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Įrašyti garsiakalbiuose girdimą garsą (dešinysis spustelėjimas: radijo stoties garso plokštė, spalva)
 (no memory used yet)	(atminčių dar nenaudota)
 Memories…	Atmintys…
 Clear this list	Išvalyti šį sąrašą

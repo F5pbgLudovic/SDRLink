@@ -119,12 +119,30 @@ Scan stopped	Prehľadávanie zastavené
 ■ Stop scan	■ Zastaviť prehľadávanie
 Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Zvuková karta stanice, nahrávaná pri zapnutom Mute WebSDR a Mute ExpertSDR:
 None (always the speakers)	Žiadna (vždy reproduktory)
+REC button width	Šírka tlačidla REC
+Narrow	Úzke
+Wide	Široké
+Navy blue (default)	Námornícka modrá (predvolená)
+Blue	Modrá
+Sky blue	Nebeská modrá
+Teal	Modrozelená
+Green	Zelená
+Red	Červená
+Burgundy	Bordová
+Purple	Fialová
+Pink	Ružová
+Brown	Hnedá
+Grey	Sivá
+Black	Čierna
+Yellow	Žltá
+REC button colour	Farba tlačidla REC
+Other colour…	Iná farba…
 REC: recording the speakers	REC: nahrávanie reproduktorov
 Empty recording: nothing to save	Prázdny záznam: nie je čo uložiť
 Recording deleted	Záznam odstránený
 The file could not be written: 	Súbor sa nepodarilo zapísať: 
 Stop recording and save the sound	Zastaviť nahrávanie a uložiť zvuk
-Record the sound heard in the speakers (right-click: rig sound card)	Nahrať zvuk z reproduktorov (pravé tlačidlo: zvuková karta stanice)
+Record the sound heard in the speakers (right-click: rig sound card, colour)	Nahrať zvuk z reproduktorov (pravé tlačidlo: zvuková karta stanice, farba)
 (no memory used yet)	(zatiaľ žiadna použitá pamäť)
 Memories…	Pamäte…
 Clear this list	Vymazať tento zoznam
