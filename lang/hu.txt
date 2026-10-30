@@ -74,9 +74,34 @@ Invalid HRD answer	Érvénytelen HRD-válasz
 HRD connection closed	A HRD-kapcsolat bezárult
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nincs HRD-szerver itt: {0}:{1} (engedélyezze az IP-szervert a HRD Rig Control programban).
 Cannot open the log: 	A napló nem nyitható meg: 
+Export all settings…	Összes beállítás exportálása…
+Import settings…	Beállítások importálása…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: gomb színe)
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
+Colour when connected	Szín csatlakoztatva
+Colour when disconnected	Szín bontott kapcsolatnál
+Colour when on	Szín bekapcsolva
+Colour when off	Szín kikapcsolva
+Colour when the scan is stopped	Szín leállított pásztázásnál
+Colour while scanning	Szín pásztázás közben
+Colour when receiving	Szín vételkor
+Colour when transmitting (PTT on)	Szín adáskor (PTT be)
+Background colour	Háttérszín
+Text colour	Szövegszín
+Colour of the selected mode	A kiválasztott üzemmód színe
+Colour of the other modes	A többi üzemmód színe
+Colour when muted	Szín némításkor
+Colour when the sound is on	Szín bekapcsolt hangnál
+Export all SDRLink settings	Az összes SDRLink-beállítás exportálása
+SDRLink settings (*.ini)|*.ini	SDRLink-beállítások (*.ini)|*.ini
+Cannot export the settings: 	A beállítások nem exportálhatók: 
+Import SDRLink settings	SDRLink-beállítások importálása
+Cannot import the settings: 	A beállítások nem importálhatók: 
+Import: this file does not contain SDRLink settings	Importálás: ez a fájl nem tartalmaz SDRLink-beállításokat
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Az összes jelenlegi beállítást (interfész, kedvencek, memóriák, színek…) a fájlban lévők váltják fel, majd az SDRLink újraindul.\n\nA jelenlegi beállítások a settings.avant-import.ini fájlban maradnak meg.\n\nFolytatja?
+Button colour	Gomb színe
 RIG	RÁDIÓ
 Disconnected	Nincs kapcsolat
 Connect	Csatlakozás
@@ -122,7 +147,9 @@ None (always the speakers)	Nincs (mindig a hangszórók)
 REC button width	A REC gomb szélessége
 Narrow	Keskeny
 Wide	Széles
+REC button colour	A REC gomb színe
 Navy blue (default)	Tengerészkék (alapértelmezett)
+Navy blue	Tengerészkék
 Blue	Kék
 Sky blue	Égszínkék
 Teal	Kékeszöld
@@ -135,7 +162,9 @@ Brown	Barna
 Grey	Szürke
 Black	Fekete
 Yellow	Sárga
-REC button colour	A REC gomb színe
+Orange	Narancs
+White	Fehér
+Default	Alapértelmezett
 Other colour…	Más szín…
 REC: recording the speakers	REC: a hangszórók felvétele
 Empty recording: nothing to save	Üres felvétel: nincs mit menteni
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Az ablak szövegmérete (100 % = eredet
 Last {0} memories used	Utolsó {0} használt memória
 ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Elérhető a V{0} frissítés: kattintson a letöltéshez
+Settings exported to "{0}"	Beállítások exportálva ide: „{0}”
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Az adás automatikusan leállt ennyi idő után: {0} (biztonsági időkorlát, a módosításhoz kattintson jobb gombbal a PTT-re)
 Remove "{0}" from the list	„{0}” eltávolítása a listából
 Remove all ({0} values)	Összes eltávolítása ({0} érték)
@@ -206,6 +236,7 @@ TRX volume:	TRX hangerő:
 ExpertSDR volume:	ExpertSDR hangerő:
 Open log	Napló megnyitása
 Text size…	Szövegméret…
+Import/Export ▾	Import/Export ▾
 …	…
 Download Hamlib…	Hamlib letöltése…
 SDRLINK cable ▾	SDRLINK kábel ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Törli a(z) „{0}” listát és
 OmniRig is not installed (OmniRig.OmniRigX not found).	Az OmniRig nincs telepítve (az OmniRig.OmniRigX nem található).
 Dark mode colour	Sötét mód színe
 Light mode colour	Világos mód színe
-Default	Alapértelmezett
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	Az SDRLink működéséhez Microsoft .NET Framework 4.6.2 vagy újabb szükséges (4.8 ajánlott).\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a .NET Framework 4.8-at?\n(újraindításra lehet szükség, utána indítsa el újra az SDRLinket)
 SDRLink - missing component	SDRLink - hiányzó összetevő
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Az SDRLinknek a WebSDR-ek megjelenítéséhez szüksége van a Microsoft Edge WebView2 Runtime összetevőre.\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a WebView2-t? (ingyenes, kb. 2 MB)

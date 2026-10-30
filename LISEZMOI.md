@@ -16,6 +16,47 @@ Au premier lancement, SDRLink dépose `WebView2Loader.dll` dans `%LOCALAPPDATA%\
 
 Pour recompiler après une modification : `powershell -ExecutionPolicy Bypass -File build.ps1` (résultat dans `dist\`).
 
+## La fenêtre, ligne par ligne
+
+Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section.
+
+1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Taille du texte…**, case **Vérifier les mises à jour**, **Import/Export ▾**.
+2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
+3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
+4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR**, boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
+5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**.
+6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR** (seulement les sons disponibles), puis **REC**.
+7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
+
+## Tous les clics droits
+
+| Où | Ce que propose le clic droit |
+|---|---|
+| Connecter | couleur quand connecté / déconnecté |
+| Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Import/Export | couleur du bouton |
+| Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
+| Scan | couleur scan arrêté / en marche |
+| PTT | délai de sécurité TX, couleur en réception / en émission |
+| RADIO, WEBSDR | couleur du fond, couleur du texte |
+| USB, LSB, AM, FM, DIGI, CW | couleur du mode sélectionné / des autres |
+| Saisie kHz | supprimer la valeur de l'historique, tout supprimer |
+| Mémoires | mémoriser la fréquence actuelle, couleur du bouton |
+| Liste des favoris (à côté de l'adresse) | renommer la liste |
+| ⇄ | réception que ⇄ laisse coupée |
+| Mute WebSDR, Mute TX | couleur son coupé / son actif |
+| Mute ExpertSDR | port TCI d'ExpertSDR, couleur son coupé / son actif |
+| « Volume WebSDR » | port TCI d'ExpertSDR |
+| REC | carte son du poste, couleur du bouton REC, largeur (étroit / large) |
+| Barre d'état | 20 derniers messages, types de messages à ne plus afficher |
+
+## Fichiers de SDRLink
+
+- `%APPDATA%\SDRLink\settings.ini` : **tous les réglages** (interface, favoris, mémoires, couleurs, fenêtre…). C'est ce fichier que copie **Import/Export**.
+- `%APPDATA%\SDRLink\settings.avant-import.ini` : les réglages d'avant le dernier import.
+- `%APPDATA%\SDRLink\sdrlink.log` : le journal (remis à zéro à chaque lancement).
+- `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll.
+- `Musique\SDRLink` : dossier des enregistrements REC par défaut ; pendant un enregistrement, un fichier provisoire `SDRLink-REC-*.raw` est dans `%TEMP%`.
+
 ## Interfaces (menu « Interface »)
 
 | Interface | Réglages | Remarque |
@@ -178,6 +219,23 @@ La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'int
   - En mode clair : uniquement des teintes claires (blanc, gris perle, crème, sable, jaune pâle, bleus, vert d'eau, rose, lavande).
   - Le reste de l'interface (champs, boutons, bordures) s'accorde automatiquement. « Par défaut » revient aux couleurs d'origine.
   - Le choix est mémorisé séparément pour le mode sombre et le mode clair.
+
+## Couleurs des boutons (clic droit)
+
+Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le bouton avait déjà un clic droit (PTT, Mémoires, Câble SDRLINK, Mute ExpertSDR…), ce menu est conservé et les couleurs sont ajoutées à la fin.
+- **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export.
+- **Deux choix, un pour chaque état** :
+  - **Connecter** : quand connecté / quand déconnecté ;
+  - **Câble SDRLINK** : quand activé / quand désactivé ;
+  - **Scan** : scan arrêté / scan en marche ;
+  - **PTT** : en réception / en émission (PTT activé) ;
+  - **RADIO** et **WEBSDR** (fréquence et mode) : couleur du fond / couleur du texte (en émission, RADIO passe toujours en rouge) ;
+  - **USB, LSB, AM, FM, DIGI, CW** : mode sélectionné / modes non sélectionnés (le choix vaut pour les six boutons) ;
+  - **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR** (chacun le sien) : son coupé / son actif. Un Mute indisponible reste grisé.
+- Couleurs proposées : **Par défaut** (couleur d'origine, qui suit le mode sombre et la palette), bleu marine, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, orange, blanc, ou **Autre couleur…** au choix.
+- Le texte passe en noir sur les couleurs claires et en blanc sur les foncées ; une bordure fait contour.
+- Les choix sont conservés, y compris en passant du mode clair au mode sombre.
+- Le bouton REC garde son propre menu (couleur et largeur, voir « Enregistrement (REC) »).
 
 ## Langue
 
@@ -351,6 +409,16 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 - **Réafficher tous les messages masqués** : annule tous les masquages. Les types masqués sont conservés au prochain lancement.
 - Le message « Câble SDRLINK : aucun câble audio virtuel trouvé » disparaît dès que le câble est mis sur **Désactivé**.
 
+## Import / Export des réglages
+
+Bouton **Import/Export ▾** (1re ligne, après « Vérifier les mises à jour ») : pour retrouver exactement la même configuration sur un autre ordinateur, ou garder une sauvegarde. Clic droit : couleur du bouton.
+- Tous les réglages de SDRLink sont dans un seul fichier : **`%APPDATA%\SDRLink\settings.ini`** (par exemple `C:\Users\<nom>\AppData\Roaming\SDRLink\settings.ini`). Le journal `sdrlink.log` est à côté.
+- **Exporter tous les réglages…** : enregistre ce fichier où vous voulez (par défaut dans Documents, nom `SDRLink-reglages-<date>.ini`), avec l'état du moment : interface et poste (port COM, vitesse, TCI, HRD, Hamlib…), synchronisation, décalage, favoris et leurs listes, mémoires, historique des fréquences, langue, mode sombre et palette, couleurs des boutons, taille du texte, REC (dossier, carte son, couleur, largeur), câble SDRLINK, scan, volumes, taille et position de la fenêtre, etc.
+- **Importer des réglages…** : choisir un fichier exporté. Après confirmation, tous les réglages actuels sont remplacés et SDRLink redémarre avec la configuration du fichier. Les anciens réglages sont gardés dans `settings.avant-import.ini` (même dossier) : pour revenir en arrière, réimporter ce fichier.
+- Un fichier qui ne contient pas de réglages SDRLink est refusé (message dans la barre d'état).
+- Sur un autre ordinateur, vérifier ce qui dépend de la machine : port COM du poste, cartes son (câble SDRLINK, carte son du poste pour REC), chemin de rigctld, dossier des enregistrements. Une carte son du poste absente est signalée « non branchée » dans le menu de REC ; si la position de la fenêtre tombe hors des écrans, elle est ignorée.
+- Les données de navigation des pages WebSDR (cookies, cache) ne font pas partie des réglages et ne sont pas exportées.
+
 ## Mises à jour
 
 Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au démarrage, si Internet répond, SDRLink regarde la dernière version publiée sur GitHub. S'il en existe une plus récente, un lien orange « ⚠ Mise à jour Vx.y disponible » apparaît en bas à droite de la fenêtre, dans la barre d'état (visible aussi en affichages réduit et mini) : un clic ouvre la page de téléchargement. Cocher la case lance la vérification tout de suite.
@@ -365,6 +433,9 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.13**
+  - **couleur de fond au choix par clic droit** sur presque tous les boutons (Connecter, Ouvrir le journal, Taille du texte, Câble SDRLINK, Conf scan, Scan, PTT, RADIO, WEBSDR, boutons de mode, QSY, Save, Mémoires, Aller, Retour, Recharger, favoris, Rechercher des WebSDR, les trois Mute), une couleur par état pour les boutons qui en ont deux ; les clics droits existants sont conservés ;
+  - bouton **Import/Export** : exporte tous les réglages (interface, favoris, mémoires, couleurs…) dans un fichier, et les importe sur un autre ordinateur (SDRLink redémarre, anciens réglages gardés dans settings.avant-import.ini).
 - **1.12**
   - bouton **REC** déplacé sur la ligne de son, juste après le dernier volume affiché (sans espace vide quand ExpertSDR ou le volume du poste sont absents), avec la même allure et la même hauteur que les boutons Mute ;
   - clic droit sur REC : **couleur du bouton** au repos (bleu marine par défaut) et **largeur** (étroit ou large) ;

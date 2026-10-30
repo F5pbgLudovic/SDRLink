@@ -74,9 +74,34 @@ Invalid HRD answer	Neplatná odpoveď HRD
 HRD connection closed	Spojenie s HRD ukončené
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} nie je server HRD (povoľte IP server v HRD Rig Control).
 Cannot open the log: 	Nedá sa otvoriť denník: 
+Export all settings…	Exportovať všetky nastavenia…
+Import settings…	Importovať nastavenia…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportovať alebo importovať všetky nastavenia pre rovnakú konfiguráciu na inom počítači (pravé tlačidlo: farba tlačidla)
 Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
 Store the current frequency…	Uložiť aktuálny kmitočet…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prepnúť zvuk na ďalší prijímač (pravé tlačidlo: prijímač, ktorý zostane stlmený)
+Colour when connected	Farba pri pripojení
+Colour when disconnected	Farba pri odpojení
+Colour when on	Farba pri zapnutí
+Colour when off	Farba pri vypnutí
+Colour when the scan is stopped	Farba pri zastavenom skenovaní
+Colour while scanning	Farba počas skenovania
+Colour when receiving	Farba pri príjme
+Colour when transmitting (PTT on)	Farba pri vysielaní (PTT zapnuté)
+Background colour	Farba pozadia
+Text colour	Farba textu
+Colour of the selected mode	Farba zvoleného druhu prevádzky
+Colour of the other modes	Farba ostatných druhov prevádzky
+Colour when muted	Farba pri stlmení
+Colour when the sound is on	Farba pri zapnutom zvuku
+Export all SDRLink settings	Exportovať všetky nastavenia SDRLink
+SDRLink settings (*.ini)|*.ini	Nastavenia SDRLink (*.ini)|*.ini
+Cannot export the settings: 	Nastavenia nemožno exportovať: 
+Import SDRLink settings	Importovať nastavenia SDRLink
+Cannot import the settings: 	Nastavenia nemožno importovať: 
+Import: this file does not contain SDRLink settings	Import: tento súbor neobsahuje nastavenia SDRLink
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Všetky súčasné nastavenia (rozhranie, obľúbené, pamäte, farby…) budú nahradené nastaveniami zo súboru a SDRLink sa potom reštartuje.\n\nSúčasné nastavenia zostanú uložené v settings.avant-import.ini.\n\nPokračovať?
+Button colour	Farba tlačidla
 RIG	TRX
 Disconnected	Odpojené
 Connect	Pripojiť
@@ -122,7 +147,9 @@ None (always the speakers)	Žiadna (vždy reproduktory)
 REC button width	Šírka tlačidla REC
 Narrow	Úzke
 Wide	Široké
+REC button colour	Farba tlačidla REC
 Navy blue (default)	Námornícka modrá (predvolená)
+Navy blue	Námornícka modrá
 Blue	Modrá
 Sky blue	Nebeská modrá
 Teal	Modrozelená
@@ -135,7 +162,9 @@ Brown	Hnedá
 Grey	Sivá
 Black	Čierna
 Yellow	Žltá
-REC button colour	Farba tlačidla REC
+Orange	Oranžová
+White	Biela
+Default	Predvolené
 Other colour…	Iná farba…
 REC: recording the speakers	REC: nahrávanie reproduktorov
 Empty recording: nothing to save	Prázdny záznam: nie je čo uložiť
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Veľkosť textu okna (100 % = pôvodná
 Last {0} memories used	Posledných {0} použitých pamätí
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ K dispozícii je aktualizácia V{0}: kliknite na stiahnutie
+Settings exported to "{0}"	Nastavenia exportované do „{0}“
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Vysielanie automaticky zastavené po {0} (bezpečnostný limit, zmeníte ho kliknutím pravým tlačidlom na PTT)
 Remove "{0}" from the list	Odstrániť „{0}“ zo zoznamu
 Remove all ({0} values)	Odstrániť všetko (hodnoty: {0})
@@ -206,6 +236,7 @@ TRX volume:	Hlasitosť TRX:
 ExpertSDR volume:	Hlasitosť ExpertSDR:
 Open log	Otvoriť denník
 Text size…	Veľkosť textu…
+Import/Export ▾	Import/Export ▾
 …	…
 Download Hamlib…	Stiahnuť Hamlib…
 SDRLINK cable ▾	Kábel SDRLINK ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Odstrániť zoznam „{0}“ a je
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nie je nainštalovaný (OmniRig.OmniRigX sa nenašiel).
 Dark mode colour	Farba tmavého režimu
 Light mode colour	Farba svetlého režimu
-Default	Predvolené
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink vyžaduje Microsoft .NET Framework 4.6.2 alebo novší (odporúča sa 4.8).\nNa tomto počítači nie je nainštalovaný.\n\nStiahnuť a nainštalovať .NET Framework 4.8 teraz?\n(môže byť potrebný reštart, potom SDRLink spustite znova)
 SDRLink - missing component	SDRLink - chýbajúci komponent
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink potrebuje na zobrazenie WebSDR modul Microsoft Edge WebView2 Runtime.\nNa tomto počítači nie je nainštalovaný.\n\nStiahnuť a nainštalovať WebView2 teraz? (zadarmo, asi 2 MB)

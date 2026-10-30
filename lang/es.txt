@@ -74,9 +74,34 @@ Invalid HRD answer	Respuesta HRD no válida
 HRD connection closed	Conexión HRD cerrada
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	No hay servidor HRD en {0}:{1} (active el servidor IP en HRD Rig Control).
 Cannot open the log: 	No se puede abrir el registro: 
+Export all settings…	Exportar todos los ajustes…
+Import settings…	Importar ajustes…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportar o importar todos los ajustes, para la misma configuración en otro ordenador (clic derecho: color del botón)
 Save: no known frequency (rig or WebSDR)	Guardar: ninguna frecuencia conocida (equipo o WebSDR)
 Store the current frequency…	Memorizar la frecuencia actual…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Pasar el sonido al receptor siguiente (clic derecho: receptor que permanece silenciado)
+Colour when connected	Color al estar conectado
+Colour when disconnected	Color al estar desconectado
+Colour when on	Color activado
+Colour when off	Color desactivado
+Colour when the scan is stopped	Color con el escaneo detenido
+Colour while scanning	Color durante el escaneo
+Colour when receiving	Color en recepción
+Colour when transmitting (PTT on)	Color en transmisión (PTT activado)
+Background colour	Color de fondo
+Text colour	Color del texto
+Colour of the selected mode	Color del modo seleccionado
+Colour of the other modes	Color de los otros modos
+Colour when muted	Color con el sonido silenciado
+Colour when the sound is on	Color con el sonido activo
+Export all SDRLink settings	Exportar todos los ajustes de SDRLink
+SDRLink settings (*.ini)|*.ini	Ajustes de SDRLink (*.ini)|*.ini
+Cannot export the settings: 	No se pueden exportar los ajustes: 
+Import SDRLink settings	Importar ajustes de SDRLink
+Cannot import the settings: 	No se pueden importar los ajustes: 
+Import: this file does not contain SDRLink settings	Importar: este archivo no contiene ajustes de SDRLink
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Todos los ajustes actuales (interfaz, favoritos, memorias, colores…) se sustituirán por los del archivo y SDRLink se reiniciará.\n\nLos ajustes actuales se guardan en settings.avant-import.ini.\n\n¿Continuar?
+Button colour	Color del botón
 RIG	EQUIPO
 Disconnected	Desconectado
 Connect	Conectar
@@ -122,7 +147,9 @@ None (always the speakers)	Ninguna (siempre los altavoces)
 REC button width	Ancho del botón REC
 Narrow	Estrecho
 Wide	Ancho
+REC button colour	Color del botón REC
 Navy blue (default)	Azul marino (predeterminado)
+Navy blue	Azul marino
 Blue	Azul
 Sky blue	Azul cielo
 Teal	Verde azulado
@@ -135,7 +162,9 @@ Brown	Marrón
 Grey	Gris
 Black	Negro
 Yellow	Amarillo
-REC button colour	Color del botón REC
+Orange	Naranja
+White	Blanco
+Default	Predeterminado
 Other colour…	Otro color…
 REC: recording the speakers	REC: grabación de los altavoces
 Empty recording: nothing to save	Grabación vacía: nada que guardar
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Tamaño del texto de la ventana (100 % 
 Last {0} memories used	Últimas {0} memorias usadas
 ExpertSDR TCI port: {0}…	Puerto TCI de ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualización V{0} disponible: haga clic para descargarla
+Settings exported to "{0}"	Ajustes exportados a «{0}»
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Transmisión detenida automáticamente tras {0} (tiempo límite de seguridad, clic derecho en PTT para cambiarlo)
 Remove "{0}" from the list	Eliminar «{0}» de la lista
 Remove all ({0} values)	Eliminar todo ({0} valores)
@@ -206,6 +236,7 @@ TRX volume:	Volumen TRX:
 ExpertSDR volume:	Volumen ExpertSDR:
 Open log	Abrir registro
 Text size…	Tamaño del texto…
+Import/Export ▾	Importar/Exportar ▾
 …	…
 Download Hamlib…	Descargar Hamlib…
 SDRLINK cable ▾	Cable SDRLINK ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	¿Eliminar la lista «{0}» y sus
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig no está instalado (no se encontró OmniRig.OmniRigX).
 Dark mode colour	Color del modo oscuro
 Light mode colour	Color del modo claro
-Default	Predeterminado
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink necesita Microsoft .NET Framework 4.6.2 o posterior (se recomienda 4.8).\nNo está instalado en este PC.\n\n¿Descargar e instalar .NET Framework 4.8 ahora?\n(puede ser necesario reiniciar; después, vuelva a iniciar SDRLink)
 SDRLink - missing component	SDRLink - componente ausente
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink necesita Microsoft Edge WebView2 Runtime para mostrar los WebSDR.\nNo está instalado en este PC.\n\n¿Descargar e instalar WebView2 ahora? (gratuito, unos 2 MB)

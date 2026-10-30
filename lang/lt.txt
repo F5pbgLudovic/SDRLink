@@ -74,9 +74,34 @@ Invalid HRD answer	Netinkamas HRD atsakymas
 HRD connection closed	HRD ryšys uždarytas
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nėra HRD serverio adresu {0}:{1} (įjunkite IP serverį programoje HRD Rig Control).
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
+Export all settings…	Eksportuoti visus nustatymus…
+Import settings…	Importuoti nustatymus…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportuoti arba importuoti visus nustatymus, kad kitame kompiuteryje būtų ta pati konfigūracija (dešinysis spustelėjimas: mygtuko spalva)
 Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
 Store the current frequency…	Įsiminti dabartinį dažnį…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Perjungti garsą į kitą imtuvą (dešinysis spustelėjimas: imtuvas, kuris lieka nutildytas)
+Colour when connected	Spalva prisijungus
+Colour when disconnected	Spalva atsijungus
+Colour when on	Spalva įjungus
+Colour when off	Spalva išjungus
+Colour when the scan is stopped	Spalva sustabdžius skenavimą
+Colour while scanning	Spalva skenuojant
+Colour when receiving	Spalva priimant
+Colour when transmitting (PTT on)	Spalva siunčiant (PTT įjungtas)
+Background colour	Fono spalva
+Text colour	Teksto spalva
+Colour of the selected mode	Pasirinktos darbo rūšies spalva
+Colour of the other modes	Kitų darbo rūšių spalva
+Colour when muted	Spalva išjungus garsą
+Colour when the sound is on	Spalva įjungus garsą
+Export all SDRLink settings	Eksportuoti visus SDRLink nustatymus
+SDRLink settings (*.ini)|*.ini	SDRLink nustatymai (*.ini)|*.ini
+Cannot export the settings: 	Nepavyko eksportuoti nustatymų: 
+Import SDRLink settings	Importuoti SDRLink nustatymus
+Cannot import the settings: 	Nepavyko importuoti nustatymų: 
+Import: this file does not contain SDRLink settings	Importas: šiame faile nėra SDRLink nustatymų
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Visi dabartiniai nustatymai (sąsaja, mėgstami, atmintys, spalvos…) bus pakeisti failo nustatymais, tada SDRLink bus paleistas iš naujo.\n\nDabartiniai nustatymai išsaugomi faile settings.avant-import.ini.\n\nTęsti?
+Button colour	Mygtuko spalva
 RIG	STOTIS
 Disconnected	Atsijungta
 Connect	Prisijungti
@@ -122,7 +147,9 @@ None (always the speakers)	Jokia (visada garsiakalbiai)
 REC button width	REC mygtuko plotis
 Narrow	Siauras
 Wide	Platus
+REC button colour	REC mygtuko spalva
 Navy blue (default)	Tamsiai mėlyna (numatytoji)
+Navy blue	Tamsiai mėlyna
 Blue	Mėlyna
 Sky blue	Žydra
 Teal	Žalsvai mėlyna
@@ -135,7 +162,9 @@ Brown	Ruda
 Grey	Pilka
 Black	Juoda
 Yellow	Geltona
-REC button colour	REC mygtuko spalva
+Orange	Oranžinė
+White	Balta
+Default	Numatytoji
 Other colour…	Kita spalva…
 REC: recording the speakers	REC: įrašomi garsiakalbiai
 Empty recording: nothing to save	Tuščias įrašas: nėra ką išsaugoti
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Lango teksto dydis (100 % = pradinis dy
 Last {0} memories used	Paskutinės {0} naudotos atmintys
 ExpertSDR TCI port: {0}…	ExpertSDR TCI prievadas: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Yra atnaujinimas V{0}: spustelėkite, kad atsisiųstumėte
+Settings exported to "{0}"	Nustatymai eksportuoti į „{0}“
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Siuntimas automatiškai sustabdytas po {0} (saugos laikmatis; norėdami pakeisti, spustelėkite PTT dešiniuoju mygtuku)
 Remove "{0}" from the list	Šalinti „{0}“ iš sąrašo
 Remove all ({0} values)	Šalinti viską (reikšmių: {0})
@@ -206,6 +236,7 @@ TRX volume:	TRX garsumas:
 ExpertSDR volume:	ExpertSDR garsumas:
 Open log	Atidaryti žurnalą
 Text size…	Teksto dydis…
+Import/Export ▾	Importas/Eksportas ▾
 …	…
 Download Hamlib…	Atsisiųsti Hamlib…
 SDRLINK cable ▾	SDRLINK kabelis ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Ištrinti sąrašą „{0}“ ir 
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig neįdiegtas (OmniRig.OmniRigX nerastas).
 Dark mode colour	Tamsaus režimo spalva
 Light mode colour	Šviesaus režimo spalva
-Default	Numatytoji
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink reikia Microsoft .NET Framework 4.6.2 arba naujesnės versijos (rekomenduojama 4.8).\nŠiame kompiuteryje ji neįdiegta.\n\nAtsisiųsti ir įdiegti .NET Framework 4.8 dabar?\n(gali reikėti paleisti kompiuterį iš naujo, tada vėl paleiskite SDRLink)
 SDRLink - missing component	SDRLink - trūksta komponento
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink reikia Microsoft Edge WebView2 Runtime, kad būtų rodomi WebSDR.\nŠiame kompiuteryje jis neįdiegtas.\n\nAtsisiųsti ir įdiegti WebView2 dabar? (nemokamai, apie 2 MB)

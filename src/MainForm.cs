@@ -250,21 +250,38 @@ namespace SDRLink
             row1.Controls.Add(btnConnect);
             chkAuto = Check("Connexion auto au démarrage", "Auto-connect at startup");
             row1.Controls.Add(chkAuto);
-            row1.Controls.Add(Btn("Ouvrir le journal", "Open log", delegate
+            row1.Controls.Add(Colorable("Log", Btn("Ouvrir le journal", "Open log", delegate
             {
                 try { System.Diagnostics.Process.Start("notepad.exe", "\"" + Log.FilePath + "\""); }
                 catch (Exception ex) { MessageBox.Show(Lang.T("Impossible d'ouvrir le journal : ", "Cannot open the log: ") + ex.Message); }
-            }));
+            })));
             chkDark = Check("Mode sombre", "Dark mode");
             chkDark.CheckedChanged += delegate { if (!loading) ApplyTheme(); };
             row1.Controls.Add(chkDark);
             btnPalette = new PaletteButton();
             btnPalette.Click += delegate { ShowPalette(); };
             row1.Controls.Add(btnPalette);
-            row1.Controls.Add(Btn("Taille du texte…", "Text size…", delegate { AskFontScale(); }));
+            row1.Controls.Add(Colorable("TextSize", Btn("Taille du texte…", "Text size…", delegate { AskFontScale(); })));
             chkUpdates = Check("Vérifier les mises à jour", "Check for updates");
             chkUpdates.CheckedChanged += delegate { if (!loading && chkUpdates.Checked) CheckForUpdate(); };
             row1.Controls.Add(chkUpdates);
+            // Import/Export : tous les réglages (interface, favoris, mémoires, couleurs…) dans un fichier, pour retrouver
+            // la même configuration sur un autre ordinateur. Clic gauche : menu ; clic droit : couleur du bouton.
+            Button btnImpExp = Btn("Import/Export ▾", "Import/Export ▾", null);
+            ContextMenuStrip ieMenu = new ContextMenuStrip();
+            ToolStripMenuItem ieExport = new ToolStripMenuItem(), ieImport = new ToolStripMenuItem();
+            ieMenu.Items.Add(ieExport);
+            ieMenu.Items.Add(ieImport);
+            ieMenu.Opening += delegate
+            {
+                ieExport.Text = Lang.T("Exporter tous les réglages…", "Export all settings…");
+                ieImport.Text = Lang.T("Importer des réglages…", "Import settings…");
+            };
+            ieExport.Click += delegate { ExportSettings(); };
+            ieImport.Click += delegate { ImportSettings(); };
+            btnImpExp.Click += delegate { ieMenu.Show(btnImpExp, new Point(0, btnImpExp.Height)); };
+            Tr(delegate { tips.SetToolTip(btnImpExp, Lang.T("Exporter ou importer tous les réglages, pour la même configuration sur un autre ordinateur (clic droit : couleur du bouton)", "Export or import all settings, for the same configuration on another computer (right-click: button colour)")); });
+            row1.Controls.Add(Colorable("ImportExport", btnImpExp));
 
             // Ligne 2 : paramètres propres à l'interface choisie
             FlowLayoutPanel row2 = rowParams = Row();
@@ -407,7 +424,7 @@ namespace SDRLink
             chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; SetPageNotch(); };
             row3.Controls.Add(chkNotch);
             // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
-            row3.Controls.Add(Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); }));
+            row3.Controls.Add(Colorable("ScanSetup", Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); })));
             btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else StartScan(); });
             btnScan.Tag = Theme.Custom;
             btnScan.FlatStyle = FlatStyle.Flat;
@@ -494,13 +511,13 @@ namespace SDRLink
             chkTop.CheckedChanged += delegate { TopMost = chkTop.Checked; };
             rowDisplay.Controls.Add(Lbl("kHz :", "kHz:"));
             rowDisplay.Controls.Add(cbFreq);
-            rowDisplay.Controls.Add(Btn("QSY", "QSY", delegate { TuneFromEntry(); }));
-            rowDisplay.Controls.Add(Btn("Save", "Save", delegate
+            rowDisplay.Controls.Add(Colorable("Qsy", Btn("QSY", "QSY", delegate { TuneFromEntry(); })));
+            rowDisplay.Controls.Add(Colorable("Save", Btn("Save", "Save", delegate
             {
                 long f = CurrentFreq();
                 if (f > 0) AddToHistory(f);
                 else ShowStatus(Lang.T("Save : aucune fréquence connue (poste ou WebSDR)", "Save: no known frequency (rig or WebSDR)"));
-            }));
+            })));
             // Mémoires de fréquences : fenêtre de gestion, et menu des 20 dernières utilisées.
             Button btnMem = Btn("Mémoires", "Memories", delegate { ShowMemories(); });
             ContextMenuStrip memMenu = new ContextMenuStrip();
@@ -509,6 +526,7 @@ namespace SDRLink
             memMenu.Opening += delegate { memAdd.Text = Lang.T("Mémoriser la fréquence actuelle…", "Store the current frequency…"); };
             memAdd.Click += delegate { AddMemoryHere(); };
             btnMem.ContextMenuStrip = memMenu;
+            Colorable("Memories", btnMem);
             btnMemRecent = Btn("▾", "▾", null);
             btnMemRecent.Margin = new Padding(0, 3, 3, 3);
             btnMemRecent.MinimumSize = new Size(22, 25);
@@ -572,13 +590,13 @@ namespace SDRLink
             renameList.Click += delegate { RenameFavoriteList(); };
             cbFavList.ContextMenuStrip = listMenu;
             rowUrl.Controls.Add(cbFavList);
-            rowUrl.Controls.Add(Btn("Aller", "Go", delegate { NavigateFromBar(); }));
-            rowUrl.Controls.Add(Btn("◀ Retour", "◀ Back", delegate { if (web.CoreWebView2 != null && web.CanGoBack) web.GoBack(); }));
-            rowUrl.Controls.Add(Btn("Recharger", "Reload", delegate { if (web.CoreWebView2 != null) web.Reload(); }));
-            rowUrl.Controls.Add(Btn("★ Ajouter aux favoris", "★ Add to favorites", delegate { AddFavorite(); }));
-            rowUrl.Controls.Add(Btn("Retirer des favoris", "Remove from favorites", delegate { RemoveCurrentFavorite(); }));
-            rowUrl.Controls.Add(Btn("Gérer les favoris…", "Manage favorites…", delegate { ManageFavorites(); }));
-            rowUrl.Controls.Add(Btn("Rechercher des WebSDR…", "Find WebSDRs…", delegate { SearchWebSdrs(); }));
+            rowUrl.Controls.Add(Colorable("Go", Btn("Aller", "Go", delegate { NavigateFromBar(); })));
+            rowUrl.Controls.Add(Colorable("Back", Btn("◀ Retour", "◀ Back", delegate { if (web.CoreWebView2 != null && web.CanGoBack) web.GoBack(); })));
+            rowUrl.Controls.Add(Colorable("Reload", Btn("Recharger", "Reload", delegate { if (web.CoreWebView2 != null) web.Reload(); })));
+            rowUrl.Controls.Add(Colorable("FavAdd", Btn("★ Ajouter aux favoris", "★ Add to favorites", delegate { AddFavorite(); })));
+            rowUrl.Controls.Add(Colorable("FavRemove", Btn("Retirer des favoris", "Remove from favorites", delegate { RemoveCurrentFavorite(); })));
+            rowUrl.Controls.Add(Colorable("FavManage", Btn("Gérer les favoris…", "Manage favorites…", delegate { ManageFavorites(); })));
+            rowUrl.Controls.Add(Colorable("Find", Btn("Rechercher des WebSDR…", "Find WebSDRs…", delegate { SearchWebSdrs(); })));
 
             // Volume du WebSDR seul (pas celui de Windows), mémorisé pour chaque favori.
             trkVolume = new TrackBar();
@@ -710,8 +728,240 @@ namespace SDRLink
             Tr(delegate { if (updateVersion != null) lblUpdate.Text = Lang.F("⚠ Mise à jour V{0} disponible : cliquez pour la télécharger", "⚠ Update V{0} available: click to download it", updateVersion); });
             strip.Items.Add(lblUpdate);
 
+            // Couleurs au clic droit des boutons à deux états (ajoutées après le menu propre au bouton, s'il en a un).
+            AddColorMenu(btnConnect, Slot("ConnectOn", () => Lang.T("Couleur quand connecté", "Colour when connected")),
+                Slot("ConnectOff", () => Lang.T("Couleur quand déconnecté", "Colour when disconnected")));
+            AddColorMenu(btnCable, Slot("CableOn", () => Lang.T("Couleur quand activé", "Colour when on")),
+                Slot("CableOff", () => Lang.T("Couleur quand désactivé", "Colour when off")));
+            AddColorMenu(btnScan, Slot("ScanOff", () => Lang.T("Couleur scan arrêté", "Colour when the scan is stopped")),
+                Slot("ScanOn", () => Lang.T("Couleur scan en marche", "Colour while scanning")));
+            AddColorMenu(btnPtt, Slot("PttRx", () => Lang.T("Couleur en réception", "Colour when receiving")),
+                Slot("PttTx", () => Lang.T("Couleur en émission (PTT activé)", "Colour when transmitting (PTT on)")));
+            AddColorMenu(lblRig, Slot("RigBack", () => Lang.T("Couleur du fond", "Background colour")), Slot("RigText", () => Lang.T("Couleur du texte", "Text colour")));
+            AddColorMenu(lblSdr, Slot("SdrBack", () => Lang.T("Couleur du fond", "Background colour")), Slot("SdrText", () => Lang.T("Couleur du texte", "Text colour")));
+            foreach (Button b in modeButtons)
+                AddColorMenu(b, Slot("ModeOn", () => Lang.T("Couleur du mode sélectionné", "Colour of the selected mode")),
+                    Slot("ModeOff", () => Lang.T("Couleur des modes non sélectionnés", "Colour of the other modes")));
+            AddColorMenu(btnMuteSdr, Slot("MuteSdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteSdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
+            AddColorMenu(btnMuteRig, Slot("MuteRigCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteRigOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
+            AddColorMenu(btnMuteEsdr, Slot("MuteEsdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteEsdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
+
             Controls.Add(table);
             Controls.Add(strip);
+        }
+
+        // ---------------------------------------------------------------- Import / export des réglages
+
+        // Première ligne des fichiers exportés (ignorée à la lecture : elle n'a pas de « = »).
+        const string ExportHeader = "# SDRLink";
+        // Redémarrage après un import (remplacé dans les tests).
+        Action restartApp = Application.Restart;
+
+        void ExportSettings()
+        {
+            using (SaveFileDialog d = new SaveFileDialog())
+            {
+                d.Title = Lang.T("Exporter tous les réglages de SDRLink", "Export all SDRLink settings");
+                d.Filter = Lang.T("Réglages SDRLink (*.ini)|*.ini", "SDRLink settings (*.ini)|*.ini");
+                d.FileName = "SDRLink-reglages-" + DateTime.Now.ToString("yyyy-MM-dd") + ".ini";
+                d.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                if (d.ShowDialog(this) == DialogResult.OK) ExportSettingsTo(d.FileName);
+            }
+        }
+
+        // Réglages du moment (fenêtre comprise) enregistrés, puis recopiés tels quels dans le fichier choisi.
+        bool ExportSettingsTo(string path)
+        {
+            try
+            {
+                SaveUiToSettings();
+                SaveWindowBounds();
+                settings.Save();
+                string body = File.ReadAllText(Settings.FilePath, Encoding.UTF8);
+                File.WriteAllText(path, ExportHeader + " V" + Program.Version + " : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\n" + body, new UTF8Encoding(false));
+                Log.Write("Réglages exportés : " + path);
+                ShowStatus(Lang.F("Réglages exportés dans « {0} »", "Settings exported to \"{0}\"", path));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Write("Export des réglages impossible : " + ex.Message);
+                ShowStatus(Lang.T("Export des réglages impossible : ", "Cannot export the settings: ") + ex.Message);
+                return false;
+            }
+        }
+
+        void ImportSettings()
+        {
+            using (OpenFileDialog d = new OpenFileDialog())
+            {
+                d.Title = Lang.T("Importer des réglages SDRLink", "Import SDRLink settings");
+                d.Filter = Lang.T("Réglages SDRLink (*.ini)|*.ini", "SDRLink settings (*.ini)|*.ini");
+                d.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                if (d.ShowDialog(this) == DialogResult.OK) ImportSettingsFrom(d.FileName, true);
+            }
+        }
+
+        // Le fichier est vérifié puis mis de côté : il remplace les réglages au redémarrage (Settings.Load), ce qui évite
+        // que la fermeture de SDRLink réenregistre les anciens réglages par-dessus.
+        bool ImportSettingsFrom(string path, bool ask)
+        {
+            string text;
+            try { text = File.ReadAllText(path, Encoding.UTF8); }
+            catch (Exception ex)
+            {
+                ShowStatus(Lang.T("Import des réglages impossible : ", "Cannot import the settings: ") + ex.Message);
+                return false;
+            }
+            if (!text.StartsWith(ExportHeader) && !text.StartsWith("Interface=") && !text.Contains("\nInterface="))
+            {
+                ShowStatus(Lang.T("Import : ce fichier ne contient pas de réglages SDRLink", "Import: this file does not contain SDRLink settings"));
+                return false;
+            }
+            if (ask && MessageBox.Show(this,
+                    Lang.T("Tous les réglages actuels (interface, favoris, mémoires, couleurs…) vont être remplacés par ceux du fichier, puis SDRLink va redémarrer.\n\nLes réglages actuels sont gardés dans settings.avant-import.ini.\n\nContinuer ?",
+                           "All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?"),
+                    "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return false;
+            try { File.WriteAllText(Settings.PendingImportPath, text, new UTF8Encoding(false)); }
+            catch (Exception ex)
+            {
+                ShowStatus(Lang.T("Import des réglages impossible : ", "Cannot import the settings: ") + ex.Message);
+                return false;
+            }
+            Log.Write("Import des réglages : " + path + " (pris en compte au redémarrage)");
+            restartApp();
+            return true;
+        }
+
+        // ---------------------------------------------------------------- Couleurs des boutons (clic droit)
+
+        // Couleur réglable : clé dans Settings.Colors et titre du sous-menu.
+        class ColorSlot { public string Key; public Func<string> Title; }
+
+        static ColorSlot Slot(string key, Func<string> title) { return new ColorSlot { Key = key, Title = title }; }
+
+        readonly Dictionary<Control, ColorSlot[]> colorSlots = new Dictionary<Control, ColorSlot[]>();
+        readonly HashSet<ContextMenuStrip> colorMenus = new HashSet<ContextMenuStrip>();
+        readonly Dictionary<Button, string> plainColorKeys = new Dictionary<Button, string>();
+        const string ColorItemTag = "couleurs";
+
+        // Bouton ordinaire (un seul état) : couleur du thème, ou celle choisie au clic droit.
+        Button Colorable(string key, Button b)
+        {
+            plainColorKeys[b] = key;
+            AddColorMenu(b, Slot(key, () => Lang.T("Couleur du bouton", "Button colour")));
+            return b;
+        }
+
+        // Ajoute les sous-menus de couleur au clic droit (menu existant conservé, sinon menu créé).
+        // Un menu partagé entre plusieurs commandes ne montre que les couleurs de celle qui a été cliquée.
+        void AddColorMenu(Control c, params ColorSlot[] slots)
+        {
+            colorSlots[c] = slots;
+            ContextMenuStrip m = c.ContextMenuStrip;
+            if (m == null)
+            {
+                m = new ContextMenuStrip();
+                m.Items.Add(new ToolStripSeparator { Tag = ColorItemTag });   // sinon le menu vide ne s'ouvre pas
+                c.ContextMenuStrip = m;
+            }
+            if (!colorMenus.Add(m)) return;
+            m.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e)
+            {
+                FillColorItems(m);
+                if (m.Items.Count > 0) e.Cancel = false;
+            };
+        }
+
+        void FillColorItems(ContextMenuStrip m)
+        {
+            for (int i = m.Items.Count - 1; i >= 0; i--)
+                if (ColorItemTag.Equals(m.Items[i].Tag)) m.Items.RemoveAt(i);
+            ColorSlot[] slots;
+            if (m.SourceControl == null || !colorSlots.TryGetValue(m.SourceControl, out slots)) return;
+            if (m.Items.Count > 0) m.Items.Add(new ToolStripSeparator { Tag = ColorItemTag });
+            foreach (ColorSlot slot in slots)
+            {
+                string key = slot.Key;
+                ToolStripMenuItem it = BuildColorMenu(slot.Title(), ColorOf(key), ButtonColors, false, delegate(int rgb) { SetColor(key, rgb); });
+                it.Tag = ColorItemTag;
+                m.Items.Add(it);
+            }
+        }
+
+        // Couleur choisie (RVB) ou -1 : couleur par défaut.
+        int ColorOf(string key)
+        {
+            int v;
+            return settings.Colors.TryGetValue(key, out v) ? v : -1;
+        }
+
+        void SetColor(string key, int rgb)
+        {
+            if (rgb < 0) settings.Colors.Remove(key);
+            else settings.Colors[key] = rgb & 0xFFFFFF;
+            Log.Write("Couleur " + key + " : " + (rgb < 0 ? "par défaut" : (rgb & 0xFFFFFF).ToString("X6")));
+            settings.Save();
+            RefreshColors();
+        }
+
+        // Remet toutes les couleurs réglables (thème, état des boutons, couleurs choisies).
+        void RefreshColors()
+        {
+            foreach (KeyValuePair<Button, string> p in plainColorKeys) PaintKeyed(p.Key, p.Value);
+            UpdateConnectButton();
+            UpdateCableButton();
+            UpdateScanButton();
+            UpdatePttButton();
+            UpdateMuteButtons();
+            UpdateFreqColors();
+            shownModeFamily = null;   // force la remise en couleur des boutons de mode
+            UpdateDisplays();
+        }
+
+        // Bouton ordinaire : couleur choisie pour la clé, sinon celle du thème.
+        void PaintKeyed(Button b, string key)
+        {
+            int c = ColorOf(key);
+            if (c < 0) Theme.StyleButton(b);
+            else PaintCustom(b, c);
+        }
+
+        // Fond choisi, texte noir ou blanc selon le fond, bordure qui fait contour (comme REC).
+        static void PaintCustom(Button b, int rgb)
+        {
+            Color back = Opaque(rgb);
+            b.FlatStyle = FlatStyle.Flat;
+            b.UseVisualStyleBackColor = false;
+            b.BackColor = back;
+            b.ForeColor = Contrast(back);
+            b.FlatAppearance.BorderColor = Outline(back);
+        }
+
+        static Color Opaque(int rgb) { return Color.FromArgb(255, Color.FromArgb(rgb)); }
+
+        static bool IsLight(Color c) { return c.R * 299 + c.G * 587 + c.B * 114 > 160000; }
+
+        static Color Contrast(Color back) { return IsLight(back) ? Color.Black : Color.White; }
+
+        // RADIO et WEBSDR : fond et texte choisis, sinon ceux du thème ; en émission, RADIO passe en rouge
+        // (rouge vif sur fond sombre, rouge foncé sur fond clair).
+        void UpdateFreqColors()
+        {
+            int rb = ColorOf("RigBack"), sb = ColorOf("SdrBack");
+            lblRig.BackColor = rb < 0 ? Theme.Back : Opaque(rb);
+            lblSdr.BackColor = sb < 0 ? Theme.Back : Opaque(sb);
+            lblRig.ForeColor = RigFore();
+            int st = ColorOf("SdrText");
+            lblSdr.ForeColor = st >= 0 ? Opaque(st) : IsLight(lblSdr.BackColor) ? Color.FromArgb(0, 120, 60) : Color.FromArgb(90, 225, 130);
+        }
+
+        Color RigFore()
+        {
+            bool light = IsLight(lblRig.BackColor);
+            if (Transmitting) return light ? Color.FromArgb(200, 0, 0) : Color.FromArgb(255, 95, 95);
+            int t = ColorOf("RigText");
+            return t >= 0 ? Opaque(t) : light ? Color.FromArgb(0, 90, 160) : Color.FromArgb(110, 185, 255);
         }
 
         // ---------------------------------------------------------------- Fabrication des contrôles (textes bilingues)
@@ -833,9 +1083,11 @@ namespace SDRLink
             Theme.LightBase = Theme.FromHex(settings.LightBase);
             SuspendLayout();
             Theme.Apply(this);
-            lblRig.BackColor = lblSdr.BackColor = Theme.Back;
-            lblSdr.ForeColor = Theme.SdrFreq;
-            lblRig.ForeColor = Transmitting ? Theme.TxFreq : Theme.RigFreq;
+            // Couleurs choisies au clic droit : reposées après le thème.
+            foreach (KeyValuePair<Button, string> p in plainColorKeys) PaintKeyed(p.Key, p.Value);
+            UpdateConnectButton();
+            UpdateCableButton();
+            UpdateFreqColors();
             shownModeFamily = null;     // force la remise en couleur des boutons de mode
             ResumeLayout();
             btnPalette.Invalidate();
@@ -883,6 +1135,7 @@ namespace SDRLink
         void UpdateConnectButton()
         {
             btnConnect.Text = worker == null ? Lang.T("Connecter", "Connect") : Lang.T("Déconnecter", "Disconnect");
+            PaintKeyed(btnConnect, worker == null ? "ConnectOff" : "ConnectOn");
         }
 
         void UpdateInterfacePanels()
@@ -1525,6 +1778,15 @@ namespace SDRLink
             btnPtt.BackColor = pttActive ? Color.FromArgb(210, 0, 0) : Color.FromArgb(55, 55, 60);
             btnPtt.ForeColor = pttActive ? Color.White : Color.FromArgb(255, 235, 110);
             btnPtt.FlatAppearance.BorderColor = Color.FromArgb(180, 0, 0);
+            // Couleur choisie au clic droit : texte noir sur fond clair ; sur fond sombre, jaune au repos, blanc en émission.
+            int custom = ColorOf(pttActive ? "PttTx" : "PttRx");
+            if (custom >= 0)
+            {
+                Color back = Opaque(custom);
+                btnPtt.BackColor = back;
+                btnPtt.ForeColor = IsLight(back) ? Color.Black : pttActive ? Color.White : Color.FromArgb(255, 235, 110);
+                btnPtt.FlatAppearance.BorderColor = Outline(back);
+            }
             // Toujours actif : désactivé, Windows grise le texte (illisible). Sans poste, un clic affiche un message.
         }
 
@@ -1909,7 +2171,7 @@ namespace SDRLink
             long shownSdr = SdrWheelActive ? sdrWheelTarget : wheel && !rigOnlyWheel ? wheelTarget + Offset : sdrF;
             SetFreqText(lblRig, Lang.T("RADIO ", "RIG ") + (worker != null && rigF > 0 ? FormatFreq(shownRig) + " " + Modes.Display(rigM) : "---"));
             // L'émission est signalée par la couleur (et le bouton PTT) : la largeur du texte ne change pas.
-            Color c = Transmitting ? Theme.TxFreq : Theme.RigFreq;
+            Color c = RigFore();
             if (lblRig.ForeColor != c) lblRig.ForeColor = c;
             // Mode WebSDR en forme courte (USB, LSB, CW, AM, FM) : le mode exact est montré par les boutons.
             string fam = Modes.SdrFamily(sdrM);
@@ -1927,6 +2189,9 @@ namespace SDRLink
                     bool on = ModeKey(ModeButtonModes[i]) == activeKey;
                     modeButtons[i].BackColor = on ? Color.FromArgb(0, 120, 60) : Theme.IdleButton;
                     modeButtons[i].ForeColor = on ? Color.White : Theme.ModeIdleText;
+                    modeButtons[i].FlatAppearance.BorderColor = Color.FromArgb(0, 150, 75);
+                    int custom = ColorOf(on ? "ModeOn" : "ModeOff");
+                    if (custom >= 0) PaintCustom(modeButtons[i], custom);
                     modeButtons[i].Text = ModeButtonText(ModeButtonModes[i], on);
                 }
             }
@@ -2223,7 +2488,9 @@ namespace SDRLink
 
         void UpdateCableButton()
         {
-            btnCable.Text = Lang.T("Câble SDRLINK", "SDRLINK cable") + (settings.CableEnabled && cableSink != null ? " ▾" : Lang.T(" (arrêt) ▾", " (off) ▾"));
+            bool on = settings.CableEnabled && cableSink != null;
+            btnCable.Text = Lang.T("Câble SDRLINK", "SDRLINK cable") + (on ? " ▾" : Lang.T(" (arrêt) ▾", " (off) ▾"));
+            PaintKeyed(btnCable, on ? "CableOn" : "CableOff");
         }
 
         // Bloc audio de la page ("pcm|fréquence|base64") à recopier vers le câble.
@@ -2337,12 +2604,12 @@ namespace SDRLink
 
         void UpdateMuteButtons()
         {
-            StyleToggle(btnMuteSdr, sdrMuted, true);
-            StyleToggle(btnMuteRig, rigMuted, worker != null && rigAfSupported == 1);
+            StyleToggle(btnMuteSdr, sdrMuted, true, "MuteSdr");
+            StyleToggle(btnMuteRig, rigMuted, worker != null && rigAfSupported == 1, "MuteRig");
             btnMuteSwap.BackColor = Theme.ButtonBack;   // ⇄ n'est pas une coupure : couleurs ordinaires
             btnMuteSwap.ForeColor = Theme.Fore;
             btnMuteSwap.FlatAppearance.BorderColor = Theme.Border;
-            StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable);
+            StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable, "MuteEsdr");
         }
 
         // ---------------------------------------------------------------- Bouton ⇄
@@ -2639,11 +2906,14 @@ namespace SDRLink
 
         // Bouton de coupure : rouge quand le son est coupé, vert quand il passe (comme le bouton de mode choisi),
         // écriture blanche ; grisé à la main s'il est indisponible (pas désactivé, pour rester lisible).
-        static void StyleToggle(Button b, bool active, bool available)
+        // Couleurs « son coupé » et « son actif » réglables au clic droit (clé + Cut / On).
+        void StyleToggle(Button b, bool active, bool available, string key)
         {
             b.BackColor = active ? Color.FromArgb(200, 0, 0) : available ? Color.FromArgb(0, 120, 60) : Theme.ButtonBack;
             b.ForeColor = active || available ? Color.White : Color.FromArgb(140, 140, 140);
             b.FlatAppearance.BorderColor = active ? Color.FromArgb(150, 0, 0) : available ? Color.FromArgb(0, 150, 75) : Theme.Border;
+            int custom = active ? ColorOf(key + "Cut") : available ? ColorOf(key + "On") : -1;
+            if (custom >= 0) PaintCustom(b, custom);
         }
 
         // ---------------------------------------------------------------- Favoris
@@ -2953,6 +3223,8 @@ namespace SDRLink
             btnScan.BackColor = scanning ? Color.FromArgb(200, 0, 0) : Theme.ButtonBack;
             btnScan.ForeColor = scanning ? Color.White : Theme.Fore;
             btnScan.FlatAppearance.BorderColor = scanning ? Color.FromArgb(150, 0, 0) : Theme.Border;
+            int custom = ColorOf(scanning ? "ScanOn" : "ScanOff");
+            if (custom >= 0) PaintCustom(btnScan, custom);
         }
 
         // ---------------------------------------------------------------- Enregistrement (REC)
@@ -3075,39 +3347,66 @@ namespace SDRLink
 
         // Couleurs proposées pour le fond de REC au repos (pas d'orange : c'est la couleur de l'enregistrement en cours).
         static readonly int[] RecColors = { 0x000080, 0x1E5AC8, 0x4FA3E0, 0x008080, 0x1E7D32, 0xB71C1C, 0x6D1028, 0x6A1B9A, 0xD81B60, 0x6D4C41, 0x607080, 0x000000, 0xF2C200 };
+        // Autres boutons : les mêmes, plus orange et blanc.
+        static readonly int[] ButtonColors = { 0x000080, 0x1E5AC8, 0x4FA3E0, 0x008080, 0x1E7D32, 0xB71C1C, 0x6D1028, 0x6A1B9A, 0xD81B60, 0x6D4C41, 0x607080, 0x000000, 0xF2C200, 0xFF8C00, 0xFFFFFF };
 
         ToolStripMenuItem BuildRecColorMenu()
         {
-            string[] names =
+            return BuildColorMenu(Lang.T("Couleur du bouton REC", "REC button colour"), settings.RecColor, RecColors, true, SetRecColor);
+        }
+
+        // Noms des couleurs de ButtonColors (RecColors en est le début).
+        static string[] ColorNames(bool rec)
+        {
+            return new[]
             {
-                Lang.T("Bleu marine (par défaut)", "Navy blue (default)"), Lang.T("Bleu", "Blue"), Lang.T("Bleu ciel", "Sky blue"),
-                Lang.T("Bleu canard", "Teal"), Lang.T("Vert", "Green"), Lang.T("Rouge", "Red"), Lang.T("Bordeaux", "Burgundy"),
-                Lang.T("Violet", "Purple"), Lang.T("Rose", "Pink"), Lang.T("Marron", "Brown"), Lang.T("Gris", "Grey"),
-                Lang.T("Noir", "Black"), Lang.T("Jaune", "Yellow"),
+                rec ? Lang.T("Bleu marine (par défaut)", "Navy blue (default)") : Lang.T("Bleu marine", "Navy blue"),
+                Lang.T("Bleu", "Blue"), Lang.T("Bleu ciel", "Sky blue"), Lang.T("Bleu canard", "Teal"), Lang.T("Vert", "Green"),
+                Lang.T("Rouge", "Red"), Lang.T("Bordeaux", "Burgundy"), Lang.T("Violet", "Purple"), Lang.T("Rose", "Pink"),
+                Lang.T("Marron", "Brown"), Lang.T("Gris", "Grey"), Lang.T("Noir", "Black"), Lang.T("Jaune", "Yellow"),
+                Lang.T("Orange", "Orange"), Lang.T("Blanc", "White"),
             };
-            ToolStripMenuItem menu = new ToolStripMenuItem(Lang.T("Couleur du bouton REC", "REC button colour"));
-            menu.Image = ColorSwatch(settings.RecColor);
+        }
+
+        // Sous-menu de couleurs : « Par défaut » (sauf REC, dont le défaut est le bleu marine), la palette,
+        // et « Autre couleur… » (choix libre). current = -1 : couleur par défaut ; set(-1) y revient.
+        ToolStripMenuItem BuildColorMenu(string title, int current, int[] colors, bool rec, Action<int> set)
+        {
+            string[] names = ColorNames(rec);
+            ToolStripMenuItem menu = new ToolStripMenuItem(title);
+            if (current >= 0) menu.Image = ColorSwatch(current);
             bool found = false;
-            for (int i = 0; i < RecColors.Length; i++)
+            if (!rec)
             {
-                int rgb = RecColors[i];
+                ToolStripMenuItem def = new ToolStripMenuItem(Lang.T("Par défaut", "Default"));
+                def.Checked = found = current < 0;
+                def.Click += delegate { set(-1); };
+                menu.DropDownItems.Add(def);
+                menu.DropDownItems.Add(new ToolStripSeparator());
+            }
+            for (int i = 0; i < colors.Length; i++)
+            {
+                int rgb = colors[i];
                 ToolStripMenuItem it = new ToolStripMenuItem(names[i], ColorSwatch(rgb));
-                it.Checked = rgb == settings.RecColor;
+                it.Checked = rgb == current;
                 found |= it.Checked;
-                it.Click += delegate { SetRecColor(rgb); };
+                it.Click += delegate { set(rgb); };
                 menu.DropDownItems.Add(it);
             }
             menu.DropDownItems.Add(new ToolStripSeparator());
-            ToolStripMenuItem other = new ToolStripMenuItem(Lang.T("Autre couleur…", "Other colour…"), found ? null : ColorSwatch(settings.RecColor));
+            ToolStripMenuItem other = new ToolStripMenuItem(Lang.T("Autre couleur…", "Other colour…"), found ? null : ColorSwatch(current));
             other.Checked = !found;
             other.Click += delegate
             {
                 using (ColorDialog d = new ColorDialog())
                 {
                     d.FullOpen = true;
-                    d.Color = Color.FromArgb(settings.RecColor);
-                    d.CustomColors = new int[] { ToBgr(settings.RecColor) };
-                    if (d.ShowDialog(this) == DialogResult.OK) SetRecColor(d.Color.ToArgb() & 0xFFFFFF);
+                    if (current >= 0)
+                    {
+                        d.Color = Color.FromArgb(current);
+                        d.CustomColors = new int[] { ToBgr(current) };
+                    }
+                    if (d.ShowDialog(this) == DialogResult.OK) set(d.Color.ToArgb() & 0xFFFFFF);
                 }
             };
             menu.DropDownItems.Add(other);
@@ -3253,6 +3552,12 @@ namespace SDRLink
         static Color Lighter(Color c)
         {
             return Color.FromArgb(Math.Min(255, c.R * 5 / 4 + 15), Math.Min(255, c.G * 5 / 4 + 15), Math.Min(255, c.B * 5 / 4 + 15));
+        }
+
+        // Contour : plus clair sur un fond sombre, plus foncé sur un fond clair (sinon invisible sur blanc ou jaune).
+        static Color Outline(Color c)
+        {
+            return IsLight(c) ? Color.FromArgb(c.R * 3 / 4, c.G * 3 / 4, c.B * 3 / 4) : Lighter(c);
         }
 
         // « REC » dans la police des boutons Mute, centré, sans retour à la ligne.

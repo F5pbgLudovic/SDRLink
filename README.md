@@ -1,4 +1,4 @@
-# SDRLink V1.12 — @F5PBG 2026
+# SDRLink V1.13 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -17,8 +17,8 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - volume du WebSDR, du poste et d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
   - interface en 23 langues européennes ;
-  - mode sombre, palette et taille du texte réglable ;
-  - vérification des mises à jour au démarrage ;
+  - mode sombre, palette, couleur de chaque bouton au choix (clic droit) et taille du texte réglable ;
+  - vérification des mises à jour au démarrage, import/export de tous les réglages vers un autre ordinateur ;
   - historique des 20 derniers messages (clic droit sur la barre d'état).
 
 ## Télécharger
@@ -58,8 +58,8 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - WebSDR, rig and ExpertSDR volume (Mute ExpertSDR, through Windows or TCI);
   - SDRLINK audio cable for WSJT-X, automatic notch;
   - interface in 23 European languages (menu on the 2nd line);
-  - dark mode, colour palette and adjustable text size;
-  - update check at startup;
+  - dark mode, colour palette, colour of each button of your choice (right-click) and adjustable text size;
+  - update check at startup, import/export of all settings to another computer;
   - history of the last 20 status messages (right-click the status bar).
 
 ### Download

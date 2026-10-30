@@ -74,9 +74,34 @@ Invalid HRD answer	Răspuns HRD nevalid
 HRD connection closed	Conexiune HRD închisă
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Niciun server HRD la {0}:{1} (activați serverul IP în HRD Rig Control).
 Cannot open the log: 	Nu se poate deschide jurnalul: 
+Export all settings…	Exportă toate setările…
+Import settings…	Importă setări…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportă sau importă toate setările, pentru aceeași configurație pe alt calculator (clic dreapta: culoarea butonului)
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
 Store the current frequency…	Memorează frecvența actuală…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Comută sunetul la receptorul următor (clic dreapta: receptor care rămâne fără sunet)
+Colour when connected	Culoare când este conectat
+Colour when disconnected	Culoare când este deconectat
+Colour when on	Culoare când este activat
+Colour when off	Culoare când este dezactivat
+Colour when the scan is stopped	Culoare cu scanarea oprită
+Colour while scanning	Culoare în timpul scanării
+Colour when receiving	Culoare la recepție
+Colour when transmitting (PTT on)	Culoare la emisie (PTT activat)
+Background colour	Culoarea fundalului
+Text colour	Culoarea textului
+Colour of the selected mode	Culoarea modului selectat
+Colour of the other modes	Culoarea celorlalte moduri
+Colour when muted	Culoare cu sunetul oprit
+Colour when the sound is on	Culoare cu sunetul pornit
+Export all SDRLink settings	Exportă toate setările SDRLink
+SDRLink settings (*.ini)|*.ini	Setări SDRLink (*.ini)|*.ini
+Cannot export the settings: 	Setările nu pot fi exportate: 
+Import SDRLink settings	Importă setări SDRLink
+Cannot import the settings: 	Setările nu pot fi importate: 
+Import: this file does not contain SDRLink settings	Import: acest fișier nu conține setări SDRLink
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Toate setările actuale (interfață, favorite, memorii, culori…) vor fi înlocuite cu cele din fișier, apoi SDRLink va reporni.\n\nSetările actuale sunt păstrate în settings.avant-import.ini.\n\nContinuați?
+Button colour	Culoarea butonului
 RIG	STAȚIE
 Disconnected	Deconectat
 Connect	Conectare
@@ -122,7 +147,9 @@ None (always the speakers)	Niciuna (întotdeauna difuzoarele)
 REC button width	Lățimea butonului REC
 Narrow	Îngust
 Wide	Lat
+REC button colour	Culoarea butonului REC
 Navy blue (default)	Bleumarin (implicit)
+Navy blue	Bleumarin
 Blue	Albastru
 Sky blue	Bleu
 Teal	Verde-albăstrui
@@ -135,7 +162,9 @@ Brown	Maro
 Grey	Gri
 Black	Negru
 Yellow	Galben
-REC button colour	Culoarea butonului REC
+Orange	Portocaliu
+White	Alb
+Default	Implicit
 Other colour…	Altă culoare…
 REC: recording the speakers	REC: înregistrarea difuzoarelor
 Empty recording: nothing to save	Înregistrare goală: nimic de salvat
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Dimensiunea textului ferestrei (100 % =
 Last {0} memories used	Ultimele {0} memorii folosite
 ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualizarea V{0} este disponibilă: faceți clic pentru a o descărca
+Settings exported to "{0}"	Setări exportate în „{0}”
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Emisie oprită automat după {0} (limită de siguranță, clic dreapta pe PTT pentru a o modifica)
 Remove "{0}" from the list	Eliminare „{0}” din listă
 Remove all ({0} values)	Eliminare toate ({0} valori)
@@ -206,6 +236,7 @@ TRX volume:	Volum TRX:
 ExpertSDR volume:	Volum ExpertSDR:
 Open log	Deschidere jurnal
 Text size…	Dimensiunea textului…
+Import/Export ▾	Import/Export ▾
 …	…
 Download Hamlib…	Descărcare Hamlib…
 SDRLINK cable ▾	Cablu SDRLINK ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Ștergeți lista „{0}” și ce
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig nu este instalat (OmniRig.OmniRigX negăsit).
 Dark mode colour	Culoare mod întunecat
 Light mode colour	Culoare mod luminos
-Default	Implicit
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink necesită Microsoft .NET Framework 4.6.2 sau mai nou (recomandat 4.8).\nNu este instalat pe acest PC.\n\nDescărcați și instalați .NET Framework 4.8 acum?\n(poate fi necesară o repornire, apoi porniți din nou SDRLink)
 SDRLink - missing component	SDRLink - componentă lipsă
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink necesită Microsoft Edge WebView2 Runtime pentru a afișa WebSDR-urile.\nNu este instalat pe acest PC.\n\nDescărcați și instalați WebView2 acum? (gratuit, circa 2 MB)

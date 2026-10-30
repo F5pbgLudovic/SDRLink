@@ -92,15 +92,7 @@ namespace SDRLink
                     }
                 }
             }
-            else if (c is Button)
-            {
-                Button b = (Button)c;
-                b.FlatStyle = Styled ? FlatStyle.Flat : FlatStyle.Standard;
-                b.UseVisualStyleBackColor = !Styled;
-                b.BackColor = ButtonBack;
-                b.ForeColor = Fore;
-                b.FlatAppearance.BorderColor = Border;
-            }
+            else if (c is Button) StyleButton((Button)c);
             else
             {
                 c.BackColor = Back;
@@ -112,6 +104,16 @@ namespace SDRLink
                     foreach (ToolStripItem i in s.Items) i.ForeColor = Fore;
                 }
             }
+        }
+
+        // Bouton ordinaire aux couleurs du thème (aussi pour revenir à la couleur par défaut après un choix au clic droit).
+        public static void StyleButton(Button b)
+        {
+            b.FlatStyle = Styled ? FlatStyle.Flat : FlatStyle.Standard;
+            b.UseVisualStyleBackColor = !Styled;
+            b.BackColor = ButtonBack;
+            b.ForeColor = Fore;
+            b.FlatAppearance.BorderColor = Border;
         }
 
         static readonly Color Highlight = Color.FromArgb(0, 95, 170);   // sélection dans les listes

@@ -74,9 +74,34 @@ Invalid HRD answer	Vigane HRD vastus
 HRD connection closed	HRD ühendus suleti
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Aadressil {0}:{1} pole HRD serverit (lubage IP-server programmis HRD Rig Control).
 Cannot open the log: 	Logi ei saa avada: 
+Export all settings…	Ekspordi kõik seaded…
+Import settings…	Impordi seaded…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Ekspordi või impordi kõik seaded, et saada sama seadistus teises arvutis (paremklõps: nupu värv)
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
 Store the current frequency…	Salvesta praegune sagedus…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Lülita heli järgmisele vastuvõtjale (paremklõps: vastuvõtja, mis jääb vaigistatuks)
+Colour when connected	Värv ühendatuna
+Colour when disconnected	Värv ühenduseta
+Colour when on	Värv sees olles
+Colour when off	Värv väljas olles
+Colour when the scan is stopped	Värv peatatud skaneerimisel
+Colour while scanning	Värv skaneerimise ajal
+Colour when receiving	Värv vastuvõtul
+Colour when transmitting (PTT on)	Värv saatmisel (PTT sees)
+Background colour	Taustavärv
+Text colour	Teksti värv
+Colour of the selected mode	Valitud töörežiimi värv
+Colour of the other modes	Teiste töörežiimide värv
+Colour when muted	Värv vaigistatuna
+Colour when the sound is on	Värv heliga
+Export all SDRLink settings	Ekspordi kõik SDRLinki seaded
+SDRLink settings (*.ini)|*.ini	SDRLinki seaded (*.ini)|*.ini
+Cannot export the settings: 	Seadeid ei saa eksportida: 
+Import SDRLink settings	Impordi SDRLinki seaded
+Cannot import the settings: 	Seadeid ei saa importida: 
+Import: this file does not contain SDRLink settings	Import: see fail ei sisalda SDRLinki seadeid
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Kõik praegused seaded (liides, lemmikud, mälukohad, värvid…) asendatakse faili omadega, seejärel käivitub SDRLink uuesti.\n\nPraegused seaded jäävad faili settings.avant-import.ini.\n\nKas jätkata?
+Button colour	Nupu värv
 RIG	RAADIO
 Disconnected	Ühendus puudub
 Connect	Ühenda
@@ -122,7 +147,9 @@ None (always the speakers)	Puudub (alati kõlarid)
 REC button width	REC-nupu laius
 Narrow	Kitsas
 Wide	Lai
+REC button colour	REC-nupu värv
 Navy blue (default)	Meresinine (vaikimisi)
+Navy blue	Meresinine
 Blue	Sinine
 Sky blue	Taevasinine
 Teal	Sinakasroheline
@@ -135,7 +162,9 @@ Brown	Pruun
 Grey	Hall
 Black	Must
 Yellow	Kollane
-REC button colour	REC-nupu värv
+Orange	Oranž
+White	Valge
+Default	Vaikimisi
 Other colour…	Muu värv…
 REC: recording the speakers	REC: kõlarite salvestamine
 Empty recording: nothing to save	Tühi salvestis: pole midagi salvestada
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Akna teksti suurus (100 % = algne suuru
 Last {0} memories used	Viimased {0} kasutatud mälu
 ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Saadaval on uuendus V{0}: klõpsake allalaadimiseks
+Settings exported to "{0}"	Seaded eksporditi faili „{0}“
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Saade peatati automaatselt, kestus {0} (ohutuse ajalõpp, muutmiseks paremklõpsake PTT-d)
 Remove "{0}" from the list	Eemalda „{0}“ loendist
 Remove all ({0} values)	Eemalda kõik ({0} väärtust)
@@ -206,6 +236,7 @@ TRX volume:	TRX helitugevus:
 ExpertSDR volume:	ExpertSDR-i helitugevus:
 Open log	Ava logi
 Text size…	Teksti suurus…
+Import/Export ▾	Import/Eksport ▾
 …	…
 Download Hamlib…	Laadi alla Hamlib…
 SDRLINK cable ▾	SDRLINK kaabel ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Kas kustutada loend „{0}“ ja 
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig pole installitud (OmniRig.OmniRigX ei leitud).
 Dark mode colour	Tumeda režiimi värv
 Light mode colour	Heleda režiimi värv
-Default	Vaikimisi
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink vajab Microsoft .NET Framework 4.6.2 või uuemat versiooni (soovitatav 4.8).\nSee pole selles arvutis installitud.\n\nKas laadida alla ja installida .NET Framework 4.8 kohe?\n(võib olla vaja arvuti taaskäivitada, seejärel käivitage SDRLink uuesti)
 SDRLink - missing component	SDRLink - puuduv komponent
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink vajab WebSDR-ide kuvamiseks komponenti Microsoft Edge WebView2 Runtime.\nSee pole selles arvutis installitud.\n\nKas laadida alla ja installida WebView2 kohe? (tasuta, umbes 2 MB)

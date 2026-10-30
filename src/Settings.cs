@@ -44,6 +44,8 @@ namespace SDRLink
         public string RecCardId = "", RecCardName = "";
         public int RecColor = 0x000080;    // fond du bouton REC au repos (RVB), bleu marine par défaut
         public int RecWidth = 1;           // largeur du bouton REC : 1 étroit (2 fois la hauteur), 2 large (4 fois)
+        // Couleurs choisies par clic droit sur les boutons (clé → RVB) ; clé absente = couleur par défaut.
+        public Dictionary<string, int> Colors = new Dictionary<string, int>(StringComparer.Ordinal);
         public bool TopMost;
         public bool AutoConnect;
         public bool MuteOnTx = true;
@@ -92,7 +94,7 @@ namespace SDRLink
             new Favorite("French Alps - PhantomSDR", "http://linkz.ddns.net:8088/"),
         };
 
-        static string FilePath
+        public static string FilePath
         {
             get
             {
@@ -102,8 +104,24 @@ namespace SDRLink
             }
         }
 
+        // Réglages importés (bouton Import/Export) : mis de côté, ils remplacent settings.ini au démarrage suivant ;
+        // l'ancien fichier est gardé dans settings.avant-import.ini.
+        public static string PendingImportPath { get { return Path.Combine(Log.DataDir, "settings.import.ini"); } }
+        public static string BeforeImportPath { get { return Path.Combine(Log.DataDir, "settings.avant-import.ini"); } }
+
         public static Settings Load()
         {
+            if (File.Exists(PendingImportPath))
+            {
+                try
+                {
+                    if (File.Exists(FilePath)) File.Copy(FilePath, BeforeImportPath, true);
+                    File.Copy(PendingImportPath, FilePath, true);
+                    File.Delete(PendingImportPath);
+                    Log.Write("Réglages importés (anciens réglages gardés dans settings.avant-import.ini)");
+                }
+                catch (Exception ex) { Log.Write("Import des réglages impossible : " + ex.Message); }
+            }
             Settings s = new Settings();
             Favorite.ListCount = 4;
             if (!File.Exists(FilePath)) return s;
@@ -155,6 +173,13 @@ namespace SDRLink
                     case "RecCardName": s.RecCardName = v; break;
                     case "RecColor": s.RecColor = Int(v, 0x000080) & 0xFFFFFF; break;
                     case "RecWidth": s.RecWidth = Math.Max(1, Math.Min(2, Int(v, 1))); break;
+                    case "Color":   // clé:RRGGBB
+                        {
+                            int c = v.IndexOf(':'), rgb;
+                            if (c > 0 && int.TryParse(v.Substring(c + 1), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out rgb))
+                                s.Colors[v.Substring(0, c)] = rgb & 0xFFFFFF;
+                        }
+                        break;
                     case "TopMost": s.TopMost = v == "1"; break;
                     case "AutoConnect": s.AutoConnect = v == "1"; break;
                     case "MuteOnTx": s.MuteOnTx = v == "1"; break;
@@ -250,6 +275,7 @@ namespace SDRLink
             Line(sb, "RecCardName", RecCardName);
             Line(sb, "RecColor", RecColor);
             Line(sb, "RecWidth", RecWidth);
+            foreach (KeyValuePair<string, int> c in Colors) Line(sb, "Color", c.Key + ":" + c.Value.ToString("X6"));
             Line(sb, "TopMost", TopMost ? 1 : 0);
             Line(sb, "AutoConnect", AutoConnect ? 1 : 0);
             Line(sb, "MuteOnTx", MuteOnTx ? 1 : 0);

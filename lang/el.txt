@@ -74,9 +74,34 @@ Invalid HRD answer	Μη έγκυρη απάντηση HRD
 HRD connection closed	Η σύνδεση HRD έκλεισε
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Δεν υπάρχει διακομιστής HRD στο {0}:{1} (ενεργοποιήστε τον διακομιστή IP στο HRD Rig Control).
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
+Export all settings…	Εξαγωγή όλων των ρυθμίσεων…
+Import settings…	Εισαγωγή ρυθμίσεων…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Εξαγωγή ή εισαγωγή όλων των ρυθμίσεων, για την ίδια διαμόρφωση σε άλλον υπολογιστή (δεξί κλικ: χρώμα κουμπιού)
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
 Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Μεταφορά του ήχου στον επόμενο δέκτη (δεξί κλικ: δέκτης που μένει σε σίγαση)
+Colour when connected	Χρώμα όταν είναι συνδεδεμένο
+Colour when disconnected	Χρώμα όταν είναι αποσυνδεδεμένο
+Colour when on	Χρώμα όταν είναι ενεργό
+Colour when off	Χρώμα όταν είναι ανενεργό
+Colour when the scan is stopped	Χρώμα με τη σάρωση σταματημένη
+Colour while scanning	Χρώμα κατά τη σάρωση
+Colour when receiving	Χρώμα στη λήψη
+Colour when transmitting (PTT on)	Χρώμα στην εκπομπή (PTT ενεργό)
+Background colour	Χρώμα φόντου
+Text colour	Χρώμα κειμένου
+Colour of the selected mode	Χρώμα του επιλεγμένου τρόπου
+Colour of the other modes	Χρώμα των άλλων τρόπων
+Colour when muted	Χρώμα με σίγαση
+Colour when the sound is on	Χρώμα με ενεργό ήχο
+Export all SDRLink settings	Εξαγωγή όλων των ρυθμίσεων του SDRLink
+SDRLink settings (*.ini)|*.ini	Ρυθμίσεις SDRLink (*.ini)|*.ini
+Cannot export the settings: 	Δεν είναι δυνατή η εξαγωγή των ρυθμίσεων: 
+Import SDRLink settings	Εισαγωγή ρυθμίσεων SDRLink
+Cannot import the settings: 	Δεν είναι δυνατή η εισαγωγή των ρυθμίσεων: 
+Import: this file does not contain SDRLink settings	Εισαγωγή: αυτό το αρχείο δεν περιέχει ρυθμίσεις SDRLink
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Όλες οι τρέχουσες ρυθμίσεις (διασύνδεση, αγαπημένα, μνήμες, χρώματα…) θα αντικατασταθούν από αυτές του αρχείου και στη συνέχεια το SDRLink θα επανεκκινηθεί.\n\nΟι τρέχουσες ρυθμίσεις διατηρούνται στο settings.avant-import.ini.\n\nΣυνέχεια;
+Button colour	Χρώμα κουμπιού
 RIG	TRX
 Disconnected	Αποσυνδέθηκε
 Connect	Σύνδεση
@@ -122,7 +147,9 @@ None (always the speakers)	Καμία (πάντα τα ηχεία)
 REC button width	Πλάτος του κουμπιού REC
 Narrow	Στενό
 Wide	Φαρδύ
+REC button colour	Χρώμα του κουμπιού REC
 Navy blue (default)	Μπλε μαρέν (προεπιλογή)
+Navy blue	Ναυτικό μπλε
 Blue	Μπλε
 Sky blue	Γαλάζιο
 Teal	Πετρόλ
@@ -135,7 +162,9 @@ Brown	Καφέ
 Grey	Γκρι
 Black	Μαύρο
 Yellow	Κίτρινο
-REC button colour	Χρώμα του κουμπιού REC
+Orange	Πορτοκαλί
+White	Λευκό
+Default	Προεπιλογή
 Other colour…	Άλλο χρώμα…
 REC: recording the speakers	REC: εγγραφή των ηχείων
 Empty recording: nothing to save	Κενή εγγραφή: τίποτα για αποθήκευση
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Μέγεθος κειμένου του 
 Last {0} memories used	Τελευταίες {0} μνήμες που χρησιμοποιήθηκαν
 ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Διαθέσιμη ενημέρωση V{0}: κάντε κλικ για λήψη
+Settings exported to "{0}"	Οι ρυθμίσεις εξήχθησαν στο «{0}»
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Η εκπομπή διακόπηκε αυτόματα μετά από {0} (χρονικό όριο ασφαλείας, δεξί κλικ στο PTT για αλλαγή)
 Remove "{0}" from the list	Αφαίρεση του «{0}» από τη λίστα
 Remove all ({0} values)	Αφαίρεση όλων ({0} τιμές)
@@ -206,6 +236,7 @@ TRX volume:	Ένταση TRX:
 ExpertSDR volume:	Ένταση ExpertSDR:
 Open log	Άνοιγμα ημερολογίου
 Text size…	Μέγεθος κειμένου…
+Import/Export ▾	Εισαγωγή/Εξαγωγή ▾
 …	…
 Download Hamlib…	Λήψη Hamlib…
 SDRLINK cable ▾	Καλώδιο SDRLINK ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Διαγραφή της λίστ�
 OmniRig is not installed (OmniRig.OmniRigX not found).	Το OmniRig δεν είναι εγκατεστημένο (δεν βρέθηκε το OmniRig.OmniRigX).
 Dark mode colour	Χρώμα σκούρας λειτουργίας
 Light mode colour	Χρώμα φωτεινής λειτουργίας
-Default	Προεπιλογή
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	Το SDRLink απαιτεί Microsoft .NET Framework 4.6.2 ή νεότερο (συνιστάται το 4.8).\nΔεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή.\n\nΛήψη και εγκατάσταση του .NET Framework 4.8 τώρα;\n(ίσως απαιτηθεί επανεκκίνηση· στη συνέχεια ξεκινήστε ξανά το SDRLink)
 SDRLink - missing component	SDRLink - λείπει στοιχείο
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Το SDRLink απαιτεί το Microsoft Edge WebView2 Runtime για την εμφάνιση των WebSDR.\nΔεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή.\n\nΛήψη και εγκατάσταση του WebView2 τώρα; (δωρεάν, περίπου 2 MB)

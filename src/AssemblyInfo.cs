@@ -5,5 +5,5 @@
 [assembly: AssemblyProduct("SDRLink")]
 [assembly: AssemblyCompany("F5PBG")]
 [assembly: AssemblyCopyright("© F5PBG 2026")]
-[assembly: AssemblyVersion("1.12.0.0")]
-[assembly: AssemblyFileVersion("1.12.0.0")]
+[assembly: AssemblyVersion("1.13.0.0")]
+[assembly: AssemblyFileVersion("1.13.0.0")]

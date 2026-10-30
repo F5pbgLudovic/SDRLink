@@ -17,6 +17,47 @@ On first launch, SDRLink places `WebView2Loader.dll` in `%LOCALAPPDATA%\SDRLink\
 
 To rebuild after a change: `powershell -ExecutionPolicy Bypass -File build.ps1` (output in `dist\`).
 
+## The window, row by row
+
+Overview; each feature is detailed further down in its own section.
+
+1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Text size…**, **Check for updates** box, **Import/Export ▾**.
+2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
+3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
+4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode, **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
+5. **5th row (WebSDR)**: **WebSDR** address (favorites list), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**.
+6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume** (only the sounds available), then **REC**.
+7. **The WebSDR page**, then the **status bar** (messages, update link).
+
+## All right-clicks
+
+| Where | What the right-click offers |
+|---|---|
+| Connect | colour when connected / disconnected |
+| Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Import/Export | button colour |
+| SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
+| Scan | colour when stopped / while scanning |
+| PTT | TX safety timeout, colour when receiving / transmitting |
+| RIG, WEBSDR | background colour, text colour |
+| USB, LSB, AM, FM, DIGI, CW | colour of the selected mode / of the others |
+| kHz entry | remove the value from the history, remove all |
+| Memories | store the current frequency, button colour |
+| Favorites list (next to the address) | rename the list |
+| ⇄ | receiver that ⇄ keeps muted |
+| Mute WebSDR, Mute TRX | colour when muted / sound on |
+| Mute ExpertSDR | ExpertSDR TCI port, colour when muted / sound on |
+| "WebSDR volume" | ExpertSDR TCI port |
+| REC | rig sound card, REC button colour, width (narrow / wide) |
+| Status bar | last 20 messages, message types to hide |
+
+## SDRLink files
+
+- `%APPDATA%\SDRLink\settings.ini`: **all settings** (interface, favorites, memories, colours, window…). This is the file **Import/Export** copies.
+- `%APPDATA%\SDRLink\settings.avant-import.ini`: the settings from before the last import.
+- `%APPDATA%\SDRLink\sdrlink.log`: the log (reset at each launch).
+- `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll.
+- `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
+
 ## Interfaces ("Interface" menu)
 
 | Interface | Settings | Notes |
@@ -179,6 +220,23 @@ The **Dark mode** box, to the right of "Open log", switches the whole interface 
   - In light mode: light shades only (white, pearl grey, cream, sand, pale yellow, blues, aqua green, pink, lavender).
   - The rest of the interface (fields, buttons, borders) adjusts automatically. "Default" returns to the original colours.
   - The choice is remembered separately for dark mode and light mode.
+
+## Button colours (right-click)
+
+Right-clicking most buttons offers their **background colour**. If the button already had a right-click menu (PTT, Memories, SDRLINK cable, Mute ExpertSDR…), that menu is kept and the colours are added at the end.
+- **One choice** ("Button colour"): Open log, Text size, Scan setup, QSY, Save, Memories, Go, Back, Reload, Add to favorites, Remove from favorites, Manage favorites, Find WebSDRs, Import/Export.
+- **Two choices, one for each state**:
+  - **Connect**: when connected / when disconnected;
+  - **SDRLINK cable**: when on / when off;
+  - **Scan**: scan stopped / while scanning;
+  - **PTT**: when receiving / when transmitting (PTT on);
+  - **RIG** and **WEBSDR** (frequency and mode): background colour / text colour (when transmitting, RIG always turns red);
+  - **USB, LSB, AM, FM, DIGI, CW**: selected mode / other modes (the choice applies to all six buttons);
+  - **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR** (each its own): muted / sound on. An unavailable Mute stays greyed out.
+- Colours offered: **Default** (the original colour, which follows dark mode and the palette), navy blue, blue, sky blue, teal, green, red, burgundy, purple, pink, brown, grey, black, yellow, orange, white, or any colour with **Other colour…**.
+- The text turns black on light colours and white on dark ones; a border outlines the button.
+- The choices are kept, including when switching between light and dark mode.
+- The REC button keeps its own menu (colour and width, see "Recording (REC)").
 
 ## Language
 
@@ -353,6 +411,16 @@ On the "Sync" row, after "Auto notch (DNF)":
 - **Show all hidden messages again**: cancels all hiding. The hidden types are kept for the next launch.
 - The message "SDRLINK cable: no virtual audio cable found" disappears as soon as the cable is set to **Off**.
 
+## Settings import / export
+
+**Import/Export ▾** button (1st row, after "Check for updates"): to get exactly the same configuration on another computer, or to keep a backup. Right-click: button colour.
+- All SDRLink settings are in a single file: **`%APPDATA%\SDRLink\settings.ini`** (for example `C:\Users\<name>\AppData\Roaming\SDRLink\settings.ini`). The log `sdrlink.log` is next to it.
+- **Export all settings…**: saves this file wherever you want (Documents by default, named `SDRLink-reglages-<date>.ini`), with the current state: interface and rig (COM port, baud rate, TCI, HRD, Hamlib…), synchronisation, offset, favorites and their lists, memories, frequency history, language, dark mode and palette, button colours, text size, REC (folder, sound card, colour, width), SDRLINK cable, scan, volumes, window size and position, etc.
+- **Import settings…**: choose an exported file. After confirmation, all current settings are replaced and SDRLink restarts with the configuration from the file. The previous settings are kept in `settings.avant-import.ini` (same folder): to go back, import that file.
+- A file that does not contain SDRLink settings is refused (message in the status bar).
+- On another computer, check what depends on the machine: rig COM port, sound cards (SDRLINK cable, rig sound card for REC), rigctld path, recordings folder. A missing rig sound card is shown as "not connected" in the REC menu; if the window position falls outside the screens, it is ignored.
+- Browsing data of the WebSDR pages (cookies, cache) is not part of the settings and is not exported.
+
 ## Updates
 
 **Check for updates** box (1st row, ticked by default): at startup, if the Internet answers, SDRLink looks up the latest version published on GitHub. If there is a newer one, an orange link "⚠ Update Vx.y available" appears at the bottom right of the window, in the status bar (also visible in reduced and mini views): one click opens the download page. Ticking the box runs the check immediately.
@@ -367,6 +435,9 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.13**
+  - **background colour of your choice by right-click** on almost every button (Connect, Open log, Text size, SDRLINK cable, Scan setup, Scan, PTT, RIG, WEBSDR, mode buttons, QSY, Save, Memories, Go, Back, Reload, favorites, Find WebSDRs, the three Mutes), one colour per state for buttons that have two; existing right-click menus are kept;
+  - **Import/Export** button: exports all settings (interface, favorites, memories, colours…) to a file, and imports them on another computer (SDRLink restarts, previous settings kept in settings.avant-import.ini).
 - **1.12**
   - **REC** button moved to the audio row, right after the last volume shown (no empty space when ExpertSDR or the rig volume are not shown), with the same look and height as the Mute buttons;
   - right-click REC: **button colour** when idle (navy blue by default) and **width** (narrow or wide);

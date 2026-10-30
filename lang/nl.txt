@@ -74,9 +74,34 @@ Invalid HRD answer	Ongeldig HRD-antwoord
 HRD connection closed	HRD-verbinding gesloten
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Geen HRD-server op {0}:{1} (schakel de IP-server in HRD Rig Control in).
 Cannot open the log: 	Kan het logboek niet openen: 
+Export all settings…	Alle instellingen exporteren…
+Import settings…	Instellingen importeren…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Alle instellingen exporteren of importeren, voor dezelfde configuratie op een andere computer (rechtsklik: knopkleur)
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
 Store the current frequency…	Huidige frequentie opslaan…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Geluid naar de volgende ontvanger schakelen (rechtsklik: ontvanger die gedempt blijft)
+Colour when connected	Kleur bij verbonden
+Colour when disconnected	Kleur bij niet verbonden
+Colour when on	Kleur bij aan
+Colour when off	Kleur bij uit
+Colour when the scan is stopped	Kleur bij gestopte scan
+Colour while scanning	Kleur tijdens scannen
+Colour when receiving	Kleur bij ontvangst
+Colour when transmitting (PTT on)	Kleur bij zenden (PTT aan)
+Background colour	Achtergrondkleur
+Text colour	Tekstkleur
+Colour of the selected mode	Kleur van de gekozen mode
+Colour of the other modes	Kleur van de andere modes
+Colour when muted	Kleur bij geluid uit
+Colour when the sound is on	Kleur bij geluid aan
+Export all SDRLink settings	Alle SDRLink-instellingen exporteren
+SDRLink settings (*.ini)|*.ini	SDRLink-instellingen (*.ini)|*.ini
+Cannot export the settings: 	Exporteren van de instellingen mislukt: 
+Import SDRLink settings	SDRLink-instellingen importeren
+Cannot import the settings: 	Importeren van de instellingen mislukt: 
+Import: this file does not contain SDRLink settings	Importeren: dit bestand bevat geen SDRLink-instellingen
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Alle huidige instellingen (interface, favorieten, geheugens, kleuren…) worden vervangen door die uit het bestand, daarna start SDRLink opnieuw.\n\nDe huidige instellingen worden bewaard in settings.avant-import.ini.\n\nDoorgaan?
+Button colour	Knopkleur
 RIG	TRX
 Disconnected	Niet verbonden
 Connect	Verbinden
@@ -122,7 +147,9 @@ None (always the speakers)	Geen (altijd de luidsprekers)
 REC button width	Breedte van de REC-knop
 Narrow	Smal
 Wide	Breed
+REC button colour	Kleur van de REC-knop
 Navy blue (default)	Marineblauw (standaard)
+Navy blue	Marineblauw
 Blue	Blauw
 Sky blue	Hemelsblauw
 Teal	Petrolblauw
@@ -135,7 +162,9 @@ Brown	Bruin
 Grey	Grijs
 Black	Zwart
 Yellow	Geel
-REC button colour	Kleur van de REC-knop
+Orange	Oranje
+White	Wit
+Default	Standaard
 Other colour…	Andere kleur…
 REC: recording the speakers	REC: opname van de luidsprekers
 Empty recording: nothing to save	Lege opname: niets op te slaan
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Tekstgrootte van het venster (100 % = o
 Last {0} memories used	Laatste {0} gebruikte geheugens
 ExpertSDR TCI port: {0}…	TCI-poort van ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Update V{0} beschikbaar: klik om te downloaden
+Settings exported to "{0}"	Instellingen geëxporteerd naar "{0}"
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Zenden automatisch gestopt na {0} (veiligheidstijd, rechtsklik op PTT om te wijzigen)
 Remove "{0}" from the list	"{0}" uit de lijst verwijderen
 Remove all ({0} values)	Alles verwijderen ({0} waarden)
@@ -206,6 +236,7 @@ TRX volume:	TRX-volume:
 ExpertSDR volume:	ExpertSDR-volume:
 Open log	Log openen
 Text size…	Tekstgrootte…
+Import/Export ▾	Importeren/Exporteren ▾
 …	…
 Download Hamlib…	Hamlib downloaden…
 SDRLINK cable ▾	SDRLINK-kabel ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Lijst "{0}" en de {1} geheugen(s)
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig is niet geïnstalleerd (OmniRig.OmniRigX niet gevonden).
 Dark mode colour	Kleur donkere modus
 Light mode colour	Kleur lichte modus
-Default	Standaard
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink heeft Microsoft .NET Framework 4.6.2 of hoger nodig (4.8 aanbevolen).\nHet is niet geïnstalleerd op deze pc.\n\n.NET Framework 4.8 nu downloaden en installeren?\n(mogelijk is een herstart nodig, start daarna SDRLink opnieuw)
 SDRLink - missing component	SDRLink - ontbrekend onderdeel
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink heeft de Microsoft Edge WebView2 Runtime nodig om WebSDR's weer te geven.\nDeze is niet geïnstalleerd op deze pc.\n\nWebView2 nu downloaden en installeren? (gratis, ca. 2 MB)

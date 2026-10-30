@@ -74,9 +74,34 @@ Invalid HRD answer	Virheellinen HRD-vastaus
 HRD connection closed	HRD-yhteys suljettu
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	HRD-palvelinta ei löydy osoitteesta {0}:{1} (ota IP-palvelin käyttöön HRD Rig Control -ohjelmassa).
 Cannot open the log: 	Lokia ei voi avata: 
+Export all settings…	Vie kaikki asetukset…
+Import settings…	Tuo asetukset…
+Export or import all settings, for the same configuration on another computer (right-click: button colour)	Vie tai tuo kaikki asetukset samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea: painikkeen väri)
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
 Store the current frequency…	Tallenna nykyinen taajuus…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Siirrä ääni seuraavaan vastaanottimeen (hiiren oikea painike: vastaanotin, joka pysyy mykistettynä)
+Colour when connected	Väri yhdistettynä
+Colour when disconnected	Väri ilman yhteyttä
+Colour when on	Väri päällä
+Colour when off	Väri pois päältä
+Colour when the scan is stopped	Väri skannauksen ollessa pysäytetty
+Colour while scanning	Väri skannauksen aikana
+Colour when receiving	Väri vastaanotossa
+Colour when transmitting (PTT on)	Väri lähetyksessä (PTT päällä)
+Background colour	Taustaväri
+Text colour	Tekstin väri
+Colour of the selected mode	Valitun lähetelajin väri
+Colour of the other modes	Muiden lähetelajien väri
+Colour when muted	Väri äänen ollessa mykistetty
+Colour when the sound is on	Väri äänen ollessa päällä
+Export all SDRLink settings	Vie kaikki SDRLink-asetukset
+SDRLink settings (*.ini)|*.ini	SDRLink-asetukset (*.ini)|*.ini
+Cannot export the settings: 	Asetuksia ei voi viedä: 
+Import SDRLink settings	Tuo SDRLink-asetukset
+Cannot import the settings: 	Asetuksia ei voi tuoda: 
+Import: this file does not contain SDRLink settings	Tuonti: tiedosto ei sisällä SDRLink-asetuksia
+All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Kaikki nykyiset asetukset (liitäntä, suosikit, muistit, värit…) korvataan tiedoston asetuksilla, minkä jälkeen SDRLink käynnistyy uudelleen.\n\nNykyiset asetukset säilytetään tiedostossa settings.avant-import.ini.\n\nJatketaanko?
+Button colour	Painikkeen väri
 RIG	RADIO
 Disconnected	Ei yhteyttä
 Connect	Yhdistä
@@ -122,7 +147,9 @@ None (always the speakers)	Ei mitään (aina kaiuttimet)
 REC button width	REC-painikkeen leveys
 Narrow	Kapea
 Wide	Leveä
+REC button colour	REC-painikkeen väri
 Navy blue (default)	Laivastonsininen (oletus)
+Navy blue	Laivastonsininen
 Blue	Sininen
 Sky blue	Taivaansininen
 Teal	Sinivihreä
@@ -135,7 +162,9 @@ Brown	Ruskea
 Grey	Harmaa
 Black	Musta
 Yellow	Keltainen
-REC button colour	REC-painikkeen väri
+Orange	Oranssi
+White	Valkoinen
+Default	Oletus
 Other colour…	Muu väri…
 REC: recording the speakers	REC: tallennetaan kaiuttimet
 Empty recording: nothing to save	Tyhjä tallenne: ei mitään tallennettavaa
@@ -152,6 +181,7 @@ Window text size (100% = original size):	Ikkunan tekstin koko (100 % = alkuperä
 Last {0} memories used	Viimeiset {0} käytettyä muistia
 ExpertSDR TCI port: {0}…	ExpertSDR:n TCI-portti: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Päivitys V{0} saatavilla: lataa napsauttamalla
+Settings exported to "{0}"	Asetukset viety kohteeseen ”{0}”
 Transmission stopped automatically after {0} (safety timeout, right-click PTT to change it)	Lähetys pysäytettiin automaattisesti, kesto {0} (turva-aikakatkaisu, muuta napsauttamalla PTT:tä hiiren kakkospainikkeella)
 Remove "{0}" from the list	Poista ”{0}” luettelosta
 Remove all ({0} values)	Poista kaikki ({0} arvoa)
@@ -206,6 +236,7 @@ TRX volume:	TRX-voimakkuus:
 ExpertSDR volume:	ExpertSDR:n äänenvoimakkuus:
 Open log	Avaa loki
 Text size…	Tekstin koko…
+Import/Export ▾	Tuonti/Vienti ▾
 …	…
 Download Hamlib…	Lataa Hamlib…
 SDRLINK cable ▾	SDRLINK-kaapeli ▾
@@ -271,7 +302,6 @@ Delete the list "{0}" and its {1} memory(ies)?	Poistetaanko luettelo ”{0}” j
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRigiä ei ole asennettu (OmniRig.OmniRigX ei löytynyt).
 Dark mode colour	Tumman tilan väri
 Light mode colour	Vaalean tilan väri
-Default	Oletus
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink tarvitsee Microsoft .NET Framework 4.6.2:n tai uudemman (suositus 4.8).\nSitä ei ole asennettu tähän tietokoneeseen.\n\nLadataanko ja asennetaanko .NET Framework 4.8 nyt?\n(uudelleenkäynnistys voi olla tarpeen, käynnistä sitten SDRLink uudelleen)
 SDRLink - missing component	SDRLink - puuttuva komponentti
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink tarvitsee Microsoft Edge WebView2 Runtimen WebSDR-sivujen näyttämiseen.\nSitä ei ole asennettu tähän tietokoneeseen.\n\nLadataanko ja asennetaanko WebView2 nyt? (ilmainen, noin 2 Mt)
