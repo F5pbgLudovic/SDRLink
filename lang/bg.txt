@@ -1,3 +1,5 @@
+sound card not found	звуковата карта не е намерена
+sound card unplugged or disabled	звуковата карта е изключена или деактивирана
 output not found	изходът не е намерен
 output already used in exclusive mode by another program	изходът вече се използва в монополен режим от друга програма
 cannot open, error 	не може да се отвори, грешка 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Сканиране: за
 Scan: check memories in "Scan setup"	Сканиране: отметнете памети в „Настройка на сканирането“
 Scan stopped	Сканирането е спряно
 ■ Stop scan	■ Спиране на сканирането
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Звукова карта на радиостанцията, записвана при включени Mute WebSDR и Mute ExpertSDR:
+None (always the speakers)	Няма (винаги високоговорителите)
+REC: recording the speakers	REC: запис на високоговорителите
+Empty recording: nothing to save	Празен запис: няма нищо за запазване
+Recording deleted	Записът е изтрит
+The file could not be written: 	Файлът не можа да бъде записан: 
+Stop recording and save the sound	Спиране на записа и запазване на звука
+Record the sound heard in the speakers (right-click: rig sound card)	Запис на звука от високоговорителите (десен бутон: звукова карта на радиостанцията)
 (no memory used yet)	(няма използвани памети)
 Memories…	Памети…
 Clear this list	Изчистване на списъка
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Паметта „{0}“ е добавена към
 Memory "{0}": {1} kHz	Памет „{0}“: {1} kHz
 Scan stopped: {0}	Сканирането е спряно: {0}
 Scan: {0}	Сканиране: {0}
+Cannot record: {0}	Записът е невъзможен: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Звуковата карта на радиостанцията „{0}“ не е налична ({1}): запис на високоговорителите
+Recording the sound of "{0}" (click REC to stop)	Записва се звукът от „{0}“ (щракнете REC за спиране)
+{0} (not connected)	{0} (не е свързана)
+REC: "{0}" will be recorded when only the rig is heard	REC: „{0}“ ще се записва, когато се слуша само радиостанцията
+Writing "{0}": {1}%	Записване на „{0}“: {1}%
+Recording saved: "{0}"	Записът е запазен: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Последните {0} съобщения (щракване: скриване или показване на този вид съобщение, ✓ = скрито)
 Show all hidden messages again ({0})	Показване отново на всички скрити съобщения ({0})
 Interface:	Интерфейс:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Авто notch (DNF)
 Reduced view	Намален изглед
 Mini view	Мини изглед
 Always on top	Винаги отгоре
+PTT view	PTT изглед
 COM port (direct CAT)	COM порт (директен CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - липсващ компонент
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink изисква Microsoft Edge WebView2 Runtime, за да показва WebSDR.\nТой не е инсталиран на този компютър.\n\nДа се изтегли и инсталира ли WebView2 сега? (безплатно, около 2 MB)
 Download or installation failed:\n	Изтеглянето или инсталирането не успя:\n
 \n\nThe official download page will open:\n	\n\nЩе се отвори официалната страница за изтегляне:\n
+the audio output does not answer	аудиоизходът не отговаря
+recording too long for the WAV format (4 GB at most)	записът е твърде дълъг за формат WAV (най-много 4 GB)
+Save the recording	Запазване на записа
+Folder:	Папка:
+Format:	Формат:
+Browse…	Преглед…
+Save file	Запазване
+Delete	Изтриване
+Delete this recording without saving it?	Да се изтрие ли този запис, без да се запази?
+compressed, plays everywhere	компресиран, възпроизвежда се навсякъде
+lossless, large file	без загуби, голям файл
+lossless, compressed	без загуби, компресиран
+Folder where the recording is saved	Папка за запазване на записа
+Enter a name for the file.	Въведете име на файла.
+Cannot create the folder: 	Папката не може да бъде създадена: 
+unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоформат ({0} бита, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3 кодерът на Windows не е наличен (0x{0:X8}): изберете WAV или FLAC
+Recording length: {0}	Продължителност на записа: {0}
+"{0}" already exists. Replace it?	„{0}“ вече съществува. Да се замени ли?
 Connecting...	Свързване...
 Connected, waiting for the rig...	Свързан, изчакване на трансивъра...
 Rig online	Трансивърът е на линия

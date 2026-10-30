@@ -1,3 +1,5 @@
+sound card not found	Soundkarte nicht gefunden
+sound card unplugged or disabled	Soundkarte getrennt oder deaktiviert
 output not found	Ausgabegerät nicht gefunden
 output already used in exclusive mode by another program	Ausgabegerät wird bereits von einem anderen Programm im exklusiven Modus verwendet
 cannot open, error 	Öffnen nicht möglich, Fehler 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Suchlauf: Start- und End
 Scan: check memories in "Scan setup"	Suchlauf: Speicher unter „Suchlauf einrichten“ ankreuzen
 Scan stopped	Suchlauf beendet
 ■ Stop scan	■ Suchlauf beenden
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Soundkarte des Funkgeräts, aufgenommen wenn Mute WebSDR und Mute ExpertSDR aktiv sind:
+None (always the speakers)	Keine (immer die Lautsprecher)
+REC: recording the speakers	REC: Aufnahme der Lautsprecher
+Empty recording: nothing to save	Leere Aufnahme: nichts zu speichern
+Recording deleted	Aufnahme gelöscht
+The file could not be written: 	Die Datei konnte nicht geschrieben werden: 
+Stop recording and save the sound	Aufnahme beenden und Ton speichern
+Record the sound heard in the speakers (right-click: rig sound card)	Den Ton aus den Lautsprechern aufnehmen (Rechtsklick: Soundkarte des Funkgeräts)
 (no memory used yet)	(noch kein Speicher verwendet)
 Memories…	Speicher…
 Clear this list	Diese Liste leeren
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Speicher „{0}“ zu „{1}“ hinzugefügt.
 Memory "{0}": {1} kHz	Speicher „{0}“: {1} kHz
 Scan stopped: {0}	Suchlauf beendet: {0}
 Scan: {0}	Suchlauf: {0}
+Cannot record: {0}	Aufnahme nicht möglich: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Soundkarte des Funkgeräts „{0}“ nicht verfügbar ({1}): Aufnahme der Lautsprecher
+Recording the sound of "{0}" (click REC to stop)	Ton von „{0}“ wird aufgenommen (zum Beenden auf REC klicken)
+{0} (not connected)	{0} (nicht angeschlossen)
+REC: "{0}" will be recorded when only the rig is heard	REC: „{0}“ wird aufgenommen, wenn nur das Funkgerät gehört wird
+Writing "{0}": {1}%	Schreibe „{0}“: {1} %
+Recording saved: "{0}"	Aufnahme gespeichert: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Letzte {0} Meldungen (Klick: diese Art von Meldung ausblenden oder wieder anzeigen, ✓ = ausgeblendet)
 Show all hidden messages again ({0})	Alle ausgeblendeten Meldungen wieder anzeigen ({0})
 Interface:	Schnittstelle:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Auto-Notch (DNF)
 Reduced view	Reduzierte Ansicht
 Mini view	Mini-Ansicht
 Always on top	Immer im Vordergrund
+PTT view	PTT-Ansicht
 COM port (direct CAT)	COM-Port (direkt CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - fehlende Komponente
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink benötigt die Microsoft Edge WebView2 Runtime, um WebSDRs anzuzeigen.\nSie ist auf diesem PC nicht installiert.\n\nWebView2 jetzt herunterladen und installieren? (kostenlos, ca. 2 MB)
 Download or installation failed:\n	Download oder Installation fehlgeschlagen:\n
 \n\nThe official download page will open:\n	\n\nDie offizielle Downloadseite wird geöffnet:\n
+the audio output does not answer	der Audioausgang antwortet nicht
+recording too long for the WAV format (4 GB at most)	Aufnahme zu lang für das WAV-Format (höchstens 4 GB)
+Save the recording	Aufnahme speichern
+Folder:	Ordner:
+Format:	Format:
+Browse…	Durchsuchen…
+Save file	Speichern
+Delete	Löschen
+Delete this recording without saving it?	Diese Aufnahme löschen, ohne sie zu speichern?
+compressed, plays everywhere	komprimiert, überall abspielbar
+lossless, large file	verlustfrei, große Datei
+lossless, compressed	verlustfrei, komprimiert
+Folder where the recording is saved	Ordner, in dem die Aufnahme gespeichert wird
+Enter a name for the file.	Geben Sie einen Dateinamen ein.
+Cannot create the folder: 	Ordner kann nicht erstellt werden: 
+unsupported audio format ({0} bits, {1} Hz)	Audioformat nicht unterstützt ({0} Bit, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3-Encoder von Windows nicht verfügbar (0x{0:X8}): WAV oder FLAC wählen
+Recording length: {0}	Aufnahmedauer: {0}
+"{0}" already exists. Replace it?	„{0}“ existiert bereits. Ersetzen?
 Connecting...	Verbinden...
 Connected, waiting for the rig...	Verbunden, warte auf den TRX...
 Rig online	TRX online

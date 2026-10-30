@@ -39,6 +39,9 @@ namespace SDRLink
         public long ScanStartHz, ScanEndHz;
         public long ScanStepHz = 1000;
         public int ScanFreqDwell = 5, ScanMemDwell = 5;
+        public string RecFolder = "";      // dossier des enregistrements (bouton REC), vide = Musique\SDRLink
+        // Carte son du poste (entrée Windows) enregistrée par REC quand seul le poste est écouté ; vide = aucune.
+        public string RecCardId = "", RecCardName = "";
         public bool TopMost;
         public bool AutoConnect;
         public bool MuteOnTx = true;
@@ -145,6 +148,9 @@ namespace SDRLink
                     case "ScanStep": { long st; if (long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out st) && st > 0) s.ScanStepHz = st; } break;
                     case "ScanFreqDwell": s.ScanFreqDwell = Math.Max(1, Int(v, 5)); break;
                     case "ScanMemDwell": s.ScanMemDwell = Math.Max(1, Int(v, 5)); break;
+                    case "RecFolder": s.RecFolder = v; break;
+                    case "RecCardId": s.RecCardId = v; break;
+                    case "RecCardName": s.RecCardName = v; break;
                     case "TopMost": s.TopMost = v == "1"; break;
                     case "AutoConnect": s.AutoConnect = v == "1"; break;
                     case "MuteOnTx": s.MuteOnTx = v == "1"; break;
@@ -235,6 +241,9 @@ namespace SDRLink
             Line(sb, "ScanStep", ScanStepHz);
             Line(sb, "ScanFreqDwell", ScanFreqDwell);
             Line(sb, "ScanMemDwell", ScanMemDwell);
+            Line(sb, "RecFolder", RecFolder);
+            Line(sb, "RecCardId", RecCardId);
+            Line(sb, "RecCardName", RecCardName);
             Line(sb, "TopMost", TopMost ? 1 : 0);
             Line(sb, "AutoConnect", AutoConnect ? 1 : 0);
             Line(sb, "MuteOnTx", MuteOnTx ? 1 : 0);

@@ -1,3 +1,5 @@
+sound card not found	ljudkortet hittades inte
+sound card unplugged or disabled	ljudkortet frånkopplat eller inaktiverat
 output not found	utgången hittades inte
 output already used in exclusive mode by another program	utgången används redan i exklusivt läge av ett annat program
 cannot open, error 	kan inte öppnas, fel 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Avsökning: ange start- 
 Scan: check memories in "Scan setup"	Avsökning: markera minnen i ”Avsökningsinställningar”
 Scan stopped	Avsökning stoppad
 ■ Stop scan	■ Stoppa avsökning
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radions ljudkort, spelas in när Mute WebSDR och Mute ExpertSDR är på:
+None (always the speakers)	Inget (alltid högtalarna)
+REC: recording the speakers	REC: spelar in högtalarna
+Empty recording: nothing to save	Tom inspelning: inget att spara
+Recording deleted	Inspelningen raderad
+The file could not be written: 	Filen kunde inte skrivas: 
+Stop recording and save the sound	Stoppa inspelningen och spara ljudet
+Record the sound heard in the speakers (right-click: rig sound card)	Spela in ljudet som hörs i högtalarna (högerklick: radions ljudkort)
 (no memory used yet)	(inget minne använt ännu)
 Memories…	Minnen…
 Clear this list	Töm den här listan
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Minnet ”{0}” har lagts till i ”{1}”.
 Memory "{0}": {1} kHz	Minne ”{0}”: {1} kHz
 Scan stopped: {0}	Avsökning stoppad: {0}
 Scan: {0}	Avsökning: {0}
+Cannot record: {0}	Kan inte spela in: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Radions ljudkort "{0}" är inte tillgängligt ({1}): spelar in högtalarna
+Recording the sound of "{0}" (click REC to stop)	Spelar in ljudet från "{0}" (klicka på REC för att stoppa)
+{0} (not connected)	{0} (inte anslutet)
+REC: "{0}" will be recorded when only the rig is heard	REC: "{0}" spelas in när bara radion avlyssnas
+Writing "{0}": {1}%	Skriver "{0}": {1} %
+Recording saved: "{0}"	Inspelningen sparad: "{0}"
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Senaste {0} meddelanden (klick: dölj eller visa denna typ av meddelande igen, ✓ = dold)
 Show all hidden messages again ({0})	Visa alla dolda meddelanden igen ({0})
 Interface:	Gränssnitt:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Auto-notch (DNF)
 Reduced view	Reducerad vy
 Mini view	Minivy
 Always on top	Alltid överst
+PTT view	PTT-vy
 COM port (direct CAT)	COM-port (direkt CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - komponent saknas
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink kräver Microsoft Edge WebView2 Runtime för att visa WebSDR.\nDen är inte installerad på denna dator.\n\nLadda ned och installera WebView2 nu? (gratis, cirka 2 MB)
 Download or installation failed:\n	Nedladdningen eller installationen misslyckades:\n
 \n\nThe official download page will open:\n	\n\nDen officiella nedladdningssidan öppnas:\n
+the audio output does not answer	ljudutgången svarar inte
+recording too long for the WAV format (4 GB at most)	inspelningen är för lång för WAV-formatet (högst 4 GB)
+Save the recording	Spara inspelningen
+Folder:	Mapp:
+Format:	Format:
+Browse…	Bläddra…
+Save file	Spara
+Delete	Radera
+Delete this recording without saving it?	Radera inspelningen utan att spara den?
+compressed, plays everywhere	komprimerat, kan spelas upp överallt
+lossless, large file	förlustfritt, stor fil
+lossless, compressed	förlustfritt, komprimerat
+Folder where the recording is saved	Mapp där inspelningen sparas
+Enter a name for the file.	Ange ett namn på filen.
+Cannot create the folder: 	Mappen kan inte skapas: 
+unsupported audio format ({0} bits, {1} Hz)	ljudformatet stöds inte ({0} bitar, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3-kodare är inte tillgänglig (0x{0:X8}): välj WAV eller FLAC
+Recording length: {0}	Inspelningens längd: {0}
+"{0}" already exists. Replace it?	"{0}" finns redan. Ersätta den?
 Connecting...	Ansluter...
 Connected, waiting for the rig...	Ansluten, väntar på riggen...
 Rig online	Riggen online

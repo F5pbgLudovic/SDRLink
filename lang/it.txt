@@ -1,3 +1,5 @@
+sound card not found	scheda audio non trovata
+sound card unplugged or disabled	scheda audio scollegata o disattivata
 output not found	uscita non trovata
 output already used in exclusive mode by another program	uscita già usata in modalità esclusiva da un altro programma
 cannot open, error 	impossibile aprire, errore 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Scansione: indicare le f
 Scan: check memories in "Scan setup"	Scansione: spuntare le memorie in «Imposta scansione»
 Scan stopped	Scansione arrestata
 ■ Stop scan	■ Arresta la scansione
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Scheda audio dell'apparato, registrata quando Mute WebSDR e Mute ExpertSDR sono attivi:
+None (always the speakers)	Nessuna (sempre gli altoparlanti)
+REC: recording the speakers	REC: registrazione degli altoparlanti
+Empty recording: nothing to save	Registrazione vuota: niente da salvare
+Recording deleted	Registrazione eliminata
+The file could not be written: 	Impossibile scrivere il file: 
+Stop recording and save the sound	Interrompi la registrazione e salva l'audio
+Record the sound heard in the speakers (right-click: rig sound card)	Registra l'audio che si sente dagli altoparlanti (clic destro: scheda audio dell'apparato)
 (no memory used yet)	(nessuna memoria ancora usata)
 Memories…	Memorie…
 Clear this list	Svuota questo elenco
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Memoria «{0}» aggiunta a «{1}».
 Memory "{0}": {1} kHz	Memoria «{0}»: {1} kHz
 Scan stopped: {0}	Scansione arrestata: {0}
 Scan: {0}	Scansione: {0}
+Cannot record: {0}	Impossibile registrare: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Scheda audio dell'apparato «{0}» non disponibile ({1}): registrazione degli altoparlanti
+Recording the sound of "{0}" (click REC to stop)	Registrazione dell'audio di «{0}» (clic su REC per fermare)
+{0} (not connected)	{0} (non collegata)
+REC: "{0}" will be recorded when only the rig is heard	REC: «{0}» sarà registrata quando si ascolta solo l'apparato
+Writing "{0}": {1}%	Scrittura di «{0}»: {1}%
+Recording saved: "{0}"	Registrazione salvata: «{0}»
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ultimi {0} messaggi (clic: nascondi o mostra di nuovo questo tipo di messaggio, ✓ = nascosto)
 Show all hidden messages again ({0})	Mostra di nuovo tutti i messaggi nascosti ({0})
 Interface:	Interfaccia:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Notch auto (DNF)
 Reduced view	Vista ridotta
 Mini view	Vista mini
 Always on top	Sempre in primo piano
+PTT view	Vista PTT
 COM port (direct CAT)	Porta COM (CAT diretto)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - componente mancante
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink richiede Microsoft Edge WebView2 Runtime per visualizzare i WebSDR.\nNon è installato su questo PC.\n\nScaricare e installare WebView2 ora? (gratuito, circa 2 MB)
 Download or installation failed:\n	Download o installazione non riusciti:\n
 \n\nThe official download page will open:\n	\n\nVerrà aperta la pagina di download ufficiale:\n
+the audio output does not answer	l'uscita audio non risponde
+recording too long for the WAV format (4 GB at most)	registrazione troppo lunga per il formato WAV (al massimo 4 GB)
+Save the recording	Salva la registrazione
+Folder:	Cartella:
+Format:	Formato:
+Browse…	Sfoglia…
+Save file	Salva
+Delete	Elimina
+Delete this recording without saving it?	Eliminare questa registrazione senza salvarla?
+compressed, plays everywhere	compresso, si riproduce ovunque
+lossless, large file	senza perdita, file grande
+lossless, compressed	senza perdita, compresso
+Folder where the recording is saved	Cartella in cui salvare la registrazione
+Enter a name for the file.	Indicare un nome per il file.
+Cannot create the folder: 	Impossibile creare la cartella: 
+unsupported audio format ({0} bits, {1} Hz)	formato audio non supportato ({0} bit, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Codificatore MP3 di Windows non disponibile (0x{0:X8}): scegliere WAV o FLAC
+Recording length: {0}	Durata della registrazione: {0}
+"{0}" already exists. Replace it?	«{0}» esiste già. Sostituirlo?
 Connecting...	Connessione...
 Connected, waiting for the rig...	Connesso, in attesa dell'RTX...
 Rig online	RTX in linea

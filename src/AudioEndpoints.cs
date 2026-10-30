@@ -109,6 +109,49 @@ namespace SDRLink
             }
         }
 
+        // Interface Core Audio (IAudioClient…) de la sortie par défaut de Windows (haut-parleurs), avec son nom.
+        // Retourne un pointeur COM à libérer par l'appelant.
+        public static IntPtr ActivateDefaultOutput(Guid iid, out string name)
+        {
+            return Activate(null, iid, out name);
+        }
+
+        // Même chose pour un périphérique donné par son identifiant (entrée d'une carte son, par exemple).
+        public static IntPtr ActivateDevice(string id, Guid iid, out string name)
+        {
+            return Activate(id, iid, out name);
+        }
+
+        static IntPtr Activate(string id, Guid iid, out string name)
+        {
+            name = null;
+            IMMDeviceEnumerator en = (IMMDeviceEnumerator)new MMDeviceEnumeratorCom();
+            IMMDevice d = null;
+            try
+            {
+                int found = id == null ? en.GetDefaultAudioEndpoint(eRender, 0, out d) : en.GetDevice(id, out d);
+                if (found != 0 && id != null) throw new System.IO.IOException(Lang.T("carte son introuvable", "sound card not found"));
+                Marshal.ThrowExceptionForHR(found);
+                int state;
+                if (id != null && (d.GetState(out state) != 0 || state != DEVICE_STATE_ACTIVE))
+                    throw new System.IO.IOException(Lang.T("carte son débranchée ou désactivée", "sound card unplugged or disabled"));
+                IPropertyStore ps;
+                if (d.OpenPropertyStore(STGM_READ, out ps) == 0)
+                {
+                    name = GetString(ps, FriendlyName);
+                    Marshal.ReleaseComObject(ps);
+                }
+                IntPtr p;
+                Marshal.ThrowExceptionForHR(d.Activate(ref iid, CLSCTX_ALL, IntPtr.Zero, out p));
+                return p;
+            }
+            finally
+            {
+                if (d != null) Marshal.ReleaseComObject(d);
+                Marshal.ReleaseComObject(en);
+            }
+        }
+
         // Coupure du son d'un logiciel dans le mélangeur de volume de Windows (toutes les sorties) :
         // mute = null lit l'état, sinon l'applique. Retourne true si toutes ses sessions sont coupées,
         // false sinon, null s'il n'a aucune session audio.

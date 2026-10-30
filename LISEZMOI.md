@@ -21,7 +21,7 @@ Pour recompiler après une modification : `powershell -ExecutionPolicy Bypass -F
 | Interface | Réglages | Remarque |
 |---|---|---|
 | Port COM (CAT direct) | Marque, modèle, port, vitesse, bits de stop, RTS/DTR, adresse CI-V (Icom) | Le port ne doit pas être ouvert par un autre logiciel |
-| OmniRig | Rig 1 / Rig 2 | Le poste se configure dans OmniRig ; permet de partager le poste avec d'autres logiciels |
+| OmniRig | Rig 1 / Rig 2 | Le poste se configure dans OmniRig ; permet de partager le poste avec d'autres logiciels. **Si OmniRig ne fonctionne pas, utiliser OmniRig version 1, en mode administrateur** (voir Dépannage) |
 | TCI | Hôte / port (40001 par défaut) | ExpertSDR (SunSDR), Thetis… activer le serveur TCI |
 | Ham Radio Deluxe | Hôte / port (7809 par défaut) | Activer le serveur IP dans HRD Rig Control |
 | Hamlib (rigctld) | Hôte / port (4532 par défaut), « Lancer rigctld », n° de modèle Hamlib | Voir ci-dessous |
@@ -302,7 +302,8 @@ Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui boug
 - En affichages réduit et mini, la ligne PTT / fréquences / modes / cases reste **sur une seule ligne** : la fenêtre ne peut pas devenir plus étroite qu'elle (sauf écran trop petit), seule la hauteur se règle. La fenêtre est aussi gardée entière dans l'écran (bas visible, au-dessus de la barre des tâches) ; en plein écran, l'affichage réduit reste en plein écran (toute la page du WebSDR est visible) et le retour à l'affichage normal aussi ; le mini, lui, est toujours une petite fenêtre.
 - Une seule des deux cases à la fois. **Décocher** la case cochée revient toujours à l'affichage normal (les deux cases décochées), même si l'on était passé du réduit au mini ou du mini au réduit.
 - Chaque affichage retrouve la taille qu'il avait quand on l'a quitté (normal et réduit), y compris d'une fois sur l'autre : les tailles sont mémorisées à la fermeture, avec l'affichage en cours. Si la fenêtre était en plein écran en affichage normal, elle y revient.
-- **Avant plan** : SDRLink reste au-dessus des autres fenêtres.
+- **Affichage ptt** (sous « Avant plan ») : toute petite fenêtre qui ne montre que le **bouton PTT** et la case « Affichage ptt ». Le PTT y fonctionne normalement (clic, clic droit pour le délai de sécurité). **Décocher** la case revient à l'affichage d'avant **strictement identique** : même affichage (normal, réduit ou mini), même taille, même position, plein écran compris. Fermer SDRLink en affichage ptt enregistre l'affichage d'avant.
+- **Avant plan** : SDRLink reste au-dessus des autres fenêtres (pratique avec l'affichage ptt).
 - **Taille du texte…** (1re ligne) : agrandit ou réduit le texte de la fenêtre principale, de 70 à 200 % (100 % = taille d'origine), avec le curseur ou les boutons − / +. Le changement se voit tout de suite ; **Annuler** revient à la taille d'avant, **100 %** à la taille d'origine. Les boutons et curseurs de taille fixe suivent. La taille est conservée au prochain lancement.
 
 Ces deux réglages sont conservés au prochain lancement.
@@ -318,6 +319,18 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 - **▶ Scan** : démarre le scan configuré ; le bouton devient rouge « ■ Arrêter le scan ». La barre d'état indique la fréquence ou la mémoire en cours (sans remplir l'historique des messages).
 - Le scan règle le poste et le WebSDR, comme une saisie de fréquence. Il s'arrête dès que le poste passe en **émission** (PTT de SDRLink ou du poste) ; il ne peut pas démarrer en émission.
 
+## Enregistrement (REC)
+
+- Bouton carré **REC**, sur la ligne « Synchro » juste après « ▶ Scan » : **bleu marine** au repos, **orange** pendant l'enregistrement.
+- Un clic lance l'enregistrement de **tout ce qu'on entend dans les haut-parleurs** (sortie audio par défaut de Windows) : WebSDR, ExpertSDR, poste relié au PC, sons de Windows… Le volume de Windows et les Mute ne changent rien à ce qui est capté avant eux : on enregistre ce que la sortie joue.
+- Un nouveau clic arrête et ouvre la fenêtre **Enregistrer le son** :
+  - **Nom** : proposé d'après la date, l'heure, la fréquence et le mode au départ (modifiable) ;
+  - **Dossier** : par défaut Musique\SDRLink, **Parcourir…** pour en choisir un autre (le dernier dossier choisi est retenu) ;
+  - **Format** : **MP3** (par défaut, 128 kbit/s, codeur de Windows), **WAV** (sans perte, volumineux) ou **FLAC** (sans perte, environ deux fois plus petit) ;
+  - **Supprimer** abandonne l'enregistrement (après confirmation).
+- Le fichier est écrit en arrière-plan ; la barre d'état indique la progression puis « Enregistrement sauvegardé ». En cas d'échec, la fenêtre revient : le son n'est pas perdu.
+- **Clic droit sur REC** : choix de la **carte son du poste** (son entrée dans Windows, par exemple « USB AUDIO CODEC » ou « USB Sound Device »), ou « Aucune (toujours les haut-parleurs) ». Cette carte est enregistrée **à la place des haut-parleurs** seulement si l'on écoute le poste seul au moment d'appuyer sur REC : **Mute WebSDR** actif (rouge) et **Mute ExpertSDR** actif (rouge) si ExpertSDR est lancé. Sinon, ce sont les haut-parleurs. Si la carte est débranchée, les haut-parleurs sont enregistrés et la barre d'état le signale. Le choix est conservé.
+- Les silences sont gardés (la durée du fichier est la durée réelle). Fermer SDRLink pendant un enregistrement propose de le sauvegarder avant de quitter.
 ## Mémoires de fréquences
 
 - Bouton **Mémoires** (ligne des fréquences, après Save) : ouvre la fenêtre des mémoires.
@@ -342,12 +355,18 @@ Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au déma
 
 ## Dépannage
 
+**OmniRig ne fonctionne pas** (pas de fréquence, erreur à la connexion) : utiliser **OmniRig version 1** (pas la 2), lancé **en mode administrateur** (clic droit sur OmniRig > Exécuter en tant qu'administrateur).
+
 Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrlink.log`. Le journal est remis à zéro à chaque lancement et contient l'état de la connexion et, pour HRD, la liste des modes reçue.
 
 Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.html` dans la fenêtre « Importer des favoris » : il vient de l'aperçu **Monaco** de **PowerToys**, pas de SDRLink (cliquer sur Continue, l'import fonctionne). Pour l'éviter : **Alt+P** dans la fenêtre d'ouverture (masque le volet d'aperçu), ou dans PowerToys > Extensions de l'Explorateur de fichiers, désactiver l'aperçu du code source (Monaco).
 
 ## Historique des versions
 
+- **1.11**
+  - bouton **REC** : enregistre le son entendu dans les haut-parleurs, puis le sauvegarde en MP3, WAV ou FLAC (nom, dossier et format au choix) ; clic droit : carte son du poste, enregistrée quand seul le poste est écouté (Mute WebSDR et Mute ExpertSDR actifs) ;
+  - case **Affichage ptt** : toute petite fenêtre avec le seul bouton PTT, retour à l'affichage d'avant à l'identique ;
+  - notice : si OmniRig ne fonctionne pas, utiliser OmniRig version 1 en mode administrateur.
 - **1.10**
   - décocher « Affichage réduit » ou « Affichage mini » revient toujours à l'affichage normal ;
   - ligne de son réorganisée : ⇄, Mute WebSDR, Mute TX, Mute ExpertSDR, puis Volume WebSDR, Volume TX, Volume ExpertSDR (chaque libellé avant sa réglette ; l'ordre ne se mélange plus quand le poste ou ExpertSDR apparaissent) ; n'y figurent que les sons disponibles, sans place vide, et ⇄ seulement s'il y a au moins deux sons ;

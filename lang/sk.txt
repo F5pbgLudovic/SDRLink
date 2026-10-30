@@ -1,3 +1,5 @@
+sound card not found	zvuková karta sa nenašla
+sound card unplugged or disabled	zvuková karta odpojená alebo vypnutá
 output not found	výstup sa nenašiel
 output already used in exclusive mode by another program	výstup už používa iný program vo výhradnom režime
 cannot open, error 	nedá sa otvoriť, chyba 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Prehľadávanie: nastavt
 Scan: check memories in "Scan setup"	Prehľadávanie: zaškrtnite pamäte v „Nastavenie prehľadávania“
 Scan stopped	Prehľadávanie zastavené
 ■ Stop scan	■ Zastaviť prehľadávanie
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Zvuková karta stanice, nahrávaná pri zapnutom Mute WebSDR a Mute ExpertSDR:
+None (always the speakers)	Žiadna (vždy reproduktory)
+REC: recording the speakers	REC: nahrávanie reproduktorov
+Empty recording: nothing to save	Prázdny záznam: nie je čo uložiť
+Recording deleted	Záznam odstránený
+The file could not be written: 	Súbor sa nepodarilo zapísať: 
+Stop recording and save the sound	Zastaviť nahrávanie a uložiť zvuk
+Record the sound heard in the speakers (right-click: rig sound card)	Nahrať zvuk z reproduktorov (pravé tlačidlo: zvuková karta stanice)
 (no memory used yet)	(zatiaľ žiadna použitá pamäť)
 Memories…	Pamäte…
 Clear this list	Vymazať tento zoznam
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Pamäť „{0}“ pridaná do „{1}“.
 Memory "{0}": {1} kHz	Pamäť „{0}“: {1} kHz
 Scan stopped: {0}	Prehľadávanie zastavené: {0}
 Scan: {0}	Prehľadávanie: {0}
+Cannot record: {0}	Nahrávanie nie je možné: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Zvuková karta stanice „{0}“ nie je dostupná ({1}): nahrávajú sa reproduktory
+Recording the sound of "{0}" (click REC to stop)	Nahráva sa zvuk z „{0}“ (zastavíte kliknutím na REC)
+{0} (not connected)	{0} (nepripojená)
+REC: "{0}" will be recorded when only the rig is heard	REC: „{0}“ sa bude nahrávať, keď sa počúva len stanica
+Writing "{0}": {1}%	Zápis „{0}“: {1} %
+Recording saved: "{0}"	Záznam uložený: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Posledných {0} správ (kliknutie: skryť alebo znova zobraziť tento druh správy, ✓ = skryté)
 Show all hidden messages again ({0})	Znova zobraziť všetky skryté správy ({0})
 Interface:	Rozhranie:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Automatický notch (DNF)
 Reduced view	Zmenšené zobrazenie
 Mini view	Mini zobrazenie
 Always on top	Vždy navrchu
+PTT view	PTT zobrazenie
 COM port (direct CAT)	COM port (priamy CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - chýbajúci komponent
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink potrebuje na zobrazenie WebSDR modul Microsoft Edge WebView2 Runtime.\nNa tomto počítači nie je nainštalovaný.\n\nStiahnuť a nainštalovať WebView2 teraz? (zadarmo, asi 2 MB)
 Download or installation failed:\n	Stiahnutie alebo inštalácia zlyhala:\n
 \n\nThe official download page will open:\n	\n\nOtvorí sa oficiálna stránka na stiahnutie:\n
+the audio output does not answer	zvukový výstup neodpovedá
+recording too long for the WAV format (4 GB at most)	záznam je pre formát WAV príliš dlhý (najviac 4 GB)
+Save the recording	Uložiť záznam
+Folder:	Priečinok:
+Format:	Formát:
+Browse…	Prehľadávať…
+Save file	Uložiť
+Delete	Odstrániť
+Delete this recording without saving it?	Odstrániť tento záznam bez uloženia?
+compressed, plays everywhere	komprimovaný, prehrá sa všade
+lossless, large file	bezstratový, veľký súbor
+lossless, compressed	bezstratový, komprimovaný
+Folder where the recording is saved	Priečinok na uloženie záznamu
+Enter a name for the file.	Zadajte názov súboru.
+Cannot create the folder: 	Priečinok sa nedá vytvoriť: 
+unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitov, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Kodér MP3 systému Windows nie je k dispozícii (0x{0:X8}): zvoľte WAV alebo FLAC
+Recording length: {0}	Dĺžka záznamu: {0}
+"{0}" already exists. Replace it?	„{0}“ už existuje. Nahradiť?
 Connecting...	Pripája sa...
 Connected, waiting for the rig...	Pripojené, čaká sa na transceiver...
 Rig online	Transceiver online

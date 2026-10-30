@@ -1,3 +1,5 @@
+sound card not found	skaņas karte nav atrasta
+sound card unplugged or disabled	skaņas karte atvienota vai atspējota
 output not found	izeja nav atrasta
 output already used in exclusive mode by another program	izeju ekskluzīvajā režīmā jau izmanto cita programma
 cannot open, error 	nevar atvērt, kļūda 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Skenēšana: norādiet s
 Scan: check memories in "Scan setup"	Skenēšana: atzīmējiet atmiņas logā “Skenēšanas iestatījumi”
 Scan stopped	Skenēšana apturēta
 ■ Stop scan	■ Apturēt skenēšanu
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Raidītāja skaņas karte, ierakstīta, kad ieslēgti Mute WebSDR un Mute ExpertSDR:
+None (always the speakers)	Nav (vienmēr skaļruņi)
+REC: recording the speakers	REC: ieraksta skaļruņus
+Empty recording: nothing to save	Tukšs ieraksts: nav ko saglabāt
+Recording deleted	Ieraksts izdzēsts
+The file could not be written: 	Failu neizdevās ierakstīt: 
+Stop recording and save the sound	Apturēt ierakstīšanu un saglabāt skaņu
+Record the sound heard in the speakers (right-click: rig sound card)	Ierakstīt skaļruņos dzirdamo skaņu (labais klikšķis: raidītāja skaņas karte)
 (no memory used yet)	(atmiņa vēl nav izmantota)
 Memories…	Atmiņas…
 Clear this list	Notīrīt šo sarakstu
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Atmiņa “{0}” pievienota sarakstam “{1}”.
 Memory "{0}": {1} kHz	Atmiņa “{0}”: {1} kHz
 Scan stopped: {0}	Skenēšana apturēta: {0}
 Scan: {0}	Skenēšana: {0}
+Cannot record: {0}	Nevar ierakstīt: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Raidītāja skaņas karte “{0}” nav pieejama ({1}): ieraksta skaļruņus
+Recording the sound of "{0}" (click REC to stop)	Notiek “{0}” skaņas ierakstīšana (lai apturētu, noklikšķiniet uz REC)
+{0} (not connected)	{0} (nav pievienota)
+REC: "{0}" will be recorded when only the rig is heard	REC: “{0}” tiks ierakstīta, kad klausās tikai raidītāju
+Writing "{0}": {1}%	Raksta “{0}”: {1}%
+Recording saved: "{0}"	Ieraksts saglabāts: “{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Pēdējie {0} ziņojumi (klikšķis: paslēpt vai atkal rādīt šāda veida ziņojumu, ✓ = paslēpts)
 Show all hidden messages again ({0})	Atkal rādīt visus paslēptos ziņojumus ({0})
 Interface:	Saskarne:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Autom. notch (DNF)
 Reduced view	Samazināts skats
 Mini view	Mini skats
 Always on top	Vienmēr virspusē
+PTT view	PTT skats
 COM port (direct CAT)	COM ports (tiešais CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - trūkst komponenta
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink nepieciešams Microsoft Edge WebView2 Runtime, lai parādītu WebSDR.\nTas nav instalēts šajā datorā.\n\nVai lejupielādēt un instalēt WebView2 tagad? (bez maksas, apm. 2 MB)
 Download or installation failed:\n	Lejupielāde vai instalēšana neizdevās:\n
 \n\nThe official download page will open:\n	\n\nTiks atvērta oficiālā lejupielādes lapa:\n
+the audio output does not answer	audio izeja neatbild
+recording too long for the WAV format (4 GB at most)	ieraksts ir pārāk garš WAV formātam (ne vairāk kā 4 GB)
+Save the recording	Saglabāt ierakstu
+Folder:	Mape:
+Format:	Formāts:
+Browse…	Pārlūkot…
+Save file	Saglabāt
+Delete	Dzēst
+Delete this recording without saving it?	Vai dzēst šo ierakstu, to nesaglabājot?
+compressed, plays everywhere	saspiests, atskaņojams visur
+lossless, large file	bez zudumiem, liels fails
+lossless, compressed	bez zudumiem, saspiests
+Folder where the recording is saved	Mape, kurā saglabāt ierakstu
+Enter a name for the file.	Ievadiet faila nosaukumu.
+Cannot create the folder: 	Nevar izveidot mapi: 
+unsupported audio format ({0} bits, {1} Hz)	neatbalstīts audio formāts ({0} biti, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3 kodētājs nav pieejams (0x{0:X8}): izvēlieties WAV vai FLAC
+Recording length: {0}	Ieraksta ilgums: {0}
+"{0}" already exists. Replace it?	“{0}” jau pastāv. Aizstāt?
 Connecting...	Savieno...
 Connected, waiting for the rig...	Savienots, gaida raiduztvērēju...
 Rig online	Raiduztvērējs tiešsaistē

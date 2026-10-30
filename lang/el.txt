@@ -1,3 +1,5 @@
+sound card not found	η κάρτα ήχου δεν βρέθηκε
+sound card unplugged or disabled	η κάρτα ήχου αποσυνδέθηκε ή απενεργοποιήθηκε
 output not found	η έξοδος δεν βρέθηκε
 output already used in exclusive mode by another program	η έξοδος χρησιμοποιείται ήδη σε αποκλειστική λειτουργία από άλλο πρόγραμμα
 cannot open, error 	αδυναμία ανοίγματος, σφάλμα 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Σάρωση: ορίστ
 Scan: check memories in "Scan setup"	Σάρωση: επιλέξτε μνήμες στη «Ρύθμιση σάρωσης»
 Scan stopped	Η σάρωση σταμάτησε
 ■ Stop scan	■ Διακοπή σάρωσης
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Κάρτα ήχου του πομποδέκτη, εγγράφεται όταν είναι ενεργά τα Mute WebSDR και Mute ExpertSDR:
+None (always the speakers)	Καμία (πάντα τα ηχεία)
+REC: recording the speakers	REC: εγγραφή των ηχείων
+Empty recording: nothing to save	Κενή εγγραφή: τίποτα για αποθήκευση
+Recording deleted	Η εγγραφή διαγράφηκε
+The file could not be written: 	Δεν ήταν δυνατή η εγγραφή του αρχείου: 
+Stop recording and save the sound	Διακοπή εγγραφής και αποθήκευση του ήχου
+Record the sound heard in the speakers (right-click: rig sound card)	Εγγραφή του ήχου των ηχείων (δεξί κλικ: κάρτα ήχου του πομποδέκτη)
 (no memory used yet)	(δεν έχει χρησιμοποιηθεί μνήμη)
 Memories…	Μνήμες…
 Clear this list	Εκκαθάριση αυτής της λίστας
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Η μνήμη «{0}» προστέθηκε στο �
 Memory "{0}": {1} kHz	Μνήμη «{0}»: {1} kHz
 Scan stopped: {0}	Η σάρωση σταμάτησε: {0}
 Scan: {0}	Σάρωση: {0}
+Cannot record: {0}	Αδύνατη η εγγραφή: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Η κάρτα ήχου του πομποδέκτη «{0}» δεν είναι διαθέσιμη ({1}): εγγραφή των ηχείων
+Recording the sound of "{0}" (click REC to stop)	Εγγραφή του ήχου από «{0}» (κλικ στο REC για διακοπή)
+{0} (not connected)	{0} (δεν είναι συνδεδεμένη)
+REC: "{0}" will be recorded when only the rig is heard	REC: η «{0}» θα εγγράφεται όταν ακούγεται μόνο ο πομποδέκτης
+Writing "{0}": {1}%	Εγγραφή «{0}»: {1}%
+Recording saved: "{0}"	Η εγγραφή αποθηκεύτηκε: «{0}»
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Τελευταία {0} μηνύματα (κλικ: απόκρυψη ή επανεμφάνιση αυτού του είδους μηνύματος, ✓ = κρυφό)
 Show all hidden messages again ({0})	Επανεμφάνιση όλων των κρυφών μηνυμάτων ({0})
 Interface:	Διασύνδεση:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Αυτόματο notch (DNF)
 Reduced view	Μειωμένη προβολή
 Mini view	Μίνι προβολή
 Always on top	Πάντα στην κορυφή
+PTT view	Προβολή PTT
 COM port (direct CAT)	Θύρα COM (άμεσο CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - λείπει στοιχείο
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Το SDRLink απαιτεί το Microsoft Edge WebView2 Runtime για την εμφάνιση των WebSDR.\nΔεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή.\n\nΛήψη και εγκατάσταση του WebView2 τώρα; (δωρεάν, περίπου 2 MB)
 Download or installation failed:\n	Η λήψη ή η εγκατάσταση απέτυχε:\n
 \n\nThe official download page will open:\n	\n\nΘα ανοίξει η επίσημη σελίδα λήψης:\n
+the audio output does not answer	η έξοδος ήχου δεν αποκρίνεται
+recording too long for the WAV format (4 GB at most)	η εγγραφή είναι πολύ μεγάλη για τη μορφή WAV (έως 4 GB)
+Save the recording	Αποθήκευση της εγγραφής
+Folder:	Φάκελος:
+Format:	Μορφή:
+Browse…	Αναζήτηση…
+Save file	Αποθήκευση
+Delete	Διαγραφή
+Delete this recording without saving it?	Διαγραφή αυτής της εγγραφής χωρίς αποθήκευση;
+compressed, plays everywhere	συμπιεσμένο, αναπαράγεται παντού
+lossless, large file	χωρίς απώλειες, μεγάλο αρχείο
+lossless, compressed	χωρίς απώλειες, συμπιεσμένο
+Folder where the recording is saved	Φάκελος αποθήκευσης της εγγραφής
+Enter a name for the file.	Δώστε ένα όνομα για το αρχείο.
+Cannot create the folder: 	Δεν είναι δυνατή η δημιουργία του φακέλου: 
+unsupported audio format ({0} bits, {1} Hz)	μη υποστηριζόμενη μορφή ήχου ({0} bit, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Ο κωδικοποιητής MP3 των Windows δεν είναι διαθέσιμος (0x{0:X8}): επιλέξτε WAV ή FLAC
+Recording length: {0}	Διάρκεια εγγραφής: {0}
+"{0}" already exists. Replace it?	Το «{0}» υπάρχει ήδη. Αντικατάσταση;
 Connecting...	Σύνδεση...
 Connected, waiting for the rig...	Συνδέθηκε, αναμονή για τον πομποδέκτη...
 Rig online	Πομποδέκτης σε σύνδεση

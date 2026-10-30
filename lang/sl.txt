@@ -1,3 +1,5 @@
+sound card not found	zvočne kartice ni mogoče najti
+sound card unplugged or disabled	zvočna kartica izklopljena ali onemogočena
 output not found	izhoda ni mogoče najti
 output already used in exclusive mode by another program	izhod že uporablja drug program v izključnem načinu
 cannot open, error 	ni mogoče odpreti, napaka 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Iskanje: vnesite začetn
 Scan: check memories in "Scan setup"	Iskanje: označite pomnilnike v »Nastavitve iskanja«
 Scan stopped	Iskanje ustavljeno
 ■ Stop scan	■ Ustavi iskanje
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Zvočna kartica postaje, posneta ko sta vklopljena Mute WebSDR in Mute ExpertSDR:
+None (always the speakers)	Nobena (vedno zvočniki)
+REC: recording the speakers	REC: snemanje zvočnikov
+Empty recording: nothing to save	Prazen posnetek: nič za shranjevanje
+Recording deleted	Posnetek izbrisan
+The file could not be written: 	Datoteke ni bilo mogoče zapisati: 
+Stop recording and save the sound	Ustavi snemanje in shrani zvok
+Record the sound heard in the speakers (right-click: rig sound card)	Posnemi zvok, ki se sliši v zvočnikih (desni klik: zvočna kartica postaje)
 (no memory used yet)	(noben pomnilnik še ni bil uporabljen)
 Memories…	Pomnilniki…
 Clear this list	Počisti ta seznam
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Pomnilnik »{0}« dodan v »{1}«.
 Memory "{0}": {1} kHz	Pomnilnik »{0}«: {1} kHz
 Scan stopped: {0}	Iskanje ustavljeno: {0}
 Scan: {0}	Iskanje: {0}
+Cannot record: {0}	Snemanje ni mogoče: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Zvočna kartica postaje »{0}« ni na voljo ({1}): snemanje zvočnikov
+Recording the sound of "{0}" (click REC to stop)	Snemanje zvoka iz »{0}« (za ustavitev kliknite REC)
+{0} (not connected)	{0} (ni priključena)
+REC: "{0}" will be recorded when only the rig is heard	REC: »{0}« bo posneta, ko se posluša samo postaja
+Writing "{0}": {1}%	Zapisovanje »{0}«: {1} %
+Recording saved: "{0}"	Posnetek shranjen: »{0}«
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Zadnjih {0} sporočil (klik: skrij ali znova prikaži to vrsto sporočila, ✓ = skrito)
 Show all hidden messages again ({0})	Znova prikaži vsa skrita sporočila ({0})
 Interface:	Vmesnik:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Samodejni notch (DNF)
 Reduced view	Zmanjšan prikaz
 Mini view	Mini prikaz
 Always on top	Vedno na vrhu
+PTT view	PTT prikaz
 COM port (direct CAT)	Vrata COM (neposredni CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - manjkajoča komponenta
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink za prikaz WebSDR potrebuje Microsoft Edge WebView2 Runtime.\nNa tem računalniku ni nameščen.\n\nŽelite zdaj prenesti in namestiti WebView2? (brezplačno, približno 2 MB)
 Download or installation failed:\n	Prenos ali namestitev ni uspela:\n
 \n\nThe official download page will open:\n	\n\nOdprla se bo uradna stran za prenos:\n
+the audio output does not answer	zvočni izhod se ne odziva
+recording too long for the WAV format (4 GB at most)	posnetek je predolg za format WAV (največ 4 GB)
+Save the recording	Shrani posnetek
+Folder:	Mapa:
+Format:	Oblika:
+Browse…	Prebrskaj…
+Save file	Shrani
+Delete	Izbriši
+Delete this recording without saving it?	Želite izbrisati ta posnetek, ne da bi ga shranili?
+compressed, plays everywhere	stisnjeno, predvaja se povsod
+lossless, large file	brez izgub, velika datoteka
+lossless, compressed	brez izgub, stisnjeno
+Folder where the recording is saved	Mapa, v katero se shrani posnetek
+Enter a name for the file.	Vnesite ime datoteke.
+Cannot create the folder: 	Mape ni mogoče ustvariti: 
+unsupported audio format ({0} bits, {1} Hz)	nepodprta oblika zvoka ({0} bitov, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Kodirnik MP3 sistema Windows ni na voljo (0x{0:X8}): izberite WAV ali FLAC
+Recording length: {0}	Dolžina posnetka: {0}
+"{0}" already exists. Replace it?	»{0}« že obstaja. Ga želite zamenjati?
 Connecting...	Povezovanje...
 Connected, waiting for the rig...	Povezano, čakanje na postajo...
 Rig online	Postaja povezana

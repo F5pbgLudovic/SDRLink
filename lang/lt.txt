@@ -1,3 +1,5 @@
+sound card not found	garso plokštė nerasta
+sound card unplugged or disabled	garso plokštė atjungta arba išjungta
 output not found	išvestis nerasta
 output already used in exclusive mode by another program	išvestį išskirtiniu režimu jau naudoja kita programa
 cannot open, error 	nepavyksta atidaryti, klaida 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Skenavimas: nurodykite p
 Scan: check memories in "Scan setup"	Skenavimas: pažymėkite atmintis lange „Skenavimo nustatymai“
 Scan stopped	Skenavimas sustabdytas
 ■ Stop scan	■ Stabdyti skenavimą
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radijo stoties garso plokštė, įrašoma kai įjungti Mute WebSDR ir Mute ExpertSDR:
+None (always the speakers)	Jokia (visada garsiakalbiai)
+REC: recording the speakers	REC: įrašomi garsiakalbiai
+Empty recording: nothing to save	Tuščias įrašas: nėra ką išsaugoti
+Recording deleted	Įrašas ištrintas
+The file could not be written: 	Failo įrašyti nepavyko: 
+Stop recording and save the sound	Sustabdyti įrašymą ir išsaugoti garsą
+Record the sound heard in the speakers (right-click: rig sound card)	Įrašyti garsiakalbiuose girdimą garsą (dešinysis spustelėjimas: radijo stoties garso plokštė)
 (no memory used yet)	(atminčių dar nenaudota)
 Memories…	Atmintys…
 Clear this list	Išvalyti šį sąrašą
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Atmintis „{0}“ pridėta prie „{1}“.
 Memory "{0}": {1} kHz	Atmintis „{0}“: {1} kHz
 Scan stopped: {0}	Skenavimas sustabdytas: {0}
 Scan: {0}	Skenavimas: {0}
+Cannot record: {0}	Įrašyti neįmanoma: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Radijo stoties garso plokštė „{0}“ nepasiekiama ({1}): įrašomi garsiakalbiai
+Recording the sound of "{0}" (click REC to stop)	Įrašomas „{0}“ garsas (norėdami sustabdyti, spustelėkite REC)
+{0} (not connected)	{0} (neprijungta)
+REC: "{0}" will be recorded when only the rig is heard	REC: „{0}“ bus įrašoma, kai klausomasi tik radijo stoties
+Writing "{0}": {1}%	Rašoma „{0}“: {1} %
+Recording saved: "{0}"	Įrašas išsaugotas: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Paskutiniai {0} pranešimai (spustelėjimas: slėpti arba vėl rodyti šios rūšies pranešimą, ✓ = paslėpta)
 Show all hidden messages again ({0})	Vėl rodyti visus paslėptus pranešimus ({0})
 Interface:	Sąsaja:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Autom. notch (DNF)
 Reduced view	Sumažintas vaizdas
 Mini view	Mini vaizdas
 Always on top	Visada viršuje
+PTT view	PTT vaizdas
 COM port (direct CAT)	COM prievadas (tiesioginis CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - trūksta komponento
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink reikia Microsoft Edge WebView2 Runtime, kad būtų rodomi WebSDR.\nŠiame kompiuteryje jis neįdiegtas.\n\nAtsisiųsti ir įdiegti WebView2 dabar? (nemokamai, apie 2 MB)
 Download or installation failed:\n	Nepavyko atsisiųsti arba įdiegti:\n
 \n\nThe official download page will open:\n	\n\nBus atidarytas oficialus atsisiuntimo puslapis:\n
+the audio output does not answer	garso išvestis neatsako
+recording too long for the WAV format (4 GB at most)	įrašas per ilgas WAV formatui (daugiausia 4 GB)
+Save the recording	Išsaugoti įrašą
+Folder:	Aplankas:
+Format:	Formatas:
+Browse…	Naršyti…
+Save file	Išsaugoti
+Delete	Ištrinti
+Delete this recording without saving it?	Ištrinti šį įrašą jo neišsaugojus?
+compressed, plays everywhere	suglaudintas, groja visur
+lossless, large file	be nuostolių, didelis failas
+lossless, compressed	be nuostolių, suglaudintas
+Folder where the recording is saved	Aplankas, kuriame išsaugomas įrašas
+Enter a name for the file.	Įveskite failo pavadinimą.
+Cannot create the folder: 	Nepavyksta sukurti aplanko: 
+unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3 koduotuvas nepasiekiamas (0x{0:X8}): pasirinkite WAV arba FLAC
+Recording length: {0}	Įrašo trukmė: {0}
+"{0}" already exists. Replace it?	„{0}“ jau yra. Pakeisti?
 Connecting...	Jungiamasi...
 Connected, waiting for the rig...	Prisijungta, laukiama stoties...
 Rig online	Stotis prisijungusi

@@ -1,3 +1,5 @@
+sound card not found	placa de sunet nu a fost găsită
+sound card unplugged or disabled	placa de sunet deconectată sau dezactivată
 output not found	ieșire negăsită
 output already used in exclusive mode by another program	ieșire deja folosită în mod exclusiv de alt program
 cannot open, error 	nu se poate deschide, eroare 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Scanare: indicați frecv
 Scan: check memories in "Scan setup"	Scanare: bifați memorii în „Configurare scanare”
 Scan stopped	Scanare oprită
 ■ Stop scan	■ Oprește scanarea
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Placa de sunet a stației, înregistrată când Mute WebSDR și Mute ExpertSDR sunt active:
+None (always the speakers)	Niciuna (întotdeauna difuzoarele)
+REC: recording the speakers	REC: înregistrarea difuzoarelor
+Empty recording: nothing to save	Înregistrare goală: nimic de salvat
+Recording deleted	Înregistrare ștearsă
+The file could not be written: 	Fișierul nu a putut fi scris: 
+Stop recording and save the sound	Oprește înregistrarea și salvează sunetul
+Record the sound heard in the speakers (right-click: rig sound card)	Înregistrează sunetul auzit în difuzoare (clic dreapta: placa de sunet a stației)
 (no memory used yet)	(nicio memorie folosită încă)
 Memories…	Memorii…
 Clear this list	Golește această listă
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Memoria „{0}” a fost adăugată la „{1}”.
 Memory "{0}": {1} kHz	Memoria „{0}”: {1} kHz
 Scan stopped: {0}	Scanare oprită: {0}
 Scan: {0}	Scanare: {0}
+Cannot record: {0}	Înregistrare imposibilă: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Placa de sunet a stației „{0}” nu este disponibilă ({1}): înregistrarea difuzoarelor
+Recording the sound of "{0}" (click REC to stop)	Se înregistrează sunetul de la „{0}” (clic pe REC pentru a opri)
+{0} (not connected)	{0} (neconectată)
+REC: "{0}" will be recorded when only the rig is heard	REC: „{0}” va fi înregistrată când se ascultă doar stația
+Writing "{0}": {1}%	Se scrie „{0}”: {1} %
+Recording saved: "{0}"	Înregistrare salvată: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ultimele {0} mesaje (clic: ascundeți sau reafișați acest tip de mesaj, ✓ = ascuns)
 Show all hidden messages again ({0})	Reafișează toate mesajele ascunse ({0})
 Interface:	Interfață:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Notch auto (DNF)
 Reduced view	Afișare redusă
 Mini view	Afișare mini
 Always on top	Mereu deasupra
+PTT view	Afișare PTT
 COM port (direct CAT)	Port COM (CAT direct)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - componentă lipsă
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink necesită Microsoft Edge WebView2 Runtime pentru a afișa WebSDR-urile.\nNu este instalat pe acest PC.\n\nDescărcați și instalați WebView2 acum? (gratuit, circa 2 MB)
 Download or installation failed:\n	Descărcarea sau instalarea a eșuat:\n
 \n\nThe official download page will open:\n	\n\nSe va deschide pagina oficială de descărcare:\n
+the audio output does not answer	ieșirea audio nu răspunde
+recording too long for the WAV format (4 GB at most)	înregistrare prea lungă pentru formatul WAV (cel mult 4 GB)
+Save the recording	Salvează înregistrarea
+Folder:	Dosar:
+Format:	Format:
+Browse…	Răsfoiește…
+Save file	Salvează
+Delete	Șterge
+Delete this recording without saving it?	Ștergeți această înregistrare fără a o salva?
+compressed, plays everywhere	comprimat, se redă oriunde
+lossless, large file	fără pierderi, fișier mare
+lossless, compressed	fără pierderi, comprimat
+Folder where the recording is saved	Dosarul în care se salvează înregistrarea
+Enter a name for the file.	Introduceți un nume pentru fișier.
+Cannot create the folder: 	Dosarul nu poate fi creat: 
+unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Codorul MP3 din Windows nu este disponibil (0x{0:X8}): alegeți WAV sau FLAC
+Recording length: {0}	Durata înregistrării: {0}
+"{0}" already exists. Replace it?	„{0}” există deja. Îl înlocuiți?
 Connecting...	Conectare...
 Connected, waiting for the rig...	Conectat, se așteaptă stația...
 Rig online	Stație online

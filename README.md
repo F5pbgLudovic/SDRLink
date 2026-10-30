@@ -1,4 +1,4 @@
-# SDRLink V1.10 — @F5PBG 2026
+# SDRLink V1.11 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -11,7 +11,8 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
   - mémoires de fréquences nommées, en listes, avec les 20 dernières utilisées ;
   - scan de fréquences ou de mémoires ;
-  - affichages réduit et mini ;
+  - bouton REC : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC ;
+  - affichages réduit, mini et ptt (bouton PTT seul) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de la France ;
   - volume du WebSDR, du poste et d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
@@ -22,11 +23,11 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 
 ## Télécharger
 
-**[Télécharger la dernière version](https://github.com/F5pbgLudovic/SDRLink/releases/latest)** (`SDRLink.exe`, ou le `.zip` qui contient aussi la notice). C'est un seul fichier, sans installation, pour Windows 10 et 11.
+**[Télécharger la dernière version](https://github.com/F5pbgLudovic/SDRLink/releases/latest)** (`SDRLink.exe`, ou le `.zip` qui contient aussi la notice en français et en anglais). C'est un seul fichier, sans installation, pour Windows 10 et 11.
 
 ## Notice
 
-Voir [LISEZMOI.md](LISEZMOI.md).
+Voir [LISEZMOI.md](LISEZMOI.md) (notice complète en anglais : [MANUAL.md](MANUAL.md)).
 
 ## Recompiler
 
@@ -51,7 +52,8 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
   - named frequency memories, in lists, with the last 20 used;
   - frequency or memory scan;
-  - reduced and mini views;
+  - REC button: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC;
+  - reduced, mini and PTT (PTT button only) views;
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near France;
   - WebSDR, rig and ExpertSDR volume (Mute ExpertSDR, through Windows or TCI);
   - SDRLINK audio cable for WSJT-X, automatic notch;
@@ -62,11 +64,11 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
 
 ### Download
 
-**[Download the latest version](https://github.com/F5pbgLudovic/SDRLink/releases/latest)** (`SDRLink.exe`, or the `.zip` that also contains the manual). It is a single file, no installation, for Windows 10 and 11. On first launch, SDRLink checks for .NET Framework 4.6.2+ and Microsoft Edge WebView2 and offers to install them if they are missing.
+**[Download the latest version](https://github.com/F5pbgLudovic/SDRLink/releases/latest)** (`SDRLink.exe`, or the `.zip` that also contains the manual in English and French). It is a single file, no installation, for Windows 10 and 11. On first launch, SDRLink checks for .NET Framework 4.6.2+ and Microsoft Edge WebView2 and offers to install them if they are missing.
 
 ### Manual
 
-The full manual is in French: see [LISEZMOI.md](LISEZMOI.md).
+See the full English manual: [MANUAL.md](MANUAL.md) (French version: [LISEZMOI.md](LISEZMOI.md)).
 
 ### Building
 

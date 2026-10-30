@@ -1,3 +1,5 @@
+sound card not found	lydkort ikke funnet
+sound card unplugged or disabled	lydkort frakoblet eller deaktivert
 output not found	utgang ikke funnet
 output already used in exclusive mode by another program	utgangen brukes allerede i eksklusiv modus av et annet program
 cannot open, error 	kan ikke åpnes, feil 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Skanning: angi start- og
 Scan: check memories in "Scan setup"	Skanning: kryss av minner i «Skanneoppsett»
 Scan stopped	Skanning stoppet
 ■ Stop scan	■ Stopp skanning
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radioens lydkort, tas opp når Mute WebSDR og Mute ExpertSDR er på:
+None (always the speakers)	Ingen (alltid høyttalerne)
+REC: recording the speakers	REC: tar opp høyttalerne
+Empty recording: nothing to save	Tomt opptak: ingenting å lagre
+Recording deleted	Opptak slettet
+The file could not be written: 	Filen kunne ikke skrives: 
+Stop recording and save the sound	Stopp opptaket og lagre lyden
+Record the sound heard in the speakers (right-click: rig sound card)	Ta opp lyden fra høyttalerne (høyreklikk: radioens lydkort)
 (no memory used yet)	(ingen minner brukt ennå)
 Memories…	Minner…
 Clear this list	Tøm denne listen
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Minnet «{0}» lagt til i «{1}».
 Memory "{0}": {1} kHz	Minne «{0}»: {1} kHz
 Scan stopped: {0}	Skanning stoppet: {0}
 Scan: {0}	Skanning: {0}
+Cannot record: {0}	Kan ikke ta opp: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Radioens lydkort «{0}» er ikke tilgjengelig ({1}): tar opp høyttalerne
+Recording the sound of "{0}" (click REC to stop)	Tar opp lyden fra «{0}» (klikk på REC for å stoppe)
+{0} (not connected)	{0} (ikke tilkoblet)
+REC: "{0}" will be recorded when only the rig is heard	REC: «{0}» tas opp når bare radioen lyttes
+Writing "{0}": {1}%	Skriver «{0}»: {1} %
+Recording saved: "{0}"	Opptak lagret: «{0}»
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Siste {0} meldinger (klikk: skjul eller vis denne typen melding igjen, ✓ = skjult)
 Show all hidden messages again ({0})	Vis alle skjulte meldinger igjen ({0})
 Interface:	Grensesnitt:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Auto-notch (DNF)
 Reduced view	Redusert visning
 Mini view	Minivisning
 Always on top	Alltid øverst
+PTT view	PTT-visning
 COM port (direct CAT)	COM-port (direkte CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - komponent mangler
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink krever Microsoft Edge WebView2 Runtime for å vise WebSDR-er.\nDen er ikke installert på denne PC-en.\n\nLaste ned og installere WebView2 nå? (gratis, ca. 2 MB)
 Download or installation failed:\n	Nedlasting eller installasjon mislyktes:\n
 \n\nThe official download page will open:\n	\n\nDen offisielle nedlastingssiden åpnes:\n
+the audio output does not answer	lydutgangen svarer ikke
+recording too long for the WAV format (4 GB at most)	opptaket er for langt for WAV-formatet (maks. 4 GB)
+Save the recording	Lagre opptaket
+Folder:	Mappe:
+Format:	Format:
+Browse…	Bla gjennom…
+Save file	Lagre
+Delete	Slett
+Delete this recording without saving it?	Slette dette opptaket uten å lagre det?
+compressed, plays everywhere	komprimert, kan spilles av overalt
+lossless, large file	tapsfri, stor fil
+lossless, compressed	tapsfri, komprimert
+Folder where the recording is saved	Mappe der opptaket lagres
+Enter a name for the file.	Angi et navn på filen.
+Cannot create the folder: 	Kan ikke opprette mappen: 
+unsupported audio format ({0} bits, {1} Hz)	lydformatet støttes ikke ({0} bit, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3-koderen i Windows er ikke tilgjengelig (0x{0:X8}): velg WAV eller FLAC
+Recording length: {0}	Opptakets lengde: {0}
+"{0}" already exists. Replace it?	«{0}» finnes allerede. Erstatte den?
 Connecting...	Kobler til...
 Connected, waiting for the rig...	Tilkoblet, venter på riggen...
 Rig online	Riggen er tilkoblet

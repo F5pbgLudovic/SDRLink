@@ -1,3 +1,5 @@
+sound card not found	geluidskaart niet gevonden
+sound card unplugged or disabled	geluidskaart losgekoppeld of uitgeschakeld
 output not found	uitvoerapparaat niet gevonden
 output already used in exclusive mode by another program	uitvoerapparaat al in exclusieve modus in gebruik door een ander programma
 cannot open, error 	kan niet openen, fout 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Scannen: geef begin- en 
 Scan: check memories in "Scan setup"	Scannen: vink geheugens aan in "Scan instellen"
 Scan stopped	Scannen gestopt
 ■ Stop scan	■ Scannen stoppen
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Geluidskaart van de transceiver, opgenomen wanneer Mute WebSDR en Mute ExpertSDR aan staan:
+None (always the speakers)	Geen (altijd de luidsprekers)
+REC: recording the speakers	REC: opname van de luidsprekers
+Empty recording: nothing to save	Lege opname: niets op te slaan
+Recording deleted	Opname verwijderd
+The file could not be written: 	Het bestand kon niet worden geschreven: 
+Stop recording and save the sound	Opname stoppen en het geluid opslaan
+Record the sound heard in the speakers (right-click: rig sound card)	Het geluid uit de luidsprekers opnemen (rechtsklik: geluidskaart van de transceiver)
 (no memory used yet)	(nog geen geheugen gebruikt)
 Memories…	Geheugens…
 Clear this list	Deze lijst leegmaken
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Geheugen "{0}" toegevoegd aan "{1}".
 Memory "{0}": {1} kHz	Geheugen "{0}": {1} kHz
 Scan stopped: {0}	Scannen gestopt: {0}
 Scan: {0}	Scannen: {0}
+Cannot record: {0}	Opnemen niet mogelijk: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Geluidskaart van de transceiver "{0}" niet beschikbaar ({1}): opname van de luidsprekers
+Recording the sound of "{0}" (click REC to stop)	Geluid van "{0}" wordt opgenomen (klik op REC om te stoppen)
+{0} (not connected)	{0} (niet aangesloten)
+REC: "{0}" will be recorded when only the rig is heard	REC: "{0}" wordt opgenomen wanneer alleen de transceiver wordt beluisterd
+Writing "{0}": {1}%	"{0}" schrijven: {1}%
+Recording saved: "{0}"	Opname opgeslagen: "{0}"
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Laatste {0} meldingen (klik: dit soort melding verbergen of weer tonen, ✓ = verborgen)
 Show all hidden messages again ({0})	Alle verborgen meldingen weer tonen ({0})
 Interface:	Interface:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Auto-notch (DNF)
 Reduced view	Verkleinde weergave
 Mini view	Mini-weergave
 Always on top	Altijd bovenaan
+PTT view	PTT-weergave
 COM port (direct CAT)	COM-poort (direct CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - ontbrekend onderdeel
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink heeft de Microsoft Edge WebView2 Runtime nodig om WebSDR's weer te geven.\nDeze is niet geïnstalleerd op deze pc.\n\nWebView2 nu downloaden en installeren? (gratis, ca. 2 MB)
 Download or installation failed:\n	Downloaden of installeren mislukt:\n
 \n\nThe official download page will open:\n	\n\nDe officiële downloadpagina wordt geopend:\n
+the audio output does not answer	de audio-uitgang antwoordt niet
+recording too long for the WAV format (4 GB at most)	opname te lang voor het WAV-formaat (maximaal 4 GB)
+Save the recording	Opname opslaan
+Folder:	Map:
+Format:	Formaat:
+Browse…	Bladeren…
+Save file	Opslaan
+Delete	Verwijderen
+Delete this recording without saving it?	Deze opname verwijderen zonder op te slaan?
+compressed, plays everywhere	gecomprimeerd, overal afspeelbaar
+lossless, large file	verliesvrij, groot bestand
+lossless, compressed	verliesvrij, gecomprimeerd
+Folder where the recording is saved	Map waarin de opname wordt opgeslagen
+Enter a name for the file.	Geef een naam voor het bestand op.
+Cannot create the folder: 	Map kan niet worden gemaakt: 
+unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0} bits, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3-encoder van Windows niet beschikbaar (0x{0:X8}): kies WAV of FLAC
+Recording length: {0}	Duur van de opname: {0}
+"{0}" already exists. Replace it?	"{0}" bestaat al. Vervangen?
 Connecting...	Verbinden...
 Connected, waiting for the rig...	Verbonden, wachten op de transceiver...
 Rig online	TRX online

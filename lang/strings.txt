@@ -1,3 +1,5 @@
+sound card not found	carte son introuvable
+sound card unplugged or disabled	carte son débranchée ou désactivée
 output not found	sortie introuvable
 output already used in exclusive mode by another program	sortie déjà utilisée en mode exclusif par un autre programme
 cannot open, error 	ouverture impossible, erreur 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Scan : indiquez les fré
 Scan: check memories in "Scan setup"	Scan : cochez des mémoires dans « Conf scan »
 Scan stopped	Scan arrêté
 ■ Stop scan	■ Arrêter le scan
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Carte son du poste, enregistrée quand Mute WebSDR et Mute ExpertSDR sont actifs :
+None (always the speakers)	Aucune (toujours les haut-parleurs)
+REC: recording the speakers	REC : enregistrement des haut-parleurs
+Empty recording: nothing to save	Enregistrement vide : rien à sauvegarder
+Recording deleted	Enregistrement supprimé
+The file could not be written: 	Le fichier n'a pas pu être écrit : 
+Stop recording and save the sound	Arrêter l'enregistrement et sauvegarder le son
+Record the sound heard in the speakers (right-click: rig sound card)	Enregistrer le son entendu dans les haut-parleurs (clic droit : carte son du poste)
 (no memory used yet)	(aucune mémoire utilisée)
 Memories…	Mémoires…
 Clear this list	Effacer cette liste
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Mémoire « {0} » ajoutée à « {1} ».
 Memory "{0}": {1} kHz	Mémoire « {0} » : {1} kHz
 Scan stopped: {0}	Scan arrêté : {0}
 Scan: {0}	Scan : {0}
+Cannot record: {0}	Enregistrement impossible : {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Carte son du poste « {0} » indisponible ({1}) : enregistrement des haut-parleurs
+Recording the sound of "{0}" (click REC to stop)	Enregistrement en cours : son de « {0} » (cliquez sur REC pour l'arrêter)
+{0} (not connected)	{0} (non branchée)
+REC: "{0}" will be recorded when only the rig is heard	REC : « {0} » sera enregistrée quand seul le poste est écouté
+Writing "{0}": {1}%	Écriture de « {0} » : {1} %
+Recording saved: "{0}"	Enregistrement sauvegardé : « {0} »
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	{0} derniers messages (clic : masquer ou réafficher ce type de message, ✓ = masqué)
 Show all hidden messages again ({0})	Réafficher tous les messages masqués ({0})
 Interface:	Interface :
@@ -203,6 +220,7 @@ Auto notch (DNF)	Notch auto (DNF)
 Reduced view	Affichage réduit
 Mini view	Affichage mini
 Always on top	Avant plan
+PTT view	Affichage ptt
 COM port (direct CAT)	Port COM (CAT direct)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - composant manquant
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink a besoin du composant Microsoft Edge WebView2 Runtime pour afficher les WebSDR.\nIl n'est pas installé sur ce PC.\n\nTélécharger et installer WebView2 maintenant ? (gratuit, environ 2 Mo à télécharger)
 Download or installation failed:\n	Le téléchargement ou l'installation a échoué :\n
 \n\nThe official download page will open:\n	\n\nLa page de téléchargement officielle va s'ouvrir :\n
+the audio output does not answer	la sortie audio ne répond pas
+recording too long for the WAV format (4 GB at most)	enregistrement trop long pour le format WAV (4 Go au plus)
+Save the recording	Enregistrer le son
+Folder:	Dossier :
+Format:	Format :
+Browse…	Parcourir…
+Save file	Enregistrer
+Delete	Supprimer
+Delete this recording without saving it?	Supprimer cet enregistrement sans le sauvegarder ?
+compressed, plays everywhere	compressé, lisible partout
+lossless, large file	sans perte, fichier volumineux
+lossless, compressed	sans perte, compressé
+Folder where the recording is saved	Dossier où enregistrer le son
+Enter a name for the file.	Indiquez un nom pour le fichier.
+Cannot create the folder: 	Dossier impossible à créer : 
+unsupported audio format ({0} bits, {1} Hz)	format audio non pris en charge ({0} bits, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	codeur MP3 de Windows indisponible (0x{0:X8}) : choisissez WAV ou FLAC
+Recording length: {0}	Durée de l'enregistrement : {0}
+"{0}" already exists. Replace it?	« {0} » existe déjà. Le remplacer ?
 Connecting...	Connexion...
 Connected, waiting for the rig...	Connecté, en attente du poste...
 Rig online	Poste en ligne

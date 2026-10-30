@@ -30,7 +30,7 @@ namespace SDRLink
         ComboBox cbInterface, cbBrand, cbModel, cbPort, cbBaud, cbStop, cbOmni, cbDirection, cbUrl, cbHrdTx, cbLang;
         TextBox txtCiv, txtHost;
         NumericUpDown numNetPort, numOffset, numUnmute;
-        CheckBox chkRts, chkDtr, chkMode, chkAuto, chkMute, chkMini, chkReduced, chkTop, chkDark;
+        CheckBox chkRts, chkDtr, chkMode, chkAuto, chkMute, chkMini, chkReduced, chkTop, chkDark, chkPttView;
         TrackBar trkVolume, trkRigVolume;
         Label lblVolume, lblRigVolume;
         PaletteButton btnPalette;
@@ -45,7 +45,7 @@ namespace SDRLink
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
         Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr;
-        Button btnMemRecent, btnScan;
+        Button btnMemRecent, btnScan, btnRec;
         bool sdrMuted, rigMuted;
         bool esdrMuted, esdrMutedByUs;   // son d'ExpertSDR coupé, et coupé par SDRLink
         bool esdrRunning, esdrWin;       // ExpertSDR lancé ; il joue par le son de Windows (sinon : liaison TCI)
@@ -98,6 +98,7 @@ namespace SDRLink
         bool compactPending;
         bool wasMaximized;          // plein écran en affichage normal, à rétablir en y revenant
         FlowLayoutPanel rowSync;
+        TableLayoutPanel mainTable;
 
         RigWorker worker;
         bool rigOnline;
@@ -140,6 +141,10 @@ namespace SDRLink
             Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyView(); };
             FormClosing += delegate
             {
+                // Enregistrement en cours : arrêté, et le fichier est proposé avant de quitter.
+                if (recorder != null) StopRecording(true);
+                // Affichage ptt : on revient d'abord à l'affichage d'avant, celui qui est enregistré.
+                if (pttView) SetPttView(false);
                 Disconnect();
                 if (cableSink != null) { cableSink.Dispose(); cableSink = null; }
                 // ExpertSDR coupé par SDRLink : son rétabli (Windows garde la coupure d'un logiciel d'une fois sur l'autre).
@@ -204,7 +209,7 @@ namespace SDRLink
 
         void BuildUi()
         {
-            TableLayoutPanel table = new TableLayoutPanel();
+            TableLayoutPanel table = mainTable = new TableLayoutPanel();
             table.Dock = DockStyle.Fill;
             table.ColumnCount = 1;
             table.RowCount = 7;
@@ -400,6 +405,23 @@ namespace SDRLink
             btnScan.Tag = Theme.Custom;
             btnScan.FlatStyle = FlatStyle.Flat;
             row3.Controls.Add(btnScan);
+            // REC : enregistre le son entendu dans les haut-parleurs ; à l'arrêt, fenêtre pour sauvegarder le fichier.
+            btnRec = new Button();
+            btnRec.Text = "REC";
+            btnRec.Font = new Font("Segoe UI", 7.5f, FontStyle.Bold);
+            btnRec.MinimumSize = btnRec.Size = new Size(34, 34);
+            btnRec.Margin = new Padding(6, 2, 3, 0);
+            btnRec.Padding = Padding.Empty;
+            btnRec.Tag = Theme.Custom;
+            btnRec.FlatStyle = FlatStyle.Flat;
+            btnRec.Click += delegate { if (recorder == null) StartRecording(); else StopRecording(false); };
+            Tr(delegate { UpdateRecButton(); });
+            // Clic droit : carte son du poste, enregistrée à la place des haut-parleurs quand seul le poste est écouté.
+            ContextMenuStrip recMenu = new ContextMenuStrip();
+            recMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillRecCardMenu(recMenu); };
+            recMenu.Items.Add("-");
+            btnRec.ContextMenuStrip = recMenu;
+            row3.Controls.Add(btnRec);
 
             // Ligne 4 : PTT, fréquences, modes, saisie ; l'affichage réduit coupe la fenêtre juste après cette ligne.
             rowDisplay = Row();
@@ -498,6 +520,11 @@ namespace SDRLink
             FlowLayoutPanel views2 = SubRow();
             views2.FlowDirection = FlowDirection.TopDown;
             views2.Controls.Add(chkTop);
+            // Affichage ptt : toute petite fenêtre avec le seul bouton PTT ; décocher revient à l'affichage d'avant, à l'identique.
+            chkPttView = Check("Affichage ptt", "PTT view");
+            chkPttView.Margin = new Padding(8, 2, 2, 0);
+            chkPttView.CheckedChanged += delegate { if (!loading) SetPttView(chkPttView.Checked); };
+            views2.Controls.Add(chkPttView);
             rowDisplay.Controls.Add(views2);
 
             // Ligne 5 : barre d'adresse WebSDR et favoris
@@ -1213,7 +1240,7 @@ namespace SDRLink
         void ApplyView()
         {
             int want = WantedView;
-            if (want == viewShown) return;
+            if (want == viewShown || pttView) return;
             // Fenêtre réduite dans la barre des tâches : Windows ignore le redimensionnement, on attend sa réapparition.
             if (WindowState == FormWindowState.Minimized) { compactPending = true; return; }
             compactPending = false;
@@ -1278,7 +1305,7 @@ namespace SDRLink
         // est au moins assez large pour elle (dans la limite de l'écran).
         void KeepRowWhole()
         {
-            if (viewShown == 0) return;
+            if (viewShown == 0 || pttView) return;
             PerformLayout();
             // Largeur de la ligne posée sur une seule rangée (largeur proposée sans limite).
             int w = rowDisplay.GetPreferredSize(new Size(100000, 0)).Width + rowDisplay.Margin.Horizontal + 2;
@@ -1293,7 +1320,7 @@ namespace SDRLink
         bool rowCheckQueued;
         void OnRowDisplayLayout()
         {
-            if (viewShown == 0 || rowCheckQueued || !IsHandleCreated) return;
+            if (viewShown == 0 || pttView || rowCheckQueued || !IsHandleCreated) return;
             rowCheckQueued = true;
             BeginInvoke((Action)delegate
             {
@@ -1313,9 +1340,86 @@ namespace SDRLink
             Location = new Point(Math.Max(a.Left, Math.Min(Left, a.Right - Width)), Math.Max(a.Top, Math.Min(Top, a.Bottom - Height)));
         }
 
+        // ---------------------------------------------------------------- Affichage ptt
+
+        // Fenêtre réduite au bouton PTT et à sa case ; tout ce qui précède (affichage, taille, position, plein écran,
+        // tailles minimale et maximale) est gardé tel quel et rétabli en décochant.
+        bool pttView;
+        FlowLayoutPanel pttPanel;
+        Rectangle pttPrevBounds;
+        FormWindowState pttPrevState;
+        Size pttPrevMin, pttPrevMax;
+        Control[] pttMoved;
+        Control[] pttParents;
+        int[] pttIndexes;
+
+        void SetPttView(bool on)
+        {
+            if (on == pttView) return;
+            SuspendLayout();
+            if (on)
+            {
+                pttPrevState = WindowState;
+                pttPrevBounds = WindowState == FormWindowState.Normal ? Bounds : RestoreBounds;
+                pttPrevMin = MinimumSize;
+                pttPrevMax = MaximumSize;
+                if (pttPanel == null)
+                {
+                    pttPanel = new FlowLayoutPanel();
+                    pttPanel.AutoSize = true;
+                    pttPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    pttPanel.WrapContents = false;
+                    pttPanel.Padding = new Padding(4);
+                    pttPanel.Location = Point.Empty;
+                    Controls.Add(pttPanel);
+                }
+                pttView = true;
+                // Le bouton PTT et la case quittent leur ligne ; leur place est notée pour les y remettre.
+                pttMoved = new Control[] { btnPtt, chkPttView };
+                pttParents = new Control[pttMoved.Length];
+                pttIndexes = new int[pttMoved.Length];
+                for (int i = 0; i < pttMoved.Length; i++)
+                {
+                    pttParents[i] = pttMoved[i].Parent;
+                    pttIndexes[i] = pttParents[i].Controls.GetChildIndex(pttMoved[i]);
+                }
+                foreach (Control c in pttMoved) pttPanel.Controls.Add(c);
+                chkPttView.Margin = new Padding(8, 14, 4, 0);
+                mainTable.Visible = strip.Visible = false;
+                pttPanel.Visible = true;
+                MinimumSize = MaximumSize = Size.Empty;
+                if (WindowState != FormWindowState.Normal) WindowState = FormWindowState.Normal;
+                ResumeLayout(true);
+                ClientSize = pttPanel.GetPreferredSize(Size.Empty);
+                Location = pttPrevBounds.Location;
+                FitOnScreen();
+                Log.Write("Affichage : ptt");
+                return;
+            }
+            pttView = false;
+            pttPanel.Visible = false;
+            chkPttView.Margin = new Padding(8, 2, 2, 0);
+            for (int i = pttMoved.Length - 1; i >= 0; i--)
+            {
+                pttParents[i].Controls.Add(pttMoved[i]);
+                pttParents[i].Controls.SetChildIndex(pttMoved[i], pttIndexes[i]);
+            }
+            mainTable.Visible = strip.Visible = true;
+            WindowState = FormWindowState.Normal;
+            MinimumSize = Size.Empty;
+            MaximumSize = Size.Empty;
+            Bounds = pttPrevBounds;
+            MinimumSize = pttPrevMin;
+            MaximumSize = pttPrevMax;
+            ResumeLayout(true);
+            if (pttPrevState == FormWindowState.Maximized) WindowState = FormWindowState.Maximized;
+            Log.Write("Affichage : retour de l'affichage ptt");
+        }
+
         // Affichage mini : hauteur fixe, juste ce qu'il faut pour les lignes affichées.
         void FitMiniHeight()
         {
+            if (pttView) return;
             MaximumSize = Size.Empty;
             PerformLayout();
             int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
@@ -2836,6 +2940,194 @@ namespace SDRLink
             btnScan.BackColor = scanning ? Color.FromArgb(200, 0, 0) : Theme.ButtonBack;
             btnScan.ForeColor = scanning ? Color.White : Theme.Fore;
             btnScan.FlatAppearance.BorderColor = scanning ? Color.FromArgb(150, 0, 0) : Theme.Border;
+        }
+
+        // ---------------------------------------------------------------- Enregistrement (REC)
+
+        AudioRecorder recorder;
+        string recName;             // nom proposé pour le fichier : date, heure, fréquence et mode au départ
+
+        // Seul le poste est écouté : Mute WebSDR actif, et Mute ExpertSDR aussi si ExpertSDR répond.
+        bool OnlyRigHeard { get { return sdrMuted && (!EsdrAvailable || esdrMuted); } }
+
+        void StartRecording()
+        {
+            // Carte son du poste choisie et seul le poste écouté : on enregistre son entrée, sinon les haut-parleurs.
+            string card = settings.RecCardId.Length > 0 && OnlyRigHeard ? settings.RecCardId : null;
+            string cardError = null;
+            if (card != null)
+            {
+                try { recorder = AudioRecorder.Start(card); }
+                catch (Exception ex)
+                {
+                    cardError = ex.Message;
+                    Log.Write("Enregistrement : carte son du poste « " + settings.RecCardName + " » indisponible (" + ex.Message + "), haut-parleurs à la place");
+                }
+            }
+            if (recorder == null)
+            {
+                try { recorder = AudioRecorder.Start(null); }
+                catch (Exception ex)
+                {
+                    recorder = null;
+                    Log.Write("Enregistrement impossible : " + ex.Message);
+                    ShowStatus(Lang.F("Enregistrement impossible : {0}", "Cannot record: {0}", ex.Message));
+                    return;
+                }
+            }
+            long hz = sdrF > 0 ? sdrF : rigF;
+            string mode = sdrF > 0 ? sdrM : rigM;
+            recName = "SDRLink " + DateTime.Now.ToString("yyyy-MM-dd HH'h'mm", CultureInfo.InvariantCulture)
+                + (hz > 0 ? " " + Memory.KHz(hz) + " kHz" : "") + (!string.IsNullOrEmpty(mode) ? " " + Modes.Display(mode) : "");
+            if (cardError != null)
+                ShowStatus(Lang.F("Carte son du poste « {0} » indisponible ({1}) : enregistrement des haut-parleurs", "Rig sound card \"{0}\" not available ({1}): recording the speakers", settings.RecCardName, cardError));
+            else
+                ShowStatus(Lang.F("Enregistrement en cours : son de « {0} » (cliquez sur REC pour l'arrêter)", "Recording the sound of \"{0}\" (click REC to stop)", recorder.DeviceName));
+            UpdateRecButton();
+        }
+
+        // Menu du clic droit sur REC : entrées des cartes son de Windows (celle du poste : « USB Audio CODEC »…).
+        void FillRecCardMenu(ContextMenuStrip m)
+        {
+            m.Items.Clear();
+            ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Carte son du poste, enregistrée quand Mute WebSDR et Mute ExpertSDR sont actifs :",
+                "Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:"));
+            title.Enabled = false;
+            m.Items.Add(title);
+            ToolStripMenuItem none = new ToolStripMenuItem(Lang.T("Aucune (toujours les haut-parleurs)", "None (always the speakers)"));
+            none.Checked = settings.RecCardId.Length == 0;
+            none.Click += delegate { SetRecCard("", ""); };
+            m.Items.Add(none);
+            bool found = false;
+            try
+            {
+                foreach (AudioEndpoints.Endpoint e in AudioEndpoints.All())
+                {
+                    if (!e.Capture) continue;
+                    string id = e.Id, name = e.FullName ?? e.Name ?? id;
+                    ToolStripMenuItem it = new ToolStripMenuItem(name);
+                    it.Checked = id == settings.RecCardId;
+                    found |= it.Checked;
+                    it.Click += delegate { SetRecCard(id, name); };
+                    m.Items.Add(it);
+                }
+            }
+            catch (Exception ex) { Log.Write("REC : lecture des cartes son impossible : " + ex.Message); }
+            // Carte choisie mais absente (débranchée) : gardée, affichée grisée.
+            if (!found && settings.RecCardId.Length > 0)
+            {
+                ToolStripMenuItem gone = new ToolStripMenuItem(Lang.F("{0} (non branchée)", "{0} (not connected)", settings.RecCardName));
+                gone.Checked = true;
+                gone.Enabled = false;
+                m.Items.Add(gone);
+            }
+        }
+
+        void SetRecCard(string id, string name)
+        {
+            settings.RecCardId = id;
+            settings.RecCardName = name;
+            settings.Save();
+            Log.Write("REC : carte son du poste = " + (id.Length > 0 ? name : "aucune"));
+            ShowStatus(id.Length > 0
+                ? Lang.F("REC : « {0} » sera enregistrée quand seul le poste est écouté", "REC: \"{0}\" will be recorded when only the rig is heard", name)
+                : Lang.T("REC : enregistrement des haut-parleurs", "REC: recording the speakers"));
+            UpdateRecButton();
+        }
+
+        // Arrêt : fenêtre pour sauvegarder le son (nom, dossier, format). En fermant SDRLink, le fichier est écrit tout de suite.
+        void StopRecording(bool closing)
+        {
+            AudioRecorder r = recorder;
+            recorder = null;
+            r.Stop();
+            UpdateRecButton();
+            Log.Write("Enregistrement : arrêt (" + r.Duration.ToString(@"hh\:mm\:ss") + ")");
+            if (r.Frames == 0)
+            {
+                r.Discard();
+                ShowStatus(Lang.T("Enregistrement vide : rien à sauvegarder", "Empty recording: nothing to save"));
+                return;
+            }
+            AskSaveRecording(r, closing);
+        }
+
+        void AskSaveRecording(AudioRecorder r, bool wait)
+        {
+            string folder = settings.RecFolder.Length > 0 ? settings.RecFolder
+                : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), "SDRLink");
+            string path;
+            int format;
+            using (RecordSaveDialog d = new RecordSaveDialog(r.Duration, recName, folder))
+            {
+                if (d.ShowDialog(this) != DialogResult.OK)
+                {
+                    r.Discard();
+                    Log.Write("Enregistrement : supprimé sans sauvegarde");
+                    ShowStatus(Lang.T("Enregistrement supprimé", "Recording deleted"));
+                    return;
+                }
+                path = d.FilePath;
+                format = d.Format;
+                settings.RecFolder = d.Folder;
+            }
+            settings.Save();
+            string file = Path.GetFileName(path);
+            System.Threading.ThreadStart work = delegate
+            {
+                Exception error = null;
+                try
+                {
+                    AudioFile.Save(r.TempPath, r.SampleRate, r.Frames, path, format, delegate(int pc)
+                    {
+                        if (!wait) UiPost(delegate { status.Text = Lang.F("Écriture de « {0} » : {1} %", "Writing \"{0}\": {1}%", file, pc); });
+                    });
+                    r.Discard();
+                    Log.Write("Enregistrement sauvegardé : " + path);
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                    Log.Write("Enregistrement : échec de l'écriture de " + path + " : " + ex.Message);
+                }
+                Action done = delegate
+                {
+                    if (error == null) { ShowStatus(Lang.F("Enregistrement sauvegardé : « {0} »", "Recording saved: \"{0}\"", path)); return; }
+                    // Le son est gardé : nouvel essai, avec un autre format ou un autre dossier.
+                    MessageBox.Show(this, Lang.T("Le fichier n'a pas pu être écrit : ", "The file could not be written: ") + error.Message,
+                        "SDRLink", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    AskSaveRecording(r, wait);
+                };
+                if (wait) done(); else UiPost(done);
+            };
+            if (wait)
+            {
+                Cursor = Cursors.WaitCursor;
+                try { work(); } finally { Cursor = Cursors.Default; }
+                return;
+            }
+            // Écriture en arrière-plan ; SDRLink attend sa fin avant de se fermer (thread de premier plan).
+            System.Threading.Thread t = new System.Threading.Thread(work);
+            t.IsBackground = false;
+            t.Name = "REC écriture";
+            t.Start();
+        }
+
+        // Action renvoyée vers la fenêtre (ignorée si elle est déjà fermée).
+        void UiPost(Action a)
+        {
+            try { if (IsHandleCreated && !IsDisposed) BeginInvoke(a); } catch (InvalidOperationException) { }
+        }
+
+        void UpdateRecButton()
+        {
+            bool on = recorder != null;
+            btnRec.BackColor = on ? Color.FromArgb(255, 140, 0) : Color.FromArgb(0, 0, 128);
+            btnRec.ForeColor = Color.White;
+            btnRec.FlatAppearance.BorderColor = on ? Color.FromArgb(205, 100, 0) : Color.FromArgb(0, 0, 80);
+            tips.SetToolTip(btnRec, on
+                ? Lang.T("Arrêter l'enregistrement et sauvegarder le son", "Stop recording and save the sound")
+                : Lang.T("Enregistrer le son entendu dans les haut-parleurs (clic droit : carte son du poste)", "Record the sound heard in the speakers (right-click: rig sound card)"));
         }
 
         // Bouton ▾ : les 20 dernières mémoires utilisées (nom s'il y en a un, sinon fréquence).

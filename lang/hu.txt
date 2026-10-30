@@ -1,3 +1,5 @@
+sound card not found	a hangkártya nem található
+sound card unplugged or disabled	a hangkártya leválasztva vagy letiltva
 output not found	a kimenet nem található
 output already used in exclusive mode by another program	a kimenetet egy másik program már kizárólagos módban használja
 cannot open, error 	nem nyitható meg, hiba 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Pásztázás: adja meg a
 Scan: check memories in "Scan setup"	Pásztázás: jelöljön be memóriákat a „Pásztázás beállítása” ablakban
 Scan stopped	Pásztázás leállítva
 ■ Stop scan	■ Pásztázás leállítása
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	A rádió hangkártyája, felvétel ha a Mute WebSDR és a Mute ExpertSDR be van kapcsolva:
+None (always the speakers)	Nincs (mindig a hangszórók)
+REC: recording the speakers	REC: a hangszórók felvétele
+Empty recording: nothing to save	Üres felvétel: nincs mit menteni
+Recording deleted	Felvétel törölve
+The file could not be written: 	A fájlt nem sikerült kiírni: 
+Stop recording and save the sound	Felvétel leállítása és a hang mentése
+Record the sound heard in the speakers (right-click: rig sound card)	A hangszórókból szóló hang felvétele (jobb gomb: a rádió hangkártyája)
 (no memory used yet)	(még nem használt memóriát)
 Memories…	Memóriák…
 Clear this list	A lista törlése
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	A(z) „{0}” memória hozzáadva ide: „{1}”.
 Memory "{0}": {1} kHz	Memória: „{0}”: {1} kHz
 Scan stopped: {0}	Pásztázás leállítva: {0}
 Scan: {0}	Pásztázás: {0}
+Cannot record: {0}	A felvétel nem lehetséges: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	A rádió „{0}” hangkártyája nem érhető el ({1}): a hangszórók felvétele
+Recording the sound of "{0}" (click REC to stop)	Felvétel: „{0}” hangja (leállítás: kattintson a REC gombra)
+{0} (not connected)	{0} (nincs csatlakoztatva)
+REC: "{0}" will be recorded when only the rig is heard	REC: „{0}” felvétele, amikor csak a rádiót hallgatja
+Writing "{0}": {1}%	„{0}” írása: {1}%
+Recording saved: "{0}"	Felvétel mentve: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Utolsó {0} üzenet (kattintás: az ilyen típusú üzenet elrejtése vagy újbóli megjelenítése, ✓ = rejtett)
 Show all hidden messages again ({0})	Minden rejtett üzenet újbóli megjelenítése ({0})
 Interface:	Interfész:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Auto notch (DNF)
 Reduced view	Csökkentett nézet
 Mini view	Mini nézet
 Always on top	Mindig felül
+PTT view	PTT nézet
 COM port (direct CAT)	COM port (közvetlen CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - hiányzó összetevő
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Az SDRLinknek a WebSDR-ek megjelenítéséhez szüksége van a Microsoft Edge WebView2 Runtime összetevőre.\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a WebView2-t? (ingyenes, kb. 2 MB)
 Download or installation failed:\n	A letöltés vagy a telepítés nem sikerült:\n
 \n\nThe official download page will open:\n	\n\nMegnyílik a hivatalos letöltési oldal:\n
+the audio output does not answer	a hangkimenet nem válaszol
+recording too long for the WAV format (4 GB at most)	a felvétel túl hosszú a WAV formátumhoz (legfeljebb 4 GB)
+Save the recording	Felvétel mentése
+Folder:	Mappa:
+Format:	Formátum:
+Browse…	Tallózás…
+Save file	Mentés
+Delete	Törlés
+Delete this recording without saving it?	Törli ezt a felvételt mentés nélkül?
+compressed, plays everywhere	tömörített, mindenhol lejátszható
+lossless, large file	veszteségmentes, nagy fájl
+lossless, compressed	veszteségmentes, tömörített
+Folder where the recording is saved	A felvétel mentési mappája
+Enter a name for the file.	Adjon nevet a fájlnak.
+Cannot create the folder: 	A mappa nem hozható létre: 
+unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	A Windows MP3-kódolója nem érhető el (0x{0:X8}): válassza a WAV-ot vagy a FLAC-ot
+Recording length: {0}	Felvétel hossza: {0}
+"{0}" already exists. Replace it?	„{0}” már létezik. Lecseréli?
 Connecting...	Csatlakozás...
 Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
 Rig online	Rádió online

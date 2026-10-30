@@ -1,3 +1,5 @@
+sound card not found	äänikorttia ei löydy
+sound card unplugged or disabled	äänikortti irrotettu tai poistettu käytöstä
 output not found	lähtöä ei löydy
 output already used in exclusive mode by another program	toinen ohjelma käyttää lähtöä jo yksinoikeustilassa
 cannot open, error 	ei voi avata, virhe 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Pyyhkäisy: anna alku- j
 Scan: check memories in "Scan setup"	Pyyhkäisy: valitse muistit kohdassa ”Pyyhkäisyn asetukset”
 Scan stopped	Pyyhkäisy pysäytetty
 ■ Stop scan	■ Pysäytä pyyhkäisy
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radion äänikortti, tallennetaan kun Mute WebSDR ja Mute ExpertSDR ovat päällä:
+None (always the speakers)	Ei mitään (aina kaiuttimet)
+REC: recording the speakers	REC: tallennetaan kaiuttimet
+Empty recording: nothing to save	Tyhjä tallenne: ei mitään tallennettavaa
+Recording deleted	Tallenne poistettu
+The file could not be written: 	Tiedostoa ei voitu kirjoittaa: 
+Stop recording and save the sound	Lopeta tallennus ja tallenna ääni
+Record the sound heard in the speakers (right-click: rig sound card)	Tallenna kaiuttimista kuuluva ääni (hiiren oikea: radion äänikortti)
 (no memory used yet)	(muistia ei ole vielä käytetty)
 Memories…	Muistit…
 Clear this list	Tyhjennä tämä luettelo
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Muisti ”{0}” lisätty luetteloon ”{1}”.
 Memory "{0}": {1} kHz	Muisti ”{0}”: {1} kHz
 Scan stopped: {0}	Pyyhkäisy pysäytetty: {0}
 Scan: {0}	Pyyhkäisy: {0}
+Cannot record: {0}	Tallennus ei onnistu: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Radion äänikortti ”{0}” ei ole käytettävissä ({1}): tallennetaan kaiuttimet
+Recording the sound of "{0}" (click REC to stop)	Tallennetaan laitteen ”{0}” ääntä (lopeta napsauttamalla REC)
+{0} (not connected)	{0} (ei kytketty)
+REC: "{0}" will be recorded when only the rig is heard	REC: ”{0}” tallennetaan, kun kuunnellaan vain radiota
+Writing "{0}": {1}%	Kirjoitetaan ”{0}”: {1} %
+Recording saved: "{0}"	Tallenne tallennettu: ”{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Viimeiset {0} viestiä (napsautus: piilota tai näytä tämäntyyppiset viestit uudelleen, ✓ = piilotettu)
 Show all hidden messages again ({0})	Näytä kaikki piilotetut viestit uudelleen ({0})
 Interface:	Liitäntä:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Auto-notch (DNF)
 Reduced view	Pienennetty näkymä
 Mini view	Mininäkymä
 Always on top	Aina päällimmäisenä
+PTT view	PTT-näkymä
 COM port (direct CAT)	COM-portti (suora CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - puuttuva komponentti
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink tarvitsee Microsoft Edge WebView2 Runtimen WebSDR-sivujen näyttämiseen.\nSitä ei ole asennettu tähän tietokoneeseen.\n\nLadataanko ja asennetaanko WebView2 nyt? (ilmainen, noin 2 Mt)
 Download or installation failed:\n	Lataus tai asennus epäonnistui:\n
 \n\nThe official download page will open:\n	\n\nVirallinen lataussivu avautuu:\n
+the audio output does not answer	äänilähtö ei vastaa
+recording too long for the WAV format (4 GB at most)	tallenne on liian pitkä WAV-muodolle (enintään 4 Gt)
+Save the recording	Tallenna tallenne
+Folder:	Kansio:
+Format:	Muoto:
+Browse…	Selaa…
+Save file	Tallenna
+Delete	Poista
+Delete this recording without saving it?	Poistetaanko tämä tallenne tallentamatta?
+compressed, plays everywhere	pakattu, toistuu kaikkialla
+lossless, large file	häviötön, suuri tiedosto
+lossless, compressed	häviötön, pakattu
+Folder where the recording is saved	Kansio, johon tallenne tallennetaan
+Enter a name for the file.	Anna tiedostolle nimi.
+Cannot create the folder: 	Kansiota ei voi luoda: 
+unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windowsin MP3-kooderi ei ole käytettävissä (0x{0:X8}): valitse WAV tai FLAC
+Recording length: {0}	Tallenteen pituus: {0}
+"{0}" already exists. Replace it?	”{0}” on jo olemassa. Korvataanko?
 Connecting...	Yhdistetään...
 Connected, waiting for the rig...	Yhdistetty, odotetaan radiota...
 Rig online	Radio yhteydessä

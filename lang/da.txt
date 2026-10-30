@@ -1,3 +1,5 @@
+sound card not found	lydkort ikke fundet
+sound card unplugged or disabled	lydkort frakoblet eller deaktiveret
 output not found	udgang ikke fundet
 output already used in exclusive mode by another program	udgangen bruges allerede i eksklusiv tilstand af et andet program
 cannot open, error 	kan ikke åbnes, fejl 
@@ -115,6 +117,14 @@ Scan: set the start and end frequencies in "Scan setup"	Scanning: angiv start- o
 Scan: check memories in "Scan setup"	Scanning: markér hukommelser i “Scanningsopsætning”
 Scan stopped	Scanning stoppet
 ■ Stop scan	■ Stop scanning
+Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radioens lydkort, optages når Mute WebSDR og Mute ExpertSDR er slået til:
+None (always the speakers)	Intet (altid højttalerne)
+REC: recording the speakers	REC: optager højttalerne
+Empty recording: nothing to save	Tom optagelse: intet at gemme
+Recording deleted	Optagelse slettet
+The file could not be written: 	Filen kunne ikke skrives: 
+Stop recording and save the sound	Stop optagelsen og gem lyden
+Record the sound heard in the speakers (right-click: rig sound card)	Optag lyden fra højttalerne (højreklik: radioens lydkort)
 (no memory used yet)	(ingen hukommelse brugt endnu)
 Memories…	Hukommelser…
 Clear this list	Ryd denne liste
@@ -146,6 +156,13 @@ Memory "{0}" added to "{1}".	Hukommelsen “{0}” tilføjet til “{1}”.
 Memory "{0}": {1} kHz	Hukommelse “{0}”: {1} kHz
 Scan stopped: {0}	Scanning stoppet: {0}
 Scan: {0}	Scanning: {0}
+Cannot record: {0}	Kan ikke optage: {0}
+Rig sound card "{0}" not available ({1}): recording the speakers	Radioens lydkort "{0}" er ikke tilgængeligt ({1}): optager højttalerne
+Recording the sound of "{0}" (click REC to stop)	Optager lyden fra "{0}" (klik på REC for at stoppe)
+{0} (not connected)	{0} (ikke tilsluttet)
+REC: "{0}" will be recorded when only the rig is heard	REC: "{0}" optages, når kun radioen lyttes
+Writing "{0}": {1}%	Skriver "{0}": {1} %
+Recording saved: "{0}"	Optagelse gemt: "{0}"
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Seneste {0} meddelelser (klik: skjul eller vis denne type meddelelse igen, ✓ = skjult)
 Show all hidden messages again ({0})	Vis alle skjulte meddelelser igen ({0})
 Interface:	Grænseflade:
@@ -203,6 +220,7 @@ Auto notch (DNF)	Auto-notch (DNF)
 Reduced view	Reduceret visning
 Mini view	Minivisning
 Always on top	Altid øverst
+PTT view	PTT-visning
 COM port (direct CAT)	COM-port (direkte CAT)
 OmniRig	OmniRig
 TCI	TCI
@@ -241,6 +259,25 @@ SDRLink - missing component	SDRLink - manglende komponent
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink kræver Microsoft Edge WebView2 Runtime for at vise WebSDR'er.\nDen er ikke installeret på denne pc.\n\nDownload og installér WebView2 nu? (gratis, ca. 2 MB)
 Download or installation failed:\n	Download eller installation mislykkedes:\n
 \n\nThe official download page will open:\n	\n\nDen officielle downloadside åbnes:\n
+the audio output does not answer	lydudgangen svarer ikke
+recording too long for the WAV format (4 GB at most)	optagelsen er for lang til WAV-formatet (højst 4 GB)
+Save the recording	Gem optagelsen
+Folder:	Mappe:
+Format:	Format:
+Browse…	Gennemse…
+Save file	Gem
+Delete	Slet
+Delete this recording without saving it?	Slet denne optagelse uden at gemme den?
+compressed, plays everywhere	komprimeret, kan afspilles overalt
+lossless, large file	tabsfri, stor fil
+lossless, compressed	tabsfri, komprimeret
+Folder where the recording is saved	Mappe, hvor optagelsen gemmes
+Enter a name for the file.	Angiv et navn til filen.
+Cannot create the folder: 	Mappen kan ikke oprettes: 
+unsupported audio format ({0} bits, {1} Hz)	lydformatet understøttes ikke ({0} bit, {1} Hz)
+Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows' MP3-koder er ikke tilgængelig (0x{0:X8}): vælg WAV eller FLAC
+Recording length: {0}	Optagelsens længde: {0}
+"{0}" already exists. Replace it?	"{0}" findes allerede. Erstat den?
 Connecting...	Forbinder...
 Connected, waiting for the rig...	Forbundet, venter på radioen...
 Rig online	Radio online
