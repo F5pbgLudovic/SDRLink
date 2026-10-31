@@ -40,7 +40,7 @@ namespace SDRLink
             port.DiscardInBuffer();
         }
 
-        public void Close()
+        public virtual void Close()
         {
             if (port != null)
             {
@@ -205,6 +205,8 @@ namespace SDRLink
     public class KenwoodRig : AsciiCatRig
     {
         readonly bool elecraft;
+        public bool NoTx;          // état TX/RX non lisible (TS-140S, TS-680S, TS-711, TS-811)
+        bool mdUnsupported;        // anciens postes (TS-440S, TS-940S...) : pas de lecture "MD;", le mode est lu dans IF
 
         public KenwoodRig(SerialSettings s, bool isElecraft) : base(s) { elecraft = isElecraft; }
 
@@ -213,14 +215,23 @@ namespace SDRLink
             freqHz = ParseDigits(Query("FA;", "FA"));
             mode = null;
             if (freqHz <= 0) return false;
-            string md = Query("MD;", "MD");
-            if (!string.IsNullOrEmpty(md)) mode = CodeToMode(md[md.Length - 1]);
+            if (!mdUnsupported)
+            {
+                string md = Query("MD;", "MD");
+                if (!string.IsNullOrEmpty(md)) { mode = CodeToMode(md[md.Length - 1]); return true; }
+                mdUnsupported = true;
+                Log.Write("Kenwood : pas de réponse à MD; , le mode sera lu dans la réponse IF");
+            }
+            string s = Query("IF;", "IF");
+            if (s != null && s.Length > 27) mode = CodeToMode(s[27]);
             return true;
         }
 
-        // Réponse IF : fréquence (11), 5 espaces, RIT/XIT (5), RIT, XIT, banque, mémoire (2), puis TX/RX au rang 26.
+        // Réponse IF : fréquence (11), 5 espaces, RIT/XIT (5), RIT, XIT, banque, mémoire (2), puis TX/RX au rang 26
+        // et le mode au rang 27 (même disposition sur les anciens postes à interface IC-10, comme le TS-440S).
         public override int ReadTx()
         {
+            if (NoTx) return -1;
             string s = Query("IF;", "IF");
             if (s == null || s.Length <= 26) return -1;
             return s[26] == '1' ? 1 : s[26] == '0' ? 0 : -1;
@@ -313,9 +324,30 @@ namespace SDRLink
 
     // Yaesu FT-817/818/857/897 : ancien protocole CAT binaire, commandes de 5 octets [P1 P2 P3 P4 CMD],
     // fréquence en BCD sur 4 octets (unité 10 Hz, chiffre de poids fort en premier).
+    // FT-847 et FT-650 : mêmes commandes, mais il faut passer le poste en mode CAT (00h) à l'ouverture et l'en sortir
+    // (80h) à la fermeture, avec 50 ms entre les octets (Hamlib ft847.c) ; pas de mode DIG.
     public class Ft817Rig : SerialRig
     {
-        public Ft817Rig(SerialSettings s) : base(s) { }
+        readonly bool ft847;
+
+        public Ft817Rig(SerialSettings s) : this(s, null) { }
+
+        public Ft817Rig(SerialSettings s, string model) : base(s)
+        {
+            ft847 = model == "FT-847" || model == "FT-650";
+        }
+
+        public override void Open()
+        {
+            base.Open();
+            if (ft847) Command(0, 0, 0, 0, 0x00, 0);   // CAT ON
+        }
+
+        public override void Close()
+        {
+            if (ft847 && port != null) { try { Command(0, 0, 0, 0, 0x80, 0); } catch { } }   // CAT OFF
+            base.Close();
+        }
 
         public override bool Read(out long freqHz, out string mode)
         {
@@ -338,7 +370,8 @@ namespace SDRLink
 
         public override void SetPtt(bool tx)
         {
-            Command(0, 0, 0, 0, (byte)(tx ? 0x08 : 0x88), 1);
+            if (ft847) Command(0, 0, 0, (byte)(tx ? 0 : 1), (byte)(tx ? 0x08 : 0x88), 0);   // codes de Hamlib pour le FT-847
+            else Command(0, 0, 0, 0, (byte)(tx ? 0x08 : 0x88), 1);
         }
 
         public override void SetFreq(long freqHz)
@@ -350,13 +383,17 @@ namespace SDRLink
         public override void SetMode(string mode)
         {
             int code = ModeToCode(mode);
+            // FT-847 / FT-650 : pas de mode DIG, les modes données passent en USB / LSB.
+            if (ft847 && code == 0x0A) code = mode == Modes.DATAL || mode == Modes.RTTY ? 0x00 : 0x01;
             if (code >= 0) Command((byte)code, 0, 0, 0, 0x07, 0);
         }
 
         byte[] Command(byte p1, byte p2, byte p3, byte p4, byte cmd, int replyLength)
         {
             port.DiscardInBuffer();
-            port.Write(new byte[] { p1, p2, p3, p4, cmd }, 0, 5);
+            byte[] frame = new byte[] { p1, p2, p3, p4, cmd };
+            if (!ft847) port.Write(frame, 0, 5);
+            else for (int i = 0; i < 5; i++) { port.Write(frame, i, 1); Thread.Sleep(50); }
             if (replyLength == 0) return null;
             byte[] r = new byte[replyLength];
             DateTime deadline = DateTime.UtcNow.AddMilliseconds(500);
@@ -566,15 +603,24 @@ namespace SDRLink
         readonly byte address;
         readonly List<byte> buffer = new List<byte>();
 
-        public IcomRig(SerialSettings s, byte civAddress) : base(s) { address = civAddress; }
+        readonly int freqBytes;   // 5, ou 4 sur les anciens postes comme l'IC-735 (« mode 731 » de Hamlib)
+
+        public IcomRig(SerialSettings s, byte civAddress) : this(s, civAddress, 5) { }
+
+        public IcomRig(SerialSettings s, byte civAddress, int frequencyBytes) : base(s)
+        {
+            address = civAddress;
+            freqBytes = frequencyBytes;
+        }
 
         public override bool Read(out long freqHz, out string mode)
         {
             freqHz = 0;
             mode = null;
             byte[] f = Transact(new byte[] { 0x03 }, 0x03);
-            if (f == null || f.Length < 5) return false;
-            freqHz = FromBcd(f, 0, 5);
+            // La longueur reçue fait foi : 5 octets en général, 4 sur les postes en « mode 731 ».
+            if (f == null || f.Length < 4) return false;
+            freqHz = FromBcd(f, 0, Math.Min(f.Length, 5));
             byte[] m = Transact(new byte[] { 0x04 }, 0x04);
             if (m != null && m.Length >= 1) mode = CodeToMode(m[0]);
             return freqHz > 0;
@@ -612,9 +658,9 @@ namespace SDRLink
 
         public override void SetFreq(long freqHz)
         {
-            byte[] cmd = new byte[6];
+            byte[] cmd = new byte[1 + freqBytes];
             cmd[0] = 0x05;
-            ToBcd(freqHz, cmd, 1, 5);
+            ToBcd(freqHz, cmd, 1, freqBytes);
             Transact(cmd, 0xFB);
         }
 

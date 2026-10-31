@@ -82,26 +82,45 @@ Hamlib est la bibliothèque libre de télécommande des postes utilisée par WSJ
 
 ## Postes en CAT direct
 
-- **Yaesu** : FT-2000, FTdx10, FTdx101, FT-991/A, FT-891, FT-710, FTdx5000, FTdx3000, FTdx1200, FT-950, FT-450, FT-817, FT-817ND, FT-818, FT-818ND, FT-857, FT-857D, FT-897, FT-897D, FT-990, FT-1000, FT-1000D, FT-1000MP, FT-1000MP Mark-V, FT-1000MP Mark-V Field
-- **Icom** : IC-7000, IC-7760, IC-7300, IC-7610, IC-705, IC-9700, IC-7100, IC-7200, IC-7410, IC-7600, IC-7700, IC-7800, IC-7851, IC-756PROIII, IC-746PRO, IC-718, IC-706, IC-706MKII, IC-706MKIIG
-- **Kenwood** : TS-590, TS-890, TS-990, TS-2000, TS-480, TS-870, TS-570, TS-850S
-- **Elecraft** : K4, K3/K3S, KX3, KX2, K2
-- **Xiegu** (CI-V compatible Icom) : G90, X6100, X6200
+Dans la liste **Modèle**, les postes sont classés par numéro (FT-100, FT-450… FT-2000, puis FTdx…, FTX-1). La liste a été comparée à celles de Hamlib, d'OmniRig et de Ham Radio Deluxe ; les protocoles viennent de Hamlib.
 
-Quand on choisit un modèle, la vitesse et l'adresse CI-V se règlent sur les valeurs d'usine. Il faut qu'elles correspondent au menu du poste :
+- **Yaesu** (40) :
+  - protocole actuel (commandes texte) : FT-450/450D, FT-710, FT-891, FT-950, FT-991/991A, FT-2000, FTdx10, FTdx101D/MP, FTdx1200, FTdx3000, FTdx5000, FTdx9000, FTX-1 ;
+  - ancien protocole binaire : FT-100/100D, FT-600, FT-650, FT-747GX, FT-757GXII, FT-767GX, FT-817, FT-817ND, FT-818, FT-818ND, FT-840, FT-847, FT-857, FT-857D, FT-890, FT-897, FT-897D, FT-900, FT-920, FT-990, FT-1000, FT-1000D, FT-1000MP, FT-1000MP Mark-V, FT-1000MP Mark-V Field ;
+  - commande seule (le poste ne renvoie rien) : FT-757GX, FT-736R.
+- **Icom** (55) : IC-78, IC-271, IC-275, IC-375, IC-471, IC-475, IC-575, IC-703, IC-705, IC-706, IC-706MKII, IC-706MKIIG, IC-707, IC-718, IC-725, IC-726, IC-728, IC-729, IC-735, IC-736, IC-737, IC-738, IC-746, IC-746PRO, IC-751/751A, IC-756, IC-756PRO, IC-756PROII, IC-756PROIII, IC-761, IC-765, IC-775, IC-781, IC-820H, IC-821H, IC-905, IC-910H, IC-970, IC-1275, IC-7000, IC-7100, IC-7200, IC-7300, IC-7300MK2, IC-7400, IC-7410, IC-7600, IC-7610, IC-7700, IC-7760, IC-7800, IC-7850, IC-7851, IC-9100, IC-9700
+- **Kenwood** (23) : TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-480, TS-570, TS-590S/SG, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-850S, TS-870S, TS-890S, TS-930S, TS-940S, TS-950S, TS-950SDX, TS-990S, TS-2000, TS-B2000
+- **Elecraft** (5) : K2, K3/K3S, K4, KX2, KX3
+- **Xiegu** (5, CI-V compatible Icom) : G90, X108G, X5105, X6100, X6200
+
+Pas dans la liste : les **FT-850 et FT-870 n'existent pas chez Yaesu** (ce sont les Kenwood **TS-850S** et **TS-870S**, présents dans la liste Kenwood ; chez Yaesu il y a les FT-840, FT-890 et FT-900). Le **FT-980** n'est pas en CAT direct (son protocole n'est qu'en version d'essai dans Hamlib) : passer par l'interface Hamlib (n° 1031) ou par HRD. Les récepteurs (IC-R…, FRG…, R-5000) et les portatifs FM ne sont pas proposés.
+
+Quand on choisit un modèle, la vitesse, les bits de stop et l'adresse CI-V se règlent sur les valeurs d'usine (celles de Hamlib). Il faut qu'elles correspondent au menu du poste :
 
 - **FT-2000** : menu CAT RATE (4800 par défaut). Testé chez toi : 38400, 1 bit de stop, RTS décoché.
 - **FTdx10** : menu CAT RATE ; sur l'USB, prendre le port COM « Enhanced ». Si rien ne répond, essayer RTS coché/décoché.
+- **FTdx9000** : 4800 bauds, 2 bits de stop par défaut. **FTX-1** : 38400 bauds, 1 bit de stop par défaut (à régler comme le menu CAT du poste).
 - **IC-7000** : adresse CI-V 70 (hex), vitesse CI-V du menu (souvent 19200 ou Auto). CI-V Transceive peut rester sur ON.
 - **FT-817/818, FT-857/857D, FT-897/897D** : ancien protocole CAT binaire de Yaesu, 2 bits de stop, vitesse selon le menu CAT RATE du poste (4800 par défaut). Le volume du poste (Mute TX, Volume TX) n'est pas réglable par ce protocole.
+- **FT-847, FT-650** : mêmes commandes que le FT-817 ; SDRLink met le poste en mode CAT à la connexion et l'en sort à la déconnexion. Vitesse proposée : 57600 pour le FT-847 (menu CAT RATE), 4800 pour le FT-650. Le FT-847 n'a pas de mode données : un mode données du WebSDR le met en USB ou LSB. Seuls les FT-847 fabriqués à partir de la série 8G05 savent renvoyer leur fréquence (d'après Hamlib).
 - **FT-990, FT-1000, FT-1000D, FT-1000MP, Mark-V** : ancien protocole CAT binaire (le même que Hamlib), 4800 bauds, 2 bits de stop, sans réglage de vitesse sur le poste. Fréquence au pas de 10 Hz. Pas de PKT côté USB : un mode données USB du WebSDR met le poste en USB. Le volume du poste (Mute TX, Volume TX) n'est pas réglable. Le FT-1000MP et le Mark-V ne disent pas de façon sûre par CAT s'ils émettent : en CAT direct, la coupure automatique du son à l'émission ne marche donc pas avec eux (le FT-990 et le FT-1000/1000D, eux, le disent). Le FT-990 est lent à recevoir les commandes (50 ms par octet, comme dans Hamlib), le suivi du VFO y est donc un peu plus lent. Par OmniRig ou HRD, choisir le poste dans ces logiciels ; par Hamlib, le numéro de modèle se remplit tout seul (FT-990 : 1016 ; si votre FT-990 a une ancienne ROM et ne répond pas, essayer 1048).
-- **TS-850S** : 4800 bauds, 2 bits de stop.
-- **IC-7760** : adresse B2. **IC-706** : adresse 48. **IC-706MKII** : adresse 4E.
+- **FT-100/100D, FT-600, FT-747GX, FT-757GXII, FT-840, FT-890, FT-900, FT-920** : ancien protocole CAT binaire, 4800 bauds, 2 bits de stop (pas de réglage de vitesse sur ces postes). SDRLink lit le bloc d'état du poste, comme Hamlib. Le volume du poste n'est pas réglable. Particularités :
+  - **FT-747GX** : le poste renvoie un long bloc (344 octets), une relecture prend presque 1 seconde ; il ne répond pas pendant l'émission (« Le poste ne répond pas » peut s'afficher pendant une longue émission, puis tout reprend) ;
+  - **FT-757GXII** : pas de commande PTT par CAT (sur ce poste, l'émission se commande par une broche de la prise CAT) : le bouton PTT de SDRLink n'a pas d'effet, mais l'émission est bien détectée ;
+  - **FT-600** : l'état d'émission n'est pas lisible (pas de coupure automatique du son à l'émission), pas de FM ;
+  - **FT-920** : modes données DATA-L / DATA-U reconnus.
+- **FT-767GX** : protocole particulier (chaque commande est répétée par le poste, puis acquittée), 4800 bauds, 2 bits de stop. SDRLink passe le poste en mode CAT le temps de chaque lecture, puis le rend : la façade est bloquée pendant ces quelques dixièmes de seconde. Pas de commande PTT par CAT ; l'émission est détectée.
+- **FT-757GX** (le premier, sans « II ») et **FT-736R** : ces postes reçoivent les ordres mais ne renvoient rien. SDRLink ne peut donc pas lire leur fréquence : il affiche la dernière fréquence qu'il a envoyée, et seul le sens **WebSDR → Radio** a du sens (choisir ce sens dans **Synchro**). Le FT-736R est mis en mode CAT à la connexion ; il accepte le PTT, pas l'AM ; au-dessus de 1,2 GHz la fréquence est codée comme dans Hamlib. Le FT-757GX n'a pas de PTT par CAT.
+- **Anciens Kenwood** (TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-930S, TS-940S, TS-950S/SDX) : 4800 bauds, 2 bits de stop (interface IF-232C ou équivalent). Ils ne répondent pas à la lecture du mode `MD;` : SDRLink le voit à la première lecture et lit alors le mode dans la réponse `IF;` (le journal l'indique). Les TS-140S, TS-680S, TS-711 et TS-811 ne disent pas par CAT s'ils émettent (pas de coupure automatique du son à l'émission). **TS-850S** : 4800 bauds, 2 bits de stop. **TS-B2000** : comme le TS-2000.
+- **Icom** : chaque modèle a son adresse CI-V d'usine (IC-7760 : B2, IC-706 : 48, IC-706MKII : 4E, IC-7300MK2 : B6, IC-905 : AC…) ; si le poste a été réglé autrement, taper son adresse dans **Adresse CI-V**. Les Icom des années 80 (IC-271, 275, 375, 471, 475, 575, 725, 726, 728, 729, 735, 751, 761, 765, 781, 1275) sont proposés à **1200 bauds**, la vitesse d'origine de leur CI-V. L'**IC-735** utilise une fréquence sur 4 octets (géré automatiquement). Sur les anciens Icom, la lecture d'émission et le volume ne sont pas disponibles : SDRLink le détecte, Volume TX et Mute TX sont alors masqués.
 - **Xiegu** : l'adresse CI-V dépend du firmware. Si le poste ne répond pas, essayer une autre adresse :
-  - G90 : 70, sinon 88 ;
+  - G90 : 88 (valeur d'usine d'après Hamlib et le manuel Radioddity), sinon 70 ;
+  - X108G, X5105 : 70 ;
   - X6100 : A4, sinon 70 pour les firmwares antérieurs au 1.1.8 ;
   - X6200 : A4.
   Régler la vitesse comme dans le menu CI-V du poste.
+
+Ces nouveaux modèles (version 1.14) ont été écrits d'après Hamlib et vérifiés sur des blocs de données simulés, pas sur de vrais postes : en cas de souci, le journal (**Ouvrir le journal**) aide à comprendre, et l'interface **Hamlib** reste une solution de repli.
 
 ## WebSDR compatibles
 
@@ -207,7 +226,7 @@ Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 - **Icom / Xiegu** : CI-V `14 01`, valeur de 0000 à 0255.
 - **TCI** : `volume:` de −60 à 0 dB.
 - **HRD** : curseur « AF gain (main) » de HRD Rig Control (sinon « AF gain » ou « Volume »), par `get/set slider-pos`. Il est recherché à la connexion, et de nouveau quand on change de poste dans HRD (FT-2000, FTdx10, FTdx5000…) sans reconnecter SDRLink ; le journal l'indique par la ligne « HRD curseur volume … ». Si HRD n'a pas de curseur de volume pour le poste, Volume TX et Mute TX sont masqués et le journal liste les curseurs disponibles.
-- **Non disponible** avec FT-817/818/857/897, FT-990 et FT-1000/1000D/1000MP (pas de commande) et OmniRig (pas de réglage de volume) : Volume TX et Mute TX sont alors masqués.
+- **Non disponible** avec les Yaesu à ancien protocole binaire (FT-100, FT-600, FT-650, FT-736R, FT-747GX, FT-757GX/GXII, FT-767GX, FT-817/818, FT-840, FT-847, FT-857, FT-890, FT-897, FT-900, FT-920, FT-990, FT-1000/1000D/1000MP : pas de commande), avec les anciens Icom et Kenwood qui ne connaissent pas la commande (détecté automatiquement) et avec OmniRig (pas de réglage de volume) : Volume TX et Mute TX sont alors masqués.
 
 ## Mode sombre
 
@@ -433,6 +452,15 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.14**
+  - **nouveaux postes en CAT direct**, après comparaison avec les listes de Hamlib, OmniRig et Ham Radio Deluxe :
+    - Yaesu : FT-100/100D, FT-600, FT-650, FT-736R, FT-747GX, FT-757GX, FT-757GXII, FT-767GX, FT-840, FT-847, FT-890, FT-900, FT-920, FTdx9000, FTX-1 ;
+    - Icom : IC-78, IC-271, IC-275, IC-375, IC-471, IC-475, IC-575, IC-703, IC-707, IC-725, IC-726, IC-728, IC-729, IC-735, IC-736, IC-737, IC-738, IC-746, IC-751/751A, IC-756, IC-756PRO, IC-756PROII, IC-761, IC-765, IC-775, IC-781, IC-820H, IC-821H, IC-905, IC-910H, IC-970, IC-1275, IC-7300MK2, IC-7400, IC-7850, IC-9100 ;
+    - Kenwood : TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-930S, TS-940S, TS-950S, TS-950SDX, TS-B2000 ;
+    - Xiegu : X108G, X5105 ;
+  - liste des modèles **classée par numéro** pour chaque marque ;
+  - Xiegu G90 : adresse CI-V proposée corrigée en 88 (valeur d'usine d'après Hamlib) ;
+  - anciens Kenwood : mode lu dans la réponse `IF;` quand le poste ne connaît pas `MD;`.
 - **1.13**
   - **couleur de fond au choix par clic droit** sur presque tous les boutons (Connecter, Ouvrir le journal, Taille du texte, Câble SDRLINK, Conf scan, Scan, PTT, RADIO, WEBSDR, boutons de mode, QSY, Save, Mémoires, Aller, Retour, Recharger, favoris, Rechercher des WebSDR, les trois Mute), une couleur par état pour les boutons qui en ont deux ; les clics droits existants sont conservés ;
   - bouton **Import/Export** : exporte tous les réglages (interface, favoris, mémoires, couleurs…) dans un fichier, et les importe sur un autre ordinateur (SDRLink redémarre, anciens réglages gardés dans settings.avant-import.ini).

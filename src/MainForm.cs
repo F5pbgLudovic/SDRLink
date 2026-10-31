@@ -1335,12 +1335,15 @@ namespace SDRLink
                         switch (model.Protocol)
                         {
                             case RigProtocol.Yaesu: return new YaesuRig(ss, model.FreqDigits);
-                            case RigProtocol.Yaesu817: return new Ft817Rig(ss);
+                            case RigProtocol.Yaesu817: return new Ft817Rig(ss, model.Name);
                             case RigProtocol.YaesuOld: return new YaesuOldRig(ss, model.Name);
-                            case RigProtocol.Icom: return new IcomRig(ss, civ);
+                            case RigProtocol.YaesuLegacy: return new YaesuLegacyRig(ss, model.Name);
+                            case RigProtocol.Yaesu767: return new Ft767Rig(ss);
+                            case RigProtocol.YaesuWriteOnly: return new YaesuWriteOnlyRig(ss, model.Name);
+                            case RigProtocol.Icom: return new IcomRig(ss, civ, model.ShortFreq ? 4 : 5);
                             // Gain BF Elecraft : 000-250, sauf K4 : 000-060 (Hamlib).
                             case RigProtocol.Elecraft: return new KenwoodRig(ss, true) { AfMax = model.Name == "K4" ? 60 : 250 };
-                            default: return new KenwoodRig(ss, false);
+                            default: return new KenwoodRig(ss, false) { NoTx = model.NoTx };
                         }
                     };
                     break;
