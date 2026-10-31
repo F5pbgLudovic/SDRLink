@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Δεν υπάρ�
 Invalid HRD answer	Μη έγκυρη απάντηση HRD
 HRD connection closed	Η σύνδεση HRD έκλεισε
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Δεν υπάρχει διακομιστής HRD στο {0}:{1} (ενεργοποιήστε τον διακομιστή IP στο HRD Rig Control).
+Import settings	Εισαγωγή ρυθμίσεων
+What should be imported from this file?	Τι πρέπει να εισαχθεί από αυτό το αρχείο;
+Configuration (rig, interface, display, colours, language…)	Διαμόρφωση (πομποδέκτης, διασύνδεση, εμφάνιση, χρώματα, γλώσσα…)
+WebSDR (favorites and favorite lists)	WebSDR (αγαπημένα και λίστες αγαπημένων)
+Frequency memories	Μνήμες συχνοτήτων
+Scan (setting, skipped ranges and scan profiles)	Σάρωση (ρύθμιση, περιοχές που παραλείπονται και προφίλ σάρωσης)
+ — not in the file	 — δεν υπάρχει στο αρχείο
+Favorites, memories and scan profiles already in SDRLink:	Αγαπημένα, μνήμες και προφίλ σάρωσης που υπάρχουν ήδη στο SDRLink:
+keep them and add those of the file (no duplicates)	διατήρηση και προσθήκη αυτών του αρχείου (χωρίς διπλότυπα)
+delete them and replace them with those of the file	διαγραφή τους και αντικατάσταση με αυτά του αρχείου
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Στη συνέχεια το SDRLink θα επανεκκινήσει. Οι τρέχουσες ρυθμίσεις φυλάσσονται στο settings.avant-import.ini.
+Import	Εισαγωγή
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
 Export all settings…	Εξαγωγή όλων των ρυθμίσεων…
 Import settings…	Εισαγωγή ρυθμίσεων…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Δεν είναι δυνατή η εξαγωγή τ
 Import SDRLink settings	Εισαγωγή ρυθμίσεων SDRLink
 Cannot import the settings: 	Δεν είναι δυνατή η εισαγωγή των ρυθμίσεων: 
 Import: this file does not contain SDRLink settings	Εισαγωγή: αυτό το αρχείο δεν περιέχει ρυθμίσεις SDRLink
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Όλες οι τρέχουσες ρυθμίσεις (διασύνδεση, αγαπημένα, μνήμες, χρώματα…) θα αντικατασταθούν από αυτές του αρχείου και στη συνέχεια το SDRLink θα επανεκκινηθεί.\n\nΟι τρέχουσες ρυθμίσεις διατηρούνται στο settings.avant-import.ini.\n\nΣυνέχεια;
 Button colour	Χρώμα κουμπιού
 RIG	TRX
 Disconnected	Αποσυνδέθηκε
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
 Add memory	Προσθήκη μνήμης
+Current "Scan setup" setting	Τρέχουσα ρύθμιση της «Ρύθμιση σάρωσης»
 No scan while transmitting	Δεν γίνεται σάρωση κατά την εκπομπή
 Scan: set the start and end frequencies in "Scan setup"	Σάρωση: ορίστε αρχική και τελική συχνότητα στη «Ρύθμιση σάρωσης»
+Scan: all frequencies are in skipped ranges ("Scan setup")	Σάρωση: όλες οι συχνότητες βρίσκονται σε περιοχές που παραλείπονται («Ρύθμιση σάρωσης»)
 Scan: check memories in "Scan setup"	Σάρωση: επιλέξτε μνήμες στη «Ρύθμιση σάρωσης»
 Scan stopped	Η σάρωση σταμάτησε
 ■ Stop scan	■ Διακοπή σάρωσης
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Συνδέθηκε, αναμονή για το
 Rig online	Πομποδέκτης σε σύνδεση
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Ο πομποδέκτης δεν απαντά (ελέγξτε θύρα, ταχύτητα, διεύθυνση CI-V, μενού CAT)
 Error: 	Σφάλμα: 
+frequencies not set	δεν έχουν οριστεί συχνότητες
+Profile:	Προφίλ:
+Rename	Μετονομασία
 Scan type:	Τύπος σάρωσης:
 Frequencies	Συχνότητες
 Start (kHz):	Αρχή (kHz):
 End (kHz):	Τέλος (kHz):
 Time on each frequency:	Χρόνος σε κάθε συχνότητα:
+Skipped ranges (from … to … kHz):	Περιοχές που παραλείπονται (από … έως … kHz):
++ Skipped range	+ Περιοχή που παραλείπεται
 Memories to scan:	Μνήμες για σάρωση:
 Time on each memory:	Χρόνος σε κάθε μνήμη:
 (no memory: Memories button)	(καμία μνήμη: κουμπί Μνήμες)
 Reset	Επαναφορά
 Start scan	Έναρξη σάρωσης
+from	από
+to	έως
+First type a profile name in the "Profile" box.	Πληκτρολογήστε πρώτα ένα όνομα προφίλ στο πεδίο «Προφίλ».
+First choose a profile in the list, then type its new name in the box and click Rename.	Επιλέξτε πρώτα ένα προφίλ από τη λίστα, πληκτρολογήστε το νέο του όνομα στο πεδίο και πατήστε Μετονομασία.
+Choose in the list the profile to delete.	Επιλέξτε από τη λίστα το προφίλ που θα διαγραφεί.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Δώστε διαφορετική αρχική και τελική συχνότητα σε kHz (π.χ. 7000 και 7200).
+All frequencies from start to end are in skipped ranges.	Όλες οι συχνότητες από την αρχή ως το τέλος βρίσκονται σε περιοχές που παραλείπονται.
 Check at least one memory to scan.	Επιλέξτε τουλάχιστον μία μνήμη για σάρωση.
+memories: {0}, {1}	μνήμες: {0}, {1}
+skipped ranges: {0}	περιοχές που παραλείπονται: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Αντικατάσταση του προφίλ «{0}» με τις ρυθμίσεις που εμφανίζονται;
+{0} profiles at most: delete one first.	Το πολύ {0} προφίλ: διαγράψτε πρώτα ένα.
+The profile "{0}" already exists.	Το προφίλ «{0}» υπάρχει ήδη.
+Delete the profile "{0}"?	Διαγραφή του προφίλ «{0}»;
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Περιοχή που παραλείπεται αρ. {0}: δώστε δύο συχνότητες σε kHz (π.χ. 7097 και 7103).
 No TCI server at 	Δεν υπάρχει διακομιστής TCI στο 
 TCI connection lost	Η σύνδεση TCI χάθηκε
 unavailable	μη διαθέσιμο

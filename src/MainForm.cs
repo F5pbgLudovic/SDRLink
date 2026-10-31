@@ -432,7 +432,7 @@ namespace SDRLink
             row3.Controls.Add(chkNotch);
             // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
             row3.Controls.Add(Colorable("ScanSetup", Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); })));
-            btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else StartScan(); });
+            btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else if (settings.ScanProfiles.Count > 0) ShowScanMenu(); else StartScan(); });
             btnScan.Tag = Theme.Custom;
             btnScan.FlatStyle = FlatStyle.Flat;
             row3.Controls.Add(btnScan);
@@ -847,17 +847,39 @@ namespace SDRLink
                 ShowStatus(Lang.T("Import : ce fichier ne contient pas de réglages SDRLink", "Import: this file does not contain SDRLink settings"));
                 return false;
             }
-            if (ask && MessageBox.Show(this,
-                    Lang.T("Tous les réglages actuels (interface, favoris, mémoires, couleurs…) vont être remplacés par ceux du fichier, puis SDRLink va redémarrer.\n\nLes réglages actuels sont gardés dans settings.avant-import.ini.\n\nContinuer ?",
-                           "All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?"),
-                    "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return false;
-            try { File.WriteAllText(Settings.PendingImportPath, text, new UTF8Encoding(false)); }
+            // Ce qu'il faut importer (cases), et si favoris, mémoires et scan importés remplacent les actuels ou s'y ajoutent.
+            bool[] take = SettingsImport.Present(text);
+            bool replace = true;
+            if (ask)
+            {
+                using (ImportDialog d = new ImportDialog(path, take))
+                {
+                    if (d.ShowDialog(this) != DialogResult.OK) return false;
+                    take = d.Take;
+                    replace = d.Replace;
+                }
+            }
+            return ImportSettingsFrom(path, text, take, replace);
+        }
+
+        // Réglages du moment enregistrés, puis mélangés avec les catégories choisies du fichier (SettingsImport.Merge).
+        bool ImportSettingsFrom(string path, string text, bool[] take, bool replace)
+        {
+            List<string> report = new List<string>();
+            try
+            {
+                SaveUiToSettings();
+                SaveWindowBounds();
+                settings.Save();
+                text = SettingsImport.Merge(File.ReadAllText(Settings.FilePath, Encoding.UTF8), text, take, replace, report);
+                File.WriteAllText(Settings.PendingImportPath, text, new UTF8Encoding(false));
+            }
             catch (Exception ex)
             {
                 ShowStatus(Lang.T("Import des réglages impossible : ", "Cannot import the settings: ") + ex.Message);
                 return false;
             }
-            Log.Write("Import des réglages : " + path + " (pris en compte au redémarrage)");
+            Log.Write("Import des réglages : " + path + " (" + string.Join(", ", report.ToArray()) + ", pris en compte au redémarrage)");
             restartApp();
             return true;
         }
@@ -3279,7 +3301,8 @@ namespace SDRLink
 
         readonly Timer scanTimer = new Timer();
         bool scanning;
-        long scanHz, scanLo, scanHi;
+        long scanHz;
+        ScanProfile scanRun;   // réglage du scan de fréquences en cours (zones non scannées comprises)
         int scanIndex;
         List<Memory> scanMems;
 
@@ -3287,21 +3310,47 @@ namespace SDRLink
         {
             DialogResult r;
             using (ScanDialog d = new ScanDialog(settings)) r = d.ShowDialog(this);
-            if (r == DialogResult.OK || r == DialogResult.Yes) settings.Save();
+            settings.Save();   // les profils enregistrés dans la fenêtre restent, même après Annuler
             if (r == DialogResult.Yes) { if (scanning) StopScan(null); StartScan(); }
         }
 
-        // Fréquences : de la plus basse à la plus haute, par pas, puis on recommence. Mémoires : les cochées, dans l'ordre.
-        // Chaque fréquence ou mémoire est gardée la durée choisie. L'émission arrête le scan.
+        // Clic sur Scan quand des profils existent : le réglage du moment ou un profil, qui devient le réglage du moment.
+        void ShowScanMenu()
+        {
+            ContextMenuStrip m = new ContextMenuStrip();
+            ToolStripMenuItem now = new ToolStripMenuItem(Lang.T("Réglage actuel de « Conf scan »", "Current \"Scan setup\" setting") + "  —  " + settings.CurrentScan("").Summary());
+            now.Font = new Font(now.Font, FontStyle.Bold);
+            now.Click += delegate { StartScan(); };
+            m.Items.Add(now);
+            m.Items.Add(new ToolStripSeparator());
+            foreach (ScanProfile p in settings.ScanProfiles)
+            {
+                ScanProfile pp = p;
+                ToolStripMenuItem it = new ToolStripMenuItem(p.Name + "  —  " + p.Summary());
+                it.Click += delegate
+                {
+                    settings.UseScan(pp);
+                    settings.Save();
+                    Log.Write("Scan : profil « " + pp.Name + " »");
+                    StartScan();
+                };
+                m.Items.Add(it);
+            }
+            m.Closed += delegate { BeginInvoke(new Action(m.Dispose)); };
+            m.Show(btnScan, new Point(0, btnScan.Height));
+        }
+
+        // Fréquences : de la plus basse à la plus haute, par pas, en sautant les zones non scannées, puis on recommence.
+        // Mémoires : les cochées, dans l'ordre. Chaque fréquence ou mémoire est gardée la durée choisie. L'émission arrête le scan.
         void StartScan()
         {
             if (Transmitting) { ShowStatus(Lang.T("Scan impossible en émission", "No scan while transmitting")); return; }
             if (settings.ScanType == 0)
             {
-                scanLo = Math.Min(settings.ScanStartHz, settings.ScanEndHz);
-                scanHi = Math.Max(settings.ScanStartHz, settings.ScanEndHz);
-                if (scanLo <= 0 || scanLo == scanHi) { ShowStatus(Lang.T("Scan : indiquez les fréquences de début et de fin dans « Conf scan »", "Scan: set the start and end frequencies in \"Scan setup\"")); return; }
-                scanHz = scanLo;
+                scanRun = settings.CurrentScan("");
+                if (scanRun.Lo <= 0 || scanRun.Lo == scanRun.Hi) { ShowStatus(Lang.T("Scan : indiquez les fréquences de début et de fin dans « Conf scan »", "Scan: set the start and end frequencies in \"Scan setup\"")); return; }
+                scanHz = scanRun.NextFreq(-1);
+                if (scanHz < 0) { ShowStatus(Lang.T("Scan : toutes les fréquences sont dans des zones non scannées (« Conf scan »)", "Scan: all frequencies are in skipped ranges (\"Scan setup\")")); return; }
                 scanTimer.Interval = Math.Max(1, settings.ScanFreqDwell) * 1000;
             }
             else
@@ -3312,7 +3361,9 @@ namespace SDRLink
                 scanTimer.Interval = Math.Max(1, settings.ScanMemDwell) * 1000;
             }
             scanning = true;
-            Log.Write("Scan : départ (" + (settings.ScanType == 0 ? FormatFreq(scanLo) + " à " + FormatFreq(scanHi) + ", pas " + settings.ScanStepHz + " Hz" : scanMems.Count + " mémoire(s)")
+            Log.Write("Scan : départ (" + (settings.ScanType == 0 ? FormatFreq(scanRun.Lo) + " à " + FormatFreq(scanRun.Hi) + ", pas " + settings.ScanStepHz + " Hz"
+                    + (scanRun.Skips.Count > 0 ? ", sans " + string.Join(", ", scanRun.Skips.ConvertAll(z => Memory.KHz(z[0]) + "-" + Memory.KHz(z[1]) + " kHz").ToArray()) : "")
+                    : scanMems.Count + " mémoire(s)")
                 + ", " + scanTimer.Interval / 1000 + " s)");
             ScanTune();
             scanTimer.Start();
@@ -3335,8 +3386,7 @@ namespace SDRLink
             if (Transmitting) { StopScan(Lang.T("émission", "transmitting")); return; }
             if (settings.ScanType == 0)
             {
-                scanHz += Math.Max(1, settings.ScanStepHz);
-                if (scanHz > scanHi) scanHz = scanLo;
+                scanHz = scanRun.NextFreq(scanHz);
             }
             else scanIndex = (scanIndex + 1) % scanMems.Count;
             ScanTune();

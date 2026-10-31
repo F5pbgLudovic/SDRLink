@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Na {0}:{1} ni ri
 Invalid HRD answer	Neveljaven odgovor HRD
 HRD connection closed	Povezava s HRD zaprta
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} ni strežnika HRD (omogočite strežnik IP v HRD Rig Control).
+Import settings	Uvozi nastavitve
+What should be imported from this file?	Kaj naj se uvozi iz te datoteke?
+Configuration (rig, interface, display, colours, language…)	Konfiguracija (postaja, vmesnik, prikaz, barve, jezik…)
+WebSDR (favorites and favorite lists)	WebSDR (priljubljene in seznami priljubljenih)
+Frequency memories	Frekvenčni pomnilniki
+Scan (setting, skipped ranges and scan profiles)	Iskanje (nastavitev, izpuščena območja in profili iskanja)
+ — not in the file	 — ni v datoteki
+Favorites, memories and scan profiles already in SDRLink:	Priljubljene, pomnilniki in profili iskanja, ki so že v SDRLink:
+keep them and add those of the file (no duplicates)	jih obdržati in dodati tiste iz datoteke (brez podvojitev)
+delete them and replace them with those of the file	jih izbrisati in nadomestiti s tistimi iz datoteke
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink se bo nato znova zagnal. Trenutne nastavitve se ohranijo v settings.avant-import.ini.
+Import	Uvozi
 Cannot open the log: 	Dnevnika ni mogoče odpreti: 
 Export all settings…	Izvozi vse nastavitve…
 Import settings…	Uvozi nastavitve…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Nastavitev ni mogoče izvoziti:
 Import SDRLink settings	Uvozi nastavitve SDRLink
 Cannot import the settings: 	Nastavitev ni mogoče uvoziti: 
 Import: this file does not contain SDRLink settings	Uvoz: ta datoteka ne vsebuje nastavitev SDRLink
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Vse trenutne nastavitve (vmesnik, priljubljene, pomnilniki, barve…) bodo zamenjane z nastavitvami iz datoteke, nato se bo SDRLink znova zagnal.\n\nTrenutne nastavitve ostanejo shranjene v settings.avant-import.ini.\n\nNadaljujem?
 Button colour	Barva gumba
 RIG	TRX
 Disconnected	Prekinjeno
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Vrata TCI programa ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Vrata strežnika TCI (ExpertSDR, Options > TCI):
 Add memory	Dodaj pomnilnik
+Current "Scan setup" setting	Trenutna nastavitev v »Nastavitve iskanja«
 No scan while transmitting	Med oddajanjem iskanje ni mogoče
 Scan: set the start and end frequencies in "Scan setup"	Iskanje: vnesite začetno in končno frekvenco v »Nastavitve iskanja«
+Scan: all frequencies are in skipped ranges ("Scan setup")	Iskanje: vse frekvence so v izpuščenih območjih (»Nastavitve iskanja«)
 Scan: check memories in "Scan setup"	Iskanje: označite pomnilnike v »Nastavitve iskanja«
 Scan stopped	Iskanje ustavljeno
 ■ Stop scan	■ Ustavi iskanje
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Povezano, čakanje na postajo...
 Rig online	Postaja povezana
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Postaja se ne odziva (preverite vrata, hitrost, naslov CI-V, meni CAT)
 Error: 	Napaka: 
+frequencies not set	frekvence niso nastavljene
+Profile:	Profil:
+Rename	Preimenuj
 Scan type:	Vrsta iskanja:
 Frequencies	Frekvence
 Start (kHz):	Začetek (kHz):
 End (kHz):	Konec (kHz):
 Time on each frequency:	Čas na vsaki frekvenci:
+Skipped ranges (from … to … kHz):	Izpuščena območja (od … do … kHz):
++ Skipped range	+ Izpuščeno območje
 Memories to scan:	Pomnilniki za iskanje:
 Time on each memory:	Čas na vsakem pomnilniku:
 (no memory: Memories button)	(ni pomnilnikov: gumb Pomnilniki)
 Reset	Ponastavi
 Start scan	Začni iskanje
+from	od
+to	do
+First type a profile name in the "Profile" box.	Najprej vpišite ime profila v polje »Profil«.
+First choose a profile in the list, then type its new name in the box and click Rename.	Najprej na seznamu izberite profil, nato v polje vpišite njegovo novo ime in kliknite Preimenuj.
+Choose in the list the profile to delete.	Na seznamu izberite profil, ki ga želite izbrisati.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Vnesite različni začetno in končno frekvenco v kHz (npr. 7000 in 7200).
+All frequencies from start to end are in skipped ranges.	Vse frekvence od začetka do konca so v izpuščenih območjih.
 Check at least one memory to scan.	Označite vsaj en pomnilnik za iskanje.
+memories: {0}, {1}	pomnilniki: {0}, {1}
+skipped ranges: {0}	izpuščena območja: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Zamenjam profil »{0}« s prikazanimi nastavitvami?
+{0} profiles at most: delete one first.	Največ {0} profilov: najprej izbrišite enega.
+The profile "{0}" already exists.	Profil »{0}« že obstaja.
+Delete the profile "{0}"?	Izbrišem profil »{0}«?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Izpuščeno območje št. {0}: vnesite dve frekvenci v kHz (npr. 7097 in 7103).
 No TCI server at 	Ni strežnika TCI na 
 TCI connection lost	Povezava TCI izgubljena
 unavailable	ni na voljo

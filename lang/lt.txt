@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nėra rigctld ad
 Invalid HRD answer	Netinkamas HRD atsakymas
 HRD connection closed	HRD ryšys uždarytas
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nėra HRD serverio adresu {0}:{1} (įjunkite IP serverį programoje HRD Rig Control).
+Import settings	Importuoti nustatymus
+What should be imported from this file?	Ką importuoti iš šio failo?
+Configuration (rig, interface, display, colours, language…)	Konfigūracija (radijo stotis, sąsaja, rodinys, spalvos, kalba…)
+WebSDR (favorites and favorite lists)	WebSDR (mėgstamiausi ir jų sąrašai)
+Frequency memories	Dažnių atmintys
+Scan (setting, skipped ranges and scan profiles)	Skenavimas (nustatymas, praleidžiami ruožai ir skenavimo profiliai)
+ — not in the file	 — faile nėra
+Favorites, memories and scan profiles already in SDRLink:	Mėgstamiausi, atmintys ir skenavimo profiliai, jau esantys SDRLink:
+keep them and add those of the file (no duplicates)	palikti juos ir pridėti failo duomenis (be dublikatų)
+delete them and replace them with those of the file	ištrinti juos ir pakeisti failo duomenimis
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Tada SDRLink bus paleista iš naujo. Dabartiniai nustatymai išsaugomi faile settings.avant-import.ini.
+Import	Importuoti
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
 Export all settings…	Eksportuoti visus nustatymus…
 Import settings…	Importuoti nustatymus…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Nepavyko eksportuoti nustatymų:
 Import SDRLink settings	Importuoti SDRLink nustatymus
 Cannot import the settings: 	Nepavyko importuoti nustatymų: 
 Import: this file does not contain SDRLink settings	Importas: šiame faile nėra SDRLink nustatymų
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Visi dabartiniai nustatymai (sąsaja, mėgstami, atmintys, spalvos…) bus pakeisti failo nustatymais, tada SDRLink bus paleistas iš naujo.\n\nDabartiniai nustatymai išsaugomi faile settings.avant-import.ini.\n\nTęsti?
 Button colour	Mygtuko spalva
 RIG	STOTIS
 Disconnected	Atsijungta
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR TCI prievadas
 TCI server port (ExpertSDR, Options > TCI):	TCI serverio prievadas (ExpertSDR, Options > TCI):
 Add memory	Pridėti atmintį
+Current "Scan setup" setting	Dabartinis nustatymas lange „Skenavimo nustatymai“
 No scan while transmitting	Siunčiant skenuoti negalima
 Scan: set the start and end frequencies in "Scan setup"	Skenavimas: nurodykite pradžios ir pabaigos dažnius lange „Skenavimo nustatymai“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skenavimas: visi dažniai yra praleidžiamuose ruožuose („Skenavimo nustatymai“)
 Scan: check memories in "Scan setup"	Skenavimas: pažymėkite atmintis lange „Skenavimo nustatymai“
 Scan stopped	Skenavimas sustabdytas
 ■ Stop scan	■ Stabdyti skenavimą
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Prisijungta, laukiama stoties...
 Rig online	Stotis prisijungusi
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stotis neatsako (patikrinkite prievadą, spartą, CI-V adresą, CAT meniu)
 Error: 	Klaida: 
+frequencies not set	dažniai nenustatyti
+Profile:	Profilis:
+Rename	Pervardyti
 Scan type:	Skenavimo tipas:
 Frequencies	Dažniai
 Start (kHz):	Pradžia (kHz):
 End (kHz):	Pabaiga (kHz):
 Time on each frequency:	Laikas kiekviename dažnyje:
+Skipped ranges (from … to … kHz):	Praleidžiami ruožai (nuo … iki … kHz):
++ Skipped range	+ Praleidžiamas ruožas
 Memories to scan:	Skenuojamos atmintys:
 Time on each memory:	Laikas kiekvienoje atmintyje:
 (no memory: Memories button)	(atminčių nėra: mygtukas Atmintys)
 Reset	Atkurti
 Start scan	Pradėti skenavimą
+from	nuo
+to	iki
+First type a profile name in the "Profile" box.	Pirmiausia laukelyje „Profilis“ įveskite profilio pavadinimą.
+First choose a profile in the list, then type its new name in the box and click Rename.	Pirmiausia sąraše pasirinkite profilį, tada laukelyje įveskite naują jo pavadinimą ir spustelėkite Pervardyti.
+Choose in the list the profile to delete.	Sąraše pasirinkite profilį, kurį norite ištrinti.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Nurodykite skirtingus pradžios ir pabaigos dažnius kHz (pvz., 7000 ir 7200).
+All frequencies from start to end are in skipped ranges.	Visi dažniai nuo pradžios iki pabaigos yra praleidžiamuose ruožuose.
 Check at least one memory to scan.	Pažymėkite bent vieną skenuojamą atmintį.
+memories: {0}, {1}	atmintys: {0}, {1}
+skipped ranges: {0}	praleidžiami ruožai: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Pakeisti profilį „{0}“ rodomais nustatymais?
+{0} profiles at most: delete one first.	Daugiausia {0} profilių: pirmiausia ištrinkite vieną.
+The profile "{0}" already exists.	Profilis „{0}“ jau yra.
+Delete the profile "{0}"?	Ištrinti profilį „{0}“?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Praleidžiamas ruožas Nr. {0}: įveskite du dažnius kHz (pvz., 7097 ir 7103).
 No TCI server at 	Nėra TCI serverio adresu 
 TCI connection lost	TCI ryšys nutrūko
 unavailable	nepasiekiama

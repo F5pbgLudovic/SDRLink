@@ -39,6 +39,8 @@ namespace SDRLink
         public long ScanStartHz, ScanEndHz;
         public long ScanStepHz = 1000;
         public int ScanFreqDwell = 5, ScanMemDwell = 5;
+        public List<long[]> ScanSkips = new List<long[]>();              // zones non scannées du scan de fréquences (10 au plus)
+        public List<ScanProfile> ScanProfiles = new List<ScanProfile>(); // profils de scan nommés (10 au plus)
         public string RecFolder = "";      // dossier des enregistrements (bouton REC), vide = Musique\SDRLink
         // Carte son du poste (entrée Windows) enregistrée par REC quand seul le poste est écouté ; vide = aucune.
         public string RecCardId = "", RecCardName = "";
@@ -170,6 +172,8 @@ namespace SDRLink
                     case "ScanStep": { long st; if (long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out st) && st > 0) s.ScanStepHz = st; } break;
                     case "ScanFreqDwell": s.ScanFreqDwell = Math.Max(1, Int(v, 5)); break;
                     case "ScanMemDwell": s.ScanMemDwell = Math.Max(1, Int(v, 5)); break;
+                    case "ScanSkip": { long[] z = ScanProfile.ParseSkip(v); if (z != null && s.ScanSkips.Count < ScanProfile.MaxSkips) s.ScanSkips.Add(z); } break;
+                    case "ScanProfile": { ScanProfile p = ScanProfile.FromSetting(v); if (p != null && s.ScanProfiles.Count < ScanProfile.MaxProfiles) s.ScanProfiles.Add(p); } break;
                     case "RecFolder": s.RecFolder = v; break;
                     case "RecCardId": s.RecCardId = v; break;
                     case "RecCardName": s.RecCardName = v; break;
@@ -281,6 +285,8 @@ namespace SDRLink
             Line(sb, "ScanStep", ScanStepHz);
             Line(sb, "ScanFreqDwell", ScanFreqDwell);
             Line(sb, "ScanMemDwell", ScanMemDwell);
+            foreach (long[] z in ScanSkips) Line(sb, "ScanSkip", ScanProfile.SkipText(z));
+            foreach (ScanProfile p in ScanProfiles) Line(sb, "ScanProfile", p.ToSetting());
             Line(sb, "RecFolder", RecFolder);
             Line(sb, "RecCardId", RecCardId);
             Line(sb, "RecCardName", RecCardName);
@@ -325,6 +331,30 @@ namespace SDRLink
             foreach (Favorite f in Favorites) Line(sb, "Fav", f.ToSetting());
             foreach (string f in FreqHistory) Line(sb, "Freq", f);
             try { File.WriteAllText(FilePath, sb.ToString(), Encoding.UTF8); } catch { }
+        }
+
+        // Réglage de scan du moment, sous forme de profil (mémoires cochées comprises).
+        public ScanProfile CurrentScan(string name)
+        {
+            ScanProfile p = new ScanProfile { Name = name, Type = ScanType, StartHz = ScanStartHz, EndHz = ScanEndHz, StepHz = ScanStepHz,
+                                              FreqDwell = ScanFreqDwell, MemDwell = ScanMemDwell };
+            foreach (long[] z in ScanSkips) p.Skips.Add(new long[] { z[0], z[1] });
+            foreach (Memory m in Memories.Items) if (m.Scan) p.Mems.Add(ScanProfile.MemKey(m));
+            return p;
+        }
+
+        // Le profil devient le réglage de scan du moment (les mémoires qu'il ne cite pas sont décochées).
+        public void UseScan(ScanProfile p)
+        {
+            ScanType = p.Type;
+            ScanStartHz = p.StartHz;
+            ScanEndHz = p.EndHz;
+            ScanStepHz = p.StepHz;
+            ScanFreqDwell = p.FreqDwell;
+            ScanMemDwell = p.MemDwell;
+            ScanSkips.Clear();
+            foreach (long[] z in p.Skips) ScanSkips.Add(new long[] { z[0], z[1] });
+            foreach (Memory m in Memories.Items) m.Scan = p.Mems.Contains(ScanProfile.MemKey(m));
         }
 
         static void Line(StringBuilder sb, string k, object v)

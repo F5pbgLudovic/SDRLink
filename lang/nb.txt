@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Ingen rigctld p�
 Invalid HRD answer	Ugyldig HRD-svar
 HRD connection closed	HRD-tilkobling lukket
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktiver IP-serveren i HRD Rig Control).
+Import settings	Importer innstillinger
+What should be imported from this file?	Hva skal importeres fra denne filen?
+Configuration (rig, interface, display, colours, language…)	Konfigurasjon (radio, grensesnitt, visning, farger, språk…)
+WebSDR (favorites and favorite lists)	WebSDR (favoritter og favorittlister)
+Frequency memories	Frekvensminner
+Scan (setting, skipped ranges and scan profiles)	Skanning (innstilling, områder som hoppes over og skanneprofiler)
+ — not in the file	 — finnes ikke i filen
+Favorites, memories and scan profiles already in SDRLink:	Favoritter, minner og skanneprofiler som allerede finnes i SDRLink:
+keep them and add those of the file (no duplicates)	beholde dem og legge til filens (uten duplikater)
+delete them and replace them with those of the file	slette dem og erstatte dem med filens
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink starter deretter på nytt. De nåværende innstillingene tas vare på i settings.avant-import.ini.
+Import	Importer
 Cannot open the log: 	Kan ikke åpne loggen: 
 Export all settings…	Eksporter alle innstillinger…
 Import settings…	Importer innstillinger…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Kan ikke eksportere innstillingene:
 Import SDRLink settings	Importer SDRLink-innstillinger
 Cannot import the settings: 	Kan ikke importere innstillingene: 
 Import: this file does not contain SDRLink settings	Import: denne filen inneholder ingen SDRLink-innstillinger
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Alle nåværende innstillinger (grensesnitt, favoritter, minner, farger…) erstattes av dem i filen, deretter starter SDRLink på nytt.\n\nDe nåværende innstillingene lagres i settings.avant-import.ini.\n\nFortsette?
 Button colour	Knappefarge
 RIG	RIGG
 Disconnected	Frakoblet
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 Add memory	Legg til minne
+Current "Scan setup" setting	Gjeldende innstilling i «Skanneoppsett»
 No scan while transmitting	Ingen skanning under sending
 Scan: set the start and end frequencies in "Scan setup"	Skanning: angi start- og sluttfrekvens i «Skanneoppsett»
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skanning: alle frekvenser ligger i områder som hoppes over («Skanneoppsett»)
 Scan: check memories in "Scan setup"	Skanning: kryss av minner i «Skanneoppsett»
 Scan stopped	Skanning stoppet
 ■ Stop scan	■ Stopp skanning
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Tilkoblet, venter på riggen...
 Rig online	Riggen er tilkoblet
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Riggen svarer ikke (kontroller port, baudrate, CI-V-adresse, CAT-meny)
 Error: 	Feil: 
+frequencies not set	frekvenser ikke angitt
+Profile:	Profil:
+Rename	Gi nytt navn
 Scan type:	Skannetype:
 Frequencies	Frekvenser
 Start (kHz):	Start (kHz):
 End (kHz):	Slutt (kHz):
 Time on each frequency:	Tid på hver frekvens:
+Skipped ranges (from … to … kHz):	Områder som hoppes over (fra … til … kHz):
++ Skipped range	+ Område som hoppes over
 Memories to scan:	Minner som skal skannes:
 Time on each memory:	Tid på hvert minne:
 (no memory: Memories button)	(ingen minner: knappen Minner)
 Reset	Tilbakestill
 Start scan	Start skanning
+from	fra
+to	til
+First type a profile name in the "Profile" box.	Skriv først et profilnavn i feltet «Profil».
+First choose a profile in the list, then type its new name in the box and click Rename.	Velg først en profil i listen, skriv deretter det nye navnet i feltet og klikk på Gi nytt navn.
+Choose in the list the profile to delete.	Velg profilen som skal slettes, i listen.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Angi ulike start- og sluttfrekvenser i kHz (f.eks. 7000 og 7200).
+All frequencies from start to end are in skipped ranges.	Alle frekvenser fra start til slutt ligger i områder som hoppes over.
 Check at least one memory to scan.	Kryss av minst ett minne som skal skannes.
+memories: {0}, {1}	minner: {0}, {1}
+skipped ranges: {0}	områder som hoppes over: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Erstatte profilen «{0}» med innstillingene som vises?
+{0} profiles at most: delete one first.	Høyst {0} profiler: slett en først.
+The profile "{0}" already exists.	Profilen «{0}» finnes allerede.
+Delete the profile "{0}"?	Slette profilen «{0}»?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Område nr. {0} som hoppes over: angi to frekvenser i kHz (f.eks. 7097 og 7103).
 No TCI server at 	Ingen TCI-server på 
 TCI connection lost	TCI-tilkobling brutt
 unavailable	utilgjengelig

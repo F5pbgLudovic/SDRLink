@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Няма rigctld
 Invalid HRD answer	Невалиден отговор от HRD
 HRD connection closed	Връзката с HRD е затворена
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Няма HRD сървър на {0}:{1} (включете IP сървъра в HRD Rig Control).
+Import settings	Импортиране на настройки
+What should be imported from this file?	Какво да се импортира от този файл?
+Configuration (rig, interface, display, colours, language…)	Конфигурация (радиостанция, интерфейс, изглед, цветове, език…)
+WebSDR (favorites and favorite lists)	WebSDR (любими и списъци с любими)
+Frequency memories	Памети на честоти
+Scan (setting, skipped ranges and scan profiles)	Сканиране (настройка, пропуснати обхвати и профили за сканиране)
+ — not in the file	 — липсва във файла
+Favorites, memories and scan profiles already in SDRLink:	Любими, памети и профили за сканиране, които вече са в SDRLink:
+keep them and add those of the file (no duplicates)	да се запазят и към тях да се добавят тези от файла (без дубликати)
+delete them and replace them with those of the file	да се изтрият и заменят с тези от файла
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	След това SDRLink ще се рестартира. Текущите настройки се запазват в settings.avant-import.ini.
+Import	Импортиране
 Cannot open the log: 	Дневникът не може да се отвори: 
 Export all settings…	Експортиране на всички настройки…
 Import settings…	Импортиране на настройки…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Настройките не могат да бъд�
 Import SDRLink settings	Импортиране на настройки на SDRLink
 Cannot import the settings: 	Настройките не могат да бъдат импортирани: 
 Import: this file does not contain SDRLink settings	Импортиране: този файл не съдържа настройки на SDRLink
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Всички текущи настройки (интерфейс, любими, памети, цветове…) ще бъдат заменени с тези от файла, след което SDRLink ще се рестартира.\n\nТекущите настройки се запазват в settings.avant-import.ini.\n\nПродължаване?
 Button colour	Цвят на бутона
 RIG	РАДИО
 Disconnected	Няма връзка
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI порт на ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Порт на TCI сървъра (ExpertSDR, Options > TCI):
 Add memory	Добавяне на памет
+Current "Scan setup" setting	Текуща настройка в „Настройка на сканирането“
 No scan while transmitting	Не може да се сканира по време на предаване
 Scan: set the start and end frequencies in "Scan setup"	Сканиране: задайте началната и крайната честота в „Настройка на сканирането“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Сканиране: всички честоти са в пропуснати обхвати („Настройка на сканирането“)
 Scan: check memories in "Scan setup"	Сканиране: отметнете памети в „Настройка на сканирането“
 Scan stopped	Сканирането е спряно
 ■ Stop scan	■ Спиране на сканирането
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Свързан, изчакване на тра
 Rig online	Трансивърът е на линия
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Трансивърът не отговаря (проверете порта, скоростта, CI-V адреса, менюто CAT)
 Error: 	Грешка: 
+frequencies not set	честотите не са зададени
+Profile:	Профил:
+Rename	Преименувай
 Scan type:	Вид сканиране:
 Frequencies	Честоти
 Start (kHz):	Начало (kHz):
 End (kHz):	Край (kHz):
 Time on each frequency:	Време на всяка честота:
+Skipped ranges (from … to … kHz):	Пропуснати обхвати (от … до … kHz):
++ Skipped range	+ Пропуснат обхват
 Memories to scan:	Памети за сканиране:
 Time on each memory:	Време на всяка памет:
 (no memory: Memories button)	(няма памети: бутон Памети)
 Reset	Нулиране
 Start scan	Старт на сканирането
+from	от
+to	до
+First type a profile name in the "Profile" box.	Първо въведете име на профил в полето „Профил“.
+First choose a profile in the list, then type its new name in the box and click Rename.	Първо изберете профил от списъка, след това въведете новото му име в полето и щракнете Преименувай.
+Choose in the list the profile to delete.	Изберете от списъка профила за изтриване.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Въведете различни начална и крайна честота в kHz (напр. 7000 и 7200).
+All frequencies from start to end are in skipped ranges.	Всички честоти от началото до края са в пропуснати обхвати.
 Check at least one memory to scan.	Отметнете поне една памет за сканиране.
+memories: {0}, {1}	памети: {0}, {1}
+skipped ranges: {0}	пропуснати обхвати: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Да се замени ли профилът „{0}“ с показаните настройки?
+{0} profiles at most: delete one first.	Най-много {0} профила: първо изтрийте един.
+The profile "{0}" already exists.	Профилът „{0}“ вече съществува.
+Delete the profile "{0}"?	Да се изтрие ли профилът „{0}“?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Пропуснат обхват № {0}: въведете две честоти в kHz (напр. 7097 и 7103).
 No TCI server at 	Няма TCI сървър на 
 TCI connection lost	Връзката с TCI е изгубена
 unavailable	недостъпно

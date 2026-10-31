@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Kein rigctld unt
 Invalid HRD answer	Ungültige HRD-Antwort
 HRD connection closed	HRD-Verbindung geschlossen
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Kein HRD-Server unter {0}:{1} (aktivieren Sie den IP-Server in HRD Rig Control).
+Import settings	Einstellungen importieren
+What should be imported from this file?	Was soll aus dieser Datei importiert werden?
+Configuration (rig, interface, display, colours, language…)	Konfiguration (Funkgerät, Schnittstelle, Anzeige, Farben, Sprache…)
+WebSDR (favorites and favorite lists)	WebSDR (Favoriten und Favoritenlisten)
+Frequency memories	Frequenzspeicher
+Scan (setting, skipped ranges and scan profiles)	Suchlauf (Einstellung, ausgelassene Bereiche und Suchlaufprofile)
+ — not in the file	 — nicht in der Datei
+Favorites, memories and scan profiles already in SDRLink:	Favoriten, Speicher und Suchlaufprofile, die bereits in SDRLink sind:
+keep them and add those of the file (no duplicates)	behalten und die der Datei hinzufügen (ohne Duplikate)
+delete them and replace them with those of the file	löschen und durch die der Datei ersetzen
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink startet anschließend neu. Die aktuellen Einstellungen bleiben in settings.avant-import.ini erhalten.
+Import	Importieren
 Cannot open the log: 	Logbuch kann nicht geöffnet werden: 
 Export all settings…	Alle Einstellungen exportieren…
 Import settings…	Einstellungen importieren…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Export der Einstellungen nicht möglich:
 Import SDRLink settings	SDRLink-Einstellungen importieren
 Cannot import the settings: 	Import der Einstellungen nicht möglich: 
 Import: this file does not contain SDRLink settings	Import: Diese Datei enthält keine SDRLink-Einstellungen
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Alle aktuellen Einstellungen (Schnittstelle, Favoriten, Speicher, Farben…) werden durch die der Datei ersetzt, danach startet SDRLink neu.\n\nDie aktuellen Einstellungen bleiben in settings.avant-import.ini erhalten.\n\nFortfahren?
 Button colour	Schaltflächenfarbe
 RIG	TRX
 Disconnected	Getrennt
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI-Port von ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-Server-Port (ExpertSDR, Options > TCI):
 Add memory	Speicher hinzufügen
+Current "Scan setup" setting	Aktuelle Einstellung von „Suchlauf einrichten“
 No scan while transmitting	Kein Suchlauf beim Senden
 Scan: set the start and end frequencies in "Scan setup"	Suchlauf: Start- und Endfrequenz unter „Suchlauf einrichten“ angeben
+Scan: all frequencies are in skipped ranges ("Scan setup")	Suchlauf: Alle Frequenzen liegen in ausgelassenen Bereichen („Suchlauf einrichten“)
 Scan: check memories in "Scan setup"	Suchlauf: Speicher unter „Suchlauf einrichten“ ankreuzen
 Scan stopped	Suchlauf beendet
 ■ Stop scan	■ Suchlauf beenden
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Verbunden, warte auf den TRX...
 Rig online	TRX online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Der TRX antwortet nicht (Port, Baudrate, CI-V-Adresse, CAT-Menü prüfen)
 Error: 	Fehler: 
+frequencies not set	Frequenzen nicht eingestellt
+Profile:	Profil:
+Rename	Umbenennen
 Scan type:	Art des Suchlaufs:
 Frequencies	Frequenzen
 Start (kHz):	Start (kHz):
 End (kHz):	Ende (kHz):
 Time on each frequency:	Dauer je Frequenz:
+Skipped ranges (from … to … kHz):	Ausgelassene Bereiche (von … bis … kHz):
++ Skipped range	+ Ausgelassener Bereich
 Memories to scan:	Zu durchlaufende Speicher:
 Time on each memory:	Dauer je Speicher:
 (no memory: Memories button)	(keine Speicher: Schaltfläche Speicher)
 Reset	Zurücksetzen
 Start scan	Suchlauf starten
+from	von
+to	bis
+First type a profile name in the "Profile" box.	Geben Sie zuerst einen Profilnamen in das Feld „Profil“ ein.
+First choose a profile in the list, then type its new name in the box and click Rename.	Wählen Sie zuerst ein Profil in der Liste, geben Sie dann den neuen Namen in das Feld ein und klicken Sie auf Umbenennen.
+Choose in the list the profile to delete.	Wählen Sie in der Liste das zu löschende Profil.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Geben Sie unterschiedliche Start- und Endfrequenzen in kHz ein (z. B. 7000 und 7200).
+All frequencies from start to end are in skipped ranges.	Alle Frequenzen von Anfang bis Ende liegen in ausgelassenen Bereichen.
 Check at least one memory to scan.	Kreuzen Sie mindestens einen Speicher an.
+memories: {0}, {1}	Speicher: {0}, {1}
+skipped ranges: {0}	ausgelassene Bereiche: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Profil „{0}“ durch die angezeigten Einstellungen ersetzen?
+{0} profiles at most: delete one first.	Höchstens {0} Profile: Löschen Sie zuerst eines.
+The profile "{0}" already exists.	Das Profil „{0}“ existiert bereits.
+Delete the profile "{0}"?	Profil „{0}“ löschen?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Ausgelassener Bereich Nr. {0}: Geben Sie zwei Frequenzen in kHz ein (z. B. 7097 und 7103).
 No TCI server at 	Kein TCI-Server unter 
 TCI connection lost	TCI-Verbindung verloren
 unavailable	nicht verfügbar

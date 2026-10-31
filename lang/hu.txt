@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nincs rigctld it
 Invalid HRD answer	Érvénytelen HRD-válasz
 HRD connection closed	A HRD-kapcsolat bezárult
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nincs HRD-szerver itt: {0}:{1} (engedélyezze az IP-szervert a HRD Rig Control programban).
+Import settings	Beállítások importálása
+What should be imported from this file?	Mit kell importálni ebből a fájlból?
+Configuration (rig, interface, display, colours, language…)	Konfiguráció (rádió, csatoló, megjelenítés, színek, nyelv…)
+WebSDR (favorites and favorite lists)	WebSDR (kedvencek és kedvenclisták)
+Frequency memories	Frekvenciamemóriák
+Scan (setting, skipped ranges and scan profiles)	Pásztázás (beállítás, kihagyott tartományok és pásztázási profilok)
+ — not in the file	 — nincs a fájlban
+Favorites, memories and scan profiles already in SDRLink:	Az SDRLinkben már meglévő kedvencek, memóriák és pásztázási profilok:
+keep them and add those of the file (no duplicates)	megtartani és hozzáadni a fájlban lévőket (ismétlődés nélkül)
+delete them and replace them with those of the file	törölni és a fájlban lévőkre cserélni
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Az SDRLink ezután újraindul. A jelenlegi beállítások a settings.avant-import.ini fájlban maradnak.
+Import	Importálás
 Cannot open the log: 	A napló nem nyitható meg: 
 Export all settings…	Összes beállítás exportálása…
 Import settings…	Beállítások importálása…
@@ -100,7 +112,6 @@ Cannot export the settings: 	A beállítások nem exportálhatók:
 Import SDRLink settings	SDRLink-beállítások importálása
 Cannot import the settings: 	A beállítások nem importálhatók: 
 Import: this file does not contain SDRLink settings	Importálás: ez a fájl nem tartalmaz SDRLink-beállításokat
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Az összes jelenlegi beállítást (interfész, kedvencek, memóriák, színek…) a fájlban lévők váltják fel, majd az SDRLink újraindul.\n\nA jelenlegi beállítások a settings.avant-import.ini fájlban maradnak meg.\n\nFolytatja?
 Button colour	Gomb színe
 RIG	RÁDIÓ
 Disconnected	Nincs kapcsolat
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
 Add memory	Memória hozzáadása
+Current "Scan setup" setting	A „Pásztázás beállítása” jelenlegi beállítása
 No scan while transmitting	Adás közben nincs pásztázás
 Scan: set the start and end frequencies in "Scan setup"	Pásztázás: adja meg a kezdő és záró frekvenciát a „Pásztázás beállítása” ablakban
+Scan: all frequencies are in skipped ranges ("Scan setup")	Pásztázás: minden frekvencia kihagyott tartományban van („Pásztázás beállítása”)
 Scan: check memories in "Scan setup"	Pásztázás: jelöljön be memóriákat a „Pásztázás beállítása” ablakban
 Scan stopped	Pásztázás leállítva
 ■ Stop scan	■ Pásztázás leállítása
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
 Rig online	Rádió online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	A rádió nem válaszol (ellenőrizze a portot, a sebességet, a CI-V címet, a CAT menüt)
 Error: 	Hiba: 
+frequencies not set	frekvenciák nincsenek beállítva
+Profile:	Profil:
+Rename	Átnevezés
 Scan type:	Pásztázás típusa:
 Frequencies	Frekvenciák
 Start (kHz):	Kezdet (kHz):
 End (kHz):	Vége (kHz):
 Time on each frequency:	Idő minden frekvencián:
+Skipped ranges (from … to … kHz):	Kihagyott tartományok (… és … kHz között):
++ Skipped range	+ Kihagyott tartomány
 Memories to scan:	Pásztázandó memóriák:
 Time on each memory:	Idő minden memórián:
 (no memory: Memories button)	(nincs memória: Memóriák gomb)
 Reset	Alaphelyzet
 Start scan	Pásztázás indítása
+from	ettől
+to	eddig
+First type a profile name in the "Profile" box.	Először írjon be egy profilnevet a „Profil” mezőbe.
+First choose a profile in the list, then type its new name in the box and click Rename.	Először válasszon egy profilt a listában, majd írja be az új nevét a mezőbe, és kattintson az Átnevezés gombra.
+Choose in the list the profile to delete.	Válassza ki a listában a törlendő profilt.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Adjon meg eltérő kezdő és záró frekvenciát kHz-ben (pl. 7000 és 7200).
+All frequencies from start to end are in skipped ranges.	A kezdettől a végéig minden frekvencia kihagyott tartományba esik.
 Check at least one memory to scan.	Jelöljön be legalább egy pásztázandó memóriát.
+memories: {0}, {1}	memóriák: {0}, {1}
+skipped ranges: {0}	kihagyott tartományok: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Lecseréli a(z) „{0}” profilt a megjelenített beállításokra?
+{0} profiles at most: delete one first.	Legfeljebb {0} profil: előbb töröljön egyet.
+The profile "{0}" already exists.	A(z) „{0}” profil már létezik.
+Delete the profile "{0}"?	Törli a(z) „{0}” profilt?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	{0}. kihagyott tartomány: adjon meg két frekvenciát kHz-ben (pl. 7097 és 7103).
 No TCI server at 	Nincs TCI-szerver itt: 
 TCI connection lost	A TCI-kapcsolat megszakadt
 unavailable	nem elérhető

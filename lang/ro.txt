@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Niciun rigctld l
 Invalid HRD answer	Răspuns HRD nevalid
 HRD connection closed	Conexiune HRD închisă
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Niciun server HRD la {0}:{1} (activați serverul IP în HRD Rig Control).
+Import settings	Importă setări
+What should be imported from this file?	Ce trebuie importat din acest fișier?
+Configuration (rig, interface, display, colours, language…)	Configurație (stație, interfață, afișare, culori, limbă…)
+WebSDR (favorites and favorite lists)	WebSDR (favorite și liste de favorite)
+Frequency memories	Memorii de frecvențe
+Scan (setting, skipped ranges and scan profiles)	Scanare (setare, intervale omise și profiluri de scanare)
+ — not in the file	 — lipsește din fișier
+Favorites, memories and scan profiles already in SDRLink:	Favorite, memorii și profiluri de scanare deja existente în SDRLink:
+keep them and add those of the file (no duplicates)	păstrați-le și adăugați-le pe cele din fișier (fără dubluri)
+delete them and replace them with those of the file	ștergeți-le și înlocuiți-le cu cele din fișier
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink va reporni apoi. Setările actuale sunt păstrate în settings.avant-import.ini.
+Import	Importă
 Cannot open the log: 	Nu se poate deschide jurnalul: 
 Export all settings…	Exportă toate setările…
 Import settings…	Importă setări…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Setările nu pot fi exportate:
 Import SDRLink settings	Importă setări SDRLink
 Cannot import the settings: 	Setările nu pot fi importate: 
 Import: this file does not contain SDRLink settings	Import: acest fișier nu conține setări SDRLink
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Toate setările actuale (interfață, favorite, memorii, culori…) vor fi înlocuite cu cele din fișier, apoi SDRLink va reporni.\n\nSetările actuale sunt păstrate în settings.avant-import.ini.\n\nContinuați?
 Button colour	Culoarea butonului
 RIG	STAȚIE
 Disconnected	Deconectat
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Portul TCI al ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Portul serverului TCI (ExpertSDR, Options > TCI):
 Add memory	Adaugă memorie
+Current "Scan setup" setting	Setarea actuală din „Configurare scanare”
 No scan while transmitting	Nu se poate scana în timpul emisiei
 Scan: set the start and end frequencies in "Scan setup"	Scanare: indicați frecvențele de început și de sfârșit în „Configurare scanare”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Scanare: toate frecvențele sunt în intervale omise („Configurare scanare”)
 Scan: check memories in "Scan setup"	Scanare: bifați memorii în „Configurare scanare”
 Scan stopped	Scanare oprită
 ■ Stop scan	■ Oprește scanarea
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Conectat, se așteaptă stația...
 Rig online	Stație online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stația nu răspunde (verificați portul, viteza, adresa CI-V, meniul CAT)
 Error: 	Eroare: 
+frequencies not set	frecvențe nesetate
+Profile:	Profil:
+Rename	Redenumire
 Scan type:	Tip de scanare:
 Frequencies	Frecvențe
 Start (kHz):	Început (kHz):
 End (kHz):	Sfârșit (kHz):
 Time on each frequency:	Timp pe fiecare frecvență:
+Skipped ranges (from … to … kHz):	Intervale omise (de la … la … kHz):
++ Skipped range	+ Interval omis
 Memories to scan:	Memorii de scanat:
 Time on each memory:	Timp pe fiecare memorie:
 (no memory: Memories button)	(nicio memorie: butonul Memorii)
 Reset	Resetare
 Start scan	Pornește scanarea
+from	de la
+to	la
+First type a profile name in the "Profile" box.	Scrieți mai întâi un nume de profil în caseta „Profil”.
+First choose a profile in the list, then type its new name in the box and click Rename.	Alegeți mai întâi un profil din listă, apoi scrieți noul nume în casetă și faceți clic pe Redenumire.
+Choose in the list the profile to delete.	Alegeți din listă profilul de șters.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Indicați frecvențe de început și de sfârșit diferite, în kHz (de ex. 7000 și 7200).
+All frequencies from start to end are in skipped ranges.	Toate frecvențele de la început la sfârșit sunt în intervale omise.
 Check at least one memory to scan.	Bifați cel puțin o memorie de scanat.
+memories: {0}, {1}	memorii: {0}, {1}
+skipped ranges: {0}	intervale omise: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Înlocuiți profilul „{0}” cu setările afișate?
+{0} profiles at most: delete one first.	Cel mult {0} profiluri: ștergeți mai întâi unul.
+The profile "{0}" already exists.	Profilul „{0}” există deja.
+Delete the profile "{0}"?	Ștergeți profilul „{0}”?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Intervalul omis nr. {0}: indicați două frecvențe în kHz (de ex. 7097 și 7103).
 No TCI server at 	Niciun server TCI la 
 TCI connection lost	Conexiune TCI pierdută
 unavailable	indisponibil

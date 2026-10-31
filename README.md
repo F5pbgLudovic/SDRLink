@@ -1,4 +1,4 @@
-# SDRLink V1.15 — @F5PBG 2026
+# SDRLink V1.16 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -10,7 +10,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - bouton ⇄ qui passe le son d'une réception à l'autre (WebSDR, poste, ExpertSDR, HDSDR), deux réceptions pouvant être laissées de côté ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
   - mémoires de fréquences nommées, en listes, avec les 20 dernières utilisées ;
-  - scan de fréquences ou de mémoires ;
+  - scan de fréquences (avec jusqu'à 10 zones non scannées) ou de mémoires, jusqu'à 10 profils de scan nommés ;
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, couleur et largeur réglables ;
   - affichages réduit, mini et ptt (bouton PTT seul) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de la France ;
@@ -18,7 +18,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
   - interface en 23 langues européennes ;
   - mode sombre, palette, couleur de chaque bouton au choix (clic droit) et taille du texte réglable ;
-  - vérification des mises à jour au démarrage, import/export de tous les réglages vers un autre ordinateur ;
+  - vérification des mises à jour au démarrage, import/export de tous les réglages vers un autre ordinateur, avec import au choix (configuration, WebSDR, mémoires, scan ; ajout ou remplacement) ;
   - historique des 20 derniers messages (clic droit sur la barre d'état).
 
 ## Télécharger
@@ -51,7 +51,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - ⇄ button that switches the audio from one receiver to the next (WebSDR, rig, ExpertSDR, HDSDR), with up to two receivers left aside;
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
   - named frequency memories, in lists, with the last 20 used;
-  - frequency or memory scan;
+  - frequency scan (with up to 10 skipped ranges) or memory scan, up to 10 named scan profiles;
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, with adjustable colour and width;
   - reduced, mini and PTT (PTT button only) views;
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near France;
@@ -59,7 +59,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - SDRLINK audio cable for WSJT-X, automatic notch;
   - interface in 23 European languages (menu on the 2nd line);
   - dark mode, colour palette, colour of each button of your choice (right-click) and adjustable text size;
-  - update check at startup, import/export of all settings to another computer;
+  - update check at startup, import/export of all settings to another computer, with selective import (configuration, WebSDR, memories, scan; add or replace);
   - history of the last 20 status messages (right-click the status bar).
 
 ### Download

@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nessun rigctld s
 Invalid HRD answer	Risposta HRD non valida
 HRD connection closed	Connessione HRD chiusa
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nessun server HRD su {0}:{1} (attivare il server IP in HRD Rig Control).
+Import settings	Importa impostazioni
+What should be imported from this file?	Che cosa importare da questo file?
+Configuration (rig, interface, display, colours, language…)	Configurazione (apparato, interfaccia, visualizzazione, colori, lingua…)
+WebSDR (favorites and favorite lists)	WebSDR (preferiti ed elenchi di preferiti)
+Frequency memories	Memorie di frequenza
+Scan (setting, skipped ranges and scan profiles)	Scansione (impostazione, intervalli esclusi e profili di scansione)
+ — not in the file	 — assente nel file
+Favorites, memories and scan profiles already in SDRLink:	Preferiti, memorie e profili di scansione già presenti in SDRLink:
+keep them and add those of the file (no duplicates)	conservarli e aggiungere quelli del file (senza doppioni)
+delete them and replace them with those of the file	eliminarli e sostituirli con quelli del file
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink verrà poi riavviato. Le impostazioni attuali sono conservate in settings.avant-import.ini.
+Import	Importa
 Cannot open the log: 	Impossibile aprire il log: 
 Export all settings…	Esporta tutte le impostazioni…
 Import settings…	Importa impostazioni…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Impossibile esportare le impostazioni:
 Import SDRLink settings	Importa impostazioni SDRLink
 Cannot import the settings: 	Impossibile importare le impostazioni: 
 Import: this file does not contain SDRLink settings	Importa: questo file non contiene impostazioni SDRLink
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Tutte le impostazioni attuali (interfaccia, preferiti, memorie, colori…) saranno sostituite da quelle del file, poi SDRLink si riavvierà.\n\nLe impostazioni attuali vengono conservate in settings.avant-import.ini.\n\nContinuare?
 Button colour	Colore del pulsante
 RIG	RTX
 Disconnected	Disconnesso
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Porta TCI di ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Porta del server TCI (ExpertSDR, Options > TCI):
 Add memory	Aggiungi memoria
+Current "Scan setup" setting	Impostazione attuale di «Imposta scansione»
 No scan while transmitting	Nessuna scansione in trasmissione
 Scan: set the start and end frequencies in "Scan setup"	Scansione: indicare le frequenze di inizio e fine in «Imposta scansione»
+Scan: all frequencies are in skipped ranges ("Scan setup")	Scansione: tutte le frequenze sono in intervalli esclusi («Imposta scansione»)
 Scan: check memories in "Scan setup"	Scansione: spuntare le memorie in «Imposta scansione»
 Scan stopped	Scansione arrestata
 ■ Stop scan	■ Arresta la scansione
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Connesso, in attesa dell'RTX...
 Rig online	RTX in linea
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	L'RTX non risponde (controllare porta, velocità, indirizzo CI-V, menu CAT)
 Error: 	Errore: 
+frequencies not set	frequenze non impostate
+Profile:	Profilo:
+Rename	Rinomina
 Scan type:	Tipo di scansione:
 Frequencies	Frequenze
 Start (kHz):	Inizio (kHz):
 End (kHz):	Fine (kHz):
 Time on each frequency:	Tempo su ogni frequenza:
+Skipped ranges (from … to … kHz):	Intervalli esclusi (da … a … kHz):
++ Skipped range	+ Intervallo escluso
 Memories to scan:	Memorie da scansionare:
 Time on each memory:	Tempo su ogni memoria:
 (no memory: Memories button)	(nessuna memoria: pulsante Memorie)
 Reset	Reimposta
 Start scan	Avvia la scansione
+from	da
+to	a
+First type a profile name in the "Profile" box.	Scrivere prima un nome di profilo nella casella «Profilo».
+First choose a profile in the list, then type its new name in the box and click Rename.	Scegliere prima un profilo nell'elenco, poi scrivere il nuovo nome nella casella e fare clic su Rinomina.
+Choose in the list the profile to delete.	Scegliere nell'elenco il profilo da eliminare.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Indicare frequenze di inizio e fine diverse, in kHz (es. 7000 e 7200).
+All frequencies from start to end are in skipped ranges.	Tutte le frequenze dall'inizio alla fine sono in intervalli esclusi.
 Check at least one memory to scan.	Spuntare almeno una memoria da scansionare.
+memories: {0}, {1}	memorie: {0}, {1}
+skipped ranges: {0}	intervalli esclusi: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Sostituire il profilo «{0}» con le impostazioni visualizzate?
+{0} profiles at most: delete one first.	Al massimo {0} profili: eliminarne prima uno.
+The profile "{0}" already exists.	Il profilo «{0}» esiste già.
+Delete the profile "{0}"?	Eliminare il profilo «{0}»?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Intervallo escluso n. {0}: indicare due frequenze in kHz (ad es. 7097 e 7103).
 No TCI server at 	Nessun server TCI su 
 TCI connection lost	Connessione TCI persa
 unavailable	non disponibile

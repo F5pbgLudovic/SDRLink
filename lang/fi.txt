@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	rigctld ei vasta
 Invalid HRD answer	Virheellinen HRD-vastaus
 HRD connection closed	HRD-yhteys suljettu
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	HRD-palvelinta ei löydy osoitteesta {0}:{1} (ota IP-palvelin käyttöön HRD Rig Control -ohjelmassa).
+Import settings	Tuo asetukset
+What should be imported from this file?	Mitä tästä tiedostosta tuodaan?
+Configuration (rig, interface, display, colours, language…)	Kokoonpano (radio, liitäntä, näkymä, värit, kieli…)
+WebSDR (favorites and favorite lists)	WebSDR (suosikit ja suosikkiluettelot)
+Frequency memories	Taajuusmuistit
+Scan (setting, skipped ranges and scan profiles)	Pyyhkäisy (asetus, ohitettavat alueet ja pyyhkäisyprofiilit)
+ — not in the file	 — ei tiedostossa
+Favorites, memories and scan profiles already in SDRLink:	Suosikit, muistit ja pyyhkäisyprofiilit, jotka ovat jo SDRLinkissä:
+keep them and add those of the file (no duplicates)	säilytä ne ja lisää tiedoston omat (ilman kaksoiskappaleita)
+delete them and replace them with those of the file	poista ne ja korvaa tiedoston omilla
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink käynnistyy sitten uudelleen. Nykyiset asetukset säilytetään tiedostossa settings.avant-import.ini.
+Import	Tuo
 Cannot open the log: 	Lokia ei voi avata: 
 Export all settings…	Vie kaikki asetukset…
 Import settings…	Tuo asetukset…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Asetuksia ei voi viedä:
 Import SDRLink settings	Tuo SDRLink-asetukset
 Cannot import the settings: 	Asetuksia ei voi tuoda: 
 Import: this file does not contain SDRLink settings	Tuonti: tiedosto ei sisällä SDRLink-asetuksia
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Kaikki nykyiset asetukset (liitäntä, suosikit, muistit, värit…) korvataan tiedoston asetuksilla, minkä jälkeen SDRLink käynnistyy uudelleen.\n\nNykyiset asetukset säilytetään tiedostossa settings.avant-import.ini.\n\nJatketaanko?
 Button colour	Painikkeen väri
 RIG	RADIO
 Disconnected	Ei yhteyttä
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR:n TCI-portti
 TCI server port (ExpertSDR, Options > TCI):	TCI-palvelimen portti (ExpertSDR, Options > TCI):
 Add memory	Lisää muisti
+Current "Scan setup" setting	Nykyinen asetus ikkunassa "Pyyhkäisyn asetukset"
 No scan while transmitting	Ei pyyhkäisyä lähetyksen aikana
 Scan: set the start and end frequencies in "Scan setup"	Pyyhkäisy: anna alku- ja lopputaajuus kohdassa ”Pyyhkäisyn asetukset”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Pyyhkäisy: kaikki taajuudet ovat ohitettavilla alueilla ("Pyyhkäisyn asetukset")
 Scan: check memories in "Scan setup"	Pyyhkäisy: valitse muistit kohdassa ”Pyyhkäisyn asetukset”
 Scan stopped	Pyyhkäisy pysäytetty
 ■ Stop scan	■ Pysäytä pyyhkäisy
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Yhdistetty, odotetaan radiota...
 Rig online	Radio yhteydessä
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radio ei vastaa (tarkista portti, nopeus, CI-V-osoite, CAT-valikko)
 Error: 	Virhe: 
+frequencies not set	taajuuksia ei asetettu
+Profile:	Profiili:
+Rename	Nimeä uudelleen
 Scan type:	Pyyhkäisyn tyyppi:
 Frequencies	Taajuudet
 Start (kHz):	Alku (kHz):
 End (kHz):	Loppu (kHz):
 Time on each frequency:	Aika kullakin taajuudella:
+Skipped ranges (from … to … kHz):	Ohitettavat alueet (… – … kHz):
++ Skipped range	+ Ohitettava alue
 Memories to scan:	Pyyhkäistävät muistit:
 Time on each memory:	Aika kussakin muistissa:
 (no memory: Memories button)	(ei muisteja: Muistit-painike)
 Reset	Palauta
 Start scan	Aloita pyyhkäisy
+from	alkaen
+to	asti
+First type a profile name in the "Profile" box.	Kirjoita ensin profiilin nimi "Profiili"-kenttään.
+First choose a profile in the list, then type its new name in the box and click Rename.	Valitse ensin profiili luettelosta, kirjoita sitten sen uusi nimi kenttään ja napsauta Nimeä uudelleen.
+Choose in the list the profile to delete.	Valitse luettelosta poistettava profiili.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Anna eri alku- ja lopputaajuus kHz:inä (esim. 7000 ja 7200).
+All frequencies from start to end are in skipped ranges.	Kaikki taajuudet alusta loppuun ovat ohitettavilla alueilla.
 Check at least one memory to scan.	Valitse vähintään yksi pyyhkäistävä muisti.
+memories: {0}, {1}	muistit: {0}, {1}
+skipped ranges: {0}	ohitettavat alueet: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Korvataanko profiili "{0}" näytetyillä asetuksilla?
+{0} profiles at most: delete one first.	Enintään {0} profiilia: poista ensin yksi.
+The profile "{0}" already exists.	Profiili "{0}" on jo olemassa.
+Delete the profile "{0}"?	Poistetaanko profiili "{0}"?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Ohitettava alue nro {0}: anna kaksi taajuutta kHz:inä (esim. 7097 ja 7103).
 No TCI server at 	TCI-palvelinta ei löydy osoitteesta 
 TCI connection lost	TCI-yhteys katkesi
 unavailable	ei käytettävissä

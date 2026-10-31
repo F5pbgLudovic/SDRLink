@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Geen rigctld op 
 Invalid HRD answer	Ongeldig HRD-antwoord
 HRD connection closed	HRD-verbinding gesloten
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Geen HRD-server op {0}:{1} (schakel de IP-server in HRD Rig Control in).
+Import settings	Instellingen importeren
+What should be imported from this file?	Wat moet uit dit bestand worden geïmporteerd?
+Configuration (rig, interface, display, colours, language…)	Configuratie (transceiver, interface, weergave, kleuren, taal…)
+WebSDR (favorites and favorite lists)	WebSDR (favorieten en favorietenlijsten)
+Frequency memories	Frequentiegeheugens
+Scan (setting, skipped ranges and scan profiles)	Scan (instelling, overgeslagen bereiken en scanprofielen)
+ — not in the file	 — niet in het bestand
+Favorites, memories and scan profiles already in SDRLink:	Favorieten, geheugens en scanprofielen die al in SDRLink staan:
+keep them and add those of the file (no duplicates)	ze behouden en die uit het bestand toevoegen (zonder dubbele)
+delete them and replace them with those of the file	ze verwijderen en vervangen door die uit het bestand
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink wordt daarna opnieuw gestart. De huidige instellingen blijven bewaard in settings.avant-import.ini.
+Import	Importeren
 Cannot open the log: 	Kan het logboek niet openen: 
 Export all settings…	Alle instellingen exporteren…
 Import settings…	Instellingen importeren…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Exporteren van de instellingen mislukt:
 Import SDRLink settings	SDRLink-instellingen importeren
 Cannot import the settings: 	Importeren van de instellingen mislukt: 
 Import: this file does not contain SDRLink settings	Importeren: dit bestand bevat geen SDRLink-instellingen
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Alle huidige instellingen (interface, favorieten, geheugens, kleuren…) worden vervangen door die uit het bestand, daarna start SDRLink opnieuw.\n\nDe huidige instellingen worden bewaard in settings.avant-import.ini.\n\nDoorgaan?
 Button colour	Knopkleur
 RIG	TRX
 Disconnected	Niet verbonden
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI-poort van ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
 Add memory	Geheugen toevoegen
+Current "Scan setup" setting	Huidige instelling van "Scan instellen"
 No scan while transmitting	Niet scannen tijdens het zenden
 Scan: set the start and end frequencies in "Scan setup"	Scannen: geef begin- en eindfrequentie op in "Scan instellen"
+Scan: all frequencies are in skipped ranges ("Scan setup")	Scan: alle frequenties liggen in overgeslagen bereiken ("Scan instellen")
 Scan: check memories in "Scan setup"	Scannen: vink geheugens aan in "Scan instellen"
 Scan stopped	Scannen gestopt
 ■ Stop scan	■ Scannen stoppen
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Verbonden, wachten op de transceiver...
 Rig online	TRX online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	De transceiver antwoordt niet (controleer poort, baudrate, CI-V-adres, CAT-menu)
 Error: 	Fout: 
+frequencies not set	frequenties niet ingesteld
+Profile:	Profiel:
+Rename	Hernoemen
 Scan type:	Soort scan:
 Frequencies	Frequenties
 Start (kHz):	Begin (kHz):
 End (kHz):	Einde (kHz):
 Time on each frequency:	Tijd op elke frequentie:
+Skipped ranges (from … to … kHz):	Overgeslagen bereiken (van … tot … kHz):
++ Skipped range	+ Overgeslagen bereik
 Memories to scan:	Te scannen geheugens:
 Time on each memory:	Tijd op elk geheugen:
 (no memory: Memories button)	(geen geheugens: knop Geheugens)
 Reset	Herstellen
 Start scan	Scan starten
+from	van
+to	tot
+First type a profile name in the "Profile" box.	Typ eerst een profielnaam in het vak "Profiel".
+First choose a profile in the list, then type its new name in the box and click Rename.	Kies eerst een profiel in de lijst, typ dan de nieuwe naam in het vak en klik op Hernoemen.
+Choose in the list the profile to delete.	Kies in de lijst het profiel dat u wilt verwijderen.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Geef verschillende begin- en eindfrequenties in kHz op (bijv. 7000 en 7200).
+All frequencies from start to end are in skipped ranges.	Alle frequenties van begin tot eind liggen in overgeslagen bereiken.
 Check at least one memory to scan.	Vink minstens één te scannen geheugen aan.
+memories: {0}, {1}	geheugens: {0}, {1}
+skipped ranges: {0}	overgeslagen bereiken: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Profiel "{0}" vervangen door de getoonde instellingen?
+{0} profiles at most: delete one first.	Hoogstens {0} profielen: verwijder er eerst een.
+The profile "{0}" already exists.	Het profiel "{0}" bestaat al.
+Delete the profile "{0}"?	Profiel "{0}" verwijderen?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Overgeslagen bereik nr. {0}: geef twee frequenties in kHz op (bijv. 7097 en 7103).
 No TCI server at 	Geen TCI-server op 
 TCI connection lost	TCI-verbinding verbroken
 unavailable	niet beschikbaar

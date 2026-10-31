@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Aadressil {0}:{1
 Invalid HRD answer	Vigane HRD vastus
 HRD connection closed	HRD ühendus suleti
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Aadressil {0}:{1} pole HRD serverit (lubage IP-server programmis HRD Rig Control).
+Import settings	Impordi seaded
+What should be imported from this file?	Mida sellest failist importida?
+Configuration (rig, interface, display, colours, language…)	Konfiguratsioon (raadio, liides, kuva, värvid, keel…)
+WebSDR (favorites and favorite lists)	WebSDR (lemmikud ja lemmikute loendid)
+Frequency memories	Sagedusmälud
+Scan (setting, skipped ranges and scan profiles)	Skaneerimine (seadistus, vahelejäetavad vahemikud ja skaneerimisprofiilid)
+ — not in the file	 — failis puudub
+Favorites, memories and scan profiles already in SDRLink:	Lemmikud, mälud ja skaneerimisprofiilid, mis on juba SDRLinkis:
+keep them and add those of the file (no duplicates)	jätta need alles ja lisada faili omad (ilma duplikaatideta)
+delete them and replace them with those of the file	kustutada need ja asendada faili omadega
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Seejärel SDRLink taaskäivitub. Praegused seaded jäävad faili settings.avant-import.ini.
+Import	Impordi
 Cannot open the log: 	Logi ei saa avada: 
 Export all settings…	Ekspordi kõik seaded…
 Import settings…	Impordi seaded…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Seadeid ei saa eksportida:
 Import SDRLink settings	Impordi SDRLinki seaded
 Cannot import the settings: 	Seadeid ei saa importida: 
 Import: this file does not contain SDRLink settings	Import: see fail ei sisalda SDRLinki seadeid
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Kõik praegused seaded (liides, lemmikud, mälukohad, värvid…) asendatakse faili omadega, seejärel käivitub SDRLink uuesti.\n\nPraegused seaded jäävad faili settings.avant-import.ini.\n\nKas jätkata?
 Button colour	Nupu värv
 RIG	RAADIO
 Disconnected	Ühendus puudub
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR-i TCI-port
 TCI server port (ExpertSDR, Options > TCI):	TCI-serveri port (ExpertSDR, Options > TCI):
 Add memory	Lisa mälu
+Current "Scan setup" setting	Praegune seadistus aknas „Skaneerimise seaded“
 No scan while transmitting	Saate ajal ei saa skaneerida
 Scan: set the start and end frequencies in "Scan setup"	Skaneerimine: määrake alg- ja lõppsagedus jaotises „Skaneerimise seaded“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skaneerimine: kõik sagedused on vahelejäetavates vahemikes („Skaneerimise seaded“)
 Scan: check memories in "Scan setup"	Skaneerimine: märkige mälud jaotises „Skaneerimise seaded“
 Scan stopped	Skaneerimine peatatud
 ■ Stop scan	■ Peata skaneerimine
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Ühendatud, raadio ootamine...
 Rig online	Raadio võrgus
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raadio ei vasta (kontrollige porti, bodikiirust, CI-V aadressi, CAT menüüd)
 Error: 	Viga: 
+frequencies not set	sagedused määramata
+Profile:	Profiil:
+Rename	Nimeta ümber
 Scan type:	Skaneerimise tüüp:
 Frequencies	Sagedused
 Start (kHz):	Algus (kHz):
 End (kHz):	Lõpp (kHz):
 Time on each frequency:	Aeg igal sagedusel:
+Skipped ranges (from … to … kHz):	Vahelejäetavad vahemikud (… kuni … kHz):
++ Skipped range	+ Vahelejäetav vahemik
 Memories to scan:	Skaneeritavad mälud:
 Time on each memory:	Aeg igal mälul:
 (no memory: Memories button)	(mälusid pole: nupp Mälud)
 Reset	Lähtesta
 Start scan	Alusta skaneerimist
+from	alates
+to	kuni
+First type a profile name in the "Profile" box.	Kirjutage kõigepealt profiili nimi väljale „Profiil“.
+First choose a profile in the list, then type its new name in the box and click Rename.	Valige kõigepealt loendist profiil, seejärel kirjutage väljale selle uus nimi ja klõpsake Nimeta ümber.
+Choose in the list the profile to delete.	Valige loendist kustutatav profiil.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Sisestage erinevad alg- ja lõppsagedused kHz-des (nt 7000 ja 7200).
+All frequencies from start to end are in skipped ranges.	Kõik sagedused algusest lõpuni on vahelejäetavates vahemikes.
 Check at least one memory to scan.	Märkige vähemalt üks skaneeritav mälu.
+memories: {0}, {1}	mälud: {0}, {1}
+skipped ranges: {0}	vahelejäetavad vahemikud: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Kas asendada profiil „{0}“ kuvatud seadetega?
+{0} profiles at most: delete one first.	Kõige rohkem {0} profiili: kustutage kõigepealt üks.
+The profile "{0}" already exists.	Profiil „{0}“ on juba olemas.
+Delete the profile "{0}"?	Kas kustutada profiil „{0}“?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Vahelejäetav vahemik nr {0}: sisestage kaks sagedust kHz-des (nt 7097 ja 7103).
 No TCI server at 	TCI serverit pole aadressil 
 TCI connection lost	TCI ühendus katkes
 unavailable	pole saadaval

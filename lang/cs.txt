@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Na {0}:{1} nebě
 Invalid HRD answer	Neplatná odpověď HRD
 HRD connection closed	Spojení s HRD ukončeno
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Na {0}:{1} není server HRD (povolte IP server v HRD Rig Control).
+Import settings	Importovat nastavení
+What should be imported from this file?	Co se má z tohoto souboru importovat?
+Configuration (rig, interface, display, colours, language…)	Konfigurace (stanice, rozhraní, zobrazení, barvy, jazyk…)
+WebSDR (favorites and favorite lists)	WebSDR (oblíbené a seznamy oblíbených)
+Frequency memories	Kmitočtové paměti
+Scan (setting, skipped ranges and scan profiles)	Prohledávání (nastavení, vynechané úseky a profily prohledávání)
+ — not in the file	 — v souboru chybí
+Favorites, memories and scan profiles already in SDRLink:	Oblíbené, paměti a profily prohledávání, které už v SDRLink jsou:
+keep them and add those of the file (no duplicates)	ponechat je a přidat k nim ty ze souboru (bez duplicit)
+delete them and replace them with those of the file	smazat je a nahradit těmi ze souboru
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink se poté restartuje. Současné nastavení zůstane uloženo v settings.avant-import.ini.
+Import	Importovat
 Cannot open the log: 	Nelze otevřít deník: 
 Export all settings…	Exportovat všechna nastavení…
 Import settings…	Importovat nastavení…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Nastavení nelze exportovat:
 Import SDRLink settings	Importovat nastavení SDRLink
 Cannot import the settings: 	Nastavení nelze importovat: 
 Import: this file does not contain SDRLink settings	Import: tento soubor neobsahuje nastavení SDRLink
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Všechna současná nastavení (rozhraní, oblíbené, paměti, barvy…) budou nahrazena nastavením ze souboru a SDRLink se poté restartuje.\n\nSoučasná nastavení zůstanou uložena v settings.avant-import.ini.\n\nPokračovat?
 Button colour	Barva tlačítka
 RIG	TRX
 Disconnected	Odpojeno
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port serveru TCI (ExpertSDR, Options > TCI):
 Add memory	Přidat paměť
+Current "Scan setup" setting	Aktuální nastavení v „Nastavení prohledávání“
 No scan while transmitting	Při vysílání nelze prohledávat
 Scan: set the start and end frequencies in "Scan setup"	Prohledávání: nastavte počáteční a koncový kmitočet v „Nastavení prohledávání“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Prohledávání: všechny kmitočty jsou ve vynechaných úsecích („Nastavení prohledávání“)
 Scan: check memories in "Scan setup"	Prohledávání: zaškrtněte paměti v „Nastavení prohledávání“
 Scan stopped	Prohledávání zastaveno
 ■ Stop scan	■ Zastavit prohledávání
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Připojeno, čekání na transceiver...
 Rig online	Transceiver online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Transceiver neodpovídá (zkontrolujte port, rychlost, adresu CI-V, menu CAT)
 Error: 	Chyba: 
+frequencies not set	kmitočty nenastaveny
+Profile:	Profil:
+Rename	Přejmenovat
 Scan type:	Druh prohledávání:
 Frequencies	Kmitočty
 Start (kHz):	Začátek (kHz):
 End (kHz):	Konec (kHz):
 Time on each frequency:	Doba na každém kmitočtu:
+Skipped ranges (from … to … kHz):	Vynechané úseky (od … do … kHz):
++ Skipped range	+ Vynechaný úsek
 Memories to scan:	Paměti k prohledání:
 Time on each memory:	Doba na každé paměti:
 (no memory: Memories button)	(žádné paměti: tlačítko Paměti)
 Reset	Obnovit výchozí
 Start scan	Spustit prohledávání
+from	od
+to	do
+First type a profile name in the "Profile" box.	Nejprve napište název profilu do pole „Profil“.
+First choose a profile in the list, then type its new name in the box and click Rename.	Nejprve vyberte profil v seznamu, pak do pole napište jeho nový název a klikněte na Přejmenovat.
+Choose in the list the profile to delete.	Vyberte v seznamu profil, který chcete smazat.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Zadejte rozdílný počáteční a koncový kmitočet v kHz (např. 7000 a 7200).
+All frequencies from start to end are in skipped ranges.	Všechny kmitočty od začátku do konce jsou ve vynechaných úsecích.
 Check at least one memory to scan.	Zaškrtněte alespoň jednu paměť k prohledání.
+memories: {0}, {1}	paměti: {0}, {1}
+skipped ranges: {0}	vynechané úseky: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Nahradit profil „{0}“ zobrazeným nastavením?
+{0} profiles at most: delete one first.	Nejvýše {0} profilů: nejprve jeden smažte.
+The profile "{0}" already exists.	Profil „{0}“ už existuje.
+Delete the profile "{0}"?	Smazat profil „{0}“?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Vynechaný úsek č. {0}: zadejte dva kmitočty v kHz (např. 7097 a 7103).
 No TCI server at 	Žádný server TCI na 
 TCI connection lost	Spojení TCI ztraceno
 unavailable	nedostupné

@@ -396,10 +396,18 @@ Ces deux réglages sont conservés au prochain lancement.
 Sur la ligne « Synchro », après « Notch auto (DNF) » :
 - **Conf scan** : choix du type de scan.
   - **Fréquences** : fréquence de **début** et de **fin** en kHz (dans n'importe quel ordre), **pas** (100 Hz à 100 kHz), **durée** sur chaque fréquence : 1 s, 2 s, 5 s, 10 s, 30 s, 1 min, 2 min, 5 min ou 10 min. Arrivé à la fin, le scan repart du début.
+  - **Zones non scannées** (jusqu'à **10**) : bouton **+ Zone non scannée**, puis « de … à … kHz ». Les fréquences de la zone, bornes comprises, sont sautées. Exemple : début 7040, fin 7200, zone de 7097 à 7103 : avec un pas de 1 kHz, le scan passe de 7096 à 7104. Les zones n'apparaissent que si elles sont définies ; **✕** en retire une ; une ligne laissée vide est ignorée. Si toutes les fréquences sont dans des zones, le scan refuse de démarrer.
   - **Mémoires** : liste des mémoires avec une **case à cocher** pour chacune (Tout cocher / Tout décocher), et la **durée** sur chaque mémoire (mêmes choix). Le mode mémorisé est appliqué.
-  - Chaque type garde ses réglages : en repassant de Mémoires à Fréquences (ou l'inverse), les choix précédents sont toujours là. **Réinitialiser** remet à zéro le type affiché (l'autre garde les siens).
+  - Chaque type garde ses réglages : en repassant de Mémoires à Fréquences (ou l'inverse), les choix précédents sont toujours là. **Réinitialiser** remet à zéro le type affiché (l'autre garde les siens, les zones du scan de fréquences sont effacées).
   - **OK** enregistre ; **Lancer le scan** enregistre et démarre.
-- **▶ Scan** : démarre le scan configuré ; le bouton devient rouge « ■ Arrêter le scan ». La barre d'état indique la fréquence ou la mémoire en cours (sans remplir l'historique des messages).
+- **Profils de scan** (jusqu'à **10**, en haut de Conf scan) : un profil garde tout le réglage affiché (type, début, fin, pas, durées, zones non scannées, mémoires cochées).
+  - **Enregistrer** : taper un nom dans la case **Profil**, puis Enregistrer. Un nom déjà pris propose de remplacer ce profil.
+  - **Choisir un profil** dans la liste : ses réglages s'affichent (OK ou Lancer le scan les prend).
+  - **Renommer** : choisir le profil, changer son nom dans la case, puis Renommer. **Supprimer** : choisir le profil, puis Supprimer (après confirmation).
+  - Les profils sont gardés même si l'on ferme Conf scan par Annuler.
+- **▶ Scan** : démarre le scan ; le bouton devient rouge « ■ Arrêter le scan ». La barre d'état indique la fréquence ou la mémoire en cours (sans remplir l'historique des messages).
+  - Sans profil, le scan démarre tout de suite avec le réglage de Conf scan.
+  - Avec des profils, un clic ouvre une liste : **Réglage actuel de « Conf scan »** (en gras), puis chaque profil avec son résumé (par ex. « 40 m CW — 7040 – 7200 kHz, 1 kHz, 5 s, zones non scannées : 1 »). Le profil choisi devient le réglage de Conf scan et le scan démarre.
 - Le scan règle le poste et le WebSDR, comme une saisie de fréquence. Il s'arrête dès que le poste passe en **émission** (PTT de SDRLink ou du poste) ; il ne peut pas démarrer en émission.
 
 ## Enregistrement (REC)
@@ -438,8 +446,18 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 
 Bouton **Import/Export ▾** (1re ligne, après « Vérifier les mises à jour ») : pour retrouver exactement la même configuration sur un autre ordinateur, ou garder une sauvegarde. Clic droit : couleur du bouton.
 - Tous les réglages de SDRLink sont dans un seul fichier : **`%APPDATA%\SDRLink\settings.ini`** (par exemple `C:\Users\<nom>\AppData\Roaming\SDRLink\settings.ini`). Le journal `sdrlink.log` est à côté.
-- **Exporter tous les réglages…** : enregistre ce fichier où vous voulez (par défaut dans Documents, nom `SDRLink-reglages-<date>.ini`), avec l'état du moment : interface et poste (port COM, vitesse, TCI, HRD, Hamlib…), synchronisation, décalage, favoris et leurs listes, mémoires, historique des fréquences, langue, mode sombre et palette, couleurs des boutons, taille du texte, REC (dossier, carte son, couleur, largeur), câble SDRLINK, scan, volumes, taille et position de la fenêtre, etc.
-- **Importer des réglages…** : choisir un fichier exporté. Après confirmation, tous les réglages actuels sont remplacés et SDRLink redémarre avec la configuration du fichier. Les anciens réglages sont gardés dans `settings.avant-import.ini` (même dossier) : pour revenir en arrière, réimporter ce fichier.
+- **Exporter tous les réglages…** : enregistre ce fichier où vous voulez (par défaut dans Documents, nom `SDRLink-reglages-<date>.ini`), avec l'état du moment : interface et poste (port COM, vitesse, TCI, HRD, Hamlib…), synchronisation, décalage, favoris et leurs listes, mémoires, historique des fréquences, langue, mode sombre et palette, couleurs des boutons, taille du texte, REC (dossier, carte son, couleur, largeur), câble SDRLINK, scan (réglage, zones non scannées et profils de scan), volumes, taille et position de la fenêtre, etc.
+- **Importer des réglages…** : choisir un fichier exporté. Une fenêtre demande **ce qu'il faut importer**, avec une case par partie (une seule ou plusieurs) :
+  - **Configuration** (poste, interface, affichage, couleurs, langue… : tout ce qui n'est pas dans les trois cases suivantes) ;
+  - **WebSDR** (favoris, listes de favoris, dernier WebSDR ouvert, volume des WebSDR hors favoris) ;
+  - **Mémoires de fréquences** (mémoires et listes de mémoires) ;
+  - **Scan** (réglage de Conf scan, zones non scannées et profils de scan).
+  - Une partie absente du fichier est grisée (« absent du fichier »). Une partie non cochée garde les réglages actuels.
+  - Pour les favoris, les mémoires et les profils de scan déjà dans SDRLink, choisir :
+    - **les garder et y ajouter ceux du fichier** (par défaut, sans doublons : même adresse dans la même liste pour un favori, même nom, fréquence et mode pour une mémoire, profil identique pour le scan). Les listes en plus dans le fichier sont créées avec leur nom ; un profil du fichier qui porte le nom d'un autre profil est renommé « nom (2) » ; 10 profils au plus. Le réglage du moment de Conf scan ne change pas ;
+    - **les effacer et les remplacer par ceux du fichier**.
+  - La configuration cochée est toujours remplacée par celle du fichier.
+  - Puis **Importer** : SDRLink redémarre avec les réglages obtenus. Les anciens réglages sont gardés dans `settings.avant-import.ini` (même dossier) : pour revenir en arrière, réimporter ce fichier en cochant tout et en choisissant « les effacer ». Le journal indique ce qui a été ajouté.
 - Un fichier qui ne contient pas de réglages SDRLink est refusé (message dans la barre d'état).
 - Sur un autre ordinateur, vérifier ce qui dépend de la machine : port COM du poste, cartes son (câble SDRLINK, carte son du poste pour REC), chemin de rigctld, dossier des enregistrements. Une carte son du poste absente est signalée « non branchée » dans le menu de REC ; si la position de la fenêtre tombe hors des écrans, elle est ignorée.
 - Les données de navigation des pages WebSDR (cookies, cache) ne font pas partie des réglages et ne sont pas exportées.
@@ -458,6 +476,11 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.16**
+  - **Conf scan, zones non scannées** : jusqu'à 10 zones « de … à … kHz » sautées par le scan de fréquences (par ex. 7040 à 7200 sans 7097 à 7103), affichées seulement si elles sont définies ;
+  - **profils de scan** : jusqu'à 10 réglages de scan nommés (Enregistrer, Renommer, Supprimer dans Conf scan) ; avec des profils, **▶ Scan** propose le réglage actuel ou l'un des profils ;
+  - **Import** : une fenêtre demande quoi importer (cases Configuration, WebSDR, Mémoires de fréquences, Scan), et si les favoris, mémoires et profils de scan du fichier **s'ajoutent** aux actuels (sans doublons) ou les **remplacent** ;
+  - l'export contient aussi les zones non scannées et les profils de scan.
 - **1.15**
   - **HDSDR** : quand HDSDR est lancé sur le PC, **Mute HDSDR** (après les autres Mute) et **Volume HDSDR** (réglette et %) apparaissent sur la ligne de son, et disparaissent quand il est fermé. Le son est coupé et réglé par le mélangeur de volume de Windows, sans port COM supplémentaire ; HDSDR peut rester relié à HRD. ExpertSDR garde son fonctionnement et peut tourner en même temps ;
   - **⇄** permute aussi avec HDSDR ; clic droit sur ⇄ : jusqu'à **deux** coupures laissées de côté (cases à cocher), pour ne permuter qu'entre les réceptions restantes ;

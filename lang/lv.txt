@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nav rigctld adre
 Invalid HRD answer	Nederīga HRD atbilde
 HRD connection closed	HRD savienojums aizvērts
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Nav HRD servera adresē {0}:{1} (iespējojiet IP serveri programmā HRD Rig Control).
+Import settings	Importēt iestatījumus
+What should be imported from this file?	Ko importēt no šī faila?
+Configuration (rig, interface, display, colours, language…)	Konfigurācija (raidītājs, saskarne, attēlojums, krāsas, valoda…)
+WebSDR (favorites and favorite lists)	WebSDR (izlase un izlases saraksti)
+Frequency memories	Frekvenču atmiņas
+Scan (setting, skipped ranges and scan profiles)	Skenēšana (iestatījums, izlaižamie diapazoni un skenēšanas profili)
+ — not in the file	 — failā nav
+Favorites, memories and scan profiles already in SDRLink:	Izlase, atmiņas un skenēšanas profili, kas jau ir SDRLink:
+keep them and add those of the file (no duplicates)	saglabāt tos un pievienot faila datus (bez dublikātiem)
+delete them and replace them with those of the file	dzēst tos un aizstāt ar faila datiem
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Pēc tam SDRLink tiks restartēts. Pašreizējie iestatījumi tiek saglabāti failā settings.avant-import.ini.
+Import	Importēt
 Cannot open the log: 	Nevar atvērt žurnālu: 
 Export all settings…	Eksportēt visus iestatījumus…
 Import settings…	Importēt iestatījumus…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Iestatījumus nevar eksportēt:
 Import SDRLink settings	Importēt SDRLink iestatījumus
 Cannot import the settings: 	Iestatījumus nevar importēt: 
 Import: this file does not contain SDRLink settings	Imports: šajā failā nav SDRLink iestatījumu
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Visi pašreizējie iestatījumi (saskarne, izlase, atmiņas, krāsas…) tiks aizstāti ar faila iestatījumiem, pēc tam SDRLink tiks restartēts.\n\nPašreizējie iestatījumi tiek saglabāti failā settings.avant-import.ini.\n\nVai turpināt?
 Button colour	Pogas krāsa
 RIG	RADIO
 Disconnected	Atvienots
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR TCI ports
 TCI server port (ExpertSDR, Options > TCI):	TCI servera ports (ExpertSDR, Options > TCI):
 Add memory	Pievienot atmiņu
+Current "Scan setup" setting	Pašreizējais iestatījums logā „Skenēšanas iestatījumi“
 No scan while transmitting	Raidīšanas laikā skenēt nevar
 Scan: set the start and end frequencies in "Scan setup"	Skenēšana: norādiet sākuma un beigu frekvenci logā “Skenēšanas iestatījumi”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skenēšana: visas frekvences ir izlaižamajos diapazonos („Skenēšanas iestatījumi“)
 Scan: check memories in "Scan setup"	Skenēšana: atzīmējiet atmiņas logā “Skenēšanas iestatījumi”
 Scan stopped	Skenēšana apturēta
 ■ Stop scan	■ Apturēt skenēšanu
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Savienots, gaida raiduztvērēju...
 Rig online	Raiduztvērējs tiešsaistē
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raiduztvērējs neatbild (pārbaudiet portu, bodu ātrumu, CI-V adresi, CAT izvēlni)
 Error: 	Kļūda: 
+frequencies not set	frekvences nav iestatītas
+Profile:	Profils:
+Rename	Pārdēvēt
 Scan type:	Skenēšanas veids:
 Frequencies	Frekvences
 Start (kHz):	Sākums (kHz):
 End (kHz):	Beigas (kHz):
 Time on each frequency:	Laiks katrā frekvencē:
+Skipped ranges (from … to … kHz):	Izlaižamie diapazoni (no … līdz … kHz):
++ Skipped range	+ Izlaižamais diapazons
 Memories to scan:	Skenējamās atmiņas:
 Time on each memory:	Laiks katrā atmiņā:
 (no memory: Memories button)	(nav atmiņu: poga Atmiņas)
 Reset	Atiestatīt
 Start scan	Sākt skenēšanu
+from	no
+to	līdz
+First type a profile name in the "Profile" box.	Vispirms laukā „Profils“ ierakstiet profila nosaukumu.
+First choose a profile in the list, then type its new name in the box and click Rename.	Vispirms sarakstā izvēlieties profilu, tad laukā ierakstiet tā jauno nosaukumu un noklikšķiniet uz Pārdēvēt.
+Choose in the list the profile to delete.	Sarakstā izvēlieties dzēšamo profilu.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Norādiet atšķirīgas sākuma un beigu frekvences kHz (piem., 7000 un 7200).
+All frequencies from start to end are in skipped ranges.	Visas frekvences no sākuma līdz beigām ir izlaižamajos diapazonos.
 Check at least one memory to scan.	Atzīmējiet vismaz vienu skenējamu atmiņu.
+memories: {0}, {1}	atmiņas: {0}, {1}
+skipped ranges: {0}	izlaižamie diapazoni: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Aizstāt profilu „{0}“ ar parādītajiem iestatījumiem?
+{0} profiles at most: delete one first.	Ne vairāk kā {0} profili: vispirms izdzēsiet vienu.
+The profile "{0}" already exists.	Profils „{0}“ jau pastāv.
+Delete the profile "{0}"?	Dzēst profilu „{0}“?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Izlaižamais diapazons Nr. {0}: ievadiet divas frekvences kHz (piem., 7097 un 7103).
 No TCI server at 	Nav TCI servera adresē 
 TCI connection lost	TCI savienojums zaudēts
 unavailable	nav pieejams

@@ -397,10 +397,18 @@ These two settings are kept for the next launch.
 On the "Sync" row, after "Auto notch (DNF)":
 - **Scan setup**: choice of scan type.
   - **Frequencies**: **start** and **end** frequency in kHz (in any order), **step** (100 Hz to 100 kHz), **time** on each frequency: 1 s, 2 s, 5 s, 10 s, 30 s, 1 min, 2 min, 5 min or 10 min. When it reaches the end, the scan starts again from the beginning.
+  - **Skipped ranges** (up to **10**): **+ Skipped range** button, then "from … to … kHz". The frequencies of the range, limits included, are skipped. Example: start 7040, end 7200, range from 7097 to 7103: with a 1 kHz step, the scan goes from 7096 to 7104. The ranges only appear when they are defined; **✕** removes one; a line left empty is ignored. If all frequencies are in ranges, the scan refuses to start.
   - **Memories**: list of memories with a **tick box** for each (Check all / Uncheck all), and the **time** on each memory (same choices). The stored mode is applied.
-  - Each type keeps its own settings: when switching from Memories back to Frequencies (or the other way round), the previous choices are still there. **Reset** clears the type shown (the other keeps its own).
+  - Each type keeps its own settings: when switching from Memories back to Frequencies (or the other way round), the previous choices are still there. **Reset** clears the type shown (the other keeps its own; the skipped ranges of the frequency scan are cleared).
   - **OK** saves; **Start scan** saves and starts.
-- **▶ Scan**: starts the configured scan; the button turns red, "■ Stop scan". The status bar shows the current frequency or memory (without filling the message history).
+- **Scan profiles** (up to **10**, at the top of Scan setup): a profile keeps the whole setting shown (type, start, end, step, times, skipped ranges, ticked memories).
+  - **Save**: type a name in the **Profile** box, then Save. A name already used offers to replace that profile.
+  - **Choose a profile** in the list: its settings are shown (OK or Start scan takes them).
+  - **Rename**: choose the profile, change its name in the box, then Rename. **Delete**: choose the profile, then Delete (after confirmation).
+  - Profiles are kept even if Scan setup is closed with Cancel.
+- **▶ Scan**: starts the scan; the button turns red, "■ Stop scan". The status bar shows the current frequency or memory (without filling the message history).
+  - Without profiles, the scan starts at once with the Scan setup setting.
+  - With profiles, a click opens a list: **Current "Scan setup" setting** (in bold), then each profile with its summary (e.g. "40 m CW — 7040 – 7200 kHz, 1 kHz, 5 s, skipped ranges: 1"). The chosen profile becomes the Scan setup setting and the scan starts.
 - The scan sets the rig and the WebSDR, like entering a frequency. It stops as soon as the rig goes into **transmit** (SDRLink's PTT or the rig's); it cannot start while transmitting.
 
 ## Recording (REC)
@@ -440,8 +448,18 @@ On the "Sync" row, after "Auto notch (DNF)":
 
 **Import/Export ▾** button (1st row, after "Check for updates"): to get exactly the same configuration on another computer, or to keep a backup. Right-click: button colour.
 - All SDRLink settings are in a single file: **`%APPDATA%\SDRLink\settings.ini`** (for example `C:\Users\<name>\AppData\Roaming\SDRLink\settings.ini`). The log `sdrlink.log` is next to it.
-- **Export all settings…**: saves this file wherever you want (Documents by default, named `SDRLink-reglages-<date>.ini`), with the current state: interface and rig (COM port, baud rate, TCI, HRD, Hamlib…), synchronisation, offset, favorites and their lists, memories, frequency history, language, dark mode and palette, button colours, text size, REC (folder, sound card, colour, width), SDRLINK cable, scan, volumes, window size and position, etc.
-- **Import settings…**: choose an exported file. After confirmation, all current settings are replaced and SDRLink restarts with the configuration from the file. The previous settings are kept in `settings.avant-import.ini` (same folder): to go back, import that file.
+- **Export all settings…**: saves this file wherever you want (Documents by default, named `SDRLink-reglages-<date>.ini`), with the current state: interface and rig (COM port, baud rate, TCI, HRD, Hamlib…), synchronisation, offset, favorites and their lists, memories, frequency history, language, dark mode and palette, button colours, text size, REC (folder, sound card, colour, width), SDRLINK cable, scan (setting, skipped ranges and scan profiles), volumes, window size and position, etc.
+- **Import settings…**: choose an exported file. A window asks **what to import**, with one tick box per part (just one or several):
+  - **Configuration** (rig, interface, display, colours, language…: everything that is not in the next three boxes);
+  - **WebSDR** (favorites, favorite lists, last WebSDR opened, volume of WebSDRs that are not favorites);
+  - **Frequency memories** (memories and memory lists);
+  - **Scan** (Scan setup setting, skipped ranges and scan profiles).
+  - A part missing from the file is greyed out ("not in the file"). A part left unticked keeps the current settings.
+  - For the favorites, memories and scan profiles already in SDRLink, choose:
+    - **keep them and add those of the file** (default, no duplicates: same address in the same list for a favorite, same name, frequency and mode for a memory, identical profile for the scan). Extra lists in the file are created with their name; a profile of the file with the name of another profile is renamed "name (2)"; 10 profiles at most. The current Scan setup setting does not change;
+    - **delete them and replace them with those of the file**.
+  - A ticked configuration is always replaced by the one in the file.
+  - Then **Import**: SDRLink restarts with the resulting settings. The previous settings are kept in `settings.avant-import.ini` (same folder): to go back, import that file with everything ticked and "delete them" chosen. The log shows what was added.
 - A file that does not contain SDRLink settings is refused (message in the status bar).
 - On another computer, check what depends on the machine: rig COM port, sound cards (SDRLINK cable, rig sound card for REC), rigctld path, recordings folder. A missing rig sound card is shown as "not connected" in the REC menu; if the window position falls outside the screens, it is ignored.
 - Browsing data of the WebSDR pages (cookies, cache) is not part of the settings and is not exported.
@@ -460,6 +478,11 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.16**
+  - **Scan setup, skipped ranges**: up to 10 "from … to … kHz" ranges skipped by the frequency scan (e.g. 7040 to 7200 without 7097 to 7103), shown only when they are defined;
+  - **scan profiles**: up to 10 named scan settings (Save, Rename, Delete in Scan setup); with profiles, **▶ Scan** offers the current setting or one of the profiles;
+  - **Import**: a window asks what to import (Configuration, WebSDR, Frequency memories, Scan tick boxes), and whether the favorites, memories and scan profiles of the file are **added** to the current ones (no duplicates) or **replace** them;
+  - the export also contains the skipped ranges and the scan profiles.
 - **1.15**
   - **HDSDR**: when HDSDR is running on the PC, **Mute HDSDR** (after the other Mute buttons) and **HDSDR volume** (slider and %) appear on the audio row, and disappear when it is closed. The audio is muted and set through the Windows volume mixer, with no extra COM port; HDSDR can stay connected to HRD. ExpertSDR works as before and can run at the same time;
   - **⇄** also switches with HDSDR; right-click ⇄: up to **two** mutes left aside (check boxes), to switch only between the remaining receivers;

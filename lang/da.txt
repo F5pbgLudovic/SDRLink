@@ -73,6 +73,18 @@ No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Ingen rigctld p�
 Invalid HRD answer	Ugyldigt HRD-svar
 HRD connection closed	HRD-forbindelse lukket
 No HRD server at {0}:{1} (enable the IP server in HRD Rig Control).	Ingen HRD-server på {0}:{1} (aktivér IP-serveren i HRD Rig Control).
+Import settings	Importér indstillinger
+What should be imported from this file?	Hvad skal importeres fra denne fil?
+Configuration (rig, interface, display, colours, language…)	Konfiguration (radio, interface, visning, farver, sprog…)
+WebSDR (favorites and favorite lists)	WebSDR (favoritter og favoritlister)
+Frequency memories	Frekvenshukommelser
+Scan (setting, skipped ranges and scan profiles)	Scanning (indstilling, områder der springes over og scanningsprofiler)
+ — not in the file	 — findes ikke i filen
+Favorites, memories and scan profiles already in SDRLink:	Favoritter, hukommelser og scanningsprofiler, der allerede er i SDRLink:
+keep them and add those of the file (no duplicates)	beholde dem og tilføje filens (uden dubletter)
+delete them and replace them with those of the file	slette dem og erstatte dem med filens
+SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink genstarter derefter. De nuværende indstillinger gemmes i settings.avant-import.ini.
+Import	Importér
 Cannot open the log: 	Kan ikke åbne loggen: 
 Export all settings…	Eksportér alle indstillinger…
 Import settings…	Importér indstillinger…
@@ -100,7 +112,6 @@ Cannot export the settings: 	Indstillingerne kan ikke eksporteres:
 Import SDRLink settings	Importér SDRLink-indstillinger
 Cannot import the settings: 	Indstillingerne kan ikke importeres: 
 Import: this file does not contain SDRLink settings	Import: denne fil indeholder ingen SDRLink-indstillinger
-All current settings (interface, favorites, memories, colours…) will be replaced by those in the file, then SDRLink will restart.\n\nThe current settings are kept in settings.avant-import.ini.\n\nContinue?	Alle nuværende indstillinger (interface, favoritter, hukommelser, farver…) erstattes af dem i filen, derefter genstarter SDRLink.\n\nDe nuværende indstillinger gemmes i settings.avant-import.ini.\n\nFortsæt?
 Button colour	Knapfarve
 RIG	TRX
 Disconnected	Afbrudt
@@ -138,8 +149,10 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 Add memory	Tilføj hukommelse
+Current "Scan setup" setting	Aktuel indstilling i "Scanningsopsætning"
 No scan while transmitting	Ingen scanning under sending
 Scan: set the start and end frequencies in "Scan setup"	Scanning: angiv start- og slutfrekvens i “Scanningsopsætning”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Scanning: alle frekvenser ligger i områder, der springes over ("Scanningsopsætning")
 Scan: check memories in "Scan setup"	Scanning: markér hukommelser i “Scanningsopsætning”
 Scan stopped	Scanning stoppet
 ■ Stop scan	■ Stop scanning
@@ -334,20 +347,38 @@ Connected, waiting for the rig...	Forbundet, venter på radioen...
 Rig online	Radio online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radioen svarer ikke (kontrollér port, baudrate, CI-V-adresse, CAT-menu)
 Error: 	Fejl: 
+frequencies not set	frekvenser ikke angivet
+Profile:	Profil:
+Rename	Omdøb
 Scan type:	Scanningstype:
 Frequencies	Frekvenser
 Start (kHz):	Start (kHz):
 End (kHz):	Slut (kHz):
 Time on each frequency:	Tid på hver frekvens:
+Skipped ranges (from … to … kHz):	Områder der springes over (fra … til … kHz):
++ Skipped range	+ Område der springes over
 Memories to scan:	Hukommelser der skal scannes:
 Time on each memory:	Tid på hver hukommelse:
 (no memory: Memories button)	(ingen hukommelser: knappen Hukommelser)
 Reset	Nulstil
 Start scan	Start scanning
+from	fra
+to	til
+First type a profile name in the "Profile" box.	Skriv først et profilnavn i feltet "Profil".
+First choose a profile in the list, then type its new name in the box and click Rename.	Vælg først en profil på listen, skriv derefter dens nye navn i feltet, og klik på Omdøb.
+Choose in the list the profile to delete.	Vælg den profil, der skal slettes, på listen.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Angiv forskellige start- og slutfrekvenser i kHz (f.eks. 7000 og 7200).
+All frequencies from start to end are in skipped ranges.	Alle frekvenser fra start til slut ligger i områder, der springes over.
 Check at least one memory to scan.	Markér mindst én hukommelse, der skal scannes.
+memories: {0}, {1}	hukommelser: {0}, {1}
+skipped ranges: {0}	områder der springes over: {0}
 {0} s	{0} s
 {0} min	{0} min
+Replace the profile "{0}" with the settings shown?	Erstat profilen "{0}" med de viste indstillinger?
+{0} profiles at most: delete one first.	Højst {0} profiler: slet en først.
+The profile "{0}" already exists.	Profilen "{0}" findes allerede.
+Delete the profile "{0}"?	Slet profilen "{0}"?
+Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Område nr. {0}, der springes over: angiv to frekvenser i kHz (f.eks. 7097 og 7103).
 No TCI server at 	Ingen TCI-server på 
 TCI connection lost	TCI-forbindelse mistet
 unavailable	ikke tilgængelig
