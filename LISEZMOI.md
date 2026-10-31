@@ -396,7 +396,7 @@ Ces deux réglages sont conservés au prochain lancement.
 Sur la ligne « Synchro », après « Notch auto (DNF) » :
 - **Conf scan** : choix du type de scan.
   - **Fréquences** : fréquence de **début** et de **fin** en kHz (dans n'importe quel ordre), **pas** (100 Hz à 100 kHz), **durée** sur chaque fréquence : 1 s, 2 s, 5 s, 10 s, 30 s, 1 min, 2 min, 5 min ou 10 min. Arrivé à la fin, le scan repart du début.
-  - **Zones non scannées** (jusqu'à **10**) : bouton **+ Zone non scannée**, puis « de … à … kHz ». Les fréquences de la zone, bornes comprises, sont sautées. Exemple : début 7040, fin 7200, zone de 7097 à 7103 : avec un pas de 1 kHz, le scan passe de 7096 à 7104. Les zones n'apparaissent que si elles sont définies ; **✕** en retire une ; une ligne laissée vide est ignorée. Si toutes les fréquences sont dans des zones, le scan refuse de démarrer.
+  - **Zones non scannées** (jusqu'à **10**) : bouton **+ Zone non scannée**, puis « de … à … kHz ». Les fréquences entre les deux bornes sont sautées ; les bornes elles-mêmes sont scannées. Exemple : début 7040, fin 7200, zone de 7096 à 7103 : avec un pas de 1 kHz, le scan s'arrête sur 7096 puis repart à 7103. Les zones n'apparaissent que si elles sont définies ; **✕** en retire une ; une ligne laissée vide est ignorée. Si toutes les fréquences sont dans des zones, le scan refuse de démarrer.
   - **Mémoires** : liste des mémoires avec une **case à cocher** pour chacune (Tout cocher / Tout décocher), et la **durée** sur chaque mémoire (mêmes choix). Le mode mémorisé est appliqué.
   - Chaque type garde ses réglages : en repassant de Mémoires à Fréquences (ou l'inverse), les choix précédents sont toujours là. **Réinitialiser** remet à zéro le type affiché (l'autre garde les siens, les zones du scan de fréquences sont effacées).
   - **OK** enregistre ; **Lancer le scan** enregistre et démarre.
@@ -476,6 +476,8 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.17**
+  - **Conf scan, zones non scannées** : les deux bornes d'une zone sont maintenant **scannées**, seules les fréquences entre les deux sont sautées (zone de 96 à 103, pas de 1 → le scan s'arrête sur 96 puis repart à 103 ; avant, il passait de 95 à 104).
 - **1.16**
   - **Conf scan, zones non scannées** : jusqu'à 10 zones « de … à … kHz » sautées par le scan de fréquences (par ex. 7040 à 7200 sans 7097 à 7103), affichées seulement si elles sont définies ;
   - **profils de scan** : jusqu'à 10 réglages de scan nommés (Enregistrer, Renommer, Supprimer dans Conf scan) ; avec des profils, **▶ Scan** propose le réglage actuel ou l'un des profils ;

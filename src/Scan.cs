@@ -26,9 +26,10 @@ namespace SDRLink
             return m.Hz.ToString(CultureInfo.InvariantCulture) + ":" + Uri.EscapeDataString(m.Mode) + ":" + Uri.EscapeDataString(m.Name);
         }
 
+        // Les bornes d'une zone sont scannées : zone 96 – 103 → le scan s'arrête sur 96 puis repart à 103.
         public bool Skipped(long hz)
         {
-            foreach (long[] z in Skips) if (hz >= z[0] && hz <= z[1]) return true;
+            foreach (long[] z in Skips) if (hz > z[0] && hz < z[1]) return true;
             return false;
         }
 

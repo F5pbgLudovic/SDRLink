@@ -397,7 +397,7 @@ These two settings are kept for the next launch.
 On the "Sync" row, after "Auto notch (DNF)":
 - **Scan setup**: choice of scan type.
   - **Frequencies**: **start** and **end** frequency in kHz (in any order), **step** (100 Hz to 100 kHz), **time** on each frequency: 1 s, 2 s, 5 s, 10 s, 30 s, 1 min, 2 min, 5 min or 10 min. When it reaches the end, the scan starts again from the beginning.
-  - **Skipped ranges** (up to **10**): **+ Skipped range** button, then "from … to … kHz". The frequencies of the range, limits included, are skipped. Example: start 7040, end 7200, range from 7097 to 7103: with a 1 kHz step, the scan goes from 7096 to 7104. The ranges only appear when they are defined; **✕** removes one; a line left empty is ignored. If all frequencies are in ranges, the scan refuses to start.
+  - **Skipped ranges** (up to **10**): **+ Skipped range** button, then "from … to … kHz". The frequencies between the two limits are skipped; the limits themselves are scanned. Example: start 7040, end 7200, range from 7096 to 7103: with a 1 kHz step, the scan stops on 7096 then resumes at 7103. The ranges only appear when they are defined; **✕** removes one; a line left empty is ignored. If all frequencies are in ranges, the scan refuses to start.
   - **Memories**: list of memories with a **tick box** for each (Check all / Uncheck all), and the **time** on each memory (same choices). The stored mode is applied.
   - Each type keeps its own settings: when switching from Memories back to Frequencies (or the other way round), the previous choices are still there. **Reset** clears the type shown (the other keeps its own; the skipped ranges of the frequency scan are cleared).
   - **OK** saves; **Start scan** saves and starts.
@@ -478,6 +478,8 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.17**
+  - **Scan setup, skipped ranges**: both limits of a range are now **scanned**, only the frequencies between them are skipped (range from 96 to 103, step 1 → the scan stops on 96 then resumes at 103; before, it went from 95 to 104).
 - **1.16**
   - **Scan setup, skipped ranges**: up to 10 "from … to … kHz" ranges skipped by the frequency scan (e.g. 7040 to 7200 without 7097 to 7103), shown only when they are defined;
   - **scan profiles**: up to 10 named scan settings (Save, Rename, Delete in Scan setup); with profiles, **▶ Scan** offers the current setting or one of the profiles;
