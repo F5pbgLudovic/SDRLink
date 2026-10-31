@@ -25,7 +25,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR**, boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**.
-6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR** (seulement les sons disponibles), puis **REC**.
+6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**.
 7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
 
 ## Tous les clics droits
@@ -42,8 +42,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Saisie kHz | supprimer la valeur de l'historique, tout supprimer |
 | Mémoires | mémoriser la fréquence actuelle, couleur du bouton |
 | Liste des favoris (à côté de l'adresse) | renommer la liste |
-| ⇄ | réception que ⇄ laisse coupée |
-| Mute WebSDR, Mute TX | couleur son coupé / son actif |
+| ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus) |
+| Mute WebSDR, Mute TX, Mute HDSDR | couleur son coupé / son actif |
 | Mute ExpertSDR | port TCI d'ExpertSDR, couleur son coupé / son actif |
 | « Volume WebSDR » | port TCI d'ExpertSDR |
 | REC | carte son du poste, couleur du bouton REC, largeur (étroit / large) |
@@ -193,7 +193,7 @@ Il faut un accès Internet. Si un annuaire ne répond pas, les autres sont quand
 
 ## Volume du WebSDR
 
-La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gauche à droite : le bouton ⇄, Mute WebSDR, Mute TX, Mute ExpertSDR, puis Volume WebSDR, Volume TX et Volume ExpertSDR, chacun avec sa réglette et sa valeur en %. Mute TX et Volume TX n'apparaissent que si le volume du poste est télécommandé, Mute ExpertSDR et Volume ExpertSDR que si ExpertSDR est lancé et répond (son Windows ou TCI), et ⇄ que s'il y a au moins deux sons à permuter. Les commandes absentes ne laissent pas de vide : la ligne se resserre à gauche. Le curseur **Volume WebSDR** règle uniquement le son du WebSDR, pas celui de Windows ni des autres logiciels.
+La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gauche à droite : le bouton ⇄, Mute WebSDR, Mute TX, Mute ExpertSDR, Mute HDSDR, puis Volume WebSDR, Volume TX, Volume ExpertSDR et Volume HDSDR, chacun avec sa réglette et sa valeur en %. Mute TX et Volume TX n'apparaissent que si le volume du poste est télécommandé, Mute ExpertSDR et Volume ExpertSDR que si ExpertSDR est lancé et répond (son Windows ou TCI), Mute HDSDR et Volume HDSDR que si HDSDR est lancé, et ⇄ que s'il y a au moins deux sons à permuter. Les commandes absentes ne laissent pas de vide : la ligne se resserre à gauche. Le curseur **Volume WebSDR** règle uniquement le son du WebSDR, pas celui de Windows ni des autres logiciels.
 - Il agit sur tous les types de WebSDR. Sur UberSDR, le son ne démarre qu'après un clic sur « Click to start » dans la page.
 - Le volume est **mémorisé pour chaque favori** : en rouvrant un favori, on retrouve son volume.
 - Les WebSDR qui ne sont pas en favoris partagent un même volume, lui aussi mémorisé.
@@ -202,11 +202,11 @@ La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gau
 ## Coupure du son et volume du poste
 
 À droite du volume du WebSDR :
-- **⇄** (petit bouton carré) : passe le son d'une réception à l'autre parmi **Mute WebSDR**, **Mute TX** et **Mute ExpertSDR** (seulement celles qui sont disponibles : Mute TX si le volume du poste est télécommandé, Mute ExpertSDR si ExpertSDR répond) :
+- **⇄** (petit bouton carré) : passe le son d'une réception à l'autre parmi **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR** et **Mute HDSDR** (seulement celles qui sont disponibles : Mute TX si le volume du poste est télécommandé, Mute ExpertSDR si ExpertSDR répond, Mute HDSDR si HDSDR joue par le son de Windows) :
   - aucun son coupé : un clic les coupe tous ;
-  - un seul son actif : il est coupé et le suivant est rétabli ; chaque clic passe au suivant (WebSDR → TX → ExpertSDR → WebSDR…) ;
+  - un seul son actif : il est coupé et le suivant est rétabli ; chaque clic passe au suivant (WebSDR → TX → ExpertSDR → HDSDR → WebSDR…) ;
   - tout coupé : le premier est rétabli ; plusieurs sons actifs (sans l'être tous) : tous coupés.
-  - **Clic droit** sur ⇄ : choisir la coupure dont ⇄ ne tient pas compte (ou « Aucune »). Elle est coupée tout de suite et le reste, pour n'entendre qu'une réception ; ⇄ ne permute alors qu'entre les deux autres. Le choix est conservé.
+  - **Clic droit** sur ⇄ : cocher les coupures dont ⇄ ne tient pas compte, **deux au plus** (ou « Aucune » pour tout décocher). Une coupure cochée est coupée tout de suite et le reste ; ⇄ ne permute alors qu'entre les réceptions restantes. Avec quatre réceptions, en cocher deux permet de ne permuter qu'entre les deux autres. Quand deux sont cochées, les autres sont grisées : décocher l'une pour en choisir une autre. Le choix est conservé.
 - Couleurs des boutons Mute : **vert, écriture blanche** quand le son passe (comme le bouton de mode choisi), **rouge, écriture blanche** quand il est coupé, gris quand la coupure n'est pas disponible.
 - **Mute WebSDR** : coupe le son du WebSDR (bouton rouge), un second clic le rétablit au volume réglé.
 - **Mute TX** : coupe le son du **transceiver** en mettant son gain BF à zéro par CAT, puis rétablit le volume au second clic. Le son est aussi rétabli à la déconnexion.
@@ -215,9 +215,15 @@ La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gau
   - sinon (son sorti par le poste lui-même, MB1, ou par ASIO) par la commande **TCI** `mute` : il faut alors activer le serveur TCI dans ExpertSDR (Options > TCI). SDRLink garde une liaison TCI avec ExpertSDR tant qu'il tourne, même si le poste est relié autrement (HRD…) : une coupure ou un volume réglé dans ExpertSDR s'affiche aussi dans SDRLink. Un message l'explique si le serveur TCI ne répond pas.
   - **Clic droit** sur Mute ExpertSDR, ou sur « Volume WebSDR » : port du serveur TCI d'ExpertSDR (**40001** par défaut), à régler comme dans ExpertSDR. Tant qu'ExpertSDR ne répond pas, Mute et Volume ExpertSDR sont masqués et la barre d'état indique de passer par « Volume WebSDR ».
   - Si SDRLink a coupé ExpertSDR, le son est rétabli à la fermeture de SDRLink.
+- **Mute HDSDR** : n'apparaît que lorsque le logiciel **HDSDR** tourne (sur le même PC), qu'il soit relié au poste par HRD, OmniRig ou autrement. Il coupe et rétablit le son de HDSDR dans le **mélangeur de volume de Windows**, sans toucher à HDSDR ni à sa liaison CAT, et sans port COM supplémentaire. ExpertSDR et HDSDR peuvent tourner en même temps : chacun a son Mute et son volume.
+  - HDSDR doit jouer par le son de Windows (sortie MME ou WDM, réglage habituel). Si sa réception est arrêtée ou si son son sort par ASIO, Mute HDSDR reste gris, Volume HDSDR affiche « — » et un clic sur Mute HDSDR l'explique dans la barre d'état.
+  - Une coupure ou un volume réglé dans le mélangeur de Windows s'affiche aussi dans SDRLink (relu toutes les 3 secondes).
+  - Si SDRLink a coupé HDSDR, le son est rétabli à la fermeture de SDRLink.
+  - **Clic droit** sur Mute HDSDR : couleur son coupé / son actif.
 - **Volume TX** : règle le volume du transceiver (gain BF, en %). La barre suit aussi le bouton du poste : elle est relue toutes les 2 secondes environ.
 - **Volume TX** et **Mute TX** ne s'affichent que si le volume du poste est télécommandé (poste connecté, et interface qui le permet).
 - **Volume ExpertSDR** (à droite de Volume TX) : volume d'ExpertSDR, par le mélangeur de Windows ou par TCI (`volume:` de −60 à 0 dB) comme Mute ExpertSDR. Affiché quand ExpertSDR tourne ; grisé tant qu'aucune des deux voies ne répond.
+- **Volume HDSDR** (à droite de Volume ExpertSDR) : volume de HDSDR dans le mélangeur de Windows (0 à 100 %). Affiché dès que HDSDR est lancé, il disparaît quand HDSDR est fermé ; grisé tant que HDSDR ne joue pas par le son de Windows.
 
 Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 - **Yaesu** : `AG0nnn;`, de 000 à 255.
@@ -250,7 +256,7 @@ Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le
   - **PTT** : en réception / en émission (PTT activé) ;
   - **RADIO** et **WEBSDR** (fréquence et mode) : couleur du fond / couleur du texte (en émission, RADIO passe toujours en rouge) ;
   - **USB, LSB, AM, FM, DIGI, CW** : mode sélectionné / modes non sélectionnés (le choix vaut pour les six boutons) ;
-  - **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR** (chacun le sien) : son coupé / son actif. Un Mute indisponible reste grisé.
+  - **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR** (chacun le sien) : son coupé / son actif. Un Mute indisponible reste grisé.
 - Couleurs proposées : **Par défaut** (couleur d'origine, qui suit le mode sombre et la palette), bleu marine, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, orange, blanc, ou **Autre couleur…** au choix.
 - Le texte passe en noir sur les couleurs claires et en blanc sur les foncées ; une bordure fait contour.
 - Les choix sont conservés, y compris en passant du mode clair au mode sombre.
@@ -398,7 +404,7 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 
 ## Enregistrement (REC)
 
-- Bouton **REC**, sur la ligne de son, juste après le dernier volume affiché (il se rapproche quand Volume TX ou Volume ExpertSDR sont absents) : **bleu marine** au repos (couleur réglable), **orange** pendant l'enregistrement.
+- Bouton **REC**, sur la ligne de son, juste après le dernier volume affiché (il se rapproche quand Volume TX, Volume ExpertSDR ou Volume HDSDR sont absents) : **bleu marine** au repos (couleur réglable), **orange** pendant l'enregistrement.
 - Un clic lance l'enregistrement de **tout ce qu'on entend dans les haut-parleurs** (sortie audio par défaut de Windows) : WebSDR, ExpertSDR, poste relié au PC, sons de Windows… Le volume de Windows et les Mute ne changent rien à ce qui est capté avant eux : on enregistre ce que la sortie joue.
 - Un nouveau clic arrête et ouvre la fenêtre **Enregistrer le son** :
   - **Nom** : proposé d'après la date, l'heure, la fréquence et le mode au départ (modifiable) ;
@@ -406,7 +412,7 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
   - **Format** : **MP3** (par défaut, 128 kbit/s, codeur de Windows), **WAV** (sans perte, volumineux) ou **FLAC** (sans perte, environ deux fois plus petit) ;
   - **Supprimer** abandonne l'enregistrement (après confirmation).
 - Le fichier est écrit en arrière-plan ; la barre d'état indique la progression puis « Enregistrement sauvegardé ». En cas d'échec, la fenêtre revient : le son n'est pas perdu.
-- **Clic droit sur REC** : choix de la **carte son du poste** (son entrée dans Windows, par exemple « USB AUDIO CODEC » ou « USB Sound Device »), ou « Aucune (toujours les haut-parleurs) ». Cette carte est enregistrée **à la place des haut-parleurs** seulement si l'on écoute le poste seul au moment d'appuyer sur REC : **Mute WebSDR** actif (rouge) et **Mute ExpertSDR** actif (rouge) si ExpertSDR est lancé. Sinon, ce sont les haut-parleurs. Si la carte est débranchée, les haut-parleurs sont enregistrés et la barre d'état le signale. Le choix est conservé.
+- **Clic droit sur REC** : choix de la **carte son du poste** (son entrée dans Windows, par exemple « USB AUDIO CODEC » ou « USB Sound Device »), ou « Aucune (toujours les haut-parleurs) ». Cette carte est enregistrée **à la place des haut-parleurs** seulement si l'on écoute le poste seul au moment d'appuyer sur REC : **Mute WebSDR** actif (rouge), **Mute ExpertSDR** actif (rouge) si ExpertSDR est lancé et **Mute HDSDR** actif (rouge) si HDSDR joue. Sinon, ce sont les haut-parleurs. Si la carte est débranchée, les haut-parleurs sont enregistrés et la barre d'état le signale. Le choix est conservé.
 - **Clic droit sur REC > Couleur du bouton REC** : couleur du bouton au repos (bleu marine par défaut, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, ou « Autre couleur… » au choix). Le texte passe en noir sur les couleurs claires ; pendant l'enregistrement, le bouton reste orange. Le choix est conservé.
 - **Clic droit sur REC > Largeur du bouton REC** : **Étroit** (rectangle deux fois plus large que haut, par défaut) ou **Large** (quatre fois plus large que haut), toujours à la hauteur des boutons Mute, « REC » centré. Le choix est conservé.
 - Les silences sont gardés (la durée du fichier est la durée réelle). Fermer SDRLink pendant un enregistrement propose de le sauvegarder avant de quitter.
@@ -452,6 +458,11 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.15**
+  - **HDSDR** : quand HDSDR est lancé sur le PC, **Mute HDSDR** (après les autres Mute) et **Volume HDSDR** (réglette et %) apparaissent sur la ligne de son, et disparaissent quand il est fermé. Le son est coupé et réglé par le mélangeur de volume de Windows, sans port COM supplémentaire ; HDSDR peut rester relié à HRD. ExpertSDR garde son fonctionnement et peut tourner en même temps ;
+  - **⇄** permute aussi avec HDSDR ; clic droit sur ⇄ : jusqu'à **deux** coupures laissées de côté (cases à cocher), pour ne permuter qu'entre les réceptions restantes ;
+  - Mute HDSDR : couleurs son coupé / son actif au clic droit, comme les autres Mute ;
+  - REC : la carte son du poste est prise si Mute HDSDR est aussi actif quand HDSDR joue.
 - **1.14**
   - **nouveaux postes en CAT direct**, après comparaison avec les listes de Hamlib, OmniRig et Ham Radio Deluxe :
     - Yaesu : FT-100/100D, FT-600, FT-650, FT-736R, FT-747GX, FT-757GX, FT-757GXII, FT-767GX, FT-840, FT-847, FT-890, FT-900, FT-920, FTdx9000, FTX-1 ;

@@ -132,8 +132,9 @@ SDRLINK cable	Cabo SDRLINK
  (off) ▾	 (desat.) ▾
 Mute TRX: connect the rig first	Silenciar TRX: ligue primeiro o rádio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume do rádio indisponível com este rádio ou interface (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Silêncio ignorado por ⇄ (fica silenciado):
+Mutes ignored by ⇄ (stay muted, two at most):	Silêncios ignorados por ⇄ (ficam silenciados, no máximo dois):
 None	Nenhum
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	O HDSDR não toca pelo som do Windows (receção parada ou som via ASIO): o SDRLink não o pode silenciar.
 ExpertSDR TCI port	Porta TCI do ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Porta do servidor TCI (ExpertSDR, Options > TCI):
 Add memory	Adicionar memória
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Varrimento: indique as f
 Scan: check memories in "Scan setup"	Varrimento: marque memórias em «Configurar varrimento»
 Scan stopped	Varrimento parado
 ■ Stop scan	■ Parar o varrimento
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Placa de som do rádio, gravada quando Mute WebSDR e Mute ExpertSDR estão ativos:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Placa de som do rádio, gravada quando Mute WebSDR, Mute ExpertSDR e Mute HDSDR estão ativos:
 None (always the speakers)	Nenhuma (sempre os altifalantes)
 REC button width	Largura do botão REC
 Narrow	Estreito
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Volume WebSDR:
 TRX volume:	Volume TRX:
 ExpertSDR volume:	Volume ExpertSDR:
+HDSDR volume:	Volume HDSDR:
 Open log	Abrir log
 Text size…	Tamanho do texto…
 Import/Export ▾	Importar/Exportar ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Silenciar WebSDR
 Mute TRX	Silenciar TRX
 ⇄	⇄
 Mute ExpertSDR	Silenciar ExpertSDR
+Mute HDSDR	Silenciar HDSDR
 Auto-connect at startup	Ligar automaticamente ao arrancar
 Dark mode	Modo escuro
 Check for updates	Procurar atualizações

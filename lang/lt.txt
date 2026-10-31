@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (išj.) ▾
 Mute TRX: connect the rig first	Nutildyti TRX: pirmiausia prijunkite stotį
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Stoties garsumas nepasiekiamas su šia stotimi ar sąsaja (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Nutildymas, kurio ⇄ nepaiso (lieka nutildytas):
+Mutes ignored by ⇄ (stay muted, two at most):	Nutildymai, kurių ⇄ nepaiso (lieka nutildyti, ne daugiau kaip du):
 None	Jokio
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR negroja per Windows garsą (priėmimas sustabdytas arba garsas per ASIO): SDRLink negali jo nutildyti.
 ExpertSDR TCI port	ExpertSDR TCI prievadas
 TCI server port (ExpertSDR, Options > TCI):	TCI serverio prievadas (ExpertSDR, Options > TCI):
 Add memory	Pridėti atmintį
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Skenavimas: nurodykite p
 Scan: check memories in "Scan setup"	Skenavimas: pažymėkite atmintis lange „Skenavimo nustatymai“
 Scan stopped	Skenavimas sustabdytas
 ■ Stop scan	■ Stabdyti skenavimą
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radijo stoties garso plokštė, įrašoma kai įjungti Mute WebSDR ir Mute ExpertSDR:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radijo stoties garso plokštė, įrašoma kai įjungti Mute WebSDR, Mute ExpertSDR ir Mute HDSDR:
 None (always the speakers)	Jokia (visada garsiakalbiai)
 REC button width	REC mygtuko plotis
 Narrow	Siauras
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR garsumas:
 TRX volume:	TRX garsumas:
 ExpertSDR volume:	ExpertSDR garsumas:
+HDSDR volume:	HDSDR garsumas:
 Open log	Atidaryti žurnalą
 Text size…	Teksto dydis…
 Import/Export ▾	Importas/Eksportas ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Nutildyti WebSDR
 Mute TRX	Nutildyti TRX
 ⇄	⇄
 Mute ExpertSDR	Nutildyti ExpertSDR
+Mute HDSDR	Nutildyti HDSDR
 Auto-connect at startup	Autom. jungtis paleidžiant
 Dark mode	Tamsus režimas
 Check for updates	Tikrinti atnaujinimus

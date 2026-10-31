@@ -132,8 +132,9 @@ SDRLINK cable	Кабел SDRLINK
  (off) ▾	 (изкл.) ▾
 Mute TRX: connect the rig first	Без звук TRX: първо свържете трансивъра
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Силата на звука на трансивъра не е достъпна с този трансивър или интерфейс (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Заглушаване, пренебрегвано от ⇄ (остава заглушено):
+Mutes ignored by ⇄ (stay muted, two at most):	Заглушавания, пренебрегвани от ⇄ (остават заглушени, най-много две):
 None	Няма
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR не използва звука на Windows (приемането е спряно или звукът е през ASIO): SDRLink не може да го заглуши.
 ExpertSDR TCI port	TCI порт на ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Порт на TCI сървъра (ExpertSDR, Options > TCI):
 Add memory	Добавяне на памет
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Сканиране: за
 Scan: check memories in "Scan setup"	Сканиране: отметнете памети в „Настройка на сканирането“
 Scan stopped	Сканирането е спряно
 ■ Stop scan	■ Спиране на сканирането
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Звукова карта на радиостанцията, записвана при включени Mute WebSDR и Mute ExpertSDR:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Звукова карта на радиостанцията, записвана при включени Mute WebSDR, Mute ExpertSDR и Mute HDSDR:
 None (always the speakers)	Няма (винаги високоговорителите)
 REC button width	Ширина на бутона REC
 Narrow	Тесен
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Сила на звука WebSDR:
 TRX volume:	Звук TRX:
 ExpertSDR volume:	Сила на звука ExpertSDR:
+HDSDR volume:	Сила на звука HDSDR:
 Open log	Отвори дневника
 Text size…	Размер на текста…
 Import/Export ▾	Импорт/Експорт ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Без звук WebSDR
 Mute TRX	Без звук TRX
 ⇄	⇄
 Mute ExpertSDR	Без звук ExpertSDR
+Mute HDSDR	Без звук HDSDR
 Auto-connect at startup	Автосвързване при старт
 Dark mode	Тъмен режим
 Check for updates	Проверка за актуализации

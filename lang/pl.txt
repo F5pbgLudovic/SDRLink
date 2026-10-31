@@ -132,8 +132,9 @@ SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (wył.) ▾
 Mute TRX: connect the rig first	Wycisz TRX: najpierw połącz radiostację
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Głośność radiostacji niedostępna dla tej radiostacji lub interfejsu (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Wyciszenie pomijane przez ⇄ (pozostaje wyciszone):
+Mutes ignored by ⇄ (stay muted, two at most):	Wyciszenia pomijane przez ⇄ (pozostają wyciszone, najwyżej dwa):
 None	Brak
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR nie gra przez dźwięk Windows (odbiór zatrzymany lub dźwięk przez ASIO): SDRLink nie może go wyciszyć.
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port serwera TCI (ExpertSDR, Options > TCI):
 Add memory	Dodaj pamięć
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Skanowanie: podaj częst
 Scan: check memories in "Scan setup"	Skanowanie: zaznacz pamięci w „Ustawienia skanowania”
 Scan stopped	Skanowanie zatrzymane
 ■ Stop scan	■ Zatrzymaj skanowanie
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Karta dźwiękowa radiostacji, nagrywana gdy Mute WebSDR i Mute ExpertSDR są włączone:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Karta dźwiękowa radiostacji, nagrywana gdy Mute WebSDR, Mute ExpertSDR i Mute HDSDR są włączone:
 None (always the speakers)	Brak (zawsze głośniki)
 REC button width	Szerokość przycisku REC
 Narrow	Wąski
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Głośność WebSDR:
 TRX volume:	Głośność TRX:
 ExpertSDR volume:	Głośność ExpertSDR:
+HDSDR volume:	Głośność HDSDR:
 Open log	Otwórz dziennik
 Text size…	Rozmiar tekstu…
 Import/Export ▾	Import/Eksport ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Wycisz WebSDR
 Mute TRX	Wycisz TRX
 ⇄	⇄
 Mute ExpertSDR	Wycisz ExpertSDR
+Mute HDSDR	Wycisz HDSDR
 Auto-connect at startup	Połącz automatycznie przy starcie
 Dark mode	Tryb ciemny
 Check for updates	Sprawdzaj aktualizacje

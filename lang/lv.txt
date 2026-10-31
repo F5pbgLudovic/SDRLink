@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (izsl.) ▾
 Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Apklusināšana, ko ⇄ ignorē (paliek apklusināta):
+Mutes ignored by ⇄ (stay muted, two at most):	Apklusināšanas, ko ⇄ ignorē (paliek apklusinātas, ne vairāk kā divas):
 None	Nav
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR neatskaņo caur Windows skaņu (uztveršana apturēta vai skaņa caur ASIO): SDRLink nevar to apklusināt.
 ExpertSDR TCI port	ExpertSDR TCI ports
 TCI server port (ExpertSDR, Options > TCI):	TCI servera ports (ExpertSDR, Options > TCI):
 Add memory	Pievienot atmiņu
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Skenēšana: norādiet s
 Scan: check memories in "Scan setup"	Skenēšana: atzīmējiet atmiņas logā “Skenēšanas iestatījumi”
 Scan stopped	Skenēšana apturēta
 ■ Stop scan	■ Apturēt skenēšanu
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Raidītāja skaņas karte, ierakstīta, kad ieslēgti Mute WebSDR un Mute ExpertSDR:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Raidītāja skaņas karte, ierakstīta, kad ieslēgti Mute WebSDR, Mute ExpertSDR un Mute HDSDR:
 None (always the speakers)	Nav (vienmēr skaļruņi)
 REC button width	REC pogas platums
 Narrow	Šaurs
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR skaļums:
 TRX volume:	TRX skaļums:
 ExpertSDR volume:	ExpertSDR skaļums:
+HDSDR volume:	HDSDR skaļums:
 Open log	Atvērt žurnālu
 Text size…	Teksta lielums…
 Import/Export ▾	Imports/Eksports ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Klusināt WebSDR
 Mute TRX	Klusināt TRX
 ⇄	⇄
 Mute ExpertSDR	Klusināt ExpertSDR
+Mute HDSDR	Klusināt HDSDR
 Auto-connect at startup	Autom. savienot startējot
 Dark mode	Tumšais režīms
 Check for updates	Pārbaudīt atjauninājumus

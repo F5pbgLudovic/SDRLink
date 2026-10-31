@@ -132,8 +132,9 @@ SDRLINK cable	Cablu SDRLINK
  (off) ▾	 (oprit) ▾
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Dezactivare sunet ignorată de ⇄ (rămâne fără sunet):
+Mutes ignored by ⇄ (stay muted, two at most):	Dezactivări de sunet ignorate de ⇄ (rămân fără sunet, cel mult două):
 None	Niciuna
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR nu redă prin sunetul Windows (recepție oprită sau sunet prin ASIO): SDRLink nu îi poate opri sunetul.
 ExpertSDR TCI port	Portul TCI al ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Portul serverului TCI (ExpertSDR, Options > TCI):
 Add memory	Adaugă memorie
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Scanare: indicați frecv
 Scan: check memories in "Scan setup"	Scanare: bifați memorii în „Configurare scanare”
 Scan stopped	Scanare oprită
 ■ Stop scan	■ Oprește scanarea
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Placa de sunet a stației, înregistrată când Mute WebSDR și Mute ExpertSDR sunt active:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Placa de sunet a stației, înregistrată când Mute WebSDR, Mute ExpertSDR și Mute HDSDR sunt active:
 None (always the speakers)	Niciuna (întotdeauna difuzoarele)
 REC button width	Lățimea butonului REC
 Narrow	Îngust
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Volum WebSDR:
 TRX volume:	Volum TRX:
 ExpertSDR volume:	Volum ExpertSDR:
+HDSDR volume:	Volum HDSDR:
 Open log	Deschidere jurnal
 Text size…	Dimensiunea textului…
 Import/Export ▾	Import/Export ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Mut WebSDR
 Mute TRX	Mut TRX
 ⇄	⇄
 Mute ExpertSDR	Mut ExpertSDR
+Mute HDSDR	Mut HDSDR
 Auto-connect at startup	Conectare automată la pornire
 Dark mode	Mod întunecat
 Check for updates	Caută actualizări

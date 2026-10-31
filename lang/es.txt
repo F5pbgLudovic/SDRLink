@@ -132,8 +132,9 @@ SDRLINK cable	Cable SDRLINK
  (off) ▾	 (desact.) ▾
 Mute TRX: connect the rig first	Silenciar TRX: conecte primero el equipo
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumen del equipo no disponible con este equipo o interfaz (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Silencio que ⇄ ignora (permanece silenciado):
+Mutes ignored by ⇄ (stay muted, two at most):	Silencios que ⇄ ignora (permanecen silenciados, dos como máximo):
 None	Ninguno
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR no suena por el sonido de Windows (recepción detenida o sonido por ASIO): SDRLink no puede silenciarlo.
 ExpertSDR TCI port	Puerto TCI de ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Puerto del servidor TCI (ExpertSDR, Options > TCI):
 Add memory	Añadir memoria
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Exploración: indique la
 Scan: check memories in "Scan setup"	Exploración: marque memorias en «Configurar exploración»
 Scan stopped	Exploración detenida
 ■ Stop scan	■ Detener la exploración
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Tarjeta de sonido del equipo, grabada cuando Mute WebSDR y Mute ExpertSDR están activos:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Tarjeta de sonido del equipo, grabada cuando Mute WebSDR, Mute ExpertSDR y Mute HDSDR están activos:
 None (always the speakers)	Ninguna (siempre los altavoces)
 REC button width	Ancho del botón REC
 Narrow	Estrecho
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Volumen WebSDR:
 TRX volume:	Volumen TRX:
 ExpertSDR volume:	Volumen ExpertSDR:
+HDSDR volume:	Volumen HDSDR:
 Open log	Abrir registro
 Text size…	Tamaño del texto…
 Import/Export ▾	Importar/Exportar ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Silenciar WebSDR
 Mute TRX	Silenciar TRX
 ⇄	⇄
 Mute ExpertSDR	Silenciar ExpertSDR
+Mute HDSDR	Silenciar HDSDR
 Auto-connect at startup	Conexión automática al iniciar
 Dark mode	Modo oscuro
 Check for updates	Buscar actualizaciones

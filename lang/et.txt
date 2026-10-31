@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK kaabel
  (off) ▾	 (väljas) ▾
 Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Vaigistus, mida ⇄ eirab (jääb vaigistatuks):
+Mutes ignored by ⇄ (stay muted, two at most):	Vaigistused, mida ⇄ eirab (jäävad vaigistatuks, kõige rohkem kaks):
 None	Puudub
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR ei kasuta Windowsi heli (vastuvõtt peatatud või heli ASIO kaudu): SDRLink ei saa seda vaigistada.
 ExpertSDR TCI port	ExpertSDR-i TCI-port
 TCI server port (ExpertSDR, Options > TCI):	TCI-serveri port (ExpertSDR, Options > TCI):
 Add memory	Lisa mälu
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Skaneerimine: määrake 
 Scan: check memories in "Scan setup"	Skaneerimine: märkige mälud jaotises „Skaneerimise seaded“
 Scan stopped	Skaneerimine peatatud
 ■ Stop scan	■ Peata skaneerimine
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Raadiojaama helikaart, salvestatakse kui Mute WebSDR ja Mute ExpertSDR on sees:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Raadiojaama helikaart, salvestatakse kui Mute WebSDR, Mute ExpertSDR ja Mute HDSDR on sees:
 None (always the speakers)	Puudub (alati kõlarid)
 REC button width	REC-nupu laius
 Narrow	Kitsas
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR-i helitugevus:
 TRX volume:	TRX helitugevus:
 ExpertSDR volume:	ExpertSDR-i helitugevus:
+HDSDR volume:	HDSDR-i helitugevus:
 Open log	Ava logi
 Text size…	Teksti suurus…
 Import/Export ▾	Import/Eksport ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Vaigista WebSDR
 Mute TRX	Vaigista TRX
 ⇄	⇄
 Mute ExpertSDR	Vaigista ExpertSDR
+Mute HDSDR	Vaigista HDSDR
 Auto-connect at startup	Ühenda käivitamisel automaatselt
 Dark mode	Tume režiim
 Check for updates	Kontrolli uuendusi

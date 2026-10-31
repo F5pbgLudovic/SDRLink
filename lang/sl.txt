@@ -132,8 +132,9 @@ SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (izkl.) ▾
 Mute TRX: connect the rig first	Utišaj TRX: najprej povežite postajo
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnost postaje ni na voljo pri tej postaji ali vmesniku (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Utišanje, ki ga ⇄ prezre (ostane utišano):
+Mutes ignored by ⇄ (stay muted, two at most):	Utišanja, ki jih ⇄ prezre (ostanejo utišana, največ dve):
 None	Brez
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR ne predvaja prek zvoka Windows (sprejem ustavljen ali zvok prek ASIO): SDRLink ga ne more utišati.
 ExpertSDR TCI port	Vrata TCI programa ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Vrata strežnika TCI (ExpertSDR, Options > TCI):
 Add memory	Dodaj pomnilnik
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Iskanje: vnesite začetn
 Scan: check memories in "Scan setup"	Iskanje: označite pomnilnike v »Nastavitve iskanja«
 Scan stopped	Iskanje ustavljeno
 ■ Stop scan	■ Ustavi iskanje
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Zvočna kartica postaje, posneta ko sta vklopljena Mute WebSDR in Mute ExpertSDR:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvočna kartica postaje, posneta ko so vklopljeni Mute WebSDR, Mute ExpertSDR in Mute HDSDR:
 None (always the speakers)	Nobena (vedno zvočniki)
 REC button width	Širina gumba REC
 Narrow	Ozko
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Glasnost WebSDR:
 TRX volume:	Glasnost TRX:
 ExpertSDR volume:	Glasnost ExpertSDR:
+HDSDR volume:	Glasnost HDSDR:
 Open log	Odpri dnevnik
 Text size…	Velikost besedila…
 Import/Export ▾	Uvoz/Izvoz ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Utišaj WebSDR
 Mute TRX	Utišaj TRX
 ⇄	⇄
 Mute ExpertSDR	Utišaj ExpertSDR
+Mute HDSDR	Utišaj HDSDR
 Auto-connect at startup	Samodejno poveži ob zagonu
 Dark mode	Temni način
 Check for updates	Preveri posodobitve

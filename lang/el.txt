@@ -132,8 +132,9 @@ SDRLINK cable	Καλώδιο SDRLINK
  (off) ▾	 (ανενεργό) ▾
 Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Σίγαση που αγνοεί το ⇄ (μένει σε σίγαση):
+Mutes ignored by ⇄ (stay muted, two at most):	Σιγάσεις που αγνοεί το ⇄ (μένουν σε σίγαση, έως δύο):
 None	Καμία
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	Το HDSDR δεν παίζει μέσω του ήχου των Windows (λήψη σταματημένη ή ήχος μέσω ASIO): το SDRLink δεν μπορεί να το θέσει σε σίγαση.
 ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
 Add memory	Προσθήκη μνήμης
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Σάρωση: ορίστ
 Scan: check memories in "Scan setup"	Σάρωση: επιλέξτε μνήμες στη «Ρύθμιση σάρωσης»
 Scan stopped	Η σάρωση σταμάτησε
 ■ Stop scan	■ Διακοπή σάρωσης
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Κάρτα ήχου του πομποδέκτη, εγγράφεται όταν είναι ενεργά τα Mute WebSDR και Mute ExpertSDR:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Κάρτα ήχου του πομποδέκτη, εγγράφεται όταν είναι ενεργά τα Mute WebSDR, Mute ExpertSDR και Mute HDSDR:
 None (always the speakers)	Καμία (πάντα τα ηχεία)
 REC button width	Πλάτος του κουμπιού REC
 Narrow	Στενό
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Ένταση WebSDR:
 TRX volume:	Ένταση TRX:
 ExpertSDR volume:	Ένταση ExpertSDR:
+HDSDR volume:	Ένταση HDSDR:
 Open log	Άνοιγμα ημερολογίου
 Text size…	Μέγεθος κειμένου…
 Import/Export ▾	Εισαγωγή/Εξαγωγή ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Σίγαση WebSDR
 Mute TRX	Σίγαση TRX
 ⇄	⇄
 Mute ExpertSDR	Σίγαση ExpertSDR
+Mute HDSDR	Σίγαση HDSDR
 Auto-connect at startup	Αυτόματη σύνδεση κατά την εκκίνηση
 Dark mode	Σκούρα λειτουργία
 Check for updates	Έλεγχος για ενημερώσεις

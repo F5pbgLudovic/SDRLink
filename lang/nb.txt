@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (av) ▾
 Mute TRX: connect the rig first	Demp rigg: koble til riggen først
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolum er ikke tilgjengelig med denne riggen eller dette grensesnittet (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Demping som ⇄ ignorerer (forblir dempet):
+Mutes ignored by ⇄ (stay muted, two at most):	Dempinger som ⇄ ignorerer (forblir dempet, høyst to):
 None	Ingen
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR spiller ikke gjennom Windows-lyden (mottak stoppet eller lyd via ASIO): SDRLink kan ikke dempe den.
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 Add memory	Legg til minne
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Skanning: angi start- og
 Scan: check memories in "Scan setup"	Skanning: kryss av minner i «Skanneoppsett»
 Scan stopped	Skanning stoppet
 ■ Stop scan	■ Stopp skanning
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radioens lydkort, tas opp når Mute WebSDR og Mute ExpertSDR er på:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radioens lydkort, tas opp når Mute WebSDR, Mute ExpertSDR og Mute HDSDR er på:
 None (always the speakers)	Ingen (alltid høyttalerne)
 REC button width	Bredde på REC-knappen
 Narrow	Smal
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR-volum:
 TRX volume:	Riggvolum:
 ExpertSDR volume:	ExpertSDR-volum:
+HDSDR volume:	HDSDR-volum:
 Open log	Åpne logg
 Text size…	Tekststørrelse…
 Import/Export ▾	Import/Eksport ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Demp WebSDR
 Mute TRX	Demp rigg
 ⇄	⇄
 Mute ExpertSDR	Demp ExpertSDR
+Mute HDSDR	Demp HDSDR
 Auto-connect at startup	Koble til automatisk ved oppstart
 Dark mode	Mørk modus
 Check for updates	Se etter oppdateringer

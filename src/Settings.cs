@@ -83,7 +83,9 @@ namespace SDRLink
         // Recherche des WebSDR lancée une seule fois, au premier démarrage (pas encore de fichier de réglages).
         public bool FirstSearchDone;
         public bool CheckUpdates = true;   // recherche d'une nouvelle version sur GitHub au démarrage
-        public int SwapIgnore = -1;        // coupure laissée de côté par le bouton ⇄ (-1 aucune, 0 WebSDR, 1 TX, 2 ExpertSDR)
+        // Coupures laissées de côté par le bouton ⇄ (0 WebSDR, 1 TX, 2 ExpertSDR, 3 HDSDR), deux au plus.
+        public List<int> SwapIgnore = new List<int>();
+        public const int MaxSwapIgnore = 2;
         public List<Favorite> Favorites = new List<Favorite>
         {
             new Favorite("Liste des WebSDR (websdr.org)", "http://www.websdr.org/"),
@@ -213,7 +215,16 @@ namespace SDRLink
                     case "Volume": s.DefaultVolume = Math.Max(0, Math.Min(100, Int(v, 100))); break;
                     case "FirstSearch": s.FirstSearchDone = v != "0"; break;
                     case "CheckUpdates": s.CheckUpdates = v != "0"; break;
-                    case "SwapIgnore": s.SwapIgnore = Math.Max(-1, Math.Min(2, Int(v, -1))); break;
+                    case "SwapIgnore":
+                        // « 0,3 » ; une seule valeur dans les versions d'avant la 1.15, -1 pour aucune.
+                        s.SwapIgnore.Clear();
+                        foreach (string part in v.Split(','))
+                        {
+                            int sk = Int(part.Trim(), -1);
+                            if (sk >= 0 && sk <= 3 && !s.SwapIgnore.Contains(sk) && s.SwapIgnore.Count < MaxSwapIgnore) s.SwapIgnore.Add(sk);
+                        }
+                        s.SwapIgnore.Sort();
+                        break;
                     case "Freq": if (s.FreqHistory.Count < 100) s.FreqHistory.Add(v); break;
                     default:
                         // List1 à List10 : noms des listes de favoris.
@@ -310,7 +321,7 @@ namespace SDRLink
             Line(sb, "Volume", DefaultVolume);
             Line(sb, "FirstSearch", FirstSearchDone ? 1 : 0);
             Line(sb, "CheckUpdates", CheckUpdates ? 1 : 0);
-            Line(sb, "SwapIgnore", SwapIgnore);
+            Line(sb, "SwapIgnore", SwapIgnore.Count == 0 ? "-1" : string.Join(",", SwapIgnore.ConvertAll(k => k.ToString()).ToArray()));
             foreach (Favorite f in Favorites) Line(sb, "Fav", f.ToSetting());
             foreach (string f in FreqHistory) Line(sb, "Freq", f);
             try { File.WriteAllText(FilePath, sb.ToString(), Encoding.UTF8); } catch { }

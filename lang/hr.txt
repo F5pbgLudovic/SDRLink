@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK kabel
  (off) ▾	 (isklj.) ▾
 Mute TRX: connect the rig first	Utišaj TRX: najprije spojite uređaj
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnoća uređaja nije dostupna s ovim uređajem ili sučeljem (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Utišavanje koje ⇄ preskače (ostaje utišano):
+Mutes ignored by ⇄ (stay muted, two at most):	Utišavanja koja ⇄ preskače (ostaju utišana, najviše dva):
 None	Nijedno
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR ne svira preko zvuka Windowsa (prijem zaustavljen ili zvuk preko ASIO): SDRLink ga ne može utišati.
 ExpertSDR TCI port	TCI priključak ExpertSDR-a
 TCI server port (ExpertSDR, Options > TCI):	Priključak TCI poslužitelja (ExpertSDR, Options > TCI):
 Add memory	Dodaj memoriju
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Pretraživanje: unesite 
 Scan: check memories in "Scan setup"	Pretraživanje: označite memorije u „Postavke pretraživanja”
 Scan stopped	Pretraživanje zaustavljeno
 ■ Stop scan	■ Zaustavi pretraživanje
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Zvučna kartica uređaja, snima se kad su uključeni Mute WebSDR i Mute ExpertSDR:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvučna kartica uređaja, snima se kad su uključeni Mute WebSDR, Mute ExpertSDR i Mute HDSDR:
 None (always the speakers)	Nijedna (uvijek zvučnici)
 REC button width	Širina gumba REC
 Narrow	Usko
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Glasnoća WebSDR-a:
 TRX volume:	Glasnoća TRX:
 ExpertSDR volume:	Glasnoća ExpertSDR-a:
+HDSDR volume:	Glasnoća HDSDR-a:
 Open log	Otvori dnevnik
 Text size…	Veličina teksta…
 Import/Export ▾	Uvoz/Izvoz ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Utišaj WebSDR
 Mute TRX	Utišaj TRX
 ⇄	⇄
 Mute ExpertSDR	Utišaj ExpertSDR
+Mute HDSDR	Utišaj HDSDR
 Auto-connect at startup	Automatsko spajanje pri pokretanju
 Dark mode	Tamni način
 Check for updates	Provjeri ažuriranja

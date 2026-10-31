@@ -44,8 +44,14 @@ namespace SDRLink
         string updateVersion, updateUrl;
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
-        Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr;
+        Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr, btnMuteHdsdr;
         Button btnMemRecent, btnScan, btnRec;
+        bool hdsdrMuted, hdsdrMutedByUs;   // son de HDSDR coupé, et coupé par SDRLink
+        bool hdsdrRunning, hdsdrWin;       // HDSDR lancé ; il a une session dans le mélangeur de Windows
+        bool hdsdrVolumeLoading;
+        Label lblHdsdrVolumeCaption, lblHdsdrVolume;
+        TrackBar trkHdsdrVolume;
+        bool? audioShownHdsdr, audioShownSwap;
         bool sdrMuted, rigMuted;
         bool esdrMuted, esdrMutedByUs;   // son d'ExpertSDR coupé, et coupé par SDRLink
         bool esdrRunning, esdrWin;       // ExpertSDR lancé ; il joue par le son de Windows (sinon : liaison TCI)
@@ -134,7 +140,7 @@ namespace SDRLink
             };
             // Surveillance de la synchro (toutes les secondes) et délai de sécurité du PTT.
             syncTimer.Interval = 1000;
-            syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); UpdateDisplays(); if (++esdrPoll % 3 == 0) CheckExpertSdr(); else RefreshExpertSdr(); };
+            syncTimer.Tick += delegate { CheckSync(); CheckPttTimeout(); UpdateDisplays(); if (++esdrPoll % 3 == 0) { FindSoundPrograms(); CheckExpertSdr(); CheckHdsdr(); } else RefreshExpertSdr(); };
             syncTimer.Start();
             scanTimer.Tick += delegate { ScanNext(); };
             LoadSettingsIntoUi();
@@ -156,6 +162,7 @@ namespace SDRLink
                 if (cableSink != null) { cableSink.Dispose(); cableSink = null; }
                 // ExpertSDR coupé par SDRLink : son rétabli (Windows garde la coupure d'un logiciel d'une fois sur l'autre).
                 try { if (esdrMutedByUs) SetExpertSdrMute(false); } catch { }
+                try { if (hdsdrMutedByUs) AudioEndpoints.ProcessMute(IsHdsdr, false); } catch { }
                 if (esdrTci != null) { esdrTci.Dispose(); esdrTci = null; }
                 SaveUiToSettings();
                 SaveWindowBounds();
@@ -651,8 +658,11 @@ namespace SDRLink
             // Mute ExpertSDR est masqué tant qu'ExpertSDR ne répond pas : le port se règle aussi par clic droit sur « Volume WebSDR ».
             lblVolumeCaption.ContextMenuStrip = audio.ContextMenuStrip = esdrMenu;
             btnMuteSwap.Visible = false;
-            btnMuteSdr.Tag = btnMuteRig.Tag = btnMuteSwap.Tag = btnMuteEsdr.Tag = Theme.Custom;
-            btnMuteSdr.FlatStyle = btnMuteRig.FlatStyle = btnMuteSwap.FlatStyle = btnMuteEsdr.FlatStyle = FlatStyle.Flat;
+            // Visible seulement quand HDSDR tourne : coupe son son dans le mélangeur de volume de Windows.
+            btnMuteHdsdr = Btn("Mute HDSDR", "Mute HDSDR", delegate { ToggleHdsdrMute(); });
+            btnMuteHdsdr.Visible = false;
+            btnMuteSdr.Tag = btnMuteRig.Tag = btnMuteSwap.Tag = btnMuteEsdr.Tag = btnMuteHdsdr.Tag = Theme.Custom;
+            btnMuteSdr.FlatStyle = btnMuteRig.FlatStyle = btnMuteSwap.FlatStyle = btnMuteEsdr.FlatStyle = btnMuteHdsdr.FlatStyle = FlatStyle.Flat;
             trkRigVolume = new TrackBar();
             trkRigVolume.Minimum = 0;
             trkRigVolume.Maximum = 100;
@@ -687,14 +697,32 @@ namespace SDRLink
             lblEsdrVolume.Margin = new Padding(0, 7, 2, 0);
             lblEsdrVolumeCaption = Lbl("Volume ExpertSDR :", "ExpertSDR volume:");
             lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = false;
-            // Ordre : ⇄, les trois Mute, puis chaque volume (libellé, réglette, valeur), et REC.
+            // Volume de HDSDR (mélangeur de Windows), affiché quand HDSDR tourne.
+            trkHdsdrVolume = new TrackBar();
+            trkHdsdrVolume.Minimum = 0;
+            trkHdsdrVolume.Maximum = 100;
+            trkHdsdrVolume.TickStyle = TickStyle.None;
+            trkHdsdrVolume.AutoSize = false;
+            trkHdsdrVolume.Size = new Size(110, 28);
+            trkHdsdrVolume.SmallChange = 5;
+            trkHdsdrVolume.LargeChange = 10;
+            trkHdsdrVolume.Margin = new Padding(2, 2, 0, 0);
+            trkHdsdrVolume.ValueChanged += delegate { OnHdsdrVolumeChanged(); };
+            lblHdsdrVolume = new Label();
+            lblHdsdrVolume.AutoSize = false;
+            lblHdsdrVolume.Size = new Size(44, 20);
+            lblHdsdrVolume.Margin = new Padding(0, 7, 2, 0);
+            lblHdsdrVolumeCaption = Lbl("Volume HDSDR :", "HDSDR volume:");
+            lblHdsdrVolumeCaption.Visible = trkHdsdrVolume.Visible = lblHdsdrVolume.Visible = false;
+            // Ordre : ⇄, les quatre Mute, puis chaque volume (libellé, réglette, valeur), et REC.
             // Les volumes masqués ne prennent pas de place : REC suit toujours le dernier volume affiché.
             audioOrder = new Control[]
             {
-                btnMuteSwap, btnMuteSdr, btnMuteRig, btnMuteEsdr,
+                btnMuteSwap, btnMuteSdr, btnMuteRig, btnMuteEsdr, btnMuteHdsdr,
                 lblVolumeCaption, trkVolume, lblVolume,
                 lblRigVolumeCaption, trkRigVolume, lblRigVolume,
                 lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
+                lblHdsdrVolumeCaption, trkHdsdrVolume, lblHdsdrVolume,
                 btnRec,
             };
             audio.Controls.AddRange(audioOrder);
@@ -745,6 +773,7 @@ namespace SDRLink
             AddColorMenu(btnMuteSdr, Slot("MuteSdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteSdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
             AddColorMenu(btnMuteRig, Slot("MuteRigCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteRigOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
             AddColorMenu(btnMuteEsdr, Slot("MuteEsdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteEsdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
+            AddColorMenu(btnMuteHdsdr, Slot("MuteHdsdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteHdsdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
 
             Controls.Add(table);
             Controls.Add(strip);
@@ -2613,47 +2642,52 @@ namespace SDRLink
             btnMuteSwap.ForeColor = Theme.Fore;
             btnMuteSwap.FlatAppearance.BorderColor = Theme.Border;
             StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable, "MuteEsdr");
+            StyleToggle(btnMuteHdsdr, hdsdrMuted, hdsdrWin, "MuteHdsdr");
         }
 
         // ---------------------------------------------------------------- Bouton ⇄
 
-        // Coupures parcourues par le bouton ⇄ : 0 WebSDR, 1 poste (volume télécommandé), 2 ExpertSDR (s'il répond).
-        static readonly string[] SwapNamesFr = { "Mute WebSDR", "Mute TX", "Mute ExpertSDR" };
-        static readonly string[] SwapNamesEn = { "Mute WebSDR", "Mute TRX", "Mute ExpertSDR" };
+        // Coupures parcourues par le bouton ⇄ : 0 WebSDR, 1 poste (volume télécommandé), 2 ExpertSDR (s'il répond),
+        // 3 HDSDR (s'il joue par le son de Windows).
+        const int SwapCount = 4;
+        static readonly string[] SwapNamesFr = { "Mute WebSDR", "Mute TX", "Mute ExpertSDR", "Mute HDSDR" };
+        static readonly string[] SwapNamesEn = { "Mute WebSDR", "Mute TRX", "Mute ExpertSDR", "Mute HDSDR" };
 
         bool SwapAvailable(int i)
         {
             if (i == 0) return true;
             if (i == 1) return worker != null && rigAfSupported == 1;
-            return EsdrAvailable;
+            if (i == 2) return EsdrAvailable;
+            return hdsdrWin;
         }
 
-        bool SwapMuted(int i) { return i == 0 ? sdrMuted : i == 1 ? rigMuted : esdrMuted; }
+        bool SwapMuted(int i) { return i == 0 ? sdrMuted : i == 1 ? rigMuted : i == 2 ? esdrMuted : hdsdrMuted; }
 
         void SetSwapMute(int i, bool mute)
         {
             if (SwapMuted(i) == mute) return;
             if (i == 0) { sdrMuted = mute; ApplyVolume(); }
             else if (i == 1) ToggleRigMute();
-            else
+            else if (i == 2)
             {
                 bool? r = SetExpertSdrMute(mute);
                 if (!r.HasValue) return;
                 esdrMuted = esdrMutedByUs = r.Value;
                 Log.Write((esdrMuted ? "Son d'ExpertSDR coupé" : "Son d'ExpertSDR rétabli") + (esdrWin ? " (mélangeur Windows)" : " (TCI)"));
             }
+            else SetHdsdrMute(mute);
         }
 
         // Aucune coupure : toutes coupées. Une seule réception audible : elle est coupée et la suivante rétablie.
         // Tout coupé : la première est rétablie. Plusieurs audibles (sans l'être toutes) : toutes coupées.
-        // La coupure laissée de côté (clic droit) reste coupée, pour n'entendre qu'une réception.
+        // Les coupures laissées de côté (clic droit, deux au plus) restent coupées : ⇄ permute entre les autres.
         void SwapMutes()
         {
             List<int> used = new List<int>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < SwapCount; i++)
             {
                 if (!SwapAvailable(i)) continue;
-                if (i == settings.SwapIgnore) SetSwapMute(i, true);
+                if (settings.SwapIgnore.Contains(i)) SetSwapMute(i, true);
                 else used.Add(i);
             }
             if (used.Count == 1) SetSwapMute(used[0], !SwapMuted(used[0]));
@@ -2670,31 +2704,118 @@ namespace SDRLink
                 else foreach (int i in used) SetSwapMute(i, true);
             }
             UpdateEsdrControls();
+            UpdateHdsdrControls();
         }
 
+        // Cases à cocher : deux coupures au plus ; les autres sont grisées tant que deux sont cochées.
         void FillSwapMenu(ContextMenuStrip menu)
         {
             menu.Items.Clear();
-            ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Coupure dont ⇄ ne tient pas compte (reste coupée) :", "Mute ignored by ⇄ (stays muted):"));
+            ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Coupures dont ⇄ ne tient pas compte (restent coupées, deux au plus) :", "Mutes ignored by ⇄ (stay muted, two at most):"));
             title.Enabled = false;
             menu.Items.Add(title);
-            for (int i = -1; i < 3; i++)
+            ToolStripMenuItem none = new ToolStripMenuItem(Lang.T("Aucune", "None"));
+            none.Checked = settings.SwapIgnore.Count == 0;
+            none.Click += delegate { SetSwapIgnore(-1); };
+            menu.Items.Add(none);
+            for (int i = 0; i < SwapCount; i++)
             {
                 int idx = i;
-                ToolStripMenuItem it = new ToolStripMenuItem(i < 0 ? Lang.T("Aucune", "None") : Lang.T(SwapNamesFr[i], SwapNamesEn[i]));
-                it.Checked = settings.SwapIgnore == i;
+                ToolStripMenuItem it = new ToolStripMenuItem(Lang.T(SwapNamesFr[i], SwapNamesEn[i]));
+                it.Checked = settings.SwapIgnore.Contains(i);
+                it.Enabled = it.Checked || settings.SwapIgnore.Count < Settings.MaxSwapIgnore;
                 it.Click += delegate { SetSwapIgnore(idx); };
                 menu.Items.Add(it);
             }
         }
 
+        // -1 : plus aucune coupure laissée de côté ; sinon coche ou décoche la coupure i (cochée : coupée tout de suite).
         void SetSwapIgnore(int i)
         {
-            settings.SwapIgnore = i;
+            bool add = false;
+            if (i < 0) settings.SwapIgnore.Clear();
+            else if (settings.SwapIgnore.Contains(i)) settings.SwapIgnore.Remove(i);
+            else if (settings.SwapIgnore.Count < Settings.MaxSwapIgnore) { settings.SwapIgnore.Add(i); settings.SwapIgnore.Sort(); add = true; }
+            else return;
             settings.Save();
-            Log.Write("Bouton ⇄ : coupure laissée de côté = " + (i < 0 ? "aucune" : SwapNamesFr[i]));
-            if (i >= 0 && SwapAvailable(i)) SetSwapMute(i, true);
+            Log.Write("Bouton ⇄ : coupures laissées de côté = " + (settings.SwapIgnore.Count == 0 ? "aucune"
+                : string.Join(", ", settings.SwapIgnore.ConvertAll(delegate(int k) { return SwapNamesFr[k]; }).ToArray())));
+            if (add && SwapAvailable(i)) SetSwapMute(i, true);
             UpdateEsdrControls();
+            UpdateHdsdrControls();
+        }
+
+        // ---------------------------------------------------------------- HDSDR
+
+        // Processus HDSDR (identifiants relevés à chaque surveillance).
+        readonly Dictionary<int, bool> hdsdrPids = new Dictionary<int, bool>();
+
+        bool IsHdsdr(int pid) { return hdsdrPids.ContainsKey(pid); }
+
+        // Toutes les 3 secondes : Mute et Volume HDSDR affichés si le logiciel tourne. Son et volume réglés dans le
+        // mélangeur de Windows ; tant que HDSDR n'y a pas de session (pas démarré, ou son sorti par ASIO), ils sont grisés.
+        void CheckHdsdr()
+        {
+            hdsdrRunning = hdsdrPids.Count > 0;
+            bool? m = null;
+            if (hdsdrRunning)
+                try { m = AudioEndpoints.ProcessMute(IsHdsdr, null); } catch (Exception ex) { Log.Write("HDSDR, lecture du son : " + ex.Message); }
+            hdsdrWin = m.HasValue;
+            if (hdsdrWin)
+            {
+                hdsdrMuted = m.Value;
+                try { ShowHdsdrVolume(AudioEndpoints.ProcessVolume(IsHdsdr, null)); } catch { }
+            }
+            else hdsdrMuted = false;
+            if (!hdsdrRunning) hdsdrMutedByUs = false;
+            UpdateHdsdrControls();
+        }
+
+        void UpdateHdsdrControls()
+        {
+            UpdateAudioRow();
+            trkHdsdrVolume.Enabled = hdsdrWin;
+            lblHdsdrVolume.Text = hdsdrWin ? trkHdsdrVolume.Value + " %" : "—";
+            UpdateMuteButtons();
+        }
+
+        void ShowHdsdrVolume(int pct)
+        {
+            if (pct < 0 || trkHdsdrVolume.Capture || trkHdsdrVolume.Value == pct) return;   // pas pendant que l'on fait glisser le curseur
+            hdsdrVolumeLoading = true;
+            trkHdsdrVolume.Value = Math.Max(0, Math.Min(100, pct));
+            hdsdrVolumeLoading = false;
+        }
+
+        void OnHdsdrVolumeChanged()
+        {
+            lblHdsdrVolume.Text = hdsdrWin ? trkHdsdrVolume.Value + " %" : "—";
+            if (hdsdrVolumeLoading || !hdsdrWin) return;
+            try { AudioEndpoints.ProcessVolume(IsHdsdr, trkHdsdrVolume.Value); } catch { }
+        }
+
+        void ToggleHdsdrMute()
+        {
+            if (!hdsdrWin) CheckHdsdr();   // HDSDR vient peut-être de démarrer sa réception
+            if (!hdsdrWin)
+            {
+                ShowStatus(Lang.T("HDSDR ne passe pas par le son de Windows (réception arrêtée, ou son sorti par ASIO) : SDRLink ne peut pas couper son son.",
+                    "HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it."));
+                return;
+            }
+            SetHdsdrMute(!hdsdrMuted);
+            UpdateHdsdrControls();
+        }
+
+        // Mélangeur de volume de Windows.
+        void SetHdsdrMute(bool mute)
+        {
+            bool? r = null;
+            try { r = AudioEndpoints.ProcessMute(IsHdsdr, mute); }
+            catch (Exception ex) { Log.Write("HDSDR, coupure du son : " + ex.Message); }
+            if (!r.HasValue) return;
+            hdsdrMuted = hdsdrMutedByUs = r.Value;
+            Log.Write(hdsdrMuted ? "Son de HDSDR coupé (mélangeur Windows)" : "Son de HDSDR rétabli (mélangeur Windows)");
         }
 
         // ---------------------------------------------------------------- ExpertSDR
@@ -2706,17 +2827,28 @@ namespace SDRLink
 
         bool EsdrAvailable { get { return esdrWin || (esdrTci != null && esdrTci.Connected); } }
 
+        // Toutes les 3 secondes : processus ExpertSDR et HDSDR en cours, relevés en un seul passage.
+        void FindSoundPrograms()
+        {
+            esdrPids.Clear();
+            hdsdrPids.Clear();
+            foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses())
+            {
+                try
+                {
+                    string name = p.ProcessName;
+                    if (name.StartsWith("ExpertSDR", StringComparison.OrdinalIgnoreCase)) esdrPids[p.Id] = true;
+                    else if (name.StartsWith("HDSDR", StringComparison.OrdinalIgnoreCase)) hdsdrPids[p.Id] = true;
+                }
+                catch { }
+                p.Dispose();
+            }
+        }
+
         // Toutes les 3 secondes : Mute et Volume ExpertSDR affichés si le logiciel tourne. Son par Windows : état lu
         // dans le mélangeur ; sinon liaison TCI (tentée en arrière-plan toutes les 10 s tant qu'elle ne répond pas).
         void CheckExpertSdr()
         {
-            esdrPids.Clear();
-            foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses())
-            {
-                try { if (p.ProcessName.StartsWith("ExpertSDR", StringComparison.OrdinalIgnoreCase)) esdrPids[p.Id] = true; }
-                catch { }
-                p.Dispose();
-            }
             esdrRunning = esdrPids.Count > 0;
             if (!esdrRunning)
             {
@@ -2797,17 +2929,21 @@ namespace SDRLink
         }
 
         // Ligne de son : Mute TX et Volume TX seulement si le volume du poste est télécommandé, Mute et Volume ExpertSDR
-        // seulement si ExpertSDR répond, ⇄ seulement s'il y a au moins deux sons à permuter. Les commandes masquées ne
-        // laissent pas de place vide (la ligne se resserre à gauche).
+        // seulement si ExpertSDR répond, Mute et Volume HDSDR dès que HDSDR est lancé, ⇄ seulement s'il y a au moins
+        // deux sons à permuter. Les commandes masquées ne laissent pas de place vide (la ligne se resserre à gauche).
         void UpdateAudioRow()
         {
-            bool rig = worker != null && rigAfSupported == 1, esdr = EsdrAvailable;
-            if (audioShownRig == rig && audioShownEsdr == esdr) return;
+            bool rig = worker != null && rigAfSupported == 1, esdr = EsdrAvailable, hdsdr = hdsdrRunning;
+            bool swap = rig || esdr || hdsdrWin;
+            if (audioShownRig == rig && audioShownEsdr == esdr && audioShownHdsdr == hdsdr && audioShownSwap == swap) return;
             audioShownRig = rig;
             audioShownEsdr = esdr;
+            audioShownHdsdr = hdsdr;
+            audioShownSwap = swap;
             lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = rig;
             btnMuteEsdr.Visible = lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = esdr;
-            btnMuteSwap.Visible = rig || esdr;
+            btnMuteHdsdr.Visible = lblHdsdrVolumeCaption.Visible = trkHdsdrVolume.Visible = lblHdsdrVolume.Visible = hdsdr;
+            btnMuteSwap.Visible = swap;
             OrderAudioRow();
         }
 
@@ -3235,8 +3371,8 @@ namespace SDRLink
         AudioRecorder recorder;
         string recName;             // nom proposé pour le fichier : date, heure, fréquence et mode au départ
 
-        // Seul le poste est écouté : Mute WebSDR actif, et Mute ExpertSDR aussi si ExpertSDR répond.
-        bool OnlyRigHeard { get { return sdrMuted && (!EsdrAvailable || esdrMuted); } }
+        // Seul le poste est écouté : Mute WebSDR actif, Mute ExpertSDR aussi si ExpertSDR répond, Mute HDSDR si HDSDR joue.
+        bool OnlyRigHeard { get { return sdrMuted && (!EsdrAvailable || esdrMuted) && (!hdsdrWin || hdsdrMuted); } }
 
         void StartRecording()
         {
@@ -3278,8 +3414,8 @@ namespace SDRLink
         void FillRecCardMenu(ContextMenuStrip m)
         {
             m.Items.Clear();
-            ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Carte son du poste, enregistrée quand Mute WebSDR et Mute ExpertSDR sont actifs :",
-                "Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:"));
+            ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Carte son du poste, enregistrée quand Mute WebSDR, Mute ExpertSDR et Mute HDSDR sont actifs :",
+                "Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:"));
             title.Enabled = false;
             m.Items.Add(title);
             ToolStripMenuItem none = new ToolStripMenuItem(Lang.T("Aucune (toujours les haut-parleurs)", "None (always the speakers)"));

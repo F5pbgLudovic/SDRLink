@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK-kaapeli
  (off) ▾	 (pois) ▾
 Mute TRX: connect the rig first	Mykistä TRX: yhdistä ensin radio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radion äänenvoimakkuutta ei voi säätää tällä radiolla tai liitännällä (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Mykistys, jonka ⇄ ohittaa (pysyy mykistettynä):
+Mutes ignored by ⇄ (stay muted, two at most):	Mykistykset, jotka ⇄ ohittaa (pysyvät mykistettyinä, enintään kaksi):
 None	Ei mitään
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR ei soita Windowsin äänen kautta (vastaanotto pysäytetty tai ääni ASIO:n kautta): SDRLink ei voi mykistää sitä.
 ExpertSDR TCI port	ExpertSDR:n TCI-portti
 TCI server port (ExpertSDR, Options > TCI):	TCI-palvelimen portti (ExpertSDR, Options > TCI):
 Add memory	Lisää muisti
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Pyyhkäisy: anna alku- j
 Scan: check memories in "Scan setup"	Pyyhkäisy: valitse muistit kohdassa ”Pyyhkäisyn asetukset”
 Scan stopped	Pyyhkäisy pysäytetty
 ■ Stop scan	■ Pysäytä pyyhkäisy
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radion äänikortti, tallennetaan kun Mute WebSDR ja Mute ExpertSDR ovat päällä:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radion äänikortti, tallennetaan kun Mute WebSDR, Mute ExpertSDR ja Mute HDSDR ovat päällä:
 None (always the speakers)	Ei mitään (aina kaiuttimet)
 REC button width	REC-painikkeen leveys
 Narrow	Kapea
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR:n äänenvoimakkuus:
 TRX volume:	TRX-voimakkuus:
 ExpertSDR volume:	ExpertSDR:n äänenvoimakkuus:
+HDSDR volume:	HDSDR:n äänenvoimakkuus:
 Open log	Avaa loki
 Text size…	Tekstin koko…
 Import/Export ▾	Tuonti/Vienti ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Mykistä WebSDR
 Mute TRX	Mykistä TRX
 ⇄	⇄
 Mute ExpertSDR	Mykistä ExpertSDR
+Mute HDSDR	Mykistä HDSDR
 Auto-connect at startup	Yhdistä automaattisesti käynnistettäessä
 Dark mode	Tumma tila
 Check for updates	Tarkista päivitykset

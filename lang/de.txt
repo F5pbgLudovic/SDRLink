@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK-Kabel
  (off) ▾	 (aus) ▾
 Mute TRX: connect the rig first	TRX stumm: Bitte zuerst den TRX verbinden
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-Lautstärke mit diesem Gerät oder dieser Schnittstelle nicht verfügbar (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Von ⇄ ignorierte Stummschaltung (bleibt stumm):
+Mutes ignored by ⇄ (stay muted, two at most):	Von ⇄ ignorierte Stummschaltungen (bleiben stumm, höchstens zwei):
 None	Keine
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR gibt den Ton nicht über Windows aus (Empfang gestoppt oder Ton über ASIO): SDRLink kann es nicht stummschalten.
 ExpertSDR TCI port	TCI-Port von ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-Server-Port (ExpertSDR, Options > TCI):
 Add memory	Speicher hinzufügen
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Suchlauf: Start- und End
 Scan: check memories in "Scan setup"	Suchlauf: Speicher unter „Suchlauf einrichten“ ankreuzen
 Scan stopped	Suchlauf beendet
 ■ Stop scan	■ Suchlauf beenden
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Soundkarte des Funkgeräts, aufgenommen wenn Mute WebSDR und Mute ExpertSDR aktiv sind:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Soundkarte des Funkgeräts, aufgenommen wenn Mute WebSDR, Mute ExpertSDR und Mute HDSDR aktiv sind:
 None (always the speakers)	Keine (immer die Lautsprecher)
 REC button width	Breite der REC-Taste
 Narrow	Schmal
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR-Lautstärke:
 TRX volume:	TRX-Lautst.:
 ExpertSDR volume:	ExpertSDR-Lautstärke:
+HDSDR volume:	HDSDR-Lautstärke:
 Open log	Log öffnen
 Text size…	Textgröße…
 Import/Export ▾	Import/Export ▾
@@ -257,6 +259,7 @@ Mute WebSDR	WebSDR stumm
 Mute TRX	TRX stumm
 ⇄	⇄
 Mute ExpertSDR	ExpertSDR stumm
+Mute HDSDR	HDSDR stumm
 Auto-connect at startup	Beim Start automatisch verbinden
 Dark mode	Dunkelmodus
 Check for updates	Nach Updates suchen

@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (uit) ▾
 Mute TRX: connect the rig first	TRX dempen: verbind eerst de transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-volume niet beschikbaar met deze transceiver of interface (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Demping die ⇄ negeert (blijft gedempt):
+Mutes ignored by ⇄ (stay muted, two at most):	Dempingen die ⇄ negeert (blijven gedempt, hoogstens twee):
 None	Geen
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR speelt niet via het Windows-geluid (ontvangst gestopt of geluid via ASIO): SDRLink kan het niet dempen.
 ExpertSDR TCI port	TCI-poort van ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
 Add memory	Geheugen toevoegen
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Scannen: geef begin- en 
 Scan: check memories in "Scan setup"	Scannen: vink geheugens aan in "Scan instellen"
 Scan stopped	Scannen gestopt
 ■ Stop scan	■ Scannen stoppen
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Geluidskaart van de transceiver, opgenomen wanneer Mute WebSDR en Mute ExpertSDR aan staan:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Geluidskaart van de transceiver, opgenomen wanneer Mute WebSDR, Mute ExpertSDR en Mute HDSDR aan staan:
 None (always the speakers)	Geen (altijd de luidsprekers)
 REC button width	Breedte van de REC-knop
 Narrow	Smal
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR-volume:
 TRX volume:	TRX-volume:
 ExpertSDR volume:	ExpertSDR-volume:
+HDSDR volume:	HDSDR-volume:
 Open log	Log openen
 Text size…	Tekstgrootte…
 Import/Export ▾	Importeren/Exporteren ▾
@@ -257,6 +259,7 @@ Mute WebSDR	WebSDR dempen
 Mute TRX	TRX dempen
 ⇄	⇄
 Mute ExpertSDR	ExpertSDR dempen
+Mute HDSDR	HDSDR dempen
 Auto-connect at startup	Automatisch verbinden bij start
 Dark mode	Donkere modus
 Check for updates	Controleren op updates

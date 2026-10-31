@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK kábel
  (off) ▾	 (ki) ▾
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	A ⇄ által figyelmen kívül hagyott némítás (némítva marad):
+Mutes ignored by ⇄ (stay muted, two at most):	A ⇄ által figyelmen kívül hagyott némítások (némítva maradnak, legfeljebb kettő):
 None	Nincs
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	A HDSDR nem a Windows hangján szól (vétel leállítva, vagy hang ASIO-n): az SDRLink nem tudja némítani.
 ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
 Add memory	Memória hozzáadása
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Pásztázás: adja meg a
 Scan: check memories in "Scan setup"	Pásztázás: jelöljön be memóriákat a „Pásztázás beállítása” ablakban
 Scan stopped	Pásztázás leállítva
 ■ Stop scan	■ Pásztázás leállítása
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	A rádió hangkártyája, felvétel ha a Mute WebSDR és a Mute ExpertSDR be van kapcsolva:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	A rádió hangkártyája, felvétel ha a Mute WebSDR, a Mute ExpertSDR és a Mute HDSDR be van kapcsolva:
 None (always the speakers)	Nincs (mindig a hangszórók)
 REC button width	A REC gomb szélessége
 Narrow	Keskeny
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR hangerő:
 TRX volume:	TRX hangerő:
 ExpertSDR volume:	ExpertSDR hangerő:
+HDSDR volume:	HDSDR hangerő:
 Open log	Napló megnyitása
 Text size…	Szövegméret…
 Import/Export ▾	Import/Export ▾
@@ -257,6 +259,7 @@ Mute WebSDR	WebSDR némítás
 Mute TRX	TRX némítás
 ⇄	⇄
 Mute ExpertSDR	ExpertSDR némítás
+Mute HDSDR	HDSDR némítás
 Auto-connect at startup	Automatikus csatlakozás indításkor
 Dark mode	Sötét mód
 Check for updates	Frissítések keresése

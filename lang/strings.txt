@@ -132,8 +132,9 @@ SDRLINK cable	Câble SDRLINK
  (off) ▾	 (arrêt) ▾
 Mute TRX: connect the rig first	Mute TX : connectez d'abord le poste
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume du poste non disponible avec ce poste ou cette interface (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Coupure dont ⇄ ne tient pas compte (reste coupée) :
+Mutes ignored by ⇄ (stay muted, two at most):	Coupures dont ⇄ ne tient pas compte (restent coupées, deux au plus) :
 None	Aucune
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR ne passe pas par le son de Windows (réception arrêtée, ou son sorti par ASIO) : SDRLink ne peut pas couper son son.
 ExpertSDR TCI port	Port TCI d'ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port du serveur TCI (ExpertSDR, Options > TCI) :
 Add memory	Ajouter une mémoire
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Scan : indiquez les fré
 Scan: check memories in "Scan setup"	Scan : cochez des mémoires dans « Conf scan »
 Scan stopped	Scan arrêté
 ■ Stop scan	■ Arrêter le scan
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Carte son du poste, enregistrée quand Mute WebSDR et Mute ExpertSDR sont actifs :
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Carte son du poste, enregistrée quand Mute WebSDR, Mute ExpertSDR et Mute HDSDR sont actifs :
 None (always the speakers)	Aucune (toujours les haut-parleurs)
 REC button width	Largeur du bouton REC
 Narrow	Étroit
@@ -234,6 +235,7 @@ WebSDR:	WebSDR :
 WebSDR volume:	Volume WebSDR :
 TRX volume:	Volume TX :
 ExpertSDR volume:	Volume ExpertSDR :
+HDSDR volume:	Volume HDSDR :
 Open log	Ouvrir le journal
 Text size…	Taille du texte…
 Import/Export ▾	Import/Export ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Mute WebSDR
 Mute TRX	Mute TX
 ⇄	⇄
 Mute ExpertSDR	Mute ExpertSDR
+Mute HDSDR	Mute HDSDR
 Auto-connect at startup	Connexion auto au démarrage
 Dark mode	Mode sombre
 Check for updates	Vérifier les mises à jour

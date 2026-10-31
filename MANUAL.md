@@ -26,7 +26,7 @@ Overview; each feature is detailed further down in its own section.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode, **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**.
-6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume** (only the sounds available), then **REC**.
+6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**.
 7. **The WebSDR page**, then the **status bar** (messages, update link).
 
 ## All right-clicks
@@ -43,8 +43,8 @@ Overview; each feature is detailed further down in its own section.
 | kHz entry | remove the value from the history, remove all |
 | Memories | store the current frequency, button colour |
 | Favorites list (next to the address) | rename the list |
-| ⇄ | receiver that ⇄ keeps muted |
-| Mute WebSDR, Mute TRX | colour when muted / sound on |
+| ⇄ | receivers that ⇄ keeps muted (check boxes, two at most) |
+| Mute WebSDR, Mute TRX, Mute HDSDR | colour when muted / sound on |
 | Mute ExpertSDR | ExpertSDR TCI port, colour when muted / sound on |
 | "WebSDR volume" | ExpertSDR TCI port |
 | REC | rig sound card, REC button colour, width (narrow / wide) |
@@ -194,7 +194,7 @@ Internet access is required. If a directory does not answer, the others are stil
 
 ## WebSDR volume
 
-The audio row, always at the start of the row below the WebSDR bar, reads from left to right: the ⇄ button, Mute WebSDR, Mute TRX, Mute ExpertSDR, then WebSDR volume, TRX volume and ExpertSDR volume, each with its slider and its value in %. Mute TRX and TRX volume only appear if the rig volume is remotely controlled, Mute ExpertSDR and ExpertSDR volume only if ExpertSDR is running and answers (Windows audio or TCI), and ⇄ only if there are at least two audio sources to switch between. Missing controls leave no gap: the row closes up to the left. The **WebSDR volume** slider only sets the WebSDR audio, not that of Windows or other programs.
+The audio row, always at the start of the row below the WebSDR bar, reads from left to right: the ⇄ button, Mute WebSDR, Mute TRX, Mute ExpertSDR, Mute HDSDR, then WebSDR volume, TRX volume, ExpertSDR volume and HDSDR volume, each with its slider and its value in %. Mute TRX and TRX volume only appear if the rig volume is remotely controlled, Mute ExpertSDR and ExpertSDR volume only if ExpertSDR is running and answers (Windows audio or TCI), Mute HDSDR and HDSDR volume only if HDSDR is running, and ⇄ only if there are at least two audio sources to switch between. Missing controls leave no gap: the row closes up to the left. The **WebSDR volume** slider only sets the WebSDR audio, not that of Windows or other programs.
 - It works on all WebSDR types. On UberSDR, the audio only starts after clicking "Click to start" on the page.
 - The volume is **remembered for each favorite**: when you reopen a favorite, you get its volume back.
 - WebSDRs that are not in favorites share a common volume, which is also remembered.
@@ -203,11 +203,11 @@ The audio row, always at the start of the row below the WebSDR bar, reads from l
 ## Muting and rig volume
 
 To the right of the WebSDR volume:
-- **⇄** (small square button): switches the audio from one receiver to another among **Mute WebSDR**, **Mute TRX** and **Mute ExpertSDR** (only those available: Mute TRX if the rig volume is remotely controlled, Mute ExpertSDR if ExpertSDR answers):
+- **⇄** (small square button): switches the audio from one receiver to another among **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR** and **Mute HDSDR** (only those available: Mute TRX if the rig volume is remotely controlled, Mute ExpertSDR if ExpertSDR answers, Mute HDSDR if HDSDR plays through Windows audio):
   - nothing muted: one click mutes them all;
-  - only one source active: it is muted and the next one is restored; each click moves to the next (WebSDR → TRX → ExpertSDR → WebSDR…);
+  - only one source active: it is muted and the next one is restored; each click moves to the next (WebSDR → TRX → ExpertSDR → HDSDR → WebSDR…);
   - everything muted: the first is restored; several sources active (but not all): all muted.
-  - **Right-click** ⇄: choose the mute that ⇄ ignores (or "None"). It is muted at once and stays muted, so you hear only one receiver; ⇄ then only switches between the other two. The choice is kept.
+  - **Right-click** ⇄: tick the mutes that ⇄ ignores, **two at most** (or "None" to untick them all). A ticked mute is muted at once and stays muted; ⇄ then only switches between the remaining receivers. With four receivers, ticking two lets you switch between the other two only. When two are ticked, the others are greyed out: untick one to choose another. The choice is kept.
 - Mute button colours: **green with white text** when the audio is passing (like the selected mode button), **red with white text** when it is muted, grey when muting is not available.
 - **Mute WebSDR**: mutes the WebSDR audio (red button); a second click restores it at the set volume.
 - **Mute TRX**: mutes the **transceiver** audio by setting its AF gain to zero over CAT, then restores the volume on the second click. The audio is also restored on disconnection.
@@ -216,9 +216,15 @@ To the right of the WebSDR volume:
   - otherwise (audio coming out of the rig itself, MB1, or through ASIO) through the **TCI** `mute` command: you must then enable the TCI server in ExpertSDR (Options > TCI). SDRLink keeps a TCI link with ExpertSDR as long as it is running, even if the rig is connected some other way (HRD…): a mute or a volume set in ExpertSDR is also shown in SDRLink. A message explains this if the TCI server does not answer.
   - **Right-click** Mute ExpertSDR, or "WebSDR volume": ExpertSDR TCI server port (**40001** by default), to be set as in ExpertSDR. As long as ExpertSDR does not answer, Mute ExpertSDR and ExpertSDR volume are hidden and the status bar says to use "WebSDR volume".
   - If SDRLink muted ExpertSDR, the audio is restored when SDRLink closes.
+- **Mute HDSDR**: only appears when the **HDSDR** software is running (on the same PC), whether it is connected to the rig through HRD, OmniRig or otherwise. It mutes and restores HDSDR's audio in the **Windows volume mixer**, without touching HDSDR or its CAT link, and without any extra COM port. ExpertSDR and HDSDR can run at the same time: each has its own Mute and volume.
+  - HDSDR must play through Windows audio (MME or WDM output, the usual setting). If its reception is stopped or its audio goes out through ASIO, Mute HDSDR stays grey, HDSDR volume shows "—" and clicking Mute HDSDR explains this in the status bar.
+  - A mute or a volume set in the Windows mixer is also shown in SDRLink (read again every 3 seconds).
+  - If SDRLink muted HDSDR, the audio is restored when SDRLink closes.
+  - **Right-click** Mute HDSDR: colour when muted / sound on.
 - **TRX volume**: sets the transceiver volume (AF gain, in %). The slider also follows the rig's knob: it is read back about every 2 seconds.
 - **TRX volume** and **Mute TRX** are only shown if the rig volume is remotely controlled (rig connected, and an interface that allows it).
 - **ExpertSDR volume** (to the right of TRX volume): ExpertSDR volume, through the Windows mixer or through TCI (`volume:` from −60 to 0 dB), like Mute ExpertSDR. Shown when ExpertSDR is running; greyed out as long as neither path answers.
+- **HDSDR volume** (to the right of ExpertSDR volume): HDSDR volume in the Windows mixer (0 to 100 %). Shown as soon as HDSDR is running, it disappears when HDSDR is closed; greyed out as long as HDSDR does not play through Windows audio.
 
 Commands used (checked against the Yaesu CAT manual and Hamlib):
 - **Yaesu**: `AG0nnn;`, from 000 to 255.
@@ -251,7 +257,7 @@ Right-clicking most buttons offers their **background colour**. If the button al
   - **PTT**: when receiving / when transmitting (PTT on);
   - **RIG** and **WEBSDR** (frequency and mode): background colour / text colour (when transmitting, RIG always turns red);
   - **USB, LSB, AM, FM, DIGI, CW**: selected mode / other modes (the choice applies to all six buttons);
-  - **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR** (each its own): muted / sound on. An unavailable Mute stays greyed out.
+  - **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR** (each its own): muted / sound on. An unavailable Mute stays greyed out.
 - Colours offered: **Default** (the original colour, which follows dark mode and the palette), navy blue, blue, sky blue, teal, green, red, burgundy, purple, pink, brown, grey, black, yellow, orange, white, or any colour with **Other colour…**.
 - The text turns black on light colours and white on dark ones; a border outlines the button.
 - The choices are kept, including when switching between light and dark mode.
@@ -399,7 +405,7 @@ On the "Sync" row, after "Auto notch (DNF)":
 
 ## Recording (REC)
 
-- **REC** button, on the audio row, right after the last volume shown (it moves left when TRX volume or ExpertSDR volume are not shown): **navy blue** when idle (colour can be changed), **orange** while recording.
+- **REC** button, on the audio row, right after the last volume shown (it moves left when TRX volume, ExpertSDR volume or HDSDR volume are not shown): **navy blue** when idle (colour can be changed), **orange** while recording.
 - One click starts recording **everything heard in the speakers** (Windows default audio output): WebSDR, ExpertSDR, rig connected to the PC, Windows sounds… The Windows volume and the Mute buttons do not change what is captured before them: what the output plays is what gets recorded.
 - Another click stops and opens the **Save the recording** window:
   - **Name**: suggested from the date, time, frequency and mode at the start (editable);
@@ -407,7 +413,7 @@ On the "Sync" row, after "Auto notch (DNF)":
   - **Format**: **MP3** (default, 128 kbit/s, Windows encoder), **WAV** (lossless, large) or **FLAC** (lossless, about half the size);
   - **Delete** discards the recording (after confirmation).
 - The file is written in the background; the status bar shows the progress, then "Recording saved". If it fails, the window comes back: the audio is not lost.
-- **Right-click REC**: choice of the **rig's sound card** (its input in Windows, for example "USB AUDIO CODEC" or "USB Sound Device"), or "None (always the speakers)". This card is recorded **instead of the speakers** only if you are listening to the rig alone when you press REC: **Mute WebSDR** on (red) and **Mute ExpertSDR** on (red) if ExpertSDR is running. Otherwise, the speakers are recorded. If the card is unplugged, the speakers are recorded and the status bar says so. The choice is kept.
+- **Right-click REC**: choice of the **rig's sound card** (its input in Windows, for example "USB AUDIO CODEC" or "USB Sound Device"), or "None (always the speakers)". This card is recorded **instead of the speakers** only if you are listening to the rig alone when you press REC: **Mute WebSDR** on (red), **Mute ExpertSDR** on (red) if ExpertSDR is running and **Mute HDSDR** on (red) if HDSDR is playing. Otherwise, the speakers are recorded. If the card is unplugged, the speakers are recorded and the status bar says so. The choice is kept.
 - **Right-click REC > REC button colour**: colour of the button when idle (navy blue by default, blue, sky blue, teal, green, red, burgundy, purple, pink, brown, grey, black, yellow, or any colour with "Other colour…"). The text turns black on light colours; while recording, the button stays orange. The choice is kept.
 - **Right-click REC > REC button width**: **Narrow** (a rectangle twice as wide as it is high, default) or **Wide** (four times as wide as it is high), always as high as the Mute buttons, with "REC" centred. The choice is kept.
 - Silences are kept (the file length is the real duration). Closing SDRLink during a recording offers to save it before quitting.
@@ -454,6 +460,11 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.15**
+  - **HDSDR**: when HDSDR is running on the PC, **Mute HDSDR** (after the other Mute buttons) and **HDSDR volume** (slider and %) appear on the audio row, and disappear when it is closed. The audio is muted and set through the Windows volume mixer, with no extra COM port; HDSDR can stay connected to HRD. ExpertSDR works as before and can run at the same time;
+  - **⇄** also switches with HDSDR; right-click ⇄: up to **two** mutes left aside (check boxes), to switch only between the remaining receivers;
+  - Mute HDSDR: colours when muted / sound on via right-click, like the other Mute buttons;
+  - REC: the rig sound card is used if Mute HDSDR is also on while HDSDR is playing.
 - **1.14**
   - **new rigs in direct CAT**, after comparing with the Hamlib, OmniRig and Ham Radio Deluxe lists:
     - Yaesu: FT-100/100D, FT-600, FT-650, FT-736R, FT-747GX, FT-757GX, FT-757GXII, FT-767GX, FT-840, FT-847, FT-890, FT-900, FT-920, FTdx9000, FTX-1;

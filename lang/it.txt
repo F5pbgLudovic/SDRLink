@@ -132,8 +132,9 @@ SDRLINK cable	Cavo SDRLINK
  (off) ▾	 (disatt.) ▾
 Mute TRX: connect the rig first	Muto RTX: connettere prima l'RTX
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume RTX non disponibile con questo apparato o interfaccia (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Silenziamento ignorato da ⇄ (resta silenziato):
+Mutes ignored by ⇄ (stay muted, two at most):	Silenziamenti ignorati da ⇄ (restano silenziati, al massimo due):
 None	Nessuno
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR non suona tramite l'audio di Windows (ricezione ferma o audio tramite ASIO): SDRLink non può silenziarlo.
 ExpertSDR TCI port	Porta TCI di ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Porta del server TCI (ExpertSDR, Options > TCI):
 Add memory	Aggiungi memoria
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Scansione: indicare le f
 Scan: check memories in "Scan setup"	Scansione: spuntare le memorie in «Imposta scansione»
 Scan stopped	Scansione arrestata
 ■ Stop scan	■ Arresta la scansione
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Scheda audio dell'apparato, registrata quando Mute WebSDR e Mute ExpertSDR sono attivi:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Scheda audio dell'apparato, registrata quando Mute WebSDR, Mute ExpertSDR e Mute HDSDR sono attivi:
 None (always the speakers)	Nessuna (sempre gli altoparlanti)
 REC button width	Larghezza del pulsante REC
 Narrow	Stretto
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Volume WebSDR:
 TRX volume:	Volume RTX:
 ExpertSDR volume:	Volume ExpertSDR:
+HDSDR volume:	Volume HDSDR:
 Open log	Apri log
 Text size…	Dimensione del testo…
 Import/Export ▾	Importa/Esporta ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Muto WebSDR
 Mute TRX	Muto RTX
 ⇄	⇄
 Mute ExpertSDR	Muto ExpertSDR
+Mute HDSDR	Muto HDSDR
 Auto-connect at startup	Connessione automatica all'avvio
 Dark mode	Modalità scura
 Check for updates	Controlla aggiornamenti

@@ -132,8 +132,9 @@ SDRLINK cable	Kábel SDRLINK
  (off) ▾	 (vyp.) ▾
 Mute TRX: connect the rig first	Stlmiť TRX: najprv pripojte transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Stlmenie, ktoré ⇄ preskakuje (zostane stlmené):
+Mutes ignored by ⇄ (stay muted, two at most):	Stlmenia, ktoré ⇄ preskakuje (zostanú stlmené, najviac dve):
 None	Žiadne
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR nehrá cez zvuk Windows (príjem zastavený alebo zvuk cez ASIO): SDRLink ho nemôže stlmiť.
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port servera TCI (ExpertSDR, Options > TCI):
 Add memory	Pridať pamäť
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Prehľadávanie: nastavt
 Scan: check memories in "Scan setup"	Prehľadávanie: zaškrtnite pamäte v „Nastavenie prehľadávania“
 Scan stopped	Prehľadávanie zastavené
 ■ Stop scan	■ Zastaviť prehľadávanie
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Zvuková karta stanice, nahrávaná pri zapnutom Mute WebSDR a Mute ExpertSDR:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvuková karta stanice, nahrávaná pri zapnutom Mute WebSDR, Mute ExpertSDR a Mute HDSDR:
 None (always the speakers)	Žiadna (vždy reproduktory)
 REC button width	Šírka tlačidla REC
 Narrow	Úzke
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	Hlasitosť WebSDR:
 TRX volume:	Hlasitosť TRX:
 ExpertSDR volume:	Hlasitosť ExpertSDR:
+HDSDR volume:	Hlasitosť HDSDR:
 Open log	Otvoriť denník
 Text size…	Veľkosť textu…
 Import/Export ▾	Import/Export ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Stlmiť WebSDR
 Mute TRX	Stlmiť TRX
 ⇄	⇄
 Mute ExpertSDR	Stlmiť ExpertSDR
+Mute HDSDR	Stlmiť HDSDR
 Auto-connect at startup	Automaticky pripojiť pri štarte
 Dark mode	Tmavý režim
 Check for updates	Kontrolovať aktualizácie

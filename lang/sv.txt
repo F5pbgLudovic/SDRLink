@@ -132,8 +132,9 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (av) ▾
 Mute TRX: connect the rig first	Tysta rigg: anslut riggen först
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolym är inte tillgänglig med denna rigg eller detta gränssnitt (OmniRig, HRD, FT-817/818…)
-Mute ignored by ⇄ (stays muted):	Ljudavstängning som ⇄ ignorerar (förblir avstängd):
+Mutes ignored by ⇄ (stay muted, two at most):	Ljudavstängningar som ⇄ ignorerar (förblir avstängda, högst två):
 None	Ingen
+HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR spelar inte via Windows-ljudet (mottagning stoppad eller ljud via ASIO): SDRLink kan inte stänga av ljudet.
 ExpertSDR TCI port	TCI-port för ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverns port (ExpertSDR, Options > TCI):
 Add memory	Lägg till minne
@@ -142,7 +143,7 @@ Scan: set the start and end frequencies in "Scan setup"	Avsökning: ange start- 
 Scan: check memories in "Scan setup"	Avsökning: markera minnen i ”Avsökningsinställningar”
 Scan stopped	Avsökning stoppad
 ■ Stop scan	■ Stoppa avsökning
-Rig sound card, recorded when Mute WebSDR and Mute ExpertSDR are on:	Radions ljudkort, spelas in när Mute WebSDR och Mute ExpertSDR är på:
+Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radions ljudkort, spelas in när Mute WebSDR, Mute ExpertSDR och Mute HDSDR är på:
 None (always the speakers)	Inget (alltid högtalarna)
 REC button width	Bredd på REC-knappen
 Narrow	Smal
@@ -234,6 +235,7 @@ WebSDR:	WebSDR:
 WebSDR volume:	WebSDR-volym:
 TRX volume:	Riggvolym:
 ExpertSDR volume:	ExpertSDR-volym:
+HDSDR volume:	HDSDR-volym:
 Open log	Öppna logg
 Text size…	Textstorlek…
 Import/Export ▾	Import/Export ▾
@@ -257,6 +259,7 @@ Mute WebSDR	Tysta WebSDR
 Mute TRX	Tysta rigg
 ⇄	⇄
 Mute ExpertSDR	Tysta ExpertSDR
+Mute HDSDR	Tysta HDSDR
 Auto-connect at startup	Anslut automatiskt vid start
 Dark mode	Mörkt läge
 Check for updates	Sök efter uppdateringar
