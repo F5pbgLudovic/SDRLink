@@ -35,6 +35,7 @@ namespace SDRLink
         Label lblVolume, lblRigVolume;
         PaletteButton btnPalette;
         ComboBox cbFavList;
+        UrlSuggest urlSuggest;
         Button btnCable;
         CheckBox chkNotch;
         FlowLayoutPanel pnlHamlib;
@@ -136,7 +137,7 @@ namespace SDRLink
             unmuteTimer.Tick += delegate
             {
                 unmuteTimer.Stop();
-                if (!Transmitting) SetMuted(false);
+                if (!Transmitting) RestoreAfterTx();
             };
             // Surveillance de la synchro (toutes les secondes) et délai de sécurité du PTT.
             syncTimer.Interval = 1000;
@@ -419,6 +420,13 @@ namespace SDRLink
             row3.Controls.Add(numOffset);
             chkMute = Check("Couper le son du WebSDR en émission", "Mute WebSDR while transmitting");
             chkMute.CheckedChanged += delegate { if (worker != null) worker.PollTx = chkMute.Checked; ApplyMute(); };
+            // Clic droit : réceptions coupées en émission (toutes par défaut) ; le menu reste ouvert pour en cocher plusieurs.
+            ContextMenuStrip muteTxMenu = new ContextMenuStrip();
+            muteTxMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillMuteTxMenu(muteTxMenu); };
+            muteTxMenu.Closing += delegate(object s, ToolStripDropDownClosingEventArgs e) { if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked) e.Cancel = true; };
+            muteTxMenu.Items.Add("-");
+            chkMute.ContextMenuStrip = muteTxMenu;
+            Tr(delegate { tips.SetToolTip(chkMute, Lang.T("Clic droit : réceptions dont le son est coupé en émission", "Right-click: receivers muted while transmitting")); });
             numUnmute = new NumericUpDown();
             numUnmute.Minimum = 0;
             numUnmute.Maximum = 10000;
@@ -571,8 +579,16 @@ namespace SDRLink
                 Favorite f = cbUrl.SelectedItem as Favorite;
                 if (f != null) BeginInvoke((Action)delegate { Navigate(f.Url); });
             };
+            // Propositions pendant la frappe (WebSDR de la liste choisie dont le nom ou l'adresse contient un mot tapé).
+            urlSuggest = new UrlSuggest(cbUrl, delegate(Favorite f)
+            {
+                cbUrl.Text = f.Name;
+                cbUrl.SelectionStart = cbUrl.Text.Length;
+                Navigate(f.Url);
+            });
             cbUrl.KeyDown += delegate(object s, KeyEventArgs e)
             {
+                if (urlSuggest.HandleKey(e.KeyCode)) { e.Handled = e.SuppressKeyPress = true; return; }
                 if (e.KeyCode == Keys.Enter) { NavigateFromBar(); e.SuppressKeyPress = true; }
             };
             rowUrl.Controls.Add(Lbl("WebSDR :", "WebSDR:"));
@@ -1498,7 +1514,7 @@ namespace SDRLink
             worker = null;
             w.Stop();
             Rigctld.Stop();
-            rigMuted = false;
+            rigMuted = txMuted[1] = false;
             rigAfSupported = -1;
             UpdateRigVolumeControls();
             rigOnline = false;
@@ -1854,25 +1870,92 @@ namespace SDRLink
             ApplyMute();
         }
 
-        // Coupe tout de suite au passage en émission ; rétablit après un délai, car le son du WebSDR
-        // arrive avec du retard et contiendrait encore la fin de notre propre émission.
+        // Coupe tout de suite au passage en émission les réceptions choisies (clic droit sur la case) ; les rétablit
+        // après un délai, car le son du WebSDR arrive avec du retard et contiendrait encore la fin de notre propre émission.
         void ApplyMute()
         {
             if (chkMute.Checked && Transmitting)
             {
                 unmuteTimer.Stop();
-                SetMuted(true);
+                for (int i = 0; i < SwapCount; i++)
+                    if (MuteOnTxFor(i)) MuteForTx(i); else RestoreAfterTx(i);
             }
             else if (!chkMute.Checked || numUnmute.Value == 0)
             {
                 unmuteTimer.Stop();
-                SetMuted(false);
+                RestoreAfterTx();
             }
-            else if (web.CoreWebView2 != null && web.CoreWebView2.IsMuted && !unmuteTimer.Enabled)
+            else if (MutedForTx() && !unmuteTimer.Enabled)
             {
                 unmuteTimer.Interval = (int)numUnmute.Value;
                 unmuteTimer.Start();
             }
+        }
+
+        // Réceptions coupées par SDRLink pour l'émission (même ordre que ⇄ : 1 poste, 2 ExpertSDR, 3 HDSDR ; le WebSDR,
+        // 0, a sa propre coupure de page, IsMuted). Une réception déjà coupée à la main n'est pas touchée : elle reste coupée.
+        readonly bool[] txMuted = new bool[SwapCount];
+
+        bool MuteOnTxFor(int i) { return !settings.MuteTxSkip.Contains(i); }
+
+        bool MutedForTx()
+        {
+            if (web.CoreWebView2 != null && web.CoreWebView2.IsMuted) return true;
+            for (int i = 1; i < SwapCount; i++) if (txMuted[i]) return true;
+            return false;
+        }
+
+        void MuteForTx(int i)
+        {
+            if (i == 0) { SetMuted(true); return; }
+            if (txMuted[i] || !SwapAvailable(i) || SwapMuted(i)) return;
+            SetSwapMute(i, true);
+            txMuted[i] = SwapMuted(i);
+            RefreshMuteControls();
+        }
+
+        void RestoreAfterTx(int i)
+        {
+            if (i == 0) { SetMuted(false); return; }
+            if (!txMuted[i]) return;
+            txMuted[i] = false;
+            if (SwapAvailable(i) && SwapMuted(i)) SetSwapMute(i, false);
+            RefreshMuteControls();
+        }
+
+        void RestoreAfterTx() { for (int i = 0; i < SwapCount; i++) RestoreAfterTx(i); }
+
+        void RefreshMuteControls()
+        {
+            UpdateEsdrControls();
+            UpdateHdsdrControls();
+        }
+
+        // Clic droit sur « Couper le son du WebSDR en émission » : une case par réception.
+        void FillMuteTxMenu(ContextMenuStrip menu)
+        {
+            menu.Items.Clear();
+            ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Réceptions dont le son est coupé en émission :", "Receivers muted while transmitting:"));
+            title.Enabled = false;
+            menu.Items.Add(title);
+            string[] names = { "WebSDR", Lang.T("Poste (Mute TX)", "Rig (Mute TRX)"), "ExpertSDR", "HDSDR" };
+            for (int i = 0; i < SwapCount; i++)
+            {
+                int idx = i;
+                ToolStripMenuItem it = new ToolStripMenuItem(names[i]);
+                it.Checked = MuteOnTxFor(i);
+                it.Click += delegate { SetMuteOnTxFor(idx, !MuteOnTxFor(idx)); it.Checked = MuteOnTxFor(idx); };
+                menu.Items.Add(it);
+            }
+        }
+
+        void SetMuteOnTxFor(int i, bool on)
+        {
+            if (on) settings.MuteTxSkip.Remove(i);
+            else if (!settings.MuteTxSkip.Contains(i)) { settings.MuteTxSkip.Add(i); settings.MuteTxSkip.Sort(); }
+            settings.Save();
+            Log.Write("Coupure en émission : " + (on ? "active" : "inactive") + " pour " + SwapNamesFr[i]);
+            ApplyMute();
         }
 
         void SetMuted(bool muted)

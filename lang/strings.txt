@@ -89,6 +89,7 @@ Cannot open the log: 	Impossible d'ouvrir le journal :
 Export all settings…	Exporter tous les réglages…
 Import settings…	Importer des réglages…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exporter ou importer tous les réglages, pour la même configuration sur un autre ordinateur (clic droit : couleur du bouton)
+Right-click: receivers muted while transmitting	Clic droit : réceptions dont le son est coupé en émission
 Save: no known frequency (rig or WebSDR)	Save : aucune fréquence connue (poste ou WebSDR)
 Store the current frequency…	Mémoriser la fréquence actuelle…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Passer le son à la réception suivante (clic droit : réception à laisser coupée)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	Délai de sécurité TX (bouton PTT)
 Off	Désactivé
 PTT: connect the rig first	PTT : connectez d'abord le poste
 transmitting	émission
+Receivers muted while transmitting:	Réceptions dont le son est coupé en émission :
+Rig (Mute TRX)	Poste (Mute TX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Fréquence invalide : tapez une valeur en kHz, par ex. 7074 ou 14074.5
 Remove this value (pick it in the list first)	Supprimer cette valeur (choisissez-la d'abord dans la liste)
 RIG 	RADIO 

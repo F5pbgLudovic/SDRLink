@@ -89,6 +89,7 @@ Cannot open the log: 	A napló nem nyitható meg:
 Export all settings…	Összes beállítás exportálása…
 Import settings…	Beállítások importálása…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: gomb színe)
+Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX biztonsági időkorlát (PTT gomb)
 Off	Ki
 PTT: connect the rig first	PTT: előbb csatlakoztassa a rádiót
 transmitting	adás
+Receivers muted while transmitting:	Adás közben némított vevők:
+Rig (Mute TRX)	Rádió (TRX némítás)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Érvénytelen frekvencia: adjon meg egy értéket kHz-ben, pl. 7074 vagy 14074.5
 Remove this value (pick it in the list first)	Érték eltávolítása (előbb válassza ki a listában)
 RIG 	RÁDIÓ 

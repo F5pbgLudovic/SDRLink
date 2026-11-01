@@ -22,9 +22,9 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 
 1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Taille du texte…**, case **Vérifier les mises à jour**, **Import/Export ▾**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
-3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
+3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR**, boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
-5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**.
+5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**.
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**.
 7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
 
@@ -42,6 +42,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Saisie kHz | supprimer la valeur de l'historique, tout supprimer |
 | Mémoires | mémoriser la fréquence actuelle, couleur du bouton |
 | Liste des favoris (à côté de l'adresse) | renommer la liste |
+| Couper le son du WebSDR en émission | réceptions dont le son est coupé en émission : WebSDR, poste, ExpertSDR, HDSDR (cases à cocher, toutes cochées au départ) |
 | ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus) |
 | Mute WebSDR, Mute TX, Mute HDSDR | couleur son coupé / son actif |
 | Mute ExpertSDR | port TCI d'ExpertSDR, couleur son coupé / son actif |
@@ -134,6 +135,7 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
 ## Favoris
 
 - La liste déroulante de la barre WebSDR affiche les favoris par leur **nom**. En choisir un ouvre le WebSDR.
+- **Propositions pendant la frappe** (depuis la 1.19) : dès que tu tapes un mot (deux lettres au moins) dans la barre WebSDR, les WebSDR dont le **nom ou l'adresse contient ce mot** s'affichent juste dessous, comme dans un moteur de recherche. Il suffit qu'**un des mots** tapés corresponde (« twente », « kiwi », « bretagne »…), sans tenir compte des majuscules ni des accents ; les WebSDR qui correspondent le mieux sont en haut. Un **clic** sur une proposition ouvre le WebSDR ; au clavier, **↓ / ↑** pour choisir, **Entrée** pour ouvrir, **Échap** pour fermer. Seuls les WebSDR de la **liste choisie** dans le menu de droite sont proposés. La **flèche** de la liste déroulante affiche toujours **tous** les WebSDR de la liste, même si du texte est tapé. Une adresse tapée en entier puis **Entrée** (sans choisir de proposition) s'ouvre comme avant.
 - **Listes de favoris** : de 1 à **10 listes** (4 au départ : Liste 1 à Liste 4) pour trier les WebSDR.
   - Le menu juste à droite de la liste des WebSDR choisit la liste affichée.
   - **Clic droit** sur ce menu pour renommer la liste (par ex. « HF France », « VHF »…).
@@ -287,7 +289,7 @@ Le menu **Langue**, sur la 2ᵉ ligne, change la langue de toute l'interface, im
 Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émission par CAT : un clic pour émettre (le bouton devient rouge « ● TX »), un second clic pour revenir en réception. C'est l'équivalent du bouton MOX de HRD.
 - Il envoie `TX1;`/`TX0;` aux Yaesu, `TX;`/`RX;` aux Kenwood et Elecraft, `1C 00` aux Icom, `trx` en TCI.
 - Avec OmniRig, il agit sur la propriété `Tx` ; avec HRD, sur le bouton MOX.
-- Le son du WebSDR est coupé dès le clic, même si le poste ne signale pas son état d'émission (si « Couper le son du WebSDR en émission » est cochée).
+- Le son des réceptions choisies (le WebSDR, et selon le clic droit le poste, ExpertSDR, HDSDR) est coupé dès le clic, même si le poste ne signale pas son état d'émission (si « Couper le son du WebSDR en émission » est cochée).
 - Par sécurité, si on se déconnecte ou si on ferme SDRLink pendant une émission lancée par ce bouton, le poste repasse en réception.
 - **Délai de sécurité TX** (clic droit sur PTT) : Désactivé, 30 s, 1, 2, 3, 5, 10, 15, 20 ou 25 min.
   - Pendant l'émission, le bouton affiche le temps restant (« ● TX 1:45 »).
@@ -297,9 +299,17 @@ Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émiss
 
 ## Coupure du son en émission
 
-Coche **« Couper le son du WebSDR en émission »** (activée par défaut) : pendant que le poste émet, le son du WebSDR est coupé pour ne pas s'entendre. L'indication **● TX** s'affiche alors en rouge à côté de « RADIO ». Décocher pour garder le son en émission.
+Coche **« Couper le son du WebSDR en émission »** (activée par défaut) : pendant que le poste émet, le son des réceptions est coupé pour ne pas s'entendre. L'indication **● TX** s'affiche alors en rouge à côté de « RADIO ». Décocher pour garder le son en émission.
 
-**« rétablir après (ms) »** (1000 par défaut) : le son d'un WebSDR arrive avec 0,5 à 2 s de retard, il contient donc encore la fin de ton émission après le relâchement du PTT. Augmente cette valeur si tu entends la fin de tes passages, mets 0 pour rétablir le son tout de suite.
+**Réceptions concernées** (depuis la 1.19) : **clic droit** sur la case pour cocher celles dont le son est coupé en émission. Toutes sont cochées au départ :
+- **WebSDR** : son de la page ;
+- **Poste (Mute TX)** : gain BF du transceiver mis à zéro par CAT, si le volume du poste est télécommandé (comme Mute TX) ;
+- **ExpertSDR** : par le mélangeur de Windows, sinon par la liaison TCI (comme Mute ExpertSDR) ;
+- **HDSDR** : par le mélangeur de Windows (comme Mute HDSDR).
+
+Le menu reste ouvert pour cocher ou décocher plusieurs réceptions ; le choix est conservé. Une réception absente (logiciel fermé, volume du poste non télécommandé) est simplement ignorée. Pendant l'émission, les boutons Mute des réceptions coupées passent au rouge. Une réception **déjà coupée à la main** avant l'émission n'est pas touchée : elle reste coupée après. Décocher une réception (ou la case) pendant l'émission rétablit son son tout de suite. À la fermeture de SDRLink, tout ce qu'il a coupé est rétabli.
+
+**« rétablir après (ms) »** (1000 par défaut) : le son d'un WebSDR arrive avec 0,5 à 2 s de retard, il contient donc encore la fin de ton émission après le relâchement du PTT. Ce délai vaut pour **toutes** les réceptions coupées : elles sont rétablies ensemble à la fin du délai. Augmente cette valeur si tu entends la fin de tes passages, mets 0 pour rétablir le son tout de suite.
 
 Lecture de l'état émission selon l'interface :
 - Yaesu : commande `TX;`
@@ -476,6 +486,9 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.19**
+  - **Coupure du son en émission** : « Couper le son du WebSDR en émission » et « rétablir après (ms) » agissent maintenant aussi sur le **poste** (gain BF), **ExpertSDR** et **HDSDR**, pas seulement sur le WebSDR. **Clic droit** sur la case pour choisir les réceptions concernées (toutes par défaut). Une réception déjà coupée à la main reste coupée.
+  - **Barre WebSDR** : pendant la frappe, des **propositions** s'affichent juste dessous : les WebSDR de la liste choisie dont le nom ou l'adresse contient l'un des mots tapés ; un clic ouvre le WebSDR. La flèche de la liste déroulante affiche toujours tous les WebSDR de la liste.
 - **1.18**
   - **Mises à jour** : quand une version plus récente est publiée, une **fenêtre s'ouvre** au démarrage (case « Vérifier les mises à jour » cochée) avec la version utilisée, la dernière version publiée, le lien direct vers la page de cette version et le lien vers la liste de toutes les versions ; bouton « Ouvrir la page de la mise à jour ». Avant, seul un lien apparaissait dans la barre d'état, facile à manquer. Cocher la case à la main ouvre la fenêtre dans tous les cas (à jour, nouvelle version ou GitHub injoignable).
 - **1.17**

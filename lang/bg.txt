@@ -89,6 +89,7 @@ Cannot open the log: 	Дневникът не може да се отвори:
 Export all settings…	Експортиране на всички настройки…
 Import settings…	Импортиране на настройки…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Експортиране или импортиране на всички настройки за същата конфигурация на друг компютър (десен бутон: цвят на бутона)
+Right-click: receivers muted while transmitting	Десен клик: приемници без звук при предаване
 Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
 Store the current frequency…	Запомняне на текущата честота…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Превключване на звука към следващия приемник (десен бутон: приемник, който остава заглушен)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	Предпазен таймер за TX (буто
 Off	Изкл.
 PTT: connect the rig first	PTT: първо свържете трансивъра
 transmitting	предаване
+Receivers muted while transmitting:	Приемници без звук при предаване:
+Rig (Mute TRX)	Трансивър (Без звук TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Невалидна честота: въведете стойност в kHz, напр. 7074 или 14074.5
 Remove this value (pick it in the list first)	Премахни тази стойност (първо я изберете от списъка)
 RIG 	РАДИО 

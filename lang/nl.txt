@@ -89,6 +89,7 @@ Cannot open the log: 	Kan het logboek niet openen:
 Export all settings…	Alle instellingen exporteren…
 Import settings…	Instellingen importeren…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Alle instellingen exporteren of importeren, voor dezelfde configuratie op een andere computer (rechtsklik: knopkleur)
+Right-click: receivers muted while transmitting	Rechtsklik: ontvangers die tijdens zenden gedempt worden
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
 Store the current frequency…	Huidige frequentie opslaan…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Geluid naar de volgende ontvanger schakelen (rechtsklik: ontvanger die gedempt blijft)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX-veiligheidstijd (PTT-knop)
 Off	Uit
 PTT: connect the rig first	PTT: verbind eerst de transceiver
 transmitting	zenden
+Receivers muted while transmitting:	Ontvangers die tijdens zenden gedempt worden:
+Rig (Mute TRX)	TRX (TRX dempen)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ongeldige frequentie: typ een waarde in kHz, bijv. 7074 of 14074.5
 Remove this value (pick it in the list first)	Deze waarde verwijderen (kies hem eerst in de lijst)
 RIG 	TRX 

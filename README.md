@@ -1,4 +1,4 @@
-# SDRLink V1.18 — @F5PBG 2026
+# SDRLink V1.19 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -6,13 +6,14 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 - **Postes en CAT direct (128 modèles, classés par numéro)** : Yaesu (40, du FT-100 au FTX-1, dont les anciens FT-747GX, FT-757GX/GXII, FT-767GX, FT-840, FT-890, FT-900, FT-920, FT-990, FT-1000…), Icom (55, de l'IC-78 à l'IC-9700, dont les IC-7xx des années 80), Kenwood (23, du TS-50S au TS-B2000), Elecraft (5), Xiegu (G90, X108G, X5105, X6100, X6200). Les autres postes passent par OmniRig, HRD ou Hamlib.
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
 - **Fonctions** :
-  - bouton PTT et coupure du son du WebSDR en émission ;
+  - bouton PTT et coupure du son en émission (WebSDR, poste, ExpertSDR, HDSDR, au choix par clic droit) ;
   - bouton ⇄ qui passe le son d'une réception à l'autre (WebSDR, poste, ExpertSDR, HDSDR), deux réceptions pouvant être laissées de côté ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
   - mémoires de fréquences nommées, en listes, avec les 20 dernières utilisées ;
   - scan de fréquences (avec jusqu'à 10 zones non scannées) ou de mémoires, jusqu'à 10 profils de scan nommés ;
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, couleur et largeur réglables ;
   - affichages réduit, mini et ptt (bouton PTT seul) ;
+  - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de la France ;
   - volume du WebSDR, du poste, d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) et de HDSDR (Mute HDSDR, par Windows) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
@@ -47,13 +48,14 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
 - **Rigs in direct CAT (128 models, sorted by number)**: Yaesu (40, from the FT-100 to the FTX-1, including the older FT-747GX, FT-757GX/GXII, FT-767GX, FT-840, FT-890, FT-900, FT-920, FT-990, FT-1000…), Icom (55, from the IC-78 to the IC-9700, including the 1980s IC-7xx), Kenwood (23, from the TS-50S to the TS-B2000), Elecraft (5), Xiegu (G90, X108G, X5105, X6100, X6200). Other rigs work through OmniRig, HRD or Hamlib.
 - **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR.
 - **Features**:
-  - PTT button, WebSDR audio muted while transmitting;
+  - PTT button, audio muted while transmitting (WebSDR, rig, ExpertSDR, HDSDR, chosen by right-click);
   - ⇄ button that switches the audio from one receiver to the next (WebSDR, rig, ExpertSDR, HDSDR), with up to two receivers left aside;
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
   - named frequency memories, in lists, with the last 20 used;
   - frequency scan (with up to 10 skipped ranges) or memory scan, up to 10 named scan profiles;
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, with adjustable colour and width;
   - reduced, mini and PTT (PTT button only) views;
+  - suggestions while typing in the WebSDR bar (name or address, chosen list);
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near France;
   - WebSDR, rig, ExpertSDR (Mute ExpertSDR, through Windows or TCI) and HDSDR volume (Mute HDSDR, through Windows);
   - SDRLINK audio cable for WSJT-X, automatic notch;

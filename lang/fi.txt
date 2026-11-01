@@ -89,6 +89,7 @@ Cannot open the log: 	Lokia ei voi avata:
 Export all settings…	Vie kaikki asetukset…
 Import settings…	Tuo asetukset…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Vie tai tuo kaikki asetukset samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea: painikkeen väri)
+Right-click: receivers muted while transmitting	Hiiren oikea painike: lähetyksen ajaksi mykistettävät vastaanottimet
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
 Store the current frequency…	Tallenna nykyinen taajuus…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Siirrä ääni seuraavaan vastaanottimeen (hiiren oikea painike: vastaanotin, joka pysyy mykistettynä)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX-turva-aikakatkaisu (PTT-painike)
 Off	Pois
 PTT: connect the rig first	PTT: yhdistä ensin radio
 transmitting	lähetys
+Receivers muted while transmitting:	Lähetyksen ajaksi mykistettävät vastaanottimet:
+Rig (Mute TRX)	Radio (Mykistä TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Virheellinen taajuus: anna arvo kHz:nä, esim. 7074 tai 14074.5
 Remove this value (pick it in the list first)	Poista tämä arvo (valitse se ensin luettelosta)
 RIG 	RADIO 

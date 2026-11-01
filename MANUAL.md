@@ -23,9 +23,9 @@ Overview; each feature is detailed further down in its own section.
 
 1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Text size…**, **Check for updates** box, **Import/Export ▾**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
-3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
+3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode, **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
-5. **5th row (WebSDR)**: **WebSDR** address (favorites list), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**.
+5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**.
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**.
 7. **The WebSDR page**, then the **status bar** (messages, update link).
 
@@ -43,6 +43,7 @@ Overview; each feature is detailed further down in its own section.
 | kHz entry | remove the value from the history, remove all |
 | Memories | store the current frequency, button colour |
 | Favorites list (next to the address) | rename the list |
+| Mute WebSDR while transmitting | receivers muted while transmitting: WebSDR, rig, ExpertSDR, HDSDR (check boxes, all ticked at the start) |
 | ⇄ | receivers that ⇄ keeps muted (check boxes, two at most) |
 | Mute WebSDR, Mute TRX, Mute HDSDR | colour when muted / sound on |
 | Mute ExpertSDR | ExpertSDR TCI port, colour when muted / sound on |
@@ -135,6 +136,7 @@ The type is detected automatically (shown in brackets):
 ## Favorites
 
 - The drop-down list in the WebSDR bar shows the favorites by **name**. Choosing one opens the WebSDR.
+- **Suggestions while typing** (since 1.19): as soon as you type a word (two letters at least) in the WebSDR bar, the WebSDRs whose **name or address contains that word** are shown just below, as in a search engine. **One of the words** typed is enough ("twente", "kiwi", "brittany"…), regardless of capitals and accents; the best matches are at the top. A **click** on a suggestion opens the WebSDR; with the keyboard, **↓ / ↑** to choose, **Enter** to open, **Esc** to close. Only the WebSDRs of the **list chosen** in the menu on the right are suggested. The **arrow** of the drop-down list always shows **all** the WebSDRs of the list, even if text is typed. A full address typed then **Enter** (without choosing a suggestion) opens as before.
 - **Favorite lists**: from 1 to **10 lists** (4 at the start: List 1 to List 4) to sort the WebSDRs.
   - The menu just to the right of the WebSDR list chooses the list shown.
   - **Right-click** this menu to rename the list (e.g. "HF France", "VHF"…).
@@ -288,7 +290,7 @@ The **Language** menu, on the 2nd row, changes the language of the whole interfa
 The large **PTT** button, to the left of "RIG", puts the rig into transmit over CAT: one click to transmit (the button turns red, "● TX"), a second click to return to receive. It is the equivalent of HRD's MOX button.
 - It sends `TX1;`/`TX0;` to Yaesus, `TX;`/`RX;` to Kenwoods and Elecrafts, `1C 00` to Icoms, `trx` over TCI.
 - With OmniRig, it acts on the `Tx` property; with HRD, on the MOX button.
-- The WebSDR audio is muted as soon as you click, even if the rig does not report its transmit status (if "Mute WebSDR while transmitting" is ticked).
+- The audio of the chosen receivers (the WebSDR and, depending on the right-click menu, the rig, ExpertSDR, HDSDR) is muted as soon as you click, even if the rig does not report its transmit status (if "Mute WebSDR while transmitting" is ticked).
 - For safety, if you disconnect or close SDRLink during a transmission started with this button, the rig goes back to receive.
 - **TX safety timeout** (right-click PTT): Off, 30 s, 1, 2, 3, 5, 10, 15, 20 or 25 min.
   - While transmitting, the button shows the time remaining ("● TX 1:45").
@@ -298,9 +300,17 @@ The large **PTT** button, to the left of "RIG", puts the rig into transmit over 
 
 ## Muting while transmitting
 
-Tick **"Mute WebSDR while transmitting"** (on by default): while the rig is transmitting, the WebSDR audio is muted so you do not hear yourself. The **● TX** indicator is then shown in red next to "RIG". Untick it to keep the audio while transmitting.
+Tick **"Mute WebSDR while transmitting"** (on by default): while the rig is transmitting, the receivers' audio is muted so you do not hear yourself. The **● TX** indicator is then shown in red next to "RIG". Untick it to keep the audio while transmitting.
 
-**"restore after (ms)"** (1000 by default): WebSDR audio arrives 0.5 to 2 s late, so it still contains the end of your transmission after you release the PTT. Increase this value if you hear the end of your overs; set 0 to restore the audio immediately.
+**Receivers concerned** (since 1.19): **right-click** the box to tick those muted while transmitting. All are ticked at the start:
+- **WebSDR**: audio of the page;
+- **Rig (Mute TRX)**: transceiver AF gain set to zero over CAT, if the rig volume is remote-controlled (like Mute TRX);
+- **ExpertSDR**: through the Windows volume mixer, otherwise through the TCI link (like Mute ExpertSDR);
+- **HDSDR**: through the Windows volume mixer (like Mute HDSDR).
+
+The menu stays open so you can tick or untick several receivers; the choice is kept. A receiver that is not there (program closed, rig volume not remote-controlled) is simply ignored. While transmitting, the Mute buttons of the muted receivers turn red. A receiver **already muted by hand** before transmitting is left alone: it stays muted afterwards. Unticking a receiver (or the box) while transmitting restores its audio at once. When SDRLink closes, everything it muted is restored.
+
+**"restore after (ms)"** (1000 by default): WebSDR audio arrives 0.5 to 2 s late, so it still contains the end of your transmission after you release the PTT. This delay applies to **all** the muted receivers: they are restored together at the end of the delay. Increase this value if you hear the end of your overs; set 0 to restore the audio immediately.
 
 Reading the transmit status, depending on the interface:
 - Yaesu: `TX;` command
@@ -478,6 +488,9 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.19**
+  - **Muting while transmitting**: "Mute WebSDR while transmitting" and "restore after (ms)" now also act on the **rig** (AF gain), **ExpertSDR** and **HDSDR**, not only on the WebSDR. **Right-click** the box to choose the receivers concerned (all by default). A receiver already muted by hand stays muted.
+  - **WebSDR bar**: while typing, **suggestions** are shown just below: the WebSDRs of the chosen list whose name or address contains one of the words typed; a click opens the WebSDR. The arrow of the drop-down list always shows all the WebSDRs of the list.
 - **1.18**
   - **Updates**: when a newer version is published, a **window opens** at startup ("Check for updates" ticked) with the version in use, the latest published version, the direct link to that version's page and the link to the list of all versions; "Open the update page" button. Before, only a link appeared in the status bar, easy to miss. Ticking the box by hand opens the window in every case (up to date, new version or GitHub unreachable).
 - **1.17**

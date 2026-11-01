@@ -52,6 +52,8 @@ namespace SDRLink
         public bool AutoConnect;
         public bool MuteOnTx = true;
         public int UnmuteDelayMs = 1000;
+        // Réceptions laissées en marche pendant l'émission (0 WebSDR, 1 poste, 2 ExpertSDR, 3 HDSDR) ; vide = toutes coupées.
+        public List<int> MuteTxSkip = new List<int>();
         public int Direction;
         public bool SyncMode = true;
         public long OffsetHz;
@@ -229,6 +231,15 @@ namespace SDRLink
                         }
                         s.SwapIgnore.Sort();
                         break;
+                    case "MuteTxSkip":
+                        s.MuteTxSkip.Clear();
+                        foreach (string part in v.Split(','))
+                        {
+                            int mk = Int(part.Trim(), -1);
+                            if (mk >= 0 && mk <= 3 && !s.MuteTxSkip.Contains(mk)) s.MuteTxSkip.Add(mk);
+                        }
+                        s.MuteTxSkip.Sort();
+                        break;
                     case "Freq": if (s.FreqHistory.Count < 100) s.FreqHistory.Add(v); break;
                     default:
                         // List1 à List10 : noms des listes de favoris.
@@ -328,6 +339,7 @@ namespace SDRLink
             Line(sb, "FirstSearch", FirstSearchDone ? 1 : 0);
             Line(sb, "CheckUpdates", CheckUpdates ? 1 : 0);
             Line(sb, "SwapIgnore", SwapIgnore.Count == 0 ? "-1" : string.Join(",", SwapIgnore.ConvertAll(k => k.ToString()).ToArray()));
+            Line(sb, "MuteTxSkip", MuteTxSkip.Count == 0 ? "-1" : string.Join(",", MuteTxSkip.ConvertAll(k => k.ToString()).ToArray()));
             foreach (Favorite f in Favorites) Line(sb, "Fav", f.ToSetting());
             foreach (string f in FreqHistory) Line(sb, "Freq", f);
             try { File.WriteAllText(FilePath, sb.ToString(), Encoding.UTF8); } catch { }

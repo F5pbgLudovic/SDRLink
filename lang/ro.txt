@@ -89,6 +89,7 @@ Cannot open the log: 	Nu se poate deschide jurnalul:
 Export all settings…	Exportă toate setările…
 Import settings…	Importă setări…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportă sau importă toate setările, pentru aceeași configurație pe alt calculator (clic dreapta: culoarea butonului)
+Right-click: receivers muted while transmitting	Clic dreapta: receptoare puse pe mut în emisie
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
 Store the current frequency…	Memorează frecvența actuală…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Comută sunetul la receptorul următor (clic dreapta: receptor care rămâne fără sunet)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	Limită de siguranță TX (buton PTT)
 Off	Dezactivat
 PTT: connect the rig first	PTT: conectați mai întâi stația
 transmitting	emisie
+Receivers muted while transmitting:	Receptoare puse pe mut în emisie:
+Rig (Mute TRX)	Stație (Mut TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frecvență nevalidă: introduceți o valoare în kHz, de ex. 7074 sau 14074.5
 Remove this value (pick it in the list first)	Eliminare valoare (alegeți-o mai întâi din listă)
 RIG 	STAȚIE 

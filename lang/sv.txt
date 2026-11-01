@@ -89,6 +89,7 @@ Cannot open the log: 	Kan inte öppna loggen:
 Export all settings…	Exportera alla inställningar…
 Import settings…	Importera inställningar…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportera eller importera alla inställningar, för samma konfiguration på en annan dator (högerklick: knappfärg)
+Right-click: receivers muted while transmitting	Högerklick: mottagare som tystas vid sändning
 Save: no known frequency (rig or WebSDR)	Save: ingen känd frekvens (rigg eller WebSDR)
 Store the current frequency…	Spara aktuell frekvens…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Växla ljudet till nästa mottagare (högerklick: mottagare som förblir avstängd)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX-säkerhetstid (PTT-knapp)
 Off	Av
 PTT: connect the rig first	PTT: anslut riggen först
 transmitting	sändning
+Receivers muted while transmitting:	Mottagare som tystas vid sändning:
+Rig (Mute TRX)	Rigg (Tysta rigg)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ogiltig frekvens: ange ett värde i kHz, t.ex. 7074 eller 14074.5
 Remove this value (pick it in the list first)	Ta bort detta värde (välj det i listan först)
 RIG 	RIGG 

@@ -89,6 +89,7 @@ Cannot open the log: 	Logbuch kann nicht geöffnet werden:
 Export all settings…	Alle Einstellungen exportieren…
 Import settings…	Einstellungen importieren…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Alle Einstellungen exportieren oder importieren, für dieselbe Konfiguration auf einem anderen Computer (Rechtsklick: Schaltflächenfarbe)
+Right-click: receivers muted while transmitting	Rechtsklick: beim Senden stummgeschaltete Empfänger
 Save: no known frequency (rig or WebSDR)	Save: keine Frequenz bekannt (TRX oder WebSDR)
 Store the current frequency…	Aktuelle Frequenz speichern…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Ton zum nächsten Empfänger umschalten (Rechtsklick: Empfänger, der stumm bleibt)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX-Sicherheitszeit (PTT-Taste)
 Off	Aus
 PTT: connect the rig first	PTT: Bitte zuerst den TRX verbinden
 transmitting	Senden
+Receivers muted while transmitting:	Beim Senden stummgeschaltete Empfänger:
+Rig (Mute TRX)	TRX (TRX stumm)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ungültige Frequenz: Geben Sie einen Wert in kHz ein, z. B. 7074 oder 14074.5
 Remove this value (pick it in the list first)	Diesen Wert entfernen (zuerst in der Liste auswählen)
 RIG 	TRX 

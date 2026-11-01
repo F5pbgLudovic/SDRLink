@@ -89,6 +89,7 @@ Cannot open the log: 	Nedá sa otvoriť denník:
 Export all settings…	Exportovať všetky nastavenia…
 Import settings…	Importovať nastavenia…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportovať alebo importovať všetky nastavenia pre rovnakú konfiguráciu na inom počítači (pravé tlačidlo: farba tlačidla)
+Right-click: receivers muted while transmitting	Pravé tlačidlo: prijímače stlmené pri vysielaní
 Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
 Store the current frequency…	Uložiť aktuálny kmitočet…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prepnúť zvuk na ďalší prijímač (pravé tlačidlo: prijímač, ktorý zostane stlmený)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	Bezpečnostný časový limit TX (tlačidlo PTT)
 Off	Vyp.
 PTT: connect the rig first	PTT: najprv pripojte transceiver
 transmitting	vysielanie
+Receivers muted while transmitting:	Prijímače stlmené pri vysielaní:
+Rig (Mute TRX)	Transceiver (Stlmiť TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Neplatná frekvencia: zadajte hodnotu v kHz, napr. 7074 alebo 14074.5
 Remove this value (pick it in the list first)	Odstrániť túto hodnotu (najprv ju vyberte v zozname)
 RIG 	TRX 

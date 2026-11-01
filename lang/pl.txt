@@ -89,6 +89,7 @@ Cannot open the log: 	Nie można otworzyć dziennika:
 Export all settings…	Eksportuj wszystkie ustawienia…
 Import settings…	Importuj ustawienia…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportuj lub importuj wszystkie ustawienia, aby mieć tę samą konfigurację na innym komputerze (prawy przycisk: kolor przycisku)
+Right-click: receivers muted while transmitting	Prawy klik: odbiorniki wyciszane podczas nadawania
 Save: no known frequency (rig or WebSDR)	Zapisz: brak znanej częstotliwości (TRX lub WebSDR)
 Store the current frequency…	Zapamiętaj bieżącą częstotliwość…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Przełącz dźwięk na następny odbiornik (prawy przycisk: odbiornik, który pozostaje wyciszony)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	Limit czasu TX dla bezpieczeństwa (przycisk PTT)
 Off	Wył.
 PTT: connect the rig first	PTT: najpierw połącz radiostację
 transmitting	nadawanie
+Receivers muted while transmitting:	Odbiorniki wyciszane podczas nadawania:
+Rig (Mute TRX)	Radiostacja (Wycisz TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nieprawidłowa częstotliwość: wpisz wartość w kHz, np. 7074 lub 14074.5
 Remove this value (pick it in the list first)	Usuń tę wartość (najpierw wybierz ją z listy)
 RIG 	TRX 

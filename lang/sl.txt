@@ -89,6 +89,7 @@ Cannot open the log: 	Dnevnika ni mogoče odpreti:
 Export all settings…	Izvozi vse nastavitve…
 Import settings…	Uvozi nastavitve…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Izvozi ali uvozi vse nastavitve za enako konfiguracijo na drugem računalniku (desni klik: barva gumba)
+Right-click: receivers muted while transmitting	Desni klik: sprejemniki, utišani med oddajanjem
 Save: no known frequency (rig or WebSDR)	Shrani: frekvenca ni znana (TRX ali WebSDR)
 Store the current frequency…	Shrani trenutno frekvenco…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Preklopi zvok na naslednji sprejemnik (desni klik: sprejemnik, ki ostane utišan)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	Varnostna časovna omejitev TX (gumb PTT)
 Off	Izkl.
 PTT: connect the rig first	PTT: najprej povežite postajo
 transmitting	oddajanje
+Receivers muted while transmitting:	Sprejemniki, utišani med oddajanjem:
+Rig (Mute TRX)	Postaja (Utišaj TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Neveljavna frekvenca: vnesite vrednost v kHz, npr. 7074 ali 14074.5
 Remove this value (pick it in the list first)	Odstrani to vrednost (najprej jo izberite na seznamu)
 RIG 	TRX 

@@ -89,6 +89,7 @@ Cannot open the log: 	Nevar atvērt žurnālu:
 Export all settings…	Eksportēt visus iestatījumus…
 Import settings…	Importēt iestatījumus…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportēt vai importēt visus iestatījumus, lai citā datorā būtu tāda pati konfigurācija (labais klikšķis: pogas krāsa)
+Right-click: receivers muted while transmitting	Labais klikšķis: uztvērēji, kas raidīšanas laikā tiek klusināti
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
 Store the current frequency…	Saglabāt pašreizējo frekvenci…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Pārslēgt skaņu uz nākamo uztvērēju (labais klikšķis: uztvērējs, kas paliek apklusināts)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX drošības taimauts (poga PTT)
 Off	Izslēgts
 PTT: connect the rig first	PTT: vispirms pievienojiet raiduztvērēju
 transmitting	raidīšana
+Receivers muted while transmitting:	Uztvērēji, kas raidīšanas laikā tiek klusināti:
+Rig (Mute TRX)	Raiduztvērējs (Klusināt TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nederīga frekvence: ievadiet vērtību kHz, piem., 7074 vai 14074.5
 Remove this value (pick it in the list first)	Noņemt šo vērtību (vispirms izvēlieties to sarakstā)
 RIG 	RADIO 

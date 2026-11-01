@@ -89,6 +89,7 @@ Cannot open the log: 	Kan ikke åbne loggen:
 Export all settings…	Eksportér alle indstillinger…
 Import settings…	Importér indstillinger…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportér eller importér alle indstillinger, for samme konfiguration på en anden computer (højreklik: knapfarve)
+Right-click: receivers muted while transmitting	Højreklik: modtagere der gøres lydløse under sending
 Save: no known frequency (rig or WebSDR)	Save: ingen kendt frekvens (radio eller WebSDR)
 Store the current frequency…	Gem den aktuelle frekvens…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Skift lyden til næste modtager (højreklik: modtager, der forbliver slået fra)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX-sikkerhedstid (PTT-knap)
 Off	Fra
 PTT: connect the rig first	PTT: forbind radioen først
 transmitting	sender
+Receivers muted while transmitting:	Modtagere der gøres lydløse under sending:
+Rig (Mute TRX)	Radio (Lydløs TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: skriv en værdi i kHz, f.eks. 7074 eller 14074.5
 Remove this value (pick it in the list first)	Fjern denne værdi (vælg den først på listen)
 RIG 	TRX 

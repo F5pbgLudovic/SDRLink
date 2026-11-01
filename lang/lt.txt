@@ -89,6 +89,7 @@ Cannot open the log: 	Nepavyksta atidaryti žurnalo:
 Export all settings…	Eksportuoti visus nustatymus…
 Import settings…	Importuoti nustatymus…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportuoti arba importuoti visus nustatymus, kad kitame kompiuteryje būtų ta pati konfigūracija (dešinysis spustelėjimas: mygtuko spalva)
+Right-click: receivers muted while transmitting	Dešinysis spustelėjimas: imtuvai, nutildomi siunčiant
 Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
 Store the current frequency…	Įsiminti dabartinį dažnį…
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Perjungti garsą į kitą imtuvą (dešinysis spustelėjimas: imtuvas, kuris lieka nutildytas)
@@ -128,6 +129,8 @@ TX safety timeout (PTT button)	TX saugos laikmatis (mygtukas PTT)
 Off	Išjungta
 PTT: connect the rig first	PTT: pirmiausia prijunkite stotį
 transmitting	siuntimas
+Receivers muted while transmitting:	Imtuvai, nutildomi siunčiant:
+Rig (Mute TRX)	Stotis (Nutildyti TRX)
 Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Netinkamas dažnis: įveskite reikšmę kHz, pvz., 7074 arba 14074.5
 Remove this value (pick it in the list first)	Šalinti šią reikšmę (pirmiausia pasirinkite ją sąraše)
 RIG 	STOTIS 
