@@ -192,6 +192,15 @@ Clear this list	Tyhjennä tämä luettelo
 Text size	Tekstin koko
 Window text size (100% = original size):	Ikkunan tekstin koko (100 % = alkuperäinen koko):
 (no message)	(ei viestejä)
+SDRLink: update available	SDRLink: päivitys saatavilla
+SDRLink: updates	SDRLink: päivitykset
+Could not reach GitHub to check for updates.	GitHubiin ei saatu yhteyttä päivitysten tarkistamiseksi.
+You are using the latest version of SDRLink.	Käytät SDRLinkin uusinta versiota.
+Latest published version: unknown	Viimeisin julkaistu versio: tuntematon
+All versions (the latest one is marked “Latest”):	Kaikki versiot (uusin on merkitty ”Latest”):
+To stop these notices, untick “Check for updates”.	Jos et halua näitä ilmoituksia, poista valinta ”Tarkista päivitykset”.
+Later	Myöhemmin
+Open the update page	Avaa päivityksen sivu
 Last {0} memories used	Viimeiset {0} käytettyä muistia
 ExpertSDR TCI port: {0}…	ExpertSDR:n TCI-portti: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Päivitys V{0} saatavilla: lataa napsauttamalla
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Kirjoitetaan ”{0}”: {1} %
 Recording saved: "{0}"	Tallenne tallennettu: ”{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Viimeiset {0} viestiä (napsautus: piilota tai näytä tämäntyyppiset viestit uudelleen, ✓ = piilotettu)
 Show all hidden messages again ({0})	Näytä kaikki piilotetut viestit uudelleen ({0})
+A new version of SDRLink is available: V{0}	SDRLinkin uusi versio on saatavilla: V{0}
+Version in use: V{0}	Käytössä oleva versio: V{0}
+Latest published version: V{0}	Viimeisin julkaistu versio: V{0}
+Version {0} page (download, what's new):	Version {0} sivu (lataus, uudet ominaisuudet):
 Interface:	Liitäntä:
 Brand:	Merkki:
 Model:	Malli:

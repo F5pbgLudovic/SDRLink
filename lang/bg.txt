@@ -192,6 +192,15 @@ Clear this list	Изчистване на списъка
 Text size	Размер на текста
 Window text size (100% = original size):	Размер на текста на прозореца (100 % = първоначален размер):
 (no message)	(няма съобщения)
+SDRLink: update available	SDRLink: налична е актуализация
+SDRLink: updates	SDRLink: актуализации
+Could not reach GitHub to check for updates.	Няма връзка с GitHub за проверка за актуализации.
+You are using the latest version of SDRLink.	Използвате най-новата версия на SDRLink.
+Latest published version: unknown	Последна публикувана версия: неизвестна
+All versions (the latest one is marked “Latest”):	Всички версии (последната е отбелязана с „Latest“):
+To stop these notices, untick “Check for updates”.	За да не получавате тези известия, махнете отметката „Проверка за актуализации“.
+Later	По-късно
+Open the update page	Отвори страницата на актуализацията
 Last {0} memories used	Последните {0} използвани памети
 ExpertSDR TCI port: {0}…	TCI порт на ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Налична е актуализация V{0}: щракнете, за да я изтеглите
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Записване на „{0}“: {1}%
 Recording saved: "{0}"	Записът е запазен: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Последните {0} съобщения (щракване: скриване или показване на този вид съобщение, ✓ = скрито)
 Show all hidden messages again ({0})	Показване отново на всички скрити съобщения ({0})
+A new version of SDRLink is available: V{0}	Налична е нова версия на SDRLink: V{0}
+Version in use: V{0}	Използвана версия: V{0}
+Latest published version: V{0}	Последна публикувана версия: V{0}
+Version {0} page (download, what's new):	Страница на версия {0} (изтегляне, новости):
 Interface:	Интерфейс:
 Brand:	Марка:
 Model:	Модел:

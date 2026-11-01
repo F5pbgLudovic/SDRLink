@@ -464,7 +464,7 @@ Bouton **Import/Export ▾** (1re ligne, après « Vérifier les mises à jour �
 
 ## Mises à jour
 
-Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au démarrage, si Internet répond, SDRLink regarde la dernière version publiée sur GitHub. S'il en existe une plus récente, un lien orange « ⚠ Mise à jour Vx.y disponible » apparaît en bas à droite de la fenêtre, dans la barre d'état (visible aussi en affichages réduit et mini) : un clic ouvre la page de téléchargement. Cocher la case lance la vérification tout de suite.
+Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au démarrage, si Internet répond, SDRLink regarde la dernière version publiée sur GitHub. S'il en existe une plus récente, une fenêtre s'ouvre (depuis la 1.18) : elle indique la version utilisée et la dernière version publiée, avec le lien direct vers la page de cette version (téléchargement et nouveautés) et le lien vers la liste de toutes les versions (https://github.com/F5pbgLudovic/SDRLink/releases, la dernière y est marquée « Latest »). Le bouton **Ouvrir la page de la mise à jour** ouvre cette page dans le navigateur ; **Plus tard** ferme la fenêtre. Un lien orange « ⚠ Mise à jour Vx.y disponible » reste aussi en bas à droite de la fenêtre, dans la barre d'état (visible aussi en affichages réduit et mini) : un clic ouvre la même page. Cocher la case lance la vérification tout de suite et ouvre la fenêtre dans tous les cas : nouvelle version, « vous utilisez la dernière version » ou GitHub injoignable. Pour ne plus être prévenu, décochez la case.
 
 ## Dépannage
 
@@ -476,6 +476,8 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.18**
+  - **Mises à jour** : quand une version plus récente est publiée, une **fenêtre s'ouvre** au démarrage (case « Vérifier les mises à jour » cochée) avec la version utilisée, la dernière version publiée, le lien direct vers la page de cette version et le lien vers la liste de toutes les versions ; bouton « Ouvrir la page de la mise à jour ». Avant, seul un lien apparaissait dans la barre d'état, facile à manquer. Cocher la case à la main ouvre la fenêtre dans tous les cas (à jour, nouvelle version ou GitHub injoignable).
 - **1.17**
   - **Conf scan, zones non scannées** : les deux bornes d'une zone sont maintenant **scannées**, seules les fréquences entre les deux sont sautées (zone de 96 à 103, pas de 1 → le scan s'arrête sur 96 puis repart à 103 ; avant, il passait de 95 à 104).
 - **1.16**
@@ -529,7 +531,7 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
   - une erreur imprévue est notée en détail dans le journal (ligne « Erreur inattendue ») et signalée en bas de la fenêtre, sans boîte de dialogue.
 - **1.6**
   - bouton ⇄ : le son passe d'une réception à la suivante (WebSDR, TX, ExpertSDR) ; clic droit pour laisser une coupure de côté ;
-  - case « Vérifier les mises à jour » et lien vers la nouvelle version dans la barre d'état.
+  - case « Vérifier les mises à jour » et lien vers la nouvelle version dans la barre d'état (fenêtre de mise à jour depuis la 1.18).
 - **1.5**
   - premier démarrage : recherche des WebSDR lancée une fois, si Internet répond ;
   - la liste où enregistrer est demandée à chaque ajout de favori, et un favori déjà présent dans la liste n'est pas ajouté ;

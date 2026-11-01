@@ -192,6 +192,15 @@ Clear this list	Wyczyść tę listę
 Text size	Rozmiar tekstu
 Window text size (100% = original size):	Rozmiar tekstu okna (100 % = rozmiar pierwotny):
 (no message)	(brak komunikatów)
+SDRLink: update available	SDRLink: dostępna aktualizacja
+SDRLink: updates	SDRLink: aktualizacje
+Could not reach GitHub to check for updates.	Nie udało się połączyć z GitHub, aby sprawdzić aktualizacje.
+You are using the latest version of SDRLink.	Używasz najnowszej wersji SDRLink.
+Latest published version: unknown	Ostatnia opublikowana wersja: nieznana
+All versions (the latest one is marked “Latest”):	Wszystkie wersje (najnowsza jest oznaczona „Latest”):
+To stop these notices, untick “Check for updates”.	Aby nie otrzymywać tych powiadomień, odznacz „Sprawdzaj aktualizacje”.
+Later	Później
+Open the update page	Otwórz stronę aktualizacji
 Last {0} memories used	Ostatnie {0} użyte pamięci
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Dostępna aktualizacja V{0}: kliknij, aby pobrać
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Zapisywanie „{0}”: {1}%
 Recording saved: "{0}"	Nagranie zapisane: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ostatnie {0} komunikatów (kliknięcie: ukryj lub pokaż ponownie ten rodzaj komunikatu, ✓ = ukryty)
 Show all hidden messages again ({0})	Pokaż ponownie wszystkie ukryte komunikaty ({0})
+A new version of SDRLink is available: V{0}	Dostępna jest nowa wersja SDRLink: V{0}
+Version in use: V{0}	Używana wersja: V{0}
+Latest published version: V{0}	Ostatnia opublikowana wersja: V{0}
+Version {0} page (download, what's new):	Strona wersji {0} (pobieranie, nowości):
 Interface:	Interfejs:
 Brand:	Marka:
 Model:	Model:

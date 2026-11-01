@@ -192,6 +192,15 @@ Clear this list	A lista törlése
 Text size	Szövegméret
 Window text size (100% = original size):	Az ablak szövegmérete (100 % = eredeti méret):
 (no message)	(nincs üzenet)
+SDRLink: update available	SDRLink: frissítés érhető el
+SDRLink: updates	SDRLink: frissítések
+Could not reach GitHub to check for updates.	Nem sikerült elérni a GitHubot a frissítések kereséséhez.
+You are using the latest version of SDRLink.	Az SDRLink legújabb verzióját használja.
+Latest published version: unknown	Legutóbb kiadott verzió: ismeretlen
+All versions (the latest one is marked “Latest”):	Összes verzió (a legújabb „Latest” jelölésű):
+To stop these notices, untick “Check for updates”.	Ha nem kér több ilyen értesítést, kapcsolja ki a „Frissítések keresése” jelölőnégyzetet.
+Later	Később
+Open the update page	Frissítés oldalának megnyitása
 Last {0} memories used	Utolsó {0} használt memória
 ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Elérhető a V{0} frissítés: kattintson a letöltéshez
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	„{0}” írása: {1}%
 Recording saved: "{0}"	Felvétel mentve: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Utolsó {0} üzenet (kattintás: az ilyen típusú üzenet elrejtése vagy újbóli megjelenítése, ✓ = rejtett)
 Show all hidden messages again ({0})	Minden rejtett üzenet újbóli megjelenítése ({0})
+A new version of SDRLink is available: V{0}	Elérhető az SDRLink új verziója: V{0}
+Version in use: V{0}	Használt verzió: V{0}
+Latest published version: V{0}	Legutóbb kiadott verzió: V{0}
+Version {0} page (download, what's new):	A(z) {0} verzió oldala (letöltés, újdonságok):
 Interface:	Interfész:
 Brand:	Gyártó:
 Model:	Modell:

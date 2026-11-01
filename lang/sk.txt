@@ -192,6 +192,15 @@ Clear this list	Vymazať tento zoznam
 Text size	Veľkosť textu
 Window text size (100% = original size):	Veľkosť textu okna (100 % = pôvodná veľkosť):
 (no message)	(žiadna správa)
+SDRLink: update available	SDRLink: k dispozícii je aktualizácia
+SDRLink: updates	SDRLink: aktualizácie
+Could not reach GitHub to check for updates.	Nedá sa spojiť s GitHubom a skontrolovať aktualizácie.
+You are using the latest version of SDRLink.	Používate najnovšiu verziu SDRLink.
+Latest published version: unknown	Posledná vydaná verzia: neznáma
+All versions (the latest one is marked “Latest”):	Všetky verzie (posledná je označená „Latest“):
+To stop these notices, untick “Check for updates”.	Ak nechcete tieto upozornenia, zrušte začiarknutie „Kontrolovať aktualizácie“.
+Later	Neskôr
+Open the update page	Otvoriť stránku aktualizácie
 Last {0} memories used	Posledných {0} použitých pamätí
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ K dispozícii je aktualizácia V{0}: kliknite na stiahnutie
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Zápis „{0}“: {1} %
 Recording saved: "{0}"	Záznam uložený: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Posledných {0} správ (kliknutie: skryť alebo znova zobraziť tento druh správy, ✓ = skryté)
 Show all hidden messages again ({0})	Znova zobraziť všetky skryté správy ({0})
+A new version of SDRLink is available: V{0}	K dispozícii je nová verzia SDRLink: V{0}
+Version in use: V{0}	Používaná verzia: V{0}
+Latest published version: V{0}	Posledná vydaná verzia: V{0}
+Version {0} page (download, what's new):	Stránka verzie {0} (stiahnutie, novinky):
 Interface:	Rozhranie:
 Brand:	Značka:
 Model:	Model:

@@ -192,6 +192,15 @@ Clear this list	Töm den här listan
 Text size	Textstorlek
 Window text size (100% = original size):	Fönstrets textstorlek (100 % = ursprunglig storlek):
 (no message)	(inga meddelanden)
+SDRLink: update available	SDRLink: uppdatering tillgänglig
+SDRLink: updates	SDRLink: uppdateringar
+Could not reach GitHub to check for updates.	Kunde inte nå GitHub för att söka efter uppdateringar.
+You are using the latest version of SDRLink.	Du använder den senaste versionen av SDRLink.
+Latest published version: unknown	Senast publicerade version: okänd
+All versions (the latest one is marked “Latest”):	Alla versioner (den senaste är märkt ”Latest”):
+To stop these notices, untick “Check for updates”.	Avmarkera ”Sök efter uppdateringar” för att slippa dessa meddelanden.
+Later	Senare
+Open the update page	Öppna uppdateringssidan
 Last {0} memories used	Senaste {0} använda minnen
 ExpertSDR TCI port: {0}…	TCI-port för ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Uppdatering V{0} tillgänglig: klicka för att ladda ner den
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Skriver "{0}": {1} %
 Recording saved: "{0}"	Inspelningen sparad: "{0}"
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Senaste {0} meddelanden (klick: dölj eller visa denna typ av meddelande igen, ✓ = dold)
 Show all hidden messages again ({0})	Visa alla dolda meddelanden igen ({0})
+A new version of SDRLink is available: V{0}	En ny version av SDRLink finns: V{0}
+Version in use: V{0}	Version som används: V{0}
+Latest published version: V{0}	Senast publicerade version: V{0}
+Version {0} page (download, what's new):	Sida för version {0} (nedladdning, nyheter):
 Interface:	Gränssnitt:
 Brand:	Märke:
 Model:	Modell:

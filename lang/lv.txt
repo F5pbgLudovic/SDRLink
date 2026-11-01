@@ -192,6 +192,15 @@ Clear this list	Notīrīt šo sarakstu
 Text size	Teksta lielums
 Window text size (100% = original size):	Loga teksta lielums (100 % = sākotnējais lielums):
 (no message)	(nav ziņojumu)
+SDRLink: update available	SDRLink: pieejams atjauninājums
+SDRLink: updates	SDRLink: atjauninājumi
+Could not reach GitHub to check for updates.	Neizdevās sazināties ar GitHub, lai pārbaudītu atjauninājumus.
+You are using the latest version of SDRLink.	Jūs izmantojat jaunāko SDRLink versiju.
+Latest published version: unknown	Jaunākā publicētā versija: nezināma
+All versions (the latest one is marked “Latest”):	Visas versijas (jaunākā ir atzīmēta ar “Latest”):
+To stop these notices, untick “Check for updates”.	Lai vairs nesaņemtu šos paziņojumus, noņemiet atzīmi “Pārbaudīt atjauninājumus”.
+Later	Vēlāk
+Open the update page	Atvērt atjauninājuma lapu
 Last {0} memories used	Pēdējās {0} izmantotās atmiņas
 ExpertSDR TCI port: {0}…	ExpertSDR TCI ports: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Pieejams atjauninājums V{0}: noklikšķiniet, lai lejupielādētu
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Raksta “{0}”: {1}%
 Recording saved: "{0}"	Ieraksts saglabāts: “{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Pēdējie {0} ziņojumi (klikšķis: paslēpt vai atkal rādīt šāda veida ziņojumu, ✓ = paslēpts)
 Show all hidden messages again ({0})	Atkal rādīt visus paslēptos ziņojumus ({0})
+A new version of SDRLink is available: V{0}	Pieejama jauna SDRLink versija: V{0}
+Version in use: V{0}	Izmantotā versija: V{0}
+Latest published version: V{0}	Jaunākā publicētā versija: V{0}
+Version {0} page (download, what's new):	Versijas {0} lapa (lejupielāde, jaunumi):
 Interface:	Saskarne:
 Brand:	Ražotājs:
 Model:	Modelis:

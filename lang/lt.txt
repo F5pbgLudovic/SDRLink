@@ -192,6 +192,15 @@ Clear this list	Išvalyti šį sąrašą
 Text size	Teksto dydis
 Window text size (100% = original size):	Lango teksto dydis (100 % = pradinis dydis):
 (no message)	(pranešimų nėra)
+SDRLink: update available	SDRLink: yra atnaujinimas
+SDRLink: updates	SDRLink: atnaujinimai
+Could not reach GitHub to check for updates.	Nepavyko prisijungti prie GitHub ir patikrinti atnaujinimų.
+You are using the latest version of SDRLink.	Naudojate naujausią SDRLink versiją.
+Latest published version: unknown	Naujausia paskelbta versija: nežinoma
+All versions (the latest one is marked “Latest”):	Visos versijos (naujausia pažymėta „Latest“):
+To stop these notices, untick “Check for updates”.	Jei nebenorite šių pranešimų, nuimkite žymę „Tikrinti atnaujinimus“.
+Later	Vėliau
+Open the update page	Atverti atnaujinimo puslapį
 Last {0} memories used	Paskutinės {0} naudotos atmintys
 ExpertSDR TCI port: {0}…	ExpertSDR TCI prievadas: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Yra atnaujinimas V{0}: spustelėkite, kad atsisiųstumėte
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Rašoma „{0}“: {1} %
 Recording saved: "{0}"	Įrašas išsaugotas: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Paskutiniai {0} pranešimai (spustelėjimas: slėpti arba vėl rodyti šios rūšies pranešimą, ✓ = paslėpta)
 Show all hidden messages again ({0})	Vėl rodyti visus paslėptus pranešimus ({0})
+A new version of SDRLink is available: V{0}	Yra nauja SDRLink versija: V{0}
+Version in use: V{0}	Naudojama versija: V{0}
+Latest published version: V{0}	Naujausia paskelbta versija: V{0}
+Version {0} page (download, what's new):	Versijos {0} puslapis (atsisiuntimas, naujovės):
 Interface:	Sąsaja:
 Brand:	Gamintojas:
 Model:	Modelis:

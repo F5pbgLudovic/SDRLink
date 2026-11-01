@@ -192,6 +192,15 @@ Clear this list	Golește această listă
 Text size	Dimensiunea textului
 Window text size (100% = original size):	Dimensiunea textului ferestrei (100 % = dimensiunea inițială):
 (no message)	(niciun mesaj)
+SDRLink: update available	SDRLink: actualizare disponibilă
+SDRLink: updates	SDRLink: actualizări
+Could not reach GitHub to check for updates.	Nu s-a putut contacta GitHub pentru căutarea actualizărilor.
+You are using the latest version of SDRLink.	Folosiți cea mai recentă versiune a SDRLink.
+Latest published version: unknown	Ultima versiune publicată: necunoscută
+All versions (the latest one is marked “Latest”):	Toate versiunile (cea mai recentă este marcată „Latest”):
+To stop these notices, untick “Check for updates”.	Pentru a nu mai primi aceste anunțuri, debifați „Caută actualizări”.
+Later	Mai târziu
+Open the update page	Deschide pagina actualizării
 Last {0} memories used	Ultimele {0} memorii folosite
 ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualizarea V{0} este disponibilă: faceți clic pentru a o descărca
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Se scrie „{0}”: {1} %
 Recording saved: "{0}"	Înregistrare salvată: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ultimele {0} mesaje (clic: ascundeți sau reafișați acest tip de mesaj, ✓ = ascuns)
 Show all hidden messages again ({0})	Reafișează toate mesajele ascunse ({0})
+A new version of SDRLink is available: V{0}	Este disponibilă o versiune nouă a SDRLink: V{0}
+Version in use: V{0}	Versiunea folosită: V{0}
+Latest published version: V{0}	Ultima versiune publicată: V{0}
+Version {0} page (download, what's new):	Pagina versiunii {0} (descărcare, noutăți):
 Interface:	Interfață:
 Brand:	Marcă:
 Model:	Model:

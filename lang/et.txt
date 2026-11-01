@@ -192,6 +192,15 @@ Clear this list	Tühjenda see loend
 Text size	Teksti suurus
 Window text size (100% = original size):	Akna teksti suurus (100 % = algne suurus):
 (no message)	(teateid pole)
+SDRLink: update available	SDRLink: uuendus saadaval
+SDRLink: updates	SDRLink: uuendused
+Could not reach GitHub to check for updates.	GitHubiga ei õnnestunud uuenduste kontrollimiseks ühendust saada.
+You are using the latest version of SDRLink.	Kasutate SDRLinki uusimat versiooni.
+Latest published version: unknown	Viimane avaldatud versioon: teadmata
+All versions (the latest one is marked “Latest”):	Kõik versioonid (uusim on märgitud „Latest“):
+To stop these notices, untick “Check for updates”.	Nende teadete peatamiseks eemaldage linnuke „Kontrolli uuendusi“.
+Later	Hiljem
+Open the update page	Ava uuenduse leht
 Last {0} memories used	Viimased {0} kasutatud mälu
 ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Saadaval on uuendus V{0}: klõpsake allalaadimiseks
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	„{0}“ kirjutamine: {1}%
 Recording saved: "{0}"	Salvestis salvestatud: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Viimased {0} teadet (klõps: peida või näita seda tüüpi teateid uuesti, ✓ = peidetud)
 Show all hidden messages again ({0})	Näita kõiki peidetud teateid uuesti ({0})
+A new version of SDRLink is available: V{0}	Saadaval on SDRLinki uus versioon: V{0}
+Version in use: V{0}	Kasutusel olev versioon: V{0}
+Latest published version: V{0}	Viimane avaldatud versioon: V{0}
+Version {0} page (download, what's new):	Versiooni {0} leht (allalaadimine, uuendused):
 Interface:	Liides:
 Brand:	Tootja:
 Model:	Mudel:

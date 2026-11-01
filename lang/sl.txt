@@ -192,6 +192,15 @@ Clear this list	Počisti ta seznam
 Text size	Velikost besedila
 Window text size (100% = original size):	Velikost besedila okna (100 % = izvirna velikost):
 (no message)	(ni sporočil)
+SDRLink: update available	SDRLink: na voljo je posodobitev
+SDRLink: updates	SDRLink: posodobitve
+Could not reach GitHub to check for updates.	Povezava z GitHubom za preverjanje posodobitev ni uspela.
+You are using the latest version of SDRLink.	Uporabljate najnovejšo različico SDRLink.
+Latest published version: unknown	Zadnja objavljena različica: neznana
+All versions (the latest one is marked “Latest”):	Vse različice (najnovejša je označena z »Latest«):
+To stop these notices, untick “Check for updates”.	Če ne želite več teh obvestil, počistite »Preveri posodobitve«.
+Later	Pozneje
+Open the update page	Odpri stran posodobitve
 Last {0} memories used	Zadnjih {0} uporabljenih pomnilnikov
 ExpertSDR TCI port: {0}…	Vrata TCI programa ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Na voljo je posodobitev V{0}: kliknite za prenos
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Zapisovanje »{0}«: {1} %
 Recording saved: "{0}"	Posnetek shranjen: »{0}«
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Zadnjih {0} sporočil (klik: skrij ali znova prikaži to vrsto sporočila, ✓ = skrito)
 Show all hidden messages again ({0})	Znova prikaži vsa skrita sporočila ({0})
+A new version of SDRLink is available: V{0}	Na voljo je nova različica SDRLink: V{0}
+Version in use: V{0}	Uporabljena različica: V{0}
+Latest published version: V{0}	Zadnja objavljena različica: V{0}
+Version {0} page (download, what's new):	Stran različice {0} (prenos, novosti):
 Interface:	Vmesnik:
 Brand:	Znamka:
 Model:	Model:

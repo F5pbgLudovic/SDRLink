@@ -466,7 +466,7 @@ On the "Sync" row, after "Auto notch (DNF)":
 
 ## Updates
 
-**Check for updates** box (1st row, ticked by default): at startup, if the Internet answers, SDRLink looks up the latest version published on GitHub. If there is a newer one, an orange link "⚠ Update Vx.y available" appears at the bottom right of the window, in the status bar (also visible in reduced and mini views): one click opens the download page. Ticking the box runs the check immediately.
+**Check for updates** box (1st row, ticked by default): at startup, if the Internet answers, SDRLink looks up the latest version published on GitHub. If there is a newer one, a window opens (since 1.18): it shows the version in use and the latest published version, with the direct link to that version's page (download and what's new) and the link to the list of all versions (https://github.com/F5pbgLudovic/SDRLink/releases, where the latest one is marked "Latest"). The **Open the update page** button opens that page in the browser; **Later** closes the window. An orange link "⚠ Update Vx.y available" also stays at the bottom right of the window, in the status bar (also visible in reduced and mini views): one click opens the same page. Ticking the box runs the check immediately and opens the window in every case: new version, "you are using the latest version" or GitHub unreachable. To stop these notices, untick the box.
 
 ## Troubleshooting
 
@@ -478,6 +478,8 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.18**
+  - **Updates**: when a newer version is published, a **window opens** at startup ("Check for updates" ticked) with the version in use, the latest published version, the direct link to that version's page and the link to the list of all versions; "Open the update page" button. Before, only a link appeared in the status bar, easy to miss. Ticking the box by hand opens the window in every case (up to date, new version or GitHub unreachable).
 - **1.17**
   - **Scan setup, skipped ranges**: both limits of a range are now **scanned**, only the frequencies between them are skipped (range from 96 to 103, step 1 → the scan stops on 96 then resumes at 103; before, it went from 95 to 104).
 - **1.16**
@@ -531,7 +533,7 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
   - an unexpected error is recorded in detail in the log ("Erreur inattendue" line) and reported at the bottom of the window, without a dialog box.
 - **1.6**
   - ⇄ button: the audio switches from one receiver to the next (WebSDR, TRX, ExpertSDR); right-click to leave one mute aside;
-  - "Check for updates" box and link to the new version in the status bar.
+  - "Check for updates" box and link to the new version in the status bar (update window since 1.18).
 - **1.5**
   - first start: WebSDR search run once, if the Internet answers;
   - the list to save to is asked for each time a favorite is added, and a favorite already in the list is not added;

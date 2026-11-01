@@ -192,6 +192,15 @@ Clear this list	Εκκαθάριση αυτής της λίστας
 Text size	Μέγεθος κειμένου
 Window text size (100% = original size):	Μέγεθος κειμένου του παραθύρου (100 % = αρχικό μέγεθος):
 (no message)	(κανένα μήνυμα)
+SDRLink: update available	SDRLink: διαθέσιμη ενημέρωση
+SDRLink: updates	SDRLink: ενημερώσεις
+Could not reach GitHub to check for updates.	Δεν ήταν δυνατή η σύνδεση με το GitHub για έλεγχο ενημερώσεων.
+You are using the latest version of SDRLink.	Χρησιμοποιείτε την τελευταία έκδοση του SDRLink.
+Latest published version: unknown	Τελευταία δημοσιευμένη έκδοση: άγνωστη
+All versions (the latest one is marked “Latest”):	Όλες οι εκδόσεις (η τελευταία έχει την ένδειξη «Latest»):
+To stop these notices, untick “Check for updates”.	Για να μη βλέπετε αυτές τις ειδοποιήσεις, καταργήστε την επιλογή «Έλεγχος για ενημερώσεις».
+Later	Αργότερα
+Open the update page	Άνοιγμα της σελίδας ενημέρωσης
 Last {0} memories used	Τελευταίες {0} μνήμες που χρησιμοποιήθηκαν
 ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Διαθέσιμη ενημέρωση V{0}: κάντε κλικ για λήψη
@@ -227,6 +236,10 @@ Writing "{0}": {1}%	Εγγραφή «{0}»: {1}%
 Recording saved: "{0}"	Η εγγραφή αποθηκεύτηκε: «{0}»
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Τελευταία {0} μηνύματα (κλικ: απόκρυψη ή επανεμφάνιση αυτού του είδους μηνύματος, ✓ = κρυφό)
 Show all hidden messages again ({0})	Επανεμφάνιση όλων των κρυφών μηνυμάτων ({0})
+A new version of SDRLink is available: V{0}	Είναι διαθέσιμη νέα έκδοση του SDRLink: V{0}
+Version in use: V{0}	Έκδοση σε χρήση: V{0}
+Latest published version: V{0}	Τελευταία δημοσιευμένη έκδοση: V{0}
+Version {0} page (download, what's new):	Σελίδα της έκδοσης {0} (λήψη, νέα χαρακτηριστικά):
 Interface:	Διασύνδεση:
 Brand:	Μάρκα:
 Model:	Μοντέλο:

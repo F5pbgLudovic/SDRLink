@@ -270,7 +270,7 @@ namespace SDRLink
             row1.Controls.Add(btnPalette);
             row1.Controls.Add(Colorable("TextSize", Btn("Taille du texte…", "Text size…", delegate { AskFontScale(); })));
             chkUpdates = Check("Vérifier les mises à jour", "Check for updates");
-            chkUpdates.CheckedChanged += delegate { if (!loading && chkUpdates.Checked) CheckForUpdate(); };
+            chkUpdates.CheckedChanged += delegate { if (!loading && chkUpdates.Checked) CheckForUpdate(true); };
             row1.Controls.Add(chkUpdates);
             // Import/Export : tous les réglages (interface, favoris, mémoires, couleurs…) dans un fichier, pour retrouver
             // la même configuration sur un autre ordinateur. Clic gauche : menu ; clic droit : couleur du bouton.
@@ -3971,8 +3971,13 @@ namespace SDRLink
 
         // ---------------------------------------------------------------- Mise à jour
 
-        // Au démarrage (case cochée) : dernière version publiée sur GitHub ; si elle est plus récente, lien dans la barre d'état.
-        void CheckForUpdate()
+        const string ReleasesUrl = "https://github.com/F5pbgLudovic/SDRLink/releases";
+
+        // Au démarrage (case cochée) : dernière version publiée sur GitHub ; si elle est plus récente, fenêtre avec le lien
+        // vers la page de cette version (et lien dans la barre d'état). Case cochée à la main : fenêtre dans tous les cas.
+        void CheckForUpdate() { CheckForUpdate(false); }
+
+        void CheckForUpdate(bool manual)
         {
             System.Threading.Thread t = new System.Threading.Thread(delegate()
             {
@@ -3987,30 +3992,43 @@ namespace SDRLink
                     string json;
                     using (WebResponse resp = req.GetResponse())
                     using (StreamReader r = new StreamReader(resp.GetResponseStream(), Encoding.UTF8)) json = r.ReadToEnd();
-                    Match m = Regex.Match(json, "\"tag_name\"\\s*:\\s*\"v?([0-9][0-9.]*)\"");
-                    if (m.Success) tag = m.Groups[1].Value.TrimEnd('.');
-                    m = Regex.Match(json, "\"html_url\"\\s*:\\s*\"(https://github\\.com/[^\"]+/releases/tag/[^\"]+)\"");
-                    url = m.Success ? m.Groups[1].Value : "https://github.com/F5pbgLudovic/SDRLink/releases/latest";
+                    ParseRelease(json, out tag, out url);
                 }
                 catch (Exception ex) { Log.Write("Mise à jour : vérification impossible (" + ex.Message + ")"); }
-                if (tag == null) return;
+                if (tag == null && !manual) return;
                 try
                 {
                     BeginInvoke((Action)delegate
                     {
-                        if (!IsNewer(tag, Program.Version)) { Log.Write("Mise à jour : V" + Program.Version + " est la dernière version"); return; }
+                        if (tag == null) { ShowUpdateWindow(null, null); return; }
+                        if (!IsNewer(tag, Program.Version))
+                        {
+                            Log.Write("Mise à jour : V" + Program.Version + " est la dernière version");
+                            if (manual) ShowUpdateWindow(tag, url);
+                            return;
+                        }
                         Log.Write("Mise à jour : V" + tag + " disponible");
                         updateVersion = tag;
                         updateUrl = url;
                         lblUpdate.Text = Lang.F("⚠ Mise à jour V{0} disponible : cliquez pour la télécharger", "⚠ Update V{0} available: click to download it", updateVersion);
                         lblUpdate.Visible = true;
                         StyleUpdateLabel();
+                        ShowUpdateWindow(tag, url);
                     });
                 }
                 catch (InvalidOperationException) { }   // fenêtre fermée entre-temps
             });
             t.IsBackground = true;
             t.Start();
+        }
+
+        // Réponse de l'API GitHub (dernière version) : numéro sans le « v » et adresse de la page de cette version.
+        static void ParseRelease(string json, out string tag, out string url)
+        {
+            Match m = Regex.Match(json, "\"tag_name\"\\s*:\\s*\"v?([0-9][0-9.]*)\"");
+            tag = m.Success ? m.Groups[1].Value.TrimEnd('.') : null;
+            m = Regex.Match(json, "\"html_url\"\\s*:\\s*\"(https://github\\.com/[^\"]+/releases/tag/[^\"]+)\"");
+            url = m.Success ? m.Groups[1].Value : ReleasesUrl + "/latest";
         }
 
         static bool IsNewer(string latest, string current)
@@ -4021,10 +4039,92 @@ namespace SDRLink
             return a > b;
         }
 
-        void OpenUpdatePage()
+        void OpenUpdatePage() { OpenUrl(updateUrl ?? ReleasesUrl + "/latest"); }
+
+        void OpenUrl(string url)
         {
-            try { System.Diagnostics.Process.Start(updateUrl ?? "https://github.com/F5pbgLudovic/SDRLink/releases/latest"); }
+            try { System.Diagnostics.Process.Start(url); }
             catch (Exception ex) { MessageBox.Show(this, ex.Message, "SDRLink"); }
+        }
+
+        // Fenêtre de mise à jour : version utilisée, dernière version publiée, lien direct vers la page de cette
+        // version et vers la liste des versions. latest = null : vérification impossible (case cochée à la main).
+        void ShowUpdateWindow(string latest, string url)
+        {
+            if (IsDisposed) return;
+            using (Form f = UpdateWindow(Font, latest, url, OpenUrl))
+                if (f.ShowDialog(this) == DialogResult.OK) OpenUrl(url);
+        }
+
+        static Form UpdateWindow(Font font, string latest, string url, Action<string> openUrl)
+        {
+            bool newer = latest != null && IsNewer(latest, Program.Version);
+            Form f = new Form();
+            {
+                f.Text = newer ? Lang.T("SDRLink : mise à jour disponible", "SDRLink: update available") : Lang.T("SDRLink : mises à jour", "SDRLink: updates");
+                f.FormBorderStyle = FormBorderStyle.FixedDialog;
+                f.MaximizeBox = f.MinimizeBox = false;
+                f.ShowInTaskbar = false;
+                f.StartPosition = FormStartPosition.CenterParent;
+                f.Font = font;
+                int y = 16, w = 520;
+                Label title = new Label { AutoSize = true, Location = new Point(14, y), Font = new Font(font, FontStyle.Bold) };
+                title.Text = latest == null ? Lang.T("Impossible de joindre GitHub pour vérifier les mises à jour.", "Could not reach GitHub to check for updates.")
+                    : newer ? Lang.F("Une nouvelle version de SDRLink est disponible : V{0}", "A new version of SDRLink is available: V{0}", latest)
+                    : Lang.T("Vous utilisez la dernière version de SDRLink.", "You are using the latest version of SDRLink.");
+                f.Controls.Add(title);
+                y += 34;
+                Label info = new Label { AutoSize = true, Location = new Point(14, y) };
+                info.Text = Lang.F("Version utilisée : V{0}", "Version in use: V{0}", Program.Version) + "\r\n" +
+                    (latest == null ? Lang.T("Dernière version publiée : inconnue", "Latest published version: unknown")
+                                    : Lang.F("Dernière version publiée : V{0}", "Latest published version: V{0}", latest));
+                f.Controls.Add(info);
+                y += 48;
+                List<LinkLabel> links = new List<LinkLabel>();
+                if (newer)
+                {
+                    f.Controls.Add(new Label { AutoSize = true, Location = new Point(14, y), Text = Lang.F("Page de la version {0} (téléchargement, nouveautés) :", "Version {0} page (download, what's new):", latest) });
+                    y += 22;
+                    links.Add(new LinkLabel { AutoSize = true, Location = new Point(14, y), Text = url });
+                    y += 30;
+                }
+                f.Controls.Add(new Label { AutoSize = true, Location = new Point(14, y), Text = Lang.T("Toutes les versions (la dernière est marquée « Latest ») :", "All versions (the latest one is marked “Latest”):") });
+                y += 22;
+                links.Add(new LinkLabel { AutoSize = true, Location = new Point(14, y), Text = ReleasesUrl });
+                y += 34;
+                if (newer)
+                {
+                    f.Controls.Add(new Label { AutoSize = true, Location = new Point(14, y), Text = Lang.T("Pour ne plus être prévenu, décochez « Vérifier les mises à jour ».", "To stop these notices, untick “Check for updates”.") });
+                    y += 30;
+                }
+                foreach (LinkLabel l in links)
+                {
+                    string target = l.Text;
+                    l.LinkClicked += delegate { openUrl(target); };
+                    f.Controls.Add(l);
+                }
+                // Largeur selon le texte le plus long (certaines langues sont plus longues que le français).
+                foreach (Control c in f.Controls) w = Math.Max(w, c.Left + c.PreferredSize.Width + 14);
+                Button close = new Button { Text = newer ? Lang.T("Plus tard", "Later") : Lang.T("Fermer", "Close"), DialogResult = DialogResult.Cancel };
+                int cw = Math.Max(110, TextRenderer.MeasureText(close.Text, font).Width + 30);
+                close.SetBounds(w - 14 - cw, y, cw, 30);
+                if (newer)
+                {
+                    Button open = new Button { Text = Lang.T("Ouvrir la page de la mise à jour", "Open the update page"), DialogResult = DialogResult.OK };
+                    int ow = Math.Max(240, TextRenderer.MeasureText(open.Text, font).Width + 30);
+                    open.SetBounds(close.Left - 8 - ow, y, ow, 30);
+                    f.Controls.Add(open);
+                    f.AcceptButton = open;
+                }
+                f.Controls.Add(close);
+                f.CancelButton = close;
+                if (!newer) f.AcceptButton = close;
+                f.ClientSize = new Size(w, y + 44);
+                Theme.Apply(f);
+                foreach (LinkLabel l in links)
+                    l.LinkColor = l.ActiveLinkColor = l.VisitedLinkColor = Theme.RigFreq;
+            }
+            return f;
         }
 
         void StyleUpdateLabel()
