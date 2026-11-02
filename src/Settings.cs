@@ -87,6 +87,9 @@ namespace SDRLink
         // Recherche des WebSDR lancée une seule fois, au premier démarrage (pas encore de fichier de réglages).
         public bool FirstSearchDone;
         public bool CheckUpdates = true;   // recherche d'une nouvelle version sur GitHub au démarrage
+        // Pseudo ou indicatif donné aux WebSDR qui en demandent un (KiwiSDR, websdr.org), jamais vide. Enregistré encodé
+        // (%XX) : l'espace insécable d'Alt+255, pseudo permis, ne doit pas être ôté à la relecture.
+        public string Callsign = "SDRLink";
         // Coupures laissées de côté par le bouton ⇄ (0 WebSDR, 1 TX, 2 ExpertSDR, 3 HDSDR), deux au plus.
         public List<int> SwapIgnore = new List<int>();
         public const int MaxSwapIgnore = 2;
@@ -221,6 +224,11 @@ namespace SDRLink
                     case "Volume": s.DefaultVolume = Math.Max(0, Math.Min(100, Int(v, 100))); break;
                     case "FirstSearch": s.FirstSearchDone = v != "0"; break;
                     case "CheckUpdates": s.CheckUpdates = v != "0"; break;
+                    case "Callsign":
+                        string cs = "";
+                        try { cs = WebSdrBridge.Clean(Uri.UnescapeDataString(v)); } catch (UriFormatException) { }
+                        s.Callsign = cs != "" ? cs : "SDRLink";
+                        break;
                     case "SwapIgnore":
                         // « 0,3 » ; une seule valeur dans les versions d'avant la 1.15, -1 pour aucune.
                         s.SwapIgnore.Clear();
@@ -338,6 +346,7 @@ namespace SDRLink
             Line(sb, "Volume", DefaultVolume);
             Line(sb, "FirstSearch", FirstSearchDone ? 1 : 0);
             Line(sb, "CheckUpdates", CheckUpdates ? 1 : 0);
+            Line(sb, "Callsign", Uri.EscapeDataString(Callsign));
             Line(sb, "SwapIgnore", SwapIgnore.Count == 0 ? "-1" : string.Join(",", SwapIgnore.ConvertAll(k => k.ToString()).ToArray()));
             Line(sb, "MuteTxSkip", MuteTxSkip.Count == 0 ? "-1" : string.Join(",", MuteTxSkip.ConvertAll(k => k.ToString()).ToArray()));
             foreach (Favorite f in Favorites) Line(sb, "Fav", f.ToSetting());

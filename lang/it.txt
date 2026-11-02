@@ -89,6 +89,7 @@ Cannot open the log: 	Impossibile aprire il log:
 Export all settings…	Esporta tutte le impostazioni…
 Import settings…	Importa impostazioni…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Esporta o importa tutte le impostazioni, per la stessa configurazione su un altro computer (clic destro: colore del pulsante)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nome o nominativo dato automaticamente ai WebSDR che lo chiedono prima dell'audio (KiwiSDR, websdr.org). Clic: cambiarlo (clic destro: colore del pulsante)
 Right-click: receivers muted while transmitting	Clic destro: ricevitori silenziati in trasmissione
 Save: no known frequency (rig or WebSDR)	Salva: nessuna frequenza nota (RTX o WebSDR)
 Store the current frequency…	Memorizza la frequenza attuale…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frequenza non valid
 Remove this value (pick it in the list first)	Rimuovi questo valore (sceglierlo prima nell'elenco)
 RIG 	RTX 
 Cannot start WebView2 (Edge):\n	Impossibile avviare WebView2 (Edge):\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nome o nominativo per i WebSDR che lo chiedono (KiwiSDR, websdr.org):
+The callsign cannot be empty.	Il nome non può essere vuoto.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Un nome già digitato su un sito viene mantenuto. Per non dare alcun nome: uno spazio unificatore (Alt+255).
 Invalid address: 	Indirizzo non valido: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Cavo SDRLINK: nessun cavo audio virtuale trovato. Installare VB-CABLE (gratuito): pulsante «Cavo SDRLINK».
 Output receiving the WebSDR audio:	Uscita che riceve l'audio del WebSDR:

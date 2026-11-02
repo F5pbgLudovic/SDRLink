@@ -89,6 +89,7 @@ Cannot open the log: 	Nelze otevřít deník:
 Export all settings…	Exportovat všechna nastavení…
 Import settings…	Importovat nastavení…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportovat nebo importovat všechna nastavení pro stejnou konfiguraci na jiném počítači (pravé tlačítko: barva tlačítka)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Jméno nebo volací značka zadávané automaticky přijímačům WebSDR, které je vyžadují před zvukem (KiwiSDR, websdr.org). Kliknutí: změnit (pravé tlačítko: barva tlačítka)
 Right-click: receivers muted while transmitting	Pravé tlačítko: přijímače ztlumené při vysílání
 Save: no known frequency (rig or WebSDR)	Uložit: neznámá frekvence (TRX ani WebSDR)
 Store the current frequency…	Uložit aktuální kmitočet…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Neplatná frekvence
 Remove this value (pick it in the list first)	Odebrat tuto hodnotu (nejprve ji vyberte v seznamu)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Nelze spustit WebView2 (Edge):\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Jméno nebo volací značka pro přijímače WebSDR, které je vyžadují (KiwiSDR, websdr.org):
+The callsign cannot be empty.	Jméno nemůže být prázdné.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Jméno již zadané na webu zůstane. Bez jména: nedělitelná mezera (Alt+255).
 Invalid address: 	Neplatná adresa: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Kabel SDRLINK: nebyl nalezen žádný virtuální audio kabel. Nainstalujte VB-CABLE (zdarma): tlačítko „Kabel SDRLINK“.
 Output receiving the WebSDR audio:	Výstup přijímající zvuk WebSDR:

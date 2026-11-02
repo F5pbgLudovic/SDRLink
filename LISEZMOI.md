@@ -20,7 +20,7 @@ Pour recompiler après une modification : `powershell -ExecutionPolicy Bypass -F
 
 Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section.
 
-1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Taille du texte…**, case **Vérifier les mises à jour**, **Import/Export ▾**.
+1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Taille du texte…**, case **Vérifier les mises à jour**, **Import/Export ▾**, **Pseudo/Call**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR**, boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
@@ -33,7 +33,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Où | Ce que propose le clic droit |
 |---|---|
 | Connecter | couleur quand connecté / déconnecté |
-| Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Import/Export | couleur du bouton |
+| Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Import/Export, Pseudo/Call | couleur du bouton |
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
 | PTT | délai de sécurité TX, couleur en réception / en émission |
@@ -55,7 +55,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 - `%APPDATA%\SDRLink\settings.ini` : **tous les réglages** (interface, favoris, mémoires, couleurs, fenêtre…). C'est ce fichier que copie **Import/Export**.
 - `%APPDATA%\SDRLink\settings.avant-import.ini` : les réglages d'avant le dernier import.
 - `%APPDATA%\SDRLink\sdrlink.log` : le journal (remis à zéro à chaque lancement).
-- `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll.
+- `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache ; le pseudo donné aux KiwiSDR et websdr.org y est aussi) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll.
 - `Musique\SDRLink` : dossier des enregistrements REC par défaut ; pendant un enregistrement, un fichier provisoire `SDRLink-REC-*.raw` est dans `%TEMP%`.
 
 ## Interfaces (menu « Interface »)
@@ -132,6 +132,25 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
 - **KiwiSDR**
 - **OpenWebRX / OpenWebRX+** (seulement dans la plage de la bande affichée)
 
+### Arrivée sur une page (depuis la 1.20)
+
+- **Son sans clic** : le son démarre tout seul. SDRLink clique lui-même sur « Click to start » (UberSDR) et retire le voile « Tap to enable audio » (PhantomSDR, French Alps), dans les 30 secondes qui suivent l'ouverture.
+- **Pseudo donné d'office** : les KiwiSDR et les websdr.org qui demandent un nom avant le son reçoivent celui du bouton **Pseudo/Call** (voir plus bas).
+- **KiwiSDR complet** : SDRLink appuie une fois sur **Enter queue** (file d'attente) ; le KiwiSDR recharge la page de lui-même dès qu'un canal se libère. Avec des canaux à mot de passe, « Queue or Camp » mène d'abord à cet écran. Une sortie de file voulue par l'utilisateur n'est pas annulée.
+- **Squelch ouvert** : sur les WebSDR qui en ont un (case « squelch » des websdr.org, réglette des OpenWebRX), le squelch est ouvert, **sauf en FM à partir de 30 MHz** (relais, FM VHF/UHF) où il est remis tel que la page l'avait. Il n'est changé qu'à l'ouverture et quand on entre ou sort de la FM VHF : un squelch réglé à la main est laissé tel quel.
+- **Bonne fréquence entendue** : après un changement de WebSDR, le son correspond bien à la fréquence affichée (sur UberSDR et PhantomSDR, SDRLink attend que le son ait démarré avant de régler la fréquence).
+- **websdr.org à une seule bande affichée** (Bordeaux…) : quand la fréquence du poste est dans une autre bande, SDRLink change de bande comme les boutons 80, 40, 20… de la page : la cascade et le curseur passent sur la bonne bande et le mode du poste est gardé (la page inversait LSB/USB). Le rappel du mode près du S-mètre est tenu à jour. Un clic de l'utilisateur sur un bouton de bande de la page fait suivre le poste (fréquence et mode de la page).
+- **PhantomSDR (French Alps)** : un clic dans le spectre ou la cascade fait suivre le poste, pas seulement la saisie de la fréquence. Si le son de la page tombe à zéro après un changement de fréquence (défaut de la page : il fallait changer de mode puis revenir), SDRLink renvoie le mode au serveur et le son revient en 1 à 2 secondes.
+
+### Pseudo/Call
+
+Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donné d'office aux WebSDR qui en demandent un avant le son (**KiwiSDR**, **websdr.org**). Par défaut **SDRLink**.
+- Un clic ouvre une fenêtre qui montre le pseudo actuel ; **OK** l'enregistre et ferme la fenêtre, **Annuler** ne change rien. Le bouton affiche seulement « Pseudo/Call ».
+- Le pseudo ne peut pas être **vide** (OK grisé). Pour ne pas donner de nom, mettre un **espace insécable** (**Alt+255** au pavé numérique) : il est accepté et gardé tel quel.
+- Un nom déjà tapé directement sur un site est **gardé** ; seul le nom que SDRLink avait mis est remplacé quand le pseudo change. Sur KiwiSDR, un pseudo d'un seul caractère (comme Alt+255) est doublé (KiwiSDR en demande deux).
+- 30 caractères au plus ; les caractères ; , = ' " sont retirés. Enregistré dans `settings.ini` (ligne `Callsign=`).
+- Clic droit : couleur du bouton.
+
 ## Favoris
 
 - La liste déroulante de la barre WebSDR affiche les favoris par leur **nom**. En choisir un ouvre le WebSDR.
@@ -196,7 +215,7 @@ Il faut un accès Internet. Si un annuaire ne répond pas, les autres sont quand
 ## Volume du WebSDR
 
 La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gauche à droite : le bouton ⇄, Mute WebSDR, Mute TX, Mute ExpertSDR, Mute HDSDR, puis Volume WebSDR, Volume TX, Volume ExpertSDR et Volume HDSDR, chacun avec sa réglette et sa valeur en %. Mute TX et Volume TX n'apparaissent que si le volume du poste est télécommandé, Mute ExpertSDR et Volume ExpertSDR que si ExpertSDR est lancé et répond (son Windows ou TCI), Mute HDSDR et Volume HDSDR que si HDSDR est lancé, et ⇄ que s'il y a au moins deux sons à permuter. Les commandes absentes ne laissent pas de vide : la ligne se resserre à gauche. Le curseur **Volume WebSDR** règle uniquement le son du WebSDR, pas celui de Windows ni des autres logiciels.
-- Il agit sur tous les types de WebSDR. Sur UberSDR, le son ne démarre qu'après un clic sur « Click to start » dans la page.
+- Il agit sur tous les types de WebSDR. Le son démarre sans clic, même sur UberSDR (« Click to start ») et PhantomSDR (« Tap to enable audio »), depuis la 1.20.
 - Le volume est **mémorisé pour chaque favori** : en rouvrant un favori, on retrouve son volume.
 - Les WebSDR qui ne sont pas en favoris partagent un même volume, lui aussi mémorisé.
 - Un favori ajouté garde le volume du moment. L'export (HTML ou CSV) inclut le volume, et l'import le reprend.
@@ -277,7 +296,7 @@ Le menu **Langue**, sur la 2ᵉ ligne, change la langue de toute l'interface, im
 - **Bidirectionnelle** / **Radio → WebSDR** / **WebSDR → Radio** / **Désactivée**
 - En choisissant **Bidirectionnelle** ou **Radio → WebSDR**, le WebSDR est aussitôt recalé sur la fréquence du poste.
 - En choisissant **WebSDR → Radio**, c'est le poste qui se cale aussitôt sur la fréquence et le mode du WebSDR.
-- **Au démarrage de SDRLink, le poste ne change jamais** de fréquence ni de mode : en Bidirectionnelle ou Radio → WebSDR, c'est le WebSDR qui se cale sur le poste ; en WebSDR → Radio ou Désactivée, rien ne change. De même, pendant les 8 secondes qui suivent le chargement d'une page ou la connexion du poste, le WebSDR ne commande pas le poste : une page encore en train de s'installer annonce parfois son ancienne fréquence, qui était auparavant renvoyée au poste.
+- **Au démarrage de SDRLink, le poste ne change jamais** de fréquence ni de mode : en Bidirectionnelle ou Radio → WebSDR, c'est le WebSDR qui se cale sur le poste ; en WebSDR → Radio ou Désactivée, rien ne change. De même, pendant les 8 secondes qui suivent le chargement d'une page ou la connexion du poste, un changement fait **par la page seule** ne commande pas le poste : une page encore en train de s'installer annonce parfois son ancienne fréquence, ou part d'elle-même ailleurs (UberSDR à la première visite) ; elle est remise sur le poste. En revanche, **un clic, une touche ou la molette de l'utilisateur dans la page** est suivi tout de suite (depuis la 1.20) : on peut cliquer dans la cascade dès que la page est calée sur le poste, le poste suit en 0,2 seconde environ. Sur Twente, c'est l'échelle des fréquences sous la cascade qui règle la fréquence, pas la cascade.
 - En **Bidirectionnelle**, le **poste fait foi** : si le WebSDR reste décalé de plus de 3 secondes, il est recalé sur le poste. C'est le cas si un réglage est perdu ou si la page est lente. En « Radio → WebSDR », on peut au contraire écarter le WebSDR du poste (molette ou clic dans la cascade) : il n'est recalé qu'au prochain mouvement du VFO.
 - **OpenWebRX à plusieurs profils** (un profil par bande, par ex. « HF_7MHz », « VHF_144-146MHz ») : si la fréquence demandée est hors du profil actif, SDRLink bascule automatiquement sur le profil qui la couvre, d'après son nom, puis règle la fréquence. Le changement de profil s'applique à tous les auditeurs de ce récepteur, comme lorsqu'on le fait à la main.
 - **Décalage WebSDR (Hz)** : ajouté à la fréquence du poste côté WebSDR (transverter, écart de calibration…)
@@ -486,6 +505,16 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.20**
+  - **Son sans clic** à l'arrivée sur une page : « Click to start » d'UberSDR et voile « Tap to enable audio » de PhantomSDR passés automatiquement.
+  - Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donné d'office aux KiwiSDR et websdr.org qui en demandent un avant le son, « SDRLink » par défaut, jamais vide, Alt+255 permis pour ne pas donner de nom ; fenêtre ouverte d'un clic.
+  - **KiwiSDR complet** : entrée automatique dans la file d'attente (« Enter queue »).
+  - **Squelch** ouvert sur les WebSDR qui en ont un, sauf en FM à partir de 30 MHz.
+  - **websdr.org à une seule bande affichée** (Bordeaux) : changement de bande avec la fréquence du poste (cascade et curseur sur la bonne bande), mode du poste gardé ; un clic sur un bouton de bande de la page fait suivre le poste.
+  - **Changement de WebSDR** : le son entendu correspond à la fréquence affichée (UberSDR, PhantomSDR).
+  - **PhantomSDR (French Alps)** : le poste suit un clic dans le spectre ; le son qui restait muet après un changement de fréquence revient tout seul.
+  - **Synchro plus rapide** : UberSDR signale ses changements en 15 à 45 ms au lieu de 0,3 s ; les autres pages sont relues toutes les 125 ms.
+  - **Clic dans la page dès l'arrivée** : un clic, une touche ou la molette de l'utilisateur est suivi tout de suite par le poste, sans attendre les 8 secondes de mise en place ; un saut fait par la page seule est toujours remis sur le poste.
 - **1.19**
   - **Coupure du son en émission** : « Couper le son du WebSDR en émission » et « rétablir après (ms) » agissent maintenant aussi sur le **poste** (gain BF), **ExpertSDR** et **HDSDR**, pas seulement sur le WebSDR. **Clic droit** sur la case pour choisir les réceptions concernées (toutes par défaut). Une réception déjà coupée à la main reste coupée.
   - **Barre WebSDR** : pendant la frappe, des **propositions** s'affichent juste dessous : les WebSDR de la liste choisie dont le nom ou l'adresse contient l'un des mots tapés ; un clic ouvre le WebSDR. La flèche de la liste déroulante affiche toujours tous les WebSDR de la liste.

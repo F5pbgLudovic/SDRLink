@@ -89,6 +89,7 @@ Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίο
 Export all settings…	Εξαγωγή όλων των ρυθμίσεων…
 Import settings…	Εισαγωγή ρυθμίσεων…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Εξαγωγή ή εισαγωγή όλων των ρυθμίσεων, για την ίδια διαμόρφωση σε άλλον υπολογιστή (δεξί κλικ: χρώμα κουμπιού)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Όνομα ή χαρακτηριστικό που δίνεται αυτόματα στα WebSDR που το ζητούν πριν από τον ήχο (KiwiSDR, websdr.org). Κλικ: αλλαγή (δεξί κλικ: χρώμα κουμπιού)
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
 Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Μη έγκυρη �
 Remove this value (pick it in the list first)	Αφαίρεση αυτής της τιμής (επιλέξτε την πρώτα στη λίστα)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Αδυναμία εκκίνησης WebView2 (Edge):\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Όνομα ή χαρακτηριστικό για τα WebSDR που το ζητούν (KiwiSDR, websdr.org):
+The callsign cannot be empty.	Το όνομα δεν μπορεί να είναι κενό.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Όνομα που έχει ήδη πληκτρολογηθεί σε έναν ιστότοπο διατηρείται. Για να μη δώσετε όνομα: ένα αδιάσπαστο κενό (Alt+255).
 Invalid address: 	Μη έγκυρη διεύθυνση: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Καλώδιο SDRLINK: δεν βρέθηκε εικονικό καλώδιο ήχου. Εγκαταστήστε το VB-CABLE (δωρεάν): κουμπί «Καλώδιο SDRLINK».
 Output receiving the WebSDR audio:	Έξοδος που λαμβάνει τον ήχο του WebSDR:

@@ -21,7 +21,7 @@ To rebuild after a change: `powershell -ExecutionPolicy Bypass -File build.ps1` 
 
 Overview; each feature is detailed further down in its own section.
 
-1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Text size…**, **Check for updates** box, **Import/Export ▾**.
+1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Text size…**, **Check for updates** box, **Import/Export ▾**, **Pseudo/Call**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode, **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
@@ -34,7 +34,7 @@ Overview; each feature is detailed further down in its own section.
 | Where | What the right-click offers |
 |---|---|
 | Connect | colour when connected / disconnected |
-| Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Import/Export | button colour |
+| Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Import/Export, Pseudo/Call | button colour |
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | colour when stopped / while scanning |
 | PTT | TX safety timeout, colour when receiving / transmitting |
@@ -56,7 +56,7 @@ Overview; each feature is detailed further down in its own section.
 - `%APPDATA%\SDRLink\settings.ini`: **all settings** (interface, favorites, memories, colours, window…). This is the file **Import/Export** copies.
 - `%APPDATA%\SDRLink\settings.avant-import.ini`: the settings from before the last import.
 - `%APPDATA%\SDRLink\sdrlink.log`: the log (reset at each launch).
-- `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll.
+- `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache; the name given to KiwiSDRs and websdr.org is there too); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll.
 - `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
 
 ## Interfaces ("Interface" menu)
@@ -133,6 +133,25 @@ The type is detected automatically (shown in brackets):
 - **KiwiSDR**
 - **OpenWebRX / OpenWebRX+** (only within the range of the band displayed)
 
+### Arriving on a page (since 1.20)
+
+- **Audio without a click**: the audio starts by itself. SDRLink clicks "Click to start" (UberSDR) and removes the "Tap to enable audio" veil (PhantomSDR, French Alps) itself, within 30 seconds of opening.
+- **Name given automatically**: KiwiSDRs and websdr.org receivers that ask for a name before the audio get the one of the **Pseudo/Call** button (see below).
+- **Full KiwiSDR**: SDRLink presses **Enter queue** once; the KiwiSDR reloads the page by itself as soon as a channel is free. With password-protected channels, "Queue or Camp" leads to that screen first. Leaving the queue on purpose is not undone.
+- **Squelch open**: on WebSDRs that have one ("squelch" box of websdr.org, slider of OpenWebRX), the squelch is opened, **except in FM from 30 MHz up** (repeaters, VHF/UHF FM) where it is put back as the page had it. It is only changed when the page opens and when entering or leaving VHF FM: a squelch set by hand is left alone.
+- **Right frequency heard**: after switching WebSDR, the audio matches the frequency displayed (on UberSDR and PhantomSDR, SDRLink waits for the audio to start before tuning).
+- **websdr.org showing a single band** (Bordeaux…): when the rig frequency is in another band, SDRLink switches band like the page's 80, 40, 20… buttons: the waterfall and the cursor move to the right band and the rig's mode is kept (the page swapped LSB/USB). The mode reminder next to the S-meter is kept up to date. A user click on a band button of the page makes the rig follow (frequency and mode of the page).
+- **PhantomSDR (French Alps)**: a click in the spectrum or the waterfall makes the rig follow, not only typing the frequency. If the page audio drops to zero after a frequency change (a fault of the page: you had to change mode and back), SDRLink sends the mode to the server again and the audio returns within 1 to 2 seconds.
+
+### Pseudo/Call
+
+**Pseudo/Call** button (1st row, after Import/Export): name or callsign given automatically to WebSDRs that ask for one before the audio (**KiwiSDR**, **websdr.org**). **SDRLink** by default.
+- A click opens a window showing the current name; **OK** saves it and closes the window, **Cancel** changes nothing. The button only shows "Pseudo/Call".
+- The name cannot be **empty** (OK greyed out). To give no name, enter a **non-breaking space** (**Alt+255** on the numeric keypad): it is accepted and kept as is.
+- A name already typed directly on a site is **kept**; only the name SDRLink had put is replaced when the name changes. On KiwiSDR, a one-character name (such as Alt+255) is doubled (KiwiSDR needs two).
+- 30 characters at most; the characters ; , = ' " are removed. Saved in `settings.ini` (`Callsign=` line).
+- Right-click: button colour.
+
 ## Favorites
 
 - The drop-down list in the WebSDR bar shows the favorites by **name**. Choosing one opens the WebSDR.
@@ -197,7 +216,7 @@ Internet access is required. If a directory does not answer, the others are stil
 ## WebSDR volume
 
 The audio row, always at the start of the row below the WebSDR bar, reads from left to right: the ⇄ button, Mute WebSDR, Mute TRX, Mute ExpertSDR, Mute HDSDR, then WebSDR volume, TRX volume, ExpertSDR volume and HDSDR volume, each with its slider and its value in %. Mute TRX and TRX volume only appear if the rig volume is remotely controlled, Mute ExpertSDR and ExpertSDR volume only if ExpertSDR is running and answers (Windows audio or TCI), Mute HDSDR and HDSDR volume only if HDSDR is running, and ⇄ only if there are at least two audio sources to switch between. Missing controls leave no gap: the row closes up to the left. The **WebSDR volume** slider only sets the WebSDR audio, not that of Windows or other programs.
-- It works on all WebSDR types. On UberSDR, the audio only starts after clicking "Click to start" on the page.
+- It works on all WebSDR types. The audio starts without a click, even on UberSDR ("Click to start") and PhantomSDR ("Tap to enable audio"), since 1.20.
 - The volume is **remembered for each favorite**: when you reopen a favorite, you get its volume back.
 - WebSDRs that are not in favorites share a common volume, which is also remembered.
 - An added favorite keeps the current volume. Export (HTML or CSV) includes the volume, and import restores it.
@@ -278,7 +297,7 @@ The **Language** menu, on the 2nd row, changes the language of the whole interfa
 - **Both ways** / **Rig → WebSDR** / **WebSDR → Rig** / **Off**
 - When you choose **Both ways** or **Rig → WebSDR**, the WebSDR is immediately re-tuned to the rig's frequency.
 - When you choose **WebSDR → Rig**, it is the rig that immediately tunes to the WebSDR's frequency and mode.
-- **When SDRLink starts, the rig never changes** frequency or mode: in Both ways or Rig → WebSDR, it is the WebSDR that tunes to the rig; in WebSDR → Rig or Off, nothing changes. Likewise, for the 8 seconds after a page loads or the rig connects, the WebSDR does not control the rig: a page that is still settling sometimes reports its old frequency, which used to be sent back to the rig.
+- **When SDRLink starts, the rig never changes** frequency or mode: in Both ways or Rig → WebSDR, it is the WebSDR that tunes to the rig; in WebSDR → Rig or Off, nothing changes. Likewise, for the 8 seconds after a page loads or the rig connects, a change made **by the page alone** does not control the rig: a page that is still settling sometimes reports its old frequency, or moves elsewhere by itself (UberSDR on a first visit); it is put back on the rig. On the other hand, **a click, a key or the mouse wheel of the user in the page** is followed at once (since 1.20): you can click in the waterfall as soon as the page is tuned to the rig, and the rig follows in about 0.2 second. On Twente, it is the frequency scale under the waterfall that sets the frequency, not the waterfall.
 - In **Both ways**, the **rig is the reference**: if the WebSDR stays off frequency for more than 3 seconds, it is re-tuned to the rig. This happens if a setting is lost or if the page is slow. In "Rig → WebSDR", on the other hand, you can move the WebSDR away from the rig (mouse wheel or click in the waterfall): it is only re-tuned at the next VFO movement.
 - **OpenWebRX with several profiles** (one profile per band, e.g. "HF_7MHz", "VHF_144-146MHz"): if the requested frequency is outside the active profile, SDRLink automatically switches to the profile that covers it, based on its name, then sets the frequency. The profile change applies to all listeners of that receiver, just as when done by hand.
 - **WebSDR offset (Hz)**: added to the rig frequency on the WebSDR side (transverter, calibration error…)
@@ -488,6 +507,16 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.20**
+  - **Audio without a click** when arriving on a page: UberSDR's "Click to start" and PhantomSDR's "Tap to enable audio" veil are passed automatically.
+  - **Pseudo/Call** button (1st row, after Import/Export): name or callsign given automatically to KiwiSDRs and websdr.org receivers that ask for one before the audio, "SDRLink" by default, never empty, Alt+255 allowed to give no name; window opened with a click.
+  - **Full KiwiSDR**: automatic entry into the waiting queue ("Enter queue").
+  - **Squelch** opened on WebSDRs that have one, except in FM from 30 MHz up.
+  - **websdr.org showing a single band** (Bordeaux): band switched with the rig frequency (waterfall and cursor on the right band), rig mode kept; a click on a band button of the page makes the rig follow.
+  - **Switching WebSDR**: the audio heard matches the frequency displayed (UberSDR, PhantomSDR).
+  - **PhantomSDR (French Alps)**: the rig follows a click in the spectrum; audio that stayed silent after a frequency change comes back by itself.
+  - **Faster sync**: UberSDR reports its changes in 15 to 45 ms instead of 0.3 s; other pages are read every 125 ms.
+  - **Clicking in the page right after arriving**: a click, a key or the mouse wheel of the user is followed at once by the rig, without waiting for the 8-second settling time; a jump made by the page alone is still put back on the rig.
 - **1.19**
   - **Muting while transmitting**: "Mute WebSDR while transmitting" and "restore after (ms)" now also act on the **rig** (AF gain), **ExpertSDR** and **HDSDR**, not only on the WebSDR. **Right-click** the box to choose the receivers concerned (all by default). A receiver already muted by hand stays muted.
   - **WebSDR bar**: while typing, **suggestions** are shown just below: the WebSDRs of the chosen list whose name or address contains one of the words typed; a click opens the WebSDR. The arrow of the drop-down list always shows all the WebSDRs of the list.

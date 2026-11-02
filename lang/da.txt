@@ -89,6 +89,7 @@ Cannot open the log: 	Kan ikke åbne loggen:
 Export all settings…	Eksportér alle indstillinger…
 Import settings…	Importér indstillinger…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportér eller importér alle indstillinger, for samme konfiguration på en anden computer (højreklik: knapfarve)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Navn eller kaldesignal, der automatisk gives til WebSDR'er, som beder om et før lyden (KiwiSDR, websdr.org). Klik: skift det (højreklik: knappens farve)
 Right-click: receivers muted while transmitting	Højreklik: modtagere der gøres lydløse under sending
 Save: no known frequency (rig or WebSDR)	Save: ingen kendt frekvens (radio eller WebSDR)
 Store the current frequency…	Gem den aktuelle frekvens…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: s
 Remove this value (pick it in the list first)	Fjern denne værdi (vælg den først på listen)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Kan ikke starte WebView2 (Edge):\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Navn eller kaldesignal til WebSDR'er, der beder om et (KiwiSDR, websdr.org):
+The callsign cannot be empty.	Navnet må ikke være tomt.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Et navn, der allerede er skrevet på et websted, bevares. For ikke at give et navn: et hårdt mellemrum (Alt+255).
 Invalid address: 	Ugyldig adresse: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kabel: intet virtuelt lydkabel fundet. Installér VB-CABLE (gratis): knappen ”SDRLINK-kabel”.
 Output receiving the WebSDR audio:	Udgang, der modtager WebSDR-lyden:

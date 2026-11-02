@@ -89,6 +89,7 @@ Cannot open the log: 	A napló nem nyitható meg:
 Export all settings…	Összes beállítás exportálása…
 Import settings…	Beállítások importálása…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: gomb színe)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Név vagy hívójel, amelyet a hang előtt ezt kérő WebSDR-ek (KiwiSDR, websdr.org) automatikusan megkapnak. Kattintás: módosítás (jobb klikk: gomb színe)
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Érvénytelen frekv
 Remove this value (pick it in the list first)	Érték eltávolítása (előbb válassza ki a listában)
 RIG 	RÁDIÓ 
 Cannot start WebView2 (Edge):\n	A WebView2 (Edge) nem indítható:\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Név vagy hívójel az ezt kérő WebSDR-eknek (KiwiSDR, websdr.org):
+The callsign cannot be empty.	A név nem lehet üres.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Az oldalon már beírt név megmarad. Ha nem akar nevet megadni: nem törhető szóköz (Alt+255).
 Invalid address: 	Érvénytelen cím: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kábel: nem található virtuális audiokábel. Telepítse a VB-CABLE-t (ingyenes): „SDRLINK kábel” gomb.
 Output receiving the WebSDR audio:	A WebSDR hangját fogadó kimenet:

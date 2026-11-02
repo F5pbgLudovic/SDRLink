@@ -41,6 +41,8 @@ namespace SDRLink
         FlowLayoutPanel pnlHamlib;
         CheckBox chkHamlibLaunch;
         CheckBox chkUpdates;
+        Button btnCallsign;   // pseudo/indicatif donné aux WebSDR qui en demandent un (clic : le changer)
+        string identityScript;   // script de pseudo installé dans WebView2 (remplacé quand le pseudo change)
         ToolStripStatusLabel lblUpdate;   // nouvelle version disponible (clic : page de téléchargement)
         string updateVersion, updateUrl;
         TextBox txtRigctld;
@@ -290,6 +292,20 @@ namespace SDRLink
             btnImpExp.Click += delegate { ieMenu.Show(btnImpExp, new Point(0, btnImpExp.Height)); };
             Tr(delegate { tips.SetToolTip(btnImpExp, Lang.T("Exporter ou importer tous les réglages, pour la même configuration sur un autre ordinateur (clic droit : couleur du bouton)", "Export or import all settings, for the same configuration on another computer (right-click: button colour)")); });
             row1.Controls.Add(Colorable("ImportExport", btnImpExp));
+            // Pseudo/Call : nom donné d'office aux WebSDR qui en demandent un avant le son (KiwiSDR, websdr.org) ;
+            // le bouton le montre, un clic ouvre la fenêtre pour le changer.
+            btnCallsign = new Button();
+            btnCallsign.AutoSize = true;
+            btnCallsign.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnCallsign.MinimumSize = new Size(30, 25);
+            btnCallsign.Click += delegate { AskCallsign(); };
+            Tr(delegate
+            {
+                UpdateCallsignButton();
+                tips.SetToolTip(btnCallsign, Lang.T("Nom ou indicatif donné d'office aux WebSDR qui en demandent un avant le son (KiwiSDR, websdr.org). Clic : le changer (clic droit : couleur du bouton)",
+                                                    "Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)"));
+            });
+            row1.Controls.Add(Colorable("Callsign", btnCallsign));
 
             // Ligne 2 : paramètres propres à l'interface choisie
             FlowLayoutPanel row2 = rowParams = Row();
@@ -1320,6 +1336,7 @@ namespace SDRLink
             chkTop.Checked = settings.TopMost;
             chkDark.Checked = settings.DarkMode;
             chkUpdates.Checked = settings.CheckUpdates;
+            UpdateCallsignButton();
             trkVolume.Value = settings.DefaultVolume;
             chkMute.Checked = settings.MuteOnTx;
             chkNotch.Checked = settings.AutoNotch;
@@ -2211,7 +2228,8 @@ namespace SDRLink
             if (changed && RigToSdr) PushToSdr();
         }
 
-        void OnSdrState(string kind, long f, string m)
+        // user : le changement suit un geste réel de l'utilisateur dans la page (clic, touche, molette).
+        void OnSdrState(string kind, long f, string m, bool user)
         {
             bool first = sdrKind == "";
             if (first)
@@ -2244,12 +2262,16 @@ namespace SDRLink
             }
             // Page en cours de mise en place (elle annonce parfois encore son ancienne fréquence après notre réglage) :
             // rien n'est envoyé au poste ; le WebSDR est recalé sur le poste si la synchro va dans ce sens.
-            if (DateTime.UtcNow < syncSettleUntil)
+            // Sauf si l'utilisateur vient de cliquer ou taper dans la page : il a la main tout de suite, et la mise en
+            // place s'arrête (sans quoi un UberSDR jamais visité, qui part de lui-même sur 7100 LSB vers 2,5 s, ou une
+            // page qui annonce encore son ancienne fréquence, serait recopié sur le poste).
+            if (DateTime.UtcNow < syncSettleUntil && !user)
             {
                 if (RigToSdr && rigOnline && rigF > 0) PushToSdr();
                 return;
             }
-            if (DateTime.UtcNow < ignoreSdrUntil) return;
+            if (user) syncSettleUntil = DateTime.MinValue;
+            else if (DateTime.UtcNow < ignoreSdrUntil) return;
             if ((freqChanged || modeChanged) && SdrToRig) PushToRig(freqChanged, modeChanged);
         }
 
@@ -2420,6 +2442,7 @@ namespace SDRLink
                 await web.EnsureCoreWebView2Async(env);
                 CoreWebView2 core = web.CoreWebView2;
                 await core.AddScriptToExecuteOnDocumentCreatedAsync(WebSdrBridge.Script);
+                await ApplyCallsign();
                 core.WebMessageReceived += OnWebMessage;
                 core.NewWindowRequested += delegate(object s, CoreWebView2NewWindowRequestedEventArgs e)
                 {
@@ -2448,6 +2471,77 @@ namespace SDRLink
             }
         }
 
+        // Pseudo fait d'espaces insécables (Alt+255) : invisible tel quel sur le bouton.
+        static string ShowCallsign(string name)
+        {
+            return name.Trim().Length == 0 ? "(Alt+255)" : name;
+        }
+
+        void UpdateCallsignButton()
+        {
+            if (btnCallsign != null) btnCallsign.Text = "Pseudo/Call";   // le pseudo se voit dans la fenêtre du bouton
+        }
+
+        // Fenêtre du pseudo : OK (ou Entrée) le retient et la referme ; un pseudo vide est refusé.
+        void AskCallsign()
+        {
+            using (Form d = new Form())
+            {
+                d.Text = "Pseudo/Call";
+                d.FormBorderStyle = FormBorderStyle.FixedDialog;
+                d.MaximizeBox = d.MinimizeBox = false;
+                d.ShowInTaskbar = false;
+                d.StartPosition = FormStartPosition.CenterParent;
+                d.Font = new Font("Segoe UI", 9f);
+                d.ClientSize = new Size(440, 150);
+                Label l = new Label { Text = Lang.T("Nom ou indicatif donné aux WebSDR qui en demandent un (KiwiSDR, websdr.org) :", "Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):"), Location = new Point(12, 12), AutoSize = true };
+                TextBox box = new TextBox { Text = settings.Callsign, MaxLength = 30 };
+                box.SetBounds(12, 36, 200, 23);
+                Label hint = new Label { Location = new Point(12, 66), Size = new Size(416, 34) };
+                Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
+                Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
+                ok.SetBounds(262, 110, 80, 28);
+                cancel.SetBounds(348, 110, 80, 28);
+                d.AcceptButton = ok;
+                d.CancelButton = cancel;
+                Action check = delegate
+                {
+                    bool empty = WebSdrBridge.Clean(box.Text) == "";
+                    ok.Enabled = !empty;
+                    hint.Text = empty
+                        ? Lang.T("Le pseudo ne peut pas être vide.", "The callsign cannot be empty.")
+                        : Lang.T("Un nom déjà tapé sur un site est gardé. Pour ne pas donner de nom : un espace insécable (Alt+255).",
+                                 "A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).");
+                };
+                box.TextChanged += delegate { check(); };
+                check();
+                d.Controls.AddRange(new Control[] { l, box, hint, ok, cancel });
+                Theme.Apply(d);
+                if (d.ShowDialog(this) == DialogResult.OK) CommitCallsign(box.Text);
+            }
+        }
+
+        // Pseudo validé : retenu, et donné aux pages ouvertes ensuite.
+        async void CommitCallsign(string text)
+        {
+            string name = WebSdrBridge.Clean(text);
+            if (name == "" || name == settings.Callsign) return;
+            settings.Callsign = name;
+            settings.Save();
+            UpdateCallsignButton();
+            Log.Write("Pseudo/Call : " + ShowCallsign(name));
+            try { await ApplyCallsign(); } catch (Exception ex) { Log.Write("Pseudo/Call non installé : " + ex.Message); }
+        }
+
+        async System.Threading.Tasks.Task ApplyCallsign()
+        {
+            CoreWebView2 core = web.CoreWebView2;
+            if (core == null) return;
+            if (identityScript != null) { core.RemoveScriptToExecuteOnDocumentCreated(identityScript); identityScript = null; }
+            string js = WebSdrBridge.Identity(settings.Callsign);
+            if (js != null) identityScript = await core.AddScriptToExecuteOnDocumentCreatedAsync(js);
+        }
+
         void OnWebMessage(object sender, CoreWebView2WebMessageReceivedEventArgs e)
         {
             string msg;
@@ -2456,7 +2550,7 @@ namespace SDRLink
             string[] p = (msg ?? "").Split('|');
             long f;
             if (p.Length < 3 || !long.TryParse(p[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out f)) return;
-            OnSdrState(p[0], f, p[2]);
+            OnSdrState(p[0], f, p[2], p.Length > 3 && p[3] == "u");
         }
 
         void Navigate(string url)

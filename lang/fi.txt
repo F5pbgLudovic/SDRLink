@@ -89,6 +89,7 @@ Cannot open the log: 	Lokia ei voi avata:
 Export all settings…	Vie kaikki asetukset…
 Import settings…	Tuo asetukset…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Vie tai tuo kaikki asetukset samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea: painikkeen väri)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi tai kutsu, joka annetaan automaattisesti WebSDR-vastaanottimille, jotka kysyvät sitä ennen ääntä (KiwiSDR, websdr.org). Napsautus: vaihda (hiiren oikea: painikkeen väri)
 Right-click: receivers muted while transmitting	Hiiren oikea painike: lähetyksen ajaksi mykistettävät vastaanottimet
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
 Store the current frequency…	Tallenna nykyinen taajuus…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Virheellinen taajuu
 Remove this value (pick it in the list first)	Poista tämä arvo (valitse se ensin luettelosta)
 RIG 	RADIO 
 Cannot start WebView2 (Edge):\n	WebView2:ta (Edge) ei voi käynnistää:\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nimi tai kutsu WebSDR-vastaanottimille, jotka kysyvät sitä (KiwiSDR, websdr.org):
+The callsign cannot be empty.	Nimi ei voi olla tyhjä.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Sivustolle jo kirjoitettu nimi säilyy. Jos et halua antaa nimeä: sitova välilyönti (Alt+255).
 Invalid address: 	Virheellinen osoite: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kaapeli: virtuaalista äänikaapelia ei löytynyt. Asenna VB-CABLE (ilmainen): ”SDRLINK-kaapeli”-painike.
 Output receiving the WebSDR audio:	WebSDR-äänen vastaanottava lähtö:

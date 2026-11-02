@@ -89,6 +89,7 @@ Cannot open the log: 	Nu se poate deschide jurnalul:
 Export all settings…	Exportă toate setările…
 Import settings…	Importă setări…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportă sau importă toate setările, pentru aceeași configurație pe alt calculator (clic dreapta: culoarea butonului)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nume sau indicativ dat automat receptoarelor WebSDR care îl cer înainte de sunet (KiwiSDR, websdr.org). Clic: schimbare (clic dreapta: culoarea butonului)
 Right-click: receivers muted while transmitting	Clic dreapta: receptoare puse pe mut în emisie
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
 Store the current frequency…	Memorează frecvența actuală…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frecvență nevalid
 Remove this value (pick it in the list first)	Eliminare valoare (alegeți-o mai întâi din listă)
 RIG 	STAȚIE 
 Cannot start WebView2 (Edge):\n	Nu se poate porni WebView2 (Edge):\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nume sau indicativ pentru receptoarele WebSDR care îl cer (KiwiSDR, websdr.org):
+The callsign cannot be empty.	Numele nu poate fi gol.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Un nume deja tastat pe un site este păstrat. Pentru a nu da niciun nume: un spațiu neseparabil (Alt+255).
 Invalid address: 	Adresă nevalidă: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Cablu SDRLINK: nu s-a găsit niciun cablu audio virtual. Instalați VB-CABLE (gratuit): butonul „Cablu SDRLINK”.
 Output receiving the WebSDR audio:	Ieșirea care primește sunetul WebSDR:

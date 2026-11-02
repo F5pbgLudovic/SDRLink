@@ -89,6 +89,7 @@ Cannot open the log: 	Kan het logboek niet openen:
 Export all settings…	Alle instellingen exporteren…
 Import settings…	Instellingen importeren…
 Export or import all settings, for the same configuration on another computer (right-click: button colour)	Alle instellingen exporteren of importeren, voor dezelfde configuratie op een andere computer (rechtsklik: knopkleur)
+Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Naam of roepnaam die automatisch wordt doorgegeven aan WebSDR's die erom vragen vóór het geluid (KiwiSDR, websdr.org). Klik: wijzigen (rechtsklik: knopkleur)
 Right-click: receivers muted while transmitting	Rechtsklik: ontvangers die tijdens zenden gedempt worden
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
 Store the current frequency…	Huidige frequentie opslaan…
@@ -135,6 +136,9 @@ Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ongeldige frequenti
 Remove this value (pick it in the list first)	Deze waarde verwijderen (kies hem eerst in de lijst)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Kan WebView2 (Edge) niet starten:\n
+Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Naam of roepnaam voor WebSDR's die erom vragen (KiwiSDR, websdr.org):
+The callsign cannot be empty.	De naam mag niet leeg zijn.
+A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Een naam die al op een site is ingetypt, blijft behouden. Om geen naam op te geven: een vaste spatie (Alt+255).
 Invalid address: 	Ongeldig adres: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kabel: geen virtuele audiokabel gevonden. Installeer VB-CABLE (gratis): knop "SDRLINK-kabel".
 Output receiving the WebSDR audio:	Uitvoer voor het WebSDR-geluid:

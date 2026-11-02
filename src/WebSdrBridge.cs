@@ -242,6 +242,15 @@ namespace SDRLink
   // UberSDR v2 : API de page window.UberSDR, asynchrone. On relit 'tuning' à chaque tour et on garde la dernière réponse
   // (un abonnement lancé pendant le chargement de la page peut ne jamais aboutir).
   function uberTuning() {
+    // Abonnement : la page prévient à chaque changement (~30 ms) ; la lecture ci-dessous, une réponse en retard
+    // (~300 ms), reste en secours.
+    if (!L.uberSub) {
+      L.uberSub = true;
+      try {
+        UberSDR.on('tuning', function (v) { if (v && v.frequency) { L.uberTuning = v; L.poll(); } });
+        Promise.resolve(UberSDR.subscribe(['tuning'])).catch(function () { });
+      } catch (e) { }
+    }
     if (!L.uberBusy) {
       L.uberBusy = true;
       UberSDR.get('tuning').then(
@@ -250,15 +259,31 @@ namespace SDRLink
     }
     return L.uberTuning;
   }
+  // Session UberSDR démarrée (« Click to start » passé) depuis plus de 0,7 s. Avant, un réglage ne part pas vers le
+  // serveur et la page le remplace au démarrage par sa propre fréquence : l'affichage et le son ne concordaient plus.
+  function uberRunning() {
+    if (!L.uberRunAt && !L.uberSessBusy) {
+      L.uberSessBusy = true;
+      UberSDR.get('session').then(
+        function (s) { if (s && s.running && !L.uberRunAt) L.uberRunAt = Date.now(); L.uberSessBusy = false; },
+        function () { L.uberSessBusy = false; });
+    }
+    return L.uberRunAt && Date.now() - L.uberRunAt > 700;
+  }
 
   L.get = function () {
     var k = detect();
     try {
       if (k === 'ubersdr') { var t = uberTuning(); if (t && t.frequency) return { k: k, f: t.frequency, m: t.mode }; return null; }
       if (k === 'phantom') {
-        // Fréquence tenue à jour par la page à chaque changement ; avant le premier, on lit l'afficheur (MHz).
-        var st = window.__catsync_state, hz = st && st.hz;
+        // Fréquence réellement écoutée : position de la porteuse dans la bande reçue (audioM, en points). Elle suit tous
+        // les réglages, y compris un clic dans le spectre ou la cascade, qui ne met pas à jour __catsync_state.
+        // À défaut : l'afficheur (MHz), puis __catsync_state.
+        var sa = spectrumAudio, hz = 0;
+        if (sa && sa.audioMaxSize > 0 && sa.totalBandwidth > 0 && typeof sa.audioM === 'number' && sa.audioM > 0)
+          hz = Math.round(sa.baseFreq + sa.audioM * sa.totalBandwidth / sa.audioMaxSize);
         if (!hz) { var inp = document.querySelector('input.font-mono'); hz = inp ? parseFloat(inp.value) * 1e6 : 0; }
+        if (!hz) { var st = window.__catsync_state; hz = st && st.hz || 0; }
         return { k: k, f: hz, m: spectrumAudio.demodulation };
       }
       if (k === 'kiwi') return { k: k, f: ext_get_freq(), m: ext_get_mode() };
@@ -275,8 +300,12 @@ namespace SDRLink
     try {
       if (k === 'phantom') {
         // setfreq : valeur en kHz (en dessous de 1e6 la page la prend pour des kHz) ; set_mode : nom en majuscules.
-        if (mode) set_mode(mode.toUpperCase());
+        // La page choisit elle-même le mode de la bande quand la fréquence change (LSB sur 40 m…) : fréquence
+        // d'abord, puis le mode voulu, ou celui d'avant (sinon ce changement repartirait vers le poste).
+        var keep = String(spectrumAudio.demodulation || '');
         if (hz) setfreq(hz / 1000);
+        var want = mode ? mode.toUpperCase() : keep.toUpperCase();
+        if (want && want !== String(spectrumAudio.demodulation || '').toUpperCase()) set_mode(want);
       } else if (k === 'ubersdr') {
         var args = { ensureVisible: true };
         if (hz) args.frequency = hz;
@@ -287,7 +316,19 @@ namespace SDRLink
         ext_tune(hz ? hz / 1000 : null, km || ext_get_mode());
       } else if (k === 'websdr') {
         if (mode && mode.toUpperCase() !== String(window.mode).toUpperCase()) set_mode(mode);
-        if (hz) setfreqb(hz / 1000);
+        if (hz) {
+          // Fréquence hors de la bande affichée : on change de bande comme le bouton de la page (80, 40, 20…).
+          // En vue « une bande » (Bordeaux), setfreqb ne le fait pas : seul le chiffre changeait, la cascade restait
+          // sur l'ancienne bande. Le changement de bande inverse LSB/USB : le mode d'avant est remis.
+          var b = websdrBand(hz / 1000);
+          if (b >= 0 && b !== window.band && typeof window.setband === 'function') {
+            var before = String(window.mode);
+            setband(b);
+            if (typeof window.bandeButton === 'function') bandeButton(b);
+            if (String(window.mode).toUpperCase() !== before.toUpperCase()) set_mode(before.toLowerCase());
+          }
+          setfreqb(hz / 1000);
+        }
       } else if (k === 'owrx+' || k === 'owrx') {
         if (hz && !owrxInRange(hz)) {
           var prof = findProfile(hz), sel = document.getElementById('openwebrx-sdr-profiles-listbox');
@@ -304,6 +345,25 @@ namespace SDRLink
     } catch (e) { }
     L.poll();
   };
+
+  // Bordeaux : rappel du mode à côté du S-mètre, tenu à jour seulement par ses boutons de mode (ni par ses boutons
+  // de bande, qui inversent pourtant LSB/USB, ni par SDRLink) : remis d'accord avec le mode réel de la page.
+  function modeLabel() {
+    var el = document.getElementById('getmode'), m = String(window.mode || '').toLowerCase();
+    if (!el || !m || typeof window.ModeID !== 'function') return;
+    var want = m.charAt(0).toUpperCase() + m.substring(1);
+    if (el.innerHTML !== want) ModeID(want);
+  }
+
+  // websdr.org : bande (index dans bi) qui contient la fréquence f en kHz, -1 si aucune.
+  function websdrBand(f) {
+    if (!window.bi || typeof window.nvbands !== 'number') return -1;
+    for (var i = 0; i < nvbands; i++) {
+      var e = bi[i];
+      if (e && f > e.centerfreq - e.samplerate / 2 - 4 && f < e.centerfreq + e.samplerate / 2 + 4) return i;
+    }
+    return -1;
+  }
 
   // Mode OpenWebRX ramené à la famille comprise par owrxTune.
   function Modes(m) {
@@ -332,15 +392,163 @@ namespace SDRLink
     }
     var s = L.get();
     if (!s || !(s.f > 0)) return;
+    // websdr.org : la page règle elle-même sa fréquence de départ à la fin du chargement (onload), puis au démarrage
+    // du son ; signalée plus tôt, SDRLink la réglerait pour rien et recopierait ensuite ce saut sur le poste.
+    if (s.k === 'websdr' && !(window.allloadeddone || (L.loadedAt && Date.now() - L.loadedAt > 4000))) return;
+    if (s.k === 'ubersdr' && !uberRunning()) return;
+    // PhantomSDR : réglé avant les premiers échantillons audio, il restait muet ; on attend que le son joue.
+    if (s.k === 'phantom' && !(window.spectrumAudio && spectrumAudio.playTime)) return;
+    squelch(s);
+    if (s.k === 'websdr') modeLabel();
     var msg = s.k + '|' + Math.round(s.f) + '|' + String(s.m || '');
     if (msg !== L.last) {
       L.last = msg;
-      try { window.chrome.webview.postMessage(msg); } catch (e) { }
+      // « |u » : l'utilisateur vient d'agir sur la page (clic, touche, molette). SDRLink suit alors ce changement même
+      // pendant la mise en place de la page, où un changement venu de la page seule est remis sur le poste.
+      var user = Date.now() - L.userAt < 1500;
+      try { window.chrome.webview.postMessage(msg + (user ? '|u' : '')); } catch (e) { }
     }
   };
+  // Seuls les gestes réels comptent (isTrusted) : les appuis simulés par SDRLink au démarrage ne comptent pas.
+  L.userAt = 0;
+  ['pointerdown', 'mousedown', 'pointerup', 'keydown', 'wheel', 'touchstart', 'touchend'].forEach(function (t) {
+    window.addEventListener(t, function (e) { if (e.isTrusted) L.userAt = Date.now(); }, true);
+  });
+  window.addEventListener('pointermove', function (e) { if (e.isTrusted && e.buttons) L.userAt = Date.now(); }, true);
 
-  setInterval(L.poll, 250);
+  window.addEventListener('load', function () { L.loadedAt = Date.now(); });
+  setInterval(L.poll, 125);   // un changement fait sur la page est signalé à SDRLink en 60 ms en moyenne
+
+  // Squelch ouvert (websdr.org : case « squelch », OpenWebRX : curseur au minimum), sauf en FM à partir de 30 MHz
+  // (relais, FM VHF/UHF) où il est remis tel que la page l'avait. Appliqué au chargement puis seulement quand on entre
+  // ou sort de la FM VHF : un squelch remis à la main par l'utilisateur est laissé tel quel.
+  function squelch(s) {
+    var want = /fm/i.test(String(s.m || '')) && s.f >= 30e6;
+    if (want === L.sqWant) return;
+    var el = s.k === 'websdr' ? document.getElementById('squelchcheckbox')
+           : s.k === 'owrx+' || s.k === 'owrx' ? document.querySelector('.openwebrx-squelch-slider') : null;
+    if (!el) return;
+    L.sqWant = want;
+    try {
+      if (el.type === 'checkbox') {
+        if (typeof window.setsquelch !== 'function') return;
+        if (!want && el.checked) { L.sqWas = true; el.checked = false; window.setsquelch(false); }
+        else if (want && L.sqWas === true && !el.checked) { L.sqWas = null; el.checked = true; window.setsquelch(true); }
+      } else {
+        var min = parseFloat(el.min), v = parseFloat(el.value);
+        if (!want && v > min) { L.sqWas = el.value; slide(el, el.min); }
+        else if (want && L.sqWas != null && v <= min) { slide(el, L.sqWas); L.sqWas = null; }
+      }
+    } catch (e) { }
+  }
+  function slide(el, v) {
+    el.value = v;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  // Démarrage sans clic : la lecture automatique étant permise, seul UberSDR attend encore un clic sur
+  // « Click to start ». SDRLink clique une fois à la place de l'utilisateur, dans les 30 s qui suivent l'ouverture.
+  var startAt = Date.now(), startTimer = setInterval(function () {
+    var b = document.querySelector('button.start__go:not(.start__go--alt)');
+    if (b && b.offsetParent !== null) { clearInterval(startTimer); try { b.click(); } catch (e) { } }
+    else if (Date.now() - startAt > 30000) clearInterval(startTimer);
+  }, 500);
+
+  // PhantomSDR (French Alps…) : voile « Tap to enable audio » ; la page attend un appui de souris n'importe où
+  // pour activer le son et retirer le voile. SDRLink le simule, toutes les 0,5 s tant que le voile est là (la page
+  // peut l'afficher avant d'écouter l'appui), dans les 30 s qui suivent l'ouverture.
+  var tapTimer = setInterval(function () {
+    if (Date.now() - startAt > 30000) { clearInterval(tapTimer); return; }
+    var v = document.getElementById('startaudio');
+    if (!v || v.offsetParent === null) return;
+    try { document.documentElement.dispatchEvent(new MouseEvent('mousedown', { bubbles: true })); } catch (e) { }
+  }, 500);
+
+  // PhantomSDR : après un changement de fréquence (de SDRLink, du clavier ou d'un clic dans le spectre), le son
+  // décodé tombe parfois à zéro 1 à 3 s plus tard et le reste, bien que les trames continuent d'arriver ; changer de
+  // mode puis revenir le relance. SDRLink renvoie le mode courant au serveur dès qu'une demi-seconde entière de trames
+  // reste muette (le squelch ou le mute de la page arrêtent les trames avant : ils ne la déclenchent pas). Trois
+  // essais au plus, rendus quand le son revient.
+  var ph = { fr: 0, pk: 0, at: 0, tries: 0 };
+  setInterval(function () {
+    var a = window.spectrumAudio;
+    if (!a || typeof a.playPCM !== 'function' || typeof a.setAudioDemodulation !== 'function') return;
+    if (!a.__sdrlinkPcm) {
+      var play = a.playPCM;
+      a.playPCM = function (e) {
+        ph.fr++;
+        try { for (var i = 0; i < e.length; i += 4) { var v = e[i] < 0 ? -e[i] : e[i]; if (v > ph.pk) ph.pk = v; } } catch (x) { }
+        return play.apply(this, arguments);
+      };
+      a.__sdrlinkPcm = true;
+      ph.at = Date.now();
+      return;
+    }
+    if (a.audioM !== ph.m) { ph.m = a.audioM; ph.tries = 0; }   // nouvelle fréquence : nouveaux essais
+    if (Date.now() - ph.at < 500) return;
+    if (ph.fr >= 10 && ph.pk < 0.0005) {
+      if (ph.tries < 3 && a.playTime) { ph.tries++; try { a.setAudioDemodulation(a.demodulation); } catch (e) { } }
+    } else if (ph.pk >= 0.0005) ph.tries = 0;
+    ph.fr = 0; ph.pk = 0; ph.at = Date.now();
+  }, 250);
+
+  // KiwiSDR complet : SDRLink appuie sur « Enter queue » (file d'attente) ; KiwiSDR recharge ensuite la page de
+  // lui-même dès qu'un canal se libère. Avec des canaux à mot de passe, « Queue or Camp » mène d'abord à cet écran.
+  // Une fois par ouverture, dans les 30 s : une sortie de file voulue par l'utilisateur n'est pas annulée.
+  var queueTimer = setInterval(function () {
+    if (Date.now() - startAt > 30000) { clearInterval(queueTimer); return; }
+    if (!window.kiwi) return;
+    var btns = document.querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+      var b = btns[i], t = (b.textContent || '').trim();
+      if (b.offsetParent === null) continue;
+      if ((t === 'Enter queue' && !window.kiwi.queued) || t === 'Queue or Camp') { clearInterval(queueTimer); try { b.click(); } catch (e) { } return; }
+    }
+  }, 500);
 })();
 ";
+
+        // Pseudo donné aux WebSDR qui en demandent un avant le son : websdr.org le lit dans le cookie « username »,
+        // KiwiSDR dans localStorage « ident » (deux caractères au moins : un pseudo d'un seul caractère, comme l'espace
+        // insécable d'Alt+255, y est doublé). Un nom tapé directement sur le site est gardé ; celui que SDRLink avait mis
+        // (repères __sdrlink_ident et __sdrlink_user) est remplacé quand le pseudo change.
+        public static string Identity(string name)
+        {
+            name = Clean(name);
+            if (name == "") return null;
+            System.Text.StringBuilder js = new System.Text.StringBuilder("'");
+            foreach (char c in name)
+                if (c < 0x20 || c > 0x7E) js.AppendFormat("\\u{0:x4}", (int)c); else js.Append(c);
+            js.Append("'");
+            return @"
+(function (name) {
+  if (window.top !== window) return;
+  try {
+    var kiwi = name.length >= 2 ? name : name + name;
+    var cur = localStorage.getItem('ident'), mine = localStorage.getItem('__sdrlink_ident');
+    if (mine === null) mine = localStorage.getItem('__sdrlink_name');   // repère des premiers essais de la 1.20
+    if (!cur || cur === mine) { localStorage.setItem('ident', kiwi); localStorage.setItem('__sdrlink_ident', kiwi); }
+  } catch (e) { }
+  try {
+    // Repère du cookie sous un autre nom : KiwiSDR recopie les cookies du site dans son localStorage.
+    var get = function (k) { var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + k + '=([^;]*)')); return m ? m[1] : null; };
+    var curC = get('username'), mineC = get('__sdrlink_user'), tail = '; max-age=157680000; path=/; SameSite=Lax';
+    if (mineC === null) mineC = get('__sdrlink_name');
+    if (!curC || curC === mineC) { document.cookie = 'username=' + name + tail; document.cookie = '__sdrlink_user=' + name + tail; }
+  } catch (e) { }
+})(" + js + ");";
+        }
+
+        // Pseudo utilisable tel quel dans un cookie et une chaîne JavaScript : sans ; , = \ ' "" ni caractères de contrôle,
+        // 30 caractères au plus. Seuls les espaces ordinaires sont ôtés autour : l'espace insécable (Alt+255) est un
+        // pseudo permis, pour qui ne veut pas donner de nom. Vide : pseudo refusé.
+        public static string Clean(string name)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            foreach (char c in (name ?? "").Trim(' ', '\t'))
+                if (!char.IsControl(c) && ";,=\\'\"".IndexOf(c) < 0 && sb.Length < 30) sb.Append(c);
+            return sb.ToString().Trim(' ', '\t');
+        }
     }
 }
