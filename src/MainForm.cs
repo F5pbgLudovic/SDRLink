@@ -456,7 +456,7 @@ namespace SDRLink
             row3.Controls.Add(chkNotch);
             // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
             row3.Controls.Add(Colorable("ScanSetup", Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); })));
-            btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else if (settings.ScanProfiles.Count > 0) ShowScanMenu(); else StartScan(); });
+            btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else ShowScanMenu(); });
             btnScan.Tag = Theme.Custom;
             btnScan.FlatStyle = FlatStyle.Flat;
             row3.Controls.Add(btnScan);
@@ -1695,10 +1695,10 @@ namespace SDRLink
 
         // ---------------------------------------------------------------- Affichage ptt
 
-        // Fenêtre réduite au bouton PTT et à sa case ; tout ce qui précède (affichage, taille, position, plein écran,
+        // Fenêtre réduite au bouton PTT, à sa case et à la case « Avant plan » ; tout ce qui précède (affichage, taille, position, plein écran,
         // tailles minimale et maximale) est gardé tel quel et rétabli en décochant.
         bool pttView;
-        FlowLayoutPanel pttPanel;
+        FlowLayoutPanel pttPanel, pttChecks;
         Rectangle pttPrevBounds;
         FormWindowState pttPrevState;
         Size pttPrevMin, pttPrevMax;
@@ -1724,11 +1724,16 @@ namespace SDRLink
                     pttPanel.WrapContents = false;
                     pttPanel.Padding = new Padding(4);
                     pttPanel.Location = Point.Empty;
+                    // Les deux cases l'une sous l'autre, à droite du bouton : elles tiennent dans sa hauteur.
+                    pttChecks = SubRow();
+                    pttChecks.FlowDirection = FlowDirection.TopDown;
+                    pttPanel.Controls.Add(pttChecks);
                     Controls.Add(pttPanel);
                 }
                 pttView = true;
-                // Le bouton PTT et la case quittent leur ligne ; leur place est notée pour les y remettre.
-                pttMoved = new Control[] { btnPtt, chkPttView };
+                // Le bouton PTT et les cases « Affichage ptt » et « Avant plan » quittent leur ligne ; leur place est
+                // notée pour les y remettre.
+                pttMoved = new Control[] { btnPtt, chkPttView, chkTop };
                 pttParents = new Control[pttMoved.Length];
                 pttIndexes = new int[pttMoved.Length];
                 for (int i = 0; i < pttMoved.Length; i++)
@@ -1736,8 +1741,11 @@ namespace SDRLink
                     pttParents[i] = pttMoved[i].Parent;
                     pttIndexes[i] = pttParents[i].Controls.GetChildIndex(pttMoved[i]);
                 }
-                foreach (Control c in pttMoved) pttPanel.Controls.Add(c);
-                chkPttView.Margin = new Padding(8, 14, 4, 0);
+                pttPanel.Controls.Add(btnPtt);
+                pttPanel.Controls.SetChildIndex(btnPtt, 0);
+                pttChecks.Controls.Add(chkPttView);
+                pttChecks.Controls.Add(chkTop);
+                chkPttView.Margin = chkTop.Margin = new Padding(8, 0, 4, 0);
                 mainTable.Visible = strip.Visible = false;
                 pttPanel.Visible = true;
                 MinimumSize = MaximumSize = Size.Empty;
@@ -1751,7 +1759,7 @@ namespace SDRLink
             }
             pttView = false;
             pttPanel.Visible = false;
-            chkPttView.Margin = new Padding(8, 2, 2, 0);
+            chkPttView.Margin = chkTop.Margin = new Padding(8, 2, 2, 0);
             for (int i = pttMoved.Length - 1; i >= 0; i--)
             {
                 pttParents[i].Controls.Add(pttMoved[i]);
@@ -3491,15 +3499,19 @@ namespace SDRLink
             if (r == DialogResult.Yes) { if (scanning) StopScan(null); StartScan(); }
         }
 
-        // Clic sur Scan quand des profils existent : le réglage du moment ou un profil, qui devient le réglage du moment.
+        // Clic sur Scan : reprendre le scan du réglage du moment à la fréquence actuelle, le lancer depuis le début, ou
+        // un profil, qui devient le réglage du moment.
         void ShowScanMenu()
         {
             ContextMenuStrip m = new ContextMenuStrip();
+            ToolStripMenuItem resume = new ToolStripMenuItem(Lang.T("Reprendre le scan", "Resume the scan") + "  —  " + ResumeText());
+            resume.Click += delegate { StartScan(true); };
+            m.Items.Add(resume);
             ToolStripMenuItem now = new ToolStripMenuItem(Lang.T("Réglage actuel de « Conf scan »", "Current \"Scan setup\" setting") + "  —  " + settings.CurrentScan("").Summary());
             now.Font = new Font(now.Font, FontStyle.Bold);
             now.Click += delegate { StartScan(); };
             m.Items.Add(now);
-            m.Items.Add(new ToolStripSeparator());
+            if (settings.ScanProfiles.Count > 0) m.Items.Add(new ToolStripSeparator());
             foreach (ScanProfile p in settings.ScanProfiles)
             {
                 ScanProfile pp = p;
@@ -3519,32 +3531,68 @@ namespace SDRLink
 
         // Fréquences : de la plus basse à la plus haute, par pas, en sautant les zones non scannées, puis on recommence.
         // Mémoires : les cochées, dans l'ordre. Chaque fréquence ou mémoire est gardée la durée choisie. L'émission arrête le scan.
-        void StartScan()
+        // Reprendre (resume) : le scan part de la fréquence actuelle si elle est dans la plage (la suivante si elle est
+        // dans une zone non scannée), de la mémoire cochée sur la fréquence actuelle ; sinon du début, comme Scan.
+        void StartScan(bool resume = false)
         {
             if (Transmitting) { ShowStatus(Lang.T("Scan impossible en émission", "No scan while transmitting")); return; }
+            long cur = resume ? CurrentFreq() : -1;
             if (settings.ScanType == 0)
             {
                 scanRun = settings.CurrentScan("");
                 if (scanRun.Lo <= 0 || scanRun.Lo == scanRun.Hi) { ShowStatus(Lang.T("Scan : indiquez les fréquences de début et de fin dans « Conf scan »", "Scan: set the start and end frequencies in \"Scan setup\"")); return; }
-                scanHz = scanRun.NextFreq(-1);
+                scanHz = ResumeFreq(scanRun, cur);
                 if (scanHz < 0) { ShowStatus(Lang.T("Scan : toutes les fréquences sont dans des zones non scannées (« Conf scan »)", "Scan: all frequencies are in skipped ranges (\"Scan setup\")")); return; }
                 scanTimer.Interval = Math.Max(1, settings.ScanFreqDwell) * 1000;
             }
             else
             {
-                scanMems = settings.Memories.Items.FindAll(delegate(Memory m) { return m.Scan; });
+                scanMems = ScanMemories();
                 if (scanMems.Count == 0) { ShowStatus(Lang.T("Scan : cochez des mémoires dans « Conf scan »", "Scan: check memories in \"Scan setup\"")); return; }
-                scanIndex = 0;
+                scanIndex = Math.Max(0, scanMems.FindIndex(m => m.Hz == cur));
                 scanTimer.Interval = Math.Max(1, settings.ScanMemDwell) * 1000;
             }
             scanning = true;
-            Log.Write("Scan : départ (" + (settings.ScanType == 0 ? FormatFreq(scanRun.Lo) + " à " + FormatFreq(scanRun.Hi) + ", pas " + settings.ScanStepHz + " Hz"
+            Log.Write("Scan : " + (resume ? "reprise à " + (settings.ScanType == 0 ? FormatFreq(scanHz) : scanMems[scanIndex].Label) + " " : "départ ") + "(" +(settings.ScanType == 0 ? FormatFreq(scanRun.Lo) + " à " + FormatFreq(scanRun.Hi) + ", pas " + settings.ScanStepHz + " Hz"
                     + (scanRun.Skips.Count > 0 ? ", sans " + string.Join(", ", scanRun.Skips.ConvertAll(z => Memory.KHz(z[0]) + "-" + Memory.KHz(z[1]) + " kHz").ToArray()) : "")
                     : scanMems.Count + " mémoire(s)")
                 + ", " + scanTimer.Interval / 1000 + " s)");
             ScanTune();
             scanTimer.Start();
             UpdateScanButton();
+        }
+
+        // Fréquence de départ : la fréquence actuelle (cur) si elle est dans la plage, la suivante si elle est dans une zone
+        // non scannée, sinon la première du scan (aussi pour cur < 0).
+        static long ResumeFreq(ScanProfile p, long cur)
+        {
+            if (cur < p.Lo || cur > p.Hi) return p.NextFreq(-1);
+            return p.Skipped(cur) ? p.NextFreq(cur) : cur;
+        }
+
+        List<Memory> ScanMemories()
+        {
+            return settings.Memories.Items.FindAll(delegate(Memory m) { return m.Scan; });
+        }
+
+        // Où « Reprendre le scan » repartira, pour le menu du bouton Scan.
+        string ResumeText()
+        {
+            long cur = CurrentFreq();
+            if (settings.ScanType == 0)
+            {
+                ScanProfile p = settings.CurrentScan("");
+                if (p.Lo <= 0 || p.Lo == p.Hi) return Lang.T("fréquences non réglées", "frequencies not set");
+                long f = ResumeFreq(p, cur);
+                if (f < 0) return Lang.T("toutes les fréquences sont dans des zones non scannées", "all frequencies are in skipped ranges");
+                if (cur >= p.Lo && cur <= p.Hi) return Lang.F("à {0} kHz", "at {0} kHz", Memory.KHz(f));
+                return Lang.F("au début ({0} kHz) : fréquence actuelle hors de la plage", "from the start ({0} kHz): current frequency out of range", Memory.KHz(f));
+            }
+            List<Memory> mems = ScanMemories();
+            if (mems.Count == 0) return Lang.T("aucune mémoire cochée", "no memory checked");
+            int i = mems.FindIndex(m => m.Hz == cur);
+            if (i >= 0) return Lang.F("à la mémoire {0}", "at memory {0}", mems[i].Label);
+            return Lang.F("au début ({0}) : fréquence actuelle hors des mémoires", "from the start ({0}): current frequency not in the memories", mems[0].Label);
         }
 
         void StopScan(string reason)

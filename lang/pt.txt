@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Porta TCI do ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Porta do servidor TCI (ExpertSDR, Options > TCI):
 Add memory	Adicionar memória
+Resume the scan	Retomar o varrimento
 Current "Scan setup" setting	Definição atual de «Configurar varrimento»
 No scan while transmitting	Sem varrimento durante a emissão
 Scan: set the start and end frequencies in "Scan setup"	Varrimento: indique as frequências de início e fim em «Configurar varrimento»
 Scan: all frequencies are in skipped ranges ("Scan setup")	Varrimento: todas as frequências estão em gamas excluídas («Configurar varrimento»)
 Scan: check memories in "Scan setup"	Varrimento: marque memórias em «Configurar varrimento»
+frequencies not set	frequências não definidas
+all frequencies are in skipped ranges	todas as frequências estão em gamas excluídas
+no memory checked	nenhuma memória marcada
 Scan stopped	Varrimento parado
 ■ Stop scan	■ Parar o varrimento
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Placa de som do rádio, gravada quando Mute WebSDR, Mute ExpertSDR e Mute HDSDR estão ativos:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Remover «{0}» de «{1}»?
 Unexpected error, written to the log: {0}	Erro inesperado, registado no diário: {0}
 Memory "{0}" added to "{1}".	Memória «{0}» adicionada a «{1}».
 Memory "{0}": {1} kHz	Memória «{0}»: {1} kHz
+at {0} kHz	a partir de {0} kHz
+from the start ({0} kHz): current frequency out of range	desde o início ({0} kHz): frequência atual fora da gama
+at memory {0}	a partir da memória {0}
+from the start ({0}): current frequency not in the memories	desde o início ({0}): frequência atual não está nas memórias
 Scan stopped: {0}	Varrimento parado: {0}
 Scan: {0}	Varrimento: {0}
 Cannot record: {0}	Impossível gravar: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Ligado, a aguardar o rádio...
 Rig online	Rádio ligado
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	O rádio não responde (verifique porta, velocidade, endereço CI-V, menu CAT)
 Error: 	Erro: 
-frequencies not set	frequências não definidas
 Profile:	Perfil:
 Rename	Mudar nome
 Scan type:	Tipo de varrimento:

@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
 Add memory	Προσθήκη μνήμης
+Resume the scan	Συνέχιση σάρωσης
 Current "Scan setup" setting	Τρέχουσα ρύθμιση της «Ρύθμιση σάρωσης»
 No scan while transmitting	Δεν γίνεται σάρωση κατά την εκπομπή
 Scan: set the start and end frequencies in "Scan setup"	Σάρωση: ορίστε αρχική και τελική συχνότητα στη «Ρύθμιση σάρωσης»
 Scan: all frequencies are in skipped ranges ("Scan setup")	Σάρωση: όλες οι συχνότητες βρίσκονται σε περιοχές που παραλείπονται («Ρύθμιση σάρωσης»)
 Scan: check memories in "Scan setup"	Σάρωση: επιλέξτε μνήμες στη «Ρύθμιση σάρωσης»
+frequencies not set	δεν έχουν οριστεί συχνότητες
+all frequencies are in skipped ranges	όλες οι συχνότητες βρίσκονται σε περιοχές που παραλείπονται
+no memory checked	δεν έχουν επιλεγεί μνήμες
 Scan stopped	Η σάρωση σταμάτησε
 ■ Stop scan	■ Διακοπή σάρωσης
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Κάρτα ήχου του πομποδέκτη, εγγράφεται όταν είναι ενεργά τα Mute WebSDR, Mute ExpertSDR και Mute HDSDR:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Αφαίρεση του «{0}» από το «{1}»;
 Unexpected error, written to the log: {0}	Απρόσμενο σφάλμα, καταγράφηκε στο αρχείο καταγραφής: {0}
 Memory "{0}" added to "{1}".	Η μνήμη «{0}» προστέθηκε στο «{1}».
 Memory "{0}": {1} kHz	Μνήμη «{0}»: {1} kHz
+at {0} kHz	από {0} kHz
+from the start ({0} kHz): current frequency out of range	από την αρχή ({0} kHz): η τρέχουσα συχνότητα είναι εκτός περιοχής
+at memory {0}	από τη μνήμη {0}
+from the start ({0}): current frequency not in the memories	από την αρχή ({0}): η τρέχουσα συχνότητα δεν είναι στις μνήμες
 Scan stopped: {0}	Η σάρωση σταμάτησε: {0}
 Scan: {0}	Σάρωση: {0}
 Cannot record: {0}	Αδύνατη η εγγραφή: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Συνδέθηκε, αναμονή για το
 Rig online	Πομποδέκτης σε σύνδεση
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Ο πομποδέκτης δεν απαντά (ελέγξτε θύρα, ταχύτητα, διεύθυνση CI-V, μενού CAT)
 Error: 	Σφάλμα: 
-frequencies not set	δεν έχουν οριστεί συχνότητες
 Profile:	Προφίλ:
 Rename	Μετονομασία
 Scan type:	Τύπος σάρωσης:

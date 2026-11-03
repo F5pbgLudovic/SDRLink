@@ -415,7 +415,7 @@ Hover the mouse over **RIG** or **WEBSDR** and turn the wheel. What moves depend
 - In reduced and mini views, the PTT / frequencies / modes / boxes row stays **on a single line**: the window cannot become narrower than it (unless the screen is too small), only the height can be adjusted. The window is also kept entirely on screen (bottom visible, above the taskbar); when maximised, reduced view stays maximised (the whole WebSDR page is visible), and so does the return to normal view; mini view, however, is always a small window.
 - Only one of the two boxes at a time. **Unticking** the ticked box always returns to normal view (both boxes unticked), even if you had switched from reduced to mini or from mini to reduced.
 - Each view gets back the size it had when you left it (normal and reduced), including from one session to the next: sizes are saved on closing, together with the current view. If the window was maximised in normal view, it returns to that.
-- **PTT view** (below "Always on top"): a very small window that only shows the **PTT button** and the "PTT view" box. PTT works normally there (click, right-click for the safety timeout). **Unticking** the box returns to the previous view **exactly as it was**: same view (normal, reduced or mini), same size, same position, maximised state included. Closing SDRLink in PTT view saves the previous view.
+- **PTT view** (below "Always on top"): a very small window that only shows the **PTT button**, the "PTT view" box and, below it, the **Always on top** box (since 1.21: the small window can be put on top without going back to the large one; it is the same box as in the large window). PTT works normally there (click, right-click for the safety timeout). **Unticking** the box returns to the previous view **exactly as it was**: same view (normal, reduced or mini), same size, same position, maximised state included. Closing SDRLink in PTT view saves the previous view.
 - **Always on top**: SDRLink stays above other windows (handy with PTT view).
 - **Text size…** (1st row): enlarges or reduces the text of the main window, from 70 to 200% (100% = original size), with the slider or the − / + buttons. The change is visible at once; **Cancel** returns to the previous size, **100 %** to the original size. Fixed-size buttons and sliders follow. The size is kept for the next launch.
 
@@ -436,8 +436,11 @@ On the "Sync" row, after "Auto notch (DNF)":
   - **Rename**: choose the profile, change its name in the box, then Rename. **Delete**: choose the profile, then Delete (after confirmation).
   - Profiles are kept even if Scan setup is closed with Cancel.
 - **▶ Scan**: starts the scan; the button turns red, "■ Stop scan". The status bar shows the current frequency or memory (without filling the message history).
-  - Without profiles, the scan starts at once with the Scan setup setting.
-  - With profiles, a click opens a list: **Current "Scan setup" setting** (in bold), then each profile with its summary (e.g. "40 m CW — 7040 – 7200 kHz, 1 kHz, 5 s, skipped ranges: 1"). The chosen profile becomes the Scan setup setting and the scan starts.
+  - A click opens a list (since 1.21, even without profiles): **Resume the scan**, **Current "Scan setup" setting** (in bold), then each profile with its summary (e.g. "40 m CW — 7040 – 7200 kHz, 1 kHz, 5 s, skipped ranges: 1"). The chosen profile becomes the Scan setup setting and the scan starts.
+  - **Resume the scan** (since 1.21): the scan of the Scan setup setting restarts from the **current frequency** instead of the start. The list shows where it will restart (e.g. "Resume the scan — at 7074 kHz").
+    - Frequency scan: if the current frequency is between start and end, the scan restarts from it, then goes on with the chosen step (from 7074.3 it moves to 7075 with a 1 kHz step); if it is in a skipped range, it restarts at the end of the range. **Out of range**, it restarts from the **first frequency** of the scan ("from the start (7000 kHz): current frequency out of range").
+    - Memory scan: it restarts from the checked memory on the current frequency, otherwise from the first memory.
+  - **Current "Scan setup" setting**: the scan always restarts from the start.
 - The scan sets the rig and the WebSDR, like entering a frequency. It stops as soon as the rig goes into **transmit** (SDRLink's PTT or the rig's); it cannot start while transmitting.
 
 ## Recording (REC)
@@ -507,8 +510,10 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
-- **1.20**
-  - **Audio without a click** when arriving on a page: UberSDR's "Click to start" and PhantomSDR's "Tap to enable audio" veil are passed automatically.
+- **1.21**
+  - **Always on top** box in PTT view, below "PTT view": the small window can be put on top without going back to the large one; its size does not change.
+  - **Resume the scan**, at the top of the ▶ Scan button's list: the scan restarts from the current frequency (or from the memory on that frequency); out of range, it restarts from the first frequency. The ▶ Scan button now always opens the list, even without profiles.
+- **1.20**  - **Audio without a click** when arriving on a page: UberSDR's "Click to start" and PhantomSDR's "Tap to enable audio" veil are passed automatically.
   - **Pseudo/Call** button (1st row, after Import/Export): name or callsign given automatically to KiwiSDRs and websdr.org receivers that ask for one before the audio, "SDRLink" by default, never empty, Alt+255 allowed to give no name; window opened with a click.
   - **Full KiwiSDR**: automatic entry into the waiting queue ("Enter queue").
   - **Squelch** opened on WebSDRs that have one, except in FM from 30 MHz up.

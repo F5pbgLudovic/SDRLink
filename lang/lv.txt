@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR TCI ports
 TCI server port (ExpertSDR, Options > TCI):	TCI servera ports (ExpertSDR, Options > TCI):
 Add memory	Pievienot atmiņu
+Resume the scan	Turpināt skenēšanu
 Current "Scan setup" setting	Pašreizējais iestatījums logā „Skenēšanas iestatījumi“
 No scan while transmitting	Raidīšanas laikā skenēt nevar
 Scan: set the start and end frequencies in "Scan setup"	Skenēšana: norādiet sākuma un beigu frekvenci logā “Skenēšanas iestatījumi”
 Scan: all frequencies are in skipped ranges ("Scan setup")	Skenēšana: visas frekvences ir izlaižamajos diapazonos („Skenēšanas iestatījumi“)
 Scan: check memories in "Scan setup"	Skenēšana: atzīmējiet atmiņas logā “Skenēšanas iestatījumi”
+frequencies not set	frekvences nav iestatītas
+all frequencies are in skipped ranges	visas frekvences ir izlaižamajos diapazonos
+no memory checked	nav atzīmēta neviena atmiņa
 Scan stopped	Skenēšana apturēta
 ■ Stop scan	■ Apturēt skenēšanu
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Raidītāja skaņas karte, ierakstīta, kad ieslēgti Mute WebSDR, Mute ExpertSDR un Mute HDSDR:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Vai noņemt "{0}" no "{1}"?
 Unexpected error, written to the log: {0}	Negaidīta kļūda, ierakstīta žurnālā: {0}
 Memory "{0}" added to "{1}".	Atmiņa “{0}” pievienota sarakstam “{1}”.
 Memory "{0}": {1} kHz	Atmiņa “{0}”: {1} kHz
+at {0} kHz	no {0} kHz
+from the start ({0} kHz): current frequency out of range	no sākuma ({0} kHz): pašreizējā frekvence ir ārpus diapazona
+at memory {0}	no atmiņas {0}
+from the start ({0}): current frequency not in the memories	no sākuma ({0}): pašreizējās frekvences nav atmiņās
 Scan stopped: {0}	Skenēšana apturēta: {0}
 Scan: {0}	Skenēšana: {0}
 Cannot record: {0}	Nevar ierakstīt: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Savienots, gaida raiduztvērēju...
 Rig online	Raiduztvērējs tiešsaistē
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raiduztvērējs neatbild (pārbaudiet portu, bodu ātrumu, CI-V adresi, CAT izvēlni)
 Error: 	Kļūda: 
-frequencies not set	frekvences nav iestatītas
 Profile:	Profils:
 Rename	Pārdēvēt
 Scan type:	Skenēšanas veids:

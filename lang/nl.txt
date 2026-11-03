@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI-poort van ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
 Add memory	Geheugen toevoegen
+Resume the scan	Scan hervatten
 Current "Scan setup" setting	Huidige instelling van "Scan instellen"
 No scan while transmitting	Niet scannen tijdens het zenden
 Scan: set the start and end frequencies in "Scan setup"	Scannen: geef begin- en eindfrequentie op in "Scan instellen"
 Scan: all frequencies are in skipped ranges ("Scan setup")	Scan: alle frequenties liggen in overgeslagen bereiken ("Scan instellen")
 Scan: check memories in "Scan setup"	Scannen: vink geheugens aan in "Scan instellen"
+frequencies not set	frequenties niet ingesteld
+all frequencies are in skipped ranges	alle frequenties liggen in overgeslagen bereiken
+no memory checked	geen geheugen aangevinkt
 Scan stopped	Scannen gestopt
 ■ Stop scan	■ Scannen stoppen
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Geluidskaart van de transceiver, opgenomen wanneer Mute WebSDR, Mute ExpertSDR en Mute HDSDR aan staan:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	"{0}" uit "{1}" verwijderen?
 Unexpected error, written to the log: {0}	Onverwachte fout, in het logboek gezet: {0}
 Memory "{0}" added to "{1}".	Geheugen "{0}" toegevoegd aan "{1}".
 Memory "{0}": {1} kHz	Geheugen "{0}": {1} kHz
+at {0} kHz	vanaf {0} kHz
+from the start ({0} kHz): current frequency out of range	vanaf het begin ({0} kHz): huidige frequentie buiten het bereik
+at memory {0}	vanaf geheugen {0}
+from the start ({0}): current frequency not in the memories	vanaf het begin ({0}): huidige frequentie staat niet in de geheugens
 Scan stopped: {0}	Scannen gestopt: {0}
 Scan: {0}	Scannen: {0}
 Cannot record: {0}	Opnemen niet mogelijk: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Verbonden, wachten op de transceiver...
 Rig online	TRX online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	De transceiver antwoordt niet (controleer poort, baudrate, CI-V-adres, CAT-menu)
 Error: 	Fout: 
-frequencies not set	frequenties niet ingesteld
 Profile:	Profiel:
 Rename	Hernoemen
 Scan type:	Soort scan:

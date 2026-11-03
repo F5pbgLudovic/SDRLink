@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Vrata TCI programa ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Vrata strežnika TCI (ExpertSDR, Options > TCI):
 Add memory	Dodaj pomnilnik
+Resume the scan	Nadaljuj iskanje
 Current "Scan setup" setting	Trenutna nastavitev v »Nastavitve iskanja«
 No scan while transmitting	Med oddajanjem iskanje ni mogoče
 Scan: set the start and end frequencies in "Scan setup"	Iskanje: vnesite začetno in končno frekvenco v »Nastavitve iskanja«
 Scan: all frequencies are in skipped ranges ("Scan setup")	Iskanje: vse frekvence so v izpuščenih območjih (»Nastavitve iskanja«)
 Scan: check memories in "Scan setup"	Iskanje: označite pomnilnike v »Nastavitve iskanja«
+frequencies not set	frekvence niso nastavljene
+all frequencies are in skipped ranges	vse frekvence so v izpuščenih območjih
+no memory checked	noben pomnilnik ni označen
 Scan stopped	Iskanje ustavljeno
 ■ Stop scan	■ Ustavi iskanje
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvočna kartica postaje, posneta ko so vklopljeni Mute WebSDR, Mute ExpertSDR in Mute HDSDR:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Odstranim »{0}« iz »{1}«?
 Unexpected error, written to the log: {0}	Nepričakovana napaka, zapisana v dnevnik: {0}
 Memory "{0}" added to "{1}".	Pomnilnik »{0}« dodan v »{1}«.
 Memory "{0}": {1} kHz	Pomnilnik »{0}«: {1} kHz
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od začetka ({0} kHz): trenutna frekvenca je zunaj območja
+at memory {0}	od pomnilnika {0}
+from the start ({0}): current frequency not in the memories	od začetka ({0}): trenutne frekvence ni v pomnilnikih
 Scan stopped: {0}	Iskanje ustavljeno: {0}
 Scan: {0}	Iskanje: {0}
 Cannot record: {0}	Snemanje ni mogoče: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Povezano, čakanje na postajo...
 Rig online	Postaja povezana
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Postaja se ne odziva (preverite vrata, hitrost, naslov CI-V, meni CAT)
 Error: 	Napaka: 
-frequencies not set	frekvence niso nastavljene
 Profile:	Profil:
 Rename	Preimenuj
 Scan type:	Vrsta iskanja:

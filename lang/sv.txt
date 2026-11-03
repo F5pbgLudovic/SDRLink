@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI-port för ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverns port (ExpertSDR, Options > TCI):
 Add memory	Lägg till minne
+Resume the scan	Återuppta avsökningen
 Current "Scan setup" setting	Aktuell inställning i ”Avsökningsinställningar”
 No scan while transmitting	Ingen avsökning under sändning
 Scan: set the start and end frequencies in "Scan setup"	Avsökning: ange start- och slutfrekvens i ”Avsökningsinställningar”
 Scan: all frequencies are in skipped ranges ("Scan setup")	Avsökning: alla frekvenser ligger i överhoppade områden (”Avsökningsinställningar”)
 Scan: check memories in "Scan setup"	Avsökning: markera minnen i ”Avsökningsinställningar”
+frequencies not set	frekvenser inte inställda
+all frequencies are in skipped ranges	alla frekvenser ligger i överhoppade områden
+no memory checked	inga minnen markerade
 Scan stopped	Avsökning stoppad
 ■ Stop scan	■ Stoppa avsökning
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radions ljudkort, spelas in när Mute WebSDR, Mute ExpertSDR och Mute HDSDR är på:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Ta bort ”{0}” från ”{1}”?
 Unexpected error, written to the log: {0}	Oväntat fel, skrivet i loggen: {0}
 Memory "{0}" added to "{1}".	Minnet ”{0}” har lagts till i ”{1}”.
 Memory "{0}": {1} kHz	Minne ”{0}”: {1} kHz
+at {0} kHz	från {0} kHz
+from the start ({0} kHz): current frequency out of range	från början ({0} kHz): aktuell frekvens utanför området
+at memory {0}	från minne {0}
+from the start ({0}): current frequency not in the memories	från början ({0}): aktuell frekvens finns inte i minnena
 Scan stopped: {0}	Avsökning stoppad: {0}
 Scan: {0}	Avsökning: {0}
 Cannot record: {0}	Kan inte spela in: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Ansluten, väntar på riggen...
 Rig online	Riggen online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Riggen svarar inte (kontrollera port, baudhastighet, CI-V-adress, CAT-meny)
 Error: 	Fel: 
-frequencies not set	frekvenser inte inställda
 Profile:	Profil:
 Rename	Byt namn
 Scan type:	Typ av avsökning:

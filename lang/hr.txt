@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI priključak ExpertSDR-a
 TCI server port (ExpertSDR, Options > TCI):	Priključak TCI poslužitelja (ExpertSDR, Options > TCI):
 Add memory	Dodaj memoriju
+Resume the scan	Nastavi pretraživanje
 Current "Scan setup" setting	Trenutačna postavka u „Postavke pretraživanja”
 No scan while transmitting	Pretraživanje nije moguće tijekom odašiljanja
 Scan: set the start and end frequencies in "Scan setup"	Pretraživanje: unesite početnu i krajnju frekvenciju u „Postavke pretraživanja”
 Scan: all frequencies are in skipped ranges ("Scan setup")	Pretraživanje: sve frekvencije su u izostavljenim rasponima („Postavke pretraživanja”)
 Scan: check memories in "Scan setup"	Pretraživanje: označite memorije u „Postavke pretraživanja”
+frequencies not set	frekvencije nisu postavljene
+all frequencies are in skipped ranges	sve frekvencije su u izostavljenim rasponima
+no memory checked	nijedna memorija nije označena
 Scan stopped	Pretraživanje zaustavljeno
 ■ Stop scan	■ Zaustavi pretraživanje
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvučna kartica uređaja, snima se kad su uključeni Mute WebSDR, Mute ExpertSDR i Mute HDSDR:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Ukloniti „{0}” iz „{1}”?
 Unexpected error, written to the log: {0}	Neočekivana pogreška, zapisana u dnevnik: {0}
 Memory "{0}" added to "{1}".	Memorija „{0}” dodana u „{1}”.
 Memory "{0}": {1} kHz	Memorija „{0}”: {1} kHz
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od početka ({0} kHz): trenutna frekvencija je izvan raspona
+at memory {0}	od memorije {0}
+from the start ({0}): current frequency not in the memories	od početka ({0}): trenutna frekvencija nije u memorijama
 Scan stopped: {0}	Pretraživanje zaustavljeno: {0}
 Scan: {0}	Pretraživanje: {0}
 Cannot record: {0}	Snimanje nije moguće: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Spojeno, čekanje na uređaj...
 Rig online	Uređaj spojen
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Uređaj ne odgovara (provjerite priključak, brzinu, CI-V adresu, CAT izbornik)
 Error: 	Pogreška: 
-frequencies not set	frekvencije nisu postavljene
 Profile:	Profil:
 Rename	Preimenuj
 Scan type:	Vrsta pretraživanja:

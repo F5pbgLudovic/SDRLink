@@ -414,7 +414,7 @@ Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui boug
 - En affichages réduit et mini, la ligne PTT / fréquences / modes / cases reste **sur une seule ligne** : la fenêtre ne peut pas devenir plus étroite qu'elle (sauf écran trop petit), seule la hauteur se règle. La fenêtre est aussi gardée entière dans l'écran (bas visible, au-dessus de la barre des tâches) ; en plein écran, l'affichage réduit reste en plein écran (toute la page du WebSDR est visible) et le retour à l'affichage normal aussi ; le mini, lui, est toujours une petite fenêtre.
 - Une seule des deux cases à la fois. **Décocher** la case cochée revient toujours à l'affichage normal (les deux cases décochées), même si l'on était passé du réduit au mini ou du mini au réduit.
 - Chaque affichage retrouve la taille qu'il avait quand on l'a quitté (normal et réduit), y compris d'une fois sur l'autre : les tailles sont mémorisées à la fermeture, avec l'affichage en cours. Si la fenêtre était en plein écran en affichage normal, elle y revient.
-- **Affichage ptt** (sous « Avant plan ») : toute petite fenêtre qui ne montre que le **bouton PTT** et la case « Affichage ptt ». Le PTT y fonctionne normalement (clic, clic droit pour le délai de sécurité). **Décocher** la case revient à l'affichage d'avant **strictement identique** : même affichage (normal, réduit ou mini), même taille, même position, plein écran compris. Fermer SDRLink en affichage ptt enregistre l'affichage d'avant.
+- **Affichage ptt** (sous « Avant plan ») : toute petite fenêtre qui ne montre que le **bouton PTT**, la case « Affichage ptt » et, dessous, la case **Avant plan** (depuis la 1.21 : on peut mettre la petite fenêtre au premier plan sans revenir en grand ; c'est la même case que dans la grande fenêtre). Le PTT y fonctionne normalement (clic, clic droit pour le délai de sécurité). **Décocher** la case revient à l'affichage d'avant **strictement identique** : même affichage (normal, réduit ou mini), même taille, même position, plein écran compris. Fermer SDRLink en affichage ptt enregistre l'affichage d'avant.
 - **Avant plan** : SDRLink reste au-dessus des autres fenêtres (pratique avec l'affichage ptt).
 - **Taille du texte…** (1re ligne) : agrandit ou réduit le texte de la fenêtre principale, de 70 à 200 % (100 % = taille d'origine), avec le curseur ou les boutons − / +. Le changement se voit tout de suite ; **Annuler** revient à la taille d'avant, **100 %** à la taille d'origine. Les boutons et curseurs de taille fixe suivent. La taille est conservée au prochain lancement.
 
@@ -435,8 +435,11 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
   - **Renommer** : choisir le profil, changer son nom dans la case, puis Renommer. **Supprimer** : choisir le profil, puis Supprimer (après confirmation).
   - Les profils sont gardés même si l'on ferme Conf scan par Annuler.
 - **▶ Scan** : démarre le scan ; le bouton devient rouge « ■ Arrêter le scan ». La barre d'état indique la fréquence ou la mémoire en cours (sans remplir l'historique des messages).
-  - Sans profil, le scan démarre tout de suite avec le réglage de Conf scan.
-  - Avec des profils, un clic ouvre une liste : **Réglage actuel de « Conf scan »** (en gras), puis chaque profil avec son résumé (par ex. « 40 m CW — 7040 – 7200 kHz, 1 kHz, 5 s, zones non scannées : 1 »). Le profil choisi devient le réglage de Conf scan et le scan démarre.
+  - Un clic ouvre une liste (depuis la 1.21, même sans profil) : **Reprendre le scan**, **Réglage actuel de « Conf scan »** (en gras), puis chaque profil avec son résumé (par ex. « 40 m CW — 7040 – 7200 kHz, 1 kHz, 5 s, zones non scannées : 1 »). Le profil choisi devient le réglage de Conf scan et le scan démarre.
+  - **Reprendre le scan** (depuis la 1.21) : le scan du réglage de Conf scan repart de la **fréquence actuelle** au lieu du début. La liste indique d'où il repartira (par ex. « Reprendre le scan — à 7074 kHz »).
+    - Scan de fréquences : si la fréquence actuelle est entre le début et la fin, le scan repart d'elle, puis continue au pas réglé (de 7074,3 il passe à 7075 avec un pas de 1 kHz) ; si elle est dans une zone non scannée, il repart à la fin de la zone. **Hors de la plage**, il repart de la **première fréquence** du scan (« au début (7000 kHz) : fréquence actuelle hors de la plage »).
+    - Scan de mémoires : il repart de la mémoire cochée qui a la fréquence actuelle, sinon de la première mémoire.
+  - **Réglage actuel de « Conf scan »** : le scan repart toujours du début.
 - Le scan règle le poste et le WebSDR, comme une saisie de fréquence. Il s'arrête dès que le poste passe en **émission** (PTT de SDRLink ou du poste) ; il ne peut pas démarrer en émission.
 
 ## Enregistrement (REC)
@@ -505,8 +508,10 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
-- **1.20**
-  - **Son sans clic** à l'arrivée sur une page : « Click to start » d'UberSDR et voile « Tap to enable audio » de PhantomSDR passés automatiquement.
+- **1.21**
+  - Case **Avant plan** dans l'affichage ptt, sous « Affichage ptt » : la petite fenêtre peut être mise au premier plan sans revenir en grand ; sa taille ne change pas.
+  - **Reprendre le scan**, en haut de la liste du bouton ▶ Scan : le scan repart de la fréquence actuelle (ou de la mémoire sur cette fréquence) ; hors de la plage, il repart de la première fréquence. Le bouton ▶ Scan ouvre maintenant toujours la liste, même sans profil.
+- **1.20**  - **Son sans clic** à l'arrivée sur une page : « Click to start » d'UberSDR et voile « Tap to enable audio » de PhantomSDR passés automatiquement.
   - Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donné d'office aux KiwiSDR et websdr.org qui en demandent un avant le son, « SDRLink » par défaut, jamais vide, Alt+255 permis pour ne pas donner de nom ; fenêtre ouverte d'un clic.
   - **KiwiSDR complet** : entrée automatique dans la file d'attente (« Enter queue »).
   - **Squelch** ouvert sur les WebSDR qui en ont un, sauf en FM à partir de 30 MHz.

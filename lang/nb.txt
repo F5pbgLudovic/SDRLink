@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 Add memory	Legg til minne
+Resume the scan	Fortsett skanningen
 Current "Scan setup" setting	Gjeldende innstilling i «Skanneoppsett»
 No scan while transmitting	Ingen skanning under sending
 Scan: set the start and end frequencies in "Scan setup"	Skanning: angi start- og sluttfrekvens i «Skanneoppsett»
 Scan: all frequencies are in skipped ranges ("Scan setup")	Skanning: alle frekvenser ligger i områder som hoppes over («Skanneoppsett»)
 Scan: check memories in "Scan setup"	Skanning: kryss av minner i «Skanneoppsett»
+frequencies not set	frekvenser ikke angitt
+all frequencies are in skipped ranges	alle frekvenser ligger i områder som hoppes over
+no memory checked	ingen minner krysset av
 Scan stopped	Skanning stoppet
 ■ Stop scan	■ Stopp skanning
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radioens lydkort, tas opp når Mute WebSDR, Mute ExpertSDR og Mute HDSDR er på:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Fjerne «{0}» fra «{1}»?
 Unexpected error, written to the log: {0}	Uventet feil, skrevet i loggen: {0}
 Memory "{0}" added to "{1}".	Minnet «{0}» lagt til i «{1}».
 Memory "{0}": {1} kHz	Minne «{0}»: {1} kHz
+at {0} kHz	fra {0} kHz
+from the start ({0} kHz): current frequency out of range	fra starten ({0} kHz): gjeldende frekvens utenfor området
+at memory {0}	fra minne {0}
+from the start ({0}): current frequency not in the memories	fra starten ({0}): gjeldende frekvens finnes ikke i minnene
 Scan stopped: {0}	Skanning stoppet: {0}
 Scan: {0}	Skanning: {0}
 Cannot record: {0}	Kan ikke ta opp: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Tilkoblet, venter på riggen...
 Rig online	Riggen er tilkoblet
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Riggen svarer ikke (kontroller port, baudrate, CI-V-adresse, CAT-meny)
 Error: 	Feil: 
-frequencies not set	frekvenser ikke angitt
 Profile:	Profil:
 Rename	Gi nytt navn
 Scan type:	Skannetype:

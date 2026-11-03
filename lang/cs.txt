@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port serveru TCI (ExpertSDR, Options > TCI):
 Add memory	Přidat paměť
+Resume the scan	Pokračovat v prohledávání
 Current "Scan setup" setting	Aktuální nastavení v „Nastavení prohledávání“
 No scan while transmitting	Při vysílání nelze prohledávat
 Scan: set the start and end frequencies in "Scan setup"	Prohledávání: nastavte počáteční a koncový kmitočet v „Nastavení prohledávání“
 Scan: all frequencies are in skipped ranges ("Scan setup")	Prohledávání: všechny kmitočty jsou ve vynechaných úsecích („Nastavení prohledávání“)
 Scan: check memories in "Scan setup"	Prohledávání: zaškrtněte paměti v „Nastavení prohledávání“
+frequencies not set	kmitočty nenastaveny
+all frequencies are in skipped ranges	všechny kmitočty jsou ve vynechaných úsecích
+no memory checked	žádná zaškrtnutá paměť
 Scan stopped	Prohledávání zastaveno
 ■ Stop scan	■ Zastavit prohledávání
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvuková karta stanice, nahrávaná při zapnutém Mute WebSDR, Mute ExpertSDR a Mute HDSDR:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Odebrat „{0}“ z „{1}“?
 Unexpected error, written to the log: {0}	Neočekávaná chyba, zapsaná do protokolu: {0}
 Memory "{0}" added to "{1}".	Paměť „{0}“ přidána do „{1}“.
 Memory "{0}": {1} kHz	Paměť „{0}“: {1} kHz
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od začátku ({0} kHz): aktuální kmitočet je mimo rozsah
+at memory {0}	od paměti {0}
+from the start ({0}): current frequency not in the memories	od začátku ({0}): aktuální kmitočet není v pamětech
 Scan stopped: {0}	Prohledávání zastaveno: {0}
 Scan: {0}	Prohledávání: {0}
 Cannot record: {0}	Nelze nahrávat: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Připojeno, čekání na transceiver...
 Rig online	Transceiver online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Transceiver neodpovídá (zkontrolujte port, rychlost, adresu CI-V, menu CAT)
 Error: 	Chyba: 
-frequencies not set	kmitočty nenastaveny
 Profile:	Profil:
 Rename	Přejmenovat
 Scan type:	Druh prohledávání:

@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
 Add memory	Memória hozzáadása
+Resume the scan	Pásztázás folytatása
 Current "Scan setup" setting	A „Pásztázás beállítása” jelenlegi beállítása
 No scan while transmitting	Adás közben nincs pásztázás
 Scan: set the start and end frequencies in "Scan setup"	Pásztázás: adja meg a kezdő és záró frekvenciát a „Pásztázás beállítása” ablakban
 Scan: all frequencies are in skipped ranges ("Scan setup")	Pásztázás: minden frekvencia kihagyott tartományban van („Pásztázás beállítása”)
 Scan: check memories in "Scan setup"	Pásztázás: jelöljön be memóriákat a „Pásztázás beállítása” ablakban
+frequencies not set	frekvenciák nincsenek beállítva
+all frequencies are in skipped ranges	minden frekvencia kihagyott tartományban van
+no memory checked	nincs bejelölt memória
 Scan stopped	Pásztázás leállítva
 ■ Stop scan	■ Pásztázás leállítása
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	A rádió hangkártyája, felvétel ha a Mute WebSDR, a Mute ExpertSDR és a Mute HDSDR be van kapcsolva:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Eltávolítja a(z) „{0}” elemet a(z) „{1}” list
 Unexpected error, written to the log: {0}	Váratlan hiba, a naplóba írva: {0}
 Memory "{0}" added to "{1}".	A(z) „{0}” memória hozzáadva ide: „{1}”.
 Memory "{0}": {1} kHz	Memória: „{0}”: {1} kHz
+at {0} kHz	{0} kHz-től
+from the start ({0} kHz): current frequency out of range	az elejéről ({0} kHz): a jelenlegi frekvencia a tartományon kívül esik
+at memory {0}	a(z) {0} memóriától
+from the start ({0}): current frequency not in the memories	az elejéről ({0}): a jelenlegi frekvencia nincs a memóriák között
 Scan stopped: {0}	Pásztázás leállítva: {0}
 Scan: {0}	Pásztázás: {0}
 Cannot record: {0}	A felvétel nem lehetséges: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
 Rig online	Rádió online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	A rádió nem válaszol (ellenőrizze a portot, a sebességet, a CI-V címet, a CAT menüt)
 Error: 	Hiba: 
-frequencies not set	frekvenciák nincsenek beállítva
 Profile:	Profil:
 Rename	Átnevezés
 Scan type:	Pásztázás típusa:

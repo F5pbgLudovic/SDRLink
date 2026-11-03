@@ -156,11 +156,15 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port serwera TCI (ExpertSDR, Options > TCI):
 Add memory	Dodaj pamięć
+Resume the scan	Wznów skanowanie
 Current "Scan setup" setting	Bieżące ustawienie w „Ustawienia skanowania”
 No scan while transmitting	Skanowanie niemożliwe podczas nadawania
 Scan: set the start and end frequencies in "Scan setup"	Skanowanie: podaj częstotliwość początkową i końcową w „Ustawienia skanowania”
 Scan: all frequencies are in skipped ranges ("Scan setup")	Skanowanie: wszystkie częstotliwości leżą w pomijanych zakresach („Ustawienia skanowania”)
 Scan: check memories in "Scan setup"	Skanowanie: zaznacz pamięci w „Ustawienia skanowania”
+frequencies not set	częstotliwości nieustawione
+all frequencies are in skipped ranges	wszystkie częstotliwości leżą w pomijanych zakresach
+no memory checked	nie zaznaczono żadnej pamięci
 Scan stopped	Skanowanie zatrzymane
 ■ Stop scan	■ Zatrzymaj skanowanie
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Karta dźwiękowa radiostacji, nagrywana gdy Mute WebSDR, Mute ExpertSDR i Mute HDSDR są włączone:
@@ -232,6 +236,10 @@ Remove "{0}" from "{1}"?	Usunąć „{0}” z „{1}”?
 Unexpected error, written to the log: {0}	Nieoczekiwany błąd, zapisany w dzienniku: {0}
 Memory "{0}" added to "{1}".	Pamięć „{0}” dodana do „{1}”.
 Memory "{0}": {1} kHz	Pamięć „{0}”: {1} kHz
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od początku ({0} kHz): bieżąca częstotliwość poza zakresem
+at memory {0}	od pamięci {0}
+from the start ({0}): current frequency not in the memories	od początku ({0}): bieżącej częstotliwości nie ma w pamięciach
 Scan stopped: {0}	Skanowanie zatrzymane: {0}
 Scan: {0}	Skanowanie: {0}
 Cannot record: {0}	Nie można nagrywać: {0}
@@ -367,7 +375,6 @@ Connected, waiting for the rig...	Połączono, oczekiwanie na radiostację...
 Rig online	Radiostacja połączona
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radiostacja nie odpowiada (sprawdź port, prędkość, adres CI-V, menu CAT)
 Error: 	Błąd: 
-frequencies not set	częstotliwości nieustawione
 Profile:	Profil:
 Rename	Zmień nazwę
 Scan type:	Rodzaj skanowania:
