@@ -88,7 +88,8 @@ Import	Importeren
 Cannot open the log: 	Kan het logboek niet openen: 
 Export all settings…	Alle instellingen exporteren…
 Import settings…	Instellingen importeren…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Alle instellingen exporteren of importeren, voor dezelfde configuratie op een andere computer (rechtsklik: knopkleur)
+Reset the program…	Programma terugzetten…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Alle instellingen exporteren of importeren, voor dezelfde configuratie op een andere computer (rechtsklik: programma terugzetten, kleur van de knop)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Naam of roepnaam die automatisch wordt doorgegeven aan WebSDR's die erom vragen vóór het geluid (KiwiSDR, websdr.org). Klik: wijzigen (rechtsklik: knopkleur)
 Right-click: receivers muted while transmitting	Rechtsklik: ontvangers die tijdens zenden gedempt worden
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Exporteren van de instellingen mislukt:
 Import SDRLink settings	SDRLink-instellingen importeren
 Cannot import the settings: 	Importeren van de instellingen mislukt: 
 Import: this file does not contain SDRLink settings	Importeren: dit bestand bevat geen SDRLink-instellingen
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Volledig terugzetten: alle instellingen, favorieten, geheugens, scans en kleuren gaan verloren.
+The checked items will be set back as at first installation.	De aangevinkte onderdelen worden teruggezet zoals bij de eerste installatie.
+SDRLink will restart. Continue?	SDRLink wordt opnieuw gestart. Doorgaan?
+Reset the program	Programma terugzetten
+Cannot reset: 	Terugzetten niet mogelijk: 
 Button colour	Knopkleur
 RIG	TRX
 Disconnected	Niet verbonden
@@ -240,6 +246,7 @@ at {0} kHz	vanaf {0} kHz
 from the start ({0} kHz): current frequency out of range	vanaf het begin ({0} kHz): huidige frequentie buiten het bereik
 at memory {0}	vanaf geheugen {0}
 from the start ({0}): current frequency not in the memories	vanaf het begin ({0}): huidige frequentie staat niet in de geheugens
+click in the page, stopped on {0} kHz	klik in de pagina, gestopt op {0} kHz
 Scan stopped: {0}	Scannen gestopt: {0}
 Scan: {0}	Scannen: {0}
 Cannot record: {0}	Opnemen niet mogelijk: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3-encoder van Windows niet beschikbaar (0x{0:X8}): kies WAV of FLAC
 Recording length: {0}	Duur van de opname: {0}
 "{0}" already exists. Replace it?	"{0}" bestaat al. Vervangen?
+Full reset (all settings, memories and colours are lost)	Volledig terugzetten (alle instellingen, geheugens en kleuren gaan verloren)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink wordt weer zoals bij de eerste installatie: start-favorieten voor WebSDR, geen geheugens, geen scan, oorspronkelijke kleuren, browsergegevens gewist.
+Partial reset:	Gedeeltelijk terugzetten:
+Colours (buttons, REC, palette)	Kleuren (knoppen, REC, palet)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (favorieten en favorietenlijsten, terug naar de start)
+Configuration (rig, interface, sync, audio, display, language, name…)	Configuratie (transceiver, interface, synchronisatie, geluid, weergave, taal, naam…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Gegevens van de ingebouwde browser (cache, cookies, instellingen bewaard door de WebSDR-sites)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Het proberen waard als de WebSDR-pagina's niet meer verschijnen (leeg venster, alsof er geen internet is).
+Reset	Herstellen
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink wordt daarna opnieuw gestart. De huidige instellingen worden bewaard in {0} (Import/Export kan ze weer laden). Updates van SDRLink zetten nooit iets terug.
 Connecting...	Verbinden...
 Connected, waiting for the rig...	Verbonden, wachten op de transceiver...
 Rig online	TRX online
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Overgeslagen bereiken (van … tot … kHz
 Memories to scan:	Te scannen geheugens:
 Time on each memory:	Tijd op elk geheugen:
 (no memory: Memories button)	(geen geheugens: knop Geheugens)
-Reset	Herstellen
 Start scan	Scan starten
 from	van
 to	tot

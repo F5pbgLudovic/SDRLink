@@ -88,7 +88,8 @@ Import	Importar
 Cannot open the log: 	No se puede abrir el registro: 
 Export all settings…	Exportar todos los ajustes…
 Import settings…	Importar ajustes…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportar o importar todos los ajustes, para la misma configuración en otro ordenador (clic derecho: color del botón)
+Reset the program…	Restablecer el programa…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportar o importar todos los ajustes, para la misma configuración en otro ordenador (clic derecho: restablecer el programa, color del botón)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nombre o indicativo dado automáticamente a los WebSDR que lo piden antes del audio (KiwiSDR, websdr.org). Clic: cambiarlo (clic derecho: color del botón)
 Right-click: receivers muted while transmitting	Clic derecho: receptores silenciados al transmitir
 Save: no known frequency (rig or WebSDR)	Guardar: ninguna frecuencia conocida (equipo o WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	No se pueden exportar los ajustes:
 Import SDRLink settings	Importar ajustes de SDRLink
 Cannot import the settings: 	No se pueden importar los ajustes: 
 Import: this file does not contain SDRLink settings	Importar: este archivo no contiene ajustes de SDRLink
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Restablecimiento total: se perderán todos los ajustes, favoritos, memorias, exploraciones y colores.
+The checked items will be set back as at first installation.	Los elementos marcados volverán a estar como en la primera instalación.
+SDRLink will restart. Continue?	SDRLink se reiniciará. ¿Continuar?
+Reset the program	Restablecer el programa
+Cannot reset: 	No se puede restablecer: 
 Button colour	Color del botón
 RIG	EQUIPO
 Disconnected	Desconectado
@@ -240,6 +246,7 @@ at {0} kHz	desde {0} kHz
 from the start ({0} kHz): current frequency out of range	desde el principio ({0} kHz): frecuencia actual fuera del rango
 at memory {0}	desde la memoria {0}
 from the start ({0}): current frequency not in the memories	desde el principio ({0}): frecuencia actual no está en las memorias
+click in the page, stopped on {0} kHz	clic en la página, detenida en {0} kHz
 Scan stopped: {0}	Exploración detenida: {0}
 Scan: {0}	Exploración: {0}
 Cannot record: {0}	No se puede grabar: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	formato de audio no compatible ({0} 
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Codificador MP3 de Windows no disponible (0x{0:X8}): elija WAV o FLAC
 Recording length: {0}	Duración de la grabación: {0}
 "{0}" already exists. Replace it?	«{0}» ya existe. ¿Reemplazarlo?
+Full reset (all settings, memories and colours are lost)	Restablecimiento total (se pierden todos los ajustes, memorias y colores)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink vuelve a estar como en su primera instalación: favoritos WebSDR iniciales, ninguna memoria, ninguna exploración, colores originales, datos del navegador borrados.
+Partial reset:	Restablecimiento parcial:
+Colours (buttons, REC, palette)	Colores (botones, REC, paleta)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (favoritos y listas de favoritos, vueltos a los iniciales)
+Configuration (rig, interface, sync, audio, display, language, name…)	Configuración (equipo, interfaz, sincronización, sonido, vista, idioma, nombre…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Datos del navegador integrado (caché, cookies, ajustes guardados por los sitios WebSDR)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Pruébelo si las páginas de los WebSDR ya no se muestran (ventana vacía, como sin Internet).
+Reset	Restablecer
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink se reiniciará después. Los ajustes actuales se guardan en {0} (Importar/Exportar puede volver a cargarlos). Las actualizaciones de SDRLink nunca restablecen nada.
 Connecting...	Conectando...
 Connected, waiting for the rig...	Conectado, esperando al equipo...
 Rig online	Equipo en línea
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Rangos excluidos (de … a … kHz):
 Memories to scan:	Memorias a explorar:
 Time on each memory:	Tiempo en cada memoria:
 (no memory: Memories button)	(ninguna memoria: botón Memorias)
-Reset	Restablecer
 Start scan	Iniciar la exploración
 from	de
 to	a

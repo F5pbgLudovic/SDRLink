@@ -118,8 +118,20 @@ namespace SDRLink
         public static string PendingImportPath { get { return Path.Combine(Log.DataDir, "settings.import.ini"); } }
         public static string BeforeImportPath { get { return Path.Combine(Log.DataDir, "settings.avant-import.ini"); } }
 
+        // Données du navigateur intégré (WebView2 : cache, cookies, stockage des sites), hors des réglages.
+        public static string WebViewDataDir
+        {
+            get
+            {
+                return Environment.GetEnvironmentVariable("SDRLINK_DATA") != null
+                    ? Path.Combine(Log.DataDir, "WebView2")
+                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SDRLink", "WebView2");
+            }
+        }
+
         public static Settings Load()
         {
+            SettingsReset.ApplyPending();   // réinitialisation demandée avant le redémarrage
             if (File.Exists(PendingImportPath))
             {
                 try

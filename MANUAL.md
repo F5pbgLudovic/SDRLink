@@ -34,7 +34,8 @@ Overview; each feature is detailed further down in its own section.
 | Where | What the right-click offers |
 |---|---|
 | Connect | colour when connected / disconnected |
-| Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Import/Export, Pseudo/Call | button colour |
+| Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
+| Import/Export | **Reset the program…** (since 1.22), button colour |
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | colour when stopped / while scanning |
 | PTT | TX safety timeout, colour when receiving / transmitting |
@@ -55,6 +56,8 @@ Overview; each feature is detailed further down in its own section.
 
 - `%APPDATA%\SDRLink\settings.ini`: **all settings** (interface, favorites, memories, colours, window…). This is the file **Import/Export** copies.
 - `%APPDATA%\SDRLink\settings.avant-import.ini`: the settings from before the last import.
+- `%APPDATA%\SDRLink\settings.avant-reinitialisation.ini`: the settings from before the last reset (since 1.22).
+- `%APPDATA%\SDRLink\settings.reset.txt`: reset requested, done at the restart then deleted (it only exists for a few seconds).
 - `%APPDATA%\SDRLink\sdrlink.log`: the log (reset at each launch).
 - `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache; the name given to KiwiSDRs and websdr.org is there too); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll.
 - `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
@@ -442,6 +445,7 @@ On the "Sync" row, after "Auto notch (DNF)":
     - Memory scan: it restarts from the checked memory on the current frequency, otherwise from the first memory.
   - **Current "Scan setup" setting**: the scan always restarts from the start.
 - The scan sets the rig and the WebSDR, like entering a frequency. It stops as soon as the rig goes into **transmit** (SDRLink's PTT or the rig's); it cannot start while transmitting.
+- **Click in the page during a scan** (since 1.22): a click anywhere in the WebSDR page (waterfall, the page's buttons…) **stops the scan** on the current frequency (or memory). If the click moved the page's frequency (click in the waterfall), it is **put back at once** on the scanned frequency, and the rig does not move. The status bar shows "Scan stopped: click in the page, stopped on 7001 kHz". The next click tunes normally. SDRLink's buttons and controls (volumes…) do not stop the scan; the ■ Stop scan button stops it as before.
 
 ## Recording (REC)
 
@@ -496,6 +500,22 @@ On the "Sync" row, after "Auto notch (DNF)":
 - On another computer, check what depends on the machine: rig COM port, sound cards (SDRLINK cable, rig sound card for REC), rigctld path, recordings folder. A missing rig sound card is shown as "not connected" in the REC menu; if the window position falls outside the screens, it is ignored.
 - Browsing data of the WebSDR pages (cookies, cache) is not part of the settings and is not exported.
 
+## Resetting the program
+
+**Right-click Import/Export > Reset the program…** (since 1.22): to start again from scratch, fully or partly, for example if the WebSDR pages stay empty (white window, as without Internet) although Internet works.
+- **Full reset (all settings, memories and colours are lost)**: SDRLink becomes as at its first installation (starting WebSDR favorites, no memories, no scan, original colours, browser data deleted).
+- **Partial reset** (default choice), one box per part, one or several:
+  - **Frequency memories**;
+  - **Scan** (setting, skipped ranges and scan profiles);
+  - **Colours** (buttons, REC, palette);
+  - **WebSDR** (favorites and favorite lists, back to the starting ones);
+  - **Configuration** (rig, interface, sync, audio, display, language, name…: everything else);
+  - **Built-in browser data** (cache, cookies, settings kept by the WebSDR sites): **try this first if the WebSDR pages no longer show**. SDRLink's settings are not touched.
+- **Reset** stays greyed out until something is chosen; **Cancel** is the default button. A confirmation is asked ("No" by default), then SDRLink **restarts** and does the reset at startup.
+- The previous settings are kept in `%APPDATA%\SDRLink\settings.avant-reinitialisation.ini`: to go back, **Import/Export > Import settings…** and choose that file. Deleted browser data does not come back (the sites simply ask for their choices again).
+- If the browser data cannot be deleted (files still open), SDRLink tries again at the next startup; the log says so.
+- **SDRLink updates never reset anything**: the settings are in `%APPDATA%\SDRLink`, not next to SDRLink.exe; replacing the exe keeps them all.
+
 ## Updates
 
 **Check for updates** box (1st row, ticked by default): at startup, if the Internet answers, SDRLink looks up the latest version published on GitHub. If there is a newer one, a window opens (since 1.18): it shows the version in use and the latest published version, with the direct link to that version's page (download and what's new) and the link to the list of all versions (https://github.com/F5pbgLudovic/SDRLink/releases, where the latest one is marked "Latest"). The **Open the update page** button opens that page in the browser; **Later** closes the window. An orange link "⚠ Update Vx.y available" also stays at the bottom right of the window, in the status bar (also visible in reduced and mini views): one click opens the same page. Ticking the box runs the check immediately and opens the window in every case: new version, "you are using the latest version" or GitHub unreachable. To stop these notices, untick the box.
@@ -510,10 +530,14 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.22**
+  - **Reset the program** (right-click Import/Export): full reset, as a first installation, or partial reset of your choice (memories, scan, colours, WebSDR, configuration, built-in browser data). Previous settings kept in settings.avant-reinitialisation.ini. Useful if the WebSDR pages stay empty. Updates reset nothing.
+  - **Click in the page during a scan**: the scan stops on the scanned frequency; if the click moved the waterfall, the frequency is put back at once (the rig does not move). The next click tunes normally.
 - **1.21**
   - **Always on top** box in PTT view, below "PTT view": the small window can be put on top without going back to the large one; its size does not change.
   - **Resume the scan**, at the top of the ▶ Scan button's list: the scan restarts from the current frequency (or from the memory on that frequency); out of range, it restarts from the first frequency. The ▶ Scan button now always opens the list, even without profiles.
-- **1.20**  - **Audio without a click** when arriving on a page: UberSDR's "Click to start" and PhantomSDR's "Tap to enable audio" veil are passed automatically.
+- **1.20**
+  - **Audio without a click** when arriving on a page: UberSDR's "Click to start" and PhantomSDR's "Tap to enable audio" veil are passed automatically.
   - **Pseudo/Call** button (1st row, after Import/Export): name or callsign given automatically to KiwiSDRs and websdr.org receivers that ask for one before the audio, "SDRLink" by default, never empty, Alt+255 allowed to give no name; window opened with a click.
   - **Full KiwiSDR**: automatic entry into the waiting queue ("Enter queue").
   - **Squelch** opened on WebSDRs that have one, except in FM from 30 MHz up.

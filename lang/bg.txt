@@ -88,7 +88,8 @@ Import	Импортиране
 Cannot open the log: 	Дневникът не може да се отвори: 
 Export all settings…	Експортиране на всички настройки…
 Import settings…	Импортиране на настройки…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Експортиране или импортиране на всички настройки за същата конфигурация на друг компютър (десен бутон: цвят на бутона)
+Reset the program…	Нулиране на програмата…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Експорт или импорт на всички настройки за същата конфигурация на друг компютър (десен клик: нулиране на програмата, цвят на бутона)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Име или позивна, давани автоматично на WebSDR, които ги искат преди звука (KiwiSDR, websdr.org). Клик: промяна (десен клик: цвят на бутона)
 Right-click: receivers muted while transmitting	Десен клик: приемници без звук при предаване
 Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Настройките не могат да бъд�
 Import SDRLink settings	Импортиране на настройки на SDRLink
 Cannot import the settings: 	Настройките не могат да бъдат импортирани: 
 Import: this file does not contain SDRLink settings	Импортиране: този файл не съдържа настройки на SDRLink
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Пълно нулиране: всички настройки, любими, памети, сканирания и цветове ще бъдат загубени.
+The checked items will be set back as at first installation.	Отметнатите елементи ще бъдат върнати както при първата инсталация.
+SDRLink will restart. Continue?	SDRLink ще се рестартира. Продължаване?
+Reset the program	Нулиране на програмата
+Cannot reset: 	Нулирането е невъзможно: 
 Button colour	Цвят на бутона
 RIG	РАДИО
 Disconnected	Няма връзка
@@ -240,6 +246,7 @@ at {0} kHz	от {0} kHz
 from the start ({0} kHz): current frequency out of range	от началото ({0} kHz): текущата честота е извън обхвата
 at memory {0}	от паметта {0}
 from the start ({0}): current frequency not in the memories	от началото ({0}): текущата честота не е в паметите
+click in the page, stopped on {0} kHz	клик в страницата, спряно на {0} kHz
 Scan stopped: {0}	Сканирането е спряно: {0}
 Scan: {0}	Сканиране: {0}
 Cannot record: {0}	Записът е невъзможен: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоф�
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3 кодерът на Windows не е наличен (0x{0:X8}): изберете WAV или FLAC
 Recording length: {0}	Продължителност на записа: {0}
 "{0}" already exists. Replace it?	„{0}“ вече съществува. Да се замени ли?
+Full reset (all settings, memories and colours are lost)	Пълно нулиране (губят се всички настройки, памети и цветове)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink става както при първата си инсталация: начални любими WebSDR, без памети, без сканиране, първоначални цветове, изтрити данни на браузъра.
+Partial reset:	Частично нулиране:
+Colours (buttons, REC, palette)	Цветове (бутони, REC, палитра)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (любими и списъци с любими, върнати към началните)
+Configuration (rig, interface, sync, audio, display, language, name…)	Конфигурация (радиостанция, интерфейс, синхронизация, звук, изглед, език, име…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Данни на вградения браузър (кеш, бисквитки, настройки, пазени от сайтовете WebSDR)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Опитайте, ако страниците на WebSDR вече не се показват (празен прозорец, сякаш няма интернет).
+Reset	Нулиране
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	След това SDRLink ще се рестартира. Текущите настройки се пазят в {0} (Импорт/Експорт може да ги зареди отново). Обновяванията на SDRLink никога не нулират нищо.
 Connecting...	Свързване...
 Connected, waiting for the rig...	Свързан, изчакване на трансивъра...
 Rig online	Трансивърът е на линия
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Пропуснати обхвати (от 
 Memories to scan:	Памети за сканиране:
 Time on each memory:	Време на всяка памет:
 (no memory: Memories button)	(няма памети: бутон Памети)
-Reset	Нулиране
 Start scan	Старт на сканирането
 from	от
 to	до

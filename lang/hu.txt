@@ -88,7 +88,8 @@ Import	Importálás
 Cannot open the log: 	A napló nem nyitható meg: 
 Export all settings…	Összes beállítás exportálása…
 Import settings…	Beállítások importálása…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: gomb színe)
+Reset the program…	A program alaphelyzetbe állítása…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: a program alaphelyzetbe állítása, gomb színe)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Név vagy hívójel, amelyet a hang előtt ezt kérő WebSDR-ek (KiwiSDR, websdr.org) automatikusan megkapnak. Kattintás: módosítás (jobb klikk: gomb színe)
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	A beállítások nem exportálhatók:
 Import SDRLink settings	SDRLink-beállítások importálása
 Cannot import the settings: 	A beállítások nem importálhatók: 
 Import: this file does not contain SDRLink settings	Importálás: ez a fájl nem tartalmaz SDRLink-beállításokat
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Teljes alaphelyzetbe állítás: minden beállítás, kedvenc, memória, pásztázás és szín elvész.
+The checked items will be set back as at first installation.	A bejelölt elemek az első telepítéskori állapotba kerülnek vissza.
+SDRLink will restart. Continue?	Az SDRLink újraindul. Folytatja?
+Reset the program	A program alaphelyzetbe állítása
+Cannot reset: 	Az alaphelyzetbe állítás nem lehetséges: 
 Button colour	Gomb színe
 RIG	RÁDIÓ
 Disconnected	Nincs kapcsolat
@@ -240,6 +246,7 @@ at {0} kHz	{0} kHz-től
 from the start ({0} kHz): current frequency out of range	az elejéről ({0} kHz): a jelenlegi frekvencia a tartományon kívül esik
 at memory {0}	a(z) {0} memóriától
 from the start ({0}): current frequency not in the memories	az elejéről ({0}): a jelenlegi frekvencia nincs a memóriák között
+click in the page, stopped on {0} kHz	kattintás az oldalon, megállítva: {0} kHz
 Scan stopped: {0}	Pásztázás leállítva: {0}
 Scan: {0}	Pásztázás: {0}
 Cannot record: {0}	A felvétel nem lehetséges: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} b
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	A Windows MP3-kódolója nem érhető el (0x{0:X8}): válassza a WAV-ot vagy a FLAC-ot
 Recording length: {0}	Felvétel hossza: {0}
 "{0}" already exists. Replace it?	„{0}” már létezik. Lecseréli?
+Full reset (all settings, memories and colours are lost)	Teljes alaphelyzetbe állítás (minden beállítás, memória és szín elvész)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	Az SDRLink olyan lesz, mint az első telepítéskor: kezdeti WebSDR-kedvencek, nincs memória, nincs pásztázás, eredeti színek, a böngésző adatai törölve.
+Partial reset:	Részleges alaphelyzetbe állítás:
+Colours (buttons, REC, palette)	Színek (gombok, REC, paletta)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (kedvencek és kedvenclisták, a kezdetiekre visszaállítva)
+Configuration (rig, interface, sync, audio, display, language, name…)	Konfiguráció (rádió, interfész, szinkron, hang, megjelenítés, nyelv, név…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	A beépített böngésző adatai (gyorsítótár, sütik, a WebSDR-oldalak által tárolt beállítások)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Érdemes kipróbálni, ha a WebSDR-oldalak már nem jelennek meg (üres ablak, mintha nem lenne internet).
+Reset	Alaphelyzet
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Az SDRLink ezután újraindul. A jelenlegi beállítások a(z) {0} fájlban maradnak meg (az Import/Export vissza tudja tölteni őket). Az SDRLink frissítései soha semmit nem állítanak alaphelyzetbe.
 Connecting...	Csatlakozás...
 Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
 Rig online	Rádió online
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Kihagyott tartományok (… és … kHz k�
 Memories to scan:	Pásztázandó memóriák:
 Time on each memory:	Idő minden memórián:
 (no memory: Memories button)	(nincs memória: Memóriák gomb)
-Reset	Alaphelyzet
 Start scan	Pásztázás indítása
 from	ettől
 to	eddig

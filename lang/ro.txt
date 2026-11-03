@@ -88,7 +88,8 @@ Import	Importă
 Cannot open the log: 	Nu se poate deschide jurnalul: 
 Export all settings…	Exportă toate setările…
 Import settings…	Importă setări…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportă sau importă toate setările, pentru aceeași configurație pe alt calculator (clic dreapta: culoarea butonului)
+Reset the program…	Resetare program…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportați sau importați toate setările, pentru aceeași configurație pe alt calculator (clic dreapta: resetare program, culoarea butonului)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nume sau indicativ dat automat receptoarelor WebSDR care îl cer înainte de sunet (KiwiSDR, websdr.org). Clic: schimbare (clic dreapta: culoarea butonului)
 Right-click: receivers muted while transmitting	Clic dreapta: receptoare puse pe mut în emisie
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Setările nu pot fi exportate:
 Import SDRLink settings	Importă setări SDRLink
 Cannot import the settings: 	Setările nu pot fi importate: 
 Import: this file does not contain SDRLink settings	Import: acest fișier nu conține setări SDRLink
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Resetare totală: toate setările, favoritele, memoriile, scanările și culorile vor fi pierdute.
+The checked items will be set back as at first installation.	Elementele bifate vor reveni ca la prima instalare.
+SDRLink will restart. Continue?	SDRLink va reporni. Continuați?
+Reset the program	Resetare program
+Cannot reset: 	Resetare imposibilă: 
 Button colour	Culoarea butonului
 RIG	STAȚIE
 Disconnected	Deconectat
@@ -240,6 +246,7 @@ at {0} kHz	de la {0} kHz
 from the start ({0} kHz): current frequency out of range	de la început ({0} kHz): frecvența curentă este în afara intervalului
 at memory {0}	de la memoria {0}
 from the start ({0}): current frequency not in the memories	de la început ({0}): frecvența curentă nu este în memorii
+click in the page, stopped on {0} kHz	clic în pagină, oprit pe {0} kHz
 Scan stopped: {0}	Scanare oprită: {0}
 Scan: {0}	Scanare: {0}
 Cannot record: {0}	Înregistrare imposibilă: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, 
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Codorul MP3 din Windows nu este disponibil (0x{0:X8}): alegeți WAV sau FLAC
 Recording length: {0}	Durata înregistrării: {0}
 "{0}" already exists. Replace it?	„{0}” există deja. Îl înlocuiți?
+Full reset (all settings, memories and colours are lost)	Resetare totală (se pierd toate setările, memoriile și culorile)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink redevine ca la prima instalare: favorite WebSDR inițiale, nicio memorie, nicio scanare, culori originale, datele browserului șterse.
+Partial reset:	Resetare parțială:
+Colours (buttons, REC, palette)	Culori (butoane, REC, paletă)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (favorite și liste de favorite, readuse la cele inițiale)
+Configuration (rig, interface, sync, audio, display, language, name…)	Configurație (stație, interfață, sincronizare, sunet, afișare, limbă, nume…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Datele browserului integrat (cache, cookie-uri, setări păstrate de site-urile WebSDR)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Merită încercat dacă paginile WebSDR nu se mai afișează (fereastră goală, ca fără internet).
+Reset	Resetare
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink va reporni apoi. Setările actuale sunt păstrate în {0} (Import/Export le poate reîncărca). Actualizările SDRLink nu resetează niciodată nimic.
 Connecting...	Conectare...
 Connected, waiting for the rig...	Conectat, se așteaptă stația...
 Rig online	Stație online
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Intervale omise (de la … la … kHz):
 Memories to scan:	Memorii de scanat:
 Time on each memory:	Timp pe fiecare memorie:
 (no memory: Memories button)	(nicio memorie: butonul Memorii)
-Reset	Resetare
 Start scan	Pornește scanarea
 from	de la
 to	la

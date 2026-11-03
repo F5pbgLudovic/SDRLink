@@ -88,7 +88,8 @@ Import	Tuo
 Cannot open the log: 	Lokia ei voi avata: 
 Export all settings…	Vie kaikki asetukset…
 Import settings…	Tuo asetukset…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Vie tai tuo kaikki asetukset samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea: painikkeen väri)
+Reset the program…	Palauta ohjelman alkutila…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Vie tai tuo kaikki asetukset, samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea painike: palauta ohjelman alkutila, painikkeen väri)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi tai kutsu, joka annetaan automaattisesti WebSDR-vastaanottimille, jotka kysyvät sitä ennen ääntä (KiwiSDR, websdr.org). Napsautus: vaihda (hiiren oikea: painikkeen väri)
 Right-click: receivers muted while transmitting	Hiiren oikea painike: lähetyksen ajaksi mykistettävät vastaanottimet
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Asetuksia ei voi viedä:
 Import SDRLink settings	Tuo SDRLink-asetukset
 Cannot import the settings: 	Asetuksia ei voi tuoda: 
 Import: this file does not contain SDRLink settings	Tuonti: tiedosto ei sisällä SDRLink-asetuksia
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Täydellinen palautus: kaikki asetukset, suosikit, muistit, pyyhkäisyt ja värit menetetään.
+The checked items will be set back as at first installation.	Valitut kohteet palautetaan ensiasennuksen mukaisiksi.
+SDRLink will restart. Continue?	SDRLink käynnistyy uudelleen. Jatketaanko?
+Reset the program	Palauta ohjelman alkutila
+Cannot reset: 	Palautus ei onnistu: 
 Button colour	Painikkeen väri
 RIG	RADIO
 Disconnected	Ei yhteyttä
@@ -240,6 +246,7 @@ at {0} kHz	taajuudelta {0} kHz
 from the start ({0} kHz): current frequency out of range	alusta ({0} kHz): nykyinen taajuus alueen ulkopuolella
 at memory {0}	muistista {0}
 from the start ({0}): current frequency not in the memories	alusta ({0}): nykyinen taajuus ei ole muisteissa
+click in the page, stopped on {0} kHz	napsautus sivulla, pysäytetty taajuudelle {0} kHz
 Scan stopped: {0}	Pyyhkäisy pysäytetty: {0}
 Scan: {0}	Pyyhkäisy: {0}
 Cannot record: {0}	Tallennus ei onnistu: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, 
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windowsin MP3-kooderi ei ole käytettävissä (0x{0:X8}): valitse WAV tai FLAC
 Recording length: {0}	Tallenteen pituus: {0}
 "{0}" already exists. Replace it?	”{0}” on jo olemassa. Korvataanko?
+Full reset (all settings, memories and colours are lost)	Täydellinen palautus (kaikki asetukset, muistit ja värit menetetään)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink palaa ensiasennuksen tilaan: alkuperäiset WebSDR-suosikit, ei muisteja, ei pyyhkäisyä, alkuperäiset värit, selaimen tiedot poistettu.
+Partial reset:	Osittainen palautus:
+Colours (buttons, REC, palette)	Värit (painikkeet, REC, paletti)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (suosikit ja suosikkiluettelot, palautettu alkuperäisiksi)
+Configuration (rig, interface, sync, audio, display, language, name…)	Kokoonpano (radio, liitäntä, synkronointi, ääni, näkymä, kieli, nimi…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Sisäänrakennetun selaimen tiedot (välimuisti, evästeet, WebSDR-sivustojen tallentamat asetukset)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Kokeile, jos WebSDR-sivut eivät enää näy (tyhjä ikkuna, kuin ilman internetiä).
+Reset	Palauta
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink käynnistyy sen jälkeen uudelleen. Nykyiset asetukset säilytetään tiedostossa {0} (Tuonti/vienti voi ladata ne takaisin). SDRLinkin päivitykset eivät koskaan palauta mitään.
 Connecting...	Yhdistetään...
 Connected, waiting for the rig...	Yhdistetty, odotetaan radiota...
 Rig online	Radio yhteydessä
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Ohitettavat alueet (… – … kHz):
 Memories to scan:	Pyyhkäistävät muistit:
 Time on each memory:	Aika kussakin muistissa:
 (no memory: Memories button)	(ei muisteja: Muistit-painike)
-Reset	Palauta
 Start scan	Aloita pyyhkäisy
 from	alkaen
 to	asti

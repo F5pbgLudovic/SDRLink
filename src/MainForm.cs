@@ -290,7 +290,14 @@ namespace SDRLink
             ieExport.Click += delegate { ExportSettings(); };
             ieImport.Click += delegate { ImportSettings(); };
             btnImpExp.Click += delegate { ieMenu.Show(btnImpExp, new Point(0, btnImpExp.Height)); };
-            Tr(delegate { tips.SetToolTip(btnImpExp, Lang.T("Exporter ou importer tous les réglages, pour la même configuration sur un autre ordinateur (clic droit : couleur du bouton)", "Export or import all settings, for the same configuration on another computer (right-click: button colour)")); });
+            // Clic droit : réinitialiser le programme, puis la couleur du bouton (ajoutée par Colorable).
+            ContextMenuStrip ieRight = new ContextMenuStrip();
+            ToolStripMenuItem ieReset = new ToolStripMenuItem();
+            ieRight.Items.Add(ieReset);
+            ieRight.Opening += delegate { ieReset.Text = Lang.T("Réinitialiser le programme…", "Reset the program…"); };
+            ieReset.Click += delegate { AskReset(); };
+            btnImpExp.ContextMenuStrip = ieRight;
+            Tr(delegate { tips.SetToolTip(btnImpExp, Lang.T("Exporter ou importer tous les réglages, pour la même configuration sur un autre ordinateur (clic droit : réinitialiser le programme, couleur du bouton)", "Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)")); });
             row1.Controls.Add(Colorable("ImportExport", btnImpExp));
             // Pseudo/Call : nom donné d'office aux WebSDR qui en demandent un avant le son (KiwiSDR, websdr.org) ;
             // le bouton le montre, un clic ouvre la fenêtre pour le changer.
@@ -912,6 +919,43 @@ namespace SDRLink
                 return false;
             }
             Log.Write("Import des réglages : " + path + " (" + string.Join(", ", report.ToArray()) + ", pris en compte au redémarrage)");
+            restartApp();
+            return true;
+        }
+
+        // Réinitialisation (clic droit sur Import/Export) : choisie dans la fenêtre, confirmée, puis faite au redémarrage
+        // (SettingsReset.ApplyPending), réglages du moment enregistrés d'abord pour qu'ils soient gardés en copie.
+        void AskReset()
+        {
+            bool[] reset;
+            using (ResetDialog d = new ResetDialog())
+            {
+                if (d.ShowDialog(this) != DialogResult.OK) return;
+                reset = d.Reset;
+            }
+            string what = SettingsReset.All(reset)
+                ? Lang.T("Réinitialisation totale : tous les réglages, favoris, mémoires, scans et couleurs seront perdus.", "Full reset: all settings, favorites, memories, scans and colours will be lost.")
+                : Lang.T("Les éléments cochés seront remis comme à la première installation.", "The checked items will be set back as at first installation.");
+            if (MessageBox.Show(this, what + "\n\n" + Lang.T("SDRLink va redémarrer. Continuer ?", "SDRLink will restart. Continue?"),
+                    Lang.T("Réinitialiser le programme", "Reset the program"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+            ResetFor(reset);
+        }
+
+        bool ResetFor(bool[] reset)
+        {
+            try
+            {
+                SaveUiToSettings();
+                SaveWindowBounds();
+                settings.Save();
+                SettingsReset.Request(reset);
+            }
+            catch (Exception ex)
+            {
+                ShowStatus(Lang.T("Réinitialisation impossible : ", "Cannot reset: ") + ex.Message);
+                return false;
+            }
+            Log.Write("Réinitialisation demandée (faite au redémarrage)");
             restartApp();
             return true;
         }
@@ -2258,6 +2302,17 @@ namespace SDRLink
             lastSdrF = f;
             lastSdrFam = fam;
 
+            // Juste après un clic qui a arrêté le scan : la fréquence où ce clic a mis la cascade est remise sur la
+            // fréquence scannée (poste et WebSDR), rien d'autre n'est suivi.
+            if (!first && DateTime.UtcNow < scanHoldUntil)
+            {
+                if (Math.Abs(f - (scanHoldHz + Offset)) > Tolerance)
+                {
+                    Log.Write("Scan arrêté par un clic : page remise de " + FormatFreq(f) + " sur " + FormatFreq(scanHoldHz + Offset));
+                    TuneBoth(scanHoldHz);
+                }
+                return;
+            }
             if (first)
             {
                 // Page qui vient de se charger : le poste impose sa fréquence s'il est connecté. Au démarrage de
@@ -2442,9 +2497,7 @@ namespace SDRLink
         {
             try
             {
-                string dataDir = Environment.GetEnvironmentVariable("SDRLINK_DATA") != null
-                    ? Path.Combine(Log.DataDir, "WebView2")
-                    : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SDRLink", "WebView2");
+                string dataDir = Settings.WebViewDataDir;
                 CoreWebView2EnvironmentOptions opts = new CoreWebView2EnvironmentOptions("--autoplay-policy=no-user-gesture-required");
                 CoreWebView2Environment env = await CoreWebView2Environment.CreateAsync(null, dataDir, opts);
                 await web.EnsureCoreWebView2Async(env);
@@ -2555,6 +2608,7 @@ namespace SDRLink
             string msg;
             try { msg = e.TryGetWebMessageAsString(); } catch { return; }
             if (msg != null && msg.StartsWith("pcm|")) { OnPcm(msg); return; }
+            if (msg == "click") { OnPageClick(); return; }
             string[] p = (msg ?? "").Split('|');
             long f;
             if (p.Length < 3 || !long.TryParse(p[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out f)) return;
@@ -3593,6 +3647,24 @@ namespace SDRLink
             int i = mems.FindIndex(m => m.Hz == cur);
             if (i >= 0) return Lang.F("à la mémoire {0}", "at memory {0}", mems[i].Label);
             return Lang.F("au début ({0}) : fréquence actuelle hors des mémoires", "from the start ({0}): current frequency not in the memories", mems[0].Label);
+        }
+
+        // Clic dans la page du WebSDR pendant un scan : le scan s'arrête et reste sur la fréquence scannée à ce
+        // moment-là ; pendant ScanHoldMs, le changement de fréquence que le clic fait dans la cascade est annulé
+        // (OnSdrState). Le clic suivant, même dans ces 2 s, règle la fréquence normalement.
+        const int ScanHoldMs = 2000;
+        long scanHoldHz;
+        DateTime scanHoldUntil;
+
+        void OnPageClick()
+        {
+            if (!scanning) { scanHoldUntil = DateTime.MinValue; return; }   // clic suivant : réglage normal
+            long hz = settings.ScanType == 0 ? scanHz : scanMems[scanIndex].Hz;
+            StopScan(Lang.F("clic dans la page, arrêt sur {0} kHz", "click in the page, stopped on {0} kHz", Memory.KHz(hz)));
+            scanHoldHz = hz;
+            scanHoldUntil = DateTime.UtcNow.AddMilliseconds(ScanHoldMs);
+            // Le changement a pu arriver avant ce message : on revient tout de suite sur la fréquence scannée.
+            if (Math.Abs(CurrentFreq() - hz) > Tolerance) TuneBoth(hz);
         }
 
         void StopScan(string reason)

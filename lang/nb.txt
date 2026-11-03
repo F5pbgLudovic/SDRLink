@@ -88,7 +88,8 @@ Import	Importer
 Cannot open the log: 	Kan ikke åpne loggen: 
 Export all settings…	Eksporter alle innstillinger…
 Import settings…	Importer innstillinger…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksporter eller importer alle innstillinger, for samme konfigurasjon på en annen datamaskin (høyreklikk: knappefarge)
+Reset the program…	Tilbakestill programmet…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksporter eller importer alle innstillinger, for samme oppsett på en annen datamaskin (høyreklikk: tilbakestill programmet, knappens farge)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Navn eller kallesignal som automatisk gis til WebSDR-er som ber om det før lyden (KiwiSDR, websdr.org). Klikk: endre det (høyreklikk: knappens farge)
 Right-click: receivers muted while transmitting	Høyreklikk: mottakere som dempes under sending
 Save: no known frequency (rig or WebSDR)	Save: ingen kjent frekvens (rigg eller WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Kan ikke eksportere innstillingene:
 Import SDRLink settings	Importer SDRLink-innstillinger
 Cannot import the settings: 	Kan ikke importere innstillingene: 
 Import: this file does not contain SDRLink settings	Import: denne filen inneholder ingen SDRLink-innstillinger
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Full tilbakestilling: alle innstillinger, favoritter, minner, skanninger og farger går tapt.
+The checked items will be set back as at first installation.	De avkryssede elementene settes tilbake som ved første installasjon.
+SDRLink will restart. Continue?	SDRLink starter på nytt. Fortsette?
+Reset the program	Tilbakestill programmet
+Cannot reset: 	Tilbakestilling ikke mulig: 
 Button colour	Knappefarge
 RIG	RIGG
 Disconnected	Frakoblet
@@ -240,6 +246,7 @@ at {0} kHz	fra {0} kHz
 from the start ({0} kHz): current frequency out of range	fra starten ({0} kHz): gjeldende frekvens utenfor området
 at memory {0}	fra minne {0}
 from the start ({0}): current frequency not in the memories	fra starten ({0}): gjeldende frekvens finnes ikke i minnene
+click in the page, stopped on {0} kHz	klikk på siden, stoppet på {0} kHz
 Scan stopped: {0}	Skanning stoppet: {0}
 Scan: {0}	Skanning: {0}
 Cannot record: {0}	Kan ikke ta opp: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	lydformatet støttes ikke ({0} bit, 
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3-koderen i Windows er ikke tilgjengelig (0x{0:X8}): velg WAV eller FLAC
 Recording length: {0}	Opptakets lengde: {0}
 "{0}" already exists. Replace it?	«{0}» finnes allerede. Erstatte den?
+Full reset (all settings, memories and colours are lost)	Full tilbakestilling (alle innstillinger, minner og farger går tapt)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink blir som ved første installasjon: start-favoritter for WebSDR, ingen minner, ingen skanning, opprinnelige farger, nettleserdata slettet.
+Partial reset:	Delvis tilbakestilling:
+Colours (buttons, REC, palette)	Farger (knapper, REC, palett)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (favoritter og favorittlister, tilbake til start)
+Configuration (rig, interface, sync, audio, display, language, name…)	Oppsett (radio, grensesnitt, synkronisering, lyd, visning, språk, navn…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Data i den innebygde nettleseren (hurtigbuffer, informasjonskapsler, innstillinger lagret av WebSDR-sidene)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Verdt å prøve hvis WebSDR-sidene ikke lenger vises (tomt vindu, som uten Internett).
+Reset	Tilbakestill
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink starter deretter på nytt. De nåværende innstillingene lagres i {0} (Import/eksport kan laste dem inn igjen). Oppdateringer av SDRLink tilbakestiller aldri noe.
 Connecting...	Kobler til...
 Connected, waiting for the rig...	Tilkoblet, venter på riggen...
 Rig online	Riggen er tilkoblet
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Områder som hoppes over (fra … til … 
 Memories to scan:	Minner som skal skannes:
 Time on each memory:	Tid på hvert minne:
 (no memory: Memories button)	(ingen minner: knappen Minner)
-Reset	Tilbakestill
 Start scan	Start skanning
 from	fra
 to	til

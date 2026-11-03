@@ -88,7 +88,8 @@ Import	Importēt
 Cannot open the log: 	Nevar atvērt žurnālu: 
 Export all settings…	Eksportēt visus iestatījumus…
 Import settings…	Importēt iestatījumus…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportēt vai importēt visus iestatījumus, lai citā datorā būtu tāda pati konfigurācija (labais klikšķis: pogas krāsa)
+Reset the program…	Atiestatīt programmu…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportēt vai importēt visus iestatījumus tai pašai konfigurācijai citā datorā (labais klikšķis: atiestatīt programmu, pogas krāsa)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Vārds vai izsaukuma signāls, ko automātiski nodod WebSDR, kas to prasa pirms skaņas (KiwiSDR, websdr.org). Klikšķis: mainīt (labais klikšķis: pogas krāsa)
 Right-click: receivers muted while transmitting	Labais klikšķis: uztvērēji, kas raidīšanas laikā tiek klusināti
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Iestatījumus nevar eksportēt:
 Import SDRLink settings	Importēt SDRLink iestatījumus
 Cannot import the settings: 	Iestatījumus nevar importēt: 
 Import: this file does not contain SDRLink settings	Imports: šajā failā nav SDRLink iestatījumu
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Pilna atiestatīšana: visi iestatījumi, izlase, atmiņas, skenēšanas un krāsas tiks zaudētas.
+The checked items will be set back as at first installation.	Atzīmētie elementi tiks atjaunoti kā pēc pirmās instalēšanas.
+SDRLink will restart. Continue?	SDRLink tiks restartēta. Turpināt?
+Reset the program	Atiestatīt programmu
+Cannot reset: 	Atiestatīt nav iespējams: 
 Button colour	Pogas krāsa
 RIG	RADIO
 Disconnected	Atvienots
@@ -240,6 +246,7 @@ at {0} kHz	no {0} kHz
 from the start ({0} kHz): current frequency out of range	no sākuma ({0} kHz): pašreizējā frekvence ir ārpus diapazona
 at memory {0}	no atmiņas {0}
 from the start ({0}): current frequency not in the memories	no sākuma ({0}): pašreizējās frekvences nav atmiņās
+click in the page, stopped on {0} kHz	klikšķis lapā, apturēts uz {0} kHz
 Scan stopped: {0}	Skenēšana apturēta: {0}
 Scan: {0}	Skenēšana: {0}
 Cannot record: {0}	Nevar ierakstīt: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	neatbalstīts audio formāts ({0} bi
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3 kodētājs nav pieejams (0x{0:X8}): izvēlieties WAV vai FLAC
 Recording length: {0}	Ieraksta ilgums: {0}
 "{0}" already exists. Replace it?	“{0}” jau pastāv. Aizstāt?
+Full reset (all settings, memories and colours are lost)	Pilna atiestatīšana (zūd visi iestatījumi, atmiņas un krāsas)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink kļūst kā pēc pirmās instalēšanas: sākotnējā WebSDR izlase, nav atmiņu, nav skenēšanas, sākotnējās krāsas, pārlūka dati dzēsti.
+Partial reset:	Daļēja atiestatīšana:
+Colours (buttons, REC, palette)	Krāsas (pogas, REC, palete)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (izlase un izlases saraksti, atjaunoti uz sākotnējiem)
+Configuration (rig, interface, sync, audio, display, language, name…)	Konfigurācija (stacija, saskarne, sinhronizācija, skaņa, attēlojums, valoda, vārds…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Iebūvētā pārlūka dati (kešatmiņa, sīkfaili, WebSDR vietņu saglabātie iestatījumi)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Vērts mēģināt, ja WebSDR lapas vairs netiek rādītas (tukšs logs, it kā nebūtu interneta).
+Reset	Atiestatīt
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Pēc tam SDRLink tiks restartēta. Pašreizējie iestatījumi tiek saglabāti failā {0} (Imports/eksports var tos ielādēt atkal). SDRLink atjauninājumi nekad neko neatiestata.
 Connecting...	Savieno...
 Connected, waiting for the rig...	Savienots, gaida raiduztvērēju...
 Rig online	Raiduztvērējs tiešsaistē
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Izlaižamie diapazoni (no … līdz … kH
 Memories to scan:	Skenējamās atmiņas:
 Time on each memory:	Laiks katrā atmiņā:
 (no memory: Memories button)	(nav atmiņu: poga Atmiņas)
-Reset	Atiestatīt
 Start scan	Sākt skenēšanu
 from	no
 to	līdz

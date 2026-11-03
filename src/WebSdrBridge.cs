@@ -415,6 +415,11 @@ namespace SDRLink
     window.addEventListener(t, function (e) { if (e.isTrusted) L.userAt = Date.now(); }, true);
   });
   window.addEventListener('pointermove', function (e) { if (e.isTrusted && e.buttons) L.userAt = Date.now(); }, true);
+  // Appui de la souris dans la page, signalé tout de suite (avant le changement de fréquence qu'il peut faire) :
+  // SDRLink arrête un scan en cours et garde la fréquence scannée à ce moment.
+  window.addEventListener('pointerdown', function (e) {
+    if (e.isTrusted) { try { window.chrome.webview.postMessage('click'); } catch (x) { } }
+  }, true);
 
   window.addEventListener('load', function () { L.loadedAt = Date.now(); });
   setInterval(L.poll, 125);   // un changement fait sur la page est signalé à SDRLink en 60 ms en moyenne

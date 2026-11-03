@@ -88,7 +88,8 @@ Import	Εισαγωγή
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
 Export all settings…	Εξαγωγή όλων των ρυθμίσεων…
 Import settings…	Εισαγωγή ρυθμίσεων…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Εξαγωγή ή εισαγωγή όλων των ρυθμίσεων, για την ίδια διαμόρφωση σε άλλον υπολογιστή (δεξί κλικ: χρώμα κουμπιού)
+Reset the program…	Επαναφορά του προγράμματος…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Εξαγωγή ή εισαγωγή όλων των ρυθμίσεων, για την ίδια διαμόρφωση σε άλλον υπολογιστή (δεξί κλικ: επαναφορά του προγράμματος, χρώμα κουμπιού)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Όνομα ή χαρακτηριστικό που δίνεται αυτόματα στα WebSDR που το ζητούν πριν από τον ήχο (KiwiSDR, websdr.org). Κλικ: αλλαγή (δεξί κλικ: χρώμα κουμπιού)
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Δεν είναι δυνατή η εξαγωγή τ
 Import SDRLink settings	Εισαγωγή ρυθμίσεων SDRLink
 Cannot import the settings: 	Δεν είναι δυνατή η εισαγωγή των ρυθμίσεων: 
 Import: this file does not contain SDRLink settings	Εισαγωγή: αυτό το αρχείο δεν περιέχει ρυθμίσεις SDRLink
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Πλήρης επαναφορά: όλες οι ρυθμίσεις, τα αγαπημένα, οι μνήμες, οι σαρώσεις και τα χρώματα θα χαθούν.
+The checked items will be set back as at first installation.	Τα επιλεγμένα στοιχεία θα επανέλθουν όπως στην πρώτη εγκατάσταση.
+SDRLink will restart. Continue?	Το SDRLink θα επανεκκινηθεί. Συνέχεια;
+Reset the program	Επαναφορά του προγράμματος
+Cannot reset: 	Η επαναφορά δεν είναι δυνατή: 
 Button colour	Χρώμα κουμπιού
 RIG	TRX
 Disconnected	Αποσυνδέθηκε
@@ -240,6 +246,7 @@ at {0} kHz	από {0} kHz
 from the start ({0} kHz): current frequency out of range	από την αρχή ({0} kHz): η τρέχουσα συχνότητα είναι εκτός περιοχής
 at memory {0}	από τη μνήμη {0}
 from the start ({0}): current frequency not in the memories	από την αρχή ({0}): η τρέχουσα συχνότητα δεν είναι στις μνήμες
+click in the page, stopped on {0} kHz	κλικ στη σελίδα, διακοπή στα {0} kHz
 Scan stopped: {0}	Η σάρωση σταμάτησε: {0}
 Scan: {0}	Σάρωση: {0}
 Cannot record: {0}	Αδύνατη η εγγραφή: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	μη υποστηριζόμενη μ
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Ο κωδικοποιητής MP3 των Windows δεν είναι διαθέσιμος (0x{0:X8}): επιλέξτε WAV ή FLAC
 Recording length: {0}	Διάρκεια εγγραφής: {0}
 "{0}" already exists. Replace it?	Το «{0}» υπάρχει ήδη. Αντικατάσταση;
+Full reset (all settings, memories and colours are lost)	Πλήρης επαναφορά (χάνονται όλες οι ρυθμίσεις, οι μνήμες και τα χρώματα)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	Το SDRLink γίνεται όπως στην πρώτη του εγκατάσταση: αρχικά αγαπημένα WebSDR, καμία μνήμη, καμία σάρωση, αρχικά χρώματα, διαγραμμένα δεδομένα προγράμματος περιήγησης.
+Partial reset:	Μερική επαναφορά:
+Colours (buttons, REC, palette)	Χρώματα (κουμπιά, REC, παλέτα)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (αγαπημένα και λίστες αγαπημένων, στα αρχικά)
+Configuration (rig, interface, sync, audio, display, language, name…)	Διαμόρφωση (πομποδέκτης, διασύνδεση, συγχρονισμός, ήχος, προβολή, γλώσσα, όνομα…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Δεδομένα ενσωματωμένου περιηγητή (cache, cookies, ρυθμίσεις των ιστοτόπων WebSDR)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Αξίζει να το δοκιμάσετε αν οι σελίδες των WebSDR δεν εμφανίζονται πια (κενό παράθυρο, σαν χωρίς Internet).
+Reset	Επαναφορά
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Στη συνέχεια το SDRLink θα επανεκκινηθεί. Οι τρέχουσες ρυθμίσεις φυλάσσονται στο {0} (η Εισαγωγή/Εξαγωγή μπορεί να τις φορτώσει ξανά). Οι ενημερώσεις του SDRLink δεν επαναφέρουν ποτέ τίποτα.
 Connecting...	Σύνδεση...
 Connected, waiting for the rig...	Συνδέθηκε, αναμονή για τον πομποδέκτη...
 Rig online	Πομποδέκτης σε σύνδεση
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Περιοχές που παραλείπο
 Memories to scan:	Μνήμες για σάρωση:
 Time on each memory:	Χρόνος σε κάθε μνήμη:
 (no memory: Memories button)	(καμία μνήμη: κουμπί Μνήμες)
-Reset	Επαναφορά
 Start scan	Έναρξη σάρωσης
 from	από
 to	έως

@@ -88,7 +88,8 @@ Import	Importovat
 Cannot open the log: 	Nelze otevřít deník: 
 Export all settings…	Exportovat všechna nastavení…
 Import settings…	Importovat nastavení…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Exportovat nebo importovat všechna nastavení pro stejnou konfiguraci na jiném počítači (pravé tlačítko: barva tlačítka)
+Reset the program…	Obnovit výchozí stav programu…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Export nebo import všech nastavení pro stejnou konfiguraci na jiném počítači (pravé tlačítko: obnovit výchozí stav programu, barva tlačítka)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Jméno nebo volací značka zadávané automaticky přijímačům WebSDR, které je vyžadují před zvukem (KiwiSDR, websdr.org). Kliknutí: změnit (pravé tlačítko: barva tlačítka)
 Right-click: receivers muted while transmitting	Pravé tlačítko: přijímače ztlumené při vysílání
 Save: no known frequency (rig or WebSDR)	Uložit: neznámá frekvence (TRX ani WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Nastavení nelze exportovat:
 Import SDRLink settings	Importovat nastavení SDRLink
 Cannot import the settings: 	Nastavení nelze importovat: 
 Import: this file does not contain SDRLink settings	Import: tento soubor neobsahuje nastavení SDRLink
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Úplné obnovení: všechna nastavení, oblíbené, paměti, prohledávání a barvy budou ztraceny.
+The checked items will be set back as at first installation.	Zaškrtnuté položky budou vráceny do stavu po první instalaci.
+SDRLink will restart. Continue?	SDRLink se restartuje. Pokračovat?
+Reset the program	Obnovit výchozí stav programu
+Cannot reset: 	Obnovení není možné: 
 Button colour	Barva tlačítka
 RIG	TRX
 Disconnected	Odpojeno
@@ -240,6 +246,7 @@ at {0} kHz	od {0} kHz
 from the start ({0} kHz): current frequency out of range	od začátku ({0} kHz): aktuální kmitočet je mimo rozsah
 at memory {0}	od paměti {0}
 from the start ({0}): current frequency not in the memories	od začátku ({0}): aktuální kmitočet není v pamětech
+click in the page, stopped on {0} kHz	kliknutí na stránku, zastaveno na {0} kHz
 Scan stopped: {0}	Prohledávání zastaveno: {0}
 Scan: {0}	Prohledávání: {0}
 Cannot record: {0}	Nelze nahrávat: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0}
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Kodér MP3 systému Windows není k dispozici (0x{0:X8}): zvolte WAV nebo FLAC
 Recording length: {0}	Délka záznamu: {0}
 "{0}" already exists. Replace it?	„{0}“ již existuje. Nahradit?
+Full reset (all settings, memories and colours are lost)	Úplné obnovení (ztráta všech nastavení, pamětí a barev)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink bude jako po první instalaci: výchozí oblíbené WebSDR, žádné paměti, žádné prohledávání, původní barvy, smazaná data prohlížeče.
+Partial reset:	Částečné obnovení:
+Colours (buttons, REC, palette)	Barvy (tlačítka, REC, paleta)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (oblíbené a seznamy oblíbených, vrácené na výchozí)
+Configuration (rig, interface, sync, audio, display, language, name…)	Konfigurace (stanice, rozhraní, synchronizace, zvuk, zobrazení, jazyk, jméno…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Data vestavěného prohlížeče (mezipaměť, cookies, nastavení uložená weby WebSDR)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Vyzkoušejte, pokud se stránky WebSDR už nezobrazují (prázdné okno, jako bez internetu).
+Reset	Obnovit výchozí
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink se poté restartuje. Současná nastavení se uloží do {0} (Import/Export je může znovu načíst). Aktualizace SDRLink nikdy nic neobnovují.
 Connecting...	Připojování...
 Connected, waiting for the rig...	Připojeno, čekání na transceiver...
 Rig online	Transceiver online
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Vynechané úseky (od … do … kHz):
 Memories to scan:	Paměti k prohledání:
 Time on each memory:	Doba na každé paměti:
 (no memory: Memories button)	(žádné paměti: tlačítko Paměti)
-Reset	Obnovit výchozí
 Start scan	Spustit prohledávání
 from	od
 to	do

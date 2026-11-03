@@ -88,7 +88,8 @@ Import	Impordi
 Cannot open the log: 	Logi ei saa avada: 
 Export all settings…	Ekspordi kõik seaded…
 Import settings…	Impordi seaded…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Ekspordi või impordi kõik seaded, et saada sama seadistus teises arvutis (paremklõps: nupu värv)
+Reset the program…	Lähtesta programm…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Ekspordi või impordi kõik seaded sama seadistuse jaoks teises arvutis (paremklõps: lähtesta programm, nupu värv)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi või kutsung, mis antakse automaatselt WebSDR-idele, mis seda enne heli küsivad (KiwiSDR, websdr.org). Klõps: muuda (paremklõps: nupu värv)
 Right-click: receivers muted while transmitting	Paremklõps: saatmise ajal vaigistatavad vastuvõtjad
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Seadeid ei saa eksportida:
 Import SDRLink settings	Impordi SDRLinki seaded
 Cannot import the settings: 	Seadeid ei saa importida: 
 Import: this file does not contain SDRLink settings	Import: see fail ei sisalda SDRLinki seadeid
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Täielik lähtestamine: kõik seaded, lemmikud, mälud, skaneerimised ja värvid lähevad kaotsi.
+The checked items will be set back as at first installation.	Märgitud osad taastatakse nagu esmasel paigaldamisel.
+SDRLink will restart. Continue?	SDRLink taaskäivitub. Jätkata?
+Reset the program	Lähtesta programm
+Cannot reset: 	Lähtestamine pole võimalik: 
 Button colour	Nupu värv
 RIG	RAADIO
 Disconnected	Ühendus puudub
@@ -240,6 +246,7 @@ at {0} kHz	alates {0} kHz
 from the start ({0} kHz): current frequency out of range	algusest ({0} kHz): praegune sagedus on vahemikust väljas
 at memory {0}	alates mälust {0}
 from the start ({0}): current frequency not in the memories	algusest ({0}): praegust sagedust pole mäludes
+click in the page, stopped on {0} kHz	klõps lehel, peatatud sagedusel {0} kHz
 Scan stopped: {0}	Skaneerimine peatatud: {0}
 Scan: {0}	Skaneerimine: {0}
 Cannot record: {0}	Salvestamine pole võimalik: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	toetamata helivorming ({0} bitti, {1
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windowsi MP3-kodeerija pole saadaval (0x{0:X8}): valige WAV või FLAC
 Recording length: {0}	Salvestise kestus: {0}
 "{0}" already exists. Replace it?	„{0}“ on juba olemas. Kas asendada?
+Full reset (all settings, memories and colours are lost)	Täielik lähtestamine (kõik seaded, mälud ja värvid lähevad kaotsi)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink muutub nagu esmasel paigaldamisel: algsed WebSDR-i lemmikud, mälusid pole, skaneerimist pole, algsed värvid, brauseri andmed kustutatud.
+Partial reset:	Osaline lähtestamine:
+Colours (buttons, REC, palette)	Värvid (nupud, REC, palett)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (lemmikud ja lemmikute loendid, algsed tagasi)
+Configuration (rig, interface, sync, audio, display, language, name…)	Seadistus (raadiojaam, liides, sünkroonimine, heli, kuva, keel, nimi…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Sisseehitatud brauseri andmed (vahemälu, küpsised, WebSDR-i saitide salvestatud seaded)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Proovige, kui WebSDR-i lehti enam ei kuvata (tühi aken, nagu interneti puudumisel).
+Reset	Lähtesta
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Seejärel SDRLink taaskäivitub. Praegused seaded säilitatakse failis {0} (Import/eksport saab need uuesti laadida). SDRLinki uuendused ei lähtesta kunagi midagi.
 Connecting...	Ühendamine...
 Connected, waiting for the rig...	Ühendatud, raadio ootamine...
 Rig online	Raadio võrgus
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Vahelejäetavad vahemikud (… kuni … kH
 Memories to scan:	Skaneeritavad mälud:
 Time on each memory:	Aeg igal mälul:
 (no memory: Memories button)	(mälusid pole: nupp Mälud)
-Reset	Lähtesta
 Start scan	Alusta skaneerimist
 from	alates
 to	kuni

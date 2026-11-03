@@ -88,7 +88,8 @@ Import	Uvozi
 Cannot open the log: 	Dnevnika ni mogoče odpreti: 
 Export all settings…	Izvozi vse nastavitve…
 Import settings…	Uvozi nastavitve…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Izvozi ali uvozi vse nastavitve za enako konfiguracijo na drugem računalniku (desni klik: barva gumba)
+Reset the program…	Ponastavi program…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Izvoz ali uvoz vseh nastavitev za enako konfiguracijo na drugem računalniku (desni klik: ponastavi program, barva gumba)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Ime ali klicni znak, ki se samodejno poda sprejemnikom WebSDR, ki ga zahtevajo pred zvokom (KiwiSDR, websdr.org). Klik: sprememba (desni klik: barva gumba)
 Right-click: receivers muted while transmitting	Desni klik: sprejemniki, utišani med oddajanjem
 Save: no known frequency (rig or WebSDR)	Shrani: frekvenca ni znana (TRX ali WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Nastavitev ni mogoče izvoziti:
 Import SDRLink settings	Uvozi nastavitve SDRLink
 Cannot import the settings: 	Nastavitev ni mogoče uvoziti: 
 Import: this file does not contain SDRLink settings	Uvoz: ta datoteka ne vsebuje nastavitev SDRLink
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Popolna ponastavitev: vse nastavitve, priljubljene, pomnilniki, iskanja in barve bodo izgubljeni.
+The checked items will be set back as at first installation.	Označeni elementi bodo vrnjeni kot ob prvi namestitvi.
+SDRLink will restart. Continue?	SDRLink se bo znova zagnal. Nadaljujem?
+Reset the program	Ponastavi program
+Cannot reset: 	Ponastavitev ni mogoča: 
 Button colour	Barva gumba
 RIG	TRX
 Disconnected	Prekinjeno
@@ -240,6 +246,7 @@ at {0} kHz	od {0} kHz
 from the start ({0} kHz): current frequency out of range	od začetka ({0} kHz): trenutna frekvenca je zunaj območja
 at memory {0}	od pomnilnika {0}
 from the start ({0}): current frequency not in the memories	od začetka ({0}): trenutne frekvence ni v pomnilnikih
+click in the page, stopped on {0} kHz	klik na stran, ustavljeno na {0} kHz
 Scan stopped: {0}	Iskanje ustavljeno: {0}
 Scan: {0}	Iskanje: {0}
 Cannot record: {0}	Snemanje ni mogoče: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	nepodprta oblika zvoka ({0} bitov, {
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Kodirnik MP3 sistema Windows ni na voljo (0x{0:X8}): izberite WAV ali FLAC
 Recording length: {0}	Dolžina posnetka: {0}
 "{0}" already exists. Replace it?	»{0}« že obstaja. Ga želite zamenjati?
+Full reset (all settings, memories and colours are lost)	Popolna ponastavitev (izgubijo se vse nastavitve, pomnilniki in barve)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink postane kot ob prvi namestitvi: začetne priljubljene WebSDR, brez pomnilnikov, brez iskanja, prvotne barve, izbrisani podatki brskalnika.
+Partial reset:	Delna ponastavitev:
+Colours (buttons, REC, palette)	Barve (gumbi, REC, paleta)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (priljubljene in seznami priljubljenih, vrnjeni na začetne)
+Configuration (rig, interface, sync, audio, display, language, name…)	Konfiguracija (postaja, vmesnik, sinhronizacija, zvok, prikaz, jezik, ime…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Podatki vgrajenega brskalnika (predpomnilnik, piškotki, nastavitve, ki jih hranijo strani WebSDR)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Vredno poskusiti, če se strani WebSDR ne prikazujejo več (prazno okno, kot brez interneta).
+Reset	Ponastavi
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink se bo nato znova zagnal. Trenutne nastavitve se hranijo v {0} (Uvoz/izvoz jih lahko znova naloži). Posodobitve SDRLink nikoli ničesar ne ponastavijo.
 Connecting...	Povezovanje...
 Connected, waiting for the rig...	Povezano, čakanje na postajo...
 Rig online	Postaja povezana
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Izpuščena območja (od … do … kHz):
 Memories to scan:	Pomnilniki za iskanje:
 Time on each memory:	Čas na vsakem pomnilniku:
 (no memory: Memories button)	(ni pomnilnikov: gumb Pomnilniki)
-Reset	Ponastavi
 Start scan	Začni iskanje
 from	od
 to	do

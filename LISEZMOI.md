@@ -33,7 +33,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Où | Ce que propose le clic droit |
 |---|---|
 | Connecter | couleur quand connecté / déconnecté |
-| Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Import/Export, Pseudo/Call | couleur du bouton |
+| Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Pseudo/Call | couleur du bouton |
+| Import/Export | **Réinitialiser le programme…** (depuis la 1.22), couleur du bouton |
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
 | PTT | délai de sécurité TX, couleur en réception / en émission |
@@ -54,6 +55,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 
 - `%APPDATA%\SDRLink\settings.ini` : **tous les réglages** (interface, favoris, mémoires, couleurs, fenêtre…). C'est ce fichier que copie **Import/Export**.
 - `%APPDATA%\SDRLink\settings.avant-import.ini` : les réglages d'avant le dernier import.
+- `%APPDATA%\SDRLink\settings.avant-reinitialisation.ini` : les réglages d'avant la dernière réinitialisation (depuis la 1.22).
+- `%APPDATA%\SDRLink\settings.reset.txt` : réinitialisation demandée, faite au redémarrage puis effacée (il n'existe que quelques secondes).
 - `%APPDATA%\SDRLink\sdrlink.log` : le journal (remis à zéro à chaque lancement).
 - `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache ; le pseudo donné aux KiwiSDR et websdr.org y est aussi) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll.
 - `Musique\SDRLink` : dossier des enregistrements REC par défaut ; pendant un enregistrement, un fichier provisoire `SDRLink-REC-*.raw` est dans `%TEMP%`.
@@ -441,6 +444,7 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
     - Scan de mémoires : il repart de la mémoire cochée qui a la fréquence actuelle, sinon de la première mémoire.
   - **Réglage actuel de « Conf scan »** : le scan repart toujours du début.
 - Le scan règle le poste et le WebSDR, comme une saisie de fréquence. Il s'arrête dès que le poste passe en **émission** (PTT de SDRLink ou du poste) ; il ne peut pas démarrer en émission.
+- **Clic dans la page pendant un scan** (depuis la 1.22) : un clic n'importe où dans la page du WebSDR (cascade, boutons de la page…) **arrête le scan** sur la fréquence (ou la mémoire) en cours. Si le clic a déplacé la fréquence de la page (clic dans la cascade), elle est **remise aussitôt** sur la fréquence scannée, et le poste n'en bouge pas. La barre d'état indique « Scan arrêté : clic dans la page, arrêt sur 7001 kHz ». Le clic suivant règle normalement la fréquence. Les boutons et réglages de SDRLink (volumes…) n'arrêtent pas le scan ; le bouton ■ Arrêter le scan l'arrête comme avant.
 
 ## Enregistrement (REC)
 
@@ -494,6 +498,22 @@ Bouton **Import/Export ▾** (1re ligne, après « Vérifier les mises à jour �
 - Sur un autre ordinateur, vérifier ce qui dépend de la machine : port COM du poste, cartes son (câble SDRLINK, carte son du poste pour REC), chemin de rigctld, dossier des enregistrements. Une carte son du poste absente est signalée « non branchée » dans le menu de REC ; si la position de la fenêtre tombe hors des écrans, elle est ignorée.
 - Les données de navigation des pages WebSDR (cookies, cache) ne font pas partie des réglages et ne sont pas exportées.
 
+## Réinitialiser le programme
+
+**Clic droit sur Import/Export > Réinitialiser le programme…** (depuis la 1.22) : pour repartir de zéro, en tout ou en partie, par exemple si les pages des WebSDR restent vides (fenêtre blanche, comme sans Internet) alors qu'Internet marche.
+- **Réinitialisation totale (perte de tous les paramètres, mémoires et couleurs)** : SDRLink redevient comme à sa première installation (favoris WebSDR de départ, aucune mémoire, aucun scan, couleurs d'origine, données du navigateur effacées).
+- **Réinitialisation partielle** (choix par défaut), une case par partie, une ou plusieurs :
+  - **Mémoires de fréquences** ;
+  - **Scan** (réglage, zones non scannées et profils de scan) ;
+  - **Couleurs** (boutons, REC, palette) ;
+  - **WebSDR** (favoris et listes de favoris, remis à ceux de départ) ;
+  - **Configuration** (poste, interface, synchro, son, affichage, langue, pseudo… : tout le reste) ;
+  - **Données du navigateur intégré** (cache, cookies, réglages gardés par les sites WebSDR) : **à essayer en premier si les pages des WebSDR ne s'affichent plus**. Les réglages de SDRLink n'en sont pas touchés.
+- **Réinitialiser** reste grisé tant que rien n'est choisi ; **Annuler** est le bouton par défaut. Une confirmation est demandée (« Non » par défaut), puis SDRLink **redémarre** et fait la réinitialisation au démarrage.
+- Les réglages d'avant sont gardés dans `%APPDATA%\SDRLink\settings.avant-reinitialisation.ini` : pour revenir en arrière, **Import/Export > Importer des réglages…** et choisir ce fichier. Les données du navigateur effacées, elles, ne reviennent pas (les sites redemandent simplement leurs choix).
+- Si les données du navigateur ne peuvent pas être effacées (fichiers encore ouverts), SDRLink réessaie au démarrage suivant ; le journal l'indique.
+- **Les mises à jour de SDRLink ne réinitialisent jamais rien** : les réglages sont dans `%APPDATA%\SDRLink`, pas à côté de SDRLink.exe ; remplacer l'exe les garde tous.
+
 ## Mises à jour
 
 Case **Vérifier les mises à jour** (1re ligne, cochée par défaut) : au démarrage, si Internet répond, SDRLink regarde la dernière version publiée sur GitHub. S'il en existe une plus récente, une fenêtre s'ouvre (depuis la 1.18) : elle indique la version utilisée et la dernière version publiée, avec le lien direct vers la page de cette version (téléchargement et nouveautés) et le lien vers la liste de toutes les versions (https://github.com/F5pbgLudovic/SDRLink/releases, la dernière y est marquée « Latest »). Le bouton **Ouvrir la page de la mise à jour** ouvre cette page dans le navigateur ; **Plus tard** ferme la fenêtre. Un lien orange « ⚠ Mise à jour Vx.y disponible » reste aussi en bas à droite de la fenêtre, dans la barre d'état (visible aussi en affichages réduit et mini) : un clic ouvre la même page. Cocher la case lance la vérification tout de suite et ouvre la fenêtre dans tous les cas : nouvelle version, « vous utilisez la dernière version » ou GitHub injoignable. Pour ne plus être prévenu, décochez la case.
@@ -508,10 +528,14 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.22**
+  - **Réinitialiser le programme** (clic droit sur Import/Export) : réinitialisation totale, comme une première installation, ou partielle au choix (mémoires, scan, couleurs, WebSDR, configuration, données du navigateur intégré). Anciens réglages gardés dans settings.avant-reinitialisation.ini. Utile si les pages des WebSDR restent vides. Les mises à jour ne réinitialisent rien.
+  - **Clic dans la page pendant un scan** : le scan s'arrête sur la fréquence scannée ; si le clic a déplacé la cascade, la fréquence y est remise aussitôt (le poste n'en bouge pas). Le clic suivant règle normalement.
 - **1.21**
   - Case **Avant plan** dans l'affichage ptt, sous « Affichage ptt » : la petite fenêtre peut être mise au premier plan sans revenir en grand ; sa taille ne change pas.
   - **Reprendre le scan**, en haut de la liste du bouton ▶ Scan : le scan repart de la fréquence actuelle (ou de la mémoire sur cette fréquence) ; hors de la plage, il repart de la première fréquence. Le bouton ▶ Scan ouvre maintenant toujours la liste, même sans profil.
-- **1.20**  - **Son sans clic** à l'arrivée sur une page : « Click to start » d'UberSDR et voile « Tap to enable audio » de PhantomSDR passés automatiquement.
+- **1.20**
+  - **Son sans clic** à l'arrivée sur une page : « Click to start » d'UberSDR et voile « Tap to enable audio » de PhantomSDR passés automatiquement.
   - Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donné d'office aux KiwiSDR et websdr.org qui en demandent un avant le son, « SDRLink » par défaut, jamais vide, Alt+255 permis pour ne pas donner de nom ; fenêtre ouverte d'un clic.
   - **KiwiSDR complet** : entrée automatique dans la file d'attente (« Enter queue »).
   - **Squelch** ouvert sur les WebSDR qui en ont un, sauf en FM à partir de 30 MHz.

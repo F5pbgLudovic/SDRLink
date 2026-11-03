@@ -88,7 +88,8 @@ Import	Importuoti
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
 Export all settings…	Eksportuoti visus nustatymus…
 Import settings…	Importuoti nustatymus…
-Export or import all settings, for the same configuration on another computer (right-click: button colour)	Eksportuoti arba importuoti visus nustatymus, kad kitame kompiuteryje būtų ta pati konfigūracija (dešinysis spustelėjimas: mygtuko spalva)
+Reset the program…	Atstatyti programą…
+Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportuoti arba importuoti visus nustatymus, tai pačiai konfigūracijai kitame kompiuteryje (dešinysis spustelėjimas: atstatyti programą, mygtuko spalva)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Vardas arba šaukinys, automatiškai pateikiamas WebSDR imtuvams, kurie jo prašo prieš garsą (KiwiSDR, websdr.org). Spustelėjimas: pakeisti (dešinysis klavišas: mygtuko spalva)
 Right-click: receivers muted while transmitting	Dešinysis spustelėjimas: imtuvai, nutildomi siunčiant
 Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
@@ -114,6 +115,11 @@ Cannot export the settings: 	Nepavyko eksportuoti nustatymų:
 Import SDRLink settings	Importuoti SDRLink nustatymus
 Cannot import the settings: 	Nepavyko importuoti nustatymų: 
 Import: this file does not contain SDRLink settings	Importas: šiame faile nėra SDRLink nustatymų
+Full reset: all settings, favorites, memories, scans and colours will be lost.	Visiškas atstatymas: bus prarasti visi nustatymai, mėgstamiausi, atmintys, skenavimai ir spalvos.
+The checked items will be set back as at first installation.	Pažymėti elementai bus grąžinti kaip po pirmojo įdiegimo.
+SDRLink will restart. Continue?	SDRLink bus paleista iš naujo. Tęsti?
+Reset the program	Atstatyti programą
+Cannot reset: 	Atstatyti neįmanoma: 
 Button colour	Mygtuko spalva
 RIG	STOTIS
 Disconnected	Atsijungta
@@ -240,6 +246,7 @@ at {0} kHz	nuo {0} kHz
 from the start ({0} kHz): current frequency out of range	nuo pradžios ({0} kHz): dabartinis dažnis už ruožo ribų
 at memory {0}	nuo atminties {0}
 from the start ({0}): current frequency not in the memories	nuo pradžios ({0}): dabartinio dažnio nėra atmintyse
+click in the page, stopped on {0} kHz	spustelėjimas puslapyje, sustabdyta ties {0} kHz
 Scan stopped: {0}	Skenavimas sustabdytas: {0}
 Scan: {0}	Skenavimas: {0}
 Cannot record: {0}	Įrašyti neįmanoma: {0}
@@ -370,6 +377,16 @@ unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bit
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3 koduotuvas nepasiekiamas (0x{0:X8}): pasirinkite WAV arba FLAC
 Recording length: {0}	Įrašo trukmė: {0}
 "{0}" already exists. Replace it?	„{0}“ jau yra. Pakeisti?
+Full reset (all settings, memories and colours are lost)	Visiškas atstatymas (prarandami visi nustatymai, atmintys ir spalvos)
+SDRLink goes back to how it was when first installed: starting WebSDR favorites, no memory, no scan, original colours, browser data deleted.	SDRLink tampa kaip po pirmojo įdiegimo: pradiniai WebSDR mėgstamiausi, jokių atminčių, jokio skenavimo, pradinės spalvos, naršyklės duomenys ištrinti.
+Partial reset:	Dalinis atstatymas:
+Colours (buttons, REC, palette)	Spalvos (mygtukai, REC, paletė)
+WebSDR (favorites and favorite lists, back to the starting ones)	WebSDR (mėgstamiausi ir jų sąrašai, grąžinti į pradinius)
+Configuration (rig, interface, sync, audio, display, language, name…)	Konfigūracija (stotis, sąsaja, sinchronizavimas, garsas, rodinys, kalba, vardas…)
+Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Įtaisytosios naršyklės duomenys (talpykla, slapukai, WebSDR svetainių išsaugoti nustatymai)
+Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Verta pabandyti, jei WebSDR puslapiai nebesirodo (tuščias langas, lyg nebūtų interneto).
+Reset	Atkurti
+SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Po to SDRLink bus paleista iš naujo. Dabartiniai nustatymai išsaugomi faile {0} (Importas/eksportas gali juos vėl įkelti). SDRLink atnaujinimai niekada nieko neatstato.
 Connecting...	Jungiamasi...
 Connected, waiting for the rig...	Prisijungta, laukiama stoties...
 Rig online	Stotis prisijungusi
@@ -387,7 +404,6 @@ Skipped ranges (from … to … kHz):	Praleidžiami ruožai (nuo … iki … kHz
 Memories to scan:	Skenuojamos atmintys:
 Time on each memory:	Laikas kiekvienoje atmintyje:
 (no memory: Memories button)	(atminčių nėra: mygtukas Atmintys)
-Reset	Atkurti
 Start scan	Pradėti skenavimą
 from	nuo
 to	iki
