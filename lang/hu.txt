@@ -156,6 +156,13 @@ SDRLINK cable	SDRLINK kábel
  (off) ▾	 (ki) ▾
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
+sound card to choose	hangkártyát kell választani
+Rig sound card…	A rádió hangkártyája…
+Rig on the PC turned off	A rádió hallgatása a gépen kikapcsolva
+Rig sound card	A rádió hangkártyája
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	A Windows bemenete, amely a rádió hangját kapja (például „USB AUDIO CODEC”); ez a REC rádióhangkártyája is:
+No sound input found in Windows	A Windowsban nem található hangbemenet
+Rig on the PC back	A rádió hallgatása a gépen helyreállt
 Mutes ignored by ⇄ (stay muted, two at most):	A ⇄ által figyelmen kívül hagyott némítások (némítva maradnak, legfeljebb kettő):
 None	Nincs
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	A HDSDR nem a Windows hangján szól (vétel leállítva, vagy hang ASIO-n): az SDRLink nem tudja némítani.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Kész: a ha
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Az átnevezés nem sikerült ({0}).\n\nKézzel: Hang vezérlőpult › Felvétel lap › „{1}” › Tulajdonságok › név.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kábel: a WebSDR hangja ide megy: „{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK kábel: „{0}”: {1}
+Also hear the rig on the PC ({0})	A rádió hallgatása a gépen is ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Rádió a gépen: a(z) „{0}” a hangszórókon szól, ha a TRX némítás nincs bekapcsolva
+Rig on the PC: sound card "{0}" not available ({1})	Rádió a gépen: a(z) „{0}” hangkártya nem érhető el ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	Az ExpertSDR fut, de nem válaszol a(z) {0} TCI-porton: a port módosításához kattintson jobb gombbal a „WebSDR hangerő” feliratra.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	Az SDRLink nem tudja elnémítani az ExpertSDR-t: az ExpertSDR nem a Windowson keresztül szól (a hang a rádióból vagy ASIO-n keresztül jön), és a TCI-kiszolgálója nem válaszol a(z) {0} porton.\n\nAz ExpertSDR-ben kapcsolja be a TCI-kiszolgálót (Options > TCI). Ha a portja nem {0}, állítsa be az „ExpertSDR némítás” gombra jobb gombbal kattintva.
 "{0}" added to "{1}".	„{0}” hozzáadva a(z) „{1}” listához.

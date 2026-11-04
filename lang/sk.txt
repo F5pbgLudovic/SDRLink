@@ -156,6 +156,13 @@ SDRLINK cable	Kábel SDRLINK
  (off) ▾	 (vyp.) ▾
 Mute TRX: connect the rig first	Stlmiť TRX: najprv pripojte transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním (OmniRig, HRD, FT-817/818…)
+sound card to choose	zvukovú kartu treba vybrať
+Rig sound card…	Zvuková karta stanice…
+Rig on the PC turned off	Počúvanie stanice na PC vypnuté
+Rig sound card	Zvuková karta stanice
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Vstup Windows, do ktorého ide zvuk stanice (napríklad „USB AUDIO CODEC“); je to aj zvuková karta stanice pre REC:
+No sound input found in Windows	Vo Windows sa nenašiel žiadny zvukový vstup
+Rig on the PC back	Počúvanie stanice na PC obnovené
 Mutes ignored by ⇄ (stay muted, two at most):	Stlmenia, ktoré ⇄ preskakuje (zostanú stlmené, najviac dve):
 None	Žiadne
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR nehrá cez zvuk Windows (príjem zastavený alebo zvuk cez ASIO): SDRLink ho nemôže stlmiť.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Hotovo: zvu
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Premenovanie zlyhalo ({0}).\n\nRučne: Ovládací panel Zvuk › karta Nahrávanie › „{1}“ › Vlastnosti › názov.
 SDRLINK cable: WebSDR audio sent to "{0}"	Kábel SDRLINK: zvuk WebSDR sa odosiela do „{0}“
 SDRLINK cable: "{0}": {1}	Kábel SDRLINK: „{0}“: {1}
+Also hear the rig on the PC ({0})	Počúvať stanicu aj na PC ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stanica na PC: „{0}“ hrá v reproduktoroch, keď nie je zapnuté Stlmiť TRX
+Rig on the PC: sound card "{0}" not available ({1})	Stanica na PC: zvuková karta „{0}“ nie je dostupná ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR beží, ale neodpovedá na porte TCI {0}: port zmeníte kliknutím pravým tlačidlom na „Hlasitosť WebSDR“.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nemôže stlmiť ExpertSDR: ExpertSDR neprehráva zvuk cez Windows (zvuk vychádza z rádia alebo cez ASIO) a jeho server TCI neodpovedá na porte {0}.\n\nV ExpertSDR zapnite server TCI (Options > TCI). Ak jeho port nie je {0}, nastavte ho kliknutím pravým tlačidlom na „Stlmiť ExpertSDR“.
 "{0}" added to "{1}".	„{0}“ pridané do „{1}“.

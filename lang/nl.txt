@@ -156,6 +156,13 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (uit) ▾
 Mute TRX: connect the rig first	TRX dempen: verbind eerst de transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-volume niet beschikbaar met deze transceiver of interface (OmniRig, HRD, FT-817/818…)
+sound card to choose	geluidskaart nog te kiezen
+Rig sound card…	Geluidskaart van de transceiver…
+Rig on the PC turned off	Transceiver op de pc uitgeschakeld
+Rig sound card	Geluidskaart van de transceiver
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Windows-ingang die het geluid van de transceiver ontvangt (bijvoorbeeld "USB AUDIO CODEC"); het is ook de geluidskaart van de transceiver voor REC:
+No sound input found in Windows	Geen geluidsingang gevonden in Windows
+Rig on the PC back	Transceiver op de pc weer actief
 Mutes ignored by ⇄ (stay muted, two at most):	Dempingen die ⇄ negeert (blijven gedempt, hoogstens twee):
 None	Geen
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR speelt niet via het Windows-geluid (ontvangst gestopt of geluid via ASIO): SDRLink kan het niet dempen.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Klaar: de a
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Hernoemen mislukt ({0}).\n\nHandmatig: Configuratiescherm Geluid › tabblad Opnemen › "{1}" › Eigenschappen › naam.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-geluid naar "{0}" gestuurd
 SDRLINK cable: "{0}": {1}	SDRLINK-kabel: "{0}": {1}
+Also hear the rig on the PC ({0})	De transceiver ook op de pc horen ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Transceiver op de pc: "{0}" speelt in de luidsprekers als TRX dempen uit staat
+Rig on the PC: sound card "{0}" not available ({1})	Transceiver op de pc: geluidskaart "{0}" niet beschikbaar ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR draait maar antwoordt niet op TCI-poort {0}: klik met rechts op "WebSDR-volume" om de poort te wijzigen.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink kan ExpertSDR niet dempen: ExpertSDR speelt geen geluid af via Windows (het geluid komt uit de radio of via ASIO) en de TCI-server antwoordt niet op poort {0}.\n\nSchakel in ExpertSDR de TCI-server in (Options > TCI). Is de poort niet {0}, klik dan met de rechtermuisknop op "ExpertSDR dempen" om hem in te stellen.
 "{0}" added to "{1}".	"{0}" toegevoegd aan "{1}".

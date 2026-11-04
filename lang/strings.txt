@@ -156,6 +156,13 @@ SDRLINK cable	Câble SDRLINK
  (off) ▾	 (arrêt) ▾
 Mute TRX: connect the rig first	Mute TX : connectez d'abord le poste
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume du poste non disponible avec ce poste ou cette interface (OmniRig, HRD, FT-817/818…)
+sound card to choose	carte son à choisir
+Rig sound card…	Carte son du poste…
+Rig on the PC turned off	Écoute du poste sur le PC désactivée
+Rig sound card	Carte son du poste
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Entrée de Windows qui reçoit le son du poste (par exemple « USB AUDIO CODEC ») ; c'est aussi la carte son du poste de REC :
+No sound input found in Windows	Aucune entrée son trouvée dans Windows
+Rig on the PC back	Écoute du poste sur le PC rétablie
 Mutes ignored by ⇄ (stay muted, two at most):	Coupures dont ⇄ ne tient pas compte (restent coupées, deux au plus) :
 None	Aucune
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR ne passe pas par le son de Windows (réception arrêtée, ou son sorti par ASIO) : SDRLink ne peut pas couper son son.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	C'est fait 
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Le renommage n'a pas abouti ({0}).\n\nÀ la main : Panneau de configuration Son › onglet Enregistrement › « {1} » › Propriétés › nom.
 SDRLINK cable: WebSDR audio sent to "{0}"	Câble SDRLINK : son du WebSDR envoyé vers « {0} »
 SDRLINK cable: "{0}": {1}	Câble SDRLINK : « {0} » : {1}
+Also hear the rig on the PC ({0})	Écouter aussi le poste sur le PC ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Écoute du poste sur le PC : « {0} » est joué dans les haut-parleurs quand Mute TX n'est pas actif
+Rig on the PC: sound card "{0}" not available ({1})	Écoute du poste : carte son « {0} » indisponible ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR est lancé mais ne répond pas sur le port TCI {0} : clic droit sur « Volume WebSDR » pour changer le port.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink ne peut pas couper le son d'ExpertSDR : ExpertSDR ne passe pas par le son de Windows (son sorti par le poste ou par ASIO), et son serveur TCI ne répond pas sur le port {0}.\n\nDans ExpertSDR, activez le serveur TCI (Options > TCI). Si son port n'est pas {0}, faites un clic droit sur Mute ExpertSDR pour l'indiquer.
 "{0}" added to "{1}".	« {0} » ajouté à « {1} ».

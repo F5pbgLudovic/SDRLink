@@ -162,6 +162,7 @@ namespace SDRLink
                 // Affichage ptt : on revient d'abord à l'affichage d'avant, celui qui est enregistré.
                 if (pttView) SetPttView(false);
                 Disconnect();
+                StopRigMonitor();
                 if (cableSink != null) { cableSink.Dispose(); cableSink = null; }
                 // ExpertSDR coupé par SDRLink : son rétabli (Windows garde la coupure d'un logiciel d'une fois sur l'autre).
                 try { if (esdrMutedByUs) SetExpertSdrMute(false); } catch { }
@@ -810,6 +811,11 @@ namespace SDRLink
                 AddColorMenu(b, Slot("ModeOn", () => Lang.T("Couleur du mode sélectionné", "Colour of the selected mode")),
                     Slot("ModeOff", () => Lang.T("Couleur des modes non sélectionnés", "Colour of the other modes")));
             AddColorMenu(btnMuteSdr, Slot("MuteSdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteSdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
+            // Clic droit sur Mute TX : écoute du poste sur le PC (carte son de REC), puis les couleurs.
+            ContextMenuStrip rigMenu = new ContextMenuStrip();
+            rigMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillRigMonitorMenu(rigMenu); };
+            rigMenu.Items.Add("-");
+            btnMuteRig.ContextMenuStrip = rigMenu;
             AddColorMenu(btnMuteRig, Slot("MuteRigCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteRigOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
             AddColorMenu(btnMuteEsdr, Slot("MuteEsdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteEsdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
             AddColorMenu(btnMuteHdsdr, Slot("MuteHdsdrCut", () => Lang.T("Couleur son coupé", "Colour when muted")), Slot("MuteHdsdrOn", () => Lang.T("Couleur son actif", "Colour when the sound is on")));
@@ -2861,6 +2867,127 @@ namespace SDRLink
             UpdateMuteButtons();
         }
 
+        // ---------------------------------------------------------------- Écoute du poste sur le PC (clic droit sur Mute TX)
+
+        // Son de l'entrée de la carte son du poste (la même que celle de REC) rejoué dans les haut-parleurs, quand l'option
+        // est cochée, le poste connecté avec Mute TX affiché et Mute TX pas actif. Mute TX actif (à la main, par ⇄ ou en
+        // émission) : la carte reste ouverte, rien n'est joué.
+        RigMonitor rigMonitor;
+        bool rigMonitorTrouble;
+
+        bool RigCardPresent()
+        {
+            if (settings.RecCardId.Length == 0) return false;
+            try { return AudioEndpoints.All().Exists(e => e.Capture && e.Id == settings.RecCardId); }
+            catch (Exception ex) { Log.Write("Écoute du poste : lecture des cartes son impossible : " + ex.Message); return false; }
+        }
+
+        void FillRigMonitorMenu(ContextMenuStrip m)
+        {
+            m.Items.Clear();
+            string card = settings.RecCardId.Length > 0 ? settings.RecCardName : Lang.T("carte son à choisir", "sound card to choose");
+            ToolStripMenuItem on = new ToolStripMenuItem(Lang.F("Écouter aussi le poste sur le PC ({0})", "Also hear the rig on the PC ({0})", card));
+            on.Checked = settings.RigMonitor;
+            on.Click += delegate { SetRigMonitor(!settings.RigMonitor); };
+            m.Items.Add(on);
+            ToolStripMenuItem pick = new ToolStripMenuItem(Lang.T("Carte son du poste…", "Rig sound card…"));
+            pick.Click += delegate { AskRigCard(); };
+            m.Items.Add(pick);
+        }
+
+        // Pas de carte choisie (ou carte débranchée) : la fenêtre de choix s'ouvre au lieu d'un message d'erreur.
+        void SetRigMonitor(bool on)
+        {
+            if (on && !RigCardPresent() && !AskRigCard()) return;
+            settings.RigMonitor = on;
+            settings.Save();
+            Log.Write("Écoute du poste sur le PC : " + (on ? "activée (" + settings.RecCardName + ")" : "désactivée"));
+            ShowStatus(on
+                ? Lang.F("Écoute du poste sur le PC : « {0} » est joué dans les haut-parleurs quand Mute TX n'est pas actif",
+                         "Rig on the PC: \"{0}\" is played in the speakers when Mute TRX is off", settings.RecCardName)
+                : Lang.T("Écoute du poste sur le PC désactivée", "Rig on the PC turned off"));
+            UpdateRigMonitor();
+        }
+
+        // Fenêtre de choix de la carte son du poste (entrées de Windows) ; c'est aussi celle de REC.
+        bool AskRigCard()
+        {
+            List<AudioEndpoints.Endpoint> cards = new List<AudioEndpoints.Endpoint>();
+            try { cards = AudioEndpoints.All().FindAll(e => e.Capture); }
+            catch (Exception ex) { Log.Write("Écoute du poste : lecture des cartes son impossible : " + ex.Message); }
+            using (Form d = new Form())
+            {
+                d.Text = Lang.T("Carte son du poste", "Rig sound card");
+                d.FormBorderStyle = FormBorderStyle.FixedDialog;
+                d.MaximizeBox = d.MinimizeBox = false;
+                d.ShowInTaskbar = false;
+                d.StartPosition = FormStartPosition.CenterParent;
+                d.Font = new Font("Segoe UI", 9f);
+                d.ClientSize = new Size(480, 280);
+                Label l = new Label { Location = new Point(12, 10), Size = new Size(456, 36),
+                    Text = Lang.T("Entrée de Windows qui reçoit le son du poste (par exemple « USB AUDIO CODEC ») ; c'est aussi la carte son du poste de REC :",
+                                  "Windows input that receives the rig's audio (for example \"USB AUDIO CODEC\"); it is also REC's rig sound card:") };
+                ListBox list = new ListBox { IntegralHeight = false };
+                list.SetBounds(12, 50, 456, 180);
+                foreach (AudioEndpoints.Endpoint e in cards) list.Items.Add(e.FullName ?? e.Name ?? e.Id);
+                list.SelectedIndex = cards.FindIndex(e => e.Id == settings.RecCardId);
+                if (cards.Count == 0) list.Items.Add(Lang.T("Aucune entrée son trouvée dans Windows", "No sound input found in Windows"));
+                Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
+                Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
+                ok.SetBounds(302, 242, 80, 28);
+                cancel.SetBounds(388, 242, 80, 28);
+                d.AcceptButton = ok;
+                d.CancelButton = cancel;
+                Action check = delegate { ok.Enabled = cards.Count > 0 && list.SelectedIndex >= 0; };
+                list.SelectedIndexChanged += delegate { check(); };
+                list.DoubleClick += delegate { if (ok.Enabled) { d.DialogResult = DialogResult.OK; } };
+                check();
+                d.Controls.AddRange(new Control[] { l, list, ok, cancel });
+                Theme.Apply(d);
+                if (d.ShowDialog(this) != DialogResult.OK || list.SelectedIndex < 0 || list.SelectedIndex >= cards.Count) return false;
+                AudioEndpoints.Endpoint c = cards[list.SelectedIndex];
+                SetRecCard(c.Id, c.FullName ?? c.Name ?? c.Id);
+                return true;
+            }
+        }
+
+        void UpdateRigMonitor()
+        {
+            bool want = settings.RigMonitor && settings.RecCardId.Length > 0 && worker != null && rigAfSupported == 1;
+            if (rigMonitor != null && (!want || rigMonitor.CaptureId != settings.RecCardId)) StopRigMonitor();
+            if (want && rigMonitor == null)
+            {
+                RigMonitor mon = new RigMonitor(settings.RecCardId, rigMuted);
+                mon.Problem += msg => BeginInvokeSafe(delegate { if (rigMonitor == mon) OnRigMonitorProblem(msg); });
+                rigMonitor = mon;
+                rigMonitorTrouble = false;
+            }
+            if (rigMonitor != null) rigMonitor.Muted = rigMuted;
+        }
+
+        // Carte débranchée ou sortie perdue : un message dans la barre d'état, la lecture reprend seule dès que possible.
+        void OnRigMonitorProblem(string msg)
+        {
+            if (msg == null)
+            {
+                if (rigMonitorTrouble) ShowStatus(Lang.T("Écoute du poste sur le PC rétablie", "Rig on the PC back"));
+                rigMonitorTrouble = false;
+                return;
+            }
+            rigMonitorTrouble = true;
+            Log.Write("Écoute du poste : « " + settings.RecCardName + " » : " + msg);
+            ShowStatus(Lang.F("Écoute du poste : carte son « {0} » indisponible ({1})", "Rig on the PC: sound card \"{0}\" not available ({1})", settings.RecCardName, msg));
+        }
+
+        void StopRigMonitor()
+        {
+            if (rigMonitor == null) return;
+            RigMonitor m = rigMonitor;
+            rigMonitor = null;
+            m.Stop();
+            Log.Write("Écoute du poste sur le PC arrêtée");
+        }
+
         void OnRigVolumeChanged()
         {
             lblRigVolume.Text = rigAfSupported == 1 ? trkRigVolume.Value + " %" : "—";
@@ -2904,6 +3031,7 @@ namespace SDRLink
             btnMuteSwap.FlatAppearance.BorderColor = Theme.Border;
             StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable, "MuteEsdr");
             StyleToggle(btnMuteHdsdr, hdsdrMuted, hdsdrWin, "MuteHdsdr");
+            UpdateRigMonitor();
         }
 
         // ---------------------------------------------------------------- Bouton ⇄
@@ -3930,6 +4058,7 @@ namespace SDRLink
                 ? Lang.F("REC : « {0} » sera enregistrée quand seul le poste est écouté", "REC: \"{0}\" will be recorded when only the rig is heard", name)
                 : Lang.T("REC : enregistrement des haut-parleurs", "REC: recording the speakers"));
             UpdateRecButton();
+            UpdateRigMonitor();
         }
 
         // Arrêt : fenêtre pour sauvegarder le son (nom, dossier, format). En fermant SDRLink, le fichier est écrit tout de suite.

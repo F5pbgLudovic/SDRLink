@@ -156,6 +156,13 @@ SDRLINK cable	Cablu SDRLINK
  (off) ▾	 (oprit) ▾
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
+sound card to choose	placă de sunet de ales
+Rig sound card…	Placa de sunet a stației…
+Rig on the PC turned off	Ascultarea stației pe PC dezactivată
+Rig sound card	Placa de sunet a stației
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Intrarea Windows care primește sunetul stației (de exemplu „USB AUDIO CODEC”); este și placa de sunet a stației pentru REC:
+No sound input found in Windows	Nicio intrare de sunet găsită în Windows
+Rig on the PC back	Ascultarea stației pe PC restabilită
 Mutes ignored by ⇄ (stay muted, two at most):	Dezactivări de sunet ignorate de ⇄ (rămân fără sunet, cel mult două):
 None	Niciuna
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR nu redă prin sunetul Windows (recepție oprită sau sunet prin ASIO): SDRLink nu îi poate opri sunetul.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gata: intra
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Redenumirea a eșuat ({0}).\n\nManual: Panou de control Sunet › fila Înregistrare › „{1}” › Proprietăți › nume.
 SDRLINK cable: WebSDR audio sent to "{0}"	Cablu SDRLINK: sunetul WebSDR trimis la „{0}”
 SDRLINK cable: "{0}": {1}	Cablu SDRLINK: „{0}”: {1}
+Also hear the rig on the PC ({0})	Ascultă stația și pe PC ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stația pe PC: „{0}” se aude în difuzoare când Mut TRX nu este activ
+Rig on the PC: sound card "{0}" not available ({1})	Stația pe PC: placa de sunet „{0}” nu este disponibilă ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR rulează, dar nu răspunde pe portul TCI {0}: clic dreapta pe „Volum WebSDR” pentru a schimba portul.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink nu poate opri sunetul ExpertSDR: ExpertSDR nu redă sunetul prin Windows (sunetul iese din aparat sau prin ASIO), iar serverul său TCI nu răspunde pe portul {0}.\n\nÎn ExpertSDR, activați serverul TCI (Options > TCI). Dacă portul său nu este {0}, faceți clic dreapta pe „Mut ExpertSDR” pentru a-l indica.
 "{0}" added to "{1}".	„{0}” adăugat în „{1}”.

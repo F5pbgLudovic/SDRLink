@@ -156,6 +156,13 @@ SDRLINK cable	SDRLINK kabel
  (off) ▾	 (isklj.) ▾
 Mute TRX: connect the rig first	Utišaj TRX: najprije spojite uređaj
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnoća uređaja nije dostupna s ovim uređajem ili sučeljem (OmniRig, HRD, FT-817/818…)
+sound card to choose	zvučnu karticu treba odabrati
+Rig sound card…	Zvučna kartica uređaja…
+Rig on the PC turned off	Slušanje uređaja na računalu isključeno
+Rig sound card	Zvučna kartica uređaja
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Ulaz u Windowsima koji prima zvuk uređaja (na primjer „USB AUDIO CODEC”); to je i zvučna kartica uređaja za REC:
+No sound input found in Windows	U Windowsima nije pronađen nijedan zvučni ulaz
+Rig on the PC back	Slušanje uređaja na računalu ponovno radi
 Mutes ignored by ⇄ (stay muted, two at most):	Utišavanja koja ⇄ preskače (ostaju utišana, najviše dva):
 None	Nijedno
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR ne svira preko zvuka Windowsa (prijem zaustavljen ili zvuk preko ASIO): SDRLink ga ne može utišati.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gotovo: aud
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Preimenovanje nije uspjelo ({0}).\n\nRučno: Upravljačka ploča Zvuk › kartica Snimanje › „{1}” › Svojstva › naziv.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabel: zvuk WebSDR-a šalje se na „{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK kabel: „{0}”: {1}
+Also hear the rig on the PC ({0})	Slušaj uređaj i na računalu ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Uređaj na računalu: „{0}” svira u zvučnicima kad Utišaj TRX nije uključen
+Rig on the PC: sound card "{0}" not available ({1})	Uređaj na računalu: zvučna kartica „{0}” nije dostupna ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR je pokrenut, ali ne odgovara na TCI priključku {0}: desni klik na „Glasnoća WebSDR-a” za promjenu priključka.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink ne može utišati ExpertSDR: ExpertSDR ne reproducira zvuk putem sustava Windows (zvuk izlazi iz uređaja ili putem ASIO-a), a njegov TCI poslužitelj ne odgovara na priključku {0}.\n\nU ExpertSDR-u uključite TCI poslužitelj (Options > TCI). Ako njegov priključak nije {0}, postavite ga desnim klikom na „Utišaj ExpertSDR”.
 "{0}" added to "{1}".	„{0}” dodano u „{1}”.

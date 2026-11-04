@@ -46,7 +46,8 @@ Overview; each feature is detailed further down in its own section.
 | Favorites list (next to the address) | rename the list |
 | Mute WebSDR while transmitting | receivers muted while transmitting: WebSDR, rig, ExpertSDR, HDSDR (check boxes, all ticked at the start) |
 | ⇄ | receivers that ⇄ keeps muted (check boxes, two at most) |
-| Mute WebSDR, Mute TRX, Mute HDSDR | colour when muted / sound on |
+| Mute WebSDR, Mute HDSDR | colour when muted / sound on |
+| Mute TRX | **also hear the rig on the PC**, rig sound card (since 1.23), colour when muted / sound on |
 | Mute ExpertSDR | ExpertSDR TCI port, colour when muted / sound on |
 | "WebSDR volume" | ExpertSDR TCI port |
 | REC | rig sound card, REC button colour, width (narrow / wide) |
@@ -235,6 +236,9 @@ To the right of the WebSDR volume:
 - Mute button colours: **green with white text** when the audio is passing (like the selected mode button), **red with white text** when it is muted, grey when muting is not available.
 - **Mute WebSDR**: mutes the WebSDR audio (red button); a second click restores it at the set volume.
 - **Mute TRX**: mutes the **transceiver** audio by setting its AF gain to zero over CAT, then restores the volume on the second click. The audio is also restored on disconnection.
+  - **Also hear the rig on the PC** (since 1.23, right-click Mute TRX, unticked at the start): the audio coming from the rig on the **rig sound card** (the same as REC's, for example "USB AUDIO CODEC") is also played in the **PC speakers** (Windows default output), with a delay of a few hundredths of a second, **as long as Mute TRX is off**. Mute TRX on (by hand, by ⇄ or while transmitting): the PC goes silent too, and the audio comes back as soon as Mute TRX is released. Only works with the rig connected, when Mute TRX is shown; the choice is kept.
+  - No card chosen, or card missing: ticking the option opens the **Rig sound card** window (list of the Windows inputs) instead of an error message; Cancel changes nothing. **Rig sound card…** (same right-click menu) opens this window at any time. A card unplugged meanwhile is reported in the status bar; the audio starts again on its own when it comes back.
+  - The volume is set with the Windows volume: the USB output of many rigs does not follow their volume knob (nor TRX volume). Do not make a rig's transmit input the Windows default output: this audio would go back into it (like the WebSDR audio).
 - **Mute ExpertSDR**: only appears when the **ExpertSDR** software (2 or 3) is running and answers. It mutes and restores ExpertSDR's audio without going into ExpertSDR:
   - through the **Windows volume mixer** if ExpertSDR plays through Windows audio;
   - otherwise (audio coming out of the rig itself, MB1, or through ASIO) through the **TCI** `mute` command: you must then enable the TCI server in ExpertSDR (Options > TCI). SDRLink keeps a TCI link with ExpertSDR as long as it is running, even if the rig is connected some other way (HRD…): a mute or a volume set in ExpertSDR is also shown in SDRLink. A message explains this if the TCI server does not answer.
@@ -530,6 +534,8 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.23**
+  - **Also hear the rig on the PC** (right-click Mute TRX, unticked at the start): the audio of the rig sound card (REC's) is played in the PC speakers as long as Mute TRX is off. Without a chosen card, the card selection window opens (no error message).
 - **1.22**
   - **Reset the program** (right-click Import/Export): full reset, as a first installation, or partial reset of your choice (memories, scan, colours, WebSDR, configuration, built-in browser data). Previous settings kept in settings.avant-reinitialisation.ini. Useful if the WebSDR pages stay empty. Updates reset nothing.
   - **Click in the page during a scan**: the scan stops on the scanned frequency; if the click moved the waterfall, the frequency is put back at once (the rig does not move). The next click tunes normally.

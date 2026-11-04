@@ -45,7 +45,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Liste des favoris (à côté de l'adresse) | renommer la liste |
 | Couper le son du WebSDR en émission | réceptions dont le son est coupé en émission : WebSDR, poste, ExpertSDR, HDSDR (cases à cocher, toutes cochées au départ) |
 | ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus) |
-| Mute WebSDR, Mute TX, Mute HDSDR | couleur son coupé / son actif |
+| Mute WebSDR, Mute HDSDR | couleur son coupé / son actif |
+| Mute TX | **écouter aussi le poste sur le PC**, carte son du poste (depuis la 1.23), couleur son coupé / son actif |
 | Mute ExpertSDR | port TCI d'ExpertSDR, couleur son coupé / son actif |
 | « Volume WebSDR » | port TCI d'ExpertSDR |
 | REC | carte son du poste, couleur du bouton REC, largeur (étroit / large) |
@@ -234,6 +235,9 @@ La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gau
 - Couleurs des boutons Mute : **vert, écriture blanche** quand le son passe (comme le bouton de mode choisi), **rouge, écriture blanche** quand il est coupé, gris quand la coupure n'est pas disponible.
 - **Mute WebSDR** : coupe le son du WebSDR (bouton rouge), un second clic le rétablit au volume réglé.
 - **Mute TX** : coupe le son du **transceiver** en mettant son gain BF à zéro par CAT, puis rétablit le volume au second clic. Le son est aussi rétabli à la déconnexion.
+  - **Écouter aussi le poste sur le PC** (depuis la 1.23, clic droit sur Mute TX, non coché au départ) : le son qui arrive du poste sur la **carte son du poste** (la même que celle de REC, par exemple « USB AUDIO CODEC ») est aussi joué dans les **haut-parleurs du PC** (sortie par défaut de Windows), avec un retard de quelques centièmes de seconde, **tant que Mute TX n'est pas actif**. Mute TX actif (à la main, par ⇄ ou pendant l'émission) : le PC se tait aussi, et le son revient dès que Mute TX est relâché. Ne marche que poste connecté, quand Mute TX est affiché ; le choix est gardé.
+  - Pas de carte choisie, ou carte absente : cocher l'option ouvre la fenêtre **Carte son du poste** (liste des entrées de Windows) au lieu d'un message d'erreur ; Annuler ne change rien. **Carte son du poste…** (même clic droit) ouvre cette fenêtre à tout moment. Une carte débranchée en cours de route est signalée dans la barre d'état ; le son repart seul quand elle revient.
+  - Le volume se règle avec celui de Windows : la sortie USB de beaucoup de postes ne suit pas leur bouton de volume (ni Volume TX). Ne pas mettre comme sortie par défaut de Windows l'entrée d'émission d'un poste : ce son y repartirait (comme celui du WebSDR).
 - **Mute ExpertSDR** : n'apparaît que lorsque le logiciel **ExpertSDR** (2 ou 3) tourne et répond. Il coupe et rétablit le son d'ExpertSDR sans aller dans ExpertSDR :
   - par le **mélangeur de volume de Windows** si ExpertSDR joue par le son de Windows ;
   - sinon (son sorti par le poste lui-même, MB1, ou par ASIO) par la commande **TCI** `mute` : il faut alors activer le serveur TCI dans ExpertSDR (Options > TCI). SDRLink garde une liaison TCI avec ExpertSDR tant qu'il tourne, même si le poste est relié autrement (HRD…) : une coupure ou un volume réglé dans ExpertSDR s'affiche aussi dans SDRLink. Un message l'explique si le serveur TCI ne répond pas.
@@ -528,6 +532,8 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.23**
+  - **Écouter aussi le poste sur le PC** (clic droit sur Mute TX, non coché au départ) : le son de la carte son du poste (celle de REC) est joué dans les haut-parleurs du PC tant que Mute TX n'est pas actif. Sans carte choisie, la fenêtre de choix de la carte s'ouvre (pas de message d'erreur).
 - **1.22**
   - **Réinitialiser le programme** (clic droit sur Import/Export) : réinitialisation totale, comme une première installation, ou partielle au choix (mémoires, scan, couleurs, WebSDR, configuration, données du navigateur intégré). Anciens réglages gardés dans settings.avant-reinitialisation.ini. Utile si les pages des WebSDR restent vides. Les mises à jour ne réinitialisent rien.
   - **Clic dans la page pendant un scan** : le scan s'arrête sur la fréquence scannée ; si le clic a déplacé la cascade, la fréquence y est remise aussitôt (le poste n'en bouge pas). Le clic suivant règle normalement.

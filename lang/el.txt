@@ -156,6 +156,13 @@ SDRLINK cable	Καλώδιο SDRLINK
  (off) ▾	 (ανενεργό) ▾
 Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
+sound card to choose	επιλέξτε κάρτα ήχου
+Rig sound card…	Κάρτα ήχου του πομποδέκτη…
+Rig on the PC turned off	Η ακρόαση του πομποδέκτη στον υπολογιστή απενεργοποιήθηκε
+Rig sound card	Κάρτα ήχου του πομποδέκτη
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Είσοδος των Windows που λαμβάνει τον ήχο του πομποδέκτη (για παράδειγμα «USB AUDIO CODEC»)· είναι και η κάρτα ήχου του πομποδέκτη για το REC:
+No sound input found in Windows	Δεν βρέθηκε είσοδος ήχου στα Windows
+Rig on the PC back	Η ακρόαση του πομποδέκτη στον υπολογιστή αποκαταστάθηκε
 Mutes ignored by ⇄ (stay muted, two at most):	Σιγάσεις που αγνοεί το ⇄ (μένουν σε σίγαση, έως δύο):
 None	Καμία
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	Το HDSDR δεν παίζει μέσω του ήχου των Windows (λήψη σταματημένη ή ήχος μέσω ASIO): το SDRLink δεν μπορεί να το θέσει σε σίγαση.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Ολοκλ�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Η μετονομασία απέτυχε ({0}).\n\nΧειροκίνητα: Πίνακας Ελέγχου Ήχος › καρτέλα Εγγραφή › «{1}» › Ιδιότητες › όνομα.
 SDRLINK cable: WebSDR audio sent to "{0}"	Καλώδιο SDRLINK: ο ήχος του WebSDR στέλνεται στο «{0}»
 SDRLINK cable: "{0}": {1}	Καλώδιο SDRLINK: «{0}»: {1}
+Also hear the rig on the PC ({0})	Ακρόαση του πομποδέκτη και στον υπολογιστή ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Πομποδέκτης στον υπολογιστή: το «{0}» παίζει στα ηχεία όταν η Σίγαση TRX δεν είναι ενεργή
+Rig on the PC: sound card "{0}" not available ({1})	Πομποδέκτης στον υπολογιστή: η κάρτα ήχου «{0}» δεν είναι διαθέσιμη ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	Το ExpertSDR εκτελείται αλλά δεν απαντά στη θύρα TCI {0}: δεξί κλικ στο «Ένταση WebSDR» για αλλαγή της θύρας.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	Το SDRLink δεν μπορεί να κάνει σίγαση στο ExpertSDR: το ExpertSDR δεν αναπαράγει ήχο μέσω των Windows (ο ήχος βγαίνει από τον πομποδέκτη ή μέσω ASIO) και ο διακομιστής TCI του δεν απαντά στη θύρα {0}.\n\nΣτο ExpertSDR ενεργοποιήστε τον διακομιστή TCI (Options > TCI). Αν η θύρα του δεν είναι {0}, ορίστε την με δεξί κλικ στη «Σίγαση ExpertSDR».
 "{0}" added to "{1}".	Το «{0}» προστέθηκε στο «{1}».

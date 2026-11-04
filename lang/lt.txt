@@ -156,6 +156,13 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (išj.) ▾
 Mute TRX: connect the rig first	Nutildyti TRX: pirmiausia prijunkite stotį
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Stoties garsumas nepasiekiamas su šia stotimi ar sąsaja (OmniRig, HRD, FT-817/818…)
+sound card to choose	reikia pasirinkti garso plokštę
+Rig sound card…	Stoties garso plokštė…
+Rig on the PC turned off	Stoties klausymas kompiuteryje išjungtas
+Rig sound card	Stoties garso plokštė
+Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Windows įvestis, į kurią ateina stoties garsas (pavyzdžiui, „USB AUDIO CODEC“); tai ir REC stoties garso plokštė:
+No sound input found in Windows	Windows nerasta jokios garso įvesties
+Rig on the PC back	Stoties klausymas kompiuteryje atkurtas
 Mutes ignored by ⇄ (stay muted, two at most):	Nutildymai, kurių ⇄ nepaiso (lieka nutildyti, ne daugiau kaip du):
 None	Jokio
 HDSDR does not play through Windows sound (reception stopped, or audio through ASIO): SDRLink cannot mute it.	HDSDR negroja per Windows garsą (priėmimas sustabdytas arba garsas per ASIO): SDRLink negali jo nutildyti.
@@ -234,6 +241,9 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Atlikta: ga
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pervardyti nepavyko ({0}).\n\nRankiniu būdu: Garso valdymo skydas › skirtukas Įrašymas › „{1}“ › Ypatybės › pavadinimas.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR garsas siunčiamas į „{0}“
 SDRLINK cable: "{0}": {1}	SDRLINK kabelis: „{0}“: {1}
+Also hear the rig on the PC ({0})	Klausytis stoties ir kompiuteryje ({0})
+Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stotis kompiuteryje: „{0}“ groja garsiakalbiuose, kai Nutildyti TRX neįjungta
+Rig on the PC: sound card "{0}" not available ({1})	Stotis kompiuteryje: garso plokštė „{0}“ nepasiekiama ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR veikia, bet neatsako TCI prievade {0}: norėdami pakeisti prievadą, dešiniuoju pelės mygtuku spustelėkite „WebSDR garsumas“.
 SDRLink cannot mute ExpertSDR: ExpertSDR does not play through Windows sound (audio comes out of the radio or through ASIO), and its TCI server does not answer on port {0}.\n\nIn ExpertSDR, enable the TCI server (Options > TCI). If its port is not {0}, right-click Mute ExpertSDR to set it.	SDRLink negali nutildyti ExpertSDR: ExpertSDR garso neleidžia per Windows (garsas sklinda iš radijo stoties arba per ASIO), o jo TCI serveris neatsako prievade {0}.\n\nExpertSDR įjunkite TCI serverį (Options > TCI). Jei jo prievadas nėra {0}, nustatykite jį dešiniuoju pelės mygtuku spustelėję „Nutildyti ExpertSDR“.
 "{0}" added to "{1}".	„{0}“ įtrauktas į „{1}“.
