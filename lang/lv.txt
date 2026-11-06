@@ -67,6 +67,9 @@ Checking… {0} left	Pārbauda… atlicis: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Pārbaude pabeigta: noņemti dublikāti – {1}, atzīmētas nedarbīgas saites – {0}. Noklikšķiniet uz "Noņemt…", lai tās dzēstu.
 {0} favorite(s) imported, {1} already present.	Importēti izlases vienumi: {0}, jau bija: {1}.
 {0} favorite(s) exported.	Eksportēti izlases vienumi: {0}.
+decoder missing from this build	šajā versijā trūkst dekodētāja
+program capture does not answer	programmas skaņas tveršana neatbild
+unsupported audio format ({0} bits, {1} Hz)	neatbalstīts audio formāts ({0} biti, {1} Hz)
 rigctld connection closed	rigctld savienojums aizvērts
 stopped	apturēts
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nav rigctld adresē {0}:{1} (palaidiet rigctld vai atzīmējiet "Palaist rigctld").
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Labais klikšķis: uztvērēji, kas raidīšanas laikā tiek klusināti
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
 Store the current frequency…	Saglabāt pašreizējo frekvenci…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: runa tiek dekodēta, tiklīdz tiek uztverts FreeDV signāls (klikšķis: ieslēgt / izslēgt; labais klikšķis: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Pārslēgt skaņu uz nākamo uztvērēju (labais klikšķis: uztvērējs, kas paliek apklusināts)
 Colour when connected	Krāsa, kad savienots
 Colour when disconnected	Krāsa, kad atvienots
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (izsl.) ▾
 Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
+rig	raiduztvērējs
+FreeDV auto off	FreeDV auto izslēgts
+ (FreeDV 3, under development)	 (FreeDV 3, izstrādē)
+FreeDV: end of speech, back to normal audio	FreeDV: runas beigas, atpakaļ pie parastās skaņas
 sound card to choose	jāizvēlas skaņas karte
 Rig sound card…	Raiduztvērēja skaņas karte…
 Rig on the PC turned off	Raiduztvērēja klausīšanās datorā izslēgta
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gatavs: aud
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pārdēvēšana neizdevās ({0}).\n\nManuāli: skaņas vadības panelis › cilne Ierakstīšana › "{1}" › Rekvizīti › nosaukums.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR skaņa tiek sūtīta uz "{0}"
 SDRLINK cable: "{0}": {1}	SDRLINK kabelis: "{0}": {1}
+FreeDV: decoder not available ({0})	FreeDV: dekodētājs nav pieejams ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): runa tiks dekodēta, tiklīdz tiks uztverts FreeDV signāls
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: runa dekodēta ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: skaņa nav pieejama ({1})
 Also hear the rig on the PC ({0})	Klausīties raiduztvērēju arī datorā ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Raiduztvērējs datorā: “{0}” skan skaļruņos, kad Klusināt TRX nav ieslēgts
 Rig on the PC: sound card "{0}" not available ({1})	Raiduztvērējs datorā: skaņas karte “{0}” nav pieejama ({1})
@@ -313,6 +326,7 @@ Reload	Pārlādēt
 Remove from favorites	Noņemt no izlases
 Manage favorites…	Pārvaldīt izlasi…
 Find WebSDRs…	Meklēt WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Klusināt WebSDR
 Mute TRX	Klusināt TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	bez zudumiem, saspiests
 Folder where the recording is saved	Mape, kurā saglabāt ierakstu
 Enter a name for the file.	Ievadiet faila nosaukumu.
 Cannot create the folder: 	Nevar izveidot mapi: 
-unsupported audio format ({0} bits, {1} Hz)	neatbalstīts audio formāts ({0} biti, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3 kodētājs nav pieejams (0x{0:X8}): izvēlieties WAV vai FLAC
 Recording length: {0}	Ieraksta ilgums: {0}
 "{0}" already exists. Replace it?	“{0}” jau pastāv. Aizstāt?

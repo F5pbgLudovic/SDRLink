@@ -67,6 +67,9 @@ Checking… {0} left	A verificar… faltam {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Verificação concluída: {1} duplicado(s) removido(s), {0} ligação(ões) inativa(s) marcadas. Clique em «Remover…» para as eliminar.
 {0} favorite(s) imported, {1} already present.	{0} favorito(s) importado(s), {1} já existente(s).
 {0} favorite(s) exported.	{0} favorito(s) exportado(s).
+decoder missing from this build	descodificador em falta nesta versão
+program capture does not answer	a captura do programa não responde
+unsupported audio format ({0} bits, {1} Hz)	formato de áudio não suportado ({0} bits, {1} Hz)
 rigctld connection closed	Ligação rigctld fechada
 stopped	parado
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nenhum rigctld em {0}:{1} (inicie o rigctld ou marque «Iniciar rigctld»).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Clique direito: recetores silenciados ao emitir
 Save: no known frequency (rig or WebSDR)	Gravar: nenhuma frequência conhecida (rádio ou WebSDR)
 Store the current frequency…	Memorizar a frequência atual…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: a voz é descodificada assim que é recebido um sinal FreeDV (clique: ligar / desligar; clique direito: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Passar o som para o recetor seguinte (clique direito: recetor que fica silenciado)
 Colour when connected	Cor quando ligado
 Colour when disconnected	Cor quando desligado
@@ -156,6 +160,10 @@ SDRLINK cable	Cabo SDRLINK
  (off) ▾	 (desat.) ▾
 Mute TRX: connect the rig first	Silenciar TRX: ligue primeiro o rádio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume do rádio indisponível com este rádio ou interface (OmniRig, HRD, FT-817/818…)
+rig	rádio
+FreeDV auto off	FreeDV auto desligado
+ (FreeDV 3, under development)	 (FreeDV 3, em desenvolvimento)
+FreeDV: end of speech, back to normal audio	FreeDV: fim da voz, regresso ao som normal
 sound card to choose	placa de som por escolher
 Rig sound card…	Placa de som do rádio…
 Rig on the PC turned off	Escuta do rádio no PC desativada
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Concluído:
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Falha ao mudar o nome ({0}).\n\nManualmente: Painel de Controlo de Som › separador Gravação › «{1}» › Propriedades › nome.
 SDRLINK cable: WebSDR audio sent to "{0}"	Cabo SDRLINK: áudio do WebSDR enviado para «{0}»
 SDRLINK cable: "{0}": {1}	Cabo SDRLINK: «{0}»: {1}
+FreeDV: decoder not available ({0})	FreeDV: descodificador indisponível ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): a voz será descodificada assim que for recebido um sinal FreeDV
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: voz descodificada ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: som indisponível ({1})
 Also hear the rig on the PC ({0})	Ouvir também o rádio no PC ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Rádio no PC: «{0}» toca nos altifalantes quando Silenciar TRX não está ativo
 Rig on the PC: sound card "{0}" not available ({1})	Rádio no PC: placa de som «{0}» indisponível ({1})
@@ -313,6 +326,7 @@ Reload	Recarregar
 Remove from favorites	Remover dos favoritos
 Manage favorites…	Gerir favoritos…
 Find WebSDRs…	Procurar WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Silenciar WebSDR
 Mute TRX	Silenciar TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	sem perdas, comprimido
 Folder where the recording is saved	Pasta onde guardar a gravação
 Enter a name for the file.	Indique um nome para o ficheiro.
 Cannot create the folder: 	Não é possível criar a pasta: 
-unsupported audio format ({0} bits, {1} Hz)	formato de áudio não suportado ({0} bits, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Codificador MP3 do Windows indisponível (0x{0:X8}): escolha WAV ou FLAC
 Recording length: {0}	Duração da gravação: {0}
 "{0}" already exists. Replace it?	«{0}» já existe. Substituir?

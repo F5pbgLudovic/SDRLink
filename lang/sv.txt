@@ -67,6 +67,9 @@ Checking… {0} left	Kontrollerar… {0} kvar
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontroll klar: {1} dubblett(er) borttagna, {0} död(a) länk(ar) bockade. Klicka på ”Ta bort…” för att radera dem.
 {0} favorite(s) imported, {1} already present.	{0} favorit(er) importerade, {1} fanns redan.
 {0} favorite(s) exported.	{0} favorit(er) exporterade.
+decoder missing from this build	avkodaren saknas i den här versionen
+program capture does not answer	inspelningen av programmet svarar inte
+unsupported audio format ({0} bits, {1} Hz)	ljudformatet stöds inte ({0} bitar, {1} Hz)
 rigctld connection closed	rigctld-anslutningen stängd
 stopped	stoppad
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Ingen rigctld på {0}:{1} (starta rigctld eller bocka för ”Starta rigctld”).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Högerklick: mottagare som tystas vid sändning
 Save: no known frequency (rig or WebSDR)	Save: ingen känd frekvens (rigg eller WebSDR)
 Store the current frequency…	Spara aktuell frekvens…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: talet avkodas så snart en FreeDV-signal tas emot (klick: på / av; högerklick: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Växla ljudet till nästa mottagare (högerklick: mottagare som förblir avstängd)
 Colour when connected	Färg när ansluten
 Colour when disconnected	Färg när frånkopplad
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (av) ▾
 Mute TRX: connect the rig first	Tysta rigg: anslut riggen först
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolym är inte tillgänglig med denna rigg eller detta gränssnitt (OmniRig, HRD, FT-817/818…)
+rig	rigg
+FreeDV auto off	FreeDV auto avstängt
+ (FreeDV 3, under development)	 (FreeDV 3, under utveckling)
+FreeDV: end of speech, back to normal audio	FreeDV: slut på talet, tillbaka till vanligt ljud
 sound card to choose	ljudkort att välja
 Rig sound card…	Riggens ljudkort…
 Rig on the PC turned off	Riggen i datorn avstängd
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Klart: ljud
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Namnbytet misslyckades ({0}).\n\nManuellt: Kontrollpanelen Ljud › fliken Inspelning › ”{1}” › Egenskaper › namn.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-ljud skickas till ”{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK-kabel: ”{0}”: {1}
+FreeDV: decoder not available ({0})	FreeDV: avkodaren är inte tillgänglig ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): talet avkodas så snart en FreeDV-signal tas emot
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: tal avkodat ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: ljud inte tillgängligt ({1})
 Also hear the rig on the PC ({0})	Hör riggen även i datorn ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Riggen i datorn: "{0}" spelas i högtalarna när Tysta rigg är av
 Rig on the PC: sound card "{0}" not available ({1})	Riggen i datorn: ljudkortet "{0}" är inte tillgängligt ({1})
@@ -313,6 +326,7 @@ Reload	Uppdatera
 Remove from favorites	Ta bort från favoriter
 Manage favorites…	Hantera favoriter…
 Find WebSDRs…	Sök WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Tysta WebSDR
 Mute TRX	Tysta rigg
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	förlustfritt, komprimerat
 Folder where the recording is saved	Mapp där inspelningen sparas
 Enter a name for the file.	Ange ett namn på filen.
 Cannot create the folder: 	Mappen kan inte skapas: 
-unsupported audio format ({0} bits, {1} Hz)	ljudformatet stöds inte ({0} bitar, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3-kodare är inte tillgänglig (0x{0:X8}): välj WAV eller FLAC
 Recording length: {0}	Inspelningens längd: {0}
 "{0}" already exists. Replace it?	"{0}" finns redan. Ersätta den?

@@ -67,6 +67,9 @@ Checking… {0} left	Sprawdzanie… pozostało: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Sprawdzanie zakończone. Usunięte duplikaty: {1}, zaznaczone martwe linki: {0}. Kliknij „Usuń…”, aby je usunąć.
 {0} favorite(s) imported, {1} already present.	Zaimportowane ulubione: {0}, już istniejące: {1}.
 {0} favorite(s) exported.	Wyeksportowane ulubione: {0}.
+decoder missing from this build	brak dekodera w tej wersji
+program capture does not answer	przechwytywanie programu nie odpowiada
+unsupported audio format ({0} bits, {1} Hz)	nieobsługiwany format dźwięku ({0} bitów, {1} Hz)
 rigctld connection closed	Połączenie rigctld zamknięte
 stopped	zatrzymano
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Brak rigctld pod adresem {0}:{1} (uruchom rigctld lub zaznacz „Uruchom rigctld”).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Prawy klik: odbiorniki wyciszane podczas nadawania
 Save: no known frequency (rig or WebSDR)	Zapisz: brak znanej częstotliwości (TRX lub WebSDR)
 Store the current frequency…	Zapamiętaj bieżącą częstotliwość…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: mowa jest dekodowana, gdy tylko odebrany zostanie sygnał FreeDV (kliknięcie: wł. / wył.; prawy przycisk: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Przełącz dźwięk na następny odbiornik (prawy przycisk: odbiornik, który pozostaje wyciszony)
 Colour when connected	Kolor po połączeniu
 Colour when disconnected	Kolor po rozłączeniu
@@ -156,6 +160,10 @@ SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (wył.) ▾
 Mute TRX: connect the rig first	Wycisz TRX: najpierw połącz radiostację
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Głośność radiostacji niedostępna dla tej radiostacji lub interfejsu (OmniRig, HRD, FT-817/818…)
+rig	radiostacja
+FreeDV auto off	FreeDV auto wyłączone
+ (FreeDV 3, under development)	 (FreeDV 3, w trakcie rozwoju)
+FreeDV: end of speech, back to normal audio	FreeDV: koniec mowy, powrót do zwykłego dźwięku
 sound card to choose	kartę dźwiękową trzeba wybrać
 Rig sound card…	Karta dźwiękowa radiostacji…
 Rig on the PC turned off	Słuchanie radiostacji na komputerze wyłączone
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gotowe: wej
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Zmiana nazwy nie powiodła się ({0}).\n\nRęcznie: Panel sterowania Dźwięk › karta Nagrywanie › „{1}” › Właściwości › nazwa.
 SDRLINK cable: WebSDR audio sent to "{0}"	Kabel SDRLINK: dźwięk z WebSDR wysyłany do „{0}”
 SDRLINK cable: "{0}": {1}	Kabel SDRLINK: „{0}”: {1}
+FreeDV: decoder not available ({0})	FreeDV: dekoder niedostępny ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): mowa będzie dekodowana, gdy tylko odebrany zostanie sygnał FreeDV
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: zdekodowana mowa ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: dźwięk niedostępny ({1})
 Also hear the rig on the PC ({0})	Słuchaj radiostacji także na komputerze ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Radiostacja na komputerze: „{0}” gra w głośnikach, gdy Wycisz TRX nie jest włączone
 Rig on the PC: sound card "{0}" not available ({1})	Radiostacja na komputerze: karta dźwiękowa „{0}” niedostępna ({1})
@@ -313,6 +326,7 @@ Reload	Przeładuj
 Remove from favorites	Usuń z ulubionych
 Manage favorites…	Zarządzaj ulubionymi…
 Find WebSDRs…	Znajdź WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Wycisz WebSDR
 Mute TRX	Wycisz TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	bezstratny, skompresowany
 Folder where the recording is saved	Folder, w którym zapisywane jest nagranie
 Enter a name for the file.	Podaj nazwę pliku.
 Cannot create the folder: 	Nie można utworzyć folderu: 
-unsupported audio format ({0} bits, {1} Hz)	nieobsługiwany format dźwięku ({0} bitów, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Koder MP3 systemu Windows niedostępny (0x{0:X8}): wybierz WAV lub FLAC
 Recording length: {0}	Długość nagrania: {0}
 "{0}" already exists. Replace it?	„{0}” już istnieje. Zastąpić?

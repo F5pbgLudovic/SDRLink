@@ -152,7 +152,7 @@ namespace SDRLink
                 InitWebView();
                 if (settings.AutoConnect) Connect();
             };
-            Shown += delegate { ApplyView(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); };
+            Shown += delegate { ApplyView(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); UpdateFreeDv(); };
             Application.AddMessageFilter(new WheelFilter(this));
             Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyView(); };
             FormClosing += delegate
@@ -163,6 +163,7 @@ namespace SDRLink
                 if (pttView) SetPttView(false);
                 Disconnect();
                 StopRigMonitor();
+                StopFreeDv();
                 if (cableSink != null) { cableSink.Dispose(); cableSink = null; }
                 // ExpertSDR coupé par SDRLink : son rétabli (Windows garde la coupure d'un logiciel d'une fois sur l'autre).
                 try { if (esdrMutedByUs) SetExpertSdrMute(false); } catch { }
@@ -644,6 +645,18 @@ namespace SDRLink
             rowUrl.Controls.Add(Colorable("FavRemove", Btn("Retirer des favoris", "Remove from favorites", delegate { RemoveCurrentFavorite(); })));
             rowUrl.Controls.Add(Colorable("FavManage", Btn("Gérer les favoris…", "Manage favorites…", delegate { ManageFavorites(); })));
             rowUrl.Controls.Add(Colorable("Find", Btn("Rechercher des WebSDR…", "Find WebSDRs…", delegate { SearchWebSdrs(); })));
+            // FreeDV auto : clic = marche / arrêt, clic droit = RADE V1 / V2 (pas de menu).
+            btnFreeDv = Btn("FreeDV auto", "FreeDV auto", delegate { SetFreeDv(!settings.FreeDvAuto); });
+            btnFreeDv.Tag = Theme.Custom;
+            btnFreeDv.FlatStyle = FlatStyle.Flat;
+            btnFreeDv.MouseUp += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Right) SetFreeDvVersion(!settings.FreeDvV2); };
+            Tr(delegate
+            {
+                UpdateFreeDvButton();
+                tips.SetToolTip(btnFreeDv, Lang.T("FreeDV RADE : la parole est décodée dès qu'un signal FreeDV est reçu (clic : marche / arrêt ; clic droit : RADE V1 / V2)",
+                    "FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)"));
+            });
+            rowUrl.Controls.Add(btnFreeDv);
 
             // Volume du WebSDR seul (pas celui de Windows), mémorisé pour chaque favori.
             trkVolume = new TrackBar();
@@ -1949,6 +1962,7 @@ namespace SDRLink
         // après un délai, car le son du WebSDR arrive avec du retard et contiendrait encore la fin de notre propre émission.
         void ApplyMute()
         {
+            if (freedv != null) freedv.OutputMuted = Transmitting;   // parole FreeDV muette en émission
             if (chkMute.Checked && Transmitting)
             {
                 unmuteTimer.Stop();
@@ -2657,8 +2671,11 @@ namespace SDRLink
                                     "SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): \"SDRLINK cable\" button.");
             if (settings.CableEnabled && dev == null) ShowStatus(missing);
             else if (status.Text == missing) ShowStatus("");   // câble désactivé ou trouvé : le message ne vaut plus
-            SetPageTap(cableSink != null);
+            UpdatePageTap();
         }
+
+        // Recopie du son de la page : pour le câble SDRLINK, ou pour FreeDV quand il écoute le WebSDR.
+        void UpdatePageTap() { SetPageTap(cableSink != null || (freedv != null && fdvSource == 0)); }
 
         void SetPageTap(bool on)
         {
@@ -2792,15 +2809,20 @@ namespace SDRLink
             PaintKeyed(btnCable, on ? "CableOn" : "CableOff");
         }
 
-        // Bloc audio de la page ("pcm|fréquence|base64") à recopier vers le câble.
+        // Bloc audio de la page ("pcm|fréquence|base64") à recopier vers le câble, et à décoder si FreeDV écoute le WebSDR.
         void OnPcm(string msg)
         {
-            if (cableSink == null) return;
+            bool toFreeDv = freedv != null && fdvSource == 0;
+            if (cableSink == null && !toFreeDv) return;
             int a = msg.IndexOf('|'), b = msg.IndexOf('|', a + 1);
             int rate;
             if (b < 0 || !int.TryParse(msg.Substring(a + 1, b - a - 1), out rate)) return;
-            try { cableSink.Write(rate, Convert.FromBase64String(msg.Substring(b + 1))); }
-            catch (FormatException) { }
+            byte[] pcm;
+            try { pcm = Convert.FromBase64String(msg.Substring(b + 1)); }
+            catch (FormatException) { return; }
+            if (toFreeDv) freedv.Feed16(rate, pcm);
+            if (cableSink == null) return;
+            cableSink.Write(rate, pcm);
             if (cableSink.Error != shownCableError)
             {
                 shownCableError = cableSink.Error;
@@ -2845,7 +2867,7 @@ namespace SDRLink
         {
             lblVolume.Text = trkVolume.Value + " %";
             if (web.CoreWebView2 == null) return;
-            double v = sdrMuted ? 0 : trkVolume.Value / 100.0;
+            double v = sdrMuted || (fdvVoice && fdvSource == 0) ? 0 : trkVolume.Value / 100.0;   // parole FreeDV jouée : page muette
             web.CoreWebView2.ExecuteScriptAsync(string.Format(CultureInfo.InvariantCulture,
                 "window.__sdrlink && window.__sdrlink.setVolume({0});", v));
         }
@@ -2865,6 +2887,191 @@ namespace SDRLink
             worker.SetAfGain(rigMuted ? 0 : trkRigVolume.Value);
             Log.Write(rigMuted ? "Son du poste coupé (gain BF à 0)" : "Son du poste rétabli à " + trkRigVolume.Value + " %");
             UpdateMuteButtons();
+        }
+
+        // ---------------------------------------------------------------- FreeDV auto (bouton après « Rechercher des WebSDR »)
+
+        // Coché : le son écouté est décodé en permanence (FreeDvEngine, deux bandes latérales) ; dès que de la parole sort,
+        // le son brut de cette réception est coupé et la parole jouée, puis tout revient 1,5 s après la fin. Une seule
+        // réception est décodée : le poste (carte son de REC) si Mute TX n'est pas actif, sinon le WebSDR si Mute WebSDR
+        // n'est pas actif, sinon ExpertSDR, sinon HDSDR (capture par programme). Décoché : rien ne tourne, DLL non chargée.
+        Button btnFreeDv;
+        FreeDvEngine freedv;
+        AudioTap fdvTap;
+        int fdvSource = -1;          // même numérotation que ⇄ : 0 WebSDR, 1 poste, 2 ExpertSDR, 3 HDSDR ; -1 aucune
+        bool fdvVoice;               // parole FreeDV en cours
+        System.Windows.Forms.Timer fdvTimer;
+
+        bool RigMonitorMuted { get { return rigMuted || (fdvVoice && fdvSource == 1); } }
+
+        string FreeDvName { get { return "RADE " + (settings.FreeDvV2 ? "V2" : "V1"); } }
+
+        string FreeDvSourceName(int i)
+        {
+            return i == 0 ? "WebSDR" : i == 1 ? Lang.T("poste", "rig") : i == 2 ? "ExpertSDR" : i == 3 ? "HDSDR" : "—";
+        }
+
+        void SetFreeDv(bool on)
+        {
+            if (on)
+            {
+                string err = FreeDvNative.Load();
+                if (err != null) { ShowStatus(Lang.F("FreeDV : décodeur indisponible ({0})", "FreeDV: decoder not available ({0})", err)); return; }
+            }
+            settings.FreeDvAuto = on;
+            settings.Save();
+            Log.Write("FreeDV auto : " + (on ? "activé (" + FreeDvName + ")" : "désactivé"));
+            ShowStatus(on
+                ? Lang.F("FreeDV auto ({0}) : la parole sera décodée dès qu'un signal FreeDV est reçu", "FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received", FreeDvName)
+                : Lang.T("FreeDV auto arrêté", "FreeDV auto off"));
+            UpdateFreeDv();
+        }
+
+        void SetFreeDvVersion(bool v2)
+        {
+            settings.FreeDvV2 = v2;
+            settings.Save();
+            Log.Write("FreeDV : " + FreeDvName);
+            ShowStatus(Lang.F("FreeDV : {0}", "FreeDV: {0}", FreeDvName + (v2 ? Lang.T(" (FreeDV 3, en développement)", " (FreeDV 3, under development)") : "")));
+            UpdateFreeDv();
+            UpdateFreeDvButton();
+        }
+
+        void UpdateFreeDvButton()
+        {
+            if (btnFreeDv == null || settings == null) return;
+            btnFreeDv.Text = "FreeDV auto " + (settings.FreeDvV2 ? "V2" : "V1");
+            if (fdvVoice) { btnFreeDv.BackColor = Color.FromArgb(255, 140, 0); btnFreeDv.ForeColor = Color.Black; btnFreeDv.FlatAppearance.BorderColor = Color.FromArgb(200, 100, 0); }
+            else if (settings.FreeDvAuto) { btnFreeDv.BackColor = Color.FromArgb(0, 120, 60); btnFreeDv.ForeColor = Color.White; btnFreeDv.FlatAppearance.BorderColor = Color.FromArgb(0, 150, 75); }
+            else { btnFreeDv.BackColor = Theme.ButtonBack; btnFreeDv.ForeColor = Theme.Fore; btnFreeDv.FlatAppearance.BorderColor = Theme.Border; }
+        }
+
+        // Toutes les 500 ms tant que FreeDV auto est coché, et à chaque changement de réglage.
+        void UpdateFreeDv()
+        {
+            if (!settings.FreeDvAuto) { StopFreeDv(); return; }
+            if (freedv != null && freedv.V2 != settings.FreeDvV2) StopFreeDv();
+            if (freedv == null)
+            {
+                if (FreeDvNative.Load() != null) { settings.FreeDvAuto = false; UpdateFreeDvButton(); return; }
+                FreeDvEngine e = new FreeDvEngine(settings.FreeDvV2);
+                e.VoiceChanged += delegate(bool on, int snr) { BeginInvokeSafe(delegate { if (freedv == e) OnFreeDvVoice(on, snr); }); };
+                freedv = e;
+                fdvSource = -2;   // source à choisir
+                if (fdvTimer == null)
+                {
+                    fdvTimer = new System.Windows.Forms.Timer { Interval = 500 };
+                    fdvTimer.Tick += delegate { UpdateFreeDv(); };
+                }
+                fdvTimer.Start();
+            }
+            // Pendant l'émission, la source ne change pas (les réceptions y sont coupées).
+            int src = Transmitting && fdvSource >= -1 ? fdvSource : PickFreeDvSource();
+            if (src != fdvSource) SwitchFreeDvSource(src);
+            freedv.OutputMuted = Transmitting;
+            if (fdvVoice) status.Text = VoiceText(freedv.Snr);   // SNR tenu à jour, sans remplir l'historique
+            UpdateFreeDvButton();
+        }
+
+        string VoiceText(int snr)
+        {
+            return Lang.F("FreeDV {0} : parole décodée ({1}, SNR {2} dB)", "FreeDV {0}: speech decoded ({1}, SNR {2} dB)",
+                FreeDvName, FreeDvSourceName(fdvSource), snr);
+        }
+
+        // Priorité : le poste, puis le WebSDR, puis ExpertSDR, puis HDSDR (seulement une réception écoutée).
+        int PickFreeDvSource()
+        {
+            if (worker != null && rigAfSupported == 1 && !rigMuted && settings.RecCardId.Length > 0) return 1;
+            if (!sdrMuted && web.CoreWebView2 != null) return 0;
+            if (EsdrAvailable && !esdrMuted && esdrPids.Count > 0) return 2;
+            if (hdsdrWin && !hdsdrMuted && hdsdrPids.Count > 0) return 3;
+            return -1;
+        }
+
+        void SwitchFreeDvSource(int src)
+        {
+            EndFreeDvVoice();
+            if (fdvTap != null) { fdvTap.Stop(); fdvTap = null; }
+            fdvSource = src;
+            freedv.Reset();
+            UpdatePageTap();
+            FreeDvEngine e = freedv;
+            if (src == 1) fdvTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, e.Feed);
+            else if (src >= 2)
+            {
+                int pid = RootProcess(src == 2 ? esdrPids.Keys : hdsdrPids.Keys);
+                if (pid != 0) fdvTap = new AudioTap(null, pid, FreeDvSourceName(src), e.Feed);
+            }
+            if (fdvTap != null)
+            {
+                AudioTap t = fdvTap;
+                t.Problem += delegate(string msg)
+                {
+                    BeginInvokeSafe(delegate
+                    {
+                        if (fdvTap != t || msg == null) return;
+                        Log.Write("FreeDV : capture de « " + t.Name + " » : " + msg);
+                        ShowStatus(Lang.F("FreeDV : {0} : son indisponible ({1})", "FreeDV: {0}: audio not available ({1})", t.Name, msg));
+                    });
+                };
+            }
+            Log.Write("FreeDV : décodage de " + (src < 0 ? "aucune réception (toutes coupées)" : FreeDvSourceName(src)));
+        }
+
+        // Programme le plus ancien du groupe (le principal ; ses sous-processus sont capturés avec lui).
+        static int RootProcess(IEnumerable<int> pids)
+        {
+            int best = 0;
+            DateTime first = DateTime.MaxValue;
+            foreach (int pid in pids)
+            {
+                try
+                {
+                    DateTime t = System.Diagnostics.Process.GetProcessById(pid).StartTime;
+                    if (t < first) { first = t; best = pid; }
+                }
+                catch { }
+            }
+            return best;
+        }
+
+        void OnFreeDvVoice(bool on, int snr)
+        {
+            if (!on) { EndFreeDvVoice(); ShowStatus(Lang.T("FreeDV : fin de la parole, retour au son normal", "FreeDV: end of speech, back to normal audio")); UpdateFreeDvButton(); return; }
+            fdvVoice = true;
+            // Son brut coupé pour le WebSDR (volume de la page) et le poste (écoute sur le PC). Pas pour ExpertSDR ni HDSDR :
+            // la capture par programme de Windows ne reçoit plus rien d'un programme coupé dans le mélangeur.
+            if (fdvSource == 0) ApplyVolume();
+            else if (fdvSource == 1) UpdateRigMonitor();
+            Log.Write("FreeDV : parole décodée (" + FreeDvName + ", " + FreeDvSourceName(fdvSource) + ", SNR " + snr + " dB)");
+            ShowStatus(VoiceText(snr));
+            UpdateFreeDvButton();
+        }
+
+        // Fin de la parole (ou arrêt) : le son brut de la réception revient.
+        void EndFreeDvVoice()
+        {
+            bool was = fdvVoice;
+            fdvVoice = false;
+            if (was) { ApplyVolume(); UpdateRigMonitor(); }
+        }
+
+        void StopFreeDv()
+        {
+            if (fdvTimer != null) fdvTimer.Stop();
+            EndFreeDvVoice();
+            if (fdvTap != null) { fdvTap.Stop(); fdvTap = null; }
+            if (freedv != null)
+            {
+                FreeDvEngine e = freedv;
+                freedv = null;
+                e.Stop();
+                Log.Write("FreeDV : décodage arrêté");
+            }
+            fdvSource = -1;
+            UpdatePageTap();
+            UpdateFreeDvButton();
         }
 
         // ---------------------------------------------------------------- Écoute du poste sur le PC (clic droit sur Mute TX)
@@ -2957,12 +3164,12 @@ namespace SDRLink
             if (rigMonitor != null && (!want || rigMonitor.CaptureId != settings.RecCardId)) StopRigMonitor();
             if (want && rigMonitor == null)
             {
-                RigMonitor mon = new RigMonitor(settings.RecCardId, rigMuted);
+                RigMonitor mon = new RigMonitor(settings.RecCardId, RigMonitorMuted);
                 mon.Problem += msg => BeginInvokeSafe(delegate { if (rigMonitor == mon) OnRigMonitorProblem(msg); });
                 rigMonitor = mon;
                 rigMonitorTrouble = false;
             }
-            if (rigMonitor != null) rigMonitor.Muted = rigMuted;
+            if (rigMonitor != null) rigMonitor.Muted = RigMonitorMuted;
         }
 
         // Carte débranchée ou sortie perdue : un message dans la barre d'état, la lecture reprend seule dès que possible.
@@ -3032,6 +3239,7 @@ namespace SDRLink
             StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable, "MuteEsdr");
             StyleToggle(btnMuteHdsdr, hdsdrMuted, hdsdrWin, "MuteHdsdr");
             UpdateRigMonitor();
+            UpdateFreeDvButton();
         }
 
         // ---------------------------------------------------------------- Bouton ⇄

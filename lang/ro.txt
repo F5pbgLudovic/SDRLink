@@ -67,6 +67,9 @@ Checking… {0} left	Verificare… mai rămân {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Verificare terminată: {1} duplicat(e) eliminat(e), {0} link(uri) inactiv(e) bifate. Faceți clic pe „Eliminare…” pentru a le șterge.
 {0} favorite(s) imported, {1} already present.	{0} favorit(e) importat(e), {1} deja existent(e).
 {0} favorite(s) exported.	{0} favorit(e) exportat(e).
+decoder missing from this build	decodorul lipsește din această versiune
+program capture does not answer	captura programului nu răspunde
+unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
 rigctld connection closed	Conexiune rigctld închisă
 stopped	oprit
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Niciun rigctld la {0}:{1} (porniți rigctld sau bifați „Pornire rigctld”).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Clic dreapta: receptoare puse pe mut în emisie
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
 Store the current frequency…	Memorează frecvența actuală…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: vocea este decodată imediat ce se recepționează un semnal FreeDV (clic: pornit / oprit; clic dreapta: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Comută sunetul la receptorul următor (clic dreapta: receptor care rămâne fără sunet)
 Colour when connected	Culoare când este conectat
 Colour when disconnected	Culoare când este deconectat
@@ -156,6 +160,10 @@ SDRLINK cable	Cablu SDRLINK
  (off) ▾	 (oprit) ▾
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
+rig	stație
+FreeDV auto off	FreeDV auto oprit
+ (FreeDV 3, under development)	 (FreeDV 3, în dezvoltare)
+FreeDV: end of speech, back to normal audio	FreeDV: sfârșitul vocii, revenire la sunetul normal
 sound card to choose	placă de sunet de ales
 Rig sound card…	Placa de sunet a stației…
 Rig on the PC turned off	Ascultarea stației pe PC dezactivată
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Gata: intra
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Redenumirea a eșuat ({0}).\n\nManual: Panou de control Sunet › fila Înregistrare › „{1}” › Proprietăți › nume.
 SDRLINK cable: WebSDR audio sent to "{0}"	Cablu SDRLINK: sunetul WebSDR trimis la „{0}”
 SDRLINK cable: "{0}": {1}	Cablu SDRLINK: „{0}”: {1}
+FreeDV: decoder not available ({0})	FreeDV: decodorul nu este disponibil ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): vocea va fi decodată imediat ce se recepționează un semnal FreeDV
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: voce decodată ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: sunet indisponibil ({1})
 Also hear the rig on the PC ({0})	Ascultă stația și pe PC ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stația pe PC: „{0}” se aude în difuzoare când Mut TRX nu este activ
 Rig on the PC: sound card "{0}" not available ({1})	Stația pe PC: placa de sunet „{0}” nu este disponibilă ({1})
@@ -313,6 +326,7 @@ Reload	Reîncărcare
 Remove from favorites	Eliminare din favorite
 Manage favorites…	Gestionare favorite…
 Find WebSDRs…	Căutare WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Mut WebSDR
 Mute TRX	Mut TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	fără pierderi, comprimat
 Folder where the recording is saved	Dosarul în care se salvează înregistrarea
 Enter a name for the file.	Introduceți un nume pentru fișier.
 Cannot create the folder: 	Dosarul nu poate fi creat: 
-unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Codorul MP3 din Windows nu este disponibil (0x{0:X8}): alegeți WAV sau FLAC
 Recording length: {0}	Durata înregistrării: {0}
 "{0}" already exists. Replace it?	„{0}” există deja. Îl înlocuiți?

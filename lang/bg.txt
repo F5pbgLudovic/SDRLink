@@ -67,6 +67,9 @@ Checking… {0} left	Проверка… остават {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Проверката завърши: премахнати дубликати – {1}, отметнати мъртви връзки – {0}. Щракнете „Премахни…“, за да ги изтриете.
 {0} favorite(s) imported, {1} already present.	Импортирани записи: {0}, вече налични: {1}.
 {0} favorite(s) exported.	Експортирани записи: {0}.
+decoder missing from this build	декодерът липсва в тази версия
+program capture does not answer	прихващането на програмата не отговаря
+unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоформат ({0} бита, {1} Hz)
 rigctld connection closed	Връзката с rigctld е затворена
 stopped	спрян
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Няма rigctld на {0}:{1} (стартирайте rigctld или отметнете „Старт rigctld“).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Десен клик: приемници без звук при предаване
 Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
 Store the current frequency…	Запомняне на текущата честота…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: речта се декодира веднага щом се приеме сигнал FreeDV (щракване: вкл. / изкл.; десен бутон: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Превключване на звука към следващия приемник (десен бутон: приемник, който остава заглушен)
 Colour when connected	Цвят при свързване
 Colour when disconnected	Цвят при прекъсната връзка
@@ -156,6 +160,10 @@ SDRLINK cable	Кабел SDRLINK
  (off) ▾	 (изкл.) ▾
 Mute TRX: connect the rig first	Без звук TRX: първо свържете трансивъра
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Силата на звука на трансивъра не е достъпна с този трансивър или интерфейс (OmniRig, HRD, FT-817/818…)
+rig	трансивър
+FreeDV auto off	FreeDV auto е изключен
+ (FreeDV 3, under development)	 (FreeDV 3, в разработка)
+FreeDV: end of speech, back to normal audio	FreeDV: край на речта, обратно към нормалния звук
 sound card to choose	звукова карта за избор
 Rig sound card…	Звукова карта на радиостанцията…
 Rig on the PC turned off	Слушането на радиостанцията на компютъра е изключено
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Готов�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Преименуването не успя ({0}).\n\nРъчно: контролен панел Звук › раздел Записване › „{1}“ › Свойства › име.
 SDRLINK cable: WebSDR audio sent to "{0}"	Кабел SDRLINK: звукът от WebSDR се изпраща към „{0}“
 SDRLINK cable: "{0}": {1}	Кабел SDRLINK: „{0}“: {1}
+FreeDV: decoder not available ({0})	FreeDV: декодерът не е наличен ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): речта ще се декодира веднага щом се приеме сигнал FreeDV
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: декодирана реч ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: звукът не е наличен ({1})
 Also hear the rig on the PC ({0})	Слушане на радиостанцията и на компютъра ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Радиостанцията на компютъра: „{0}“ се възпроизвежда във високоговорителите, когато „Без звук TRX“ не е включено
 Rig on the PC: sound card "{0}" not available ({1})	Радиостанцията на компютъра: звуковата карта „{0}“ не е налична ({1})
@@ -313,6 +326,7 @@ Reload	Презареди
 Remove from favorites	Махни от предпочитани
 Manage favorites…	Управление на предпочитани…
 Find WebSDRs…	Търсене на WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Без звук WebSDR
 Mute TRX	Без звук TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	без загуби, компресиран
 Folder where the recording is saved	Папка за запазване на записа
 Enter a name for the file.	Въведете име на файла.
 Cannot create the folder: 	Папката не може да бъде създадена: 
-unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоформат ({0} бита, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3 кодерът на Windows не е наличен (0x{0:X8}): изберете WAV или FLAC
 Recording length: {0}	Продължителност на записа: {0}
 "{0}" already exists. Replace it?	„{0}“ вече съществува. Да се замени ли?

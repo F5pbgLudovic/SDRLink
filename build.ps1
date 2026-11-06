@@ -18,6 +18,7 @@ $core   = Join-Path $lib 'Microsoft.Web.WebView2.Core.dll'
 $wf     = Join-Path $lib 'Microsoft.Web.WebView2.WinForms.dll'
 $loader = Join-Path $pkg 'runtimes\win-x86\native\WebView2Loader.dll'
 $ico    = Join-Path $root 'src\SDRLink.ico'   # fabriquée par tools\makeicon.ps1
+$fdv    = Join-Path $root 'native\sdrlink_freedv.dll.gz'   # décodeur FreeDV, fabriqué par native\build-freedv.ps1
 
 New-Item -ItemType Directory -Force $bin | Out-Null
 # Anciennes DLL posées à côté de l'exe : plus nécessaires.
@@ -31,6 +32,7 @@ $sources = Get-ChildItem (Join-Path $root 'src') -Filter *.cs | ForEach-Object {
     "/resource:$wf,Microsoft.Web.WebView2.WinForms.dll" `
     "/resource:$loader,WebView2Loader.dll" `
     "/resource:$ico,SDRLink.ico" "/win32icon:$ico" `
+    "/resource:$fdv,sdrlink_freedv.dll.gz" `
     $sources
 if ($LASTEXITCODE -ne 0) { throw "Échec de la compilation" }
 Write-Host "OK : $bin\SDRLink.exe (autonome)"

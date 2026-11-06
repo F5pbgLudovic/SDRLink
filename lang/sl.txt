@@ -67,6 +67,9 @@ Checking… {0} left	Preverjanje… preostalo: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Preverjanje končano. Odstranjeni dvojniki: {1}, označene mrtve povezave: {0}. Kliknite »Odstrani…«, da jih izbrišete.
 {0} favorite(s) imported, {1} already present.	Uvožene priljubljene: {0}, že obstoječe: {1}.
 {0} favorite(s) exported.	Izvožene priljubljene: {0}.
+decoder missing from this build	dekodirnik v tej različici manjka
+program capture does not answer	zajemanje programa se ne odziva
+unsupported audio format ({0} bits, {1} Hz)	nepodprta oblika zvoka ({0} bitov, {1} Hz)
 rigctld connection closed	Povezava z rigctld zaprta
 stopped	ustavljeno
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Na {0}:{1} ni rigctld (zaženite rigctld ali označite »Zaženi rigctld«).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Desni klik: sprejemniki, utišani med oddajanjem
 Save: no known frequency (rig or WebSDR)	Shrani: frekvenca ni znana (TRX ali WebSDR)
 Store the current frequency…	Shrani trenutno frekvenco…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: govor se dekodira takoj, ko se sprejme signal FreeDV (klik: vklop / izklop; desni klik: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Preklopi zvok na naslednji sprejemnik (desni klik: sprejemnik, ki ostane utišan)
 Colour when connected	Barva ob povezavi
 Colour when disconnected	Barva ob prekinjeni povezavi
@@ -156,6 +160,10 @@ SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (izkl.) ▾
 Mute TRX: connect the rig first	Utišaj TRX: najprej povežite postajo
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnost postaje ni na voljo pri tej postaji ali vmesniku (OmniRig, HRD, FT-817/818…)
+rig	postaja
+FreeDV auto off	FreeDV auto izklopljen
+ (FreeDV 3, under development)	 (FreeDV 3, v razvoju)
+FreeDV: end of speech, back to normal audio	FreeDV: konec govora, vrnitev na običajni zvok
 sound card to choose	zvočno kartico je treba izbrati
 Rig sound card…	Zvočna kartica postaje…
 Rig on the PC turned off	Poslušanje postaje na računalniku izklopljeno
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Končano: z
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Preimenovanje ni uspelo ({0}).\n\nRočno: Nadzorna plošča Zvok › zavihek Snemanje › »{1}« › Lastnosti › ime.
 SDRLINK cable: WebSDR audio sent to "{0}"	Kabel SDRLINK: zvok WebSDR se pošilja v »{0}«
 SDRLINK cable: "{0}": {1}	Kabel SDRLINK: »{0}«: {1}
+FreeDV: decoder not available ({0})	FreeDV: dekodirnik ni na voljo ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): govor se bo dekodiral takoj, ko se sprejme signal FreeDV
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekodiran govor ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: zvok ni na voljo ({1})
 Also hear the rig on the PC ({0})	Poslušaj postajo tudi na računalniku ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Postaja na računalniku: »{0}« se predvaja v zvočnikih, ko Utišaj TRX ni vklopljen
 Rig on the PC: sound card "{0}" not available ({1})	Postaja na računalniku: zvočna kartica »{0}« ni na voljo ({1})
@@ -313,6 +326,7 @@ Reload	Znova naloži
 Remove from favorites	Odstrani iz priljubljenih
 Manage favorites…	Upravljaj priljubljene…
 Find WebSDRs…	Poišči WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Utišaj WebSDR
 Mute TRX	Utišaj TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	brez izgub, stisnjeno
 Folder where the recording is saved	Mapa, v katero se shrani posnetek
 Enter a name for the file.	Vnesite ime datoteke.
 Cannot create the folder: 	Mape ni mogoče ustvariti: 
-unsupported audio format ({0} bits, {1} Hz)	nepodprta oblika zvoka ({0} bitov, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Kodirnik MP3 sistema Windows ni na voljo (0x{0:X8}): izberite WAV ali FLAC
 Recording length: {0}	Dolžina posnetka: {0}
 "{0}" already exists. Replace it?	»{0}« že obstaja. Ga želite zamenjati?

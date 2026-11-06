@@ -67,6 +67,9 @@ Checking… {0} left	Tikrinama… liko {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Tikrinimas baigtas: pašalinta dublikatų – {1}, pažymėta neveikiančių nuorodų – {0}. Spustelėkite „Šalinti…“, kad jas ištrintumėte.
 {0} favorite(s) imported, {1} already present.	Importuota parankinių: {0}, jau buvo: {1}.
 {0} favorite(s) exported.	Eksportuota parankinių: {0}.
+decoder missing from this build	šioje versijoje nėra dekoderio
+program capture does not answer	programos garso įrašymas neatsako
+unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
 rigctld connection closed	rigctld ryšys uždarytas
 stopped	sustabdyta
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nėra rigctld adresu {0}:{1} (paleiskite rigctld arba pažymėkite „Paleisti rigctld“).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Dešinysis spustelėjimas: imtuvai, nutildomi siunčiant
 Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
 Store the current frequency…	Įsiminti dabartinį dažnį…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: kalba dekoduojama, kai tik priimamas FreeDV signalas (spustelėjimas: įjungti / išjungti; dešinysis spustelėjimas: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Perjungti garsą į kitą imtuvą (dešinysis spustelėjimas: imtuvas, kuris lieka nutildytas)
 Colour when connected	Spalva prisijungus
 Colour when disconnected	Spalva atsijungus
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (išj.) ▾
 Mute TRX: connect the rig first	Nutildyti TRX: pirmiausia prijunkite stotį
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Stoties garsumas nepasiekiamas su šia stotimi ar sąsaja (OmniRig, HRD, FT-817/818…)
+rig	stotis
+FreeDV auto off	FreeDV auto išjungtas
+ (FreeDV 3, under development)	 (FreeDV 3, kuriama)
+FreeDV: end of speech, back to normal audio	FreeDV: kalbos pabaiga, grįžtama prie įprasto garso
 sound card to choose	reikia pasirinkti garso plokštę
 Rig sound card…	Stoties garso plokštė…
 Rig on the PC turned off	Stoties klausymas kompiuteryje išjungtas
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Atlikta: ga
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Pervardyti nepavyko ({0}).\n\nRankiniu būdu: Garso valdymo skydas › skirtukas Įrašymas › „{1}“ › Ypatybės › pavadinimas.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kabelis: WebSDR garsas siunčiamas į „{0}“
 SDRLINK cable: "{0}": {1}	SDRLINK kabelis: „{0}“: {1}
+FreeDV: decoder not available ({0})	FreeDV: dekoderis nepasiekiamas ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): kalba bus dekoduojama, kai tik bus priimtas FreeDV signalas
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: kalba dekoduota ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: garsas nepasiekiamas ({1})
 Also hear the rig on the PC ({0})	Klausytis stoties ir kompiuteryje ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stotis kompiuteryje: „{0}“ groja garsiakalbiuose, kai Nutildyti TRX neįjungta
 Rig on the PC: sound card "{0}" not available ({1})	Stotis kompiuteryje: garso plokštė „{0}“ nepasiekiama ({1})
@@ -313,6 +326,7 @@ Reload	Įkelti iš naujo
 Remove from favorites	Šalinti iš parankinių
 Manage favorites…	Tvarkyti parankinius…
 Find WebSDRs…	Ieškoti WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Nutildyti WebSDR
 Mute TRX	Nutildyti TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	be nuostolių, suglaudintas
 Folder where the recording is saved	Aplankas, kuriame išsaugomas įrašas
 Enter a name for the file.	Įveskite failo pavadinimą.
 Cannot create the folder: 	Nepavyksta sukurti aplanko: 
-unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows MP3 koduotuvas nepasiekiamas (0x{0:X8}): pasirinkite WAV arba FLAC
 Recording length: {0}	Įrašo trukmė: {0}
 "{0}" already exists. Replace it?	„{0}“ jau yra. Pakeisti?

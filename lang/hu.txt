@@ -67,6 +67,9 @@ Checking… {0} left	Ellenőrzés… még {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Ellenőrzés kész: {1} ismétlődés eltávolítva, {0} halott link bejelölve. Az „Eltávolítás…” gombbal törölheti őket.
 {0} favorite(s) imported, {1} already present.	{0} kedvenc importálva, {1} már megvolt.
 {0} favorite(s) exported.	{0} kedvenc exportálva.
+decoder missing from this build	a dekóder hiányzik ebből a verzióból
+program capture does not answer	a program hangjának rögzítése nem válaszol
+unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
 rigctld connection closed	A rigctld-kapcsolat bezárult
 stopped	leállítva
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nincs rigctld itt: {0}:{1} (indítsa el a rigctld-t, vagy jelölje be a „rigctld indítása” opciót).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: a beszéd dekódolása azonnal megtörténik, amint FreeDV-jel érkezik (kattintás: be / ki; jobb kattintás: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
 Colour when connected	Szín csatlakoztatva
 Colour when disconnected	Szín bontott kapcsolatnál
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK kábel
  (off) ▾	 (ki) ▾
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
+rig	rádió
+FreeDV auto off	FreeDV auto kikapcsolva
+ (FreeDV 3, under development)	 (FreeDV 3, fejlesztés alatt)
+FreeDV: end of speech, back to normal audio	FreeDV: a beszéd vége, vissza a normál hanghoz
 sound card to choose	hangkártyát kell választani
 Rig sound card…	A rádió hangkártyája…
 Rig on the PC turned off	A rádió hallgatása a gépen kikapcsolva
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Kész: a ha
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Az átnevezés nem sikerült ({0}).\n\nKézzel: Hang vezérlőpult › Felvétel lap › „{1}” › Tulajdonságok › név.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kábel: a WebSDR hangja ide megy: „{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK kábel: „{0}”: {1}
+FreeDV: decoder not available ({0})	FreeDV: a dekóder nem érhető el ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): a beszéd dekódolása azonnal megtörténik, amint FreeDV-jel érkezik
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekódolt beszéd ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: a hang nem érhető el ({1})
 Also hear the rig on the PC ({0})	A rádió hallgatása a gépen is ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Rádió a gépen: a(z) „{0}” a hangszórókon szól, ha a TRX némítás nincs bekapcsolva
 Rig on the PC: sound card "{0}" not available ({1})	Rádió a gépen: a(z) „{0}” hangkártya nem érhető el ({1})
@@ -313,6 +326,7 @@ Reload	Újratöltés
 Remove from favorites	Eltávolítás a kedvencekből
 Manage favorites…	Kedvencek kezelése…
 Find WebSDRs…	WebSDR-ek keresése…
+FreeDV auto	FreeDV auto
 Mute WebSDR	WebSDR némítás
 Mute TRX	TRX némítás
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	veszteségmentes, tömörített
 Folder where the recording is saved	A felvétel mentési mappája
 Enter a name for the file.	Adjon nevet a fájlnak.
 Cannot create the folder: 	A mappa nem hozható létre: 
-unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	A Windows MP3-kódolója nem érhető el (0x{0:X8}): válassza a WAV-ot vagy a FLAC-ot
 Recording length: {0}	Felvétel hossza: {0}
 "{0}" already exists. Replace it?	„{0}” már létezik. Lecseréli?

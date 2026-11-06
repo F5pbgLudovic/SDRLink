@@ -67,6 +67,9 @@ Checking… {0} left	Kontrola… zbývá: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontrola dokončena. Odstraněné duplikáty: {1}, zaškrtnuté nefunkční odkazy: {0}. Smažete je tlačítkem „Odebrat…“.
 {0} favorite(s) imported, {1} already present.	Importované oblíbené: {0}, již existující: {1}.
 {0} favorite(s) exported.	Exportované oblíbené: {0}.
+decoder missing from this build	dekodér v této verzi chybí
+program capture does not answer	zachytávání programu neodpovídá
+unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitů, {1} Hz)
 rigctld connection closed	Spojení s rigctld ukončeno
 stopped	zastaveno
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Na {0}:{1} neběží rigctld (spusťte rigctld nebo zaškrtněte „Spustit rigctld“).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Pravé tlačítko: přijímače ztlumené při vysílání
 Save: no known frequency (rig or WebSDR)	Uložit: neznámá frekvence (TRX ani WebSDR)
 Store the current frequency…	Uložit aktuální kmitočet…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: řeč se dekóduje, jakmile je přijat signál FreeDV (klik: zapnout / vypnout; pravé tlačítko: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Přepnout zvuk na další přijímač (pravé tlačítko: přijímač, který zůstane ztlumený)
 Colour when connected	Barva při připojení
 Colour when disconnected	Barva při odpojení
@@ -156,6 +160,10 @@ SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (vyp.) ▾
 Mute TRX: connect the rig first	Ztlumit TRX: nejprve připojte transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitost transceiveru není u tohoto transceiveru nebo rozhraní dostupná (OmniRig, HRD, FT-817/818…)
+rig	transceiver
+FreeDV auto off	FreeDV auto vypnuto
+ (FreeDV 3, under development)	 (FreeDV 3, ve vývoji)
+FreeDV: end of speech, back to normal audio	FreeDV: konec řeči, návrat k normálnímu zvuku
 sound card to choose	zvukovou kartu je třeba vybrat
 Rig sound card…	Zvuková karta stanice…
 Rig on the PC turned off	Poslech stanice na PC vypnut
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Hotovo: zvu
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Přejmenování se nezdařilo ({0}).\n\nRučně: Ovládací panel Zvuk › karta Záznam › „{1}“ › Vlastnosti › název.
 SDRLINK cable: WebSDR audio sent to "{0}"	Kabel SDRLINK: zvuk WebSDR odesílán do „{0}“
 SDRLINK cable: "{0}": {1}	Kabel SDRLINK: „{0}“: {1}
+FreeDV: decoder not available ({0})	FreeDV: dekodér není dostupný ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): řeč se bude dekódovat, jakmile bude přijat signál FreeDV
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekódovaná řeč ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: zvuk není dostupný ({1})
 Also hear the rig on the PC ({0})	Poslouchat stanici také na PC ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stanice na PC: „{0}“ hraje v reproduktorech, když není zapnuto Ztlumit TRX
 Rig on the PC: sound card "{0}" not available ({1})	Stanice na PC: zvuková karta „{0}“ není dostupná ({1})
@@ -313,6 +326,7 @@ Reload	Znovu načíst
 Remove from favorites	Odebrat z oblíbených
 Manage favorites…	Spravovat oblíbené…
 Find WebSDRs…	Najít WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Ztlumit WebSDR
 Mute TRX	Ztlumit TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	bezztrátový, komprimovaný
 Folder where the recording is saved	Složka pro uložení záznamu
 Enter a name for the file.	Zadejte název souboru.
 Cannot create the folder: 	Složku nelze vytvořit: 
-unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitů, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Kodér MP3 systému Windows není k dispozici (0x{0:X8}): zvolte WAV nebo FLAC
 Recording length: {0}	Délka záznamu: {0}
 "{0}" already exists. Replace it?	„{0}“ již existuje. Nahradit?

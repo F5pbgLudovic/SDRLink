@@ -67,6 +67,9 @@ Checking… {0} left	Kontrollerer… {0} tilbage
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontrol færdig: {1} dublet(ter) fjernet, {0} død(e) link(s) afkrydset. Klik på ”Fjern…” for at slette dem.
 {0} favorite(s) imported, {1} already present.	{0} favorit(ter) importeret, {1} fandtes allerede.
 {0} favorite(s) exported.	{0} favorit(ter) eksporteret.
+decoder missing from this build	dekoderen mangler i denne version
+program capture does not answer	optagelse af programmet svarer ikke
+unsupported audio format ({0} bits, {1} Hz)	lydformatet understøttes ikke ({0} bit, {1} Hz)
 rigctld connection closed	rigctld-forbindelse lukket
 stopped	stoppet
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Ingen rigctld på {0}:{1} (start rigctld, eller sæt kryds i ”Start rigctld”).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Højreklik: modtagere der gøres lydløse under sending
 Save: no known frequency (rig or WebSDR)	Save: ingen kendt frekvens (radio eller WebSDR)
 Store the current frequency…	Gem den aktuelle frekvens…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: talen afkodes, så snart et FreeDV-signal modtages (klik: til / fra; højreklik: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Skift lyden til næste modtager (højreklik: modtager, der forbliver slået fra)
 Colour when connected	Farve når forbundet
 Colour when disconnected	Farve når afbrudt
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (fra) ▾
 Mute TRX: connect the rig first	Lydløs TRX: forbind radioen først
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radiolydstyrke er ikke tilgængelig med denne radio eller grænseflade (OmniRig, HRD, FT-817/818…)
+rig	radio
+FreeDV auto off	FreeDV auto slået fra
+ (FreeDV 3, under development)	 (FreeDV 3, under udvikling)
+FreeDV: end of speech, back to normal audio	FreeDV: slut på talen, tilbage til normal lyd
 sound card to choose	lydkort skal vælges
 Rig sound card…	Radioens lydkort…
 Rig on the PC turned off	Radioen på pc'en slået fra
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Færdig: ly
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Omdøbning mislykkedes ({0}).\n\nManuelt: Kontrolpanelet Lyd › fanen Optagelse › ”{1}” › Egenskaber › navn.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-lyd sendes til ”{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK-kabel: ”{0}”: {1}
+FreeDV: decoder not available ({0})	FreeDV: dekoderen er ikke tilgængelig ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): talen afkodes, så snart et FreeDV-signal modtages
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: tale afkodet ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: lyd ikke tilgængelig ({1})
 Also hear the rig on the PC ({0})	Hør også radioen på pc'en ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Radioen på pc'en: "{0}" afspilles i højttalerne, når Lydløs TRX er slået fra
 Rig on the PC: sound card "{0}" not available ({1})	Radioen på pc'en: lydkortet "{0}" er ikke tilgængeligt ({1})
@@ -313,6 +326,7 @@ Reload	Genindlæs
 Remove from favorites	Fjern fra favoritter
 Manage favorites…	Administrér favoritter…
 Find WebSDRs…	Find WebSDR'er…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Lydløs WebSDR
 Mute TRX	Lydløs TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	tabsfri, komprimeret
 Folder where the recording is saved	Mappe, hvor optagelsen gemmes
 Enter a name for the file.	Angiv et navn til filen.
 Cannot create the folder: 	Mappen kan ikke oprettes: 
-unsupported audio format ({0} bits, {1} Hz)	lydformatet understøttes ikke ({0} bit, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windows' MP3-koder er ikke tilgængelig (0x{0:X8}): vælg WAV eller FLAC
 Recording length: {0}	Optagelsens længde: {0}
 "{0}" already exists. Replace it?	"{0}" findes allerede. Erstat den?

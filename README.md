@@ -1,4 +1,4 @@
-# SDRLink V1.23 — @F5PBG 2026
+# SDRLink V1.24 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -17,6 +17,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de la France ;
   - volume du WebSDR, du poste, d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) et de HDSDR (Mute HDSDR, par Windows), son du poste aussi sur le PC au choix (clic droit sur Mute TX) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
+  - décodage automatique de la voix numérique FreeDV RADE (V1 ou V2) dès qu'un signal est reçu (bouton FreeDV auto) ;
   - interface en 23 langues européennes ;
   - mode sombre, palette, couleur de chaque bouton au choix (clic droit) et taille du texte réglable ;
   - vérification des mises à jour au démarrage, import/export de tous les réglages vers un autre ordinateur, avec import au choix (configuration, WebSDR, mémoires, scan ; ajout ou remplacement), réinitialisation totale ou partielle du programme ;
@@ -40,6 +41,8 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 
 Le script télécharge le paquet WebView2 (NuGet) au premier lancement et produit `dist\SDRLink.exe`.
 
+Le décodeur FreeDV (`native\sdrlink_freedv.dll.gz`, déjà dans le dépôt) est une DLL en C : radae_nopy (David Rowe et Peter B Marks, licence BSD 2 clauses, `native\freedv\rade\LICENSE`) et le vocodeur FARGAN d'Opus (licence BSD, `native\freedv\opus\COPYING`). Pour la recompiler : `tools\install-toolchain.ps1` (télécharge LLVM-MinGW), puis `native\build-freedv.ps1`.
+
 ## English
 
 SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows the rig's VFO and the rig follows the WebSDR waterfall. The mode is synchronised too.
@@ -59,6 +62,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near France;
   - WebSDR, rig, ExpertSDR (Mute ExpertSDR, through Windows or TCI) and HDSDR volume (Mute HDSDR, through Windows), rig audio also on the PC if wanted (right-click Mute TRX);
   - SDRLINK audio cable for WSJT-X, automatic notch;
+  - automatic decoding of FreeDV RADE digital voice (V1 or V2) as soon as a signal is received (FreeDV auto button);
   - interface in 23 European languages (menu on the 2nd line);
   - dark mode, colour palette, colour of each button of your choice (right-click) and adjustable text size;
   - update check at startup, import/export of all settings to another computer, with selective import (configuration, WebSDR, memories, scan; add or replace), full or partial reset of the program;
@@ -81,3 +85,5 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
 On first run, the script downloads the WebView2 package (NuGet) and produces `dist\SDRLink.exe`.
+
+The FreeDV decoder (`native\sdrlink_freedv.dll.gz`, already in the repository) is a C DLL: radae_nopy (David Rowe and Peter B Marks, 2-clause BSD licence, `native\freedv\rade\LICENSE`) and Opus's FARGAN vocoder (BSD licence, `native\freedv\opus\COPYING`). To rebuild it: `tools\install-toolchain.ps1` (downloads LLVM-MinGW), then `native\build-freedv.ps1`.

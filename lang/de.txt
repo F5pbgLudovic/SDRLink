@@ -67,6 +67,9 @@ Checking… {0} left	Prüfung… noch {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Prüfung abgeschlossen: {1} Duplikat(e) entfernt, {0} tote(r) Link(s) markiert. Klicken Sie auf „Entfernen…“, um sie zu löschen.
 {0} favorite(s) imported, {1} already present.	{0} Favorit(en) importiert, {1} bereits vorhanden.
 {0} favorite(s) exported.	{0} Favorit(en) exportiert.
+decoder missing from this build	Decoder fehlt in dieser Version
+program capture does not answer	Programmaufnahme antwortet nicht
+unsupported audio format ({0} bits, {1} Hz)	Audioformat nicht unterstützt ({0} Bit, {1} Hz)
 rigctld connection closed	rigctld-Verbindung geschlossen
 stopped	gestoppt
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Kein rigctld unter {0}:{1} (starten Sie rigctld oder aktivieren Sie „rigctld starten“).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Rechtsklick: beim Senden stummgeschaltete Empfänger
 Save: no known frequency (rig or WebSDR)	Save: keine Frequenz bekannt (TRX oder WebSDR)
 Store the current frequency…	Aktuelle Frequenz speichern…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: Sprache wird dekodiert, sobald ein FreeDV-Signal empfangen wird (Klick: ein / aus; Rechtsklick: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Ton zum nächsten Empfänger umschalten (Rechtsklick: Empfänger, der stumm bleibt)
 Colour when connected	Farbe wenn verbunden
 Colour when disconnected	Farbe wenn getrennt
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK-Kabel
  (off) ▾	 (aus) ▾
 Mute TRX: connect the rig first	TRX stumm: Bitte zuerst den TRX verbinden
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-Lautstärke mit diesem Gerät oder dieser Schnittstelle nicht verfügbar (OmniRig, HRD, FT-817/818…)
+rig	Funkgerät
+FreeDV auto off	FreeDV auto ausgeschaltet
+ (FreeDV 3, under development)	 (FreeDV 3, in Entwicklung)
+FreeDV: end of speech, back to normal audio	FreeDV: Ende der Sprache, zurück zum normalen Ton
 sound card to choose	Soundkarte auswählen
 Rig sound card…	Soundkarte des Funkgeräts…
 Rig on the PC turned off	Funkgerät am PC ausgeschaltet
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Fertig: Der
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Umbenennen fehlgeschlagen ({0}).\n\nManuell: Systemsteuerung Sound › Registerkarte Aufnahme › „{1}“ › Eigenschaften › Name.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-Kabel: WebSDR-Ton wird an „{0}“ gesendet
 SDRLINK cable: "{0}": {1}	SDRLINK-Kabel: „{0}“: {1}
+FreeDV: decoder not available ({0})	FreeDV: Decoder nicht verfügbar ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): Sprache wird dekodiert, sobald ein FreeDV-Signal empfangen wird
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: Sprache dekodiert ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: Ton nicht verfügbar ({1})
 Also hear the rig on the PC ({0})	Funkgerät auch am PC hören ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Funkgerät am PC: „{0}“ wird über die Lautsprecher wiedergegeben, wenn TRX stumm aus ist
 Rig on the PC: sound card "{0}" not available ({1})	Funkgerät am PC: Soundkarte „{0}“ nicht verfügbar ({1})
@@ -313,6 +326,7 @@ Reload	Neu laden
 Remove from favorites	Aus Favoriten entfernen
 Manage favorites…	Favoriten verwalten…
 Find WebSDRs…	WebSDRs suchen…
+FreeDV auto	FreeDV auto
 Mute WebSDR	WebSDR stumm
 Mute TRX	TRX stumm
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	verlustfrei, komprimiert
 Folder where the recording is saved	Ordner, in dem die Aufnahme gespeichert wird
 Enter a name for the file.	Geben Sie einen Dateinamen ein.
 Cannot create the folder: 	Ordner kann nicht erstellt werden: 
-unsupported audio format ({0} bits, {1} Hz)	Audioformat nicht unterstützt ({0} Bit, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3-Encoder von Windows nicht verfügbar (0x{0:X8}): WAV oder FLAC wählen
 Recording length: {0}	Aufnahmedauer: {0}
 "{0}" already exists. Replace it?	„{0}“ existiert bereits. Ersetzen?

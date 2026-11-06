@@ -67,6 +67,9 @@ Checking… {0} left	Tarkistetaan… {0} jäljellä
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Tarkistus valmis: {1} kaksoiskappale(tta) poistettu, {0} kuollut(ta) linkki(ä) merkitty. Poista ne valitsemalla ”Poista…”.
 {0} favorite(s) imported, {1} already present.	{0} suosikki(a) tuotu, {1} oli jo olemassa.
 {0} favorite(s) exported.	{0} suosikki(a) viety.
+decoder missing from this build	dekooderi puuttuu tästä versiosta
+program capture does not answer	ohjelman äänen kaappaus ei vastaa
+unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, {1} Hz)
 rigctld connection closed	rigctld-yhteys suljettu
 stopped	pysäytetty
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	rigctld ei vastaa osoitteessa {0}:{1} (käynnistä rigctld tai valitse ”Käynnistä rigctld”).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Hiiren oikea painike: lähetyksen ajaksi mykistettävät vastaanottimet
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
 Store the current frequency…	Tallenna nykyinen taajuus…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: puhe puretaan heti, kun FreeDV-signaali vastaanotetaan (napsautus: päälle / pois; oikea napsautus: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Siirrä ääni seuraavaan vastaanottimeen (hiiren oikea painike: vastaanotin, joka pysyy mykistettynä)
 Colour when connected	Väri yhdistettynä
 Colour when disconnected	Väri ilman yhteyttä
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK-kaapeli
  (off) ▾	 (pois) ▾
 Mute TRX: connect the rig first	Mykistä TRX: yhdistä ensin radio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radion äänenvoimakkuutta ei voi säätää tällä radiolla tai liitännällä (OmniRig, HRD, FT-817/818…)
+rig	radio
+FreeDV auto off	FreeDV auto pois päältä
+ (FreeDV 3, under development)	 (FreeDV 3, kehitteillä)
+FreeDV: end of speech, back to normal audio	FreeDV: puhe päättyi, paluu tavalliseen ääneen
 sound card to choose	äänikortti valittava
 Rig sound card…	Radion äänikortti…
 Rig on the PC turned off	Radion kuuntelu tietokoneella pois päältä
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Valmis: ä�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Uudelleennimeäminen epäonnistui ({0}).\n\nKäsin: Ääni-ohjauspaneeli › Tallennus-välilehti › ”{1}” › Ominaisuudet › nimi.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kaapeli: WebSDR-ääni ohjataan laitteeseen ”{0}”
 SDRLINK cable: "{0}": {1}	SDRLINK-kaapeli: ”{0}”: {1}
+FreeDV: decoder not available ({0})	FreeDV: dekooderi ei ole käytettävissä ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): puhe puretaan heti, kun FreeDV-signaali vastaanotetaan
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: puhe purettu ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: ääni ei ole käytettävissä ({1})
 Also hear the rig on the PC ({0})	Kuuntele radiota myös tietokoneella ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Radio tietokoneella: ”{0}” soi kaiuttimissa, kun Mykistä TRX ei ole päällä
 Rig on the PC: sound card "{0}" not available ({1})	Radio tietokoneella: äänikortti ”{0}” ei ole käytettävissä ({1})
@@ -313,6 +326,7 @@ Reload	Lataa uudelleen
 Remove from favorites	Poista suosikeista
 Manage favorites…	Hallitse suosikkeja…
 Find WebSDRs…	Etsi WebSDR-vastaanottimia…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Mykistä WebSDR
 Mute TRX	Mykistä TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	häviötön, pakattu
 Folder where the recording is saved	Kansio, johon tallenne tallennetaan
 Enter a name for the file.	Anna tiedostolle nimi.
 Cannot create the folder: 	Kansiota ei voi luoda: 
-unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windowsin MP3-kooderi ei ole käytettävissä (0x{0:X8}): valitse WAV tai FLAC
 Recording length: {0}	Tallenteen pituus: {0}
 "{0}" already exists. Replace it?	”{0}” on jo olemassa. Korvataanko?

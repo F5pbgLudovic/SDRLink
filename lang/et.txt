@@ -67,6 +67,9 @@ Checking… {0} left	Kontrollimine… jäänud {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontroll valmis: eemaldati {1} duplikaat(i), märgiti {0} surnud link(i). Nende kustutamiseks klõpsake „Eemalda…“.
 {0} favorite(s) imported, {1} already present.	Imporditi {0} lemmik(ut), {1} oli juba olemas.
 {0} favorite(s) exported.	Eksporditi {0} lemmik(ut).
+decoder missing from this build	dekooder puudub selles versioonis
+program capture does not answer	programmi heli püüdmine ei vasta
+unsupported audio format ({0} bits, {1} Hz)	toetamata helivorming ({0} bitti, {1} Hz)
 rigctld connection closed	rigctld ühendus suleti
 stopped	peatatud
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Aadressil {0}:{1} pole rigctld-d (käivitage rigctld või märkige „Käivita rigctld“).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Paremklõps: saatmise ajal vaigistatavad vastuvõtjad
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
 Store the current frequency…	Salvesta praegune sagedus…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: kõne dekodeeritakse kohe, kui FreeDV signaal saabub (klõps: sisse / välja; paremklõps: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Lülita heli järgmisele vastuvõtjale (paremklõps: vastuvõtja, mis jääb vaigistatuks)
 Colour when connected	Värv ühendatuna
 Colour when disconnected	Värv ühenduseta
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK kaabel
  (off) ▾	 (väljas) ▾
 Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
+rig	raadio
+FreeDV auto off	FreeDV auto välja lülitatud
+ (FreeDV 3, under development)	 (FreeDV 3, arendamisel)
+FreeDV: end of speech, back to normal audio	FreeDV: kõne lõpp, tagasi tavalise heli juurde
 sound card to choose	helikaart tuleb valida
 Rig sound card…	Raadiojaama helikaart…
 Rig on the PC turned off	Raadiojaama kuulamine arvutis välja lülitatud
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Valmis: hel
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Ümbernimetamine nurjus ({0}).\n\nKäsitsi: Heli juhtpaneel › vahekaart Salvestamine › „{1}“ › Atribuudid › nimi.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK kaabel: WebSDR-i heli saadetakse seadmesse „{0}“
 SDRLINK cable: "{0}": {1}	SDRLINK kaabel: „{0}“: {1}
+FreeDV: decoder not available ({0})	FreeDV: dekooder pole saadaval ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): kõne dekodeeritakse kohe, kui FreeDV signaal saabub
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: kõne dekodeeritud ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: heli pole saadaval ({1})
 Also hear the rig on the PC ({0})	Kuula raadiojaama ka arvutis ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Raadiojaam arvutis: „{0}“ mängib kõlarites, kui Vaigista TRX pole sees
 Rig on the PC: sound card "{0}" not available ({1})	Raadiojaam arvutis: helikaart „{0}“ pole saadaval ({1})
@@ -313,6 +326,7 @@ Reload	Laadi uuesti
 Remove from favorites	Eemalda lemmikutest
 Manage favorites…	Halda lemmikuid…
 Find WebSDRs…	Otsi WebSDR-e…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Vaigista WebSDR
 Mute TRX	Vaigista TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	kadudeta, tihendatud
 Folder where the recording is saved	Kaust, kuhu salvestis salvestatakse
 Enter a name for the file.	Sisestage faili nimi.
 Cannot create the folder: 	Kausta ei saa luua: 
-unsupported audio format ({0} bits, {1} Hz)	toetamata helivorming ({0} bitti, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Windowsi MP3-kodeerija pole saadaval (0x{0:X8}): valige WAV või FLAC
 Recording length: {0}	Salvestise kestus: {0}
 "{0}" already exists. Replace it?	„{0}“ on juba olemas. Kas asendada?

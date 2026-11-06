@@ -5,3 +5,7 @@ packages/
 bin/
 bin-test/
 dist/
+
+# Compilateur C (LLVM-MinGW) de la DLL FreeDV, téléchargé par tools\install-toolchain.ps1
+toolchain/
+native/out/

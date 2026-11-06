@@ -25,7 +25,7 @@ Overview; each feature is detailed further down in its own section.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode, **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
-5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**.
+5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24).
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**.
 7. **The WebSDR page**, then the **status bar** (messages, update link).
 
@@ -35,6 +35,7 @@ Overview; each feature is detailed further down in its own section.
 |---|---|
 | Connect | colour when connected / disconnected |
 | Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
+| FreeDV auto | no menu: right-click switches between RADE V1 and RADE V2 (since 1.24) |
 | Import/Export | **Reset the program…** (since 1.22), button colour |
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | colour when stopped / while scanning |
@@ -60,7 +61,7 @@ Overview; each feature is detailed further down in its own section.
 - `%APPDATA%\SDRLink\settings.avant-reinitialisation.ini`: the settings from before the last reset (since 1.22).
 - `%APPDATA%\SDRLink\settings.reset.txt`: reset requested, done at the restart then deleted (it only exists for a few seconds).
 - `%APPDATA%\SDRLink\sdrlink.log`: the log (reset at each launch).
-- `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache; the name given to KiwiSDRs and websdr.org is there too); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll.
+- `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache; the name given to KiwiSDRs and websdr.org is there too); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<size>\sdrlink_freedv.dll`: FreeDV decoder, written only the first time FreeDV auto is used (since 1.24).
 - `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
 
 ## Interfaces ("Interface" menu)
@@ -216,6 +217,21 @@ Duplicates are removed. The list is shown **sorted by distance from the centre o
 **First start**: the search opens by itself, once only, if the Internet answers, to fill in the favorites. Without a connection, it is tried again at the next start.
 
 Internet access is required. If a directory does not answer, the others are still shown: the bottom of the window shows the result for each source.
+
+## FreeDV auto (FreeDV RADE reception)
+
+**FreeDV auto V1** button (WebSDR bar, after "Find WebSDRs…", since 1.24): automatic decoding of **FreeDV RADE** digital voice.
+- **Click**: on / off (off at the start). **Right-click**: **RADE V1** (FreeDV 2, the current mode) or **RADE V2** (FreeDV 3, still under development); the button shows "FreeDV auto V1" or "V2".
+- Colours: normal when off, **green** while listening, **orange** while decoded speech plays.
+- When on, the audio being listened to is decoded all the time. As soon as a FreeDV signal is received (after 0.6 s of continuous decoding), the **raw audio is muted** and the **decoded voice** is played in the PC speakers. The status bar shows for example "FreeDV RADE V1: speech decoded (WebSDR, SNR 15 dB)", with the SNR kept up to date. 1.5 s after the end of the signal, the normal audio comes back. While transmitting, the decoded voice is muted.
+- The audio is decoded **as received**, in the mode chosen by the operator: on USB if the rig or the WebSDR is on USB, on LSB if it is on LSB. A FreeDV signal listened to on the wrong sideband is not decoded (you hear the raw audio).
+- **Only one receiver** is decoded, in this order:
+  1. **the rig**: if Mute TRX is off and a rig sound card is chosen (REC's, right-click REC or Mute TRX); the rig volume must therefore be remotely controlled. During speech, listening to the rig on the PC is muted; the rig's own volume is not touched;
+  2. **the WebSDR**, if Mute WebSDR is off: the page is set to volume 0 during speech (Mute WebSDR does not change);
+  3. **ExpertSDR**, then **HDSDR** (capture of the program's audio, Windows 10 version 2004 or later). Their raw audio **stays audible** under the decoded voice: muting a program in the Windows mixer would also mute what the decoder receives.
+- Speech is only played if the SNR is at least −5 dB: below that, the decoder can lock wrongly (for example on the wrong sideband) and would only output gibberish.
+- **When off, FreeDV uses no resources**: the decoder is not even loaded. When on, it takes about 7 to 10% of one processor core.
+- The decoder is FreeDV's (radae_nopy, by David Rowe and Peter B Marks, BSD licence; Opus FARGAN vocoder, BSD licence), the same as in PhoneSDRLink. It has not yet been tried on a real signal received live: only on the FreeDV project's off-air recording.
 
 ## WebSDR volume
 
@@ -534,6 +550,8 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Version history
 
+- **1.24**
+  - **FreeDV auto** button (after "Find WebSDRs…"): automatic decoding of FreeDV RADE V1 (or V2 with a right-click) on the received audio (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR), on USB or LSB according to the chosen mode; as soon as a FreeDV signal is received, the decoded voice replaces the raw audio. When off, nothing runs. The exe grows to 17 MB (FreeDV decoder).
 - **1.23**
   - **Also hear the rig on the PC** (right-click Mute TRX, unticked at the start): the audio of the rig sound card (REC's) is played in the PC speakers as long as Mute TRX is off. Without a chosen card, the card selection window opens (no error message).
 - **1.22**

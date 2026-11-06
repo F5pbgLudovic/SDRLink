@@ -24,7 +24,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR**, boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
-5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**.
+5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24).
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**.
 7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
 
@@ -34,6 +34,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 |---|---|
 | Connecter | couleur quand connecté / déconnecté |
 | Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Pseudo/Call | couleur du bouton |
+| FreeDV auto | pas de menu : le clic droit passe de RADE V1 à RADE V2 et inversement (depuis la 1.24) |
 | Import/Export | **Réinitialiser le programme…** (depuis la 1.22), couleur du bouton |
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
@@ -59,7 +60,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 - `%APPDATA%\SDRLink\settings.avant-reinitialisation.ini` : les réglages d'avant la dernière réinitialisation (depuis la 1.22).
 - `%APPDATA%\SDRLink\settings.reset.txt` : réinitialisation demandée, faite au redémarrage puis effacée (il n'existe que quelques secondes).
 - `%APPDATA%\SDRLink\sdrlink.log` : le journal (remis à zéro à chaque lancement).
-- `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache ; le pseudo donné aux KiwiSDR et websdr.org y est aussi) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll.
+- `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache ; le pseudo donné aux KiwiSDR et websdr.org y est aussi) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll ; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<taille>\sdrlink_freedv.dll` : décodeur FreeDV, écrit seulement au premier usage de FreeDV auto (depuis la 1.24).
 - `Musique\SDRLink` : dossier des enregistrements REC par défaut ; pendant un enregistrement, un fichier provisoire `SDRLink-REC-*.raw` est dans `%TEMP%`.
 
 ## Interfaces (menu « Interface »)
@@ -215,6 +216,21 @@ Les doublons sont retirés. La liste s'affiche **triée par distance depuis le c
 **Premier démarrage** : la recherche s'ouvre d'elle-même, une seule fois, si Internet répond, pour remplir les favoris. Sans connexion, elle est retentée au démarrage suivant.
 
 Il faut un accès Internet. Si un annuaire ne répond pas, les autres sont quand même affichés : le bas de la fenêtre indique le résultat de chaque source.
+
+## FreeDV auto (réception FreeDV RADE)
+
+Bouton **FreeDV auto V1** (barre WebSDR, après « Rechercher des WebSDR… », depuis la 1.24) : décodage automatique de la voix numérique **FreeDV RADE**.
+- **Clic** : marche / arrêt (arrêt au départ). **Clic droit** : **RADE V1** (FreeDV 2, le mode actuel) ou **RADE V2** (FreeDV 3, encore en développement) ; le bouton affiche « FreeDV auto V1 » ou « V2 ».
+- Couleurs : normales à l'arrêt, **vert** en écoute, **orange** pendant une parole décodée.
+- En marche, le son écouté est décodé en permanence. Dès qu'un signal FreeDV est reçu (après 0,6 s de décodage continu), le **son brut est coupé** et la **voix décodée** est jouée dans les haut-parleurs du PC. La barre d'état indique par exemple « FreeDV RADE V1 : parole décodée (WebSDR, SNR 15 dB) », SNR tenu à jour. 1,5 s après la fin du signal, le son normal revient. En émission, la voix décodée est muette.
+- Le son est décodé **tel qu'il est reçu**, dans le mode choisi par l'opérateur : en USB si le poste ou le WebSDR est en USB, en LSB s'il est en LSB. Un signal FreeDV écouté sur la mauvaise bande latérale n'est pas décodé (on entend le son brut).
+- **Une seule réception** est décodée, dans cet ordre :
+  1. **le poste** : si Mute TX n'est pas actif et qu'une carte son du poste est choisie (celle de REC, clic droit sur REC ou sur Mute TX) ; il faut donc que le volume du poste soit télécommandé. Pendant la parole, l'écoute du poste sur le PC est coupée ; le volume du poste lui-même n'est pas touché ;
+  2. **le WebSDR**, si Mute WebSDR n'est pas actif : la page est mise à volume 0 pendant la parole (Mute WebSDR ne change pas) ;
+  3. **ExpertSDR**, puis **HDSDR** (capture du son du programme, Windows 10 version 2004 ou plus récente). Leur son brut **reste audible** sous la voix décodée : couper un programme dans le mélangeur de Windows couperait aussi ce que reçoit le décodeur.
+- La parole n'est jouée que si le SNR est d'au moins −5 dB : en dessous, le décodeur peut s'accrocher à tort (par exemple sur la mauvaise bande latérale) et ne sortirait que du charabia.
+- **Arrêté, FreeDV ne prend aucune ressource** : le décodeur n'est même pas chargé. En marche, il prend environ 7 à 10 % d'un cœur du processeur.
+- Le décodeur est celui de FreeDV (radae_nopy, de David Rowe et Peter B Marks, licence BSD ; vocodeur FARGAN d'Opus, licence BSD), le même que dans PhoneSDRLink. Il n'a pas encore été essayé sur un vrai signal reçu en direct : seulement sur l'enregistrement hors antenne du projet FreeDV.
 
 ## Volume du WebSDR
 
@@ -532,6 +548,8 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Historique des versions
 
+- **1.24**
+  - Bouton **FreeDV auto** (après « Rechercher des WebSDR… ») : décodage automatique de FreeDV RADE V1 (ou V2 au clic droit) sur le son reçu (poste, sinon WebSDR, sinon ExpertSDR, sinon HDSDR), en USB ou LSB selon le mode choisi ; dès qu'un signal FreeDV est reçu, la voix décodée remplace le son brut. Arrêté, rien ne tourne. L'exe passe à 17 Mo (décodeur FreeDV).
 - **1.23**
   - **Écouter aussi le poste sur le PC** (clic droit sur Mute TX, non coché au départ) : le son de la carte son du poste (celle de REC) est joué dans les haut-parleurs du PC tant que Mute TX n'est pas actif. Sans carte choisie, la fenêtre de choix de la carte s'ouvre (pas de message d'erreur).
 - **1.22**

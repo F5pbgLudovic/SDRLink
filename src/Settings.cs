@@ -46,6 +46,7 @@ namespace SDRLink
         public string RecCardId = "", RecCardName = "";
         public int RecColor = 0x000080;    // fond du bouton REC au repos (RVB), bleu marine par défaut
         public int RecWidth = 1;           // largeur du bouton REC : 1 étroit (2 fois la hauteur), 2 large (4 fois)
+        public bool FreeDvAuto, FreeDvV2;    // bouton FreeDV auto (décoché au départ) ; RADE V2 au lieu de V1 (clic droit)
         public bool RigMonitor;            // clic droit sur Mute TX : carte son du poste rejouée sur le PC quand Mute TX n'est pas actif
         // Couleurs choisies par clic droit sur les boutons (clé → RVB) ; clé absente = couleur par défaut.
         public Dictionary<string, int> Colors = new Dictionary<string, int>(StringComparer.Ordinal);
@@ -238,6 +239,8 @@ namespace SDRLink
                     case "FirstSearch": s.FirstSearchDone = v != "0"; break;
                     case "CheckUpdates": s.CheckUpdates = v != "0"; break;
                     case "RigMonitor": s.RigMonitor = v == "1"; break;
+                    case "FreeDvAuto": s.FreeDvAuto = v == "1"; break;
+                    case "FreeDvV2": s.FreeDvV2 = v == "1"; break;
                     case "Callsign":
                         string cs = "";
                         try { cs = WebSdrBridge.Clean(Uri.UnescapeDataString(v)); } catch (UriFormatException) { }
@@ -361,6 +364,8 @@ namespace SDRLink
             Line(sb, "FirstSearch", FirstSearchDone ? 1 : 0);
             Line(sb, "CheckUpdates", CheckUpdates ? 1 : 0);
             Line(sb, "RigMonitor", RigMonitor ? 1 : 0);
+            Line(sb, "FreeDvAuto", FreeDvAuto ? 1 : 0);
+            Line(sb, "FreeDvV2", FreeDvV2 ? 1 : 0);
             Line(sb, "Callsign", Uri.EscapeDataString(Callsign));
             Line(sb, "SwapIgnore", SwapIgnore.Count == 0 ? "-1" : string.Join(",", SwapIgnore.ConvertAll(k => k.ToString()).ToArray()));
             Line(sb, "MuteTxSkip", MuteTxSkip.Count == 0 ? "-1" : string.Join(",", MuteTxSkip.ConvertAll(k => k.ToString()).ToArray()));

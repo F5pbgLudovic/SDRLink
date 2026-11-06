@@ -67,6 +67,9 @@ Checking… {0} left	Controleren… nog {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Controle klaar: {1} duplica(a)t(en) verwijderd, {0} dode link(s) aangevinkt. Klik op "Verwijderen…" om ze te wissen.
 {0} favorite(s) imported, {1} already present.	{0} favoriet(en) geïmporteerd, {1} al aanwezig.
 {0} favorite(s) exported.	{0} favoriet(en) geëxporteerd.
+decoder missing from this build	decoder ontbreekt in deze versie
+program capture does not answer	opname van het programma reageert niet
+unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0} bits, {1} Hz)
 rigctld connection closed	rigctld-verbinding gesloten
 stopped	gestopt
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Geen rigctld op {0}:{1} (start rigctld, of vink "rigctld starten" aan).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Rechtsklik: ontvangers die tijdens zenden gedempt worden
 Save: no known frequency (rig or WebSDR)	Save: geen frequentie bekend (TRX of WebSDR)
 Store the current frequency…	Huidige frequentie opslaan…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: spraak wordt gedecodeerd zodra een FreeDV-signaal wordt ontvangen (klik: aan / uit; rechtsklik: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Geluid naar de volgende ontvanger schakelen (rechtsklik: ontvanger die gedempt blijft)
 Colour when connected	Kleur bij verbonden
 Colour when disconnected	Kleur bij niet verbonden
@@ -156,6 +160,10 @@ SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (uit) ▾
 Mute TRX: connect the rig first	TRX dempen: verbind eerst de transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-volume niet beschikbaar met deze transceiver of interface (OmniRig, HRD, FT-817/818…)
+rig	transceiver
+FreeDV auto off	FreeDV auto uitgeschakeld
+ (FreeDV 3, under development)	 (FreeDV 3, in ontwikkeling)
+FreeDV: end of speech, back to normal audio	FreeDV: einde van de spraak, terug naar normaal geluid
 sound card to choose	geluidskaart nog te kiezen
 Rig sound card…	Geluidskaart van de transceiver…
 Rig on the PC turned off	Transceiver op de pc uitgeschakeld
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Klaar: de a
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Hernoemen mislukt ({0}).\n\nHandmatig: Configuratiescherm Geluid › tabblad Opnemen › "{1}" › Eigenschappen › naam.
 SDRLINK cable: WebSDR audio sent to "{0}"	SDRLINK-kabel: WebSDR-geluid naar "{0}" gestuurd
 SDRLINK cable: "{0}": {1}	SDRLINK-kabel: "{0}": {1}
+FreeDV: decoder not available ({0})	FreeDV: decoder niet beschikbaar ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): spraak wordt gedecodeerd zodra een FreeDV-signaal wordt ontvangen
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: spraak gedecodeerd ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: geluid niet beschikbaar ({1})
 Also hear the rig on the PC ({0})	De transceiver ook op de pc horen ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Transceiver op de pc: "{0}" speelt in de luidsprekers als TRX dempen uit staat
 Rig on the PC: sound card "{0}" not available ({1})	Transceiver op de pc: geluidskaart "{0}" niet beschikbaar ({1})
@@ -313,6 +326,7 @@ Reload	Vernieuwen
 Remove from favorites	Uit favorieten verwijderen
 Manage favorites…	Favorieten beheren…
 Find WebSDRs…	WebSDR's zoeken…
+FreeDV auto	FreeDV auto
 Mute WebSDR	WebSDR dempen
 Mute TRX	TRX dempen
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	verliesvrij, gecomprimeerd
 Folder where the recording is saved	Map waarin de opname wordt opgeslagen
 Enter a name for the file.	Geef een naam voor het bestand op.
 Cannot create the folder: 	Map kan niet worden gemaakt: 
-unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0} bits, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	MP3-encoder van Windows niet beschikbaar (0x{0:X8}): kies WAV of FLAC
 Recording length: {0}	Duur van de opname: {0}
 "{0}" already exists. Replace it?	"{0}" bestaat al. Vervangen?

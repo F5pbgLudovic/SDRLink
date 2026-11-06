@@ -67,6 +67,9 @@ Checking… {0} left	Έλεγχος… απομένουν {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Ο έλεγχος ολοκληρώθηκε: αφαιρέθηκαν {1} διπλότυπα, σημειώθηκαν {0} νεκροί σύνδεσμοι. Κάντε κλικ στο «Αφαίρεση…» για να διαγραφούν.
 {0} favorite(s) imported, {1} already present.	Εισήχθησαν {0} αγαπημένα, {1} υπήρχαν ήδη.
 {0} favorite(s) exported.	Εξήχθησαν {0} αγαπημένα.
+decoder missing from this build	ο αποκωδικοποιητής λείπει από αυτή την έκδοση
+program capture does not answer	η καταγραφή του προγράμματος δεν αποκρίνεται
+unsupported audio format ({0} bits, {1} Hz)	μη υποστηριζόμενη μορφή ήχου ({0} bit, {1} Hz)
 rigctld connection closed	Η σύνδεση rigctld έκλεισε
 stopped	διακόπηκε
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Δεν υπάρχει rigctld στο {0}:{1} (εκκινήστε το rigctld ή επιλέξτε «Εκκίνηση rigctld»).
@@ -94,6 +97,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
 Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
+FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: η ομιλία αποκωδικοποιείται μόλις ληφθεί σήμα FreeDV (κλικ: ενεργό / ανενεργό· δεξί κλικ: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Μεταφορά του ήχου στον επόμενο δέκτη (δεξί κλικ: δέκτης που μένει σε σίγαση)
 Colour when connected	Χρώμα όταν είναι συνδεδεμένο
 Colour when disconnected	Χρώμα όταν είναι αποσυνδεδεμένο
@@ -156,6 +160,10 @@ SDRLINK cable	Καλώδιο SDRLINK
  (off) ▾	 (ανενεργό) ▾
 Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
+rig	πομποδέκτης
+FreeDV auto off	Το FreeDV auto απενεργοποιήθηκε
+ (FreeDV 3, under development)	 (FreeDV 3, υπό ανάπτυξη)
+FreeDV: end of speech, back to normal audio	FreeDV: τέλος ομιλίας, επιστροφή στον κανονικό ήχο
 sound card to choose	επιλέξτε κάρτα ήχου
 Rig sound card…	Κάρτα ήχου του πομποδέκτη…
 Rig on the PC turned off	Η ακρόαση του πομποδέκτη στον υπολογιστή απενεργοποιήθηκε
@@ -241,6 +249,11 @@ Done: the audio input is now called "{0}". Restart WSJT-X to see it.	Ολοκλ�
 Renaming failed ({0}).\n\nBy hand: Sound control panel › Recording tab › "{1}" › Properties › name.	Η μετονομασία απέτυχε ({0}).\n\nΧειροκίνητα: Πίνακας Ελέγχου Ήχος › καρτέλα Εγγραφή › «{1}» › Ιδιότητες › όνομα.
 SDRLINK cable: WebSDR audio sent to "{0}"	Καλώδιο SDRLINK: ο ήχος του WebSDR στέλνεται στο «{0}»
 SDRLINK cable: "{0}": {1}	Καλώδιο SDRLINK: «{0}»: {1}
+FreeDV: decoder not available ({0})	FreeDV: ο αποκωδικοποιητής δεν είναι διαθέσιμος ({0})
+FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): η ομιλία θα αποκωδικοποιείται μόλις ληφθεί σήμα FreeDV
+FreeDV: {0}	FreeDV: {0}
+FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: αποκωδικοποιημένη ομιλία ({1}, SNR {2} dB)
+FreeDV: {0}: audio not available ({1})	FreeDV: {0}: ο ήχος δεν είναι διαθέσιμος ({1})
 Also hear the rig on the PC ({0})	Ακρόαση του πομποδέκτη και στον υπολογιστή ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Πομποδέκτης στον υπολογιστή: το «{0}» παίζει στα ηχεία όταν η Σίγαση TRX δεν είναι ενεργή
 Rig on the PC: sound card "{0}" not available ({1})	Πομποδέκτης στον υπολογιστή: η κάρτα ήχου «{0}» δεν είναι διαθέσιμη ({1})
@@ -313,6 +326,7 @@ Reload	Ανανέωση
 Remove from favorites	Αφαίρεση από τα αγαπημένα
 Manage favorites…	Διαχείριση αγαπημένων…
 Find WebSDRs…	Εύρεση WebSDR…
+FreeDV auto	FreeDV auto
 Mute WebSDR	Σίγαση WebSDR
 Mute TRX	Σίγαση TRX
 ⇄	⇄
@@ -383,7 +397,6 @@ lossless, compressed	χωρίς απώλειες, συμπιεσμένο
 Folder where the recording is saved	Φάκελος αποθήκευσης της εγγραφής
 Enter a name for the file.	Δώστε ένα όνομα για το αρχείο.
 Cannot create the folder: 	Δεν είναι δυνατή η δημιουργία του φακέλου: 
-unsupported audio format ({0} bits, {1} Hz)	μη υποστηριζόμενη μορφή ήχου ({0} bit, {1} Hz)
 Windows MP3 encoder not available (0x{0:X8}): choose WAV or FLAC	Ο κωδικοποιητής MP3 των Windows δεν είναι διαθέσιμος (0x{0:X8}): επιλέξτε WAV ή FLAC
 Recording length: {0}	Διάρκεια εγγραφής: {0}
 "{0}" already exists. Replace it?	Το «{0}» υπάρχει ήδη. Αντικατάσταση;
