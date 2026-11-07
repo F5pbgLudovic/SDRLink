@@ -3,6 +3,116 @@ sound card unplugged or disabled	scheda audio scollegata o disattivata
 output not found	uscita non trovata
 output already used in exclusive mode by another program	uscita già usata in modalità esclusiva da un altro programma
 cannot open, error 	impossibile aprire, errore 
+WEFAX: waiting for the start tone	WEFAX: in attesa del tono di inizio
+WEFAX: listening	WEFAX: in ascolto
+WEFAX: stop tone	WEFAX: tono di fine
+WEFAX: start tone (IOC {0})	WEFAX: tono di inizio (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: immagine {0} righe/min, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: immagine {0} righe/min, IOC {1}, riga {2}
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} cicli, {1} messaggi, ritardo {2} s
+searching for a signal…	ricerca di un segnale…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	ricezione a {0:F0} Hz (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	ricerca di un segnale… ({0:F0} Hz)
+decoder missing from this build	decodificatore mancante in questa versione
+Olivia: settings refused	Olivia: impostazioni rifiutate
+listening at %d Hz	in ascolto a %d Hz
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sincronizzato, S/N %.0f dB, scarto %+.0f Hz, centro %d Hz
+searching for a signal… (centre %d Hz)	ricerca di un segnale… (centro %d Hz)
+listening at {0:F0} Hz	ascolto a {0:F0} Hz
+signal at {0:F0} Hz	segnale a {0:F0} Hz
+reversed	Invertita
+Highlight: callsigns or texts to spot, separated by commas	Evidenziazione: nominativi o testi da individuare, separati da virgole
+Clear the received text	Cancella il testo ricevuto
+Default values	Valori predefiniti
+CW settings (applied immediately):	Impostazioni CW (applicate subito):
+Automatic tone	Tono automatico
+Filter follows the speed	Filtro in base alla velocità
+Automatic speed	Velocità automatica
+Drift tracking (AFC)	Inseguimento della deriva (AFC)
+slow	lento
+medium	medio
+fast	veloce
+RTTY settings (applied immediately):	Impostazioni RTTY (applicate subito):
+Automatic	Automatico
+Speed (baud rate)	Velocità (baud)
+Shift between the two tones	Shift tra i due toni
+Polarity	Polarità
+Normal (mark = low tone)	Normale (mark = tono basso)
+Reversed	Invertita
+Automatic frequency	Frequenza automatica
+A space returns to letters (UOS)	Lo spazio riporta alle lettere (UOS)
+PSK31 settings (applied immediately):	Impostazioni PSK31 (applicate subito):
+Automatic frequency (strongest signal)	Frequenza automatica (segnale più forte)
+Speed	Velocità
+Number of tones	Numero di toni
+Signal bandwidth	Larghezza di banda del segnale
+Automatic signal centre	Centro del segnale automatico
+Reversed signal (opposite sideband)	Segnale invertito (banda laterale opposta)
+Hell settings (applied immediately):	Impostazioni Hell (applicate subito):
+Transmitter variant	Variante del trasmettitore
+none	Nessuno
+Swap the tones (FM Hell 105 / 245, Hell 80)	Scambia i toni (FM Hell 105 / 245, Hell 80)
+Clear the screen	Cancella lo schermo
+Save the picture	Salva l'immagine
+Open the image folder	Apri la cartella delle immagini
+Slow (30 s)	Lento (30 s)
+Normal (15 s)	Normale (15 s)
+Fast (10 s)	Veloce (10 s)
+Sensitivity	Sensibilità
+Data loss	Perdita di dati
+Save the pictures automatically (Pictures › SDRLink)	Salva automaticamente le immagini (Immagini › SDRLink)
+WEFAX settings (applied immediately):	Impostazioni WEFAX (applicate subito):
+Lines per minute	Righe al minuto
+Index of cooperation (IOC) when the picture starts without a start tone	Indice di cooperazione (IOC) quando l'immagine inizia senza tono di inizio
+Wait for the start tone (otherwise the picture starts at once)	Attendi il tono di inizio (altrimenti l'immagine inizia subito)
+End the picture at the stop tone	Termina l'immagine al tono di fine
+Align the line start on the phasing lines	Allinea l'inizio delle righe sulle righe di fasatura
+Start a picture now	Inizia un'immagine ora
+End the picture and save it	Termina l'immagine e salvala
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	Modo USB o DATA, su una frequenza FT8 (7.074, 14.074 MHz…) o FT4 (7.0475, 14.080 MHz…). L'orologio del PC deve essere preciso.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	Ora UTC · DT (s) · frequenza audio (Hz) · messaggio. I due periodi (pari e dispari) sono mostrati in due colori.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	Modo USB o DATA, su una frequenza FT2 (3.578, 7.052, 14.084 MHz…). FT2 è FT4 a velocità doppia: slot di 3.75 s, messaggi di 2.5 s, larghezza 170 Hz. L'orologio del PC deve essere preciso. Solo ricezione; i segnali deboli vengono decodificati peggio che in FT4 (simboli più brevi).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	Modo USB, su una frequenza WSPR (14.0956, 7.0386, 10.1387 MHz…: frequenza della portante + 1500 Hz). Slot di 2 minuti; l'orologio del PC deve essere preciso; primi risultati alla fine del primo slot.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	Ora UTC · SNR (dB) · DT (s) · frequenza audio (Hz) · nominativo, locatore, potenza (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	Modo USB, su una frequenza JT9 (14.078, 7.078, 3.578 MHz…). Slot di 1 minuto; l'orologio del PC deve essere preciso.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	Ora UTC · SNR (dB) · DT (s) · frequenza audio (Hz) · messaggio.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	Modo USB, su una frequenza JS8Call (14.078, 7.078, 3.578 MHz…). Solo ricezione: frame heartbeat, messaggi diretti, testo libero. Scegli la velocità del trasmettitore (l'elenco Velocità qui sotto): Lento (slot da 30 s), Normale (15 s), Veloce (10 s), Turbo (6 s), Ultra (4 s); deve essere la stessa della stazione che ascolti. L'orologio del PC deve essere preciso.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	Ora UTC · SNR (dB) · DT (s) · frequenza audio (Hz) · frame (nominativo del mittente: destinatario o comando, testo). I due periodi (pari e dispari) sono mostrati in due colori.
+CW or USB mode, on a CW signal.	Modo CW o USB, su un segnale CW.
+UTC time · text.	Ora UTC · testo.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	Modo USB o LSB (almeno 500 Hz di banda), su un segnale RTTY (da 14.080 a 14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	Modo USB, su un segnale PSK31 (14.070, 7.035, 3.580 MHz…); la frequenza audio viene trovata automaticamente (o impostata a mano). PSK63 possibile.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	Modo USB, su un segnale Olivia (chiamata 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 e 32/1000 un po' più in alto, intorno a 14.075 e 14.106 MHz). Imposta il numero di toni e la larghezza di banda del trasmettitore: devono essere uguali ai suoi; formati comuni: 8/250, 16/500, 32/1000. Il centro del segnale viene trovato automaticamente nello spettro (o fissato a mano). Il testo appare a blocchi, alcuni secondi dopo la sincronizzazione; il segnale può anche stare ben sotto il rumore. Solo ricezione.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	Ora UTC · testo. Il titolo della finestra mostra la sincronizzazione, il rapporto segnale/rumore e lo scarto di frequenza.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	Modo USB, su un segnale Contestia (variante di Olivia con caratteri a 6 bit: 3.5825, 7.0425, 14.0725 MHz…). Imposta il numero di toni e la larghezza di banda del trasmettitore: formati comuni 8/250, 16/500, 32/1000. Il centro del segnale viene trovato automaticamente nello spettro (o fissato a mano). Solo ricezione.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	Modo USB, su un segnale Hellschreiber (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Scegli la variante del trasmettitore: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 o Hell 80. Il testo non viene decodificato in lettere: è scritto come un'immagine che si legge a occhio, come sulla macchina originale (righe di 14 punti che scorrono verso l'alto). La frequenza viene trovata automaticamente nello spettro; le file di punti si allineano da sole. Solo ricezione.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Immagine: le lettere sono scritte da sinistra a destra e la riga va a capo alla fine. Se il testo appare inclinato, gli orologi delle due stazioni differiscono leggermente: l'inseguimento si recupera da solo.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	Modo USB, 1,9 kHz sotto la frequenza pubblicata della stazione di fax meteo (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), o su un segnale FAX radioamatoriale. Nero 1500 Hz, bianco 2300 Hz. L'immagine inizia al tono di inizio (il suo IOC, 576 o 288, viene riconosciuto) e termina al tono di fine; viene salvata alla fine. La maggior parte delle stazioni trasmette 120 righe al minuto, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Se l'immagine è inclinata, la scheda audio o il WebSDR non funziona esattamente alla cadenza giusta: correggi con «Correzione dell'inclinazione». Se l'immagine è spostata verso destra, è stata presa a metà (senza righe di fasatura).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Modo USB (larghezza di banda di almeno 2,4 kHz), su una frequenza SSTV (14.230, 7.033, 3.730 MHz…); il modo immagine viene riconosciuto automaticamente, l'immagine si forma riga per riga e viene salvata al termine.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Sensibilità (da 1 a 10): più il numero è alto, più deboli sono i segnali accettati dal decodificatore (codice di avvio, impulsi di sincronismo, righe), con il rischio di qualche falso rilevamento.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Perdita di dati (da 1 a 10): per quanto tempo il decodificatore continua con un'immagine quando il segnale scompare (3 s con 1, 12 s con 4, 120 s con 10). Se il segnale ritorna entro questo tempo, l'immagine riprende alla riga giusta e le righe perse restano grigie. Trascorso questo tempo l'immagine viene salvata così com'è e il decodificatore torna in ascolto (poi trova da solo la modalità).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	La ricezione scelta come per FreeDV (apparato, altrimenti WebSDR, altrimenti ExpertSDR, altrimenti HDSDR) viene analizzata di continuo (una ricezione silenziata non viene scelta).
+Tone: {0} Hz	Tono: {0} Hz
+Filter: {0} Hz	Filtro: {0} Hz
+Speed: {0} WPM	Velocità: {0} WPM
+Detection threshold: {0} %	Soglia di rilevamento: {0} %
+Squelch (signal / noise): ×{0}	Squelch (segnale / rumore): ×{0}
+Letter gap: {0} dots	Spazio tra lettere: {0} punti
+Word gap: {0} dots	Spazio tra parole: {0} punti
+AGC (fading): {0}	AGC (fading): {0}
+Low tone: {0} Hz	Tono basso: {0} Hz
+Audio frequency: {0} Hz	Frequenza audio: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (coerenza di fase): {0} %
+{0} settings (applied immediately):	Impostazioni {0} (applicate subito):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Velocità: circa {0} caratteri al secondo ({1} toni su {2} Hz)
+Signal centre: {0} Hz	Centro del segnale: {0} Hz
+Frequency search margin: ± {0} tones	Margine di ricerca in frequenza: ± {0} toni
+Synchronisation integration: {0}	Integrazione della sincronizzazione: {0}
+Synchronisation threshold (signal / noise): ×{0}	Soglia di sincronizzazione (segnale / rumore): ×{0}
+Squelch: {0}	Squelch: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Frequenza centrale: {0} Hz (nero {1} Hz, bianco {2} Hz)
+Slant correction: {0} ppm	Correzione dell'inclinazione: {0} ppm
 Name:	Nome:
 Address:	Indirizzo:
 Cancel	Annulla
@@ -67,7 +177,6 @@ Checking… {0} left	Verifica… ne restano {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Verifica completata: {1} duplicato/i rimosso/i, {0} link non funzionante/i spuntati. Fare clic su «Rimuovi…» per eliminarli.
 {0} favorite(s) imported, {1} already present.	{0} preferito/i importato/i, {1} già presente/i.
 {0} favorite(s) exported.	{0} preferito/i esportato/i.
-decoder missing from this build	decodificatore mancante in questa versione
 program capture does not answer	la cattura del programma non risponde
 unsupported audio format ({0} bits, {1} Hz)	formato audio non supportato ({0} bit, {1} Hz)
 rigctld connection closed	Connessione rigctld chiusa
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	SDRLink verrà riavviato. Continuare?
 Reset the program	Ripristina il programma
 Cannot reset: 	Ripristino impossibile: 
 Button colour	Colore del pulsante
-RIG	RTX
+RIG	apparato
 Disconnected	Disconnesso
 Connect	Connetti
 Disconnect	Disconnetti
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: decodificatore non disponibile ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): la voce sarà decodificata appena si riceve un segnale FreeDV
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: voce decodificata ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: audio non disponibile ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: audio non disponibile ({2})
 Also hear the rig on the PC ({0})	Ascoltare l'apparato anche sul PC ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Apparato sul PC: «{0}» suona negli altoparlanti quando Muto RTX non è attivo
 Rig on the PC: sound card "{0}" not available ({1})	Apparato sul PC: scheda audio «{0}» non disponibile ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → RTX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Modi digitali: la decodifica è mostrata in una finestra sopra la pagina (clic: acceso / spento; clic destro: scelta del modo, clic destro su un modo: le sue impostazioni)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Pressione lunga e trascinamento: sposta la finestra; trascinare un bordo o un angolo: ridimensiona (clic destro: modi e impostazioni)
+Reset the windows	Ripristina le finestre
+image complete	immagine completata
+signal lost	segnale perso
+Nothing to save	Niente da salvare
+Hell: could not save	Hell: impossibile salvare
+{0}: decoding on	{0}: decodifica attiva
+{0}: decoding off	{0}: decodifica disattivata
+{0} settings	Impostazioni {0}
+{0} settings…	Impostazioni {0}…
+Reset the {0} window	Ripristina la finestra {0}
+{0}: listening ({1})	{0}: in ascolto ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): riga {2}
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, immagine salvata: {2}
+{0}: {1}, could not save	{0}: {1}, impossibile salvare
+Hell: picture saved: {0}	Hell: immagine salvata: {0}
+SSTV	SSTV
 Frequency (kHz):	Frequenza (kHz):
 Mode:	Modo:
 (mode unchanged)	(modo invariato)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Sostituire il profilo «{0}»
 The profile "{0}" already exists.	Il profilo «{0}» esiste già.
 Delete the profile "{0}"?	Eliminare il profilo «{0}»?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Intervallo escluso n. {0}: indicare due frequenze in kHz (ad es. 7097 e 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: modo non supportato (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — segnale ritrovato, riga {1}
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — manca l'inizio, ricezione presa a metà
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Nessun server TCI su 
 TCI connection lost	Connessione TCI persa
 unavailable	non disponibile

@@ -3,6 +3,116 @@ sound card unplugged or disabled	helikaart on lahti ühendatud või keelatud
 output not found	väljundit ei leitud
 output already used in exclusive mode by another program	väljundit kasutab juba teine programm ainurežiimis
 cannot open, error 	ei saa avada, viga 
+WEFAX: waiting for the start tone	WEFAX: ootan algustooni
+WEFAX: listening	WEFAX: kuulab
+WEFAX: stop tone	WEFAX: lõputoon
+WEFAX: start tone (IOC {0})	WEFAX: algustoon (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: pilt {0} rida/min, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: pilt {0} rida/min, IOC {1}, rida {2}
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} ajapesa, {1} sõnumit, viivitus {2} s
+searching for a signal…	signaali otsimine…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	vastuvõtt sagedusel {0:F0} Hz (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	otsin signaali… ({0:F0} Hz)
+decoder missing from this build	dekooder puudub selles versioonis
+Olivia: settings refused	Olivia: seaded tagasi lükatud
+listening at %d Hz	kuulamas sagedusel %d Hz
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sünkroonis, S/N %.0f dB, nihe %+.0f Hz, keskpunkt %d Hz
+searching for a signal… (centre %d Hz)	otsin signaali… (keskpunkt %d Hz)
+listening at {0:F0} Hz	kuulamine sagedusel {0:F0} Hz
+signal at {0:F0} Hz	signaal sagedusel {0:F0} Hz
+reversed	Ümberpööratud
+Highlight: callsigns or texts to spot, separated by commas	Esiletõstmine: kutsungid või tekstid, mida otsida, eraldatud komadega
+Clear the received text	Tühjenda vastuvõetud tekst
+Default values	Vaikeväärtused
+CW settings (applied immediately):	CW seaded (rakenduvad kohe):
+Automatic tone	Automaatne toon
+Filter follows the speed	Filter järgib kiirust
+Automatic speed	Automaatne kiirus
+Drift tracking (AFC)	Triivi jälgimine (AFC)
+slow	aeglane
+medium	keskmine
+fast	kiire
+RTTY settings (applied immediately):	RTTY seaded (rakenduvad kohe):
+Automatic	Automaatne
+Speed (baud rate)	Kiirus (bodi)
+Shift between the two tones	Kahe tooni vahe
+Polarity	Polaarsus
+Normal (mark = low tone)	Tavaline (mark = madal toon)
+Reversed	Ümberpööratud
+Automatic frequency	Automaatne sagedus
+A space returns to letters (UOS)	Tühik viib tagasi tähtedele (UOS)
+PSK31 settings (applied immediately):	PSK31 seaded (rakendatakse kohe):
+Automatic frequency (strongest signal)	Automaatne sagedus (tugevaim signaal)
+Speed	Kiirus
+Number of tones	Toonide arv
+Signal bandwidth	Signaali ribalaius
+Automatic signal centre	Automaatne signaali keskpunkt
+Reversed signal (opposite sideband)	Ümberpööratud signaal (vastasküljariba)
+Hell settings (applied immediately):	Hell seaded (rakenduvad kohe):
+Transmitter variant	Saatja variant
+none	Puudub
+Swap the tones (FM Hell 105 / 245, Hell 80)	Vaheta toonid (FM Hell 105 / 245, Hell 80)
+Clear the screen	Tühjenda ekraan
+Save the picture	Salvesta pilt
+Open the image folder	Ava piltide kaust
+Slow (30 s)	Aeglane (30 s)
+Normal (15 s)	Tavaline (15 s)
+Fast (10 s)	Kiire (10 s)
+Sensitivity	Tundlikkus
+Data loss	Andmekadu
+Save the pictures automatically (Pictures › SDRLink)	Salvesta pildid automaatselt (Pildid › SDRLink)
+WEFAX settings (applied immediately):	WEFAX-i seaded (rakenduvad kohe):
+Lines per minute	Ridu minutis
+Index of cooperation (IOC) when the picture starts without a start tone	Koostööindeks (IOC), kui pilt algab ilma algustoonita
+Wait for the start tone (otherwise the picture starts at once)	Oota algustooni (muidu algab pilt kohe)
+End the picture at the stop tone	Lõpeta pilt lõputooni juures
+Align the line start on the phasing lines	Joonda ridade algus faasimisridade järgi
+Start a picture now	Alusta pilti kohe
+End the picture and save it	Lõpeta pilt ja salvesta see
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	USB- või DATA-režiim, FT8 (7.074, 14.074 MHz…) või FT4 (7.0475, 14.080 MHz…) sagedusel. Arvuti kell peab olema täpne.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	UTC aeg · DT (s) · helisagedus (Hz) · sõnum. Kaks perioodi (paaris ja paaritu) kuvatakse kahe värviga.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	USB- või DATA-režiim, FT2 (3.578, 7.052, 14.084 MHz…) sagedusel. FT2 on kahekordse kiirusega FT4: 3.75 s pesad, 2.5 s sõnumid, 170 Hz laiused. Arvuti kell peab olema täpne. Ainult vastuvõtt; nõrku signaale dekodeeritakse halvemini kui FT4-s (lühemad sümbolid).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	USB-režiim, WSPR sagedusel (14.0956, 7.0386, 10.1387 MHz…: kandesagedus + 1500 Hz). 2-minutilised ajavahemikud; arvuti kell peab olema täpne; esimesed tulemused esimese ajavahemiku lõpus.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	UTC aeg · SNR (dB) · DT (s) · helisagedus (Hz) · kutsung, lokaator, võimsus (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	USB-režiim, JT9 sagedusel (14.078, 7.078, 3.578 MHz…). 1-minutilised ajavahemikud; arvuti kell peab olema täpne.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	UTC aeg · SNR (dB) · DT (s) · helisagedus (Hz) · sõnum.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	USB-režiim, JS8Calli sagedusel (14.078, 7.078, 3.578 MHz…). Ainult vastuvõtt: heartbeat-kaadrid, adresseeritud sõnumid, vaba tekst. Valige saatja kiirus (allpool olev nimekiri Kiirus): Aeglane (30 s ajavahemikud), Tavaline (15 s), Kiire (10 s), Turbo (6 s), Ultra (4 s); see peab olema sama, mis kuulataval jaamal. Arvuti kell peab olema täpne.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	UTC aeg · SNR (dB) · DT (s) · helisagedus (Hz) · kaader (saatja kutsung: adressaat või käsk, tekst). Kaks perioodi (paaris ja paaritu) kuvatakse kahes värvis.
+CW or USB mode, on a CW signal.	CW- või USB-režiim, CW-signaalil.
+UTC time · text.	UTC aeg · tekst.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	USB- või LSB-režiim (vähemalt 500 Hz ribalaius), RTTY-signaalil (14.080 kuni 14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	USB-režiim, PSK31 signaalil (14.070, 7.035, 3.580 MHz…); helisagedus leitakse automaatselt (või seatakse käsitsi). PSK63 on võimalik.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	USB-režiim, Olivia signaalil (väljakutse 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 ja 32/1000 veidi kõrgemal, umbes 14.075 ja 14.106 MHz). Määrake saatja toonide arv ja ribalaius: need peavad olema samad mis saatjal; tavalised vormingud: 8/250, 16/500, 32/1000. Signaali keskpunkt leitakse spektrist automaatselt (või määratakse käsitsi). Tekst ilmub plokkidena, mõni sekund pärast sünkroniseerimist; signaal võib olla isegi tugevalt müra all. Ainult vastuvõtt.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	UTC-aeg · tekst. Akna pealkiri näitab sünkroniseerimist, signaali ja müra suhet ning sagedusnihet.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	USB-režiim, Contestia signaalil (Olivia variant 6-bitiste märkidega: 3.5825, 7.0425, 14.0725 MHz…). Määrake saatja toonide arv ja ribalaius: tavalised vormingud 8/250, 16/500, 32/1000. Signaali keskpunkt leitakse spektrist automaatselt (või määratakse käsitsi). Ainult vastuvõtt.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	USB-režiim, Hellschreiberi signaalil (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Valige saatja variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 või Hell 80. Teksti ei dekodeerita tähtedeks: see kirjutatakse pildina, mida loete silmaga, nagu algsel masinal (14-punktilised read, mis kerivad üles). Sagedus leitakse spektrist automaatselt; punktiread joonduvad ise. Ainult vastuvõtt.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Pilt: tähed kirjutatakse vasakult paremale ja rida murdub lõpus. Kui tekst paistab viltune, erinevad kahe jaama kellad veidi: jälgimine korrigeerib selle ise.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	USB-režiim, 1,9 kHz allpool ilmafaksijaama avaldatud sagedust (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), või raadioamatööride FAX-signaalil. Must 1500 Hz, valge 2300 Hz. Pilt algab algustooniga (selle IOC, 576 või 288, tuvastatakse) ja lõpeb lõputooniga; see salvestatakse lõpus. Enamik jaamu saadab 120 rida minutis, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Kui pilt on viltu, ei tööta helikaart või WebSDR päris õige kiirusega: parandage seda valikuga „Kaldeparandus“. Kui pilt on paremale nihkunud, püüti see poole pealt (ilma faasimisridadeta).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB-režiim (ribalaius vähemalt 2,4 kHz), SSTV sagedusel (14.230, 7.033, 3.730 MHz…); pildirežiim tuvastatakse automaatselt, pilt ehitub rida realt ja salvestatakse lõpus.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Tundlikkus (1 kuni 10): mida suurem arv, seda nõrgemaid signaale dekooder vastu võtab (stardikood, sünkroonimisimpulsid, read), kusjuures on oht mõnele valetuvastusele.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Andmekadu (1 kuni 10): kui kaua dekooder pildiga jätkab, kui signaal kaob (3 s väärtusel 1, 12 s väärtusel 4, 120 s väärtusel 10). Kui signaal selle aja jooksul tagasi tuleb, jätkub pilt õigelt realt ja kaotatud read jäävad halliks. Pärast seda aega salvestatakse pilt sellisena, nagu see on, ja dekooder kuulab uuesti (seejärel leiab ta režiimi ise).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Vastuvõttu, mis valitakse nagu FreeDV puhul (raadio, muidu WebSDR, muidu ExpertSDR, muidu HDSDR), analüüsitakse pidevalt (vaigistatud vastuvõttu ei valita).
+Tone: {0} Hz	Toon: {0} Hz
+Filter: {0} Hz	Filter: {0} Hz
+Speed: {0} WPM	Kiirus: {0} WPM
+Detection threshold: {0} %	Tuvastuslävi: {0} %
+Squelch (signal / noise): ×{0}	Squelch (signaal / müra): ×{0}
+Letter gap: {0} dots	Tähepaus: {0} punkti
+Word gap: {0} dots	Sõnapaus: {0} punkti
+AGC (fading): {0}	AGC (hajumine): {0}
+Low tone: {0} Hz	Madal toon: {0} Hz
+Audio frequency: {0} Hz	Helisagedus: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (faasikoherentsus): {0} %
+{0} settings (applied immediately):	{0} seaded (rakenduvad kohe):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Kiirus: umbes {0} märki sekundis ({1} tooni {2} Hz ulatuses)
+Signal centre: {0} Hz	Signaali keskpunkt: {0} Hz
+Frequency search margin: ± {0} tones	Sageduse otsingu varu: ± {0} tooni
+Synchronisation integration: {0}	Sünkroniseerimise integreerimine: {0}
+Synchronisation threshold (signal / noise): ×{0}	Sünkroniseerimise lävi (signaal / müra): ×{0}
+Squelch: {0}	Squelch: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Keskmine sagedus: {0} Hz (must {1} Hz, valge {2} Hz)
+Slant correction: {0} ppm	Kaldeparandus: {0} ppm
 Name:	Nimi:
 Address:	Aadress:
 Cancel	Loobu
@@ -67,7 +177,6 @@ Checking… {0} left	Kontrollimine… jäänud {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontroll valmis: eemaldati {1} duplikaat(i), märgiti {0} surnud link(i). Nende kustutamiseks klõpsake „Eemalda…“.
 {0} favorite(s) imported, {1} already present.	Imporditi {0} lemmik(ut), {1} oli juba olemas.
 {0} favorite(s) exported.	Eksporditi {0} lemmik(ut).
-decoder missing from this build	dekooder puudub selles versioonis
 program capture does not answer	programmi heli püüdmine ei vasta
 unsupported audio format ({0} bits, {1} Hz)	toetamata helivorming ({0} bitti, {1} Hz)
 rigctld connection closed	rigctld ühendus suleti
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	SDRLink taaskäivitub. Jätkata?
 Reset the program	Lähtesta programm
 Cannot reset: 	Lähtestamine pole võimalik: 
 Button colour	Nupu värv
-RIG	RAADIO
+RIG	raadio
 Disconnected	Ühendus puudub
 Connect	Ühenda
 Disconnect	Katkesta
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: dekooder pole saadaval ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): kõne dekodeeritakse kohe, kui FreeDV signaal saabub
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: kõne dekodeeritud ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: heli pole saadaval ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: heli pole saadaval ({2})
 Also hear the rig on the PC ({0})	Kuula raadiojaama ka arvutis ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Raadiojaam arvutis: „{0}“ mängib kõlarites, kui Vaigista TRX pole sees
 Rig on the PC: sound card "{0}" not available ({1})	Raadiojaam arvutis: helikaart „{0}“ pole saadaval ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → Raadio
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitaalsed režiimid: dekodeerimine kuvatakse lehe kohal olevas aknas (klõps: sisse / välja; paremklõps: režiimi valik, paremklõps režiimil: selle seaded)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Pikk vajutus ja lohistamine: akna liigutamine; serva või nurga lohistamine: suuruse muutmine (paremklõps: režiimid ja seaded)
+Reset the windows	Lähtesta aknad
+image complete	pilt valmis
+signal lost	signaal kadunud
+Nothing to save	Pole midagi salvestada
+Hell: could not save	Hell: salvestamine ebaõnnestus
+{0}: decoding on	{0}: dekodeerimine sees
+{0}: decoding off	{0}: dekodeerimine väljas
+{0} settings	{0} seaded
+{0} settings…	{0} seaded…
+Reset the {0} window	Lähtesta {0} aken
+{0}: listening ({1})	{0}: kuulab ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): rida {2}
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, pilt salvestatud: {2}
+{0}: {1}, could not save	{0}: {1}, salvestamine ebaõnnestus
+Hell: picture saved: {0}	Hell: pilt salvestatud: {0}
+SSTV	SSTV
 Frequency (kHz):	Sagedus (kHz):
 Mode:	Režiim:
 (mode unchanged)	(režiim muutmata)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Kas asendada profiil „{0}�
 The profile "{0}" already exists.	Profiil „{0}“ on juba olemas.
 Delete the profile "{0}"?	Kas kustutada profiil „{0}“?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Vahelejäetav vahemik nr {0}: sisestage kaks sagedust kHz-des (nt 7097 ja 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: režiimi ei toetata (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — signaal leiti uuesti, rida {1}
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — algus puudub, vastuvõtt alustatud poole pealt
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	TCI serverit pole aadressil 
 TCI connection lost	TCI ühendus katkes
 unavailable	pole saadaval

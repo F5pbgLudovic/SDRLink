@@ -47,6 +47,15 @@ namespace SDRLink
         public int RecColor = 0x000080;    // fond du bouton REC au repos (RVB), bleu marine par défaut
         public int RecWidth = 1;           // largeur du bouton REC : 1 étroit (2 fois la hauteur), 2 large (4 fois)
         public bool FreeDvAuto, FreeDvV2;    // bouton FreeDV auto (décoché au départ) ; RADE V2 au lieu de V1 (clic droit)
+        public bool SstvAuto;              // bouton SSTV (décoché au départ)
+        public int SstvX = 0, SstvY = 1000; // position de la fenêtre SSTV sur la page, en millièmes de la place libre (0,1000 = en bas à gauche)
+        public string DigiMode = "SSTV";   // mode numérique du bouton SSTV (SSTV, FT8, CW, WEFAX...) ; SstvAuto = décodeur en marche
+        public string DigiHi = "";         // surbrillance : textes à repérer dans le trafic décodé, séparés par des virgules
+        public Dictionary<string, int> Digi = new Dictionary<string, int>();   // réglages des modes numériques (nom : valeur entière)
+        public int DigiGet(string k, int def) { int v; return Digi.TryGetValue(k, out v) ? v : def; }
+        public bool DigiGet(string k, bool def) { int v; return Digi.TryGetValue(k, out v) ? v != 0 : def; }
+        public void DigiSet(string k, int v) { Digi[k] = v; }
+        public void DigiSet(string k, bool v) { Digi[k] = v ? 1 : 0; }
         public bool RigMonitor;            // clic droit sur Mute TX : carte son du poste rejouée sur le PC quand Mute TX n'est pas actif
         // Couleurs choisies par clic droit sur les boutons (clé → RVB) ; clé absente = couleur par défaut.
         public Dictionary<string, int> Colors = new Dictionary<string, int>(StringComparer.Ordinal);
@@ -241,6 +250,15 @@ namespace SDRLink
                     case "RigMonitor": s.RigMonitor = v == "1"; break;
                     case "FreeDvAuto": s.FreeDvAuto = v == "1"; break;
                     case "FreeDvV2": s.FreeDvV2 = v == "1"; break;
+                    case "SstvAuto": s.SstvAuto = v == "1"; break;
+                    case "SstvX": s.SstvX = Math.Max(0, Math.Min(1000, Int(v, 0))); break;
+                    case "SstvY": s.SstvY = Math.Max(0, Math.Min(1000, Int(v, 1000))); break;
+                    case "DigiMode": s.DigiMode = v; break;
+                    case "DigiHi": try { s.DigiHi = Uri.UnescapeDataString(v); } catch { } break;
+                    case "Digi":
+                        int dc = v.IndexOf(':');
+                        if (dc > 0) s.Digi[v.Substring(0, dc)] = Int(v.Substring(dc + 1), 0);
+                        break;
                     case "Callsign":
                         string cs = "";
                         try { cs = WebSdrBridge.Clean(Uri.UnescapeDataString(v)); } catch (UriFormatException) { }
@@ -366,6 +384,12 @@ namespace SDRLink
             Line(sb, "RigMonitor", RigMonitor ? 1 : 0);
             Line(sb, "FreeDvAuto", FreeDvAuto ? 1 : 0);
             Line(sb, "FreeDvV2", FreeDvV2 ? 1 : 0);
+            Line(sb, "SstvAuto", SstvAuto ? 1 : 0);
+            Line(sb, "SstvX", SstvX);
+            Line(sb, "SstvY", SstvY);
+            Line(sb, "DigiMode", DigiMode);
+            Line(sb, "DigiHi", Uri.EscapeDataString(DigiHi));
+            foreach (KeyValuePair<string, int> d in Digi) Line(sb, "Digi", d.Key + ":" + d.Value.ToString(CultureInfo.InvariantCulture));
             Line(sb, "Callsign", Uri.EscapeDataString(Callsign));
             Line(sb, "SwapIgnore", SwapIgnore.Count == 0 ? "-1" : string.Join(",", SwapIgnore.ConvertAll(k => k.ToString()).ToArray()));
             Line(sb, "MuteTxSkip", MuteTxSkip.Count == 0 ? "-1" : string.Join(",", MuteTxSkip.ConvertAll(k => k.ToString()).ToArray()));

@@ -3,6 +3,116 @@ sound card unplugged or disabled	garso plokštė atjungta arba išjungta
 output not found	išvestis nerasta
 output already used in exclusive mode by another program	išvestį išskirtiniu režimu jau naudoja kita programa
 cannot open, error 	nepavyksta atidaryti, klaida 
+WEFAX: waiting for the start tone	WEFAX: laukiama pradžios tono
+WEFAX: listening	WEFAX: klausomasi
+WEFAX: stop tone	WEFAX: pabaigos tonas
+WEFAX: start tone (IOC {0})	WEFAX: pradžios tonas (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: vaizdas {0} eil./min, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: vaizdas {0} eil./min, IOC {1}, eilutė {2}
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} intervalų, {1} pranešimų, vėlavimas {2} s
+searching for a signal…	ieškoma signalo…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	priimama {0:F0} Hz dažniu (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	ieškoma signalo… ({0:F0} Hz)
+decoder missing from this build	šioje versijoje nėra dekoderio
+Olivia: settings refused	Olivia: nustatymai atmesti
+listening at %d Hz	klausoma %d Hz dažniu
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sinchronizuota, S/N %.0f dB, nuokrypis %+.0f Hz, centras %d Hz
+searching for a signal… (centre %d Hz)	ieškoma signalo… (centras %d Hz)
+listening at {0:F0} Hz	klausoma {0:F0} Hz dažniu
+signal at {0:F0} Hz	signalas {0:F0} Hz dažniu
+reversed	Atvirkštinis
+Highlight: callsigns or texts to spot, separated by commas	Paryškinimas: šaukiniai arba tekstai, kuriuos reikia pastebėti, atskirti kableliais
+Clear the received text	Išvalyti priimtą tekstą
+Default values	Numatytosios reikšmės
+CW settings (applied immediately):	CW nustatymai (taikomi iš karto):
+Automatic tone	Automatinis tonas
+Filter follows the speed	Filtras seka greitį
+Automatic speed	Automatinis greitis
+Drift tracking (AFC)	Dreifo sekimas (AFC)
+slow	lėtas
+medium	vidutinis
+fast	greitas
+RTTY settings (applied immediately):	RTTY nustatymai (taikomi iš karto):
+Automatic	Automatinis
+Speed (baud rate)	Greitis (baudai)
+Shift between the two tones	Skirtumas tarp dviejų tonų
+Polarity	Poliškumas
+Normal (mark = low tone)	Normalus (mark = žemas tonas)
+Reversed	Atvirkštinis
+Automatic frequency	Automatinis dažnis
+A space returns to letters (UOS)	Tarpas grąžina į raides (UOS)
+PSK31 settings (applied immediately):	PSK31 nustatymai (taikomi iš karto):
+Automatic frequency (strongest signal)	Automatinis dažnis (stipriausias signalas)
+Speed	Greitis
+Number of tones	Tonų skaičius
+Signal bandwidth	Signalo juostos plotis
+Automatic signal centre	Automatinis signalo centras
+Reversed signal (opposite sideband)	Apverstas signalas (priešinga šoninė juosta)
+Hell settings (applied immediately):	Hell nustatymai (taikomi iš karto):
+Transmitter variant	Siųstuvo variantas
+none	Jokio
+Swap the tones (FM Hell 105 / 245, Hell 80)	Sukeisti tonus (FM Hell 105 / 245, Hell 80)
+Clear the screen	Išvalyti ekraną
+Save the picture	Išsaugoti paveikslėlį
+Open the image folder	Atidaryti vaizdų aplanką
+Slow (30 s)	Lėtai (30 s)
+Normal (15 s)	Normaliai (15 s)
+Fast (10 s)	Greitai (10 s)
+Sensitivity	Jautrumas
+Data loss	Duomenų praradimas
+Save the pictures automatically (Pictures › SDRLink)	Automatiškai įrašyti vaizdus (Paveikslėliai › SDRLink)
+WEFAX settings (applied immediately):	WEFAX nustatymai (taikomi iš karto):
+Lines per minute	Eilučių per minutę
+Index of cooperation (IOC) when the picture starts without a start tone	Bendradarbiavimo indeksas (IOC), kai vaizdas prasideda be pradžios tono
+Wait for the start tone (otherwise the picture starts at once)	Laukti pradžios tono (kitaip vaizdas prasideda iš karto)
+End the picture at the stop tone	Baigti vaizdą ties pabaigos tonu
+Align the line start on the phasing lines	Lygiuoti eilučių pradžią pagal fazavimo eilutes
+Start a picture now	Pradėti vaizdą dabar
+End the picture and save it	Baigti vaizdą ir jį įrašyti
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	USB arba DATA režimas, FT8 (7.074, 14.074 MHz…) arba FT4 (7.0475, 14.080 MHz…) dažniu. Kompiuterio laikrodis turi būti tikslus.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	UTC laikas · DT (s) · garso dažnis (Hz) · pranešimas. Du periodai (lyginis ir nelyginis) rodomi dviem spalvomis.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	USB arba DATA režimas, FT2 (3.578, 7.052, 14.084 MHz…) dažniu. FT2 yra dvigubai greitesnis FT4: 3.75 s laiko tarpai, 2.5 s pranešimai, 170 Hz pločio. Kompiuterio laikrodis turi būti tikslus. Tik priėmimas; silpni signalai dekoduojami blogiau nei FT4 (trumpesni simboliai).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	USB režimas, WSPR dažniu (14.0956, 7.0386, 10.1387 MHz…: nešlio dažnis + 1500 Hz). 2 minučių laiko tarpai; kompiuterio laikrodis turi būti tikslus; pirmieji rezultatai pirmojo laiko tarpo pabaigoje.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	UTC laikas · SNR (dB) · DT (s) · garso dažnis (Hz) · šaukinys, lokatorius, galia (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	USB režimas, JT9 dažniu (14.078, 7.078, 3.578 MHz…). 1 minutės laiko tarpai; kompiuterio laikrodis turi būti tikslus.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	UTC laikas · SNR (dB) · DT (s) · garso dažnis (Hz) · pranešimas.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	USB režimas, JS8Call dažniu (14.078, 7.078, 3.578 MHz…). Tik priėmimas: heartbeat kadrai, adresuoti pranešimai, laisvas tekstas. Pasirinkite siųstuvo greitį (sąrašas Greitis žemiau): Lėtai (30 s intervalai), Normaliai (15 s), Greitai (10 s), Turbo (6 s), Ultra (4 s); jis turi būti toks pat kaip klausomos stoties. Kompiuterio laikrodis turi būti tikslus.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	UTC laikas · SNR (dB) · DT (s) · garso dažnis (Hz) · kadras (siuntėjo šaukinys: adresatas arba komanda, tekstas). Du periodai (lyginis ir nelyginis) rodomi dviem spalvomis.
+CW or USB mode, on a CW signal.	CW arba USB režimas, CW signalui.
+UTC time · text.	UTC laikas · tekstas.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	USB arba LSB režimas (bent 500 Hz juosta), RTTY signalui (14.080–14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	USB režimas, PSK31 signalu (14.070, 7.035, 3.580 MHz…); garso dažnis randamas automatiškai (arba nustatomas rankiniu būdu). Galimas PSK63.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	USB režimas, Olivia signalui (šaukimo dažnis 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 ir 32/1000 šiek tiek aukščiau, apie 14.075 ir 14.106 MHz). Nustatykite siųstuvo tonų skaičių ir juostos plotį: jie turi sutapti su siųstuvo; įprasti formatai: 8/250, 16/500, 32/1000. Signalo centras automatiškai randamas spektre (arba nustatomas rankiniu būdu). Tekstas rodomas blokais, praėjus kelioms sekundėms po sinchronizacijos; signalas gali būti net gerokai žemiau triukšmo lygio. Tik priėmimas.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	UTC laikas · tekstas. Lango antraštėje rodoma sinchronizacija, signalo ir triukšmo santykis bei dažnio nuokrypis.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	USB režimas, Contestia signalui (Olivia variantas su 6 bitų simboliais: 3.5825, 7.0425, 14.0725 MHz…). Nustatykite siųstuvo tonų skaičių ir juostos plotį: įprasti formatai 8/250, 16/500, 32/1000. Signalo centras automatiškai randamas spektre (arba nustatomas rankiniu būdu). Tik priėmimas.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	USB režimas, Hellschreiber signalui (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Pasirinkite siųstuvo variantą: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 arba Hell 80. Tekstas nedekoduojamas į raides: jis rašomas kaip paveikslėlis, kurį skaitote akimis, kaip originaliame aparate (14 taškų eilutės slenka aukštyn). Dažnis automatiškai randamas spektre; taškų eilutės susilygiuoja pačios. Tik priėmimas.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Paveikslėlis: raidės rašomos iš kairės į dešinę, o eilutė pabaigoje laužoma į kitą. Jei tekstas atrodo pasviręs, dviejų stočių laikrodžiai šiek tiek skiriasi: sekimas pats pasitaiso.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	USB režimas, 1,9 kHz žemiau paskelbto meteorologinio fakso stoties dažnio (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), arba radijo mėgėjų FAX signalui. Juoda 1500 Hz, balta 2300 Hz. Vaizdas prasideda ties pradžios tonu (jo IOC, 576 arba 288, atpažįstamas) ir baigiasi ties pabaigos tonu; pabaigoje jis įrašomas. Dauguma stočių siunčia 120 eilučių per minutę, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Jei vaizdas pasviręs, garso plokštė arba WebSDR veikia ne visai tinkamu dažniu: pataisykite nustatymu „Pasvirimo korekcija“. Jei vaizdas pasislinkęs į dešinę, jis buvo pagautas viduryje (be fazavimo eilučių).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB režimas (mažiausiai 2,4 kHz juostos plotis), SSTV dažniu (14.230, 7.033, 3.730 MHz…); vaizdo režimas atpažįstamas automatiškai, vaizdas kuriamas eilutė po eilutės ir pabaigoje išsaugomas.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Jautrumas (nuo 1 iki 10): kuo didesnis skaičius, tuo silpnesnius signalus dekoderis priima (pradžios kodą, sinchronizavimo impulsus, eilutes), rizikuojant kelis kartus klaidingai aptikti.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Duomenų praradimas (nuo 1 iki 10): kiek laiko dekoderis tęsia vaizdą, kai signalas dingsta (3 s esant 1, 12 s esant 4, 120 s esant 10). Jei signalas per tą laiką sugrįžta, vaizdas tęsiamas nuo tinkamos eilutės, o prarastos eilutės lieka pilkos. Praėjus tam laikui vaizdas išsaugomas toks, koks yra, ir dekoderis vėl klausosi (tada pats suranda režimą).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Priėmimas, pasirenkamas kaip FreeDV atveju (stotis, kitaip WebSDR, kitaip ExpertSDR, kitaip HDSDR), analizuojamas nuolat (nutildytas priėmimas nepasirenkamas).
+Tone: {0} Hz	Tonas: {0} Hz
+Filter: {0} Hz	Filtras: {0} Hz
+Speed: {0} WPM	Greitis: {0} WPM
+Detection threshold: {0} %	Aptikimo slenkstis: {0} %
+Squelch (signal / noise): ×{0}	Squelch (signalas / triukšmas): ×{0}
+Letter gap: {0} dots	Tarpas tarp raidžių: {0} taškų
+Word gap: {0} dots	Tarpas tarp žodžių: {0} taškų
+AGC (fading): {0}	AGC (nykimas): {0}
+Low tone: {0} Hz	Žemas tonas: {0} Hz
+Audio frequency: {0} Hz	Garso dažnis: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (fazių koherencija): {0} %
+{0} settings (applied immediately):	{0} nustatymai (taikomi iš karto):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Greitis: apie {0} simbolių per sekundę ({1} tonų per {2} Hz)
+Signal centre: {0} Hz	Signalo centras: {0} Hz
+Frequency search margin: ± {0} tones	Dažnio paieškos ribos: ± {0} tonų
+Synchronisation integration: {0}	Sinchronizacijos integravimas: {0}
+Synchronisation threshold (signal / noise): ×{0}	Sinchronizacijos slenkstis (signalas / triukšmas): ×{0}
+Squelch: {0}	Squelch: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Centrinis dažnis: {0} Hz (juoda {1} Hz, balta {2} Hz)
+Slant correction: {0} ppm	Pasvirimo korekcija: {0} ppm
 Name:	Pavadinimas:
 Address:	Adresas:
 Cancel	Atšaukti
@@ -67,7 +177,6 @@ Checking… {0} left	Tikrinama… liko {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Tikrinimas baigtas: pašalinta dublikatų – {1}, pažymėta neveikiančių nuorodų – {0}. Spustelėkite „Šalinti…“, kad jas ištrintumėte.
 {0} favorite(s) imported, {1} already present.	Importuota parankinių: {0}, jau buvo: {1}.
 {0} favorite(s) exported.	Eksportuota parankinių: {0}.
-decoder missing from this build	šioje versijoje nėra dekoderio
 program capture does not answer	programos garso įrašymas neatsako
 unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
 rigctld connection closed	rigctld ryšys uždarytas
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	SDRLink bus paleista iš naujo. Tęsti?
 Reset the program	Atstatyti programą
 Cannot reset: 	Atstatyti neįmanoma: 
 Button colour	Mygtuko spalva
-RIG	STOTIS
+RIG	stotis
 Disconnected	Atsijungta
 Connect	Prisijungti
 Disconnect	Atsijungti
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: dekoderis nepasiekiamas ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): kalba bus dekoduojama, kai tik bus priimtas FreeDV signalas
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: kalba dekoduota ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: garsas nepasiekiamas ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: garsas nepasiekiamas ({2})
 Also hear the rig on the PC ({0})	Klausytis stoties ir kompiuteryje ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stotis kompiuteryje: „{0}“ groja garsiakalbiuose, kai Nutildyti TRX neįjungta
 Rig on the PC: sound card "{0}" not available ({1})	Stotis kompiuteryje: garso plokštė „{0}“ nepasiekiama ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Skaitmeniniai režimai: dekodavimas rodomas lange virš puslapio (spustelėjimas: įjungti / išjungti; dešinysis spustelėjimas: režimo pasirinkimas, dešinysis spustelėjimas ant režimo: jo nustatymai)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Ilgas paspaudimas ir vilkimas: perkelti langą; tempiant kraštą ar kampą: keisti dydį (dešinysis spustelėjimas: režimai ir nustatymai)
+Reset the windows	Atkurti langus
+image complete	vaizdas baigtas
+signal lost	signalas prarastas
+Nothing to save	Nėra ką išsaugoti
+Hell: could not save	Hell: įrašyti nepavyko
+{0}: decoding on	{0}: dekodavimas įjungtas
+{0}: decoding off	{0}: dekodavimas išjungtas
+{0} settings	{0} nustatymai
+{0} settings…	{0} nustatymai…
+Reset the {0} window	Atkurti {0} langą
+{0}: listening ({1})	{0}: klausomasi ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): eilutė {2}
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, vaizdas įrašytas: {2}
+{0}: {1}, could not save	{0}: {1}, įrašyti nepavyko
+Hell: picture saved: {0}	Hell: vaizdas įrašytas: {0}
+SSTV	SSTV
 Frequency (kHz):	Dažnis (kHz):
 Mode:	Režimas:
 (mode unchanged)	(režimas nekeičiamas)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Pakeisti profilį „{0}“ r
 The profile "{0}" already exists.	Profilis „{0}“ jau yra.
 Delete the profile "{0}"?	Ištrinti profilį „{0}“?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Praleidžiamas ruožas Nr. {0}: įveskite du dažnius kHz (pvz., 7097 ir 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: nepalaikomas režimas (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — signalas vėl rastas, eilutė {1}
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — trūksta pradžios, priėmimas pradėtas viduryje
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Nėra TCI serverio adresu 
 TCI connection lost	TCI ryšys nutrūko
 unavailable	nepasiekiama

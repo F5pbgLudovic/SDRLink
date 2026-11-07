@@ -3,6 +3,116 @@ sound card unplugged or disabled	lydkort frakoblet eller deaktiveret
 output not found	udgang ikke fundet
 output already used in exclusive mode by another program	udgangen bruges allerede i eksklusiv tilstand af et andet program
 cannot open, error 	kan ikke åbnes, fejl 
+WEFAX: waiting for the start tone	WEFAX: venter på starttonen
+WEFAX: listening	WEFAX: lytter
+WEFAX: stop tone	WEFAX: stoptone
+WEFAX: start tone (IOC {0})	WEFAX: starttone (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: billede {0} linjer/min, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: billede {0} linjer/min, IOC {1}, linje {2}
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} perioder, {1} beskeder, forsinkelse {2} s
+searching for a signal…	søger efter et signal…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	modtager ved {0:F0} Hz (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	søger efter et signal… ({0:F0} Hz)
+decoder missing from this build	dekoderen mangler i denne version
+Olivia: settings refused	Olivia: indstillinger afvist
+listening at %d Hz	lytter ved %d Hz
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	synkroniseret, S/N %.0f dB, afvigelse %+.0f Hz, centrum %d Hz
+searching for a signal… (centre %d Hz)	søger efter et signal… (centrum %d Hz)
+listening at {0:F0} Hz	lytter på {0:F0} Hz
+signal at {0:F0} Hz	signal på {0:F0} Hz
+reversed	Omvendt
+Highlight: callsigns or texts to spot, separated by commas	Fremhæv: kaldesignaler eller tekster at finde, adskilt af kommaer
+Clear the received text	Ryd den modtagne tekst
+Default values	Standardværdier
+CW settings (applied immediately):	CW-indstillinger (anvendes straks):
+Automatic tone	Automatisk tone
+Filter follows the speed	Filter følger hastigheden
+Automatic speed	Automatisk hastighed
+Drift tracking (AFC)	Driftsporing (AFC)
+slow	langsom
+medium	middel
+fast	hurtig
+RTTY settings (applied immediately):	RTTY-indstillinger (anvendes straks):
+Automatic	Automatisk
+Speed (baud rate)	Hastighed (baud)
+Shift between the two tones	Skift mellem de to toner
+Polarity	Polaritet
+Normal (mark = low tone)	Normal (mark = lav tone)
+Reversed	Omvendt
+Automatic frequency	Automatisk frekvens
+A space returns to letters (UOS)	Mellemrum vender tilbage til bogstaver (UOS)
+PSK31 settings (applied immediately):	PSK31-indstillinger (anvendes med det samme):
+Automatic frequency (strongest signal)	Automatisk frekvens (kraftigste signal)
+Speed	Hastighed
+Number of tones	Antal toner
+Signal bandwidth	Signalets båndbredde
+Automatic signal centre	Automatisk signalcentrum
+Reversed signal (opposite sideband)	Vendt signal (modsat sidebånd)
+Hell settings (applied immediately):	Hell-indstillinger (anvendes med det samme):
+Transmitter variant	Senderens variant
+none	Ingen
+Swap the tones (FM Hell 105 / 245, Hell 80)	Byt om på tonerne (FM Hell 105 / 245, Hell 80)
+Clear the screen	Ryd skærmen
+Save the picture	Gem billedet
+Open the image folder	Åbn billedmappen
+Slow (30 s)	Langsom (30 s)
+Normal (15 s)	Normal (15 s)
+Fast (10 s)	Hurtig (10 s)
+Sensitivity	Følsomhed
+Data loss	Datatab
+Save the pictures automatically (Pictures › SDRLink)	Gem billederne automatisk (Billeder › SDRLink)
+WEFAX settings (applied immediately):	WEFAX-indstillinger (anvendes med det samme):
+Lines per minute	Linjer pr. minut
+Index of cooperation (IOC) when the picture starts without a start tone	Samarbejdsindeks (IOC), når billedet starter uden starttone
+Wait for the start tone (otherwise the picture starts at once)	Vent på starttonen (ellers starter billedet med det samme)
+End the picture at the stop tone	Afslut billedet ved stoptonen
+Align the line start on the phasing lines	Juster linjestarten efter fasningslinjerne
+Start a picture now	Start et billede nu
+End the picture and save it	Afslut billedet og gem det
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	USB- eller DATA-mode, på en FT8- (7.074, 14.074 MHz…) eller FT4-frekvens (7.0475, 14.080 MHz…). Pc'ens ur skal være nøjagtigt.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	UTC-tid · DT (s) · lydfrekvens (Hz) · meddelelse. De to perioder (lige og ulige) vises i to farver.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	USB- eller DATA-mode, på en FT2-frekvens (3.578, 7.052, 14.084 MHz…). FT2 er FT4 med dobbelt hastighed: 3.75 s slots, 2.5 s beskeder, 170 Hz bredde. Pc'ens ur skal være nøjagtigt. Kun modtagelse; svage signaler dekodes dårligere end i FT4 (kortere symboler).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	USB-mode, på en WSPR-frekvens (14.0956, 7.0386, 10.1387 MHz…: bærefrekvens + 1500 Hz). Tidsslots på 2 minutter; pc'ens ur skal være nøjagtigt; første resultater i slutningen af første tidsslot.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	UTC-tid · SNR (dB) · DT (s) · lydfrekvens (Hz) · kaldesignal, locator, effekt (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	USB-mode, på en JT9-frekvens (14.078, 7.078, 3.578 MHz…). Tidsslots på 1 minut; pc'ens ur skal være nøjagtigt.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	UTC-tid · SNR (dB) · DT (s) · lydfrekvens (Hz) · meddelelse.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	USB-tilstand, på en JS8Call-frekvens (14.078, 7.078, 3.578 MHz…). Kun modtagelse: heartbeat-rammer, rettede beskeder, fri tekst. Vælg senderens hastighed (listen Hastighed nedenfor): Langsom (30 s-slots), Normal (15 s), Hurtig (10 s), Turbo (6 s), Ultra (4 s); den skal være den samme som hos den station, du lytter til. Pc'ens ur skal være præcist.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	UTC-tid · SNR (dB) · DT (s) · lydfrekvens (Hz) · ramme (afsenderens kaldesignal: modtager eller kommando, tekst). De to perioder (lige og ulige) vises i to farver.
+CW or USB mode, on a CW signal.	CW- eller USB-mode, på et CW-signal.
+UTC time · text.	UTC-tid · tekst.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	USB- eller LSB-mode (mindst 500 Hz båndbredde), på et RTTY-signal (14.080 til 14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	USB-mode, på et PSK31-signal (14.070, 7.035, 3.580 MHz…); lydfrekvensen findes automatisk (eller indstilles manuelt). PSK63 muligt.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	USB-mode, på et Olivia-signal (kald 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 og 32/1000 lidt højere, omkring 14.075 og 14.106 MHz). Indstil senderens antal toner og båndbredde: de skal være de samme som senderens; almindelige formater: 8/250, 16/500, 32/1000. Signalets centrum findes automatisk i spektret (eller fastlægges manuelt). Teksten vises i blokke, nogle sekunder efter synkroniseringen; signalet kan endda ligge langt under støjen. Kun modtagelse.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	UTC-tid · tekst. Vinduets titel viser synkroniseringen, signal/støj-forholdet og frekvensafvigelsen.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	USB-mode, på et Contestia-signal (en Olivia-variant med 6-bit tegn: 3.5825, 7.0425, 14.0725 MHz…). Indstil senderens antal toner og båndbredde: almindelige formater 8/250, 16/500, 32/1000. Signalets centrum findes automatisk i spektret (eller fastlægges manuelt). Kun modtagelse.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	USB-mode, på et Hellschreiber-signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Vælg senderens variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 eller Hell 80. Teksten afkodes ikke til bogstaver: den skrives som et billede, som du læser med øjnene, ligesom på den oprindelige maskine (linjer på 14 punkter, der ruller opad). Frekvensen findes automatisk i spektret; punktrækkerne retter sig selv ind. Kun modtagelse.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Billede: bogstaverne skrives fra venstre mod højre, og linjen skifter ved enden. Hvis teksten ser skæv ud, afviger de to stationers ure en smule: sporingen retter sig selv.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	USB-mode, 1,9 kHz under den offentliggjorte frekvens for vejrfaxstationen (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), eller på et FAX-signal fra radioamatører. Sort 1500 Hz, hvid 2300 Hz. Billedet starter ved starttonen (dets IOC, 576 eller 288, genkendes) og slutter ved stoptonen; det gemmes til sidst. De fleste stationer sender 120 linjer pr. minut, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Hvis billedet hælder, kører lydkortet eller WebSDR'en ikke helt med den rigtige hastighed: ret det med „Hældningskorrektion“. Hvis billedet er forskudt mod højre, blev det fanget undervejs (uden fasningslinjer).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB-mode (mindst 2,4 kHz båndbredde), på en SSTV-frekvens (14.230, 7.033, 3.730 MHz…); billedmode genkendes automatisk, billedet opbygges linje for linje og gemmes, når det er slut.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Følsomhed (1 til 10): jo højere tal, jo svagere signaler accepterer dekoderen (startkode, synkroniseringspulser, linjer), med risiko for et par falske detektioner.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Datatab (1 til 10): hvor længe dekoderen fortsætter med et billede, når signalet forsvinder (3 s ved 1, 12 s ved 4, 120 s ved 10). Hvis signalet vender tilbage inden for den tid, fortsætter billedet på den rigtige linje, og de tabte linjer forbliver grå. Efter den tid gemmes billedet, som det er, og dekoderen lytter igen (den finder så selv tilstanden).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Modtagelsen, der vælges som for FreeDV (radio, ellers WebSDR, ellers ExpertSDR, ellers HDSDR), analyseres løbende (en modtagelse med slået lyd fra vælges ikke).
+Tone: {0} Hz	Tone: {0} Hz
+Filter: {0} Hz	Filter: {0} Hz
+Speed: {0} WPM	Hastighed: {0} WPM
+Detection threshold: {0} %	Detektionstærskel: {0} %
+Squelch (signal / noise): ×{0}	Squelch (signal / støj): ×{0}
+Letter gap: {0} dots	Bogstavmellemrum: {0} prikker
+Word gap: {0} dots	Ordmellemrum: {0} prikker
+AGC (fading): {0}	AGC (fading): {0}
+Low tone: {0} Hz	Lav tone: {0} Hz
+Audio frequency: {0} Hz	Audiofrekvens: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (fasekohærens): {0} %
+{0} settings (applied immediately):	{0}-indstillinger (anvendes med det samme):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Hastighed: ca. {0} tegn i sekundet ({1} toner over {2} Hz)
+Signal centre: {0} Hz	Signalcentrum: {0} Hz
+Frequency search margin: ± {0} tones	Frekvenssøgningsmargen: ± {0} toner
+Synchronisation integration: {0}	Synkroniseringsintegration: {0}
+Synchronisation threshold (signal / noise): ×{0}	Synkroniseringstærskel (signal / støj): ×{0}
+Squelch: {0}	Squelch: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Centerfrekvens: {0} Hz (sort {1} Hz, hvid {2} Hz)
+Slant correction: {0} ppm	Hældningskorrektion: {0} ppm
 Name:	Navn:
 Address:	Adresse:
 Cancel	Annuller
@@ -67,7 +177,6 @@ Checking… {0} left	Kontrollerer… {0} tilbage
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontrol færdig: {1} dublet(ter) fjernet, {0} død(e) link(s) afkrydset. Klik på ”Fjern…” for at slette dem.
 {0} favorite(s) imported, {1} already present.	{0} favorit(ter) importeret, {1} fandtes allerede.
 {0} favorite(s) exported.	{0} favorit(ter) eksporteret.
-decoder missing from this build	dekoderen mangler i denne version
 program capture does not answer	optagelse af programmet svarer ikke
 unsupported audio format ({0} bits, {1} Hz)	lydformatet understøttes ikke ({0} bit, {1} Hz)
 rigctld connection closed	rigctld-forbindelse lukket
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	SDRLink genstarter. Fortsæt?
 Reset the program	Nulstil programmet
 Cannot reset: 	Nulstilling ikke mulig: 
 Button colour	Knapfarve
-RIG	TRX
+RIG	radio
 Disconnected	Afbrudt
 Connect	Forbind
 Disconnect	Afbryd
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: dekoderen er ikke tilgængelig ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): talen afkodes, så snart et FreeDV-signal modtages
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: tale afkodet ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: lyd ikke tilgængelig ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: lyd ikke tilgængelig ({2})
 Also hear the rig on the PC ({0})	Hør også radioen på pc'en ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Radioen på pc'en: "{0}" afspilles i højttalerne, når Lydløs TRX er slået fra
 Rig on the PC: sound card "{0}" not available ({1})	Radioen på pc'en: lydkortet "{0}" er ikke tilgængeligt ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitale modes: afkodningen vises i et vindue over siden (klik: til / fra; højreklik: vælg mode, højreklik på en mode: dens indstillinger)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Langt tryk og træk: flyt vinduet; træk i en kant eller et hjørne: ændr størrelsen (højreklik: modes og indstillinger)
+Reset the windows	Nulstil vinduerne
+image complete	billede færdigt
+signal lost	signal mistet
+Nothing to save	Intet at gemme
+Hell: could not save	Hell: kunne ikke gemmes
+{0}: decoding on	{0}: afkodning til
+{0}: decoding off	{0}: afkodning fra
+{0} settings	{0}-indstillinger
+{0} settings…	{0}-indstillinger…
+Reset the {0} window	Nulstil {0}-vinduet
+{0}: listening ({1})	{0}: lytter ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linje {2}
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, billede gemt: {2}
+{0}: {1}, could not save	{0}: {1}, kunne ikke gemmes
+Hell: picture saved: {0}	Hell: billede gemt: {0}
+SSTV	SSTV
 Frequency (kHz):	Frekvens (kHz):
 Mode:	Mode:
 (mode unchanged)	(mode uændret)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Erstat profilen "{0}" med de 
 The profile "{0}" already exists.	Profilen "{0}" findes allerede.
 Delete the profile "{0}"?	Slet profilen "{0}"?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Område nr. {0}, der springes over: angiv to frekvenser i kHz (f.eks. 7097 og 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: tilstand understøttes ikke (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — signal fundet igen, linje {1}
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — starten mangler, modtagelse fanget undervejs
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Ingen TCI-server på 
 TCI connection lost	TCI-forbindelse mistet
 unavailable	ikke tilgængelig

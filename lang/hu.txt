@@ -3,6 +3,116 @@ sound card unplugged or disabled	a hangkártya leválasztva vagy letiltva
 output not found	a kimenet nem található
 output already used in exclusive mode by another program	a kimenetet egy másik program már kizárólagos módban használja
 cannot open, error 	nem nyitható meg, hiba 
+WEFAX: waiting for the start tone	WEFAX: várakozás a kezdőhangra
+WEFAX: listening	WEFAX: figyel
+WEFAX: stop tone	WEFAX: záróhang
+WEFAX: start tone (IOC {0})	WEFAX: kezdőhang (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: kép {0} sor/perc, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: kép {0} sor/perc, IOC {1}, {2}. sor
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} időszelet, {1} üzenet, késés {2} s
+searching for a signal…	jel keresése…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	vétel {0:F0} Hz-en (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	jel keresése… ({0:F0} Hz)
+decoder missing from this build	a dekóder hiányzik ebből a verzióból
+Olivia: settings refused	Olivia: a beállításokat elutasította
+listening at %d Hz	figyelés %d Hz-en
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	szinkronban, S/N %.0f dB, eltérés %+.0f Hz, közép %d Hz
+searching for a signal… (centre %d Hz)	jel keresése… (közép %d Hz)
+listening at {0:F0} Hz	hallgatás {0:F0} Hz-en
+signal at {0:F0} Hz	jel {0:F0} Hz-en
+reversed	Fordított
+Highlight: callsigns or texts to spot, separated by commas	Kiemelés: hívójelek vagy keresendő szövegek, vesszővel elválasztva
+Clear the received text	A vett szöveg törlése
+Default values	Alapértékek
+CW settings (applied immediately):	CW beállítások (azonnal érvényesek):
+Automatic tone	Automatikus hang
+Filter follows the speed	A szűrő követi a sebességet
+Automatic speed	Automatikus sebesség
+Drift tracking (AFC)	Sodródás követése (AFC)
+slow	lassú
+medium	közepes
+fast	gyors
+RTTY settings (applied immediately):	RTTY beállítások (azonnal érvényesek):
+Automatic	Automatikus
+Speed (baud rate)	Sebesség (baud)
+Shift between the two tones	Eltolás a két hang között
+Polarity	Polaritás
+Normal (mark = low tone)	Normál (mark = mély hang)
+Reversed	Fordított
+Automatic frequency	Automatikus frekvencia
+A space returns to letters (UOS)	A szóköz visszavált betűkre (UOS)
+PSK31 settings (applied immediately):	PSK31 beállítások (azonnal érvénybe lépnek):
+Automatic frequency (strongest signal)	Automatikus frekvencia (legerősebb jel)
+Speed	Sebesség
+Number of tones	Hangok száma
+Signal bandwidth	Jel sávszélessége
+Automatic signal centre	Automatikus jelközép
+Reversed signal (opposite sideband)	Fordított jel (ellenkező oldalsáv)
+Hell settings (applied immediately):	Hell beállítások (azonnal érvényesülnek):
+Transmitter variant	Adó változata
+none	Nincs
+Swap the tones (FM Hell 105 / 245, Hell 80)	Hangok felcserélése (FM Hell 105 / 245, Hell 80)
+Clear the screen	Képernyő törlése
+Save the picture	Kép mentése
+Open the image folder	A képek mappájának megnyitása
+Slow (30 s)	Lassú (30 s)
+Normal (15 s)	Normál (15 s)
+Fast (10 s)	Gyors (10 s)
+Sensitivity	Érzékenység
+Data loss	Adatvesztés
+Save the pictures automatically (Pictures › SDRLink)	A képek automatikus mentése (Képek › SDRLink)
+WEFAX settings (applied immediately):	WEFAX-beállítások (azonnal érvényesek):
+Lines per minute	Sor percenként
+Index of cooperation (IOC) when the picture starts without a start tone	Együttműködési index (IOC), ha a kép kezdőhang nélkül indul
+Wait for the start tone (otherwise the picture starts at once)	Várakozás a kezdőhangra (különben a kép azonnal indul)
+End the picture at the stop tone	A kép befejezése a záróhangnál
+Align the line start on the phasing lines	A sorkezdet igazítása a fázissorokhoz
+Start a picture now	Kép indítása most
+End the picture and save it	A kép befejezése és mentése
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	USB vagy DATA üzemmód, FT8 (7.074, 14.074 MHz…) vagy FT4 (7.0475, 14.080 MHz…) frekvencián. A számítógép óráját pontosan kell beállítani.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	UTC idő · DT (s) · hangfrekvencia (Hz) · üzenet. A két periódus (páros és páratlan) két színnel jelenik meg.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	USB vagy DATA üzemmód, FT2 (3.578, 7.052, 14.084 MHz…) frekvencián. Az FT2 kétszeres sebességű FT4: 3.75 s-os időrések, 2.5 s-os üzenetek, 170 Hz széles. A számítógép óráját pontosan kell beállítani. Csak vétel; a gyenge jeleket rosszabbul dekódolja, mint az FT4 (rövidebb szimbólumok).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	USB üzemmód, WSPR frekvencián (14.0956, 7.0386, 10.1387 MHz…: vivőfrekvencia + 1500 Hz). 2 perces időszeletek; a számítógép óráját pontosan kell beállítani; az első eredmények az első időszelet végén.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	UTC idő · SNR (dB) · DT (s) · hangfrekvencia (Hz) · hívójel, lokátor, teljesítmény (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	USB üzemmód, JT9 frekvencián (14.078, 7.078, 3.578 MHz…). 1 perces időszeletek; a számítógép óráját pontosan kell beállítani.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	UTC idő · SNR (dB) · DT (s) · hangfrekvencia (Hz) · üzenet.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	USB üzemmód, JS8Call frekvencián (14.078, 7.078, 3.578 MHz…). Csak vétel: heartbeat keretek, címzett üzenetek, szabad szöveg. Válassza ki az adó sebességét (a lenti Sebesség lista): Lassú (30 s-os idősávok), Normál (15 s), Gyors (10 s), Turbo (6 s), Ultra (4 s); ennek meg kell egyeznie a hallgatott állomáséval. A számítógép óráját pontosra kell állítani.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	UTC idő · SNR (dB) · DT (s) · hangfrekvencia (Hz) · keret (feladó hívójele: címzett vagy parancs, szöveg). A két periódus (páros és páratlan) két színben jelenik meg.
+CW or USB mode, on a CW signal.	CW vagy USB üzemmód, CW jelen.
+UTC time · text.	UTC idő · szöveg.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	USB vagy LSB üzemmód (legalább 500 Hz sávszélesség), RTTY jelen (14.080–14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	USB üzemmód, PSK31 jelen (14.070, 7.035, 3.580 MHz…); a hangfrekvenciát automatikusan megtalálja (vagy kézzel állítható be). PSK63 lehetséges.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	USB üzemmód, Olivia jelen (hívás 8/250: 14.0729, 7.0729, 3.5729 MHz…; a 16/500 és a 32/1000 kicsit feljebb, 14.075 és 14.106 MHz körül). Állítsa be az adó hangjainak számát és sávszélességét: meg kell egyezniük az adóéval; gyakori formátumok: 8/250, 16/500, 32/1000. A jel közepét a program automatikusan megtalálja a spektrumban (vagy kézzel rögzíthető). A szöveg blokkonként jelenik meg, néhány másodperccel a szinkronizálás után; a jel akár jóval a zaj szintje alatt is lehet. Csak vétel.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	UTC idő · szöveg. Az ablak címsora mutatja a szinkronizálást, a jel/zaj viszonyt és a frekvenciaeltérést.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	USB üzemmód, Contestia jelen (az Olivia 6 bites karaktereket használó változata: 3.5825, 7.0425, 14.0725 MHz…). Állítsa be az adó hangjainak számát és sávszélességét: gyakori formátumok 8/250, 16/500, 32/1000. A jel közepét a program automatikusan megtalálja a spektrumban (vagy kézzel rögzíthető). Csak vétel.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	USB üzemmód, Hellschreiber jelen (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Válassza ki az adó változatát: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 vagy Hell 80. A szöveget nem betűkké dekódolja: képként jelenik meg, amelyet szemmel olvas, mint az eredeti gépen (felfelé gördülő, 14 pontos sorok). A frekvenciát a program automatikusan megtalálja a spektrumban; a pontsorok maguktól beállnak. Csak vétel.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Kép: a betűk balról jobbra íródnak, és a sor a végén tovább törik. Ha a szöveg ferdének tűnik, a két állomás órája kissé eltér: a követés magától kiigazítja.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	USB üzemmód, 1,9 kHz-cel az időjárási faxállomás közzétett frekvenciája alatt (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), vagy rádióamatőr FAX jelen. Fekete 1500 Hz, fehér 2300 Hz. A kép a kezdőhangnál indul (az IOC értékét, 576 vagy 288, felismeri) és a záróhangnál ér véget; a végén mentésre kerül. A legtöbb állomás percenként 120 sort ad, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Ha a kép ferde, a hangkártya vagy a WebSDR nem egészen a helyes ütemben fut: javítsa a „Ferdeségkorrekció” beállítással. Ha a kép jobbra el van tolva, menet közben lett elkapva (fázissorok nélkül).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB üzemmód (legalább 2,4 kHz sávszélesség), SSTV frekvencián (14.230, 7.033, 3.730 MHz…); a képmódot automatikusan felismeri, a kép soronként épül fel, és a végén mentésre kerül.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Érzékenység (1-től 10-ig): minél nagyobb a szám, annál gyengébb jeleket fogad el a dekóder (startkód, szinkronimpulzusok, sorok), néhány téves észlelés kockázatával.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Adatvesztés (1-től 10-ig): mennyi ideig folytatja a dekóder a képet, amikor a jel eltűnik (3 s az 1-nél, 12 s a 4-nél, 120 s a 10-nél). Ha a jel ezen időn belül visszatér, a kép a megfelelő soron folytatódik, az elveszett sorok pedig szürkék maradnak. Ennyi idő után a kép úgy kerül mentésre, ahogy van, és a dekóder újra hallgat (ekkor magától megtalálja az üzemmódot).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	A FreeDV-hez hasonlóan kiválasztott vételt (rádió, különben WebSDR, különben ExpertSDR, különben HDSDR) folyamatosan elemzi (némított vételt nem választ).
+Tone: {0} Hz	Hang: {0} Hz
+Filter: {0} Hz	Szűrő: {0} Hz
+Speed: {0} WPM	Sebesség: {0} WPM
+Detection threshold: {0} %	Érzékelési küszöb: {0} %
+Squelch (signal / noise): ×{0}	Squelch (jel / zaj): ×{0}
+Letter gap: {0} dots	Betűköz: {0} pont
+Word gap: {0} dots	Szóköz: {0} pont
+AGC (fading): {0}	AGC (fading): {0}
+Low tone: {0} Hz	Mély hang: {0} Hz
+Audio frequency: {0} Hz	Hangfrekvencia: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (fáziskoherencia): {0} %
+{0} settings (applied immediately):	{0} beállítások (azonnal érvényesülnek):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Sebesség: kb. {0} karakter másodpercenként ({1} hang {2} Hz-en)
+Signal centre: {0} Hz	Jelközép: {0} Hz
+Frequency search margin: ± {0} tones	Frekvenciakeresési tartomány: ± {0} hang
+Synchronisation integration: {0}	Szinkronizálási integráció: {0}
+Synchronisation threshold (signal / noise): ×{0}	Szinkronizálási küszöb (jel / zaj): ×{0}
+Squelch: {0}	Zajzár: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Középfrekvencia: {0} Hz (fekete {1} Hz, fehér {2} Hz)
+Slant correction: {0} ppm	Ferdeségkorrekció: {0} ppm
 Name:	Név:
 Address:	Cím:
 Cancel	Mégse
@@ -67,7 +177,6 @@ Checking… {0} left	Ellenőrzés… még {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Ellenőrzés kész: {1} ismétlődés eltávolítva, {0} halott link bejelölve. Az „Eltávolítás…” gombbal törölheti őket.
 {0} favorite(s) imported, {1} already present.	{0} kedvenc importálva, {1} már megvolt.
 {0} favorite(s) exported.	{0} kedvenc exportálva.
-decoder missing from this build	a dekóder hiányzik ebből a verzióból
 program capture does not answer	a program hangjának rögzítése nem válaszol
 unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
 rigctld connection closed	A rigctld-kapcsolat bezárult
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	Az SDRLink újraindul. Folytatja?
 Reset the program	A program alaphelyzetbe állítása
 Cannot reset: 	Az alaphelyzetbe állítás nem lehetséges: 
 Button colour	Gomb színe
-RIG	RÁDIÓ
+RIG	rádió
 Disconnected	Nincs kapcsolat
 Connect	Csatlakozás
 Disconnect	Bontás
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: a dekóder nem érhető el ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): a beszéd dekódolása azonnal megtörténik, amint FreeDV-jel érkezik
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekódolt beszéd ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: a hang nem érhető el ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: a hang nem érhető el ({2})
 Also hear the rig on the PC ({0})	A rádió hallgatása a gépen is ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Rádió a gépen: a(z) „{0}” a hangszórókon szól, ha a TRX némítás nincs bekapcsolva
 Rig on the PC: sound card "{0}" not available ({1})	Rádió a gépen: a(z) „{0}” hangkártya nem érhető el ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → Rádió
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitális üzemmódok: a dekódolás egy, az oldal fölötti ablakban jelenik meg (kattintás: be / ki; jobb kattintás: üzemmód választása, jobb kattintás egy üzemmódon: annak beállításai)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Hosszú nyomás, majd húzás: az ablak áthelyezése; szél vagy sarok húzása: átméretezés (jobb kattintás: üzemmódok és beállítások)
+Reset the windows	Ablakok visszaállítása
+image complete	a kép elkészült
+signal lost	a jel elveszett
+Nothing to save	Nincs mit menteni
+Hell: could not save	Hell: a mentés nem sikerült
+{0}: decoding on	{0}: dekódolás be
+{0}: decoding off	{0}: dekódolás ki
+{0} settings	{0}-beállítások
+{0} settings…	{0}-beállítások…
+Reset the {0} window	A(z) {0} ablak visszaállítása
+{0}: listening ({1})	{0}: figyel ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): {2}. sor
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, kép mentve: {2}
+{0}: {1}, could not save	{0}: {1}, a mentés nem sikerült
+Hell: picture saved: {0}	Hell: kép mentve: {0}
+SSTV	SSTV
 Frequency (kHz):	Frekvencia (kHz):
 Mode:	Üzemmód:
 (mode unchanged)	(üzemmód változatlan)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Lecseréli a(z) „{0}” pro
 The profile "{0}" already exists.	A(z) „{0}” profil már létezik.
 Delete the profile "{0}"?	Törli a(z) „{0}” profilt?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	{0}. kihagyott tartomány: adjon meg két frekvenciát kHz-ben (pl. 7097 és 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: nem támogatott üzemmód (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — a jel újra megvan, {1}. sor
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — hiányzik az eleje, a vétel menet közben indult
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Nincs TCI-szerver itt: 
 TCI connection lost	A TCI-kapcsolat megszakadt
 unavailable	nem elérhető

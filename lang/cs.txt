@@ -3,6 +3,116 @@ sound card unplugged or disabled	zvuková karta odpojena nebo vypnuta
 output not found	výstup nenalezen
 output already used in exclusive mode by another program	výstup již používá jiný program ve výhradním režimu
 cannot open, error 	nelze otevřít, chyba 
+WEFAX: waiting for the start tone	WEFAX: čekání na úvodní tón
+WEFAX: listening	WEFAX: poslech
+WEFAX: stop tone	WEFAX: ukončovací tón
+WEFAX: start tone (IOC {0})	WEFAX: úvodní tón (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: obrázek {0} řádků/min, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: obrázek {0} řádků/min, IOC {1}, řádek {2}
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} cyklů, {1} zpráv, zpoždění {2} s
+searching for a signal…	hledání signálu…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	příjem na {0:F0} Hz (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	hledání signálu… ({0:F0} Hz)
+decoder missing from this build	dekodér v této verzi chybí
+Olivia: settings refused	Olivia: nastavení odmítnuto
+listening at %d Hz	poslech na %d Hz
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	synchronizováno, S/N %.0f dB, odchylka %+.0f Hz, střed %d Hz
+searching for a signal… (centre %d Hz)	hledání signálu… (střed %d Hz)
+listening at {0:F0} Hz	poslech na {0:F0} Hz
+signal at {0:F0} Hz	signál na {0:F0} Hz
+reversed	Převrácená
+Highlight: callsigns or texts to spot, separated by commas	Zvýraznění: volací znaky nebo texty k nalezení, oddělené čárkami
+Clear the received text	Vymazat přijatý text
+Default values	Výchozí hodnoty
+CW settings (applied immediately):	Nastavení CW (použijí se hned):
+Automatic tone	Automatický tón
+Filter follows the speed	Filtr podle rychlosti
+Automatic speed	Automatická rychlost
+Drift tracking (AFC)	Sledování driftu (AFC)
+slow	pomalé
+medium	střední
+fast	rychlé
+RTTY settings (applied immediately):	Nastavení RTTY (použijí se hned):
+Automatic	Automaticky
+Speed (baud rate)	Rychlost (baud)
+Shift between the two tones	Posun mezi dvěma tóny
+Polarity	Polarita
+Normal (mark = low tone)	Normální (mark = nízký tón)
+Reversed	Převrácená
+Automatic frequency	Automatická frekvence
+A space returns to letters (UOS)	Mezera vrací na písmena (UOS)
+PSK31 settings (applied immediately):	Nastavení PSK31 (použije se okamžitě):
+Automatic frequency (strongest signal)	Automatická frekvence (nejsilnější signál)
+Speed	Rychlost
+Number of tones	Počet tónů
+Signal bandwidth	Šířka pásma signálu
+Automatic signal centre	Automatický střed signálu
+Reversed signal (opposite sideband)	Převrácený signál (opačné postranní pásmo)
+Hell settings (applied immediately):	Nastavení Hell (použije se okamžitě):
+Transmitter variant	Varianta vysílače
+none	Žádné
+Swap the tones (FM Hell 105 / 245, Hell 80)	Prohodit tóny (FM Hell 105 / 245, Hell 80)
+Clear the screen	Vymazat obrazovku
+Save the picture	Uložit obrázek
+Open the image folder	Otevřít složku obrázků
+Slow (30 s)	Pomalu (30 s)
+Normal (15 s)	Normálně (15 s)
+Fast (10 s)	Rychle (10 s)
+Sensitivity	Citlivost
+Data loss	Ztráta dat
+Save the pictures automatically (Pictures › SDRLink)	Ukládat obrázky automaticky (Obrázky › SDRLink)
+WEFAX settings (applied immediately):	Nastavení WEFAX (použije se okamžitě):
+Lines per minute	Řádků za minutu
+Index of cooperation (IOC) when the picture starts without a start tone	Index spolupráce (IOC), když obrázek začne bez úvodního tónu
+Wait for the start tone (otherwise the picture starts at once)	Čekat na úvodní tón (jinak obrázek začne hned)
+End the picture at the stop tone	Ukončit obrázek při ukončovacím tónu
+Align the line start on the phasing lines	Zarovnat začátek řádků podle fázovacích řádků
+Start a picture now	Začít obrázek nyní
+End the picture and save it	Ukončit obrázek a uložit ho
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	Režim USB nebo DATA, na frekvenci FT8 (7.074, 14.074 MHz…) nebo FT4 (7.0475, 14.080 MHz…). Hodiny počítače musí být přesné.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	Čas UTC · DT (s) · zvuková frekvence (Hz) · zpráva. Dvě periody (sudá a lichá) jsou zobrazeny dvěma barvami.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	Režim USB nebo DATA, na frekvenci FT2 (3.578, 7.052, 14.084 MHz…). FT2 je FT4 dvojnásobnou rychlostí: sloty 3.75 s, zprávy 2.5 s, šířka 170 Hz. Hodiny počítače musí být přesné. Pouze příjem; slabé signály se dekódují hůře než ve FT4 (kratší symboly).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	Režim USB, na frekvenci WSPR (14.0956, 7.0386, 10.1387 MHz…: frekvence nosné + 1500 Hz). Časové sloty po 2 minutách; hodiny počítače musí být přesné; první výsledky na konci prvního slotu.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	Čas UTC · SNR (dB) · DT (s) · zvuková frekvence (Hz) · volací značka, lokátor, výkon (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	Režim USB, na frekvenci JT9 (14.078, 7.078, 3.578 MHz…). Časové sloty po 1 minutě; hodiny počítače musí být přesné.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	Čas UTC · SNR (dB) · DT (s) · zvuková frekvence (Hz) · zpráva.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	Režim USB, na frekvenci JS8Call (14.078, 7.078, 3.578 MHz…). Pouze příjem: rámce heartbeat, adresované zprávy, volný text. Vyberte rychlost vysílače (seznam Rychlost níže): Pomalu (sloty po 30 s), Normálně (15 s), Rychle (10 s), Turbo (6 s), Ultra (4 s); musí být stejná jako u stanice, kterou posloucháte. Hodiny počítače musí být přesné.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	Čas UTC · SNR (dB) · DT (s) · zvuková frekvence (Hz) · rámec (volací znak odesílatele: adresát nebo příkaz, text). Obě periody (sudá a lichá) se zobrazují ve dvou barvách.
+CW or USB mode, on a CW signal.	Režim CW nebo USB, na signálu CW.
+UTC time · text.	Čas UTC · text.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	Režim USB nebo LSB (šířka aspoň 500 Hz), na signálu RTTY (14.080 až 14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	Režim USB, na signálu PSK31 (14.070, 7.035, 3.580 MHz…); zvuková frekvence se najde automaticky (nebo se nastaví ručně). PSK63 možný.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	Režim USB, na signálu Olivia (volací kmitočty 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 a 32/1000 o něco výše, kolem 14.075 a 14.106 MHz). Nastavte počet tónů a šířku pásma vysílače: musí být stejné jako u něj; běžné formáty: 8/250, 16/500, 32/1000. Střed signálu se najde automaticky ve spektru (nebo se nastaví ručně). Text se objevuje po blocích, několik sekund po synchronizaci; signál může být i hluboko pod úrovní šumu. Pouze příjem.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	Čas UTC · text. Titulek okna ukazuje synchronizaci, odstup signálu od šumu a kmitočtovou odchylku.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	Režim USB, na signálu Contestia (varianta Olivie se 6bitovými znaky: 3.5825, 7.0425, 14.0725 MHz…). Nastavte počet tónů a šířku pásma vysílače: běžné formáty 8/250, 16/500, 32/1000. Střed signálu se najde automaticky ve spektru (nebo se nastaví ručně). Pouze příjem.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	Režim USB, na signálu Hellschreiber (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Vyberte variantu vysílače: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 nebo Hell 80. Text se nedekóduje na písmena: zapisuje se jako obrázek, který čtete okem, jako na původním přístroji (řádky o 14 bodech se posouvají nahoru). Kmitočet se najde automaticky ve spektru; řady bodů se srovnají samy. Pouze příjem.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Obrázek: písmena se zapisují zleva doprava a řádek se na konci zalamuje. Pokud se text jeví nakloněný, hodiny obou stanic se mírně liší: sledování se samo dorovná.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	Režim USB, 1,9 kHz pod zveřejněným kmitočtem stanice meteorologického faxu (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), nebo na radioamatérském signálu FAX. Černá 1500 Hz, bílá 2300 Hz. Obrázek začíná úvodním tónem (jeho IOC, 576 nebo 288, se rozpozná) a končí ukončovacím tónem; na konci se uloží. Většina stanic vysílá 120 řádků za minutu, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Pokud je obrázek šikmý, zvuková karta nebo WebSDR neběží úplně správnou rychlostí: opravte to pomocí „Korekce sklonu“. Pokud je obrázek posunutý doprava, byl zachycen v průběhu (bez fázovacích řádků).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Režim USB (šířka pásma alespoň 2,4 kHz), na frekvenci SSTV (14.230, 7.033, 3.730 MHz…); režim obrazu se rozpozná automaticky, obraz se skládá řádek po řádku a na konci se uloží.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Citlivost (1 až 10): čím vyšší číslo, tím slabší signály dekodér přijímá (startovací kód, synchronizační impulzy, řádky), s rizikem několika falešných detekcí.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Ztráta dat (1 až 10): jak dlouho dekodér pokračuje s obrázkem, když signál zmizí (3 s při 1, 12 s při 4, 120 s při 10). Pokud se signál v této době vrátí, obrázek pokračuje na správném řádku a ztracené řádky zůstanou šedé. Po uplynutí této doby se obrázek uloží tak, jak je, a dekodér opět naslouchá (režim pak najde sám).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Příjem zvolený stejně jako pro FreeDV (transceiver, jinak WebSDR, jinak ExpertSDR, jinak HDSDR) se průběžně analyzuje (ztlumený příjem se nevybírá).
+Tone: {0} Hz	Tón: {0} Hz
+Filter: {0} Hz	Filtr: {0} Hz
+Speed: {0} WPM	Rychlost: {0} WPM
+Detection threshold: {0} %	Práh detekce: {0} %
+Squelch (signal / noise): ×{0}	Squelch (signál / šum): ×{0}
+Letter gap: {0} dots	Mezera mezi písmeny: {0} teček
+Word gap: {0} dots	Mezera mezi slovy: {0} teček
+AGC (fading): {0}	AGC (úniky): {0}
+Low tone: {0} Hz	Nízký tón: {0} Hz
+Audio frequency: {0} Hz	Zvuková frekvence: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (fázová koherence): {0} %
+{0} settings (applied immediately):	Nastavení {0} (použije se okamžitě):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Rychlost: asi {0} znaků za sekundu ({1} tónů na {2} Hz)
+Signal centre: {0} Hz	Střed signálu: {0} Hz
+Frequency search margin: ± {0} tones	Rozsah hledání kmitočtu: ± {0} tónů
+Synchronisation integration: {0}	Integrace synchronizace: {0}
+Synchronisation threshold (signal / noise): ×{0}	Práh synchronizace (signál / šum): ×{0}
+Squelch: {0}	Squelch: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Středový kmitočet: {0} Hz (černá {1} Hz, bílá {2} Hz)
+Slant correction: {0} ppm	Korekce sklonu: {0} ppm
 Name:	Název:
 Address:	Adresa:
 Cancel	Zrušit
@@ -67,7 +177,6 @@ Checking… {0} left	Kontrola… zbývá: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontrola dokončena. Odstraněné duplikáty: {1}, zaškrtnuté nefunkční odkazy: {0}. Smažete je tlačítkem „Odebrat…“.
 {0} favorite(s) imported, {1} already present.	Importované oblíbené: {0}, již existující: {1}.
 {0} favorite(s) exported.	Exportované oblíbené: {0}.
-decoder missing from this build	dekodér v této verzi chybí
 program capture does not answer	zachytávání programu neodpovídá
 unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitů, {1} Hz)
 rigctld connection closed	Spojení s rigctld ukončeno
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	SDRLink se restartuje. Pokračovat?
 Reset the program	Obnovit výchozí stav programu
 Cannot reset: 	Obnovení není možné: 
 Button colour	Barva tlačítka
-RIG	TRX
+RIG	transceiver
 Disconnected	Odpojeno
 Connect	Připojit
 Disconnect	Odpojit
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: dekodér není dostupný ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): řeč se bude dekódovat, jakmile bude přijat signál FreeDV
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekódovaná řeč ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: zvuk není dostupný ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: zvuk není dostupný ({2})
 Also hear the rig on the PC ({0})	Poslouchat stanici také na PC ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stanice na PC: „{0}“ hraje v reproduktorech, když není zapnuto Ztlumit TRX
 Rig on the PC: sound card "{0}" not available ({1})	Stanice na PC: zvuková karta „{0}“ není dostupná ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitální režimy: dekódování se zobrazuje v okně nad stránkou (klik: zapnout / vypnout; pravé tlačítko: volba režimu, pravé tlačítko na režimu: jeho nastavení)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Dlouhé stisknutí a tažení: přesunout okno; tažení za okraj nebo roh: změnit velikost (pravé tlačítko: režimy a nastavení)
+Reset the windows	Obnovit okna
+image complete	obrázek dokončen
+signal lost	signál ztracen
+Nothing to save	Není co ukládat
+Hell: could not save	Hell: uložení se nezdařilo
+{0}: decoding on	{0}: dekódování zapnuto
+{0}: decoding off	{0}: dekódování vypnuto
+{0} settings	Nastavení {0}
+{0} settings…	Nastavení {0}…
+Reset the {0} window	Obnovit okno {0}
+{0}: listening ({1})	{0}: poslech ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): řádek {2}
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, obrázek uložen: {2}
+{0}: {1}, could not save	{0}: {1}, uložení se nezdařilo
+Hell: picture saved: {0}	Hell: obrázek uložen: {0}
+SSTV	SSTV
 Frequency (kHz):	Kmitočet (kHz):
 Mode:	Druh provozu:
 (mode unchanged)	(druh provozu beze změny)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Nahradit profil „{0}“ zob
 The profile "{0}" already exists.	Profil „{0}“ už existuje.
 Delete the profile "{0}"?	Smazat profil „{0}“?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Vynechaný úsek č. {0}: zadejte dva kmitočty v kHz (např. 7097 a 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: nepodporovaný režim (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — signál znovu nalezen, řádek {1}
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — chybí začátek, příjem zachycen v průběhu
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Žádný server TCI na 
 TCI connection lost	Spojení TCI ztraceno
 unavailable	nedostupné

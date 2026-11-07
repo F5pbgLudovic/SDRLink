@@ -3,6 +3,116 @@ sound card unplugged or disabled	zvučna kartica isključena ili onemogućena
 output not found	izlaz nije pronađen
 output already used in exclusive mode by another program	izlaz već koristi drugi program u isključivom načinu
 cannot open, error 	nije moguće otvoriti, pogreška 
+WEFAX: waiting for the start tone	WEFAX: čekanje početnog tona
+WEFAX: listening	WEFAX: slušanje
+WEFAX: stop tone	WEFAX: završni ton
+WEFAX: start tone (IOC {0})	WEFAX: početni ton (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: slika {0} redaka/min, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: slika {0} redaka/min, IOC {1}, redak {2}
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} ciklusa, {1} poruka, kašnjenje {2} s
+searching for a signal…	traženje signala…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	prijam na {0:F0} Hz (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	traženje signala… ({0:F0} Hz)
+decoder missing from this build	dekoder nedostaje u ovoj verziji
+Olivia: settings refused	Olivia: postavke odbijene
+listening at %d Hz	slušanje na %d Hz
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sinkronizirano, S/N %.0f dB, odstupanje %+.0f Hz, središte %d Hz
+searching for a signal… (centre %d Hz)	traženje signala… (središte %d Hz)
+listening at {0:F0} Hz	slušanje na {0:F0} Hz
+signal at {0:F0} Hz	signal na {0:F0} Hz
+reversed	Obrnuto
+Highlight: callsigns or texts to spot, separated by commas	Isticanje: pozivni znakovi ili tekstovi za uočavanje, odvojeni zarezima
+Clear the received text	Obriši primljeni tekst
+Default values	Zadane vrijednosti
+CW settings (applied immediately):	CW postavke (primjenjuju se odmah):
+Automatic tone	Automatski ton
+Filter follows the speed	Filtar prati brzinu
+Automatic speed	Automatska brzina
+Drift tracking (AFC)	Praćenje pomaka (AFC)
+slow	sporo
+medium	srednje
+fast	brzo
+RTTY settings (applied immediately):	RTTY postavke (primjenjuju se odmah):
+Automatic	Automatski
+Speed (baud rate)	Brzina (baud)
+Shift between the two tones	Razmak između dva tona
+Polarity	Polaritet
+Normal (mark = low tone)	Normalno (mark = niski ton)
+Reversed	Obrnuto
+Automatic frequency	Automatska frekvencija
+A space returns to letters (UOS)	Razmak vraća na slova (UOS)
+PSK31 settings (applied immediately):	PSK31 postavke (primjenjuju se odmah):
+Automatic frequency (strongest signal)	Automatska frekvencija (najjači signal)
+Speed	Brzina
+Number of tones	Broj tonova
+Signal bandwidth	Širina pojasa signala
+Automatic signal centre	Automatsko središte signala
+Reversed signal (opposite sideband)	Obrnuti signal (suprotni bočni pojas)
+Hell settings (applied immediately):	Hell postavke (primjenjuju se odmah):
+Transmitter variant	Inačica predajnika
+none	Nijedno
+Swap the tones (FM Hell 105 / 245, Hell 80)	Zamijeni tonove (FM Hell 105 / 245, Hell 80)
+Clear the screen	Očisti zaslon
+Save the picture	Spremi sliku
+Open the image folder	Otvori mapu slika
+Slow (30 s)	Sporo (30 s)
+Normal (15 s)	Normalno (15 s)
+Fast (10 s)	Brzo (10 s)
+Sensitivity	Osjetljivost
+Data loss	Gubitak podataka
+Save the pictures automatically (Pictures › SDRLink)	Automatski spremaj slike (Slike › SDRLink)
+WEFAX settings (applied immediately):	Postavke WEFAX (primjenjuju se odmah):
+Lines per minute	Redaka u minuti
+Index of cooperation (IOC) when the picture starts without a start tone	Indeks suradnje (IOC) kada slika počne bez početnog tona
+Wait for the start tone (otherwise the picture starts at once)	Čekaj početni ton (inače slika počinje odmah)
+End the picture at the stop tone	Završi sliku na završnom tonu
+Align the line start on the phasing lines	Poravnaj početak redaka prema linijama fazinga
+Start a picture now	Započni sliku sada
+End the picture and save it	Završi sliku i spremi je
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	Način USB ili DATA, na FT8 (7.074, 14.074 MHz…) ili FT4 (7.0475, 14.080 MHz…) frekvenciji. Sat računala mora biti točan.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	UTC vrijeme · DT (s) · audio frekvencija (Hz) · poruka. Dva razdoblja (parno i neparno) prikazana su dvjema bojama.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	Način USB ili DATA, na FT2 frekvenciji (3.578, 7.052, 14.084 MHz…). FT2 je FT4 dvostruke brzine: slotovi od 3.75 s, poruke od 2.5 s, širina 170 Hz. Sat računala mora biti točan. Samo prijem; slabi signali se dekodiraju lošije nego u FT4 (kraći simboli).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	Način USB, na WSPR frekvenciji (14.0956, 7.0386, 10.1387 MHz…: frekvencija nosioca + 1500 Hz). Vremenski odsječci od 2 minute; sat računala mora biti točan; prvi rezultati na kraju prvog odsječka.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	UTC vrijeme · SNR (dB) · DT (s) · audio frekvencija (Hz) · pozivni znak, lokator, snaga (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	Način USB, na JT9 frekvenciji (14.078, 7.078, 3.578 MHz…). Vremenski odsječci od 1 minute; sat računala mora biti točan.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	UTC vrijeme · SNR (dB) · DT (s) · audio frekvencija (Hz) · poruka.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	USB način rada, na frekvenciji JS8Call (14.078, 7.078, 3.578 MHz…). Samo prijem: heartbeat okviri, usmjerene poruke, slobodan tekst. Odaberite brzinu odašiljača (popis Brzina u nastavku): Sporo (odsječci od 30 s), Normalno (15 s), Brzo (10 s), Turbo (6 s), Ultra (4 s); mora biti ista kao kod postaje koju slušate. Sat računala mora biti točan.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	UTC vrijeme · SNR (dB) · DT (s) · audiofrekvencija (Hz) · okvir (pozivni znak pošiljatelja: primatelj ili naredba, tekst). Dva razdoblja (parno i neparno) prikazana su u dvije boje.
+CW or USB mode, on a CW signal.	Način CW ili USB, na CW signalu.
+UTC time · text.	UTC vrijeme · tekst.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	Način USB ili LSB (širina pojasa najmanje 500 Hz), na RTTY signalu (14.080 do 14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	Način USB, na PSK31 signalu (14.070, 7.035, 3.580 MHz…); audio frekvencija nalazi se automatski (ili se postavlja ručno). PSK63 moguć.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	USB način rada, na Olivia signalu (pozivna frekvencija 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 i 32/1000 nešto više, oko 14.075 i 14.106 MHz). Podesite broj tonova i širinu pojasa predajnika: moraju biti jednaki njegovima; uobičajeni formati: 8/250, 16/500, 32/1000. Središte signala automatski se pronalazi u spektru (ili se zadaje ručno). Tekst se pojavljuje u blokovima, nekoliko sekundi nakon sinkronizacije; signal može biti i znatno ispod razine šuma. Samo prijam.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	UTC vrijeme · tekst. Naslov prozora prikazuje sinkronizaciju, omjer signala i šuma te odstupanje frekvencije.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	USB način rada, na Contestia signalu (inačica Olivie sa 6-bitnim znakovima: 3.5825, 7.0425, 14.0725 MHz…). Podesite broj tonova i širinu pojasa predajnika: uobičajeni formati 8/250, 16/500, 32/1000. Središte signala automatski se pronalazi u spektru (ili se zadaje ručno). Samo prijam.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	USB način rada, na Hellschreiber signalu (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Odaberite inačicu predajnika: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 ili Hell 80. Tekst se ne dekodira u slova: ispisuje se kao slika koju čitate okom, kao na izvornom stroju (retci od 14 točaka koji se pomiču prema gore). Frekvencija se automatski pronalazi u spektru; redovi točaka poravnavaju se sami. Samo prijam.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Slika: slova se pišu slijeva nadesno, a redak se na kraju prelama. Ako tekst izgleda nakošeno, satovi dviju postaja malo se razlikuju: praćenje se samo ispravlja.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	Način USB, 1,9 kHz ispod objavljene frekvencije meteorološke faks postaje (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), ili na radioamaterskom FAX signalu. Crna 1500 Hz, bijela 2300 Hz. Slika počinje na početnom tonu (njezin IOC, 576 ili 288, prepoznaje se) i završava na završnom tonu; sprema se na kraju. Većina postaja šalje 120 redaka u minuti, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Ako je slika nagnuta, zvučna kartica ili WebSDR ne radi baš točnim taktom: ispravite to pomoću „Korekcija nagiba”. Ako je slika pomaknuta udesno, uhvaćena je usred prijenosa (bez linija fazinga).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Način USB (širina pojasa najmanje 2,4 kHz), na SSTV frekvenciji (14.230, 7.033, 3.730 MHz…); način slike prepoznaje se automatski, slika se gradi redak po redak i sprema se na kraju.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Osjetljivost (1 do 10): što je broj veći, to slabije signale dekoder prihvaća (početni kod, sinkronizacijski impulsi, linije), uz rizik nekoliko lažnih detekcija.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Gubitak podataka (1 do 10): koliko dugo dekoder nastavlja sa slikom kada signal nestane (3 s kod 1, 12 s kod 4, 120 s kod 10). Ako se signal vrati u tom vremenu, slika se nastavlja na ispravnoj liniji, a izgubljene linije ostaju sive. Nakon tog vremena slika se sprema takva kakva jest, a dekoder ponovno sluša (tada sam pronalazi način rada).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Prijem odabran kao za FreeDV (uređaj, inače WebSDR, inače ExpertSDR, inače HDSDR) analizira se neprekidno (utišani prijem se ne odabire).
+Tone: {0} Hz	Ton: {0} Hz
+Filter: {0} Hz	Filtar: {0} Hz
+Speed: {0} WPM	Brzina: {0} WPM
+Detection threshold: {0} %	Prag detekcije: {0} %
+Squelch (signal / noise): ×{0}	Squelch (signal / šum): ×{0}
+Letter gap: {0} dots	Razmak slova: {0} točaka
+Word gap: {0} dots	Razmak riječi: {0} točaka
+AGC (fading): {0}	AGC (fading): {0}
+Low tone: {0} Hz	Niski ton: {0} Hz
+Audio frequency: {0} Hz	Audiofrekvencija: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (fazna koherencija): {0} %
+{0} settings (applied immediately):	{0} postavke (primjenjuju se odmah):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Brzina: oko {0} znakova u sekundi ({1} tonova na {2} Hz)
+Signal centre: {0} Hz	Središte signala: {0} Hz
+Frequency search margin: ± {0} tones	Granica traženja frekvencije: ± {0} tonova
+Synchronisation integration: {0}	Integracija sinkronizacije: {0}
+Synchronisation threshold (signal / noise): ×{0}	Prag sinkronizacije (signal / šum): ×{0}
+Squelch: {0}	Squelch: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Središnja frekvencija: {0} Hz (crna {1} Hz, bijela {2} Hz)
+Slant correction: {0} ppm	Korekcija nagiba: {0} ppm
 Name:	Naziv:
 Address:	Adresa:
 Cancel	Odustani
@@ -67,7 +177,6 @@ Checking… {0} left	Provjera… preostalo: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Provjera završena. Uklonjeni duplikati: {1}, označene neispravne poveznice: {0}. Kliknite „Ukloni…” da ih izbrišete.
 {0} favorite(s) imported, {1} already present.	Uvezeni favoriti: {0}, već postojeći: {1}.
 {0} favorite(s) exported.	Izvezeni favoriti: {0}.
-decoder missing from this build	dekoder nedostaje u ovoj verziji
 program capture does not answer	snimanje programa ne odgovara
 unsupported audio format ({0} bits, {1} Hz)	nepodržani audioformat ({0} bita, {1} Hz)
 rigctld connection closed	Veza s rigctld zatvorena
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	SDRLink će se ponovno pokrenuti. Nastaviti?
 Reset the program	Vrati program na početne postavke
 Cannot reset: 	Vraćanje nije moguće: 
 Button colour	Boja gumba
-RIG	TRX
+RIG	uređaj
 Disconnected	Odspojeno
 Connect	Spoji
 Disconnect	Odspoji
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: dekoder nije dostupan ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): govor će se dekodirati čim se primi FreeDV signal
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: govor dekodiran ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: zvuk nije dostupan ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: zvuk nije dostupan ({2})
 Also hear the rig on the PC ({0})	Slušaj uređaj i na računalu ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Uređaj na računalu: „{0}” svira u zvučnicima kad Utišaj TRX nije uključen
 Rig on the PC: sound card "{0}" not available ({1})	Uređaj na računalu: zvučna kartica „{0}” nije dostupna ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitalni načini rada: dekodiranje se prikazuje u prozoru iznad stranice (klik: uključi / isključi; desni klik: odabir načina, desni klik na način: njegove postavke)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Dugi pritisak pa povlačenje: pomicanje prozora; povlačenje ruba ili kuta: promjena veličine (desni klik: načini rada i postavke)
+Reset the windows	Vrati prozore na početno
+image complete	slika dovršena
+signal lost	signal izgubljen
+Nothing to save	Nema ničega za spremanje
+Hell: could not save	Hell: spremanje nije uspjelo
+{0}: decoding on	{0}: dekodiranje uključeno
+{0}: decoding off	{0}: dekodiranje isključeno
+{0} settings	Postavke {0}
+{0} settings…	Postavke {0}…
+Reset the {0} window	Vrati prozor {0} na početno
+{0}: listening ({1})	{0}: slušanje ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): redak {2}
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, slika spremljena: {2}
+{0}: {1}, could not save	{0}: {1}, spremanje nije uspjelo
+Hell: picture saved: {0}	Hell: slika spremljena: {0}
+SSTV	SSTV
 Frequency (kHz):	Frekvencija (kHz):
 Mode:	Način rada:
 (mode unchanged)	(način rada nepromijenjen)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Zamijeniti profil „{0}” p
 The profile "{0}" already exists.	Profil „{0}” već postoji.
 Delete the profile "{0}"?	Izbrisati profil „{0}”?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Izostavljeni raspon br. {0}: unesite dvije frekvencije u kHz (npr. 7097 i 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: način nije podržan (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — signal ponovno pronađen, redak {1}
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — nedostaje početak, prijem uhvaćen usred slike
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Nema TCI poslužitelja na 
 TCI connection lost	TCI veza izgubljena
 unavailable	nedostupno

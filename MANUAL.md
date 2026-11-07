@@ -25,7 +25,7 @@ Overview; each feature is detailed further down in its own section.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode, **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
-5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24).
+5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25).
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**.
 7. **The WebSDR page**, then the **status bar** (messages, update link).
 
@@ -36,6 +36,7 @@ Overview; each feature is detailed further down in its own section.
 | Connect | colour when connected / disconnected |
 | Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
 | FreeDV auto | no menu: right-click switches between RADE V1 and RADE V2 (since 1.24) |
+| Digital modes (button and window over the page) | the 14 modes (left-click: choose and start; right-click: choose and open the settings), **<mode> settings…**, **Clear the received text**, **Open the image folder**, **Reset the <mode> window**, **Reset the windows** (since 1.25) |
 | Import/Export | **Reset the program…** (since 1.22), button colour |
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | colour when stopped / while scanning |
@@ -63,6 +64,8 @@ Overview; each feature is detailed further down in its own section.
 - `%APPDATA%\SDRLink\sdrlink.log`: the log (reset at each launch).
 - `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache; the name given to KiwiSDRs and websdr.org is there too); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<size>\sdrlink_freedv.dll`: FreeDV decoder, written only the first time FreeDV auto is used (since 1.24).
 - `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
+- `Pictures\SDRLink`: received SSTV, WEFAX and Hell pictures, as PNG (`SSTV_<mode>_<date>_<time>.png`, `WEFAX_<lines>-<IOC>_<date>_<time>.png`, `Hell_<date>_<time>.png`; `_partiel` if the picture did not reach the end) (since 1.25).
+- `%LOCALAPPDATA%\SDRLink\runtime\digi-…\sdrlink_digi.dll`: FT8 / FT4 / FT2 and Olivia / Contestia decoders, written only when these modes are first used (since 1.25).
 
 ## Interfaces ("Interface" menu)
 
@@ -232,6 +235,28 @@ Internet access is required. If a directory does not answer, the others are stil
 - Speech is only played if the SNR is at least −5 dB: below that, the decoder can lock wrongly (for example on the wrong sideband) and would only output gibberish.
 - **When off, FreeDV uses no resources**: the decoder is not even loaded. When on, it takes about 7 to 10% of one processor core.
 - The decoder is FreeDV's (radae_nopy, by David Rowe and Peter B Marks, BSD licence; Opus FARGAN vocoder, BSD licence), the same as in PhoneSDRLink. It has not yet been tried on a real signal received live: only on the FreeDV project's off-air recording.
+
+## Digital modes: SSTV, FT8, CW, WEFAX… (reception)
+
+**Digital modes** button (WebSDR bar, after "FreeDV auto", since 1.25): one button for all the decoders taken from PhoneSDRLink, plus WEFAX. Its text is the name of the chosen mode ("SSTV" at first).
+- **Click**: on / off (off at first). Colours: normal when off, **green** when listening, **orange** while receiving (SSTV or WEFAX picture in progress, text or message decoded less than 2 s ago, Hell picture being written).
+- **Right-click** (on the button or on the mode window): menu of the modes. **Left-click on a mode**: it becomes the button's mode and decoding starts. **Right-click on a mode**: the same, and the **settings** window of that mode opens; if it was already the chosen mode, only the settings window opens. At the bottom of the menu: **<mode> settings…**, **Clear the received text** (text modes), **Open the image folder**, **Reset the <mode> window** (only the window of the mode shown goes back to its original place and size), **Reset the windows** (every mode window goes back to its original place, bottom left, and its original size).
+- Modes: **FT8**, **FT4**, **FT2**, **WSPR**, **JT9**, **JS8** (UTC slots: the PC clock must be accurate), **CW**, **RTTY**, **PSK31 / PSK63**, **Olivia**, **Contestia**, **Hell** (Feld Hell, Slow Hell, Hell X5, X9, FM Hell 105 / 245, Hell 80), **SSTV** (26 modes), **WEFAX** (weather fax, or amateur FAX). Only one mode decodes at a time; FreeDV auto can run at the same time.
+- **Settings window**: an explanation of the mode (usual frequencies, columns shown), **highlight** (text modes: callsigns or texts to spot, separated by commas, highlighted in green) and the decoder settings, the same as in PhoneSDRLink: CW (tone, filter, speed, thresholds, AFC, AGC), RTTY (baud rate, shift, polarity, frequency, AFC, UOS, squelch), PSK (frequency, PSK31 / PSK63, AFC, squelch), Olivia and Contestia (tones, bandwidth, centre, reversal, search, sync), Hell (variant, frequency, squelch, tone swap, **Clear the screen**, **Save the picture**), JS8 (speed), SSTV (sensitivity, data loss, automatic saving), WEFAX (see below). **Default values** resets the mode's settings. Everything is applied at once and **remembered, even after a restart**, for each mode (like the chosen mode, the highlight and on / off).
+- When on, a **window** is placed over the WebSDR page, at the **bottom left** at first, with the decoder state as its caption. Text modes: the latest lines, the newest at the bottom (FT8, FT4, FT2, WSPR, JT9, JS8: the two periods in two colours; CW, RTTY, PSK, Olivia, Contestia: a line stamped in UTC about every 70 characters). SSTV: the picture line by line. Hell: the scrolling writing strip. WEFAX: the bottom of the picture in progress.
+- **Moving the window**: **long press** (0.4 s, the frame turns orange), then drag up, down, left or right, and release.
+- **Resizing the window**: like a Windows window, drag an **edge** or a **corner** with the left button (the pointer becomes a double arrow; no long press needed). The window stays inside the page.
+  - **SSTV** and **Hell**: the window's proportions are **fixed** (those of the picture); width and height change together and the decoded picture is **enlarged accordingly**, without distortion. In SSTV, when a picture of another format arrives (for example PD120, 640 × 496), the window keeps its width and takes the height of that format. If the enlarged window no longer fits at the bottom of the page, it moves up.
+  - **Text modes**: free width and height; a taller window shows more lines. **WEFAX**: free too; a taller window shows more lines of the chart.
+  - When the SDRLink window changes size, the mode window follows in proportion.
+- Each mode has **its own window**: position and size are **remembered for each mode, even after a restart** (enlarging the CW window changes nothing in the SSTV window). **Reset the <mode> window** (menu) resets only the one of the mode shown, **Reset the windows** resets them all.
+- **Original size**: SSTV, the picture fits in 42 % of the page width and height; text modes, 68 % of the page height (up to 74 characters wide); Hell and WEFAX, twice the height of the picture alone (Hell up to 92 % of the page width).
+- The decoded receiver is chosen **as for FreeDV auto**, only one at a time: **the rig** (Mute TRX off and rig sound card chosen), otherwise **the WebSDR** (Mute WebSDR off), otherwise **ExpertSDR**, then **HDSDR**. The **audio is not muted**.
+- **SSTV**: the mode is recognised automatically from the VIS code: Robot 36 and 72, Robot 8, 12 and 24 B&W, Martin M1 to M4, Scottie S1 to S4 and DX, PD50, PD90, PD120, PD160, PD180, PD240, PD290, Wraase SC2-120 and SC2-180, Pasokon P3, P5 and P7. A picture picked up **midway** is also recognised, from the rhythm of its sync pulses. If the signal is lost, the picture waits for the "data loss" time (12 s at first) then stops.
+- **WEFAX**: tune **USB 1.9 kHz below the published frequency** (for example DWD 7880 kHz → 7878.1 kHz). Black 1500 Hz, white 2300 Hz. The picture starts at the **start tone** (IOC 576 or 288 recognised), the line start is aligned on the **phasing lines**, and it ends at the **stop tone**. Settings: lines per minute (60, 90, **120**, 240), IOC without start tone, wait or not for the start tone, stop tone, alignment, centre frequency, **slant correction** (in ppm, if the picture slants), **Start a picture now**, **End the picture and save it**.
+- **SSTV** and **WEFAX** pictures of at least 16 lines are **saved as PNG** in `Pictures\SDRLink` (`SSTV_Robot36_20261107_101500.png`, `WEFAX_120-576_20261107_101500.png`; `_partiel` if the picture did not reach the end). **Hell**: with **Save the picture** (`Hell_<date>_<time>.png`).
+- **When off, nothing runs** and the window is hidden.
+- The decoders are those of PhoneSDRLink: ft8_lib (Kārlis Goba, MIT licence) for FT8, FT4 and FT2; Pawel Jalocha's MFSK library (the one in fldigi, GNU GPL) for Olivia and Contestia; the others written for PhoneSDRLink. WEFAX is written for SDRLink. They have been tried on test signals and recordings, **not yet on real signals received live** in SDRLink: your feedback is welcome.
 
 ## WebSDR volume
 
@@ -548,8 +573,15 @@ Settings: `%APPDATA%\SDRLink\settings.ini`. Log: `%APPDATA%\SDRLink\sdrlink.log`
 
 Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the "Import favorites" window: it comes from the **Monaco** preview of **PowerToys**, not from SDRLink (click Continue, the import works). To avoid it: **Alt+P** in the open dialog (hides the preview pane), or in PowerToys > File Explorer add-ons, disable the source code preview (Monaco).
 
+## Licence
+
+Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICENSE` file in the GitHub repository). It comes with no warranty. You may use, study, modify and redistribute it, provided you give the source code under the same licence. Reason: the Olivia / Contestia decoders (Pawel Jalocha's library, taken from fldigi) and JS8 (JS8Call data) are GPL. The other components (FreeDV: BSD; ft8_lib: MIT; WebView2) are listed in `THIRD-PARTY-NOTICES.md`.
+
 ## Version history
 
+- **1.25**
+  - **Digital modes** button (after "FreeDV auto"): all the PhoneSDRLink decoders — FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31 / PSK63, Olivia, Contestia, Hell, SSTV (26 modes) — plus **WEFAX** (weather fax), on the same receiver as FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR). Click: on / off; right-click: choose the mode (left-click) or choose it and open its settings (right-click), with the same settings as PhoneSDRLink and highlighting. The text or picture is shown in a window placed over the page, at the bottom left, movable with a long press then drag, resizable by its edges and corners like a Windows window (fixed proportions in SSTV and Hell: the picture is enlarged accordingly; position and size remembered for each mode; **Reset the <mode> window** and **Reset the windows** in the menu); SSTV and WEFAX pictures are saved as PNG in Pictures\SDRLink. All the mode settings are remembered after a restart. When off, nothing runs.
+  - SDRLink is now **free software under the GNU GPL v3 licence** (LICENSE file in the repository), like PhoneSDRLink: the Olivia / Contestia decoders (Pawel Jalocha's library, taken from fldigi) and the JS8 dictionary (JS8Call) are GPL.
 - **1.24**
   - **FreeDV auto** button (after "Find WebSDRs…"): automatic decoding of FreeDV RADE V1 (or V2 with a right-click) on the received audio (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR), on USB or LSB according to the chosen mode; as soon as a FreeDV signal is received, the decoded voice replaces the raw audio. When off, nothing runs. The exe grows to 17 MB (FreeDV decoder).
 - **1.23**

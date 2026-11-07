@@ -3,6 +3,116 @@ sound card unplugged or disabled	placa de sunet deconectată sau dezactivată
 output not found	ieșire negăsită
 output already used in exclusive mode by another program	ieșire deja folosită în mod exclusiv de alt program
 cannot open, error 	nu se poate deschide, eroare 
+WEFAX: waiting for the start tone	WEFAX: se așteaptă tonul de început
+WEFAX: listening	WEFAX: ascultare
+WEFAX: stop tone	WEFAX: ton de sfârșit
+WEFAX: start tone (IOC {0})	WEFAX: ton de început (IOC {0})
+WEFAX: picture {0} lines/min, IOC {1}	WEFAX: imagine {0} linii/min, IOC {1}
+WEFAX: picture {0} lines/min, IOC {1}, line {2}	WEFAX: imagine {0} linii/min, IOC {1}, linia {2}
+{3}: {0} slots, {1} messages, delay {2} s	{3}: {0} cicluri, {1} mesaje, întârziere {2} s
+searching for a signal…	căutare de semnal…
+receiving at {0:F0} Hz (S/N {1:F0} dB)	recepție la {0:F0} Hz (S/N {1:F0} dB)
+searching for a signal… ({0:F0} Hz)	se caută un semnal… ({0:F0} Hz)
+decoder missing from this build	decodorul lipsește din această versiune
+Olivia: settings refused	Olivia: setări refuzate
+listening at %d Hz	ascultare la %d Hz
+in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sincronizat, S/N %.0f dB, abatere %+.0f Hz, centru %d Hz
+searching for a signal… (centre %d Hz)	se caută un semnal… (centru %d Hz)
+listening at {0:F0} Hz	ascultare la {0:F0} Hz
+signal at {0:F0} Hz	semnal la {0:F0} Hz
+reversed	Inversată
+Highlight: callsigns or texts to spot, separated by commas	Evidențiere: indicative sau texte de reperat, separate prin virgule
+Clear the received text	Șterge textul recepționat
+Default values	Valori implicite
+CW settings (applied immediately):	Setări CW (aplicate imediat):
+Automatic tone	Ton automat
+Filter follows the speed	Filtrul urmează viteza
+Automatic speed	Viteză automată
+Drift tracking (AFC)	Urmărirea derivei (AFC)
+slow	lent
+medium	mediu
+fast	rapid
+RTTY settings (applied immediately):	Setări RTTY (aplicate imediat):
+Automatic	Automat
+Speed (baud rate)	Viteză (baud)
+Shift between the two tones	Decalajul dintre cele două tonuri
+Polarity	Polaritate
+Normal (mark = low tone)	Normală (mark = ton jos)
+Reversed	Inversată
+Automatic frequency	Frecvență automată
+A space returns to letters (UOS)	Spațiul revine la litere (UOS)
+PSK31 settings (applied immediately):	Setări PSK31 (aplicate imediat):
+Automatic frequency (strongest signal)	Frecvență automată (cel mai puternic semnal)
+Speed	Viteză
+Number of tones	Număr de tonuri
+Signal bandwidth	Lărgimea de bandă a semnalului
+Automatic signal centre	Centrul semnalului automat
+Reversed signal (opposite sideband)	Semnal inversat (bandă laterală opusă)
+Hell settings (applied immediately):	Setări Hell (aplicate imediat):
+Transmitter variant	Varianta emițătorului
+none	Niciuna
+Swap the tones (FM Hell 105 / 245, Hell 80)	Inversează tonurile (FM Hell 105 / 245, Hell 80)
+Clear the screen	Șterge ecranul
+Save the picture	Salvează imaginea
+Open the image folder	Deschide dosarul imaginilor
+Slow (30 s)	Lent (30 s)
+Normal (15 s)	Normal (15 s)
+Fast (10 s)	Rapid (10 s)
+Sensitivity	Sensibilitate
+Data loss	Pierdere de date
+Save the pictures automatically (Pictures › SDRLink)	Salvează automat imaginile (Imagini › SDRLink)
+WEFAX settings (applied immediately):	Setări WEFAX (aplicate imediat):
+Lines per minute	Linii pe minut
+Index of cooperation (IOC) when the picture starts without a start tone	Index de cooperare (IOC) când imaginea începe fără ton de început
+Wait for the start tone (otherwise the picture starts at once)	Așteaptă tonul de început (altfel imaginea începe imediat)
+End the picture at the stop tone	Termină imaginea la tonul de sfârșit
+Align the line start on the phasing lines	Aliniază începutul liniilor pe liniile de fazare
+Start a picture now	Începe o imagine acum
+End the picture and save it	Termină imaginea și salveaz-o
+USB or DATA mode, on an FT8 (7.074, 14.074 MHz…) or FT4 (7.0475, 14.080 MHz…) frequency. The PC clock must be accurate.	Mod USB sau DATA, pe o frecvență FT8 (7.074, 14.074 MHz…) sau FT4 (7.0475, 14.080 MHz…). Ceasul PC-ului trebuie să fie exact.
+UTC time · DT (s) · audio frequency (Hz) · message. The two periods (even and odd) are shown in two colours.	Ora UTC · DT (s) · frecvență audio (Hz) · mesaj. Cele două perioade (pară și impară) sunt afișate în două culori.
+USB or DATA mode, on an FT2 frequency (3.578, 7.052, 14.084 MHz…). FT2 is FT4 at double speed: 3.75 s slots, 2.5 s messages, 170 Hz wide. The PC clock must be accurate. Reception only; weak signals decode less well than in FT4 (shorter symbols).	Mod USB sau DATA, pe o frecvență FT2 (3.578, 7.052, 14.084 MHz…). FT2 este FT4 la viteză dublă: sloturi de 3.75 s, mesaje de 2.5 s, lățime de 170 Hz. Ceasul PC-ului trebuie să fie exact. Doar recepție; semnalele slabe sunt decodate mai prost decât în FT4 (simboluri mai scurte).
+USB mode, on a WSPR frequency (14.0956, 7.0386, 10.1387 MHz…: carrier frequency + 1500 Hz). 2-minute slots; the PC clock must be accurate; first results at the end of the first slot.	Mod USB, pe o frecvență WSPR (14.0956, 7.0386, 10.1387 MHz…: frecvența purtătoarei + 1500 Hz). Intervale de 2 minute; ceasul PC-ului trebuie să fie exact; primele rezultate la sfârșitul primului interval.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · callsign, locator, power (dBm).	Ora UTC · SNR (dB) · DT (s) · frecvență audio (Hz) · indicativ, locator, putere (dBm).
+USB mode, on a JT9 frequency (14.078, 7.078, 3.578 MHz…). 1-minute slots; the PC clock must be accurate.	Mod USB, pe o frecvență JT9 (14.078, 7.078, 3.578 MHz…). Intervale de 1 minut; ceasul PC-ului trebuie să fie exact.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · message.	Ora UTC · SNR (dB) · DT (s) · frecvență audio (Hz) · mesaj.
+USB mode, on a JS8Call frequency (14.078, 7.078, 3.578 MHz…). Receive only: heartbeat frames, directed messages, free text. Choose the transmitter's speed (the Speed list below): Slow (30 s slots), Normal (15 s), Fast (10 s), Turbo (6 s), Ultra (4 s); it must be the same as the station you listen to. The PC clock must be accurate.	Mod USB, pe o frecvență JS8Call (14.078, 7.078, 3.578 MHz…). Doar recepție: cadre heartbeat, mesaje direcționate, text liber. Alegeți viteza emițătorului (lista Viteză de mai jos): Lent (intervale de 30 s), Normal (15 s), Rapid (10 s), Turbo (6 s), Ultra (4 s); trebuie să fie aceeași cu a stației pe care o ascultați. Ceasul PC-ului trebuie să fie exact.
+UTC time · SNR (dB) · DT (s) · audio frequency (Hz) · frame (sender callsign: addressee or command, text). The two periods (even and odd) are shown in two colours.	Ora UTC · SNR (dB) · DT (s) · frecvență audio (Hz) · cadru (indicativul expeditorului: destinatar sau comandă, text). Cele două perioade (pară și impară) sunt afișate în două culori.
+CW or USB mode, on a CW signal.	Mod CW sau USB, pe un semnal CW.
+UTC time · text.	Ora UTC · text.
+USB or LSB mode (at least 500 Hz bandwidth), on an RTTY signal (14.080 to 14.099 MHz…).	Mod USB sau LSB (lărgime de bandă de cel puțin 500 Hz), pe un semnal RTTY (14.080 până la 14.099 MHz…).
+USB mode, on a PSK31 signal (14.070, 7.035, 3.580 MHz…); the audio frequency is found automatically (or set by hand). PSK63 possible.	Mod USB, pe un semnal PSK31 (14.070, 7.035, 3.580 MHz…); frecvența audio este găsită automat (sau setată manual). PSK63 posibil.
+USB mode, on an Olivia signal (calling 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 and 32/1000 a little higher, around 14.075 and 14.106 MHz). Set the transmitter's number of tones and bandwidth: they must be the same as its own; common formats: 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). The text appears in blocks, a few seconds after synchronisation; the signal can even be well below the noise. Receive only.	Mod USB, pe un semnal Olivia (apel 8/250: 14.0729, 7.0729, 3.5729 MHz…; 16/500 și 32/1000 puțin mai sus, în jur de 14.075 și 14.106 MHz). Setați numărul de tonuri și lărgimea de bandă a emițătorului: trebuie să fie aceleași ca ale lui; formate uzuale: 8/250, 16/500, 32/1000. Centrul semnalului este găsit automat în spectru (sau fixat manual). Textul apare în blocuri, la câteva secunde după sincronizare; semnalul poate fi chiar mult sub nivelul zgomotului. Doar recepție.
+UTC time · text. The window caption shows the synchronisation, the signal-to-noise ratio and the frequency offset.	Ora UTC · text. Titlul ferestrei arată sincronizarea, raportul semnal/zgomot și abaterea de frecvență.
+USB mode, on a Contestia signal (an Olivia variant with 6-bit characters: 3.5825, 7.0425, 14.0725 MHz…). Set the transmitter's number of tones and bandwidth: common formats 8/250, 16/500, 32/1000. The signal's centre is found automatically in the spectrum (or fixed by hand). Receive only.	Mod USB, pe un semnal Contestia (o variantă Olivia cu caractere de 6 biți: 3.5825, 7.0425, 14.0725 MHz…). Setați numărul de tonuri și lărgimea de bandă a emițătorului: formate uzuale 8/250, 16/500, 32/1000. Centrul semnalului este găsit automat în spectru (sau fixat manual). Doar recepție.
+USB mode, on a Hellschreiber signal (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Choose the transmitter's variant: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 or Hell 80. The text is not decoded into letters: it is written as a picture that you read by eye, like on the original machine (14-dot lines scrolling up). The frequency is found automatically in the spectrum; the dot rows line up by themselves. Receive only.	Mod USB, pe un semnal Hellschreiber (Feld Hell: 14.063, 7.046, 3.592 MHz…; FM Hell 105: 3.585, 7.0695, 10.1425 MHz…). Alegeți varianta emițătorului: Feld Hell, Slow Hell, Hell X5, Hell X9, FM Hell 105, FM Hell 245 sau Hell 80. Textul nu este decodat în litere: este scris ca o imagine pe care o citiți din ochi, ca pe aparatul original (linii de 14 puncte care derulează în sus). Frecvența este găsită automat în spectru; rândurile de puncte se aliniază singure. Doar recepție.
+Picture: the letters are written from left to right and the line wraps at its end. If the text looks slanted, the two stations' clocks differ slightly: tracking catches up by itself.	Imagine: literele se scriu de la stânga la dreapta, iar linia trece pe rândul următor la capăt. Dacă textul pare înclinat, ceasurile celor două stații diferă ușor: urmărirea se corectează singură.
+USB mode, 1.9 kHz below the published frequency of the weather fax station (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), or on an amateur FAX signal. Black 1500 Hz, white 2300 Hz. The picture starts at the start tone (its IOC, 576 or 288, is recognised) and ends at the stop tone; it is saved at the end. Most stations send 120 lines per minute, IOC 576.	Mod USB, cu 1,9 kHz sub frecvența publicată a stației de fax meteo (DWD Pinneberg 3.855, 7.880, 13.8825 MHz; Northwood 2.618, 4.610, 8.040 MHz…), sau pe un semnal FAX de radioamator. Negru 1500 Hz, alb 2300 Hz. Imaginea începe la tonul de început (IOC-ul său, 576 sau 288, este recunoscut) și se termină la tonul de sfârșit; este salvată la final. Majoritatea stațiilor transmit 120 de linii pe minut, IOC 576.
+If the picture slants, the sound card or the WebSDR is not running at quite the right rate: correct it with “Slant correction”. If the picture is shifted to the right, it was picked up midway (without phasing lines).	Dacă imaginea este înclinată, placa de sunet sau WebSDR-ul nu funcționează chiar la cadența corectă: corectați cu „Corecția înclinării”. Dacă imaginea este deplasată spre dreapta, a fost prinsă din mers (fără liniile de fazare).
+USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Mod USB (lățime de bandă de cel puțin 2,4 kHz), pe o frecvență SSTV (14.230, 7.033, 3.730 MHz…); modul imaginii este recunoscut automat, imaginea se construiește linie cu linie și este salvată la sfârșit.
+Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Sensibilitate (de la 1 la 10): cu cât numărul este mai mare, cu atât decodorul acceptă semnale mai slabe (cod de start, impulsuri de sincronizare, linii), cu riscul unor detecții false.
+Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Pierdere de date (de la 1 la 10): cât timp continuă decodorul cu o imagine când semnalul dispare (3 s la 1, 12 s la 4, 120 s la 10). Dacă semnalul revine în acest interval, imaginea continuă de la linia corectă, iar liniile pierdute rămân gri. După acest interval imaginea este salvată așa cum este, iar decodorul ascultă din nou (apoi găsește singur modul).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Recepția aleasă ca pentru FreeDV (stație, altfel WebSDR, altfel ExpertSDR, altfel HDSDR) este analizată continuu (o recepție cu sunetul oprit nu este aleasă).
+Tone: {0} Hz	Ton: {0} Hz
+Filter: {0} Hz	Filtru: {0} Hz
+Speed: {0} WPM	Viteză: {0} WPM
+Detection threshold: {0} %	Prag de detecție: {0} %
+Squelch (signal / noise): ×{0}	Squelch (semnal / zgomot): ×{0}
+Letter gap: {0} dots	Spațiu între litere: {0} puncte
+Word gap: {0} dots	Spațiu între cuvinte: {0} puncte
+AGC (fading): {0}	AGC (fading): {0}
+Low tone: {0} Hz	Ton jos: {0} Hz
+Audio frequency: {0} Hz	Frecvență audio: {0} Hz
+Squelch (phase coherence): {0} %	Squelch (coerență de fază): {0} %
+{0} settings (applied immediately):	Setări {0} (aplicate imediat):
+Speed: about {0} characters per second ({1} tones over {2} Hz)	Viteză: aproximativ {0} caractere pe secundă ({1} tonuri pe {2} Hz)
+Signal centre: {0} Hz	Centrul semnalului: {0} Hz
+Frequency search margin: ± {0} tones	Marja de căutare a frecvenței: ± {0} tonuri
+Synchronisation integration: {0}	Integrarea sincronizării: {0}
+Synchronisation threshold (signal / noise): ×{0}	Pragul de sincronizare (semnal / zgomot): ×{0}
+Squelch: {0}	Squelch: {0}
+Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Frecvența centrală: {0} Hz (negru {1} Hz, alb {2} Hz)
+Slant correction: {0} ppm	Corecția înclinării: {0} ppm
 Name:	Nume:
 Address:	Adresă:
 Cancel	Anulare
@@ -67,7 +177,6 @@ Checking… {0} left	Verificare… mai rămân {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Verificare terminată: {1} duplicat(e) eliminat(e), {0} link(uri) inactiv(e) bifate. Faceți clic pe „Eliminare…” pentru a le șterge.
 {0} favorite(s) imported, {1} already present.	{0} favorit(e) importat(e), {1} deja existent(e).
 {0} favorite(s) exported.	{0} favorit(e) exportat(e).
-decoder missing from this build	decodorul lipsește din această versiune
 program capture does not answer	captura programului nu răspunde
 unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
 rigctld connection closed	Conexiune rigctld închisă
@@ -125,7 +234,7 @@ SDRLink will restart. Continue?	SDRLink va reporni. Continuați?
 Reset the program	Resetare program
 Cannot reset: 	Resetare imposibilă: 
 Button colour	Culoarea butonului
-RIG	STAȚIE
+RIG	stație
 Disconnected	Deconectat
 Connect	Conectare
 Disconnect	Deconectare
@@ -253,7 +362,7 @@ FreeDV: decoder not available ({0})	FreeDV: decodorul nu este disponibil ({0})
 FreeDV auto ({0}): speech will be decoded as soon as a FreeDV signal is received	FreeDV auto ({0}): vocea va fi decodată imediat ce se recepționează un semnal FreeDV
 FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: voce decodată ({1}, SNR {2} dB)
-FreeDV: {0}: audio not available ({1})	FreeDV: {0}: sunet indisponibil ({1})
+{0}: {1}: audio not available ({2})	{0}: {1}: sunet indisponibil ({2})
 Also hear the rig on the PC ({0})	Ascultă stația și pe PC ({0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stația pe PC: „{0}” se aude în difuzoare când Mut TRX nu este activ
 Rig on the PC: sound card "{0}" not available ({1})	Stația pe PC: placa de sunet „{0}” nu este disponibilă ({1})
@@ -362,6 +471,26 @@ WebSDR → Rig	WebSDR → Stație
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Moduri digitale: decodarea este afișată într-o fereastră deasupra paginii (clic: pornit / oprit; clic dreapta: alegerea modului, clic dreapta pe un mod: setările sale)
+Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Apăsare lungă și tragere: mutarea ferestrei; tragerea unei margini sau a unui colț: redimensionare (clic dreapta: moduri și setări)
+Reset the windows	Resetarea ferestrelor
+image complete	imagine terminată
+signal lost	semnal pierdut
+Nothing to save	Nimic de salvat
+Hell: could not save	Hell: salvare imposibilă
+{0}: decoding on	{0}: decodare pornită
+{0}: decoding off	{0}: decodare oprită
+{0} settings	Setări {0}
+{0} settings…	Setări {0}…
+Reset the {0} window	Resetarea ferestrei {0}
+{0}: listening ({1})	{0}: ascultare ({1})
+{0} {1} ({2}): {3} / {4}	{0} {1} ({2}): {3} / {4}
+WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linia {2}
+{0}: {1}	{0}: {1}
+{0}: {1}, image saved: {2}	{0}: {1}, imagine salvată: {2}
+{0}: {1}, could not save	{0}: {1}, salvare imposibilă
+Hell: picture saved: {0}	Hell: imagine salvată: {0}
+SSTV	SSTV
 Frequency (kHz):	Frecvență (kHz):
 Mode:	Mod:
 (mode unchanged)	(mod neschimbat)
@@ -445,6 +574,10 @@ Replace the profile "{0}" with the settings shown?	Înlocuiți profilul „{0}�
 The profile "{0}" already exists.	Profilul „{0}” există deja.
 Delete the profile "{0}"?	Ștergeți profilul „{0}”?
 Skipped range no. {0}: enter two frequencies in kHz (e.g. 7097 and 7103).	Intervalul omis nr. {0}: indicați două frecvențe în kHz (de ex. 7097 și 7103).
+SSTV: unsupported mode (VIS {0})	SSTV: mod neacceptat (VIS {0})
+SSTV: {0} — signal found again, line {1}	SSTV: {0} — semnal regăsit, linia {1}
+SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — lipsește începutul, recepție prinsă din mers
+SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Niciun server TCI la 
 TCI connection lost	Conexiune TCI pierdută
 unavailable	indisponibil

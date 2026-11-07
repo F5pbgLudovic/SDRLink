@@ -19,6 +19,8 @@ $wf     = Join-Path $lib 'Microsoft.Web.WebView2.WinForms.dll'
 $loader = Join-Path $pkg 'runtimes\win-x86\native\WebView2Loader.dll'
 $ico    = Join-Path $root 'src\SDRLink.ico'   # fabriquée par tools\makeicon.ps1
 $fdv    = Join-Path $root 'native\sdrlink_freedv.dll.gz'   # décodeur FreeDV, fabriqué par native\build-freedv.ps1
+$digi   = Join-Path $root 'native\sdrlink_digi.dll.gz'     # FT8/FT4/FT2 (ft8_lib) et Olivia/Contestia (Jalocha), fabriqué par native\build-digi.ps1
+$jsc    = Join-Path $root 'data\js8jsc.bin.gz'               # dictionnaire de compression du texte JS8 (repris de PhoneSDRLink)
 
 New-Item -ItemType Directory -Force $bin | Out-Null
 # Anciennes DLL posées à côté de l'exe : plus nécessaires.
@@ -33,6 +35,8 @@ $sources = Get-ChildItem (Join-Path $root 'src') -Filter *.cs | ForEach-Object {
     "/resource:$loader,WebView2Loader.dll" `
     "/resource:$ico,SDRLink.ico" "/win32icon:$ico" `
     "/resource:$fdv,sdrlink_freedv.dll.gz" `
+    "/resource:$digi,sdrlink_digi.dll.gz" `
+    "/resource:$jsc,js8jsc.bin.gz" `
     $sources
 if ($LASTEXITCODE -ne 0) { throw "Échec de la compilation" }
 Write-Host "OK : $bin\SDRLink.exe (autonome)"
