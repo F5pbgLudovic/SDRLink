@@ -208,6 +208,8 @@ delete them and replace them with those of the file	διαγραφή τους κ
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Στη συνέχεια το SDRLink θα επανεκκινήσει. Οι τρέχουσες ρυθμίσεις φυλάσσονται στο settings.avant-import.ini.
 Import	Εισαγωγή
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
+Check for updates	Έλεγχος για ενημερώσεις
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Επιλεγμένο πλαίσιο: αυτόματος έλεγχος για ενημερώσεις κατά την εκκίνηση. Κλικ στο κουμπί: έλεγχος τώρα και άνοιγμα του παραθύρου ενημέρωσης (δεξί κλικ: χρώμα του κουμπιού)
 Export all settings…	Εξαγωγή όλων των ρυθμίσεων…
 Import settings…	Εισαγωγή ρυθμίσεων…
 Reset the program…	Επαναφορά του προγράμματος…
@@ -266,7 +268,7 @@ RIG 	TRX
 Cannot start WebView2 (Edge):\n	Αδυναμία εκκίνησης WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Όνομα ή χαρακτηριστικό για τα WebSDR που το ζητούν (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Το όνομα δεν μπορεί να είναι κενό.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Όνομα που έχει ήδη πληκτρολογηθεί σε έναν ιστότοπο διατηρείται. Για να μη δώσετε όνομα: ένα αδιάσπαστο κενό (Alt+255).
+A name already typed on a site is kept.	Ένα όνομα που έχει ήδη πληκτρολογηθεί σε έναν ιστότοπο διατηρείται.
 Invalid address: 	Μη έγκυρη διεύθυνση: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Καλώδιο SDRLINK: δεν βρέθηκε εικονικό καλώδιο ήχου. Εγκαταστήστε το VB-CABLE (δωρεάν): κουμπί «Καλώδιο SDRLINK».
 Output receiving the WebSDR audio:	Έξοδος που λαμβάνει τον ήχο του WebSDR:
@@ -342,15 +344,24 @@ Clear this list	Εκκαθάριση αυτής της λίστας
 Text size	Μέγεθος κειμένου
 Window text size (100% = original size):	Μέγεθος κειμένου του παραθύρου (100 % = αρχικό μέγεθος):
 (no message)	(κανένα μήνυμα)
+Checking GitHub for updates…	Αναζήτηση ενημερώσεων στο GitHub…
+Update cancelled.	Η ενημέρωση ακυρώθηκε.
 SDRLink: update available	SDRLink: διαθέσιμη ενημέρωση
 SDRLink: updates	SDRLink: ενημερώσεις
 Could not reach GitHub to check for updates.	Δεν ήταν δυνατή η σύνδεση με το GitHub για έλεγχο ενημερώσεων.
 You are using the latest version of SDRLink.	Χρησιμοποιείτε την τελευταία έκδοση του SDRLink.
 Latest published version: unknown	Τελευταία δημοσιευμένη έκδοση: άγνωστη
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Κατεβάζει το SDRLink.exe από το GitHub, ελέγχει το αποτύπωμά του, το βάζει στη θέση αυτού και επανεκκινεί το SDRLink.
+If your antivirus blocks the automatic update, use the links below.	Αν το πρόγραμμα προστασίας από ιούς μπλοκάρει την αυτόματη ενημέρωση, χρησιμοποιήστε τους παρακάτω συνδέσμους.
 All versions (the latest one is marked “Latest”):	Όλες οι εκδόσεις (η τελευταία έχει την ένδειξη «Latest»):
-To stop these notices, untick “Check for updates”.	Για να μη βλέπετε αυτές τις ειδοποιήσεις, καταργήστε την επιλογή «Έλεγχος για ενημερώσεις».
+Automatic check at startup: on.	Αυτόματος έλεγχος κατά την εκκίνηση: ενεργός.
+To stop these notices, untick the box of the “Check for updates” button.	Για να μη λαμβάνετε πια ειδοποιήσεις, καταργήστε την επιλογή του πλαισίου στο κουμπί «Έλεγχος για ενημερώσεις».
+You will be told at startup as soon as a new version is published.	Θα ειδοποιηθείτε κατά την εκκίνηση μόλις δημοσιευτεί νέα έκδοση.
+Automatic check at startup: off.	Αυτόματος έλεγχος κατά την εκκίνηση: ανενεργός.
+To turn it on, tick the box of the “Check for updates” button.	Για να τον ενεργοποιήσετε, επιλέξτε το πλαίσιο στο κουμπί «Έλεγχος για ενημερώσεις».
 Later	Αργότερα
 Open the update page	Άνοιγμα της σελίδας ενημέρωσης
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	Το SDRLink ενημερώθηκε στην V{0} (η παλιά έκδοση φυλάσσεται δίπλα: {1}).
 Last {0} memories used	Τελευταίες {0} μνήμες που χρησιμοποιήθηκαν
 ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Διαθέσιμη ενημέρωση V{0}: κάντε κλικ για λήψη
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	Εγγραφή «{0}»: {1}%
 Recording saved: "{0}"	Η εγγραφή αποθηκεύτηκε: «{0}»
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Τελευταία {0} μηνύματα (κλικ: απόκρυψη ή επανεμφάνιση αυτού του είδους μηνύματος, ✓ = κρυφό)
 Show all hidden messages again ({0})	Επανεμφάνιση όλων των κρυφών μηνυμάτων ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	Το SDRLink δεν έχει δικαίωμα εγγραφής στον φάκελο {0} (εκτελέστε το ως διαχειριστής ή βάλτε το σε δικό σας φάκελο).
+the new version could not be started ({0})	η νέα έκδοση δεν μπόρεσε να ξεκινήσει ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Η αυτόματη ενημέρωση δεν ολοκληρώθηκε: {0}\n\nΤο SDRLink δεν άλλαξε. Άνοιγμα της σελίδας λήψης της V{1};
 A new version of SDRLink is available: V{0}	Είναι διαθέσιμη νέα έκδοση του SDRLink: V{0}
 Version in use: V{0}	Έκδοση σε χρήση: V{0}
 Latest published version: V{0}	Τελευταία δημοσιευμένη έκδοση: V{0}
+➜ Update to V{0} automatically now	➜ Αυτόματη ενημέρωση στην V{0} τώρα
 Version {0} page (download, what's new):	Σελίδα της έκδοσης {0} (λήψη, νέα χαρακτηριστικά):
 Interface:	Διασύνδεση:
 Brand:	Μάρκα:
@@ -452,7 +467,6 @@ Mute ExpertSDR	Σίγαση ExpertSDR
 Mute HDSDR	Σίγαση HDSDR
 Auto-connect at startup	Αυτόματη σύνδεση κατά την εκκίνηση
 Dark mode	Σκούρα λειτουργία
-Check for updates	Έλεγχος για ενημερώσεις
 RTS	RTS
 DTR	DTR
 Start rigctld:	Εκκίνηση rigctld:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Δεν υπάρχει διακομιστής TCI στο 
 TCI connection lost	Η σύνδεση TCI χάθηκε
+the downloaded file has disappeared (antivirus?)	το αρχείο που κατέβηκε εξαφανίστηκε (πρόγραμμα προστασίας από ιούς;)
+SHA-256 fingerprint differs from the one published on GitHub	το αποτύπωμα SHA-256 διαφέρει από αυτό που δημοσιεύτηκε στο GitHub
+Checking the file…	Έλεγχος του αρχείου…
+wrong size ({0} bytes instead of {1})	λάθος μέγεθος ({0} byte αντί για {1})
+the file is not SDRLink V{0}	το αρχείο δεν είναι το SDRLink V{0}
+cannot delete the old copy {0} ({1})	δεν είναι δυνατή η διαγραφή του παλιού αντιγράφου {0} ({1})
+cannot rename {0} ({1})	δεν είναι δυνατή η μετονομασία του {0} ({1})
+cannot put the new version in place ({0})	δεν είναι δυνατή η τοποθέτηση της νέας έκδοσης ({0})
+SDRLink: update V{0}	SDRLink: ενημέρωση V{0}
+Downloading SDRLink V{0}…	Λήψη του SDRLink V{0}…
 unavailable	μη διαθέσιμο
 unexpected format	μη αναμενόμενη μορφή
 Find WebSDRs (France and neighbouring countries)	Εύρεση WebSDR (Γαλλία και γειτονικές χώρες)

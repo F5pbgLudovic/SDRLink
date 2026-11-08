@@ -208,6 +208,8 @@ delete them and replace them with those of the file	kustutada need ja asendada f
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Seejärel SDRLink taaskäivitub. Praegused seaded jäävad faili settings.avant-import.ini.
 Import	Impordi
 Cannot open the log: 	Logi ei saa avada: 
+Check for updates	Kontrolli uuendusi
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Märkeruut märgitud: uuenduste automaatne kontroll käivitamisel. Klõps nupul: kontrolli kohe ja ava uuendusaken (paremklõps: nupu värv)
 Export all settings…	Ekspordi kõik seaded…
 Import settings…	Impordi seaded…
 Reset the program…	Lähtesta programm…
@@ -266,7 +268,7 @@ RIG 	RAADIO
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) ei saa käivitada:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nimi või kutsung WebSDR-idele, mis seda küsivad (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Nimi ei saa olla tühi.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Saidil juba sisestatud nimi jääb alles. Nime mitte andmiseks: tühik ilma reavahetuseta (Alt+255).
+A name already typed on a site is kept.	Saidil juba sisestatud nimi jääb alles.
 Invalid address: 	Vigane aadress: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kaabel: virtuaalset helikaablit ei leitud. Installige VB-CABLE (tasuta): nupp „SDRLINK kaabel“.
 Output receiving the WebSDR audio:	WebSDR-i heli vastuvõttev väljund:
@@ -342,15 +344,24 @@ Clear this list	Tühjenda see loend
 Text size	Teksti suurus
 Window text size (100% = original size):	Akna teksti suurus (100 % = algne suurus):
 (no message)	(teateid pole)
+Checking GitHub for updates…	Uuenduste otsimine GitHubist…
+Update cancelled.	Uuendamine katkestati.
 SDRLink: update available	SDRLink: uuendus saadaval
 SDRLink: updates	SDRLink: uuendused
 Could not reach GitHub to check for updates.	GitHubiga ei õnnestunud uuenduste kontrollimiseks ühendust saada.
 You are using the latest version of SDRLink.	Kasutate SDRLinki uusimat versiooni.
 Latest published version: unknown	Viimane avaldatud versioon: teadmata
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Laadib GitHubist alla SDRLink.exe, kontrollib selle sõrmejälge, paneb selle praeguse asemele ja taaskäivitab SDRLinki.
+If your antivirus blocks the automatic update, use the links below.	Kui viirusetõrje blokeerib automaatse uuendamise, kasutage allolevaid linke.
 All versions (the latest one is marked “Latest”):	Kõik versioonid (uusim on märgitud „Latest“):
-To stop these notices, untick “Check for updates”.	Nende teadete peatamiseks eemaldage linnuke „Kontrolli uuendusi“.
+Automatic check at startup: on.	Automaatne kontroll käivitamisel: sees.
+To stop these notices, untick the box of the “Check for updates” button.	Kui te ei soovi enam teateid, eemaldage märge nupu „Kontrolli uuendusi“ märkeruudust.
+You will be told at startup as soon as a new version is published.	Teid teavitatakse käivitamisel kohe, kui uus versioon avaldatakse.
+Automatic check at startup: off.	Automaatne kontroll käivitamisel: väljas.
+To turn it on, tick the box of the “Check for updates” button.	Sisselülitamiseks märkige nupu „Kontrolli uuendusi“ märkeruut.
 Later	Hiljem
 Open the update page	Ava uuenduse leht
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink on uuendatud versioonile V{0} (vana versioon on hoitud kõrval: {1}).
 Last {0} memories used	Viimased {0} kasutatud mälu
 ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Saadaval on uuendus V{0}: klõpsake allalaadimiseks
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	„{0}“ kirjutamine: {1}%
 Recording saved: "{0}"	Salvestis salvestatud: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Viimased {0} teadet (klõps: peida või näita seda tüüpi teateid uuesti, ✓ = peidetud)
 Show all hidden messages again ({0})	Näita kõiki peidetud teateid uuesti ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	SDRLinkil pole õigust kirjutada kausta {0} (käivitage see administraatorina või pange see oma kausta).
+the new version could not be started ({0})	uut versiooni ei õnnestunud käivitada ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Automaatne uuendamine ei lõppenud: {0}\n\nSDRLinki ei muudetud. Kas avada V{1} allalaadimisleht?
 A new version of SDRLink is available: V{0}	Saadaval on SDRLinki uus versioon: V{0}
 Version in use: V{0}	Kasutusel olev versioon: V{0}
 Latest published version: V{0}	Viimane avaldatud versioon: V{0}
+➜ Update to V{0} automatically now	➜ Uuenda kohe automaatselt versioonile V{0}
 Version {0} page (download, what's new):	Versiooni {0} leht (allalaadimine, uuendused):
 Interface:	Liides:
 Brand:	Tootja:
@@ -452,7 +467,6 @@ Mute ExpertSDR	Vaigista ExpertSDR
 Mute HDSDR	Vaigista HDSDR
 Auto-connect at startup	Ühenda käivitamisel automaatselt
 Dark mode	Tume režiim
-Check for updates	Kontrolli uuendusi
 RTS	RTS
 DTR	DTR
 Start rigctld:	Käivita rigctld:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	TCI serverit pole aadressil 
 TCI connection lost	TCI ühendus katkes
+the downloaded file has disappeared (antivirus?)	allalaaditud fail on kadunud (viirusetõrje?)
+SHA-256 fingerprint differs from the one published on GitHub	SHA-256 sõrmejälg erineb GitHubis avaldatust
+Checking the file…	Faili kontrollimine…
+wrong size ({0} bytes instead of {1})	vale suurus ({0} baiti {1} asemel)
+the file is not SDRLink V{0}	fail ei ole SDRLink V{0}
+cannot delete the old copy {0} ({1})	vana koopiat {0} ei saa kustutada ({1})
+cannot rename {0} ({1})	faili {0} ei saa ümber nimetada ({1})
+cannot put the new version in place ({0})	uut versiooni ei saa õigesse kohta panna ({0})
+SDRLink: update V{0}	SDRLink: uuendus V{0}
+Downloading SDRLink V{0}…	SDRLink V{0} allalaadimine…
 unavailable	pole saadaval
 unexpected format	ootamatu vorming
 Find WebSDRs (France and neighbouring countries)	Otsi WebSDR-e (Prantsusmaa ja naaberriigid)

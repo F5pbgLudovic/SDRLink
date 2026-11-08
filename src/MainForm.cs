@@ -40,11 +40,12 @@ namespace SDRLink
         CheckBox chkNotch;
         FlowLayoutPanel pnlHamlib;
         CheckBox chkHamlibLaunch;
-        CheckBox chkUpdates;
+        CheckButton chkUpdates;
         Button btnCallsign;   // pseudo/indicatif donné aux WebSDR qui en demandent un (clic : le changer)
         string identityScript;   // script de pseudo installé dans WebView2 (remplacé quand le pseudo change)
         ToolStripStatusLabel lblUpdate;   // nouvelle version disponible (clic : page de téléchargement)
         string updateVersion, updateUrl;
+        Updater.Asset updateAsset;        // SDRLink.exe de la nouvelle version (mise à jour automatique), null si absent
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
         Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr, btnMuteHdsdr;
@@ -152,7 +153,16 @@ namespace SDRLink
                 InitWebView();
                 if (settings.AutoConnect) Connect();
             };
-            Shown += delegate { ApplyView(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); UpdateFreeDv(); };
+            Shown += delegate
+            {
+                ApplyView(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); UpdateFreeDv();
+                if (Program.JustUpdated)
+                {
+                    Log.Write("Mise à jour automatique : V" + Program.Version + " démarrée");
+                    ShowStatus(Lang.F("SDRLink a été mis à jour en V{0} (l'ancienne version est gardée à côté : {1}).",
+                        "SDRLink has been updated to V{0} (the old version is kept next to it: {1}).", Program.Version, Path.GetFileName(Updater.PreviousPath(Application.ExecutablePath))));
+                }
+            };
             Application.AddMessageFilter(new WheelFilter(this));
             Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyView(); };
             FormClosing += delegate
@@ -274,9 +284,17 @@ namespace SDRLink
             btnPalette.Click += delegate { ShowPalette(); };
             row1.Controls.Add(btnPalette);
             row1.Controls.Add(Colorable("TextSize", Btn("Taille du texte…", "Text size…", delegate { AskFontScale(); })));
-            chkUpdates = Check("Vérifier les mises à jour", "Check for updates");
-            chkUpdates.CheckedChanged += delegate { if (!loading && chkUpdates.Checked) CheckForUpdate(true); };
-            row1.Controls.Add(chkUpdates);
+            // Bouton « Vérifier les mises à jour » avec sa case (depuis la 1.27) : la case = vérification automatique au
+            // démarrage ; un clic ailleurs sur le bouton vérifie tout de suite et ouvre la fenêtre de mise à jour.
+            chkUpdates = new CheckButton();
+            Tr(delegate
+            {
+                chkUpdates.Text = Lang.T("Vérifier les mises à jour", "Check for updates");
+                tips.SetToolTip(chkUpdates, Lang.T("Case cochée : vérification automatique des mises à jour au démarrage. Clic sur le bouton : vérifier maintenant et ouvrir la fenêtre de mise à jour (clic droit : couleur du bouton)",
+                                                   "Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)"));
+            });
+            chkUpdates.Click += delegate { CheckForUpdate(true); };
+            row1.Controls.Add(Colorable("Updates", chkUpdates));
             // Import/Export : tous les réglages (interface, favoris, mémoires, couleurs…) dans un fichier, pour retrouver
             // la même configuration sur un autre ordinateur. Clic gauche : menu ; clic droit : couleur du bouton.
             Button btnImpExp = Btn("Import/Export ▾", "Import/Export ▾", null);
@@ -814,7 +832,8 @@ namespace SDRLink
             lblUpdate.Visible = false;
             lblUpdate.IsLink = true;
             lblUpdate.Font = new Font(Font, FontStyle.Bold);
-            lblUpdate.Click += delegate { OpenUpdatePage(); };
+            // Clic : la fenêtre de mise à jour (mise à jour automatique ou page de téléchargement).
+            lblUpdate.Click += delegate { if (updateVersion != null) ShowUpdateWindow(updateVersion, updateUrl, updateAsset); else OpenUpdatePage(); };
             Tr(delegate { if (updateVersion != null) lblUpdate.Text = Lang.F("⚠ Mise à jour V{0} disponible : cliquez pour la télécharger", "⚠ Update V{0} available: click to download it", updateVersion); });
             strip.Items.Add(lblUpdate);
 
@@ -2561,10 +2580,10 @@ namespace SDRLink
             }
         }
 
-        // Pseudo fait d'espaces insécables (Alt+255) : invisible tel quel sur le bouton.
+        // Pseudo sans caractère visible : noté ainsi dans le journal.
         static string ShowCallsign(string name)
         {
-            return name.Trim().Length == 0 ? "(Alt+255)" : name;
+            return name.Trim().Length == 0 ? "(invisible)" : name;
         }
 
         void UpdateCallsignButton()
@@ -2583,15 +2602,15 @@ namespace SDRLink
                 d.ShowInTaskbar = false;
                 d.StartPosition = FormStartPosition.CenterParent;
                 d.Font = new Font("Segoe UI", 9f);
-                d.ClientSize = new Size(440, 150);
+                d.ClientSize = new Size(440, 168);
                 Label l = new Label { Text = Lang.T("Nom ou indicatif donné aux WebSDR qui en demandent un (KiwiSDR, websdr.org) :", "Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):"), Location = new Point(12, 12), AutoSize = true };
                 TextBox box = new TextBox { Text = settings.Callsign, MaxLength = 30 };
                 box.SetBounds(12, 36, 200, 23);
-                Label hint = new Label { Location = new Point(12, 66), Size = new Size(416, 34) };
+                Label hint = new Label { Location = new Point(12, 66), Size = new Size(416, 52) };
                 Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
                 Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
-                ok.SetBounds(262, 110, 80, 28);
-                cancel.SetBounds(348, 110, 80, 28);
+                ok.SetBounds(262, 128, 80, 28);
+                cancel.SetBounds(348, 128, 80, 28);
                 d.AcceptButton = ok;
                 d.CancelButton = cancel;
                 Action check = delegate
@@ -2600,10 +2619,20 @@ namespace SDRLink
                     ok.Enabled = !empty;
                     hint.Text = empty
                         ? Lang.T("Le pseudo ne peut pas être vide.", "The callsign cannot be empty.")
-                        : Lang.T("Un nom déjà tapé sur un site est gardé. Pour ne pas donner de nom : un espace insécable (Alt+255).",
-                                 "A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).");
+                        : Lang.T("Un nom déjà tapé sur un site est gardé.", "A name already typed on a site is kept.");
                 };
-                box.TextChanged += delegate { check(); };
+                box.TextChanged += delegate
+                {
+                    // Espaces normalisés dès la frappe (comme WebSdrBridge.Clean).
+                    if (box.Text.IndexOf(' ') >= 0 || box.Text.IndexOf('\t') >= 0)
+                    {
+                        int pos = box.SelectionStart;
+                        box.Text = box.Text.Replace(' ', WebSdrBridge.Nbsp).Replace('\t', WebSdrBridge.Nbsp);
+                        box.SelectionStart = Math.Min(pos, box.Text.Length);
+                        return;   // TextChanged revient avec le texte remplacé
+                    }
+                    check();
+                };
                 check();
                 d.Controls.AddRange(new Control[] { l, box, hint, ok, cancel });
                 Theme.Apply(d);
@@ -4661,11 +4690,20 @@ namespace SDRLink
         // vers la page de cette version (et lien dans la barre d'état). Case cochée à la main : fenêtre dans tous les cas.
         void CheckForUpdate() { CheckForUpdate(false); }
 
+        bool updateChecking;   // vérification demandée par le bouton en cours (un 2e clic ne relance rien)
+
         void CheckForUpdate(bool manual)
         {
+            if (manual)
+            {
+                if (updateChecking) return;
+                updateChecking = true;
+                ShowStatus(Lang.T("Recherche des mises à jour sur GitHub…", "Checking GitHub for updates…"));
+            }
             System.Threading.Thread t = new System.Threading.Thread(delegate()
             {
                 string tag = null, url = null;
+                Updater.Asset asset = null;
                 try
                 {
                     ServicePointManager.SecurityProtocol |= (SecurityProtocolType)3072;   // TLS 1.2
@@ -4677,6 +4715,7 @@ namespace SDRLink
                     using (WebResponse resp = req.GetResponse())
                     using (StreamReader r = new StreamReader(resp.GetResponseStream(), Encoding.UTF8)) json = r.ReadToEnd();
                     ParseRelease(json, out tag, out url);
+                    asset = Updater.FindExe(json);
                 }
                 catch (Exception ex) { Log.Write("Mise à jour : vérification impossible (" + ex.Message + ")"); }
                 if (tag == null && !manual) return;
@@ -4684,20 +4723,22 @@ namespace SDRLink
                 {
                     BeginInvoke((Action)delegate
                     {
-                        if (tag == null) { ShowUpdateWindow(null, null); return; }
+                        if (manual) updateChecking = false;
+                        if (tag == null) { ShowUpdateWindow(null, null, null); return; }
                         if (!IsNewer(tag, Program.Version))
                         {
                             Log.Write("Mise à jour : V" + Program.Version + " est la dernière version");
-                            if (manual) ShowUpdateWindow(tag, url);
+                            if (manual) ShowUpdateWindow(tag, url, null);
                             return;
                         }
                         Log.Write("Mise à jour : V" + tag + " disponible");
                         updateVersion = tag;
                         updateUrl = url;
+                        updateAsset = asset;
                         lblUpdate.Text = Lang.F("⚠ Mise à jour V{0} disponible : cliquez pour la télécharger", "⚠ Update V{0} available: click to download it", updateVersion);
                         lblUpdate.Visible = true;
                         StyleUpdateLabel();
-                        ShowUpdateWindow(tag, url);
+                        ShowUpdateWindow(tag, url, asset);
                     });
                 }
                 catch (InvalidOperationException) { }   // fenêtre fermée entre-temps
@@ -4733,14 +4774,72 @@ namespace SDRLink
 
         // Fenêtre de mise à jour : version utilisée, dernière version publiée, lien direct vers la page de cette
         // version et vers la liste des versions. latest = null : vérification impossible (case cochée à la main).
-        void ShowUpdateWindow(string latest, string url)
+        // asset : SDRLink.exe de cette version (lien de mise à jour automatique), null si GitHub n'en donne pas.
+        void ShowUpdateWindow(string latest, string url, Updater.Asset asset)
         {
             if (IsDisposed) return;
-            using (Form f = UpdateWindow(Font, latest, url, OpenUrl))
-                if (f.ShowDialog(this) == DialogResult.OK) OpenUrl(url);
+            DialogResult r;
+            using (Form f = UpdateWindow(Font, latest, url, asset, chkUpdates.Checked, OpenUrl)) r = f.ShowDialog(this);
+            if (r == DialogResult.OK) OpenUrl(url);
+            else if (r == DialogResult.Yes) AutoUpdate(latest, url, asset);
         }
 
-        static Form UpdateWindow(Font font, string latest, string url, Action<string> openUrl)
+        // Mise à jour automatique : téléchargement et contrôle de SDRLink.exe, remplacement de l'exe utilisé
+        // (l'ancien reste à côté sous le nom SDRLink.previous.exe), lancement de la nouvelle version, fermeture de celle-ci.
+        // En cas d'échec : explication et proposition d'ouvrir la page de téléchargement.
+        void AutoUpdate(string version, string url, Updater.Asset asset)
+        {
+            string exe = Application.ExecutablePath, dir = Path.GetDirectoryName(exe), dl = Updater.DownloadPath(exe);
+            if (!Updater.CanWrite(dir))
+            {
+                AutoUpdateFailed(version, url, Lang.F("SDRLink n'a pas le droit d'écrire dans le dossier {0} (lancez-le en administrateur, ou installez-le dans un dossier à vous).",
+                    "SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).", dir));
+                return;
+            }
+            Log.Write("Mise à jour automatique : téléchargement de V" + version + " (" + asset.Url + ", " + asset.Size + " octets, SHA-256 " + (asset.Sha256 ?? "non publiée") + ")");
+            string err;
+            using (UpdateProgressForm p = new UpdateProgressForm(Font, version, asset, dl))
+            {
+                p.ShowDialog(this);
+                err = p.Error;
+            }
+            if (err == "") { Log.Write("Mise à jour automatique : annulée"); ShowStatus(Lang.T("Mise à jour annulée.", "Update cancelled.")); return; }
+            if (err == null) err = Updater.Install(exe, dl);
+            if (err != null)
+            {
+                try { if (File.Exists(dl)) File.Delete(dl); } catch { }
+                AutoUpdateFailed(version, url, err);
+                return;
+            }
+            try
+            {
+                System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(exe,
+                    Updater.AfterUpdateArg + " " + System.Diagnostics.Process.GetCurrentProcess().Id);
+                psi.UseShellExecute = false;
+                psi.WorkingDirectory = dir;
+                System.Diagnostics.Process.Start(psi).Dispose();
+            }
+            catch (Exception ex)
+            {
+                Updater.Restore(exe);
+                AutoUpdateFailed(version, url, Lang.F("la nouvelle version n'a pas pu être lancée ({0})", "the new version could not be started ({0})", ex.Message));
+                return;
+            }
+            Log.Write("Mise à jour automatique : V" + version + " installée, redémarrage");
+            Close();
+        }
+
+        void AutoUpdateFailed(string version, string url, string reason)
+        {
+            Log.Write("Mise à jour automatique : échec (" + reason + ")");
+            if (MessageBox.Show(this, Lang.F("La mise à jour automatique n'a pas abouti : {0}\r\n\r\nSDRLink n'a pas été modifié. Ouvrir la page de téléchargement de la V{1} ?",
+                    "The automatic update did not complete: {0}\r\n\r\nSDRLink has not been changed. Open the download page of V{1}?", reason, version),
+                    "SDRLink", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                OpenUrl(url ?? ReleasesUrl + "/latest");
+        }
+
+        // autoCheck : case du bouton « Vérifier les mises à jour » (vérification automatique au démarrage).
+        static Form UpdateWindow(Font font, string latest, string url, Updater.Asset asset, bool autoCheck, Action<string> openUrl)
         {
             bool newer = latest != null && IsNewer(latest, Program.Version);
             Form f = new Form();
@@ -4765,6 +4864,23 @@ namespace SDRLink
                 f.Controls.Add(info);
                 y += 48;
                 List<LinkLabel> links = new List<LinkLabel>();
+                LinkLabel auto = null;
+                if (newer && asset != null)
+                {
+                    // Lien de mise à jour automatique ; les liens vers la page restent dessous (certains antivirus
+                    // bloquent un programme qui se remplace lui-même).
+                    auto = new LinkLabel { AutoSize = true, Location = new Point(14, y), Font = new Font(font, FontStyle.Bold),
+                        Text = Lang.F("➜ Mettre à jour automatiquement en V{0} maintenant", "➜ Update to V{0} automatically now", latest) };
+                    auto.LinkClicked += delegate { f.DialogResult = DialogResult.Yes; };
+                    f.Controls.Add(auto);
+                    y += 24;
+                    f.Controls.Add(new Label { AutoSize = true, Location = new Point(14, y), Text =
+                        Lang.T("Télécharge SDRLink.exe sur GitHub, vérifie son empreinte, le met à la place de celui-ci et redémarre SDRLink.",
+                               "Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.") + "\r\n" +
+                        Lang.T("Si l'antivirus bloque la mise à jour automatique, utilisez les liens ci-dessous.",
+                               "If your antivirus blocks the automatic update, use the links below.") });
+                    y += 52;
+                }
                 if (newer)
                 {
                     f.Controls.Add(new Label { AutoSize = true, Location = new Point(14, y), Text = Lang.F("Page de la version {0} (téléchargement, nouveautés) :", "Version {0} page (download, what's new):", latest) });
@@ -4776,11 +4892,14 @@ namespace SDRLink
                 y += 22;
                 links.Add(new LinkLabel { AutoSize = true, Location = new Point(14, y), Text = ReleasesUrl });
                 y += 34;
-                if (newer)
-                {
-                    f.Controls.Add(new Label { AutoSize = true, Location = new Point(14, y), Text = Lang.T("Pour ne plus être prévenu, décochez « Vérifier les mises à jour ».", "To stop these notices, untick “Check for updates”.") });
-                    y += 30;
-                }
+                // État de la vérification automatique, dans tous les cas (nouvelle version, à jour, GitHub injoignable).
+                f.Controls.Add(new Label { AutoSize = true, Location = new Point(14, y), Text = autoCheck
+                    ? Lang.T("Vérification automatique au démarrage : activée.", "Automatic check at startup: on.") + "\r\n" + (newer
+                      ? Lang.T("Pour ne plus être prévenu, décochez la case du bouton « Vérifier les mises à jour ».", "To stop these notices, untick the box of the “Check for updates” button.")
+                      : Lang.T("Vous serez prévenu au démarrage dès qu'une nouvelle version sera publiée.", "You will be told at startup as soon as a new version is published."))
+                    : Lang.T("Vérification automatique au démarrage : désactivée.", "Automatic check at startup: off.") + "\r\n" +
+                      Lang.T("Pour l'activer, cochez la case du bouton « Vérifier les mises à jour ».", "To turn it on, tick the box of the “Check for updates” button.") });
+                y += 44;
                 foreach (LinkLabel l in links)
                 {
                     string target = l.Text;
@@ -4807,6 +4926,7 @@ namespace SDRLink
                 Theme.Apply(f);
                 foreach (LinkLabel l in links)
                     l.LinkColor = l.ActiveLinkColor = l.VisitedLinkColor = Theme.RigFreq;
+                if (auto != null) auto.LinkColor = auto.ActiveLinkColor = auto.VisitedLinkColor = Theme.Dark ? Color.FromArgb(255, 170, 60) : Color.FromArgb(200, 80, 0);
             }
             return f;
         }

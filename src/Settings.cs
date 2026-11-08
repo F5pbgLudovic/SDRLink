@@ -101,7 +101,7 @@ namespace SDRLink
         public bool FirstSearchDone;
         public bool CheckUpdates = true;   // recherche d'une nouvelle version sur GitHub au démarrage
         // Pseudo ou indicatif donné aux WebSDR qui en demandent un (KiwiSDR, websdr.org), jamais vide. Enregistré encodé
-        // (%XX) : l'espace insécable d'Alt+255, pseudo permis, ne doit pas être ôté à la relecture.
+        // (%XX) pour être relu tel quel.
         public string Callsign = "SDRLink";
         // Coupures laissées de côté par le bouton ⇄ (0 WebSDR, 1 TX, 2 ExpertSDR, 3 HDSDR), deux au plus.
         public List<int> SwapIgnore = new List<int>();

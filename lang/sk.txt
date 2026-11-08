@@ -208,6 +208,8 @@ delete them and replace them with those of the file	odstrániť ich a nahradiť 
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink sa potom reštartuje. Súčasné nastavenia zostanú uložené v settings.avant-import.ini.
 Import	Importovať
 Cannot open the log: 	Nedá sa otvoriť denník: 
+Check for updates	Kontrolovať aktualizácie
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Začiarknuté políčko: automatická kontrola aktualizácií pri spustení. Kliknutie na tlačidlo: skontrolovať hneď a otvoriť okno aktualizácie (pravé tlačidlo: farba tlačidla)
 Export all settings…	Exportovať všetky nastavenia…
 Import settings…	Importovať nastavenia…
 Reset the program…	Obnoviť pôvodný stav programu…
@@ -266,7 +268,7 @@ RIG 	TRX
 Cannot start WebView2 (Edge):\n	Nedá sa spustiť WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Meno alebo volacia značka pre prijímače WebSDR, ktoré ju vyžadujú (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Meno nemôže byť prázdne.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Meno už zadané na stránke zostane. Bez mena: nedeliteľná medzera (Alt+255).
+A name already typed on a site is kept.	Meno už zadané na stránke zostane zachované.
 Invalid address: 	Neplatná adresa: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Kábel SDRLINK: nenašiel sa žiadny virtuálny audio kábel. Nainštalujte VB-CABLE (zadarmo): tlačidlo „Kábel SDRLINK“.
 Output receiving the WebSDR audio:	Výstup prijímajúci zvuk WebSDR:
@@ -342,15 +344,24 @@ Clear this list	Vymazať tento zoznam
 Text size	Veľkosť textu
 Window text size (100% = original size):	Veľkosť textu okna (100 % = pôvodná veľkosť):
 (no message)	(žiadna správa)
+Checking GitHub for updates…	Hľadanie aktualizácií na GitHube…
+Update cancelled.	Aktualizácia zrušená.
 SDRLink: update available	SDRLink: k dispozícii je aktualizácia
 SDRLink: updates	SDRLink: aktualizácie
 Could not reach GitHub to check for updates.	Nedá sa spojiť s GitHubom a skontrolovať aktualizácie.
 You are using the latest version of SDRLink.	Používate najnovšiu verziu SDRLink.
 Latest published version: unknown	Posledná vydaná verzia: neznáma
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Stiahne SDRLink.exe z GitHubu, overí jeho odtlačok, nahradí ním tento súbor a reštartuje SDRLink.
+If your antivirus blocks the automatic update, use the links below.	Ak antivírus automatickú aktualizáciu blokuje, použite odkazy nižšie.
 All versions (the latest one is marked “Latest”):	Všetky verzie (posledná je označená „Latest“):
-To stop these notices, untick “Check for updates”.	Ak nechcete tieto upozornenia, zrušte začiarknutie „Kontrolovať aktualizácie“.
+Automatic check at startup: on.	Automatická kontrola pri spustení: zapnutá.
+To stop these notices, untick the box of the “Check for updates” button.	Ak už nechcete dostávať upozornenia, zrušte začiarknutie políčka tlačidla „Kontrolovať aktualizácie“.
+You will be told at startup as soon as a new version is published.	Pri spustení budete upozornení, hneď ako bude zverejnená nová verzia.
+Automatic check at startup: off.	Automatická kontrola pri spustení: vypnutá.
+To turn it on, tick the box of the “Check for updates” button.	Ak ju chcete zapnúť, začiarknite políčko tlačidla „Kontrolovať aktualizácie“.
 Later	Neskôr
 Open the update page	Otvoriť stránku aktualizácie
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink bol aktualizovaný na V{0} (stará verzia je uložená vedľa: {1}).
 Last {0} memories used	Posledných {0} použitých pamätí
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ K dispozícii je aktualizácia V{0}: kliknite na stiahnutie
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	Zápis „{0}“: {1} %
 Recording saved: "{0}"	Záznam uložený: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Posledných {0} správ (kliknutie: skryť alebo znova zobraziť tento druh správy, ✓ = skryté)
 Show all hidden messages again ({0})	Znova zobraziť všetky skryté správy ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	SDRLink nemá povolenie zapisovať do priečinka {0} (spustite ho ako správca alebo ho umiestnite do vlastného priečinka).
+the new version could not be started ({0})	novú verziu sa nepodarilo spustiť ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Automatická aktualizácia sa nedokončila: {0}\n\nSDRLink nebol zmenený. Otvoriť stránku na stiahnutie V{1}?
 A new version of SDRLink is available: V{0}	K dispozícii je nová verzia SDRLink: V{0}
 Version in use: V{0}	Používaná verzia: V{0}
 Latest published version: V{0}	Posledná vydaná verzia: V{0}
+➜ Update to V{0} automatically now	➜ Automaticky aktualizovať na V{0} teraz
 Version {0} page (download, what's new):	Stránka verzie {0} (stiahnutie, novinky):
 Interface:	Rozhranie:
 Brand:	Značka:
@@ -452,7 +467,6 @@ Mute ExpertSDR	Stlmiť ExpertSDR
 Mute HDSDR	Stlmiť HDSDR
 Auto-connect at startup	Automaticky pripojiť pri štarte
 Dark mode	Tmavý režim
-Check for updates	Kontrolovať aktualizácie
 RTS	RTS
 DTR	DTR
 Start rigctld:	Spustiť rigctld:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Žiadny server TCI na 
 TCI connection lost	Spojenie TCI stratené
+the downloaded file has disappeared (antivirus?)	stiahnutý súbor zmizol (antivírus?)
+SHA-256 fingerprint differs from the one published on GitHub	odtlačok SHA-256 sa líši od odtlačku zverejneného na GitHube
+Checking the file…	Kontrola súboru…
+wrong size ({0} bytes instead of {1})	nesprávna veľkosť ({0} bajtov namiesto {1})
+the file is not SDRLink V{0}	súbor nie je SDRLink V{0}
+cannot delete the old copy {0} ({1})	nedá sa zmazať stará kópia {0} ({1})
+cannot rename {0} ({1})	nedá sa premenovať {0} ({1})
+cannot put the new version in place ({0})	novú verziu nemožno umiestniť na miesto ({0})
+SDRLink: update V{0}	SDRLink: aktualizácia V{0}
+Downloading SDRLink V{0}…	Sťahovanie SDRLink V{0}…
 unavailable	nedostupné
 unexpected format	neočakávaný formát
 Find WebSDRs (France and neighbouring countries)	Nájsť WebSDR (Francúzsko a susedné krajiny)

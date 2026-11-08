@@ -208,6 +208,8 @@ delete them and replace them with those of the file	ștergeți-le și înlocuiț
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink va reporni apoi. Setările actuale sunt păstrate în settings.avant-import.ini.
 Import	Importă
 Cannot open the log: 	Nu se poate deschide jurnalul: 
+Check for updates	Caută actualizări
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Casetă bifată: verificarea automată a actualizărilor la pornire. Clic pe buton: verifică acum și deschide fereastra de actualizare (clic dreapta: culoarea butonului)
 Export all settings…	Exportă toate setările…
 Import settings…	Importă setări…
 Reset the program…	Resetare program…
@@ -266,7 +268,7 @@ RIG 	STAȚIE
 Cannot start WebView2 (Edge):\n	Nu se poate porni WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nume sau indicativ pentru receptoarele WebSDR care îl cer (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Numele nu poate fi gol.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Un nume deja tastat pe un site este păstrat. Pentru a nu da niciun nume: un spațiu neseparabil (Alt+255).
+A name already typed on a site is kept.	Un nume deja tastat pe un site este păstrat.
 Invalid address: 	Adresă nevalidă: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Cablu SDRLINK: nu s-a găsit niciun cablu audio virtual. Instalați VB-CABLE (gratuit): butonul „Cablu SDRLINK”.
 Output receiving the WebSDR audio:	Ieșirea care primește sunetul WebSDR:
@@ -342,15 +344,24 @@ Clear this list	Golește această listă
 Text size	Dimensiunea textului
 Window text size (100% = original size):	Dimensiunea textului ferestrei (100 % = dimensiunea inițială):
 (no message)	(niciun mesaj)
+Checking GitHub for updates…	Se caută actualizări pe GitHub…
+Update cancelled.	Actualizare anulată.
 SDRLink: update available	SDRLink: actualizare disponibilă
 SDRLink: updates	SDRLink: actualizări
 Could not reach GitHub to check for updates.	Nu s-a putut contacta GitHub pentru căutarea actualizărilor.
 You are using the latest version of SDRLink.	Folosiți cea mai recentă versiune a SDRLink.
 Latest published version: unknown	Ultima versiune publicată: necunoscută
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Descarcă SDRLink.exe de pe GitHub, îi verifică amprenta, îl pune în locul acestuia și repornește SDRLink.
+If your antivirus blocks the automatic update, use the links below.	Dacă antivirusul blochează actualizarea automată, folosiți linkurile de mai jos.
 All versions (the latest one is marked “Latest”):	Toate versiunile (cea mai recentă este marcată „Latest”):
-To stop these notices, untick “Check for updates”.	Pentru a nu mai primi aceste anunțuri, debifați „Caută actualizări”.
+Automatic check at startup: on.	Verificare automată la pornire: activată.
+To stop these notices, untick the box of the “Check for updates” button.	Pentru a nu mai fi anunțat, debifați caseta butonului „Caută actualizări”.
+You will be told at startup as soon as a new version is published.	Veți fi anunțat la pornire de îndată ce va fi publicată o versiune nouă.
+Automatic check at startup: off.	Verificare automată la pornire: dezactivată.
+To turn it on, tick the box of the “Check for updates” button.	Pentru a o activa, bifați caseta butonului „Caută actualizări”.
 Later	Mai târziu
 Open the update page	Deschide pagina actualizării
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink a fost actualizat la V{0} (versiunea veche este păstrată alături: {1}).
 Last {0} memories used	Ultimele {0} memorii folosite
 ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualizarea V{0} este disponibilă: faceți clic pentru a o descărca
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	Se scrie „{0}”: {1} %
 Recording saved: "{0}"	Înregistrare salvată: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Ultimele {0} mesaje (clic: ascundeți sau reafișați acest tip de mesaj, ✓ = ascuns)
 Show all hidden messages again ({0})	Reafișează toate mesajele ascunse ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	SDRLink nu are dreptul să scrie în dosarul {0} (porniți-l ca administrator sau puneți-l într-un dosar propriu).
+the new version could not be started ({0})	noua versiune nu a putut fi pornită ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Actualizarea automată nu s-a încheiat: {0}\n\nSDRLink nu a fost modificat. Deschideți pagina de descărcare a V{1}?
 A new version of SDRLink is available: V{0}	Este disponibilă o versiune nouă a SDRLink: V{0}
 Version in use: V{0}	Versiunea folosită: V{0}
 Latest published version: V{0}	Ultima versiune publicată: V{0}
+➜ Update to V{0} automatically now	➜ Actualizează automat la V{0} acum
 Version {0} page (download, what's new):	Pagina versiunii {0} (descărcare, noutăți):
 Interface:	Interfață:
 Brand:	Marcă:
@@ -452,7 +467,6 @@ Mute ExpertSDR	Mut ExpertSDR
 Mute HDSDR	Mut HDSDR
 Auto-connect at startup	Conectare automată la pornire
 Dark mode	Mod întunecat
-Check for updates	Caută actualizări
 RTS	RTS
 DTR	DTR
 Start rigctld:	Pornire rigctld:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Niciun server TCI la 
 TCI connection lost	Conexiune TCI pierdută
+the downloaded file has disappeared (antivirus?)	fișierul descărcat a dispărut (antivirus?)
+SHA-256 fingerprint differs from the one published on GitHub	amprenta SHA-256 diferă de cea publicată pe GitHub
+Checking the file…	Se verifică fișierul…
+wrong size ({0} bytes instead of {1})	dimensiune greșită ({0} octeți în loc de {1})
+the file is not SDRLink V{0}	fișierul nu este SDRLink V{0}
+cannot delete the old copy {0} ({1})	copia veche {0} nu poate fi ștearsă ({1})
+cannot rename {0} ({1})	{0} nu poate fi redenumit ({1})
+cannot put the new version in place ({0})	noua versiune nu poate fi pusă în loc ({0})
+SDRLink: update V{0}	SDRLink: actualizare V{0}
+Downloading SDRLink V{0}…	Se descarcă SDRLink V{0}…
 unavailable	indisponibil
 unexpected format	format neașteptat
 Find WebSDRs (France and neighbouring countries)	Căutare WebSDR (Franța și țările vecine)

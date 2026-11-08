@@ -208,6 +208,8 @@ delete them and replace them with those of the file	löschen und durch die der D
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink startet anschließend neu. Die aktuellen Einstellungen bleiben in settings.avant-import.ini erhalten.
 Import	Importieren
 Cannot open the log: 	Logbuch kann nicht geöffnet werden: 
+Check for updates	Nach Updates suchen
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Kästchen angehakt: automatische Suche nach Updates beim Start. Klick auf die Schaltfläche: jetzt suchen und das Update-Fenster öffnen (Rechtsklick: Farbe der Schaltfläche)
 Export all settings…	Alle Einstellungen exportieren…
 Import settings…	Einstellungen importieren…
 Reset the program…	Programm zurücksetzen…
@@ -266,7 +268,7 @@ RIG 	TRX
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) kann nicht gestartet werden:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Name oder Rufzeichen für WebSDRs, die danach fragen (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Der Name darf nicht leer sein.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Ein auf einer Seite bereits eingegebener Name bleibt erhalten. Um keinen Namen anzugeben: ein geschütztes Leerzeichen (Alt+255).
+A name already typed on a site is kept.	Ein auf einer Website bereits eingegebener Name bleibt erhalten.
 Invalid address: 	Ungültige Adresse: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-Kabel: kein virtuelles Audiokabel gefunden. Installieren Sie VB-CABLE (kostenlos): Schaltfläche „SDRLINK-Kabel“.
 Output receiving the WebSDR audio:	Ausgabe für den WebSDR-Ton:
@@ -342,15 +344,24 @@ Clear this list	Diese Liste leeren
 Text size	Textgröße
 Window text size (100% = original size):	Textgröße des Fensters (100 % = ursprüngliche Größe):
 (no message)	(keine Meldung)
+Checking GitHub for updates…	Suche nach Updates auf GitHub…
+Update cancelled.	Aktualisierung abgebrochen.
 SDRLink: update available	SDRLink: Update verfügbar
 SDRLink: updates	SDRLink: Updates
 Could not reach GitHub to check for updates.	GitHub ist nicht erreichbar, die Suche nach Updates ist nicht möglich.
 You are using the latest version of SDRLink.	Sie verwenden die neueste Version von SDRLink.
 Latest published version: unknown	Neueste veröffentlichte Version: unbekannt
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Lädt SDRLink.exe von GitHub herunter, prüft seinen Fingerabdruck, setzt es an die Stelle dieses Programms und startet SDRLink neu.
+If your antivirus blocks the automatic update, use the links below.	Wenn Ihr Virenschutz die automatische Aktualisierung blockiert, verwenden Sie die Links unten.
 All versions (the latest one is marked “Latest”):	Alle Versionen (die neueste ist mit „Latest“ markiert):
-To stop these notices, untick “Check for updates”.	Um diese Hinweise abzustellen, „Nach Updates suchen“ deaktivieren.
+Automatic check at startup: on.	Automatische Suche beim Start: ein.
+To stop these notices, untick the box of the “Check for updates” button.	Um keine Hinweise mehr zu erhalten, entfernen Sie den Haken im Kästchen der Schaltfläche „Nach Updates suchen“.
+You will be told at startup as soon as a new version is published.	Sie werden beim Start benachrichtigt, sobald eine neue Version veröffentlicht wird.
+Automatic check at startup: off.	Automatische Suche beim Start: aus.
+To turn it on, tick the box of the “Check for updates” button.	Zum Einschalten setzen Sie den Haken im Kästchen der Schaltfläche „Nach Updates suchen“.
 Later	Später
 Open the update page	Update-Seite öffnen
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink wurde auf V{0} aktualisiert (die alte Version liegt daneben: {1}).
 Last {0} memories used	Letzte {0} verwendete Speicher
 ExpertSDR TCI port: {0}…	TCI-Port von ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Update V{0} verfügbar: zum Herunterladen klicken
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	Schreibe „{0}“: {1} %
 Recording saved: "{0}"	Aufnahme gespeichert: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Letzte {0} Meldungen (Klick: diese Art von Meldung ausblenden oder wieder anzeigen, ✓ = ausgeblendet)
 Show all hidden messages again ({0})	Alle ausgeblendeten Meldungen wieder anzeigen ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	SDRLink darf nicht in den Ordner {0} schreiben (als Administrator starten oder in einem eigenen Ordner ablegen).
+the new version could not be started ({0})	die neue Version konnte nicht gestartet werden ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Die automatische Aktualisierung wurde nicht abgeschlossen: {0}\n\nSDRLink wurde nicht verändert. Downloadseite von V{1} öffnen?
 A new version of SDRLink is available: V{0}	Eine neue Version von SDRLink ist verfügbar: V{0}
 Version in use: V{0}	Verwendete Version: V{0}
 Latest published version: V{0}	Neueste veröffentlichte Version: V{0}
+➜ Update to V{0} automatically now	➜ Jetzt automatisch auf V{0} aktualisieren
 Version {0} page (download, what's new):	Seite der Version {0} (Download, Neuerungen):
 Interface:	Schnittstelle:
 Brand:	Hersteller:
@@ -452,7 +467,6 @@ Mute ExpertSDR	ExpertSDR stumm
 Mute HDSDR	HDSDR stumm
 Auto-connect at startup	Beim Start automatisch verbinden
 Dark mode	Dunkelmodus
-Check for updates	Nach Updates suchen
 RTS	RTS
 DTR	DTR
 Start rigctld:	rigctld starten:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Kein TCI-Server unter 
 TCI connection lost	TCI-Verbindung verloren
+the downloaded file has disappeared (antivirus?)	die heruntergeladene Datei ist verschwunden (Virenschutz?)
+SHA-256 fingerprint differs from the one published on GitHub	SHA-256-Fingerabdruck weicht von dem auf GitHub veröffentlichten ab
+Checking the file…	Datei wird geprüft…
+wrong size ({0} bytes instead of {1})	falsche Größe ({0} Bytes statt {1})
+the file is not SDRLink V{0}	die Datei ist nicht SDRLink V{0}
+cannot delete the old copy {0} ({1})	die alte Kopie {0} kann nicht gelöscht werden ({1})
+cannot rename {0} ({1})	{0} kann nicht umbenannt werden ({1})
+cannot put the new version in place ({0})	die neue Version kann nicht an ihre Stelle gesetzt werden ({0})
+SDRLink: update V{0}	SDRLink: Aktualisierung V{0}
+Downloading SDRLink V{0}…	SDRLink V{0} wird heruntergeladen…
 unavailable	nicht verfügbar
 unexpected format	unerwartetes Format
 Find WebSDRs (France and neighbouring countries)	WebSDRs suchen (Frankreich und Nachbarländer)

@@ -208,6 +208,8 @@ delete them and replace them with those of the file	törölni és a fájlban lé
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Az SDRLink ezután újraindul. A jelenlegi beállítások a settings.avant-import.ini fájlban maradnak.
 Import	Importálás
 Cannot open the log: 	A napló nem nyitható meg: 
+Check for updates	Frissítések keresése
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Bejelölt négyzet: frissítések automatikus keresése indításkor. Kattintás a gombra: keresés most és a frissítési ablak megnyitása (jobb klikk: a gomb színe)
 Export all settings…	Összes beállítás exportálása…
 Import settings…	Beállítások importálása…
 Reset the program…	A program alaphelyzetbe állítása…
@@ -266,7 +268,7 @@ RIG 	RÁDIÓ
 Cannot start WebView2 (Edge):\n	A WebView2 (Edge) nem indítható:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Név vagy hívójel az ezt kérő WebSDR-eknek (KiwiSDR, websdr.org):
 The callsign cannot be empty.	A név nem lehet üres.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Az oldalon már beírt név megmarad. Ha nem akar nevet megadni: nem törhető szóköz (Alt+255).
+A name already typed on a site is kept.	A webhelyen már beírt név megmarad.
 Invalid address: 	Érvénytelen cím: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kábel: nem található virtuális audiokábel. Telepítse a VB-CABLE-t (ingyenes): „SDRLINK kábel” gomb.
 Output receiving the WebSDR audio:	A WebSDR hangját fogadó kimenet:
@@ -342,15 +344,24 @@ Clear this list	A lista törlése
 Text size	Szövegméret
 Window text size (100% = original size):	Az ablak szövegmérete (100 % = eredeti méret):
 (no message)	(nincs üzenet)
+Checking GitHub for updates…	Frissítések keresése a GitHubon…
+Update cancelled.	Frissítés megszakítva.
 SDRLink: update available	SDRLink: frissítés érhető el
 SDRLink: updates	SDRLink: frissítések
 Could not reach GitHub to check for updates.	Nem sikerült elérni a GitHubot a frissítések kereséséhez.
 You are using the latest version of SDRLink.	Az SDRLink legújabb verzióját használja.
 Latest published version: unknown	Legutóbb kiadott verzió: ismeretlen
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Letölti a SDRLink.exe fájlt a GitHubról, ellenőrzi az ujjlenyomatát, a mostani helyére teszi, és újraindítja a SDRLinket.
+If your antivirus blocks the automatic update, use the links below.	Ha a víruskereső blokkolja az automatikus frissítést, használja az alábbi hivatkozásokat.
 All versions (the latest one is marked “Latest”):	Összes verzió (a legújabb „Latest” jelölésű):
-To stop these notices, untick “Check for updates”.	Ha nem kér több ilyen értesítést, kapcsolja ki a „Frissítések keresése” jelölőnégyzetet.
+Automatic check at startup: on.	Automatikus keresés indításkor: be.
+To stop these notices, untick the box of the “Check for updates” button.	Ha nem kér több értesítést, törölje a jelölést a „Frissítések keresése” gomb négyzetéből.
+You will be told at startup as soon as a new version is published.	Indításkor értesítést kap, amint új verzió jelenik meg.
+Automatic check at startup: off.	Automatikus keresés indításkor: ki.
+To turn it on, tick the box of the “Check for updates” button.	A bekapcsoláshoz jelölje be a „Frissítések keresése” gomb négyzetét.
 Later	Később
 Open the update page	Frissítés oldalának megnyitása
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	A SDRLink frissítve a V{0} verzióra (a régi verzió mellette marad: {1}).
 Last {0} memories used	Utolsó {0} használt memória
 ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Elérhető a V{0} frissítés: kattintson a letöltéshez
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	„{0}” írása: {1}%
 Recording saved: "{0}"	Felvétel mentve: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Utolsó {0} üzenet (kattintás: az ilyen típusú üzenet elrejtése vagy újbóli megjelenítése, ✓ = rejtett)
 Show all hidden messages again ({0})	Minden rejtett üzenet újbóli megjelenítése ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	A SDRLink nem írhat a(z) {0} mappába (indítsa rendszergazdaként, vagy tegye egy saját mappába).
+the new version could not be started ({0})	az új verziót nem sikerült elindítani ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Az automatikus frissítés nem fejeződött be: {0}\n\nA SDRLink nem változott. Megnyitja a V{1} letöltési oldalát?
 A new version of SDRLink is available: V{0}	Elérhető az SDRLink új verziója: V{0}
 Version in use: V{0}	Használt verzió: V{0}
 Latest published version: V{0}	Legutóbb kiadott verzió: V{0}
+➜ Update to V{0} automatically now	➜ Automatikus frissítés most a V{0} verzióra
 Version {0} page (download, what's new):	A(z) {0} verzió oldala (letöltés, újdonságok):
 Interface:	Interfész:
 Brand:	Gyártó:
@@ -452,7 +467,6 @@ Mute ExpertSDR	ExpertSDR némítás
 Mute HDSDR	HDSDR némítás
 Auto-connect at startup	Automatikus csatlakozás indításkor
 Dark mode	Sötét mód
-Check for updates	Frissítések keresése
 RTS	RTS
 DTR	DTR
 Start rigctld:	rigctld indítása:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Nincs TCI-szerver itt: 
 TCI connection lost	A TCI-kapcsolat megszakadt
+the downloaded file has disappeared (antivirus?)	a letöltött fájl eltűnt (víruskereső?)
+SHA-256 fingerprint differs from the one published on GitHub	a SHA-256 ujjlenyomat eltér a GitHubon közzétettől
+Checking the file…	A fájl ellenőrzése…
+wrong size ({0} bytes instead of {1})	hibás méret ({0} bájt {1} helyett)
+the file is not SDRLink V{0}	a fájl nem a SDRLink V{0}
+cannot delete the old copy {0} ({1})	a régi másolat ({0}) nem törölhető ({1})
+cannot rename {0} ({1})	{0} nem nevezhető át ({1})
+cannot put the new version in place ({0})	az új verzió nem tehető a helyére ({0})
+SDRLink: update V{0}	SDRLink: frissítés V{0}
+Downloading SDRLink V{0}…	A SDRLink V{0} letöltése…
 unavailable	nem elérhető
 unexpected format	váratlan formátum
 Find WebSDRs (France and neighbouring countries)	WebSDR-ek keresése (Franciaország és szomszédos országok)

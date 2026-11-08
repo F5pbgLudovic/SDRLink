@@ -208,6 +208,8 @@ delete them and replace them with those of the file	ištrinti juos ir pakeisti f
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Tada SDRLink bus paleista iš naujo. Dabartiniai nustatymai išsaugomi faile settings.avant-import.ini.
 Import	Importuoti
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
+Check for updates	Tikrinti atnaujinimus
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Langelis pažymėtas: automatinis naujinimų tikrinimas paleidžiant. Spustelėjus mygtuką: tikrinti dabar ir atidaryti naujinimo langą (dešinysis spustelėjimas: mygtuko spalva)
 Export all settings…	Eksportuoti visus nustatymus…
 Import settings…	Importuoti nustatymus…
 Reset the program…	Atstatyti programą…
@@ -266,7 +268,7 @@ RIG 	STOTIS
 Cannot start WebView2 (Edge):\n	Nepavyksta paleisti WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Vardas arba šaukinys WebSDR imtuvams, kurie jo prašo (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Vardas negali būti tuščias.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Svetainėje jau įvestas vardas išlieka. Jei nenorite pateikti vardo: nepertraukiamas tarpas (Alt+255).
+A name already typed on a site is kept.	Svetainėje jau įvestas vardas išlieka.
 Invalid address: 	Netinkamas adresas: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kabelis: virtualus garso kabelis nerastas. Įdiekite VB-CABLE (nemokamai): mygtukas „SDRLINK kabelis“.
 Output receiving the WebSDR audio:	Išvestis, gaunanti WebSDR garsą:
@@ -342,15 +344,24 @@ Clear this list	Išvalyti šį sąrašą
 Text size	Teksto dydis
 Window text size (100% = original size):	Lango teksto dydis (100 % = pradinis dydis):
 (no message)	(pranešimų nėra)
+Checking GitHub for updates…	Ieškoma naujinimų GitHub…
+Update cancelled.	Naujinimas atšauktas.
 SDRLink: update available	SDRLink: yra atnaujinimas
 SDRLink: updates	SDRLink: atnaujinimai
 Could not reach GitHub to check for updates.	Nepavyko prisijungti prie GitHub ir patikrinti atnaujinimų.
 You are using the latest version of SDRLink.	Naudojate naujausią SDRLink versiją.
 Latest published version: unknown	Naujausia paskelbta versija: nežinoma
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Atsisiunčia SDRLink.exe iš GitHub, patikrina jo kontrolinį atspaudą, padeda jį vietoj šio ir paleidžia SDRLink iš naujo.
+If your antivirus blocks the automatic update, use the links below.	Jei antivirusinė programa blokuoja automatinį naujinimą, naudokite toliau esančias nuorodas.
 All versions (the latest one is marked “Latest”):	Visos versijos (naujausia pažymėta „Latest“):
-To stop these notices, untick “Check for updates”.	Jei nebenorite šių pranešimų, nuimkite žymę „Tikrinti atnaujinimus“.
+Automatic check at startup: on.	Automatinis tikrinimas paleidžiant: įjungtas.
+To stop these notices, untick the box of the “Check for updates” button.	Jei nebenorite pranešimų, nuimkite žymę nuo mygtuko „Tikrinti atnaujinimus“ langelio.
+You will be told at startup as soon as a new version is published.	Paleidžiant būsite informuoti, kai tik bus paskelbta nauja versija.
+Automatic check at startup: off.	Automatinis tikrinimas paleidžiant: išjungtas.
+To turn it on, tick the box of the “Check for updates” button.	Norėdami įjungti, pažymėkite mygtuko „Tikrinti atnaujinimus“ langelį.
 Later	Vėliau
 Open the update page	Atverti atnaujinimo puslapį
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink atnaujintas į V{0} (senoji versija paliekama šalia: {1}).
 Last {0} memories used	Paskutinės {0} naudotos atmintys
 ExpertSDR TCI port: {0}…	ExpertSDR TCI prievadas: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Yra atnaujinimas V{0}: spustelėkite, kad atsisiųstumėte
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	Rašoma „{0}“: {1} %
 Recording saved: "{0}"	Įrašas išsaugotas: „{0}“
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Paskutiniai {0} pranešimai (spustelėjimas: slėpti arba vėl rodyti šios rūšies pranešimą, ✓ = paslėpta)
 Show all hidden messages again ({0})	Vėl rodyti visus paslėptus pranešimus ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	SDRLink neturi teisės rašyti į aplanką {0} (paleiskite jį kaip administratorius arba perkelkite į savo aplanką).
+the new version could not be started ({0})	nepavyko paleisti naujos versijos ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Automatinis naujinimas nebaigtas: {0}\n\nSDRLink nepakeistas. Atidaryti V{1} atsisiuntimo puslapį?
 A new version of SDRLink is available: V{0}	Yra nauja SDRLink versija: V{0}
 Version in use: V{0}	Naudojama versija: V{0}
 Latest published version: V{0}	Naujausia paskelbta versija: V{0}
+➜ Update to V{0} automatically now	➜ Automatiškai atnaujinti į V{0} dabar
 Version {0} page (download, what's new):	Versijos {0} puslapis (atsisiuntimas, naujovės):
 Interface:	Sąsaja:
 Brand:	Gamintojas:
@@ -452,7 +467,6 @@ Mute ExpertSDR	Nutildyti ExpertSDR
 Mute HDSDR	Nutildyti HDSDR
 Auto-connect at startup	Autom. jungtis paleidžiant
 Dark mode	Tamsus režimas
-Check for updates	Tikrinti atnaujinimus
 RTS	RTS
 DTR	DTR
 Start rigctld:	Paleisti rigctld:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Nėra TCI serverio adresu 
 TCI connection lost	TCI ryšys nutrūko
+the downloaded file has disappeared (antivirus?)	atsisiųstas failas dingo (antivirusinė programa?)
+SHA-256 fingerprint differs from the one published on GitHub	SHA-256 atspaudas skiriasi nuo paskelbto GitHub
+Checking the file…	Tikrinamas failas…
+wrong size ({0} bytes instead of {1})	neteisingas dydis ({0} baitų vietoj {1})
+the file is not SDRLink V{0}	failas nėra SDRLink V{0}
+cannot delete the old copy {0} ({1})	negalima ištrinti senosios kopijos {0} ({1})
+cannot rename {0} ({1})	negalima pervadinti {0} ({1})
+cannot put the new version in place ({0})	negalima padėti naujos versijos į vietą ({0})
+SDRLink: update V{0}	SDRLink: naujinimas V{0}
+Downloading SDRLink V{0}…	Atsisiunčiama SDRLink V{0}…
 unavailable	nepasiekiama
 unexpected format	netikėtas formatas
 Find WebSDRs (France and neighbouring countries)	Ieškoti WebSDR (Prancūzija ir kaimyninės šalys)

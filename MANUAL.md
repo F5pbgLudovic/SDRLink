@@ -21,7 +21,7 @@ To rebuild after a change: `powershell -ExecutionPolicy Bypass -File build.ps1` 
 
 Overview; each feature is detailed further down in its own section.
 
-1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Text size…**, **Check for updates** box, **Import/Export ▾**, **Pseudo/Call**.
+1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
@@ -34,7 +34,7 @@ Overview; each feature is detailed further down in its own section.
 | Where | What the right-click offers |
 |---|---|
 | Connect | colour when connected / disconnected |
-| Open log, Text size, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
+| Open log, Text size, Check for updates, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
 | FreeDV auto | no menu: right-click switches between RADE V1 and RADE V2 (since 1.24) |
 | Digital modes (button and window over the page) | the 14 modes (left-click: choose and start; right-click: choose and open the settings), **<mode> settings…**, **Clear the received text**, **Open the image folder**, **Reset the <mode> window**, **Reset the windows** (since 1.25) |
 | Import/Export | **Reset the program…** (since 1.22), button colour |
@@ -64,6 +64,7 @@ Overview; each feature is detailed further down in its own section.
 - `%APPDATA%\SDRLink\settings.reset.txt`: reset requested, done at the restart then deleted (it only exists for a few seconds).
 - `%APPDATA%\SDRLink\sdrlink.log`: the log (reset at each launch).
 - `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache; the name given to KiwiSDRs and websdr.org is there too); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<size>\sdrlink_freedv.dll`: FreeDV decoder, written only the first time FreeDV auto is used (since 1.24).
+- Next to `SDRLink.exe`: `SDRLink.previous.exe`, the previous version kept by the automatic update (it can be deleted); `SDRLink.exe.download` exists only during a download (since 1.27).
 - `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
 - `Pictures\SDRLink`: received SSTV, WEFAX and Hell pictures, as PNG (`SSTV_<mode>_<date>_<time>.png`, `WEFAX_<lines>-<IOC>_<date>_<time>.png`, `Hell_<date>_<time>.png`; `_partiel` if the picture did not reach the end) (since 1.25).
 - `%LOCALAPPDATA%\SDRLink\runtime\digi-…\sdrlink_digi.dll`: FT8 / FT4 / FT2 and Olivia / Contestia decoders, written only when these modes are first used (since 1.25).
@@ -156,8 +157,8 @@ The type is detected automatically (shown in brackets):
 
 **Pseudo/Call** button (1st row, after Import/Export): name or callsign given automatically to WebSDRs that ask for one before the audio (**KiwiSDR**, **websdr.org**). **SDRLink** by default.
 - A click opens a window showing the current name; **OK** saves it and closes the window, **Cancel** changes nothing. The button only shows "Pseudo/Call".
-- The name cannot be **empty** (OK greyed out). To give no name, enter a **non-breaking space** (**Alt+255** on the numeric keypad): it is accepted and kept as is.
-- A name already typed directly on a site is **kept**; only the name SDRLink had put is replaced when the name changes. On KiwiSDR, a one-character name (such as Alt+255) is doubled (KiwiSDR needs two).
+- The name cannot be **empty** (OK greyed out).
+- A name already typed directly on a site is **kept**; only the name SDRLink had put is replaced when the name changes. On KiwiSDR, a one-character name is doubled (KiwiSDR needs two).
 - 30 characters at most; the characters ; , = ' " are removed. Saved in `settings.ini` (`Callsign=` line).
 - Right-click: button colour.
 
@@ -589,7 +590,20 @@ On the "Sync" row, after "Auto notch (DNF)":
 
 ## Updates
 
-**Check for updates** box (1st row, ticked by default): at startup, if the Internet answers, SDRLink looks up the latest version published on GitHub. If there is a newer one, a window opens (since 1.18): it shows the version in use and the latest published version, with the direct link to that version's page (download and what's new) and the link to the list of all versions (https://github.com/F5pbgLudovic/SDRLink/releases, where the latest one is marked "Latest"). The **Open the update page** button opens that page in the browser; **Later** closes the window. An orange link "⚠ Update Vx.y available" also stays at the bottom right of the window, in the status bar (also visible in reduced and mini views): one click opens the same page. Ticking the box runs the check immediately and opens the window in every case: new version, "you are using the latest version" or GitHub unreachable. To stop these notices, untick the box.
+**Check for updates** button (1st row, after "Text size…"): since 1.27, the box is **inside the button**, left of the text.
+- **Click the box** (ticked by default): automatic check at startup yes / no. Ticking or unticking opens nothing.
+- **Click anywhere else on the button** (or Enter / Space when it has the focus): immediate check ("Checking GitHub for updates…" in the status bar), then the update window opens in every case, with a matching text: new version available, "You are using the latest version of SDRLink" or "Could not reach GitHub". At the bottom, it says whether the automatic check is on or off and how to change it.
+- **Right-click**: button colour.
+
+Box ticked: at startup, if the Internet answers, SDRLink looks up the latest version published on GitHub. If there is a newer one, a window opens (since 1.18): it shows the version in use and the latest published version, with the direct link to that version's page (download and what's new) and the link to the list of all versions (https://github.com/F5pbgLudovic/SDRLink/releases, where the latest one is marked "Latest"). The **Open the update page** button opens that page in the browser; **Later** closes the window. An orange link "⚠ Update Vx.y available" also stays at the bottom right of the window, in the status bar (also visible in reduced and mini views): one click opens this window again (since 1.27; before, it opened the page). To stop these notices, untick the button's box.
+
+**Automatic update** (since 1.27): in this window, the orange link **➜ Update to Vx.y automatically now** does everything by itself:
+- it downloads the new version's `SDRLink.exe` from GitHub, with a progress bar and a **Cancel** button;
+- it checks the file: size, **SHA-256 fingerprint** published by GitHub and version number; if it does not match, nothing is changed;
+- it puts the new version in place of this one, with the same name and in the same folder; the old one stays next to it as **`SDRLink.previous.exe`** (replaced at the next update), to go back if needed;
+- it closes SDRLink (settings saved as usual) and starts the new version, which waits until the old one has completely closed before starting; the status bar then shows "SDRLink has been updated to Vx.y".
+
+The settings do not move (they are in `%APPDATA%\SDRLink`). If something fails (antivirus blocking or deleting the file, a folder SDRLink is not allowed to write to such as `Program Files`, Internet down…), SDRLink stays as it is, explains why and offers to open the download page. **The links to the version page and to all versions stay in the window**: some antivirus programs do not like a program that replaces itself, so you can always download by hand. The automatic update works from a version that contains it (1.27 or later) to a newer version.
 
 ## Troubleshooting
 
@@ -605,6 +619,9 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.27**
+  - **Automatic update**: in the "update available" window, link **➜ Update to Vx.y automatically now**. SDRLink downloads the new version, checks its SHA-256 fingerprint, puts it in place of the exe (the old one is kept as `SDRLink.previous.exe`) and restarts. The links to the download page stay, for antivirus programs that block it. The "⚠ Update available" link in the status bar opens this window again.
+  - **"Check for updates" button** (after "Text size…"): the box is inside the button. Box: automatic check at startup; click elsewhere on the button: check now and open the update window, with a matching text when there is no new version.
 - **1.26**
   - **Left-click on the RIG or WEBSDR frequency**: frequency keypad as in PhoneSDRLink. Keys in rounded boxes, then **Mem ▾**, **Store**, **Auto N min**, then **Cancel** and **OK**; the PC keyboard works too.
   - **Mem** list: the last 20 frequencies with the mode, the running digital mode, the time and the date. It opens to the right of the keypad (on the left if there is no room), with a scroll bar if needed. Click: go back to it, digital mode included; right-click or long press: copy to "Memories" or delete.
@@ -624,7 +641,7 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
   - **Resume the scan**, at the top of the ▶ Scan button's list: the scan restarts from the current frequency (or from the memory on that frequency); out of range, it restarts from the first frequency. The ▶ Scan button now always opens the list, even without profiles.
 - **1.20**
   - **Audio without a click** when arriving on a page: UberSDR's "Click to start" and PhantomSDR's "Tap to enable audio" veil are passed automatically.
-  - **Pseudo/Call** button (1st row, after Import/Export): name or callsign given automatically to KiwiSDRs and websdr.org receivers that ask for one before the audio, "SDRLink" by default, never empty, Alt+255 allowed to give no name; window opened with a click.
+  - **Pseudo/Call** button (1st row, after Import/Export): name or callsign given automatically to KiwiSDRs and websdr.org receivers that ask for one before the audio, "SDRLink" by default, never empty; window opened with a click.
   - **Full KiwiSDR**: automatic entry into the waiting queue ("Enter queue").
   - **Squelch** opened on WebSDRs that have one, except in FM from 30 MHz up.
   - **websdr.org showing a single band** (Bordeaux): band switched with the rig frequency (waterfall and cursor on the right band), rig mode kept; a click on a band button of the page makes the rig follow.

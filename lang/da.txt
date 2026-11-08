@@ -208,6 +208,8 @@ delete them and replace them with those of the file	slette dem og erstatte dem m
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink genstarter derefter. De nuværende indstillinger gemmes i settings.avant-import.ini.
 Import	Importér
 Cannot open the log: 	Kan ikke åbne loggen: 
+Check for updates	Søg efter opdateringer
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Feltet markeret: automatisk søgning efter opdateringer ved start. Klik på knappen: søg nu og åbn opdateringsvinduet (højreklik: knappens farve)
 Export all settings…	Eksportér alle indstillinger…
 Import settings…	Importér indstillinger…
 Reset the program…	Nulstil programmet…
@@ -266,7 +268,7 @@ RIG 	TRX
 Cannot start WebView2 (Edge):\n	Kan ikke starte WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Navn eller kaldesignal til WebSDR'er, der beder om et (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Navnet må ikke være tomt.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Et navn, der allerede er skrevet på et websted, bevares. For ikke at give et navn: et hårdt mellemrum (Alt+255).
+A name already typed on a site is kept.	Et navn, der allerede er skrevet på et websted, bevares.
 Invalid address: 	Ugyldig adresse: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kabel: intet virtuelt lydkabel fundet. Installér VB-CABLE (gratis): knappen ”SDRLINK-kabel”.
 Output receiving the WebSDR audio:	Udgang, der modtager WebSDR-lyden:
@@ -342,15 +344,24 @@ Clear this list	Ryd denne liste
 Text size	Tekststørrelse
 Window text size (100% = original size):	Vinduets tekststørrelse (100 % = oprindelig størrelse):
 (no message)	(ingen meddelelser)
+Checking GitHub for updates…	Søger efter opdateringer på GitHub…
+Update cancelled.	Opdateringen blev annulleret.
 SDRLink: update available	SDRLink: opdatering tilgængelig
 SDRLink: updates	SDRLink: opdateringer
 Could not reach GitHub to check for updates.	Kunne ikke kontakte GitHub for at søge efter opdateringer.
 You are using the latest version of SDRLink.	Du bruger den nyeste version af SDRLink.
 Latest published version: unknown	Senest udgivne version: ukendt
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Henter SDRLink.exe fra GitHub, kontrollerer dets fingeraftryk, sætter det i stedet for dette og genstarter SDRLink.
+If your antivirus blocks the automatic update, use the links below.	Hvis dit antivirusprogram blokerer den automatiske opdatering, så brug linkene nedenfor.
 All versions (the latest one is marked “Latest”):	Alle versioner (den nyeste er markeret “Latest”):
-To stop these notices, untick “Check for updates”.	Fjern fluebenet i “Søg efter opdateringer” for ikke at blive mindet om det.
+Automatic check at startup: on.	Automatisk søgning ved start: til.
+To stop these notices, untick the box of the “Check for updates” button.	Hvis du ikke vil have flere meddelelser, så fjern markeringen i feltet på knappen "Søg efter opdateringer".
+You will be told at startup as soon as a new version is published.	Du får besked ved start, så snart en ny version er offentliggjort.
+Automatic check at startup: off.	Automatisk søgning ved start: fra.
+To turn it on, tick the box of the “Check for updates” button.	For at slå den til skal du markere feltet på knappen "Søg efter opdateringer".
 Later	Senere
 Open the update page	Åbn siden med opdateringen
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink er opdateret til V{0} (den gamle version ligger ved siden af: {1}).
 Last {0} memories used	Seneste {0} brugte hukommelser
 ExpertSDR TCI port: {0}…	TCI-port for ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Opdatering V{0} tilgængelig: klik for at hente den
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	Skriver "{0}": {1} %
 Recording saved: "{0}"	Optagelse gemt: "{0}"
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Seneste {0} meddelelser (klik: skjul eller vis denne type meddelelse igen, ✓ = skjult)
 Show all hidden messages again ({0})	Vis alle skjulte meddelelser igen ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	SDRLink må ikke skrive i mappen {0} (start det som administrator, eller læg det i en mappe, du selv ejer).
+the new version could not be started ({0})	den nye version kunne ikke startes ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Den automatiske opdatering blev ikke gennemført: {0}\n\nSDRLink er ikke ændret. Åbn downloadsiden for V{1}?
 A new version of SDRLink is available: V{0}	En ny version af SDRLink er tilgængelig: V{0}
 Version in use: V{0}	Version i brug: V{0}
 Latest published version: V{0}	Senest udgivne version: V{0}
+➜ Update to V{0} automatically now	➜ Opdater automatisk til V{0} nu
 Version {0} page (download, what's new):	Side for version {0} (download, nyheder):
 Interface:	Grænseflade:
 Brand:	Mærke:
@@ -452,7 +467,6 @@ Mute ExpertSDR	Lydløs ExpertSDR
 Mute HDSDR	Lydløs HDSDR
 Auto-connect at startup	Forbind automatisk ved start
 Dark mode	Mørk tilstand
-Check for updates	Søg efter opdateringer
 RTS	RTS
 DTR	DTR
 Start rigctld:	Start rigctld:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Ingen TCI-server på 
 TCI connection lost	TCI-forbindelse mistet
+the downloaded file has disappeared (antivirus?)	den hentede fil er forsvundet (antivirus?)
+SHA-256 fingerprint differs from the one published on GitHub	SHA-256-fingeraftrykket afviger fra det, der er offentliggjort på GitHub
+Checking the file…	Kontrollerer filen…
+wrong size ({0} bytes instead of {1})	forkert størrelse ({0} byte i stedet for {1})
+the file is not SDRLink V{0}	filen er ikke SDRLink V{0}
+cannot delete the old copy {0} ({1})	kan ikke slette den gamle kopi {0} ({1})
+cannot rename {0} ({1})	kan ikke omdøbe {0} ({1})
+cannot put the new version in place ({0})	kan ikke sætte den nye version på plads ({0})
+SDRLink: update V{0}	SDRLink: opdatering V{0}
+Downloading SDRLink V{0}…	Henter SDRLink V{0}…
 unavailable	ikke tilgængelig
 unexpected format	uventet format
 Find WebSDRs (France and neighbouring countries)	Find WebSDR'er (Frankrig og nabolande)

@@ -208,6 +208,8 @@ delete them and replace them with those of the file	izbrisati ih i zamijeniti on
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink će se zatim ponovno pokrenuti. Trenutačne postavke čuvaju se u settings.avant-import.ini.
 Import	Uvezi
 Cannot open the log: 	Nije moguće otvoriti dnevnik: 
+Check for updates	Provjeri ažuriranja
+Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Okvir označen: automatska provjera ažuriranja pri pokretanju. Klik na gumb: provjeri sada i otvori prozor ažuriranja (desni klik: boja gumba)
 Export all settings…	Izvezi sve postavke…
 Import settings…	Uvezi postavke…
 Reset the program…	Vrati program na početne postavke…
@@ -266,7 +268,7 @@ RIG 	TRX
 Cannot start WebView2 (Edge):\n	Nije moguće pokrenuti WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Ime ili pozivni znak za WebSDR-ove koji ga traže (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Ime ne može biti prazno.
-A name already typed on a site is kept. To give no name: a non-breaking space (Alt+255).	Ime već upisano na stranici se zadržava. Da ne date ime: neprekidni razmak (Alt+255).
+A name already typed on a site is kept.	Ime već upisano na stranici se zadržava.
 Invalid address: 	Nevažeća adresa: 
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kabel: nije pronađen virtualni audio kabel. Instalirajte VB-CABLE (besplatno): gumb „SDRLINK kabel”.
 Output receiving the WebSDR audio:	Izlaz koji prima zvuk WebSDR-a:
@@ -342,15 +344,24 @@ Clear this list	Isprazni ovaj popis
 Text size	Veličina teksta
 Window text size (100% = original size):	Veličina teksta prozora (100 % = izvorna veličina):
 (no message)	(nema poruka)
+Checking GitHub for updates…	Traženje ažuriranja na GitHubu…
+Update cancelled.	Ažuriranje otkazano.
 SDRLink: update available	SDRLink: dostupno ažuriranje
 SDRLink: updates	SDRLink: ažuriranja
 Could not reach GitHub to check for updates.	Nije moguće spojiti se na GitHub radi provjere ažuriranja.
 You are using the latest version of SDRLink.	Koristite najnoviju verziju SDRLinka.
 Latest published version: unknown	Posljednja objavljena verzija: nepoznata
+Downloads SDRLink.exe from GitHub, checks its fingerprint, puts it in place of this one and restarts SDRLink.	Preuzima SDRLink.exe s GitHuba, provjerava njegov otisak, stavlja ga na mjesto ovoga i ponovno pokreće SDRLink.
+If your antivirus blocks the automatic update, use the links below.	Ako antivirusni program blokira automatsko ažuriranje, upotrijebite poveznice u nastavku.
 All versions (the latest one is marked “Latest”):	Sve verzije (najnovija je označena „Latest”):
-To stop these notices, untick “Check for updates”.	Da više ne dobivate ove obavijesti, isključite „Provjeri ažuriranja”.
+Automatic check at startup: on.	Automatska provjera pri pokretanju: uključena.
+To stop these notices, untick the box of the “Check for updates” button.	Ako više ne želite obavijesti, odznačite okvir na gumbu „Provjeri ažuriranja”.
+You will be told at startup as soon as a new version is published.	Pri pokretanju bit ćete obaviješteni čim bude objavljena nova verzija.
+Automatic check at startup: off.	Automatska provjera pri pokretanju: isključena.
+To turn it on, tick the box of the “Check for updates” button.	Za uključivanje označite okvir na gumbu „Provjeri ažuriranja”.
 Later	Kasnije
 Open the update page	Otvori stranicu ažuriranja
+SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink je ažuriran na V{0} (stara verzija čuva se pokraj: {1}).
 Last {0} memories used	Zadnjih {0} korištenih memorija
 ExpertSDR TCI port: {0}…	TCI priključak ExpertSDR-a: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Dostupno je ažuriranje V{0}: kliknite za preuzimanje
@@ -399,9 +410,13 @@ Writing "{0}": {1}%	Zapisivanje „{0}”: {1} %
 Recording saved: "{0}"	Snimka spremljena: „{0}”
 Last {0} messages (click: hide or show this kind of message again, ✓ = hidden)	Zadnjih {0} poruka (klik: sakrij ili ponovno prikaži ovu vrstu poruke, ✓ = skriveno)
 Show all hidden messages again ({0})	Ponovno prikaži sve skrivene poruke ({0})
+SDRLink is not allowed to write to the folder {0} (run it as administrator, or put it in a folder of your own).	SDRLink nema dopuštenje pisati u mapu {0} (pokrenite ga kao administrator ili ga stavite u vlastitu mapu).
+the new version could not be started ({0})	nova verzija nije se mogla pokrenuti ({0})
+The automatic update did not complete: {0}\n\nSDRLink has not been changed. Open the download page of V{1}?	Automatsko ažuriranje nije dovršeno: {0}\n\nSDRLink nije promijenjen. Otvoriti stranicu za preuzimanje V{1}?
 A new version of SDRLink is available: V{0}	Dostupna je nova verzija SDRLinka: V{0}
 Version in use: V{0}	Verzija u upotrebi: V{0}
 Latest published version: V{0}	Posljednja objavljena verzija: V{0}
+➜ Update to V{0} automatically now	➜ Automatski ažuriraj na V{0} sada
 Version {0} page (download, what's new):	Stranica verzije {0} (preuzimanje, novosti):
 Interface:	Sučelje:
 Brand:	Marka:
@@ -452,7 +467,6 @@ Mute ExpertSDR	Utišaj ExpertSDR
 Mute HDSDR	Utišaj HDSDR
 Auto-connect at startup	Automatsko spajanje pri pokretanju
 Dark mode	Tamni način
-Check for updates	Provjeri ažuriranja
 RTS	RTS
 DTR	DTR
 Start rigctld:	Pokreni rigctld:
@@ -591,6 +605,16 @@ SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
 No TCI server at 	Nema TCI poslužitelja na 
 TCI connection lost	TCI veza izgubljena
+the downloaded file has disappeared (antivirus?)	preuzeta datoteka je nestala (antivirus?)
+SHA-256 fingerprint differs from the one published on GitHub	otisak SHA-256 razlikuje se od onoga objavljenog na GitHubu
+Checking the file…	Provjera datoteke…
+wrong size ({0} bytes instead of {1})	pogrešna veličina ({0} bajtova umjesto {1})
+the file is not SDRLink V{0}	datoteka nije SDRLink V{0}
+cannot delete the old copy {0} ({1})	nije moguće izbrisati staru kopiju {0} ({1})
+cannot rename {0} ({1})	nije moguće preimenovati {0} ({1})
+cannot put the new version in place ({0})	nije moguće staviti novu verziju na mjesto ({0})
+SDRLink: update V{0}	SDRLink: ažuriranje V{0}
+Downloading SDRLink V{0}…	Preuzimanje SDRLink V{0}…
 unavailable	nedostupno
 unexpected format	neočekivani format
 Find WebSDRs (France and neighbouring countries)	Pronađi WebSDR (Francuska i susjedne zemlje)

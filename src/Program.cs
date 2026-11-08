@@ -7,13 +7,19 @@ namespace SDRLink
     static class Program
     {
         // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
-        public const string Version = "1.26";
+        public const string Version = "1.27";
+
+        // Vrai quand cette version vient d'être installée par la mise à jour automatique.
+        public static bool JustUpdated;
 
         [STAThread]
         static int Main(string[] args)
         {
             // Relancé avec les droits d'administrateur pour renommer un périphérique audio (câble SDRLINK).
             if (args.Length == 3 && args[0] == "--name-endpoint") return AudioEndpoints.SetName(args[1], args[2]);
+            // Lancé par la mise à jour automatique : on attend que l'ancienne version ait fini de se fermer
+            // (réglages enregistrés, ports et WebView2 libérés).
+            JustUpdated = Updater.AfterUpdate(args);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Langue lue dès le départ pour que les messages de vérification soient dans la bonne langue.

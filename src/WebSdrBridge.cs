@@ -515,8 +515,8 @@ namespace SDRLink
 ";
 
         // Pseudo donné aux WebSDR qui en demandent un avant le son : websdr.org le lit dans le cookie « username »,
-        // KiwiSDR dans localStorage « ident » (deux caractères au moins : un pseudo d'un seul caractère, comme l'espace
-        // insécable d'Alt+255, y est doublé). Un nom tapé directement sur le site est gardé ; celui que SDRLink avait mis
+        // KiwiSDR dans localStorage « ident » (deux caractères au moins : un pseudo d'un seul caractère y est doublé).
+        // Un nom tapé directement sur le site est gardé ; celui que SDRLink avait mis
         // (repères __sdrlink_ident et __sdrlink_user) est remplacé quand le pseudo change.
         public static string Identity(string name)
         {
@@ -546,14 +546,18 @@ namespace SDRLink
         }
 
         // Pseudo utilisable tel quel dans un cookie et une chaîne JavaScript : sans ; , = \ ' "" ni caractères de contrôle,
-        // 30 caractères au plus. Seuls les espaces ordinaires sont ôtés autour : l'espace insécable (Alt+255) est un
-        // pseudo permis, pour qui ne veut pas donner de nom. Vide : pseudo refusé.
+        // 30 caractères au plus ; espaces et tabulations normalisés en U+00A0. Vide : pseudo refusé.
+        public const char Nbsp = '\u00A0';
+
         public static string Clean(string name)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            foreach (char c in (name ?? "").Trim(' ', '\t'))
-                if (!char.IsControl(c) && ";,=\\'\"".IndexOf(c) < 0 && sb.Length < 30) sb.Append(c);
-            return sb.ToString().Trim(' ', '\t');
+            foreach (char c in name ?? "")
+            {
+                char x = c == ' ' || c == '\t' ? Nbsp : c;
+                if (!char.IsControl(x) && ";,=\\'\"".IndexOf(x) < 0 && sb.Length < 30) sb.Append(x);
+            }
+            return sb.ToString();
         }
     }
 }
