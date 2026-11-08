@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} favori(s) exporté(s).
 program capture does not answer	capture du programme sans réponse
 unsupported audio format ({0} bits, {1} Hz)	format audio non pris en charge ({0} bits, {1} Hz)
+Frequency (kHz):	Fréquence (kHz) :
+The last 20 stored frequencies (click a line: go back to it)	Les 20 dernières fréquences mémorisées (clic sur une ligne : y retourner)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Mémorise tout de suite la fréquence, le mode et le mode numérique en marche dans la liste Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Enregistrement automatique dans la liste Mem quand la fréquence reste ce temps sans changer (0 = jamais)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Fréquence invalide : tapez une valeur en kHz, par ex. 7074 ou 14074.5
+Empty list: "Store" or the automatic storing fills it.	Liste vide : « Store » ou l'enregistrement automatique l'alimentent.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Clic droit (ou appui long) sur une ligne : la mémoriser dans « Mémoires » ou la supprimer.
+Store in "Memories"	Mémoriser dans « Mémoires »
+Delete from the "Mem" list	Supprimer de la liste « Mem »
+Delete from the "Mem" list?	Supprimer de la liste « Mem » ?
 rigctld connection closed	Connexion rigctld fermée
 stopped	arrêté
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Pas de rigctld sur {0}:{1} (lancez rigctld, ou cochez « Lancer rigctld »).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT : connectez d'abord le poste
 transmitting	émission
 Receivers muted while transmitting:	Réceptions dont le son est coupé en émission :
 Rig (Mute TRX)	Poste (Mute TX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Fréquence invalide : tapez une valeur en kHz, par ex. 7074 ou 14074.5
 Remove this value (pick it in the list first)	Supprimer cette valeur (choisissez-la d'abord dans la liste)
 RIG 	RADIO 
 Cannot start WebView2 (Edge):\n	Impossible de démarrer WebView2 (Edge) :\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}) : ligne {2}
 {0}: {1}, could not save	{0} : {1}, enregistrement impossible
 Hell: picture saved: {0}	Hell : image enregistrée : {0}
 SSTV	SSTV
-Frequency (kHz):	Fréquence (kHz) :
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clic : clavier de fréquence et liste Mem des dernières fréquences ; molette : changer de fréquence (clic droit : couleurs)
+No frequency to store (no rig, no WebSDR).	Aucune fréquence à mémoriser (ni poste ni WebSDR).
+Stored: {0} kHz	Mémorisé : {0} kHz
 Mode:	Mode :
 (mode unchanged)	(mode inchangé)
 Edit…	Modifier…

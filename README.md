@@ -1,4 +1,4 @@
-# SDRLink V1.25 — @F5PBG 2026
+# SDRLink V1.26 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -9,6 +9,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - bouton PTT et coupure du son en émission (WebSDR, poste, ExpertSDR, HDSDR, au choix par clic droit) ;
   - bouton ⇄ qui passe le son d'une réception à l'autre (WebSDR, poste, ExpertSDR, HDSDR), deux réceptions pouvant être laissées de côté ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
+  - clic sur la fréquence : clavier de fréquence et liste Mem des 20 dernières fréquences (Store, enregistrement automatique après 1 à 30 min sur la même fréquence), comme dans PhoneSDRLink ;
   - mémoires de fréquences nommées, en listes, avec les 20 dernières utilisées ;
   - scan de fréquences (avec jusqu'à 10 zones non scannées) ou de mémoires, jusqu'à 10 profils de scan nommés, reprise du scan à la fréquence actuelle ;
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, couleur et largeur réglables ;
@@ -61,6 +62,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - PTT button, audio muted while transmitting (WebSDR, rig, ExpertSDR, HDSDR, chosen by right-click);
   - ⇄ button that switches the audio from one receiver to the next (WebSDR, rig, ExpertSDR, HDSDR), with up to two receivers left aside;
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
+  - click on the frequency: frequency keypad and Mem list of the last 20 frequencies (Store, automatic storing after 1 to 30 min on the same frequency), as in PhoneSDRLink;
   - named frequency memories, in lists, with the last 20 used;
   - frequency scan (with up to 10 skipped ranges) or memory scan, up to 10 named scan profiles, scan resumed from the current frequency;
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, with adjustable colour and width;

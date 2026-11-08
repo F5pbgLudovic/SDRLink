@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	Izvezeni favoriti: {0}.
 program capture does not answer	snimanje programa ne odgovara
 unsupported audio format ({0} bits, {1} Hz)	nepodržani audioformat ({0} bita, {1} Hz)
+Frequency (kHz):	Frekvencija (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Posljednjih 20 spremljenih frekvencija (klik na redak: povratak na nju)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Odmah sprema frekvenciju, način rada i pokrenuti digitalni način u popis Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatsko spremanje u popis Mem kad frekvencija ostane nepromijenjena ovo vrijeme (0 = nikad)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nevažeća frekvencija: upišite vrijednost u kHz, npr. 7074 ili 14074.5
+Empty list: "Store" or the automatic storing fills it.	Prazan popis: puni ga „Store” ili automatsko spremanje.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Desni klik (ili dugi pritisak) na redak: spremite ga u „Memorije” ili ga izbrišite.
+Store in "Memories"	Spremi u „Memorije”
+Delete from the "Mem" list	Izbriši s popisa „Mem”
+Delete from the "Mem" list?	Izbrisati s popisa „Mem”?
 rigctld connection closed	Veza s rigctld zatvorena
 stopped	zaustavljeno
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nema rigctld na {0}:{1} (pokrenite rigctld ili označite „Pokreni rigctld”).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: najprije spojite uređaj
 transmitting	odašiljanje
 Receivers muted while transmitting:	Prijemnici utišani tijekom odašiljanja:
 Rig (Mute TRX)	Uređaj (Utišaj TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Nevažeća frekvencija: upišite vrijednost u kHz, npr. 7074 ili 14074.5
 Remove this value (pick it in the list first)	Ukloni ovu vrijednost (najprije je odaberite na popisu)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Nije moguće pokrenuti WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): redak {2}
 {0}: {1}, could not save	{0}: {1}, spremanje nije uspjelo
 Hell: picture saved: {0}	Hell: slika spremljena: {0}
 SSTV	SSTV
-Frequency (kHz):	Frekvencija (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: tipkovnica frekvencije i popis Mem posljednjih frekvencija; kotačić: promjena frekvencije (desni klik: boje)
+No frequency to store (no rig, no WebSDR).	Nema frekvencije za spremanje (ni uređaja ni WebSDR-a).
+Stored: {0} kHz	Spremljeno: {0} kHz
 Mode:	Način rada:
 (mode unchanged)	(način rada nepromijenjen)
 Edit…	Uredi…

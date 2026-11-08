@@ -24,7 +24,7 @@ Overview; each feature is detailed further down in its own section.
 1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Text size…**, **Check for updates** box, **Import/Export ▾**, **Pseudo/Call**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
-4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode, **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
+4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25).
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**.
 7. **The WebSDR page**, then the **status bar** (messages, update link).
@@ -41,7 +41,8 @@ Overview; each feature is detailed further down in its own section.
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | colour when stopped / while scanning |
 | PTT | TX safety timeout, colour when receiving / transmitting |
-| RIG, WEBSDR | background colour, text colour |
+| RIG, WEBSDR | background colour, text colour (left-click opens the frequency keypad) |
+| Line of the **Mem** list (frequency keypad; also with a long press) | **Store in "Memories"** ▸ chosen list, **Delete from the "Mem" list** (since 1.26) |
 | USB, LSB, AM, FM, DIGI, CW | colour of the selected mode / of the others |
 | kHz entry | remove the value from the history, remove all |
 | Memories | store the current frequency, button colour |
@@ -438,6 +439,31 @@ The buttons always keep the same place: the RIG and WEBSDR areas have a fixed wi
 - **Right-click** the field: "Remove "…" from the list" (the value shown) or "Remove all" (confirmation is requested).
 - The list is kept for the next launch.
 
+## Frequency keypad and Mem list (since 1.26)
+
+The same keypad and "Mem" list as in PhoneSDRLink.
+
+- **Left-click the RIG or WEBSDR frequency**: the keypad opens below the frequency you clicked. It shows that frequency in kHz in large digits and, below it, the full value (`= 14.074.000`).
+  - Keys **7 8 9 / 4 5 6 / 1 2 3 / . 0 ⌫**, in rounded boxes. The first key replaces the value shown; only one decimal point; 11 characters at most.
+  - **⌫** deletes the last digit; **long press on ⌫**: clear everything.
+  - The PC keyboard works too: digits (top row or numeric keypad), dot or comma, **Backspace**, **Delete** (clear everything), **Enter** (OK), **Esc** (Cancel).
+  - Accepted frequencies: from 1 kHz to 100 GHz. A value outside this range is marked ✗; OK is then refused with "Invalid frequency" and the keypad stays open.
+  - **OK**: same rule as the mouse wheel (see "Mouse wheel on the frequencies"). With Bidirectional sync, the rig and the WebSDR go to the frequency typed. Otherwise, depending on the sync direction, only the frequency you clicked changes. The frequency is also added to the history of the "kHz" field. A running scan stops.
+  - **Cancel**: changes nothing.
+  - While the keypad is open, the wheel over RIG / WEBSDR does not change the frequency.
+- Below the keys: **Mem ▾**, **Store** and **Auto N min**.
+  - **Store** puts at the top of the Mem list right away: the current frequency (the rig's, otherwise the WebSDR's), the mode, and the digital mode if one is running (FT8, SSTV, CW…). FreeDV auto is not recorded. If the same line is already at the top, only its time is updated; a duplicate further down is removed.
+  - **Auto**: automatic storing in the Mem list after **0** (never, the default), **1, 2, 3, 5, 10, 15, 20 or 30 minutes**. The frequency is stored only if the frequency, the mode and the digital mode have not changed during that time. Any change resets the countdown. After that, it is stored again at each interval (the line already at the top gets the new time).
+- **Mem ▾** opens the **Mem** list, to the right of the keypad without covering it. If there is no room on the right, it opens on the left.
+  - The **last 20** frequencies, the most recent at the top, each in a rounded box: frequency, mode, digital mode, time and date (`14074 kHz  USB  FT8  10:26 8/11/2026`).
+  - A **scroll bar** appears if the list does not fit on the screen; the wheel scrolls it.
+  - **Click a line**: the list and the keypad close. The rig and the WebSDR go to the frequency and mode of the line, and the line's digital mode starts.
+  - **Right-click or long press a line**:
+    - **Store in "Memories"** ▸ chosen list: copies the frequency and mode to the memories (without the digital mode or the time);
+    - **Delete from the "Mem" list**: deletes the line, after confirmation.
+  - Empty list: "Store" or the automatic storing fills it.
+- The list and the Auto setting are kept after a restart (`settings.ini`, `MemHist=` and `MemHistMin=` lines). For Import/Export and Reset the program, the Mem list is part of the "memories".
+
 ## Mouse wheel on the frequencies
 
 Hover the mouse over **RIG** or **WEBSDR** and turn the wheel. What moves depends on the synchronisation:
@@ -579,6 +605,10 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.26**
+  - **Left-click on the RIG or WEBSDR frequency**: frequency keypad as in PhoneSDRLink. Keys in rounded boxes, then **Mem ▾**, **Store**, **Auto N min**, then **Cancel** and **OK**; the PC keyboard works too.
+  - **Mem** list: the last 20 frequencies with the mode, the running digital mode, the time and the date. It opens to the right of the keypad (on the left if there is no room), with a scroll bar if needed. Click: go back to it, digital mode included; right-click or long press: copy to "Memories" or delete.
+  - **Store** and automatic storing (**Auto**, 0 to 30 min) when the frequency does not change during that time. List and setting kept after a restart.
 - **1.25**
   - **Digital modes** button (after "FreeDV auto"): all the PhoneSDRLink decoders — FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31 / PSK63, Olivia, Contestia, Hell, SSTV (26 modes) — plus **WEFAX** (weather fax), on the same receiver as FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR). Click: on / off; right-click: choose the mode (left-click) or choose it and open its settings (right-click), with the same settings as PhoneSDRLink and highlighting. The text or picture is shown in a window placed over the page, at the bottom left, movable with a long press then drag, resizable by its edges and corners like a Windows window (fixed proportions in SSTV and Hell: the picture is enlarged accordingly; position and size remembered for each mode; **Reset the <mode> window** and **Reset the windows** in the menu); SSTV and WEFAX pictures are saved as PNG in Pictures\SDRLink. All the mode settings are remembered after a restart. When off, nothing runs.
   - SDRLink is now **free software under the GNU GPL v3 licence** (LICENSE file in the repository), like PhoneSDRLink: the Olivia / Contestia decoders (Pawel Jalocha's library, taken from fldigi) and the JS8 dictionary (JS8Call) are GPL.

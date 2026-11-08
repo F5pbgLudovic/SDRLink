@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} Favorit(en) exportiert.
 program capture does not answer	Programmaufnahme antwortet nicht
 unsupported audio format ({0} bits, {1} Hz)	Audioformat nicht unterstützt ({0} Bit, {1} Hz)
+Frequency (kHz):	Frequenz (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Die letzten 20 gespeicherten Frequenzen (Klick auf eine Zeile: dorthin zurück)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Speichert sofort Frequenz, Betriebsart und laufende digitale Betriebsart in der Mem-Liste
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatisches Speichern in der Mem-Liste, wenn die Frequenz so lange unverändert bleibt (0 = nie)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ungültige Frequenz: Geben Sie einen Wert in kHz ein, z. B. 7074 oder 14074.5
+Empty list: "Store" or the automatic storing fills it.	Leere Liste: „Store“ oder das automatische Speichern füllen sie.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Rechtsklick (oder langes Drücken) auf eine Zeile: in „Speicher“ übernehmen oder löschen.
+Store in "Memories"	In „Speicher“ übernehmen
+Delete from the "Mem" list	Aus der „Mem“-Liste löschen
+Delete from the "Mem" list?	Aus der „Mem“-Liste löschen?
 rigctld connection closed	rigctld-Verbindung geschlossen
 stopped	gestoppt
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Kein rigctld unter {0}:{1} (starten Sie rigctld oder aktivieren Sie „rigctld starten“).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: Bitte zuerst den TRX verbinden
 transmitting	Senden
 Receivers muted while transmitting:	Beim Senden stummgeschaltete Empfänger:
 Rig (Mute TRX)	TRX (TRX stumm)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ungültige Frequenz: Geben Sie einen Wert in kHz ein, z. B. 7074 oder 14074.5
 Remove this value (pick it in the list first)	Diesen Wert entfernen (zuerst in der Liste auswählen)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) kann nicht gestartet werden:\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): Zeile {2}
 {0}: {1}, could not save	{0}: {1}, Speichern nicht möglich
 Hell: picture saved: {0}	Hell: Bild gespeichert: {0}
 SSTV	SSTV
-Frequency (kHz):	Frequenz (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klick: Frequenztastatur und Mem-Liste der letzten Frequenzen; Mausrad: Frequenz ändern (Rechtsklick: Farben)
+No frequency to store (no rig, no WebSDR).	Keine Frequenz zum Speichern (weder Funkgerät noch WebSDR).
+Stored: {0} kHz	Gespeichert: {0} kHz
 Mode:	Betriebsart:
 (mode unchanged)	(Betriebsart unverändert)
 Edit…	Bearbeiten…

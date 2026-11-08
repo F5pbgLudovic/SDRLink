@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	Eksportuota parankinių: {0}.
 program capture does not answer	programos garso įrašymas neatsako
 unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
+Frequency (kHz):	Dažnis (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Paskutiniai 20 įrašytų dažnių (spustelėjus eilutę: grįžti į jį)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Iš karto įrašo dažnį, moduliaciją ir veikiančią skaitmeninę moduliaciją į sąrašą Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatinis įrašymas į sąrašą Mem, kai dažnis tiek laiko nesikeičia (0 = niekada)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Netinkamas dažnis: įveskite reikšmę kHz, pvz., 7074 arba 14074.5
+Empty list: "Store" or the automatic storing fills it.	Tuščias sąrašas: jį pildo „Store“ arba automatinis įrašymas.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Dešinysis spustelėjimas (arba ilgas paspaudimas) ant eilutės: įrašyti į „Atmintys“ arba ištrinti.
+Store in "Memories"	Įrašyti į „Atmintys“
+Delete from the "Mem" list	Ištrinti iš sąrašo „Mem“
+Delete from the "Mem" list?	Ištrinti iš sąrašo „Mem“?
 rigctld connection closed	rigctld ryšys uždarytas
 stopped	sustabdyta
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nėra rigctld adresu {0}:{1} (paleiskite rigctld arba pažymėkite „Paleisti rigctld“).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: pirmiausia prijunkite stotį
 transmitting	siuntimas
 Receivers muted while transmitting:	Imtuvai, nutildomi siunčiant:
 Rig (Mute TRX)	Stotis (Nutildyti TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Netinkamas dažnis: įveskite reikšmę kHz, pvz., 7074 arba 14074.5
 Remove this value (pick it in the list first)	Šalinti šią reikšmę (pirmiausia pasirinkite ją sąraše)
 RIG 	STOTIS 
 Cannot start WebView2 (Edge):\n	Nepavyksta paleisti WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): eilutė {2}
 {0}: {1}, could not save	{0}: {1}, įrašyti nepavyko
 Hell: picture saved: {0}	Hell: vaizdas įrašytas: {0}
 SSTV	SSTV
-Frequency (kHz):	Dažnis (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Spustelėjimas: dažnio klaviatūra ir paskutinių dažnių sąrašas Mem; ratukas: keisti dažnį (dešinysis spustelėjimas: spalvos)
+No frequency to store (no rig, no WebSDR).	Nėra dažnio įrašymui (nei radijo stoties, nei WebSDR).
+Stored: {0} kHz	Įrašyta: {0} kHz
 Mode:	Režimas:
 (mode unchanged)	(režimas nekeičiamas)
 Edit…	Keisti…

@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	Exportované obľúbené: {0}.
 program capture does not answer	zachytávanie programu neodpovedá
 unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitov, {1} Hz)
+Frequency (kHz):	Kmitočet (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Posledných 20 uložených frekvencií (kliknutie na riadok: návrat naň)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Okamžite uloží frekvenciu, druh prevádzky a bežiaci digitálny druh prevádzky do zoznamu Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatické ukladanie do zoznamu Mem, keď sa frekvencia počas tohto času nezmení (0 = nikdy)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Neplatná frekvencia: zadajte hodnotu v kHz, napr. 7074 alebo 14074.5
+Empty list: "Store" or the automatic storing fills it.	Prázdny zoznam: plní ho „Store“ alebo automatické ukladanie.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Pravé tlačidlo (alebo dlhé stlačenie) na riadku: uložiť ho do „Pamäte“ alebo ho zmazať.
+Store in "Memories"	Uložiť do „Pamäte“
+Delete from the "Mem" list	Zmazať zo zoznamu „Mem“
+Delete from the "Mem" list?	Zmazať zo zoznamu „Mem“?
 rigctld connection closed	Spojenie s rigctld ukončené
 stopped	zastavené
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Na {0}:{1} nebeží rigctld (spustite rigctld alebo začiarknite „Spustiť rigctld“).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: najprv pripojte transceiver
 transmitting	vysielanie
 Receivers muted while transmitting:	Prijímače stlmené pri vysielaní:
 Rig (Mute TRX)	Transceiver (Stlmiť TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Neplatná frekvencia: zadajte hodnotu v kHz, napr. 7074 alebo 14074.5
 Remove this value (pick it in the list first)	Odstrániť túto hodnotu (najprv ju vyberte v zozname)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Nedá sa spustiť WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): riadok {2}
 {0}: {1}, could not save	{0}: {1}, uloženie sa nepodarilo
 Hell: picture saved: {0}	Hell: obrázok uložený: {0}
 SSTV	SSTV
-Frequency (kHz):	Kmitočet (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Kliknutie: klávesnica frekvencie a zoznam Mem posledných frekvencií; koliesko: zmena frekvencie (pravé tlačidlo: farby)
+No frequency to store (no rig, no WebSDR).	Žiadna frekvencia na uloženie (ani rádiostanica, ani WebSDR).
+Stored: {0} kHz	Uložené: {0} kHz
 Mode:	Druh prevádzky:
 (mode unchanged)	(druh prevádzky bez zmeny)
 Edit…	Upraviť…

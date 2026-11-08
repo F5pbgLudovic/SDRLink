@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	Експортирани записи: {0}.
 program capture does not answer	прихващането на програмата не отговаря
 unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоформат ({0} бита, {1} Hz)
+Frequency (kHz):	Честота (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Последните 20 запомнени честоти (щракване върху ред: връщане към нея)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Запомня веднага честотата, режима и работещия цифров режим в списъка Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Автоматично запомняне в списъка Mem, когато честотата остане непроменена това време (0 = никога)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Невалидна честота: въведете стойност в kHz, напр. 7074 или 14074.5
+Empty list: "Store" or the automatic storing fills it.	Празен списък: попълва се от „Store“ или от автоматичното запомняне.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Десен клик (или продължително натискане) върху ред: запомнете го в „Памети“ или го изтрийте.
+Store in "Memories"	Запомняне в „Памети“
+Delete from the "Mem" list	Изтриване от списъка „Mem“
+Delete from the "Mem" list?	Изтриване от списъка „Mem“?
 rigctld connection closed	Връзката с rigctld е затворена
 stopped	спрян
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Няма rigctld на {0}:{1} (стартирайте rigctld или отметнете „Старт rigctld“).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: първо свържете трансивъра
 transmitting	предаване
 Receivers muted while transmitting:	Приемници без звук при предаване:
 Rig (Mute TRX)	Трансивър (Без звук TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Невалидна честота: въведете стойност в kHz, напр. 7074 или 14074.5
 Remove this value (pick it in the list first)	Премахни тази стойност (първо я изберете от списъка)
 RIG 	РАДИО 
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) не може да се стартира:\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): ред {2}
 {0}: {1}, could not save	{0}: {1}, записът е невъзможен
 Hell: picture saved: {0}	Hell: изображението е записано: {0}
 SSTV	SSTV
-Frequency (kHz):	Честота (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Клик: клавиатура за честота и списък Mem с последните честоти; колелце: смяна на честотата (десен клик: цветове)
+No frequency to store (no rig, no WebSDR).	Няма честота за запомняне (нито радиостанция, нито WebSDR).
+Stored: {0} kHz	Запомнено: {0} kHz
 Mode:	Режим:
 (mode unchanged)	(режимът не се променя)
 Edit…	Редактиране…

@@ -75,6 +75,8 @@ namespace SDRLink
         public string[] ListNames = DefaultListNames();
         public List<string> HiddenMessages = new List<string>();
         public MemoryBook Memories = new MemoryBook();   // mémoires de fréquences (bouton Mémoires)
+        public List<MemHistEntry> MemHist = new List<MemHistEntry>();   // liste « Mem » du clavier de fréquence (20 au plus, la plus récente en tête)
+        public int MemHistMin;                             // enregistrement automatique dans « Mem » après ce nombre de minutes sur la même fréquence (0 = jamais)
         public int FontScale = 100;                        // taille du texte de la fenêtre principale, en %
         public const int FontScaleMin = 70, FontScaleMax = 200;   // types de messages de la barre d'état masqués (clic droit)
 
@@ -254,6 +256,8 @@ namespace SDRLink
                     case "SstvX": s.SstvX = Math.Max(0, Math.Min(1000, Int(v, 0))); break;
                     case "SstvY": s.SstvY = Math.Max(0, Math.Min(1000, Int(v, 1000))); break;
                     case "DigiMode": s.DigiMode = v; break;
+                    case "MemHist": { MemHistEntry e = MemHistEntry.FromSetting(v); if (e != null && s.MemHist.Count < MemHistEntry.Size) s.MemHist.Add(e); } break;
+                    case "MemHistMin": { int m = Int(v, 0); s.MemHistMin = Array.IndexOf(FreqKeypad.AutoMinutes, m) >= 0 ? m : 0; } break;
                     case "DigiHi": try { s.DigiHi = Uri.UnescapeDataString(v); } catch { } break;
                     case "Digi":
                         int dc = v.IndexOf(':');
@@ -388,6 +392,8 @@ namespace SDRLink
             Line(sb, "SstvX", SstvX);
             Line(sb, "SstvY", SstvY);
             Line(sb, "DigiMode", DigiMode);
+            Line(sb, "MemHistMin", MemHistMin);
+            foreach (MemHistEntry e in MemHist) Line(sb, "MemHist", e.ToSetting());
             Line(sb, "DigiHi", Uri.EscapeDataString(DigiHi));
             foreach (KeyValuePair<string, int> d in Digi) Line(sb, "Digi", d.Key + ":" + d.Value.ToString(CultureInfo.InvariantCulture));
             Line(sb, "Callsign", Uri.EscapeDataString(Callsign));

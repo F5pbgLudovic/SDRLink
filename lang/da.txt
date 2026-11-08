@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} favorit(ter) eksporteret.
 program capture does not answer	optagelse af programmet svarer ikke
 unsupported audio format ({0} bits, {1} Hz)	lydformatet understøttes ikke ({0} bit, {1} Hz)
+Frequency (kHz):	Frekvens (kHz):
+The last 20 stored frequencies (click a line: go back to it)	De sidste 20 gemte frekvenser (klik på en linje: gå tilbage til den)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Gemmer straks frekvensen, modulationen og den kørende digitale modulation i Mem-listen
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatisk lagring i Mem-listen, når frekvensen er uændret i denne tid (0 = aldrig)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: skriv en værdi i kHz, f.eks. 7074 eller 14074.5
+Empty list: "Store" or the automatic storing fills it.	Tom liste: "Store" eller den automatiske lagring fylder den.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Højreklik (eller langt tryk) på en linje: gem den i "Hukommelser" eller slet den.
+Store in "Memories"	Gem i "Hukommelser"
+Delete from the "Mem" list	Slet fra "Mem"-listen
+Delete from the "Mem" list?	Slet fra "Mem"-listen?
 rigctld connection closed	rigctld-forbindelse lukket
 stopped	stoppet
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Ingen rigctld på {0}:{1} (start rigctld, eller sæt kryds i ”Start rigctld”).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: forbind radioen først
 transmitting	sender
 Receivers muted while transmitting:	Modtagere der gøres lydløse under sending:
 Rig (Mute TRX)	Radio (Lydløs TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: skriv en værdi i kHz, f.eks. 7074 eller 14074.5
 Remove this value (pick it in the list first)	Fjern denne værdi (vælg den først på listen)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Kan ikke starte WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linje {2}
 {0}: {1}, could not save	{0}: {1}, kunne ikke gemmes
 Hell: picture saved: {0}	Hell: billede gemt: {0}
 SSTV	SSTV
-Frequency (kHz):	Frekvens (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: frekvenstastatur og Mem-liste over de sidste frekvenser; hjul: skift frekvens (højreklik: farver)
+No frequency to store (no rig, no WebSDR).	Ingen frekvens at gemme (hverken radio eller WebSDR).
+Stored: {0} kHz	Gemt: {0} kHz
 Mode:	Mode:
 (mode unchanged)	(mode uændret)
 Edit…	Rediger…

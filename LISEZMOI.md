@@ -23,7 +23,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Taille du texte…**, case **Vérifier les mises à jour**, **Import/Export ▾**, **Pseudo/Call**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
-4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR**, boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
+4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25).
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**.
 7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
@@ -40,7 +40,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
 | PTT | délai de sécurité TX, couleur en réception / en émission |
-| RADIO, WEBSDR | couleur du fond, couleur du texte |
+| RADIO, WEBSDR | couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
+| Ligne de la liste **Mem** (clavier de fréquence ; aussi par un appui long) | **Mémoriser dans « Mémoires »** ▸ liste choisie, **Supprimer de la liste « Mem »** (depuis la 1.26) |
 | USB, LSB, AM, FM, DIGI, CW | couleur du mode sélectionné / des autres |
 | Saisie kHz | supprimer la valeur de l'historique, tout supprimer |
 | Mémoires | mémoriser la fréquence actuelle, couleur du bouton |
@@ -437,6 +438,31 @@ Les boutons gardent toujours la même place : les zones RADIO et WEBSDR ont une 
 - **Clic droit** sur le champ : « Supprimer … de la liste » (la valeur affichée) ou « Tout supprimer » (une confirmation est demandée).
 - La liste est conservée au prochain lancement.
 
+## Clavier de fréquence et liste Mem (depuis la 1.26)
+
+Le même clavier et la même liste « Mem » que dans PhoneSDRLink.
+
+- **Clic gauche sur la fréquence RADIO ou WEBSDR** : le clavier s'ouvre sous la fréquence cliquée, avec cette fréquence en kHz en grands chiffres et, en dessous, la valeur complète (`= 14.074.000`).
+  - Touches **7 8 9 / 4 5 6 / 1 2 3 / . 0 ⌫**, dans des cases arrondies. La première touche remplace la valeur affichée ; un seul point décimal ; 11 caractères au plus.
+  - **⌫** efface le dernier chiffre ; **appui long sur ⌫** : tout effacer.
+  - Le clavier du PC marche aussi : chiffres (rangée du haut ou pavé numérique), point ou virgule, **Retour arrière**, **Suppr** (tout effacer), **Entrée** (OK), **Échap** (Annuler).
+  - Fréquences acceptées : de 1 kHz à 100 GHz. Une valeur hors de cette plage est marquée ✗ ; OK est alors refusé avec « Fréquence invalide » et le clavier reste ouvert.
+  - **OK** : même règle que la molette (voir « Molette sur les fréquences »). En Bidirectionnelle, le poste et le WebSDR vont sur la fréquence tapée. Sinon, selon le sens de synchronisation, seule la fréquence cliquée change. La fréquence rejoint aussi l'historique du champ « kHz ». Un scan en cours s'arrête.
+  - **Annuler** : ne change rien.
+  - Pendant que le clavier est ouvert, la molette sur RADIO / WEBSDR ne change pas la fréquence.
+- Sous les touches : **Mem ▾**, **Store** et **Auto N min**.
+  - **Store** met tout de suite en tête de la liste Mem : la fréquence actuelle (celle du poste, sinon celle du WebSDR), le mode, et le mode numérique s'il est en marche (FT8, SSTV, CW…). FreeDV auto n'est pas retenu. Si la même ligne est déjà en tête, seule son heure est mise à jour ; un doublon plus bas est retiré.
+  - **Auto** : enregistrement automatique dans la liste Mem après **0** (jamais, par défaut), **1, 2, 3, 5, 10, 15, 20 ou 30 minutes**. La fréquence n'est enregistrée que si la fréquence, le mode et le mode numérique n'ont pas changé pendant ce temps. Tout changement remet le compteur à zéro. Ensuite, elle est enregistrée de nouveau à chaque échéance (la ligne déjà en tête prend la nouvelle heure).
+- **Mem ▾** ouvre la liste **Mem**, à droite du clavier sans le recouvrir. S'il n'y a pas la place à droite, elle s'ouvre à gauche.
+  - Les **20 dernières** fréquences, la plus récente en haut, chacune dans une case arrondie : fréquence, mode, mode numérique, heure et date (`14074 kHz  USB  FT8  10:26 8/11/2026`).
+  - Un **ascenseur** apparaît si la liste ne tient pas à l'écran ; la molette fait défiler.
+  - **Clic sur une ligne** : la liste et le clavier se ferment. Le poste et le WebSDR vont sur la fréquence et le mode de la ligne, et le mode numérique de la ligne se met en marche.
+  - **Clic droit ou appui long sur une ligne** :
+    - **Mémoriser dans « Mémoires »** ▸ liste choisie : copie fréquence et mode dans les mémoires (sans le mode numérique ni l'heure) ;
+    - **Supprimer de la liste « Mem »** : supprime la ligne, après confirmation.
+  - Liste vide : « Store » ou l'enregistrement automatique l'alimentent.
+- La liste et le réglage Auto sont gardés après redémarrage (`settings.ini`, lignes `MemHist=` et `MemHistMin=`). Pour Import/Export et Réinitialiser le programme, la liste Mem fait partie des « mémoires ».
+
 ## Molette sur les fréquences
 
 Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui bouge dépend de la synchronisation :
@@ -577,6 +603,10 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.26**
+  - **Clic gauche sur la fréquence RADIO ou WEBSDR** : clavier de fréquence comme dans PhoneSDRLink. Touches en cases arrondies, puis **Mem ▾**, **Store**, **Auto N min**, puis **Annuler** et **OK** ; le clavier du PC marche aussi.
+  - Liste **Mem** : les 20 dernières fréquences avec le mode, le mode numérique en marche, l'heure et la date. Elle s'ouvre à droite du clavier (à gauche s'il n'y a pas la place), avec un ascenseur si besoin. Clic : y retourner, mode numérique compris ; clic droit ou appui long : copier dans « Mémoires » ou supprimer.
+  - **Store** et enregistrement automatique (**Auto**, 0 à 30 min) quand la fréquence ne change pas pendant ce temps. Liste et réglage gardés après redémarrage.
 - **1.25**
   - Bouton des **modes numériques** (après « FreeDV auto ») : tous les décodeurs de PhoneSDRLink — FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31 / PSK63, Olivia, Contestia, Hell, SSTV (26 modes) — plus **WEFAX** (fac-similé météo), sur la même réception que FreeDV (poste, sinon WebSDR, sinon ExpertSDR, sinon HDSDR). Clic : marche / arrêt ; clic droit : choix du mode (clic gauche) ou choix et réglages du mode (clic droit), avec les mêmes réglages que PhoneSDRLink et la surbrillance. Le texte ou l'image s'affiche dans une fenêtre posée sur la page, en bas à gauche, déplaçable par appui long puis glisser, agrandissable par les bords et les coins comme une fenêtre Windows (proportions fixes en SSTV et Hell : l'image est agrandie d'autant ; place et taille retenues pour chaque mode ; **Réinitialiser la fenêtre <mode>** et **Réinitialiser les fenêtres** dans le menu) ; les images SSTV et WEFAX sont enregistrées en PNG dans Images\SDRLink. Tous les réglages des modes sont retenus après redémarrage. Arrêté, rien ne tourne.
   - SDRLink est désormais un **logiciel libre sous licence GNU GPL v3** (fichier LICENSE du dépôt), comme PhoneSDRLink : les décodeurs Olivia / Contestia (bibliothèque de Pawel Jalocha, reprise de fldigi) et le dictionnaire JS8 (JS8Call) sont sous GPL.

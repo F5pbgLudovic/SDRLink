@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} favoriet(en) geëxporteerd.
 program capture does not answer	opname van het programma reageert niet
 unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0} bits, {1} Hz)
+Frequency (kHz):	Frequentie (kHz):
+The last 20 stored frequencies (click a line: go back to it)	De laatste 20 opgeslagen frequenties (klik op een regel: ga ernaar terug)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Slaat de frequentie, de mode en de lopende digitale mode meteen op in de Mem-lijst
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatisch opslaan in de Mem-lijst als de frequentie zo lang ongewijzigd blijft (0 = nooit)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ongeldige frequentie: typ een waarde in kHz, bijv. 7074 of 14074.5
+Empty list: "Store" or the automatic storing fills it.	Lege lijst: "Store" of het automatisch opslaan vult hem.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Rechtsklik (of lang indrukken) op een regel: opslaan in "Geheugens" of verwijderen.
+Store in "Memories"	Opslaan in "Geheugens"
+Delete from the "Mem" list	Verwijderen uit de "Mem"-lijst
+Delete from the "Mem" list?	Verwijderen uit de "Mem"-lijst?
 rigctld connection closed	rigctld-verbinding gesloten
 stopped	gestopt
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Geen rigctld op {0}:{1} (start rigctld, of vink "rigctld starten" aan).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: verbind eerst de transceiver
 transmitting	zenden
 Receivers muted while transmitting:	Ontvangers die tijdens zenden gedempt worden:
 Rig (Mute TRX)	TRX (TRX dempen)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ongeldige frequentie: typ een waarde in kHz, bijv. 7074 of 14074.5
 Remove this value (pick it in the list first)	Deze waarde verwijderen (kies hem eerst in de lijst)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Kan WebView2 (Edge) niet starten:\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): lijn {2}
 {0}: {1}, could not save	{0}: {1}, opslaan niet gelukt
 Hell: picture saved: {0}	Hell: beeld opgeslagen: {0}
 SSTV	SSTV
-Frequency (kHz):	Frequentie (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: frequentietoetsenbord en Mem-lijst van de laatste frequenties; wieltje: frequentie wijzigen (rechtsklik: kleuren)
+No frequency to store (no rig, no WebSDR).	Geen frequentie om op te slaan (geen transceiver, geen WebSDR).
+Stored: {0} kHz	Opgeslagen: {0} kHz
 Mode:	Mode:
 (mode unchanged)	(mode ongewijzigd)
 Edit…	Wijzigen…

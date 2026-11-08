@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} kedvenc exportálva.
 program capture does not answer	a program hangjának rögzítése nem válaszol
 unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
+Frequency (kHz):	Frekvencia (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Az utolsó 20 tárolt frekvencia (kattintás egy sorra: visszatérés oda)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Azonnal tárolja a frekvenciát, az üzemmódot és a futó digitális üzemmódot a Mem listában
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatikus tárolás a Mem listába, ha a frekvencia ennyi ideig nem változik (0 = soha)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Érvénytelen frekvencia: adjon meg egy értéket kHz-ben, pl. 7074 vagy 14074.5
+Empty list: "Store" or the automatic storing fills it.	Üres lista: a „Store” vagy az automatikus tárolás tölti fel.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Jobb kattintás (vagy hosszú nyomás) egy soron: tárolás a „Memóriák” közé vagy törlés.
+Store in "Memories"	Tárolás a „Memóriák” közé
+Delete from the "Mem" list	Törlés a „Mem” listából
+Delete from the "Mem" list?	Törli a „Mem” listából?
 rigctld connection closed	A rigctld-kapcsolat bezárult
 stopped	leállítva
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nincs rigctld itt: {0}:{1} (indítsa el a rigctld-t, vagy jelölje be a „rigctld indítása” opciót).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: előbb csatlakoztassa a rádiót
 transmitting	adás
 Receivers muted while transmitting:	Adás közben némított vevők:
 Rig (Mute TRX)	Rádió (TRX némítás)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Érvénytelen frekvencia: adjon meg egy értéket kHz-ben, pl. 7074 vagy 14074.5
 Remove this value (pick it in the list first)	Érték eltávolítása (előbb válassza ki a listában)
 RIG 	RÁDIÓ 
 Cannot start WebView2 (Edge):\n	A WebView2 (Edge) nem indítható:\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): {2}. sor
 {0}: {1}, could not save	{0}: {1}, a mentés nem sikerült
 Hell: picture saved: {0}	Hell: kép mentve: {0}
 SSTV	SSTV
-Frequency (kHz):	Frekvencia (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Kattintás: frekvencia-billentyűzet és a legutóbbi frekvenciák Mem listája; görgő: frekvencia váltása (jobb kattintás: színek)
+No frequency to store (no rig, no WebSDR).	Nincs tárolható frekvencia (sem rádió, sem WebSDR).
+Stored: {0} kHz	Tárolva: {0} kHz
 Mode:	Üzemmód:
 (mode unchanged)	(üzemmód változatlan)
 Edit…	Szerkesztés…

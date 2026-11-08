@@ -505,6 +505,7 @@ namespace SDRLink
             rowDisplay.Controls.Add(btnPtt);
             rowDisplay.Controls.Add(lblRig);
             rowDisplay.Controls.Add(lblSdr);
+            InitFreqKeypad();
 
             // Boutons de mode : poste et WebSDR ensemble.
             modeButtons = new Button[ModeButtonModes.Length];
@@ -2074,7 +2075,7 @@ namespace SDRLink
 
             public bool PreFilterMessage(ref Message m)
             {
-                if (m.Msg != WM_MOUSEWHEEL) return false;
+                if (m.Msg != WM_MOUSEWHEEL || form.freqPopup != null) return false;
                 // Position écran du curseur au moment du cran, fournie par le message.
                 long lp = (long)m.LParam;
                 Point p = new Point((short)(lp & 0xFFFF), (short)((lp >> 16) & 0xFFFF));

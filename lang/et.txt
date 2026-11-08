@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	Eksporditi {0} lemmik(ut).
 program capture does not answer	programmi heli püüdmine ei vasta
 unsupported audio format ({0} bits, {1} Hz)	toetamata helivorming ({0} bitti, {1} Hz)
+Frequency (kHz):	Sagedus (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Viimased 20 salvestatud sagedust (klõps real: naase selle juurde)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Salvestab kohe sageduse, režiimi ja töötava digirežiimi Mem-loendisse
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automaatne salvestamine Mem-loendisse, kui sagedus püsib nii kaua muutumatuna (0 = mitte kunagi)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Vigane sagedus: sisestage väärtus kHz-des, nt 7074 või 14074.5
+Empty list: "Store" or the automatic storing fills it.	Tühi loend: seda täidavad „Store“ või automaatne salvestamine.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Paremklõps (või pikk vajutus) real: salvesta see „Mälud“ alla või kustuta.
+Store in "Memories"	Salvesta „Mälud“ alla
+Delete from the "Mem" list	Kustuta „Mem“-loendist
+Delete from the "Mem" list?	Kas kustutada „Mem“-loendist?
 rigctld connection closed	rigctld ühendus suleti
 stopped	peatatud
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Aadressil {0}:{1} pole rigctld-d (käivitage rigctld või märkige „Käivita rigctld“).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: ühendage esmalt raadio
 transmitting	saade
 Receivers muted while transmitting:	Saatmise ajal vaigistatavad vastuvõtjad:
 Rig (Mute TRX)	Raadio (Vaigista TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Vigane sagedus: sisestage väärtus kHz-des, nt 7074 või 14074.5
 Remove this value (pick it in the list first)	Eemalda see väärtus (valige see esmalt loendist)
 RIG 	RAADIO 
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) ei saa käivitada:\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): rida {2}
 {0}: {1}, could not save	{0}: {1}, salvestamine ebaõnnestus
 Hell: picture saved: {0}	Hell: pilt salvestatud: {0}
 SSTV	SSTV
-Frequency (kHz):	Sagedus (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klõps: sageduse klahvistik ja viimaste sageduste Mem-loend; ratas: muuda sagedust (paremklõps: värvid)
+No frequency to store (no rig, no WebSDR).	Pole sagedust, mida salvestada (ei raadiojaama ega WebSDR-i).
+Stored: {0} kHz	Salvestatud: {0} kHz
 Mode:	Režiim:
 (mode unchanged)	(režiim muutmata)
 Edit…	Muuda…

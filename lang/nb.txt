@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} favoritt(er) eksportert.
 program capture does not answer	opptak av programmet svarer ikke
 unsupported audio format ({0} bits, {1} Hz)	lydformatet støttes ikke ({0} bit, {1} Hz)
+Frequency (kHz):	Frekvens (kHz):
+The last 20 stored frequencies (click a line: go back to it)	De siste 20 lagrede frekvensene (klikk på en linje: gå tilbake til den)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Lagrer straks frekvensen, modusen og den aktive digitale modusen i Mem-listen
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automatisk lagring i Mem-listen når frekvensen er uendret så lenge (0 = aldri)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: skriv en verdi i kHz, f.eks. 7074 eller 14074.5
+Empty list: "Store" or the automatic storing fills it.	Tom liste: «Store» eller den automatiske lagringen fyller den.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Høyreklikk (eller langt trykk) på en linje: lagre den i «Minner» eller slett den.
+Store in "Memories"	Lagre i «Minner»
+Delete from the "Mem" list	Slett fra «Mem»-listen
+Delete from the "Mem" list?	Slette fra «Mem»-listen?
 rigctld connection closed	rigctld-tilkobling lukket
 stopped	stoppet
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Ingen rigctld på {0}:{1} (start rigctld, eller kryss av for «Start rigctld»).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: koble til riggen først
 transmitting	sending
 Receivers muted while transmitting:	Mottakere som dempes under sending:
 Rig (Mute TRX)	Rigg (Demp rigg)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Ugyldig frekvens: skriv en verdi i kHz, f.eks. 7074 eller 14074.5
 Remove this value (pick it in the list first)	Fjern denne verdien (velg den i listen først)
 RIG 	RIGG 
 Cannot start WebView2 (Edge):\n	Kan ikke starte WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linje {2}
 {0}: {1}, could not save	{0}: {1}, kunne ikke lagres
 Hell: picture saved: {0}	Hell: bilde lagret: {0}
 SSTV	SSTV
-Frequency (kHz):	Frekvens (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klikk: frekvenstastatur og Mem-liste over de siste frekvensene; hjul: endre frekvens (høyreklikk: farger)
+No frequency to store (no rig, no WebSDR).	Ingen frekvens å lagre (verken radio eller WebSDR).
+Stored: {0} kHz	Lagret: {0} kHz
 Mode:	Modus:
 (mode unchanged)	(modus uendret)
 Edit…	Rediger…

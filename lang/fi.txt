@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} suosikki(a) viety.
 program capture does not answer	ohjelman äänen kaappaus ei vastaa
 unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, {1} Hz)
+Frequency (kHz):	Taajuus (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Viimeiset 20 tallennettua taajuutta (napsautus riviin: palaa siihen)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Tallentaa heti taajuuden, lähetyslajin ja käynnissä olevan digitaalisen lähetyslajin Mem-luetteloon
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Automaattinen tallennus Mem-luetteloon, kun taajuus pysyy muuttumattomana tämän ajan (0 = ei koskaan)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Virheellinen taajuus: anna arvo kHz:nä, esim. 7074 tai 14074.5
+Empty list: "Store" or the automatic storing fills it.	Tyhjä luettelo: sen täyttävät ”Store” tai automaattinen tallennus.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Hiiren oikea painike (tai pitkä painallus) rivillä: tallenna se ”Muistit”-kohtaan tai poista se.
+Store in "Memories"	Tallenna ”Muistit”-kohtaan
+Delete from the "Mem" list	Poista ”Mem”-luettelosta
+Delete from the "Mem" list?	Poistetaanko ”Mem”-luettelosta?
 rigctld connection closed	rigctld-yhteys suljettu
 stopped	pysäytetty
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	rigctld ei vastaa osoitteessa {0}:{1} (käynnistä rigctld tai valitse ”Käynnistä rigctld”).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: yhdistä ensin radio
 transmitting	lähetys
 Receivers muted while transmitting:	Lähetyksen ajaksi mykistettävät vastaanottimet:
 Rig (Mute TRX)	Radio (Mykistä TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Virheellinen taajuus: anna arvo kHz:nä, esim. 7074 tai 14074.5
 Remove this value (pick it in the list first)	Poista tämä arvo (valitse se ensin luettelosta)
 RIG 	RADIO 
 Cannot start WebView2 (Edge):\n	WebView2:ta (Edge) ei voi käynnistää:\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): rivi {2}
 {0}: {1}, could not save	{0}: {1}, tallennus ei onnistunut
 Hell: picture saved: {0}	Hell: kuva tallennettu: {0}
 SSTV	SSTV
-Frequency (kHz):	Taajuus (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Napsautus: taajuusnäppäimistö ja viimeisten taajuuksien Mem-luettelo; rulla: vaihda taajuutta (oikea painike: värit)
+No frequency to store (no rig, no WebSDR).	Ei tallennettavaa taajuutta (ei radiota eikä WebSDR:ää).
+Stored: {0} kHz	Tallennettu: {0} kHz
 Mode:	Lähetelaji:
 (mode unchanged)	(lähetelaji ennallaan)
 Edit…	Muokkaa…

@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} preferito/i esportato/i.
 program capture does not answer	la cattura del programma non risponde
 unsupported audio format ({0} bits, {1} Hz)	formato audio non supportato ({0} bit, {1} Hz)
+Frequency (kHz):	Frequenza (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Le ultime 20 frequenze memorizzate (clic su una riga: tornarci)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Memorizza subito la frequenza, il modo e il modo digitale in funzione nella lista Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Memorizzazione automatica nella lista Mem quando la frequenza resta invariata per questo tempo (0 = mai)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frequenza non valida: inserire un valore in kHz, es. 7074 o 14074.5
+Empty list: "Store" or the automatic storing fills it.	Lista vuota: la riempiono «Store» o la memorizzazione automatica.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Clic destro (o pressione lunga) su una riga: memorizzarla in «Memorie» o eliminarla.
+Store in "Memories"	Memorizza in «Memorie»
+Delete from the "Mem" list	Elimina dalla lista «Mem»
+Delete from the "Mem" list?	Eliminare dalla lista «Mem»?
 rigctld connection closed	Connessione rigctld chiusa
 stopped	arrestato
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nessun rigctld su {0}:{1} (avviare rigctld o spuntare «Avvia rigctld»).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: connettere prima l'RTX
 transmitting	trasmissione
 Receivers muted while transmitting:	Ricevitori silenziati in trasmissione:
 Rig (Mute TRX)	RTX (Muto RTX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frequenza non valida: inserire un valore in kHz, es. 7074 o 14074.5
 Remove this value (pick it in the list first)	Rimuovi questo valore (sceglierlo prima nell'elenco)
 RIG 	RTX 
 Cannot start WebView2 (Edge):\n	Impossibile avviare WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): riga {2}
 {0}: {1}, could not save	{0}: {1}, impossibile salvare
 Hell: picture saved: {0}	Hell: immagine salvata: {0}
 SSTV	SSTV
-Frequency (kHz):	Frequenza (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clic: tastierino della frequenza e lista Mem delle ultime frequenze; rotellina: cambiare frequenza (clic destro: colori)
+No frequency to store (no rig, no WebSDR).	Nessuna frequenza da memorizzare (né apparato né WebSDR).
+Stored: {0} kHz	Memorizzato: {0} kHz
 Mode:	Modo:
 (mode unchanged)	(modo invariato)
 Edit…	Modifica…

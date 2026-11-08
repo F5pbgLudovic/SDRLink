@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	Εξήχθησαν {0} αγαπημένα.
 program capture does not answer	η καταγραφή του προγράμματος δεν αποκρίνεται
 unsupported audio format ({0} bits, {1} Hz)	μη υποστηριζόμενη μορφή ήχου ({0} bit, {1} Hz)
+Frequency (kHz):	Συχνότητα (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Οι τελευταίες 20 αποθηκευμένες συχνότητες (κλικ σε μια γραμμή: επιστροφή σε αυτή)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Αποθηκεύει αμέσως τη συχνότητα, τον τρόπο λειτουργίας και τον ενεργό ψηφιακό τρόπο στη λίστα Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Αυτόματη αποθήκευση στη λίστα Mem όταν η συχνότητα μένει αμετάβλητη για αυτόν τον χρόνο (0 = ποτέ)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Μη έγκυρη συχνότητα: πληκτρολογήστε τιμή σε kHz, π.χ. 7074 ή 14074.5
+Empty list: "Store" or the automatic storing fills it.	Κενή λίστα: τη γεμίζει το «Store» ή η αυτόματη αποθήκευση.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Δεξί κλικ (ή παρατεταμένο πάτημα) σε μια γραμμή: αποθήκευση στις «Μνήμες» ή διαγραφή.
+Store in "Memories"	Αποθήκευση στις «Μνήμες»
+Delete from the "Mem" list	Διαγραφή από τη λίστα «Mem»
+Delete from the "Mem" list?	Διαγραφή από τη λίστα «Mem»;
 rigctld connection closed	Η σύνδεση rigctld έκλεισε
 stopped	διακόπηκε
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Δεν υπάρχει rigctld στο {0}:{1} (εκκινήστε το rigctld ή επιλέξτε «Εκκίνηση rigctld»).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: συνδέστε πρώτα τον πομποδ�
 transmitting	εκπομπή
 Receivers muted while transmitting:	Δέκτες σε σίγαση κατά την εκπομπή:
 Rig (Mute TRX)	Πομποδέκτης (Σίγαση TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Μη έγκυρη συχνότητα: πληκτρολογήστε τιμή σε kHz, π.χ. 7074 ή 14074.5
 Remove this value (pick it in the list first)	Αφαίρεση αυτής της τιμής (επιλέξτε την πρώτα στη λίστα)
 RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Αδυναμία εκκίνησης WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): γραμμή {2}
 {0}: {1}, could not save	{0}: {1}, αδύνατη η αποθήκευση
 Hell: picture saved: {0}	Hell: η εικόνα αποθηκεύτηκε: {0}
 SSTV	SSTV
-Frequency (kHz):	Συχνότητα (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Κλικ: πληκτρολόγιο συχνότητας και λίστα Mem με τις τελευταίες συχνότητες· ροδέλα: αλλαγή συχνότητας (δεξί κλικ: χρώματα)
+No frequency to store (no rig, no WebSDR).	Καμία συχνότητα για αποθήκευση (ούτε πομποδέκτης ούτε WebSDR).
+Stored: {0} kHz	Αποθηκεύτηκε: {0} kHz
 Mode:	Τρόπος:
 (mode unchanged)	(τρόπος αμετάβλητος)
 Edit…	Επεξεργασία…

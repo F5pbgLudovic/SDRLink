@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} favorito(s) exportado(s).
 program capture does not answer	a captura do programa não responde
 unsupported audio format ({0} bits, {1} Hz)	formato de áudio não suportado ({0} bits, {1} Hz)
+Frequency (kHz):	Frequência (kHz):
+The last 20 stored frequencies (click a line: go back to it)	As últimas 20 frequências guardadas (clique numa linha: voltar a ela)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Guarda de imediato a frequência, o modo e o modo digital em funcionamento na lista Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Gravação automática na lista Mem quando a frequência fica inalterada durante este tempo (0 = nunca)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frequência inválida: escreva um valor em kHz, p. ex. 7074 ou 14074.5
+Empty list: "Store" or the automatic storing fills it.	Lista vazia: é preenchida por «Store» ou pela gravação automática.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Clique direito (ou toque longo) numa linha: guardá-la em «Memórias» ou eliminá-la.
+Store in "Memories"	Guardar em «Memórias»
+Delete from the "Mem" list	Eliminar da lista «Mem»
+Delete from the "Mem" list?	Eliminar da lista «Mem»?
 rigctld connection closed	Ligação rigctld fechada
 stopped	parado
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Nenhum rigctld em {0}:{1} (inicie o rigctld ou marque «Iniciar rigctld»).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: ligue primeiro o rádio
 transmitting	emissão
 Receivers muted while transmitting:	Recetores silenciados ao emitir:
 Rig (Mute TRX)	Rádio (Silenciar TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frequência inválida: escreva um valor em kHz, p. ex. 7074 ou 14074.5
 Remove this value (pick it in the list first)	Remover este valor (escolha-o primeiro na lista)
 RIG 	RÁDIO 
 Cannot start WebView2 (Edge):\n	Não é possível iniciar o WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linha {2}
 {0}: {1}, could not save	{0}: {1}, não foi possível guardar
 Hell: picture saved: {0}	Hell: imagem guardada: {0}
 SSTV	SSTV
-Frequency (kHz):	Frequência (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clique: teclado de frequência e lista Mem das últimas frequências; roda: mudar a frequência (clique direito: cores)
+No frequency to store (no rig, no WebSDR).	Nenhuma frequência para guardar (nem rádio nem WebSDR).
+Stored: {0} kHz	Guardado: {0} kHz
 Mode:	Modo:
 (mode unchanged)	(modo inalterado)
 Edit…	Modificar…

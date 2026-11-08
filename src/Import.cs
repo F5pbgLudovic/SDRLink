@@ -26,7 +26,7 @@ namespace SDRLink
             switch (key)
             {
                 case "Fav": case "ListCount": case "CurrentList": case "LastUrl": case "Volume": return WebSdr;
-                case "Mem": case "MemRecent": case "MemListCount": case "MemCurrentList": return Mems;
+                case "Mem": case "MemRecent": case "MemListCount": case "MemCurrentList": case "MemHist": return Mems;
             }
             if (Numbered(key, "MemList")) return Mems;
             if (Numbered(key, "List")) return WebSdr;

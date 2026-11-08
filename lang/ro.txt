@@ -179,6 +179,16 @@ Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…
 {0} favorite(s) exported.	{0} favorit(e) exportat(e).
 program capture does not answer	captura programului nu răspunde
 unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
+Frequency (kHz):	Frecvență (kHz):
+The last 20 stored frequencies (click a line: go back to it)	Ultimele 20 de frecvențe memorate (clic pe un rând: revenire la ea)
+Stores the frequency, the mode and the running digital mode in the Mem list right away	Memorează imediat frecvența, modul și modul digital pornit în lista Mem
+Automatic storing in the Mem list when the frequency stays unchanged for this time (0 = never)	Memorare automată în lista Mem când frecvența rămâne neschimbată atât timp (0 = niciodată)
+Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frecvență nevalidă: introduceți o valoare în kHz, de ex. 7074 sau 14074.5
+Empty list: "Store" or the automatic storing fills it.	Listă goală: o completează „Store” sau memorarea automată.
+Right-click (or long press) a line: store it in "Memories" or delete it.	Clic dreapta (sau apăsare lungă) pe un rând: memorați-l în „Memorii” sau ștergeți-l.
+Store in "Memories"	Memorare în „Memorii”
+Delete from the "Mem" list	Ștergere din lista „Mem”
+Delete from the "Mem" list?	Ștergeți din lista „Mem”?
 rigctld connection closed	Conexiune rigctld închisă
 stopped	oprit
 No rigctld at {0}:{1} (start rigctld, or tick "Start rigctld").	Niciun rigctld la {0}:{1} (porniți rigctld sau bifați „Pornire rigctld”).
@@ -251,7 +261,6 @@ PTT: connect the rig first	PTT: conectați mai întâi stația
 transmitting	emisie
 Receivers muted while transmitting:	Receptoare puse pe mut în emisie:
 Rig (Mute TRX)	Stație (Mut TRX)
-Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5	Frecvență nevalidă: introduceți o valoare în kHz, de ex. 7074 sau 14074.5
 Remove this value (pick it in the list first)	Eliminare valoare (alegeți-o mai întâi din listă)
 RIG 	STAȚIE 
 Cannot start WebView2 (Edge):\n	Nu se poate porni WebView2 (Edge):\n
@@ -491,7 +500,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linia {2}
 {0}: {1}, could not save	{0}: {1}, salvare imposibilă
 Hell: picture saved: {0}	Hell: imagine salvată: {0}
 SSTV	SSTV
-Frequency (kHz):	Frecvență (kHz):
+Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clic: tastatură de frecvență și lista Mem a ultimelor frecvențe; rotiță: schimbarea frecvenței (clic dreapta: culori)
+No frequency to store (no rig, no WebSDR).	Nicio frecvență de memorat (nici stație, nici WebSDR).
+Stored: {0} kHz	Memorat: {0} kHz
 Mode:	Mod:
 (mode unchanged)	(mod neschimbat)
 Edit…	Modifică…
