@@ -311,9 +311,10 @@ Commandes utilisées (vérifiées dans le manuel CAT Yaesu et dans Hamlib) :
 La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'interface en couleurs sombres : fenêtre, barre de titre (Windows 10 20H1 et plus, Windows 11), listes, boutons et gestionnaire de favoris. La page du WebSDR garde ses propres couleurs.
 - Les fréquences, le PTT et les boutons de mode prennent des teintes plus claires, lisibles dans la pénombre.
 - Les réglages grisés pendant la connexion restent lisibles.
-- **Palette** : le petit carré multicolore à droite de « Mode sombre » ouvre un choix de couleurs de fond.
-  - En mode sombre : uniquement des teintes foncées (noir, graphite, bleus nuit, violet, bordeaux, rouge très foncé, brun, vert et bleu-vert foncés).
-  - En mode clair : uniquement des teintes claires (blanc, gris perle, crème, sable, jaune pâle, bleus, vert d'eau, rose, lavande).
+- **Palette** : le petit carré multicolore à droite de « Mode sombre » ouvre un choix de couleurs de fond : 64 teintes, en deux moitiés de 32 de part et d'autre du bouton (à gauche les neutres et les tons froids, à droite les tons chauds).
+  - En mode sombre : uniquement des teintes foncées (noirs et graphites, gris bleutés, bleus nuit, bleu-vert et verts foncés ; violets, prunes, bordeaux, rouges très foncés, bruns, olives).
+  - En mode clair : uniquement des teintes claires (blancs et gris perle, bleus, vert d'eau, verts tendres ; lavandes, roses, saumon, crèmes, jaunes pâles, sables, beiges).
+  - **Couleur au choix** (sous la palette) : tapez les valeurs **Rouge**, **Vert**, **Bleu** (0 à 255) puis **Appliquer** (ou Entrée) ; l'aperçu « Texte » montre le fond avec la couleur du texte de ce mode, pour vérifier qu'il reste lisible. **Autre couleur…** ouvre le sélecteur de couleurs de Windows. La case est préremplie avec la couleur en cours.
   - Le reste de l'interface (champs, boutons, bordures) s'accorde automatiquement. « Par défaut » revient aux couleurs d'origine.
   - Le choix est mémorisé séparément pour le mode sombre et le mode clair.
 
@@ -620,6 +621,9 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.29**
+  - **Palette** des couleurs de fond : **64 teintes** en mode sombre et 64 en mode clair, 32 de chaque côté du bouton (neutres et froides à gauche, chaudes à droite).
+  - **Couleur au choix** sous la palette : valeurs **Rouge**, **Vert**, **Bleu** (0 à 255) avec aperçu du texte, **Appliquer**, ou **Autre couleur…** (sélecteur de Windows).
 - **1.28**
   - **Mémoires** : liste **Modes numériques**, comme dans PhoneSDRLink : les fréquences habituelles du mode utilisé (1,8 à 440 MHz) selon la région IARU, ouverte directement quand un décodeur est en marche ; **Copier…** vers vos listes.
   - **SSTV** : si l'émission continue après le bas de l'image, l'image remonte ligne par ligne au lieu de s'arrêter.

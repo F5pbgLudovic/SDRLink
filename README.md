@@ -1,4 +1,4 @@
-# SDRLink V1.28 — @F5PBG 2026
+# SDRLink V1.29 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -21,7 +21,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - décodage automatique de la voix numérique FreeDV RADE (V1 ou V2) dès qu'un signal est reçu (bouton FreeDV auto) ;
   - décodeurs de modes numériques sur un seul bouton : FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) et WEFAX, affichés dans une fenêtre déplaçable sur la page (images enregistrées en PNG) ;
   - interface en 23 langues européennes ;
-  - mode sombre, palette, couleur de chaque bouton au choix (clic droit) et taille du texte réglable ;
+  - mode sombre, palette de 64 teintes et couleur de fond au choix (RVB), couleur de chaque bouton au choix (clic droit) et taille du texte réglable ;
   - vérification des mises à jour au démarrage et mise à jour automatique en un clic (empreinte SHA-256 vérifiée, ancienne version gardée), import/export de tous les réglages vers un autre ordinateur, avec import au choix (configuration, WebSDR, mémoires, scan ; ajout ou remplacement), réinitialisation totale ou partielle du programme ;
   - historique des 20 derniers messages (clic droit sur la barre d'état).
 
@@ -74,7 +74,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - automatic decoding of FreeDV RADE digital voice (V1 or V2) as soon as a signal is received (FreeDV auto button);
   - digital mode decoders on a single button: FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) and WEFAX, shown in a movable window over the page (pictures saved as PNG);
   - interface in 23 European languages (menu on the 2nd line);
-  - dark mode, colour palette, colour of each button of your choice (right-click) and adjustable text size;
+  - dark mode, 64-shade palette and background colour of your choice (RGB), colour of each button of your choice (right-click) and adjustable text size;
   - update check at startup and one-click automatic update (SHA-256 fingerprint checked, previous version kept), import/export of all settings to another computer, with selective import (configuration, WebSDR, memories, scan; add or replace), full or partial reset of the program;
   - history of the last 20 status messages (right-click the status bar).
 

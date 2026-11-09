@@ -538,6 +538,10 @@ Delete the list "{0}" and its {1} memory(ies)?	Slette listen «{0}» og dens {1}
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig er ikke installert (finner ikke OmniRig.OmniRigX).
 Dark mode colour	Farge i mørk modus
 Light mode colour	Farge i lys modus
+Your own colour:	Egen farge:
+Text	Tekst
+Preview: the chosen background with this mode's text	Forhåndsvisning: valgt bakgrunn med teksten i denne modusen
+Apply	Bruk
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink krever Microsoft .NET Framework 4.6.2 eller nyere (4.8 anbefales).\nDet er ikke installert på denne PC-en.\n\nLaste ned og installere .NET Framework 4.8 nå?\n(en omstart kan være nødvendig, start deretter SDRLink på nytt)
 SDRLink - missing component	SDRLink - komponent mangler
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink krever Microsoft Edge WebView2 Runtime for å vise WebSDR-er.\nDen er ikke installert på denne PC-en.\n\nLaste ned og installere WebView2 nå? (gratis, ca. 2 MB)

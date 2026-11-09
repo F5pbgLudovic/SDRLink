@@ -312,9 +312,10 @@ Commands used (checked against the Yaesu CAT manual and Hamlib):
 The **Dark mode** box, to the right of "Open log", switches the whole interface to dark colours: window, title bar (Windows 10 20H1 and later, Windows 11), lists, buttons and favorite manager. The WebSDR page keeps its own colours.
 - Frequencies, PTT and mode buttons take lighter shades, readable in low light.
 - Settings greyed out while connected remain readable.
-- **Palette**: the small multicoloured square to the right of "Dark mode" opens a choice of background colours.
-  - In dark mode: dark shades only (black, graphite, night blues, purple, burgundy, very dark red, brown, dark green and teal).
-  - In light mode: light shades only (white, pearl grey, cream, sand, pale yellow, blues, aqua green, pink, lavender).
+- **Palette**: the small multicoloured square to the right of "Dark mode" opens a choice of background colours: 64 shades, in two halves of 32 on either side of the button (neutral and cool shades on the left, warm shades on the right).
+  - In dark mode: dark shades only (blacks and graphites, bluish greys, night blues, teal and dark greens; purples, plums, burgundies, very dark reds, browns, olives).
+  - In light mode: light shades only (whites and pearl greys, blues, aqua, soft greens; lavenders, pinks, salmon, creams, pale yellows, sands, beiges).
+  - **Your own colour** (below the palette): type the **Red**, **Green**, **Blue** values (0 to 255) then **Apply** (or Enter); the "Text" preview shows the background with this mode's text colour, so you can check it stays readable. **Other colour…** opens the Windows colour picker. The boxes are filled in with the current colour.
   - The rest of the interface (fields, buttons, borders) adjusts automatically. "Default" returns to the original colours.
   - The choice is remembered separately for dark mode and light mode.
 
@@ -622,6 +623,9 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.29**
+  - Background colour **palette**: **64 shades** in dark mode and 64 in light mode, 32 on each side of the button (neutral and cool on the left, warm on the right).
+  - **Your own colour** below the palette: **Red**, **Green**, **Blue** values (0 to 255) with a text preview, **Apply**, or **Other colour…** (Windows colour picker).
 - **1.28**
   - **Memories**: **Digital modes** list, as in PhoneSDRLink: the usual frequencies of the mode in use (1.8 to 440 MHz) according to the IARU region, opened directly when a decoder is running; **Copy…** to your lists.
   - **SSTV**: if the transmission goes on past the bottom of the picture, the picture scrolls up line by line instead of stopping.

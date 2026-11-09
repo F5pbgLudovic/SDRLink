@@ -1240,7 +1240,11 @@ namespace SDRLink
         void ShowPalette()
         {
             PalettePopup p = new PalettePopup(Theme.Dark ? Theme.DarkBase : Theme.LightBase);
-            Point below = btnPalette.PointToScreen(new Point(0, btnPalette.Height + 2));
+            // Centrée sous le bouton : une moitié de la palette de chaque côté, sans sortir de l'écran.
+            Point below = btnPalette.PointToScreen(new Point(btnPalette.Width / 2 - p.Width / 2, btnPalette.Height + 2));
+            Rectangle wa = Screen.FromControl(btnPalette).WorkingArea;
+            below.X = Math.Max(wa.Left, Math.Min(below.X, wa.Right - p.Width));
+            if (below.Y + p.Height > wa.Bottom) below.Y = Math.Max(wa.Top, btnPalette.PointToScreen(Point.Empty).Y - p.Height - 2);
             p.Location = below;
             p.FormClosed += delegate
             {

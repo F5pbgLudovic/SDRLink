@@ -538,6 +538,10 @@ Delete the list "{0}" and its {1} memory(ies)?	Törli a(z) „{0}” listát és
 OmniRig is not installed (OmniRig.OmniRigX not found).	Az OmniRig nincs telepítve (az OmniRig.OmniRigX nem található).
 Dark mode colour	Sötét mód színe
 Light mode colour	Világos mód színe
+Your own colour:	Saját szín:
+Text	Szöveg
+Preview: the chosen background with this mode's text	Előnézet: a választott háttér ennek a módnak a szövegével
+Apply	Alkalmaz
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	Az SDRLink működéséhez Microsoft .NET Framework 4.6.2 vagy újabb szükséges (4.8 ajánlott).\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a .NET Framework 4.8-at?\n(újraindításra lehet szükség, utána indítsa el újra az SDRLinket)
 SDRLink - missing component	SDRLink - hiányzó összetevő
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Az SDRLinknek a WebSDR-ek megjelenítéséhez szüksége van a Microsoft Edge WebView2 Runtime összetevőre.\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a WebView2-t? (ingyenes, kb. 2 MB)

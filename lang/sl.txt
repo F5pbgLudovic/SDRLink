@@ -538,6 +538,10 @@ Delete the list "{0}" and its {1} memory(ies)?	Izbrišem seznam »{0}« in njego
 OmniRig is not installed (OmniRig.OmniRigX not found).	OmniRig ni nameščen (OmniRig.OmniRigX ni bil najden).
 Dark mode colour	Barva temnega načina
 Light mode colour	Barva svetlega načina
+Your own colour:	Lastna barva:
+Text	Besedilo
+Preview: the chosen background with this mode's text	Predogled: izbrano ozadje z besedilom tega načina
+Apply	Uporabi
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink potrebuje Microsoft .NET Framework 4.6.2 ali novejši (priporočeno 4.8).\nNa tem računalniku ni nameščen.\n\nŽelite zdaj prenesti in namestiti .NET Framework 4.8?\n(morda bo potreben ponovni zagon, nato znova zaženite SDRLink)
 SDRLink - missing component	SDRLink - manjkajoča komponenta
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink za prikaz WebSDR potrebuje Microsoft Edge WebView2 Runtime.\nNa tem računalniku ni nameščen.\n\nŽelite zdaj prenesti in namestiti WebView2? (brezplačno, približno 2 MB)
