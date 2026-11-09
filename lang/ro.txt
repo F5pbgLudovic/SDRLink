@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	se caută un semnal… (centru %d Hz)
 listening at {0:F0} Hz	ascultare la {0:F0} Hz
 signal at {0:F0} Hz	semnal la {0:F0} Hz
 reversed	Inversată
+IARU Region 2 (Americas)	Regiunea 2 IARU (Americi)
+IARU Region 3 (Asia-Pacific)	Regiunea 3 IARU (Asia-Pacific)
+IARU Region 1 (Europe, Africa)	Regiunea 1 IARU (Europa, Africa)
 Highlight: callsigns or texts to spot, separated by commas	Evidențiere: indicative sau texte de reperat, separate prin virgule
 Clear the received text	Șterge textul recepționat
 Default values	Valori implicite
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Mod USB (lățime de bandă de cel puțin 2,4 kHz), pe o frecvență SSTV (14.230, 7.033, 3.730 MHz…); modul imaginii este recunoscut automat, imaginea se construiește linie cu linie și este salvată la sfârșit.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Sensibilitate (de la 1 la 10): cu cât numărul este mai mare, cu atât decodorul acceptă semnale mai slabe (cod de start, impulsuri de sincronizare, linii), cu riscul unor detecții false.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Pierdere de date (de la 1 la 10): cât timp continuă decodorul cu o imagine când semnalul dispare (3 s la 1, 12 s la 4, 120 s la 10). Dacă semnalul revine în acest interval, imaginea continuă de la linia corectă, iar liniile pierdute rămân gri. După acest interval imaginea este salvată așa cum este, iar decodorul ascultă din nou (apoi găsește singur modul).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Recepția aleasă ca pentru FreeDV (stație, altfel WebSDR, altfel ExpertSDR, altfel HDSDR) este analizată continuu (o recepție cu sunetul oprit nu este aleasă).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Recepția aleasă ca pentru FreeDV (stație, altfel WebSDR, altfel ExpertSDR, altfel HDSDR) este analizată continuu (o recepție cu sunetul oprit nu este aleasă; dacă toate au sunetul oprit, decodarea continuă cu stația sau cu WebSDR).
 Tone: {0} Hz	Ton: {0} Hz
 Filter: {0} Hz	Filtru: {0} Hz
 Speed: {0} WPM	Viteză: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Memorat: {0} kHz
 Mode:	Mod:
 (mode unchanged)	(mod neschimbat)
 Edit…	Modifică…
+Digital mode whose usual frequencies are shown	Mod digital ale cărui frecvențe obișnuite sunt afișate
 Frequency (kHz)	Frecvență (kHz)
 Mode	Mod
+Digital modes	Moduri digitale
+Copy…	Copiere…
 Select a memory first.	Selectați mai întâi o memorie.
 Edit memory	Modifică memoria
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Frecvențele obișnuite pentru {0}, {1}. Faceți clic pentru a merge acolo (Copiere…: adăugați-o la una dintre listele dumneavoastră).
 {0} memory(ies). Click a memory to go there.	{0} memorie(i). Faceți clic pe o memorie pentru a merge la ea.
 Tuned to "{0}" ({1} kHz).	Acordat pe „{0}” ({1} kHz).
 Remove the memory "{0}"?	Eliminați memoria „{0}”?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: mod neacceptat (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — semnal regăsit, linia {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — lipsește începutul, recepție prinsă din mers
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — emisia continuă după marginea de jos a imaginii: imaginea urcă
 No TCI server at 	Niciun server TCI la 
 TCI connection lost	Conexiune TCI pierdută
 the downloaded file has disappeared (antivirus?)	fișierul descărcat a dispărut (antivirus?)

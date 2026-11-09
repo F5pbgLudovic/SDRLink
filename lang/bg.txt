@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	търсене на сигнал… (ц
 listening at {0:F0} Hz	слушане на {0:F0} Hz
 signal at {0:F0} Hz	сигнал на {0:F0} Hz
 reversed	Обърната
+IARU Region 2 (Americas)	Регион 2 на IARU (Америка)
+IARU Region 3 (Asia-Pacific)	Регион 3 на IARU (Азия и Тихоокеанския регион)
+IARU Region 1 (Europe, Africa)	Регион 1 на IARU (Европа, Африка)
 Highlight: callsigns or texts to spot, separated by commas	Маркиране: позивни или текстове за търсене, разделени със запетаи
 Clear the received text	Изчистване на приетия текст
 Default values	Стойности по подразбиране
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Режим USB (честотна лента поне 2,4 kHz), на SSTV честота (14.230, 7.033, 3.730 MHz…); режимът на изображението се разпознава автоматично, изображението се изгражда ред по ред и се запазва в края.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Чувствителност (от 1 до 10): колкото по-голямо е числото, толкова по-слаби сигнали приема декодерът (стартов код, синхронизиращи импулси, редове), с риск от няколко фалшиви засичания.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Загуба на данни (от 1 до 10): колко дълго декодерът продължава с изображението, когато сигналът изчезне (3 s при 1, 12 s при 4, 120 s при 10). Ако сигналът се върне през това време, изображението продължава от правилния ред, а изгубените редове остават сиви. След това време изображението се запазва такова, каквото е, и декодерът отново слуша (тогава сам намира режима).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Приемането, избрано както за FreeDV (трансивър, иначе WebSDR, иначе ExpertSDR, иначе HDSDR), се анализира непрекъснато (заглушено приемане не се избира).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Приемането, избрано както за FreeDV (трансивър, иначе WebSDR, иначе ExpertSDR, иначе HDSDR), се анализира непрекъснато (заглушено приемане не се избира; ако всички са заглушени, декодирането продължава с трансивъра или WebSDR).
 Tone: {0} Hz	Тон: {0} Hz
 Filter: {0} Hz	Филтър: {0} Hz
 Speed: {0} WPM	Скорост: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Запомнено: {0} kHz
 Mode:	Режим:
 (mode unchanged)	(режимът не се променя)
 Edit…	Редактиране…
+Digital mode whose usual frequencies are shown	Цифров режим, чиито обичайни честоти се показват
 Frequency (kHz)	Честота (kHz)
 Mode	Режим
+Digital modes	Цифрови режими
+Copy…	Копиране…
 Select a memory first.	Първо изберете памет.
 Edit memory	Редактиране на паметта
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Обичайни честоти за {0}, {1}. Щракнете, за да отидете там (Копиране…: добавяне към някой от вашите списъци).
 {0} memory(ies). Click a memory to go there.	{0} памет(и). Щракнете върху памет, за да отидете на нея.
 Tuned to "{0}" ({1} kHz).	Настроено на „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Да се премахне ли паметта „{0}“?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: неподдържан режим (VIS {0
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — сигналът е намерен отново, ред {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — началото липсва, приемането е започнато по средата
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — предаването продължава след долния край на изображението: изображението се превърта нагоре
 No TCI server at 	Няма TCI сървър на 
 TCI connection lost	Връзката с TCI е изгубена
 the downloaded file has disappeared (antivirus?)	изтегленият файл изчезна (антивирусна програма?)

@@ -386,7 +386,7 @@ namespace SDRLink
                         + "\n\n" + Lang.T("Perte data (1 à 10) : combien de temps le décodeur continue une image quand le signal disparaît (3 s au chiffre 1, 12 s au 4, 120 s au 10). Si le signal revient dans ce temps, l'image reprend à la bonne ligne et les lignes perdues restent grises. Passé ce temps, l'image est enregistrée telle quelle et le décodeur se remet à l'écoute (il retrouve alors le mode tout seul).", "Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).");
                     break;
             }
-            return Lang.T("La réception choisie comme pour FreeDV (poste, sinon WebSDR, sinon ExpertSDR, sinon HDSDR) est analysée en continu (une réception coupée n'est pas choisie).", "The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).")
+            return Lang.T("La réception choisie comme pour FreeDV (poste, sinon WebSDR, sinon ExpertSDR, sinon HDSDR) est analysée en continu (une réception coupée n'est pas choisie ; si toutes sont coupées, le décodage continue sur le poste ou le WebSDR).", "The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).")
                 + "\n\n" + head + (cols != null ? "\n\n" + cols : "");
         }
     }

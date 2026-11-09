@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	hľadanie signálu… (stred %d Hz)
 listening at {0:F0} Hz	počúvanie na {0:F0} Hz
 signal at {0:F0} Hz	signál na {0:F0} Hz
 reversed	Prevrátená
+IARU Region 2 (Americas)	Oblasť IARU 2 (Amerika)
+IARU Region 3 (Asia-Pacific)	Oblasť IARU 3 (Ázia a Tichomorie)
+IARU Region 1 (Europe, Africa)	Oblasť IARU 1 (Európa, Afrika)
 Highlight: callsigns or texts to spot, separated by commas	Zvýraznenie: volacie znaky alebo texty na nájdenie, oddelené čiarkami
 Clear the received text	Vymazať prijatý text
 Default values	Predvolené hodnoty
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Režim USB (šírka pásma aspoň 2,4 kHz), na frekvencii SSTV (14.230, 7.033, 3.730 MHz…); režim obrazu sa rozpozná automaticky, obraz sa skladá riadok po riadku a na konci sa uloží.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Citlivosť (1 až 10): čím vyššie číslo, tým slabšie signály dekodér prijíma (štartovací kód, synchronizačné impulzy, riadky), s rizikom niekoľkých falošných detekcií.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Strata dát (1 až 10): ako dlho dekodér pokračuje s obrázkom, keď signál zmizne (3 s pri 1, 12 s pri 4, 120 s pri 10). Ak sa signál v tomto čase vráti, obrázok pokračuje na správnom riadku a stratené riadky zostanú sivé. Po uplynutí tohto času sa obrázok uloží tak, ako je, a dekodér opäť počúva (režim potom nájde sám).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Príjem zvolený rovnako ako pre FreeDV (transceiver, inak WebSDR, inak ExpertSDR, inak HDSDR) sa priebežne analyzuje (stlmený príjem sa nevyberá).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Príjem zvolený rovnako ako pre FreeDV (transceiver, inak WebSDR, inak ExpertSDR, inak HDSDR) sa priebežne analyzuje (stlmený príjem sa nevyberá; ak sú stlmené všetky, dekódovanie pokračuje s transceiverom alebo WebSDR).
 Tone: {0} Hz	Tón: {0} Hz
 Filter: {0} Hz	Filter: {0} Hz
 Speed: {0} WPM	Rýchlosť: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Uložené: {0} kHz
 Mode:	Druh prevádzky:
 (mode unchanged)	(druh prevádzky bez zmeny)
 Edit…	Upraviť…
+Digital mode whose usual frequencies are shown	Digitálny druh prevádzky, ktorého obvyklé frekvencie sa zobrazujú
 Frequency (kHz)	Kmitočet (kHz)
 Mode	Druh prevádzky
+Digital modes	Digitálne druhy prevádzky
+Copy…	Kopírovať…
 Select a memory first.	Najprv vyberte pamäť.
 Edit memory	Upraviť pamäť
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Obvyklé frekvencie {0}, {1}. Kliknutím sa naladíte (Kopírovať…: pridať do jedného z vašich zoznamov).
 {0} memory(ies). Click a memory to go there.	{0} pamätí. Kliknutím na pamäť sa na ňu preladíte.
 Tuned to "{0}" ({1} kHz).	Preladené na „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Odstrániť pamäť „{0}“?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: nepodporovaný režim (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signál znova nájdený, riadok {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — chýba začiatok, príjem zachytený v priebehu
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — vysielanie pokračuje za spodným okrajom obrázka: obrázok sa posúva nahor
 No TCI server at 	Žiadny server TCI na 
 TCI connection lost	Spojenie TCI stratené
 the downloaded file has disappeared (antivirus?)	stiahnutý súbor zmizol (antivírus?)

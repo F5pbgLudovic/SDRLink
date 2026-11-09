@@ -165,17 +165,31 @@ namespace SDRLink
         readonly ListView view = new ListView();
         readonly ComboBox cbList = new ComboBox();
         readonly Label lblStatus = new Label();
-        readonly Button btnAddList, btnRemoveList;
+        readonly Button btnAddList, btnRemoveList, btnEdit, btnDel;
+        readonly ComboBox cbDigi = new ComboBox(), cbRegion = new ComboBox();
+        readonly Func<string, string> digiName;
         bool filling;
 
+        // Liste « Modes numériques » (après « Toutes les listes ») : fréquences habituelles du mode choisi, région IARU choisie.
+        public int IaruRegion = 1;
         int AllLists { get { return book.ListCount; } }
+        int DigiList { get { return book.ListCount + 1; } }
         int ShownList { get { return Math.Max(0, cbList.SelectedIndex); } }
+        bool Digital { get { return ShownList == DigiList; } }
+        string DigiMode { get { return cbDigi.SelectedIndex >= 0 ? DigitalFreqs.ModesShown[cbDigi.SelectedIndex] : "FT8"; } }
 
         public MemoriesDialog(MemoryBook book, Func<Memory> current, Action<Memory> tune)
+            : this(book, current, tune, null, 1, false, null) { }
+
+        // digiMode : mode numérique utilisé (la liste « Modes numériques » le montre d'abord) ; openDigital : ouvrir sur cette liste
+        // (décodage en marche) ; digiName : nom affiché d'un mode (PSK31 / PSK63).
+        public MemoriesDialog(MemoryBook book, Func<Memory> current, Action<Memory> tune, string digiMode, int region, bool openDigital, Func<string, string> digiName)
         {
             this.book = book;
             this.current = current;
             this.tune = tune;
+            this.digiName = digiName ?? delegate(string m) { return m; };
+            IaruRegion = Math.Max(1, Math.Min(3, region));
             Text = Lang.T("Mémoires", "Memories");
             FormBorderStyle = FormBorderStyle.Sizable;
             MaximizeBox = MinimizeBox = false;
@@ -187,8 +201,8 @@ namespace SDRLink
 
             Button add = Make(Lang.T("Mémoriser la fréquence actuelle…", "Store the current frequency…"), 12, 12, 230, 32, delegate { AddMemory(); });
             add.Font = new Font(Font, FontStyle.Bold);
-            Button edit = Make(Lang.T("Modifier…", "Edit…"), 250, 12, 110, 32, delegate { EditSelected(); });
-            Button del = Make(Lang.T("Supprimer…", "Remove…"), 366, 12, 110, 32, delegate { RemoveSelected(); });
+            Button edit = btnEdit = Make(Lang.T("Modifier…", "Edit…"), 250, 12, 110, 32, delegate { EditSelected(); });
+            Button del = btnDel = Make(Lang.T("Supprimer…", "Remove…"), 366, 12, 110, 32, delegate { RemoveSelected(); });
 
             Label lList = new Label { Text = Lang.T("Liste :", "List:"), Location = new Point(12, 60), AutoSize = true };
             cbList.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -198,7 +212,7 @@ namespace SDRLink
             listMenu.Items.Add(rename);
             listMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e)
             {
-                if (ShownList == AllLists) { e.Cancel = true; return; }
+                if (ShownList >= AllLists) { e.Cancel = true; return; }
                 rename.Text = Lang.F("Renommer « {0} »…", "Rename \"{0}\"…", FavoritesDialog.ListLabel(book.ListNames, ShownList));
             };
             rename.Click += delegate { RenameList(); };
@@ -206,6 +220,19 @@ namespace SDRLink
             new ToolTip().SetToolTip(cbList, Lang.T("(clic droit sur la liste pour la renommer)", "(right-click the list to rename it)"));
             btnAddList = Make(Lang.T("Nouvelle liste", "New list"), 280, 54, 120, 27, delegate { AddList(); });
             btnRemoveList = Make(Lang.T("Supprimer la liste…", "Delete list…"), 406, 54, 132, 27, delegate { RemoveList(); });
+            // Liste « Modes numériques » : mode et région à la place des boutons de liste.
+            cbDigi.DropDownStyle = cbRegion.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbDigi.SetBounds(280, 56, 110, 23);
+            cbRegion.SetBounds(398, 56, 210, 23);
+            cbRegion.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            foreach (string m in DigitalFreqs.ModesShown) cbDigi.Items.Add(this.digiName(m));
+            int di = Array.IndexOf(DigitalFreqs.ModesShown, digiMode ?? "");
+            cbDigi.SelectedIndex = di >= 0 ? di : 0;
+            for (int r = 1; r <= 3; r++) cbRegion.Items.Add(DigitalFreqs.RegionName(r));
+            cbRegion.SelectedIndex = IaruRegion - 1;
+            cbDigi.SelectedIndexChanged += delegate { if (!filling) Refill(null); };
+            cbRegion.SelectedIndexChanged += delegate { IaruRegion = cbRegion.SelectedIndex + 1; if (!filling) Refill(null); };
+            new ToolTip().SetToolTip(cbDigi, Lang.T("Mode numérique dont on voit les fréquences habituelles", "Digital mode whose usual frequencies are shown"));
 
             view.SetBounds(12, 90, 596, 382);
             view.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -231,12 +258,12 @@ namespace SDRLink
             close.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CancelButton = close;
 
-            Controls.AddRange(new Control[] { add, edit, del, lList, cbList, btnAddList, btnRemoveList, view, lblStatus, close });
-            FillListCombo(Math.Min(book.CurrentList, book.ListCount - 1));
+            Controls.AddRange(new Control[] { add, edit, del, lList, cbList, btnAddList, btnRemoveList, cbDigi, cbRegion, view, lblStatus, close });
+            FillListCombo(openDigital ? DigiList : Math.Min(book.CurrentList, book.ListCount - 1));
             cbList.SelectedIndexChanged += delegate
             {
                 if (filling) return;
-                if (ShownList != AllLists) book.CurrentList = ShownList;
+                if (ShownList < AllLists) book.CurrentList = ShownList;
                 Refill(null);
             };
             Theme.Apply(this);
@@ -257,17 +284,36 @@ namespace SDRLink
             cbList.Items.Clear();
             for (int i = 0; i < book.ListCount; i++) cbList.Items.Add(FavoritesDialog.ListLabel(book.ListNames, i));
             cbList.Items.Add(Lang.T("Toutes les listes", "All lists"));
+            cbList.Items.Add(Lang.T("Modes numériques", "Digital modes"));
             cbList.SelectedIndex = Math.Max(0, Math.Min(cbList.Items.Count - 1, select));
             filling = false;
             btnAddList.Enabled = book.ListCount < Memory.MaxLists;
-            btnRemoveList.Enabled = ShownList != AllLists && book.ListCount > 1;
+            btnRemoveList.Enabled = ShownList < AllLists && book.ListCount > 1;
         }
 
         void Refill(Memory select)
         {
-            btnRemoveList.Enabled = ShownList != AllLists && book.ListCount > 1;
+            bool dig = Digital;
+            btnRemoveList.Enabled = ShownList < AllLists && book.ListCount > 1;
+            btnAddList.Visible = btnRemoveList.Visible = !dig;
+            cbDigi.Visible = cbRegion.Visible = dig;
+            btnEdit.Text = dig ? Lang.T("Copier…", "Copy…") : Lang.T("Modifier…", "Edit…");
+            btnDel.Enabled = !dig;
             view.BeginUpdate();
             view.Items.Clear();
+            if (dig)
+            {
+                foreach (Memory m in DigitalFreqs.List(DigiMode, IaruRegion, digiName(DigiMode)))
+                {
+                    ListViewItem it = new ListViewItem(new[] { m.Name, Memory.KHz(m.Hz), Modes.Display(m.Mode), Lang.T("Modes numériques", "Digital modes") });
+                    it.Tag = m;
+                    view.Items.Add(it);
+                }
+                view.EndUpdate();
+                lblStatus.Text = Lang.F("Fréquences habituelles de {0}, {1}. Cliquez pour y aller (Copier… : l'ajouter à une de vos listes).",
+                    "Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).", digiName(DigiMode), DigitalFreqs.RegionName(IaruRegion));
+                return;
+            }
             foreach (Memory m in book.Items)
             {
                 if (ShownList != AllLists && m.List != ShownList) continue;
@@ -293,7 +339,7 @@ namespace SDRLink
         public void AddMemory()
         {
             Memory m = current() ?? new Memory("", 0, "");
-            m.List = ShownList == AllLists ? book.CurrentList : ShownList;
+            m.List = ShownList >= AllLists ? book.CurrentList : ShownList;
             using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Ajouter une mémoire", "Add memory"), m, book))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
@@ -303,10 +349,25 @@ namespace SDRLink
             }
         }
 
+        // Liste « Modes numériques » : la fréquence choisie est copiée dans une des listes de l'utilisateur.
+        void CopySelected(Memory m)
+        {
+            Memory c = new Memory(m.Name, m.Hz, m.Mode);
+            c.List = Math.Min(book.CurrentList, book.ListCount - 1);
+            using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Ajouter une mémoire", "Add memory"), c, book))
+            {
+                if (d.ShowDialog(this) != DialogResult.OK) return;
+                book.Items.Add(d.Result);
+                lblStatus.Text = Lang.F("Mémoire « {0} » ajoutée à « {1} ».", "Memory \"{0}\" added to \"{1}\".", d.Result.Label,
+                    FavoritesDialog.ListLabel(book.ListNames, d.Result.List));
+            }
+        }
+
         void EditSelected()
         {
             Memory m = Selected;
             if (m == null) { lblStatus.Text = Lang.T("Sélectionnez d'abord une mémoire.", "Select a memory first."); return; }
+            if (Digital) { CopySelected(m); return; }
             using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Modifier la mémoire", "Edit memory"), m, book))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
@@ -320,6 +381,7 @@ namespace SDRLink
         {
             Memory m = Selected;
             if (m == null) { lblStatus.Text = Lang.T("Sélectionnez d'abord une mémoire.", "Select a memory first."); return; }
+            if (Digital) return;
             if (MessageBox.Show(this, Lang.F("Supprimer la mémoire « {0} » ?", "Remove the memory \"{0}\"?", m.Label), "SDRLink",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
             book.Items.Remove(m);
@@ -341,7 +403,7 @@ namespace SDRLink
         void RemoveList()
         {
             int i = ShownList;
-            if (i == AllLists || book.ListCount <= 1) return;
+            if (i >= AllLists || book.ListCount <= 1) return;
             string label = FavoritesDialog.ListLabel(book.ListNames, i);
             int count = book.Items.FindAll(delegate(Memory m) { return m.List == i; }).Count;
             string q = count == 0
@@ -356,7 +418,7 @@ namespace SDRLink
         void RenameList()
         {
             int i = ShownList;
-            if (i == AllLists) return;
+            if (i >= AllLists) return;
             string name = FavoritesDialog.AskListName(this, book.ListNames[i]);
             if (string.IsNullOrEmpty(name)) return;
             book.ListNames[i] = name.Replace("|", "/");

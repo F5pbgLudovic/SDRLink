@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	ieškoma signalo… (centras %d Hz)
 listening at {0:F0} Hz	klausoma {0:F0} Hz dažniu
 signal at {0:F0} Hz	signalas {0:F0} Hz dažniu
 reversed	Atvirkštinis
+IARU Region 2 (Americas)	IARU 2 regionas (Amerika)
+IARU Region 3 (Asia-Pacific)	IARU 3 regionas (Azija ir Ramusis vandenynas)
+IARU Region 1 (Europe, Africa)	IARU 1 regionas (Europa, Afrika)
 Highlight: callsigns or texts to spot, separated by commas	Paryškinimas: šaukiniai arba tekstai, kuriuos reikia pastebėti, atskirti kableliais
 Clear the received text	Išvalyti priimtą tekstą
 Default values	Numatytosios reikšmės
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB režimas (mažiausiai 2,4 kHz juostos plotis), SSTV dažniu (14.230, 7.033, 3.730 MHz…); vaizdo režimas atpažįstamas automatiškai, vaizdas kuriamas eilutė po eilutės ir pabaigoje išsaugomas.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Jautrumas (nuo 1 iki 10): kuo didesnis skaičius, tuo silpnesnius signalus dekoderis priima (pradžios kodą, sinchronizavimo impulsus, eilutes), rizikuojant kelis kartus klaidingai aptikti.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Duomenų praradimas (nuo 1 iki 10): kiek laiko dekoderis tęsia vaizdą, kai signalas dingsta (3 s esant 1, 12 s esant 4, 120 s esant 10). Jei signalas per tą laiką sugrįžta, vaizdas tęsiamas nuo tinkamos eilutės, o prarastos eilutės lieka pilkos. Praėjus tam laikui vaizdas išsaugomas toks, koks yra, ir dekoderis vėl klausosi (tada pats suranda režimą).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Priėmimas, pasirenkamas kaip FreeDV atveju (stotis, kitaip WebSDR, kitaip ExpertSDR, kitaip HDSDR), analizuojamas nuolat (nutildytas priėmimas nepasirenkamas).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Priėmimas, pasirenkamas kaip FreeDV atveju (stotis, kitaip WebSDR, kitaip ExpertSDR, kitaip HDSDR), analizuojamas nuolat (nutildytas priėmimas nepasirenkamas; jei nutildyti visi, dekodavimas tęsiamas su stotimi arba WebSDR).
 Tone: {0} Hz	Tonas: {0} Hz
 Filter: {0} Hz	Filtras: {0} Hz
 Speed: {0} WPM	Greitis: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Įrašyta: {0} kHz
 Mode:	Režimas:
 (mode unchanged)	(režimas nekeičiamas)
 Edit…	Keisti…
+Digital mode whose usual frequencies are shown	Skaitmeninė darbo rūšis, kurios įprasti dažniai rodomi
 Frequency (kHz)	Dažnis (kHz)
 Mode	Režimas
+Digital modes	Skaitmeninės darbo rūšys
+Copy…	Kopijuoti…
 Select a memory first.	Pirmiausia pasirinkite atmintį.
 Edit memory	Keisti atmintį
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Įprasti {0} dažniai, {1}. Spustelėkite, kad ten nueitumėte (Kopijuoti…: pridėti prie vieno iš jūsų sąrašų).
 {0} memory(ies). Click a memory to go there.	{0} atmintis(-ys). Spustelėkite atmintį, kad į ją pereitumėte.
 Tuned to "{0}" ({1} kHz).	Suderinta: „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Pašalinti atmintį „{0}“?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: nepalaikomas režimas (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signalas vėl rastas, eilutė {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — trūksta pradžios, priėmimas pradėtas viduryje
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — siuntimas tęsiasi už apatinio vaizdo krašto: vaizdas slenka aukštyn
 No TCI server at 	Nėra TCI serverio adresu 
 TCI connection lost	TCI ryšys nutrūko
 the downloaded file has disappeared (antivirus?)	atsisiųstas failas dingo (antivirusinė programa?)

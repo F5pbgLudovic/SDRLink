@@ -23,7 +23,8 @@ namespace SDRLink
         public event Action<string, int, int, int[]> ImageBegin;   // mode, largeur, hauteur, pixels (remplis au fil des lignes)
         public event Action<int> ImageRows;                        // lignes terminées
         public event Action<bool, int> ImageEnd;                   // image complète ou signal perdu, lignes terminées
-        public event Action<string> Status;                        // message à afficher (début d'image, signal retrouvé, mode inconnu)
+        public event Action ImageScrolled;                         // l'émission continue après le bas de l'image : tout a remonté
+        public event Action<string> Status;                       // message à afficher (début d'image, signal retrouvé, mode inconnu)
 
         const int RATE = 8000;
         const int RING = 1 << 17, MASK = RING - 1, FIRN = 31;
@@ -522,6 +523,10 @@ namespace SDRLink
         long curS;
         int[] pendY, pendCr;
         int pendRow;
+        // Bas de l'image atteint alors que l'émission continue (réception prise en cours de route, image plus longue, images à la
+        // suite sans code VIS) : l'image remonte d'une ligne à chaque nouvelle ligne reçue, la plus récente en bas ; shift = blocs remontés.
+        bool scrolling;
+        int shift;
 
         void NewImage(Mode m)
         {
@@ -530,6 +535,7 @@ namespace SDRLink
             px = new int[m.W * m.H];
             for (int i = 0; i < px.Length; i++) px[i] = unchecked((int)0xFF202020);
             blockIdx = 0; rowsDone = 0; misses = 0; foundCount = 0; kLast = 0; pendY = null;
+            scrolling = false; shift = 0;
             period = m.PeriodMs * SPMS;
             awaitSync = true;
             img = true;
@@ -558,6 +564,8 @@ namespace SDRLink
                 if (s < 0)
                 {
                     if (blockIdx == 0) { Finish(false); return; }
+                    // Après le bas de l'image, pas de synchro : l'émission est finie (une ligne manquée tolérée une fois que l'image remonte).
+                    if (scrolling && (shift == 0 || misses >= 1)) { Finish(true); return; }
                     misses++;
                     s = Rnd(expected);
                 }
@@ -583,9 +591,17 @@ namespace SDRLink
             for (int i = 0; i < md.St.Length; i++) after = Math.Max(after, md.St[i] + md.Len[i]);
             if (md.Kind == R36) after = 150;
             if (n < curS + after * SPMS + 16) return;
-            if (misses <= 6) DecodeBlock(curS);   // au-delà de quelques lignes sans synchro, les lignes restent grises
+            if (scrolling)
+            {   // une ligne n'entre en bas (et l'image ne remonte) que si sa synchro a été trouvée
+                if (misses == 0)
+                {
+                    if (blockIdx - shift >= BlocksTotal()) ScrollUp(md.Kind == R36 ? 2 : 1);
+                    DecodeBlock(curS);
+                }
+            }
+            else if (misses <= 6) DecodeBlock(curS);   // au-delà de quelques lignes sans synchro, les lignes restent grises
             blockIdx++;
-            if (blockIdx >= BlocksTotal()) { Finish(true); return; }
+            if (!scrolling && blockIdx >= BlocksTotal()) scrolling = true;   // la ligne suivante dira si l'émission continue (sinon : image terminée)
             expected = sLast + (blockIdx - kLast) * period;
             hw = (6 + 3 * Math.Min(misses, 5)) * SPMS;
             awaitSync = true;
@@ -655,9 +671,26 @@ namespace SDRLink
 
         static int[] Wide(int[] half, int w) { int[] o = new int[w]; for (int i = 0; i < w; i++) o[i] = half[Math.Min(half.Length - 1, i / 2)]; return o; }
 
+        // L'image remonte de n blocs (les lignes du haut sortent, le bas redevient gris pour les lignes suivantes).
+        void ScrollUp(int n)
+        {
+            int rows = n * (md.Kind == PD ? 2 : md.Rep);
+            int w = md.W, h = md.H;
+            if (rows <= 0 || rows >= h) return;
+            Array.Copy(px, rows * w, px, 0, (h - rows) * w);
+            for (int i = (h - rows) * w; i < h * w; i++) px[i] = unchecked((int)0xFF202020);
+            if (shift == 0) Say(Lang.F("SSTV : {0} — l'émission continue après le bas de l'image : l'image remonte", "SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up", md.Name));
+            shift += n;
+            rowsDone = h;   // l'image est pleine (Robot 36 pris en cours de route : la dernière ligne paire peut manquer)
+            if (pendY != null) pendRow -= n;
+            Action h2 = ImageScrolled;
+            if (h2 != null) h2();
+        }
+
         void DecodeBlock(long s)
         {
             int w = md.W;
+            int blockIdx = this.blockIdx - shift;   // rang du bloc dans l'image (l'image a pu remonter)
             switch (md.Kind)
             {
                 case RGB:

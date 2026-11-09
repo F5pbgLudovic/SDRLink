@@ -233,6 +233,7 @@ namespace SDRLink
                 e.ImageBegin += delegate(string name, int w, int h, int[] px) { BeginInvokeSafe(delegate { if (sstv == e) OnSstvBegin(name, w, h, px); }); };
                 e.ImageRows += delegate(int done) { BeginInvokeSafe(delegate { if (sstv == e) OnSstvRows(done); }); };
                 e.ImageEnd += delegate(bool complete, int rows) { BeginInvokeSafe(delegate { if (sstv == e) OnSstvEnd(complete, rows); }); };
+                e.ImageScrolled += delegate { BeginInvokeSafe(delegate { if (sstv == e && sstvView != null) sstvView.RedrawAll(); }); };
                 e.Status += delegate(string text) { BeginInvokeSafe(delegate { if (sstv == e) { Log.Write(text); ShowStatus(text); } }); };
                 sstv = e;
             }

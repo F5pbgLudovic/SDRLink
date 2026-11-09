@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	αναζήτηση σήματος… (�
 listening at {0:F0} Hz	ακρόαση στα {0:F0} Hz
 signal at {0:F0} Hz	σήμα στα {0:F0} Hz
 reversed	Αντίστροφη
+IARU Region 2 (Americas)	Περιοχή 2 της IARU (Αμερική)
+IARU Region 3 (Asia-Pacific)	Περιοχή 3 της IARU (Ασία-Ειρηνικός)
+IARU Region 1 (Europe, Africa)	Περιοχή 1 της IARU (Ευρώπη, Αφρική)
 Highlight: callsigns or texts to spot, separated by commas	Επισήμανση: διακριτικά κλήσης ή κείμενα προς εντοπισμό, χωρισμένα με κόμματα
 Clear the received text	Διαγραφή του ληφθέντος κειμένου
 Default values	Προεπιλεγμένες τιμές
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Λειτουργία USB (εύρος ζώνης τουλάχιστον 2,4 kHz), σε συχνότητα SSTV (14.230, 7.033, 3.730 MHz…); η λειτουργία εικόνας αναγνωρίζεται αυτόματα, η εικόνα σχηματίζεται γραμμή προς γραμμή και αποθηκεύεται στο τέλος.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Ευαισθησία (1 έως 10): όσο μεγαλύτερος ο αριθμός, τόσο ασθενέστερα σήματα δέχεται ο αποκωδικοποιητής (κωδικός έναρξης, παλμοί συγχρονισμού, γραμμές), με κίνδυνο λίγων εσφαλμένων ανιχνεύσεων.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Απώλεια δεδομένων (1 έως 10): για πόση ώρα ο αποκωδικοποιητής συνεχίζει με μια εικόνα όταν το σήμα εξαφανιστεί (3 s στο 1, 12 s στο 4, 120 s στο 10). Αν το σήμα επανέλθει εντός αυτού του χρόνου, η εικόνα συνεχίζεται στη σωστή γραμμή και οι χαμένες γραμμές μένουν γκρι. Μετά από αυτόν τον χρόνο η εικόνα αποθηκεύεται ως έχει και ο αποκωδικοποιητής ακούει ξανά (στη συνέχεια βρίσκει μόνος του τη λειτουργία).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Η λήψη που επιλέγεται όπως για το FreeDV (πομποδέκτης, αλλιώς WebSDR, αλλιώς ExpertSDR, αλλιώς HDSDR) αναλύεται συνεχώς (μια λήψη σε σίγαση δεν επιλέγεται).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Η λήψη που επιλέγεται όπως για το FreeDV (πομποδέκτης, αλλιώς WebSDR, αλλιώς ExpertSDR, αλλιώς HDSDR) αναλύεται συνεχώς (μια λήψη σε σίγαση δεν επιλέγεται· αν όλες είναι σε σίγαση, η αποκωδικοποίηση συνεχίζεται με τον πομποδέκτη ή το WebSDR).
 Tone: {0} Hz	Τόνος: {0} Hz
 Filter: {0} Hz	Φίλτρο: {0} Hz
 Speed: {0} WPM	Ταχύτητα: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Αποθηκεύτηκε: {0} kHz
 Mode:	Τρόπος:
 (mode unchanged)	(τρόπος αμετάβλητος)
 Edit…	Επεξεργασία…
+Digital mode whose usual frequencies are shown	Ψηφιακός τρόπος λειτουργίας του οποίου εμφανίζονται οι συνήθεις συχνότητες
 Frequency (kHz)	Συχνότητα (kHz)
 Mode	Τρόπος
+Digital modes	Ψηφιακοί τρόποι λειτουργίας
+Copy…	Αντιγραφή…
 Select a memory first.	Επιλέξτε πρώτα μια μνήμη.
 Edit memory	Επεξεργασία μνήμης
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Συνήθεις συχνότητες {0}, {1}. Κάντε κλικ για να συντονιστείτε (Αντιγραφή…: προσθήκη σε μία από τις λίστες σας).
 {0} memory(ies). Click a memory to go there.	{0} μνήμη(ες). Κάντε κλικ σε μια μνήμη για να μεταβείτε σε αυτή.
 Tuned to "{0}" ({1} kHz).	Συντονισμός στο «{0}» ({1} kHz).
 Remove the memory "{0}"?	Αφαίρεση της μνήμης «{0}»;
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: μη υποστηριζόμενη λει�
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — το σήμα βρέθηκε ξανά, γραμμή {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — λείπει η αρχή, η λήψη πιάστηκε στη μέση
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — η εκπομπή συνεχίζεται μετά το κάτω άκρο της εικόνας: η εικόνα κυλά προς τα πάνω
 No TCI server at 	Δεν υπάρχει διακομιστής TCI στο 
 TCI connection lost	Η σύνδεση TCI χάθηκε
 the downloaded file has disappeared (antivirus?)	το αρχείο που κατέβηκε εξαφανίστηκε (πρόγραμμα προστασίας από ιούς;)

@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	söker efter en signal… (mittpunkt %d
 listening at {0:F0} Hz	lyssnar på {0:F0} Hz
 signal at {0:F0} Hz	signal på {0:F0} Hz
 reversed	Omvänd
+IARU Region 2 (Americas)	IARU Region 2 (Amerika)
+IARU Region 3 (Asia-Pacific)	IARU Region 3 (Asien–Stillahavet)
+IARU Region 1 (Europe, Africa)	IARU Region 1 (Europa, Afrika)
 Highlight: callsigns or texts to spot, separated by commas	Markering: anropssignaler eller texter att upptäcka, åtskilda med kommatecken
 Clear the received text	Rensa den mottagna texten
 Default values	Standardvärden
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB-läge (minst 2,4 kHz bandbredd), på en SSTV-frekvens (14.230, 7.033, 3.730 MHz…); bildläget känns igen automatiskt, bilden byggs upp rad för rad och sparas när den är klar.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Känslighet (1 till 10): ju högre tal, desto svagare signaler accepterar avkodaren (startkod, synkpulser, rader), med risk för några falska detekteringar.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Dataförlust (1 till 10): hur länge avkodaren fortsätter med en bild när signalen försvinner (3 s vid 1, 12 s vid 4, 120 s vid 10). Om signalen kommer tillbaka inom den tiden fortsätter bilden på rätt rad, och de förlorade raderna förblir gråa. Efter den tiden sparas bilden som den är och avkodaren lyssnar igen (den hittar då läget själv).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Mottagningen som väljs som för FreeDV (rigg, annars WebSDR, annars ExpertSDR, annars HDSDR) analyseras kontinuerligt (en tystad mottagning väljs inte).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Mottagningen som väljs som för FreeDV (rigg, annars WebSDR, annars ExpertSDR, annars HDSDR) analyseras kontinuerligt (en tystad mottagning väljs inte; är alla tystade fortsätter avkodningen med riggen eller WebSDR).
 Tone: {0} Hz	Ton: {0} Hz
 Filter: {0} Hz	Filter: {0} Hz
 Speed: {0} WPM	Hastighet: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Sparat: {0} kHz
 Mode:	Trafiksätt:
 (mode unchanged)	(trafiksätt oförändrat)
 Edit…	Redigera…
+Digital mode whose usual frequencies are shown	Digitalt trafiksätt vars vanliga frekvenser visas
 Frequency (kHz)	Frekvens (kHz)
 Mode	Trafiksätt
+Digital modes	Digitala trafiksätt
+Copy…	Kopiera…
 Select a memory first.	Välj först ett minne.
 Edit memory	Redigera minne
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Vanliga frekvenser för {0}, {1}. Klicka för att gå dit (Kopiera…: lägg till den i en av dina listor).
 {0} memory(ies). Click a memory to go there.	{0} minne/minnen. Klicka på ett minne för att gå dit.
 Tuned to "{0}" ({1} kHz).	Inställd på ”{0}” ({1} kHz).
 Remove the memory "{0}"?	Ta bort minnet ”{0}”?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: läget stöds inte (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signal återfunnen, rad {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — början saknas, mottagning fångad mitt i
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — sändningen fortsätter efter bildens nederkant: bilden rullar uppåt
 No TCI server at 	Ingen TCI-server på 
 TCI connection lost	TCI-anslutningen förlorad
 the downloaded file has disappeared (antivirus?)	den hämtade filen har försvunnit (antivirus?)

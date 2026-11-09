@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	ricerca di un segnale… (centro %d Hz)
 listening at {0:F0} Hz	ascolto a {0:F0} Hz
 signal at {0:F0} Hz	segnale a {0:F0} Hz
 reversed	Invertita
+IARU Region 2 (Americas)	Regione IARU 2 (Americhe)
+IARU Region 3 (Asia-Pacific)	Regione IARU 3 (Asia-Pacifico)
+IARU Region 1 (Europe, Africa)	Regione IARU 1 (Europa, Africa)
 Highlight: callsigns or texts to spot, separated by commas	Evidenziazione: nominativi o testi da individuare, separati da virgole
 Clear the received text	Cancella il testo ricevuto
 Default values	Valori predefiniti
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Modo USB (larghezza di banda di almeno 2,4 kHz), su una frequenza SSTV (14.230, 7.033, 3.730 MHz…); il modo immagine viene riconosciuto automaticamente, l'immagine si forma riga per riga e viene salvata al termine.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Sensibilità (da 1 a 10): più il numero è alto, più deboli sono i segnali accettati dal decodificatore (codice di avvio, impulsi di sincronismo, righe), con il rischio di qualche falso rilevamento.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Perdita di dati (da 1 a 10): per quanto tempo il decodificatore continua con un'immagine quando il segnale scompare (3 s con 1, 12 s con 4, 120 s con 10). Se il segnale ritorna entro questo tempo, l'immagine riprende alla riga giusta e le righe perse restano grigie. Trascorso questo tempo l'immagine viene salvata così com'è e il decodificatore torna in ascolto (poi trova da solo la modalità).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	La ricezione scelta come per FreeDV (apparato, altrimenti WebSDR, altrimenti ExpertSDR, altrimenti HDSDR) viene analizzata di continuo (una ricezione silenziata non viene scelta).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	La ricezione scelta come per FreeDV (apparato, altrimenti WebSDR, altrimenti ExpertSDR, altrimenti HDSDR) viene analizzata di continuo (una ricezione silenziata non viene scelta; se lo sono tutte, la decodifica continua con l'apparato o il WebSDR).
 Tone: {0} Hz	Tono: {0} Hz
 Filter: {0} Hz	Filtro: {0} Hz
 Speed: {0} WPM	Velocità: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Memorizzato: {0} kHz
 Mode:	Modo:
 (mode unchanged)	(modo invariato)
 Edit…	Modifica…
+Digital mode whose usual frequencies are shown	Modo digitale di cui si vedono le frequenze abituali
 Frequency (kHz)	Frequenza (kHz)
 Mode	Modo
+Digital modes	Modi digitali
+Copy…	Copia…
 Select a memory first.	Selezionare prima una memoria.
 Edit memory	Modifica la memoria
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Frequenze abituali di {0}, {1}. Fare clic per andarci (Copia…: aggiungerla a una delle proprie liste).
 {0} memory(ies). Click a memory to go there.	{0} memoria/e. Fare clic su una memoria per andarci.
 Tuned to "{0}" ({1} kHz).	Sintonizzato su «{0}» ({1} kHz).
 Remove the memory "{0}"?	Rimuovere la memoria «{0}»?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: modo non supportato (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — segnale ritrovato, riga {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — manca l'inizio, ricezione presa a metà
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — la trasmissione continua oltre il fondo dell'immagine: l'immagine scorre verso l'alto
 No TCI server at 	Nessun server TCI su 
 TCI connection lost	Connessione TCI persa
 the downloaded file has disappeared (antivirus?)	il file scaricato è scomparso (antivirus?)

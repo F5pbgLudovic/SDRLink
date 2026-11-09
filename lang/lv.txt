@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	meklē signālu… (centrs %d Hz)
 listening at {0:F0} Hz	klausās uz {0:F0} Hz
 signal at {0:F0} Hz	signāls uz {0:F0} Hz
 reversed	Apgriezta
+IARU Region 2 (Americas)	IARU 2. reģions (Amerika)
+IARU Region 3 (Asia-Pacific)	IARU 3. reģions (Āzija un Klusā okeāna reģions)
+IARU Region 1 (Europe, Africa)	IARU 1. reģions (Eiropa, Āfrika)
 Highlight: callsigns or texts to spot, separated by commas	Izcelšana: izsaukuma zīmes vai teksti, kas jāatrod, atdalīti ar komatiem
 Clear the received text	Notīrīt uztverto tekstu
 Default values	Noklusējuma vērtības
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB režīms (joslas platums vismaz 2,4 kHz), uz SSTV frekvences (14.230, 7.033, 3.730 MHz…); attēla režīms tiek atpazīts automātiski, attēls veidojas rindu pa rindai un beigās tiek saglabāts.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Jutība (no 1 līdz 10): jo lielāks skaitlis, jo vājākus signālus dekodētājs pieņem (starta kodu, sinhronizācijas impulsus, rindas), riskējot ar dažām kļūdainām noteikšanām.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Datu zudums (no 1 līdz 10): cik ilgi dekodētājs turpina attēlu, kad signāls pazūd (3 s pie 1, 12 s pie 4, 120 s pie 10). Ja signāls šajā laikā atgriežas, attēls turpinās no pareizās rindas, un zaudētās rindas paliek pelēkas. Pēc šī laika attēls tiek saglabāts tāds, kāds tas ir, un dekodētājs atkal klausās (tad pats atrod režīmu).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Uztveršana, kas izvēlēta tāpat kā FreeDV (raiduztvērējs, citādi WebSDR, citādi ExpertSDR, citādi HDSDR), tiek analizēta nepārtraukti (apklusināta uztveršana netiek izvēlēta).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Uztveršana, kas izvēlēta tāpat kā FreeDV (raiduztvērējs, citādi WebSDR, citādi ExpertSDR, citādi HDSDR), tiek analizēta nepārtraukti (apklusināta uztveršana netiek izvēlēta; ja visas ir apklusinātas, dekodēšana turpinās ar raiduztvērēju vai WebSDR).
 Tone: {0} Hz	Tonis: {0} Hz
 Filter: {0} Hz	Filtrs: {0} Hz
 Speed: {0} WPM	Ātrums: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Saglabāts: {0} kHz
 Mode:	Režīms:
 (mode unchanged)	(režīms nemainīts)
 Edit…	Rediģēt…
+Digital mode whose usual frequencies are shown	Digitālais darba veids, kura parastās frekvences tiek rādītas
 Frequency (kHz)	Frekvence (kHz)
 Mode	Režīms
+Digital modes	Digitālie darba veidi
+Copy…	Kopēt…
 Select a memory first.	Vispirms izvēlieties atmiņu.
 Edit memory	Rediģēt atmiņu
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	{0} parastās frekvences, {1}. Noklikšķiniet, lai tur pārietu (Kopēt…: pievienot kādam no jūsu sarakstiem).
 {0} memory(ies). Click a memory to go there.	{0} atmiņa(s). Noklikšķiniet uz atmiņas, lai pārietu uz to.
 Tuned to "{0}" ({1} kHz).	Noskaņots uz “{0}” ({1} kHz).
 Remove the memory "{0}"?	Noņemt atmiņu “{0}”?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: neatbalstīts režīms (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signāls atkal atrasts, rinda {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — trūkst sākuma, uztveršana sākta vidū
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — raidījums turpinās aiz attēla apakšējās malas: attēls ritinās uz augšu
 No TCI server at 	Nav TCI servera adresē 
 TCI connection lost	TCI savienojums zaudēts
 the downloaded file has disappeared (antivirus?)	lejupielādētais fails ir pazudis (pretvīrusu programma?)

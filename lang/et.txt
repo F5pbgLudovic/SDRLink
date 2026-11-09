@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	otsin signaali… (keskpunkt %d Hz)
 listening at {0:F0} Hz	kuulamine sagedusel {0:F0} Hz
 signal at {0:F0} Hz	signaal sagedusel {0:F0} Hz
 reversed	Ümberpööratud
+IARU Region 2 (Americas)	IARU 2. regioon (Ameerika)
+IARU Region 3 (Asia-Pacific)	IARU 3. regioon (Aasia ja Vaikse ookeani piirkond)
+IARU Region 1 (Europe, Africa)	IARU 1. regioon (Euroopa, Aafrika)
 Highlight: callsigns or texts to spot, separated by commas	Esiletõstmine: kutsungid või tekstid, mida otsida, eraldatud komadega
 Clear the received text	Tühjenda vastuvõetud tekst
 Default values	Vaikeväärtused
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB-režiim (ribalaius vähemalt 2,4 kHz), SSTV sagedusel (14.230, 7.033, 3.730 MHz…); pildirežiim tuvastatakse automaatselt, pilt ehitub rida realt ja salvestatakse lõpus.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Tundlikkus (1 kuni 10): mida suurem arv, seda nõrgemaid signaale dekooder vastu võtab (stardikood, sünkroonimisimpulsid, read), kusjuures on oht mõnele valetuvastusele.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Andmekadu (1 kuni 10): kui kaua dekooder pildiga jätkab, kui signaal kaob (3 s väärtusel 1, 12 s väärtusel 4, 120 s väärtusel 10). Kui signaal selle aja jooksul tagasi tuleb, jätkub pilt õigelt realt ja kaotatud read jäävad halliks. Pärast seda aega salvestatakse pilt sellisena, nagu see on, ja dekooder kuulab uuesti (seejärel leiab ta režiimi ise).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Vastuvõttu, mis valitakse nagu FreeDV puhul (raadio, muidu WebSDR, muidu ExpertSDR, muidu HDSDR), analüüsitakse pidevalt (vaigistatud vastuvõttu ei valita).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Vastuvõttu, mis valitakse nagu FreeDV puhul (raadio, muidu WebSDR, muidu ExpertSDR, muidu HDSDR), analüüsitakse pidevalt (vaigistatud vastuvõttu ei valita; kui kõik on vaigistatud, jätkub dekodeerimine raadio või WebSDR-iga).
 Tone: {0} Hz	Toon: {0} Hz
 Filter: {0} Hz	Filter: {0} Hz
 Speed: {0} WPM	Kiirus: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Salvestatud: {0} kHz
 Mode:	Režiim:
 (mode unchanged)	(režiim muutmata)
 Edit…	Muuda…
+Digital mode whose usual frequencies are shown	Digitaalne režiim, mille tavalisi sagedusi näidatakse
 Frequency (kHz)	Sagedus (kHz)
 Mode	Režiim
+Digital modes	Digitaalsed režiimid
+Copy…	Kopeeri…
 Select a memory first.	Valige esmalt mälu.
 Edit memory	Muuda mälu
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	{0} tavalised sagedused, {1}. Klõpsake, et sinna minna (Kopeeri…: lisage see oma loendisse).
 {0} memory(ies). Click a memory to go there.	{0} mälu. Klõpsake mälul, et sinna minna.
 Tuned to "{0}" ({1} kHz).	Häälestatud: „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Kas eemaldada mälu „{0}“?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: režiimi ei toetata (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signaal leiti uuesti, rida {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — algus puudub, vastuvõtt alustatud poole pealt
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — saade jätkub pärast pildi alumist serva: pilt kerib üles
 No TCI server at 	TCI serverit pole aadressil 
 TCI connection lost	TCI ühendus katkes
 the downloaded file has disappeared (antivirus?)	allalaaditud fail on kadunud (viirusetõrje?)

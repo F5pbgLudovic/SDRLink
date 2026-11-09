@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	jel keresése… (közép %d Hz)
 listening at {0:F0} Hz	hallgatás {0:F0} Hz-en
 signal at {0:F0} Hz	jel {0:F0} Hz-en
 reversed	Fordított
+IARU Region 2 (Americas)	IARU 2. régió (Amerika)
+IARU Region 3 (Asia-Pacific)	IARU 3. régió (Ázsia és a csendes-óceáni térség)
+IARU Region 1 (Europe, Africa)	IARU 1. régió (Európa, Afrika)
 Highlight: callsigns or texts to spot, separated by commas	Kiemelés: hívójelek vagy keresendő szövegek, vesszővel elválasztva
 Clear the received text	A vett szöveg törlése
 Default values	Alapértékek
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB üzemmód (legalább 2,4 kHz sávszélesség), SSTV frekvencián (14.230, 7.033, 3.730 MHz…); a képmódot automatikusan felismeri, a kép soronként épül fel, és a végén mentésre kerül.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Érzékenység (1-től 10-ig): minél nagyobb a szám, annál gyengébb jeleket fogad el a dekóder (startkód, szinkronimpulzusok, sorok), néhány téves észlelés kockázatával.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Adatvesztés (1-től 10-ig): mennyi ideig folytatja a dekóder a képet, amikor a jel eltűnik (3 s az 1-nél, 12 s a 4-nél, 120 s a 10-nél). Ha a jel ezen időn belül visszatér, a kép a megfelelő soron folytatódik, az elveszett sorok pedig szürkék maradnak. Ennyi idő után a kép úgy kerül mentésre, ahogy van, és a dekóder újra hallgat (ekkor magától megtalálja az üzemmódot).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	A FreeDV-hez hasonlóan kiválasztott vételt (rádió, különben WebSDR, különben ExpertSDR, különben HDSDR) folyamatosan elemzi (némított vételt nem választ).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	A FreeDV-hez hasonlóan kiválasztott vételt (rádió, különben WebSDR, különben ExpertSDR, különben HDSDR) folyamatosan elemzi (némított vételt nem választ; ha mind némítva van, a dekódolás a rádióval vagy a WebSDR-rel folytatódik).
 Tone: {0} Hz	Hang: {0} Hz
 Filter: {0} Hz	Szűrő: {0} Hz
 Speed: {0} WPM	Sebesség: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Tárolva: {0} kHz
 Mode:	Üzemmód:
 (mode unchanged)	(üzemmód változatlan)
 Edit…	Szerkesztés…
+Digital mode whose usual frequencies are shown	Digitális üzemmód, amelynek szokásos frekvenciái láthatók
 Frequency (kHz)	Frekvencia (kHz)
 Mode	Üzemmód
+Digital modes	Digitális üzemmódok
+Copy…	Másolás…
 Select a memory first.	Először válasszon memóriát.
 Edit memory	Memória szerkesztése
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	A(z) {0} szokásos frekvenciái, {1}. Kattintson a hangoláshoz (Másolás…: hozzáadás valamelyik listájához).
 {0} memory(ies). Click a memory to go there.	{0} memória. Kattintson egy memóriára, hogy oda hangoljon.
 Tuned to "{0}" ({1} kHz).	Hangolva: „{0}” ({1} kHz).
 Remove the memory "{0}"?	Eltávolítja a(z) „{0}” memóriát?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: nem támogatott üzemmód (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — a jel újra megvan, {1}. sor
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — hiányzik az eleje, a vétel menet közben indult
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — az adás a kép alsó szélén túl is folytatódik: a kép felfelé gördül
 No TCI server at 	Nincs TCI-szerver itt: 
 TCI connection lost	A TCI-kapcsolat megszakadt
 the downloaded file has disappeared (antivirus?)	a letöltött fájl eltűnt (víruskereső?)

@@ -119,6 +119,9 @@ namespace SDRLink
         DateTime ignoreRigUntil, ignoreSdrUntil;
         DateTime syncSettleUntil;   // jusqu'à cette heure, le WebSDR ne commande pas le poste (mise en place)
         bool firstPage = true;      // première page depuis le lancement de SDRLink
+        // Fréquence et famille de mode du dernier WebSDR quitté : reprises par le WebSDR suivant (ou celui retrouvé par ◀ Retour)
+        // quand le poste ne l'impose pas (poste déconnecté, synchro désactivée ou dans le sens WebSDR → Radio).
+        long carryF; string carryFam = "";
 
         public MainForm()
         {
@@ -1990,7 +1993,7 @@ namespace SDRLink
         // après un délai, car le son du WebSDR arrive avec du retard et contiendrait encore la fin de notre propre émission.
         void ApplyMute()
         {
-            if (freedv != null) freedv.OutputMuted = Transmitting;   // parole FreeDV muette en émission
+            if (freedv != null) freedv.OutputMuted = Transmitting || DecodeSourceMuted;   // parole FreeDV muette en émission (ou réception coupée)
             if (chkMute.Checked && Transmitting)
             {
                 unmuteTimer.Stop();
@@ -2366,7 +2369,9 @@ namespace SDRLink
                 // Page qui vient de se charger : le poste impose sa fréquence s'il est connecté. Au démarrage de
                 // SDRLink, le poste ne change jamais (en "WebSDR → Radio" non plus) : seul le WebSDR suit.
                 syncSettleUntil = DateTime.UtcNow.AddMilliseconds(SettleMs);
+                // Sinon, le nouveau WebSDR reprend la fréquence et le mode de celui qu'on vient de quitter.
                 if (RigToSdr && rigOnline && rigF > 0) PushToSdr();
+                else if (PushCarry(true)) { }
                 else if (Dir == Direction.SdrToRig && !firstPage) PushToRig(true, true);
                 firstPage = false;
                 return;
@@ -2379,6 +2384,7 @@ namespace SDRLink
             if (DateTime.UtcNow < syncSettleUntil && !user)
             {
                 if (RigToSdr && rigOnline && rigF > 0) PushToSdr();
+                else PushCarry(false);
                 return;
             }
             if (user) syncSettleUntil = DateTime.MinValue;
@@ -2413,6 +2419,20 @@ namespace SDRLink
             ignoreSdrUntil = DateTime.UtcNow.AddMilliseconds(EchoIgnoreMs);
             web.CoreWebView2.ExecuteScriptAsync(string.Format(CultureInfo.InvariantCulture,
                 "window.__sdrlink && window.__sdrlink.set({0}, '{1}');", needF ? target : 0, needM ? fam : ""));
+        }
+
+        // WebSDR qui se met en place sans que le poste l'impose : fréquence et mode du WebSDR quitté (faux s'il n'y en a pas).
+        bool PushCarry(bool first)
+        {
+            if (carryF <= 0 || web.CoreWebView2 == null) return false;
+            bool needF = Math.Abs(carryF - sdrF) > Tolerance;
+            bool needM = carryFam != "" && carryFam != Modes.SdrFamily(sdrM);
+            if (!needF && !needM) return true;
+            if (first) Log.Write("WebSDR : reprise de la fréquence du WebSDR précédent (" + FormatFreq(carryF) + (carryFam != "" ? " " + carryFam.ToUpperInvariant() : "") + ")");
+            ignoreSdrUntil = DateTime.UtcNow.AddMilliseconds(EchoIgnoreMs);
+            web.CoreWebView2.ExecuteScriptAsync(string.Format(CultureInfo.InvariantCulture,
+                "window.__sdrlink && window.__sdrlink.set({0}, '{1}');", needF ? carryF : 0, needM ? carryFam : ""));
+            return true;
         }
 
         void PushToRig(bool freq, bool mode)
@@ -2560,7 +2580,10 @@ namespace SDRLink
                 };
                 core.NavigationStarting += delegate(object s, CoreWebView2NavigationStartingEventArgs e)
                 {
-                    if (!e.IsRedirected) { sdrKind = ""; lastSdrF = 0; lastSdrFam = null; UpdateDisplays(); }
+                    if (e.IsRedirected) return;
+                    // WebSDR quitté : sa fréquence et son mode seront repris par le suivant (une page sans WebSDR ne les efface pas).
+                    if (sdrKind != "" && sdrF > 0) { carryF = sdrF; carryFam = Modes.SdrFamily(sdrM); }
+                    sdrKind = ""; lastSdrF = 0; lastSdrFam = null; UpdateDisplays();
                 };
                 core.SourceChanged += delegate
                 {
@@ -3021,7 +3044,7 @@ namespace SDRLink
             if (src != fdvSource) SwitchFreeDvSource(src);
             if (freedv != null)
             {
-                freedv.OutputMuted = Transmitting;
+                freedv.OutputMuted = Transmitting || DecodeSourceMuted;
                 if (fdvVoice) status.Text = VoiceText(freedv.Snr);   // SNR tenu à jour, sans remplir l'historique
             }
             UpdateFreeDvButton();
@@ -3041,8 +3064,17 @@ namespace SDRLink
             if (!sdrMuted && web.CoreWebView2 != null) return 0;
             if (EsdrAvailable && !esdrMuted && esdrPids.Count > 0) return 2;
             if (hdsdrWin && !hdsdrMuted && hdsdrPids.Count > 0) return 3;
+            // Toutes les réceptions coupées : le décodage continue sur le poste ou le WebSDR (le son reste coupé ; leur coupure
+            // n'arrête pas le son capturé). ExpertSDR et HDSDR coupés ne donnent plus rien à capturer.
+            if (fdvSource == 1 && worker != null && settings.RecCardId.Length > 0) return 1;
+            if (fdvSource == 0 && web.CoreWebView2 != null) return 0;
+            if (worker != null && rigAfSupported == 1 && settings.RecCardId.Length > 0) return 1;
+            if (web.CoreWebView2 != null) return 0;
             return -1;
         }
+
+        // Le décodage écoute une réception coupée (toutes le sont) : la parole FreeDV n'est pas jouée.
+        bool DecodeSourceMuted { get { return (fdvSource == 0 && sdrMuted) || (fdvSource == 1 && rigMuted); } }
 
         void SwitchFreeDvSource(int src)
         {
@@ -3903,8 +3935,14 @@ namespace SDRLink
 
         void ShowMemories()
         {
-            using (MemoriesDialog d = new MemoriesDialog(settings.Memories, CurrentMemory, TuneMemory))
+            // Décodage en marche : la fenêtre s'ouvre sur la liste « Modes numériques » du mode utilisé (FreeDV si lui seul décode).
+            string dm = !settings.SstvAuto && settings.FreeDvAuto ? "FreeDV" : CurDigiMode;
+            using (MemoriesDialog d = new MemoriesDialog(settings.Memories, CurrentMemory, TuneMemory, dm, settings.IaruRegion,
+                settings.SstvAuto || settings.FreeDvAuto, DigiName))
+            {
                 d.ShowDialog(this);
+                settings.IaruRegion = d.IaruRegion;
+            }
             settings.Save();
         }
 

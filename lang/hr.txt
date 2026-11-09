@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	traženje signala… (središte %d Hz)
 listening at {0:F0} Hz	slušanje na {0:F0} Hz
 signal at {0:F0} Hz	signal na {0:F0} Hz
 reversed	Obrnuto
+IARU Region 2 (Americas)	IARU regija 2 (Amerike)
+IARU Region 3 (Asia-Pacific)	IARU regija 3 (Azija i Pacifik)
+IARU Region 1 (Europe, Africa)	IARU regija 1 (Europa, Afrika)
 Highlight: callsigns or texts to spot, separated by commas	Isticanje: pozivni znakovi ili tekstovi za uočavanje, odvojeni zarezima
 Clear the received text	Obriši primljeni tekst
 Default values	Zadane vrijednosti
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	Način USB (širina pojasa najmanje 2,4 kHz), na SSTV frekvenciji (14.230, 7.033, 3.730 MHz…); način slike prepoznaje se automatski, slika se gradi redak po redak i sprema se na kraju.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Osjetljivost (1 do 10): što je broj veći, to slabije signale dekoder prihvaća (početni kod, sinkronizacijski impulsi, linije), uz rizik nekoliko lažnih detekcija.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Gubitak podataka (1 do 10): koliko dugo dekoder nastavlja sa slikom kada signal nestane (3 s kod 1, 12 s kod 4, 120 s kod 10). Ako se signal vrati u tom vremenu, slika se nastavlja na ispravnoj liniji, a izgubljene linije ostaju sive. Nakon tog vremena slika se sprema takva kakva jest, a dekoder ponovno sluša (tada sam pronalazi način rada).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Prijem odabran kao za FreeDV (uređaj, inače WebSDR, inače ExpertSDR, inače HDSDR) analizira se neprekidno (utišani prijem se ne odabire).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Prijem odabran kao za FreeDV (uređaj, inače WebSDR, inače ExpertSDR, inače HDSDR) analizira se neprekidno (utišani prijem se ne odabire; ako su svi utišani, dekodiranje se nastavlja s uređajem ili WebSDR-om).
 Tone: {0} Hz	Ton: {0} Hz
 Filter: {0} Hz	Filtar: {0} Hz
 Speed: {0} WPM	Brzina: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Spremljeno: {0} kHz
 Mode:	Način rada:
 (mode unchanged)	(način rada nepromijenjen)
 Edit…	Uredi…
+Digital mode whose usual frequencies are shown	Digitalna vrsta rada čije se uobičajene frekvencije prikazuju
 Frequency (kHz)	Frekvencija (kHz)
 Mode	Način rada
+Digital modes	Digitalne vrste rada
+Copy…	Kopiraj…
 Select a memory first.	Najprije odaberite memoriju.
 Edit memory	Uredi memoriju
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Uobičajene frekvencije za {0}, {1}. Kliknite za ugađanje (Kopiraj…: dodajte je na jedan od svojih popisa).
 {0} memory(ies). Click a memory to go there.	{0} memorija. Kliknite memoriju da biste prešli na nju.
 Tuned to "{0}" ({1} kHz).	Ugođeno na „{0}” ({1} kHz).
 Remove the memory "{0}"?	Ukloniti memoriju „{0}”?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: način nije podržan (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signal ponovno pronađen, redak {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — nedostaje početak, prijem uhvaćen usred slike
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — emitiranje se nastavlja nakon donjeg ruba slike: slika se pomiče prema gore
 No TCI server at 	Nema TCI poslužitelja na 
 TCI connection lost	TCI veza izgubljena
 the downloaded file has disappeared (antivirus?)	preuzeta datoteka je nestala (antivirus?)

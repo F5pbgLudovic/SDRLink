@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	zoekt een signaal… (midden %d Hz)
 listening at {0:F0} Hz	luisteren op {0:F0} Hz
 signal at {0:F0} Hz	signaal op {0:F0} Hz
 reversed	Omgekeerd
+IARU Region 2 (Americas)	IARU-regio 2 (Amerika)
+IARU Region 3 (Asia-Pacific)	IARU-regio 3 (Azië-Pacific)
+IARU Region 1 (Europe, Africa)	IARU-regio 1 (Europa, Afrika)
 Highlight: callsigns or texts to spot, separated by commas	Markeren: roepletters of teksten om te signaleren, gescheiden door komma's
 Clear the received text	Ontvangen tekst wissen
 Default values	Standaardwaarden
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB-modus (minstens 2,4 kHz bandbreedte), op een SSTV-frequentie (14.230, 7.033, 3.730 MHz…); de beeldmodus wordt automatisch herkend, het beeld wordt regel voor regel opgebouwd en aan het einde opgeslagen.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Gevoeligheid (1 tot 10): hoe hoger het getal, hoe zwakkere signalen de decoder accepteert (startcode, synchronisatiepulsen, regels), met het risico op enkele valse detecties.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Gegevensverlies (1 tot 10): hoe lang de decoder met een beeld doorgaat wanneer het signaal verdwijnt (3 s bij 1, 12 s bij 4, 120 s bij 10). Als het signaal in die tijd terugkomt, gaat het beeld verder op de juiste regel en blijven de verloren regels grijs. Na die tijd wordt het beeld opgeslagen zoals het is en luistert de decoder weer (hij vindt dan zelf de modus).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	De ontvangst die net als bij FreeDV wordt gekozen (transceiver, anders WebSDR, anders ExpertSDR, anders HDSDR), wordt continu geanalyseerd (een gedempte ontvangst wordt niet gekozen).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	De ontvangst die net als bij FreeDV wordt gekozen (transceiver, anders WebSDR, anders ExpertSDR, anders HDSDR), wordt continu geanalyseerd (een gedempte ontvangst wordt niet gekozen; zijn ze allemaal gedempt, dan gaat het decoderen door met de transceiver of de WebSDR).
 Tone: {0} Hz	Toon: {0} Hz
 Filter: {0} Hz	Filter: {0} Hz
 Speed: {0} WPM	Snelheid: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Opgeslagen: {0} kHz
 Mode:	Mode:
 (mode unchanged)	(mode ongewijzigd)
 Edit…	Wijzigen…
+Digital mode whose usual frequencies are shown	Digitale mode waarvan de gebruikelijke frequenties worden getoond
 Frequency (kHz)	Frequentie (kHz)
 Mode	Mode
+Digital modes	Digitale modes
+Copy…	Kopiëren…
 Select a memory first.	Kies eerst een geheugen.
 Edit memory	Geheugen wijzigen
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Gebruikelijke frequenties voor {0}, {1}. Klik om erheen te gaan (Kopiëren…: toevoegen aan een van uw lijsten).
 {0} memory(ies). Click a memory to go there.	{0} geheugen(s). Klik op een geheugen om erheen te gaan.
 Tuned to "{0}" ({1} kHz).	Afgestemd op "{0}" ({1} kHz).
 Remove the memory "{0}"?	Geheugen "{0}" verwijderen?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: mode niet ondersteund (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signaal teruggevonden, regel {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — begin ontbreekt, ontvangst halverwege opgepikt
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — de uitzending gaat door na de onderkant van het beeld: het beeld schuift omhoog
 No TCI server at 	Geen TCI-server op 
 TCI connection lost	TCI-verbinding verbroken
 the downloaded file has disappeared (antivirus?)	het gedownloade bestand is verdwenen (antivirus?)

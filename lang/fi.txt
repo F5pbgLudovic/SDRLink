@@ -21,6 +21,9 @@ searching for a signal… (centre %d Hz)	etsitään signaalia… (keskitaajuus %
 listening at {0:F0} Hz	kuunnellaan taajuudella {0:F0} Hz
 signal at {0:F0} Hz	signaali taajuudella {0:F0} Hz
 reversed	Käänteinen
+IARU Region 2 (Americas)	IARU:n alue 2 (Amerikka)
+IARU Region 3 (Asia-Pacific)	IARU:n alue 3 (Aasia ja Tyynenmeren alue)
+IARU Region 1 (Europe, Africa)	IARU:n alue 1 (Eurooppa, Afrikka)
 Highlight: callsigns or texts to spot, separated by commas	Korostus: kutsutunnukset tai tekstit, jotka halutaan huomata, pilkuilla erotettuina
 Clear the received text	Tyhjennä vastaanotettu teksti
 Default values	Oletusarvot
@@ -92,7 +95,7 @@ If the picture slants, the sound card or the WebSDR is not running at quite the 
 USB mode (at least 2.4 kHz bandwidth), on an SSTV frequency (14.230, 7.033, 3.730 MHz…); the picture mode is recognised automatically, the picture builds up line by line and is saved when it ends.	USB-tila (kaistanleveys vähintään 2,4 kHz), SSTV-taajuudella (14.230, 7.033, 3.730 MHz…); kuvatila tunnistetaan automaattisesti, kuva muodostuu rivi riviltä ja tallennetaan lopuksi.
 Sensitivity (1 to 10): the higher the number, the weaker the signals the decoder accepts (start code, sync pulses, lines), at the risk of a few false detections.	Herkkyys (1–10): mitä suurempi luku, sitä heikompia signaaleja dekooderi hyväksyy (aloituskoodi, tahdistuspulssit, rivit), mikä voi aiheuttaa muutaman virheellisen tunnistuksen.
 Data loss (1 to 10): how long the decoder keeps going with a picture when the signal disappears (3 s at 1, 12 s at 4, 120 s at 10). If the signal comes back in that time, the picture resumes at the right line and the lost lines stay grey. After that time the picture is saved as it is and the decoder listens again (it then finds the mode by itself).	Tiedonmenetys (1–10): kuinka kauan dekooderi jatkaa kuvaa, kun signaali katoaa (3 s arvolla 1, 12 s arvolla 4, 120 s arvolla 10). Jos signaali palaa sinä aikana, kuva jatkuu oikealta riviltä ja menetetyt rivit jäävät harmaiksi. Sen ajan jälkeen kuva tallennetaan sellaisenaan ja dekooderi kuuntelee uudelleen (se löytää sitten tilan itse).
-The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen).	Vastaanottoa, joka valitaan kuten FreeDV:lle (radio, muuten WebSDR, muuten ExpertSDR, muuten HDSDR), analysoidaan jatkuvasti (mykistettyä vastaanottoa ei valita).
+The reception chosen as for FreeDV (rig, otherwise WebSDR, otherwise ExpertSDR, otherwise HDSDR) is analysed continuously (a muted reception is not chosen; if all are muted, decoding goes on with the rig or the WebSDR).	Vastaanottoa, joka valitaan kuten FreeDV:lle (radio, muuten WebSDR, muuten ExpertSDR, muuten HDSDR), analysoidaan jatkuvasti (mykistettyä vastaanottoa ei valita; jos kaikki on mykistetty, dekoodaus jatkuu radiolla tai WebSDR:llä).
 Tone: {0} Hz	Äänenkorkeus: {0} Hz
 Filter: {0} Hz	Suodatin: {0} Hz
 Speed: {0} WPM	Nopeus: {0} WPM
@@ -520,10 +523,14 @@ Stored: {0} kHz	Tallennettu: {0} kHz
 Mode:	Lähetelaji:
 (mode unchanged)	(lähetelaji ennallaan)
 Edit…	Muokkaa…
+Digital mode whose usual frequencies are shown	Digitaalinen lähetelaji, jonka tavalliset taajuudet näytetään
 Frequency (kHz)	Taajuus (kHz)
 Mode	Lähetelaji
+Digital modes	Digitaaliset lähetelajit
+Copy…	Kopioi…
 Select a memory first.	Valitse ensin muisti.
 Edit memory	Muokkaa muistia
+Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Tavalliset {0}-taajuudet, {1}. Napsauta siirtyäksesi taajuudelle (Kopioi…: lisää se johonkin listaasi).
 {0} memory(ies). Click a memory to go there.	{0} muistia. Siirry muistiin napsauttamalla sitä.
 Tuned to "{0}" ({1} kHz).	Viritetty: ”{0}” ({1} kHz).
 Remove the memory "{0}"?	Poistetaanko muisti ”{0}”?
@@ -603,6 +610,7 @@ SSTV: unsupported mode (VIS {0})	SSTV: tilaa ei tueta (VIS {0})
 SSTV: {0} — signal found again, line {1}	SSTV: {0} — signaali löytyi uudelleen, rivi {1}
 SSTV: {0} ({1}×{2}) — start missing, picked up in progress	SSTV: {0} ({1}×{2}) — alku puuttuu, vastaanotto aloitettu kesken kuvan
 SSTV: {0} ({1}×{2})	SSTV: {0} ({1}×{2})
+SSTV: {0} — the transmission goes on past the bottom of the image: the image scrolls up	SSTV: {0} — lähetys jatkuu kuvan alareunan jälkeen: kuva vierii ylöspäin
 No TCI server at 	TCI-palvelinta ei löydy osoitteesta 
 TCI connection lost	TCI-yhteys katkesi
 the downloaded file has disappeared (antivirus?)	ladattu tiedosto on kadonnut (virustorjunta?)
