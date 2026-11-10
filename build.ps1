@@ -29,7 +29,7 @@ Remove-Item (Join-Path $bin '*.dll') -ErrorAction SilentlyContinue
 $sources = Get-ChildItem (Join-Path $root 'src') -Filter *.cs | ForEach-Object { $_.FullName }
 & $csc /nologo /target:winexe /platform:x86 /optimize+ /codepage:65001 `
     "/out:$bin\SDRLink.exe" `
-    /r:System.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll /r:System.Web.Extensions.dll "/r:$core" "/r:$wf" `
+    /r:System.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll /r:System.Web.Extensions.dll /r:System.Device.dll "/r:$core" "/r:$wf" `
     "/resource:$core,Microsoft.Web.WebView2.Core.dll" `
     "/resource:$wf,Microsoft.Web.WebView2.WinForms.dll" `
     "/resource:$loader,WebView2Loader.dll" `

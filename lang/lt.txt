@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automatinis tikrinimas paleidžiant: išjungtas
 To turn it on, tick the box of the “Check for updates” button.	Norėdami įjungti, pažymėkite mygtuko „Tikrinti atnaujinimus“ langelį.
 Later	Vėliau
 Open the update page	Atverti atnaujinimo puslapį
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink atnaujintas į V{0} (senoji versija paliekama šalia: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink atnaujintas į V{0}; senoji versija ištrinta.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink atnaujintas į V{0}; senoji versija bus ištrinta kito paleidimo metu.
 Last {0} memories used	Paskutinės {0} naudotos atmintys
 ExpertSDR TCI port: {0}…	ExpertSDR TCI prievadas: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Yra atnaujinimas V{0}: spustelėkite, kad atsisiųstumėte
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: naujinimas V{0}
 Downloading SDRLink V{0}…	Atsisiunčiama SDRLink V{0}…
 unavailable	nepasiekiama
 unexpected format	netikėtas formatas
-Find WebSDRs (France and neighbouring countries)	Ieškoti WebSDR (Prancūzija ir kaimyninės šalys)
+Find WebSDRs near your position	Ieškoti WebSDR netoli jūsų vietos
 All	Visi
-Max distance from the centre of France (km):	Didž. atstumas nuo Prancūzijos centro (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Jūsų lokatorius (JN18du) arba koordinatės (48.85, 2.35). Tuščia: kompiuterio vieta („Windows“ vietos nustatymas).
+Position (Grid locator):	Vieta (Grid locator):
+Computer's position	Kompiuterio vieta
+Max distance from the current position (km):	Didž. atstumas nuo dabartinės vietos (km):
 Filter:	Filtras:
 Type:	Tipas:
 Location	Vieta
@@ -639,9 +643,14 @@ Country	Šalis
 Users	Naud.
 Add checked to favorites	Pažymėtus į parankinius
 Refresh	Atnaujinti
+position not recognised: type a locator (JN18du) or "latitude, longitude"	vieta neatpažinta: įveskite lokatorių (JN18du) arba „platuma, ilguma“
+looking for the computer's position…	ieškoma kompiuterio vietos…
+computer's position unknown (Windows location turned off?): centre of France	kompiuterio vieta nežinoma (išjungtas „Windows“ vietos nustatymas?): Prancūzijos centras
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Ieškoma kataloguose (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Pirmiausia sąraše pasirinkite imtuvą.
 Please check the receivers to add first.	Pirmiausia pažymėkite norimus įtraukti imtuvus.
 Add to favorites	Įtraukti į parankinius
+typed position: {0}	įvesta vieta: {0}
+computer: {0}	kompiuteris: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Rodoma imtuvų: {0}, pažymėta: {1}, paslėpta (jau parankiniuose) – {2}   —   šaltiniai: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Į sąrašą „{1}“ įtraukta parankinių: {0}. Juos galite pervardyti lange „Tvarkyti parankinius…“.

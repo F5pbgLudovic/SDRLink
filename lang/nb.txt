@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automatisk søk ved oppstart: av.
 To turn it on, tick the box of the “Check for updates” button.	For å slå det på, kryss av i boksen på knappen «Se etter oppdateringer».
 Later	Senere
 Open the update page	Åpne oppdateringssiden
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink er oppdatert til V{0} (den gamle versjonen ligger ved siden av: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink er oppdatert til V{0}; den gamle versjonen er slettet.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink er oppdatert til V{0}; den gamle versjonen slettes ved neste oppstart.
 Last {0} memories used	Siste {0} brukte minner
 ExpertSDR TCI port: {0}…	TCI-port for ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Oppdatering V{0} tilgjengelig: klikk for å laste den ned
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: oppdatering V{0}
 Downloading SDRLink V{0}…	Laster ned SDRLink V{0}…
 unavailable	utilgjengelig
 unexpected format	uventet format
-Find WebSDRs (France and neighbouring countries)	Finn WebSDR-er (Frankrike og naboland)
+Find WebSDRs near your position	Finn WebSDR-er nær din posisjon
 All	Alle
-Max distance from the centre of France (km):	Maks avstand fra midten av Frankrike (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Din lokator (JN18du) eller dine koordinater (48.85, 2.35). Tom: datamaskinens posisjon (Windows-posisjon).
+Position (Grid locator):	Posisjon (Grid locator):
+Computer's position	Datamaskinens posisjon
+Max distance from the current position (km):	Maks. avstand fra nåværende posisjon (km):
 Filter:	Filter:
 Type:	Type:
 Location	Sted
@@ -639,9 +643,14 @@ Country	Land
 Users	Bruk.
 Add checked to favorites	Legg avkryssede i favoritter
 Refresh	Oppdater
+position not recognised: type a locator (JN18du) or "latitude, longitude"	posisjon ikke gjenkjent: skriv en lokator (JN18du) eller «breddegrad, lengdegrad»
+looking for the computer's position…	søker etter datamaskinens posisjon…
+computer's position unknown (Windows location turned off?): centre of France	datamaskinens posisjon ukjent (Windows-posisjon slått av?): midten av Frankrike
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Søker i kataloger (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Velg først en mottaker i listen.
 Please check the receivers to add first.	Kryss først av mottakerne som skal legges til.
 Add to favorites	Legg til i favoritter
+typed position: {0}	skrevet posisjon: {0}
+computer: {0}	datamaskin: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} mottaker(e) vist, {1} avkrysset, {2} allerede i favoritter skjult   —   kilder: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favoritt(er) lagt til i «{1}». Du kan gi dem nye navn i «Behandle favoritter…».

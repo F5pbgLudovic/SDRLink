@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automatische controle bij het starten: uit.
 To turn it on, tick the box of the “Check for updates” button.	Om het in te schakelen, vink het vakje van de knop "Controleren op updates" aan.
 Later	Later
 Open the update page	Updatepagina openen
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink is bijgewerkt naar V{0} (de oude versie staat ernaast: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink is bijgewerkt naar V{0}; de oude versie is verwijderd.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink is bijgewerkt naar V{0}; de oude versie wordt bij de volgende start verwijderd.
 Last {0} memories used	Laatste {0} gebruikte geheugens
 ExpertSDR TCI port: {0}…	TCI-poort van ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Update V{0} beschikbaar: klik om te downloaden
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: update V{0}
 Downloading SDRLink V{0}…	SDRLink V{0} downloaden…
 unavailable	niet beschikbaar
 unexpected format	onverwacht formaat
-Find WebSDRs (France and neighbouring countries)	WebSDR's zoeken (Frankrijk en buurlanden)
+Find WebSDRs near your position	WebSDR's zoeken in de buurt van uw positie
 All	Alle
-Max distance from the centre of France (km):	Max. afstand tot het midden van Frankrijk (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Uw locator (JN18du) of uw coördinaten (48.85, 2.35). Leeg: positie van de computer (Windows-locatie).
+Position (Grid locator):	Positie (Grid locator):
+Computer's position	Positie van de computer
+Max distance from the current position (km):	Max. afstand tot de huidige positie (km):
 Filter:	Filter:
 Type:	Type:
 Location	Locatie
@@ -639,9 +643,14 @@ Country	Land
 Users	Gebr.
 Add checked to favorites	Aangevinkte aan favorieten
 Refresh	Vernieuwen
+position not recognised: type a locator (JN18du) or "latitude, longitude"	positie niet herkend: typ een locator (JN18du) of "breedte, lengte"
+looking for the computer's position…	positie van de computer zoeken…
+computer's position unknown (Windows location turned off?): centre of France	positie van de computer onbekend (Windows-locatie uitgeschakeld?): midden van Frankrijk
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Zoeken in overzichten (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Selecteer eerst een ontvanger in de lijst.
 Please check the receivers to add first.	Vink eerst de ontvangers aan die je wilt toevoegen.
 Add to favorites	Toevoegen aan favorieten
+typed position: {0}	getypte positie: {0}
+computer: {0}	computer: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} ontvanger(s) getoond, {1} aangevinkt, {2} al in favorieten verborgen   —   bronnen: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favoriet(en) toegevoegd aan "{1}". Je kunt ze hernoemen via "Favorieten beheren…".

@@ -364,7 +364,8 @@ Automatic check at startup: off.	Αυτόματος έλεγχος κατά τη
 To turn it on, tick the box of the “Check for updates” button.	Για να τον ενεργοποιήσετε, επιλέξτε το πλαίσιο στο κουμπί «Έλεγχος για ενημερώσεις».
 Later	Αργότερα
 Open the update page	Άνοιγμα της σελίδας ενημέρωσης
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	Το SDRLink ενημερώθηκε στην V{0} (η παλιά έκδοση φυλάσσεται δίπλα: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	Το SDRLink ενημερώθηκε στην V{0}· η παλιά έκδοση διαγράφηκε.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	Το SDRLink ενημερώθηκε στην V{0}· η παλιά έκδοση θα διαγραφεί στην επόμενη εκκίνηση.
 Last {0} memories used	Τελευταίες {0} μνήμες που χρησιμοποιήθηκαν
 ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Διαθέσιμη ενημέρωση V{0}: κάντε κλικ για λήψη
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: ενημέρωση V{0}
 Downloading SDRLink V{0}…	Λήψη του SDRLink V{0}…
 unavailable	μη διαθέσιμο
 unexpected format	μη αναμενόμενη μορφή
-Find WebSDRs (France and neighbouring countries)	Εύρεση WebSDR (Γαλλία και γειτονικές χώρες)
+Find WebSDRs near your position	Αναζήτηση WebSDR κοντά στη θέση σας
 All	Όλα
-Max distance from the centre of France (km):	Μέγ. απόσταση από το κέντρο της Γαλλίας (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Ο λοκέιτορ σας (JN18du) ή οι συντεταγμένες σας (48.85, 2.35). Κενό: η θέση του υπολογιστή (τοποθεσία Windows).
+Position (Grid locator):	Θέση (Grid locator):
+Computer's position	Θέση του υπολογιστή
+Max distance from the current position (km):	Μέγ. απόσταση από την τρέχουσα θέση (km):
 Filter:	Φίλτρο:
 Type:	Τύπος:
 Location	Τοποθεσία
@@ -639,9 +643,14 @@ Country	Χώρα
 Users	Χρήστες
 Add checked to favorites	Προσθήκη σημειωμένων στα αγαπημένα
 Refresh	Ανανέωση
+position not recognised: type a locator (JN18du) or "latitude, longitude"	η θέση δεν αναγνωρίστηκε: πληκτρολογήστε λοκέιτορ (JN18du) ή «γεωγρ. πλάτος, μήκος»
+looking for the computer's position…	αναζήτηση της θέσης του υπολογιστή…
+computer's position unknown (Windows location turned off?): centre of France	άγνωστη θέση υπολογιστή (τοποθεσία Windows απενεργοποιημένη;): κέντρο της Γαλλίας
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Αναζήτηση σε καταλόγους (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Επιλέξτε πρώτα έναν δέκτη από τη λίστα.
 Please check the receivers to add first.	Επιλέξτε πρώτα τους δέκτες που θα προστεθούν.
 Add to favorites	Προσθήκη στα αγαπημένα
+typed position: {0}	θέση που πληκτρολογήθηκε: {0}
+computer: {0}	υπολογιστής: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} δέκτες εμφανίζονται, {1} σημειωμένοι, {2} ήδη στα αγαπημένα κρυμμένα   —   πηγές: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Προστέθηκαν {0} αγαπημένα στο «{1}». Μπορείτε να τα μετονομάσετε στη «Διαχείριση αγαπημένων…».

@@ -1,4 +1,4 @@
-# SDRLink V1.29 — @F5PBG 2026
+# SDRLink V1.30 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -15,14 +15,14 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, couleur et largeur réglables ;
   - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
-  - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de la France ;
+  - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de votre position (ordinateur, locator ou coordonnées) ;
   - volume du WebSDR, du poste, d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) et de HDSDR (Mute HDSDR, par Windows), son du poste aussi sur le PC au choix (clic droit sur Mute TX) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique ;
   - décodage automatique de la voix numérique FreeDV RADE (V1 ou V2) dès qu'un signal est reçu (bouton FreeDV auto) ;
   - décodeurs de modes numériques sur un seul bouton : FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) et WEFAX, affichés dans une fenêtre déplaçable sur la page (images enregistrées en PNG) ;
   - interface en 23 langues européennes ;
   - mode sombre, palette de 64 teintes et couleur de fond au choix (RVB), couleur de chaque bouton au choix (clic droit) et taille du texte réglable ;
-  - vérification des mises à jour au démarrage et mise à jour automatique en un clic (empreinte SHA-256 vérifiée, ancienne version gardée), import/export de tous les réglages vers un autre ordinateur, avec import au choix (configuration, WebSDR, mémoires, scan ; ajout ou remplacement), réinitialisation totale ou partielle du programme ;
+  - vérification des mises à jour au démarrage et mise à jour automatique en un clic (empreinte SHA-256 vérifiée, même nom de fichier, ancienne version supprimée), import/export de tous les réglages vers un autre ordinateur, avec import au choix (configuration, WebSDR, mémoires, scan ; ajout ou remplacement), réinitialisation totale ou partielle du programme ;
   - historique des 20 derniers messages (clic droit sur la barre d'état).
 
 ## Télécharger
@@ -68,14 +68,14 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, with adjustable colour and width;
   - reduced, mini and PTT (PTT button only, with the Always on top box) views;
   - suggestions while typing in the WebSDR bar (name or address, chosen list);
-  - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near France;
+  - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near your position (computer, locator or coordinates);
   - WebSDR, rig, ExpertSDR (Mute ExpertSDR, through Windows or TCI) and HDSDR volume (Mute HDSDR, through Windows), rig audio also on the PC if wanted (right-click Mute TRX);
   - SDRLINK audio cable for WSJT-X, automatic notch;
   - automatic decoding of FreeDV RADE digital voice (V1 or V2) as soon as a signal is received (FreeDV auto button);
   - digital mode decoders on a single button: FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) and WEFAX, shown in a movable window over the page (pictures saved as PNG);
   - interface in 23 European languages (menu on the 2nd line);
   - dark mode, 64-shade palette and background colour of your choice (RGB), colour of each button of your choice (right-click) and adjustable text size;
-  - update check at startup and one-click automatic update (SHA-256 fingerprint checked, previous version kept), import/export of all settings to another computer, with selective import (configuration, WebSDR, memories, scan; add or replace), full or partial reset of the program;
+  - update check at startup and one-click automatic update (SHA-256 fingerprint checked, same file name, old version deleted), import/export of all settings to another computer, with selective import (configuration, WebSDR, memories, scan; add or replace), full or partial reset of the program;
   - history of the last 20 status messages (right-click the status bar).
 
 ### Download

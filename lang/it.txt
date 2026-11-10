@@ -364,7 +364,8 @@ Automatic check at startup: off.	Controllo automatico all'avvio: disattivato.
 To turn it on, tick the box of the “Check for updates” button.	Per attivarlo, spuntate la casella del pulsante «Controlla aggiornamenti».
 Later	Più tardi
 Open the update page	Apri la pagina dell'aggiornamento
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink è stato aggiornato alla V{0} (la vecchia versione è conservata accanto: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink è stato aggiornato alla V{0}; la vecchia versione è stata eliminata.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink è stato aggiornato alla V{0}; la vecchia versione sarà eliminata al prossimo avvio.
 Last {0} memories used	Ultime {0} memorie usate
 ExpertSDR TCI port: {0}…	Porta TCI di ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Aggiornamento V{0} disponibile: fare clic per scaricarlo
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: aggiornamento V{0}
 Downloading SDRLink V{0}…	Download di SDRLink V{0}…
 unavailable	non disponibile
 unexpected format	formato imprevisto
-Find WebSDRs (France and neighbouring countries)	Cerca WebSDR (Francia e paesi vicini)
+Find WebSDRs near your position	Cerca WebSDR vicini alla tua posizione
 All	Tutti
-Max distance from the centre of France (km):	Distanza max dal centro della Francia (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Il tuo locatore (JN18du) o le tue coordinate (48.85, 2.35). Vuoto: posizione del computer (posizione di Windows).
+Position (Grid locator):	Posizione (Grid locator):
+Computer's position	Posizione del computer
+Max distance from the current position (km):	Distanza max dalla posizione attuale (km):
 Filter:	Filtro:
 Type:	Tipo:
 Location	Località
@@ -639,9 +643,14 @@ Country	Paese
 Users	Utenti
 Add checked to favorites	Aggiungi spuntati ai preferiti
 Refresh	Aggiorna
+position not recognised: type a locator (JN18du) or "latitude, longitude"	posizione non riconosciuta: digita un locatore (JN18du) o «latitudine, longitudine»
+looking for the computer's position…	ricerca della posizione del computer…
+computer's position unknown (Windows location turned off?): centre of France	posizione del computer sconosciuta (posizione di Windows disattivata?): centro della Francia
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Ricerca negli elenchi (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Selezionare prima un ricevitore nell'elenco.
 Please check the receivers to add first.	Spuntare prima i ricevitori da aggiungere.
 Add to favorites	Aggiungi ai preferiti
+typed position: {0}	posizione digitata: {0}
+computer: {0}	computer: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} ricevitore/i visualizzato/i, {1} spuntato/i, {2} già nei preferiti nascosto/i   —   fonti: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} preferito/i aggiunto/i a «{1}». È possibile rinominarli in «Gestisci preferiti…».

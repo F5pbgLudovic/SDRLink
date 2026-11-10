@@ -63,7 +63,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 - `%APPDATA%\SDRLink\settings.reset.txt` : réinitialisation demandée, faite au redémarrage puis effacée (il n'existe que quelques secondes).
 - `%APPDATA%\SDRLink\sdrlink.log` : le journal (remis à zéro à chaque lancement).
 - `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache ; le pseudo donné aux KiwiSDR et websdr.org y est aussi) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll ; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<taille>\sdrlink_freedv.dll` : décodeur FreeDV, écrit seulement au premier usage de FreeDV auto (depuis la 1.24).
-- À côté de `SDRLink.exe` : `SDRLink.previous.exe`, la version d'avant gardée par la mise à jour automatique (on peut la supprimer) ; `SDRLink.exe.download` n'existe que pendant un téléchargement (depuis la 1.27).
+- À côté de `SDRLink.exe`, pendant une mise à jour automatique seulement : `SDRLink.exe.download` (le téléchargement) et `SDRLink.previous.exe` (l'ancienne version, supprimée dès que la nouvelle a démarré, depuis la 1.30).
 - `Musique\SDRLink` : dossier des enregistrements REC par défaut ; pendant un enregistrement, un fichier provisoire `SDRLink-REC-*.raw` est dans `%TEMP%`.
 - `Images\SDRLink` : images SSTV, WEFAX et Hell reçues, en PNG (`SSTV_<mode>_<date>_<heure>.png`, `WEFAX_<lignes>-<IOC>_<date>_<heure>.png`, `Hell_<date>_<heure>.png` ; `_partiel` si l'image n'est pas allée jusqu'au bout) (depuis la 1.25).
 - `%LOCALAPPDATA%\SDRLink\runtime\digi-…\sdrlink_digi.dll` : décodeurs FT8 / FT4 / FT2 et Olivia / Contestia, écrit seulement au premier usage de ces modes (depuis la 1.25).
@@ -209,8 +209,12 @@ Le bouton **Rechercher des WebSDR…** (barre WebSDR) consulte trois annuaires p
 - la liste officielle des **KiwiSDR** ;
 - **ReceiverBook** (OpenWebRX, WebSDR, KiwiSDR).
 
-Les doublons sont retirés. La liste s'affiche **triée par distance depuis le centre de la France**.
-- **Distance max** (1000 km par défaut) : France, Belgique, Luxembourg, Suisse, nord de l'Italie et de l'Espagne, ouest de l'Allemagne, Pays-Bas, sud de l'Angleterre… À augmenter ou réduire à volonté.
+Les doublons sont retirés. La liste s'affiche **triée par distance depuis votre position** (depuis la 1.30).
+- **Position (Grid locator)** : laissez la case **vide** pour prendre la **position de l'ordinateur**, donnée par le service de localisation de Windows (GPS, Wi-Fi ou réseau ; il faut que **Paramètres > Confidentialité > Position** soit activé, avec « Autoriser les applications de bureau à accéder à votre position »). Ou tapez votre **locator** (JN18 ou JN18du) ou vos **coordonnées** (48.85, 2.35 ; 48,85 2,35 ; 48.85N 1.5W…). Ce que vous tapez est retenu pour la fois suivante.
+  - À droite, SDRLink indique la position utilisée, en locator : « position tapée : JN18du » ou « ordinateur : JN18eu ». Une position fausse s'affiche en rouge.
+  - **Position de l'ordinateur** : vide la case et redemande la position à Windows.
+  - Position de l'ordinateur inconnue (localisation de Windows désactivée) et rien de tapé : les distances partent du **centre de la France**, comme avant la 1.30 ; c'est écrit en rouge.
+- **Distance max par rapport à la position actuelle** (1000 km par défaut ; depuis le centre de la France : France, Belgique, Luxembourg, Suisse, nord de l'Italie et de l'Espagne, ouest de l'Allemagne, Pays-Bas, sud de l'Angleterre…). À augmenter ou réduire à volonté.
 - **Filtre** : texte libre (ville, indicatif, département…). **Type** : websdr.org, KiwiSDR, OpenWebRX…
 - Les récepteurs **déjà en favoris** (dans n'importe quelle liste) ne sont pas proposés ; le bas de la fenêtre indique combien sont ainsi masqués. Les relais KiwiSDR (xxx.proxy.kiwisdr.com) avec ou sans :8073 comptent comme un seul récepteur.
 - Clic sur un titre de colonne : tri par cette colonne.
@@ -602,8 +606,8 @@ Case cochée : au démarrage, si Internet répond, SDRLink regarde la dernière 
 **Mise à jour automatique** (depuis la 1.27) : dans cette fenêtre, le lien orange **➜ Mettre à jour automatiquement en Vx.y maintenant** fait tout seul :
 - il télécharge `SDRLink.exe` de la nouvelle version sur GitHub, avec une barre de progression et un bouton **Annuler** ;
 - il vérifie le fichier : taille, **empreinte SHA-256** publiée par GitHub et numéro de version ; s'il ne correspond pas, rien n'est changé ;
-- il met la nouvelle version à la place de celle-ci, sous le même nom et dans le même dossier ; l'ancienne reste à côté sous le nom **`SDRLink.previous.exe`** (remplacée à la mise à jour suivante), pour revenir en arrière si besoin ;
-- il ferme SDRLink (réglages enregistrés comme d'habitude) et lance la nouvelle version, qui attend la fermeture complète de l'ancienne avant de démarrer ; la barre d'état indique ensuite « SDRLink a été mis à jour en Vx.y ».
+- il met la nouvelle version à la place de celle-ci, **sous le même nom `SDRLink.exe` et dans le même dossier** : un raccourci sur le bureau ou dans la barre des tâches lance donc toujours la nouvelle version ;
+- il ferme SDRLink (réglages enregistrés comme d'habitude) et lance la nouvelle version, qui attend la fermeture complète de l'ancienne avant de démarrer, puis **supprime l'ancienne version du disque** (depuis la 1.30 ; avant, elle restait à côté sous le nom `SDRLink.previous.exe`). La barre d'état indique ensuite « SDRLink a été mis à jour en Vx.y ; l'ancienne version a été supprimée. » Si Windows bloque encore l'ancien fichier, il est supprimé au démarrage suivant. Les copies `SDRLink.previous.exe` laissées par les mises à jour d'avant la 1.30 sont supprimées aussi.
 
 Les réglages ne bougent pas (ils sont dans `%APPDATA%\SDRLink`). Si quelque chose échoue (antivirus qui bloque ou supprime le fichier, dossier où SDRLink n'a pas le droit d'écrire comme `Program Files`, Internet coupé…), SDRLink reste tel quel, explique pourquoi et propose d'ouvrir la page de téléchargement. **Les liens vers la page de la version et vers toutes les versions restent dans la fenêtre** : certains antivirus n'aiment pas qu'un programme se remplace lui-même, on peut alors toujours télécharger à la main. La mise à jour automatique fonctionne à partir d'une version qui la contient (1.27 ou plus) vers une version plus récente.
 
@@ -621,6 +625,9 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.30**
+  - **Mise à jour automatique** : l'ancienne version est **supprimée du disque** dès que la nouvelle a démarré (plus de `SDRLink.previous.exe`) ; la nouvelle garde le nom `SDRLink.exe`, les raccourcis du bureau marchent toujours.
+  - **Rechercher des WebSDR** : les distances partent de **votre position** et non plus du centre de la France : position de l'ordinateur (localisation de Windows), ou locator ou coordonnées tapés (retenus). « Distance max par rapport à la position actuelle ». Centre de la France seulement si aucune position n'est connue.
 - **1.29**
   - **Palette** des couleurs de fond : **64 teintes** en mode sombre et 64 en mode clair, 32 de chaque côté du bouton (neutres et froides à gauche, chaudes à droite).
   - **Couleur au choix** sous la palette : valeurs **Rouge**, **Vert**, **Bleu** (0 à 255) avec aperçu du texte, **Appliquer**, ou **Autre couleur…** (sélecteur de Windows).

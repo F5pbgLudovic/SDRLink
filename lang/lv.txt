@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automātiska pārbaude startējot: izslēgta.
 To turn it on, tick the box of the “Check for updates” button.	Lai to ieslēgtu, atzīmējiet pogas “Pārbaudīt atjauninājumus” rūtiņu.
 Later	Vēlāk
 Open the update page	Atvērt atjauninājuma lapu
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink ir atjaunināts uz V{0} (vecā versija saglabāta blakus: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink ir atjaunināts uz V{0}; vecā versija ir izdzēsta.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink ir atjaunināts uz V{0}; vecā versija tiks izdzēsta nākamajā palaišanas reizē.
 Last {0} memories used	Pēdējās {0} izmantotās atmiņas
 ExpertSDR TCI port: {0}…	ExpertSDR TCI ports: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Pieejams atjauninājums V{0}: noklikšķiniet, lai lejupielādētu
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: atjauninājums V{0}
 Downloading SDRLink V{0}…	Lejupielādē SDRLink V{0}…
 unavailable	nav pieejams
 unexpected format	negaidīts formāts
-Find WebSDRs (France and neighbouring countries)	Meklēt WebSDR (Francija un kaimiņvalstis)
+Find WebSDRs near your position	Meklēt WebSDR jūsu atrašanās vietas tuvumā
 All	Visi
-Max distance from the centre of France (km):	Maks. attālums no Francijas centra (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Jūsu lokators (JN18du) vai koordinātas (48.85, 2.35). Tukšs: datora atrašanās vieta (Windows atrašanās vieta).
+Position (Grid locator):	Atrašanās vieta (Grid locator):
+Computer's position	Datora atrašanās vieta
+Max distance from the current position (km):	Maks. attālums no pašreizējās atrašanās vietas (km):
 Filter:	Filtrs:
 Type:	Tips:
 Location	Vieta
@@ -639,9 +643,14 @@ Country	Valsts
 Users	Lietot.
 Add checked to favorites	Pievienot atzīmētos izlasei
 Refresh	Atsvaidzināt
+position not recognised: type a locator (JN18du) or "latitude, longitude"	atrašanās vieta nav atpazīta: ievadiet lokatoru (JN18du) vai “platums, garums”
+looking for the computer's position…	meklē datora atrašanās vietu…
+computer's position unknown (Windows location turned off?): centre of France	datora atrašanās vieta nav zināma (Windows atrašanās vieta izslēgta?): Francijas centrs
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Meklē katalogos (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Vispirms sarakstā atlasiet uztvērēju.
 Please check the receivers to add first.	Vispirms atzīmējiet pievienojamos uztvērējus.
 Add to favorites	Pievienot izlasei
+typed position: {0}	ievadītā atrašanās vieta: {0}
+computer: {0}	dators: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Parādīti uztvērēji: {0}, atzīmēti: {1}, paslēpti (jau izlasē) – {2}   —   avoti: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Sarakstam "{1}" pievienoti izlases vienumi: {0}. Tos var pārdēvēt sadaļā "Pārvaldīt izlasi…".

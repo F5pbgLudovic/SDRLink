@@ -15,8 +15,10 @@ namespace SDRLink
 {
     // Mise à jour automatique : SDRLink.exe de la dernière version publiée sur GitHub est téléchargé à côté de l'exe
     // utilisé, vérifié (taille, empreinte SHA-256 donnée par GitHub, numéro de version du fichier), puis l'exe utilisé
-    // est renommé en « SDRLink.previous.exe » (Windows le permet même quand il tourne), le nouveau prend sa place et
-    // est lancé avec « --after-update <pid> » : il attend que l'ancien soit fermé avant de démarrer.
+    // est renommé en « SDRLink.previous.exe » (Windows le permet même quand il tourne), le nouveau prend sa place (même nom :
+    // les raccourcis marchent toujours) et
+    // est lancé avec « --after-update <pid> » : il attend que l'ancien soit fermé avant de démarrer, puis supprime
+    // SDRLink.previous.exe (depuis la 1.30).
     public static class Updater
     {
         public const string AssetName = "SDRLink.exe";
@@ -207,9 +209,34 @@ namespace SDRLink
                 string exe = Application.ExecutablePath;
                 TryDelete(DownloadPath(exe));
                 TryDelete(DownloadPath(exe) + ".rejected");
+                DeletePrevious(exe, updated);
             }
             catch { }
             return updated;
+        }
+
+        // Depuis la 1.30 : l'ancienne version (SDRLink.previous.exe) est supprimée du disque dès que la nouvelle a démarré
+        // et que l'ancienne est fermée ; le raccourci du bureau, qui vise SDRLink.exe, lance donc toujours la nouvelle.
+        // Fait à chaque démarrage (copies laissées par les mises à jour d'avant la 1.30, ou ancienne version encore ouverte
+        // la fois précédente). Juste après une mise à jour, quelques essais : Windows libère le fichier peu après la fermeture.
+        public static void DeletePrevious(string exe, bool justUpdated)
+        {
+            string prev = PreviousPath(exe);
+            if (!File.Exists(prev)) return;
+            for (int i = 0; i < (justUpdated ? 20 : 1); i++)
+            {
+                try
+                {
+                    File.Delete(prev);
+                    Log.Write("Mise à jour : ancienne version supprimée (" + Path.GetFileName(prev) + ")");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    if (i == (justUpdated ? 19 : 0)) Log.Write("Mise à jour : ancienne version " + Path.GetFileName(prev) + " pas encore supprimée (" + ex.Message + ")");
+                    else Thread.Sleep(250);
+                }
+            }
         }
 
         static void TryDelete(string f)

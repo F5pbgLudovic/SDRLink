@@ -64,7 +64,7 @@ Overview; each feature is detailed further down in its own section.
 - `%APPDATA%\SDRLink\settings.reset.txt`: reset requested, done at the restart then deleted (it only exists for a few seconds).
 - `%APPDATA%\SDRLink\sdrlink.log`: the log (reset at each launch).
 - `%LOCALAPPDATA%\SDRLink\WebView2`: WebSDR page data (cookies, cache; the name given to KiwiSDRs and websdr.org is there too); `%LOCALAPPDATA%\SDRLink\runtime`: WebView2Loader.dll; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<size>\sdrlink_freedv.dll`: FreeDV decoder, written only the first time FreeDV auto is used (since 1.24).
-- Next to `SDRLink.exe`: `SDRLink.previous.exe`, the previous version kept by the automatic update (it can be deleted); `SDRLink.exe.download` exists only during a download (since 1.27).
+- Next to `SDRLink.exe`, only during an automatic update: `SDRLink.exe.download` (the download) and `SDRLink.previous.exe` (the old version, deleted as soon as the new one has started, since 1.30).
 - `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
 - `Pictures\SDRLink`: received SSTV, WEFAX and Hell pictures, as PNG (`SSTV_<mode>_<date>_<time>.png`, `WEFAX_<lines>-<IOC>_<date>_<time>.png`, `Hell_<date>_<time>.png`; `_partiel` if the picture did not reach the end) (since 1.25).
 - `%LOCALAPPDATA%\SDRLink\runtime\digi-…\sdrlink_digi.dll`: FT8 / FT4 / FT2 and Olivia / Contestia decoders, written only when these modes are first used (since 1.25).
@@ -210,8 +210,12 @@ The **Find WebSDRs…** button (WebSDR bar) queries three public directories:
 - the official **KiwiSDR** list;
 - **ReceiverBook** (OpenWebRX, WebSDR, KiwiSDR).
 
-Duplicates are removed. The list is shown **sorted by distance from the centre of France**.
-- **Max distance** (1000 km by default): France, Belgium, Luxembourg, Switzerland, northern Italy and Spain, western Germany, the Netherlands, southern England… Increase or reduce as you like.
+Duplicates are removed. The list is shown **sorted by distance from your position** (since 1.30).
+- **Position (Grid locator)**: leave the box **empty** to use the **computer's position**, given by the Windows location service (GPS, Wi-Fi or network; **Settings > Privacy > Location** must be on, with "Allow desktop apps to access your location"). Or type your **locator** (JN18 or JN18du) or your **coordinates** (48.85, 2.35; 48,85 2,35; 48.85N 1.5W…). What you type is remembered for next time.
+  - On the right, SDRLink shows the position used, as a locator: "typed position: JN18du" or "computer: JN18eu". A wrong position is shown in red.
+  - **Computer's position**: empties the box and asks Windows for the position again.
+  - Computer's position unknown (Windows location turned off) and nothing typed: distances start from the **centre of France**, as before 1.30; this is written in red.
+- **Max distance from the current position** (1000 km by default; from the centre of France: France, Belgium, Luxembourg, Switzerland, northern Italy and Spain, western Germany, the Netherlands, southern England…). Increase or reduce as you like.
 - **Filter**: free text (town, callsign, département…). **Type**: websdr.org, KiwiSDR, OpenWebRX…
 - Receivers **already in favorites** (in any list) are not offered; the bottom of the window shows how many are hidden this way. KiwiSDR proxies (xxx.proxy.kiwisdr.com) with or without :8073 count as a single receiver.
 - Click a column heading to sort by that column.
@@ -604,8 +608,8 @@ Box ticked: at startup, if the Internet answers, SDRLink looks up the latest ver
 **Automatic update** (since 1.27): in this window, the orange link **➜ Update to Vx.y automatically now** does everything by itself:
 - it downloads the new version's `SDRLink.exe` from GitHub, with a progress bar and a **Cancel** button;
 - it checks the file: size, **SHA-256 fingerprint** published by GitHub and version number; if it does not match, nothing is changed;
-- it puts the new version in place of this one, with the same name and in the same folder; the old one stays next to it as **`SDRLink.previous.exe`** (replaced at the next update), to go back if needed;
-- it closes SDRLink (settings saved as usual) and starts the new version, which waits until the old one has completely closed before starting; the status bar then shows "SDRLink has been updated to Vx.y".
+- it puts the new version in place of this one, **with the same name `SDRLink.exe` and in the same folder**: a shortcut on the desktop or the taskbar therefore always starts the new version;
+- it closes SDRLink (settings saved as usual) and starts the new version, which waits until the old one has completely closed before starting, then **deletes the old version from the disk** (since 1.30; before, it stayed next to it as `SDRLink.previous.exe`). The status bar then shows "SDRLink has been updated to Vx.y; the old version has been deleted." If Windows still locks the old file, it is deleted at the next start. `SDRLink.previous.exe` copies left by updates before 1.30 are deleted too.
 
 The settings do not move (they are in `%APPDATA%\SDRLink`). If something fails (antivirus blocking or deleting the file, a folder SDRLink is not allowed to write to such as `Program Files`, Internet down…), SDRLink stays as it is, explains why and offers to open the download page. **The links to the version page and to all versions stay in the window**: some antivirus programs do not like a program that replaces itself, so you can always download by hand. The automatic update works from a version that contains it (1.27 or later) to a newer version.
 
@@ -623,6 +627,9 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.30**
+  - **Automatic update**: the old version is **deleted from the disk** as soon as the new one has started (no more `SDRLink.previous.exe`); the new one keeps the name `SDRLink.exe`, so desktop shortcuts still work.
+  - **Find WebSDRs**: distances start from **your position** instead of the centre of France: the computer's position (Windows location), or a typed locator or coordinates (remembered). "Max distance from the current position". Centre of France only when no position is known.
 - **1.29**
   - Background colour **palette**: **64 shades** in dark mode and 64 in light mode, 32 on each side of the button (neutral and cool on the left, warm on the right).
   - **Your own colour** below the palette: **Red**, **Green**, **Blue** values (0 to 255) with a text preview, **Apply**, or **Other colour…** (Windows colour picker).

@@ -162,8 +162,10 @@ namespace SDRLink
                 if (Program.JustUpdated)
                 {
                     Log.Write("Mise à jour automatique : V" + Program.Version + " démarrée");
-                    ShowStatus(Lang.F("SDRLink a été mis à jour en V{0} (l'ancienne version est gardée à côté : {1}).",
-                        "SDRLink has been updated to V{0} (the old version is kept next to it: {1}).", Program.Version, Path.GetFileName(Updater.PreviousPath(Application.ExecutablePath))));
+                    // Depuis la 1.30, l'ancienne version est supprimée du disque (Updater.AfterUpdate).
+                    ShowStatus(!File.Exists(Updater.PreviousPath(Application.ExecutablePath))
+                        ? Lang.F("SDRLink a été mis à jour en V{0} ; l'ancienne version a été supprimée.", "SDRLink has been updated to V{0}; the old version has been deleted.", Program.Version)
+                        : Lang.F("SDRLink a été mis à jour en V{0} ; l'ancienne version sera supprimée au prochain démarrage.", "SDRLink has been updated to V{0}; the old version will be deleted at the next start.", Program.Version));
                 }
             };
             Application.AddMessageFilter(new WheelFilter(this));
@@ -3871,11 +3873,13 @@ namespace SDRLink
         // Recherche dans les annuaires publics ; les récepteurs cochés sont ajoutés aux favoris.
         void SearchWebSdrs()
         {
-            using (WebSdrSearchDialog d = new WebSdrSearchDialog(settings.Favorites, settings.ListNames, delegate(string url) { Navigate(url); }))
+            using (WebSdrSearchDialog d = new WebSdrSearchDialog(settings.Favorites, settings.ListNames, delegate(string url) { Navigate(url); }, settings.SearchPosition))
             {
                 d.TargetList = settings.CurrentList;
                 d.ShowDialog(this);
-                if (d.Added == 0) return;
+                bool posChanged = d.Position != settings.SearchPosition;
+                settings.SearchPosition = d.Position;      // locator ou coordonnées tapés (vide = position de l'ordinateur)
+                if (d.Added == 0) { if (posChanged) settings.Save(); return; }
             }
             RefillUrlCombo();
             if (web.CoreWebView2 != null) OnPageChanged(web.CoreWebView2.Source);
@@ -4827,7 +4831,8 @@ namespace SDRLink
         }
 
         // Mise à jour automatique : téléchargement et contrôle de SDRLink.exe, remplacement de l'exe utilisé
-        // (l'ancien reste à côté sous le nom SDRLink.previous.exe), lancement de la nouvelle version, fermeture de celle-ci.
+        // (l'ancien est renommé SDRLink.previous.exe, que la nouvelle version supprime en démarrant), lancement de la nouvelle
+        // version, fermeture de celle-ci.
         // En cas d'échec : explication et proposition d'ouvrir la page de téléchargement.
         void AutoUpdate(string version, string url, Updater.Asset asset)
         {

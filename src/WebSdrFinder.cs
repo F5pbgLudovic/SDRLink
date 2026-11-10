@@ -22,7 +22,7 @@ namespace SDRLink
     // Lecture des annuaires publics : websdr.org, KiwiSDR (kiwisdr.com via rx.linkfanel.net) et ReceiverBook.
     public static class WebSdrFinder
     {
-        // Centre de la France : les distances sont comptées depuis ce point.
+        // Centre de la France : point de départ des distances quand la position de la station est inconnue.
         public const double CenterLat = 46.6, CenterLon = 2.4;
 
         const string WebSdrOrgUrl = "http://websdr.ewi.utwente.nl/~~websdrlistk?v=1&fmt=2&chseq=0";
@@ -44,6 +44,12 @@ namespace SDRLink
             }
             all.Sort(delegate(FoundSdr a, FoundSdr b) { return a.DistanceKm.CompareTo(b.DistanceKm); });
             return all;
+        }
+
+        // Distances recalculées depuis la position de la station (recherche de WebSDR, depuis la 1.30).
+        public static void SetDistances(List<FoundSdr> list, double lat, double lon)
+        {
+            foreach (FoundSdr s in list) s.DistanceKm = Distance(lat, lon, s.Lat, s.Lon);
         }
 
         static void Load(string source, string url, Func<string, List<FoundSdr>> parse,
@@ -281,12 +287,26 @@ namespace SDRLink
         public int TargetList;      // liste proposée pour les récepteurs ajoutés (choix demandé à chaque ajout)
         readonly string[] listNames;
 
+        // Position de la station (depuis la 1.30) : les distances partent de là. Case vide = position de l'ordinateur
+        // (localisation de Windows) ; sinon locator ou coordonnées tapés ; à défaut, centre de la France.
+        readonly TextBox txtPos = new TextBox();
+        readonly Label lblPos = new Label();
+        double refLat = WebSdrFinder.CenterLat, refLon = WebSdrFinder.CenterLon;
+        double pcLat, pcLon;
+        bool pcKnown, pcBusy, posSilent;
+
+        // Locator ou coordonnées tapés (vide = position de l'ordinateur), à retenir dans les réglages.
+        public string Position { get { return txtPos.Text.Trim(); } }
+
         public WebSdrSearchDialog(List<Favorite> favorites, string[] listNames, Action<string> listen)
+            : this(favorites, listNames, listen, "") { }
+
+        public WebSdrSearchDialog(List<Favorite> favorites, string[] listNames, Action<string> listen, string position)
         {
             favs = favorites;
             this.listNames = listNames;
             this.listen = listen;
-            Text = Lang.T("Rechercher des WebSDR (France et pays voisins)", "Find WebSDRs (France and neighbouring countries)");
+            Text = Lang.T("Rechercher des WebSDR proches de votre position", "Find WebSDRs near your position");
             StartPosition = FormStartPosition.CenterParent;
             ShowInTaskbar = false;
             MinimizeBox = false;
@@ -301,7 +321,26 @@ namespace SDRLink
             cbType.Width = 120;
             cbType.Items.AddRange(new object[] { Lang.T("Tous", "All"), "websdr.org", "KiwiSDR", "OpenWebRX", "WebSDR" });
             cbType.SelectedIndex = 0;
-            top.Controls.Add(L(Lang.T("Distance max du centre de la France (km) :", "Max distance from the centre of France (km):")));
+            txtPos.Width = 120;
+            txtPos.Text = position ?? "";
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(txtPos, Lang.T("Votre locator (JN18du) ou vos coordonnées (48.85, 2.35). Vide : position de l'ordinateur (localisation de Windows).",
+                                          "Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location)."));
+            top.Controls.Add(L(Lang.T("Position (Grid locator) :", "Position (Grid locator):")));
+            top.Controls.Add(txtPos);
+            Button pc = B(Lang.T("Position de l'ordinateur", "Computer's position"), delegate
+            {
+                posSilent = true; txtPos.Text = ""; posSilent = false;
+                UpdatePosition(true);
+            });
+            pc.Margin = new Padding(4, 1, 2, 0);
+            top.Controls.Add(pc);
+            lblPos.AutoSize = true;
+            lblPos.Margin = new Padding(4, 6, 12, 0);
+            top.Controls.Add(lblPos);
+            txtPos.TextChanged += delegate { if (!posSilent) UpdatePosition(false); };
+            top.SetFlowBreak(lblPos, true);
+            top.Controls.Add(L(Lang.T("Distance max par rapport à la position actuelle (km) :", "Max distance from the current position (km):")));
             top.Controls.Add(numDist);
             top.Controls.Add(L(Lang.T("Filtre :", "Filter:")));
             top.Controls.Add(txtFilter);
@@ -354,7 +393,69 @@ namespace SDRLink
             Controls.Add(top);
             Controls.Add(bottom);
             Theme.Apply(this);
-            Shown += delegate { StartLoading(); };
+            Shown += delegate { UpdatePosition(false); StartLoading(); };
+        }
+
+        // Position de départ des distances : tapée (locator ou coordonnées), sinon celle de l'ordinateur (demandée à
+        // Windows en arrière-plan, gardée pendant la fenêtre ; askComputer = la redemander), sinon centre de la France.
+        void UpdatePosition(bool askComputer)
+        {
+            string t = txtPos.Text.Trim();
+            double lat, lon;
+            if (t != "")
+            {
+                if (GeoPosition.Parse(t, out lat, out lon))
+                    SetReference(lat, lon, Lang.F("position tapée : {0}", "typed position: {0}", GeoPosition.ToLocator(lat, lon)), false);
+                else
+                {
+                    lblPos.Text = Lang.T("position non reconnue : tapez un locator (JN18du) ou « latitude, longitude »",
+                                         "position not recognised: type a locator (JN18du) or \"latitude, longitude\"");
+                    lblPos.ForeColor = Theme.TxFreq;
+                }
+                return;
+            }
+            if (pcKnown && !askComputer)
+            {
+                SetReference(pcLat, pcLon, Lang.F("ordinateur : {0}", "computer: {0}", GeoPosition.ToLocator(pcLat, pcLon)), false);
+                return;
+            }
+            if (pcBusy) return;
+            pcBusy = true;
+            lblPos.Text = Lang.T("recherche de la position de l'ordinateur…", "looking for the computer's position…");
+            lblPos.ForeColor = Theme.Fore;
+            Thread th = new Thread(delegate()
+            {
+                double a, b;
+                bool ok = GeoPosition.FromWindows(10000, out a, out b);
+                try
+                {
+                    BeginInvoke((Action)delegate
+                    {
+                        pcBusy = false;
+                        if (ok) { pcKnown = true; pcLat = a; pcLon = b; }
+                        Log.Write(ok ? "Recherche WebSDR : position de l'ordinateur " + GeoPosition.ToLocator(a, b)
+                                     : "Recherche WebSDR : position de l'ordinateur inconnue, centre de la France");
+                        if (txtPos.Text.Trim() != "") return;     // une position a été tapée entre-temps
+                        if (ok) SetReference(a, b, Lang.F("ordinateur : {0}", "computer: {0}", GeoPosition.ToLocator(a, b)), false);
+                        else SetReference(WebSdrFinder.CenterLat, WebSdrFinder.CenterLon,
+                            Lang.T("position de l'ordinateur inconnue (localisation de Windows désactivée ?) : centre de la France",
+                                   "computer's position unknown (Windows location turned off?): centre of France"), true);
+                    });
+                }
+                catch (InvalidOperationException) { }   // fenêtre fermée pendant la recherche
+            });
+            th.IsBackground = true;
+            th.Start();
+        }
+
+        void SetReference(double lat, double lon, string label, bool warn)
+        {
+            refLat = lat;
+            refLon = lon;
+            lblPos.Text = label;
+            lblPos.ForeColor = warn ? Theme.TxFreq : Theme.Fore;
+            WebSdrFinder.SetDistances(found, refLat, refLon);
+            Fill();
         }
 
         static Label L(string text)
@@ -385,6 +486,7 @@ namespace SDRLink
                     {
                         Cursor = Cursors.Default;
                         found = list;
+                        WebSdrFinder.SetDistances(found, refLat, refLon);
                         sourcesReport = string.Join(", ", report.ToArray());
                         Log.Write("Recherche WebSDR : " + sourcesReport);
                         Fill();

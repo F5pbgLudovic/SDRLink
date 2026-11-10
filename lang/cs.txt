@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automatická kontrola při spuštění: vypnuta
 To turn it on, tick the box of the “Check for updates” button.	Pro zapnutí zaškrtněte políčko tlačítka „Kontrolovat aktualizace“.
 Later	Později
 Open the update page	Otevřít stránku aktualizace
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink byl aktualizován na V{0} (stará verze je uložena vedle: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink byl aktualizován na V{0}; stará verze byla smazána.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink byl aktualizován na V{0}; stará verze bude smazána při příštím spuštění.
 Last {0} memories used	Posledních {0} použitých pamětí
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ K dispozici je aktualizace V{0}: klikněte pro stažení
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: aktualizace V{0}
 Downloading SDRLink V{0}…	Stahování SDRLink V{0}…
 unavailable	nedostupné
 unexpected format	neočekávaný formát
-Find WebSDRs (France and neighbouring countries)	Najít WebSDR (Francie a sousední země)
+Find WebSDRs near your position	Hledat WebSDR blízko vaší polohy
 All	Vše
-Max distance from the centre of France (km):	Max. vzdálenost od středu Francie (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Váš lokátor (JN18du) nebo souřadnice (48.85, 2.35). Prázdné: poloha počítače (poloha Windows).
+Position (Grid locator):	Poloha (Grid locator):
+Computer's position	Poloha počítače
+Max distance from the current position (km):	Max. vzdálenost od aktuální polohy (km):
 Filter:	Filtr:
 Type:	Typ:
 Location	Umístění
@@ -639,9 +643,14 @@ Country	Země
 Users	Uživ.
 Add checked to favorites	Přidat zaškrtnuté do oblíbených
 Refresh	Obnovit
+position not recognised: type a locator (JN18du) or "latitude, longitude"	poloha nerozpoznána: zadejte lokátor (JN18du) nebo „zeměpisná šířka, délka“
+looking for the computer's position…	zjišťování polohy počítače…
+computer's position unknown (Windows location turned off?): centre of France	poloha počítače neznámá (poloha Windows vypnutá?): střed Francie
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Prohledávání adresářů (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Nejprve vyberte přijímač v seznamu.
 Please check the receivers to add first.	Nejprve zaškrtněte přijímače, které chcete přidat.
 Add to favorites	Přidat do oblíbených
+typed position: {0}	zadaná poloha: {0}
+computer: {0}	počítač: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Zobrazené přijímače: {0}, zaškrtnuté: {1}, skryté (již v oblíbených): {2}   —   zdroje: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Přidané oblíbené: {0} (seznam „{1}“). Můžete je přejmenovat v „Spravovat oblíbené…“.

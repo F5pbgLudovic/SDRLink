@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automaattinen tarkistus käynnistettäessä: po
 To turn it on, tick the box of the “Check for updates” button.	Ota se käyttöön valitsemalla painikkeen ”Tarkista päivitykset” ruutu.
 Later	Myöhemmin
 Open the update page	Avaa päivityksen sivu
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink on päivitetty versioon V{0} (vanha versio on tallessa vieressä: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink on päivitetty versioon V{0}; vanha versio on poistettu.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink on päivitetty versioon V{0}; vanha versio poistetaan seuraavalla käynnistyskerralla.
 Last {0} memories used	Viimeiset {0} käytettyä muistia
 ExpertSDR TCI port: {0}…	ExpertSDR:n TCI-portti: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Päivitys V{0} saatavilla: lataa napsauttamalla
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: päivitys V{0}
 Downloading SDRLink V{0}…	Ladataan SDRLink V{0}…
 unavailable	ei käytettävissä
 unexpected format	odottamaton muoto
-Find WebSDRs (France and neighbouring countries)	Etsi WebSDR-vastaanottimia (Ranska ja naapurimaat)
+Find WebSDRs near your position	Etsi WebSDR:iä sijaintisi läheltä
 All	Kaikki
-Max distance from the centre of France (km):	Enimmäisetäisyys Ranskan keskipisteestä (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Lokaattorisi (JN18du) tai koordinaattisi (48.85, 2.35). Tyhjä: tietokoneen sijainti (Windowsin sijainti).
+Position (Grid locator):	Sijainti (Grid locator):
+Computer's position	Tietokoneen sijainti
+Max distance from the current position (km):	Enimmäisetäisyys nykyisestä sijainnista (km):
 Filter:	Suodatin:
 Type:	Tyyppi:
 Location	Sijainti
@@ -639,9 +643,14 @@ Country	Maa
 Users	Käytt.
 Add checked to favorites	Lisää merkityt suosikkeihin
 Refresh	Päivitä
+position not recognised: type a locator (JN18du) or "latitude, longitude"	sijaintia ei tunnistettu: kirjoita lokaattori (JN18du) tai "leveys, pituus"
+looking for the computer's position…	haetaan tietokoneen sijaintia…
+computer's position unknown (Windows location turned off?): centre of France	tietokoneen sijainti tuntematon (Windowsin sijainti pois päältä?): Ranskan keskipiste
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Haetaan hakemistoista (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Valitse ensin vastaanotin luettelosta.
 Please check the receivers to add first.	Merkitse ensin lisättävät vastaanottimet.
 Add to favorites	Lisää suosikkeihin
+typed position: {0}	kirjoitettu sijainti: {0}
+computer: {0}	tietokone: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} vastaanotin(ta) näkyvissä, {1} merkitty, {2} jo suosikeissa piilotettu   —   lähteet: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} suosikki(a) lisätty luetteloon ”{1}”. Voit nimetä ne uudelleen kohdassa ”Hallitse suosikkeja…”.

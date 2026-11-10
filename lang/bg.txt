@@ -364,7 +364,8 @@ Automatic check at startup: off.	Автоматична проверка при 
 To turn it on, tick the box of the “Check for updates” button.	За да я включите, отметнете квадратчето на бутона „Проверка за актуализации“.
 Later	По-късно
 Open the update page	Отвори страницата на актуализацията
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink е обновен до V{0} (старата версия е запазена до него: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink беше обновен до V{0}; старата версия беше изтрита.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink беше обновен до V{0}; старата версия ще бъде изтрита при следващото стартиране.
 Last {0} memories used	Последните {0} използвани памети
 ExpertSDR TCI port: {0}…	TCI порт на ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Налична е актуализация V{0}: щракнете, за да я изтеглите
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: обновяване V{0}
 Downloading SDRLink V{0}…	Изтегляне на SDRLink V{0}…
 unavailable	недостъпно
 unexpected format	неочакван формат
-Find WebSDRs (France and neighbouring countries)	Търсене на WebSDR (Франция и съседни страни)
+Find WebSDRs near your position	Търсене на WebSDR близо до вашето местоположение
 All	Всички
-Max distance from the centre of France (km):	Макс. разстояние от центъра на Франция (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Вашият локатор (JN18du) или координати (48.85, 2.35). Празно: местоположението на компютъра (местоположение на Windows).
+Position (Grid locator):	Местоположение (Grid locator):
+Computer's position	Местоположение на компютъра
+Max distance from the current position (km):	Макс. разстояние от текущото местоположение (km):
 Filter:	Филтър:
 Type:	Тип:
 Location	Място
@@ -639,9 +643,14 @@ Country	Държава
 Users	Потреб.
 Add checked to favorites	Добави отметнатите в предпочитани
 Refresh	Обнови
+position not recognised: type a locator (JN18du) or "latitude, longitude"	неразпознато местоположение: въведете локатор (JN18du) или „ширина, дължина“
+looking for the computer's position…	търсене на местоположението на компютъра…
+computer's position unknown (Windows location turned off?): centre of France	местоположението на компютъра е неизвестно (местоположението на Windows е изключено?): центърът на Франция
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Търсене в каталозите (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Първо изберете приемник от списъка.
 Please check the receivers to add first.	Първо отметнете приемниците за добавяне.
 Add to favorites	Добавяне в предпочитани
+typed position: {0}	въведено местоположение: {0}
+computer: {0}	компютър: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Показани приемници: {0}, отметнати: {1}, скрити (вече в предпочитани) – {2}   —   източници: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Добавени записи в „{1}“: {0}. Можете да ги преименувате в „Управление на предпочитани…“.

@@ -364,7 +364,8 @@ Automatic check at startup: off.	Verificare automată la pornire: dezactivată.
 To turn it on, tick the box of the “Check for updates” button.	Pentru a o activa, bifați caseta butonului „Caută actualizări”.
 Later	Mai târziu
 Open the update page	Deschide pagina actualizării
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink a fost actualizat la V{0} (versiunea veche este păstrată alături: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink a fost actualizat la V{0}; versiunea veche a fost ștearsă.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink a fost actualizat la V{0}; versiunea veche va fi ștearsă la următoarea pornire.
 Last {0} memories used	Ultimele {0} memorii folosite
 ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualizarea V{0} este disponibilă: faceți clic pentru a o descărca
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: actualizare V{0}
 Downloading SDRLink V{0}…	Se descarcă SDRLink V{0}…
 unavailable	indisponibil
 unexpected format	format neașteptat
-Find WebSDRs (France and neighbouring countries)	Căutare WebSDR (Franța și țările vecine)
+Find WebSDRs near your position	Caută WebSDR-uri lângă poziția dvs.
 All	Toate
-Max distance from the centre of France (km):	Distanța max. față de centrul Franței (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Locatorul dvs. (JN18du) sau coordonatele dvs. (48.85, 2.35). Gol: poziția computerului (locația Windows).
+Position (Grid locator):	Poziție (Grid locator):
+Computer's position	Poziția computerului
+Max distance from the current position (km):	Distanța max. față de poziția actuală (km):
 Filter:	Filtru:
 Type:	Tip:
 Location	Locație
@@ -639,9 +643,14 @@ Country	Țară
 Users	Utiliz.
 Add checked to favorites	Adăugare bifate la favorite
 Refresh	Reîmprospătare
+position not recognised: type a locator (JN18du) or "latitude, longitude"	poziție nerecunoscută: tastați un locator (JN18du) sau „latitudine, longitudine”
+looking for the computer's position…	se caută poziția computerului…
+computer's position unknown (Windows location turned off?): centre of France	poziția computerului necunoscută (locația Windows dezactivată?): centrul Franței
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Căutare în directoare (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Selectați mai întâi un receptor din listă.
 Please check the receivers to add first.	Bifați mai întâi receptoarele de adăugat.
 Add to favorites	Adăugare la favorite
+typed position: {0}	poziție tastată: {0}
+computer: {0}	computer: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} receptor(i) afișat(i), {1} bifat(i), {2} deja în favorite ascuns(e)   —   surse: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favorit(e) adăugat(e) în „{1}”. Le puteți redenumi în „Gestionare favorite…”.

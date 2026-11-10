@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automatikus keresés indításkor: ki.
 To turn it on, tick the box of the “Check for updates” button.	A bekapcsoláshoz jelölje be a „Frissítések keresése” gomb négyzetét.
 Later	Később
 Open the update page	Frissítés oldalának megnyitása
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	A SDRLink frissítve a V{0} verzióra (a régi verzió mellette marad: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	Az SDRLink frissítve: V{0}; a régi verzió törölve.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	Az SDRLink frissítve: V{0}; a régi verzió a következő indításkor törlődik.
 Last {0} memories used	Utolsó {0} használt memória
 ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Elérhető a V{0} frissítés: kattintson a letöltéshez
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: frissítés V{0}
 Downloading SDRLink V{0}…	A SDRLink V{0} letöltése…
 unavailable	nem elérhető
 unexpected format	váratlan formátum
-Find WebSDRs (France and neighbouring countries)	WebSDR-ek keresése (Franciaország és szomszédos országok)
+Find WebSDRs near your position	WebSDR-ek keresése az Ön helyzetének közelében
 All	Mind
-Max distance from the centre of France (km):	Max. távolság Franciaország közepétől (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Az Ön lokátora (JN18du) vagy koordinátái (48.85, 2.35). Üres: a számítógép helyzete (Windows-helymeghatározás).
+Position (Grid locator):	Helyzet (Grid locator):
+Computer's position	A számítógép helyzete
+Max distance from the current position (km):	Max. távolság a jelenlegi helyzettől (km):
 Filter:	Szűrő:
 Type:	Típus:
 Location	Hely
@@ -639,9 +643,14 @@ Country	Ország
 Users	Felh.
 Add checked to favorites	Bejelöltek a kedvencekhez
 Refresh	Frissítés
+position not recognised: type a locator (JN18du) or "latitude, longitude"	ismeretlen helyzet: írjon be lokátort (JN18du) vagy „szélesség, hosszúság” értéket
+looking for the computer's position…	a számítógép helyzetének keresése…
+computer's position unknown (Windows location turned off?): centre of France	a számítógép helyzete ismeretlen (ki van kapcsolva a Windows-helymeghatározás?): Franciaország közepe
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Keresés a címtárakban (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Először válasszon ki egy vevőt a listában.
 Please check the receivers to add first.	Előbb jelölje be a hozzáadandó vevőket.
 Add to favorites	Hozzáadás a kedvencekhez
+typed position: {0}	beírt helyzet: {0}
+computer: {0}	számítógép: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} vevő látható, {1} bejelölve, {2} már kedvencként elrejtve   —   források: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} kedvenc hozzáadva a(z) „{1}” listához. Átnevezheti őket a „Kedvencek kezelése…” menüpontban.

@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automatska provjera pri pokretanju: isključena
 To turn it on, tick the box of the “Check for updates” button.	Za uključivanje označite okvir na gumbu „Provjeri ažuriranja”.
 Later	Kasnije
 Open the update page	Otvori stranicu ažuriranja
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink je ažuriran na V{0} (stara verzija čuva se pokraj: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink je ažuriran na V{0}; stara verzija je izbrisana.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink je ažuriran na V{0}; stara verzija bit će izbrisana pri sljedećem pokretanju.
 Last {0} memories used	Zadnjih {0} korištenih memorija
 ExpertSDR TCI port: {0}…	TCI priključak ExpertSDR-a: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Dostupno je ažuriranje V{0}: kliknite za preuzimanje
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: ažuriranje V{0}
 Downloading SDRLink V{0}…	Preuzimanje SDRLink V{0}…
 unavailable	nedostupno
 unexpected format	neočekivani format
-Find WebSDRs (France and neighbouring countries)	Pronađi WebSDR (Francuska i susjedne zemlje)
+Find WebSDRs near your position	Traži WebSDR-ove blizu vašeg položaja
 All	Sve
-Max distance from the centre of France (km):	Najv. udaljenost od središta Francuske (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Vaš lokator (JN18du) ili vaše koordinate (48.85, 2.35). Prazno: položaj računala (lokacija sustava Windows).
+Position (Grid locator):	Položaj (Grid locator):
+Computer's position	Položaj računala
+Max distance from the current position (km):	Najveća udaljenost od trenutnog položaja (km):
 Filter:	Filtar:
 Type:	Vrsta:
 Location	Lokacija
@@ -639,9 +643,14 @@ Country	Država
 Users	Korisn.
 Add checked to favorites	Dodaj označene u favorite
 Refresh	Osvježi
+position not recognised: type a locator (JN18du) or "latitude, longitude"	položaj nije prepoznat: upišite lokator (JN18du) ili „širina, dužina”
+looking for the computer's position…	traženje položaja računala…
+computer's position unknown (Windows location turned off?): centre of France	položaj računala nepoznat (lokacija sustava Windows isključena?): središte Francuske
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Pretraživanje imenika (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Najprije odaberite prijemnik na popisu.
 Please check the receivers to add first.	Najprije označite prijamnike koje želite dodati.
 Add to favorites	Dodaj u favorite
+typed position: {0}	upisani položaj: {0}
+computer: {0}	računalo: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	Prikazani prijemnici: {0}, označeni: {1}, skriveni (već u favoritima): {2}   —   izvori: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	Dodani favoriti: {0} (popis „{1}”). Možete ih preimenovati u „Upravljaj favoritima…”.

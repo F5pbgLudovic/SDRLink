@@ -51,6 +51,7 @@ namespace SDRLink
         public int SstvX = 0, SstvY = 1000; // position de la fenêtre SSTV sur la page, en millièmes de la place libre (0,1000 = en bas à gauche)
         public string DigiMode = "SSTV";   // mode numérique du bouton SSTV (SSTV, FT8, CW, WEFAX...) ; SstvAuto = décodeur en marche
         public int IaruRegion = 1;         // liste de mémoires « Modes numériques » : région IARU 1, 2 ou 3
+        public string SearchPosition = "";  // recherche de WebSDR : locator ou coordonnées tapés (vide = position de l'ordinateur)
         public string DigiHi = "";         // surbrillance : textes à repérer dans le trafic décodé, séparés par des virgules
         public Dictionary<string, int> Digi = new Dictionary<string, int>();   // réglages des modes numériques (nom : valeur entière)
         public int DigiGet(string k, int def) { int v; return Digi.TryGetValue(k, out v) ? v : def; }
@@ -258,6 +259,7 @@ namespace SDRLink
                     case "SstvY": s.SstvY = Math.Max(0, Math.Min(1000, Int(v, 1000))); break;
                     case "DigiMode": s.DigiMode = v; break;
                     case "IaruRegion": s.IaruRegion = Math.Max(1, Math.Min(3, Int(v, 1))); break;
+                    case "SearchPosition": s.SearchPosition = v; break;
                     case "MemHist": { MemHistEntry e = MemHistEntry.FromSetting(v); if (e != null && s.MemHist.Count < MemHistEntry.Size) s.MemHist.Add(e); } break;
                     case "MemHistMin": { int m = Int(v, 0); s.MemHistMin = Array.IndexOf(FreqKeypad.AutoMinutes, m) >= 0 ? m : 0; } break;
                     case "DigiHi": try { s.DigiHi = Uri.UnescapeDataString(v); } catch { } break;
@@ -395,6 +397,7 @@ namespace SDRLink
             Line(sb, "SstvY", SstvY);
             Line(sb, "DigiMode", DigiMode);
             Line(sb, "IaruRegion", IaruRegion);
+            Line(sb, "SearchPosition", SearchPosition);
             Line(sb, "MemHistMin", MemHistMin);
             foreach (MemHistEntry e in MemHist) Line(sb, "MemHist", e.ToSetting());
             Line(sb, "DigiHi", Uri.EscapeDataString(DigiHi));

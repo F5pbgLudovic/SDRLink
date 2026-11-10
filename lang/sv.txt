@@ -364,7 +364,8 @@ Automatic check at startup: off.	Automatisk sökning vid start: av.
 To turn it on, tick the box of the “Check for updates” button.	För att slå på den, markera rutan på knappen ”Sök efter uppdateringar”.
 Later	Senare
 Open the update page	Öppna uppdateringssidan
-SDRLink has been updated to V{0} (the old version is kept next to it: {1}).	SDRLink har uppdaterats till V{0} (den gamla versionen finns kvar bredvid: {1}).
+SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink har uppdaterats till V{0}; den gamla versionen har tagits bort.
+SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink har uppdaterats till V{0}; den gamla versionen tas bort vid nästa start.
 Last {0} memories used	Senaste {0} använda minnen
 ExpertSDR TCI port: {0}…	TCI-port för ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Uppdatering V{0} tillgänglig: klicka för att ladda ner den
@@ -629,9 +630,12 @@ SDRLink: update V{0}	SDRLink: uppdatering V{0}
 Downloading SDRLink V{0}…	Hämtar SDRLink V{0}…
 unavailable	ej tillgänglig
 unexpected format	oväntat format
-Find WebSDRs (France and neighbouring countries)	Sök WebSDR (Frankrike och grannländer)
+Find WebSDRs near your position	Sök WebSDR nära din position
 All	Alla
-Max distance from the centre of France (km):	Max avstånd från Frankrikes mitt (km):
+Your locator (JN18du) or your coordinates (48.85, 2.35). Empty: the computer's position (Windows location).	Din lokator (JN18du) eller dina koordinater (48.85, 2.35). Tomt: datorns position (Windows-plats).
+Position (Grid locator):	Position (Grid locator):
+Computer's position	Datorns position
+Max distance from the current position (km):	Max. avstånd från aktuell position (km):
 Filter:	Filter:
 Type:	Typ:
 Location	Plats
@@ -639,9 +643,14 @@ Country	Land
 Users	Anv.
 Add checked to favorites	Lägg bockade i favoriter
 Refresh	Uppdatera
+position not recognised: type a locator (JN18du) or "latitude, longitude"	positionen känns inte igen: skriv en lokator (JN18du) eller "latitud, longitud"
+looking for the computer's position…	söker datorns position…
+computer's position unknown (Windows location turned off?): centre of France	datorns position okänd (Windows-plats avstängd?): Frankrikes mitt
 Searching directories (websdr.org, KiwiSDR, ReceiverBook)…	Söker i kataloger (websdr.org, KiwiSDR, ReceiverBook)…
 Please select a receiver in the list first.	Välj först en mottagare i listan.
 Please check the receivers to add first.	Bocka först för mottagarna som ska läggas till.
 Add to favorites	Lägg till i favoriter
+typed position: {0}	skriven position: {0}
+computer: {0}	dator: {0}
 {0} receiver(s) shown, {1} checked, {2} already in favorites hidden   —   sources: 	{0} mottagare visas, {1} bockade, {2} redan i favoriter dolda   —   källor: 
 {0} favorite(s) added to "{1}". You can rename them in "Manage favorites…".	{0} favorit(er) tillagda i ”{1}”. Du kan byta namn på dem i ”Hantera favoriter…”.
