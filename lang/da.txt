@@ -219,6 +219,7 @@ Reset the program…	Nulstil programmet…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportér eller importér alle indstillinger til samme opsætning på en anden computer (højreklik: nulstil programmet, knappens farve)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Navn eller kaldesignal, der automatisk gives til WebSDR'er, som beder om et før lyden (KiwiSDR, websdr.org). Klik: skift det (højreklik: knappens farve)
 Right-click: receivers muted while transmitting	Højreklik: modtagere der gøres lydløse under sending
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Genstarter den aktuelle WebSDR (f.eks. stoppet efter en periode uden aktivitet). Klik: genstart med indstillingerne bevaret (frekvens, mode, filter, zoom, lydstyrke). Højreklik: fuld nulstilling af WebSDR, som ved første besøg
 Save: no known frequency (rig or WebSDR)	Save: ingen kendt frekvens (radio eller WebSDR)
 Store the current frequency…	Gem den aktuelle frekvens…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: talen afkodes, så snart et FreeDV-signal modtages (klik: til / fra; højreklik: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	Kan ikke starte WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Navn eller kaldesignal til WebSDR'er, der beder om et (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Navnet må ikke være tomt.
 A name already typed on a site is kept.	Et navn, der allerede er skrevet på et websted, bevares.
+WebSDR restarted: filter and zoom restored	WebSDR genstartet: filter og zoom gendannet
 Invalid address: 	Ugyldig adresse: 
+No open WebSDR to restart	Ingen åben WebSDR at genstarte
+WebSDR restarted keeping its settings	WebSDR genstartet med indstillingerne bevaret
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR nulstillet: webstedets cookies og indstillinger slettet, siden åbnet igen som ved første besøg
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kabel: intet virtuelt lydkabel fundet. Installér VB-CABLE (gratis): knappen ”SDRLINK-kabel”.
 Output receiving the WebSDR audio:	Udgang, der modtager WebSDR-lyden:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Navngiv kablets anden ende ”SDRLINK” (vælg først et virtuelt kabel)
@@ -452,6 +457,7 @@ Download Hamlib…	Download Hamlib…
 SDRLINK cable ▾	SDRLINK-kabel ▾
 Scan setup	Scanningsopsætning
 ▶ Scan	▶ Scan
+Reset WebSDR	Nulstil WebSDR
 QSY	QSY
 Save	Save
 Memories	Hukommelser

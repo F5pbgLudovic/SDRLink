@@ -409,6 +409,52 @@ namespace SDRLink
       try { window.chrome.webview.postMessage(msg + (user ? '|u' : '')); } catch (e) { }
     }
   };
+  // Bouton Réinit WebSDR (clic) : réglages de la page gardés pour le rechargement, dans sessionStorage (il survit au
+  // rechargement de l'onglet) : filtre (bande passante) et zoom de la cascade de websdr.org et de KiwiSDR. La fréquence
+  // et le mode sont remis par SDRLink (reprise du WebSDR quitté) ; OpenWebRX garde les siens dans l'adresse (#freq=…),
+  // KiwiSDR et les autres dans leur propre stockage. Valable aussi quand la page a été arrêtée par son délai
+  // d'inactivité (« Idle time out. » de websdr.org) : ses variables restent lisibles.
+  L.keep = function () {
+    try {
+      var s = L.get(), k = detect(), x = { at: Date.now(), k: k, f: s ? Math.round(s.f) : 0, m: s ? String(s.m || '') : '' };
+      if (k === 'websdr') {
+        if (typeof window.lo === 'number' && typeof window.hi === 'number') { x.lo = window.lo; x.hi = window.hi; }
+        var e = window.bi && window.bi[window.band];
+        if (e && typeof e.zoom === 'number' && typeof e.effcenterfreq === 'number') { x.b = window.band; x.z = e.zoom; x.c = e.effcenterfreq; }
+      } else if (k === 'kiwi') {
+        if (typeof window.ext_get_passband === 'function') { var p = ext_get_passband(); if (p) { x.lo = p.low; x.hi = p.high; } }
+        if (typeof window.ext_get_zoom === 'function') x.z = ext_get_zoom();
+      }
+      sessionStorage.setItem('__sdrlink_keep', JSON.stringify(x));
+      return JSON.stringify(x);
+    } catch (e) { return ''; }
+  };
+  // Après le rechargement : réglages remis une fois, quand la page est prête et stable depuis 1,5 s dans le mode d'avant
+  // (le filtre dépend du mode). Une minute au plus ; rien si la page a changé de type de WebSDR.
+  var kept = null;
+  try { kept = JSON.parse(sessionStorage.getItem('__sdrlink_keep') || 'null'); sessionStorage.removeItem('__sdrlink_keep'); } catch (e) { }
+  if (kept && Date.now() - kept.at < 60000 && (kept.lo != null || kept.z != null)) {
+    var keptF = 0, keptSince = 0, keptTimer = setInterval(function () {
+      if (Date.now() - kept.at > 60000) { clearInterval(keptTimer); return; }
+      var s = L.get();
+      var ready = s && s.k === kept.k && s.f > 0 && String(s.m || '').toUpperCase() === String(kept.m).toUpperCase();
+      if (ready && s.k === 'websdr' && !(window.allloadeddone || (L.loadedAt && Date.now() - L.loadedAt > 4000))) ready = false;
+      if (!ready || Math.abs(s.f - keptF) > 100) { keptF = ready ? s.f : 0; keptSince = ready ? Date.now() : 0; return; }
+      if (Date.now() - keptSince < 1500) return;
+      clearInterval(keptTimer);
+      try {
+        if (kept.k === 'websdr') {
+          if (kept.lo != null && typeof window.setmf === 'function') setmf(String(window.mode), kept.lo, kept.hi);
+          if (kept.z != null && kept.b === window.band && typeof window.wfset_freq === 'function') wfset_freq(kept.b, kept.z, kept.c);
+        } else if (kept.k === 'kiwi') {
+          if (kept.lo != null && typeof window.ext_set_passband === 'function') ext_set_passband(kept.lo, kept.hi);
+          if (kept.z != null && typeof window.ext_set_zoom === 'function' && window.ext_zoom) ext_set_zoom(ext_zoom.ABS, kept.z);
+        }
+        try { window.chrome.webview.postMessage('kept'); } catch (x) { }
+      } catch (e) { }
+    }, 250);
+  }
+
   // Seuls les gestes réels comptent (isTrusted) : les appuis simulés par SDRLink au démarrage ne comptent pas.
   L.userAt = 0;
   ['pointerdown', 'mousedown', 'pointerup', 'keydown', 'wheel', 'touchstart', 'touchend'].forEach(function (t) {

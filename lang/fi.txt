@@ -219,6 +219,7 @@ Reset the program…	Palauta ohjelman alkutila…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Vie tai tuo kaikki asetukset, samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea painike: palauta ohjelman alkutila, painikkeen väri)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi tai kutsu, joka annetaan automaattisesti WebSDR-vastaanottimille, jotka kysyvät sitä ennen ääntä (KiwiSDR, websdr.org). Napsautus: vaihda (hiiren oikea: painikkeen väri)
 Right-click: receivers muted while transmitting	Hiiren oikea painike: lähetyksen ajaksi mykistettävät vastaanottimet
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Käynnistää nykyisen WebSDR:n uudelleen (esimerkiksi käyttämättömyyden vuoksi pysähtyneen). Napsautus: uudelleenkäynnistys asetukset säilyttäen (taajuus, lähetyslaji, suodin, zoomaus, äänenvoimakkuus). Hiiren kakkospainike: WebSDR:n täydellinen nollaus, kuten ensimmäisellä käynnillä
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
 Store the current frequency…	Tallenna nykyinen taajuus…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: puhe puretaan heti, kun FreeDV-signaali vastaanotetaan (napsautus: päälle / pois; oikea napsautus: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	WebView2:ta (Edge) ei voi käynnistää:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nimi tai kutsu WebSDR-vastaanottimille, jotka kysyvät sitä (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Nimi ei voi olla tyhjä.
 A name already typed on a site is kept.	Sivustolle jo kirjoitettu nimi säilyy.
+WebSDR restarted: filter and zoom restored	WebSDR käynnistetty uudelleen: suodin ja zoomaus palautettu
 Invalid address: 	Virheellinen osoite: 
+No open WebSDR to restart	Ei avointa WebSDR:ää käynnistettäväksi uudelleen
+WebSDR restarted keeping its settings	WebSDR käynnistetty uudelleen asetukset säilyttäen
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR nollattu: sivuston evästeet ja asetukset poistettu, sivu avattu uudelleen kuten ensimmäisellä käynnillä
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kaapeli: virtuaalista äänikaapelia ei löytynyt. Asenna VB-CABLE (ilmainen): ”SDRLINK-kaapeli”-painike.
 Output receiving the WebSDR audio:	WebSDR-äänen vastaanottava lähtö:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nimeä kaapelin toinen pää ”SDRLINK” (valitse ensin virtuaalikaapeli)
@@ -452,6 +457,7 @@ Download Hamlib…	Lataa Hamlib…
 SDRLINK cable ▾	SDRLINK-kaapeli ▾
 Scan setup	Pyyhkäisyn asetukset
 ▶ Scan	▶ Pyyhkäisy
+Reset WebSDR	Nollaa WebSDR
 QSY	QSY
 Save	Tallenna
 Memories	Muistit

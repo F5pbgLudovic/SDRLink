@@ -49,7 +49,7 @@ namespace SDRLink
         TextBox txtRigctld;
         NumericUpDown numHamlibModel;
         Button btnMuteSdr, btnMuteRig, btnMuteSwap, btnMuteEsdr, btnMuteHdsdr;
-        Button btnMemRecent, btnScan, btnRec;
+        Button btnMemRecent, btnScan, btnRec, btnReinit;
         bool hdsdrMuted, hdsdrMutedByUs;   // son de HDSDR coupé, et coupé par SDRLink
         bool hdsdrRunning, hdsdrWin;       // HDSDR lancé ; il a une session dans le mélangeur de Windows
         bool hdsdrVolumeLoading;
@@ -122,6 +122,10 @@ namespace SDRLink
         // Fréquence et famille de mode du dernier WebSDR quitté : reprises par le WebSDR suivant (ou celui retrouvé par ◀ Retour)
         // quand le poste ne l'impose pas (poste déconnecté, synchro désactivée ou dans le sens WebSDR → Radio).
         long carryF; string carryFam = "";
+        // Réinit WebSDR au clic droit : la page rouverte part de zéro, sans reprendre la fréquence du WebSDR quitté.
+        bool resetPending;
+        // Réinit WebSDR au clic : la page rouverte remet ses réglages (message « kept »), signalé dans la barre d'état.
+        bool reinitPending;
 
         public MainForm()
         {
@@ -510,6 +514,16 @@ namespace SDRLink
             recMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillRecCardMenu(recMenu); };
             recMenu.Items.Add("-");
             btnRec.ContextMenuStrip = recMenu;
+            // Réinit WebSDR (après REC) : relance un WebSDR arrêté (délai d'inactivité dépassé, son perdu…).
+            // Clic : la page est rechargée en gardant ses réglages ; clic droit : réinitialisation totale (pas de menu).
+            btnReinit = Btn("Réinit WebSDR", "Reset WebSDR", delegate { ReinitWebSdr(false); });
+            btnReinit.Margin = new Padding(6, 3, 3, 3);
+            btnReinit.MouseUp += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Right) ReinitWebSdr(true); };
+            Tr(delegate
+            {
+                tips.SetToolTip(btnReinit, Lang.T("Relance le WebSDR en cours (par exemple arrêté après un temps d'inactivité). Clic : relance en gardant ses réglages (fréquence, mode, filtre, zoom, volume). Clic droit : réinitialisation totale du WebSDR, comme une première visite",
+                    "Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit"));
+            });
 
             // Ligne 4 : PTT, fréquences, modes, saisie ; l'affichage réduit coupe la fenêtre juste après cette ligne.
             rowDisplay = Row();
@@ -802,7 +816,7 @@ namespace SDRLink
                 lblRigVolumeCaption, trkRigVolume, lblRigVolume,
                 lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
                 lblHdsdrVolumeCaption, trkHdsdrVolume, lblHdsdrVolume,
-                btnRec,
+                btnRec, btnReinit,
             };
             audio.Controls.AddRange(audioOrder);
 
@@ -2589,6 +2603,7 @@ namespace SDRLink
                     if (e.IsRedirected) return;
                     // WebSDR quitté : sa fréquence et son mode seront repris par le suivant (une page sans WebSDR ne les efface pas).
                     if (sdrKind != "" && sdrF > 0) { carryF = sdrF; carryFam = Modes.SdrFamily(sdrM); }
+                    if (resetPending) { resetPending = false; carryF = 0; carryFam = ""; }
                     sdrKind = ""; lastSdrF = 0; lastSdrFam = null; UpdateDisplays();
                 };
                 core.SourceChanged += delegate
@@ -2696,6 +2711,7 @@ namespace SDRLink
             try { msg = e.TryGetWebMessageAsString(); } catch { return; }
             if (msg != null && msg.StartsWith("pcm|")) { OnPcm(msg); return; }
             if (msg == "click") { OnPageClick(); return; }
+            if (msg == "kept") { if (reinitPending) { reinitPending = false; ShowStatus(Lang.T("WebSDR relancé : filtre et zoom remis comme avant", "WebSDR restarted: filter and zoom restored")); } return; }
             string[] p = (msg ?? "").Split('|');
             long f;
             if (p.Length < 3 || !long.TryParse(p[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out f)) return;
@@ -2709,6 +2725,48 @@ namespace SDRLink
             if (!url.Contains("://")) url = "http://" + url;
             try { web.CoreWebView2.Navigate(url); }
             catch (ArgumentException) { ShowStatus(Lang.T("Adresse invalide : ", "Invalid address: ") + url); }
+        }
+
+        // Bouton Réinit WebSDR. Clic (total = faux) : la page garde ses réglages (filtre, zoom : __sdrlink.keep), puis
+        // est rechargée ; fréquence et mode sont repris comme d'un WebSDR quitté, volume, Mute et notch remis par SDRLink.
+        // Clic droit (total = vrai) : cookies et stockage du site effacés, page rouverte sans la partie après « # »
+        // (OpenWebRX y garde fréquence et mode) et sans reprise de fréquence : le WebSDR repart comme à la première
+        // visite (le pseudo est redonné par SDRLink, le poste impose toujours sa fréquence si la synchro va dans ce sens).
+        async void ReinitWebSdr(bool total)
+        {
+            CoreWebView2 core = web.CoreWebView2;
+            Uri u;
+            if (core == null || !Uri.TryCreate(core.Source ?? "", UriKind.Absolute, out u) || (u.Scheme != "http" && u.Scheme != "https"))
+            {
+                ShowStatus(Lang.T("Aucun WebSDR ouvert à relancer", "No open WebSDR to restart"));
+                return;
+            }
+            if (!total)
+            {
+                string kept = "";
+                try { kept = await core.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.keep ? window.__sdrlink.keep() : ''"); }
+                catch (Exception ex) { Log.Write("Réinit WebSDR : réglages non lus : " + ex.Message); }
+                Log.Write("Réinit WebSDR : rechargement de " + u.Host + " en gardant les réglages " + kept);
+                reinitPending = true;
+                resetPending = false;
+                core.Reload();
+                ShowStatus(Lang.T("WebSDR relancé en gardant ses réglages", "WebSDR restarted keeping its settings"));
+                return;
+            }
+            string origin = u.GetLeftPart(UriPartial.Authority);
+            try
+            {
+                foreach (CoreWebView2Cookie c in await core.CookieManager.GetCookiesAsync(origin + "/")) core.CookieManager.DeleteCookie(c);
+                await core.CallDevToolsProtocolMethodAsync("Storage.clearDataForOrigin",
+                    "{\"origin\":\"" + origin + "\",\"storageTypes\":\"all\"}");
+            }
+            catch (Exception ex) { Log.Write("Réinit WebSDR : effacement incomplet pour " + origin + " : " + ex.Message); }
+            Log.Write("Réinit WebSDR : réinitialisation totale de " + origin);
+            reinitPending = false;
+            resetPending = true;
+            Navigate(u.GetLeftPart(UriPartial.Query));
+            ShowStatus(Lang.T("WebSDR réinitialisé : cookies et réglages du site effacés, page rouverte comme à la première visite",
+                "WebSDR reset: site cookies and settings cleared, page reopened as on a first visit"));
         }
 
         // Le texte de la barre peut être une adresse, ou le nom d'un favori choisi dans la liste.

@@ -26,7 +26,7 @@ Overview; each feature is detailed further down in its own section.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25).
-6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**.
+6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC** and **Reset WebSDR** (since 1.31).
 7. **The WebSDR page**, then the **status bar** (messages, update link).
 
 ## All right-clicks
@@ -54,6 +54,7 @@ Overview; each feature is detailed further down in its own section.
 | Mute ExpertSDR | ExpertSDR TCI port, colour when muted / sound on |
 | "WebSDR volume" | ExpertSDR TCI port |
 | REC | rig sound card, REC button colour, width (narrow / wide) |
+| Reset WebSDR | no menu: right-click makes a **full reset** of the current WebSDR (since 1.31) |
 | Status bar | last 20 messages, message types to hide |
 
 ## SDRLink files
@@ -541,6 +542,14 @@ On the "Sync" row, after "Auto notch (DNF)":
 - **Right-click REC > REC button width**: **Narrow** (a rectangle twice as wide as it is high, default) or **Wide** (four times as wide as it is high), always as high as the Mute buttons, with "REC" centred. The choice is kept.
 - Silences are kept (the file length is the real duration). Closing SDRLink during a recording offers to save it before quitting.
 
+## Reset WebSDR (since 1.31)
+
+**Reset WebSDR** button, on the audio row, right after REC: it restarts the WebSDR shown when it has stopped, for example after its **idle timeout** (the websdr.org page only shows "Idle time out.", a KiwiSDR drops the connection), or when the audio does not come back.
+
+- **Click**: restart **keeping all the settings**. The page is reloaded, then SDRLink puts back the **frequency** and the **mode**, and, on websdr.org and KiwiSDR, the **filter** (passband) and the waterfall **zoom** as they were, even if the page had already stopped. SDRLink's volume, Mutes, notch and name are put back too. OpenWebRX and the other WebSDRs keep their own settings when reloaded. The status bar shows "WebSDR restarted keeping its settings", then "WebSDR restarted: filter and zoom restored".
+- **Right-click**: **full reset** of the current WebSDR. The cookies and the settings saved by this site (page storage) are cleared, and the page is reopened **as on a first visit** (without the part of the address after "#", where OpenWebRX keeps frequency and mode); the frequency of the previous WebSDR is not carried over. The name of the Pseudo/Call button is given again. If synchronisation goes from the rig to the WebSDR, the rig still imposes its frequency. SDRLink's settings (favorites, volume…) and those of other sites are not touched.
+- No colour menu on this button: its right-click is used for the reset.
+
 ## Frequency memories
 
 - **Memories** button (frequency row, after Save): opens the memories window.
@@ -627,6 +636,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.31**
+  - **Reset WebSDR** button after REC, to restart a stopped WebSDR (idle timeout…): **click** = restart keeping its settings (frequency, mode, filter, zoom, volume); **right-click** = full reset of the current WebSDR (site cookies and settings cleared, as on a first visit).
 - **1.30**
   - **Automatic update**: the old version is **deleted from the disk** as soon as the new one has started (no more `SDRLink.previous.exe`); the new one keeps the name `SDRLink.exe`, so desktop shortcuts still work.
   - **Find WebSDRs**: distances start from **your position** instead of the centre of France: the computer's position (Windows location), or a typed locator or coordinates (remembered). "Max distance from the current position". Centre of France only when no position is known.

@@ -219,6 +219,7 @@ Reset the program…	Restablecer el programa…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportar o importar todos los ajustes, para la misma configuración en otro ordenador (clic derecho: restablecer el programa, color del botón)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nombre o indicativo dado automáticamente a los WebSDR que lo piden antes del audio (KiwiSDR, websdr.org). Clic: cambiarlo (clic derecho: color del botón)
 Right-click: receivers muted while transmitting	Clic derecho: receptores silenciados al transmitir
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Reinicia el WebSDR actual (por ejemplo, detenido tras un tiempo de inactividad). Clic: reinicio conservando sus ajustes (frecuencia, modo, filtro, zoom, volumen). Clic derecho: restablecimiento total del WebSDR, como en una primera visita
 Save: no known frequency (rig or WebSDR)	Guardar: ninguna frecuencia conocida (equipo o WebSDR)
 Store the current frequency…	Memorizar la frecuencia actual…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: la voz se decodifica en cuanto se recibe una señal FreeDV (clic: activar / desactivar; clic derecho: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	No se puede iniciar WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nombre o indicativo para los WebSDR que lo piden (KiwiSDR, websdr.org):
 The callsign cannot be empty.	El nombre no puede estar vacío.
 A name already typed on a site is kept.	Se conserva un nombre ya escrito en un sitio.
+WebSDR restarted: filter and zoom restored	WebSDR reiniciado: filtro y zoom restaurados
 Invalid address: 	Dirección no válida: 
+No open WebSDR to restart	No hay ningún WebSDR abierto que reiniciar
+WebSDR restarted keeping its settings	WebSDR reiniciado conservando sus ajustes
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR restablecido: cookies y ajustes del sitio borrados, página reabierta como en una primera visita
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Cable SDRLINK: no se encontró ningún cable de audio virtual. Instale VB-CABLE (gratuito): botón «Cable SDRLINK».
 Output receiving the WebSDR audio:	Salida que recibe el audio del WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Llamar «SDRLINK» al otro extremo del cable (elija antes un cable virtual)
@@ -452,6 +457,7 @@ Download Hamlib…	Descargar Hamlib…
 SDRLINK cable ▾	Cable SDRLINK ▾
 Scan setup	Configurar exploración
 ▶ Scan	▶ Explorar
+Reset WebSDR	Reiniciar WebSDR
 QSY	QSY
 Save	Guardar
 Memories	Memorias

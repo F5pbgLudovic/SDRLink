@@ -219,6 +219,7 @@ Reset the program…	Resetare program…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportați sau importați toate setările, pentru aceeași configurație pe alt calculator (clic dreapta: resetare program, culoarea butonului)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nume sau indicativ dat automat receptoarelor WebSDR care îl cer înainte de sunet (KiwiSDR, websdr.org). Clic: schimbare (clic dreapta: culoarea butonului)
 Right-click: receivers muted while transmitting	Clic dreapta: receptoare puse pe mut în emisie
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Repornește WebSDR-ul curent (de exemplu oprit după un timp de inactivitate). Clic: repornire cu păstrarea setărilor (frecvență, mod, filtru, zoom, volum). Clic dreapta: reinițializare completă a WebSDR-ului, ca la prima vizită
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
 Store the current frequency…	Memorează frecvența actuală…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: vocea este decodată imediat ce se recepționează un semnal FreeDV (clic: pornit / oprit; clic dreapta: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	Nu se poate porni WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nume sau indicativ pentru receptoarele WebSDR care îl cer (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Numele nu poate fi gol.
 A name already typed on a site is kept.	Un nume deja tastat pe un site este păstrat.
+WebSDR restarted: filter and zoom restored	WebSDR repornit: filtrul și zoomul au fost restabilite
 Invalid address: 	Adresă nevalidă: 
+No open WebSDR to restart	Niciun WebSDR deschis de repornit
+WebSDR restarted keeping its settings	WebSDR repornit cu păstrarea setărilor
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR reinițializat: cookie-urile și setările site-ului au fost șterse, pagina a fost redeschisă ca la prima vizită
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Cablu SDRLINK: nu s-a găsit niciun cablu audio virtual. Instalați VB-CABLE (gratuit): butonul „Cablu SDRLINK”.
 Output receiving the WebSDR audio:	Ieșirea care primește sunetul WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Numește „SDRLINK” celălalt capăt al cablului (alegeți mai întâi un cablu virtual)
@@ -452,6 +457,7 @@ Download Hamlib…	Descărcare Hamlib…
 SDRLINK cable ▾	Cablu SDRLINK ▾
 Scan setup	Configurare scanare
 ▶ Scan	▶ Scanare
+Reset WebSDR	Reinițializare WebSDR
 QSY	QSY
 Save	Salvare
 Memories	Memorii

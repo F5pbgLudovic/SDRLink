@@ -219,6 +219,7 @@ Reset the program…	Vrati program na početne postavke…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Izvoz ili uvoz svih postavki, za istu konfiguraciju na drugom računalu (desni klik: vrati program na početne postavke, boja gumba)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Ime ili pozivni znak koji se automatski daje WebSDR-ovima koji ga traže prije zvuka (KiwiSDR, websdr.org). Klik: promjena (desni klik: boja gumba)
 Right-click: receivers muted while transmitting	Desni klik: prijemnici utišani tijekom odašiljanja
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Ponovno pokreće trenutni WebSDR (na primjer zaustavljen nakon razdoblja neaktivnosti). Klik: ponovno pokretanje uz zadržavanje postavki (frekvencija, način rada, filtar, zumiranje, glasnoća). Desni klik: potpuno resetiranje WebSDR-a, kao pri prvom posjetu
 Save: no known frequency (rig or WebSDR)	Spremi: nema poznate frekvencije (TRX ili WebSDR)
 Store the current frequency…	Spremi trenutačnu frekvenciju…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: govor se dekodira čim se primi FreeDV signal (klik: uključi / isključi; desni klik: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	Nije moguće pokrenuti WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Ime ili pozivni znak za WebSDR-ove koji ga traže (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Ime ne može biti prazno.
 A name already typed on a site is kept.	Ime već upisano na stranici se zadržava.
+WebSDR restarted: filter and zoom restored	WebSDR ponovno pokrenut: filtar i zumiranje vraćeni
 Invalid address: 	Nevažeća adresa: 
+No open WebSDR to restart	Nema otvorenog WebSDR-a za ponovno pokretanje
+WebSDR restarted keeping its settings	WebSDR ponovno pokrenut uz zadržane postavke
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR resetiran: kolačići i postavke web-mjesta izbrisani, stranica ponovno otvorena kao pri prvom posjetu
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kabel: nije pronađen virtualni audio kabel. Instalirajte VB-CABLE (besplatno): gumb „SDRLINK kabel”.
 Output receiving the WebSDR audio:	Izlaz koji prima zvuk WebSDR-a:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nazovi drugi kraj kabela „SDRLINK” (najprije odaberite virtualni kabel)
@@ -452,6 +457,7 @@ Download Hamlib…	Preuzmi Hamlib…
 SDRLINK cable ▾	SDRLINK kabel ▾
 Scan setup	Postavke pretraživanja
 ▶ Scan	▶ Pretraživanje
+Reset WebSDR	Resetiraj WebSDR
 QSY	QSY
 Save	Spremi
 Memories	Memorije

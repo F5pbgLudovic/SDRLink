@@ -219,6 +219,7 @@ Reset the program…	Atiestatīt programmu…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportēt vai importēt visus iestatījumus tai pašai konfigurācijai citā datorā (labais klikšķis: atiestatīt programmu, pogas krāsa)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Vārds vai izsaukuma signāls, ko automātiski nodod WebSDR, kas to prasa pirms skaņas (KiwiSDR, websdr.org). Klikšķis: mainīt (labais klikšķis: pogas krāsa)
 Right-click: receivers muted while transmitting	Labais klikšķis: uztvērēji, kas raidīšanas laikā tiek klusināti
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Restartē pašreizējo WebSDR (piemēram, apturētu pēc neaktivitātes laika). Klikšķis: restartēšana, saglabājot iestatījumus (frekvence, režīms, filtrs, tālummaiņa, skaļums). Labais klikšķis: pilnīga WebSDR atiestatīšana, kā pirmajā apmeklējumā
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
 Store the current frequency…	Saglabāt pašreizējo frekvenci…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: runa tiek dekodēta, tiklīdz tiek uztverts FreeDV signāls (klikšķis: ieslēgt / izslēgt; labais klikšķis: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	Nevar palaist WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Vārds vai izsaukuma signāls WebSDR, kas to prasa (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Vārds nevar būt tukšs.
 A name already typed on a site is kept.	Vietnē jau ierakstītais vārds tiek saglabāts.
+WebSDR restarted: filter and zoom restored	WebSDR restartēts: filtrs un tālummaiņa atjaunoti
 Invalid address: 	Nederīga adrese: 
+No open WebSDR to restart	Nav atvērta WebSDR, ko restartēt
+WebSDR restarted keeping its settings	WebSDR restartēts, saglabājot iestatījumus
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR atiestatīts: vietnes sīkfaili un iestatījumi izdzēsti, lapa atvērta no jauna kā pirmajā apmeklējumā
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kabelis: virtuālais audio kabelis nav atrasts. Instalējiet VB-CABLE (bez maksas): poga "SDRLINK kabelis".
 Output receiving the WebSDR audio:	Izeja, kas saņem WebSDR skaņu:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nosaukt kabeļa otru galu "SDRLINK" (vispirms izvēlieties virtuālo kabeli)
@@ -452,6 +457,7 @@ Download Hamlib…	Lejupielādēt Hamlib…
 SDRLINK cable ▾	SDRLINK kabelis ▾
 Scan setup	Skenēšanas iestatījumi
 ▶ Scan	▶ Skenēt
+Reset WebSDR	Atiestatīt WebSDR
 QSY	QSY
 Save	Saglabāt
 Memories	Atmiņas

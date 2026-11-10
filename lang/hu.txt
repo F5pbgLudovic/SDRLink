@@ -219,6 +219,7 @@ Reset the program…	A program alaphelyzetbe állítása…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: a program alaphelyzetbe állítása, gomb színe)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Név vagy hívójel, amelyet a hang előtt ezt kérő WebSDR-ek (KiwiSDR, websdr.org) automatikusan megkapnak. Kattintás: módosítás (jobb klikk: gomb színe)
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Újraindítja az aktuális WebSDR-t (például ha tétlenség miatt leállt). Kattintás: újraindítás a beállítások megtartásával (frekvencia, üzemmód, szűrő, nagyítás, hangerő). Jobb kattintás: a WebSDR teljes alaphelyzetbe állítása, mint az első látogatáskor
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: a beszéd dekódolása azonnal megtörténik, amint FreeDV-jel érkezik (kattintás: be / ki; jobb kattintás: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	A WebView2 (Edge) nem indítható:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Név vagy hívójel az ezt kérő WebSDR-eknek (KiwiSDR, websdr.org):
 The callsign cannot be empty.	A név nem lehet üres.
 A name already typed on a site is kept.	A webhelyen már beírt név megmarad.
+WebSDR restarted: filter and zoom restored	WebSDR újraindítva: szűrő és nagyítás visszaállítva
 Invalid address: 	Érvénytelen cím: 
+No open WebSDR to restart	Nincs megnyitott WebSDR, amit újra lehetne indítani
+WebSDR restarted keeping its settings	WebSDR újraindítva a beállítások megtartásával
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR alaphelyzetbe állítva: a webhely sütijei és beállításai törölve, az oldal újra megnyitva, mint az első látogatáskor
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kábel: nem található virtuális audiokábel. Telepítse a VB-CABLE-t (ingyenes): „SDRLINK kábel” gomb.
 Output receiving the WebSDR audio:	A WebSDR hangját fogadó kimenet:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	A kábel másik végének elnevezése „SDRLINK” névre (előbb válasszon virtuális kábelt)
@@ -452,6 +457,7 @@ Download Hamlib…	Hamlib letöltése…
 SDRLINK cable ▾	SDRLINK kábel ▾
 Scan setup	Pásztázás beállítása
 ▶ Scan	▶ Pásztázás
+Reset WebSDR	WebSDR újraindítás
 QSY	QSY
 Save	Mentés
 Memories	Memóriák

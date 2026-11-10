@@ -219,6 +219,7 @@ Reset the program…	Επαναφορά του προγράμματος…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Εξαγωγή ή εισαγωγή όλων των ρυθμίσεων, για την ίδια διαμόρφωση σε άλλον υπολογιστή (δεξί κλικ: επαναφορά του προγράμματος, χρώμα κουμπιού)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Όνομα ή χαρακτηριστικό που δίνεται αυτόματα στα WebSDR που το ζητούν πριν από τον ήχο (KiwiSDR, websdr.org). Κλικ: αλλαγή (δεξί κλικ: χρώμα κουμπιού)
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Επανεκκινεί τον τρέχοντα WebSDR (για παράδειγμα σταματημένο μετά από χρόνο αδράνειας). Κλικ: επανεκκίνηση με διατήρηση των ρυθμίσεων (συχνότητα, τρόπος, φίλτρο, ζουμ, ένταση). Δεξί κλικ: πλήρης επαναφορά του WebSDR, όπως στην πρώτη επίσκεψη
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
 Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: η ομιλία αποκωδικοποιείται μόλις ληφθεί σήμα FreeDV (κλικ: ενεργό / ανενεργό· δεξί κλικ: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	Αδυναμία εκκίνησης WebView2 (Ed
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Όνομα ή χαρακτηριστικό για τα WebSDR που το ζητούν (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Το όνομα δεν μπορεί να είναι κενό.
 A name already typed on a site is kept.	Ένα όνομα που έχει ήδη πληκτρολογηθεί σε έναν ιστότοπο διατηρείται.
+WebSDR restarted: filter and zoom restored	Ο WebSDR επανεκκινήθηκε: το φίλτρο και το ζουμ επαναφέρθηκαν
 Invalid address: 	Μη έγκυρη διεύθυνση: 
+No open WebSDR to restart	Δεν υπάρχει ανοιχτός WebSDR για επανεκκίνηση
+WebSDR restarted keeping its settings	Ο WebSDR επανεκκινήθηκε με διατήρηση των ρυθμίσεων
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	Επαναφορά WebSDR: τα cookies και οι ρυθμίσεις του ιστότοπου διαγράφηκαν, η σελίδα άνοιξε ξανά όπως στην πρώτη επίσκεψη
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Καλώδιο SDRLINK: δεν βρέθηκε εικονικό καλώδιο ήχου. Εγκαταστήστε το VB-CABLE (δωρεάν): κουμπί «Καλώδιο SDRLINK».
 Output receiving the WebSDR audio:	Έξοδος που λαμβάνει τον ήχο του WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Ονομασία «SDRLINK» στο άλλο άκρο του καλωδίου (επιλέξτε πρώτα εικονικό καλώδιο)
@@ -452,6 +457,7 @@ Download Hamlib…	Λήψη Hamlib…
 SDRLINK cable ▾	Καλώδιο SDRLINK ▾
 Scan setup	Ρύθμιση σάρωσης
 ▶ Scan	▶ Σάρωση
+Reset WebSDR	Επαναφορά WebSDR
 QSY	QSY
 Save	Αποθήκ.
 Memories	Μνήμες

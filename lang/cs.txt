@@ -219,6 +219,7 @@ Reset the program…	Obnovit výchozí stav programu…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Export nebo import všech nastavení pro stejnou konfiguraci na jiném počítači (pravé tlačítko: obnovit výchozí stav programu, barva tlačítka)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Jméno nebo volací značka zadávané automaticky přijímačům WebSDR, které je vyžadují před zvukem (KiwiSDR, websdr.org). Kliknutí: změnit (pravé tlačítko: barva tlačítka)
 Right-click: receivers muted while transmitting	Pravé tlačítko: přijímače ztlumené při vysílání
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Znovu spustí aktuální WebSDR (například zastavený po době nečinnosti). Klik: restart se zachováním nastavení (kmitočet, druh provozu, filtr, zoom, hlasitost). Pravý klik: úplný reset WebSDR, jako při první návštěvě
 Save: no known frequency (rig or WebSDR)	Uložit: neznámá frekvence (TRX ani WebSDR)
 Store the current frequency…	Uložit aktuální kmitočet…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: řeč se dekóduje, jakmile je přijat signál FreeDV (klik: zapnout / vypnout; pravé tlačítko: RADE V1 / V2)
@@ -272,7 +273,11 @@ Cannot start WebView2 (Edge):\n	Nelze spustit WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Jméno nebo volací značka pro přijímače WebSDR, které je vyžadují (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Jméno nemůže být prázdné.
 A name already typed on a site is kept.	Jméno už zadané na webu zůstane zachováno.
+WebSDR restarted: filter and zoom restored	WebSDR znovu spuštěn: filtr a zoom obnoveny
 Invalid address: 	Neplatná adresa: 
+No open WebSDR to restart	Žádný otevřený WebSDR k opětovnému spuštění
+WebSDR restarted keeping its settings	WebSDR znovu spuštěn se zachováním nastavení
+WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR resetován: cookies a nastavení webu smazány, stránka znovu otevřena jako při první návštěvě
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Kabel SDRLINK: nebyl nalezen žádný virtuální audio kabel. Nainstalujte VB-CABLE (zdarma): tlačítko „Kabel SDRLINK“.
 Output receiving the WebSDR audio:	Výstup přijímající zvuk WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Pojmenovat druhý konec kabelu „SDRLINK“ (nejprve vyberte virtuální kabel)
@@ -452,6 +457,7 @@ Download Hamlib…	Stáhnout Hamlib…
 SDRLINK cable ▾	Kabel SDRLINK ▾
 Scan setup	Nastavení prohledávání
 ▶ Scan	▶ Prohledávání
+Reset WebSDR	Reset WebSDR
 QSY	QSY
 Save	Uložit
 Memories	Paměti

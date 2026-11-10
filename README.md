@@ -1,4 +1,4 @@
-# SDRLink V1.30 — @F5PBG 2026
+# SDRLink V1.31 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -13,6 +13,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - mémoires de fréquences nommées, en listes, avec les 20 dernières utilisées, et une liste « Modes numériques » des fréquences habituelles du mode utilisé (1,8 à 440 MHz, selon la région IARU) ;
   - scan de fréquences (avec jusqu'à 10 zones non scannées) ou de mémoires, jusqu'à 10 profils de scan nommés, reprise du scan à la fréquence actuelle ;
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, couleur et largeur réglables ;
+  - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou clic droit pour le réinitialiser totalement ;
   - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de votre position (ordinateur, locator ou coordonnées) ;
@@ -66,6 +67,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - named frequency memories, in lists, with the last 20 used, and a "Digital modes" list of the usual frequencies of the mode in use (1.8 to 440 MHz, by IARU region);
   - frequency scan (with up to 10 skipped ranges) or memory scan, up to 10 named scan profiles, scan resumed from the current frequency;
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, with adjustable colour and width;
+  - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or right-click to reset it completely;
   - reduced, mini and PTT (PTT button only, with the Always on top box) views;
   - suggestions while typing in the WebSDR bar (name or address, chosen list);
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near your position (computer, locator or coordinates);
