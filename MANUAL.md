@@ -21,7 +21,7 @@ To rebuild after a change: `powershell -ExecutionPolicy Bypass -File build.ps1` 
 
 Overview; each feature is detailed further down in its own section.
 
-1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Look ▾**, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
+1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Connecting... / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Look ▾**, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
@@ -33,7 +33,7 @@ Overview; each feature is detailed further down in its own section.
 
 | Where | What the right-click offers |
 |---|---|
-| Connect | colour when connected / disconnected |
+| Connect | colour when connected / disconnected / rig not answering yet |
 | Open log, Look, Text size, Check for updates, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
 | FreeDV auto | no menu: right-click switches between RADE V1 and RADE V2 (since 1.24) |
 | Digital modes (button and window over the page) | the 14 modes (left-click: choose and start; right-click: choose and open the settings), **<mode> settings…**, **Clear the received text**, **Open the image folder**, **Reset the <mode> window**, **Reset the windows** (since 1.25) |
@@ -79,6 +79,14 @@ Overview; each feature is detailed further down in its own section.
 | TCI | Host / port (40001 by default) | ExpertSDR (SunSDR), Thetis… enable the TCI server |
 | Ham Radio Deluxe | Host / port (7809 by default) | Enable the IP server in HRD Rig Control |
 | Hamlib (rigctld) | Host / port (4532 by default), "Start rigctld", Hamlib model no. | See below |
+
+### Connect button and link check (since 1.34)
+
+- **Connect**: no link with the rig.
+- **Connecting...** (orange): the link is started but the rig has not answered yet, or no longer answers. A click stops the attempt.
+- **Disconnect**: the rig really answers; a click closes the link.
+- The link is checked **15 s after "Connect", then every minute**. If the rig does not answer, the status bar says so with the last error message. A frozen link (OmniRig or a COM port that no longer answers) is seen as lost: "Link lost: the rig has not answered for X s", the button goes back to "Connecting..." and returns to "Disconnect" by itself when the rig answers again. Each problem is written to the log.
+- **With OmniRig**, if the rig does not answer, a **help window** opens on top (once per connection, without blocking SDRLink): use **OmniRig version 1**, start **both OmniRig and SDRLink as administrator** (it says whether SDRLink already is), check the model, COM port and baud rate in OmniRig; with the link to the OmniRig page.
 
 ## Hamlib
 
@@ -338,7 +346,7 @@ The **Dark mode** box, to the right of "Open log", switches the whole interface 
 Right-clicking most buttons offers their **background colour**. If the button already had a right-click menu (PTT, Memories, SDRLINK cable, Mute ExpertSDR…), that menu is kept and the colours are added at the end.
 - **One choice** ("Button colour"): Open log, Look, Text size, Scan setup, QSY, Save, Memories, Go, Back, Reload, Add to favorites, Remove from favorites, Manage favorites, Find WebSDRs, Import/Export.
 - **Two choices, one for each state**:
-  - **Connect**: when connected / when disconnected;
+  - **Connect**: when connected / when disconnected / when the rig is not answering yet (orange by default);
   - **SDRLINK cable**: when on / when off;
   - **Scan**: scan stopped / while scanning;
   - **PTT**: when receiving / when transmitting (PTT on);
@@ -634,7 +642,7 @@ The settings do not move (they are in `%APPDATA%\SDRLink`). If something fails (
 
 ## Troubleshooting
 
-**OmniRig does not work** (no frequency, error on connection): use **OmniRig version 1** (not version 2), run **as administrator** (right-click OmniRig > Run as administrator).
+**OmniRig does not work** (no frequency, error on connection): use **OmniRig version 1** (not version 2), run **as administrator** (right-click OmniRig > Run as administrator), and **SDRLink as administrator too**. Since 1.34, SDRLink opens a help window with this advice by itself when OmniRig does not answer.
 
 Settings: `%APPDATA%\SDRLink\settings.ini`. Log: `%APPDATA%\SDRLink\sdrlink.log`. The log is cleared at each launch and contains the connection status and, for HRD, the list of modes received.
 
@@ -646,6 +654,9 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.34**
+  - **Rig link checked**: the button shows "Connecting..." (orange) as long as the rig has not answered, "Disconnect" only when it answers; check 15 s after connecting then every minute, frozen link detected.
+  - **OmniRig help** on top if the rig does not answer (OmniRig version 1, OmniRig and SDRLink run as administrator).
 - **1.33**
   - **Look ▾** button: 7 button styles to choose from (Classic, Win3.11, AI Neon, Modern, Glass, Terminal, Metal), without changing the size of the buttons.
 - **1.32**

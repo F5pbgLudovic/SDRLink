@@ -14,6 +14,12 @@ namespace SDRLink
         // Lecture du PTT à chaque tour : seulement si quelqu'un s'en sert, pour ne pas charger la liaison CAT.
         public volatile bool PollTx;
 
+        // Heure (Environment.TickCount) de la dernière lecture réussie du poste : sert au contrôle de la liaison chaque minute.
+        public volatile int LastOkTick;
+
+        // Oublie le dernier état annoncé : le prochain état sera de nouveau signalé (après un contrôle qui a vu la liaison perdue).
+        public void ResetStatus() { lastStatus = null; }
+
         readonly Func<IRig> factory;
         readonly int pollMs;
         Thread thread;
@@ -23,7 +29,7 @@ namespace SDRLink
         string pendingMode;
         int pendingPtt = -1;       // -1 : rien à envoyer
         bool pttCommandedOn;       // émission lancée par SDRLink, à couper avant de fermer la liaison
-        string lastStatus;
+        volatile string lastStatus;
 
         public RigWorker(Func<IRig> factory, int pollMs)
         {
@@ -122,6 +128,7 @@ namespace SDRLink
                     if (rig.Read(out f, out m))
                     {
                         misses = 0;
+                        LastOkTick = Environment.TickCount;
                         Status(Lang.T("Poste en ligne", "Rig online"), true);
                         if (f != lastF || m != lastM)
                         {

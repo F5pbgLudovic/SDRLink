@@ -215,6 +215,7 @@ Modern	Moderan
 Glass	Staklo
 Metal	Metal
 Classic	Klasičan
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Spoji: pokreće vezu s uređajem. „Spajanje...”: uređaj još ne odgovara (klik: zaustavi). „Odspoji”: uređaj odgovara; veza se provjerava svake minute (desni klik: boje gumba)
 Cannot open the log: 	Nije moguće otvoriti dnevnik: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Izgled gumba: Klasičan, Win3.11, Neon UI, Moderan, Staklo, Terminal ili Metal (desni klik: boja gumba)
 Check for updates	Provjeri ažuriranja
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prebaci zvuk na sljedeći prijemnik (desni klik: prijemnik koji ostaje utišan)
 Colour when connected	Boja kad je spojeno
 Colour when disconnected	Boja kad nije spojeno
+Colour when the rig is not answering yet	Boja dok uređaj još ne odgovara
 Colour when on	Boja kad je uključeno
 Colour when off	Boja kad je isključeno
 Colour when the scan is stopped	Boja kad je pretraživanje zaustavljeno
@@ -260,6 +262,7 @@ RIG	uređaj
 Disconnected	Odspojeno
 Connect	Spoji
 Disconnect	Odspoji
+Connecting...	Spajanje...
 Location of rigctld.exe (Hamlib)	Lokacija rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Programi (*.exe)|*.exe
 Please choose a rig model.	Odaberite model uređaja.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): redak {2}
 {0}: {1}, could not save	{0}: {1}, spremanje nije uspjelo
 Hell: picture saved: {0}	Hell: slika spremljena: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Uređaj i dalje ne odgovara: provjerite je li uključen i postavke veze
+SDRLink: no link with OmniRig	SDRLink: nema veze s OmniRigom
+Last message: 	Zadnja poruka: 
+Things to try:	Što pokušati:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Koristite verziju 1 OmniRiga (OmniRig 1.x autora VE3NEA), dostupnu na stranici ispod.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Zatvorite OmniRig i SDRLink, zatim oba ponovno pokrenite kao administrator: desni klik na program, zatim „Pokreni kao administrator”.
+SDRLink is currently running as administrator.	SDRLink trenutno radi kao administrator.
+SDRLink is not currently running as administrator.	SDRLink trenutno ne radi kao administrator.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. U OmniRigu (Rig 1 ili Rig 2, onaj odabran u SDRLinku) provjerite model uređaja, COM priključak i brzinu; nijedan drugi program ne smije koristiti taj COM priključak.
+Then click the “Connecting...” button to stop, then click “Connect”.	Zatim kliknite gumb „Spajanje...” za zaustavljanje, pa „Spoji”.
+Link lost: the rig has not answered for {0} s	Veza izgubljena: uređaj ne odgovara već {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink ne može komunicirati s uređajem preko OmniRiga (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: tipkovnica frekvencije i popis Mem posljednjih frekvencija; kotačić: promjena frekvencije (desni klik: boje)
 No frequency to store (no rig, no WebSDR).	Nema frekvencije za spremanje (ni uređaja ni WebSDR-a).
 Stored: {0} kHz	Spremljeno: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Podaci
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Vrijedi pokušati ako se stranice WebSDR više ne prikazuju (prazan prozor, kao bez interneta).
 Reset	Vrati početno
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink će se zatim ponovno pokrenuti. Trenutne postavke čuvaju se u {0} (Uvoz/Izvoz ih može ponovno učitati). Ažuriranja SDRLinka nikad ništa ne vraćaju na početno.
-Connecting...	Spajanje...
 Connected, waiting for the rig...	Spojeno, čekanje na uređaj...
 Rig online	Uređaj spojen
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Uređaj ne odgovara (provjerite priključak, brzinu, CI-V adresu, CAT izbornik)

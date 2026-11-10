@@ -20,7 +20,7 @@ Pour recompiler après une modification : `powershell -ExecutionPolicy Bypass -F
 
 Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section.
 
-1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Look ▾**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
+1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Connexion... / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Look ▾**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
@@ -32,7 +32,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 
 | Où | Ce que propose le clic droit |
 |---|---|
-| Connecter | couleur quand connecté / déconnecté |
+| Connecter | couleur quand connecté / déconnecté / poste qui ne répond pas encore |
 | Ouvrir le journal, Look, Taille du texte, Vérifier les mises à jour, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Pseudo/Call | couleur du bouton |
 | FreeDV auto | pas de menu : le clic droit passe de RADE V1 à RADE V2 et inversement (depuis la 1.24) |
 | Modes numériques (bouton et fenêtre posée sur la page) | les 14 modes (clic gauche : choisir et lancer ; clic droit : choisir et ouvrir les réglages), **Réglages <mode>…**, **Effacer le texte reçu**, **Ouvrir le dossier des images**, **Réinitialiser la fenêtre <mode>**, **Réinitialiser les fenêtres** (depuis la 1.25) |
@@ -78,6 +78,14 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | TCI | Hôte / port (40001 par défaut) | ExpertSDR (SunSDR), Thetis… activer le serveur TCI |
 | Ham Radio Deluxe | Hôte / port (7809 par défaut) | Activer le serveur IP dans HRD Rig Control |
 | Hamlib (rigctld) | Hôte / port (4532 par défaut), « Lancer rigctld », n° de modèle Hamlib | Voir ci-dessous |
+
+### Bouton Connecter et contrôle de la liaison (depuis la 1.34)
+
+- **Connecter** : pas de liaison avec le poste.
+- **Connexion...** (orange) : la liaison est lancée mais le poste n'a pas encore répondu, ou ne répond plus. Un clic arrête la tentative.
+- **Déconnecter** : le poste répond vraiment ; un clic coupe la liaison.
+- La liaison est contrôlée **15 s après « Connecter », puis chaque minute**. Si le poste ne répond pas, la barre d'état le dit avec le dernier message d'erreur. Une liaison figée (OmniRig ou port COM qui ne répond plus) est vue perdue : « Liaison perdue : le poste ne répond plus depuis X s », le bouton repasse à « Connexion... » puis revient seul à « Déconnecter » quand le poste répond de nouveau. Chaque problème est noté dans le journal.
+- **Avec OmniRig**, si le poste ne répond pas, une **fenêtre d'aide** s'ouvre au premier plan (une fois par connexion, sans bloquer SDRLink) : utiliser **OmniRig version 1**, relancer **OmniRig et SDRLink en mode administrateur** (elle indique si SDRLink l'est déjà), vérifier dans OmniRig le modèle, le port COM et la vitesse ; avec le lien vers la page d'OmniRig.
 
 ## Hamlib
 
@@ -337,7 +345,7 @@ La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'int
 Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le bouton avait déjà un clic droit (PTT, Mémoires, Câble SDRLINK, Mute ExpertSDR…), ce menu est conservé et les couleurs sont ajoutées à la fin.
 - **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Look, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export.
 - **Deux choix, un pour chaque état** :
-  - **Connecter** : quand connecté / quand déconnecté ;
+  - **Connecter** : quand connecté / quand déconnecté / quand le poste ne répond pas encore (orange par défaut) ;
   - **Câble SDRLINK** : quand activé / quand désactivé ;
   - **Scan** : scan arrêté / scan en marche ;
   - **PTT** : en réception / en émission (PTT activé) ;
@@ -632,7 +640,7 @@ Les réglages ne bougent pas (ils sont dans `%APPDATA%\SDRLink`). Si quelque cho
 
 ## Dépannage
 
-**OmniRig ne fonctionne pas** (pas de fréquence, erreur à la connexion) : utiliser **OmniRig version 1** (pas la 2), lancé **en mode administrateur** (clic droit sur OmniRig > Exécuter en tant qu'administrateur).
+**OmniRig ne fonctionne pas** (pas de fréquence, erreur à la connexion) : utiliser **OmniRig version 1** (pas la 2), lancé **en mode administrateur** (clic droit sur OmniRig > Exécuter en tant qu'administrateur), et **SDRLink aussi en mode administrateur**. Depuis la 1.34, SDRLink ouvre lui-même une fenêtre d'aide avec ces conseils quand OmniRig ne répond pas.
 
 Réglages : `%APPDATA%\SDRLink\settings.ini`. Journal : `%APPDATA%\SDRLink\sdrlink.log`. Le journal est remis à zéro à chaque lancement et contient l'état de la connexion et, pour HRD, la liste des modes reçue.
 
@@ -644,6 +652,9 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.34**
+  - **Liaison avec le poste vérifiée** : le bouton affiche « Connexion... » (orange) tant que le poste n'a pas répondu, « Déconnecter » seulement quand il répond ; contrôle 15 s après la connexion puis chaque minute, liaison figée détectée.
+  - **Aide OmniRig** au premier plan si le poste ne répond pas (OmniRig version 1, mode administrateur pour OmniRig et SDRLink).
 - **1.33**
   - Bouton **Look ▾** : 7 allures de boutons au choix (Classique, Win3.11, Néon IA, Moderne, Verre, Terminal, Métal), sans changer la taille des boutons.
 - **1.32**

@@ -215,6 +215,7 @@ Modern	Modern
 Glass	Glas
 Metal	Metaal
 Classic	Klassiek
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Verbinden: start de verbinding met de transceiver. "Verbinden...": de transceiver antwoordt nog niet (klik: stoppen). "Verbreken": de transceiver antwoordt; de verbinding wordt elke minuut gecontroleerd (rechtsklik: kleuren van de knop)
 Cannot open the log: 	Kan het logboek niet openen: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Stijl van de knoppen: Klassiek, Win3.11, AI-neon, Modern, Glas, Terminal of Metaal (rechtsklik: kleur van de knop)
 Check for updates	Controleren op updates
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Geluid naar de volgende ontvanger schakelen (rechtsklik: ontvanger die gedempt blijft)
 Colour when connected	Kleur bij verbonden
 Colour when disconnected	Kleur bij niet verbonden
+Colour when the rig is not answering yet	Kleur zolang de transceiver nog niet antwoordt
 Colour when on	Kleur bij aan
 Colour when off	Kleur bij uit
 Colour when the scan is stopped	Kleur bij gestopte scan
@@ -260,6 +262,7 @@ RIG	transceiver
 Disconnected	Niet verbonden
 Connect	Verbinden
 Disconnect	Verbreken
+Connecting...	Verbinden...
 Location of rigctld.exe (Hamlib)	Locatie van rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Programma's (*.exe)|*.exe
 Please choose a rig model.	Kies een transceivermodel.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): lijn {2}
 {0}: {1}, could not save	{0}: {1}, opslaan niet gelukt
 Hell: picture saved: {0}	Hell: beeld opgeslagen: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	De transceiver antwoordt nog steeds niet: controleer of hij aanstaat en de verbindingsinstellingen
+SDRLink: no link with OmniRig	SDRLink: geen verbinding met OmniRig
+Last message: 	Laatste melding: 
+Things to try:	Om te proberen:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Gebruik versie 1 van OmniRig (OmniRig 1.x van VE3NEA), te downloaden via de pagina hieronder.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Sluit OmniRig en SDRLink en start ze daarna allebei opnieuw als administrator: rechtsklik op het programma, dan "Als administrator uitvoeren".
+SDRLink is currently running as administrator.	SDRLink draait op dit moment als administrator.
+SDRLink is not currently running as administrator.	SDRLink draait op dit moment niet als administrator.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. Controleer in OmniRig (Rig 1 of Rig 2, die in SDRLink gekozen is) het model van de transceiver, de COM-poort en de snelheid; geen ander programma mag deze COM-poort gebruiken.
+Then click the “Connecting...” button to stop, then click “Connect”.	Klik daarna op de knop "Verbinden..." om te stoppen en vervolgens op "Verbinden".
+Link lost: the rig has not answered for {0} s	Verbinding verloren: de transceiver antwoordt al {0} s niet meer
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink kan niet met de transceiver communiceren via OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: frequentietoetsenbord en Mem-lijst van de laatste frequenties; wieltje: frequentie wijzigen (rechtsklik: kleuren)
 No frequency to store (no rig, no WebSDR).	Geen frequentie om op te slaan (geen transceiver, geen WebSDR).
 Stored: {0} kHz	Opgeslagen: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Gegeve
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Het proberen waard als de WebSDR-pagina's niet meer verschijnen (leeg venster, alsof er geen internet is).
 Reset	Herstellen
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink wordt daarna opnieuw gestart. De huidige instellingen worden bewaard in {0} (Import/Export kan ze weer laden). Updates van SDRLink zetten nooit iets terug.
-Connecting...	Verbinden...
 Connected, waiting for the rig...	Verbonden, wachten op de transceiver...
 Rig online	TRX online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	De transceiver antwoordt niet (controleer poort, baudrate, CI-V-adres, CAT-menu)

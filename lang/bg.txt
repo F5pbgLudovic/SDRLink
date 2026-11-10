@@ -215,6 +215,7 @@ Modern	Модерен
 Glass	Стъкло
 Metal	Метал
 Classic	Класически
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Свържи: започва връзката с радиостанцията. „Свързване...“: станцията още не отговаря (щракване: спиране). „Прекъсни“: станцията отговаря; връзката се проверява всяка минута (десен клик: цветове на бутона)
 Cannot open the log: 	Дневникът не може да се отвори: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Вид на бутоните: Класически, Win3.11, Неон ИИ, Модерен, Стъкло, Terminal или Метал (десен клик: цвят на бутона)
 Check for updates	Проверка за актуализации
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Превключване на звука към следващия приемник (десен бутон: приемник, който остава заглушен)
 Colour when connected	Цвят при свързване
 Colour when disconnected	Цвят при прекъсната връзка
+Colour when the rig is not answering yet	Цвят, докато станцията още не отговаря
 Colour when on	Цвят при включено
 Colour when off	Цвят при изключено
 Colour when the scan is stopped	Цвят при спряно сканиране
@@ -260,6 +262,7 @@ RIG	трансивър
 Disconnected	Няма връзка
 Connect	Свържи
 Disconnect	Прекъсни
+Connecting...	Свързване...
 Location of rigctld.exe (Hamlib)	Местоположение на rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Програми (*.exe)|*.exe
 Please choose a rig model.	Изберете модел на трансивъра.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): ред {2}
 {0}: {1}, could not save	{0}: {1}, записът е невъзможен
 Hell: picture saved: {0}	Hell: изображението е записано: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Станцията все още не отговаря: проверете дали е включена и настройките на връзката
+SDRLink: no link with OmniRig	SDRLink: няма връзка с OmniRig
+Last message: 	Последно съобщение: 
+Things to try:	Какво да опитате:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Използвайте версия 1 на OmniRig (OmniRig 1.x от VE3NEA), достъпна от страницата по-долу.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Затворете OmniRig и SDRLink, след това стартирайте отново и двете като администратор: десен клик върху програмата, после „Изпълни като администратор“.
+SDRLink is currently running as administrator.	SDRLink в момента работи като администратор.
+SDRLink is not currently running as administrator.	SDRLink в момента не работи като администратор.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. В OmniRig (Rig 1 или Rig 2, избраният в SDRLink) проверете модела на станцията, COM порта и скоростта; никоя друга програма не трябва да използва този COM порт.
+Then click the “Connecting...” button to stop, then click “Connect”.	След това щракнете върху бутона „Свързване...“, за да спрете, и после върху „Свържи“.
+Link lost: the rig has not answered for {0} s	Връзката е загубена: станцията не отговаря от {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink не може да комуникира със станцията чрез OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Клик: клавиатура за честота и списък Mem с последните честоти; колелце: смяна на честотата (десен клик: цветове)
 No frequency to store (no rig, no WebSDR).	Няма честота за запомняне (нито радиостанция, нито WebSDR).
 Stored: {0} kHz	Запомнено: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Дан
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Опитайте, ако страниците на WebSDR вече не се показват (празен прозорец, сякаш няма интернет).
 Reset	Нулиране
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	След това SDRLink ще се рестартира. Текущите настройки се пазят в {0} (Импорт/Експорт може да ги зареди отново). Обновяванията на SDRLink никога не нулират нищо.
-Connecting...	Свързване...
 Connected, waiting for the rig...	Свързан, изчакване на трансивъра...
 Rig online	Трансивърът е на линия
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Трансивърът не отговаря (проверете порта, скоростта, CI-V адреса, менюто CAT)

@@ -215,6 +215,7 @@ Modern	Moderns
 Glass	Stikls
 Metal	Metāls
 Classic	Klasisks
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Savienot: sāk savienojumu ar raidītāju. “Savieno...”: raidītājs vēl neatbild (klikšķis: apturēt). “Atvienot”: raidītājs atbild; savienojums tiek pārbaudīts katru minūti (labais klikšķis: pogas krāsas)
 Cannot open the log: 	Nevar atvērt žurnālu: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Pogu stils: Klasisks, Win3.11, MI neons, Moderns, Stikls, Terminal vai Metāls (labais klikšķis: pogas krāsa)
 Check for updates	Pārbaudīt atjauninājumus
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Pārslēgt skaņu uz nākamo uztvērēju (labais klikšķis: uztvērējs, kas paliek apklusināts)
 Colour when connected	Krāsa, kad savienots
 Colour when disconnected	Krāsa, kad atvienots
+Colour when the rig is not answering yet	Krāsa, kamēr raidītājs vēl neatbild
 Colour when on	Krāsa, kad ieslēgts
 Colour when off	Krāsa, kad izslēgts
 Colour when the scan is stopped	Krāsa, kad skenēšana apturēta
@@ -260,6 +262,7 @@ RIG	raiduztvērējs
 Disconnected	Atvienots
 Connect	Savienot
 Disconnect	Atvienot
+Connecting...	Savieno...
 Location of rigctld.exe (Hamlib)	rigctld.exe (Hamlib) atrašanās vieta
 Programs (*.exe)|*.exe	Programmas (*.exe)|*.exe
 Please choose a rig model.	Lūdzu, izvēlieties raiduztvērēja modeli.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): rinda {2}
 {0}: {1}, could not save	{0}: {1}, saglabāt neizdevās
 Hell: picture saved: {0}	Hell: attēls saglabāts: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Raidītājs joprojām neatbild: pārbaudiet, vai tas ir ieslēgts, un savienojuma iestatījumus
+SDRLink: no link with OmniRig	SDRLink: nav savienojuma ar OmniRig
+Last message: 	Pēdējais ziņojums: 
+Things to try:	Ko izmēģināt:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Izmantojiet OmniRig 1. versiju (OmniRig 1.x no VE3NEA), kas pieejama zemāk norādītajā lapā.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Aizveriet OmniRig un SDRLink, pēc tam palaidiet abus vēlreiz kā administrators: labais klikšķis uz programmas, pēc tam “Palaist kā administratoram”.
+SDRLink is currently running as administrator.	SDRLink pašlaik darbojas kā administrators.
+SDRLink is not currently running as administrator.	SDRLink pašlaik nedarbojas kā administrators.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. OmniRig (Rig 1 vai Rig 2, tas, kas izvēlēts SDRLink) pārbaudiet raidītāja modeli, COM portu un ātrumu; neviena cita programma nedrīkst izmantot šo COM portu.
+Then click the “Connecting...” button to stop, then click “Connect”.	Pēc tam noklikšķiniet uz pogas “Savieno...”, lai apturētu, un pēc tam uz “Savienot”.
+Link lost: the rig has not answered for {0} s	Savienojums zaudēts: raidītājs neatbild jau {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nevar sazināties ar raidītāju caur OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klikšķis: frekvences tastatūra un pēdējo frekvenču saraksts Mem; ritenītis: mainīt frekvenci (labais klikšķis: krāsas)
 No frequency to store (no rig, no WebSDR).	Nav frekvences, ko saglabāt (nav ne raidītāja, ne WebSDR).
 Stored: {0} kHz	Saglabāts: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Iebūv
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Vērts mēģināt, ja WebSDR lapas vairs netiek rādītas (tukšs logs, it kā nebūtu interneta).
 Reset	Atiestatīt
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Pēc tam SDRLink tiks restartēta. Pašreizējie iestatījumi tiek saglabāti failā {0} (Imports/eksports var tos ielādēt atkal). SDRLink atjauninājumi nekad neko neatiestata.
-Connecting...	Savieno...
 Connected, waiting for the rig...	Savienots, gaida raiduztvērēju...
 Rig online	Raiduztvērējs tiešsaistē
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raiduztvērējs neatbild (pārbaudiet portu, bodu ātrumu, CI-V adresi, CAT izvēlni)

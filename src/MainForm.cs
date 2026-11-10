@@ -278,6 +278,7 @@ namespace SDRLink
             btnConnect.Width = 110;
             btnConnect.Height = 27;
             btnConnect.Click += delegate { if (worker == null) Connect(); else Disconnect(); };
+            Tr(delegate { tips.SetToolTip(btnConnect, Lang.T("Connecter : lance la liaison avec le poste. « Connexion... » : le poste ne répond pas encore (clic : arrêter). « Déconnecter » : le poste répond ; la liaison est contrôlée chaque minute (clic droit : couleurs du bouton)", "Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)")); });
             row1.Controls.Add(btnConnect);
             chkAuto = Check("Connexion auto au démarrage", "Auto-connect at startup");
             row1.Controls.Add(chkAuto);
@@ -880,7 +881,8 @@ namespace SDRLink
 
             // Couleurs au clic droit des boutons à deux états (ajoutées après le menu propre au bouton, s'il en a un).
             AddColorMenu(btnConnect, Slot("ConnectOn", () => Lang.T("Couleur quand connecté", "Colour when connected")),
-                Slot("ConnectOff", () => Lang.T("Couleur quand déconnecté", "Colour when disconnected")));
+                Slot("ConnectOff", () => Lang.T("Couleur quand déconnecté", "Colour when disconnected")),
+                Slot("ConnectWait", () => Lang.T("Couleur quand le poste ne répond pas encore", "Colour when the rig is not answering yet")));
             AddColorMenu(btnCable, Slot("CableOn", () => Lang.T("Couleur quand activé", "Colour when on")),
                 Slot("CableOff", () => Lang.T("Couleur quand désactivé", "Colour when off")));
             AddColorMenu(btnScan, Slot("ScanOff", () => Lang.T("Couleur scan arrêté", "Colour when the scan is stopped")),
@@ -1361,8 +1363,10 @@ namespace SDRLink
 
         void UpdateConnectButton()
         {
-            btnConnect.Text = worker == null ? Lang.T("Connecter", "Connect") : Lang.T("Déconnecter", "Disconnect");
-            PaintKeyed(btnConnect, worker == null ? "ConnectOff" : "ConnectOn");
+            // Trois états : pas de liaison, liaison lancée mais poste muet (« Connexion... », clic = arrêter), poste qui répond.
+            btnConnect.Text = worker == null ? Lang.T("Connecter", "Connect") : rigOnline ? Lang.T("Déconnecter", "Disconnect") : Lang.T("Connexion...", "Connecting...");
+            if (worker != null && !rigOnline && ColorOf("ConnectWait") < 0) PaintCustom(btnConnect, ConnectWaitDefault);
+            else PaintKeyed(btnConnect, worker == null ? "ConnectOff" : rigOnline ? "ConnectOn" : "ConnectWait");
         }
 
         void UpdateInterfacePanels()
@@ -1615,6 +1619,7 @@ namespace SDRLink
             pttActive = false;
             UpdatePttButton();
             UpdateConnectButton();
+            StartLinkCheck();
             SetConfigEnabled(false);
         }
 
@@ -1672,6 +1677,7 @@ namespace SDRLink
             RigWorker w = worker;
             // Son du poste coupé par SDRLink : on le rétablit avant de lâcher la liaison.
             if (rigMuted) w.SetAfGain(trkRigVolume.Value);
+            StopLinkCheck();
             worker = null;
             w.Stop();
             Rigctld.Stop();
@@ -1709,7 +1715,9 @@ namespace SDRLink
         {
             if (worker == null) return;
             rigOnline = online;
+            lastRigMsg = msg;
             ShowStatus(msg);
+            UpdateConnectButton();
             UpdateDisplays();
         }
 

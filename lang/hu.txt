@@ -215,6 +215,7 @@ Modern	Modern
 Glass	Üveg
 Metal	Fém
 Classic	Klasszikus
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Csatlakozás: elindítja a kapcsolatot a rádióval. „Csatlakozás...”: a rádió még nem válaszol (kattintás: leállítás). „Bontás”: a rádió válaszol; a kapcsolat ellenőrzése percenként történik (jobb kattintás: a gomb színei)
 Cannot open the log: 	A napló nem nyitható meg: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Gombok megjelenése: Klasszikus, Win3.11, MI neon, Modern, Üveg, Terminal vagy Fém (jobb kattintás: gomb színe)
 Check for updates	Frissítések keresése
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
 Colour when connected	Szín csatlakoztatva
 Colour when disconnected	Szín bontott kapcsolatnál
+Colour when the rig is not answering yet	Szín, amíg a rádió még nem válaszol
 Colour when on	Szín bekapcsolva
 Colour when off	Szín kikapcsolva
 Colour when the scan is stopped	Szín leállított pásztázásnál
@@ -260,6 +262,7 @@ RIG	rádió
 Disconnected	Nincs kapcsolat
 Connect	Csatlakozás
 Disconnect	Bontás
+Connecting...	Csatlakozás...
 Location of rigctld.exe (Hamlib)	A rigctld.exe helye (Hamlib)
 Programs (*.exe)|*.exe	Programok (*.exe)|*.exe
 Please choose a rig model.	Válasszon rádiómodellt.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): {2}. sor
 {0}: {1}, could not save	{0}: {1}, a mentés nem sikerült
 Hell: picture saved: {0}	Hell: kép mentve: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	A rádió még mindig nem válaszol: ellenőrizze, hogy be van-e kapcsolva, és a kapcsolat beállításait
+SDRLink: no link with OmniRig	SDRLink: nincs kapcsolat az OmniRiggel
+Last message: 	Utolsó üzenet: 
+Things to try:	Kipróbálandó:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Az OmniRig 1-es verzióját használja (OmniRig 1.x, VE3NEA), letölthető az alábbi oldalról.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Zárja be az OmniRiget és az SDRLinket, majd indítsa újra mindkettőt rendszergazdaként: jobb kattintás a programra, majd „Futtatás rendszergazdaként”.
+SDRLink is currently running as administrator.	Az SDRLink jelenleg rendszergazdaként fut.
+SDRLink is not currently running as administrator.	Az SDRLink jelenleg nem rendszergazdaként fut.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. Az OmniRigben (Rig 1 vagy Rig 2, amelyik az SDRLinkben ki van választva) ellenőrizze a rádió típusát, a COM portot és a sebességet; más program nem használhatja ezt a COM portot.
+Then click the “Connecting...” button to stop, then click “Connect”.	Ezután kattintson a „Csatlakozás...” gombra a leállításhoz, majd a „Csatlakozás” gombra.
+Link lost: the rig has not answered for {0} s	A kapcsolat megszakadt: a rádió {0} s óta nem válaszol
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	Az SDRLink nem tud kommunikálni a rádióval az OmniRigen keresztül (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Kattintás: frekvencia-billentyűzet és a legutóbbi frekvenciák Mem listája; görgő: frekvencia váltása (jobb kattintás: színek)
 No frequency to store (no rig, no WebSDR).	Nincs tárolható frekvencia (sem rádió, sem WebSDR).
 Stored: {0} kHz	Tárolva: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	A beé
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Érdemes kipróbálni, ha a WebSDR-oldalak már nem jelennek meg (üres ablak, mintha nem lenne internet).
 Reset	Alaphelyzet
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Az SDRLink ezután újraindul. A jelenlegi beállítások a(z) {0} fájlban maradnak meg (az Import/Export vissza tudja tölteni őket). Az SDRLink frissítései soha semmit nem állítanak alaphelyzetbe.
-Connecting...	Csatlakozás...
 Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
 Rig online	Rádió online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	A rádió nem válaszol (ellenőrizze a portot, a sebességet, a CI-V címet, a CAT menüt)

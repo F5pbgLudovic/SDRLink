@@ -215,6 +215,7 @@ Modern	Modern
 Glass	Sticlă
 Metal	Metal
 Classic	Clasic
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Conectare: pornește legătura cu stația. „Conectare...”: stația nu răspunde încă (clic: oprire). „Deconectare”: stația răspunde; legătura este verificată în fiecare minut (clic dreapta: culorile butonului)
 Cannot open the log: 	Nu se poate deschide jurnalul: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Aspectul butoanelor: Clasic, Win3.11, Neon IA, Modern, Sticlă, Terminal sau Metal (clic dreapta: culoarea butonului)
 Check for updates	Caută actualizări
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Comută sunetul la receptorul următor (clic dreapta: receptor care rămâne fără sunet)
 Colour when connected	Culoare când este conectat
 Colour when disconnected	Culoare când este deconectat
+Colour when the rig is not answering yet	Culoare cât timp stația nu răspunde încă
 Colour when on	Culoare când este activat
 Colour when off	Culoare când este dezactivat
 Colour when the scan is stopped	Culoare cu scanarea oprită
@@ -260,6 +262,7 @@ RIG	stație
 Disconnected	Deconectat
 Connect	Conectare
 Disconnect	Deconectare
+Connecting...	Conectare...
 Location of rigctld.exe (Hamlib)	Locația rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Programe (*.exe)|*.exe
 Please choose a rig model.	Alegeți un model de stație.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linia {2}
 {0}: {1}, could not save	{0}: {1}, salvare imposibilă
 Hell: picture saved: {0}	Hell: imagine salvată: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Stația tot nu răspunde: verificați dacă este pornită și setările legăturii
+SDRLink: no link with OmniRig	SDRLink: nicio legătură cu OmniRig
+Last message: 	Ultimul mesaj: 
+Things to try:	De încercat:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Folosiți versiunea 1 a OmniRig (OmniRig 1.x de VE3NEA), disponibilă pe pagina de mai jos.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Închideți OmniRig și SDRLink, apoi porniți-le din nou pe amândouă ca administrator: clic dreapta pe program, apoi „Executare ca administrator”.
+SDRLink is currently running as administrator.	SDRLink rulează acum ca administrator.
+SDRLink is not currently running as administrator.	SDRLink nu rulează acum ca administrator.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. În OmniRig (Rig 1 sau Rig 2, cel ales în SDRLink), verificați modelul stației, portul COM și viteza; niciun alt program nu trebuie să folosească acest port COM.
+Then click the “Connecting...” button to stop, then click “Connect”.	Apoi faceți clic pe butonul „Conectare...” pentru a opri, apoi pe „Conectare”.
+Link lost: the rig has not answered for {0} s	Legătură pierdută: stația nu mai răspunde de {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nu poate comunica cu stația prin OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clic: tastatură de frecvență și lista Mem a ultimelor frecvențe; rotiță: schimbarea frecvenței (clic dreapta: culori)
 No frequency to store (no rig, no WebSDR).	Nicio frecvență de memorat (nici stație, nici WebSDR).
 Stored: {0} kHz	Memorat: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Datele
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Merită încercat dacă paginile WebSDR nu se mai afișează (fereastră goală, ca fără internet).
 Reset	Resetare
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink va reporni apoi. Setările actuale sunt păstrate în {0} (Import/Export le poate reîncărca). Actualizările SDRLink nu resetează niciodată nimic.
-Connecting...	Conectare...
 Connected, waiting for the rig...	Conectat, se așteaptă stația...
 Rig online	Stație online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stația nu răspunde (verificați portul, viteza, adresa CI-V, meniul CAT)

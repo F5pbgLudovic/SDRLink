@@ -215,6 +215,7 @@ Modern	Modernus
 Glass	Stiklas
 Metal	Metalas
 Classic	Klasikinis
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Prisijungti: pradeda ryšį su radijo stotimi. „Jungiamasi...“: stotis dar neatsako (spustelėjimas: sustabdyti). „Atsijungti“: stotis atsako; ryšys tikrinamas kas minutę (dešinysis spustelėjimas: mygtuko spalvos)
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Mygtukų stilius: Klasikinis, Win3.11, DI neonas, Modernus, Stiklas, Terminal arba Metalas (dešinysis spustelėjimas: mygtuko spalva)
 Check for updates	Tikrinti atnaujinimus
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Perjungti garsą į kitą imtuvą (dešinysis spustelėjimas: imtuvas, kuris lieka nutildytas)
 Colour when connected	Spalva prisijungus
 Colour when disconnected	Spalva atsijungus
+Colour when the rig is not answering yet	Spalva, kol stotis dar neatsako
 Colour when on	Spalva įjungus
 Colour when off	Spalva išjungus
 Colour when the scan is stopped	Spalva sustabdžius skenavimą
@@ -260,6 +262,7 @@ RIG	stotis
 Disconnected	Atsijungta
 Connect	Prisijungti
 Disconnect	Atsijungti
+Connecting...	Jungiamasi...
 Location of rigctld.exe (Hamlib)	rigctld.exe (Hamlib) vieta
 Programs (*.exe)|*.exe	Programos (*.exe)|*.exe
 Please choose a rig model.	Pasirinkite stoties modelį.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): eilutė {2}
 {0}: {1}, could not save	{0}: {1}, įrašyti nepavyko
 Hell: picture saved: {0}	Hell: vaizdas įrašytas: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Stotis vis dar neatsako: patikrinkite, ar ji įjungta, ir ryšio nustatymus
+SDRLink: no link with OmniRig	SDRLink: nėra ryšio su OmniRig
+Last message: 	Paskutinis pranešimas: 
+Things to try:	Ką išbandyti:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Naudokite OmniRig 1 versiją (VE3NEA OmniRig 1.x), kurią galima atsisiųsti iš toliau nurodyto puslapio.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Uždarykite OmniRig ir SDRLink, tada abu vėl paleiskite kaip administratorius: dešiniuoju pelės mygtuku spustelėkite programą, tada „Vykdyti kaip administratoriui“.
+SDRLink is currently running as administrator.	SDRLink šiuo metu veikia kaip administratorius.
+SDRLink is not currently running as administrator.	SDRLink šiuo metu neveikia kaip administratorius.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. OmniRig (Rig 1 arba Rig 2, pasirinktame SDRLink) patikrinkite stoties modelį, COM prievadą ir greitį; jokia kita programa negali naudoti šio COM prievado.
+Then click the “Connecting...” button to stop, then click “Connect”.	Tada spustelėkite mygtuką „Jungiamasi...“, kad sustabdytumėte, ir po to „Prisijungti“.
+Link lost: the rig has not answered for {0} s	Ryšys prarastas: stotis neatsako jau {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink negali susisiekti su stotimi per OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Spustelėjimas: dažnio klaviatūra ir paskutinių dažnių sąrašas Mem; ratukas: keisti dažnį (dešinysis spustelėjimas: spalvos)
 No frequency to store (no rig, no WebSDR).	Nėra dažnio įrašymui (nei radijo stoties, nei WebSDR).
 Stored: {0} kHz	Įrašyta: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Įtais
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Verta pabandyti, jei WebSDR puslapiai nebesirodo (tuščias langas, lyg nebūtų interneto).
 Reset	Atkurti
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Po to SDRLink bus paleista iš naujo. Dabartiniai nustatymai išsaugomi faile {0} (Importas/eksportas gali juos vėl įkelti). SDRLink atnaujinimai niekada nieko neatstato.
-Connecting...	Jungiamasi...
 Connected, waiting for the rig...	Prisijungta, laukiama stoties...
 Rig online	Stotis prisijungusi
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stotis neatsako (patikrinkite prievadą, spartą, CI-V adresą, CAT meniu)

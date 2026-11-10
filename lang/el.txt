@@ -215,6 +215,7 @@ Modern	Μοντέρνο
 Glass	Γυαλί
 Metal	Μέταλλο
 Classic	Κλασικό
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Σύνδεση: ξεκινά τη σύνδεση με τον πομποδέκτη. «Σύνδεση...»: ο πομποδέκτης δεν απαντά ακόμη (κλικ: διακοπή). «Αποσύνδεση»: ο πομποδέκτης απαντά· η σύνδεση ελέγχεται κάθε λεπτό (δεξί κλικ: χρώματα κουμπιού)
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Εμφάνιση κουμπιών: Κλασικό, Win3.11, Νέον ΤΝ, Μοντέρνο, Γυαλί, Terminal ή Μέταλλο (δεξί κλικ: χρώμα κουμπιού)
 Check for updates	Έλεγχος για ενημερώσεις
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Μεταφορά του ήχου στον επόμενο δέκτη (δεξί κλικ: δέκτης που μένει σε σίγαση)
 Colour when connected	Χρώμα όταν είναι συνδεδεμένο
 Colour when disconnected	Χρώμα όταν είναι αποσυνδεδεμένο
+Colour when the rig is not answering yet	Χρώμα όσο ο πομποδέκτης δεν απαντά ακόμη
 Colour when on	Χρώμα όταν είναι ενεργό
 Colour when off	Χρώμα όταν είναι ανενεργό
 Colour when the scan is stopped	Χρώμα με τη σάρωση σταματημένη
@@ -260,6 +262,7 @@ RIG	πομποδέκτης
 Disconnected	Αποσυνδέθηκε
 Connect	Σύνδεση
 Disconnect	Αποσύνδεση
+Connecting...	Σύνδεση...
 Location of rigctld.exe (Hamlib)	Θέση του rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Προγράμματα (*.exe)|*.exe
 Please choose a rig model.	Επιλέξτε μοντέλο πομποδέκτη.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): γραμμή {2}
 {0}: {1}, could not save	{0}: {1}, αδύνατη η αποθήκευση
 Hell: picture saved: {0}	Hell: η εικόνα αποθηκεύτηκε: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Ο πομποδέκτης εξακολουθεί να μην απαντά: ελέγξτε ότι είναι αναμμένος και τις ρυθμίσεις σύνδεσης
+SDRLink: no link with OmniRig	SDRLink: καμία σύνδεση με το OmniRig
+Last message: 	Τελευταίο μήνυμα: 
+Things to try:	Τι να δοκιμάσετε:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Χρησιμοποιήστε την έκδοση 1 του OmniRig (OmniRig 1.x του VE3NEA), διαθέσιμη από την παρακάτω σελίδα.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Κλείστε το OmniRig και το SDRLink και ξεκινήστε ξανά και τα δύο ως διαχειριστής: δεξί κλικ στο πρόγραμμα και μετά «Εκτέλεση ως διαχειριστής».
+SDRLink is currently running as administrator.	Το SDRLink εκτελείται αυτή τη στιγμή ως διαχειριστής.
+SDRLink is not currently running as administrator.	Το SDRLink δεν εκτελείται αυτή τη στιγμή ως διαχειριστής.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. Στο OmniRig (Rig 1 ή Rig 2, αυτό που επιλέχθηκε στο SDRLink), ελέγξτε το μοντέλο του πομποδέκτη, τη θύρα COM και την ταχύτητα· κανένα άλλο πρόγραμμα δεν πρέπει να χρησιμοποιεί αυτή τη θύρα COM.
+Then click the “Connecting...” button to stop, then click “Connect”.	Έπειτα κάντε κλικ στο κουμπί «Σύνδεση...» για διακοπή και μετά στο «Σύνδεση».
+Link lost: the rig has not answered for {0} s	Η σύνδεση χάθηκε: ο πομποδέκτης δεν απαντά εδώ και {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	Το SDRLink δεν μπορεί να επικοινωνήσει με τον πομποδέκτη μέσω του OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Κλικ: πληκτρολόγιο συχνότητας και λίστα Mem με τις τελευταίες συχνότητες· ροδέλα: αλλαγή συχνότητας (δεξί κλικ: χρώματα)
 No frequency to store (no rig, no WebSDR).	Καμία συχνότητα για αποθήκευση (ούτε πομποδέκτης ούτε WebSDR).
 Stored: {0} kHz	Αποθηκεύτηκε: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Δεδ
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Αξίζει να το δοκιμάσετε αν οι σελίδες των WebSDR δεν εμφανίζονται πια (κενό παράθυρο, σαν χωρίς Internet).
 Reset	Επαναφορά
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Στη συνέχεια το SDRLink θα επανεκκινηθεί. Οι τρέχουσες ρυθμίσεις φυλάσσονται στο {0} (η Εισαγωγή/Εξαγωγή μπορεί να τις φορτώσει ξανά). Οι ενημερώσεις του SDRLink δεν επαναφέρουν ποτέ τίποτα.
-Connecting...	Σύνδεση...
 Connected, waiting for the rig...	Συνδέθηκε, αναμονή για τον πομποδέκτη...
 Rig online	Πομποδέκτης σε σύνδεση
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Ο πομποδέκτης δεν απαντά (ελέγξτε θύρα, ταχύτητα, διεύθυνση CI-V, μενού CAT)

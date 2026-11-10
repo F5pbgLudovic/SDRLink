@@ -215,6 +215,7 @@ Modern	Moderne
 Glass	Verre
 Metal	Métal
 Classic	Classique
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Connecter : lance la liaison avec le poste. « Connexion... » : le poste ne répond pas encore (clic : arrêter). « Déconnecter » : le poste répond ; la liaison est contrôlée chaque minute (clic droit : couleurs du bouton)
 Cannot open the log: 	Impossible d'ouvrir le journal : 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Allure des boutons : Classique, Win3.11, Néon IA, Moderne, Verre, Terminal ou Métal (clic droit : couleur du bouton)
 Check for updates	Vérifier les mises à jour
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Passer le son à la réception suivante (clic droit : réception à laisser coupée)
 Colour when connected	Couleur quand connecté
 Colour when disconnected	Couleur quand déconnecté
+Colour when the rig is not answering yet	Couleur quand le poste ne répond pas encore
 Colour when on	Couleur quand activé
 Colour when off	Couleur quand désactivé
 Colour when the scan is stopped	Couleur scan arrêté
@@ -260,6 +262,7 @@ RIG	RADIO
 Disconnected	Déconnecté
 Connect	Connecter
 Disconnect	Déconnecter
+Connecting...	Connexion...
 Location of rigctld.exe (Hamlib)	Emplacement de rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Programmes (*.exe)|*.exe
 Please choose a rig model.	Choisissez un modèle de poste.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}) : ligne {2}
 {0}: {1}, could not save	{0} : {1}, enregistrement impossible
 Hell: picture saved: {0}	Hell : image enregistrée : {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Le poste ne répond toujours pas : vérifiez qu'il est allumé et le réglage de la liaison
+SDRLink: no link with OmniRig	SDRLink : pas de liaison avec OmniRig
+Last message: 	Dernier message : 
+Things to try:	À essayer :
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Utilisez la version 1 d'OmniRig (OmniRig 1.x de VE3NEA), à télécharger sur la page ci-dessous.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Fermez OmniRig et SDRLink, puis relancez-les tous les deux en mode administrateur : clic droit sur le programme, puis « Exécuter en tant qu'administrateur ».
+SDRLink is currently running as administrator.	SDRLink tourne en ce moment en mode administrateur.
+SDRLink is not currently running as administrator.	SDRLink ne tourne pas en ce moment en mode administrateur.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. Dans OmniRig (Rig 1 ou Rig 2, celui choisi dans SDRLink), vérifiez le modèle du poste, le port COM et la vitesse ; aucun autre programme ne doit utiliser ce port COM.
+Then click the “Connecting...” button to stop, then click “Connect”.	Ensuite, cliquez sur le bouton « Connexion... » pour arrêter, puis sur « Connecter ».
+Link lost: the rig has not answered for {0} s	Liaison perdue : le poste ne répond plus depuis {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink n'arrive pas à dialoguer avec le poste par OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clic : clavier de fréquence et liste Mem des dernières fréquences ; molette : changer de fréquence (clic droit : couleurs)
 No frequency to store (no rig, no WebSDR).	Aucune fréquence à mémoriser (ni poste ni WebSDR).
 Stored: {0} kHz	Mémorisé : {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Donné
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	À essayer si les pages des WebSDR ne s'affichent plus (fenêtre vide, comme sans Internet).
 Reset	Réinitialiser
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink va ensuite redémarrer. Les réglages actuels sont gardés dans {0} (Import/Export peut les recharger). Les mises à jour de SDRLink ne réinitialisent jamais rien.
-Connecting...	Connexion...
 Connected, waiting for the rig...	Connecté, en attente du poste...
 Rig online	Poste en ligne
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Le poste ne répond pas (vérifiez port, vitesse, adresse CI-V, menu CAT)

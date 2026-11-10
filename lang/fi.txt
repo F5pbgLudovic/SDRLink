@@ -215,6 +215,7 @@ Modern	Moderni
 Glass	Lasi
 Metal	Metalli
 Classic	Klassinen
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Yhdistä: käynnistää yhteyden radioon. ”Yhdistetään...”: radio ei vielä vastaa (napsautus: keskeytä). ”Katkaise”: radio vastaa; yhteys tarkistetaan minuutin välein (hiiren oikea painike: painikkeen värit)
 Cannot open the log: 	Lokia ei voi avata: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Painikkeiden tyyli: Klassinen, Win3.11, Tekoälyneon, Moderni, Lasi, Terminal tai Metalli (hiiren oikea painike: painikkeen väri)
 Check for updates	Tarkista päivitykset
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Siirrä ääni seuraavaan vastaanottimeen (hiiren oikea painike: vastaanotin, joka pysyy mykistettynä)
 Colour when connected	Väri yhdistettynä
 Colour when disconnected	Väri ilman yhteyttä
+Colour when the rig is not answering yet	Väri, kun radio ei vielä vastaa
 Colour when on	Väri päällä
 Colour when off	Väri pois päältä
 Colour when the scan is stopped	Väri skannauksen ollessa pysäytetty
@@ -260,6 +262,7 @@ RIG	radio
 Disconnected	Ei yhteyttä
 Connect	Yhdistä
 Disconnect	Katkaise
+Connecting...	Yhdistetään...
 Location of rigctld.exe (Hamlib)	rigctld.exe-tiedoston sijainti (Hamlib)
 Programs (*.exe)|*.exe	Ohjelmat (*.exe)|*.exe
 Please choose a rig model.	Valitse radion malli.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): rivi {2}
 {0}: {1}, could not save	{0}: {1}, tallennus ei onnistunut
 Hell: picture saved: {0}	Hell: kuva tallennettu: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Radio ei vieläkään vastaa: tarkista, että se on päällä, sekä yhteyden asetukset
+SDRLink: no link with OmniRig	SDRLink: ei yhteyttä OmniRigiin
+Last message: 	Viimeisin viesti: 
+Things to try:	Kokeile näitä:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Käytä OmniRigin versiota 1 (VE3NEA:n OmniRig 1.x), ladattavissa alla olevalta sivulta.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Sulje OmniRig ja SDRLink ja käynnistä sitten molemmat uudelleen järjestelmänvalvojana: napsauta ohjelmaa hiiren oikealla painikkeella ja valitse ”Suorita järjestelmänvalvojana”.
+SDRLink is currently running as administrator.	SDRLink on nyt käynnissä järjestelmänvalvojana.
+SDRLink is not currently running as administrator.	SDRLink ei ole nyt käynnissä järjestelmänvalvojana.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. Tarkista OmniRigissä (Rig 1 tai Rig 2, SDRLinkissä valittu) radion malli, COM-portti ja nopeus; mikään muu ohjelma ei saa käyttää tätä COM-porttia.
+Then click the “Connecting...” button to stop, then click “Connect”.	Napsauta sitten painiketta ”Yhdistetään...” keskeyttääksesi ja sen jälkeen ”Yhdistä”.
+Link lost: the rig has not answered for {0} s	Yhteys menetetty: radio ei ole vastannut {0} s:iin
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink ei saa yhteyttä radioon OmniRigin kautta (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Napsautus: taajuusnäppäimistö ja viimeisten taajuuksien Mem-luettelo; rulla: vaihda taajuutta (oikea painike: värit)
 No frequency to store (no rig, no WebSDR).	Ei tallennettavaa taajuutta (ei radiota eikä WebSDR:ää).
 Stored: {0} kHz	Tallennettu: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Sisä�
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Kokeile, jos WebSDR-sivut eivät enää näy (tyhjä ikkuna, kuin ilman internetiä).
 Reset	Palauta
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink käynnistyy sen jälkeen uudelleen. Nykyiset asetukset säilytetään tiedostossa {0} (Tuonti/vienti voi ladata ne takaisin). SDRLinkin päivitykset eivät koskaan palauta mitään.
-Connecting...	Yhdistetään...
 Connected, waiting for the rig...	Yhdistetty, odotetaan radiota...
 Rig online	Radio yhteydessä
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radio ei vastaa (tarkista portti, nopeus, CI-V-osoite, CAT-valikko)

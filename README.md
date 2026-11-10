@@ -1,8 +1,8 @@
-# SDRLink V1.33 — @F5PBG 2026
+# SDRLink V1.34 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
-- **Interfaces** : port COM (CAT direct), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld).
+- **Interfaces** : port COM (CAT direct), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld) ; liaison avec le poste contrôlée chaque minute, aide OmniRig si le poste ne répond pas.
 - **Postes en CAT direct (128 modèles, classés par numéro)** : Yaesu (40, du FT-100 au FTX-1, dont les anciens FT-747GX, FT-757GX/GXII, FT-767GX, FT-840, FT-890, FT-900, FT-920, FT-990, FT-1000…), Icom (55, de l'IC-78 à l'IC-9700, dont les IC-7xx des années 80), Kenwood (23, du TS-50S au TS-B2000), Elecraft (5), Xiegu (G90, X108G, X5105, X6100, X6200). Les autres postes passent par OmniRig, HRD ou Hamlib.
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. Le son démarre sans clic, un pseudo (bouton Pseudo/Call, « SDRLink » par défaut) est donné d'office aux KiwiSDR et websdr.org qui en demandent un, un KiwiSDR complet met en file d'attente, le squelch est ouvert (sauf FM VHF), et un clic dans la page fait suivre le poste dès l'arrivée.
 - **Fonctions** :
@@ -57,7 +57,7 @@ SDRLink est distribué sous la **licence publique générale GNU version 3** (GP
 
 SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows the rig's VFO and the rig follows the WebSDR waterfall. The mode is synchronised too.
 
-- **Interfaces**: COM port (direct CAT), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld).
+- **Interfaces**: COM port (direct CAT), OmniRig, TCI, Ham Radio Deluxe, Hamlib (rigctld); rig link checked every minute, OmniRig help if the rig does not answer.
 - **Rigs in direct CAT (128 models, sorted by number)**: Yaesu (40, from the FT-100 to the FTX-1, including the older FT-747GX, FT-757GX/GXII, FT-767GX, FT-840, FT-890, FT-900, FT-920, FT-990, FT-1000…), Icom (55, from the IC-78 to the IC-9700, including the 1980s IC-7xx), Kenwood (23, from the TS-50S to the TS-B2000), Elecraft (5), Xiegu (G90, X108G, X5105, X6100, X6200). Other rigs work through OmniRig, HRD or Hamlib.
 - **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. The audio starts without a click, a name (Pseudo/Call button, "SDRLink" by default) is given automatically to KiwiSDRs and websdr.org receivers that ask for one, a full KiwiSDR puts you in the queue, the squelch is opened (except VHF FM), and a click in the page makes the rig follow right after arriving.
 - **Features**:

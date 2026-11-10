@@ -215,6 +215,7 @@ Modern	Moderný
 Glass	Sklo
 Metal	Kov
 Classic	Klasický
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Pripojiť: spustí spojenie s transceiverom. „Pripája sa...“: transceiver zatiaľ neodpovedá (klik: zastaviť). „Odpojiť“: transceiver odpovedá; spojenie sa kontroluje každú minútu (pravé tlačidlo: farby tlačidla)
 Cannot open the log: 	Nedá sa otvoriť denník: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Vzhľad tlačidiel: Klasický, Win3.11, Neón AI, Moderný, Sklo, Terminal alebo Kov (pravé tlačidlo: farba tlačidla)
 Check for updates	Kontrolovať aktualizácie
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prepnúť zvuk na ďalší prijímač (pravé tlačidlo: prijímač, ktorý zostane stlmený)
 Colour when connected	Farba pri pripojení
 Colour when disconnected	Farba pri odpojení
+Colour when the rig is not answering yet	Farba, kým transceiver ešte neodpovedá
 Colour when on	Farba pri zapnutí
 Colour when off	Farba pri vypnutí
 Colour when the scan is stopped	Farba pri zastavenom skenovaní
@@ -260,6 +262,7 @@ RIG	transceiver
 Disconnected	Odpojené
 Connect	Pripojiť
 Disconnect	Odpojiť
+Connecting...	Pripája sa...
 Location of rigctld.exe (Hamlib)	Umiestnenie rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Programy (*.exe)|*.exe
 Please choose a rig model.	Vyberte model transceivera.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): riadok {2}
 {0}: {1}, could not save	{0}: {1}, uloženie sa nepodarilo
 Hell: picture saved: {0}	Hell: obrázok uložený: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Transceiver stále neodpovedá: skontrolujte, či je zapnutý, a nastavenie spojenia
+SDRLink: no link with OmniRig	SDRLink: žiadne spojenie s OmniRig
+Last message: 	Posledná správa: 
+Things to try:	Čo skúsiť:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Použite verziu 1 programu OmniRig (OmniRig 1.x od VE3NEA), na stiahnutie na stránke nižšie.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Zatvorte OmniRig aj SDRLink a spustite ich znova oba ako správca: pravé tlačidlo na programe, potom „Spustiť ako správca“.
+SDRLink is currently running as administrator.	SDRLink teraz beží ako správca.
+SDRLink is not currently running as administrator.	SDRLink teraz nebeží ako správca.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. V OmniRig (Rig 1 alebo Rig 2, ten zvolený v SDRLink) skontrolujte model transceivera, port COM a rýchlosť; žiadny iný program nesmie tento port COM používať.
+Then click the “Connecting...” button to stop, then click “Connect”.	Potom kliknite na tlačidlo „Pripája sa...“ na zastavenie a potom na „Pripojiť“.
+Link lost: the rig has not answered for {0} s	Spojenie stratené: transceiver neodpovedá už {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nedokáže komunikovať s transceiverom cez OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Kliknutie: klávesnica frekvencie a zoznam Mem posledných frekvencií; koliesko: zmena frekvencie (pravé tlačidlo: farby)
 No frequency to store (no rig, no WebSDR).	Žiadna frekvencia na uloženie (ani rádiostanica, ani WebSDR).
 Stored: {0} kHz	Uložené: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Údaje
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Skúste, ak sa stránky WebSDR už nezobrazujú (prázdne okno, ako bez internetu).
 Reset	Obnoviť predvolené
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink sa potom reštartuje. Súčasné nastavenia sa uložia do {0} (Import/Export ich môže znova načítať). Aktualizácie SDRLink nikdy nič neobnovujú.
-Connecting...	Pripája sa...
 Connected, waiting for the rig...	Pripojené, čaká sa na transceiver...
 Rig online	Transceiver online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Transceiver neodpovedá (skontrolujte port, rýchlosť, adresu CI-V, menu CAT)

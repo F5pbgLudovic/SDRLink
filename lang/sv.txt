@@ -215,6 +215,7 @@ Modern	Modern
 Glass	Glas
 Metal	Metall
 Classic	Klassisk
+Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Anslut: startar förbindelsen med radion. ”Ansluter...”: radion svarar inte än (klick: stoppa). ”Koppla från”: radion svarar; förbindelsen kontrolleras varje minut (högerklick: knappens färger)
 Cannot open the log: 	Kan inte öppna loggen: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Knapparnas stil: Klassisk, Win3.11, AI-neon, Modern, Glas, Terminal eller Metall (högerklick: knappens färg)
 Check for updates	Sök efter uppdateringar
@@ -232,6 +233,7 @@ FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Växla ljudet till nästa mottagare (högerklick: mottagare som förblir avstängd)
 Colour when connected	Färg när ansluten
 Colour when disconnected	Färg när frånkopplad
+Colour when the rig is not answering yet	Färg medan radion ännu inte svarar
 Colour when on	Färg när på
 Colour when off	Färg när av
 Colour when the scan is stopped	Färg när skanningen är stoppad
@@ -260,6 +262,7 @@ RIG	rigg
 Disconnected	Frånkopplad
 Connect	Anslut
 Disconnect	Koppla från
+Connecting...	Ansluter...
 Location of rigctld.exe (Hamlib)	Plats för rigctld.exe (Hamlib)
 Programs (*.exe)|*.exe	Program (*.exe)|*.exe
 Please choose a rig model.	Välj en riggmodell.
@@ -531,6 +534,18 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linje {2}
 {0}: {1}, could not save	{0}: {1}, kunde inte sparas
 Hell: picture saved: {0}	Hell: bild sparad: {0}
 SSTV	SSTV
+The rig is still not answering: check that it is switched on and the link settings	Radion svarar fortfarande inte: kontrollera att den är påslagen och förbindelsens inställningar
+SDRLink: no link with OmniRig	SDRLink: ingen förbindelse med OmniRig
+Last message: 	Senaste meddelande: 
+Things to try:	Att prova:
+1. Use version 1 of OmniRig (OmniRig 1.x by VE3NEA), available from the page below.	1. Använd version 1 av OmniRig (OmniRig 1.x av VE3NEA), som finns på sidan nedan.
+2. Close OmniRig and SDRLink, then start both of them again as administrator: right-click the program, then “Run as administrator”.	2. Stäng OmniRig och SDRLink och starta sedan båda igen som administratör: högerklicka på programmet och välj ”Kör som administratör”.
+SDRLink is currently running as administrator.	SDRLink körs just nu som administratör.
+SDRLink is not currently running as administrator.	SDRLink körs just nu inte som administratör.
+3. In OmniRig (Rig 1 or Rig 2, the one chosen in SDRLink), check the rig model, the COM port and the baud rate; no other program may use this COM port.	3. Kontrollera i OmniRig (Rig 1 eller Rig 2, den som valts i SDRLink) radiomodell, COM-port och hastighet; inget annat program får använda denna COM-port.
+Then click the “Connecting...” button to stop, then click “Connect”.	Klicka sedan på knappen ”Ansluter...” för att stoppa och därefter på ”Anslut”.
+Link lost: the rig has not answered for {0} s	Förbindelsen förlorad: radion har inte svarat på {0} s
+SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink kan inte kommunicera med radion via OmniRig (Rig {0}).
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klick: frekvenstangentbord och Mem-lista över de senaste frekvenserna; hjul: byt frekvens (högerklick: färger)
 No frequency to store (no rig, no WebSDR).	Ingen frekvens att spara (varken radio eller WebSDR).
 Stored: {0} kHz	Sparat: {0} kHz
@@ -589,7 +604,6 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Data i
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Värt att prova om WebSDR-sidorna inte längre visas (tomt fönster, som utan internet).
 Reset	Återställ
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink startar sedan om. De nuvarande inställningarna sparas i {0} (Import/Export kan läsa in dem igen). Uppdateringar av SDRLink återställer aldrig något.
-Connecting...	Ansluter...
 Connected, waiting for the rig...	Ansluten, väntar på riggen...
 Rig online	Riggen online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Riggen svarar inte (kontrollera port, baudhastighet, CI-V-adress, CAT-meny)
