@@ -210,7 +210,13 @@ keep them and add those of the file (no duplicates)	les garder et y ajouter ceux
 delete them and replace them with those of the file	les effacer et les remplacer par ceux du fichier
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink va ensuite redémarrer. Les réglages actuels sont gardés dans settings.avant-import.ini.
 Import	Importer
+AI Neon	Néon IA
+Modern	Moderne
+Glass	Verre
+Metal	Métal
+Classic	Classique
 Cannot open the log: 	Impossible d'ouvrir le journal : 
+Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Allure des boutons : Classique, Win3.11, Néon IA, Moderne, Verre, Terminal ou Métal (clic droit : couleur du bouton)
 Check for updates	Vérifier les mises à jour
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Case cochée : vérification automatique des mises à jour au démarrage. Clic sur le bouton : vérifier maintenant et ouvrir la fenêtre de mise à jour (clic droit : couleur du bouton)
 Export all settings…	Exporter tous les réglages…
@@ -450,6 +456,7 @@ TRX volume:	Volume TX :
 ExpertSDR volume:	Volume ExpertSDR :
 HDSDR volume:	Volume HDSDR :
 Open log	Ouvrir le journal
+Look ▾	Look ▾
 Text size…	Taille du texte…
 Import/Export ▾	Import/Export ▾
 …	…

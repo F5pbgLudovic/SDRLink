@@ -292,6 +292,28 @@ namespace SDRLink
             btnPalette = new PaletteButton();
             btnPalette.Click += delegate { ShowPalette(); };
             row1.Controls.Add(btnPalette);
+            // Look (depuis la 1.33) : allure des boutons, au choix dans un menu ; les boutons gardent leur taille.
+            Button btnLook = Btn("Look ▾", "Look ▾", null);
+            ContextMenuStrip lookMenu = new ContextMenuStrip();
+            for (int i = 0; i < Looks.Count; i++)
+            {
+                int look = i;
+                ToolStripMenuItem it = new ToolStripMenuItem();
+                it.Click += delegate { SetLook(look); };
+                lookMenu.Items.Add(it);
+            }
+            lookMenu.Opening += delegate
+            {
+                for (int i = 0; i < Looks.Count; i++)
+                {
+                    ToolStripMenuItem it = (ToolStripMenuItem)lookMenu.Items[i];
+                    it.Text = Looks.Name(i);
+                    it.Checked = i == Looks.Current;
+                }
+            };
+            btnLook.Click += delegate { lookMenu.Show(btnLook, new Point(0, btnLook.Height)); };
+            Tr(delegate { tips.SetToolTip(btnLook, Lang.T("Allure des boutons : Classique, Win3.11, Néon IA, Moderne, Verre, Terminal ou Métal (clic droit : couleur du bouton)", "Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)")); });
+            row1.Controls.Add(Colorable("Look", btnLook));
             row1.Controls.Add(Colorable("TextSize", Btn("Taille du texte…", "Text size…", delegate { AskFontScale(); })));
             // Bouton « Vérifier les mises à jour » avec sa case (depuis la 1.27) : la case = vérification automatique au
             // démarrage ; un clic ailleurs sur le bouton vérifie tout de suite et ouvre la fenêtre de mise à jour.
@@ -1272,8 +1294,16 @@ namespace SDRLink
             p.Show(this);
         }
 
+        void SetLook(int look)
+        {
+            settings.Look = look;
+            Looks.Set(look);
+            settings.Save();
+        }
+
         void ApplyTheme()
         {
+            Looks.Current = settings.Look;
             Theme.Dark = chkDark.Checked;
             settings.DarkMode = Theme.Dark;
             Theme.DarkBase = Theme.FromHex(settings.DarkBase);

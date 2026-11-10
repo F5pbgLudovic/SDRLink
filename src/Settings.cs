@@ -95,6 +95,7 @@ namespace SDRLink
         public bool AutoNotch;             // notch automatique (comme le DNF) sur le son du WebSDR
         public bool DarkMode;
         public string DarkBase = "", LightBase = "";   // couleurs de palette choisies (RRGGBB, vide = par défaut)
+        public int Look;                                   // allure des boutons (Looks.Classic, Win311...), depuis la 1.33
         // Position et taille de la fenêtre en affichage normal (0 = jamais enregistrées).
         public int WinX, WinY, WinW, WinH;
         public bool WinMax;
@@ -243,6 +244,7 @@ namespace SDRLink
                     case "DarkMode": s.DarkMode = v == "1"; break;
                     case "DarkBase": s.DarkBase = v; break;
                     case "LightBase": s.LightBase = v; break;
+                    case "Look": s.Look = Math.Max(0, Math.Min(Looks.Count - 1, Int(v, 0))); break;
                     case "WinX": s.WinX = Int(v, 0); break;
                     case "WinY": s.WinY = Int(v, 0); break;
                     case "WinW": s.WinW = Int(v, 0); break;
@@ -381,6 +383,7 @@ namespace SDRLink
             Line(sb, "DarkMode", DarkMode ? 1 : 0);
             Line(sb, "DarkBase", DarkBase);
             Line(sb, "LightBase", LightBase);
+            Line(sb, "Look", Look);
             Line(sb, "WinX", WinX);
             Line(sb, "WinY", WinY);
             Line(sb, "WinW", WinW);

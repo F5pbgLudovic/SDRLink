@@ -210,7 +210,13 @@ keep them and add those of the file (no duplicates)	jih obdržati in dodati tist
 delete them and replace them with those of the file	jih izbrisati in nadomestiti s tistimi iz datoteke
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink se bo nato znova zagnal. Trenutne nastavitve se ohranijo v settings.avant-import.ini.
 Import	Uvozi
+AI Neon	Neon UI
+Modern	Sodoben
+Glass	Steklo
+Metal	Kovina
+Classic	Klasičen
 Cannot open the log: 	Dnevnika ni mogoče odpreti: 
+Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Videz gumbov: Klasičen, Win3.11, Neon UI, Sodoben, Steklo, Terminal ali Kovina (desni klik: barva gumba)
 Check for updates	Preveri posodobitve
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Polje označeno: samodejno preverjanje posodobitev ob zagonu. Klik na gumb: preveri zdaj in odpri okno posodobitve (desni klik: barva gumba)
 Export all settings…	Izvozi vse nastavitve…
@@ -450,6 +456,7 @@ TRX volume:	Glasnost TRX:
 ExpertSDR volume:	Glasnost ExpertSDR:
 HDSDR volume:	Glasnost HDSDR:
 Open log	Odpri dnevnik
+Look ▾	Look ▾
 Text size…	Velikost besedila…
 Import/Export ▾	Uvoz/Izvoz ▾
 …	…

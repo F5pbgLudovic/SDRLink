@@ -92,6 +92,8 @@ namespace SDRLink
 
         static void ApplyOne(Control c)
         {
+            // Look des boutons (aussi pour les boutons colorés par la fenêtre elle-même : PTT, modes, Scan, REC...).
+            if (c is Button) Looks.Hook((Button)c);
             if (Custom.Equals(c.Tag)) return;
             if (c is TextBox || c is ComboBox || c is NumericUpDown || c is ListBox)
             {
@@ -127,6 +129,7 @@ namespace SDRLink
         // Bouton ordinaire aux couleurs du thème (aussi pour revenir à la couleur par défaut après un choix au clic droit).
         public static void StyleButton(Button b)
         {
+            Looks.Hook(b);
             b.FlatStyle = Styled ? FlatStyle.Flat : FlatStyle.Standard;
             b.UseVisualStyleBackColor = !Styled;
             b.BackColor = ButtonBack;

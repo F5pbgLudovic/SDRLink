@@ -210,7 +210,13 @@ keep them and add those of the file (no duplicates)	διατήρηση και π
 delete them and replace them with those of the file	διαγραφή τους και αντικατάσταση με αυτά του αρχείου
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Στη συνέχεια το SDRLink θα επανεκκινήσει. Οι τρέχουσες ρυθμίσεις φυλάσσονται στο settings.avant-import.ini.
 Import	Εισαγωγή
+AI Neon	Νέον ΤΝ
+Modern	Μοντέρνο
+Glass	Γυαλί
+Metal	Μέταλλο
+Classic	Κλασικό
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
+Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Εμφάνιση κουμπιών: Κλασικό, Win3.11, Νέον ΤΝ, Μοντέρνο, Γυαλί, Terminal ή Μέταλλο (δεξί κλικ: χρώμα κουμπιού)
 Check for updates	Έλεγχος για ενημερώσεις
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Επιλεγμένο πλαίσιο: αυτόματος έλεγχος για ενημερώσεις κατά την εκκίνηση. Κλικ στο κουμπί: έλεγχος τώρα και άνοιγμα του παραθύρου ενημέρωσης (δεξί κλικ: χρώμα του κουμπιού)
 Export all settings…	Εξαγωγή όλων των ρυθμίσεων…
@@ -450,6 +456,7 @@ TRX volume:	Ένταση TRX:
 ExpertSDR volume:	Ένταση ExpertSDR:
 HDSDR volume:	Ένταση HDSDR:
 Open log	Άνοιγμα ημερολογίου
+Look ▾	Look ▾
 Text size…	Μέγεθος κειμένου…
 Import/Export ▾	Εισαγωγή/Εξαγωγή ▾
 …	…

@@ -210,7 +210,13 @@ keep them and add those of the file (no duplicates)	jätta need alles ja lisada 
 delete them and replace them with those of the file	kustutada need ja asendada faili omadega
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Seejärel SDRLink taaskäivitub. Praegused seaded jäävad faili settings.avant-import.ini.
 Import	Impordi
+AI Neon	TI neoon
+Modern	Moodne
+Glass	Klaas
+Metal	Metall
+Classic	Klassikaline
 Cannot open the log: 	Logi ei saa avada: 
+Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Nuppude stiil: Klassikaline, Win3.11, TI neoon, Moodne, Klaas, Terminal või Metall (paremklõps: nupu värv)
 Check for updates	Kontrolli uuendusi
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Märkeruut märgitud: uuenduste automaatne kontroll käivitamisel. Klõps nupul: kontrolli kohe ja ava uuendusaken (paremklõps: nupu värv)
 Export all settings…	Ekspordi kõik seaded…
@@ -450,6 +456,7 @@ TRX volume:	TRX helitugevus:
 ExpertSDR volume:	ExpertSDR-i helitugevus:
 HDSDR volume:	HDSDR-i helitugevus:
 Open log	Ava logi
+Look ▾	Look ▾
 Text size…	Teksti suurus…
 Import/Export ▾	Import/Eksport ▾
 …	…

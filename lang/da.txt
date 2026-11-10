@@ -210,7 +210,13 @@ keep them and add those of the file (no duplicates)	beholde dem og tilføje file
 delete them and replace them with those of the file	slette dem og erstatte dem med filens
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	SDRLink genstarter derefter. De nuværende indstillinger gemmes i settings.avant-import.ini.
 Import	Importér
+AI Neon	AI-neon
+Modern	Moderne
+Glass	Glas
+Metal	Metal
+Classic	Klassisk
 Cannot open the log: 	Kan ikke åbne loggen: 
+Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Knappernes stil: Klassisk, Win3.11, AI-neon, Moderne, Glas, Terminal eller Metal (højreklik: knappens farve)
 Check for updates	Søg efter opdateringer
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Feltet markeret: automatisk søgning efter opdateringer ved start. Klik på knappen: søg nu og åbn opdateringsvinduet (højreklik: knappens farve)
 Export all settings…	Eksportér alle indstillinger…
@@ -450,6 +456,7 @@ TRX volume:	TRX-lydstyrke:
 ExpertSDR volume:	ExpertSDR-lydstyrke:
 HDSDR volume:	HDSDR-lydstyrke:
 Open log	Åbn log
+Look ▾	Look ▾
 Text size…	Tekststørrelse…
 Import/Export ▾	Import/Eksport ▾
 …	…

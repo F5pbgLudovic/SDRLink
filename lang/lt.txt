@@ -210,7 +210,13 @@ keep them and add those of the file (no duplicates)	palikti juos ir pridėti fai
 delete them and replace them with those of the file	ištrinti juos ir pakeisti failo duomenimis
 SDRLink will then restart. The current settings are kept in settings.avant-import.ini.	Tada SDRLink bus paleista iš naujo. Dabartiniai nustatymai išsaugomi faile settings.avant-import.ini.
 Import	Importuoti
+AI Neon	DI neonas
+Modern	Modernus
+Glass	Stiklas
+Metal	Metalas
+Classic	Klasikinis
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
+Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Mygtukų stilius: Klasikinis, Win3.11, DI neonas, Modernus, Stiklas, Terminal arba Metalas (dešinysis spustelėjimas: mygtuko spalva)
 Check for updates	Tikrinti atnaujinimus
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Langelis pažymėtas: automatinis naujinimų tikrinimas paleidžiant. Spustelėjus mygtuką: tikrinti dabar ir atidaryti naujinimo langą (dešinysis spustelėjimas: mygtuko spalva)
 Export all settings…	Eksportuoti visus nustatymus…
@@ -450,6 +456,7 @@ TRX volume:	TRX garsumas:
 ExpertSDR volume:	ExpertSDR garsumas:
 HDSDR volume:	HDSDR garsumas:
 Open log	Atidaryti žurnalą
+Look ▾	Look ▾
 Text size…	Teksto dydis…
 Import/Export ▾	Importas/Eksportas ▾
 …	…

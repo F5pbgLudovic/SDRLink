@@ -20,7 +20,7 @@ Pour recompiler après une modification : `powershell -ExecutionPolicy Bypass -F
 
 Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section.
 
-1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
+1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Look ▾**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
@@ -33,7 +33,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Où | Ce que propose le clic droit |
 |---|---|
 | Connecter | couleur quand connecté / déconnecté |
-| Ouvrir le journal, Taille du texte, Vérifier les mises à jour, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Pseudo/Call | couleur du bouton |
+| Ouvrir le journal, Look, Taille du texte, Vérifier les mises à jour, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Pseudo/Call | couleur du bouton |
 | FreeDV auto | pas de menu : le clic droit passe de RADE V1 à RADE V2 et inversement (depuis la 1.24) |
 | Modes numériques (bouton et fenêtre posée sur la page) | les 14 modes (clic gauche : choisir et lancer ; clic droit : choisir et ouvrir les réglages), **Réglages <mode>…**, **Effacer le texte reçu**, **Ouvrir le dossier des images**, **Réinitialiser la fenêtre <mode>**, **Réinitialiser les fenêtres** (depuis la 1.25) |
 | Import/Export | **Réinitialiser le programme…** (depuis la 1.22), couleur du bouton |
@@ -322,11 +322,20 @@ La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'int
   - **Couleur au choix** (sous la palette) : tapez les valeurs **Rouge**, **Vert**, **Bleu** (0 à 255) puis **Appliquer** (ou Entrée) ; l'aperçu « Texte » montre le fond avec la couleur du texte de ce mode, pour vérifier qu'il reste lisible. **Autre couleur…** ouvre le sélecteur de couleurs de Windows. La case est préremplie avec la couleur en cours.
   - Le reste de l'interface (champs, boutons, bordures) s'accorde automatiquement. « Par défaut » revient aux couleurs d'origine.
   - Le choix est mémorisé séparément pour le mode sombre et le mode clair.
+- **Look ▾** (depuis la 1.33), à droite de la palette : allure de tous les boutons, au choix dans un menu. Les boutons gardent exactement leur taille et leur place ; seul le dessin change.
+  - **Classique** : l'allure habituelle (par défaut).
+  - **Win3.11** : gris, cadre noir et relief d'époque, pour le clin d'œil.
+  - **Néon IA** : verre sombre (nacré en mode clair), liseré dégradé cyan-violet, halo au survol.
+  - **Moderne** : à plat, coins légèrement arrondis, façon Windows 11.
+  - **Verre** : boutons bleus brillants avec reflet.
+  - **Terminal** : fond noir, texte vert phosphore, inversé quand on appuie.
+  - **Métal** : alu brossé en léger relief.
+  - Les couleurs qui ont un sens restent visibles dans tous les looks (PTT en émission, mode actif, Scan, REC, couleurs choisies au clic droit) ; le look suit le mode sombre ou clair et la palette. Le choix est retenu au prochain lancement et suit l'export des réglages.
 
 ## Couleurs des boutons (clic droit)
 
 Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le bouton avait déjà un clic droit (PTT, Mémoires, Câble SDRLINK, Mute ExpertSDR…), ce menu est conservé et les couleurs sont ajoutées à la fin.
-- **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export.
+- **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Look, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export.
 - **Deux choix, un pour chaque état** :
   - **Connecter** : quand connecté / quand déconnecté ;
   - **Câble SDRLINK** : quand activé / quand désactivé ;
@@ -572,7 +581,7 @@ Bouton **Réinit WebSDR**, sur la ligne de son, juste après REC : il relance le
 
 Bouton **Import/Export ▾** (1re ligne, après « Vérifier les mises à jour ») : pour retrouver exactement la même configuration sur un autre ordinateur, ou garder une sauvegarde. Clic droit : couleur du bouton.
 - Tous les réglages de SDRLink sont dans un seul fichier : **`%APPDATA%\SDRLink\settings.ini`** (par exemple `C:\Users\<nom>\AppData\Roaming\SDRLink\settings.ini`). Le journal `sdrlink.log` est à côté.
-- **Exporter tous les réglages…** : enregistre ce fichier où vous voulez (par défaut dans Documents, nom `SDRLink-reglages-<date>.ini`), avec l'état du moment : interface et poste (port COM, vitesse, TCI, HRD, Hamlib…), synchronisation, décalage, favoris et leurs listes, mémoires, historique des fréquences, langue, mode sombre et palette, couleurs des boutons, taille du texte, REC (dossier, carte son, couleur, largeur), câble SDRLINK, scan (réglage, zones non scannées et profils de scan), volumes, taille et position de la fenêtre, etc.
+- **Exporter tous les réglages…** : enregistre ce fichier où vous voulez (par défaut dans Documents, nom `SDRLink-reglages-<date>.ini`), avec l'état du moment : interface et poste (port COM, vitesse, TCI, HRD, Hamlib…), synchronisation, décalage, favoris et leurs listes, mémoires, historique des fréquences, langue, mode sombre et palette, look des boutons, couleurs des boutons, taille du texte, REC (dossier, carte son, couleur, largeur), câble SDRLINK, scan (réglage, zones non scannées et profils de scan), volumes, taille et position de la fenêtre, etc.
 - **Importer des réglages…** : choisir un fichier exporté. Une fenêtre demande **ce qu'il faut importer**, avec une case par partie (une seule ou plusieurs) :
   - **Configuration** (poste, interface, affichage, couleurs, langue… : tout ce qui n'est pas dans les trois cases suivantes) ;
   - **WebSDR** (favoris, listes de favoris, dernier WebSDR ouvert, volume des WebSDR hors favoris) ;
@@ -635,6 +644,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.33**
+  - Bouton **Look ▾** : 7 allures de boutons au choix (Classique, Win3.11, Néon IA, Moderne, Verre, Terminal, Métal), sans changer la taille des boutons.
 - **1.32**
   - **Synchro Désactivée** : la case kHz (QSY), les mémoires et la liste Mem, le scan et les boutons de mode ne règlent plus que le **WebSDR**, sans toucher à la fréquence ni au mode de l'émetteur.
   - **Délai de sécurité TX** (clic droit sur PTT) : jusqu'à **55 min** (30, 35, 40, 45, 50 et 55 min ajoutés).
