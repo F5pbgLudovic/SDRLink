@@ -218,6 +218,7 @@ Classic	Klassisch
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Verbinden: startet die Verbindung mit dem Funkgerät. „Verbinden...“: das Funkgerät antwortet noch nicht (Klick: abbrechen). „Trennen“: das Funkgerät antwortet; die Verbindung wird jede Minute geprüft (Rechtsklick: Farben der Schaltfläche)
 Cannot open the log: 	Logbuch kann nicht geöffnet werden: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Aussehen der Schaltflächen: Klassisch, Win3.11, Neon KI, Modern, Glas, Terminal oder Metall (Rechtsklick: Farbe der Schaltfläche)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Setzt das Bedienfeld (von der Zeile Schnittstelle bis zur Mute-Zeile) oben ins Fenster oder unter die WebSDR-Seite; die Statusleiste bleibt unten (Rechtsklick: Farbe der Schaltfläche)
 Check for updates	Nach Updates suchen
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Kästchen angehakt: automatische Suche nach Updates beim Start. Klick auf die Schaltfläche: jetzt suchen und das Update-Fenster öffnen (Rechtsklick: Farbe der Schaltfläche)
 Export all settings…	Alle Einstellungen exportieren…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR-Lautstärke:
 HDSDR volume:	HDSDR-Lautstärke:
 Open log	Log öffnen
 Look ▾	Look ▾
+Control panel	Bedienfeld
 Text size…	Textgröße…
 Import/Export ▾	Import/Export ▾
 …	…

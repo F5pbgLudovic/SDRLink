@@ -218,6 +218,7 @@ Classic	Κλασικό
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Σύνδεση: ξεκινά τη σύνδεση με τον πομποδέκτη. «Σύνδεση...»: ο πομποδέκτης δεν απαντά ακόμη (κλικ: διακοπή). «Αποσύνδεση»: ο πομποδέκτης απαντά· η σύνδεση ελέγχεται κάθε λεπτό (δεξί κλικ: χρώματα κουμπιού)
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Εμφάνιση κουμπιών: Κλασικό, Win3.11, Νέον ΤΝ, Μοντέρνο, Γυαλί, Terminal ή Μέταλλο (δεξί κλικ: χρώμα κουμπιού)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Τοποθετεί τον πίνακα ελέγχου (από τη γραμμή Διασύνδεση έως τη γραμμή Mute) στο πάνω μέρος του παραθύρου ή κάτω από τη σελίδα του WebSDR· η γραμμή κατάστασης μένει κάτω (δεξί κλικ: χρώμα κουμπιού)
 Check for updates	Έλεγχος για ενημερώσεις
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Επιλεγμένο πλαίσιο: αυτόματος έλεγχος για ενημερώσεις κατά την εκκίνηση. Κλικ στο κουμπί: έλεγχος τώρα και άνοιγμα του παραθύρου ενημέρωσης (δεξί κλικ: χρώμα του κουμπιού)
 Export all settings…	Εξαγωγή όλων των ρυθμίσεων…
@@ -460,6 +461,7 @@ ExpertSDR volume:	Ένταση ExpertSDR:
 HDSDR volume:	Ένταση HDSDR:
 Open log	Άνοιγμα ημερολογίου
 Look ▾	Look ▾
+Control panel	Πίνακας ελέγχου
 Text size…	Μέγεθος κειμένου…
 Import/Export ▾	Εισαγωγή/Εξαγωγή ▾
 …	…

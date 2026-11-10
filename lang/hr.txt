@@ -218,6 +218,7 @@ Classic	Klasičan
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Spoji: pokreće vezu s uređajem. „Spajanje...”: uređaj još ne odgovara (klik: zaustavi). „Odspoji”: uređaj odgovara; veza se provjerava svake minute (desni klik: boje gumba)
 Cannot open the log: 	Nije moguće otvoriti dnevnik: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Izgled gumba: Klasičan, Win3.11, Neon UI, Moderan, Staklo, Terminal ili Metal (desni klik: boja gumba)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Stavlja upravljačku ploču (od retka Sučelje do retka Mute) na vrh prozora ili ispod stranice WebSDR-a; traka stanja ostaje dolje (desni klik: boja gumba)
 Check for updates	Provjeri ažuriranja
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Okvir označen: automatska provjera ažuriranja pri pokretanju. Klik na gumb: provjeri sada i otvori prozor ažuriranja (desni klik: boja gumba)
 Export all settings…	Izvezi sve postavke…
@@ -460,6 +461,7 @@ ExpertSDR volume:	Glasnoća ExpertSDR-a:
 HDSDR volume:	Glasnoća HDSDR-a:
 Open log	Otvori dnevnik
 Look ▾	Look ▾
+Control panel	Upravljačka ploča
 Text size…	Veličina teksta…
 Import/Export ▾	Uvoz/Izvoz ▾
 …	…

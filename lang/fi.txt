@@ -218,6 +218,7 @@ Classic	Klassinen
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Yhdistä: käynnistää yhteyden radioon. ”Yhdistetään...”: radio ei vielä vastaa (napsautus: keskeytä). ”Katkaise”: radio vastaa; yhteys tarkistetaan minuutin välein (hiiren oikea painike: painikkeen värit)
 Cannot open the log: 	Lokia ei voi avata: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Painikkeiden tyyli: Klassinen, Win3.11, Tekoälyneon, Moderni, Lasi, Terminal tai Metalli (hiiren oikea painike: painikkeen väri)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Sijoittaa ohjauspaneelin (Liitäntä-riviltä Mute-riville) ikkunan yläosaan tai WebSDR-sivun alle; tilarivi pysyy alhaalla (hiiren oikea painike: painikkeen väri)
 Check for updates	Tarkista päivitykset
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Ruutu valittuna: päivitysten automaattinen tarkistus käynnistettäessä. Painikkeen napsautus: tarkista nyt ja avaa päivitysikkuna (hiiren oikea: painikkeen väri)
 Export all settings…	Vie kaikki asetukset…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR:n äänenvoimakkuus:
 HDSDR volume:	HDSDR:n äänenvoimakkuus:
 Open log	Avaa loki
 Look ▾	Look ▾
+Control panel	Ohjauspaneeli
 Text size…	Tekstin koko…
 Import/Export ▾	Tuonti/Vienti ▾
 …	…

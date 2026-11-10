@@ -218,6 +218,7 @@ Classic	Klasikinis
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Prisijungti: pradeda ryšį su radijo stotimi. „Jungiamasi...“: stotis dar neatsako (spustelėjimas: sustabdyti). „Atsijungti“: stotis atsako; ryšys tikrinamas kas minutę (dešinysis spustelėjimas: mygtuko spalvos)
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Mygtukų stilius: Klasikinis, Win3.11, DI neonas, Modernus, Stiklas, Terminal arba Metalas (dešinysis spustelėjimas: mygtuko spalva)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Perkelia valdymo skydelį (nuo eilutės Sąsaja iki Mute eilutės) į lango viršų arba po WebSDR puslapiu; būsenos juosta lieka apačioje (dešinysis spustelėjimas: mygtuko spalva)
 Check for updates	Tikrinti atnaujinimus
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Langelis pažymėtas: automatinis naujinimų tikrinimas paleidžiant. Spustelėjus mygtuką: tikrinti dabar ir atidaryti naujinimo langą (dešinysis spustelėjimas: mygtuko spalva)
 Export all settings…	Eksportuoti visus nustatymus…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR garsumas:
 HDSDR volume:	HDSDR garsumas:
 Open log	Atidaryti žurnalą
 Look ▾	Look ▾
+Control panel	Valdymo skydelis
 Text size…	Teksto dydis…
 Import/Export ▾	Importas/Eksportas ▾
 …	…

@@ -218,6 +218,7 @@ Classic	Klasyczny
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Połącz: uruchamia połączenie z radiem. „Łączenie...”: radio jeszcze nie odpowiada (klik: zatrzymaj). „Rozłącz”: radio odpowiada; połączenie jest sprawdzane co minutę (prawy klik: kolory przycisku)
 Cannot open the log: 	Nie można otworzyć dziennika: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Wygląd przycisków: Klasyczny, Win3.11, Neon AI, Nowoczesny, Szkło, Terminal lub Metal (prawy klik: kolor przycisku)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Umieszcza panel sterowania (od wiersza Interfejs do wiersza Mute) na górze okna lub pod stroną WebSDR; pasek stanu zostaje na dole (prawy klik: kolor przycisku)
 Check for updates	Sprawdzaj aktualizacje
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Pole zaznaczone: automatyczne sprawdzanie aktualizacji przy uruchomieniu. Kliknięcie przycisku: sprawdź teraz i otwórz okno aktualizacji (prawy przycisk: kolor przycisku)
 Export all settings…	Eksportuj wszystkie ustawienia…
@@ -460,6 +461,7 @@ ExpertSDR volume:	Głośność ExpertSDR:
 HDSDR volume:	Głośność HDSDR:
 Open log	Otwórz dziennik
 Look ▾	Look ▾
+Control panel	Panel sterowania
 Text size…	Rozmiar tekstu…
 Import/Export ▾	Import/Eksport ▾
 …	…

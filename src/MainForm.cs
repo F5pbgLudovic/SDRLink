@@ -315,6 +315,10 @@ namespace SDRLink
             btnLook.Click += delegate { lookMenu.Show(btnLook, new Point(0, btnLook.Height)); };
             Tr(delegate { tips.SetToolTip(btnLook, Lang.T("Allure des boutons : Classique, Win3.11, Néon IA, Moderne, Verre, Terminal ou Métal (clic droit : couleur du bouton)", "Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)")); });
             row1.Controls.Add(Colorable("Look", btnLook));
+            // Panneau de commande : de la ligne Interface à la ligne des Mute, en haut ou sous la page du WebSDR.
+            Button btnPanel = Btn("Panneau de commande", "Control panel", delegate { SetPanelBottom(!settings.PanelBottom); });
+            Tr(delegate { tips.SetToolTip(btnPanel, Lang.T("Place le panneau de commande (de la ligne Interface à la ligne des Mute) en haut de la fenêtre ou sous la page du WebSDR ; la barre d'état reste en bas (clic droit : couleur du bouton)", "Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)")); });
+            row1.Controls.Add(Colorable("Panel", btnPanel));
             row1.Controls.Add(Colorable("TextSize", Btn("Taille du texte…", "Text size…", delegate { AskFontScale(); })));
             // Bouton « Vérifier les mises à jour » avec sa case (depuis la 1.27) : la case = vérification automatique au
             // démarrage ; un clic ailleurs sur le bouton vérifie tout de suite et ouvre la fenêtre de mise à jour.
@@ -859,6 +863,7 @@ namespace SDRLink
             table.Controls.Add(rowDisplay, 0, 4);
             table.Controls.Add(rowUrl, 0, 5);
             table.Controls.Add(webHost, 0, 6);
+            ApplyPanelPosition();
 
             strip = new StatusStrip();
             status = new ToolStripStatusLabel();
@@ -1759,7 +1764,8 @@ namespace SDRLink
                     WindowState = FormWindowState.Normal;
                 }
                 normalSize = Size;
-                topRowsHeight = rowSync.Top;
+                // Hauteur des lignes masquées (Interface, paramètres, Hamlib), où que soit le panneau de commande.
+                topRowsHeight = rowSync.Top - rowConn.Top + rowConn.Margin.Top;
             }
             else if (viewShown == 1)
             {
@@ -1935,7 +1941,8 @@ namespace SDRLink
             if (pttView) return;
             MaximumSize = Size.Empty;
             PerformLayout();
-            int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom + strip.Height + 4)).Height;
+            // Hauteur des lignes affichées seulement (le panneau de commande peut être sous la place de la page).
+            int h = SizeFromClientSize(new Size(ClientSize.Width, rowUrl.Bottom - rowSync.Top + rowSync.Margin.Top + strip.Height + 4)).Height;
             MaximumSize = new Size(10000, h);
             Height = h;
         }

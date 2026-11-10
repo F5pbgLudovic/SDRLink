@@ -218,6 +218,7 @@ Classic	Класически
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Свържи: започва връзката с радиостанцията. „Свързване...“: станцията още не отговаря (щракване: спиране). „Прекъсни“: станцията отговаря; връзката се проверява всяка минута (десен клик: цветове на бутона)
 Cannot open the log: 	Дневникът не може да се отвори: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Вид на бутоните: Класически, Win3.11, Неон ИИ, Модерен, Стъкло, Terminal или Метал (десен клик: цвят на бутона)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Поставя контролния панел (от реда Интерфейс до реда Mute) в горната част на прозореца или под страницата на WebSDR; лентата за състоянието остава долу (десен клик: цвят на бутона)
 Check for updates	Проверка за актуализации
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Отметнато квадратче: автоматична проверка за актуализации при стартиране. Щракване върху бутона: проверка сега и отваряне на прозореца за актуализация (десен клик: цвят на бутона)
 Export all settings…	Експортиране на всички настройки…
@@ -460,6 +461,7 @@ ExpertSDR volume:	Сила на звука ExpertSDR:
 HDSDR volume:	Сила на звука HDSDR:
 Open log	Отвори дневника
 Look ▾	Look ▾
+Control panel	Контролен панел
 Text size…	Размер на текста…
 Import/Export ▾	Импорт/Експорт ▾
 …	…

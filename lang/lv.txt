@@ -218,6 +218,7 @@ Classic	Klasisks
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Savienot: sāk savienojumu ar raidītāju. “Savieno...”: raidītājs vēl neatbild (klikšķis: apturēt). “Atvienot”: raidītājs atbild; savienojums tiek pārbaudīts katru minūti (labais klikšķis: pogas krāsas)
 Cannot open the log: 	Nevar atvērt žurnālu: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Pogu stils: Klasisks, Win3.11, MI neons, Moderns, Stikls, Terminal vai Metāls (labais klikšķis: pogas krāsa)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Novieto vadības paneli (no rindas Saskarne līdz Mute rindai) loga augšā vai zem WebSDR lapas; statusa josla paliek apakšā (labais klikšķis: pogas krāsa)
 Check for updates	Pārbaudīt atjauninājumus
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Rūtiņa atzīmēta: automātiska atjauninājumu pārbaude startējot. Klikšķis uz pogas: pārbaudīt tagad un atvērt atjaunināšanas logu (labais klikšķis: pogas krāsa)
 Export all settings…	Eksportēt visus iestatījumus…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR skaļums:
 HDSDR volume:	HDSDR skaļums:
 Open log	Atvērt žurnālu
 Look ▾	Look ▾
+Control panel	Vadības panelis
 Text size…	Teksta lielums…
 Import/Export ▾	Imports/Eksports ▾
 …	…

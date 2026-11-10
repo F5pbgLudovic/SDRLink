@@ -21,7 +21,7 @@ To rebuild after a change: `powershell -ExecutionPolicy Bypass -File build.ps1` 
 
 Overview; each feature is detailed further down in its own section.
 
-1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Connecting... / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Look ▾**, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
+1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Connecting... / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Look ▾**, **Control panel**, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)**, **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
@@ -34,7 +34,7 @@ Overview; each feature is detailed further down in its own section.
 | Where | What the right-click offers |
 |---|---|
 | Connect | colour when connected / disconnected / rig not answering yet |
-| Open log, Look, Text size, Check for updates, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
+| Open log, Look, Control panel, Text size, Check for updates, Scan setup, QSY, Save, Go, Back, Reload, Add / Remove / Manage favorites, Find WebSDRs, Pseudo/Call | button colour |
 | FreeDV auto | no menu: right-click switches between RADE V1 and RADE V2 (since 1.24) |
 | Digital modes (button and window over the page) | the 14 modes (left-click: choose and start; right-click: choose and open the settings), **<mode> settings…**, **Clear the received text**, **Open the image folder**, **Reset the <mode> window**, **Reset the windows** (since 1.25) |
 | Import/Export | **Reset the program…** (since 1.22), button colour |
@@ -340,11 +340,12 @@ The **Dark mode** box, to the right of "Open log", switches the whole interface 
   - **Terminal**: black background, phosphor-green text, inverted when pressed.
   - **Metal**: brushed aluminium with a slight bevel.
   - Meaningful colours stay visible in every look (PTT while transmitting, active mode, Scan, REC, colours chosen by right-click); the look follows dark or light mode and the palette. The choice is kept at the next start and is included in the settings export.
+- **Control panel** (since 1.35), right after Look: each click moves the **control panel** (from the "Interface:" row down to and including the Mute row) from the **top of the window** to **below the WebSDR page**, and back. The button always keeps the same name. The **status bar stays at the very bottom**. The page is not reloaded (the audio goes on). The reduced and mini views also work with the panel at the bottom (reduced: the page at the top, then Sync, PTT and WebSDR/Mute). The position is kept at the next start and is included in the settings export.
 
 ## Button colours (right-click)
 
 Right-clicking most buttons offers their **background colour**. If the button already had a right-click menu (PTT, Memories, SDRLINK cable, Mute ExpertSDR…), that menu is kept and the colours are added at the end.
-- **One choice** ("Button colour"): Open log, Look, Text size, Scan setup, QSY, Save, Memories, Go, Back, Reload, Add to favorites, Remove from favorites, Manage favorites, Find WebSDRs, Import/Export.
+- **One choice** ("Button colour"): Open log, Look, Control panel, Text size, Scan setup, QSY, Save, Memories, Go, Back, Reload, Add to favorites, Remove from favorites, Manage favorites, Find WebSDRs, Import/Export.
 - **Two choices, one for each state**:
   - **Connect**: when connected / when disconnected / when the rig is not answering yet (orange by default);
   - **SDRLINK cable**: when on / when off;
@@ -591,7 +592,7 @@ On the "Sync" row, after "Auto notch (DNF)":
 
 **Import/Export ▾** button (1st row, after "Check for updates"): to get exactly the same configuration on another computer, or to keep a backup. Right-click: button colour.
 - All SDRLink settings are in a single file: **`%APPDATA%\SDRLink\settings.ini`** (for example `C:\Users\<name>\AppData\Roaming\SDRLink\settings.ini`). The log `sdrlink.log` is next to it.
-- **Export all settings…**: saves this file wherever you want (Documents by default, named `SDRLink-reglages-<date>.ini`), with the current state: interface and rig (COM port, baud rate, TCI, HRD, Hamlib…), synchronisation, offset, favorites and their lists, memories, frequency history, language, dark mode and palette, button look, button colours, text size, REC (folder, sound card, colour, width), SDRLINK cable, scan (setting, skipped ranges and scan profiles), volumes, window size and position, etc.
+- **Export all settings…**: saves this file wherever you want (Documents by default, named `SDRLink-reglages-<date>.ini`), with the current state: interface and rig (COM port, baud rate, TCI, HRD, Hamlib…), synchronisation, offset, favorites and their lists, memories, frequency history, language, dark mode and palette, button look, control panel position, button colours, text size, REC (folder, sound card, colour, width), SDRLINK cable, scan (setting, skipped ranges and scan profiles), volumes, window size and position, etc.
 - **Import settings…**: choose an exported file. A window asks **what to import**, with one tick box per part (just one or several):
   - **Configuration** (rig, interface, display, colours, language…: everything that is not in the next three boxes);
   - **WebSDR** (favorites, favorite lists, last WebSDR opened, volume of WebSDRs that are not favorites);
@@ -654,6 +655,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.35**
+  - **Control panel** button: the panel (from the Interface row to the Mute row) moves from the top of the window to below the WebSDR page, and back; the status bar stays at the bottom, the position is kept.
 - **1.34**
   - **Rig link checked**: the button shows "Connecting..." (orange) as long as the rig has not answered, "Disconnect" only when it answers; check 15 s after connecting then every minute, frozen link detected.
   - **OmniRig help** on top if the rig does not answer (OmniRig version 1, OmniRig and SDRLink run as administrator).

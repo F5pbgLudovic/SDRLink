@@ -218,6 +218,7 @@ Classic	Klasszikus
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Csatlakozás: elindítja a kapcsolatot a rádióval. „Csatlakozás...”: a rádió még nem válaszol (kattintás: leállítás). „Bontás”: a rádió válaszol; a kapcsolat ellenőrzése percenként történik (jobb kattintás: a gomb színei)
 Cannot open the log: 	A napló nem nyitható meg: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Gombok megjelenése: Klasszikus, Win3.11, MI neon, Modern, Üveg, Terminal vagy Fém (jobb kattintás: gomb színe)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	A vezérlőpultot (az Interfész sortól a Mute sorig) az ablak tetejére vagy a WebSDR oldal alá teszi; az állapotsor lent marad (jobb kattintás: gomb színe)
 Check for updates	Frissítések keresése
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Bejelölt négyzet: frissítések automatikus keresése indításkor. Kattintás a gombra: keresés most és a frissítési ablak megnyitása (jobb klikk: a gomb színe)
 Export all settings…	Összes beállítás exportálása…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR hangerő:
 HDSDR volume:	HDSDR hangerő:
 Open log	Napló megnyitása
 Look ▾	Look ▾
+Control panel	Vezérlőpult
 Text size…	Szövegméret…
 Import/Export ▾	Import/Export ▾
 …	…

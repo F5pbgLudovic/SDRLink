@@ -218,6 +218,7 @@ Classic	Klassikaline
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Ühenda: käivitab ühenduse raadiojaamaga. „Ühendamine...“: jaam ei vasta veel (klõps: peata). „Katkesta“: jaam vastab; ühendust kontrollitakse iga minut (paremklõps: nupu värvid)
 Cannot open the log: 	Logi ei saa avada: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Nuppude stiil: Klassikaline, Win3.11, TI neoon, Moodne, Klaas, Terminal või Metall (paremklõps: nupu värv)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Paigutab juhtpaneeli (reast Liides kuni Mute-reani) akna ülaossa või WebSDR-i lehe alla; olekuriba jääb alla (paremklõps: nupu värv)
 Check for updates	Kontrolli uuendusi
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Märkeruut märgitud: uuenduste automaatne kontroll käivitamisel. Klõps nupul: kontrolli kohe ja ava uuendusaken (paremklõps: nupu värv)
 Export all settings…	Ekspordi kõik seaded…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR-i helitugevus:
 HDSDR volume:	HDSDR-i helitugevus:
 Open log	Ava logi
 Look ▾	Look ▾
+Control panel	Juhtpaneel
 Text size…	Teksti suurus…
 Import/Export ▾	Import/Eksport ▾
 …	…

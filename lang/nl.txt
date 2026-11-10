@@ -218,6 +218,7 @@ Classic	Klassiek
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Verbinden: start de verbinding met de transceiver. "Verbinden...": de transceiver antwoordt nog niet (klik: stoppen). "Verbreken": de transceiver antwoordt; de verbinding wordt elke minuut gecontroleerd (rechtsklik: kleuren van de knop)
 Cannot open the log: 	Kan het logboek niet openen: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Stijl van de knoppen: Klassiek, Win3.11, AI-neon, Modern, Glas, Terminal of Metaal (rechtsklik: kleur van de knop)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Zet het bedieningspaneel (van de regel Interface tot de Mute-regel) bovenaan het venster of onder de WebSDR-pagina; de statusbalk blijft onderaan (rechtsklik: kleur van de knop)
 Check for updates	Controleren op updates
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Vakje aangevinkt: automatisch op updates controleren bij het starten. Klik op de knop: nu controleren en het updatevenster openen (rechtsklik: kleur van de knop)
 Export all settings…	Alle instellingen exporteren…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR-volume:
 HDSDR volume:	HDSDR-volume:
 Open log	Log openen
 Look ▾	Look ▾
+Control panel	Bedieningspaneel
 Text size…	Tekstgrootte…
 Import/Export ▾	Importeren/Exporteren ▾
 …	…

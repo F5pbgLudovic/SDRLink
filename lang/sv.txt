@@ -218,6 +218,7 @@ Classic	Klassisk
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Anslut: startar förbindelsen med radion. ”Ansluter...”: radion svarar inte än (klick: stoppa). ”Koppla från”: radion svarar; förbindelsen kontrolleras varje minut (högerklick: knappens färger)
 Cannot open the log: 	Kan inte öppna loggen: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Knapparnas stil: Klassisk, Win3.11, AI-neon, Modern, Glas, Terminal eller Metall (högerklick: knappens färg)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Placerar kontrollpanelen (från raden Gränssnitt till Mute-raden) överst i fönstret eller under WebSDR-sidan; statusfältet stannar längst ned (högerklick: knappens färg)
 Check for updates	Sök efter uppdateringar
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Rutan markerad: automatisk sökning efter uppdateringar vid start. Klick på knappen: sök nu och öppna uppdateringsfönstret (högerklick: knappens färg)
 Export all settings…	Exportera alla inställningar…
@@ -460,6 +461,7 @@ ExpertSDR volume:	ExpertSDR-volym:
 HDSDR volume:	HDSDR-volym:
 Open log	Öppna logg
 Look ▾	Look ▾
+Control panel	Kontrollpanel
 Text size…	Textstorlek…
 Import/Export ▾	Import/Export ▾
 …	…

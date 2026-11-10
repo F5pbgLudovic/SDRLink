@@ -218,6 +218,7 @@ Classic	Klasický
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Připojit: spustí spojení s transceiverem. „Připojování...“: transceiver zatím neodpovídá (klik: zastavit). „Odpojit“: transceiver odpovídá; spojení se kontroluje každou minutu (pravé tlačítko: barvy tlačítka)
 Cannot open the log: 	Nelze otevřít deník: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Vzhled tlačítek: Klasický, Win3.11, Neon AI, Moderní, Sklo, Terminal nebo Kov (pravé tlačítko: barva tlačítka)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Umístí ovládací panel (od řádku Rozhraní po řádek Mute) nahoru do okna nebo pod stránku WebSDR; stavový řádek zůstává dole (pravé tlačítko: barva tlačítka)
 Check for updates	Kontrolovat aktualizace
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Zaškrtnuté políčko: automatická kontrola aktualizací při spuštění. Klepnutí na tlačítko: zkontrolovat hned a otevřít okno aktualizace (pravé tlačítko: barva tlačítka)
 Export all settings…	Exportovat všechna nastavení…
@@ -460,6 +461,7 @@ ExpertSDR volume:	Hlasitost ExpertSDR:
 HDSDR volume:	Hlasitost HDSDR:
 Open log	Otevřít deník
 Look ▾	Look ▾
+Control panel	Ovládací panel
 Text size…	Velikost textu…
 Import/Export ▾	Import/Export ▾
 …	…

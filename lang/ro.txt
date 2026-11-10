@@ -218,6 +218,7 @@ Classic	Clasic
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Conectare: pornește legătura cu stația. „Conectare...”: stația nu răspunde încă (clic: oprire). „Deconectare”: stația răspunde; legătura este verificată în fiecare minut (clic dreapta: culorile butonului)
 Cannot open the log: 	Nu se poate deschide jurnalul: 
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Aspectul butoanelor: Clasic, Win3.11, Neon IA, Modern, Sticlă, Terminal sau Metal (clic dreapta: culoarea butonului)
+Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Pune panoul de comandă (de la rândul Interfață la rândul Mute) în partea de sus a ferestrei sau sub pagina WebSDR; bara de stare rămâne jos (clic dreapta: culoarea butonului)
 Check for updates	Caută actualizări
 Box ticked: automatic update check at startup. Click the button: check now and open the update window (right-click: button colour)	Casetă bifată: verificarea automată a actualizărilor la pornire. Clic pe buton: verifică acum și deschide fereastra de actualizare (clic dreapta: culoarea butonului)
 Export all settings…	Exportă toate setările…
@@ -460,6 +461,7 @@ ExpertSDR volume:	Volum ExpertSDR:
 HDSDR volume:	Volum HDSDR:
 Open log	Deschidere jurnal
 Look ▾	Look ▾
+Control panel	Panou de comandă
 Text size…	Dimensiunea textului…
 Import/Export ▾	Import/Export ▾
 …	…
