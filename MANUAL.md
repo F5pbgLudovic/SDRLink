@@ -361,6 +361,7 @@ The **Language** menu, on the 2nd row, changes the language of the whole interfa
 - **◀ Back** (WebSDR bar): returns to the previous page, like a browser's back arrow. Useful after following a link, for example in a WebSDR directory.
 - **Changing WebSDR without the rig** (since 1.28): when the rig is disconnected, or sync is **Off** or **WebSDR → Rig**, the new WebSDR (favorite, address, link, **◀ Back**, **Reload**) takes the **frequency and mode** of the one you just left; if it moves elsewhere by itself while it settles, it is put back. Rig connected in Both ways or Rig → WebSDR: the rig sets the frequency, as before.
 - If the rig is in DATA-U and the WebSDR in USB, SDRLink does not change the rig's mode (same family).
+- **Sync Off: the WebSDR only** (since 1.32). The **kHz** box with **QSY**, recalling a **memory** (Memories button, Mem list of the frequency keypad), the **scan** (frequencies or memories) and the **mode buttons** (USB, LSB, AM, FM, DIGI, CW) only tune the WebSDR: the transmitter's frequency and mode do not change. The mode buttons light up from the WebSDR's mode, and the WebSDR's frequency is the one taken by **Save**, "Store the current frequency", the Mem list and scan resume. The mouse wheel on the RIG frequency still tunes the rig alone.
 
 ## PTT button
 
@@ -369,7 +370,7 @@ The large **PTT** button, to the left of "RIG", puts the rig into transmit over 
 - With OmniRig, it acts on the `Tx` property; with HRD, on the MOX button.
 - The audio of the chosen receivers (the WebSDR and, depending on the right-click menu, the rig, ExpertSDR, HDSDR) is muted as soon as you click, even if the rig does not report its transmit status (if "Mute WebSDR while transmitting" is ticked).
 - For safety, if you disconnect or close SDRLink during a transmission started with this button, the rig goes back to receive.
-- **TX safety timeout** (right-click PTT): Off, 30 s, 1, 2, 3, 5, 10, 15, 20 or 25 min.
+- **TX safety timeout** (right-click PTT): Off, 30 s, 1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 or 55 min.
   - While transmitting, the button shows the time remaining ("● TX 1:45").
   - When it expires, SDRLink returns to receive and says so at the bottom of the window.
   - This timeout applies to transmissions started with SDRLink's PTT button, not the footswitch or the microphone.
@@ -636,6 +637,9 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.32**
+  - **Sync Off**: the kHz box (QSY), memories and the Mem list, the scan and the mode buttons now only tune the **WebSDR**, without touching the transmitter's frequency or mode.
+  - **TX safety timeout** (right-click PTT): up to **55 min** (30, 35, 40, 45, 50 and 55 min added).
 - **1.31**
   - **Reset WebSDR** button after REC, to restart a stopped WebSDR (idle timeout…): **click** = restart keeping its settings (frequency, mode, filter, zoom, volume); **right-click** = full reset of the current WebSDR (site cookies and settings cleared, as on a first visit).
 - **1.30**

@@ -87,11 +87,12 @@ namespace SDRLink
             }
         }
 
-        // Mode actuel : celui du poste s'il est connecté, sinon celui du WebSDR.
+        // Mode actuel : celui du poste s'il est connecté, sinon celui du WebSDR (aussi en synchro désactivée).
         string MemHistModeNow()
         {
-            if (worker != null && rigF > 0 && rigM != null) return rigM;
+            if (worker != null && rigF > 0 && rigM != null && !SdrAlone) return rigM;
             string fam = Modes.SdrFamily(sdrM);
+            if (SdrAlone && digiActive && (fam == "usb" || fam == "lsb")) return digiMode;
             return fam != "" ? Modes.FromSdrFamily(fam) : (clickedMode ?? "");
         }
 

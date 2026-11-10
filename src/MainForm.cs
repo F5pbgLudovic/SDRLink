@@ -1906,7 +1906,7 @@ namespace SDRLink
         // Bouton PTT : bascule émission/réception, comme le MOX de HRD. Le son est coupé tout de suite,
         // sans attendre que le poste confirme l'émission.
         // Clic droit sur PTT : délai de sécurité au bout duquel une émission lancée par le bouton est coupée.
-        static readonly int[] PttTimeouts = { 0, 30, 60, 120, 180, 300, 600, 900, 1200, 1500 };
+        static readonly int[] PttTimeouts = { 0, 30, 60, 120, 180, 300, 600, 900, 1200, 1500, 1800, 2100, 2400, 2700, 3000, 3300 };
 
         ContextMenuStrip BuildPttMenu()
         {
@@ -2172,7 +2172,8 @@ namespace SDRLink
                 TuneSdrOnly((long)Math.Round((double)baseSdr / step) * step + notches * step);
                 return;
             }
-            long baseF = WheelActive && wheelTarget > 0 ? wheelTarget : CurrentFreq();
+            // Molette sur POSTE seul : on part du poste (en synchro désactivée, CurrentFreq est celle du WebSDR).
+            long baseF = WheelActive && wheelTarget > 0 ? wheelTarget : rigOnly && worker != null && rigF > 0 ? rigF : CurrentFreq();
             if (baseF <= 0) return;
             long target = (long)Math.Round((double)baseF / step) * step + notches * step;
             if (rigOnly) TuneRigOnly(target); else TuneBoth(target);
@@ -2205,17 +2206,24 @@ namespace SDRLink
 
         bool rigOnlyWheel;   // la cible de molette en cours ne concerne que le poste (l'affichage WebSDR reste réel)
 
+        // Synchro désactivée : touche kHz, mémoires, liste Mem, scan et boutons de mode ne règlent que le WebSDR.
+        bool SdrAlone { get { return Dir == Direction.Off; } }
+
         // Fréquence actuelle côté poste (ou déduite du WebSDR si aucun poste n'est connecté), 0 si inconnue.
+        // Synchro désactivée : celle du WebSDR (c'est lui que règlent mémoires, touche kHz et scan).
         long CurrentFreq()
         {
+            if (SdrAlone && sdrKind != "" && sdrF > 0) return sdrF - Offset;
             if (rigF > 0 && worker != null) return rigF;
             return sdrKind != "" ? sdrF - Offset : 0;
         }
 
         // Règle le poste ET le WebSDR sur la même fréquence (fréquence poste ; le décalage s'applique au WebSDR).
+        // Synchro désactivée : le WebSDR seul (le poste ne bouge pas).
         void TuneBoth(long rigHz)
         {
             if (rigHz <= 0) return;
+            if (SdrAlone) { if (rigHz + Offset > 0) TuneSdrOnly(rigHz + Offset); return; }
             DateTime now = DateTime.UtcNow;
             wheelTarget = rigHz;
             wheelActiveUntil = now.AddMilliseconds(1000);
@@ -2229,10 +2237,10 @@ namespace SDRLink
             UpdateDisplays();
         }
 
-        // Change le mode du poste ET du WebSDR (boutons USB/LSB/AM/FM).
+        // Change le mode du poste ET du WebSDR (boutons USB/LSB/AM/FM). Synchro désactivée : le WebSDR seul.
         void SetModeBoth(string mode)
         {
-            if (worker != null && rigOnline)
+            if (worker != null && rigOnline && !SdrAlone)
             {
                 ignoreRigUntil = DateTime.UtcNow.AddMilliseconds(EchoIgnoreMs);
                 worker.SetMode(mode);
@@ -2516,7 +2524,7 @@ namespace SDRLink
 
         string ActiveModeKey(string sdrFamily)
         {
-            if (worker != null && rigOnline && rigM != null)
+            if (worker != null && rigOnline && rigM != null && !SdrAlone)
             {
                 // Le poste dit lui-même de quel côté il est (CW/CW-R, DATA-U/DATA-L), une fois la commande arrivée.
                 bool settled = DateTime.UtcNow > modeClickUntil;
@@ -3995,7 +4003,7 @@ namespace SDRLink
         // Fréquence et mode actuels, proposés pour une nouvelle mémoire.
         Memory CurrentMemory()
         {
-            string mode = worker != null && rigM != null ? rigM : (clickedMode ?? "");
+            string mode = worker != null && rigM != null && !SdrAlone ? rigM : SdrAlone ? MemHistModeNow() : (clickedMode ?? "");
             return new Memory("", CurrentFreq(), mode);
         }
 

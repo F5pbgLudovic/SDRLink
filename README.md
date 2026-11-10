@@ -1,4 +1,4 @@
-# SDRLink V1.31 — @F5PBG 2026
+# SDRLink V1.32 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -6,7 +6,8 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 - **Postes en CAT direct (128 modèles, classés par numéro)** : Yaesu (40, du FT-100 au FTX-1, dont les anciens FT-747GX, FT-757GX/GXII, FT-767GX, FT-840, FT-890, FT-900, FT-920, FT-990, FT-1000…), Icom (55, de l'IC-78 à l'IC-9700, dont les IC-7xx des années 80), Kenwood (23, du TS-50S au TS-B2000), Elecraft (5), Xiegu (G90, X108G, X5105, X6100, X6200). Les autres postes passent par OmniRig, HRD ou Hamlib.
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. Le son démarre sans clic, un pseudo (bouton Pseudo/Call, « SDRLink » par défaut) est donné d'office aux KiwiSDR et websdr.org qui en demandent un, un KiwiSDR complet met en file d'attente, le squelch est ouvert (sauf FM VHF), et un clic dans la page fait suivre le poste dès l'arrivée.
 - **Fonctions** :
-  - bouton PTT et coupure du son en émission (WebSDR, poste, ExpertSDR, HDSDR, au choix par clic droit) ;
+  - bouton PTT avec délai de sécurité jusqu'à 55 min, et coupure du son en émission (WebSDR, poste, ExpertSDR, HDSDR, au choix par clic droit) ;
+  - synchro désactivée : la case kHz, les mémoires, le scan et les modes ne règlent que le WebSDR, l'émetteur ne bouge pas ;
   - bouton ⇄ qui passe le son d'une réception à l'autre (WebSDR, poste, ExpertSDR, HDSDR), deux réceptions pouvant être laissées de côté ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
   - clic sur la fréquence : clavier de fréquence et liste Mem des 20 dernières fréquences (Store, enregistrement automatique après 1 à 30 min sur la même fréquence), comme dans PhoneSDRLink ;
@@ -60,7 +61,8 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
 - **Rigs in direct CAT (128 models, sorted by number)**: Yaesu (40, from the FT-100 to the FTX-1, including the older FT-747GX, FT-757GX/GXII, FT-767GX, FT-840, FT-890, FT-900, FT-920, FT-990, FT-1000…), Icom (55, from the IC-78 to the IC-9700, including the 1980s IC-7xx), Kenwood (23, from the TS-50S to the TS-B2000), Elecraft (5), Xiegu (G90, X108G, X5105, X6100, X6200). Other rigs work through OmniRig, HRD or Hamlib.
 - **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. The audio starts without a click, a name (Pseudo/Call button, "SDRLink" by default) is given automatically to KiwiSDRs and websdr.org receivers that ask for one, a full KiwiSDR puts you in the queue, the squelch is opened (except VHF FM), and a click in the page makes the rig follow right after arriving.
 - **Features**:
-  - PTT button, audio muted while transmitting (WebSDR, rig, ExpertSDR, HDSDR, chosen by right-click);
+  - PTT button with a safety timeout of up to 55 min, audio muted while transmitting (WebSDR, rig, ExpertSDR, HDSDR, chosen by right-click);
+  - sync Off: the kHz box, memories, scan and modes only tune the WebSDR, the transmitter does not move;
   - ⇄ button that switches the audio from one receiver to the next (WebSDR, rig, ExpertSDR, HDSDR), with up to two receivers left aside;
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
   - click on the frequency: frequency keypad and Mem list of the last 20 frequencies (Store, automatic storing after 1 to 30 min on the same frequency), as in PhoneSDRLink;

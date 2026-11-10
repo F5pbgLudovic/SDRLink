@@ -360,6 +360,7 @@ Le menu **Langue**, sur la 2ᵉ ligne, change la langue de toute l'interface, im
 - **◀ Retour** (barre WebSDR) : revient à la page précédente, comme la flèche retour d'un navigateur. Utile après avoir suivi un lien, par exemple dans un annuaire de WebSDR.
 - **Changement de WebSDR sans le poste** (depuis la 1.28) : quand le poste est déconnecté, ou que la synchronisation est **Désactivée** ou en **WebSDR → Radio**, le nouveau WebSDR (favori, adresse, lien, **◀ Retour**, **Recharger**) reprend la **fréquence et le mode** de celui qu'on vient de quitter ; s'il part de lui-même ailleurs pendant sa mise en place, il y est remis. Poste connecté en Bidirectionnelle ou Radio → WebSDR : c'est le poste qui impose sa fréquence, comme avant.
 - Si le poste est en DATA-U et le WebSDR en USB, SDRLink ne change pas le mode du poste (même famille).
+- **Synchro Désactivée : le WebSDR seul** (depuis la 1.32). La case **kHz** avec **QSY**, le rappel d'une **mémoire** (bouton Mémoires, liste Mem du clavier de fréquence), le **scan** (fréquences ou mémoires) et les **boutons de mode** (USB, LSB, AM, FM, DIGI, CW) ne règlent que le WebSDR : la fréquence et le mode de l'émetteur ne changent pas. Les boutons de mode s'allument d'après le mode du WebSDR, et c'est la fréquence du WebSDR qui est reprise par **Save**, « Mémoriser la fréquence actuelle », la liste Mem et la reprise du scan. La molette sur la fréquence RADIO règle toujours le poste seul.
 
 ## Bouton PTT
 
@@ -368,7 +369,7 @@ Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émiss
 - Avec OmniRig, il agit sur la propriété `Tx` ; avec HRD, sur le bouton MOX.
 - Le son des réceptions choisies (le WebSDR, et selon le clic droit le poste, ExpertSDR, HDSDR) est coupé dès le clic, même si le poste ne signale pas son état d'émission (si « Couper le son du WebSDR en émission » est cochée).
 - Par sécurité, si on se déconnecte ou si on ferme SDRLink pendant une émission lancée par ce bouton, le poste repasse en réception.
-- **Délai de sécurité TX** (clic droit sur PTT) : Désactivé, 30 s, 1, 2, 3, 5, 10, 15, 20 ou 25 min.
+- **Délai de sécurité TX** (clic droit sur PTT) : Désactivé, 30 s, 1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 ou 55 min.
   - Pendant l'émission, le bouton affiche le temps restant (« ● TX 1:45 »).
   - À l'échéance, SDRLink repasse en réception et l'indique en bas de la fenêtre.
   - Ce délai concerne l'émission lancée par le bouton PTT de SDRLink, pas la pédale ni le micro.
@@ -634,6 +635,9 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.32**
+  - **Synchro Désactivée** : la case kHz (QSY), les mémoires et la liste Mem, le scan et les boutons de mode ne règlent plus que le **WebSDR**, sans toucher à la fréquence ni au mode de l'émetteur.
+  - **Délai de sécurité TX** (clic droit sur PTT) : jusqu'à **55 min** (30, 35, 40, 45, 50 et 55 min ajoutés).
 - **1.31**
   - Bouton **Réinit WebSDR** après REC, pour relancer un WebSDR arrêté (délai d'inactivité dépassé…) : **clic** = relance en gardant ses réglages (fréquence, mode, filtre, zoom, volume) ; **clic droit** = réinitialisation totale du WebSDR en cours (cookies et réglages du site effacés, comme à la première visite).
 - **1.30**
