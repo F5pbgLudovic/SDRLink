@@ -313,7 +313,11 @@ namespace SDRLink
         UberSDR.command('tune', args).catch(function () { });
       } else if (k === 'kiwi') {
         var km = mode === 'fm' ? 'nbfm' : mode;
-        ext_tune(hz ? hz / 1000 : null, km || ext_get_mode());
+        // Sans zoom donné, ext_tune remet la cascade en vue « bande » (zoom_step(TO_BAND)) : le zoom choisi sur la page
+        // était perdu à chaque fréquence ou mode venus de SDRLink. Zoom actuel redonné tel quel : la page n'y touche pas
+        // et recentre d'elle-même la cascade, au même zoom, si la nouvelle fréquence sort de la vue.
+        if (window.ext_zoom && typeof ext_zoom.ABS === 'number' && typeof window.ext_get_zoom === 'function') ext_tune(hz ? hz / 1000 : null, km || ext_get_mode(), ext_zoom.ABS, ext_get_zoom());
+        else ext_tune(hz ? hz / 1000 : null, km || ext_get_mode());
       } else if (k === 'websdr') {
         if (mode && mode.toUpperCase() !== String(window.mode).toUpperCase()) set_mode(mode);
         if (hz) {

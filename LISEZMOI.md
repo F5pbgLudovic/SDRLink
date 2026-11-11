@@ -151,6 +151,8 @@ Le type est reconnu automatiquement (affiché entre parenthèses) :
 - **KiwiSDR**
 - **OpenWebRX / OpenWebRX+** (seulement dans la plage de la bande affichée)
 
+**Zoom de la cascade gardé** (corrigé dans la 1.36 pour les KiwiSDR) : quand SDRLink change la fréquence ou le mode du WebSDR (synchro avec le poste, clavier de fréquence, mémoires, scan), le zoom choisi sur la page ne change pas. Si la nouvelle fréquence sort de la partie visible, la cascade se décale pour la montrer, au même zoom. Avant la 1.36, un KiwiSDR revenait à chaque fois à la vue de toute la bande.
+
 ### Arrivée sur une page (depuis la 1.20)
 
 - **Son sans clic** : le son démarre tout seul. SDRLink clique lui-même sur « Click to start » (UberSDR) et retire le voile « Tap to enable audio » (PhantomSDR, French Alps), dans les 30 secondes qui suivent l'ouverture.
@@ -653,6 +655,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.36**
+  - **KiwiSDR : zoom de la cascade gardé** quand SDRLink change la fréquence ou le mode (synchro, clavier, mémoires, scan) ; avant, le KiwiSDR revenait à la vue de toute la bande. Vérifié aussi sur websdr.org, OpenWebRX+, UberSDR et PhantomSDR, qui gardaient déjà leur zoom.
 - **1.35**
   - Bouton **Panneau de commande** : le panneau (de la ligne Interface à la ligne des Mute) passe du haut de la fenêtre à sous la page du WebSDR, et inversement ; la barre d'état reste en bas, la position est retenue.
 - **1.34**

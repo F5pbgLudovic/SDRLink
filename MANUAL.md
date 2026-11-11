@@ -152,6 +152,8 @@ The type is detected automatically (shown in brackets):
 - **KiwiSDR**
 - **OpenWebRX / OpenWebRX+** (only within the range of the band displayed)
 
+**Waterfall zoom kept** (fixed in 1.36 for KiwiSDRs): when SDRLink changes the frequency or the mode of the WebSDR (sync with the rig, frequency keypad, memories, scan), the zoom chosen on the page does not change. If the new frequency is outside the visible part, the waterfall moves to show it, at the same zoom. Before 1.36, a KiwiSDR went back to the whole-band view every time.
+
 ### Arriving on a page (since 1.20)
 
 - **Audio without a click**: the audio starts by itself. SDRLink clicks "Click to start" (UberSDR) and removes the "Tap to enable audio" veil (PhantomSDR, French Alps) itself, within 30 seconds of opening.
@@ -655,6 +657,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.36**
+  - **KiwiSDR: waterfall zoom kept** when SDRLink changes the frequency or the mode (sync, keypad, memories, scan); before, the KiwiSDR went back to the whole-band view. Also checked on websdr.org, OpenWebRX+, UberSDR and PhantomSDR, which already kept their zoom.
 - **1.35**
   - **Control panel** button: the panel (from the Interface row to the Mute row) moves from the top of the window to below the WebSDR page, and back; the status bar stays at the bottom, the position is kept.
 - **1.34**
