@@ -227,7 +227,7 @@ Reset the program…	Lähtesta programm…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Ekspordi või impordi kõik seaded sama seadistuse jaoks teises arvutis (paremklõps: lähtesta programm, nupu värv)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi või kutsung, mis antakse automaatselt WebSDR-idele, mis seda enne heli küsivad (KiwiSDR, websdr.org). Klõps: muuda (paremklõps: nupu värv)
 Right-click: receivers muted while transmitting	Paremklõps: saatmise ajal vaigistatavad vastuvõtjad
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Käivitab praeguse WebSDR-i uuesti (näiteks pärast tegevusetust peatunud). Klõps: taaskäivitus seadeid säilitades (sagedus, režiim, filter, suum, helitugevus). Paremklõps: WebSDR-i täielik lähtestamine nagu esimesel külastusel
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Käivitab praeguse WebSDR-i uuesti (näiteks pärast jõudeaega peatunud). Klõps: taaskäivitus seadeid säilitades (sagedus, režiim, filter, suum, helitugevus). Paremklõps: automaatne taaskäivitus heli kadumisel (Auto) ja selle viivitus, WebSDR-i täielik lähtestamine, nupu värvid
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
 Store the current frequency…	Salvesta praegune sagedus…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: kõne dekodeeritakse kohe, kui FreeDV signaal saabub (klõps: sisse / välja; paremklõps: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Värv ühenduseta
 Colour when the rig is not answering yet	Värv, kuni jaam veel ei vasta
 Colour when on	Värv sees olles
 Colour when off	Värv väljas olles
+Colour of "Reset WebSDR" (Auto off)	„Lähtesta WebSDR“ värv (Auto väljas)
+Colour of "Auto Reset WebSDR" (Auto on)	„Lähtesta Auto WebSDR“ värv (Auto sees)
 Colour when the scan is stopped	Värv peatatud skaneerimisel
 Colour while scanning	Värv skaneerimise ajal
 Colour when receiving	Värv vastuvõtul
@@ -288,6 +290,11 @@ Invalid address: 	Vigane aadress:
 No open WebSDR to restart	Pole avatud WebSDR-i, mida taaskäivitada
 WebSDR restarted keeping its settings	WebSDR taaskäivitatud, seaded säilitatud
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR lähtestatud: saidi küpsised ja seaded kustutatud, leht avatud uuesti nagu esimesel külastusel
+Reset WebSDR	Lähtesta WebSDR
+Auto Reset WebSDR	Lähtesta Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: käivita WebSDR uuesti, kui heli kaob
+Full reset of the WebSDR (as on a first visit)	WebSDR-i täielik lähtestamine (nagu esmakülastusel)
+Auto Reset WebSDR off	Lähtesta Auto WebSDR väljas
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kaabel: virtuaalset helikaablit ei leitud. Installige VB-CABLE (tasuta): nupp „SDRLINK kaabel“.
 Output receiving the WebSDR audio:	WebSDR-i heli vastuvõttev väljund:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nimeta kaabli teine ots „SDRLINK“ (valige esmalt virtuaalne kaabel)
@@ -328,9 +335,6 @@ Scan stopped	Skaneerimine peatatud
 ■ Stop scan	■ Peata skaneerimine
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Raadiojaama helikaart, salvestatakse kui Mute WebSDR, Mute ExpertSDR ja Mute HDSDR on sees:
 None (always the speakers)	Puudub (alati kõlarid)
-REC button width	REC-nupu laius
-Narrow	Kitsas
-Wide	Lai
 REC button colour	REC-nupu värv
 Navy blue (default)	Meresinine (vaikimisi)
 Navy blue	Meresinine
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Eemalda „{0}“ loendist
 Remove all ({0} values)	Eemalda kõik ({0} väärtust)
 Remove all {0} frequencies from the list?	Kas eemaldada loendist kõik {0} sagedust?
+No sound for {0} s: WebSDR restarted automatically	Heli pole olnud {0} s: WebSDR käivitati automaatselt uuesti
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Heli pole olnud {0} s: WebSDR käivitati automaatselt uuesti (3. katse, viimane, kuni heli tagasi tuleb)
+Time without sound before the restart: {0} s	Aeg ilma helita enne taaskäivitust: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Lähtesta Auto WebSDR: WebSDR käivitatakse uuesti pärast {0} s ilma helita (järjest kõige rohkem 3 katset)
+Auto Reset WebSDR: time without sound {0} s	Lähtesta Auto WebSDR: aeg ilma helita {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}“ ei paista olevat virtuaalne kaabel: WebSDR-i heli mängitakse seal kogu aeg (ja see läheb eetrisse, kui see on raadio saatja helikaart).\n\nKas kasutada seda väljundit siiski?
 Name the other end of the cable "SDRLINK" ("{0}")…	Nimeta kaabli teine ots „SDRLINK“ („{0}“)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	See kaabel on juba ümber nimetatud („{0}“): seda võib juba kasutada mõni muu tarkvara (VoiceMeeter…). Kui nimetate selle ümber („{1}“), tuleb see selles tarkvaras uuesti valida.\n\nKas jätkata?
@@ -469,7 +478,6 @@ Download Hamlib…	Laadi alla Hamlib…
 SDRLINK cable ▾	SDRLINK kaabel ▾
 Scan setup	Skaneerimise seaded
 ▶ Scan	▶ Skaneeri
-Reset WebSDR	Lähtesta WebSDR
 QSY	QSY
 Save	Salvesta
 Memories	Mälud

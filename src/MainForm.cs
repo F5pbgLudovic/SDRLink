@@ -542,14 +542,23 @@ namespace SDRLink
             recMenu.Items.Add("-");
             btnRec.ContextMenuStrip = recMenu;
             // Réinit WebSDR (après REC) : relance un WebSDR arrêté (délai d'inactivité dépassé, son perdu…).
-            // Clic : la page est rechargée en gardant ses réglages ; clic droit : réinitialisation totale (pas de menu).
+            // Clic : la page est rechargée en gardant ses réglages. Clic droit : Auto (relance automatique quand le son est perdu)
+            // et son délai, réinitialisation totale, couleurs des deux états. En Auto, le bouton devient « Réinit Auto WebSDR » ;
+            // sa largeur est celle du plus long des deux textes, pour qu'il ne change pas de taille.
             btnReinit = Btn("Réinit WebSDR", "Reset WebSDR", delegate { ReinitWebSdr(false); });
             btnReinit.Margin = new Padding(6, 3, 3, 3);
-            btnReinit.MouseUp += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Right) ReinitWebSdr(true); };
+            btnReinit.Tag = Theme.Custom;
+            btnReinit.FlatStyle = FlatStyle.Flat;
+            btnReinit.FontChanged += delegate { UpdateReinitButton(); };
+            ContextMenuStrip reinitMenu = new ContextMenuStrip();
+            reinitMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillReinitMenu(reinitMenu); };
+            reinitMenu.Items.Add("-");
+            btnReinit.ContextMenuStrip = reinitMenu;
             Tr(delegate
             {
-                tips.SetToolTip(btnReinit, Lang.T("Relance le WebSDR en cours (par exemple arrêté après un temps d'inactivité). Clic : relance en gardant ses réglages (fréquence, mode, filtre, zoom, volume). Clic droit : réinitialisation totale du WebSDR, comme une première visite",
-                    "Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit"));
+                UpdateReinitButton();
+                tips.SetToolTip(btnReinit, Lang.T("Relance le WebSDR en cours (par exemple arrêté après un temps d'inactivité). Clic : relance en gardant ses réglages (fréquence, mode, filtre, zoom, volume). Clic droit : relance automatique quand le son est perdu (Auto) et son délai, réinitialisation totale du WebSDR, couleurs du bouton",
+                    "Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours"));
             });
 
             // Ligne 4 : PTT, fréquences, modes, saisie ; l'affichage réduit coupe la fenêtre juste après cette ligne.
@@ -890,6 +899,8 @@ namespace SDRLink
                 Slot("ConnectWait", () => Lang.T("Couleur quand le poste ne répond pas encore", "Colour when the rig is not answering yet")));
             AddColorMenu(btnCable, Slot("CableOn", () => Lang.T("Couleur quand activé", "Colour when on")),
                 Slot("CableOff", () => Lang.T("Couleur quand désactivé", "Colour when off")));
+            AddColorMenu(btnReinit, Slot("ReinitOff", () => Lang.T("Couleur de « Réinit WebSDR » (Auto arrêté)", "Colour of \"Reset WebSDR\" (Auto off)")),
+                Slot("ReinitAuto", () => Lang.T("Couleur de « Réinit Auto WebSDR » (Auto en marche)", "Colour of \"Auto Reset WebSDR\" (Auto on)")));
             AddColorMenu(btnScan, Slot("ScanOff", () => Lang.T("Couleur scan arrêté", "Colour when the scan is stopped")),
                 Slot("ScanOn", () => Lang.T("Couleur scan en marche", "Colour while scanning")));
             AddColorMenu(btnPtt, Slot("PttRx", () => Lang.T("Couleur en réception", "Colour when receiving")),
@@ -1134,6 +1145,7 @@ namespace SDRLink
             UpdateConnectButton();
             UpdateCableButton();
             UpdateScanButton();
+            UpdateReinitButton();
             UpdatePttButton();
             UpdateMuteButtons();
             UpdateFreqColors();
@@ -1330,6 +1342,7 @@ namespace SDRLink
             UpdateDisplays();
             StyleUpdateLabel();
             UpdateScanButton();
+            UpdateReinitButton();
         }
 
         // Largeur fixe des fréquences, calculée sur une fréquence HF avec le mode le plus long : les boutons à droite
@@ -1359,6 +1372,7 @@ namespace SDRLink
             if (cbFavList.Items.Count > 0) FillFavListCombo();
             UpdateCableButton();
             UpdateScanButton();
+            UpdateReinitButton();
             if (worker == null) ShowStatus(Lang.T("Déconnecté", "Disconnected"));
             UpdateDisplays();
             // Les textes ont changé de longueur : on recalcule la hauteur de l'affichage mini.
@@ -2669,6 +2683,7 @@ namespace SDRLink
                 ApplyCable();
                 UpdateCableButton();
                 Navigate(settings.LastUrl);
+                StartReinitWatch();
             }
             catch (Exception ex)
             {
@@ -2776,6 +2791,7 @@ namespace SDRLink
             url = (url ?? "").Trim();
             if (url == "" || web.CoreWebView2 == null) return;
             if (!url.Contains("://")) url = "http://" + url;
+            autoReinitTries = 0;   // autre WebSDR : la relance automatique a de nouveau ses 3 essais
             try { web.CoreWebView2.Navigate(url); }
             catch (ArgumentException) { ShowStatus(Lang.T("Adresse invalide : ", "Invalid address: ") + url); }
         }
@@ -2785,13 +2801,30 @@ namespace SDRLink
         // Clic droit (total = vrai) : cookies et stockage du site effacés, page rouverte sans la partie après « # »
         // (OpenWebRX y garde fréquence et mode) et sans reprise de fréquence : le WebSDR repart comme à la première
         // visite (le pseudo est redonné par SDRLink, le poste impose toujours sa fréquence si la synchro va dans ce sens).
-        async void ReinitWebSdr(bool total)
+        async void ReinitWebSdr(bool total, bool auto = false)
         {
             CoreWebView2 core = web.CoreWebView2;
             Uri u;
+            if (!auto) autoReinitTries = 0;   // relance à la main : la relance automatique a de nouveau ses 3 essais
             if (core == null || !Uri.TryCreate(core.Source ?? "", UriKind.Absolute, out u) || (u.Scheme != "http" && u.Scheme != "https"))
             {
                 ShowStatus(Lang.T("Aucun WebSDR ouvert à relancer", "No open WebSDR to restart"));
+                return;
+            }
+            if (!total && auto)
+            {
+                string kept = "";
+                try { kept = await core.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.keep ? window.__sdrlink.keep() : ''"); }
+                catch (Exception ex) { Log.Write("Réinit Auto WebSDR : réglages non lus : " + ex.Message); }
+                Log.Write("Réinit Auto WebSDR : plus de son depuis " + settings.AutoReinitSec + " s, rechargement de " + u.Host
+                    + " en gardant les réglages " + kept + " (essai " + autoReinitTries + " sur " + AutoReinitMaxTries + ")");
+                reinitPending = false;
+                resetPending = false;
+                core.Reload();
+                ShowStatus(autoReinitTries < AutoReinitMaxTries
+                    ? Lang.F("Plus de son depuis {0} s : WebSDR relancé automatiquement", "No sound for {0} s: WebSDR restarted automatically", settings.AutoReinitSec)
+                    : Lang.F("Plus de son depuis {0} s : WebSDR relancé automatiquement (3e essai, le dernier tant que le son ne revient pas)",
+                        "No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)", settings.AutoReinitSec));
                 return;
             }
             if (!total)
@@ -2820,6 +2853,120 @@ namespace SDRLink
             Navigate(u.GetLeftPart(UriPartial.Query));
             ShowStatus(Lang.T("WebSDR réinitialisé : cookies et réglages du site effacés, page rouverte comme à la première visite",
                 "WebSDR reset: site cookies and settings cleared, page reopened as on a first visit"));
+        }
+
+        // ---------------------------------------------------------------- Réinit Auto WebSDR
+
+        // Relance automatique (clic droit sur Réinit WebSDR, comme la « Réinitialisation automatique WEBSDR » de PhoneSDRLink) :
+        // toutes les 10 s, SDRLink demande à la page depuis combien de temps elle ne produit plus de son (mesuré avant le volume
+        // et Mute WebSDR, qui ne comptent donc pas comme une perte). Au-delà du délai choisi, la page est rechargée en gardant
+        // ses réglages, comme au clic. 3 essais de suite au plus : le compteur repart quand le son revient, quand on change de
+        // WebSDR ou qu'on relance à la main. Volume de la page à zéro ou son bouton « mute » enfoncé : pas de relance.
+        const int AutoReinitMaxTries = 3;
+        static readonly int[] AutoReinitDelays = { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60 };
+        System.Windows.Forms.Timer reinitWatch;
+        int autoReinitTries;
+        bool reinitAsking;
+
+        void StartReinitWatch()
+        {
+            if (reinitWatch != null) return;
+            reinitWatch = new System.Windows.Forms.Timer { Interval = 10000 };   // toutes les 10 s : le plus court délai choisi
+            reinitWatch.Tick += delegate { ReinitWatchTick(); };
+            reinitWatch.Start();
+        }
+
+        async void ReinitWatchTick()
+        {
+            CoreWebView2 core = web.CoreWebView2;
+            if (!settings.AutoReinit || core == null || sdrKind == "" || reinitAsking) return;
+            // Son coupé volontairement dans SDRLink (Mute WebSDR, volume à 0, parole FreeDV jouée à la place) : pas de relance.
+            // (La mesure se fait avant ce volume, mais on ne relance jamais un WebSDR que l'opérateur a fait taire.)
+            if (sdrMuted || trkVolume.Value == 0 || (fdvVoice && fdvSource == 0)) return;
+            string v = null;
+            reinitAsking = true;
+            try { v = await core.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.silentMs ? window.__sdrlink.silentMs() + '|' + (window.__sdrlink.heard ? 1 : 0) : '-1|0'"); }
+            catch { }
+            finally { reinitAsking = false; }
+            string[] p = (v ?? "").Trim('"').Split('|');
+            double ms;
+            if (p.Length != 2 || !double.TryParse(p[0], NumberStyles.Float, CultureInfo.InvariantCulture, out ms)) return;
+            // Vrai son entendu depuis l'ouverture de la page et encore présent : de nouveau 3 essais pour la prochaine perte.
+            // (Une page rechargée qui ne joue pas encore a aussi un silence court : elle ne remet pas le compteur à zéro.)
+            if (p[1] == "1" && ms >= 0 && ms < 5000) autoReinitTries = 0;
+            if (!settings.AutoReinit || sdrKind == "" || ms < settings.AutoReinitSec * 1000.0 || autoReinitTries >= AutoReinitMaxTries) return;
+            autoReinitTries++;
+            ReinitWebSdr(false, true);
+        }
+
+        // Bouton : « Réinit WebSDR » ou « Réinit Auto WebSDR » (Auto en marche, autre couleur), toujours à la même largeur.
+        void UpdateReinitButton()
+        {
+            if (btnReinit == null) return;
+            string plain = Lang.T("Réinit WebSDR", "Reset WebSDR"), auto = Lang.T("Réinit Auto WebSDR", "Auto Reset WebSDR");
+            int w = 0;
+            btnReinit.SuspendLayout();
+            btnReinit.MinimumSize = new Size(30, 25);
+            foreach (string t in new[] { plain, auto })
+            {
+                btnReinit.Text = t;
+                w = Math.Max(w, btnReinit.GetPreferredSize(Size.Empty).Width);
+            }
+            btnReinit.MinimumSize = new Size(w, 25);
+            btnReinit.Text = settings.AutoReinit ? auto : plain;
+            btnReinit.ResumeLayout();
+            Theme.StyleButton(btnReinit);
+            if (settings.AutoReinit)
+            {
+                btnReinit.FlatStyle = FlatStyle.Flat;
+                btnReinit.UseVisualStyleBackColor = false;
+                btnReinit.BackColor = Color.FromArgb(0, 120, 150);
+                btnReinit.ForeColor = Color.White;
+                btnReinit.FlatAppearance.BorderColor = Color.FromArgb(0, 80, 105);
+            }
+            int custom = ColorOf(settings.AutoReinit ? "ReinitAuto" : "ReinitOff");
+            if (custom >= 0) PaintCustom(btnReinit, custom);
+        }
+
+        // Clic droit : Auto, délai sans son, réinitialisation totale ; les couleurs des deux états sont ajoutées ensuite.
+        void FillReinitMenu(ContextMenuStrip m)
+        {
+            m.Items.Clear();
+            ToolStripMenuItem auto = new ToolStripMenuItem(Lang.T("Auto : relancer le WebSDR quand le son est perdu", "Auto: restart the WebSDR when the sound is lost"));
+            auto.Checked = settings.AutoReinit;
+            auto.Click += delegate { SetAutoReinit(!settings.AutoReinit); };
+            m.Items.Add(auto);
+            ToolStripMenuItem delay = new ToolStripMenuItem(Lang.F("Délai sans son avant la relance : {0} s", "Time without sound before the restart: {0} s", settings.AutoReinitSec));
+            foreach (int s in AutoReinitDelays)
+            {
+                int sec = s;
+                ToolStripMenuItem it = new ToolStripMenuItem(sec + " s");
+                it.Checked = settings.AutoReinitSec == sec;
+                it.Click += delegate { SetAutoReinitDelay(sec); };
+                delay.DropDownItems.Add(it);
+            }
+            m.Items.Add(delay);
+            m.Items.Add(new ToolStripSeparator());
+            m.Items.Add(Lang.T("Réinitialisation totale du WebSDR (comme une première visite)", "Full reset of the WebSDR (as on a first visit)"), null, delegate { ReinitWebSdr(true); });
+        }
+
+        void SetAutoReinit(bool on)
+        {
+            settings.AutoReinit = on;
+            settings.Save();
+            autoReinitTries = 0;
+            Log.Write("Réinit Auto WebSDR : " + (on ? "en marche (" + settings.AutoReinitSec + " s sans son)" : "arrêtée"));
+            ShowStatus(on ? Lang.F("Réinit Auto WebSDR : le WebSDR sera relancé après {0} s sans son (3 essais de suite au plus)", "Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)", settings.AutoReinitSec)
+                : Lang.T("Réinit Auto WebSDR arrêtée", "Auto Reset WebSDR off"));
+            UpdateReinitButton();
+        }
+
+        void SetAutoReinitDelay(int sec)
+        {
+            settings.AutoReinitSec = sec;
+            settings.Save();
+            Log.Write("Réinit Auto WebSDR : délai " + sec + " s");
+            ShowStatus(Lang.F("Réinit Auto WebSDR : délai sans son {0} s", "Auto Reset WebSDR: time without sound {0} s", sec));
         }
 
         // Le texte de la barre peut être une adresse, ou le nom d'un favori choisi dans la liste.
@@ -4366,36 +4513,20 @@ namespace SDRLink
             }
             m.Items.Add(new ToolStripSeparator());
             m.Items.Add(BuildRecColorMenu());
-            // Largeur : étroit (rectangle deux fois plus large que haut, par défaut) ou large (quatre fois), même hauteur.
-            ToolStripMenuItem width = new ToolStripMenuItem(Lang.T("Largeur du bouton REC", "REC button width"));
-            string[] widths = { Lang.T("Étroit", "Narrow"), Lang.T("Large", "Wide") };
-            for (int i = 0; i < widths.Length; i++)
-            {
-                int n = i + 1;
-                ToolStripMenuItem it = new ToolStripMenuItem(widths[i]);
-                it.Checked = settings.RecWidth == n;
-                it.Click += delegate { SetRecWidth(n); };
-                width.DropDownItems.Add(it);
-            }
-            m.Items.Add(width);
         }
 
-        // Hauteur des boutons Mute (30 à la taille de texte normale) ; largeur : 2 (étroit) ou 4 (large) fois la hauteur.
+        // REC (et Mute TX) : même largeur et même hauteur que Mute WebSDR (suivent la langue et la taille du texte).
         Size RecSize()
         {
             int h = btnMuteSdr != null && btnMuteSdr.Height > 0 ? btnMuteSdr.Height : 30;
-            return new Size(h << settings.RecWidth, h);
-        }
-
-        void SetRecWidth(int w)
-        {
-            settings.RecWidth = w;
-            settings.Save();
-            ResizeRecButton();
+            int w = btnMuteSdr != null && btnMuteSdr.Width > 0 ? btnMuteSdr.Width : 2 * h;
+            return new Size(w, h);
         }
 
         void ResizeRecButton()
         {
+            if (btnMuteRig != null && btnMuteSdr != null && btnMuteSdr.Width > 0 && btnMuteRig.MinimumSize.Width != btnMuteSdr.Width)
+                btnMuteRig.MinimumSize = new Size(btnMuteSdr.Width, 25);
             Size s = RecSize();
             if (btnRec.Size == s && btnRec.Image != null) return;
             btnRec.MinimumSize = Size.Empty;   // d'abord le minimum, sinon il empêche de rétrécir
@@ -4711,6 +4842,7 @@ namespace SDRLink
             }
             foreach (KeyValuePair<Control, int> kv in baseWidths) kv.Key.Width = (int)Math.Round(kv.Value * f);
             ResumeLayout(true);
+            ResizeRecButton();   // REC et Mute TX reprennent la largeur de Mute WebSDR à la nouvelle taille
             SizeFreqLabels();
             // Affichages réduit et mini : la ligne PTT reste entière ; en mini, la hauteur de la fenêtre suit celle des lignes.
             if (viewShown != 0) KeepRowWhole();

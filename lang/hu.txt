@@ -227,7 +227,7 @@ Reset the program…	A program alaphelyzetbe állítása…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: a program alaphelyzetbe állítása, gomb színe)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Név vagy hívójel, amelyet a hang előtt ezt kérő WebSDR-ek (KiwiSDR, websdr.org) automatikusan megkapnak. Kattintás: módosítás (jobb klikk: gomb színe)
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Újraindítja az aktuális WebSDR-t (például ha tétlenség miatt leállt). Kattintás: újraindítás a beállítások megtartásával (frekvencia, üzemmód, szűrő, nagyítás, hangerő). Jobb kattintás: a WebSDR teljes alaphelyzetbe állítása, mint az első látogatáskor
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Újraindítja az aktuális WebSDR-t (például ha tétlenség miatt leállt). Kattintás: újraindítás a beállítások megtartásával (frekvencia, üzemmód, szűrő, nagyítás, hangerő). Jobb kattintás: automatikus újraindítás a hang elvesztésekor (Auto) és annak késleltetése, a WebSDR teljes alaphelyzetbe állítása, a gomb színei
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: a beszéd dekódolása azonnal megtörténik, amint FreeDV-jel érkezik (kattintás: be / ki; jobb kattintás: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Szín bontott kapcsolatnál
 Colour when the rig is not answering yet	Szín, amíg a rádió még nem válaszol
 Colour when on	Szín bekapcsolva
 Colour when off	Szín kikapcsolva
+Colour of "Reset WebSDR" (Auto off)	A „WebSDR újraindítás” színe (Auto kikapcsolva)
+Colour of "Auto Reset WebSDR" (Auto on)	A „WebSDR Auto újraindítás” színe (Auto bekapcsolva)
 Colour when the scan is stopped	Szín leállított pásztázásnál
 Colour while scanning	Szín pásztázás közben
 Colour when receiving	Szín vételkor
@@ -288,6 +290,11 @@ Invalid address: 	Érvénytelen cím:
 No open WebSDR to restart	Nincs megnyitott WebSDR, amit újra lehetne indítani
 WebSDR restarted keeping its settings	WebSDR újraindítva a beállítások megtartásával
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR alaphelyzetbe állítva: a webhely sütijei és beállításai törölve, az oldal újra megnyitva, mint az első látogatáskor
+Reset WebSDR	WebSDR újraindítás
+Auto Reset WebSDR	WebSDR Auto újraindítás
+Auto: restart the WebSDR when the sound is lost	Auto: a WebSDR újraindítása a hang elvesztésekor
+Full reset of the WebSDR (as on a first visit)	A WebSDR teljes alaphelyzetbe állítása (mint az első látogatáskor)
+Auto Reset WebSDR off	WebSDR Auto újraindítás kikapcsolva
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK kábel: nem található virtuális audiokábel. Telepítse a VB-CABLE-t (ingyenes): „SDRLINK kábel” gomb.
 Output receiving the WebSDR audio:	A WebSDR hangját fogadó kimenet:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	A kábel másik végének elnevezése „SDRLINK” névre (előbb válasszon virtuális kábelt)
@@ -328,9 +335,6 @@ Scan stopped	Pásztázás leállítva
 ■ Stop scan	■ Pásztázás leállítása
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	A rádió hangkártyája, felvétel ha a Mute WebSDR, a Mute ExpertSDR és a Mute HDSDR be van kapcsolva:
 None (always the speakers)	Nincs (mindig a hangszórók)
-REC button width	A REC gomb szélessége
-Narrow	Keskeny
-Wide	Széles
 REC button colour	A REC gomb színe
 Navy blue (default)	Tengerészkék (alapértelmezett)
 Navy blue	Tengerészkék
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	„{0}” eltávolítása a listából
 Remove all ({0} values)	Összes eltávolítása ({0} érték)
 Remove all {0} frequencies from the list?	Eltávolítja a listából mind a {0} frekvenciát?
+No sound for {0} s: WebSDR restarted automatically	{0} s óta nincs hang: a WebSDR automatikusan újraindult
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	{0} s óta nincs hang: a WebSDR automatikusan újraindult (3. próbálkozás, az utolsó, amíg a hang vissza nem tér)
+Time without sound before the restart: {0} s	Hang nélküli idő az újraindítás előtt: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	WebSDR Auto újraindítás: a WebSDR {0} s hang nélküli idő után újraindul (legfeljebb 3 próbálkozás egymás után)
+Auto Reset WebSDR: time without sound {0} s	WebSDR Auto újraindítás: hang nélküli idő {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}” nem tűnik virtuális kábelnek: a WebSDR hangja folyamatosan ott fog szólni (és adásba kerül, ha ez egy rádió adási hangkártyája).\n\nMégis ezt a kimenetet használja?
 Name the other end of the cable "SDRLINK" ("{0}")…	A kábel másik végének elnevezése „SDRLINK” névre („{0}”)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Ez a kábel már át lett nevezve („{0}”): lehet, hogy már más szoftver használja (VoiceMeeter…). Ha átnevezi („{1}”), abban a szoftverben újra ki kell választani.\n\nFolytatja?
@@ -469,7 +478,6 @@ Download Hamlib…	Hamlib letöltése…
 SDRLINK cable ▾	SDRLINK kábel ▾
 Scan setup	Pásztázás beállítása
 ▶ Scan	▶ Pásztázás
-Reset WebSDR	WebSDR újraindítás
 QSY	QSY
 Save	Mentés
 Memories	Memóriák

@@ -227,7 +227,7 @@ Reset the program…	Obnoviť pôvodný stav programu…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Export alebo import všetkých nastavení pre rovnakú konfiguráciu na inom počítači (pravé tlačidlo: obnoviť pôvodný stav programu, farba tlačidla)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Meno alebo volacia značka zadávaná automaticky prijímačom WebSDR, ktoré ju vyžadujú pred zvukom (KiwiSDR, websdr.org). Kliknutie: zmeniť (pravé tlačidlo: farba tlačidla)
 Right-click: receivers muted while transmitting	Pravé tlačidlo: prijímače stlmené pri vysielaní
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Znova spustí aktuálny WebSDR (napríklad zastavený po čase nečinnosti). Klik: reštart so zachovaním nastavení (frekvencia, druh prevádzky, filter, zoom, hlasitosť). Pravý klik: úplný reset WebSDR, ako pri prvej návšteve
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Znovu spustí aktuálny WebSDR (napríklad zastavený po čase nečinnosti). Klik: znovu spustiť so zachovaním nastavení (frekvencia, režim, filter, zoom, hlasitosť). Pravý klik: automatické znovuspustenie pri strate zvuku (Auto) a jeho oneskorenie, úplný reset WebSDR, farby tlačidla
 Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
 Store the current frequency…	Uložiť aktuálny kmitočet…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: reč sa dekóduje, hneď ako sa prijme signál FreeDV (klik: zapnúť / vypnúť; pravé tlačidlo: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Farba pri odpojení
 Colour when the rig is not answering yet	Farba, kým transceiver ešte neodpovedá
 Colour when on	Farba pri zapnutí
 Colour when off	Farba pri vypnutí
+Colour of "Reset WebSDR" (Auto off)	Farba „Reset WebSDR“ (Auto vypnuté)
+Colour of "Auto Reset WebSDR" (Auto on)	Farba „Reset Auto WebSDR“ (Auto zapnuté)
 Colour when the scan is stopped	Farba pri zastavenom skenovaní
 Colour while scanning	Farba počas skenovania
 Colour when receiving	Farba pri príjme
@@ -288,6 +290,11 @@ Invalid address: 	Neplatná adresa:
 No open WebSDR to restart	Žiadny otvorený WebSDR na opätovné spustenie
 WebSDR restarted keeping its settings	WebSDR znova spustený so zachovaním nastavení
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR resetovaný: súbory cookie a nastavenia lokality vymazané, stránka znova otvorená ako pri prvej návšteve
+Reset WebSDR	Reset WebSDR
+Auto Reset WebSDR	Reset Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: znovu spustiť WebSDR pri strate zvuku
+Full reset of the WebSDR (as on a first visit)	Úplný reset WebSDR (ako pri prvej návšteve)
+Auto Reset WebSDR off	Reset Auto WebSDR vypnutý
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Kábel SDRLINK: nenašiel sa žiadny virtuálny audio kábel. Nainštalujte VB-CABLE (zadarmo): tlačidlo „Kábel SDRLINK“.
 Output receiving the WebSDR audio:	Výstup prijímajúci zvuk WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Pomenovať druhý koniec kábla „SDRLINK“ (najprv vyberte virtuálny kábel)
@@ -328,9 +335,6 @@ Scan stopped	Prehľadávanie zastavené
 ■ Stop scan	■ Zastaviť prehľadávanie
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvuková karta stanice, nahrávaná pri zapnutom Mute WebSDR, Mute ExpertSDR a Mute HDSDR:
 None (always the speakers)	Žiadna (vždy reproduktory)
-REC button width	Šírka tlačidla REC
-Narrow	Úzke
-Wide	Široké
 REC button colour	Farba tlačidla REC
 Navy blue (default)	Námornícka modrá (predvolená)
 Navy blue	Námornícka modrá
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Odstrániť „{0}“ zo zoznamu
 Remove all ({0} values)	Odstrániť všetko (hodnoty: {0})
 Remove all {0} frequencies from the list?	Odstrániť zo zoznamu všetky frekvencie ({0})?
+No sound for {0} s: WebSDR restarted automatically	Bez zvuku {0} s: WebSDR automaticky znovu spustený
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Bez zvuku {0} s: WebSDR automaticky znovu spustený (3. pokus, posledný, kým sa zvuk nevráti)
+Time without sound before the restart: {0} s	Čas bez zvuku pred znovuspustením: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Reset Auto WebSDR: WebSDR sa znovu spustí po {0} s bez zvuku (najviac 3 pokusy za sebou)
+Auto Reset WebSDR: time without sound {0} s	Reset Auto WebSDR: čas bez zvuku {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}“ nevyzerá ako virtuálny kábel: zvuk WebSDR sa tam bude prehrávať neustále (a vysielať, ak ide o vysielaciu zvukovú kartu transceivera).\n\nNapriek tomu použiť tento výstup?
 Name the other end of the cable "SDRLINK" ("{0}")…	Pomenovať druhý koniec kábla „SDRLINK“ („{0}“)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Tento kábel už bol premenovaný na „{0}“: možno ho už používa iný softvér (VoiceMeeter…). Po premenovaní na „{1}“ ho bude nutné v tomto softvéri vybrať znova.\n\nPokračovať?
@@ -469,7 +478,6 @@ Download Hamlib…	Stiahnuť Hamlib…
 SDRLINK cable ▾	Kábel SDRLINK ▾
 Scan setup	Nastavenie prehľadávania
 ▶ Scan	▶ Prehľadávanie
-Reset WebSDR	Reset WebSDR
 QSY	QSY
 Save	Uložiť
 Memories	Pamäte

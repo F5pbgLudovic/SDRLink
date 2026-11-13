@@ -46,6 +46,8 @@ namespace SDRLink
         public string RecCardId = "", RecCardName = "";
         public int RecColor = 0x000080;    // fond du bouton REC au repos (RVB), bleu marine par défaut
         public int RecWidth = 1;           // largeur du bouton REC : 1 étroit (2 fois la hauteur), 2 large (4 fois)
+        public bool AutoReinit;            // Réinit Auto WebSDR : relance du WebSDR quand son son est perdu depuis AutoReinitSec secondes
+        public int AutoReinitSec = 30;     // 10 à 60 s, par pas de 5 (comme PhoneSDRLink)
         public bool FreeDvAuto, FreeDvV2;    // bouton FreeDV auto (décoché au départ) ; RADE V2 au lieu de V1 (clic droit)
         public bool SstvAuto;              // bouton SSTV (décoché au départ)
         public int SstvX = 0, SstvY = 1000; // position de la fenêtre SSTV sur la page, en millièmes de la place libre (0,1000 = en bas à gauche)
@@ -213,6 +215,8 @@ namespace SDRLink
                     case "RecCardName": s.RecCardName = v; break;
                     case "RecColor": s.RecColor = Int(v, 0x000080) & 0xFFFFFF; break;
                     case "RecWidth": s.RecWidth = Math.Max(1, Math.Min(2, Int(v, 1))); break;
+                    case "AutoReinit": s.AutoReinit = v == "1"; break;
+                    case "AutoReinitSec": s.AutoReinitSec = Math.Max(10, Math.Min(60, Int(v, 30) / 5 * 5)); break;
                     case "Color":   // clé:RRGGBB
                         {
                             int c = v.IndexOf(':'), rgb;
@@ -358,6 +362,8 @@ namespace SDRLink
             Line(sb, "RecCardName", RecCardName);
             Line(sb, "RecColor", RecColor);
             Line(sb, "RecWidth", RecWidth);
+            Line(sb, "AutoReinit", AutoReinit ? 1 : 0);
+            Line(sb, "AutoReinitSec", AutoReinitSec);
             foreach (KeyValuePair<string, int> c in Colors) Line(sb, "Color", c.Key + ":" + c.Value.ToString("X6"));
             Line(sb, "TopMost", TopMost ? 1 : 0);
             Line(sb, "AutoConnect", AutoConnect ? 1 : 0);

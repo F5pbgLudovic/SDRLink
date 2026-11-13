@@ -227,7 +227,7 @@ Reset the program…	Нулиране на програмата…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Експорт или импорт на всички настройки за същата конфигурация на друг компютър (десен клик: нулиране на програмата, цвят на бутона)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Име или позивна, давани автоматично на WebSDR, които ги искат преди звука (KiwiSDR, websdr.org). Клик: промяна (десен клик: цвят на бутона)
 Right-click: receivers muted while transmitting	Десен клик: приемници без звук при предаване
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Рестартира текущия WebSDR (например спрян след период на неактивност). Клик: рестарт със запазване на настройките (честота, режим, филтър, мащаб, сила на звука). Десен клик: пълно нулиране на WebSDR, като при първо посещение
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Рестартира текущия WebSDR (например спрян след период на неактивност). Клик: рестарт със запазване на настройките (честота, режим, филтър, мащаб, сила на звука). Десен клик: автоматичен рестарт при загуба на звука (Auto) и неговото забавяне, пълно нулиране на WebSDR, цветове на бутона
 Save: no known frequency (rig or WebSDR)	Запис: няма известна честота (трансивър или WebSDR)
 Store the current frequency…	Запомняне на текущата честота…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: речта се декодира веднага щом се приеме сигнал FreeDV (щракване: вкл. / изкл.; десен бутон: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Цвят при прекъсната връзка
 Colour when the rig is not answering yet	Цвят, докато станцията още не отговаря
 Colour when on	Цвят при включено
 Colour when off	Цвят при изключено
+Colour of "Reset WebSDR" (Auto off)	Цвят на „Нулиране WebSDR“ (Auto изключено)
+Colour of "Auto Reset WebSDR" (Auto on)	Цвят на „Нулиране Auto WebSDR“ (Auto включено)
 Colour when the scan is stopped	Цвят при спряно сканиране
 Colour while scanning	Цвят по време на сканиране
 Colour when receiving	Цвят при приемане
@@ -288,6 +290,11 @@ Invalid address: 	Невалиден адрес:
 No open WebSDR to restart	Няма отворен WebSDR за рестартиране
 WebSDR restarted keeping its settings	WebSDR е рестартиран със запазени настройки
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR е нулиран: бисквитките и настройките на сайта са изтрити, страницата е отворена отново като при първо посещение
+Reset WebSDR	Нулиране WebSDR
+Auto Reset WebSDR	Нулиране Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: рестартиране на WebSDR при загуба на звука
+Full reset of the WebSDR (as on a first visit)	Пълно нулиране на WebSDR (като при първо посещение)
+Auto Reset WebSDR off	Нулиране Auto WebSDR е изключено
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Кабел SDRLINK: не е намерен виртуален аудиокабел. Инсталирайте VB-CABLE (безплатно): бутон „Кабел SDRLINK“.
 Output receiving the WebSDR audio:	Изход, който получава звука от WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Наименувай другия край на кабела „SDRLINK“ (първо изберете виртуален кабел)
@@ -328,9 +335,6 @@ Scan stopped	Сканирането е спряно
 ■ Stop scan	■ Спиране на сканирането
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Звукова карта на радиостанцията, записвана при включени Mute WebSDR, Mute ExpertSDR и Mute HDSDR:
 None (always the speakers)	Няма (винаги високоговорителите)
-REC button width	Ширина на бутона REC
-Narrow	Тесен
-Wide	Широк
 REC button colour	Цвят на бутона REC
 Navy blue (default)	Тъмносин (по подразбиране)
 Navy blue	Тъмносин
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Премахни „{0}“ от списъка
 Remove all ({0} values)	Премахни всички (стойности: {0})
 Remove all {0} frequencies from the list?	Да се премахнат ли всички честоти от списъка ({0})?
+No sound for {0} s: WebSDR restarted automatically	Няма звук от {0} s: WebSDR е рестартиран автоматично
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Няма звук от {0} s: WebSDR е рестартиран автоматично (3-ти опит, последният, докато звукът не се върне)
+Time without sound before the restart: {0} s	Време без звук преди рестарта: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Нулиране Auto WebSDR: WebSDR ще бъде рестартиран след {0} s без звук (най-много 3 опита подред)
+Auto Reset WebSDR: time without sound {0} s	Нулиране Auto WebSDR: време без звук {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	„{0}“ не прилича на виртуален кабел: звукът от WebSDR ще се възпроизвежда там постоянно (и ще се излъчва, ако това е звуковата карта за предаване на трансивър).\n\nДа се използва ли все пак този изход?
 Name the other end of the cable "SDRLINK" ("{0}")…	Наименувай другия край на кабела „SDRLINK“ („{0}“)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Този кабел вече е преименуван на „{0}“: възможно е да се използва от друг софтуер (VoiceMeeter…). Ако го преименувате на „{1}“, ще трябва да го изберете отново в този софтуер.\n\nПродължаване?
@@ -469,7 +478,6 @@ Download Hamlib…	Изтегли Hamlib…
 SDRLINK cable ▾	Кабел SDRLINK ▾
 Scan setup	Настройка на сканирането
 ▶ Scan	▶ Сканиране
-Reset WebSDR	Нулиране WebSDR
 QSY	QSY
 Save	Запис
 Memories	Памети

@@ -227,7 +227,7 @@ Reset the program…	Επαναφορά του προγράμματος…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Εξαγωγή ή εισαγωγή όλων των ρυθμίσεων, για την ίδια διαμόρφωση σε άλλον υπολογιστή (δεξί κλικ: επαναφορά του προγράμματος, χρώμα κουμπιού)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Όνομα ή χαρακτηριστικό που δίνεται αυτόματα στα WebSDR που το ζητούν πριν από τον ήχο (KiwiSDR, websdr.org). Κλικ: αλλαγή (δεξί κλικ: χρώμα κουμπιού)
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Επανεκκινεί τον τρέχοντα WebSDR (για παράδειγμα σταματημένο μετά από χρόνο αδράνειας). Κλικ: επανεκκίνηση με διατήρηση των ρυθμίσεων (συχνότητα, τρόπος, φίλτρο, ζουμ, ένταση). Δεξί κλικ: πλήρης επαναφορά του WebSDR, όπως στην πρώτη επίσκεψη
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Επανεκκινεί το τρέχον WebSDR (για παράδειγμα σταματημένο μετά από χρόνο αδράνειας). Κλικ: επανεκκίνηση με διατήρηση των ρυθμίσεων (συχνότητα, τρόπος, φίλτρο, ζουμ, ένταση). Δεξί κλικ: αυτόματη επανεκκίνηση όταν χάνεται ο ήχος (Auto) και η καθυστέρησή της, πλήρης επαναφορά του WebSDR, χρώματα του κουμπιού
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
 Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: η ομιλία αποκωδικοποιείται μόλις ληφθεί σήμα FreeDV (κλικ: ενεργό / ανενεργό· δεξί κλικ: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Χρώμα όταν είναι αποσυνδεδεμέ
 Colour when the rig is not answering yet	Χρώμα όσο ο πομποδέκτης δεν απαντά ακόμη
 Colour when on	Χρώμα όταν είναι ενεργό
 Colour when off	Χρώμα όταν είναι ανενεργό
+Colour of "Reset WebSDR" (Auto off)	Χρώμα του «Επαναφορά WebSDR» (Auto ανενεργό)
+Colour of "Auto Reset WebSDR" (Auto on)	Χρώμα του «Επαναφορά Auto WebSDR» (Auto ενεργό)
 Colour when the scan is stopped	Χρώμα με τη σάρωση σταματημένη
 Colour while scanning	Χρώμα κατά τη σάρωση
 Colour when receiving	Χρώμα στη λήψη
@@ -288,6 +290,11 @@ Invalid address: 	Μη έγκυρη διεύθυνση:
 No open WebSDR to restart	Δεν υπάρχει ανοιχτός WebSDR για επανεκκίνηση
 WebSDR restarted keeping its settings	Ο WebSDR επανεκκινήθηκε με διατήρηση των ρυθμίσεων
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	Επαναφορά WebSDR: τα cookies και οι ρυθμίσεις του ιστότοπου διαγράφηκαν, η σελίδα άνοιξε ξανά όπως στην πρώτη επίσκεψη
+Reset WebSDR	Επαναφορά WebSDR
+Auto Reset WebSDR	Επαναφορά Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: επανεκκίνηση του WebSDR όταν χάνεται ο ήχος
+Full reset of the WebSDR (as on a first visit)	Πλήρης επαναφορά του WebSDR (όπως στην πρώτη επίσκεψη)
+Auto Reset WebSDR off	Επαναφορά Auto WebSDR ανενεργή
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Καλώδιο SDRLINK: δεν βρέθηκε εικονικό καλώδιο ήχου. Εγκαταστήστε το VB-CABLE (δωρεάν): κουμπί «Καλώδιο SDRLINK».
 Output receiving the WebSDR audio:	Έξοδος που λαμβάνει τον ήχο του WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Ονομασία «SDRLINK» στο άλλο άκρο του καλωδίου (επιλέξτε πρώτα εικονικό καλώδιο)
@@ -328,9 +335,6 @@ Scan stopped	Η σάρωση σταμάτησε
 ■ Stop scan	■ Διακοπή σάρωσης
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Κάρτα ήχου του πομποδέκτη, εγγράφεται όταν είναι ενεργά τα Mute WebSDR, Mute ExpertSDR και Mute HDSDR:
 None (always the speakers)	Καμία (πάντα τα ηχεία)
-REC button width	Πλάτος του κουμπιού REC
-Narrow	Στενό
-Wide	Φαρδύ
 REC button colour	Χρώμα του κουμπιού REC
 Navy blue (default)	Μπλε μαρέν (προεπιλογή)
 Navy blue	Ναυτικό μπλε
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Αφαίρεση του «{0}» από τη λίστα
 Remove all ({0} values)	Αφαίρεση όλων ({0} τιμές)
 Remove all {0} frequencies from the list?	Αφαίρεση και των {0} συχνοτήτων από τη λίστα;
+No sound for {0} s: WebSDR restarted automatically	Χωρίς ήχο για {0} s: το WebSDR επανεκκινήθηκε αυτόματα
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Χωρίς ήχο για {0} s: το WebSDR επανεκκινήθηκε αυτόματα (3η προσπάθεια, η τελευταία μέχρι να επιστρέψει ο ήχος)
+Time without sound before the restart: {0} s	Χρόνος χωρίς ήχο πριν από την επανεκκίνηση: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Επαναφορά Auto WebSDR: το WebSDR θα επανεκκινηθεί μετά από {0} s χωρίς ήχο (το πολύ 3 διαδοχικές προσπάθειες)
+Auto Reset WebSDR: time without sound {0} s	Επαναφορά Auto WebSDR: χρόνος χωρίς ήχο {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	Το «{0}» δεν μοιάζει με εικονικό καλώδιο: ο ήχος του WebSDR θα αναπαράγεται εκεί συνεχώς (και θα εκπέμπεται, αν είναι η κάρτα ήχου εκπομπής ενός πομποδέκτη).\n\nΧρήση αυτής της εξόδου παρ' όλα αυτά;
 Name the other end of the cable "SDRLINK" ("{0}")…	Ονομασία «SDRLINK» στο άλλο άκρο του καλωδίου («{0}»)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Αυτό το καλώδιο έχει ήδη μετονομαστεί σε «{0}»: ίσως χρησιμοποιείται ήδη από άλλο λογισμικό (VoiceMeeter…). Αν το μετονομάσετε σε «{1}», θα πρέπει να το επιλέξετε ξανά σε εκείνο το λογισμικό.\n\nΣυνέχεια;
@@ -469,7 +478,6 @@ Download Hamlib…	Λήψη Hamlib…
 SDRLINK cable ▾	Καλώδιο SDRLINK ▾
 Scan setup	Ρύθμιση σάρωσης
 ▶ Scan	▶ Σάρωση
-Reset WebSDR	Επαναφορά WebSDR
 QSY	QSY
 Save	Αποθήκ.
 Memories	Μνήμες

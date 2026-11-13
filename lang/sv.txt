@@ -227,7 +227,7 @@ Reset the program…	Återställ programmet…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportera eller importera alla inställningar, för samma konfiguration på en annan dator (högerklick: återställ programmet, knappens färg)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Namn eller anropssignal som automatiskt ges till WebSDR:er som ber om det före ljudet (KiwiSDR, websdr.org). Klick: ändra det (högerklick: knappens färg)
 Right-click: receivers muted while transmitting	Högerklick: mottagare som tystas vid sändning
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Startar om aktuell WebSDR (till exempel stoppad efter en tid utan aktivitet). Klick: omstart med inställningarna kvar (frekvens, trafiksätt, filter, zoom, volym). Högerklick: fullständig återställning av WebSDR, som vid ett första besök
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Startar om den aktuella WebSDR (till exempel stoppad efter en tids inaktivitet). Klick: omstart med inställningarna kvar (frekvens, trafiksätt, filter, zoom, volym). Högerklick: automatisk omstart när ljudet försvinner (Auto) och dess fördröjning, fullständig återställning av WebSDR, knappens färger
 Save: no known frequency (rig or WebSDR)	Save: ingen känd frekvens (rigg eller WebSDR)
 Store the current frequency…	Spara aktuell frekvens…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: talet avkodas så snart en FreeDV-signal tas emot (klick: på / av; högerklick: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Färg när frånkopplad
 Colour when the rig is not answering yet	Färg medan radion ännu inte svarar
 Colour when on	Färg när på
 Colour when off	Färg när av
+Colour of "Reset WebSDR" (Auto off)	Färg på ”Återställ WebSDR” (Auto av)
+Colour of "Auto Reset WebSDR" (Auto on)	Färg på ”Återställ Auto WebSDR” (Auto på)
 Colour when the scan is stopped	Färg när skanningen är stoppad
 Colour while scanning	Färg under skanning
 Colour when receiving	Färg vid mottagning
@@ -288,6 +290,11 @@ Invalid address: 	Ogiltig adress:
 No open WebSDR to restart	Ingen öppen WebSDR att starta om
 WebSDR restarted keeping its settings	WebSDR omstartad med inställningarna kvar
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR återställd: webbplatsens cookies och inställningar raderade, sidan öppnad igen som vid ett första besök
+Reset WebSDR	Återställ WebSDR
+Auto Reset WebSDR	Återställ Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: starta om WebSDR när ljudet försvinner
+Full reset of the WebSDR (as on a first visit)	Fullständig återställning av WebSDR (som vid ett första besök)
+Auto Reset WebSDR off	Återställ Auto WebSDR avstängd
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kabel: ingen virtuell ljudkabel hittades. Installera VB-CABLE (gratis): knappen ”SDRLINK-kabel”.
 Output receiving the WebSDR audio:	Utgång som tar emot WebSDR-ljudet:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Döp kabelns andra ände till ”SDRLINK” (välj först en virtuell kabel)
@@ -328,9 +335,6 @@ Scan stopped	Avsökning stoppad
 ■ Stop scan	■ Stoppa avsökning
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radions ljudkort, spelas in när Mute WebSDR, Mute ExpertSDR och Mute HDSDR är på:
 None (always the speakers)	Inget (alltid högtalarna)
-REC button width	Bredd på REC-knappen
-Narrow	Smal
-Wide	Bred
 REC button colour	Färg på REC-knappen
 Navy blue (default)	Marinblå (standard)
 Navy blue	Marinblå
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Ta bort ”{0}” från listan
 Remove all ({0} values)	Ta bort alla ({0} värden)
 Remove all {0} frequencies from the list?	Ta bort alla {0} frekvenser från listan?
+No sound for {0} s: WebSDR restarted automatically	Inget ljud på {0} s: WebSDR omstartad automatiskt
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Inget ljud på {0} s: WebSDR omstartad automatiskt (3:e försöket, det sista tills ljudet kommer tillbaka)
+Time without sound before the restart: {0} s	Tid utan ljud före omstarten: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Återställ Auto WebSDR: WebSDR startas om efter {0} s utan ljud (högst 3 försök i rad)
+Auto Reset WebSDR: time without sound {0} s	Återställ Auto WebSDR: tid utan ljud {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	”{0}” verkar inte vara en virtuell kabel: WebSDR-ljudet kommer att spelas upp där hela tiden (och sändas, om det är en riggs ljudkort för sändning).\n\nAnvända denna utgång ändå?
 Name the other end of the cable "SDRLINK" ("{0}")…	Döp kabelns andra ände till ”SDRLINK” (”{0}”)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Denna kabel har redan döpts om till ”{0}”: den kan redan användas av annan programvara (VoiceMeeter…). Om du döper om den till ”{1}” måste du välja den igen i den programvaran.\n\nFortsätta?
@@ -469,7 +478,6 @@ Download Hamlib…	Ladda ned Hamlib…
 SDRLINK cable ▾	SDRLINK-kabel ▾
 Scan setup	Avsökningsinställningar
 ▶ Scan	▶ Avsök
-Reset WebSDR	Återställ WebSDR
 QSY	QSY
 Save	Save
 Memories	Minnen

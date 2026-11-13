@@ -52,8 +52,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Mute TX | **écouter aussi le poste sur le PC**, carte son du poste (depuis la 1.23), couleur son coupé / son actif |
 | Mute ExpertSDR | port TCI d'ExpertSDR, couleur son coupé / son actif |
 | « Volume WebSDR » | port TCI d'ExpertSDR |
-| REC | carte son du poste, couleur du bouton REC, largeur (étroit / large) |
-| Réinit WebSDR | pas de menu : le clic droit fait la **réinitialisation totale** du WebSDR en cours (depuis la 1.31) |
+| REC | carte son du poste, couleur du bouton REC |
+| Réinit WebSDR | **Auto** (relance quand le son est perdu) et son délai, **réinitialisation totale** du WebSDR en cours, couleurs des deux états (depuis la 1.37) |
 | Barre d'état | 20 derniers messages, types de messages à ne plus afficher |
 
 ## Fichiers de SDRLink
@@ -351,6 +351,7 @@ Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le
   - **Connecter** : quand connecté / quand déconnecté / quand le poste ne répond pas encore (orange par défaut) ;
   - **Câble SDRLINK** : quand activé / quand désactivé ;
   - **Scan** : scan arrêté / scan en marche ;
+  - **Réinit WebSDR** : Auto arrêté / Auto en marche (« Réinit Auto WebSDR ») ;
   - **PTT** : en réception / en émission (PTT activé) ;
   - **RADIO** et **WEBSDR** (fréquence et mode) : couleur du fond / couleur du texte (en émission, RADIO passe toujours en rouge) ;
   - **USB, LSB, AM, FM, DIGI, CW** : mode sélectionné / modes non sélectionnés (le choix vaut pour les six boutons) ;
@@ -358,7 +359,7 @@ Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le
 - Couleurs proposées : **Par défaut** (couleur d'origine, qui suit le mode sombre et la palette), bleu marine, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, orange, blanc, ou **Autre couleur…** au choix.
 - Le texte passe en noir sur les couleurs claires et en blanc sur les foncées ; une bordure fait contour.
 - Les choix sont conservés, y compris en passant du mode clair au mode sombre.
-- Le bouton REC garde son propre menu (couleur et largeur, voir « Enregistrement (REC) »).
+- Le bouton REC garde son propre menu (carte son et couleur, voir « Enregistrement (REC) »).
 
 ## Langue
 
@@ -549,7 +550,7 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 
 ## Enregistrement (REC)
 
-- Bouton **REC**, sur la ligne de son, juste après le dernier volume affiché (il se rapproche quand Volume TX, Volume ExpertSDR ou Volume HDSDR sont absents) : **bleu marine** au repos (couleur réglable), **orange** pendant l'enregistrement.
+- Bouton **REC**, sur la ligne de son, juste après le dernier volume affiché (il se rapproche quand Volume TX, Volume ExpertSDR ou Volume HDSDR sont absents), de la même taille que **Mute WebSDR** (comme **Mute TX**, depuis la 1.37) : **bleu marine** au repos (couleur réglable), **orange** pendant l'enregistrement.
 - Un clic lance l'enregistrement de **tout ce qu'on entend dans les haut-parleurs** (sortie audio par défaut de Windows) : WebSDR, ExpertSDR, poste relié au PC, sons de Windows… Le volume de Windows et les Mute ne changent rien à ce qui est capté avant eux : on enregistre ce que la sortie joue.
 - Un nouveau clic arrête et ouvre la fenêtre **Enregistrer le son** :
   - **Nom** : proposé d'après la date, l'heure, la fréquence et le mode au départ (modifiable) ;
@@ -559,15 +560,28 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 - Le fichier est écrit en arrière-plan ; la barre d'état indique la progression puis « Enregistrement sauvegardé ». En cas d'échec, la fenêtre revient : le son n'est pas perdu.
 - **Clic droit sur REC** : choix de la **carte son du poste** (son entrée dans Windows, par exemple « USB AUDIO CODEC » ou « USB Sound Device »), ou « Aucune (toujours les haut-parleurs) ». Cette carte est enregistrée **à la place des haut-parleurs** seulement si l'on écoute le poste seul au moment d'appuyer sur REC : **Mute WebSDR** actif (rouge), **Mute ExpertSDR** actif (rouge) si ExpertSDR est lancé et **Mute HDSDR** actif (rouge) si HDSDR joue. Sinon, ce sont les haut-parleurs. Si la carte est débranchée, les haut-parleurs sont enregistrés et la barre d'état le signale. Le choix est conservé.
 - **Clic droit sur REC > Couleur du bouton REC** : couleur du bouton au repos (bleu marine par défaut, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, ou « Autre couleur… » au choix). Le texte passe en noir sur les couleurs claires ; pendant l'enregistrement, le bouton reste orange. Le choix est conservé.
-- **Clic droit sur REC > Largeur du bouton REC** : **Étroit** (rectangle deux fois plus large que haut, par défaut) ou **Large** (quatre fois plus large que haut), toujours à la hauteur des boutons Mute, « REC » centré. Le choix est conservé.
 - Les silences sont gardés (la durée du fichier est la durée réelle). Fermer SDRLink pendant un enregistrement propose de le sauvegarder avant de quitter.
 ## Réinit WebSDR (depuis la 1.31)
 
 Bouton **Réinit WebSDR**, sur la ligne de son, juste après REC : il relance le WebSDR affiché quand il s'est arrêté, par exemple après son **délai d'inactivité** (la page websdr.org n'affiche plus que « Idle time out. », un KiwiSDR coupe la liaison), ou quand le son ne revient pas.
 
 - **Clic** : relance **en gardant tous les réglages**. La page est rechargée, puis SDRLink remet la **fréquence** et le **mode**, et, sur websdr.org et KiwiSDR, le **filtre** (bande passante) et le **zoom** de la cascade tels qu'ils étaient, même si la page était déjà arrêtée. Le volume, les Mute, le notch et le pseudo de SDRLink sont remis aussi. OpenWebRX et les autres WebSDR gardent eux-mêmes leurs réglages au rechargement. La barre d'état indique « WebSDR relancé en gardant ses réglages », puis « WebSDR relancé : filtre et zoom remis comme avant ».
-- **Clic droit** : **réinitialisation totale** du WebSDR en cours. Les cookies et les réglages enregistrés par ce site (stockage de la page) sont effacés, et la page est rouverte **comme à la première visite** (sans la partie de l'adresse après « # », où OpenWebRX garde fréquence et mode) ; la fréquence du WebSDR d'avant n'est pas reprise. Le pseudo du bouton Pseudo/Call est redonné. Si la synchronisation va du poste vers le WebSDR, le poste impose toujours sa fréquence. Les réglages de SDRLink (favoris, volume…) et ceux des autres sites ne sont pas touchés.
-- Pas de menu de couleur sur ce bouton : son clic droit sert à la réinitialisation.
+- **Clic droit** : un menu (depuis la 1.37) :
+  - **Auto : relancer le WebSDR quand le son est perdu** (case à cocher) : voir « Réinit Auto WebSDR » ci-dessous ;
+  - **Délai sans son avant la relance** : de 10 à 60 s, par pas de 5 s (30 s au départ) ;
+  - **Réinitialisation totale du WebSDR (comme une première visite)** : les cookies et les réglages enregistrés par ce site (stockage de la page) sont effacés, et la page est rouverte **comme à la première visite** (sans la partie de l'adresse après « # », où OpenWebRX garde fréquence et mode) ; la fréquence du WebSDR d'avant n'est pas reprise. Le pseudo du bouton Pseudo/Call est redonné. Si la synchronisation va du poste vers le WebSDR, le poste impose toujours sa fréquence. Les réglages de SDRLink (favoris, volume…) et ceux des autres sites ne sont pas touchés. (Jusqu'à la 1.36, le clic droit faisait directement cette réinitialisation.)
+  - les **couleurs** du bouton : une pour « Réinit WebSDR » (Auto arrêté, couleur du thème par défaut), une pour « Réinit Auto WebSDR » (Auto en marche, bleu canard par défaut).
+
+### Réinit Auto WebSDR (depuis la 1.37)
+
+Relance automatique du WebSDR quand son son est perdu (coupure du serveur, délai d'inactivité, « session timed out »…), comme la « Réinitialisation automatique WEBSDR » de PhoneSDRLink.
+- Cochez **Auto** au clic droit : le bouton devient **Réinit Auto WebSDR** et change de couleur. Il garde **la même largeur** dans les deux états (celle du plus long des deux textes dans la langue choisie).
+- Toutes les **10 secondes**, SDRLink regarde depuis combien de temps la page du WebSDR ne produit plus de son. Au-delà du délai choisi, la page est relancée **en gardant ses réglages**, comme un clic sur le bouton ; la barre d'état l'indique (« Plus de son depuis 30 s : WebSDR relancé automatiquement »). La relance a donc lieu entre le délai choisi et 10 s de plus.
+- **Pas de relance quand le son est coupé volontairement** : **Mute WebSDR** enclenché, **Volume WebSDR** à 0, parole FreeDV jouée à la place du WebSDR, **curseur de volume de la page** à zéro, ou **bouton « mute » de la page** enfoncé (websdr.org, KiwiSDR…). Quand le son est remis, le décompte repart de zéro.
+- Une page dont le son n'a jamais démarré n'est pas relancée.
+- **3 essais de suite au plus** : si le son ne revient pas après 3 relances, SDRLink attend. Le compteur repart quand le son revient vraiment, quand on change de WebSDR ou quand on clique sur le bouton.
+- En FM avec un squelch fermé, le silence compte comme une perte de son (3 relances au plus).
+- Les choix (Auto, délai) sont conservés.
 
 ## Mémoires de fréquences
 
@@ -592,7 +606,7 @@ Bouton **Réinit WebSDR**, sur la ligne de son, juste après REC : il relance le
 
 Bouton **Import/Export ▾** (1re ligne, après « Vérifier les mises à jour ») : pour retrouver exactement la même configuration sur un autre ordinateur, ou garder une sauvegarde. Clic droit : couleur du bouton.
 - Tous les réglages de SDRLink sont dans un seul fichier : **`%APPDATA%\SDRLink\settings.ini`** (par exemple `C:\Users\<nom>\AppData\Roaming\SDRLink\settings.ini`). Le journal `sdrlink.log` est à côté.
-- **Exporter tous les réglages…** : enregistre ce fichier où vous voulez (par défaut dans Documents, nom `SDRLink-reglages-<date>.ini`), avec l'état du moment : interface et poste (port COM, vitesse, TCI, HRD, Hamlib…), synchronisation, décalage, favoris et leurs listes, mémoires, historique des fréquences, langue, mode sombre et palette, look des boutons, position du panneau de commande, couleurs des boutons, taille du texte, REC (dossier, carte son, couleur, largeur), câble SDRLINK, scan (réglage, zones non scannées et profils de scan), volumes, taille et position de la fenêtre, etc.
+- **Exporter tous les réglages…** : enregistre ce fichier où vous voulez (par défaut dans Documents, nom `SDRLink-reglages-<date>.ini`), avec l'état du moment : interface et poste (port COM, vitesse, TCI, HRD, Hamlib…), synchronisation, décalage, favoris et leurs listes, mémoires, historique des fréquences, langue, mode sombre et palette, look des boutons, position du panneau de commande, couleurs des boutons, taille du texte, REC (dossier, carte son, couleur), Réinit Auto WebSDR (Auto, délai), câble SDRLINK, scan (réglage, zones non scannées et profils de scan), volumes, taille et position de la fenêtre, etc.
 - **Importer des réglages…** : choisir un fichier exporté. Une fenêtre demande **ce qu'il faut importer**, avec une case par partie (une seule ou plusieurs) :
   - **Configuration** (poste, interface, affichage, couleurs, langue… : tout ce qui n'est pas dans les trois cases suivantes) ;
   - **WebSDR** (favoris, listes de favoris, dernier WebSDR ouvert, volume des WebSDR hors favoris) ;
@@ -655,6 +669,9 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.37**
+  - **Réinit Auto WebSDR** : au clic droit sur Réinit WebSDR, case **Auto** et délai sans son (10 à 60 s) ; le WebSDR est relancé tout seul quand son son est perdu (contrôle toutes les 10 s, 3 essais de suite au plus), jamais quand le son est coupé volontairement (Mute WebSDR, volume à 0, volume ou mute de la page). Le bouton devient « Réinit Auto WebSDR », même largeur, deux couleurs réglables. La réinitialisation totale passe dans ce menu.
+  - **REC** et **Mute TX** ont la même taille que **Mute WebSDR** (le choix étroit / large de REC disparaît).
 - **1.36**
   - **KiwiSDR : zoom de la cascade gardé** quand SDRLink change la fréquence ou le mode (synchro, clavier, mémoires, scan) ; avant, le KiwiSDR revenait à la vue de toute la bande. Vérifié aussi sur websdr.org, OpenWebRX+, UberSDR et PhantomSDR, qui gardaient déjà leur zoom.
 - **1.35**

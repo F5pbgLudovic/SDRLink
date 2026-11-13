@@ -53,8 +53,8 @@ Overview; each feature is detailed further down in its own section.
 | Mute TRX | **also hear the rig on the PC**, rig sound card (since 1.23), colour when muted / sound on |
 | Mute ExpertSDR | ExpertSDR TCI port, colour when muted / sound on |
 | "WebSDR volume" | ExpertSDR TCI port |
-| REC | rig sound card, REC button colour, width (narrow / wide) |
-| Reset WebSDR | no menu: right-click makes a **full reset** of the current WebSDR (since 1.31) |
+| REC | rig sound card, REC button colour |
+| Reset WebSDR | **Auto** (restart when the sound is lost) and its time, **full reset** of the current WebSDR, colours of both states (since 1.37) |
 | Status bar | last 20 messages, message types to hide |
 
 ## SDRLink files
@@ -352,6 +352,7 @@ Right-clicking most buttons offers their **background colour**. If the button al
   - **Connect**: when connected / when disconnected / when the rig is not answering yet (orange by default);
   - **SDRLINK cable**: when on / when off;
   - **Scan**: scan stopped / while scanning;
+  - **Reset WebSDR**: Auto off / Auto on ("Auto Reset WebSDR");
   - **PTT**: when receiving / when transmitting (PTT on);
   - **RIG** and **WEBSDR** (frequency and mode): background colour / text colour (when transmitting, RIG always turns red);
   - **USB, LSB, AM, FM, DIGI, CW**: selected mode / other modes (the choice applies to all six buttons);
@@ -359,7 +360,7 @@ Right-clicking most buttons offers their **background colour**. If the button al
 - Colours offered: **Default** (the original colour, which follows dark mode and the palette), navy blue, blue, sky blue, teal, green, red, burgundy, purple, pink, brown, grey, black, yellow, orange, white, or any colour with **Other colour…**.
 - The text turns black on light colours and white on dark ones; a border outlines the button.
 - The choices are kept, including when switching between light and dark mode.
-- The REC button keeps its own menu (colour and width, see "Recording (REC)").
+- The REC button keeps its own menu (sound card and colour, see "Recording (REC)").
 
 ## Language
 
@@ -560,7 +561,6 @@ On the "Sync" row, after "Auto notch (DNF)":
 - The file is written in the background; the status bar shows the progress, then "Recording saved". If it fails, the window comes back: the audio is not lost.
 - **Right-click REC**: choice of the **rig's sound card** (its input in Windows, for example "USB AUDIO CODEC" or "USB Sound Device"), or "None (always the speakers)". This card is recorded **instead of the speakers** only if you are listening to the rig alone when you press REC: **Mute WebSDR** on (red), **Mute ExpertSDR** on (red) if ExpertSDR is running and **Mute HDSDR** on (red) if HDSDR is playing. Otherwise, the speakers are recorded. If the card is unplugged, the speakers are recorded and the status bar says so. The choice is kept.
 - **Right-click REC > REC button colour**: colour of the button when idle (navy blue by default, blue, sky blue, teal, green, red, burgundy, purple, pink, brown, grey, black, yellow, or any colour with "Other colour…"). The text turns black on light colours; while recording, the button stays orange. The choice is kept.
-- **Right-click REC > REC button width**: **Narrow** (a rectangle twice as wide as it is high, default) or **Wide** (four times as wide as it is high), always as high as the Mute buttons, with "REC" centred. The choice is kept.
 - Silences are kept (the file length is the real duration). Closing SDRLink during a recording offers to save it before quitting.
 
 ## Reset WebSDR (since 1.31)
@@ -568,8 +568,22 @@ On the "Sync" row, after "Auto notch (DNF)":
 **Reset WebSDR** button, on the audio row, right after REC: it restarts the WebSDR shown when it has stopped, for example after its **idle timeout** (the websdr.org page only shows "Idle time out.", a KiwiSDR drops the connection), or when the audio does not come back.
 
 - **Click**: restart **keeping all the settings**. The page is reloaded, then SDRLink puts back the **frequency** and the **mode**, and, on websdr.org and KiwiSDR, the **filter** (passband) and the waterfall **zoom** as they were, even if the page had already stopped. SDRLink's volume, Mutes, notch and name are put back too. OpenWebRX and the other WebSDRs keep their own settings when reloaded. The status bar shows "WebSDR restarted keeping its settings", then "WebSDR restarted: filter and zoom restored".
-- **Right-click**: **full reset** of the current WebSDR. The cookies and the settings saved by this site (page storage) are cleared, and the page is reopened **as on a first visit** (without the part of the address after "#", where OpenWebRX keeps frequency and mode); the frequency of the previous WebSDR is not carried over. The name of the Pseudo/Call button is given again. If synchronisation goes from the rig to the WebSDR, the rig still imposes its frequency. SDRLink's settings (favorites, volume…) and those of other sites are not touched.
-- No colour menu on this button: its right-click is used for the reset.
+- **Right-click**: a menu (since 1.37):
+  - **Auto: restart the WebSDR when the sound is lost** (tick box): see "Auto Reset WebSDR" below;
+  - **Time without sound before the restart**: 10 to 60 s, in steps of 5 s (30 s at first);
+  - **Full reset of the WebSDR (as on a first visit)**: the cookies and the settings saved by this site (page storage) are cleared, and the page is reopened **as on a first visit** (without the part of the address after "#", where OpenWebRX keeps frequency and mode); the frequency of the previous WebSDR is not carried over. The name of the Pseudo/Call button is given again. If synchronisation goes from the rig to the WebSDR, the rig still imposes its frequency. SDRLink's settings (favorites, volume…) and those of other sites are not touched. (Up to 1.36, the right-click made this reset directly.)
+  - the button **colours**: one for "Reset WebSDR" (Auto off, theme colour by default), one for "Auto Reset WebSDR" (Auto on, teal by default).
+
+### Auto Reset WebSDR (since 1.37)
+
+Automatic restart of the WebSDR when its sound is lost (server drop, idle timeout, "session timed out"…), like PhoneSDRLink's "Automatic WebSDR reset".
+- Tick **Auto** in the right-click menu: the button becomes **Auto Reset WebSDR** and changes colour. It keeps **the same width** in both states (that of the longer of the two texts in the chosen language).
+- Every **10 seconds**, SDRLink checks how long the WebSDR page has produced no sound. Beyond the chosen time, the page is restarted **keeping its settings**, like a click on the button; the status bar says so ("No sound for 30 s: WebSDR restarted automatically"). The restart therefore happens between the chosen time and 10 s more.
+- **No restart when the sound is cut on purpose**: **Mute WebSDR** on, **WebSDR volume** at 0, FreeDV speech played instead of the WebSDR, **page volume slider** at zero, or **page "mute" button** pressed (websdr.org, KiwiSDR…). When the sound is back on, the count starts again from zero.
+- A page whose sound never started is not restarted.
+- **3 attempts in a row at most**: if the sound does not come back after 3 restarts, SDRLink waits. The count starts again when the sound really comes back, when you change WebSDR or when you click the button.
+- In FM with a closed squelch, the silence counts as a loss of sound (3 restarts at most).
+- The choices (Auto, time) are kept.
 
 ## Frequency memories
 
@@ -594,7 +608,7 @@ On the "Sync" row, after "Auto notch (DNF)":
 
 **Import/Export ▾** button (1st row, after "Check for updates"): to get exactly the same configuration on another computer, or to keep a backup. Right-click: button colour.
 - All SDRLink settings are in a single file: **`%APPDATA%\SDRLink\settings.ini`** (for example `C:\Users\<name>\AppData\Roaming\SDRLink\settings.ini`). The log `sdrlink.log` is next to it.
-- **Export all settings…**: saves this file wherever you want (Documents by default, named `SDRLink-reglages-<date>.ini`), with the current state: interface and rig (COM port, baud rate, TCI, HRD, Hamlib…), synchronisation, offset, favorites and their lists, memories, frequency history, language, dark mode and palette, button look, control panel position, button colours, text size, REC (folder, sound card, colour, width), SDRLINK cable, scan (setting, skipped ranges and scan profiles), volumes, window size and position, etc.
+- **Export all settings…**: saves this file wherever you want (Documents by default, named `SDRLink-reglages-<date>.ini`), with the current state: interface and rig (COM port, baud rate, TCI, HRD, Hamlib…), synchronisation, offset, favorites and their lists, memories, frequency history, language, dark mode and palette, button look, control panel position, button colours, text size, REC (folder, sound card, colour), Auto Reset WebSDR (Auto, time), SDRLINK cable, scan (setting, skipped ranges and scan profiles), volumes, window size and position, etc.
 - **Import settings…**: choose an exported file. A window asks **what to import**, with one tick box per part (just one or several):
   - **Configuration** (rig, interface, display, colours, language…: everything that is not in the next three boxes);
   - **WebSDR** (favorites, favorite lists, last WebSDR opened, volume of WebSDRs that are not favorites);
@@ -657,6 +671,9 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.37**
+  - **Auto Reset WebSDR**: right-click Reset WebSDR for an **Auto** tick box and a time without sound (10 to 60 s); the WebSDR is restarted on its own when its sound is lost (checked every 10 s, 3 attempts in a row at most), never when the sound is cut on purpose (Mute WebSDR, volume at 0, page volume or mute). The button becomes "Auto Reset WebSDR", same width, two adjustable colours. The full reset moves into this menu.
+  - **REC** and **Mute TRX** have the same size as **Mute WebSDR** (REC's narrow / wide choice is gone).
 - **1.36**
   - **KiwiSDR: waterfall zoom kept** when SDRLink changes the frequency or the mode (sync, keypad, memories, scan); before, the KiwiSDR went back to the whole-band view. Also checked on websdr.org, OpenWebRX+, UberSDR and PhantomSDR, which already kept their zoom.
 - **1.35**

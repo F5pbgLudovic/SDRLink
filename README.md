@@ -1,4 +1,4 @@
-# SDRLink V1.36 — @F5PBG 2026
+# SDRLink V1.37 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -13,8 +13,8 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - clic sur la fréquence : clavier de fréquence et liste Mem des 20 dernières fréquences (Store, enregistrement automatique après 1 à 30 min sur la même fréquence), comme dans PhoneSDRLink ;
   - mémoires de fréquences nommées, en listes, avec les 20 dernières utilisées, et une liste « Modes numériques » des fréquences habituelles du mode utilisé (1,8 à 440 MHz, selon la région IARU) ;
   - scan de fréquences (avec jusqu'à 10 zones non scannées) ou de mémoires, jusqu'à 10 profils de scan nommés, reprise du scan à la fréquence actuelle ;
-  - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, couleur et largeur réglables ;
-  - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou clic droit pour le réinitialiser totalement ;
+  - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, même taille que Mute WebSDR, couleur réglable ;
+  - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou automatiquement quand son son est perdu (Réinit Auto WebSDR, clic droit : Auto et délai de 10 à 60 s, jamais quand le son est coupé volontairement) ; réinitialisation totale au clic droit ;
   - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de votre position (ordinateur, locator ou coordonnées) ;
@@ -68,8 +68,8 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - click on the frequency: frequency keypad and Mem list of the last 20 frequencies (Store, automatic storing after 1 to 30 min on the same frequency), as in PhoneSDRLink;
   - named frequency memories, in lists, with the last 20 used, and a "Digital modes" list of the usual frequencies of the mode in use (1.8 to 440 MHz, by IARU region);
   - frequency scan (with up to 10 skipped ranges) or memory scan, up to 10 named scan profiles, scan resumed from the current frequency;
-  - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, with adjustable colour and width;
-  - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or right-click to reset it completely;
+  - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, same size as Mute WebSDR, adjustable colour;
+  - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or automatically when its sound is lost (Auto Reset WebSDR, right-click: Auto and a time of 10 to 60 s, never when the sound is cut on purpose); full reset from the right-click menu;
   - reduced, mini and PTT (PTT button only, with the Always on top box) views;
   - suggestions while typing in the WebSDR bar (name or address, chosen list);
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near your position (computer, locator or coordinates);

@@ -227,7 +227,7 @@ Reset the program…	Palauta ohjelman alkutila…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Vie tai tuo kaikki asetukset, samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea painike: palauta ohjelman alkutila, painikkeen väri)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi tai kutsu, joka annetaan automaattisesti WebSDR-vastaanottimille, jotka kysyvät sitä ennen ääntä (KiwiSDR, websdr.org). Napsautus: vaihda (hiiren oikea: painikkeen väri)
 Right-click: receivers muted while transmitting	Hiiren oikea painike: lähetyksen ajaksi mykistettävät vastaanottimet
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Käynnistää nykyisen WebSDR:n uudelleen (esimerkiksi käyttämättömyyden vuoksi pysähtyneen). Napsautus: uudelleenkäynnistys asetukset säilyttäen (taajuus, lähetyslaji, suodin, zoomaus, äänenvoimakkuus). Hiiren kakkospainike: WebSDR:n täydellinen nollaus, kuten ensimmäisellä käynnillä
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Käynnistää nykyisen WebSDR:n uudelleen (esimerkiksi käyttämättömyyden jälkeen pysähtyneen). Napsautus: uudelleenkäynnistys asetukset säilyttäen (taajuus, toimintatapa, suodatin, zoomaus, äänenvoimakkuus). Oikea napsautus: automaattinen uudelleenkäynnistys äänen kadotessa (Auto) ja sen viive, WebSDR:n täydellinen nollaus, painikkeen värit
 Save: no known frequency (rig or WebSDR)	Tallenna: taajuutta ei tiedetä (radio tai WebSDR)
 Store the current frequency…	Tallenna nykyinen taajuus…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: puhe puretaan heti, kun FreeDV-signaali vastaanotetaan (napsautus: päälle / pois; oikea napsautus: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Väri ilman yhteyttä
 Colour when the rig is not answering yet	Väri, kun radio ei vielä vastaa
 Colour when on	Väri päällä
 Colour when off	Väri pois päältä
+Colour of "Reset WebSDR" (Auto off)	”Nollaa WebSDR” -painikkeen väri (Auto pois)
+Colour of "Auto Reset WebSDR" (Auto on)	”Nollaa Auto WebSDR” -painikkeen väri (Auto päällä)
 Colour when the scan is stopped	Väri skannauksen ollessa pysäytetty
 Colour while scanning	Väri skannauksen aikana
 Colour when receiving	Väri vastaanotossa
@@ -288,6 +290,11 @@ Invalid address: 	Virheellinen osoite:
 No open WebSDR to restart	Ei avointa WebSDR:ää käynnistettäväksi uudelleen
 WebSDR restarted keeping its settings	WebSDR käynnistetty uudelleen asetukset säilyttäen
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR nollattu: sivuston evästeet ja asetukset poistettu, sivu avattu uudelleen kuten ensimmäisellä käynnillä
+Reset WebSDR	Nollaa WebSDR
+Auto Reset WebSDR	Nollaa Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: käynnistä WebSDR uudelleen äänen kadotessa
+Full reset of the WebSDR (as on a first visit)	WebSDR:n täydellinen nollaus (kuin ensimmäisellä käynnillä)
+Auto Reset WebSDR off	Nollaa Auto WebSDR pois päältä
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	SDRLINK-kaapeli: virtuaalista äänikaapelia ei löytynyt. Asenna VB-CABLE (ilmainen): ”SDRLINK-kaapeli”-painike.
 Output receiving the WebSDR audio:	WebSDR-äänen vastaanottava lähtö:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Nimeä kaapelin toinen pää ”SDRLINK” (valitse ensin virtuaalikaapeli)
@@ -328,9 +335,6 @@ Scan stopped	Pyyhkäisy pysäytetty
 ■ Stop scan	■ Pysäytä pyyhkäisy
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radion äänikortti, tallennetaan kun Mute WebSDR, Mute ExpertSDR ja Mute HDSDR ovat päällä:
 None (always the speakers)	Ei mitään (aina kaiuttimet)
-REC button width	REC-painikkeen leveys
-Narrow	Kapea
-Wide	Leveä
 REC button colour	REC-painikkeen väri
 Navy blue (default)	Laivastonsininen (oletus)
 Navy blue	Laivastonsininen
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Poista ”{0}” luettelosta
 Remove all ({0} values)	Poista kaikki ({0} arvoa)
 Remove all {0} frequencies from the list?	Poistetaanko kaikki {0} taajuutta luettelosta?
+No sound for {0} s: WebSDR restarted automatically	Ei ääntä {0} s: WebSDR käynnistetty automaattisesti uudelleen
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Ei ääntä {0} s: WebSDR käynnistetty automaattisesti uudelleen (3. yritys, viimeinen kunnes ääni palaa)
+Time without sound before the restart: {0} s	Aika ilman ääntä ennen uudelleenkäynnistystä: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Nollaa Auto WebSDR: WebSDR käynnistetään uudelleen {0} s äänettömyyden jälkeen (enintään 3 yritystä peräkkäin)
+Auto Reset WebSDR: time without sound {0} s	Nollaa Auto WebSDR: aika ilman ääntä {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	”{0}” ei näytä virtuaalikaapelilta: WebSDR-ääni soi siinä koko ajan (ja lähetetään, jos se on radion lähetysäänikortti).\n\nKäytetäänkö tätä lähtöä silti?
 Name the other end of the cable "SDRLINK" ("{0}")…	Nimeä kaapelin toinen pää ”SDRLINK” (”{0}”)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Tämä kaapeli on jo nimetty uudelleen (”{0}”): jokin muu ohjelma (VoiceMeeter…) voi jo käyttää sitä. Jos nimeät sen uudelleen (”{1}”), se on valittava uudelleen siinä ohjelmassa.\n\nJatketaanko?
@@ -469,7 +478,6 @@ Download Hamlib…	Lataa Hamlib…
 SDRLINK cable ▾	SDRLINK-kaapeli ▾
 Scan setup	Pyyhkäisyn asetukset
 ▶ Scan	▶ Pyyhkäisy
-Reset WebSDR	Nollaa WebSDR
 QSY	QSY
 Save	Tallenna
 Memories	Muistit

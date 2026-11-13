@@ -28,6 +28,7 @@ namespace SDRLink
         L.ctxs.push(ctx);
         if (L.tapOn) tap(ctx);
         if (L.notchOn) notch(ctx, true);
+        watch(ctx);
       }
       return ctx.__sdrlinkIn;
     };
@@ -175,7 +176,60 @@ namespace SDRLink
       L.tapOn = !!on;
       if (on) for (var i = 0; i < L.ctxs.length; i++) tap(L.ctxs[i]);
     };
+
+    // Surveillance du son (Réinit Auto WebSDR, comme PhoneSDRLink) : un analyseur sur l'entrée commune (avant volume,
+    // Mute WebSDR et notch) regarde chaque seconde si la page produit du son ; L.lastSound = dernier instant avec du son.
+    // Une page dont le son n'a jamais démarré n'est pas en panne ; un son qui a tourné puis dont le contexte audio est
+    // suspendu ou fermé (arrêt par le serveur, « session timed out ») compte comme un son perdu.
+    L.lastSound = Date.now();
+    var watch = function (ctx) {
+      if (ctx.__sdrlinkWatch || !ctx.createAnalyser) return;
+      var a = ctx.__sdrlinkWatch = ctx.createAnalyser();
+      a.fftSize = 2048;
+      origConnect.call(ctx.__sdrlinkIn, a);
+      a.buf = new Float32Array(a.fftSize);
+    };
+    setInterval(function () {
+      var running = false, now = Date.now();
+      for (var i = 0; i < L.ctxs.length; i++) {
+        var c = L.ctxs[i], a = c.__sdrlinkWatch;
+        if (!a || c.state !== 'running') continue;
+        running = true;
+        L.everRan = true;
+        try {
+          a.getFloatTimeDomainData(a.buf);
+          for (var k = 0; k < a.buf.length; k++) if (Math.abs(a.buf[k]) > 0.00005) { L.lastSound = now; L.heard = true; break; }
+        } catch (e) { }
+      }
+      if (!running && !L.everRan) L.lastSound = now;
+    }, 1000);
   }
+  // Durée (ms) sans son ; -2 si le volume de la page est à zéro ou son bouton « mute » enfoncé (choix de l'opérateur) ;
+  // -1 si rien à surveiller (pas de son dans la page).
+  L.silentMs = function () {
+    if (!L.ctxs.length) return -1;
+    try {
+      var k = detect(), el = null;
+      if (k === 'websdr') el = document.getElementById('volumecontrol2');
+      else if (k === 'owrx' || k === 'owrx+') el = document.getElementById('openwebrx-panel-volume');
+      else if (k === 'kiwi') el = document.querySelector('input.id-input-volume');
+      else if (k === 'phantom') {
+        var s = document.querySelectorAll('input.glass-slider');
+        for (var j = 0; j < s.length; j++) if (s[j].min === '0' && s[j].max === '100') { el = s[j]; break; }
+      }
+      if (el && parseFloat(el.value) <= parseFloat(el.min || 0)) { L.lastSound = Date.now(); return -2; }
+      // KiwiSDR : mute signalé par l'icône « id-mute-yes » affichée (sans w3-hide) ; variable globale muted si présente.
+      if (k === 'kiwi' && window.muted === true) { L.lastSound = Date.now(); return -2; }
+      var y = document.querySelectorAll('[class*=mute-yes i]');
+      for (var n = 0; n < y.length; n++) if (!/(^|\s)w3-hide(\s|$)/.test(String(y[n].className))) { L.lastSound = Date.now(); return -2; }
+      var m = document.querySelectorAll('[id*=mute i],[class*=mute i],[name*=mute i],[aria-label*=mute i],[title*=mute i]');
+      for (var i = 0; i < m.length; i++) {
+        var e2 = m[i], cls = String(e2.className && e2.className.baseVal !== undefined ? e2.className.baseVal : e2.className);
+        if (e2.checked === true || e2.getAttribute('aria-pressed') === 'true' || /(^|[\s_-])(muted|active|on|pressed|selected|checked)([\s_-]|$)/i.test(cls)) { L.lastSound = Date.now(); return -2; }
+      }
+    } catch (e) { }
+    return Date.now() - L.lastSound;
+  };
   // v : 0 à 1. Agit aussi sur les éléments <audio>/<video> éventuels.
   L.setVolume = function (v) {
     L.volume = v;

@@ -227,7 +227,7 @@ Reset the program…	Restablecer el programa…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportar o importar todos los ajustes, para la misma configuración en otro ordenador (clic derecho: restablecer el programa, color del botón)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nombre o indicativo dado automáticamente a los WebSDR que lo piden antes del audio (KiwiSDR, websdr.org). Clic: cambiarlo (clic derecho: color del botón)
 Right-click: receivers muted while transmitting	Clic derecho: receptores silenciados al transmitir
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Reinicia el WebSDR actual (por ejemplo, detenido tras un tiempo de inactividad). Clic: reinicio conservando sus ajustes (frecuencia, modo, filtro, zoom, volumen). Clic derecho: restablecimiento total del WebSDR, como en una primera visita
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Reinicia el WebSDR actual (por ejemplo detenido tras un tiempo de inactividad). Clic: reinicio conservando sus ajustes (frecuencia, modo, filtro, zoom, volumen). Clic derecho: reinicio automático cuando se pierde el sonido (Auto) y su retardo, reinicialización total del WebSDR, colores del botón
 Save: no known frequency (rig or WebSDR)	Guardar: ninguna frecuencia conocida (equipo o WebSDR)
 Store the current frequency…	Memorizar la frecuencia actual…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: la voz se decodifica en cuanto se recibe una señal FreeDV (clic: activar / desactivar; clic derecho: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Color al estar desconectado
 Colour when the rig is not answering yet	Color mientras el equipo aún no responde
 Colour when on	Color activado
 Colour when off	Color desactivado
+Colour of "Reset WebSDR" (Auto off)	Color de «Reiniciar WebSDR» (Auto apagado)
+Colour of "Auto Reset WebSDR" (Auto on)	Color de «Reiniciar Auto WebSDR» (Auto encendido)
 Colour when the scan is stopped	Color con el escaneo detenido
 Colour while scanning	Color durante el escaneo
 Colour when receiving	Color en recepción
@@ -288,6 +290,11 @@ Invalid address: 	Dirección no válida:
 No open WebSDR to restart	No hay ningún WebSDR abierto que reiniciar
 WebSDR restarted keeping its settings	WebSDR reiniciado conservando sus ajustes
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR restablecido: cookies y ajustes del sitio borrados, página reabierta como en una primera visita
+Reset WebSDR	Reiniciar WebSDR
+Auto Reset WebSDR	Reiniciar Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: reiniciar el WebSDR cuando se pierde el sonido
+Full reset of the WebSDR (as on a first visit)	Reinicialización total del WebSDR (como en una primera visita)
+Auto Reset WebSDR off	Reiniciar Auto WebSDR desactivado
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Cable SDRLINK: no se encontró ningún cable de audio virtual. Instale VB-CABLE (gratuito): botón «Cable SDRLINK».
 Output receiving the WebSDR audio:	Salida que recibe el audio del WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Llamar «SDRLINK» al otro extremo del cable (elija antes un cable virtual)
@@ -328,9 +335,6 @@ Scan stopped	Exploración detenida
 ■ Stop scan	■ Detener la exploración
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Tarjeta de sonido del equipo, grabada cuando Mute WebSDR, Mute ExpertSDR y Mute HDSDR están activos:
 None (always the speakers)	Ninguna (siempre los altavoces)
-REC button width	Ancho del botón REC
-Narrow	Estrecho
-Wide	Ancho
 REC button colour	Color del botón REC
 Navy blue (default)	Azul marino (predeterminado)
 Navy blue	Azul marino
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Eliminar «{0}» de la lista
 Remove all ({0} values)	Eliminar todo ({0} valores)
 Remove all {0} frequencies from the list?	¿Eliminar las {0} frecuencias de la lista?
+No sound for {0} s: WebSDR restarted automatically	Sin sonido desde hace {0} s: WebSDR reiniciado automáticamente
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Sin sonido desde hace {0} s: WebSDR reiniciado automáticamente (3.er intento, el último mientras el sonido no vuelva)
+Time without sound before the restart: {0} s	Tiempo sin sonido antes del reinicio: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Reiniciar Auto WebSDR: el WebSDR se reiniciará tras {0} s sin sonido (3 intentos seguidos como máximo)
+Auto Reset WebSDR: time without sound {0} s	Reiniciar Auto WebSDR: tiempo sin sonido {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	«{0}» no parece un cable virtual: el audio del WebSDR se reproducirá ahí todo el tiempo (y se transmitirá, si es la tarjeta de sonido de transmisión de un equipo).\n\n¿Usar esta salida de todos modos?
 Name the other end of the cable "SDRLINK" ("{0}")…	Llamar «SDRLINK» al otro extremo del cable («{0}»)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Este cable ya se renombró como «{0}»: puede que ya lo use otro programa (VoiceMeeter…). Renombrarlo como «{1}» obligará a seleccionarlo de nuevo en ese programa.\n\n¿Continuar?
@@ -469,7 +478,6 @@ Download Hamlib…	Descargar Hamlib…
 SDRLINK cable ▾	Cable SDRLINK ▾
 Scan setup	Configurar exploración
 ▶ Scan	▶ Explorar
-Reset WebSDR	Reiniciar WebSDR
 QSY	QSY
 Save	Guardar
 Memories	Memorias

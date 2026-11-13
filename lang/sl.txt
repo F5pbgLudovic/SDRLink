@@ -227,7 +227,7 @@ Reset the program…	Ponastavi program…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Izvoz ali uvoz vseh nastavitev za enako konfiguracijo na drugem računalniku (desni klik: ponastavi program, barva gumba)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Ime ali klicni znak, ki se samodejno poda sprejemnikom WebSDR, ki ga zahtevajo pred zvokom (KiwiSDR, websdr.org). Klik: sprememba (desni klik: barva gumba)
 Right-click: receivers muted while transmitting	Desni klik: sprejemniki, utišani med oddajanjem
-Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: full reset of the WebSDR, as on a first visit	Znova zažene trenutni WebSDR (na primer ustavljen po času nedejavnosti). Klik: ponovni zagon z ohranjenimi nastavitvami (frekvenca, način, filter, povečava, glasnost). Desni klik: popolna ponastavitev WebSDR, kot ob prvem obisku
+Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Znova zažene trenutni WebSDR (na primer ustavljen po času nedejavnosti). Klik: ponovni zagon z ohranitvijo nastavitev (frekvenca, način, filter, povečava, glasnost). Desni klik: samodejni ponovni zagon ob izgubi zvoka (Auto) in njegova zakasnitev, popolna ponastavitev WebSDR, barve gumba
 Save: no known frequency (rig or WebSDR)	Shrani: frekvenca ni znana (TRX ali WebSDR)
 Store the current frequency…	Shrani trenutno frekvenco…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: govor se dekodira takoj, ko se sprejme signal FreeDV (klik: vklop / izklop; desni klik: RADE V1 / V2)
@@ -237,6 +237,8 @@ Colour when disconnected	Barva ob prekinjeni povezavi
 Colour when the rig is not answering yet	Barva, dokler postaja še ne odgovarja
 Colour when on	Barva ob vklopu
 Colour when off	Barva ob izklopu
+Colour of "Reset WebSDR" (Auto off)	Barva »Ponastavi WebSDR« (Auto izklopljen)
+Colour of "Auto Reset WebSDR" (Auto on)	Barva »Ponastavi Auto WebSDR« (Auto vklopljen)
 Colour when the scan is stopped	Barva ob ustavljenem iskanju
 Colour while scanning	Barva med iskanjem
 Colour when receiving	Barva pri sprejemu
@@ -288,6 +290,11 @@ Invalid address: 	Neveljaven naslov:
 No open WebSDR to restart	Ni odprtega WebSDR za ponovni zagon
 WebSDR restarted keeping its settings	WebSDR znova zagnan z ohranjenimi nastavitvami
 WebSDR reset: site cookies and settings cleared, page reopened as on a first visit	WebSDR ponastavljen: piškotki in nastavitve spletnega mesta izbrisani, stran znova odprta kot ob prvem obisku
+Reset WebSDR	Ponastavi WebSDR
+Auto Reset WebSDR	Ponastavi Auto WebSDR
+Auto: restart the WebSDR when the sound is lost	Auto: znova zaženi WebSDR ob izgubi zvoka
+Full reset of the WebSDR (as on a first visit)	Popolna ponastavitev WebSDR (kot ob prvem obisku)
+Auto Reset WebSDR off	Ponastavi Auto WebSDR izklopljen
 SDRLINK cable: no virtual audio cable found. Install VB-CABLE (free): "SDRLINK cable" button.	Kabel SDRLINK: navideznega zvočnega kabla ni mogoče najti. Namestite VB-CABLE (brezplačno): gumb »Kabel SDRLINK«.
 Output receiving the WebSDR audio:	Izhod, ki prejema zvok WebSDR:
 Name the other end of the cable "SDRLINK" (pick a virtual cable first)	Poimenuj drugi konec kabla »SDRLINK« (najprej izberite navidezni kabel)
@@ -328,9 +335,6 @@ Scan stopped	Iskanje ustavljeno
 ■ Stop scan	■ Ustavi iskanje
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvočna kartica postaje, posneta ko so vklopljeni Mute WebSDR, Mute ExpertSDR in Mute HDSDR:
 None (always the speakers)	Nobena (vedno zvočniki)
-REC button width	Širina gumba REC
-Narrow	Ozko
-Wide	Široko
 REC button colour	Barva gumba REC
 Navy blue (default)	Mornarsko modra (privzeto)
 Navy blue	Mornarsko modra
@@ -389,6 +393,11 @@ Transmission stopped automatically after {0} (safety timeout, right-click PTT to
 Remove "{0}" from the list	Odstrani »{0}« s seznama
 Remove all ({0} values)	Odstrani vse (vrednosti: {0})
 Remove all {0} frequencies from the list?	Odstranim vse frekvence s seznama ({0})?
+No sound for {0} s: WebSDR restarted automatically	Brez zvoka {0} s: WebSDR samodejno znova zagnan
+No sound for {0} s: WebSDR restarted automatically (3rd attempt, the last one until the sound comes back)	Brez zvoka {0} s: WebSDR samodejno znova zagnan (3. poskus, zadnji, dokler se zvok ne vrne)
+Time without sound before the restart: {0} s	Čas brez zvoka pred ponovnim zagonom: {0} s
+Auto Reset WebSDR: the WebSDR will be restarted after {0} s without sound (3 attempts in a row at most)	Ponastavi Auto WebSDR: WebSDR bo znova zagnan po {0} s brez zvoka (največ 3 poskusi zapored)
+Auto Reset WebSDR: time without sound {0} s	Ponastavi Auto WebSDR: čas brez zvoka {0} s
 "{0}" does not look like a virtual cable: the WebSDR audio will be played there all the time (and transmitted, if it is a radio's transmit sound card).\n\nUse this output anyway?	»{0}« ni videti kot navidezni kabel: zvok WebSDR se bo tam ves čas predvajal (in oddajal, če je to oddajna zvočna kartica postaje).\n\nŽelite vseeno uporabiti ta izhod?
 Name the other end of the cable "SDRLINK" ("{0}")…	Poimenuj drugi konec kabla »SDRLINK« (»{0}«)…
 This cable was already renamed "{0}": it may already be used by other software (VoiceMeeter…). Renaming it "{1}" means selecting it again in that software.\n\nContinue?	Ta kabel je že preimenovan v »{0}«: morda ga že uporablja druga programska oprema (VoiceMeeter…). Če ga preimenujete v »{1}«, ga boste morali v tej programski opremi znova izbrati.\n\nŽelite nadaljevati?
@@ -469,7 +478,6 @@ Download Hamlib…	Prenesi Hamlib…
 SDRLINK cable ▾	Kabel SDRLINK ▾
 Scan setup	Nastavitve iskanja
 ▶ Scan	▶ Iskanje
-Reset WebSDR	Ponastavi WebSDR
 QSY	QSY
 Save	Shrani
 Memories	Pomnilniki
