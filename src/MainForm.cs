@@ -37,7 +37,7 @@ namespace SDRLink
         ComboBox cbFavList;
         UrlSuggest urlSuggest;
         Button btnCable;
-        CheckBox chkNotch;
+        CheckButton chkNotch;
         FlowLayoutPanel pnlHamlib;
         CheckBox chkHamlibLaunch;
         CheckButton chkUpdates;
@@ -96,7 +96,7 @@ namespace SDRLink
         bool tapShown;              // recopie du son demandée à la page
         AudioSink cableSink;        // sortie Windows (câble virtuel) recevant le son du WebSDR
         string shownModeFamily;     // mode mis en surbrillance sur les boutons
-        static readonly long[] Steps = { 100, 250, 500, 1000, 2500, 5000, 10000 };
+        static readonly long[] Steps = { 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000 };
         long wheelTarget;           // fréquence poste visée par la molette
         DateTime wheelLast, wheelActiveUntil;
         int wheelRemainder;         // molettes "haute résolution" : fractions de cran accumulées
@@ -182,7 +182,9 @@ namespace SDRLink
                 if (pttView) SetPttView(false);
                 Disconnect();
                 StopRigMonitor();
+                if (probe != null) StopProbe(null, null);
                 StopDecoders();
+                CloseDigiWin();
                 if (cableSink != null) { cableSink.Dispose(); cableSink = null; }
                 // ExpertSDR coupé par SDRLink : son rétabli (Windows garde la coupure d'un logiciel d'une fois sur l'autre).
                 try { if (esdrMutedByUs) SetExpertSdrMute(false); } catch { }
@@ -514,9 +516,18 @@ namespace SDRLink
             row3.Controls.Add(chkMute);
             row3.Controls.Add(Lbl("rétablir après (ms) :", "restore after (ms):"));
             row3.Controls.Add(numUnmute);
-            chkNotch = Check("Notch auto (DNF)", "Auto notch (DNF)");
-            chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; SetPageNotch(); };
-            row3.Controls.Add(chkNotch);
+            // Notch auto (DNF) : case dans le bouton (marche / arrêt) ; clic ailleurs sur le bouton : options et niveau (depuis la 1.38).
+            chkNotch = new CheckButton();
+            chkNotch.Margin = new Padding(8, 3, 3, 3);
+            chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; RefreshNotch(); };
+            chkNotch.Click += delegate { ShowNotchMenu(); };
+            Tr(delegate
+            {
+                chkNotch.Text = Lang.T("Notch auto (DNF)", "Auto notch (DNF)");
+                tips.SetToolTip(chkNotch, Lang.T("Case : notch automatique en marche / arrêté. Clic sur le bouton : coupure en mode numérique et en FreeDV, niveau de 1 à 10 (clic droit : couleur du bouton)",
+                    "Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)"));
+            });
+            row3.Controls.Add(Colorable("Notch", chkNotch));
             // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
             row3.Controls.Add(Colorable("ScanSetup", Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); })));
             btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else ShowScanMenu(); });
@@ -614,8 +625,9 @@ namespace SDRLink
             // Choisir une valeur dans la liste y accorde directement (BeginInvoke : la liste se réorganise après la sélection).
             cbFreq.SelectionChangeCommitted += delegate { BeginInvoke((Action)TuneFromEntry); };
             BuildFreqMenu();
-            cbStep = Combo(70, new[] { "100 Hz", "250 Hz", "500 Hz", "1 kHz", "2,5 kHz", "5 kHz", "10 kHz" },
-                               new[] { "100 Hz", "250 Hz", "500 Hz", "1 kHz", "2.5 kHz", "5 kHz", "10 kHz" });
+            cbStep = Combo(70, new[] { "10 Hz", "25 Hz", "50 Hz", "100 Hz", "250 Hz", "500 Hz", "1 kHz", "2,5 kHz", "5 kHz", "10 kHz" },
+                               new[] { "10 Hz", "25 Hz", "50 Hz", "100 Hz", "250 Hz", "500 Hz", "1 kHz", "2.5 kHz", "5 kHz", "10 kHz" });
+            cbStep.SelectedIndexChanged += delegate { OnStepChosen(); };   // pas retenu pour le mode affiché (depuis la 1.38)
             // Affichage réduit (à partir de la ligne Synchro, page comprise) et mini (de Synchro au volume) : l'un ou l'autre.
             chkReduced = Check("Affichage réduit", "Reduced view");
             chkMini = Check("Affichage mini", "Mini view");
@@ -650,6 +662,7 @@ namespace SDRLink
             rowDisplay.Controls.Add(btnMemRecent);
             rowDisplay.Controls.Add(Lbl("Pas :", "Step:"));
             rowDisplay.Controls.Add(cbStep);
+            CreateBwCombo(rowDisplay);
             // Les cases deux par deux, l'une sous l'autre : elles tiennent dans la hauteur du bouton PTT.
             FlowLayoutPanel views = SubRow();
             views.FlowDirection = FlowDirection.TopDown;
@@ -1146,6 +1159,7 @@ namespace SDRLink
             UpdateCableButton();
             UpdateScanButton();
             UpdateReinitButton();
+            UpdateFindModeButton();
             UpdatePttButton();
             UpdateMuteButtons();
             UpdateFreqColors();
@@ -1343,6 +1357,7 @@ namespace SDRLink
             StyleUpdateLabel();
             UpdateScanButton();
             UpdateReinitButton();
+            UpdateFindModeButton();
         }
 
         // Largeur fixe des fréquences, calculée sur une fréquence HF avec le mode le plus long : les boutons à droite
@@ -1373,6 +1388,7 @@ namespace SDRLink
             UpdateCableButton();
             UpdateScanButton();
             UpdateReinitButton();
+            UpdateFindModeButton();
             if (worker == null) ShowStatus(Lang.T("Déconnecté", "Disconnected"));
             UpdateDisplays();
             // Les textes ont changé de longueur : on recalcule la hauteur de l'affichage mini.
@@ -2428,6 +2444,7 @@ namespace SDRLink
                 ApplyVolume();
                 if (tapShown) SetPageTap(true);
                 SetPageNotch();
+                PushBwLater(3500);   // page chargée : bande passante du mode remise une fois la page en place
             }
             sdrKind = kind;
             sdrF = f;
@@ -2561,6 +2578,7 @@ namespace SDRLink
             {
                 shownModeFamily = active;
                 string activeKey = active.Split('|')[0];
+                OnModeKeyChanged(activeKey);
                 for (int i = 0; i < modeButtons.Length; i++)
                 {
                     bool on = ModeKey(ModeButtonModes[i]) == activeKey;
@@ -3163,12 +3181,6 @@ namespace SDRLink
         }
         string shownCableError;
 
-        // Notch automatique (comme le DNF des Yaesu) : supprime les porteuses et sifflements stables du son du WebSDR.
-        void SetPageNotch()
-        {
-            if (web.CoreWebView2 != null)
-                web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setNotch && window.__sdrlink.setNotch(" + (chkNotch.Checked ? "true" : "false") + ");");
-        }
 
         // ---------------------------------------------------------------- Volume du WebSDR
 
@@ -3280,6 +3292,7 @@ namespace SDRLink
         // Les deux décodeurs écoutent la même réception (une seule capture).
         void UpdateFreeDv()
         {
+            RefreshNotch();   // FreeDV ou décodeur mis en marche / arrêté : notch coupé ou remis selon ses options
             if (!settings.FreeDvAuto) StopFreeDvEngine();
             else
             {
@@ -3371,7 +3384,7 @@ namespace SDRLink
             Log.Write(DecodersName + " : décodage de " + (src < 0 ? "aucune réception (toutes coupées)" : FreeDvSourceName(src)));
         }
 
-        bool DecodingOn { get { return freedv != null || DigiRunning; } }
+        bool DecodingOn { get { return freedv != null || DigiRunning || probe != null; } }
 
         string DecodersName { get { string d = digiRun != null ? DigiName(digiRun) : DigiName(CurDigiMode); return freedv != null && DigiRunning ? "FreeDV / " + d : DigiRunning ? d : "FreeDV"; } }
 
@@ -3381,6 +3394,8 @@ namespace SDRLink
             FreeDvEngine fe = freedv;
             if (fe != null) fe.Feed(rate, x, n);
             DigiFeed(rate, x, n);
+            ModeProbe pr = probe;
+            if (pr != null) pr.Feed(rate, x, n);
         }
 
         // Programme le plus ancien du groupe (le principal ; ses sous-processus sont capturés avec lui).
@@ -4241,7 +4256,8 @@ namespace SDRLink
         // Fréquence (poste et WebSDR) et mode de la mémoire, sans la noter (sert aussi au scan).
         void ApplyMemory(Memory m)
         {
-            TuneBoth(m.Hz);
+            // Mode d'abord, fréquence ensuite : websdr.org décale la fréquence de 750 Hz en passant d'USB à CW (corrigé dans la 1.38 ;
+            // une mémoire CW rappelée depuis USB tombait 750 Hz à côté).
             if (m.Mode != "")
             {
                 if (ModeKey(m.Mode) == "digi") digiMode = m.Mode;
@@ -4253,6 +4269,7 @@ namespace SDRLink
                 shownModeFamily = null;
                 UpdateDisplays();
             }
+            TuneBoth(m.Hz);
         }
 
         // ---------------------------------------------------------------- Scan

@@ -34,9 +34,13 @@ namespace SDRLink
     };
 
     // Notch automatique (comme le DNF des Yaesu) : un analyseur repère les raies stables (porteuses, sifflements)
-    // et jusqu'à 4 filtres coupe-bande étroits les suivent. Le chant et la parole bougent trop pour être retenus.
+    // et de 4 à 8 filtres coupe-bande étroits (selon le niveau) les suivent. Le chant et la parole bougent trop pour être retenus.
     // Seul le haut-parleur est filtré : le câble SDRLINK reçoit le son brut, pour les logiciels de décodage.
-    var NOTCHES = 4, HOLD = 6, RELEASE = 10, ABOVE = 18;
+    // Niveaux 1 à 10 (repris de PhoneSDRLink) : nombre de filtres actifs, seuil au-dessus du bruit (dB), présence demandée
+    // (analyses de 100 ms) et largeur de chaque coupure (Hz). Niveau 1 = le notch des versions d'avant.
+    var NOTCHES = 8, RELEASE = 10;
+    var NL_COUNT = [4, 4, 5, 5, 6, 6, 7, 7, 8, 8], NL_ABOVE = [18, 16, 14, 12, 10, 9, 8, 7, 6, 5], NL_HOLD = [6, 6, 5, 5, 4, 4, 3, 3, 3, 2], NL_WIDTH = [40, 48, 56, 64, 72, 80, 90, 100, 110, 120];
+    var nAct = 4, HOLD = 6, ABOVE = 18, nWidth = 40;
     var notch = function (ctx, on) {
       var n = ctx.__sdrlinkNotch, input = ctx.__sdrlinkIn, out = ctx.__sdrlinkOut;
       if (!input || !ctx.createBiquadFilter || !ctx.createAnalyser) return;
@@ -97,7 +101,7 @@ namespace SDRLink
       n.cnt = cnt;
       peaks.sort(function (a, b) { return n.avg[b] - n.avg[a]; });
       var used = [];
-      for (var s = 0; s < NOTCHES; s++) {
+      for (var s = 0; s < nAct; s++) {
         var sl = n.slots[s];
         if (sl.bin < 0) continue;
         var best = -1;
@@ -109,7 +113,7 @@ namespace SDRLink
       }
       for (var q = 0; q < peaks.length; q++) {
         if (used.indexOf(peaks[q]) >= 0) continue;
-        for (var t = 0; t < NOTCHES; t++) {
+        for (var t = 0; t < nAct; t++) {
           if (n.slots[t].bin >= 0) continue;
           used.push(peaks[q]);
           place(ctx, n, t, peaks[q], hz);
@@ -124,11 +128,16 @@ namespace SDRLink
       n.slots[s].bin = bin;
       n.slots[s].miss = 0;
       n.f[s].frequency.setTargetAtTime(f, ctx.currentTime, n.slots[s].placed ? 0.05 : 0.005);
-      n.f[s].Q.value = Math.max(5, f / 40);
+      n.f[s].Q.value = Math.max(5, f / nWidth);
       n.slots[s].placed = true;
     };
     L.notchOn = false;
-    L.setNotch = function (on) {
+    L.setNotch = function (on, lvl) {
+      lvl = Math.max(0, Math.min(9, (lvl || 1) - 1));
+      var old = nAct;
+      nAct = NL_COUNT[lvl]; ABOVE = NL_ABOVE[lvl]; HOLD = NL_HOLD[lvl]; nWidth = NL_WIDTH[lvl];
+      L.notchLevel = lvl + 1;
+      if (nAct < old) for (var c = 0; c < L.ctxs.length; c++) { var nn = L.ctxs[c].__sdrlinkNotch; if (nn) for (var j = nAct; j < NOTCHES; j++) release(L.ctxs[c], nn, j); }
       L.notchOn = !!on;
       for (var i = 0; i < L.ctxs.length; i++) notch(L.ctxs[i], L.notchOn);
     };
@@ -401,7 +410,49 @@ namespace SDRLink
         owrxTune(k, hz, mode);
       }
     } catch (e) { }
+    if (L.bw && mode) setTimeout(L.applyBw, 500);   // un changement de mode rend à la page son filtre d'origine
     L.poll();
+  };
+
+  // Bande passante de réception (Hz), reprise de PhoneSDRLink. BLU : bord à 300 Hz de la porteuse, du côté du mode ;
+  // AM, FM, CW : centrée sur le centre actuel du filtre. L.bw = 0 : filtre d'origine de la page (non modifié).
+  L.bw = 0;
+  L.setBw = function (bw) { L.bw = bw > 0 ? Math.round(bw) : 0; if (L.bw) L.applyBw(); };
+  // Retour au filtre d'origine de la page (choix « Filtre d'origine ») : filtre par défaut du mode pour KiwiSDR et
+  // websdr.org (le mode remis à l'identique n'y change rien), le mode réappliqué pour les autres.
+  L.resetBw = function () {
+    L.bw = 0;
+    var k = detect(), s = L.get();
+    try {
+      if (k === 'kiwi' && typeof window.kiwi_passbands === 'function') { var pb = kiwi_passbands(ext_get_mode()); if (pb) { ext_set_passband(pb.lo, pb.hi); return; } }
+      if (k === 'websdr' && typeof window.set_mode === 'function') { set_mode(String(window.mode)); return; }
+    } catch (e) { }
+    if (s && s.m) L.set(0, String(s.m).toLowerCase());
+  };
+  L.applyBw = function () {
+    var bw = L.bw, k = detect(), s = bw ? L.get() : null;
+    if (!bw || !k || !s) return;
+    var m = String(s.m || '').toLowerCase(), side = m === 'lsb' ? -1 : m === 'usb' ? 1 : 0, E = 300, cur = null, p;
+    try {
+      if (k === 'websdr') cur = [window.lo * 1000, window.hi * 1000];
+      else if (k === 'kiwi') { var kp = ext_get_passband(); cur = [kp.low, kp.high]; }
+      else if (k === 'owrx+' || k === 'owrx') { var bp = (k === 'owrx+' ? UI.getDemodulator() : owrxDemod()).getBandpass(); cur = [bp.low_cut, bp.high_cut]; }
+      else if (k === 'ubersdr') { var ut = uberTuning(); if (ut && ut.bandwidthLow != null) cur = [ut.bandwidthLow, ut.bandwidthHigh]; }
+    } catch (e) { }
+    var centre = cur && isFinite(cur[0]) && isFinite(cur[1]) ? (cur[0] + cur[1]) / 2 : 0;
+    p = side > 0 ? [E, E + bw] : side < 0 ? [-E - bw, -E] : [centre - bw / 2, centre + bw / 2];
+    try {
+      if (k === 'websdr') { window.lo = p[0] / 1000; window.hi = p[1] / 1000; updbw(); }
+      else if (k === 'kiwi') ext_set_passband(Math.round(p[0]), Math.round(p[1]));
+      else if (k === 'owrx+' || k === 'owrx') (k === 'owrx+' ? UI.getDemodulator() : owrxDemod()).setBandpass({ low_cut: Math.round(p[0]), high_cut: Math.round(p[1]) });
+      else if (k === 'ubersdr') UberSDR.command('passband', { low: Math.round(p[0]), high: Math.round(p[1]) }).catch(function () { });
+      else if (k === 'phantom') {
+        // Largeur en points du spectre ; la page décale les trois valeurs de réserve de 200/750/200 Hz.
+        var a = spectrumAudio, r = a.getAudioRange(), bin = a.totalBandwidth / a.audioMaxSize, n = bw / bin, l2, r2, mm = r[1];
+        if (m === 'lsb') { l2 = mm - n; r2 = mm; } else if (m === 'usb') { l2 = mm; r2 = mm + n; } else { var c = (r[0] + r[2]) / 2; l2 = c - n / 2; r2 = c + n / 2; }
+        a.setAudioRange(l2, mm, r2, l2 - 200 / bin, mm - 750 / bin, r2 - 200 / bin);
+      }
+    } catch (e) { }
   };
 
   // Bordeaux : rappel du mode à côté du S-mètre, tenu à jour seulement par ses boutons de mode (ni par ses boutons

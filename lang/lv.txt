@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: iestatījumi noraidīti
 listening at %d Hz	klausās uz %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sinhronizēts, S/N %.0f dB, novirze %+.0f Hz, centrs %d Hz
 searching for a signal… (centre %d Hz)	meklē signālu… (centrs %d Hz)
+VIS header received	Saņemta VIS galvene
+start tone received	Saņemts sākuma tonis
+{0} message(s)	Ziņojumi: {0}
 listening at {0:F0} Hz	klausās uz {0:F0} Hz
 signal at {0:F0} Hz	signāls uz {0:F0} Hz
 reversed	Apgriezta
@@ -227,6 +230,8 @@ Reset the program…	Atiestatīt programmu…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportēt vai importēt visus iestatījumus tai pašai konfigurācijai citā datorā (labais klikšķis: atiestatīt programmu, pogas krāsa)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Vārds vai izsaukuma signāls, ko automātiski nodod WebSDR, kas to prasa pirms skaņas (KiwiSDR, websdr.org). Klikšķis: mainīt (labais klikšķis: pogas krāsa)
 Right-click: receivers muted while transmitting	Labais klikšķis: uztvērēji, kas raidīšanas laikā tiek klusināti
+Auto notch (DNF)	Autom. notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Izvēles rūtiņa: automātiskais notch iesl. / izsl. Klikšķis uz pogas: izslēgts digitālajos darba veidos un FreeDV, līmenis no 1 līdz 10 (labais klikšķis: pogas krāsa)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Restartē pašreizējo WebSDR (piemēram, apturētu pēc dīkstāves laika). Klikšķis: restartēt, saglabājot iestatījumus (frekvence, režīms, filtrs, tālummaiņa, skaļums). Labais klikšķis: automātiska restartēšana, kad zūd skaņa (Auto), un tās aizture, pilnīga WebSDR atiestatīšana, pogas krāsas
 Save: no known frequency (rig or WebSDR)	Saglabāt: nav zināmas frekvences (raiduztvērējs vai WebSDR)
 Store the current frequency…	Saglabāt pašreizējo frekvenci…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Palaist rigctld:
 Sync mode	Sinhronizēt režīmu
 Mute WebSDR while transmitting	Klusināt WebSDR raidīšanas laikā
-Auto notch (DNF)	Autom. notch (DNF)
 Reduced view	Samazināts skats
 Mini view	Mini skats
 Always on top	Vienmēr virspusē
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT pogas
 Both ways	Abos virzienos
 Rig → WebSDR	TRX → WebSDR
 WebSDR → Rig	WebSDR → TRX
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → TRX
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitālie režīmi: dekodēšana tiek rādīta logā virs lapas (klikšķis: ieslēgt / izslēgt; labais klikšķis: režīma izvēle, labais klikšķis uz režīma: tā iestatījumi)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Ilga nospiešana un vilkšana: pārvietot logu; velkot malu vai stūri: mainīt izmēru (labais klikšķis: režīmi un iestatījumi)
 Reset the windows	Atiestatīt logus
+Separate window (can go on another screen)	Atsevišķs logs (var pārvietot uz citu ekrānu)
+Full screen (F11 or double-click; Esc to leave)	Pilnekrāns (F11 vai dubultklikšķis; iziešana ar Esc)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Izvēloties darba veidu: pāriet uz tā tuvāko frekvenci (Atmiņas > Digitālie darba veidi)
 image complete	attēls pabeigts
 signal lost	signāls zaudēts
 Nothing to save	Nav ko saglabāt
 Hell: could not save	Hell: saglabāt neizdevās
+Digital modes: separate window, to place wherever you want (even on another screen)	Digitālie darba veidi: atsevišķs logs, ko novietot, kur vēlaties (pat citā ekrānā)
+Digital modes: window back on the page	Digitālie darba veidi: logs atpakaļ lapā
 {0}: decoding on	{0}: dekodēšana ieslēgta
 {0}: decoding off	{0}: dekodēšana izslēgta
 {0} settings	{0} iestatījumi
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nevar sazināt
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klikšķis: frekvences tastatūra un pēdējo frekvenču saraksts Mem; ritenītis: mainīt frekvenci (labais klikšķis: krāsas)
 No frequency to store (no rig, no WebSDR).	Nav frekvences, ko saglabāt (nav ne raidītāja, ne WebSDR).
 Stored: {0} kHz	Saglabāts: {0} kHz
+Auto notch off in digital modes	Autom. notch izslēgts digitālajos darba veidos
+Auto notch off in FreeDV V1 and V2	Autom. notch izslēgts FreeDV V1 un V2
+Notch level:	Notch līmenis:
+1 (original setting)	1 (sākotnējais iestatījums)
+10 (strongest)	10 (spēcīgākais)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automātiskais notch atklāj pastāvīgus svilpienus (nesējus) WebSDR skaņā un tos vājina. Rūtiņa uz pogas to ieslēdz vai izslēdz. Līmenis, no 1 (sākotnējais iestatījums) līdz 10, palielina apstrādāto svilpienu skaitu (no 4 līdz 8) un darbības stiprumu; augsts līmenis var ietekmēt arī balsi, kas tur noti. Tas tiek izslēgts, nenoņemot atzīmi, digitālā darba veida laikā (darbojas dekoders vai DIGI režīms) un FreeDV laikā, ja augstāk esošās izvēles ir atzīmētas: tas bojātu dekodējamos signālus. SDRLINK kabelis un dekoderi vienmēr saņem skaņu bez notch.
+, off in digital modes	, izslēgts digitālajos darba veidos
+, off in FreeDV	, izslēgts FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR uztveršanas joslas platums, saglabāts katram darba veidam (CW, USB/LSB, AM, FM, DIGI), katrā WebSDR un pēc restartēšanas. „Noklusējuma filtrs”: paša WebSDR filtrs.
+Default filter	Noklusējuma filtrs
+Other…	Cits…
+Bandwidth	Joslas platums
+Invalid bandwidth (0.1 to 15 kHz)	Nederīgs joslas platums (no 0,1 līdz 15 kHz)
+Mode?	Veids?
+Mode search: no WebSDR or rig to listen to	Darba veida meklēšana: nav WebSDR vai stacijas, ko klausīties
+Mode search stopped	Darba veida meklēšana apturēta
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Darba veida meklēšana: neviens darba veids nav atpazīts (pārāk vājš signāls, neatbalstīts darba veids vai WSPR / JT9 / Hell, kas ir pārāk lēni atpazīšanai)
+Auto notch: level {0}{1}{2}	Autom. notch: līmenis {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Joslas platums kHz darba veidam {0} (no 0,1 līdz 15):
+{0} bandwidth: WebSDR default filter	{0} joslas platums: WebSDR noklusējuma filtrs
+{0} bandwidth: {1}	{0} joslas platums: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Dzirdamā digitālā darba veida meklēšana: ne ilgāk kā {0} s skaņa tiek izmēģināta ar FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW un Olivia; atpazītais darba veids tiek izvēlēts un sākta tā dekodēšana (nemainot frekvenci). Vēlreiz noklikšķiniet: apturēt meklēšanu
+Searching… {0} s	Meklē… {0} s
+Searching for the mode being heard ({0} s at most)…	Meklē dzirdamo darba veidu (ne ilgāk kā {0} s)…
+Mode found: {0} ({1})	Atrasts darba veids: {0} ({1})
+BW:	JP:
 Mode:	Režīms:
 (mode unchanged)	(režīms nemainīts)
 Edit…	Rediģēt…

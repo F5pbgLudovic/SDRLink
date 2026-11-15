@@ -72,11 +72,14 @@ namespace SDRLink
                     "Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)"));
             });
             row.Controls.Add(btnSstv);
+            CreateFindModeButton(row);
         }
 
         void CreateDigiView(Control host)
         {
             sstvView = new SstvView();
+            digiHost = host;
+            sstvView.DoubleClick += delegate { if (sstvView.Detached) SetDigiFull(!settings.DigiFull); };
             sstvView.Tag = Theme.Custom;
             sstvView.Visible = false;
             LoadDigiWindow(CurDigiMode);
@@ -109,16 +112,18 @@ namespace SDRLink
 
         // Choix d'un mode dans le menu : il remplace le précédent et le décodage se met en marche ; avec le clic droit, ses réglages
         // s'ouvrent (seulement eux si c'était déjà le mode choisi).
-        void SelectDigiMode(string mode, bool openSettings)
+        void SelectDigiMode(string mode, bool openSettings, bool noQsy = false)
         {
             bool same = mode == CurDigiMode;
             if (openSettings && same) { OpenDigiSettings(mode); return; }
+            bool qsy = !noQsy && settings.DigiAutoQsy && (!same || !settings.SstvAuto);
             if (!same)
             {
                 StopDigiEngine();
                 settings.DigiMode = mode;
                 settings.Save();
             }
+            if (qsy) QsyToDigi(mode);
             if (!settings.SstvAuto) SetSstv(true);
             else { UpdateFreeDv(); ShowStatus(Lang.F("{0} : décodage en marche", "{0}: decoding on", DigiName(mode))); }
             UpdateSstvButton();
@@ -154,7 +159,7 @@ namespace SDRLink
                 case "faxStart": { FaxEngine fx = digi as FaxEngine; if (fx != null) fx.StartReq++; } break;
                 case "faxStop": { FaxEngine fx = digi as FaxEngine; if (fx != null) fx.StopReq++; } break;
                 case "restart": if (digi != null) { StopDigiEngine(); UpdateFreeDv(); } break;
-                case "rename": UpdateSstvButton(); if (sstvView != null && digi != null) sstvView.Caption = DigiName(CurDigiMode); break;
+                case "rename": UpdateSstvButton(); if (sstvView != null && digi != null) sstvView.Caption = DigiName(CurDigiMode); UpdateDigiWinTitle(); break;
             }
         }
 
@@ -207,6 +212,19 @@ namespace SDRLink
             m.Items.Add(Lang.T("Ouvrir le dossier des images", "Open the image folder"), null, delegate { OpenSstvFolder(); });
             m.Items.Add(Lang.F("Réinitialiser la fenêtre {0}", "Reset the {0} window", DigiName(ViewMode)), null, delegate { ResetDigiWindow(); });
             m.Items.Add(Lang.T("Réinitialiser les fenêtres", "Reset the windows"), null, delegate { ResetDigiWindows(); });
+            m.Items.Add(new ToolStripSeparator());
+            ToolStripMenuItem sep = new ToolStripMenuItem(Lang.T("Fenêtre séparée (déplaçable sur un autre écran)", "Separate window (can go on another screen)"));
+            sep.Checked = settings.DigiDetached;
+            sep.Click += delegate { BeginInvokeSafe(delegate { SetDigiDetached(!settings.DigiDetached); }); };
+            m.Items.Add(sep);
+            ToolStripMenuItem full = new ToolStripMenuItem(Lang.T("Plein écran (F11 ou double-clic ; Échap pour sortir)", "Full screen (F11 or double-click; Esc to leave)"));
+            full.Checked = settings.DigiDetached && settings.DigiFull;
+            full.Click += delegate { BeginInvokeSafe(delegate { SetDigiFull(!(settings.DigiDetached && settings.DigiFull)); }); };
+            m.Items.Add(full);
+            ToolStripMenuItem aq = new ToolStripMenuItem(Lang.T("Choix d'un mode : aller sur sa fréquence la plus proche (Mémoires > Modes numériques)", "Choosing a mode: go to its nearest frequency (Memories > Digital modes)"));
+            aq.Checked = settings.DigiAutoQsy;
+            aq.Click += delegate { settings.DigiAutoQsy = !settings.DigiAutoQsy; settings.Save(); Log.Write("Modes numériques : accord automatique " + (settings.DigiAutoQsy ? "en marche" : "arrêté")); };
+            m.Items.Add(aq);
         }
 
         // ---- marche / arrêt (appelé par UpdateFreeDv)
@@ -253,9 +271,7 @@ namespace SDRLink
                 ApplyDigiSettings();
             }
             ApplyDigiSettings();
-            sstvView.Visible = true;
-            sstvView.Place();
-            sstvView.BringToFront();
+            ShowDigiView(true);
             Log.Write(DigiName(mode) + " : décodage démarré");
         }
 
@@ -281,7 +297,7 @@ namespace SDRLink
 
         void StopDigiEngine()
         {
-            if (sstvView != null) sstvView.Visible = false;
+            ShowDigiView(false);
             if (!DigiRunning) return;
             string n = DigiName(digiRun ?? CurDigiMode);
             if (sstv != null)
@@ -583,6 +599,7 @@ namespace SDRLink
         // « Réinitialiser les fenêtres » : toutes les fenêtres des modes reprennent leur place (en bas à gauche) et leur taille d'origine.
         void ResetDigiWindows()
         {
+            ResetDigiWinPlace();
             foreach (string mode in DigiModes)
                 foreach (string k in new string[] { "winX.", "winY.", "winW.", "winH." }) settings.Digi.Remove(k + mode);
             settings.SstvX = 0; settings.SstvY = 1000;
@@ -594,6 +611,7 @@ namespace SDRLink
         // « Réinitialiser la fenêtre <mode> » : seule la fenêtre du mode affiché reprend sa place et sa taille d'origine.
         void ResetDigiWindow()
         {
+            ResetDigiWinPlace();
             string mode = ViewMode;
             foreach (string k in new string[] { "winX.", "winY.", "winW.", "winH." }) settings.Digi.Remove(k + mode);
             if (mode == "SSTV") { settings.SstvX = 0; settings.SstvY = 1000; }
@@ -614,6 +632,199 @@ namespace SDRLink
             }
             if (mode == "SSTV") { settings.SstvX = settings.DigiGet("winX.SSTV", 0); settings.SstvY = settings.DigiGet("winY.SSTV", 1000); }
             settings.Save();
+        }
+
+        // ---- Accord automatique (depuis la 1.38) : choisir un mode numérique accorde sur sa fréquence d'usage la plus proche
+        // (liste « Modes numériques » des mémoires, région IARU choisie), avec le mode du récepteur, selon le sens de synchro.
+        void QsyToDigi(string mode)
+        {
+            long cur = CurrentFreq();
+            if (cur <= 0) return;   // ni poste ni WebSDR : rien à accorder
+            List<Memory> l = DigitalFreqs.List(mode, settings.IaruRegion, DigiName(mode));
+            if (l.Count == 0) return;
+            Memory best = l[0];
+            foreach (Memory m in l) if (Math.Abs(m.Hz - cur) < Math.Abs(best.Hz - cur)) best = m;
+            if (Math.Abs(best.Hz - cur) < 50) return;   // déjà dessus
+            Log.Write("Modes numériques : accord automatique sur " + best.Label);
+            TuneMemory(best);
+        }
+
+        // ---- Fenêtre séparée et plein écran (depuis la 1.38) : la fenêtre des modes numériques peut quitter la page pour
+        // une fenêtre à elle, que l'on place où l'on veut (second écran), et passer en plein écran sur l'écran où elle est.
+
+        Control digiHost;   // place de la vue sur la page (panneau du WebView2)
+        Form digiWin;       // fenêtre séparée (créée à la demande)
+        bool digiWinClosing;
+
+        void ShowDigiView(bool on)
+        {
+            if (sstvView == null) return;
+            if (!on)
+            {
+                sstvView.Visible = false;
+                if (digiWin != null && digiWin.Visible) digiWin.Hide();
+                return;
+            }
+            if (settings.DigiDetached) AttachToWin(); else AttachToPage();
+            sstvView.Visible = true;
+            if (settings.DigiDetached)
+            {
+                UpdateDigiWinTitle();
+                if (!digiWin.Visible) digiWin.Show();
+                ApplyDigiFull();
+            }
+            else
+            {
+                sstvView.Place();
+                sstvView.BringToFront();
+            }
+        }
+
+        void AttachToPage()
+        {
+            if (sstvView.Parent == digiHost) return;
+            sstvView.Detached = false;
+            sstvView.Dock = DockStyle.None;
+            digiHost.Controls.Add(sstvView);
+            sstvView.BringToFront();
+            LoadDigiWindow(ViewMode);
+            sstvView.Place();
+        }
+
+        void AttachToWin()
+        {
+            EnsureDigiWin();
+            if (sstvView.Parent == digiWin) return;
+            sstvView.Detached = true;
+            digiWin.Controls.Add(sstvView);
+            sstvView.Dock = DockStyle.Fill;
+        }
+
+        void EnsureDigiWin()
+        {
+            if (digiWin != null && !digiWin.IsDisposed) return;
+            Form f = new Form();
+            f.StartPosition = FormStartPosition.Manual;
+            f.ShowInTaskbar = true;
+            f.Icon = Icon;
+            f.KeyPreview = true;
+            f.BackColor = Color.FromArgb(24, 24, 24);
+            f.MinimumSize = new Size(240, 160);
+            Rectangle r = settings.DigiWin;
+            bool seen = false;
+            if (r.Width >= 200 && r.Height >= 120)
+                foreach (Screen s in Screen.AllScreens) if (s.WorkingArea.IntersectsWith(r)) { seen = true; break; }
+            if (!workAreaOverride.IsEmpty && workAreaOverride.IntersectsWith(r)) seen = true;
+            if (!seen)
+            {   // première fois (ou écran débranché) : à côté de la fenêtre de SDRLink, dans l'écran de celle-ci
+                Rectangle wa = WorkArea;
+                int w = Math.Min(900, wa.Width), h = Math.Min(560, wa.Height);
+                r = new Rectangle(Math.Max(wa.Left, Math.Min(wa.Right - w, Left + 60)), Math.Max(wa.Top, Math.Min(wa.Bottom - h, Top + 60)), w, h);
+            }
+            f.Bounds = r;
+            f.KeyDown += delegate(object s, KeyEventArgs e)
+            {
+                if (e.KeyCode == Keys.F11) { SetDigiFull(!settings.DigiFull); e.Handled = true; }
+                else if (e.KeyCode == Keys.Escape && settings.DigiFull) { SetDigiFull(false); e.Handled = true; }
+            };
+            f.ResizeEnd += delegate { KeepDigiWinBounds(); };
+            f.Move += delegate { if (!f.Capture) KeepDigiWinBounds(); };
+            // Fermer la fenêtre séparée : la fenêtre des modes revient sur la page (le décodage continue).
+            f.FormClosing += delegate(object s, FormClosingEventArgs e)
+            {
+                if (digiWinClosing || e.CloseReason != CloseReason.UserClosing) return;
+                e.Cancel = true;
+                BeginInvokeSafe(delegate { SetDigiDetached(false); });
+            };
+            Theme.TitleBar(f);
+            digiWin = f;
+        }
+
+        // Place de la fenêtre séparée retenue (seulement hors plein écran).
+        void KeepDigiWinBounds()
+        {
+            if (digiWin == null || settings.DigiFull || digiWin.WindowState != FormWindowState.Normal || !digiWin.Visible) return;
+            if (settings.DigiWin == digiWin.Bounds) return;
+            settings.DigiWin = digiWin.Bounds;
+            settings.Save();
+        }
+
+        void UpdateDigiWinTitle()
+        {
+            if (digiWin != null && !digiWin.IsDisposed) digiWin.Text = "SDRLink — " + DigiName(ViewMode);
+        }
+
+        void SetDigiDetached(bool on)
+        {
+            if (!on && settings.DigiFull) { settings.DigiFull = false; ApplyDigiFull(); }
+            settings.DigiDetached = on;
+            settings.Save();
+            Log.Write("Modes numériques : fenêtre " + (on ? "séparée" : "sur la page"));
+            if (on)
+            {
+                AttachToWin();
+                if (sstvView.Visible || DigiRunning) ShowDigiView(true);
+                ShowStatus(Lang.T("Modes numériques : fenêtre séparée, à placer où vous voulez (même sur un autre écran)", "Digital modes: separate window, to place wherever you want (even on another screen)"));
+            }
+            else
+            {
+                bool shown = sstvView.Visible;
+                AttachToPage();
+                if (digiWin != null && digiWin.Visible) digiWin.Hide();
+                sstvView.Visible = shown || DigiRunning;
+                ShowStatus(Lang.T("Modes numériques : fenêtre remise sur la page", "Digital modes: window back on the page"));
+            }
+        }
+
+        void SetDigiFull(bool on)
+        {
+            if (on && !settings.DigiDetached) SetDigiDetached(true);
+            if (on == settings.DigiFull) { ApplyDigiFull(); return; }
+            if (on) KeepDigiWinBounds();
+            settings.DigiFull = on;
+            settings.Save();
+            Log.Write("Modes numériques : plein écran " + (on ? "en marche" : "arrêté"));
+            ApplyDigiFull();
+        }
+
+        // Plein écran : sans bord, sur tout l'écran où se trouve la fenêtre ; sinon, cadre normal et place retenue.
+        void ApplyDigiFull()
+        {
+            if (digiWin == null || digiWin.IsDisposed) return;
+            if (settings.DigiFull && settings.DigiDetached)
+            {
+                Rectangle scr = !workAreaOverride.IsEmpty ? workAreaOverride : Screen.FromRectangle(digiWin.Bounds).Bounds;
+                if (digiWin.FormBorderStyle != FormBorderStyle.None) digiWin.FormBorderStyle = FormBorderStyle.None;
+                if (digiWin.Bounds != scr) digiWin.Bounds = scr;
+            }
+            else if (digiWin.FormBorderStyle == FormBorderStyle.None)
+            {
+                digiWin.FormBorderStyle = FormBorderStyle.Sizable;
+                if (!settings.DigiWin.IsEmpty) digiWin.Bounds = settings.DigiWin;
+            }
+        }
+
+        // « Réinitialiser la fenêtre » avec la fenêtre séparée : plein écran quitté, place d'origine (à côté de SDRLink).
+        void ResetDigiWinPlace()
+        {
+            if (!settings.DigiDetached) return;
+            bool shown = sstvView.Visible;
+            settings.DigiFull = false;
+            settings.DigiWin = Rectangle.Empty;
+            if (digiWin != null) { sstvView.Visible = false; digiHost.Controls.Add(sstvView); sstvView.Detached = false; sstvView.Dock = DockStyle.None; }
+            CloseDigiWin();
+            if (shown) ShowDigiView(true);
+        }
+
+        // Fermeture de SDRLink : la fenêtre séparée part avec elle.
+        void CloseDigiWin()
+        {
+            if (digiWin == null || digiWin.IsDisposed) return;
+            KeepDigiWinBounds();
+            digiWinClosing = true;
+            digiWin.Close();
+            digiWin.Dispose();
+            digiWin = null;
         }
     }
 }

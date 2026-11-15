@@ -774,6 +774,8 @@ namespace SDRLink
         string caption = "SSTV";
         public double PosX = 0, PosY = 1;   // 0 = gauche / haut, 1 = droite / bas
         public double CustW, CustH;         // taille choisie en tirant sur les bords, en fraction de la page (0 = taille d'origine)
+        // Fenêtre séparée (depuis la 1.38) : la vue remplit sa fenêtre, qui se déplace et se redimensionne comme toute fenêtre.
+        public bool Detached;
         readonly System.Windows.Forms.Timer hold = new System.Windows.Forms.Timer { Interval = 400 };
         bool dragging, pressed;
         Point grab;
@@ -910,6 +912,7 @@ namespace SDRLink
         // Taille et position dans la page : l'image tient dans 42 % de la largeur et de la hauteur de la page.
         public void Place()
         {
+            if (Detached) return;
             Control p = Parent;
             if (p == null || p.ClientSize.Width < 50 || p.ClientSize.Height < 50) return;
             int ch = CaptionH;
@@ -1095,6 +1098,7 @@ namespace SDRLink
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
+            if (Detached) return;
             if (e.Button != MouseButtons.Left) return;
             int k = HitEdges(e.Location);
             if (k != 0 && Parent != null)
@@ -1114,6 +1118,7 @@ namespace SDRLink
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            if (Detached) { Cursor = Cursors.Default; return; }
             if (sizing != 0 && Parent != null)
             {
                 Size pz = Parent.ClientSize;

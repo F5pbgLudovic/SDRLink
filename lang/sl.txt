@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: nastavitve zavrnjene
 listening at %d Hz	poslušanje pri %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sinhronizirano, S/N %.0f dB, odmik %+.0f Hz, središče %d Hz
 searching for a signal… (centre %d Hz)	iskanje signala… (središče %d Hz)
+VIS header received	Prejeta glava VIS
+start tone received	Prejet začetni ton
+{0} message(s)	Sporočila: {0}
 listening at {0:F0} Hz	poslušanje na {0:F0} Hz
 signal at {0:F0} Hz	signal na {0:F0} Hz
 reversed	Obrnjena
@@ -227,6 +230,8 @@ Reset the program…	Ponastavi program…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Izvoz ali uvoz vseh nastavitev za enako konfiguracijo na drugem računalniku (desni klik: ponastavi program, barva gumba)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Ime ali klicni znak, ki se samodejno poda sprejemnikom WebSDR, ki ga zahtevajo pred zvokom (KiwiSDR, websdr.org). Klik: sprememba (desni klik: barva gumba)
 Right-click: receivers muted while transmitting	Desni klik: sprejemniki, utišani med oddajanjem
+Auto notch (DNF)	Samodejni notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Potrditveno polje: samodejni notch vklop / izklop. Klik na gumb: izklopljen pri digitalnih načinih dela in FreeDV, raven od 1 do 10 (desni klik: barva gumba)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Znova zažene trenutni WebSDR (na primer ustavljen po času nedejavnosti). Klik: ponovni zagon z ohranitvijo nastavitev (frekvenca, način, filter, povečava, glasnost). Desni klik: samodejni ponovni zagon ob izgubi zvoka (Auto) in njegova zakasnitev, popolna ponastavitev WebSDR, barve gumba
 Save: no known frequency (rig or WebSDR)	Shrani: frekvenca ni znana (TRX ali WebSDR)
 Store the current frequency…	Shrani trenutno frekvenco…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Zaženi rigctld:
 Sync mode	Sinhroniziraj način
 Mute WebSDR while transmitting	Utišaj WebSDR med oddajanjem
-Auto notch (DNF)	Samodejni notch (DNF)
 Reduced view	Zmanjšan prikaz
 Mini view	Mini prikaz
 Always on top	Vedno na vrhu
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	Gumbi MOX/VOX/TX/PTT
 Both ways	Obojesmerno
 Rig → WebSDR	TRX → WebSDR
 WebSDR → Rig	WebSDR → TRX
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → TRX
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitalni načini: dekodiranje se prikaže v oknu nad stranjo (klik: vklop / izklop; desni klik: izbira načina, desni klik na način: njegove nastavitve)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Dolg pritisk in vlečenje: premik okna; vlečenje roba ali kota: sprememba velikosti (desni klik: načini in nastavitve)
 Reset the windows	Ponastavi okna
+Separate window (can go on another screen)	Ločeno okno (lahko na drugem zaslonu)
+Full screen (F11 or double-click; Esc to leave)	Celozaslonski način (F11 ali dvoklik; Esc za izhod)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Ob izbiri načina dela: pojdi na njegovo najbližjo frekvenco (Pomnilniki > Digitalni načini dela)
 image complete	slika dokončana
 signal lost	signal izgubljen
 Nothing to save	Ni česa shraniti
 Hell: could not save	Hell: shranjevanje ni uspelo
+Digital modes: separate window, to place wherever you want (even on another screen)	Digitalni načini dela: ločeno okno, ki ga postavite, kamor želite (tudi na drug zaslon)
+Digital modes: window back on the page	Digitalni načini dela: okno nazaj na strani
 {0}: decoding on	{0}: dekodiranje vklopljeno
 {0}: decoding off	{0}: dekodiranje izklopljeno
 {0} settings	Nastavitve {0}
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink ne more komuni
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: tipkovnica frekvence in seznam Mem zadnjih frekvenc; kolesce: sprememba frekvence (desni klik: barve)
 No frequency to store (no rig, no WebSDR).	Ni frekvence za shranjevanje (ne postaje ne WebSDR).
 Stored: {0} kHz	Shranjeno: {0} kHz
+Auto notch off in digital modes	Samodejni notch izklopljen pri digitalnih načinih dela
+Auto notch off in FreeDV V1 and V2	Samodejni notch izklopljen pri FreeDV V1 in V2
+Notch level:	Raven notcha:
+1 (original setting)	1 (izvirna nastavitev)
+10 (strongest)	10 (najmočnejši)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Samodejni notch zazna stalne piske (nosilce) v zvoku WebSDR in jih oslabi. Polje na gumbu ga vklopi ali izklopi. Raven, od 1 (izvirna nastavitev) do 10, poveča število obdelanih piskov (4 do 8) in moč delovanja; visoka raven lahko vpliva tudi na glas, ki drži noto. Brez odstranitve kljukice se izklopi med digitalnim načinom dela (dekoder deluje ali način DIGI) in med FreeDV, če so zgornje izbire označene: poškodoval bi signale za dekodiranje. Kabel SDRLINK in dekoderji vedno prejmejo zvok brez notcha.
+, off in digital modes	, izklopljen pri digitalnih načinih dela
+, off in FreeDV	, izklopljen pri FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Pasovna širina sprejema WebSDR, shranjena za vsak način (CW, USB/LSB, AM, FM, DIGI), na vsakem WebSDR in po ponovnem zagonu. »Privzeti filter«: lastni filter WebSDR.
+Default filter	Privzeti filter
+Other…	Drugo…
+Bandwidth	Pasovna širina
+Invalid bandwidth (0.1 to 15 kHz)	Neveljavna pasovna širina (0,1 do 15 kHz)
+Mode?	Način?
+Mode search: no WebSDR or rig to listen to	Iskanje načina: ni WebSDR ali postaje za poslušanje
+Mode search stopped	Iskanje načina ustavljeno
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Iskanje načina: noben način ni prepoznan (prešibak signal, nepodprt način ali WSPR / JT9 / Hell, prepočasni za prepoznavo)
+Auto notch: level {0}{1}{2}	Samodejni notch: raven {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Pasovna širina v kHz za {0} (0,1 do 15):
+{0} bandwidth: WebSDR default filter	Pasovna širina {0}: privzeti filter WebSDR
+{0} bandwidth: {1}	Pasovna širina {0}: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Iskanje slišanega digitalnega načina dela: največ {0} s se zvok preizkuša s FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW in Olivia; prepoznani način se izbere in zažene se njegovo dekodiranje (brez spremembe frekvence). Ponovni klik: ustavi iskanje
+Searching… {0} s	Iskanje… {0} s
+Searching for the mode being heard ({0} s at most)…	Iskanje slišanega načina (največ {0} s)…
+Mode found: {0} ({1})	Najden način: {0} ({1})
+BW:	PŠ:
 Mode:	Način:
 (mode unchanged)	(način nespremenjen)
 Edit…	Uredi…

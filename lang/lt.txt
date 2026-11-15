@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: nustatymai atmesti
 listening at %d Hz	klausoma %d Hz dažniu
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sinchronizuota, S/N %.0f dB, nuokrypis %+.0f Hz, centras %d Hz
 searching for a signal… (centre %d Hz)	ieškoma signalo… (centras %d Hz)
+VIS header received	Gauta VIS antraštė
+start tone received	Gautas pradžios tonas
+{0} message(s)	Pranešimų: {0}
 listening at {0:F0} Hz	klausoma {0:F0} Hz dažniu
 signal at {0:F0} Hz	signalas {0:F0} Hz dažniu
 reversed	Atvirkštinis
@@ -227,6 +230,8 @@ Reset the program…	Atstatyti programą…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportuoti arba importuoti visus nustatymus, tai pačiai konfigūracijai kitame kompiuteryje (dešinysis spustelėjimas: atstatyti programą, mygtuko spalva)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Vardas arba šaukinys, automatiškai pateikiamas WebSDR imtuvams, kurie jo prašo prieš garsą (KiwiSDR, websdr.org). Spustelėjimas: pakeisti (dešinysis klavišas: mygtuko spalva)
 Right-click: receivers muted while transmitting	Dešinysis spustelėjimas: imtuvai, nutildomi siunčiant
+Auto notch (DNF)	Autom. notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Žymimasis langelis: automatinis notch įj. / išj. Spustelėjus mygtuką: išjungtas skaitmeninėse darbo rūšyse ir FreeDV, lygis nuo 1 iki 10 (dešinysis spustelėjimas: mygtuko spalva)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Iš naujo paleidžia dabartinį WebSDR (pavyzdžiui, sustojusį po neveiklumo laiko). Spustelėjimas: paleisti iš naujo išsaugant nustatymus (dažnis, režimas, filtras, mastelis, garsumas). Dešinysis spustelėjimas: automatinis paleidimas iš naujo dingus garsui (Auto) ir jo delsa, visiškas WebSDR atstatymas, mygtuko spalvos
 Save: no known frequency (rig or WebSDR)	Įrašyti: dažnis nežinomas (stotis ar WebSDR)
 Store the current frequency…	Įsiminti dabartinį dažnį…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Paleisti rigctld:
 Sync mode	Sinchronizuoti režimą
 Mute WebSDR while transmitting	Nutildyti WebSDR siunčiant
-Auto notch (DNF)	Autom. notch (DNF)
 Reduced view	Sumažintas vaizdas
 Mini view	Mini vaizdas
 Always on top	Visada viršuje
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	Mygtukai MOX/VOX/TX/PTT
 Both ways	Abiem kryptimis
 Rig → WebSDR	TRX → WebSDR
 WebSDR → Rig	WebSDR → TRX
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → TRX
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Skaitmeniniai režimai: dekodavimas rodomas lange virš puslapio (spustelėjimas: įjungti / išjungti; dešinysis spustelėjimas: režimo pasirinkimas, dešinysis spustelėjimas ant režimo: jo nustatymai)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Ilgas paspaudimas ir vilkimas: perkelti langą; tempiant kraštą ar kampą: keisti dydį (dešinysis spustelėjimas: režimai ir nustatymai)
 Reset the windows	Atkurti langus
+Separate window (can go on another screen)	Atskiras langas (galima perkelti į kitą ekraną)
+Full screen (F11 or double-click; Esc to leave)	Visas ekranas (F11 arba dvigubas spustelėjimas; išeiti – Esc)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Pasirinkus darbo rūšį: pereiti į artimiausią jos dažnį (Atmintys > Skaitmeninės darbo rūšys)
 image complete	vaizdas baigtas
 signal lost	signalas prarastas
 Nothing to save	Nėra ką išsaugoti
 Hell: could not save	Hell: įrašyti nepavyko
+Digital modes: separate window, to place wherever you want (even on another screen)	Skaitmeninės darbo rūšys: atskiras langas, kurį galima padėti bet kur (net kitame ekrane)
+Digital modes: window back on the page	Skaitmeninės darbo rūšys: langas grąžintas į puslapį
 {0}: decoding on	{0}: dekodavimas įjungtas
 {0}: decoding off	{0}: dekodavimas išjungtas
 {0} settings	{0} nustatymai
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink negali susisie
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Spustelėjimas: dažnio klaviatūra ir paskutinių dažnių sąrašas Mem; ratukas: keisti dažnį (dešinysis spustelėjimas: spalvos)
 No frequency to store (no rig, no WebSDR).	Nėra dažnio įrašymui (nei radijo stoties, nei WebSDR).
 Stored: {0} kHz	Įrašyta: {0} kHz
+Auto notch off in digital modes	Autom. notch išjungtas skaitmeninėse darbo rūšyse
+Auto notch off in FreeDV V1 and V2	Autom. notch išjungtas FreeDV V1 ir V2
+Notch level:	Notch lygis:
+1 (original setting)	1 (pradinis nustatymas)
+10 (strongest)	10 (stipriausias)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatinis notch aptinka pastovius švilpimus (nešlius) WebSDR garse ir juos susilpnina. Langelis ant mygtuko jį įjungia arba išjungia. Lygis, nuo 1 (pradinis nustatymas) iki 10, padidina apdorojamų švilpimų skaičių (nuo 4 iki 8) ir veikimo stiprumą; aukštas lygis gali paveikti ir balsą, laikantį natą. Jis išjungiamas nenuimant žymės skaitmeninės darbo rūšies metu (veikia dekoderis arba DIGI režimas) ir FreeDV metu, jei pažymėti aukščiau esantys pasirinkimai: jis pažeistų dekoduojamus signalus. SDRLINK kabelis ir dekoderiai visada gauna garsą be notch.
+, off in digital modes	, išjungtas skaitmeninėse darbo rūšyse
+, off in FreeDV	, išjungtas FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR priėmimo juostos plotis, įsimenamas kiekvienai darbo rūšiai (CW, USB/LSB, AM, FM, DIGI), kiekviename WebSDR ir po paleidimo iš naujo. „Numatytasis filtras“: paties WebSDR filtras.
+Default filter	Numatytasis filtras
+Other…	Kita…
+Bandwidth	Juostos plotis
+Invalid bandwidth (0.1 to 15 kHz)	Netinkamas juostos plotis (nuo 0,1 iki 15 kHz)
+Mode?	Rūšis?
+Mode search: no WebSDR or rig to listen to	Darbo rūšies paieška: nėra WebSDR ar radijo stoties klausytis
+Mode search stopped	Darbo rūšies paieška sustabdyta
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Darbo rūšies paieška: neatpažinta jokia darbo rūšis (per silpnas signalas, nepalaikoma darbo rūšis arba WSPR / JT9 / Hell, per lėtos atpažinti)
+Auto notch: level {0}{1}{2}	Autom. notch: lygis {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Juostos plotis kHz, skirtas {0} (nuo 0,1 iki 15):
+{0} bandwidth: WebSDR default filter	{0} juostos plotis: WebSDR numatytasis filtras
+{0} bandwidth: {1}	{0} juostos plotis: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Girdimos skaitmeninės darbo rūšies paieška: ne ilgiau kaip {0} s garsas bandomas su FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW ir Olivia; atpažinta darbo rūšis pasirenkama ir paleidžiamas jos dekodavimas (nekeičiant dažnio). Spustelėkite dar kartą: sustabdyti paiešką
+Searching… {0} s	Ieškoma… {0} s
+Searching for the mode being heard ({0} s at most)…	Ieškoma girdimos darbo rūšies (ne ilgiau kaip {0} s)…
+Mode found: {0} ({1})	Rasta darbo rūšis: {0} ({1})
+BW:	JP:
 Mode:	Režimas:
 (mode unchanged)	(režimas nekeičiamas)
 Edit…	Keisti…

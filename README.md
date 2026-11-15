@@ -1,4 +1,4 @@
-# SDRLink V1.37 — @F5PBG 2026
+# SDRLink V1.38 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -19,9 +19,10 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de votre position (ordinateur, locator ou coordonnées) ;
   - volume du WebSDR, du poste, d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) et de HDSDR (Mute HDSDR, par Windows), son du poste aussi sur le PC au choix (clic droit sur Mute TX) ;
-  - câble audio SDRLINK pour WSJT-X, notch automatique ;
+  - câble audio SDRLINK pour WSJT-X, notch automatique de niveau 1 à 10 (coupé au choix en mode numérique et en FreeDV) ;
+  - bande passante de réception et pas de la molette (dès 10 Hz) retenus pour chaque mode ;
   - décodage automatique de la voix numérique FreeDV RADE (V1 ou V2) dès qu'un signal est reçu (bouton FreeDV auto) ;
-  - décodeurs de modes numériques sur un seul bouton : FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) et WEFAX, affichés dans une fenêtre déplaçable sur la page (images enregistrées en PNG) ;
+  - décodeurs de modes numériques sur un seul bouton : FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) et WEFAX, affichés dans une fenêtre déplaçable sur la page ou séparée (second écran, plein écran), images enregistrées en PNG ; accord automatique sur la fréquence du mode choisi, et bouton Mode ? qui reconnaît le mode écouté ;
   - interface en 23 langues européennes ;
   - mode sombre, palette de 64 teintes et couleur de fond au choix (RVB), 7 looks de boutons (Classique, Win3.11, Néon IA, Moderne, Verre, Terminal, Métal), panneau de commande en haut ou sous la page du WebSDR, couleur de chaque bouton au choix (clic droit) et taille du texte réglable ;
   - vérification des mises à jour au démarrage et mise à jour automatique en un clic (empreinte SHA-256 vérifiée, même nom de fichier, ancienne version supprimée), import/export de tous les réglages vers un autre ordinateur, avec import au choix (configuration, WebSDR, mémoires, scan ; ajout ou remplacement), réinitialisation totale ou partielle du programme ;
@@ -74,9 +75,10 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - suggestions while typing in the WebSDR bar (name or address, chosen list);
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near your position (computer, locator or coordinates);
   - WebSDR, rig, ExpertSDR (Mute ExpertSDR, through Windows or TCI) and HDSDR volume (Mute HDSDR, through Windows), rig audio also on the PC if wanted (right-click Mute TRX);
-  - SDRLINK audio cable for WSJT-X, automatic notch;
+  - SDRLINK audio cable for WSJT-X, automatic notch with level 1 to 10 (optionally off in digital modes and FreeDV);
+  - receive bandwidth and wheel step (from 10 Hz) kept for each mode;
   - automatic decoding of FreeDV RADE digital voice (V1 or V2) as soon as a signal is received (FreeDV auto button);
-  - digital mode decoders on a single button: FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) and WEFAX, shown in a movable window over the page (pictures saved as PNG);
+  - digital mode decoders on a single button: FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK31/63, Olivia, Contestia, Hell, SSTV (26 modes) and WEFAX, shown in a movable window over the page or in a separate one (second screen, full screen), pictures saved as PNG; automatic tuning to the chosen mode's frequency, and a Mode? button that recognises the mode being heard;
   - interface in 23 European languages (menu on the 2nd line);
   - dark mode, 64-shade palette and background colour of your choice (RGB), 7 button looks (Classic, Win3.11, AI Neon, Modern, Glass, Terminal, Metal), control panel at the top or below the WebSDR page, colour of each button of your choice (right-click) and adjustable text size;
   - update check at startup and one-click automatic update (SHA-256 fingerprint checked, same file name, old version deleted), import/export of all settings to another computer, with selective import (configuration, WebSDR, memories, scan; add or replace), full or partial reset of the program;

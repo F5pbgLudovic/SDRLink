@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: seaded tagasi lükatud
 listening at %d Hz	kuulamas sagedusel %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sünkroonis, S/N %.0f dB, nihe %+.0f Hz, keskpunkt %d Hz
 searching for a signal… (centre %d Hz)	otsin signaali… (keskpunkt %d Hz)
+VIS header received	VIS-päis vastu võetud
+start tone received	Stardi toon vastu võetud
+{0} message(s)	{0} sõnum(it)
 listening at {0:F0} Hz	kuulamine sagedusel {0:F0} Hz
 signal at {0:F0} Hz	signaal sagedusel {0:F0} Hz
 reversed	Ümberpööratud
@@ -227,6 +230,8 @@ Reset the program…	Lähtesta programm…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Ekspordi või impordi kõik seaded sama seadistuse jaoks teises arvutis (paremklõps: lähtesta programm, nupu värv)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi või kutsung, mis antakse automaatselt WebSDR-idele, mis seda enne heli küsivad (KiwiSDR, websdr.org). Klõps: muuda (paremklõps: nupu värv)
 Right-click: receivers muted while transmitting	Paremklõps: saatmise ajal vaigistatavad vastuvõtjad
+Auto notch (DNF)	Automaatne notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Märkeruut: automaatne notch sees / väljas. Klõps nupul: väljas digitaalsetes režiimides ja FreeDV-s, tase 1 kuni 10 (paremklõps: nupu värv)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Käivitab praeguse WebSDR-i uuesti (näiteks pärast jõudeaega peatunud). Klõps: taaskäivitus seadeid säilitades (sagedus, režiim, filter, suum, helitugevus). Paremklõps: automaatne taaskäivitus heli kadumisel (Auto) ja selle viivitus, WebSDR-i täielik lähtestamine, nupu värvid
 Save: no known frequency (rig or WebSDR)	Salvesta: sagedus pole teada (raadio ega WebSDR)
 Store the current frequency…	Salvesta praegune sagedus…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Käivita rigctld:
 Sync mode	Sünkrooni töörežiim
 Mute WebSDR while transmitting	Vaigista WebSDR saatmise ajal
-Auto notch (DNF)	Automaatne notch (DNF)
 Reduced view	Vähendatud vaade
 Mini view	Minivaade
 Always on top	Alati pealmine
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT nupud
 Both ways	Mõlemas suunas
 Rig → WebSDR	Raadio → WebSDR
 WebSDR → Rig	WebSDR → Raadio
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → Raadio
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitaalsed režiimid: dekodeerimine kuvatakse lehe kohal olevas aknas (klõps: sisse / välja; paremklõps: režiimi valik, paremklõps režiimil: selle seaded)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Pikk vajutus ja lohistamine: akna liigutamine; serva või nurga lohistamine: suuruse muutmine (paremklõps: režiimid ja seaded)
 Reset the windows	Lähtesta aknad
+Separate window (can go on another screen)	Eraldi aken (võib viia teisele ekraanile)
+Full screen (F11 or double-click; Esc to leave)	Täisekraan (F11 või topeltklõps; väljumiseks Esc)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Režiimi valimisel: mine selle lähimale sagedusele (Mälud > Digitaalsed režiimid)
 image complete	pilt valmis
 signal lost	signaal kadunud
 Nothing to save	Pole midagi salvestada
 Hell: could not save	Hell: salvestamine ebaõnnestus
+Digital modes: separate window, to place wherever you want (even on another screen)	Digitaalsed režiimid: eraldi aken, mille saab paigutada kuhu iganes (ka teisele ekraanile)
+Digital modes: window back on the page	Digitaalsed režiimid: aken tagasi lehele
 {0}: decoding on	{0}: dekodeerimine sees
 {0}: decoding off	{0}: dekodeerimine väljas
 {0} settings	{0} seaded
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink ei saa OmniRig
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klõps: sageduse klahvistik ja viimaste sageduste Mem-loend; ratas: muuda sagedust (paremklõps: värvid)
 No frequency to store (no rig, no WebSDR).	Pole sagedust, mida salvestada (ei raadiojaama ega WebSDR-i).
 Stored: {0} kHz	Salvestatud: {0} kHz
+Auto notch off in digital modes	Automaatne notch väljas digitaalsetes režiimides
+Auto notch off in FreeDV V1 and V2	Automaatne notch väljas FreeDV V1 ja V2 korral
+Notch level:	Notchi tase:
+1 (original setting)	1 (algne seadistus)
+10 (strongest)	10 (tugevaim)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaatne notch tuvastab WebSDR-i helis püsivad viled (kandjad) ja summutab need. Nupul olev märkeruut lülitab selle sisse või välja. Tase, 1-st (algne seadistus) kuni 10-ni, suurendab töödeldavate vilede arvu (4 kuni 8) ja toime tugevust; kõrge tase võib mõjutada ka häält, mis hoiab nooti. See lülitatakse märget eemaldamata välja digitaalse režiimi ajal (dekooder töötab või DIGI-režiim) ja FreeDV ajal, kui ülaltoodud valikud on märgitud: see rikuks dekodeeritavaid signaale. SDRLINK-kaabel ja dekoodrid saavad heli alati ilma notchita.
+, off in digital modes	, väljas digitaalsetes režiimides
+, off in FreeDV	, väljas FreeDV korral
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR-i vastuvõtu ribalaius, salvestatud iga režiimi jaoks (CW, USB/LSB, AM, FM, DIGI), igal WebSDR-il ja pärast taaskäivitust. „Vaikefilter“: WebSDR-i enda filter.
+Default filter	Vaikefilter
+Other…	Muu…
+Bandwidth	Ribalaius
+Invalid bandwidth (0.1 to 15 kHz)	Vigane ribalaius (0,1 kuni 15 kHz)
+Mode?	Režiim?
+Mode search: no WebSDR or rig to listen to	Režiimi otsing: pole WebSDR-i ega raadiojaama, mida kuulata
+Mode search stopped	Režiimi otsing peatatud
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Režiimi otsing: ühtegi režiimi ei tuvastatud (liiga nõrk signaal, toetamata režiim või WSPR / JT9 / Hell, mis on tuvastamiseks liiga aeglased)
+Auto notch: level {0}{1}{2}	Automaatne notch: tase {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Ribalaius kHz-des režiimile {0} (0,1 kuni 15):
+{0} bandwidth: WebSDR default filter	{0} ribalaius: WebSDR-i vaikefilter
+{0} bandwidth: {1}	{0} ribalaius: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Kuuldava digitaalse režiimi otsing: kuni {0} s proovitakse heli režiimidega FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW ja Olivia; tuvastatud režiim valitakse ja selle dekodeerimine käivitatakse (sagedust muutmata). Uus klõps: peata otsing
+Searching… {0} s	Otsin… {0} s
+Searching for the mode being heard ({0} s at most)…	Otsin kuuldavat režiimi (kuni {0} s)…
+Mode found: {0} ({1})	Leitud režiim: {0} ({1})
+BW:	RL:
 Mode:	Režiim:
 (mode unchanged)	(režiim muutmata)
 Edit…	Muuda…

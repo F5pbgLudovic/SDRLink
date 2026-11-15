@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: setări refuzate
 listening at %d Hz	ascultare la %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sincronizat, S/N %.0f dB, abatere %+.0f Hz, centru %d Hz
 searching for a signal… (centre %d Hz)	se caută un semnal… (centru %d Hz)
+VIS header received	Antet VIS recepționat
+start tone received	Ton de start recepționat
+{0} message(s)	{0} mesaj(e)
 listening at {0:F0} Hz	ascultare la {0:F0} Hz
 signal at {0:F0} Hz	semnal la {0:F0} Hz
 reversed	Inversată
@@ -227,6 +230,8 @@ Reset the program…	Resetare program…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportați sau importați toate setările, pentru aceeași configurație pe alt calculator (clic dreapta: resetare program, culoarea butonului)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nume sau indicativ dat automat receptoarelor WebSDR care îl cer înainte de sunet (KiwiSDR, websdr.org). Clic: schimbare (clic dreapta: culoarea butonului)
 Right-click: receivers muted while transmitting	Clic dreapta: receptoare puse pe mut în emisie
+Auto notch (DNF)	Notch auto (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Casetă: notch automat pornit / oprit. Clic pe buton: oprit în modurile digitale și în FreeDV, nivel de la 1 la 10 (clic dreapta: culoarea butonului)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Repornește WebSDR-ul curent (de exemplu oprit după o perioadă de inactivitate). Clic: repornire păstrând setările (frecvență, mod, filtru, zoom, volum). Clic dreapta: repornire automată când sunetul se pierde (Auto) și întârzierea ei, reinițializare totală a WebSDR-ului, culorile butonului
 Save: no known frequency (rig or WebSDR)	Salvare: nicio frecvență cunoscută (stație sau WebSDR)
 Store the current frequency…	Memorează frecvența actuală…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Pornire rigctld:
 Sync mode	Sincronizare mod
 Mute WebSDR while transmitting	Mut WebSDR în emisie
-Auto notch (DNF)	Notch auto (DNF)
 Reduced view	Afișare redusă
 Mini view	Afișare mini
 Always on top	Mereu deasupra
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	Butoane MOX/VOX/TX/PTT
 Both ways	Bidirecțional
 Rig → WebSDR	Stație → WebSDR
 WebSDR → Rig	WebSDR → Stație
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → Stație
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Moduri digitale: decodarea este afișată într-o fereastră deasupra paginii (clic: pornit / oprit; clic dreapta: alegerea modului, clic dreapta pe un mod: setările sale)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Apăsare lungă și tragere: mutarea ferestrei; tragerea unei margini sau a unui colț: redimensionare (clic dreapta: moduri și setări)
 Reset the windows	Resetarea ferestrelor
+Separate window (can go on another screen)	Fereastră separată (poate merge pe alt ecran)
+Full screen (F11 or double-click; Esc to leave)	Ecran complet (F11 sau dublu clic; Esc pentru ieșire)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	La alegerea unui mod: mergi la cea mai apropiată frecvență a lui (Memorii > Moduri digitale)
 image complete	imagine terminată
 signal lost	semnal pierdut
 Nothing to save	Nimic de salvat
 Hell: could not save	Hell: salvare imposibilă
+Digital modes: separate window, to place wherever you want (even on another screen)	Moduri digitale: fereastră separată, de așezat unde vrei (chiar și pe alt ecran)
+Digital modes: window back on the page	Moduri digitale: fereastra înapoi în pagină
 {0}: decoding on	{0}: decodare pornită
 {0}: decoding off	{0}: decodare oprită
 {0} settings	Setări {0}
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nu poate comun
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clic: tastatură de frecvență și lista Mem a ultimelor frecvențe; rotiță: schimbarea frecvenței (clic dreapta: culori)
 No frequency to store (no rig, no WebSDR).	Nicio frecvență de memorat (nici stație, nici WebSDR).
 Stored: {0} kHz	Memorat: {0} kHz
+Auto notch off in digital modes	Notch auto oprit în modurile digitale
+Auto notch off in FreeDV V1 and V2	Notch auto oprit în FreeDV V1 și V2
+Notch level:	Nivel notch:
+1 (original setting)	1 (setarea inițială)
+10 (strongest)	10 (cel mai puternic)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Notch-ul automat detectează fluierăturile constante (purtătoare) din sunetul WebSDR și le atenuează. Caseta de pe buton îl pornește sau îl oprește. Nivelul, de la 1 (setarea inițială) la 10, crește numărul de fluierături tratate (4 până la 8) și puterea acțiunii; un nivel ridicat poate afecta și o voce care ține o notă. Este oprit, fără a debifa caseta, în timpul unui mod digital (decodor pornit sau mod DIGI) și în timpul FreeDV, dacă opțiunile de mai sus sunt bifate: ar deteriora semnalele de decodat. Cablul SDRLINK și decodoarele primesc întotdeauna sunetul fără notch.
+, off in digital modes	, oprit în modurile digitale
+, off in FreeDV	, oprit în FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Lățimea de bandă de recepție a WebSDR-ului, păstrată pentru fiecare mod (CW, USB/LSB, AM, FM, DIGI), pe fiecare WebSDR și după o repornire. „Filtru implicit”: filtrul propriu al WebSDR-ului.
+Default filter	Filtru implicit
+Other…	Altă…
+Bandwidth	Lățime de bandă
+Invalid bandwidth (0.1 to 15 kHz)	Lățime de bandă nevalidă (0,1 până la 15 kHz)
+Mode?	Mod?
+Mode search: no WebSDR or rig to listen to	Căutare mod: niciun WebSDR sau stație de ascultat
+Mode search stopped	Căutarea modului oprită
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Căutare mod: niciun mod recunoscut (semnal prea slab, mod neacceptat sau WSPR / JT9 / Hell, prea lente pentru a fi recunoscute)
+Auto notch: level {0}{1}{2}	Notch auto: nivel {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Lățime de bandă în kHz pentru {0} (0,1 până la 15):
+{0} bandwidth: WebSDR default filter	Lățime de bandă {0}: filtrul implicit al WebSDR-ului
+{0} bandwidth: {1}	Lățime de bandă {0}: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Căutarea modului digital auzit: timp de cel mult {0} s, sunetul este încercat cu FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW și Olivia; modul recunoscut este ales și decodarea lui pornită (fără schimbarea frecvenței). Clic din nou: oprește căutarea
+Searching… {0} s	Se caută… {0} s
+Searching for the mode being heard ({0} s at most)…	Se caută modul auzit (cel mult {0} s)…
+Mode found: {0} ({1})	Mod găsit: {0} ({1})
+BW:	LB:
 Mode:	Mod:
 (mode unchanged)	(mod neschimbat)
 Edit…	Modifică…

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -95,6 +96,17 @@ namespace SDRLink
         public string CableDevice = "";    // sortie audio recevant le son du WebSDR (câble virtuel), vide = choix automatique
         public bool CableEnabled = true;
         public bool AutoNotch;             // notch automatique (comme le DNF) sur le son du WebSDR
+        public bool NotchOffDigi = true;   // notch coupé quand un mode numérique décode ou que DIGI est le mode
+        public bool NotchOffFdv = true;    // notch coupé quand FreeDV auto (V1 ou V2) est en marche
+        public int NotchLevel = 1;         // force du notch, 1 (celui d'avant la 1.38) à 10
+        // Pas de la molette et bande passante de réception retenus par mode (clés cw, ssb, am, fm, digi) ; bande passante 0 = filtre
+        // d'origine du WebSDR. Les valeurs absentes prennent celles par défaut (ModeStep, ModeBw).
+        public Dictionary<string, int> ModeSteps = new Dictionary<string, int>(StringComparer.Ordinal);
+        public Dictionary<string, int> ModeBws = new Dictionary<string, int>(StringComparer.Ordinal);
+        public bool DigiAutoQsy = true;    // choix d'un mode numérique : accord sur sa fréquence d'usage la plus proche
+        public bool DigiDetached;          // fenêtre des modes numériques séparée de la page (déplaçable sur un autre écran)
+        public bool DigiFull;              // fenêtre séparée en plein écran
+        public Rectangle DigiWin = Rectangle.Empty;   // place de la fenêtre séparée (coordonnées de l'écran)
         public bool DarkMode;
         public string DarkBase = "", LightBase = "";   // couleurs de palette choisies (RRGGBB, vide = par défaut)
         public int Look;                                   // allure des boutons (Looks.Classic, Win311...), depuis la 1.33
@@ -246,6 +258,15 @@ namespace SDRLink
                     case "DigiDevice": case "CableDevice": s.CableDevice = v; break;
                     case "Cable": s.CableEnabled = v != "0"; break;
                     case "AutoNotch": s.AutoNotch = v == "1"; break;
+                    case "NotchOffDigi": s.NotchOffDigi = v == "1"; break;
+                    case "NotchOffFdv": s.NotchOffFdv = v == "1"; break;
+                    case "NotchLevel": s.NotchLevel = Math.Max(1, Math.Min(10, Int(v, 1))); break;
+                    case "ModeStep": { int c = v.IndexOf(':'); if (c > 0) s.ModeSteps[v.Substring(0, c)] = Math.Max(1, Int(v.Substring(c + 1), 500)); } break;
+                    case "ModeBw": { int c = v.IndexOf(':'); if (c > 0) s.ModeBws[v.Substring(0, c)] = Math.Max(0, Math.Min(20000, Int(v.Substring(c + 1), 0))); } break;
+                    case "DigiAutoQsy": s.DigiAutoQsy = v == "1"; break;
+                    case "DigiDetached": s.DigiDetached = v == "1"; break;
+                    case "DigiFull": s.DigiFull = v == "1"; break;
+                    case "DigiWin": { string[] q = v.Split(','); if (q.Length == 4) s.DigiWin = new Rectangle(Int(q[0], 0), Int(q[1], 0), Int(q[2], 0), Int(q[3], 0)); } break;
                     case "DarkMode": s.DarkMode = v == "1"; break;
                     case "DarkBase": s.DarkBase = v; break;
                     case "LightBase": s.LightBase = v; break;
@@ -388,6 +409,15 @@ namespace SDRLink
             Line(sb, "CableDevice", CableDevice);
             Line(sb, "Cable", CableEnabled ? 1 : 0);
             Line(sb, "AutoNotch", AutoNotch ? 1 : 0);
+            Line(sb, "NotchOffDigi", NotchOffDigi ? 1 : 0);
+            Line(sb, "NotchOffFdv", NotchOffFdv ? 1 : 0);
+            Line(sb, "NotchLevel", NotchLevel);
+            foreach (KeyValuePair<string, int> p in ModeSteps) Line(sb, "ModeStep", p.Key + ":" + p.Value);
+            foreach (KeyValuePair<string, int> p in ModeBws) Line(sb, "ModeBw", p.Key + ":" + p.Value);
+            Line(sb, "DigiAutoQsy", DigiAutoQsy ? 1 : 0);
+            Line(sb, "DigiDetached", DigiDetached ? 1 : 0);
+            Line(sb, "DigiFull", DigiFull ? 1 : 0);
+            if (!DigiWin.IsEmpty) Line(sb, "DigiWin", DigiWin.X + "," + DigiWin.Y + "," + DigiWin.Width + "," + DigiWin.Height);
             Line(sb, "DarkMode", DarkMode ? 1 : 0);
             Line(sb, "DarkBase", DarkBase);
             Line(sb, "LightBase", LightBase);

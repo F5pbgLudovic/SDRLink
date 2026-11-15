@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: οι ρυθμίσεις απορρίφθηκα�
 listening at %d Hz	ακρόαση στα %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	συγχρονισμένο, S/N %.0f dB, απόκλιση %+.0f Hz, κέντρο %d Hz
 searching for a signal… (centre %d Hz)	αναζήτηση σήματος… (κέντρο %d Hz)
+VIS header received	Λήφθηκε κεφαλίδα VIS
+start tone received	Λήφθηκε τόνος έναρξης
+{0} message(s)	{0} μήνυμα(τα)
 listening at {0:F0} Hz	ακρόαση στα {0:F0} Hz
 signal at {0:F0} Hz	σήμα στα {0:F0} Hz
 reversed	Αντίστροφη
@@ -227,6 +230,8 @@ Reset the program…	Επαναφορά του προγράμματος…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Εξαγωγή ή εισαγωγή όλων των ρυθμίσεων, για την ίδια διαμόρφωση σε άλλον υπολογιστή (δεξί κλικ: επαναφορά του προγράμματος, χρώμα κουμπιού)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Όνομα ή χαρακτηριστικό που δίνεται αυτόματα στα WebSDR που το ζητούν πριν από τον ήχο (KiwiSDR, websdr.org). Κλικ: αλλαγή (δεξί κλικ: χρώμα κουμπιού)
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
+Auto notch (DNF)	Αυτόματο notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Κουτάκι: αυτόματο notch ενεργό / ανενεργό. Κλικ στο κουμπί: ανενεργό στους ψηφιακούς τρόπους λειτουργίας και στο FreeDV, επίπεδο 1 έως 10 (δεξί κλικ: χρώμα κουμπιού)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Επανεκκινεί το τρέχον WebSDR (για παράδειγμα σταματημένο μετά από χρόνο αδράνειας). Κλικ: επανεκκίνηση με διατήρηση των ρυθμίσεων (συχνότητα, τρόπος, φίλτρο, ζουμ, ένταση). Δεξί κλικ: αυτόματη επανεκκίνηση όταν χάνεται ο ήχος (Auto) και η καθυστέρησή της, πλήρης επαναφορά του WebSDR, χρώματα του κουμπιού
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
 Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Εκκίνηση rigctld:
 Sync mode	Συγχρ. διαμόρφωσης
 Mute WebSDR while transmitting	Σίγαση WebSDR κατά την εκπομπή
-Auto notch (DNF)	Αυτόματο notch (DNF)
 Reduced view	Μειωμένη προβολή
 Mini view	Μίνι προβολή
 Always on top	Πάντα στην κορυφή
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	Κουμπιά MOX/VOX/TX/PTT
 Both ways	Αμφίδρομα
 Rig → WebSDR	TRX → WebSDR
 WebSDR → Rig	WebSDR → TRX
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → TRX
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Ψηφιακές λειτουργίες: η αποκωδικοποίηση εμφανίζεται σε παράθυρο πάνω από τη σελίδα (κλικ: ενεργό / ανενεργό· δεξί κλικ: επιλογή λειτουργίας, δεξί κλικ σε λειτουργία: οι ρυθμίσεις της)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Παρατεταμένο πάτημα και σύρσιμο: μετακίνηση του παραθύρου· σύρσιμο άκρης ή γωνίας: αλλαγή μεγέθους (δεξί κλικ: λειτουργίες και ρυθμίσεις)
 Reset the windows	Επαναφορά των παραθύρων
+Separate window (can go on another screen)	Ξεχωριστό παράθυρο (μπορεί να πάει σε άλλη οθόνη)
+Full screen (F11 or double-click; Esc to leave)	Πλήρης οθόνη (F11 ή διπλό κλικ· Esc για έξοδο)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Επιλογή τρόπου: μετάβαση στην πλησιέστερη συχνότητά του (Μνήμες > Ψηφιακοί τρόποι λειτουργίας)
 image complete	η εικόνα ολοκληρώθηκε
 signal lost	το σήμα χάθηκε
 Nothing to save	Δεν υπάρχει τίποτα για αποθήκευση
 Hell: could not save	Hell: αδύνατη η αποθήκευση
+Digital modes: separate window, to place wherever you want (even on another screen)	Ψηφιακοί τρόποι λειτουργίας: ξεχωριστό παράθυρο, για να το τοποθετήσετε όπου θέλετε (ακόμη και σε άλλη οθόνη)
+Digital modes: window back on the page	Ψηφιακοί τρόποι λειτουργίας: το παράθυρο πίσω στη σελίδα
 {0}: decoding on	{0}: αποκωδικοποίηση ενεργή
 {0}: decoding off	{0}: αποκωδικοποίηση ανενεργή
 {0} settings	Ρυθμίσεις {0}
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	Το SDRLink δεν μ
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Κλικ: πληκτρολόγιο συχνότητας και λίστα Mem με τις τελευταίες συχνότητες· ροδέλα: αλλαγή συχνότητας (δεξί κλικ: χρώματα)
 No frequency to store (no rig, no WebSDR).	Καμία συχνότητα για αποθήκευση (ούτε πομποδέκτης ούτε WebSDR).
 Stored: {0} kHz	Αποθηκεύτηκε: {0} kHz
+Auto notch off in digital modes	Αυτόματο notch ανενεργό στους ψηφιακούς τρόπους
+Auto notch off in FreeDV V1 and V2	Αυτόματο notch ανενεργό στο FreeDV V1 και V2
+Notch level:	Επίπεδο notch:
+1 (original setting)	1 (αρχική ρύθμιση)
+10 (strongest)	10 (ισχυρότερο)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Το αυτόματο notch εντοπίζει σταθερά σφυρίγματα (φέροντα) στον ήχο του WebSDR και τα εξασθενεί. Το κουτάκι στο κουμπί το ενεργοποιεί ή το απενεργοποιεί. Το επίπεδο, από 1 (αρχική ρύθμιση) έως 10, αυξάνει τον αριθμό των σφυριγμάτων που αντιμετωπίζονται (4 έως 8) και την ένταση της δράσης· ένα υψηλό επίπεδο μπορεί επίσης να επηρεάσει μια φωνή που κρατά μια νότα. Απενεργοποιείται, χωρίς να ξετσεκαριστεί το κουτάκι, κατά τη διάρκεια ψηφιακού τρόπου (αποκωδικοποιητής σε λειτουργία ή τρόπος DIGI) και κατά τη διάρκεια του FreeDV, αν οι παραπάνω επιλογές είναι τσεκαρισμένες: θα αλλοίωνε τα σήματα προς αποκωδικοποίηση. Το καλώδιο SDRLINK και οι αποκωδικοποιητές λαμβάνουν πάντα τον ήχο χωρίς notch.
+, off in digital modes	, ανενεργό στους ψηφιακούς τρόπους
+, off in FreeDV	, ανενεργό στο FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Εύρος ζώνης λήψης του WebSDR, αποθηκευμένο για κάθε τρόπο (CW, USB/LSB, AM, FM, DIGI), σε κάθε WebSDR και μετά από επανεκκίνηση. «Προεπιλεγμένο φίλτρο»: το φίλτρο του ίδιου του WebSDR.
+Default filter	Προεπιλεγμένο φίλτρο
+Other…	Άλλο…
+Bandwidth	Εύρος ζώνης
+Invalid bandwidth (0.1 to 15 kHz)	Μη έγκυρο εύρος ζώνης (0,1 έως 15 kHz)
+Mode?	Τρόπος;
+Mode search: no WebSDR or rig to listen to	Αναζήτηση τρόπου: κανένα WebSDR ή πομποδέκτης για ακρόαση
+Mode search stopped	Η αναζήτηση τρόπου σταμάτησε
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Αναζήτηση τρόπου: δεν αναγνωρίστηκε κανένας τρόπος (πολύ ασθενές σήμα, μη υποστηριζόμενος τρόπος ή WSPR / JT9 / Hell, πολύ αργοί για αναγνώριση)
+Auto notch: level {0}{1}{2}	Αυτόματο notch: επίπεδο {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Εύρος ζώνης σε kHz για {0} (0,1 έως 15):
+{0} bandwidth: WebSDR default filter	Εύρος ζώνης {0}: προεπιλεγμένο φίλτρο του WebSDR
+{0} bandwidth: {1}	Εύρος ζώνης {0}: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Αναζήτηση του ψηφιακού τρόπου που ακούγεται: για το πολύ {0} s ο ήχος δοκιμάζεται με FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW και Olivia· ο τρόπος που αναγνωρίζεται επιλέγεται και ξεκινά η αποκωδικοποίησή του (χωρίς αλλαγή συχνότητας). Νέο κλικ: διακοπή της αναζήτησης
+Searching… {0} s	Αναζήτηση… {0} s
+Searching for the mode being heard ({0} s at most)…	Αναζήτηση του τρόπου που ακούγεται (το πολύ {0} s)…
+Mode found: {0} ({1})	Βρέθηκε τρόπος: {0} ({1})
+BW:	ΕΖ:
 Mode:	Τρόπος:
 (mode unchanged)	(τρόπος αμετάβλητος)
 Edit…	Επεξεργασία…

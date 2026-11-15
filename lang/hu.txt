@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: a beállításokat elutasította
 listening at %d Hz	figyelés %d Hz-en
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	szinkronban, S/N %.0f dB, eltérés %+.0f Hz, közép %d Hz
 searching for a signal… (centre %d Hz)	jel keresése… (közép %d Hz)
+VIS header received	VIS fejléc érkezett
+start tone received	Indítóhang érkezett
+{0} message(s)	{0} üzenet
 listening at {0:F0} Hz	hallgatás {0:F0} Hz-en
 signal at {0:F0} Hz	jel {0:F0} Hz-en
 reversed	Fordított
@@ -227,6 +230,8 @@ Reset the program…	A program alaphelyzetbe állítása…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: a program alaphelyzetbe állítása, gomb színe)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Név vagy hívójel, amelyet a hang előtt ezt kérő WebSDR-ek (KiwiSDR, websdr.org) automatikusan megkapnak. Kattintás: módosítás (jobb klikk: gomb színe)
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
+Auto notch (DNF)	Auto notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Jelölőnégyzet: automatikus notch be / ki. Kattintás a gombra: kikapcsolva digitális üzemmódokban és FreeDV-ben, szint 1-től 10-ig (jobb kattintás: a gomb színe)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Újraindítja az aktuális WebSDR-t (például ha tétlenség miatt leállt). Kattintás: újraindítás a beállítások megtartásával (frekvencia, üzemmód, szűrő, nagyítás, hangerő). Jobb kattintás: automatikus újraindítás a hang elvesztésekor (Auto) és annak késleltetése, a WebSDR teljes alaphelyzetbe állítása, a gomb színei
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	rigctld indítása:
 Sync mode	Üzemmód szinkronizálása
 Mute WebSDR while transmitting	WebSDR némítása adás közben
-Auto notch (DNF)	Auto notch (DNF)
 Reduced view	Csökkentett nézet
 Mini view	Mini nézet
 Always on top	Mindig felül
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT gombok
 Both ways	Kétirányú
 Rig → WebSDR	Rádió → WebSDR
 WebSDR → Rig	WebSDR → Rádió
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → Rádió
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitális üzemmódok: a dekódolás egy, az oldal fölötti ablakban jelenik meg (kattintás: be / ki; jobb kattintás: üzemmód választása, jobb kattintás egy üzemmódon: annak beállításai)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Hosszú nyomás, majd húzás: az ablak áthelyezése; szél vagy sarok húzása: átméretezés (jobb kattintás: üzemmódok és beállítások)
 Reset the windows	Ablakok visszaállítása
+Separate window (can go on another screen)	Külön ablak (másik képernyőre is tehető)
+Full screen (F11 or double-click; Esc to leave)	Teljes képernyő (F11 vagy dupla kattintás; kilépés: Esc)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Üzemmód választásakor: ugrás a legközelebbi frekvenciájára (Memóriák > Digitális üzemmódok)
 image complete	a kép elkészült
 signal lost	a jel elveszett
 Nothing to save	Nincs mit menteni
 Hell: could not save	Hell: a mentés nem sikerült
+Digital modes: separate window, to place wherever you want (even on another screen)	Digitális üzemmódok: külön ablak, bárhová elhelyezhető (akár másik képernyőre is)
+Digital modes: window back on the page	Digitális üzemmódok: ablak vissza az oldalra
 {0}: decoding on	{0}: dekódolás be
 {0}: decoding off	{0}: dekódolás ki
 {0} settings	{0}-beállítások
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	Az SDRLink nem tud kom
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Kattintás: frekvencia-billentyűzet és a legutóbbi frekvenciák Mem listája; görgő: frekvencia váltása (jobb kattintás: színek)
 No frequency to store (no rig, no WebSDR).	Nincs tárolható frekvencia (sem rádió, sem WebSDR).
 Stored: {0} kHz	Tárolva: {0} kHz
+Auto notch off in digital modes	Auto notch kikapcsolva digitális üzemmódokban
+Auto notch off in FreeDV V1 and V2	Auto notch kikapcsolva FreeDV V1 és V2 alatt
+Notch level:	Notch szint:
+1 (original setting)	1 (eredeti beállítás)
+10 (strongest)	10 (legerősebb)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Az automatikus notch érzékeli a WebSDR hangjában lévő állandó füttyöket (vivőket), és csillapítja őket. A gombon lévő jelölőnégyzet be- vagy kikapcsolja. A szint, 1-től (eredeti beállítás) 10-ig, növeli a kezelt füttyök számát (4–8) és a hatás erősségét; magas szint egy hangot kitartó emberi hangot is befolyásolhat. A jelölőnégyzet törlése nélkül kikapcsol digitális üzemmód alatt (futó dekóder vagy DIGI mód) és FreeDV alatt, ha a fenti lehetőségek be vannak jelölve: károsítaná a dekódolandó jeleket. Az SDRLINK kábel és a dekóderek mindig notch nélkül kapják a hangot.
+, off in digital modes	, kikapcsolva digitális üzemmódokban
+, off in FreeDV	, kikapcsolva FreeDV alatt
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	A WebSDR vételi sávszélessége, üzemmódonként megjegyezve (CW, USB/LSB, AM, FM, DIGI), minden WebSDR-en és újraindítás után is. „Alapértelmezett szűrő”: a WebSDR saját szűrője.
+Default filter	Alapértelmezett szűrő
+Other…	Egyéb…
+Bandwidth	Sávszélesség
+Invalid bandwidth (0.1 to 15 kHz)	Érvénytelen sávszélesség (0,1–15 kHz)
+Mode?	Mód?
+Mode search: no WebSDR or rig to listen to	Üzemmódkeresés: nincs hallgatható WebSDR vagy rádió
+Mode search stopped	Üzemmódkeresés leállítva
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Üzemmódkeresés: nem ismerhető fel üzemmód (túl gyenge jel, nem támogatott üzemmód, vagy WSPR / JT9 / Hell, amelyek túl lassúak a felismeréshez)
+Auto notch: level {0}{1}{2}	Auto notch: szint {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Sávszélesség kHz-ben, {0} (0,1–15):
+{0} bandwidth: WebSDR default filter	{0} sávszélesség: a WebSDR alapértelmezett szűrője
+{0} bandwidth: {1}	{0} sávszélesség: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	A hallott digitális üzemmód keresése: legfeljebb {0} s-ig próbálja a hangot ezekkel: FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW és Olivia; a felismert üzemmódot kiválasztja és elindítja a dekódolását (frekvenciaváltás nélkül). Újabb kattintás: a keresés leállítása
+Searching… {0} s	Keresés… {0} s
+Searching for the mode being heard ({0} s at most)…	A hallott üzemmód keresése (legfeljebb {0} s)…
+Mode found: {0} ({1})	Talált üzemmód: {0} ({1})
+BW:	Ssz:
 Mode:	Üzemmód:
 (mode unchanged)	(üzemmód változatlan)
 Edit…	Szerkesztés…

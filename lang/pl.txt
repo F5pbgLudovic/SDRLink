@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: ustawienia odrzucone
 listening at %d Hz	nasłuch na %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	zsynchronizowano, S/N %.0f dB, odchyłka %+.0f Hz, środek %d Hz
 searching for a signal… (centre %d Hz)	szukanie sygnału… (środek %d Hz)
+VIS header received	Odebrano nagłówek VIS
+start tone received	Odebrano ton startowy
+{0} message(s)	Wiadomości: {0}
 listening at {0:F0} Hz	nasłuch na {0:F0} Hz
 signal at {0:F0} Hz	sygnał na {0:F0} Hz
 reversed	Odwrócona
@@ -227,6 +230,8 @@ Reset the program…	Przywróć program do stanu początkowego…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksport lub import wszystkich ustawień, dla tej samej konfiguracji na innym komputerze (prawy klik: przywróć program do stanu początkowego, kolor przycisku)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nazwa lub znak wywoławczy podawany automatycznie odbiornikom WebSDR, które proszą o nie przed dźwiękiem (KiwiSDR, websdr.org). Kliknięcie: zmiana (prawy przycisk: kolor przycisku)
 Right-click: receivers muted while transmitting	Prawy klik: odbiorniki wyciszane podczas nadawania
+Auto notch (DNF)	Autom. notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Pole: automatyczny notch wł. / wył. Kliknięcie przycisku: wyłączony w emisjach cyfrowych i FreeDV, poziom od 1 do 10 (prawy przycisk: kolor przycisku)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Ponownie uruchamia bieżący WebSDR (na przykład zatrzymany po okresie bezczynności). Kliknięcie: ponowne uruchomienie z zachowaniem ustawień (częstotliwość, emisja, filtr, powiększenie, głośność). Prawy przycisk: automatyczne ponowne uruchomienie po utracie dźwięku (Auto) i jego opóźnienie, całkowity reset WebSDR, kolory przycisku
 Save: no known frequency (rig or WebSDR)	Zapisz: brak znanej częstotliwości (TRX lub WebSDR)
 Store the current frequency…	Zapamiętaj bieżącą częstotliwość…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Uruchom rigctld:
 Sync mode	Synchronizuj emisję
 Mute WebSDR while transmitting	Wycisz WebSDR podczas nadawania
-Auto notch (DNF)	Autom. notch (DNF)
 Reduced view	Widok zmniejszony
 Mini view	Widok mini
 Always on top	Zawsze na wierzchu
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	Przyciski MOX/VOX/TX/PTT
 Both ways	Dwukierunkowo
 Rig → WebSDR	TRX → WebSDR
 WebSDR → Rig	WebSDR → TRX
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → TRX
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Tryby cyfrowe: dekodowanie jest wyświetlane w oknie nad stroną (kliknięcie: wł. / wył.; prawy przycisk: wybór trybu, prawy przycisk na trybie: jego ustawienia)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Długie naciśnięcie i przeciągnięcie: przesuń okno; przeciągnięcie krawędzi lub rogu: zmień rozmiar (prawy przycisk: tryby i ustawienia)
 Reset the windows	Przywróć okna
+Separate window (can go on another screen)	Osobne okno (może być na innym ekranie)
+Full screen (F11 or double-click; Esc to leave)	Pełny ekran (F11 lub dwuklik; Esc, aby wyjść)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Przy wyborze emisji: przejście na jej najbliższą częstotliwość (Pamięci > Emisje cyfrowe)
 image complete	obraz ukończony
 signal lost	sygnał utracony
 Nothing to save	Nic do zapisania
 Hell: could not save	Hell: nie udało się zapisać
+Digital modes: separate window, to place wherever you want (even on another screen)	Emisje cyfrowe: osobne okno, do umieszczenia gdziekolwiek (nawet na innym ekranie)
+Digital modes: window back on the page	Emisje cyfrowe: okno z powrotem na stronie
 {0}: decoding on	{0}: dekodowanie wł.
 {0}: decoding off	{0}: dekodowanie wył.
 {0} settings	Ustawienia {0}
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nie może komu
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: klawiatura częstotliwości i lista Mem ostatnich częstotliwości; kółko: zmiana częstotliwości (prawy klik: kolory)
 No frequency to store (no rig, no WebSDR).	Brak częstotliwości do zapisania (ani radiostacji, ani WebSDR).
 Stored: {0} kHz	Zapisano: {0} kHz
+Auto notch off in digital modes	Autom. notch wyłączony w emisjach cyfrowych
+Auto notch off in FreeDV V1 and V2	Autom. notch wyłączony w FreeDV V1 i V2
+Notch level:	Poziom notcha:
+1 (original setting)	1 (ustawienie pierwotne)
+10 (strongest)	10 (najsilniejszy)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatyczny notch wykrywa stałe gwizdy (nośne) w dźwięku WebSDR i je tłumi. Pole na przycisku włącza go lub wyłącza. Poziom, od 1 (ustawienie pierwotne) do 10, zwiększa liczbę obsługiwanych gwizdów (od 4 do 8) i siłę działania; wysoki poziom może też wpływać na głos trzymający nutę. Jest wyłączany, bez odznaczania pola, podczas emisji cyfrowej (działający dekoder lub tryb DIGI) i podczas FreeDV, jeśli powyższe opcje są zaznaczone: uszkodziłby sygnały do dekodowania. Kabel SDRLINK i dekodery zawsze otrzymują dźwięk bez notcha.
+, off in digital modes	, wyłączony w emisjach cyfrowych
+, off in FreeDV	, wyłączony w FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Szerokość pasma odbioru WebSDR, zapamiętana dla każdej emisji (CW, USB/LSB, AM, FM, DIGI), na każdym WebSDR i po ponownym uruchomieniu. „Filtr domyślny”: własny filtr WebSDR.
+Default filter	Filtr domyślny
+Other…	Inna…
+Bandwidth	Szerokość pasma
+Invalid bandwidth (0.1 to 15 kHz)	Nieprawidłowa szerokość pasma (od 0,1 do 15 kHz)
+Mode?	Emisja?
+Mode search: no WebSDR or rig to listen to	Szukanie emisji: brak WebSDR lub radia do słuchania
+Mode search stopped	Szukanie emisji zatrzymane
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Szukanie emisji: nie rozpoznano emisji (zbyt słaby sygnał, nieobsługiwana emisja lub WSPR / JT9 / Hell, zbyt wolne do rozpoznania)
+Auto notch: level {0}{1}{2}	Autom. notch: poziom {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Szerokość pasma w kHz dla {0} (od 0,1 do 15):
+{0} bandwidth: WebSDR default filter	Szerokość pasma {0}: filtr domyślny WebSDR
+{0} bandwidth: {1}	Szerokość pasma {0}: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Szukanie słyszanej emisji cyfrowej: przez maksymalnie {0} s dźwięk jest próbowany z FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW i Olivia; rozpoznana emisja jest wybierana i uruchamiane jest jej dekodowanie (bez zmiany częstotliwości). Ponowne kliknięcie: zatrzymanie szukania
+Searching… {0} s	Szukanie… {0} s
+Searching for the mode being heard ({0} s at most)…	Szukanie słyszanej emisji (maks. {0} s)…
+Mode found: {0} ({1})	Znaleziono emisję: {0} ({1})
+BW:	SP:
 Mode:	Emisja:
 (mode unchanged)	(emisja bez zmian)
 Edit…	Edytuj…

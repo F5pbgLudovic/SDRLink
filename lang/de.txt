@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: Einstellungen abgelehnt
 listening at %d Hz	Empfang bei %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	synchron, S/N %.0f dB, Versatz %+.0f Hz, Mitte %d Hz
 searching for a signal… (centre %d Hz)	Suche nach einem Signal… (Mitte %d Hz)
+VIS header received	VIS-Header empfangen
+start tone received	Startton empfangen
+{0} message(s)	{0} Nachricht(en)
 listening at {0:F0} Hz	Empfang bei {0:F0} Hz
 signal at {0:F0} Hz	Signal bei {0:F0} Hz
 reversed	Invertiert
@@ -227,6 +230,8 @@ Reset the program…	Programm zurücksetzen…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Alle Einstellungen exportieren oder importieren, für dieselbe Konfiguration auf einem anderen Computer (Rechtsklick: Programm zurücksetzen, Farbe der Schaltfläche)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Name oder Rufzeichen, das WebSDRs automatisch erhalten, die vor dem Ton danach fragen (KiwiSDR, websdr.org). Klick: ändern (Rechtsklick: Schaltflächenfarbe)
 Right-click: receivers muted while transmitting	Rechtsklick: beim Senden stummgeschaltete Empfänger
+Auto notch (DNF)	Auto-Notch (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Kästchen: automatischer Notch ein / aus. Klick auf die Schaltfläche: aus bei digitalen Betriebsarten und FreeDV, Stufe 1 bis 10 (Rechtsklick: Farbe der Schaltfläche)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Startet den aktuellen WebSDR neu (zum Beispiel nach einer Inaktivitätszeit angehalten). Klick: Neustart mit Beibehaltung der Einstellungen (Frequenz, Betriebsart, Filter, Zoom, Lautstärke). Rechtsklick: automatischer Neustart bei Tonverlust (Auto) und seine Wartezeit, vollständiges Zurücksetzen des WebSDR, Farben der Schaltfläche
 Save: no known frequency (rig or WebSDR)	Save: keine Frequenz bekannt (TRX oder WebSDR)
 Store the current frequency…	Aktuelle Frequenz speichern…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	rigctld starten:
 Sync mode	Mode synchronisieren
 Mute WebSDR while transmitting	WebSDR beim Senden stumm
-Auto notch (DNF)	Auto-Notch (DNF)
 Reduced view	Reduzierte Ansicht
 Mini view	Mini-Ansicht
 Always on top	Immer im Vordergrund
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	MOX/VOX/TX/PTT-Tasten
 Both ways	Beide Richtungen
 Rig → WebSDR	TRX → WebSDR
 WebSDR → Rig	WebSDR → TRX
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → TRX
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitale Betriebsarten: Die Dekodierung wird in einem Fenster über der Seite angezeigt (Klick: ein / aus; Rechtsklick: Betriebsart wählen, Rechtsklick auf eine Betriebsart: ihre Einstellungen)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Lange drücken, dann ziehen: Fenster verschieben; an einem Rand oder einer Ecke ziehen: Größe ändern (Rechtsklick: Betriebsarten und Einstellungen)
 Reset the windows	Fenster zurücksetzen
+Separate window (can go on another screen)	Separates Fenster (kann auf einen anderen Bildschirm)
+Full screen (F11 or double-click; Esc to leave)	Vollbild (F11 oder Doppelklick; Esc zum Verlassen)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Wahl einer Betriebsart: zu ihrer nächstgelegenen Frequenz gehen (Speicher > Digitale Betriebsarten)
 image complete	Bild fertig
 signal lost	Signal verloren
 Nothing to save	Nichts zu speichern
 Hell: could not save	Hell: Speichern nicht möglich
+Digital modes: separate window, to place wherever you want (even on another screen)	Digitale Betriebsarten: separates Fenster, beliebig platzierbar (auch auf einem anderen Bildschirm)
+Digital modes: window back on the page	Digitale Betriebsarten: Fenster zurück auf die Seite
 {0}: decoding on	{0}: Dekodierung ein
 {0}: decoding off	{0}: Dekodierung aus
 {0} settings	{0}-Einstellungen
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink kann über Omn
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klick: Frequenztastatur und Mem-Liste der letzten Frequenzen; Mausrad: Frequenz ändern (Rechtsklick: Farben)
 No frequency to store (no rig, no WebSDR).	Keine Frequenz zum Speichern (weder Funkgerät noch WebSDR).
 Stored: {0} kHz	Gespeichert: {0} kHz
+Auto notch off in digital modes	Auto-Notch aus bei digitalen Betriebsarten
+Auto notch off in FreeDV V1 and V2	Auto-Notch aus bei FreeDV V1 und V2
+Notch level:	Notch-Stufe:
+1 (original setting)	1 (ursprüngliche Einstellung)
+10 (strongest)	10 (am stärksten)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Der automatische Notch erkennt gleichbleibende Pfeiftöne (Träger) im WebSDR-Ton und dämpft sie. Das Kästchen auf der Schaltfläche schaltet ihn ein oder aus. Die Stufe, von 1 (ursprüngliche Einstellung) bis 10, erhöht die Zahl der behandelten Pfeiftöne (4 bis 8) und die Stärke der Wirkung; eine hohe Stufe kann auch eine Stimme beeinflussen, die einen Ton hält. Er wird, ohne das Häkchen zu entfernen, während einer digitalen Betriebsart (laufender Decoder oder DIGI-Modus) und während FreeDV ausgeschaltet, wenn die obigen Optionen angehakt sind: er würde die zu decodierenden Signale beschädigen. Das SDRLINK-Kabel und die Decoder erhalten den Ton immer ohne Notch.
+, off in digital modes	, aus bei digitalen Betriebsarten
+, off in FreeDV	, aus bei FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR-Empfangsbandbreite, für jeden Modus gespeichert (CW, USB/LSB, AM, FM, DIGI), auf jedem WebSDR und nach einem Neustart. „Standardfilter“: der eigene Filter des WebSDR.
+Default filter	Standardfilter
+Other…	Andere…
+Bandwidth	Bandbreite
+Invalid bandwidth (0.1 to 15 kHz)	Ungültige Bandbreite (0,1 bis 15 kHz)
+Mode?	Modus?
+Mode search: no WebSDR or rig to listen to	Betriebsartsuche: kein WebSDR oder Funkgerät zum Abhören
+Mode search stopped	Betriebsartsuche gestoppt
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Betriebsartsuche: keine Betriebsart erkannt (Signal zu schwach, nicht unterstützte Betriebsart oder WSPR / JT9 / Hell, zu langsam zum Erkennen)
+Auto notch: level {0}{1}{2}	Auto-Notch: Stufe {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Bandbreite in kHz für {0} (0,1 bis 15):
+{0} bandwidth: WebSDR default filter	Bandbreite {0}: Standardfilter des WebSDR
+{0} bandwidth: {1}	Bandbreite {0}: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Suche nach der gehörten digitalen Betriebsart: höchstens {0} s lang wird der Ton mit FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW und Olivia probiert; die erkannte Betriebsart wird gewählt und ihre Decodierung gestartet (ohne Frequenzwechsel). Erneuter Klick: Suche stoppen
+Searching… {0} s	Suche… {0} s
+Searching for the mode being heard ({0} s at most)…	Suche nach der gehörten Betriebsart (höchstens {0} s)…
+Mode found: {0} ({1})	Betriebsart gefunden: {0} ({1})
+BW:	BB:
 Mode:	Betriebsart:
 (mode unchanged)	(Betriebsart unverändert)
 Edit…	Bearbeiten…

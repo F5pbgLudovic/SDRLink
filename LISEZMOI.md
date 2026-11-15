@@ -22,9 +22,9 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 
 1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Connexion... / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Look ▾**, **Panneau de commande**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
-3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)**, **Conf scan**, **▶ Scan**.
-4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
-5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25).
+3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (case dans le bouton ; clic : options et niveau), **Conf scan**, **▶ Scan**.
+4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
+5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC** et **Réinit WebSDR** (depuis la 1.31).
 7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
 
@@ -35,7 +35,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Connecter | couleur quand connecté / déconnecté / poste qui ne répond pas encore |
 | Ouvrir le journal, Look, Panneau de commande, Taille du texte, Vérifier les mises à jour, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Pseudo/Call | couleur du bouton |
 | FreeDV auto | pas de menu : le clic droit passe de RADE V1 à RADE V2 et inversement (depuis la 1.24) |
-| Modes numériques (bouton et fenêtre posée sur la page) | les 14 modes (clic gauche : choisir et lancer ; clic droit : choisir et ouvrir les réglages), **Réglages <mode>…**, **Effacer le texte reçu**, **Ouvrir le dossier des images**, **Réinitialiser la fenêtre <mode>**, **Réinitialiser les fenêtres** (depuis la 1.25) |
+| Modes numériques (bouton et fenêtre posée sur la page) | les 14 modes (clic gauche : choisir et lancer ; clic droit : choisir et ouvrir les réglages), **Réglages <mode>…**, **Effacer le texte reçu**, **Ouvrir le dossier des images**, **Réinitialiser la fenêtre <mode>**, **Réinitialiser les fenêtres** (depuis la 1.25), **Fenêtre séparée**, **Plein écran**, **Choix d'un mode : aller sur sa fréquence la plus proche** (depuis la 1.38) |
 | Import/Export | **Réinitialiser le programme…** (depuis la 1.22), couleur du bouton |
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
@@ -257,6 +257,10 @@ Bouton **FreeDV auto V1** (barre WebSDR, après « Rechercher des WebSDR… », 
 Bouton des **modes numériques** (barre WebSDR, après « FreeDV auto », depuis la 1.25) : un seul bouton pour tous les décodeurs repris de PhoneSDRLink, plus WEFAX. Son texte est le nom du mode choisi (« SSTV » au départ).
 - **Clic** : marche / arrêt (arrêt au départ). Couleurs : normales à l'arrêt, **vert** en écoute, **orange** pendant une réception (image SSTV ou WEFAX en cours, texte ou message décodé il y a moins de 2 s, image Hell qui s'écrit).
 - **Clic droit** (sur le bouton ou sur la fenêtre du mode) : menu des modes. **Clic gauche sur un mode** : il devient le mode du bouton et le décodage se met en marche. **Clic droit sur un mode** : même chose, et la fenêtre de **réglages** de ce mode s'ouvre ; si c'était déjà le mode choisi, seule la fenêtre de réglages s'ouvre. En bas du menu : **Réglages <mode>…**, **Effacer le texte reçu** (modes à texte), **Ouvrir le dossier des images**, **Réinitialiser la fenêtre <mode>** (seule la fenêtre du mode affiché reprend sa place et sa taille d'origine), **Réinitialiser les fenêtres** (toutes les fenêtres des modes reprennent leur place, en bas à gauche, et leur taille d'origine).
+- **Accord automatique** (depuis la 1.38) : choisir un mode dans le menu accorde sur **sa fréquence d'usage la plus proche** de la fréquence actuelle (liste « Modes numériques » des Mémoires, région IARU choisie), avec le mode du récepteur (USB, CW…), selon le sens de synchronisation. Par exemple vers 7100 kHz : FT8 → 7074, RTTY → 7040, CW → 7030. Case **Choix d'un mode : aller sur sa fréquence la plus proche** dans le même menu pour l'arrêter.
+- **Fenêtre séparée** et **plein écran** (depuis la 1.38), dans le même menu : **Fenêtre séparée (déplaçable sur un autre écran)** sort la fenêtre du mode de la page : elle devient une fenêtre normale, à placer et agrandir où l'on veut, par exemple sur un **second écran**. **Plein écran** la met sur tout l'écran où elle se trouve ; aussi **F11** ou **double-clic** dans la fenêtre, **Échap** pour sortir. Fermer la fenêtre séparée la remet sur la page (le décodage continue). Place, fenêtre séparée et plein écran sont retenus, même après redémarrage ; **Réinitialiser la fenêtre** la ramène à côté de SDRLink.
+- Bouton **Mode ?** (depuis la 1.38), juste après le bouton des modes : **recherche du mode écouté**. Pendant **33 s au plus** (le bouton devient orange avec le compte à rebours), le son est essayé en même temps avec FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW et Olivia. Un message FT8, FT4, FT2 ou JS8, un en-tête SSTV ou un ton de début WEFAX donnent une réponse sûre tout de suite ; pour RTTY, PSK, CW et Olivia, le texte décodé est noté (indicatifs, CQ, DE, 73, RST…). Le mode reconnu devient celui du bouton et son décodage se met en marche, **sans changer de fréquence**. Nouveau clic : arrêter la recherche. WSPR, JT9 et Hell ne sont pas cherchés (il faudrait plusieurs minutes). Les décodeurs ne tournent que le temps de la recherche.
+- **Contrôle automatique de fréquence** : CW, RTTY et PSK ont leur **AFC** (coché au départ, dans leurs réglages) : le décodeur suit le signal même un peu à côté ou qui glisse. Olivia, Contestia et Hell cherchent eux-mêmes le signal dans le son ; FT8, FT4, FT2, WSPR, JT9 et JS8 décodent toute la bande passante.
 - Modes : **FT8**, **FT4**, **FT2**, **WSPR**, **JT9**, **JS8** (tranches UTC : l'heure du PC doit être exacte), **CW**, **RTTY**, **PSK31 / PSK63**, **Olivia**, **Contestia**, **Hell** (Feld Hell, Slow Hell, Hell X5, X9, FM Hell 105 / 245, Hell 80), **SSTV** (26 modes), **WEFAX** (fac-similé météo, ou FAX radioamateur). Un seul mode décode à la fois ; FreeDV auto peut marcher en même temps.
 - **Fenêtre de réglages** : une explication du mode (fréquences habituelles, colonnes affichées), la **surbrillance** (modes à texte : indicatifs ou textes à repérer, séparés par des virgules, surlignés en vert) et les réglages du décodeur, les mêmes que dans PhoneSDRLink : CW (tonalité, filtre, vitesse, seuils, AFC, AGC), RTTY (débit, décalage, polarité, fréquence, AFC, UOS, squelch), PSK (fréquence, PSK31 / PSK63, AFC, squelch), Olivia et Contestia (tons, bande, centre, inversion, recherche, synchro), Hell (variante, fréquence, squelch, inversion, **Effacer l'écran**, **Enregistrer l'image**), JS8 (vitesse), SSTV (sensibilité, perte data, enregistrement automatique), WEFAX (voir plus bas). **Valeurs par défaut** remet les réglages du mode. Tout est appliqué tout de suite et **retenu, même après redémarrage**, pour chaque mode (comme le mode choisi, la surbrillance et la marche / arrêt).
 - En marche, une **fenêtre** est posée sur la page WebSDR, **en bas à gauche** au départ, avec en légende l'état du décodeur. Modes à texte : les dernières lignes, la plus récente en bas (FT8, FT4, FT2, WSPR, JT9, JS8 : les deux périodes en deux couleurs ; CW, RTTY, PSK, Olivia, Contestia : une ligne datée en UTC environ tous les 70 caractères). SSTV : l'image ligne par ligne. Hell : la bande d'écriture qui défile. WEFAX : le bas de l'image en cours.
@@ -346,7 +350,7 @@ La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'int
 ## Couleurs des boutons (clic droit)
 
 Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le bouton avait déjà un clic droit (PTT, Mémoires, Câble SDRLINK, Mute ExpertSDR…), ce menu est conservé et les couleurs sont ajoutées à la fin.
-- **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Look, Panneau de commande, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export.
+- **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Look, Panneau de commande, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export, Notch auto, Mode ?.
 - **Deux choix, un pour chaque état** :
   - **Connecter** : quand connecté / quand déconnecté / quand le poste ne répond pas encore (orange par défaut) ;
   - **Câble SDRLINK** : quand activé / quand désactivé ;
@@ -453,11 +457,16 @@ Le son du WebSDR est recopié **en permanence, dans tous les modes**, vers un c�
 
 ## Notch automatique (DNF)
 
-Case **Notch auto (DNF)**, au bout de la ligne Synchro : comme le DNF du FT-2000, elle supprime automatiquement les **porteuses et sifflements stables** du son du WebSDR.
-- Jusqu'à 4 raies à la fois. Chaque raie est repérée en environ 0,6 s, puis suivie si elle glisse. L'atténuation mesurée est d'environ 48 dB, jusqu'au niveau du bruit.
-- La parole bouge trop pour être retenue. Une **CW** stable est en revanche supprimée, comme avec le DNF du poste : décocher en CW.
-- Seul le son entendu est filtré, le câble SDRLINK reçoit le son brut (les décodeurs en ont besoin).
-- Le choix est mémorisé.
+Bouton **Notch auto (DNF)**, au bout de la ligne Synchro (depuis la 1.38, la case est dans le bouton, comme « Vérifier les mises à jour ») : comme le DNF du FT-2000, il supprime automatiquement les **porteuses et sifflements stables** du son du WebSDR.
+- **La case** du bouton met le notch en marche ou l'arrête. Le choix est mémorisé.
+- **Un clic ailleurs sur le bouton** ouvre la fenêtre du notch (depuis la 1.38) :
+  - **Notch auto désactivé en mode numérique** (coché au départ) : le notch est coupé, sans décocher la case, quand un décodeur des modes numériques est en marche ou que **DIGI** est le mode ;
+  - **Notch auto désactivé en FreeDV V1 et V2** (coché au départ) : coupé tant que FreeDV auto est en marche ;
+  - **Niveau du notch** de **1** (le notch des versions d'avant) à **10** : le nombre de sifflements traités passe de 4 à 8, ils sont repérés plus vite et plus bas au-dessus du bruit, et chaque coupure est plus large ;
+  - l'explication, puis **Fermer** (ou un clic ailleurs, ou Échap). Tout s'applique tout de suite et est retenu.
+- Au niveau 1 : jusqu'à 4 raies à la fois, chacune repérée en environ 0,6 s puis suivie si elle glisse ; l'atténuation mesurée est d'environ 48 dB, jusqu'au niveau du bruit.
+- La parole bouge trop pour être retenue (un niveau élevé peut toutefois toucher une voix qui tient une note). Une **CW** stable est en revanche supprimée, comme avec le DNF du poste : décocher en CW.
+- Seul le son entendu est filtré, le câble SDRLINK et les décodeurs reçoivent le son brut.
 
 Les boutons gardent toujours la même place : les zones RADIO et WEBSDR ont une largeur fixe. Le mode du WebSDR y est affiché en forme courte (USB, LSB, CW, AM, FM). L'émission est signalée par la fréquence RADIO en rouge et par le bouton PTT. La FM devient NBFM sur KiwiSDR et NFM sur UberSDR et OpenWebRX.
 
@@ -505,7 +514,15 @@ Laisser la souris sur **RADIO** ou **WEBSDR** et tourner la molette. Ce qui boug
 | WebSDR → Radio | radio seule | radio et WebSDR |
 | Désactivée | radio seule | WebSDR seul |
 
-- Le **pas** se choisit dans le menu « Pas » de la même ligne : 100 Hz, 250 Hz, 500 Hz, 1 kHz, 2,5 kHz, 5 kHz ou 10 kHz.
+- Le **pas** se choisit dans la liste « Pas » de la même ligne : 10 Hz, 25 Hz, 50 Hz (depuis la 1.38), 100 Hz, 250 Hz, 500 Hz, 1 kHz, 2,5 kHz, 5 kHz ou 10 kHz. Depuis la 1.38, il est **retenu pour chaque mode** (CW, USB/LSB, AM, FM, DIGI), même après redémarrage ; au départ 10 Hz en CW, 1 kHz en AM et FM, 500 Hz pour les autres.
+
+## Bande passante de réception (depuis la 1.38)
+
+Liste **BP**, après « Pas » : largeur du filtre de réception du WebSDR, **retenue pour chaque mode** (CW, USB/LSB, AM, FM, DIGI), **sur tous les WebSDR** et **après redémarrage**, comme dans PhoneSDRLink.
+- Choix proposés : CW 100 à 800 Hz ; USB/LSB 2,1 à 5 kHz ; AM 6, 8, 10 kHz ; FM 8 à 15 kHz ; DIGI 200 Hz à 4 kHz ; plus **Filtre d'origine** (celui du WebSDR) et **Autre…** (valeur en kHz, de 0,1 à 15).
+- Au départ : CW 300 Hz, USB/LSB 2,9 kHz, AM 6 kHz, FM 8 kHz, DIGI filtre d'origine.
+- En USB et LSB, le filtre commence à 300 Hz de la porteuse, du côté du mode ; en CW, AM et FM, il reste centré.
+- La largeur est remise quand le mode change (bouton de mode, poste, page), quand on change de WebSDR et quand la page est rechargée. Essayé sur KiwiSDR et websdr.org ; OpenWebRX, UberSDR et PhantomSDR sont pris en charge.
 - La fréquence est arrondie au pas : au pas de 1 kHz, on tombe sur des kHz ronds.
 - **Accélération** si le pas est inférieur à 1 kHz, selon le temps entre deux crans :
   - moins de 100 ms : pas × 2 ;
@@ -669,6 +686,12 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.38**
+  - **Modes numériques** : fenêtre séparée, déplaçable sur un **second écran**, et **plein écran** ; choisir un mode **accorde sur sa fréquence d'usage la plus proche** ; bouton **Mode ?** qui reconnaît le mode écouté (33 s au plus) et lance son décodage.
+  - **Bande passante de réception** (liste BP) retenue pour chaque mode, sur tous les WebSDR et après redémarrage.
+  - **Notch auto** : case dans le bouton ; fenêtre avec coupure en mode numérique et en FreeDV, **niveau de 1 à 10**.
+  - **Pas** de 10, 25 et 50 Hz ajoutés ; pas retenu pour chaque mode (CW 10 Hz, AM/FM 1 kHz, autres 500 Hz).
+  - Corrigé : sur websdr.org, une mémoire CW rappelée depuis USB tombait 750 Hz à côté (le mode est maintenant réglé avant la fréquence).
 - **1.37**
   - **Réinit Auto WebSDR** : au clic droit sur Réinit WebSDR, case **Auto** et délai sans son (10 à 60 s) ; le WebSDR est relancé tout seul quand son son est perdu (contrôle toutes les 10 s, 3 essais de suite au plus), jamais quand le son est coupé volontairement (Mute WebSDR, volume à 0, volume ou mute de la page). Le bouton devient « Réinit Auto WebSDR », même largeur, deux couleurs réglables. La réinitialisation totale passe dans ce menu.
   - **REC** et **Mute TX** ont la même taille que **Mute WebSDR** (le choix étroit / large de REC disparaît).

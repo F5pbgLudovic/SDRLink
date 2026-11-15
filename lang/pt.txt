@@ -18,6 +18,9 @@ Olivia: settings refused	Olivia: definições recusadas
 listening at %d Hz	em escuta a %d Hz
 in sync, S/N %.0f dB, offset %+.0f Hz, centre %d Hz	sincronizado, S/N %.0f dB, desvio %+.0f Hz, centro %d Hz
 searching for a signal… (centre %d Hz)	a procurar um sinal… (centro %d Hz)
+VIS header received	Cabeçalho VIS recebido
+start tone received	Tom de início recebido
+{0} message(s)	{0} mensagem(ns)
 listening at {0:F0} Hz	a ouvir em {0:F0} Hz
 signal at {0:F0} Hz	sinal a {0:F0} Hz
 reversed	Invertida
@@ -227,6 +230,8 @@ Reset the program…	Repor o programa…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportar ou importar todas as definições, para a mesma configuração noutro computador (clique direito: repor o programa, cor do botão)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nome ou indicativo dado automaticamente aos WebSDR que o pedem antes do áudio (KiwiSDR, websdr.org). Clique: alterá-lo (clique direito: cor do botão)
 Right-click: receivers muted while transmitting	Clique direito: recetores silenciados ao emitir
+Auto notch (DNF)	Notch auto (DNF)
+Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Caixa: notch automático ligado / desligado. Clique no botão: desligado nos modos digitais e no FreeDV, nível 1 a 10 (clique direito: cor do botão)
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Reinicia o WebSDR atual (por exemplo parado após um tempo de inatividade). Clique: reinício mantendo as suas definições (frequência, modo, filtro, zoom, volume). Clique direito: reinício automático quando o som se perde (Auto) e o seu atraso, reposição total do WebSDR, cores do botão
 Save: no known frequency (rig or WebSDR)	Gravar: nenhuma frequência conhecida (rádio ou WebSDR)
 Store the current frequency…	Memorizar a frequência atual…
@@ -502,7 +507,6 @@ DTR	DTR
 Start rigctld:	Iniciar rigctld:
 Sync mode	Sincronizar modo
 Mute WebSDR while transmitting	Silenciar WebSDR ao emitir
-Auto notch (DNF)	Notch auto (DNF)
 Reduced view	Vista reduzida
 Mini view	Vista mini
 Always on top	Sempre visível
@@ -517,6 +521,9 @@ MOX/VOX/TX/PTT buttons	Botões MOX/VOX/TX/PTT
 Both ways	Bidirecional
 Rig → WebSDR	Rádio → WebSDR
 WebSDR → Rig	WebSDR → Rádio
+10 Hz	10 Hz
+25 Hz	25 Hz
+50 Hz	50 Hz
 100 Hz	100 Hz
 250 Hz	250 Hz
 500 Hz	500 Hz
@@ -527,10 +534,15 @@ WebSDR → Rig	WebSDR → Rádio
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Modos digitais: a descodificação é mostrada numa janela sobre a página (clique: ligar / desligar; clique direito: escolher o modo, clique direito num modo: as suas definições)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Pressão longa e arrastar: mover a janela; arrastar uma margem ou um canto: redimensionar (clique direito: modos e definições)
 Reset the windows	Repor as janelas
+Separate window (can go on another screen)	Janela separada (pode ir para outro ecrã)
+Full screen (F11 or double-click; Esc to leave)	Ecrã inteiro (F11 ou duplo clique; Esc para sair)
+Choosing a mode: go to its nearest frequency (Memories > Digital modes)	Ao escolher um modo: ir para a frequência mais próxima dele (Memórias > Modos digitais)
 image complete	imagem concluída
 signal lost	sinal perdido
 Nothing to save	Nada para guardar
 Hell: could not save	Hell: não foi possível guardar
+Digital modes: separate window, to place wherever you want (even on another screen)	Modos digitais: janela separada, para colocar onde quiser (até noutro ecrã)
+Digital modes: window back on the page	Modos digitais: janela de volta à página
 {0}: decoding on	{0}: descodificação ligada
 {0}: decoding off	{0}: descodificação desligada
 {0} settings	Definições {0}
@@ -559,6 +571,33 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	O SDRLink não consegu
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clique: teclado de frequência e lista Mem das últimas frequências; roda: mudar a frequência (clique direito: cores)
 No frequency to store (no rig, no WebSDR).	Nenhuma frequência para guardar (nem rádio nem WebSDR).
 Stored: {0} kHz	Guardado: {0} kHz
+Auto notch off in digital modes	Notch auto desligado nos modos digitais
+Auto notch off in FreeDV V1 and V2	Notch auto desligado no FreeDV V1 e V2
+Notch level:	Nível do notch:
+1 (original setting)	1 (definição original)
+10 (strongest)	10 (o mais forte)
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	O notch automático deteta assobios constantes (portadoras) no som do WebSDR e atenua-os. A caixa no botão liga-o ou desliga-o. O nível, de 1 (definição original) a 10, aumenta o número de assobios tratados (4 a 8) e a força da ação; um nível alto também pode afetar uma voz que sustenta uma nota. É desligado, sem desmarcar a caixa, durante um modo digital (descodificador em funcionamento ou modo DIGI) e durante o FreeDV, se as opções acima estiverem marcadas: danificaria os sinais a descodificar. O cabo SDRLINK e os descodificadores recebem sempre o som sem notch.
+, off in digital modes	, desligado nos modos digitais
+, off in FreeDV	, desligado no FreeDV
+.	,
+WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Largura de banda de receção do WebSDR, guardada para cada modo (CW, USB/LSB, AM, FM, DIGI), em cada WebSDR e após um reinício. «Filtro predefinido»: o do próprio WebSDR.
+Default filter	Filtro predefinido
+Other…	Outra…
+Bandwidth	Largura de banda
+Invalid bandwidth (0.1 to 15 kHz)	Largura de banda inválida (0,1 a 15 kHz)
+Mode?	Modo?
+Mode search: no WebSDR or rig to listen to	Procura de modo: nenhum WebSDR ou rádio para ouvir
+Mode search stopped	Procura de modo parada
+Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Procura de modo: nenhum modo reconhecido (sinal demasiado fraco, modo não suportado, ou WSPR / JT9 / Hell, demasiado lentos para reconhecer)
+Auto notch: level {0}{1}{2}	Notch auto: nível {0}{1}{2}
+Bandwidth in kHz for {0} (0.1 to 15):	Largura de banda em kHz para {0} (0,1 a 15):
+{0} bandwidth: WebSDR default filter	Largura de banda {0}: filtro predefinido do WebSDR
+{0} bandwidth: {1}	Largura de banda {0}: {1}
+Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search	Procura do modo digital que se ouve: durante {0} s no máximo, o som é testado com FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW e Olivia; o modo reconhecido é escolhido e a sua descodificação iniciada (sem mudar de frequência). Novo clique: parar a procura
+Searching… {0} s	A procurar… {0} s
+Searching for the mode being heard ({0} s at most)…	A procurar o modo que se ouve ({0} s no máximo)…
+Mode found: {0} ({1})	Modo encontrado: {0} ({1})
+BW:	LB:
 Mode:	Modo:
 (mode unchanged)	(modo inalterado)
 Edit…	Modificar…
