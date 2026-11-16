@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	Suche nach einem Signal… (Mitte %d Hz
 VIS header received	VIS-Header empfangen
 start tone received	Startton empfangen
 {0} message(s)	{0} Nachricht(en)
+{0} slot rhythm recognised, sound delay {1} s	{0}-Zeitfensterrhythmus erkannt, Tonverzögerung {1} s
+around {0} Hz: 	bei etwa {0} Hz: 
 listening at {0:F0} Hz	Empfang bei {0:F0} Hz
 signal at {0:F0} Hz	Signal bei {0:F0} Hz
 reversed	Invertiert
@@ -587,6 +589,7 @@ Bandwidth	Bandbreite
 Invalid bandwidth (0.1 to 15 kHz)	Ungültige Bandbreite (0,1 bis 15 kHz)
 Mode?	Modus?
 Mode search: no WebSDR or rig to listen to	Betriebsartsuche: kein WebSDR oder Funkgerät zum Abhören
+: waiting for a decoded message…	: warte auf eine dekodierte Nachricht…
 Mode search stopped	Betriebsartsuche gestoppt
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Betriebsartsuche: keine Betriebsart erkannt (Signal zu schwach, nicht unterstützte Betriebsart oder WSPR / JT9 / Hell, zu langsam zum Erkennen)
 Auto notch: level {0}{1}{2}	Auto-Notch: Stufe {0}{1}{2}

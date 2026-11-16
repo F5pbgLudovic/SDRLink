@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	meklē signālu… (centrs %d Hz)
 VIS header received	Saņemta VIS galvene
 start tone received	Saņemts sākuma tonis
 {0} message(s)	Ziņojumi: {0}
+{0} slot rhythm recognised, sound delay {1} s	atpazīts {0} intervālu ritms, skaņas aizkave {1} s
+around {0} Hz: 	ap {0} Hz: 
 listening at {0:F0} Hz	klausās uz {0:F0} Hz
 signal at {0:F0} Hz	signāls uz {0:F0} Hz
 reversed	Apgriezta
@@ -587,6 +589,7 @@ Bandwidth	Joslas platums
 Invalid bandwidth (0.1 to 15 kHz)	Nederīgs joslas platums (no 0,1 līdz 15 kHz)
 Mode?	Veids?
 Mode search: no WebSDR or rig to listen to	Darba veida meklēšana: nav WebSDR vai stacijas, ko klausīties
+: waiting for a decoded message…	: gaida dekodētu ziņu…
 Mode search stopped	Darba veida meklēšana apturēta
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Darba veida meklēšana: neviens darba veids nav atpazīts (pārāk vājš signāls, neatbalstīts darba veids vai WSPR / JT9 / Hell, kas ir pārāk lēni atpazīšanai)
 Auto notch: level {0}{1}{2}	Autom. notch: līmenis {0}{1}{2}

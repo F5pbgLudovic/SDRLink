@@ -44,8 +44,52 @@ namespace SDRLink
         {
             for (int i = 0; i < N; i++) { re[i] = ring[(rp + i) & (N - 1)] * win[i]; im[i] = 0; }
             Fft();
-            for (int b = 0; b < BINS; b++) pw[b] = pw[b] * 0.95 + re[b] * re[b] + im[b] * im[b];
+            Action<double[]> sp = Spectrum;
+            if (sp != null && inst == null) inst = new double[BINS];
+            for (int b = 0; b < BINS; b++)
+            {
+                double p = re[b] * re[b] + im[b] * im[b];
+                pw[b] = pw[b] * 0.95 + p;
+                if (sp != null) inst[b] = p;
+            }
             dirty = true;
+            if (sp != null) sp(inst);
+        }
+
+        double[] inst;
+
+        /** Spectre instantané (puissance par case) à chaque pas, pour qui en a besoin (recherche du mode : rythme des tranches FT8/FT4). */
+        public Action<double[]> Spectrum;
+
+        /** Fréquences (Hz) des pics nets du spectre lissé entre f0 et f1, du plus fort au plus faible : au plus max pics, chacun au moins
+         *  ratio fois au-dessus de la puissance médiane de la plage, espacés d'au moins sep Hz. */
+        public System.Collections.Generic.List<double> Peaks(int max, double f0, double f1, double ratio, double sep)
+        {
+            System.Collections.Generic.List<double> res = new System.Collections.Generic.List<double>();
+            int b0 = Math.Max(2, JRound(f0 / HZ)), b1 = Math.Min(BINS - 3, JRound(f1 / HZ));
+            if (b1 - b0 < 8) return res;
+            double[] sorted = new double[b1 - b0 + 1];
+            for (int b = b0; b <= b1; b++) sorted[b - b0] = pw[b];
+            Array.Sort(sorted);
+            double med = sorted[sorted.Length / 2];
+            if (med <= 0) return res;
+            System.Collections.Generic.List<int> cand = new System.Collections.Generic.List<int>();
+            for (int b = b0; b <= b1; b++)
+            {
+                double p = pw[b - 1] + pw[b] + pw[b + 1];
+                if (p >= pw[b - 2] + pw[b - 1] + pw[b] && p > pw[b] + pw[b + 1] + pw[b + 2] && p > 3 * ratio * med) cand.Add(b);
+            }
+            cand.Sort(delegate(int a, int c) { return (pw[c - 1] + pw[c] + pw[c + 1]).CompareTo(pw[a - 1] + pw[a] + pw[a + 1]); });
+            foreach (int b in cand)
+            {
+                double f = b * HZ;
+                bool near = false;
+                foreach (double g in res) if (Math.Abs(g - f) < sep) { near = true; break; }
+                if (near) continue;
+                res.Add(f);
+                if (res.Count >= max) break;
+            }
+            return res;
         }
 
         void Fft()

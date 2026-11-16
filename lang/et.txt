@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	otsin signaali… (keskpunkt %d Hz)
 VIS header received	VIS-päis vastu võetud
 start tone received	Stardi toon vastu võetud
 {0} message(s)	{0} sõnum(it)
+{0} slot rhythm recognised, sound delay {1} s	{0} ajapesade rütm tuvastatud, heli viivitus {1} s
+around {0} Hz: 	umbes {0} Hz: 
 listening at {0:F0} Hz	kuulamine sagedusel {0:F0} Hz
 signal at {0:F0} Hz	signaal sagedusel {0:F0} Hz
 reversed	Ümberpööratud
@@ -587,6 +589,7 @@ Bandwidth	Ribalaius
 Invalid bandwidth (0.1 to 15 kHz)	Vigane ribalaius (0,1 kuni 15 kHz)
 Mode?	Režiim?
 Mode search: no WebSDR or rig to listen to	Režiimi otsing: pole WebSDR-i ega raadiojaama, mida kuulata
+: waiting for a decoded message…	: ootan dekodeeritud sõnumit…
 Mode search stopped	Režiimi otsing peatatud
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Režiimi otsing: ühtegi režiimi ei tuvastatud (liiga nõrk signaal, toetamata režiim või WSPR / JT9 / Hell, mis on tuvastamiseks liiga aeglased)
 Auto notch: level {0}{1}{2}	Automaatne notch: tase {0}{1}{2}

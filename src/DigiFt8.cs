@@ -57,6 +57,17 @@ namespace SDRLink
         /** Retard appris (s) entre l'heure UTC et le son reçu. */
         public double ShiftSec { get { lock (sync) return shiftSec; } }
 
+        /** Retard imposé (s), par exemple mesuré sur le rythme des tranches : la dernière tranche complète encore en mémoire est
+         *  décodée de nouveau avec ce retard (au tic suivant), puis les suivantes. */
+        public void SetShift(double sec)
+        {
+            lock (sync)
+            {
+                shiftSec = Math.Max(-0.5, Math.Min(SlotMs / 1000.0 / 2, sec));
+                lastSlot = long.MinValue;
+            }
+        }
+
         // Morceau de son (fil du son) : noté avec son heure d'arrivée.
         public override void Feed(float[] x, int n)
         {

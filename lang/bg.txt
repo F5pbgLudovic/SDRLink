@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	търсене на сигнал… (ц
 VIS header received	Получен VIS хедър
 start tone received	Получен стартов тон
 {0} message(s)	{0} съобщение(я)
+{0} slot rhythm recognised, sound delay {1} s	разпознат ритъм на циклите {0}, закъснение на звука {1} s
+around {0} Hz: 	около {0} Hz: 
 listening at {0:F0} Hz	слушане на {0:F0} Hz
 signal at {0:F0} Hz	сигнал на {0:F0} Hz
 reversed	Обърната
@@ -587,6 +589,7 @@ Bandwidth	Честотна лента
 Invalid bandwidth (0.1 to 15 kHz)	Невалидна честотна лента (от 0,1 до 15 kHz)
 Mode?	Режим?
 Mode search: no WebSDR or rig to listen to	Търсене на режим: няма WebSDR или станция за слушане
+: waiting for a decoded message…	: изчакване на декодирано съобщение…
 Mode search stopped	Търсенето на режим е спряно
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Търсене на режим: не е разпознат режим (твърде слаб сигнал, неподдържан режим или WSPR / JT9 / Hell, твърде бавни за разпознаване)
 Auto notch: level {0}{1}{2}	Авто notch: ниво {0}{1}{2}

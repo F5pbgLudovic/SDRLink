@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	søker etter et signal… (sentrum %d H
 VIS header received	VIS-header mottatt
 start tone received	Starttone mottatt
 {0} message(s)	{0} melding(er)
+{0} slot rhythm recognised, sound delay {1} s	{0}-periodenes rytme gjenkjent, lydforsinkelse {1} s
+around {0} Hz: 	rundt {0} Hz: 
 listening at {0:F0} Hz	lytter på {0:F0} Hz
 signal at {0:F0} Hz	signal på {0:F0} Hz
 reversed	Omvendt
@@ -587,6 +589,7 @@ Bandwidth	Båndbredde
 Invalid bandwidth (0.1 to 15 kHz)	Ugyldig båndbredde (0,1 til 15 kHz)
 Mode?	Modus?
 Mode search: no WebSDR or rig to listen to	Modussøk: ingen WebSDR eller radio å lytte til
+: waiting for a decoded message…	: venter på en dekodet melding…
 Mode search stopped	Modussøk stoppet
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Modussøk: ingen modus gjenkjent (for svakt signal, modus ikke støttet, eller WSPR / JT9 / Hell, for trege til å gjenkjennes)
 Auto notch: level {0}{1}{2}	Auto-notch: nivå {0}{1}{2}

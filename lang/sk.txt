@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	hľadanie signálu… (stred %d Hz)
 VIS header received	Prijatá hlavička VIS
 start tone received	Prijatý štartovací tón
 {0} message(s)	{0} správ(a)
+{0} slot rhythm recognised, sound delay {1} s	rozpoznaný rytmus cyklov {0}, oneskorenie zvuku {1} s
+around {0} Hz: 	okolo {0} Hz: 
 listening at {0:F0} Hz	počúvanie na {0:F0} Hz
 signal at {0:F0} Hz	signál na {0:F0} Hz
 reversed	Prevrátená
@@ -587,6 +589,7 @@ Bandwidth	Šírka pásma
 Invalid bandwidth (0.1 to 15 kHz)	Neplatná šírka pásma (0,1 až 15 kHz)
 Mode?	Mód?
 Mode search: no WebSDR or rig to listen to	Hľadanie druhu prevádzky: žiadny WebSDR ani transceiver na počúvanie
+: waiting for a decoded message…	: čaká sa na dekódovanú správu…
 Mode search stopped	Hľadanie druhu prevádzky zastavené
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Hľadanie druhu prevádzky: nerozpoznaný žiadny druh prevádzky (príliš slabý signál, nepodporovaný druh prevádzky alebo WSPR / JT9 / Hell, príliš pomalé na rozpoznanie)
 Auto notch: level {0}{1}{2}	Automatický notch: úroveň {0}{1}{2}

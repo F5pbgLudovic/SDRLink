@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	jel keresése… (közép %d Hz)
 VIS header received	VIS fejléc érkezett
 start tone received	Indítóhang érkezett
 {0} message(s)	{0} üzenet
+{0} slot rhythm recognised, sound delay {1} s	{0} időszelet-ritmus felismerve, hangkésés {1} s
+around {0} Hz: 	kb. {0} Hz: 
 listening at {0:F0} Hz	hallgatás {0:F0} Hz-en
 signal at {0:F0} Hz	jel {0:F0} Hz-en
 reversed	Fordított
@@ -587,6 +589,7 @@ Bandwidth	Sávszélesség
 Invalid bandwidth (0.1 to 15 kHz)	Érvénytelen sávszélesség (0,1–15 kHz)
 Mode?	Mód?
 Mode search: no WebSDR or rig to listen to	Üzemmódkeresés: nincs hallgatható WebSDR vagy rádió
+: waiting for a decoded message…	: várakozás dekódolt üzenetre…
 Mode search stopped	Üzemmódkeresés leállítva
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Üzemmódkeresés: nem ismerhető fel üzemmód (túl gyenge jel, nem támogatott üzemmód, vagy WSPR / JT9 / Hell, amelyek túl lassúak a felismeréshez)
 Auto notch: level {0}{1}{2}	Auto notch: szint {0}{1}{2}

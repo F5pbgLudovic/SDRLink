@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	traženje signala… (središte %d Hz)
 VIS header received	Primljeno VIS zaglavlje
 start tone received	Primljen početni ton
 {0} message(s)	{0} poruka(e)
+{0} slot rhythm recognised, sound delay {1} s	prepoznat ritam ciklusa {0}, kašnjenje zvuka {1} s
+around {0} Hz: 	oko {0} Hz: 
 listening at {0:F0} Hz	slušanje na {0:F0} Hz
 signal at {0:F0} Hz	signal na {0:F0} Hz
 reversed	Obrnuto
@@ -587,6 +589,7 @@ Bandwidth	Širina pojasa
 Invalid bandwidth (0.1 to 15 kHz)	Neispravna širina pojasa (0,1 do 15 kHz)
 Mode?	Vrsta?
 Mode search: no WebSDR or rig to listen to	Traženje vrste rada: nema WebSDR-a ni uređaja za slušanje
+: waiting for a decoded message…	: čekanje dekodirane poruke…
 Mode search stopped	Traženje vrste rada zaustavljeno
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Traženje vrste rada: nijedna vrsta rada nije prepoznata (preslab signal, nepodržana vrsta rada ili WSPR / JT9 / Hell, prespori za prepoznavanje)
 Auto notch: level {0}{1}{2}	Automatski notch: razina {0}{1}{2}

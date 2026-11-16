@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	a procurar um sinal… (centro %d Hz)
 VIS header received	Cabeçalho VIS recebido
 start tone received	Tom de início recebido
 {0} message(s)	{0} mensagem(ns)
+{0} slot rhythm recognised, sound delay {1} s	ritmo dos ciclos {0} reconhecido, atraso do som {1} s
+around {0} Hz: 	perto de {0} Hz: 
 listening at {0:F0} Hz	a ouvir em {0:F0} Hz
 signal at {0:F0} Hz	sinal a {0:F0} Hz
 reversed	Invertida
@@ -587,6 +589,7 @@ Bandwidth	Largura de banda
 Invalid bandwidth (0.1 to 15 kHz)	Largura de banda inválida (0,1 a 15 kHz)
 Mode?	Modo?
 Mode search: no WebSDR or rig to listen to	Procura de modo: nenhum WebSDR ou rádio para ouvir
+: waiting for a decoded message…	: à espera de uma mensagem descodificada…
 Mode search stopped	Procura de modo parada
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Procura de modo: nenhum modo reconhecido (sinal demasiado fraco, modo não suportado, ou WSPR / JT9 / Hell, demasiado lentos para reconhecer)
 Auto notch: level {0}{1}{2}	Notch auto: nível {0}{1}{2}

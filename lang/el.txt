@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	αναζήτηση σήματος… (�
 VIS header received	Λήφθηκε κεφαλίδα VIS
 start tone received	Λήφθηκε τόνος έναρξης
 {0} message(s)	{0} μήνυμα(τα)
+{0} slot rhythm recognised, sound delay {1} s	αναγνωρίστηκε ο ρυθμός κύκλων {0}, καθυστέρηση ήχου {1} s
+around {0} Hz: 	γύρω στα {0} Hz: 
 listening at {0:F0} Hz	ακρόαση στα {0:F0} Hz
 signal at {0:F0} Hz	σήμα στα {0:F0} Hz
 reversed	Αντίστροφη
@@ -587,6 +589,7 @@ Bandwidth	Εύρος ζώνης
 Invalid bandwidth (0.1 to 15 kHz)	Μη έγκυρο εύρος ζώνης (0,1 έως 15 kHz)
 Mode?	Τρόπος;
 Mode search: no WebSDR or rig to listen to	Αναζήτηση τρόπου: κανένα WebSDR ή πομποδέκτης για ακρόαση
+: waiting for a decoded message…	: αναμονή για αποκωδικοποιημένο μήνυμα…
 Mode search stopped	Η αναζήτηση τρόπου σταμάτησε
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Αναζήτηση τρόπου: δεν αναγνωρίστηκε κανένας τρόπος (πολύ ασθενές σήμα, μη υποστηριζόμενος τρόπος ή WSPR / JT9 / Hell, πολύ αργοί για αναγνώριση)
 Auto notch: level {0}{1}{2}	Αυτόματο notch: επίπεδο {0}{1}{2}

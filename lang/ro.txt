@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	se caută un semnal… (centru %d Hz)
 VIS header received	Antet VIS recepționat
 start tone received	Ton de start recepționat
 {0} message(s)	{0} mesaj(e)
+{0} slot rhythm recognised, sound delay {1} s	ritmul ciclurilor {0} recunoscut, întârzierea sunetului {1} s
+around {0} Hz: 	în jur de {0} Hz: 
 listening at {0:F0} Hz	ascultare la {0:F0} Hz
 signal at {0:F0} Hz	semnal la {0:F0} Hz
 reversed	Inversată
@@ -587,6 +589,7 @@ Bandwidth	Lățime de bandă
 Invalid bandwidth (0.1 to 15 kHz)	Lățime de bandă nevalidă (0,1 până la 15 kHz)
 Mode?	Mod?
 Mode search: no WebSDR or rig to listen to	Căutare mod: niciun WebSDR sau stație de ascultat
+: waiting for a decoded message…	: se așteaptă un mesaj decodat…
 Mode search stopped	Căutarea modului oprită
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Căutare mod: niciun mod recunoscut (semnal prea slab, mod neacceptat sau WSPR / JT9 / Hell, prea lente pentru a fi recunoscute)
 Auto notch: level {0}{1}{2}	Notch auto: nivel {0}{1}{2}

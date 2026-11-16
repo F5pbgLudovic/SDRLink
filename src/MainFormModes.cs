@@ -331,6 +331,7 @@ namespace SDRLink
         ModeProbe probe;
         DateTime probeEnd;
         System.Windows.Forms.Timer probeTimer;
+        bool probeExtended, probeRhythmShown;
 
         void CreateFindModeButton(Control row)
         {
@@ -381,6 +382,7 @@ namespace SDRLink
             ModeProbe p = new ModeProbe(settings.DigiGet("js8Speed", 1));
             p.Sure += delegate(string mode, string detail) { BeginInvokeSafe(delegate { if (probe == p) StopProbe(mode, detail); }); };
             probe = p;
+            probeExtended = false; probeRhythmShown = false;
             probeEnd = DateTime.UtcNow.AddSeconds(ModeProbe.Seconds);
             if (probeTimer == null)
             {
@@ -388,7 +390,19 @@ namespace SDRLink
                 probeTimer.Tick += delegate
                 {
                     if (probe == null) { probeTimer.Stop(); return; }
-                    if (DateTime.UtcNow >= probeEnd) { string d; int s; string m = probe.BestText(out d, out s); StopProbe(m, d); return; }
+                    string rm = probe.RhythmMode;
+                    if (rm != null && !probeRhythmShown)
+                    {
+                        probeRhythmShown = true;
+                        ShowStatus(probe.RhythmDetail + Lang.T(" : attente d'un message décodé…", ": waiting for a decoded message…"));
+                    }
+                    if (DateTime.UtcNow >= probeEnd)
+                    {
+                        // Rythme FT8 / FT4 reconnu sans message : encore une tranche pour en décoder un (le retard du son vient d'être corrigé).
+                        if (rm != null && !probeExtended) { probeExtended = true; probeEnd = DateTime.UtcNow.AddSeconds(rm == "FT8" ? 20 : 12); UpdateFindModeButton(); return; }
+                        if (rm != null) { StopProbe(rm, probe.RhythmDetail); return; }
+                        string d; int s; string m = probe.BestText(out d, out s); StopProbe(m, d); return;
+                    }
                     string d2; int s2; string m2 = probe.BestText(out d2, out s2);
                     if (m2 != null && s2 >= 3 * ModeProbe.Threshold) { StopProbe(m2, d2); return; }   // texte très clair : inutile d'attendre
                     UpdateFindModeButton();
@@ -414,6 +428,10 @@ namespace SDRLink
             {
                 Log.Write("Recherche du mode : " + mode + " (" + detail + ")");
                 SelectDigiMode(mode, false, true);
+                // Retard du son mesuré pendant la recherche : donné au décodeur FT8 / FT4 / FT2, qui n'a pas à le réapprendre.
+                double? sh = p.ShiftFor(mode);
+                Ft8Engine fe = digi as Ft8Engine;
+                if (sh.HasValue && fe != null && fe.Name == mode) fe.SetShift(sh.Value);
                 ShowStatus(Lang.F("Mode trouvé : {0} ({1})", "Mode found: {0} ({1})", DigiName(mode), detail));
             }
             else

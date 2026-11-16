@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	ieškoma signalo… (centras %d Hz)
 VIS header received	Gauta VIS antraštė
 start tone received	Gautas pradžios tonas
 {0} message(s)	Pranešimų: {0}
+{0} slot rhythm recognised, sound delay {1} s	atpažintas {0} intervalų ritmas, garso vėlavimas {1} s
+around {0} Hz: 	apie {0} Hz: 
 listening at {0:F0} Hz	klausoma {0:F0} Hz dažniu
 signal at {0:F0} Hz	signalas {0:F0} Hz dažniu
 reversed	Atvirkštinis
@@ -587,6 +589,7 @@ Bandwidth	Juostos plotis
 Invalid bandwidth (0.1 to 15 kHz)	Netinkamas juostos plotis (nuo 0,1 iki 15 kHz)
 Mode?	Rūšis?
 Mode search: no WebSDR or rig to listen to	Darbo rūšies paieška: nėra WebSDR ar radijo stoties klausytis
+: waiting for a decoded message…	: laukiama iškoduoto pranešimo…
 Mode search stopped	Darbo rūšies paieška sustabdyta
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Darbo rūšies paieška: neatpažinta jokia darbo rūšis (per silpnas signalas, nepalaikoma darbo rūšis arba WSPR / JT9 / Hell, per lėtos atpažinti)
 Auto notch: level {0}{1}{2}	Autom. notch: lygis {0}{1}{2}

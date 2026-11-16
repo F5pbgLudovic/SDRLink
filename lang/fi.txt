@@ -21,6 +21,8 @@ searching for a signal… (centre %d Hz)	etsitään signaalia… (keskitaajuus %
 VIS header received	VIS-otsake vastaanotettu
 start tone received	Aloitusääni vastaanotettu
 {0} message(s)	{0} viesti(ä)
+{0} slot rhythm recognised, sound delay {1} s	{0}-jaksojen rytmi tunnistettu, äänen viive {1} s
+around {0} Hz: 	noin {0} Hz: 
 listening at {0:F0} Hz	kuunnellaan taajuudella {0:F0} Hz
 signal at {0:F0} Hz	signaali taajuudella {0:F0} Hz
 reversed	Käänteinen
@@ -587,6 +589,7 @@ Bandwidth	Kaistanleveys
 Invalid bandwidth (0.1 to 15 kHz)	Virheellinen kaistanleveys (0,1–15 kHz)
 Mode?	Laji?
 Mode search: no WebSDR or rig to listen to	Lähetelajin haku: ei WebSDR:ää tai radiota kuunneltavana
+: waiting for a decoded message…	: odotetaan dekoodattua viestiä…
 Mode search stopped	Lähetelajin haku pysäytetty
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Lähetelajin haku: lähetelajia ei tunnistettu (liian heikko signaali, ei-tuettu lähetelaji tai WSPR / JT9 / Hell, liian hitaita tunnistettaviksi)
 Auto notch: level {0}{1}{2}	Auto-notch: taso {0}{1}{2}
