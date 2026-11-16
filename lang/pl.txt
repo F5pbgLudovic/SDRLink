@@ -336,6 +336,8 @@ ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port serwera TCI (ExpertSDR, Options > TCI):
 Add memory	Dodaj pamięć
 ; preamp cannot be set on this rig / interface	; przedwzmacniacza nie można ustawić w tej radiostacji / tym interfejsie
+; power cannot be set on this rig / interface	; mocy nie można ustawić w tej radiostacji / tym interfejsie
+ (on return to receive)	 (po powrocie do odbioru)
 Resume the scan	Wznów skanowanie
 Current "Scan setup" setting	Bieżące ustawienie w „Ustawienia skanowania”
 No scan while transmitting	Skanowanie niemożliwe podczas nadawania
@@ -644,18 +646,26 @@ Preamp:	Przedwzmacniacz:
 (preamp unchanged)	(przedwzmacniacz bez zmian)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Ustawienie przedwzmacniacza radiostacji stosowane po przywołaniu tej pamięci (po częstotliwości)
 (mode unchanged)	(emisja bez zmian)
+Power:	Moc:
+set to	ustaw na
+Ceiling:	Limit:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Moc nadawania jest wysyłana przy wywołaniu pamięci, nigdy podczas nadawania. Limit dotyczy wszystkich pamięci: ustaw go odpowiednio do swojego wzmacniacza i anteny.
+Unticked, the rig power is left alone	Bez zaznaczenia moc radiostacji pozostaje bez zmian
+No memory will send more than this ceiling (all memories)	Żadna pamięć nie wyśle więcej niż ten limit (wszystkie pamięci)
 Edit…	Edytuj…
 Digital mode whose usual frequencies are shown	Emisja cyfrowa, której zwykłe częstotliwości są pokazane
 Frequency (kHz)	Częstotliwość (kHz)
 Mode	Emisja
 Preamp	Przedwzmacniacz
+Power	Moc
 Digital modes	Emisje cyfrowe
 Copy…	Kopiuj…
 Select a memory first.	Najpierw wybierz pamięć.
 Edit memory	Edytuj pamięć
-Preamp of the frequency	Przedwzmacniacz częstotliwości
+Preamp and power of the frequency	Przedwzmacniacz i moc częstotliwości
  (here: {0})	 (tutaj: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Zwykłe częstotliwości {0}, {1}. Kliknij, aby się tam dostroić (Edytuj…: przedwzmacniacz; Kopiuj…: dodaj ją do jednej ze swoich list).
+This rig: {0} to {1} W.	Ta radiostacja: od {0} do {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Zwykłe częstotliwości {0}, {1}. Kliknij, aby się tam dostroić (Edytuj…: przedwzmacniacz i moc; Kopiuj…: dodaj ją do jednej ze swoich list).
 {0} memory(ies). Click a memory to go there.	{0} pamięci. Kliknij pamięć, aby się na nią przestroić.
 Tuned to "{0}" ({1} kHz).	Przestrojono na „{0}” ({1} kHz).
 Remove the memory "{0}"?	Usunąć pamięć „{0}”?

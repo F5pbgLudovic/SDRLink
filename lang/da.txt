@@ -336,6 +336,8 @@ ExpertSDR TCI port	TCI-port for ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	TCI-serverens port (ExpertSDR, Options > TCI):
 Add memory	Tilføj hukommelse
 ; preamp cannot be set on this rig / interface	; forforstærkeren kan ikke styres på denne radio / grænseflade
+; power cannot be set on this rig / interface	; effekten kan ikke styres på denne radio / grænseflade
+ (on return to receive)	 (når der skiftes tilbage til modtagelse)
 Resume the scan	Genoptag scanningen
 Current "Scan setup" setting	Aktuel indstilling i "Scanningsopsætning"
 No scan while transmitting	Ingen scanning under sending
@@ -644,18 +646,26 @@ Preamp:	Forforstærker:
 (preamp unchanged)	(forforstærker uændret)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Radioens forforstærkerindstilling, der anvendes når denne hukommelse kaldes frem (efter frekvensen)
 (mode unchanged)	(mode uændret)
+Power:	Effekt:
+set to	sæt til
+Ceiling:	Loft:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Sendeeffekten sendes, når hukommelsen hentes, aldrig under sending. Loftet gælder for alle hukommelser: indstil det efter din forstærker og antenne.
+Unticked, the rig power is left alone	Uden flueben røres radioens effekt ikke
+No memory will send more than this ceiling (all memories)	Ingen hukommelse sender mere end dette loft (alle hukommelser)
 Edit…	Rediger…
 Digital mode whose usual frequencies are shown	Digital mode, hvis sædvanlige frekvenser vises
 Frequency (kHz)	Frekvens (kHz)
 Mode	Mode
 Preamp	Forforstærker
+Power	Effekt
 Digital modes	Digitale modes
 Copy…	Kopiér…
 Select a memory first.	Vælg først en hukommelse.
 Edit memory	Rediger hukommelse
-Preamp of the frequency	Forforstærker for frekvensen
+Preamp and power of the frequency	Forforstærker og effekt for frekvensen
  (here: {0})	 (her: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Sædvanlige frekvenser for {0}, {1}. Klik for at gå dertil (Rediger…: forforstærker; Kopiér…: tilføj den til en af dine lister).
+This rig: {0} to {1} W.	Denne radio: {0} til {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Sædvanlige frekvenser for {0}, {1}. Klik for at gå dertil (Rediger…: forforstærker og effekt; Kopiér…: tilføj den til en af dine lister).
 {0} memory(ies). Click a memory to go there.	{0} hukommelse(r). Klik på en hukommelse for at gå dertil.
 Tuned to "{0}" ({1} kHz).	Indstillet på “{0}” ({1} kHz).
 Remove the memory "{0}"?	Fjern hukommelsen “{0}”?

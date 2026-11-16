@@ -15,6 +15,7 @@ namespace SDRLink
         public int List;
         public bool Scan;   // cochée dans « Conf scan » (scan des mémoires)
         public int Preamp = -1;   // préampli du poste (Preamps : -1 inchangé, 0 sans/IPO, 1 AMP1, 2 AMP2, 3 IPO2), depuis la 1.41
+        public int Power = -1;    // puissance d'émission en watts (-1 inchangée), depuis la 1.42
 
         public const int MaxLists = 10;
 
@@ -34,11 +35,12 @@ namespace SDRLink
 
         public bool Same(Memory m) { return m != null && m.Hz == Hz && m.Name == Name && m.Mode == Mode; }
 
-        // Ligne du fichier de réglages : "nom|Hz|mode|liste|scan|préampli" (scan : 1 si cochée pour le scan ; préampli absent
-        // = inchangé ; les versions d'avant la 1.41 ignorent ce 6e champ).
+        // Ligne du fichier de réglages : "nom|Hz|mode|liste|scan|préampli|puissance" (scan : 1 si cochée pour le scan ; préampli ou
+        // puissance vide ou absent = inchangé ; les versions plus anciennes ignorent les champs en trop).
         public string ToSetting()
         {
             string s = Name.Replace("|", "/") + "|" + Hz.ToString(CultureInfo.InvariantCulture) + "|" + Mode + "|" + List;
+            if (Power >= 0) return s + "|" + (Scan ? "1" : "0") + "|" + (Preamp >= 0 ? Preamp.ToString(CultureInfo.InvariantCulture) : "") + "|" + Power.ToString(CultureInfo.InvariantCulture);
             if (Preamp >= 0) return s + "|" + (Scan ? "1" : "0") + "|" + Preamp.ToString(CultureInfo.InvariantCulture);
             return s + (Scan ? "|1" : "");
         }
@@ -54,6 +56,8 @@ namespace SDRLink
             m.Scan = p.Length >= 5 && p[4] == "1";
             int pre;
             if (p.Length >= 6 && int.TryParse(p[5], NumberStyles.Integer, CultureInfo.InvariantCulture, out pre) && pre >= 0 && pre <= Preamps.MaxCode) m.Preamp = pre;
+            int pw;
+            if (p.Length >= 7 && int.TryParse(p[6], NumberStyles.Integer, CultureInfo.InvariantCulture, out pw) && pw >= 0 && pw <= Powers.LimitMax) m.Power = pw;
             return m;
         }
     }
@@ -72,12 +76,15 @@ namespace SDRLink
         // lignes « MemDigiPre=Hz|mode|code » du fichier de réglages.
         public readonly Dictionary<string, int> DigiPreamps = new Dictionary<string, int>(StringComparer.Ordinal);
 
+        // Puissance (W) choisie pour des fréquences « Modes numériques » (1.42) : lignes « MemDigiPwr=Hz|mode|watts ».
+        public readonly Dictionary<string, int> DigiPowers = new Dictionary<string, int>(StringComparer.Ordinal);
+
         public static string DigiKey(Memory m) { return m.Hz.ToString(CultureInfo.InvariantCulture) + "|" + m.Mode; }
 
         // Préampli des fréquences « Modes numériques » repris dans la liste donnée.
         public List<Memory> WithDigiPreamps(List<Memory> list)
         {
-            foreach (Memory m in list) { int p; m.Preamp = DigiPreamps.TryGetValue(DigiKey(m), out p) ? p : -1; }
+            foreach (Memory m in list) { int p; m.Preamp = DigiPreamps.TryGetValue(DigiKey(m), out p) ? p : -1; m.Power = DigiPowers.TryGetValue(DigiKey(m), out p) ? p : -1; }
             return list;
         }
 
@@ -89,7 +96,7 @@ namespace SDRLink
         // Mémoire utilisée : en tête des dernières utilisées, sans doublon.
         public void Used(Memory m)
         {
-            Memory copy = new Memory(m.Name, m.Hz, m.Mode) { Preamp = m.Preamp };
+            Memory copy = new Memory(m.Name, m.Hz, m.Mode) { Preamp = m.Preamp, Power = m.Power };
             Recent.RemoveAll(delegate(Memory r) { return r.Same(copy); });
             Recent.Insert(0, copy);
             if (Recent.Count > RecentSize) Recent.RemoveRange(RecentSize, Recent.Count - RecentSize);
@@ -114,12 +121,14 @@ namespace SDRLink
         readonly ComboBox cbMode = new ComboBox(), cbList = new ComboBox(), cbPre = new ComboBox();
         static readonly string[] ModeValues = { "", Modes.USB, Modes.LSB, Modes.CW, Modes.CWR, Modes.AM, Modes.FM, Modes.DATAU, Modes.DATAL };
         readonly List<int> preCodes = new List<int>();
+        readonly CheckBox chkPwr = new CheckBox();
+        readonly NumericUpDown nuPwr = new NumericUpDown(), nuLimit = new NumericUpDown();
 
         public Memory Result;
 
         public MemoryEditDialog(string title, Memory m, MemoryBook book) : this(title, m, book, false) { }
 
-        // preampOnly : fréquence de la liste « Modes numériques » (1.41) : seul le préampli se change, le reste est grisé.
+        // preampOnly : fréquence de la liste « Modes numériques » (1.41) : seuls le préampli et la puissance se changent, le reste est grisé.
         public MemoryEditDialog(string title, Memory m, MemoryBook book, bool preampOnly)
         {
             Text = title;
@@ -128,7 +137,7 @@ namespace SDRLink
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
             Font = new Font("Segoe UI", 9f);
-            ClientSize = new Size(480, 230);
+            ClientSize = new Size(480, 322);
 
             Label l1 = new Label { Text = Lang.T("Nom :", "Name:"), Location = new Point(12, 16), AutoSize = true };
             Label l2 = new Label { Text = Lang.T("Fréquence (kHz) :", "Frequency (kHz):"), Location = new Point(12, 50), AutoSize = true };
@@ -162,15 +171,51 @@ namespace SDRLink
             cbMode.SelectedIndex = Math.Max(0, Array.IndexOf(ModeValues, m.Mode));
             for (int i = 0; i < book.ListCount; i++) cbList.Items.Add(FavoritesDialog.ListLabel(book.ListNames, i));
             cbList.SelectedIndex = Math.Max(0, Math.Min(book.ListCount - 1, m.List));
+            // Puissance (1.42) : rien par défaut ; plafond commun à toutes les mémoires ; envoyée seulement en réception (RigWorker).
+            Label l6 = new Label { Text = Lang.T("Puissance :", "Power:"), Location = new Point(12, 186), AutoSize = true };
+            chkPwr.Text = Lang.T("régler à", "set to");
+            chkPwr.SetBounds(130, 184, 80, 23);
+            nuPwr.SetBounds(212, 183, 60, 23);
+            Label lw = new Label { Text = "W", Location = new Point(276, 186), AutoSize = true };
+            Label l7 = new Label { Text = Lang.T("Plafond :", "Ceiling:"), Location = new Point(320, 186), AutoSize = true };
+            nuLimit.SetBounds(384, 183, 60, 23);
+            Label lw2 = new Label { Text = "W", Location = new Point(448, 186), AutoSize = true };
+            nuLimit.Minimum = 1; nuLimit.Maximum = Powers.LimitMax;
+            nuLimit.Value = Math.Max(1, Math.Min(Powers.LimitMax, Powers.Limit));
+            nuPwr.Minimum = 0;
+            nuPwr.Maximum = nuLimit.Value;
+            chkPwr.Checked = m.Power >= 0;
+            nuPwr.Value = Math.Max(0, Math.Min(nuPwr.Maximum, m.Power >= 0 ? m.Power : Math.Min(10, (int)nuLimit.Value)));
+            nuPwr.Enabled = chkPwr.Checked;
+            chkPwr.CheckedChanged += delegate { nuPwr.Enabled = chkPwr.Checked; };
+            nuLimit.ValueChanged += delegate { nuPwr.Maximum = nuLimit.Value; };
+            PowerRange pr = Powers.Current;
+            Label lWarn = new Label { AutoSize = false };
+            lWarn.SetBounds(12, 214, 456, 62);
+            lWarn.Text = Lang.T("Puissance d'émission envoyée en rappelant la mémoire, jamais pendant l'émission. Le plafond vaut pour toutes les mémoires : réglez-le selon votre amplificateur et votre antenne.",
+                "Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.")
+                + (pr != null ? " " + Lang.F("Ce poste : {0} à {1} W.", "This rig: {0} to {1} W.", pr.MinW, pr.MaxW) : "");
+            ToolTip tp = new ToolTip();
+            tp.SetToolTip(chkPwr, Lang.T("Sans coche, la puissance du poste n'est pas touchée", "Unticked, the rig power is left alone"));
+            tp.SetToolTip(nuLimit, Lang.T("Aucune mémoire n'enverra plus que ce plafond (toutes les mémoires)", "No memory will send more than this ceiling (all memories)"));
             Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
             Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
-            ok.SetBounds(300, 190, 80, 28);
-            cancel.SetBounds(386, 190, 80, 28);
+            ok.SetBounds(300, 284, 80, 28);
+            cancel.SetBounds(386, 284, 80, 28);
             AcceptButton = ok;
             CancelButton = cancel;
-            Controls.AddRange(new Control[] { l1, l2, l3, l4, l5, txtName, txtFreq, cbMode, cbList, cbPre, ok, cancel });
+            Controls.AddRange(new Control[] { l1, l2, l3, l4, l5, txtName, txtFreq, cbMode, cbList, cbPre, l6, chkPwr, nuPwr, lw, l7, nuLimit, lw2, lWarn, ok, cancel });
             if (preampOnly) { txtName.Enabled = txtFreq.Enabled = cbMode.Enabled = cbList.Enabled = false; ActiveControl = cbPre; }
             Theme.Apply(this);
+            // Ligne « Puissance » placée selon la longueur des textes (langues).
+            chkPwr.Width = chkPwr.PreferredSize.Width + 2;
+            nuPwr.Left = chkPwr.Right + 2;
+            lw.Left = nuPwr.Right + 4;
+            l7.Left = Math.Max(320, lw.Right + 18);
+            nuLimit.Left = l7.Left + l7.PreferredWidth + 4;
+            lw2.Left = nuLimit.Right + 4;
+            if (lw2.Right + 14 > ClientSize.Width) ClientSize = new Size(lw2.Right + 14, ClientSize.Height);
+            ok.Left = ClientSize.Width - 180; cancel.Left = ClientSize.Width - 94; lWarn.Width = ClientSize.Width - 24;
             FormClosing += delegate(object s, FormClosingEventArgs e)
             {
                 if (DialogResult != DialogResult.OK) return;
@@ -186,6 +231,8 @@ namespace SDRLink
                 Result.List = Math.Max(0, cbList.SelectedIndex);
                 Result.Preamp = preCodes[Math.Max(0, cbPre.SelectedIndex)];
                 Result.Scan = m.Scan;
+                Result.Power = chkPwr.Checked ? (int)nuPwr.Value : -1;
+                Powers.Limit = (int)nuLimit.Value;
             };
         }
 
@@ -286,11 +333,12 @@ namespace SDRLink
             view.FullRowSelect = true;
             view.HideSelection = false;
             view.MultiSelect = false;
-            view.Columns.Add(Lang.T("Nom", "Name"), 190);
-            view.Columns.Add(Lang.T("Fréquence (kHz)", "Frequency (kHz)"), 120);
+            view.Columns.Add(Lang.T("Nom", "Name"), 160);
+            view.Columns.Add(Lang.T("Fréquence (kHz)", "Frequency (kHz)"), 110);
             view.Columns.Add(Lang.T("Mode", "Mode"), 80);
             view.Columns.Add(Lang.T("Préampli", "Preamp"), 90);
-            view.Columns.Add(Lang.T("Liste", "List"), 110);
+            view.Columns.Add(Lang.T("Puissance", "Power"), 70);
+            view.Columns.Add(Lang.T("Liste", "List"), 90);
             // Un clic sur une mémoire change la fréquence tout de suite.
             view.MouseClick += delegate { TuneSelected(); };
             view.KeyDown += delegate(object s, KeyEventArgs e)
@@ -344,7 +392,7 @@ namespace SDRLink
             btnRemoveList.Enabled = ShownList < AllLists && book.ListCount > 1;
             btnAddList.Visible = btnRemoveList.Visible = !dig;
             cbDigi.Visible = cbRegion.Visible = dig;
-            // « Modes numériques » : Modifier… change seulement le préampli de la fréquence (1.41), Copier… prend la place de Supprimer….
+            // « Modes numériques » : Modifier… change seulement le préampli (1.41) et la puissance (1.42) de la fréquence, Copier… prend la place de Supprimer….
             btnEdit.Text = Lang.T("Modifier…", "Edit…");
             btnDel.Text = dig ? Lang.T("Copier…", "Copy…") : Lang.T("Supprimer…", "Remove…");
             view.BeginUpdate();
@@ -353,20 +401,20 @@ namespace SDRLink
             {
                 foreach (Memory m in book.WithDigiPreamps(DigitalFreqs.List(DigiMode, IaruRegion, digiName(DigiMode))))
                 {
-                    ListViewItem it = new ListViewItem(new[] { m.Name, Memory.KHz(m.Hz), Modes.Display(m.Mode), PreampText(m.Preamp), Lang.T("Modes numériques", "Digital modes") });
+                    ListViewItem it = new ListViewItem(new[] { m.Name, Memory.KHz(m.Hz), Modes.Display(m.Mode), PreampText(m.Preamp), Powers.Text(m.Power), Lang.T("Modes numériques", "Digital modes") });
                     it.Tag = m;
                     view.Items.Add(it);
                     if (select != null && select.Hz == m.Hz && select.Mode == m.Mode) it.Selected = true;
                 }
                 view.EndUpdate();
-                lblStatus.Text = Lang.F("Fréquences habituelles de {0}, {1}. Cliquez pour y aller (Modifier… : son préampli ; Copier… : l'ajouter à une de vos listes).",
-                    "Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).", digiName(DigiMode), DigitalFreqs.RegionName(IaruRegion));
+                lblStatus.Text = Lang.F("Fréquences habituelles de {0}, {1}. Cliquez pour y aller (Modifier… : son préampli et sa puissance ; Copier… : l'ajouter à une de vos listes).",
+                    "Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).", digiName(DigiMode), DigitalFreqs.RegionName(IaruRegion));
                 return;
             }
             foreach (Memory m in book.Items)
             {
                 if (ShownList != AllLists && m.List != ShownList) continue;
-                ListViewItem it = new ListViewItem(new[] { m.Name, Memory.KHz(m.Hz), m.Mode == "" ? "—" : Modes.Display(m.Mode), PreampText(m.Preamp), FavoritesDialog.ListLabel(book.ListNames, m.List) });
+                ListViewItem it = new ListViewItem(new[] { m.Name, Memory.KHz(m.Hz), m.Mode == "" ? "—" : Modes.Display(m.Mode), PreampText(m.Preamp), Powers.Text(m.Power), FavoritesDialog.ListLabel(book.ListNames, m.List) });
                 it.Tag = m;
                 view.Items.Add(it);
                 if (m == select) it.Selected = true;
@@ -408,7 +456,7 @@ namespace SDRLink
         // Liste « Modes numériques » : la fréquence choisie est copiée dans une des listes de l'utilisateur.
         void CopySelected(Memory m)
         {
-            Memory c = new Memory(m.Name, m.Hz, m.Mode) { Preamp = m.Preamp };
+            Memory c = new Memory(m.Name, m.Hz, m.Mode) { Preamp = m.Preamp, Power = m.Power };
             c.List = Math.Min(book.CurrentList, book.ListCount - 1);
             using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Ajouter une mémoire", "Add memory"), c, book))
             {
@@ -427,20 +475,23 @@ namespace SDRLink
             using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Modifier la mémoire", "Edit memory"), m, book))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
-                m.Name = d.Result.Name; m.Hz = d.Result.Hz; m.Mode = d.Result.Mode; m.List = d.Result.List; m.Preamp = d.Result.Preamp;
+                m.Name = d.Result.Name; m.Hz = d.Result.Hz; m.Mode = d.Result.Mode; m.List = d.Result.List; m.Preamp = d.Result.Preamp; m.Power = d.Result.Power;
                 if (ShownList != AllLists && m.List != ShownList) FillListCombo(m.List);
                 Refill(m);
             }
         }
 
-        // Fréquence « Modes numériques » : seul son préampli se change ; gardé pour cette fréquence et ce mode (MemDigiPre).
+        // Fréquence « Modes numériques » : seuls son préampli et sa puissance se changent ; gardés pour cette fréquence et ce mode
+        // (MemDigiPre, MemDigiPwr).
         void EditDigiPreamp(Memory m)
         {
-            using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Préampli de la fréquence", "Preamp of the frequency"), m, book, true))
+            using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Préampli et puissance de la fréquence", "Preamp and power of the frequency"), m, book, true))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
                 if (d.Result.Preamp < 0) book.DigiPreamps.Remove(MemoryBook.DigiKey(m));
                 else book.DigiPreamps[MemoryBook.DigiKey(m)] = d.Result.Preamp;
+                if (d.Result.Power < 0) book.DigiPowers.Remove(MemoryBook.DigiKey(m));
+                else book.DigiPowers[MemoryBook.DigiKey(m)] = d.Result.Power;
                 Refill(m);
             }
         }

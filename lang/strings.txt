@@ -336,6 +336,8 @@ ExpertSDR TCI port	Port TCI d'ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port du serveur TCI (ExpertSDR, Options > TCI) :
 Add memory	Ajouter une mémoire
 ; preamp cannot be set on this rig / interface	 ; préampli non pilotable sur ce poste / cette interface
+; power cannot be set on this rig / interface	 ; puissance non pilotable sur ce poste / cette interface
+ (on return to receive)	 (au retour en réception)
 Resume the scan	Reprendre le scan
 Current "Scan setup" setting	Réglage actuel de « Conf scan »
 No scan while transmitting	Scan impossible en émission
@@ -644,18 +646,26 @@ Preamp:	Préampli :
 (preamp unchanged)	(préampli inchangé)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Réglage du préampli du poste appliqué en rappelant cette mémoire (après la fréquence)
 (mode unchanged)	(mode inchangé)
+Power:	Puissance :
+set to	régler à
+Ceiling:	Plafond :
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Puissance d'émission envoyée en rappelant la mémoire, jamais pendant l'émission. Le plafond vaut pour toutes les mémoires : réglez-le selon votre amplificateur et votre antenne.
+Unticked, the rig power is left alone	Sans coche, la puissance du poste n'est pas touchée
+No memory will send more than this ceiling (all memories)	Aucune mémoire n'enverra plus que ce plafond (toutes les mémoires)
 Edit…	Modifier…
 Digital mode whose usual frequencies are shown	Mode numérique dont on voit les fréquences habituelles
 Frequency (kHz)	Fréquence (kHz)
 Mode	Mode
 Preamp	Préampli
+Power	Puissance
 Digital modes	Modes numériques
 Copy…	Copier…
 Select a memory first.	Sélectionnez d'abord une mémoire.
 Edit memory	Modifier la mémoire
-Preamp of the frequency	Préampli de la fréquence
+Preamp and power of the frequency	Préampli et puissance de la fréquence
  (here: {0})	 (ici : {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Fréquences habituelles de {0}, {1}. Cliquez pour y aller (Modifier… : son préampli ; Copier… : l'ajouter à une de vos listes).
+This rig: {0} to {1} W.	Ce poste : {0} à {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Fréquences habituelles de {0}, {1}. Cliquez pour y aller (Modifier… : son préampli et sa puissance ; Copier… : l'ajouter à une de vos listes).
 {0} memory(ies). Click a memory to go there.	{0} mémoire(s). Cliquez sur une mémoire pour y aller.
 Tuned to "{0}" ({1} kHz).	Accord sur « {0} » ({1} kHz).
 Remove the memory "{0}"?	Supprimer la mémoire « {0} » ?

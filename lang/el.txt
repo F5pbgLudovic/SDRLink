@@ -336,6 +336,8 @@ ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
 Add memory	Προσθήκη μνήμης
 ; preamp cannot be set on this rig / interface	; ο προενισχυτής δεν μπορεί να ρυθμιστεί σε αυτόν τον πομποδέκτη / αυτή τη διεπαφή
+; power cannot be set on this rig / interface	; η ισχύς δεν μπορεί να ρυθμιστεί σε αυτόν τον πομποδέκτη / αυτή τη διεπαφή
+ (on return to receive)	 (κατά την επιστροφή σε λήψη)
 Resume the scan	Συνέχιση σάρωσης
 Current "Scan setup" setting	Τρέχουσα ρύθμιση της «Ρύθμιση σάρωσης»
 No scan while transmitting	Δεν γίνεται σάρωση κατά την εκπομπή
@@ -644,18 +646,26 @@ Preamp:	Προενισχυτής:
 (preamp unchanged)	(προενισχυτής αμετάβλητος)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Ρύθμιση προενισχυτή του πομποδέκτη που εφαρμόζεται κατά την ανάκληση αυτής της μνήμης (μετά τη συχνότητα)
 (mode unchanged)	(τρόπος αμετάβλητος)
+Power:	Ισχύς:
+set to	ρύθμιση σε
+Ceiling:	Όριο:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Η ισχύς εκπομπής στέλνεται κατά την ανάκληση της μνήμης, ποτέ κατά την εκπομπή. Το όριο ισχύει για όλες τις μνήμες: ρυθμίστε το ανάλογα με τον ενισχυτή και την κεραία σας.
+Unticked, the rig power is left alone	Χωρίς σημάδι, η ισχύς του πομποδέκτη δεν αλλάζει
+No memory will send more than this ceiling (all memories)	Καμία μνήμη δεν θα στείλει περισσότερο από αυτό το όριο (όλες οι μνήμες)
 Edit…	Επεξεργασία…
 Digital mode whose usual frequencies are shown	Ψηφιακός τρόπος λειτουργίας του οποίου εμφανίζονται οι συνήθεις συχνότητες
 Frequency (kHz)	Συχνότητα (kHz)
 Mode	Τρόπος
 Preamp	Προενισχυτής
+Power	Ισχύς
 Digital modes	Ψηφιακοί τρόποι λειτουργίας
 Copy…	Αντιγραφή…
 Select a memory first.	Επιλέξτε πρώτα μια μνήμη.
 Edit memory	Επεξεργασία μνήμης
-Preamp of the frequency	Προενισχυτής της συχνότητας
+Preamp and power of the frequency	Προενισχυτής και ισχύς της συχνότητας
  (here: {0})	 (εδώ: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Συνήθεις συχνότητες {0}, {1}. Κάντε κλικ για να συντονιστείτε (Επεξεργασία…: προενισχυτής, Αντιγραφή…: προσθήκη σε μία από τις λίστες σας).
+This rig: {0} to {1} W.	Αυτός ο πομποδέκτης: {0} έως {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Συνήθεις συχνότητες {0}, {1}. Κάντε κλικ για να συντονιστείτε (Επεξεργασία…: προενισχυτής και ισχύς, Αντιγραφή…: προσθήκη σε μία από τις λίστες σας).
 {0} memory(ies). Click a memory to go there.	{0} μνήμη(ες). Κάντε κλικ σε μια μνήμη για να μεταβείτε σε αυτή.
 Tuned to "{0}" ({1} kHz).	Συντονισμός στο «{0}» ({1} kHz).
 Remove the memory "{0}"?	Αφαίρεση της μνήμης «{0}»;

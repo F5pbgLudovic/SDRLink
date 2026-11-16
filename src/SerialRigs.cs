@@ -68,6 +68,11 @@ namespace SDRLink
         public PreampSet Preamps { get { return PreampChoices; } }
         public virtual void SetPreamp(int code) { }
 
+        // Puissance (1.42) : bornes du modèle choisi (Powers.ForModel, données à la création) ; null = pas de commande connue.
+        public PowerRange PowerChoices;
+        public PowerRange Power { get { return PowerChoices; } }
+        public virtual void SetPower(int watts) { }
+
         protected static int ToPercent(long raw, int max) { return (int)Math.Round(raw * 100.0 / max); }
         protected static int FromPercent(int pct, int max) { return (int)Math.Round(Math.Max(0, Math.Min(100, pct)) * max / 100.0); }
         public abstract void SetFreq(long freqHz);
@@ -89,6 +94,12 @@ namespace SDRLink
         {
             string w = SDRLink.Preamps.AsciiWire(PreampChoices, code, LastHz);
             if (w != null) Send(w);
+        }
+
+        // Puissance : PCnnn; en watts (Yaesu, Kenwood, Elecraft K3 / KX3 / KX2).
+        public override void SetPower(int watts)
+        {
+            if (PowerChoices != null) Send(Powers.PcCommand(watts));
         }
 
         // Envoie une requête et attend la réponse commençant par `prefix`, en ignorant les messages spontanés (AI).
@@ -683,6 +694,16 @@ namespace SDRLink
             byte v = byte.Parse(w, CultureInfo.InvariantCulture);
             if (v > 1 && lastHz > 60000000 && SDRLink.Preamps.OnePreampAbove60MHz(PreampChoices.Rig)) v = 1;
             Transact(new byte[] { 0x16, 0x02, v }, 0xFB);
+        }
+
+        // Puissance : CI-V 14 0A, niveau 0000-0255 en BCD, proportionnel à la puissance maxi de la bande (Powers.IcomMax).
+        public override void SetPower(int watts)
+        {
+            if (PowerChoices == null) return;
+            int v = Powers.IcomLevel(PowerChoices.Rig, watts, lastHz);
+            byte hi = (byte)(((v / 1000) << 4) | ((v / 100) % 10));
+            byte lo = (byte)((((v / 10) % 10) << 4) | (v % 10));
+            Transact(new byte[] { 0x14, 0x0A, hi, lo }, 0xFB);
         }
 
         public override void SetFreq(long freqHz)

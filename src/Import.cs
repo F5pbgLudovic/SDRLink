@@ -26,7 +26,7 @@ namespace SDRLink
             switch (key)
             {
                 case "Fav": case "ListCount": case "CurrentList": case "LastUrl": case "Volume": return WebSdr;
-                case "Mem": case "MemRecent": case "MemListCount": case "MemCurrentList": case "MemHist": case "MemDigiPre": return Mems;
+                case "Mem": case "MemRecent": case "MemListCount": case "MemCurrentList": case "MemHist": case "MemDigiPre": case "MemDigiPwr": return Mems;
             }
             if (Numbered(key, "MemList")) return Mems;
             if (Numbered(key, "List")) return WebSdr;
@@ -152,13 +152,13 @@ namespace SDRLink
                 r.Add(l);
                 added++;
             }
-            // Préamplis des fréquences « Modes numériques » : ceux du fichier pour les fréquences qui n'en ont pas encore.
+            // Préamplis et puissances des fréquences « Modes numériques » : ceux du fichier pour les fréquences qui n'en ont pas encore.
             foreach (KeyValuePair<string, string> l in imp)
             {
-                if (l.Key != "MemDigiPre") continue;
+                if (l.Key != "MemDigiPre" && l.Key != "MemDigiPwr") continue;
                 int bar = l.Value.LastIndexOf('|');
                 string k = bar > 0 ? l.Value.Substring(0, bar + 1) : l.Value;
-                if (!r.Exists(x => x.Key == "MemDigiPre" && x.Value.StartsWith(k, StringComparison.Ordinal))) r.Add(l);
+                if (!r.Exists(x => x.Key == l.Key && x.Value.StartsWith(k, StringComparison.Ordinal))) r.Add(l);
             }
             report.Add("mémoires : " + added + " ajoutée(s)");
             return r;

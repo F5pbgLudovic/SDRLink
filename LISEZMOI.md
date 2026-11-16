@@ -638,11 +638,11 @@ Bouton **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **We
 ## Mémoires de fréquences
 
 - Bouton **Mémoires** (ligne des fréquences, après Save) : ouvre la fenêtre des mémoires.
-  - **Mémoriser la fréquence actuelle…** : même fenêtre que l'ajout d'un favori, avec **Nom** (pseudo, facultatif), **Fréquence** en kHz, **Mode** (ou « mode inchangé ») et **Liste**.
+  - **Mémoriser la fréquence actuelle…** : même fenêtre que l'ajout d'un favori, avec **Nom** (pseudo, facultatif), **Fréquence** en kHz, **Mode** (ou « mode inchangé »), **Liste**, **Préampli** et **Puissance** (voir plus bas).
   - **Cliquer sur une mémoire** change tout de suite la fréquence (poste et WebSDR) et le mode s'il est mémorisé ; la fenêtre reste ouverte pour passer à une autre. Entrée fait de même.
   - **Modifier…**, **Supprimer…** (ou touche Suppr).
   - Listes de mémoires comme pour les favoris : menu **Liste** (ou « Toutes les listes »), clic droit pour renommer, **Nouvelle liste** (10 au maximum), **Supprimer la liste…** (avec ses mémoires, après confirmation).
-  - Liste **Modes numériques** (dernière du menu **Liste**, depuis la 1.28, comme dans PhoneSDRLink) : les **fréquences habituelles** du mode numérique choisi, bandes radioamateurs de **1,8 à 440 MHz**, d'après les listes de WSJT-X et JS8Call, les plans de bande IARU et les usages courants (Olivia, Contestia, Hell, stations WEFAX). Elle suit le **mode utilisé** : quand un décodeur est en marche (bouton des modes numériques ou FreeDV auto), la fenêtre s'ouvre directement sur cette liste et ce mode. À droite : le **mode** (FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK, Olivia, Contestia, Hell, SSTV, WEFAX, FreeDV) pour voir les fréquences d'un autre mode, et la **région IARU** (1 Europe-Afrique au départ, 2 Amériques, 3 Asie-Pacifique ; retenue) : les fréquences propres à une région sont marquées (R1), (R2)… Un clic y va, avec le mode de la fréquence (USB, LSB, CW ou FM) ; **Modifier…** choisit son **préampli** (depuis la 1.41, seul ce champ se change ; gardé pour cette fréquence, ligne `MemDigiPre=` des réglages) ; **Copier…** (à la place de Supprimer…) l'ajoute à une de vos listes. Ces fréquences d'usage peuvent changer et ne remplacent pas le plan de bande de chaque pays.
+  - Liste **Modes numériques** (dernière du menu **Liste**, depuis la 1.28, comme dans PhoneSDRLink) : les **fréquences habituelles** du mode numérique choisi, bandes radioamateurs de **1,8 à 440 MHz**, d'après les listes de WSJT-X et JS8Call, les plans de bande IARU et les usages courants (Olivia, Contestia, Hell, stations WEFAX). Elle suit le **mode utilisé** : quand un décodeur est en marche (bouton des modes numériques ou FreeDV auto), la fenêtre s'ouvre directement sur cette liste et ce mode. À droite : le **mode** (FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK, Olivia, Contestia, Hell, SSTV, WEFAX, FreeDV) pour voir les fréquences d'un autre mode, et la **région IARU** (1 Europe-Afrique au départ, 2 Amériques, 3 Asie-Pacifique ; retenue) : les fréquences propres à une région sont marquées (R1), (R2)… Un clic y va, avec le mode de la fréquence (USB, LSB, CW ou FM) ; **Modifier…** choisit son **préampli** (depuis la 1.41) et sa **puissance** (depuis la 1.42) ; seuls ces champs se changent ; gardés pour cette fréquence, lignes `MemDigiPre=` et `MemDigiPwr=` des réglages ; **Copier…** (à la place de Supprimer…) l'ajoute à une de vos listes. Ces fréquences d'usage peuvent changer et ne remplacent pas le plan de bande de chaque pays.
 - **Clic droit** sur Mémoires : mémoriser la fréquence actuelle sans ouvrir la fenêtre.
 - Bouton **▾** à droite : les **20 dernières mémoires utilisées**, la plus récente en haut. Une mémoire qui a un nom (pseudo) est affichée par son nom, sinon par sa fréquence. Un clic y va. En bas : Mémoires… et Effacer cette liste.
 - Les mémoires sont gardées dans les réglages (`settings.ini`, lignes `Mem=`).
@@ -740,6 +740,95 @@ Sans commande CAT de préampli (le préampli s'y règle à la main) :
 - **Icom** : IC-271, IC-275, IC-375, IC-471, IC-475, IC-575, IC-706, IC-706MKII, IC-707, IC-725, IC-726, IC-728, IC-729, IC-735, IC-736, IC-737, IC-738, IC-751/751A, IC-756, IC-761, IC-765, IC-775, IC-781, IC-820H, IC-821H, IC-970, IC-1275
 - **Kenwood** : TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-850S, TS-870S, TS-930S, TS-940S, TS-950S, TS-950SDX
 
+### Puissance mémorisée (depuis la 1.42)
+
+- Dans la fenêtre d'une mémoire, ligne **Puissance** : cochez **régler à** et indiquez les **watts**. Sans coche (départ), la puissance du poste n'est **pas touchée**. Au rappel de la mémoire (clic, liste ▾, scan des mémoires), le poste reçoit cette puissance **juste après la fréquence**. La barre d'état le rappelle (« Mémoire « 40 m » : 7074 kHz, 50 W »). Colonne **Puissance** dans la liste des mémoires.
+- Aussi pour les fréquences de la liste **Modes numériques** : **Modifier…** y règle le préampli et la puissance (ligne `MemDigiPwr=` des réglages), repris quand le choix d'un mode numérique accorde sur sa fréquence. Pratique pour, par exemple, 30 W en FT8 et 100 W en SSB.
+- Utile sur les postes qui ne retiennent qu'une puissance par **catégorie** (le FT-891 n'en a que six : HF SSB, HF AM, HF autres modes, et les mêmes en 50 MHz) : la mémoire donne la puissance voulue **bande par bande**.
+- **Précautions** (une puissance trop forte peut abîmer un amplificateur ou une antenne) :
+  - **Plafond** (même ligne, 100 W au départ) : il vaut pour **toutes** les mémoires ; une mémoire au-dessus est ramenée au plafond. Réglez-le selon votre amplificateur et votre antenne (ligne `PowerLimit=` des réglages) ;
+  - **jamais pendant l'émission** : si le poste est en émission au rappel d'une mémoire, la puissance attend le **retour en réception** (la fréquence, elle, change tout de suite) ;
+  - la valeur est aussi ramenée aux **limites du poste** (par exemple 5 W au minimum sur le FT-891), et le poste la limite lui-même selon la bande et le mode (en AM, le FT-891 ne dépasse pas sa puissance AM) ;
+  - quand la commande est en **proportion** (Icom, Hamlib, TCI), SDRLink compte sur la puissance maxi de la **version la plus puissante** du poste : en cas de doute, le poste sort **moins** de watts que demandé, jamais plus ;
+  - seuls les postes dont la commande est confirmée sont pilotés : les autres sont rappelés sans changer la puissance, et la barre d'état le dit.
+- Par interface :
+  - **Port COM** et **OmniRig** : commande du tableau ci-dessous (par OmniRig, envoyée telle quelle pour le modèle choisi dans OmniRig ; Icom : adresse CI-V par défaut du modèle) ;
+  - **Hamlib** : `L RFPOWER <0 à 1>`, proportion de la puissance maxi donnée par rigctld (`\power2mW`), sinon par le tableau ; seulement pour un poste du tableau dont Hamlib sait régler la puissance ;
+  - **TCI** (ExpertSDR, Thetis…) : `drive` en pourcentage, avec **% = watts** : juste sur un appareil de 100 W (SunSDR2 DX), moins de watts sur un plus petit (sur un SunSDR2 Pro de 20 W, 50 « W » donnent 50 %, soit 10 W). Proposé dès que le serveur TCI a annoncé son réglage ;
+  - **Ham Radio Deluxe** : **pas de puissance par HRD** dans cette version. HRD n'a pas de commande CAT brute, et l'échelle de son curseur de puissance (« RF power percentage », 0 à 255 sur le FT-2000) n'est pas documentée : une erreur pourrait donner plus de watts que demandé. Elle sera ajoutée après un essai sur un vrai poste.
+- Dans `settings.ini`, la puissance est le 7e champ de la ligne `Mem=` (vide ou absent = inchangée) ; les versions plus anciennes l'ignorent.
+
+### Puissance : par interface et par poste
+
+| Interface | Comment la puissance est commandée | Postes concernés |
+|---|---|---|
+| Port COM (CAT direct) | commande du tableau ci-dessous, après la fréquence, jamais en émission | les postes du tableau |
+| OmniRig | la même commande, envoyée telle quelle par OmniRig ; poste reconnu par le nom choisi dans OmniRig | les postes du tableau |
+| Hamlib (rigctld) | `L RFPOWER <0 à 1>` (watts ÷ puissance maxi) | les postes du tableau dont Hamlib sait régler la puissance |
+| TCI (ExpertSDR, Thetis…) | `drive:0,<%>;` (ou `drive:<%>;` sur un ancien serveur), % = watts | appareils TCI, après l'annonce de leur `drive` |
+| Ham Radio Deluxe | aucune (échelle du curseur HRD non documentée) | aucun |
+
+Puissance maxi : celle de la version la plus puissante du modèle (FT-2000D, FTdx101MP, TS-480HX…) ; le poste ramène lui-même la valeur à ses limites. Icom : trame CI-V `FE FE <adresse> E0 14 0A <niveau en BCD> FD`, niveau proportionnel à la puissance maxi de la bande.
+
+| Marque | Modèle | Puissance (W) | Commande |
+|---|---|---|---|
+| Yaesu | FT-450/450D | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-710 | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-891 | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-950 | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-991/991A | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-2000 | 5 à 200 | `PC005;` … `PC200;` |
+| Yaesu | FTdx10 | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FTdx101D/MP | 5 à 200 | `PC005;` … `PC200;` |
+| Yaesu | FTdx1200 | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FTdx3000 | 5 à 100 | `PC005;` … `PC100;` |
+| Yaesu | FTdx5000 | 10 à 200 | `PC010;` … `PC200;` |
+| Yaesu | FTdx9000 | 5 à 400 | `PC005;` … `PC400;` |
+| Icom | IC-703 | 1 à 10 | `14 0A 0000` … `14 0A 0255` (255 = 10 W) |
+| Icom | IC-705 | 1 à 10 | `14 0A 0000` … `14 0A 0255` (255 = 10 W) |
+| Icom | IC-706MKIIG | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W en HF / 50, 50 W en 144, 20 W en 430) |
+| Icom | IC-718 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-746 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-746PRO | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-756PRO | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-756PROII | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-756PROIII | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-905 | 1 à 10 | `14 0A 0000` … `14 0A 0255` (255 = 10 W) |
+| Icom | IC-910H | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W en HF / 144, 75 W en 430, 10 W en 1200) |
+| Icom | IC-7000 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W en HF / 50, 50 W en 144, 35 W en 430) |
+| Icom | IC-7100 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W en HF / 50, 50 W en 144, 35 W en 430) |
+| Icom | IC-7200 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7300 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7300MK2 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7400 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7410 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7600 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7610 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7700 | 1 à 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7760 | 1 à 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7800 | 1 à 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7850 | 1 à 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7851 | 1 à 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-9100 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W en HF / 144, 75 W en 430, 10 W en 1200) |
+| Icom | IC-9700 | 1 à 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W en 144, 75 W en 430, 10 W en 1200) |
+| Kenwood | TS-480 | 5 à 200 | `PC005;` … `PC200;` |
+| Kenwood | TS-570 | 5 à 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-590S/SG | 5 à 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-890S | 5 à 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-990S | 5 à 200 | `PC005;` … `PC200;` |
+| Kenwood | TS-2000 | 5 à 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-B2000 | 5 à 100 | `PC005;` … `PC100;` |
+| Elecraft | K3/K3S | 1 à 110 | `PC001;` … `PC110;` |
+| Elecraft | KX2 | 1 à 12 | `PC001;` … `PC012;` |
+| Elecraft | KX3 | 1 à 15 | `PC001;` … `PC015;` |
+
+Sans commande de puissance pilotée par SDRLink (la puissance s'y règle à la main) :
+- **Yaesu** : FT-100/100D, FT-600, FT-650, FT-736R, FT-747GX, FT-757GX, FT-757GXII, FT-767GX, FT-817, FT-817ND, FT-818, FT-818ND, FT-840, FT-847, FT-857, FT-857D, FT-890, FT-897, FT-897D, FT-900, FT-920, FT-990, FT-1000, FT-1000D, FT-1000MP, FT-1000MP Mark-V, FT-1000MP Mark-V Field, FTX-1
+- **Icom** : IC-78, IC-271, IC-275, IC-375, IC-471, IC-475, IC-575, IC-706, IC-706MKII, IC-707, IC-725, IC-726, IC-728, IC-729, IC-735, IC-736, IC-737, IC-738, IC-751/751A, IC-756, IC-761, IC-765, IC-775, IC-781, IC-820H, IC-821H, IC-970, IC-1275
+- **Kenwood** : TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-850S, TS-870S, TS-930S, TS-940S, TS-950S, TS-950SDX
+- **Elecraft** : K2, K4
+- **Xiegu** : G90, X108G, X5105, X6100, X6200
+
 ## Barre d'état (messages en bas de la fenêtre)
 
 - **Clic droit** sur la barre d'état : les **20 derniers messages**, le plus récent en haut, avec leur heure.
@@ -814,6 +903,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.42**
+  - **Puissance mémorisée** avec chaque mémoire et pour les fréquences de la liste **Modes numériques** (en watts, case **régler à** ; rien par défaut), envoyée au rappel juste après la fréquence, en CAT direct, par OmniRig, Hamlib et TCI (pas par HRD). **Plafond** commun à toutes les mémoires, **jamais pendant l'émission** (attend le retour en réception), en cas de doute moins de watts, jamais plus. 49 modèles pilotés : tableau dans la notice.
 - **1.41**
   - **Préampli mémorisé** avec chaque mémoire, et pour les fréquences de la liste **Modes numériques** (Modifier…), aussi au choix d'un mode numérique qui accorde sur sa fréquence (IPO / AMP1 / AMP2 chez Yaesu, IPO1 / IPO2 sur le FTdx5000, P.AMP chez Icom, PRE chez Kenwood et Elecraft), appliqué au rappel juste après la fréquence, en CAT direct, par Hamlib, OmniRig et HRD.
   - **Diversité** : un simple bouton (clic = marche / arrêt), largeur fixe ; le **notch automatique** s'applique aussi à l'oreille du WebSDR.

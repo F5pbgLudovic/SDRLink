@@ -336,6 +336,8 @@ ExpertSDR TCI port	ExpertSDR-i TCI-port
 TCI server port (ExpertSDR, Options > TCI):	TCI-serveri port (ExpertSDR, Options > TCI):
 Add memory	Lisa mälu
 ; preamp cannot be set on this rig / interface	; eelvõimendit ei saa sellel jaamal / liidesel juhtida
+; power cannot be set on this rig / interface	; võimsust ei saa sellel jaamal / liidesel juhtida
+ (on return to receive)	 (vastuvõtule naasmisel)
 Resume the scan	Jätka skaneerimist
 Current "Scan setup" setting	Praegune seadistus aknas „Skaneerimise seaded“
 No scan while transmitting	Saate ajal ei saa skaneerida
@@ -644,18 +646,26 @@ Preamp:	Eelvõimendi:
 (preamp unchanged)	(eelvõimendi muutmata)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Jaama eelvõimendi säte, mida rakendatakse selle mälu esilekutsumisel (pärast sagedust)
 (mode unchanged)	(režiim muutmata)
+Power:	Võimsus:
+set to	määra
+Ceiling:	Ülempiir:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Saatevõimsus saadetakse mälu valimisel, mitte kunagi saate ajal. Ülempiir kehtib kõigile mäludele: seadke see vastavalt oma võimendile ja antennile.
+Unticked, the rig power is left alone	Ilma linnukeseta raadio võimsust ei muudeta
+No memory will send more than this ceiling (all memories)	Ükski mälu ei saada rohkem kui see ülempiir (kõik mälud)
 Edit…	Muuda…
 Digital mode whose usual frequencies are shown	Digitaalne režiim, mille tavalisi sagedusi näidatakse
 Frequency (kHz)	Sagedus (kHz)
 Mode	Režiim
 Preamp	Eelvõimendi
+Power	Võimsus
 Digital modes	Digitaalsed režiimid
 Copy…	Kopeeri…
 Select a memory first.	Valige esmalt mälu.
 Edit memory	Muuda mälu
-Preamp of the frequency	Sageduse eelvõimendi
+Preamp and power of the frequency	Sageduse eelvõimendi ja võimsus
  (here: {0})	 (siin: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	{0} tavalised sagedused, {1}. Klõpsake, et sinna minna (Muuda…: eelvõimendi; Kopeeri…: lisage see oma loendisse).
+This rig: {0} to {1} W.	See raadio: {0} kuni {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	{0} tavalised sagedused, {1}. Klõpsake, et sinna minna (Muuda…: eelvõimendi ja võimsus; Kopeeri…: lisage see oma loendisse).
 {0} memory(ies). Click a memory to go there.	{0} mälu. Klõpsake mälul, et sinna minna.
 Tuned to "{0}" ({1} kHz).	Häälestatud: „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Kas eemaldada mälu „{0}“?

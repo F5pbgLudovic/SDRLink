@@ -639,11 +639,11 @@ Automatic restart of the WebSDR when its sound is lost (server drop, idle timeou
 ## Frequency memories
 
 - **Memories** button (frequency row, after Save): opens the memories window.
-  - **Store the current frequency…**: same window as for adding a favorite, with **Name** (nickname, optional), **Frequency** in kHz, **Mode** (or "mode unchanged") and **List**.
+  - **Store the current frequency…**: same window as for adding a favorite, with **Name** (nickname, optional), **Frequency** in kHz, **Mode** (or "mode unchanged"), **List**, **Preamp** and **Power** (see below).
   - **Clicking a memory** changes the frequency at once (rig and WebSDR) and the mode if it is stored; the window stays open so you can move on to another one. Enter does the same.
   - **Edit…**, **Remove…** (or the Delete key).
   - Memory lists as for favorites: **List** menu (or "All lists"), right-click to rename, **New list** (10 at most), **Delete list…** (with its memories, after confirmation).
-  - **Digital modes** list (last in the **List** menu, since 1.28, as in PhoneSDRLink): the **usual frequencies** of the chosen digital mode, amateur bands from **1.8 to 440 MHz**, from the WSJT-X and JS8Call lists, the IARU band plans and common practice (Olivia, Contestia, Hell, WEFAX stations). It follows the **mode in use**: when a decoder is running (digital modes button or FreeDV auto), the window opens directly on this list and this mode. On the right: the **mode** (FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK, Olivia, Contestia, Hell, SSTV, WEFAX, FreeDV) to see the frequencies of another mode, and the **IARU region** (1 Europe-Africa at first, 2 Americas, 3 Asia-Pacific; remembered): frequencies specific to a region are marked (R1), (R2)… A click goes there, with the frequency's mode (USB, LSB, CW or FM); **Edit…** chooses its **preamp** (since 1.41, only this field can be changed; kept for that frequency, `MemDigiPre=` line of the settings); **Copy…** (in place of Remove…) adds it to one of your lists. These are frequencies in common use: they may change and do not replace each country's band plan.
+  - **Digital modes** list (last in the **List** menu, since 1.28, as in PhoneSDRLink): the **usual frequencies** of the chosen digital mode, amateur bands from **1.8 to 440 MHz**, from the WSJT-X and JS8Call lists, the IARU band plans and common practice (Olivia, Contestia, Hell, WEFAX stations). It follows the **mode in use**: when a decoder is running (digital modes button or FreeDV auto), the window opens directly on this list and this mode. On the right: the **mode** (FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK, Olivia, Contestia, Hell, SSTV, WEFAX, FreeDV) to see the frequencies of another mode, and the **IARU region** (1 Europe-Africa at first, 2 Americas, 3 Asia-Pacific; remembered): frequencies specific to a region are marked (R1), (R2)… A click goes there, with the frequency's mode (USB, LSB, CW or FM); **Edit…** chooses its **preamp** (since 1.41) and its **power** (since 1.42); only these fields can be changed; kept for that frequency, `MemDigiPre=` and `MemDigiPwr=` lines of the settings; **Copy…** (in place of Remove…) adds it to one of your lists. These are frequencies in common use: they may change and do not replace each country's band plan.
 - **Right-click** Memories: store the current frequency without opening the window.
 - **▾** button on the right: the **last 20 memories used**, the most recent at the top. A memory that has a name (nickname) is shown by its name, otherwise by its frequency. One click goes there. At the bottom: Memories… and Clear this list.
 - Memories are kept in the settings (`settings.ini`, `Mem=` lines).
@@ -741,6 +741,95 @@ No CAT preamp command (the preamp is set by hand):
 - **Icom**: IC-271, IC-275, IC-375, IC-471, IC-475, IC-575, IC-706, IC-706MKII, IC-707, IC-725, IC-726, IC-728, IC-729, IC-735, IC-736, IC-737, IC-738, IC-751/751A, IC-756, IC-761, IC-765, IC-775, IC-781, IC-820H, IC-821H, IC-970, IC-1275
 - **Kenwood**: TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-850S, TS-870S, TS-930S, TS-940S, TS-950S, TS-950SDX
 
+### Stored power (since 1.42)
+
+- In a memory's window, **Power** line: tick **set to** and enter the **watts**. Unticked (the default), the rig power is **left alone**. When the memory is recalled (click, ▾ list, memory scan), the rig receives this power **just after the frequency**. The status bar says so ("Memory "40 m": 7074 kHz, 50 W"). **Power** column in the memory list.
+- Also for the frequencies of the **Digital modes** list: **Edit…** sets their preamp and power there (`MemDigiPwr=` line of the settings), used again when choosing a digital mode tunes to its frequency. Handy for, say, 30 W on FT8 and 100 W on SSB.
+- Useful on rigs that keep only one power per **category** (the FT-891 has just six: HF SSB, HF AM, HF other modes, and the same on 50 MHz): the memory gives the wanted power **band by band**.
+- **Safeguards** (too much power can damage an amplifier or an antenna):
+  - **Ceiling** (same line, 100 W at first): it applies to **every** memory; a memory above it is brought down to the ceiling. Set it for your amplifier and antenna (`PowerLimit=` line of the settings);
+  - **never while transmitting**: if the rig is transmitting when a memory is recalled, the power waits for the **return to receive** (the frequency changes at once);
+  - the value is also kept within the **rig's limits** (for example 5 W minimum on the FT-891), and the rig limits it itself by band and mode (in AM, the FT-891 does not go above its AM power);
+  - when the command is a **proportion** (Icom, Hamlib, TCI), SDRLink counts on the maximum power of the **most powerful version** of the rig: when in doubt, the rig gives **fewer** watts than asked, never more;
+  - only rigs whose command is confirmed are driven: the others are recalled without changing the power, and the status bar says so.
+- By interface:
+  - **COM port** and **OmniRig**: command from the table below (through OmniRig, sent as is for the model chosen in OmniRig; Icom: the model's default CI-V address);
+  - **Hamlib**: `L RFPOWER <0 to 1>`, proportion of the maximum power given by rigctld (`\power2mW`), otherwise by the table; only for a rig of the table whose power Hamlib can set;
+  - **TCI** (ExpertSDR, Thetis…): `drive` as a percentage, with **% = watts**: exact on a 100 W unit (SunSDR2 DX), fewer watts on a smaller one (on a 20 W SunSDR2 Pro, 50 "W" gives 50 %, that is 10 W). Offered once the TCI server has announced its setting;
+  - **Ham Radio Deluxe**: **no power through HRD** in this version. HRD has no raw CAT command, and the scale of its power slider ("RF power percentage", 0 to 255 on the FT-2000) is not documented: a mistake could give more watts than asked. It will be added after a test on a real rig.
+- In `settings.ini`, the power is the 7th field of the `Mem=` line (empty or missing = unchanged); older versions ignore it.
+
+### Power: by interface and by rig
+
+| Interface | How the power is set | Rigs |
+|---|---|---|
+| COM port (direct CAT) | command from the table below, after the frequency, never while transmitting | the rigs of the table |
+| OmniRig | the same command, sent as is by OmniRig; rig recognised by the name chosen in OmniRig | the rigs of the table |
+| Hamlib (rigctld) | `L RFPOWER <0 to 1>` (watts ÷ maximum power) | the rigs of the table whose power Hamlib can set |
+| TCI (ExpertSDR, Thetis…) | `drive:0,<%>;` (or `drive:<%>;` on an older server), % = watts | TCI units, once they have announced their `drive` |
+| Ham Radio Deluxe | none (HRD slider scale not documented) | none |
+
+Maximum power: that of the most powerful version of the model (FT-2000D, FTdx101MP, TS-480HX…); the rig itself brings the value within its limits. Icom: CI-V frame `FE FE <address> E0 14 0A <BCD level> FD`, level proportional to the band's maximum power.
+
+| Brand | Model | Power (W) | Command |
+|---|---|---|---|
+| Yaesu | FT-450/450D | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-710 | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-891 | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-950 | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-991/991A | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FT-2000 | 5 to 200 | `PC005;` … `PC200;` |
+| Yaesu | FTdx10 | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FTdx101D/MP | 5 to 200 | `PC005;` … `PC200;` |
+| Yaesu | FTdx1200 | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FTdx3000 | 5 to 100 | `PC005;` … `PC100;` |
+| Yaesu | FTdx5000 | 10 to 200 | `PC010;` … `PC200;` |
+| Yaesu | FTdx9000 | 5 to 400 | `PC005;` … `PC400;` |
+| Icom | IC-703 | 1 to 10 | `14 0A 0000` … `14 0A 0255` (255 = 10 W) |
+| Icom | IC-705 | 1 to 10 | `14 0A 0000` … `14 0A 0255` (255 = 10 W) |
+| Icom | IC-706MKIIG | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W on HF / 50, 50 W on 144, 20 W on 430) |
+| Icom | IC-718 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-746 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-746PRO | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-756PRO | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-756PROII | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-756PROIII | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-905 | 1 to 10 | `14 0A 0000` … `14 0A 0255` (255 = 10 W) |
+| Icom | IC-910H | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W on HF / 144, 75 W on 430, 10 W on 1200) |
+| Icom | IC-7000 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W on HF / 50, 50 W on 144, 35 W on 430) |
+| Icom | IC-7100 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W on HF / 50, 50 W on 144, 35 W on 430) |
+| Icom | IC-7200 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7300 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7300MK2 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7400 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7410 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7600 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7610 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W) |
+| Icom | IC-7700 | 1 to 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7760 | 1 to 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7800 | 1 to 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7850 | 1 to 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-7851 | 1 to 200 | `14 0A 0000` … `14 0A 0255` (255 = 200 W) |
+| Icom | IC-9100 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W on HF / 144, 75 W on 430, 10 W on 1200) |
+| Icom | IC-9700 | 1 to 100 | `14 0A 0000` … `14 0A 0255` (255 = 100 W on 144, 75 W on 430, 10 W on 1200) |
+| Kenwood | TS-480 | 5 to 200 | `PC005;` … `PC200;` |
+| Kenwood | TS-570 | 5 to 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-590S/SG | 5 to 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-890S | 5 to 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-990S | 5 to 200 | `PC005;` … `PC200;` |
+| Kenwood | TS-2000 | 5 to 100 | `PC005;` … `PC100;` |
+| Kenwood | TS-B2000 | 5 to 100 | `PC005;` … `PC100;` |
+| Elecraft | K3/K3S | 1 to 110 | `PC001;` … `PC110;` |
+| Elecraft | KX2 | 1 to 12 | `PC001;` … `PC012;` |
+| Elecraft | KX3 | 1 to 15 | `PC001;` … `PC015;` |
+
+No power command driven by SDRLink (the power is set by hand):
+- **Yaesu**: FT-100/100D, FT-600, FT-650, FT-736R, FT-747GX, FT-757GX, FT-757GXII, FT-767GX, FT-817, FT-817ND, FT-818, FT-818ND, FT-840, FT-847, FT-857, FT-857D, FT-890, FT-897, FT-897D, FT-900, FT-920, FT-990, FT-1000, FT-1000D, FT-1000MP, FT-1000MP Mark-V, FT-1000MP Mark-V Field, FTX-1
+- **Icom**: IC-78, IC-271, IC-275, IC-375, IC-471, IC-475, IC-575, IC-706, IC-706MKII, IC-707, IC-725, IC-726, IC-728, IC-729, IC-735, IC-736, IC-737, IC-738, IC-751/751A, IC-756, IC-761, IC-765, IC-775, IC-781, IC-820H, IC-821H, IC-970, IC-1275
+- **Kenwood**: TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-850S, TS-870S, TS-930S, TS-940S, TS-950S, TS-950SDX
+- **Elecraft**: K2, K4
+- **Xiegu**: G90, X108G, X5105, X6100, X6200
+
 ## Status bar (messages at the bottom of the window)
 
 - **Right-click** the status bar: the **last 20 messages**, the most recent at the top, with their time.
@@ -815,6 +904,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.42**
+  - **Stored power** with each memory and for the frequencies of the **Digital modes** list (in watts, **set to** box; nothing by default), sent on recall just after the frequency, through direct CAT, OmniRig, Hamlib and TCI (not through HRD). **Ceiling** shared by every memory, **never while transmitting** (waits for the return to receive), when in doubt fewer watts, never more. 49 models driven: table in the manual.
 - **1.41**
   - **Stored preamp** with each memory, and for the frequencies of the **Digital modes** list (Edit…), also when choosing a digital mode tunes to its frequency (IPO / AMP1 / AMP2 on Yaesu, IPO1 / IPO2 on the FTdx5000, P.AMP on Icom, PRE on Kenwood and Elecraft), applied on recall just after the frequency, in direct CAT, through Hamlib, OmniRig and HRD.
   - **Diversity**: a plain button (click = on / off), fixed width; the **auto notch** also applies to the WebSDR's ear.

@@ -336,6 +336,8 @@ ExpertSDR TCI port	TCI-poort van ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Poort van de TCI-server (ExpertSDR, Options > TCI):
 Add memory	Geheugen toevoegen
 ; preamp cannot be set on this rig / interface	; de voorversterker kan op deze transceiver / interface niet worden bediend
+; power cannot be set on this rig / interface	; het vermogen kan op deze transceiver / interface niet worden bediend
+ (on return to receive)	 (bij terugkeer naar ontvangst)
 Resume the scan	Scan hervatten
 Current "Scan setup" setting	Huidige instelling van "Scan instellen"
 No scan while transmitting	Niet scannen tijdens het zenden
@@ -644,18 +646,26 @@ Preamp:	Voorversterker:
 (preamp unchanged)	(voorversterker ongewijzigd)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Voorversterkerinstelling van de transceiver die wordt toegepast bij het oproepen van dit geheugen (na de frequentie)
 (mode unchanged)	(mode ongewijzigd)
+Power:	Vermogen:
+set to	instellen op
+Ceiling:	Plafond:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Het zendvermogen wordt verstuurd bij het oproepen van het geheugen, nooit tijdens het zenden. Het plafond geldt voor alle geheugens: stel het in op uw versterker en antenne.
+Unticked, the rig power is left alone	Zonder vinkje blijft het vermogen van de transceiver ongewijzigd
+No memory will send more than this ceiling (all memories)	Geen enkel geheugen stuurt meer dan dit plafond (alle geheugens)
 Edit…	Wijzigen…
 Digital mode whose usual frequencies are shown	Digitale mode waarvan de gebruikelijke frequenties worden getoond
 Frequency (kHz)	Frequentie (kHz)
 Mode	Mode
 Preamp	Voorversterker
+Power	Vermogen
 Digital modes	Digitale modes
 Copy…	Kopiëren…
 Select a memory first.	Kies eerst een geheugen.
 Edit memory	Geheugen wijzigen
-Preamp of the frequency	Voorversterker van de frequentie
+Preamp and power of the frequency	Voorversterker en vermogen van de frequentie
  (here: {0})	 (hier: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Gebruikelijke frequenties voor {0}, {1}. Klik om erheen te gaan (Wijzigen…: voorversterker; Kopiëren…: toevoegen aan een van uw lijsten).
+This rig: {0} to {1} W.	Deze transceiver: {0} tot {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Gebruikelijke frequenties voor {0}, {1}. Klik om erheen te gaan (Wijzigen…: voorversterker en vermogen; Kopiëren…: toevoegen aan een van uw lijsten).
 {0} memory(ies). Click a memory to go there.	{0} geheugen(s). Klik op een geheugen om erheen te gaan.
 Tuned to "{0}" ({1} kHz).	Afgestemd op "{0}" ({1} kHz).
 Remove the memory "{0}"?	Geheugen "{0}" verwijderen?

@@ -213,6 +213,11 @@ namespace SDRLink
         string btnIpo, btnAmp1, btnAmp2, btnPre, btnPre1, btnPre2;
         public PreampSet Preamps { get { return preamps; } }
 
+        // Puissance (1.42) : non pilotée par HRD : l'échelle de son curseur (« RF power percentage », 0-255 sur le FT-2000) n'est pas
+        // documentée, et une erreur pourrait donner plus de watts que demandé.
+        public PowerRange Power { get { return null; } }
+        public void SetPower(int watts) { }
+
         static string Norm(string s)
         {
             StringBuilder b = new StringBuilder();

@@ -336,6 +336,8 @@ ExpertSDR TCI port	TCI priključak ExpertSDR-a
 TCI server port (ExpertSDR, Options > TCI):	Priključak TCI poslužitelja (ExpertSDR, Options > TCI):
 Add memory	Dodaj memoriju
 ; preamp cannot be set on this rig / interface	; pretpojačalo se ne može postaviti na ovom uređaju / sučelju
+; power cannot be set on this rig / interface	; snaga se ne može postaviti na ovom uređaju / sučelju
+ (on return to receive)	 (pri povratku na prijem)
 Resume the scan	Nastavi pretraživanje
 Current "Scan setup" setting	Trenutačna postavka u „Postavke pretraživanja”
 No scan while transmitting	Pretraživanje nije moguće tijekom odašiljanja
@@ -644,18 +646,26 @@ Preamp:	Pretpojačalo:
 (preamp unchanged)	(pretpojačalo nepromijenjeno)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Postavka pretpojačala uređaja primijenjena pri pozivanju ove memorije (nakon frekvencije)
 (mode unchanged)	(način rada nepromijenjen)
+Power:	Snaga:
+set to	postavi na
+Ceiling:	Granica:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Snaga odašiljanja šalje se pri pozivu memorije, nikad tijekom odašiljanja. Granica vrijedi za sve memorije: postavite je prema svom pojačalu i anteni.
+Unticked, the rig power is left alone	Bez kvačice snaga uređaja ostaje nepromijenjena
+No memory will send more than this ceiling (all memories)	Nijedna memorija neće poslati više od ove granice (sve memorije)
 Edit…	Uredi…
 Digital mode whose usual frequencies are shown	Digitalna vrsta rada čije se uobičajene frekvencije prikazuju
 Frequency (kHz)	Frekvencija (kHz)
 Mode	Način rada
 Preamp	Pretpojačalo
+Power	Snaga
 Digital modes	Digitalne vrste rada
 Copy…	Kopiraj…
 Select a memory first.	Najprije odaberite memoriju.
 Edit memory	Uredi memoriju
-Preamp of the frequency	Pretpojačalo frekvencije
+Preamp and power of the frequency	Pretpojačalo i snaga frekvencije
  (here: {0})	 (ovdje: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Uobičajene frekvencije za {0}, {1}. Kliknite za ugađanje (Uredi…: pretpojačalo; Kopiraj…: dodajte je na jedan od svojih popisa).
+This rig: {0} to {1} W.	Ovaj uređaj: od {0} do {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Uobičajene frekvencije za {0}, {1}. Kliknite za ugađanje (Uredi…: pretpojačalo i snaga; Kopiraj…: dodajte je na jedan od svojih popisa).
 {0} memory(ies). Click a memory to go there.	{0} memorija. Kliknite memoriju da biste prešli na nju.
 Tuned to "{0}" ({1} kHz).	Ugođeno na „{0}” ({1} kHz).
 Remove the memory "{0}"?	Ukloniti memoriju „{0}”?

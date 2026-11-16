@@ -336,6 +336,8 @@ ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port servera TCI (ExpertSDR, Options > TCI):
 Add memory	Pridať pamäť
 ; preamp cannot be set on this rig / interface	; predzosilňovač sa na tomto transceiveri / rozhraní nedá nastaviť
+; power cannot be set on this rig / interface	; výkon sa na tomto transceiveri / rozhraní nedá nastaviť
+ (on return to receive)	 (po návrate na príjem)
 Resume the scan	Pokračovať v prehľadávaní
 Current "Scan setup" setting	Aktuálne nastavenie v „Nastavenie prehľadávania“
 No scan while transmitting	Počas vysielania nie je možné prehľadávať
@@ -644,18 +646,26 @@ Preamp:	Predzosilňovač:
 (preamp unchanged)	(predzosilňovač bez zmeny)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Nastavenie predzosilňovača transceivera použité pri vyvolaní tejto pamäte (po frekvencii)
 (mode unchanged)	(druh prevádzky bez zmeny)
+Power:	Výkon:
+set to	nastaviť na
+Ceiling:	Strop:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Vysielací výkon sa odošle pri vyvolaní pamäte, nikdy počas vysielania. Strop platí pre všetky pamäte: nastavte ho podľa svojho zosilňovača a antény.
+Unticked, the rig power is left alone	Bez začiarknutia zostane výkon transceivera nezmenený
+No memory will send more than this ceiling (all memories)	Žiadna pamäť neodošle viac ako tento strop (všetky pamäte)
 Edit…	Upraviť…
 Digital mode whose usual frequencies are shown	Digitálny druh prevádzky, ktorého obvyklé frekvencie sa zobrazujú
 Frequency (kHz)	Kmitočet (kHz)
 Mode	Druh prevádzky
 Preamp	Predzosilňovač
+Power	Výkon
 Digital modes	Digitálne druhy prevádzky
 Copy…	Kopírovať…
 Select a memory first.	Najprv vyberte pamäť.
 Edit memory	Upraviť pamäť
-Preamp of the frequency	Predzosilňovač frekvencie
+Preamp and power of the frequency	Predzosilňovač a výkon frekvencie
  (here: {0})	 (tu: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Obvyklé frekvencie {0}, {1}. Kliknutím sa naladíte (Upraviť…: predzosilňovač; Kopírovať…: pridať do jedného z vašich zoznamov).
+This rig: {0} to {1} W.	Tento transceiver: {0} až {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Obvyklé frekvencie {0}, {1}. Kliknutím sa naladíte (Upraviť…: predzosilňovač a výkon; Kopírovať…: pridať do jedného z vašich zoznamov).
 {0} memory(ies). Click a memory to go there.	{0} pamätí. Kliknutím na pamäť sa na ňu preladíte.
 Tuned to "{0}" ({1} kHz).	Preladené na „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Odstrániť pamäť „{0}“?

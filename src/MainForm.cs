@@ -1656,16 +1656,16 @@ namespace SDRLink
                     {
                         switch (model.Protocol)
                         {
-                            case RigProtocol.Yaesu: return new YaesuRig(ss, model.FreqDigits) { PreampChoices = Preamps.ForModel(model) };
+                            case RigProtocol.Yaesu: return new YaesuRig(ss, model.FreqDigits) { PreampChoices = Preamps.ForModel(model), PowerChoices = Powers.ForModel(model) };
                             case RigProtocol.Yaesu817: return new Ft817Rig(ss, model.Name);
                             case RigProtocol.YaesuOld: return new YaesuOldRig(ss, model.Name);
                             case RigProtocol.YaesuLegacy: return new YaesuLegacyRig(ss, model.Name);
                             case RigProtocol.Yaesu767: return new Ft767Rig(ss);
                             case RigProtocol.YaesuWriteOnly: return new YaesuWriteOnlyRig(ss, model.Name);
-                            case RigProtocol.Icom: return new IcomRig(ss, civ, model.ShortFreq ? 4 : 5) { PreampChoices = Preamps.ForModel(model) };
+                            case RigProtocol.Icom: return new IcomRig(ss, civ, model.ShortFreq ? 4 : 5) { PreampChoices = Preamps.ForModel(model), PowerChoices = Powers.ForModel(model) };
                             // Gain BF Elecraft : 000-250, sauf K4 : 000-060 (Hamlib).
-                            case RigProtocol.Elecraft: return new KenwoodRig(ss, true) { AfMax = model.Name == "K4" ? 60 : 250, PreampChoices = Preamps.ForModel(model) };
-                            default: return new KenwoodRig(ss, false) { NoTx = model.NoTx, PreampChoices = Preamps.ForModel(model) };
+                            case RigProtocol.Elecraft: return new KenwoodRig(ss, true) { AfMax = model.Name == "K4" ? 60 : 250, PreampChoices = Preamps.ForModel(model), PowerChoices = Powers.ForModel(model) };
+                            default: return new KenwoodRig(ss, false) { NoTx = model.NoTx, PreampChoices = Preamps.ForModel(model), PowerChoices = Powers.ForModel(model) };
                         }
                     };
                     break;
@@ -1703,6 +1703,8 @@ namespace SDRLink
             worker.AfGainChanged += delegate(int a) { BeginInvokeSafe(delegate { OnRigAfGain(a); }); };
             worker.PreampsKnown += delegate(PreampSet ps) { BeginInvokeSafe(delegate { rigPreamps = ps; }); };
             rigPreamps = null;
+            worker.PowerKnown += delegate(PowerRange pr) { BeginInvokeSafe(delegate { rigPower = pr; }); };
+            rigPower = null;
             worker.PollTx = chkMute.Checked;
             rigAfSupported = -1;
             rigMuted = false;
@@ -1775,6 +1777,7 @@ namespace SDRLink
             worker = null;
             w.Stop();
             rigPreamps = null;
+            rigPower = null;
             Rigctld.Stop();
             rigMuted = txMuted[1] = false;
             rigAfSupported = -1;
@@ -4351,7 +4354,7 @@ namespace SDRLink
             AddToHistory(m.Hz);
             settings.Memories.Used(m);
             Log.Write("Mémoire : " + m.Label + " (" + Memory.KHz(m.Hz) + " kHz" + (m.Mode != "" ? " " + m.Mode : "") + ")");
-            ShowStatus(Lang.F("Mémoire « {0} » : {1} kHz", "Memory \"{0}\": {1} kHz", m.Label, Memory.KHz(m.Hz)) + PreampStatus(m));
+            ShowStatus(Lang.F("Mémoire « {0} » : {1} kHz", "Memory \"{0}\": {1} kHz", m.Label, Memory.KHz(m.Hz)) + PreampStatus(m) + PowerStatus(m));
             settings.Save();
         }
 
@@ -4377,9 +4380,12 @@ namespace SDRLink
             {
                 if (rigPreamps != null) worker.SetPreamp(m.Preamp);
             }
+            // Puissance mémorisée (1.42) : ramenée sous le plafond ; le poste la reçoit après la fréquence, jamais pendant l'émission.
+            if (m.Power >= 0 && worker != null && rigOnline && !SdrAlone && rigPower != null) worker.SetPower(Math.Min(m.Power, Powers.Limit));
         }
 
         PreampSet rigPreamps;   // réglages de préampli annoncés par le poste connecté (null : non pilotable ou pas connecté)
+        PowerRange rigPower;    // puissance réglable du poste connecté (1.42 ; null : non pilotable ou pas connecté)
 
         // Préampli proposé dans la fenêtre des mémoires : celui du poste connecté, sinon celui du modèle choisi (port COM).
         void UpdatePreampChoices()
@@ -4387,6 +4393,9 @@ namespace SDRLink
             PreampSet ps = rigPreamps;
             if (ps == null && worker == null && settings.Interface == 0) ps = Preamps.ForModel(cbModel.SelectedItem as RigModel);
             Preamps.Current = ps;
+            PowerRange pr = rigPower;
+            if (pr == null && worker == null && settings.Interface == 0) pr = Powers.ForModel(cbModel.SelectedItem as RigModel);
+            Powers.Current = pr;
         }
 
         // Fin du message de rappel d'une mémoire : préampli appliqué, ou pourquoi il ne l'est pas.
@@ -4395,6 +4404,15 @@ namespace SDRLink
             if (m.Preamp < 0 || worker == null || !rigOnline || SdrAlone) return "";
             if (rigPreamps == null) return Lang.T(" ; préampli non pilotable sur ce poste / cette interface", "; preamp cannot be set on this rig / interface");
             return ", " + rigPreamps.LabelOf(rigPreamps.Map(m.Preamp));
+        }
+
+        // Fin du message de rappel : puissance demandée, ou pourquoi elle ne l'est pas.
+        string PowerStatus(Memory m)
+        {
+            if (m.Power < 0 || worker == null || !rigOnline || SdrAlone) return "";
+            if (rigPower == null) return Lang.T(" ; puissance non pilotable sur ce poste / cette interface", "; power cannot be set on this rig / interface");
+            int w = Powers.Clamp(m.Power, rigPower);
+            return ", " + w + " W" + (rigTx ? Lang.T(" (au retour en réception)", " (on return to receive)") : "");
         }
 
         // ---------------------------------------------------------------- Scan

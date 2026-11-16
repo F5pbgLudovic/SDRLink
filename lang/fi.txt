@@ -336,6 +336,8 @@ ExpertSDR TCI port	ExpertSDR:n TCI-portti
 TCI server port (ExpertSDR, Options > TCI):	TCI-palvelimen portti (ExpertSDR, Options > TCI):
 Add memory	Lisää muisti
 ; preamp cannot be set on this rig / interface	; esivahvistinta ei voi ohjata tällä radiolla / liitännällä
+; power cannot be set on this rig / interface	; tehoa ei voi ohjata tällä radiolla / liitännällä
+ (on return to receive)	 (kun palataan vastaanottoon)
 Resume the scan	Jatka pyyhkäisyä
 Current "Scan setup" setting	Nykyinen asetus ikkunassa "Pyyhkäisyn asetukset"
 No scan while transmitting	Ei pyyhkäisyä lähetyksen aikana
@@ -644,18 +646,26 @@ Preamp:	Esivahvistin:
 (preamp unchanged)	(esivahvistin ennallaan)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Radion esivahvistinasetus, joka otetaan käyttöön muistia kutsuttaessa (taajuuden jälkeen)
 (mode unchanged)	(lähetelaji ennallaan)
+Power:	Teho:
+set to	aseta
+Ceiling:	Yläraja:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Lähetysteho lähetetään, kun muisti valitaan, ei koskaan lähetyksen aikana. Yläraja koskee kaikkia muisteja: aseta se vahvistimesi ja antennisi mukaan.
+Unticked, the rig power is left alone	Ilman valintaa radion tehoon ei kosketa
+No memory will send more than this ceiling (all memories)	Mikään muisti ei lähetä enempää kuin tämä yläraja (kaikki muistit)
 Edit…	Muokkaa…
 Digital mode whose usual frequencies are shown	Digitaalinen lähetelaji, jonka tavalliset taajuudet näytetään
 Frequency (kHz)	Taajuus (kHz)
 Mode	Lähetelaji
 Preamp	Esivahvistin
+Power	Teho
 Digital modes	Digitaaliset lähetelajit
 Copy…	Kopioi…
 Select a memory first.	Valitse ensin muisti.
 Edit memory	Muokkaa muistia
-Preamp of the frequency	Taajuuden esivahvistin
+Preamp and power of the frequency	Taajuuden esivahvistin ja teho
  (here: {0})	 (tässä: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Tavalliset {0}-taajuudet, {1}. Napsauta siirtyäksesi taajuudelle (Muokkaa…: esivahvistin; Kopioi…: lisää se johonkin listaasi).
+This rig: {0} to {1} W.	Tämä radio: {0}–{1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Tavalliset {0}-taajuudet, {1}. Napsauta siirtyäksesi taajuudelle (Muokkaa…: esivahvistin ja teho; Kopioi…: lisää se johonkin listaasi).
 {0} memory(ies). Click a memory to go there.	{0} muistia. Siirry muistiin napsauttamalla sitä.
 Tuned to "{0}" ({1} kHz).	Viritetty: ”{0}” ({1} kHz).
 Remove the memory "{0}"?	Poistetaanko muisti ”{0}”?

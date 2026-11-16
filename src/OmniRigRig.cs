@@ -33,6 +33,7 @@ namespace SDRLink
             catch { }
             try { model = SDRLink.Preamps.FindModel(Convert.ToString(Get(rig, "RigType"))); preamps = SDRLink.Preamps.ForModel(model); }
             catch { model = null; preamps = null; }
+            power = Powers.ForModel(model);
         }
 
         public void Close()
@@ -103,6 +104,27 @@ namespace SDRLink
                     Call(rig, "SendCustomCommand", new byte[] { 0xFE, 0xFE, model.CivAddress, 0xE0, 0x16, 0x02, v, 0xFD }, 0, "");
                 }
                 else Call(rig, "SendCustomCommand", w, 0, "");
+            }
+            catch (Exception ex) { LogError(ex); }
+        }
+
+        // Puissance (1.42) : même chemin que le préampli (SendCustomCommand), pour les modèles dont la commande est confirmée.
+        PowerRange power;
+        public PowerRange Power { get { return power; } }
+
+        public void SetPower(int watts)
+        {
+            if (power == null || model == null) return;
+            try
+            {
+                if (model.Protocol == RigProtocol.Icom)
+                {
+                    int v = Powers.IcomLevel(model.Name, watts, lastHz);
+                    byte hi = (byte)(((v / 1000) << 4) | ((v / 100) % 10));
+                    byte lo = (byte)((((v / 10) % 10) << 4) | (v % 10));
+                    Call(rig, "SendCustomCommand", new byte[] { 0xFE, 0xFE, model.CivAddress, 0xE0, 0x14, 0x0A, hi, lo, 0xFD }, 0, "");
+                }
+                else Call(rig, "SendCustomCommand", Powers.PcCommand(watts), 0, "");
             }
             catch (Exception ex) { LogError(ex); }
         }

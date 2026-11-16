@@ -261,6 +261,15 @@ namespace SDRLink
                             s.Memories.DigiPreamps[q[0] + "|" + q[1]] = pre;
                     }
                     break;
+                    case "MemDigiPwr":
+                    {
+                        string[] q = v.Split('|');
+                        int pw;
+                        if (q.Length == 3 && int.TryParse(q[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out pw) && pw >= 0 && pw <= Powers.LimitMax)
+                            s.Memories.DigiPowers[q[0] + "|" + q[1]] = pw;
+                    }
+                    break;
+                    case "PowerLimit": Powers.Limit = Math.Max(1, Math.Min(Powers.LimitMax, Int(v, 100))); break;
                     case "MemListCount": s.Memories.ListCount = Math.Max(1, Math.Min(Memory.MaxLists, Int(v, 1))); break;
                     case "MemCurrentList": s.Memories.CurrentList = Math.Max(0, Math.Min(Memory.MaxLists - 1, Int(v, 0))); break;
                     case "FontScale": s.FontScale = Math.Max(FontScaleMin, Math.Min(FontScaleMax, Int(v, 100))); break;
@@ -419,6 +428,8 @@ namespace SDRLink
             foreach (Memory m in Memories.Items) Line(sb, "Mem", m.ToSetting());
             foreach (Memory m in Memories.Recent) Line(sb, "MemRecent", m.ToSetting());
             foreach (KeyValuePair<string, int> p in Memories.DigiPreamps) Line(sb, "MemDigiPre", p.Key + "|" + p.Value.ToString(CultureInfo.InvariantCulture));
+            foreach (KeyValuePair<string, int> p in Memories.DigiPowers) Line(sb, "MemDigiPwr", p.Key + "|" + p.Value.ToString(CultureInfo.InvariantCulture));
+            Line(sb, "PowerLimit", Powers.Limit);
             Line(sb, "CurrentList", CurrentList);
             Line(sb, "PttTimeout", PttTimeoutSec);
             Line(sb, "CableDevice", CableDevice);

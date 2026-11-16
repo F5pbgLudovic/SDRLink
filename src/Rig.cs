@@ -23,6 +23,10 @@ namespace SDRLink
         PreampSet Preamps { get; }
         // code : Preamps.Off / Amp1 / Amp2 / Ipo2, ramené à ce que le poste sait faire (PreampSet.Map).
         void SetPreamp(int code);
+        // Puissance d'émission (1.42) : bornes en watts (null = non pilotable par cette interface), connues après Open().
+        PowerRange Power { get; }
+        // watts déjà ramenés dans les bornes (Powers.Clamp) ; jamais appelé pendant l'émission.
+        void SetPower(int watts);
     }
 
     public enum RigProtocol { Yaesu, Yaesu817, YaesuOld, YaesuLegacy, Yaesu767, YaesuWriteOnly, Icom, Kenwood, Elecraft }

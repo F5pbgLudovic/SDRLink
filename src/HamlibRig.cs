@@ -44,7 +44,14 @@ namespace SDRLink
             afUnsupported = false;
             string[] v = Command("_", 1);   // nom du poste (rigctld : commande "_" = get_info)
             Log.Write("Hamlib : connecté à rigctld " + host + ":" + port + (v != null ? " (" + v[0] + ")" : ""));
+            rfpowerSettable = false; hamlibModel = null; lastMode = null; lastHz = 0;
             try { preamps = ReadPreamps(); } catch (Exception ex) { preamps = null; Log.Write("Hamlib : préampli non lu (" + ex.Message + ")"); }
+            power = null;
+            if (rfpowerSettable && hamlibModel != null)
+            {
+                PowerRange r = Powers.ForModel(SDRLink.Preamps.FindModel(hamlibModel));
+                if (r != null) power = new PowerRange(r.Rig, PowerKind.Hamlib, r.MinW, r.MaxW);
+            }
         }
 
         public void Close()
@@ -62,8 +69,10 @@ namespace SDRLink
             double d;
             if (f == null || !double.TryParse(f[0], NumberStyles.Float, CultureInfo.InvariantCulture, out d) || d <= 0) return false;
             freqHz = (long)Math.Round(d);
+            lastHz = freqHz;
             string[] m = Command("m", 2);
             if (m != null) mode = FromHamlib(m[0]);
+            if (m != null) lastMode = m[0];
             return true;
         }
 
@@ -104,6 +113,31 @@ namespace SDRLink
             if (w != null) Command("L PREAMP " + w, 0);
         }
 
+        // Puissance (1.42) : « L RFPOWER <0-1> », proportion de la puissance maxi. Celle-ci est demandée à Hamlib (\power2mW 1 à la
+        // fréquence et au mode du moment), sinon prise dans le tableau de SDRLink (version la plus puissante du poste : en cas de doute,
+        // moins de watts, jamais plus). Seulement pour un poste du catalogue dont Hamlib sait régler RFPOWER.
+        PowerRange power;
+        public PowerRange Power { get { return power; } }
+        bool rfpowerSettable;
+        string hamlibModel, lastMode;
+        long lastHz;
+
+        public void SetPower(int watts)
+        {
+            if (power == null) return;
+            double max = power.Rig != null ? SDRLink.Powers.IcomMax(power.Rig, lastHz) : 0;
+            if (max <= 0) max = power.MaxW;
+            if (lastHz > 0 && !string.IsNullOrEmpty(lastMode))
+            {
+                string[] r = Command("\\power2mW 1 " + lastHz.ToString(CultureInfo.InvariantCulture) + " " + lastMode, 1);
+                double mw;
+                if (r != null && double.TryParse(r[0], NumberStyles.Float, CultureInfo.InvariantCulture, out mw) && mw >= 1000 && mw <= 2000000) max = mw / 1000.0;
+            }
+            double f = Math.Max(0, Math.Min(1, watts / max));
+            Log.Write("Hamlib : puissance " + watts + " W sur " + max.ToString("0", CultureInfo.InvariantCulture) + " W maxi = RFPOWER " + f.ToString("0.000", CultureInfo.InvariantCulture));
+            Command("L RFPOWER " + f.ToString("0.000", CultureInfo.InvariantCulture), 0);
+        }
+
         PreampSet ReadPreamps()
         {
             if (stream == null) return null;
@@ -119,7 +153,11 @@ namespace SDRLink
                 string s = line.Trim();
                 if (s.StartsWith("Model name:", StringComparison.Ordinal)) model = s.Substring(11).Trim();
                 else if (s.StartsWith("Preamp:", StringComparison.Ordinal)) list = s.Substring(7).Trim();
-                else if (s.StartsWith("Set level:", StringComparison.Ordinal)) settable = (" " + s.Substring(10) + " ").Contains(" PREAMP");
+                else if (s.StartsWith("Set level:", StringComparison.Ordinal))
+                {
+                    settable = (" " + s.Substring(10) + " ").Contains(" PREAMP");
+                    rfpowerSettable = (" " + s.Substring(10) + " ").Contains(" RFPOWER");
+                }
             }
             List<string> dbs = new List<string>();
             foreach (string p in (list ?? "").Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries))
@@ -128,6 +166,7 @@ namespace SDRLink
                 int n;
                 if (int.TryParse(d, NumberStyles.Integer, CultureInfo.InvariantCulture, out n) && n > 0) dbs.Add(d);
             }
+            hamlibModel = model;
             Log.Write("Hamlib : poste « " + model + " », préampli " + (list ?? "?") + (settable ? "" : " (non réglable)"));
             if (!settable || dbs.Count == 0) return null;
             string[] wire = { "0", dbs[0], dbs.Count > 1 ? dbs[1] : dbs[0], "0" };
@@ -147,12 +186,13 @@ namespace SDRLink
             Command("L AF " + (Math.Max(0, Math.Min(100, percent)) / 100.0).ToString("0.000", CultureInfo.InvariantCulture), 0);
         }
 
-        public void SetFreq(long freqHz) { Command("F " + freqHz.ToString(CultureInfo.InvariantCulture), 0); }
+        public void SetFreq(long freqHz) { lastHz = freqHz; Command("F " + freqHz.ToString(CultureInfo.InvariantCulture), 0); }
 
         public void SetMode(string mode)
         {
             string m = ToHamlib(mode);
             if (m == null) return;
+            lastMode = m;
             // Largeur de filtre -1 = inchangée ; les anciens rigctld ne la connaissent pas : 0 = largeur normale du mode.
             if (passbandNoChange && Command("M " + m + " -1", 0) == null)
             {

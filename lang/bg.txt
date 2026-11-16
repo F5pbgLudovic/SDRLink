@@ -336,6 +336,8 @@ ExpertSDR TCI port	TCI порт на ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Порт на TCI сървъра (ExpertSDR, Options > TCI):
 Add memory	Добавяне на памет
 ; preamp cannot be set on this rig / interface	; предусилвателят не може да се задава на този трансивър / интерфейс
+; power cannot be set on this rig / interface	; мощността не може да се задава на този трансивър / интерфейс
+ (on return to receive)	 (при връщане на приемане)
 Resume the scan	Продължаване на сканирането
 Current "Scan setup" setting	Текуща настройка в „Настройка на сканирането“
 No scan while transmitting	Не може да се сканира по време на предаване
@@ -644,18 +646,26 @@ Preamp:	Предусилвател:
 (preamp unchanged)	(предусилвателят не е променен)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Настройка на предусилвателя на трансивъра, прилагана при извикване на тази памет (след честотата)
 (mode unchanged)	(режимът не се променя)
+Power:	Мощност:
+set to	задай на
+Ceiling:	Таван:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Мощността на предаване се изпраща при извикване на паметта, никога по време на предаване. Таванът важи за всички памети: задайте го според вашия усилвател и антена.
+Unticked, the rig power is left alone	Без отметка мощността на трансивъра не се променя
+No memory will send more than this ceiling (all memories)	Никоя памет няма да изпрати повече от този таван (всички памети)
 Edit…	Редактиране…
 Digital mode whose usual frequencies are shown	Цифров режим, чиито обичайни честоти се показват
 Frequency (kHz)	Честота (kHz)
 Mode	Режим
 Preamp	Предусилвател
+Power	Мощност
 Digital modes	Цифрови режими
 Copy…	Копиране…
 Select a memory first.	Първо изберете памет.
 Edit memory	Редактиране на паметта
-Preamp of the frequency	Предусилвател на честотата
+Preamp and power of the frequency	Предусилвател и мощност на честотата
  (here: {0})	 (тук: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Обичайни честоти за {0}, {1}. Щракнете, за да отидете там (Редактиране…: предусилвател; Копиране…: добавяне към някой от вашите списъци).
+This rig: {0} to {1} W.	Този трансивър: от {0} до {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Обичайни честоти за {0}, {1}. Щракнете, за да отидете там (Редактиране…: предусилвател и мощност; Копиране…: добавяне към някой от вашите списъци).
 {0} memory(ies). Click a memory to go there.	{0} памет(и). Щракнете върху памет, за да отидете на нея.
 Tuned to "{0}" ({1} kHz).	Настроено на „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Да се премахне ли паметта „{0}“?

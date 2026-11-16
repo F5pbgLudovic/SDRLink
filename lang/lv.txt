@@ -336,6 +336,8 @@ ExpertSDR TCI port	ExpertSDR TCI ports
 TCI server port (ExpertSDR, Options > TCI):	TCI servera ports (ExpertSDR, Options > TCI):
 Add memory	Pievienot atmiņu
 ; preamp cannot be set on this rig / interface	; pirmspastiprinātāju šajā raiduztvērējā / saskarnē nevar vadīt
+; power cannot be set on this rig / interface	; jaudu šajā raiduztvērējā / saskarnē nevar vadīt
+ (on return to receive)	 (atgriežoties uztveršanā)
 Resume the scan	Turpināt skenēšanu
 Current "Scan setup" setting	Pašreizējais iestatījums logā „Skenēšanas iestatījumi“
 No scan while transmitting	Raidīšanas laikā skenēt nevar
@@ -644,18 +646,26 @@ Preamp:	Pirmspastiprinātājs:
 (preamp unchanged)	(pirmspastiprinātājs nemainīts)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Raiduztvērēja pirmspastiprinātāja iestatījums, ko piemēro, atsaucot šo atmiņu (pēc frekvences)
 (mode unchanged)	(režīms nemainīts)
+Power:	Jauda:
+set to	iestatīt uz
+Ceiling:	Griesti:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Raidīšanas jauda tiek nosūtīta, izsaucot atmiņu, nekad raidīšanas laikā. Griesti attiecas uz visām atmiņām: iestatiet tos atbilstoši savam pastiprinātājam un antenai.
+Unticked, the rig power is left alone	Bez atzīmes raiduztvērēja jauda netiek mainīta
+No memory will send more than this ceiling (all memories)	Neviena atmiņa nenosūtīs vairāk par šiem griestiem (visas atmiņas)
 Edit…	Rediģēt…
 Digital mode whose usual frequencies are shown	Digitālais darba veids, kura parastās frekvences tiek rādītas
 Frequency (kHz)	Frekvence (kHz)
 Mode	Režīms
 Preamp	Pirmspastiprinātājs
+Power	Jauda
 Digital modes	Digitālie darba veidi
 Copy…	Kopēt…
 Select a memory first.	Vispirms izvēlieties atmiņu.
 Edit memory	Rediģēt atmiņu
-Preamp of the frequency	Frekvences priekšpastiprinātājs
+Preamp and power of the frequency	Frekvences priekšpastiprinātājs un jauda
  (here: {0})	 (šeit: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	{0} parastās frekvences, {1}. Noklikšķiniet, lai tur pārietu (Rediģēt…: pirmspastiprinātājs; Kopēt…: pievienot kādam no jūsu sarakstiem).
+This rig: {0} to {1} W.	Šis raiduztvērējs: no {0} līdz {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	{0} parastās frekvences, {1}. Noklikšķiniet, lai tur pārietu (Rediģēt…: pirmspastiprinātājs un jauda; Kopēt…: pievienot kādam no jūsu sarakstiem).
 {0} memory(ies). Click a memory to go there.	{0} atmiņa(s). Noklikšķiniet uz atmiņas, lai pārietu uz to.
 Tuned to "{0}" ({1} kHz).	Noskaņots uz “{0}” ({1} kHz).
 Remove the memory "{0}"?	Noņemt atmiņu “{0}”?

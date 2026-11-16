@@ -172,6 +172,28 @@ namespace SDRLink
         public PreampSet Preamps { get { return null; } }
         public void SetPreamp(int code) { }
 
+        // Puissance (1.42) : « drive » en % de la puissance maxi de l'appareil, envoyé avec % = watts (exact sur un appareil de
+        // 100 W, moins de watts sur un plus petit, jamais plus : les appareils TCI d'Expert Electronics font 100 W au plus). Proposé
+        // seulement après que le serveur a annoncé son drive, dont la forme donne celle de la commande (« drive:0,50; » ExpertSDR3,
+        // « drive:50; » anciens serveurs).
+        int driveArgs;   // 0 : drive pas encore annoncé
+        public PowerRange Power { get { lock (sync) return driveArgs > 0 ? new PowerRange("TCI", PowerKind.Tci, 0, 100) : null; } }
+
+        public void SetPower(int watts)
+        {
+            int n;
+            lock (sync) n = driveArgs;
+            if (n == 0) return;
+            Send(DriveCommand(n, watts));
+        }
+
+        // « drive:0,50; » (serveur qui annonce « drive:0,nn; ») ou « drive:50; » ; % = watts, 0 à 100.
+        public static string DriveCommand(int args, int watts)
+        {
+            string p = Math.Max(0, Math.Min(100, watts)).ToString(CultureInfo.InvariantCulture);
+            return args >= 2 ? "drive:0," + p + ";" : "drive:" + p + ";";
+        }
+
         public void SetAfGain(int percent)
         {
             int db = (int)Math.Round(Math.Max(0, Math.Min(100, percent)) * 60 / 100.0) - 60;
@@ -242,6 +264,10 @@ namespace SDRLink
                 double db;
                 if (double.TryParse(a[0], NumberStyles.Float, CultureInfo.InvariantCulture, out db))
                     lock (sync) volumeDb = (int)Math.Round(db);
+            }
+            else if (name == "drive" && a.Length >= 1 && a[0].Length > 0)
+            {
+                lock (sync) if (driveArgs == 0) driveArgs = a.Length >= 2 ? 2 : 1;
             }
             else if (name == "trx" && a.Length >= 2 && a[0] == "0")
             {

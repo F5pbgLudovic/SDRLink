@@ -60,11 +60,17 @@ namespace SDRLink
         public void SetPtt(bool tx) { lock (pendingLock) pendingPtt = tx ? 1 : 0; }
         public void SetAfGain(int pct) { lock (pendingLock) pendingAf = pct; }
         public void SetPreamp(int code) { lock (pendingLock) pendingPreamp = code; }
+        // Puissance en watts (1.42), déjà ramenée sous le plafond général ; envoyée seulement en réception.
+        public void SetPower(int watts) { lock (pendingLock) pendingPower = watts; }
+
+        // Puissance réglable du poste connecté (null : non pilotable), annoncée après la connexion et à chaque changement
+        // (TCI ne la connaît qu'après l'annonce du drive par le serveur).
+        public event Action<PowerRange> PowerKnown;
 
         // Réglages de préampli du poste connecté (null : non pilotable), annoncés après chaque connexion.
         public event Action<PreampSet> PreampsKnown;
 
-        int pendingAf = -1, pendingPreamp = -1;
+        int pendingAf = -1, pendingPreamp = -1, pendingPower = -1;
         const int AfReadEvery = 10;     // relecture du volume du poste tous les 10 tours (bouton tourné sur le poste)
 
         void Run()
@@ -77,6 +83,8 @@ namespace SDRLink
             int lastAf = -2, afCountdown = 0;
             DateTime afQuietUntil = DateTime.MinValue;
             bool txUnsupportedLogged = false;
+            bool powerAnnounced = false, powerWaitLogged = false;
+            PowerRange lastPower = null;
             while (running)
             {
                 try
@@ -96,13 +104,15 @@ namespace SDRLink
                         Log.Write("Préampli : " + (ps == null ? "non pilotable sur ce poste / cette interface" : ps.Describe()));
                         Action<PreampSet> pk = PreampsKnown;
                         if (pk != null) pk(ps);
+                        powerAnnounced = false;
                     }
 
-                    long f; string m; int ptt, af, pre;
+                    long f; string m; int ptt, af, pre, pwr;
                     lock (pendingLock)
                     {
                         f = pendingFreq; m = pendingMode; ptt = pendingPtt; af = pendingAf; pre = pendingPreamp;
-                        pendingFreq = 0; pendingMode = null; pendingPtt = -1; pendingAf = -1; pendingPreamp = -1;
+                        pwr = pendingPower;
+                        pendingFreq = 0; pendingMode = null; pendingPtt = -1; pendingAf = -1; pendingPreamp = -1; pendingPower = -1;
                     }
                     if (af >= 0)
                     {
@@ -128,6 +138,36 @@ namespace SDRLink
                         {
                             Log.Write("Préampli : " + ps.LabelOf(ps.Map(pre)));
                             rig.SetPreamp(pre);
+                            Thread.Sleep(40);
+                        }
+                    }
+
+                    // Puissance (1.42) : après la fréquence (le poste la retient souvent par bande / mode), et JAMAIS pendant l'émission :
+                    // elle attend le retour en réception (sauf si un ordre plus récent l'a remplacée).
+                    PowerRange pr = null;
+                    try { pr = rig.Power; } catch { }
+                    if (!powerAnnounced || !SamePower(pr, lastPower))
+                    {
+                        powerAnnounced = true;
+                        lastPower = pr;
+                        Log.Write("Puissance : " + (pr == null ? "non pilotable sur ce poste / cette interface" : pr.Describe()));
+                        Action<PowerRange> wk = PowerKnown;
+                        if (wk != null) wk(pr);
+                    }
+                    if (pwr >= 0 && pr != null)
+                    {
+                        if (rig.ReadTx() == 1)
+                        {
+                            if (!powerWaitLogged) Log.Write("Puissance : poste en émission, réglage remis au retour en réception");
+                            powerWaitLogged = true;
+                            lock (pendingLock) if (pendingPower < 0) pendingPower = pwr;
+                        }
+                        else
+                        {
+                            int w = Powers.Clamp(pwr, pr);
+                            Log.Write("Puissance : " + w + " W" + (w != pwr ? " (demandé " + pwr + " W, ramené au plafond / aux limites du poste)" : ""));
+                            rig.SetPower(w);
+                            powerWaitLogged = false;
                             Thread.Sleep(40);
                         }
                     }
@@ -202,6 +242,12 @@ namespace SDRLink
                 try { rig.Close(); } catch { }
             }
             Status(Lang.T("Déconnecté", "Disconnected"), false);
+        }
+
+        static bool SamePower(PowerRange a, PowerRange b)
+        {
+            if (a == null || b == null) return a == b;
+            return a.Kind == b.Kind && a.MinW == b.MinW && a.MaxW == b.MaxW && a.Rig == b.Rig;
         }
 
         void RaiseTx(int tx)

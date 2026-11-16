@@ -336,6 +336,8 @@ ExpertSDR TCI port	ExpertSDR TCI prievadas
 TCI server port (ExpertSDR, Options > TCI):	TCI serverio prievadas (ExpertSDR, Options > TCI):
 Add memory	Pridėti atmintį
 ; preamp cannot be set on this rig / interface	; išankstinio stiprintuvo šioje stotyje / sąsajoje valdyti negalima
+; power cannot be set on this rig / interface	; galios šioje stotyje / sąsajoje valdyti negalima
+ (on return to receive)	 (grįžus į priėmimą)
 Resume the scan	Tęsti skenavimą
 Current "Scan setup" setting	Dabartinis nustatymas lange „Skenavimo nustatymai“
 No scan while transmitting	Siunčiant skenuoti negalima
@@ -644,18 +646,26 @@ Preamp:	Išankstinis stiprintuvas:
 (preamp unchanged)	(išankstinis stiprintuvas nepakeistas)
 Rig preamp setting applied when this memory is recalled (after the frequency)	Stoties išankstinio stiprintuvo nuostata, taikoma iškvietus šią atmintį (po dažnio)
 (mode unchanged)	(režimas nekeičiamas)
+Power:	Galia:
+set to	nustatyti
+Ceiling:	Riba:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Siųstuvo galia nusiunčiama iškvietus atmintį, niekada siunčiant. Riba galioja visoms atmintims: nustatykite ją pagal savo stiprintuvą ir anteną.
+Unticked, the rig power is left alone	Nepažymėjus stoties galia nekeičiama
+No memory will send more than this ceiling (all memories)	Jokia atmintis nesiųs daugiau nei ši riba (visos atmintys)
 Edit…	Keisti…
 Digital mode whose usual frequencies are shown	Skaitmeninė darbo rūšis, kurios įprasti dažniai rodomi
 Frequency (kHz)	Dažnis (kHz)
 Mode	Režimas
 Preamp	Išankstinis stiprintuvas
+Power	Galia
 Digital modes	Skaitmeninės darbo rūšys
 Copy…	Kopijuoti…
 Select a memory first.	Pirmiausia pasirinkite atmintį.
 Edit memory	Keisti atmintį
-Preamp of the frequency	Dažnio išankstinis stiprintuvas
+Preamp and power of the frequency	Dažnio išankstinis stiprintuvas ir galia
  (here: {0})	 (čia: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Įprasti {0} dažniai, {1}. Spustelėkite, kad ten nueitumėte (Keisti…: išankstinis stiprintuvas; Kopijuoti…: pridėti prie vieno iš jūsų sąrašų).
+This rig: {0} to {1} W.	Ši stotis: nuo {0} iki {1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	Įprasti {0} dažniai, {1}. Spustelėkite, kad ten nueitumėte (Keisti…: išankstinis stiprintuvas ir galia; Kopijuoti…: pridėti prie vieno iš jūsų sąrašų).
 {0} memory(ies). Click a memory to go there.	{0} atmintis(-ys). Spustelėkite atmintį, kad į ją pereitumėte.
 Tuned to "{0}" ({1} kHz).	Suderinta: „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Pašalinti atmintį „{0}“?

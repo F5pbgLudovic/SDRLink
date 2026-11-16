@@ -336,6 +336,8 @@ ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
 Add memory	Memória hozzáadása
 ; preamp cannot be set on this rig / interface	; az előerősítő ezen a rádión / interfészen nem állítható
+; power cannot be set on this rig / interface	; a teljesítmény ezen a rádión / interfészen nem állítható
+ (on return to receive)	 (a vételre való visszatéréskor)
 Resume the scan	Pásztázás folytatása
 Current "Scan setup" setting	A „Pásztázás beállítása” jelenlegi beállítása
 No scan while transmitting	Adás közben nincs pásztázás
@@ -644,18 +646,26 @@ Preamp:	Előerősítő:
 (preamp unchanged)	(az előerősítő változatlan)
 Rig preamp setting applied when this memory is recalled (after the frequency)	A rádió előerősítő-beállítása, amely a memória előhívásakor érvényesül (a frekvencia után)
 (mode unchanged)	(üzemmód változatlan)
+Power:	Teljesítmény:
+set to	beállítás:
+Ceiling:	Felső határ:
+Transmit power sent when the memory is recalled, never while transmitting. The ceiling applies to every memory: set it for your amplifier and antenna.	Az adóteljesítményt a memória előhívásakor küldi el, adás közben soha. A felső határ minden memóriára érvényes: állítsa be az erősítőjéhez és az antennájához.
+Unticked, the rig power is left alone	Pipa nélkül a rádió teljesítménye nem változik
+No memory will send more than this ceiling (all memories)	Egyik memória sem küld többet ennél a felső határnál (minden memória)
 Edit…	Szerkesztés…
 Digital mode whose usual frequencies are shown	Digitális üzemmód, amelynek szokásos frekvenciái láthatók
 Frequency (kHz)	Frekvencia (kHz)
 Mode	Üzemmód
 Preamp	Előerősítő
+Power	Teljesítmény
 Digital modes	Digitális üzemmódok
 Copy…	Másolás…
 Select a memory first.	Először válasszon memóriát.
 Edit memory	Memória szerkesztése
-Preamp of the frequency	A frekvencia előerősítője
+Preamp and power of the frequency	A frekvencia előerősítője és teljesítménye
  (here: {0})	 (itt: {0})
-Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	A(z) {0} szokásos frekvenciái, {1}. Kattintson a hangoláshoz (Szerkesztés…: előerősítő; Másolás…: hozzáadás valamelyik listájához).
+This rig: {0} to {1} W.	Ez a rádió: {0}–{1} W.
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp and power; Copy…: add it to one of your lists).	A(z) {0} szokásos frekvenciái, {1}. Kattintson a hangoláshoz (Szerkesztés…: előerősítő és teljesítmény; Másolás…: hozzáadás valamelyik listájához).
 {0} memory(ies). Click a memory to go there.	{0} memória. Kattintson egy memóriára, hogy oda hangoljon.
 Tuned to "{0}" ({1} kHz).	Hangolva: „{0}” ({1} kHz).
 Remove the memory "{0}"?	Eltávolítja a(z) „{0}” memóriát?
