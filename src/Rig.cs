@@ -19,6 +19,10 @@ namespace SDRLink
         void SetAfGain(int percent);
         void SetFreq(long freqHz);
         void SetMode(string mode);
+        // Préampli (1.41) : réglages proposés par ce poste (null = non pilotable par cette interface), connus après Open().
+        PreampSet Preamps { get; }
+        // code : Preamps.Off / Amp1 / Amp2 / Ipo2, ramené à ce que le poste sait faire (PreampSet.Map).
+        void SetPreamp(int code);
     }
 
     public enum RigProtocol { Yaesu, Yaesu817, YaesuOld, YaesuLegacy, Yaesu767, YaesuWriteOnly, Icom, Kenwood, Elecraft }

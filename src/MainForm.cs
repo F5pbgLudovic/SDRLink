@@ -521,7 +521,7 @@ namespace SDRLink
             // Notch auto (DNF) : case dans le bouton (marche / arrêt) ; clic ailleurs sur le bouton : options et niveau (depuis la 1.38).
             chkNotch = new CheckButton();
             chkNotch.Margin = new Padding(8, 3, 3, 3);
-            chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; RefreshNotch(); };
+            chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; RefreshNotch(); UpdateNotchButton(); };
             chkNotch.Click += delegate { ShowNotchMenu(); };
             Tr(delegate
             {
@@ -529,7 +529,10 @@ namespace SDRLink
                 tips.SetToolTip(chkNotch, Lang.T("Case : notch automatique en marche / arrêté. Clic sur le bouton : coupure en mode numérique et en FreeDV, niveau de 1 à 10 (clic droit : couleur du bouton)",
                     "Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)"));
             });
-            row3.Controls.Add(Colorable("Notch", chkNotch));
+            row3.Controls.Add(chkNotch);
+            // Couleurs au clic droit : notch arrêté / en marche (1.41 ; avant, une seule couleur « Notch », gardée pour les deux).
+            AddColorMenu(chkNotch, Slot("NotchOff", () => Lang.T("Couleur notch arrêté", "Colour when the notch is off")),
+                Slot("NotchOn", () => Lang.T("Couleur notch en marche", "Colour when the notch is on")));
             // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
             row3.Controls.Add(Colorable("ScanSetup", Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); })));
             btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else ShowScanMenu(); });
@@ -726,6 +729,8 @@ namespace SDRLink
             };
             renameList.Click += delegate { RenameFavoriteList(); };
             cbFavList.ContextMenuStrip = listMenu;
+            cbFavList.Name = "des favoris";
+            GuardDropDown(cbFavList);
             rowUrl.Controls.Add(cbFavList);
             rowUrl.Controls.Add(Colorable("Go", Btn("Aller", "Go", delegate { NavigateFromBar(); })));
             rowUrl.Controls.Add(Colorable("Back", Btn("◀ Retour", "◀ Back", delegate { if (web.CoreWebView2 != null && web.CanGoBack) web.GoBack(); })));
@@ -789,6 +794,7 @@ namespace SDRLink
             ContextMenuStrip swapMenu = new ContextMenuStrip();
             swapMenu.Opening += delegate { FillSwapMenu(swapMenu); };
             btnMuteSwap.ContextMenuStrip = swapMenu;
+            AddColorMenu(btnMuteSwap, Slot("Swap", () => Lang.T("Couleur du bouton", "Button colour")));
             // Visible seulement quand ExpertSDR tourne : coupe son son dans le mélangeur de volume de Windows.
             btnMuteEsdr = Btn("Mute ExpertSDR", "Mute ExpertSDR", delegate { ToggleExpertSdrMute(); });
             btnMuteEsdr.Visible = false;
@@ -1163,11 +1169,51 @@ namespace SDRLink
             UpdateScanButton();
             UpdateReinitButton();
             UpdateFindModeButton();
+            UpdateDiversityButton(true);
+            UpdateNotchButton();
+            UpdateSstvButton();
             UpdatePttButton();
             UpdateMuteButtons();
             UpdateFreqColors();
             shownModeFamily = null;   // force la remise en couleur des boutons de mode
             UpdateDisplays();
+        }
+
+        // Liste déroulante refermée toute seule moins de 0,5 s après son ouverture, sans choix ni Échap : rouverte (2 fois au
+        // plus par ouverture). Parade à une fermeture vue pendant la diversité, dont la cause n'a pas été trouvée (1.41).
+        void GuardDropDown(ComboBox cb)
+        {
+            DateTime opened = DateTime.MinValue;
+            int selAtOpen = -1, reopens = 0;
+            bool escape = false, reopening = false;
+            cb.DropDown += delegate
+            {
+                if (reopening) { reopening = false; opened = DateTime.UtcNow; return; }
+                opened = DateTime.UtcNow; selAtOpen = cb.SelectedIndex; reopens = 0; escape = false;
+            };
+            cb.KeyDown += delegate(object s, KeyEventArgs e) { if (e.KeyCode == Keys.Escape) escape = true; };
+            cb.DropDownClosed += delegate
+            {
+                if (escape || reopens >= 2 || cb.SelectedIndex != selAtOpen || (DateTime.UtcNow - opened).TotalMilliseconds >= 500) return;
+                reopens++;
+                Log.Write("Liste " + cb.Name + " refermée après " + (int)(DateTime.UtcNow - opened).TotalMilliseconds + " ms sans choix : rouverte");
+                BeginInvoke((Action)delegate
+                {
+                    if (cb.IsDisposed || !cb.Visible || cb.SelectedIndex != selAtOpen) return;
+                    reopening = true;
+                    cb.DroppedDown = true;
+                });
+            };
+        }
+
+        // Notch auto : couleur de l'état (marche / arrêt), sinon l'ancienne couleur unique « Notch », sinon le thème.
+        void UpdateNotchButton()
+        {
+            if (chkNotch == null) return;
+            int c = ColorOf(chkNotch.Checked ? "NotchOn" : "NotchOff");
+            if (c < 0) c = ColorOf("Notch");
+            if (c < 0) Theme.StyleButton(chkNotch);
+            else PaintCustom(chkNotch, c);
         }
 
         // Bouton ordinaire : couleur choisie pour la clé, sinon celle du thème.
@@ -1361,6 +1407,9 @@ namespace SDRLink
             UpdateScanButton();
             UpdateReinitButton();
             UpdateFindModeButton();
+            UpdateDiversityButton(true);
+            UpdateNotchButton();
+            UpdateSstvButton();
         }
 
         // Largeur fixe des fréquences, calculée sur une fréquence HF avec le mode le plus long : les boutons à droite
@@ -1392,6 +1441,9 @@ namespace SDRLink
             UpdateScanButton();
             UpdateReinitButton();
             UpdateFindModeButton();
+            UpdateDiversityButton(true);
+            UpdateNotchButton();
+            UpdateSstvButton();
             if (worker == null) ShowStatus(Lang.T("Déconnecté", "Disconnected"));
             UpdateDisplays();
             // Les textes ont changé de longueur : on recalcule la hauteur de l'affichage mini.
@@ -1604,16 +1656,16 @@ namespace SDRLink
                     {
                         switch (model.Protocol)
                         {
-                            case RigProtocol.Yaesu: return new YaesuRig(ss, model.FreqDigits);
+                            case RigProtocol.Yaesu: return new YaesuRig(ss, model.FreqDigits) { PreampChoices = Preamps.ForModel(model) };
                             case RigProtocol.Yaesu817: return new Ft817Rig(ss, model.Name);
                             case RigProtocol.YaesuOld: return new YaesuOldRig(ss, model.Name);
                             case RigProtocol.YaesuLegacy: return new YaesuLegacyRig(ss, model.Name);
                             case RigProtocol.Yaesu767: return new Ft767Rig(ss);
                             case RigProtocol.YaesuWriteOnly: return new YaesuWriteOnlyRig(ss, model.Name);
-                            case RigProtocol.Icom: return new IcomRig(ss, civ, model.ShortFreq ? 4 : 5);
+                            case RigProtocol.Icom: return new IcomRig(ss, civ, model.ShortFreq ? 4 : 5) { PreampChoices = Preamps.ForModel(model) };
                             // Gain BF Elecraft : 000-250, sauf K4 : 000-060 (Hamlib).
-                            case RigProtocol.Elecraft: return new KenwoodRig(ss, true) { AfMax = model.Name == "K4" ? 60 : 250 };
-                            default: return new KenwoodRig(ss, false) { NoTx = model.NoTx };
+                            case RigProtocol.Elecraft: return new KenwoodRig(ss, true) { AfMax = model.Name == "K4" ? 60 : 250, PreampChoices = Preamps.ForModel(model) };
+                            default: return new KenwoodRig(ss, false) { NoTx = model.NoTx, PreampChoices = Preamps.ForModel(model) };
                         }
                     };
                     break;
@@ -1649,6 +1701,8 @@ namespace SDRLink
             worker.StatusChanged += delegate(string msg, bool online) { BeginInvokeSafe(delegate { OnRigStatus(msg, online); }); };
             worker.TxChanged += delegate(int tx) { BeginInvokeSafe(delegate { OnRigTx(tx); }); };
             worker.AfGainChanged += delegate(int a) { BeginInvokeSafe(delegate { OnRigAfGain(a); }); };
+            worker.PreampsKnown += delegate(PreampSet ps) { BeginInvokeSafe(delegate { rigPreamps = ps; }); };
+            rigPreamps = null;
             worker.PollTx = chkMute.Checked;
             rigAfSupported = -1;
             rigMuted = false;
@@ -1720,6 +1774,7 @@ namespace SDRLink
             StopLinkCheck();
             worker = null;
             w.Stop();
+            rigPreamps = null;
             Rigctld.Stop();
             rigMuted = txMuted[1] = false;
             rigAfSupported = -1;
@@ -3024,13 +3079,22 @@ namespace SDRLink
         }
 
         // Recopie du son de la page : pour le câble SDRLINK, ou pour FreeDV et SSTV quand ils écoutent le WebSDR.
-        void UpdatePageTap() { SetPageTap(cableSink != null || (DecodingOn && fdvSource == 0) || diversity != null); }
+        // Diversité seule : prélèvement après le notch (l'oreille du WebSDR est filtrée comme le haut-parleur) ; câble et
+        // décodeurs gardent le son brut.
+        void UpdatePageTap()
+        {
+            bool raw = cableSink != null || (DecodingOn && fdvSource == 0);
+            tapPost = !raw && diversity != null;
+            SetPageTap(raw || diversity != null);
+        }
+
+        bool tapPost;
 
         void SetPageTap(bool on)
         {
             tapShown = on;
             if (web.CoreWebView2 != null)
-                web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setTap && window.__sdrlink.setTap(" + (on ? "true" : "false") + ");");
+                web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setTap && window.__sdrlink.setTap(" + (on ? "true" : "false") + "," + (on && tapPost ? "true" : "false") + ");");
         }
 
         string CableDeviceName()
@@ -3652,6 +3716,7 @@ namespace SDRLink
             btnMuteSwap.BackColor = Theme.ButtonBack;   // ⇄ n'est pas une coupure : couleurs ordinaires
             btnMuteSwap.ForeColor = Theme.Fore;
             btnMuteSwap.FlatAppearance.BorderColor = Theme.Border;
+            if (ColorOf("Swap") >= 0) PaintCustom(btnMuteSwap, ColorOf("Swap"));
             StyleToggle(btnMuteEsdr, esdrMuted, EsdrAvailable, "MuteEsdr");
             StyleToggle(btnMuteHdsdr, hdsdrMuted, hdsdrWin, "MuteHdsdr");
             UpdateRigMonitor();
@@ -3843,6 +3908,10 @@ namespace SDRLink
         bool EsdrAvailable { get { return esdrWin || (esdrTci != null && esdrTci.Connected); } }
 
         // Toutes les 3 secondes : processus ExpertSDR et HDSDR en cours, relevés en un seul passage.
+        // Essais seulement : SDRLINK_TEST_ESDR = nom exact du faux ExpertSDR ; tout autre ExpertSDR ou HDSDR est alors ignoré
+        // (la copie d'essai ne touche jamais au vrai logiciel qui tournerait sur la station).
+        static readonly string testEsdrName = Environment.GetEnvironmentVariable("SDRLINK_TEST_ESDR");
+
         void FindSoundPrograms()
         {
             esdrPids.Clear();
@@ -3852,7 +3921,8 @@ namespace SDRLink
                 try
                 {
                     string name = p.ProcessName;
-                    if (name.StartsWith("ExpertSDR", StringComparison.OrdinalIgnoreCase)) esdrPids[p.Id] = true;
+                    if (!string.IsNullOrEmpty(testEsdrName)) { if (name == testEsdrName) esdrPids[p.Id] = true; }
+                    else if (name.StartsWith("ExpertSDR", StringComparison.OrdinalIgnoreCase)) esdrPids[p.Id] = true;
                     else if (name.StartsWith("HDSDR", StringComparison.OrdinalIgnoreCase)) hdsdrPids[p.Id] = true;
                 }
                 catch { }
@@ -4248,6 +4318,7 @@ namespace SDRLink
         {
             // Décodage en marche : la fenêtre s'ouvre sur la liste « Modes numériques » du mode utilisé (FreeDV si lui seul décode).
             string dm = !settings.SstvAuto && settings.FreeDvAuto ? "FreeDV" : CurDigiMode;
+            UpdatePreampChoices();
             using (MemoriesDialog d = new MemoriesDialog(settings.Memories, CurrentMemory, TuneMemory, dm, settings.IaruRegion,
                 settings.SstvAuto || settings.FreeDvAuto, DigiName))
             {
@@ -4261,6 +4332,7 @@ namespace SDRLink
         {
             Memory m = CurrentMemory();
             m.List = settings.Memories.CurrentList;
+            UpdatePreampChoices();
             using (MemoryEditDialog d = new MemoryEditDialog(Lang.T("Ajouter une mémoire", "Add memory"), m, settings.Memories))
             {
                 if (d.ShowDialog(this) != DialogResult.OK) return;
@@ -4279,7 +4351,7 @@ namespace SDRLink
             AddToHistory(m.Hz);
             settings.Memories.Used(m);
             Log.Write("Mémoire : " + m.Label + " (" + Memory.KHz(m.Hz) + " kHz" + (m.Mode != "" ? " " + m.Mode : "") + ")");
-            ShowStatus(Lang.F("Mémoire « {0} » : {1} kHz", "Memory \"{0}\": {1} kHz", m.Label, Memory.KHz(m.Hz)));
+            ShowStatus(Lang.F("Mémoire « {0} » : {1} kHz", "Memory \"{0}\": {1} kHz", m.Label, Memory.KHz(m.Hz)) + PreampStatus(m));
             settings.Save();
         }
 
@@ -4300,6 +4372,29 @@ namespace SDRLink
                 UpdateDisplays();
             }
             TuneBoth(m.Hz);
+            // Préampli mémorisé (1.41) : envoyé avec la fréquence, appliqué par le poste juste après elle (RigWorker).
+            if (m.Preamp >= 0 && worker != null && rigOnline && !SdrAlone)
+            {
+                if (rigPreamps != null) worker.SetPreamp(m.Preamp);
+            }
+        }
+
+        PreampSet rigPreamps;   // réglages de préampli annoncés par le poste connecté (null : non pilotable ou pas connecté)
+
+        // Préampli proposé dans la fenêtre des mémoires : celui du poste connecté, sinon celui du modèle choisi (port COM).
+        void UpdatePreampChoices()
+        {
+            PreampSet ps = rigPreamps;
+            if (ps == null && worker == null && settings.Interface == 0) ps = Preamps.ForModel(cbModel.SelectedItem as RigModel);
+            Preamps.Current = ps;
+        }
+
+        // Fin du message de rappel d'une mémoire : préampli appliqué, ou pourquoi il ne l'est pas.
+        string PreampStatus(Memory m)
+        {
+            if (m.Preamp < 0 || worker == null || !rigOnline || SdrAlone) return "";
+            if (rigPreamps == null) return Lang.T(" ; préampli non pilotable sur ce poste / cette interface", "; preamp cannot be set on this rig / interface");
+            return ", " + rigPreamps.LabelOf(rigPreamps.Map(m.Preamp));
         }
 
         // ---------------------------------------------------------------- Scan

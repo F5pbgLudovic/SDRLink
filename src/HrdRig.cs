@@ -84,6 +84,7 @@ namespace SDRLink
                 voxBaseline = (Command("get button-select VOX") ?? "").Trim();
 
             ProbeAfSlider();
+            ProbePreamp();
             Log.Write("HRD " + Command("get radio") + " : liste des modes [" + modeDropdown + "], boutons émission [" +
                 string.Join(", ", txButtons) + "]" + (voxBaseline != null ? ", VOX en réception = " + voxBaseline : ""));
         }
@@ -111,6 +112,7 @@ namespace SDRLink
                     Probe();
                 }
             }
+            PreampCheck();
             string f = Command("get frequency");
             if (!long.TryParse((f ?? "").Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out freqHz) || freqHz <= 0)
                 return false;
@@ -200,6 +202,171 @@ namespace SDRLink
             int[] v = Ints(Command("get slider-pos " + SliderArgs()));
             if (v.Length == 0) return -1;
             return (int)Math.Round((Math.Max(afMin, Math.Min(afMax, v[0])) - afMin) * 100.0 / (afMax - afMin));
+        }
+
+        // Préampli (1.41) : le serveur IP de HRD n'a pas de commande préampli ; on passe par les commandes de la fenêtre
+        // de HRD pour ce poste, trouvées à la connexion : une liste déroulante (« Preamp », « IPO »…) dont les choix
+        // ressemblent à IPO / AMP1 / AMP2 / OFF / ON, sinon des boutons (« IPO », « AMP 1 », « AMP 2 », « P.AMP »…).
+        // Les noms dépendent de la définition du poste dans HRD : ce qui est trouvé est écrit dans le journal.
+        PreampSet preamps;
+        string preDropdown;          // liste déroulante utilisée, ou null (boutons)
+        string btnIpo, btnAmp1, btnAmp2, btnPre, btnPre1, btnPre2;
+        public PreampSet Preamps { get { return preamps; } }
+
+        static string Norm(string s)
+        {
+            StringBuilder b = new StringBuilder();
+            foreach (char c in (s ?? "").ToUpperInvariant()) if (char.IsLetterOrDigit(c)) b.Append(c);
+            return b.ToString();
+        }
+
+        // Code d'un libellé HRD : -1 si ce n'est pas un réglage de préampli reconnu.
+        static int PreCode(string text)
+        {
+            string n = Norm(text);
+            if (n == "IPO2") return SDRLink.Preamps.Ipo2;
+            if (n == "IPO" || n == "IPO1" || n == "OFF" || n == "IPOON" || n == "PREOFF" || n == "PAMPOFF") return SDRLink.Preamps.Off;
+            if (n == "AMP2" || n == "PAMP2" || n == "PRE2" || n == "PREAMP2") return SDRLink.Preamps.Amp2;
+            if (n == "AMP1" || n == "PAMP1" || n == "PRE1" || n == "PREAMP1" || n == "AMP" || n == "PAMP" || n == "ON" || n == "PRE" || n == "PREON" || n == "IPOOFF") return SDRLink.Preamps.Amp1;
+            return -1;
+        }
+
+        void ProbePreamp()
+        {
+            preamps = null; preDropdown = null; btnIpo = btnAmp1 = btnAmp2 = btnPre = btnPre1 = btnPre2 = null; preTarget = -1;
+            foreach (string name in Distinct(Command("get dropdowns")))
+            {
+                string n = Norm(name);
+                bool named = n.Contains("PREAMP") || n.Contains("IPO") || n == "PAMP" || n == "AMP" || n == "RFAMP" || n == "PRE" || n.StartsWith("PREMAIN");
+                // Liste reconnue par son nom, ou par ses choix : au moins un IPO / AMP / P.AMP / PRE (FTdx5000 dans HRD :
+                // « IPO 1, Amp 1, Amp 2, IPO 2 » = PA00, PA01, PA02, PA03). Une liste OFF / ON seule ne suffit pas (NB, NR…).
+                if (!named && n.Contains("MODE")) continue;
+                string[] items = (Command("get dropdown-list {" + name + "}") ?? "").Split(',');
+                if (!named)
+                {
+                    bool pre = false;
+                    foreach (string it in items) { string q = Norm(it); if (PreCode(it) >= 0 && (q.Contains("IPO") || q.Contains("AMP") || q.StartsWith("PRE"))) pre = true; }
+                    if (!pre) continue;
+                }
+                List<int> codes = new List<int>();
+                List<string> labels = new List<string>(), wire = new List<string>();
+                for (int i = 0; i < items.Length; i++)
+                {
+                    int c = PreCode(items[i]);
+                    if (c < 0 || codes.Contains(c)) continue;
+                    codes.Add(c); labels.Add(items[i].Trim()); wire.Add(i.ToString(CultureInfo.InvariantCulture) + "|" + items[i].Trim());
+                }
+                if (codes.Count < 2 || !codes.Contains(SDRLink.Preamps.Off)) continue;
+                preDropdown = name;
+                preamps = new PreampSet(radioName, codes.ToArray(), labels.ToArray(), wire.ToArray());
+                Log.Write("HRD : préampli par la liste [" + name + "] : " + string.Join(", ", items));
+                return;
+            }
+            foreach (string b in allButtons)
+            {
+                string n = Norm(b);
+                if (n == "IPO") btnIpo = b;
+                else if (n == "AMP1" || n == "PAMP1") btnAmp1 = b;
+                else if (n == "AMP2" || n == "PAMP2") btnAmp2 = b;
+                else if (n == "PAMP" || n == "PREAMP" || n == "PRE" || n == "AMP") btnPre = b;
+                else if (n == "PRE1" || n == "PRE1A") btnPre1 = b;     // « Pre 1 A » : récepteur principal (A)
+                else if (n == "PRE2" || n == "PRE2A") btnPre2 = b;
+                else if (n == "PREMAIN" && btnPre == null) btnPre = b; // « Pre (MAIN) » (TS-990 dans HRD = PA00 / PA01)
+            }
+            // FT-2000 (et d'autres Yaesu) dans HRD : deux boutons « Pre 1 » et « Pre 2 » (relevé de F5PBG dans WSJT-WWA,
+            // vérifié sur le vrai poste) : IPO = les deux éteints, AMP1 = Pre 1 seul, AMP2 = Pre 2 seul.
+            if (btnPre1 != null && btnPre2 != null)
+            {
+                bool yaesu = (radioName ?? "").ToUpperInvariant().Contains("FT");
+                preamps = new PreampSet(radioName, new[] { SDRLink.Preamps.Off, SDRLink.Preamps.Amp1, SDRLink.Preamps.Amp2 },
+                    yaesu ? new[] { "IPO", "AMP1", "AMP2" } : new[] { "OFF", btnPre1, btnPre2 }, null);
+                Log.Write("HRD : préampli par les boutons [" + btnPre1 + "] et [" + btnPre2 + "]");
+                return;
+            }
+            List<int> bc = new List<int>();
+            List<string> bl = new List<string>();
+            if (btnIpo != null || btnPre != null) { bc.Add(SDRLink.Preamps.Off); bl.Add(btnIpo != null ? "IPO" : "OFF"); }
+            if (btnAmp1 != null || btnPre != null || (btnIpo != null && btnAmp2 == null)) { bc.Add(SDRLink.Preamps.Amp1); bl.Add(btnAmp1 ?? btnPre ?? "AMP"); }
+            if (btnAmp2 != null) { bc.Add(SDRLink.Preamps.Amp2); bl.Add(btnAmp2); }
+            if (bc.Count >= 2 && bc.Contains(SDRLink.Preamps.Off))
+            {
+                preamps = new PreampSet(radioName, bc.ToArray(), bl.ToArray(), null);
+                Log.Write("HRD : préampli par les boutons [" + btnIpo + "] [" + btnAmp1 + "] [" + btnAmp2 + "] [" + btnPre + "]");
+            }
+            else Log.Write("HRD : pas de commande de préampli reconnue pour ce poste (boutons : " + string.Join(", ", allButtons) + ")");
+        }
+
+        int preTarget = -1, prePass;
+        DateTime preNext;
+        static readonly int[] PreWaits = { 0, 500, 1000, 1500 };
+
+        bool ButtonOn(string b) { return (Command("get button-select " + b.Replace(' ', '~')) ?? "").Trim() == "1"; }
+
+        void PreampPass()
+        {
+            bool want1 = preTarget == SDRLink.Preamps.Amp1, want2 = preTarget == SDRLink.Preamps.Amp2;
+            bool was1 = ButtonOn(btnPre1), was2 = ButtonOn(btnPre2);
+            string trace = "HRD : préampli " + preamps.LabelOf(preTarget) + ", passage " + prePass + " : Pre1=" + (was1 ? 1 : 0) + " Pre2=" + (was2 ? 1 : 0);
+            // Le poste n'a qu'une position de préampli : allumer Pre 1 (ou Pre 2) l'y place directement, sans IPO, mais HRD
+            // peut continuer à afficher l'AUTRE bouton allumé ; l'éteindre enverrait le poste en IPO. On ne l'éteint donc
+            // JAMAIS pour aller vers AMP1 / AMP2 ; seul l'aller vers IPO éteint le bouton allumé (correctif de F5PBG dans
+            // WSJT-WWA, vérifié sur le FT-2000). Réussi = bouton voulu allumé (ou les deux éteints pour IPO).
+            bool ok = !want1 && !want2 ? !was1 && !was2 : want1 ? was1 : was2;
+            if (ok)
+            {
+                if (prePass >= 1) { Log.Write(trace + " (stable)"); preTarget = -1; return; }
+            }
+            else
+            {
+                if (!want1 && !want2)
+                {
+                    if (was1) Command("set button-select " + btnPre1.Replace(' ', '~') + " 0");
+                    if (was2) Command("set button-select " + btnPre2.Replace(' ', '~') + " 0");
+                }
+                else Command("set button-select " + (want1 ? btnPre1 : btnPre2).Replace(' ', '~') + " 1");
+                trace += " -> envoyé";
+            }
+            Log.Write(trace);
+            if (++prePass >= PreWaits.Length) { preTarget = -1; return; }
+            preNext = DateTime.UtcNow.AddMilliseconds(PreWaits[prePass]);
+        }
+
+        // Relectures programmées du préampli (boutons Pre 1 / Pre 2), à chaque lecture du poste.
+        void PreampCheck()
+        {
+            if (preTarget >= 0 && btnPre1 != null && DateTime.UtcNow >= preNext) PreampPass();
+        }
+
+        public void SetPreamp(int code)
+        {
+            if (preamps == null) return;
+            int c = preamps.Map(code);
+            if (btnPre1 != null && btnPre2 != null)
+            {
+                // État lu avant d'écrire (une commande redondante peut faire basculer le poste), puis relu à +0,5 s, +1,5 s
+                // et +3 s (PreampCheck, appelé par Read) : le poste recharge sa mémoire de préampli par bande après un QSY.
+                preTarget = c;
+                prePass = 0;
+                PreampPass();
+                return;
+            }
+            if (preDropdown != null)
+            {
+                string w = preamps.WireOf(code);
+                int bar = w.IndexOf('|');
+                Command("set dropdown " + preDropdown.Replace(' ', '~') + " " + w.Substring(bar + 1).Replace(' ', '~') + " " + w.Substring(0, bar));
+                return;
+            }
+            // Boutons : IPO enfoncé = sans préampli ; AMP1 / AMP2 / P.AMP enfoncé = préampli.
+            if (c == SDRLink.Preamps.Off)
+            {
+                if (btnIpo != null) Command("set button-select " + btnIpo + " 1");
+                else Command("set button-select " + btnPre.Replace(' ', '~') + " 0");
+                return;
+            }
+            string target = c == SDRLink.Preamps.Amp2 ? btnAmp2 : btnAmp1 ?? btnPre;
+            if (target != null) Command("set button-select " + target.Replace(' ', '~') + " 1");
+            else if (btnIpo != null) Command("set button-select " + btnIpo + " 0");
         }
 
         public void SetAfGain(int percent)

@@ -59,8 +59,12 @@ namespace SDRLink
         public void SetMode(string mode) { lock (pendingLock) pendingMode = mode; }
         public void SetPtt(bool tx) { lock (pendingLock) pendingPtt = tx ? 1 : 0; }
         public void SetAfGain(int pct) { lock (pendingLock) pendingAf = pct; }
+        public void SetPreamp(int code) { lock (pendingLock) pendingPreamp = code; }
 
-        int pendingAf = -1;
+        // Réglages de préampli du poste connecté (null : non pilotable), annoncés après chaque connexion.
+        public event Action<PreampSet> PreampsKnown;
+
+        int pendingAf = -1, pendingPreamp = -1;
         const int AfReadEvery = 10;     // relecture du volume du poste tous les 10 tours (bouton tourné sur le poste)
 
         void Run()
@@ -87,13 +91,18 @@ namespace SDRLink
                         lastAf = -2;
                         afCountdown = 0;
                         Status(Lang.T("Connecté, en attente du poste...", "Connected, waiting for the rig..."), false);
+                        PreampSet ps = null;
+                        try { ps = rig.Preamps; } catch { }
+                        Log.Write("Préampli : " + (ps == null ? "non pilotable sur ce poste / cette interface" : ps.Describe()));
+                        Action<PreampSet> pk = PreampsKnown;
+                        if (pk != null) pk(ps);
                     }
 
-                    long f; string m; int ptt, af;
+                    long f; string m; int ptt, af, pre;
                     lock (pendingLock)
                     {
-                        f = pendingFreq; m = pendingMode; ptt = pendingPtt; af = pendingAf;
-                        pendingFreq = 0; pendingMode = null; pendingPtt = -1; pendingAf = -1;
+                        f = pendingFreq; m = pendingMode; ptt = pendingPtt; af = pendingAf; pre = pendingPreamp;
+                        pendingFreq = 0; pendingMode = null; pendingPtt = -1; pendingAf = -1; pendingPreamp = -1;
                     }
                     if (af >= 0)
                     {
@@ -111,6 +120,17 @@ namespace SDRLink
                     // Mode avant fréquence : certains postes décalent la fréquence au changement de mode.
                     if (m != null) { rig.SetMode(m); Thread.Sleep(40); }
                     if (f > 0) { rig.SetFreq(f); Thread.Sleep(40); }
+                    // Préampli après la fréquence : la plupart des postes le retiennent par bande (changement de bande = autre réglage).
+                    if (pre >= 0)
+                    {
+                        PreampSet ps = rig.Preamps;
+                        if (ps != null)
+                        {
+                            Log.Write("Préampli : " + ps.LabelOf(ps.Map(pre)));
+                            rig.SetPreamp(pre);
+                            Thread.Sleep(40);
+                        }
+                    }
 
                     // PTT lu en premier : c'est ce qui doit réagir le plus vite (coupure du son).
                     if (PollTx)

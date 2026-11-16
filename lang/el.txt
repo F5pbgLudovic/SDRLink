@@ -237,11 +237,14 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
 Auto notch (DNF)	Αυτόματο notch (DNF)
 Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Κουτάκι: αυτόματο notch ενεργό / ανενεργό. Κλικ στο κουμπί: ανενεργό στους ψηφιακούς τρόπους λειτουργίας και στο FreeDV, επίπεδο 1 έως 10 (δεξί κλικ: χρώμα κουμπιού)
+Colour when the notch is off	Χρώμα όταν το notch είναι ανενεργό
+Colour when the notch is on	Χρώμα όταν το notch είναι ενεργό
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Επανεκκινεί το τρέχον WebSDR (για παράδειγμα σταματημένο μετά από χρόνο αδράνειας). Κλικ: επανεκκίνηση με διατήρηση των ρυθμίσεων (συχνότητα, τρόπος, φίλτρο, ζουμ, ένταση). Δεξί κλικ: αυτόματη επανεκκίνηση όταν χάνεται ο ήχος (Auto) και η καθυστέρησή της, πλήρης επαναφορά του WebSDR, χρώματα του κουμπιού
 Save: no known frequency (rig or WebSDR)	Αποθήκευση: καμία γνωστή συχνότητα (πομποδέκτης ή WebSDR)
 Store the current frequency…	Αποθήκευση της τρέχουσας συχνότητας…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: η ομιλία αποκωδικοποιείται μόλις ληφθεί σήμα FreeDV (κλικ: ενεργό / ανενεργό· δεξί κλικ: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Μεταφορά του ήχου στον επόμενο δέκτη (δεξί κλικ: δέκτης που μένει σε σίγαση)
+Button colour	Χρώμα κουμπιού
 Colour when connected	Χρώμα όταν είναι συνδεδεμένο
 Colour when disconnected	Χρώμα όταν είναι αποσυνδεδεμένο
 Colour when the rig is not answering yet	Χρώμα όσο ο πομποδέκτης δεν απαντά ακόμη
@@ -270,7 +273,6 @@ The checked items will be set back as at first installation.	Τα επιλεγμ
 SDRLink will restart. Continue?	Το SDRLink θα επανεκκινηθεί. Συνέχεια;
 Reset the program	Επαναφορά του προγράμματος
 Cannot reset: 	Η επαναφορά δεν είναι δυνατή: 
-Button colour	Χρώμα κουμπιού
 RIG	πομποδέκτης
 Disconnected	Αποσυνδέθηκε
 Connect	Σύνδεση
@@ -333,6 +335,7 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Θύρα TCI του ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Θύρα διακομιστή TCI (ExpertSDR, Options > TCI):
 Add memory	Προσθήκη μνήμης
+; preamp cannot be set on this rig / interface	; ο προενισχυτής δεν μπορεί να ρυθμιστεί σε αυτόν τον πομποδέκτη / αυτή τη διεπαφή
 Resume the scan	Συνέχιση σάρωσης
 Current "Scan setup" setting	Τρέχουσα ρύθμιση της «Ρύθμιση σάρωσης»
 No scan while transmitting	Δεν γίνεται σάρωση κατά την εκπομπή
@@ -537,6 +540,9 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Colour when decoding is off	Χρώμα όταν η αποκωδικοποίηση είναι ανενεργή
+Colour when decoding is on	Χρώμα όταν η αποκωδικοποίηση είναι ενεργή
+Colour while a signal is being received	Χρώμα κατά τη λήψη σήματος
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Ψηφιακές λειτουργίες: η αποκωδικοποίηση εμφανίζεται σε παράθυρο πάνω από τη σελίδα (κλικ: ενεργό / ανενεργό· δεξί κλικ: επιλογή λειτουργίας, δεξί κλικ σε λειτουργία: οι ρυθμίσεις της)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Παρατεταμένο πάτημα και σύρσιμο: μετακίνηση του παραθύρου· σύρσιμο άκρης ή γωνίας: αλλαγή μεγέθους (δεξί κλικ: λειτουργίες και ρυθμίσεις)
 Reset the windows	Επαναφορά των παραθύρων
@@ -562,6 +568,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): γραμμή {2}
 {0}: {1}, could not save	{0}: {1}, αδύνατη η αποθήκευση
 Hell: picture saved: {0}	Hell: η εικόνα αποθηκεύτηκε: {0}
 SSTV	SSTV
+Colour when diversity is off	Χρώμα όταν το diversity είναι ανενεργό
+Colour while measuring the delay	Χρώμα κατά τη μέτρηση της καθυστέρησης
+Colour when diversity is locked	Χρώμα όταν το diversity είναι κλειδωμένο
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Ακρόαση Diversity: το WebSDR στο ένα αυτί, ο πομποδέκτης (ή το ExpertSDR ή το HDSDR) στο άλλο, ο τοπικός ήχος καθυστερεί ώστε να συμπίπτει με το WebSDR. Κλικ: ενεργό / ανενεργό. Δεξί κλικ: λήψη στο άλλο αυτί, πλευρά WebSDR, μετρημένη καθυστέρηση
 In the other ear:	Στο άλλο αυτί:
 Rig: first choose its sound card (right-click REC)	Πομποδέκτης: επιλέξτε πρώτα την κάρτα ήχου του (δεξί κλικ στο REC)
@@ -615,6 +624,7 @@ Default filter	Προεπιλεγμένο φίλτρο
 Other…	Άλλο…
 Bandwidth	Εύρος ζώνης
 Invalid bandwidth (0.1 to 15 kHz)	Μη έγκυρο εύρος ζώνης (0,1 έως 15 kHz)
+Colour while searching	Χρώμα κατά την αναζήτηση
 Mode?	Τρόπος;
 Mode search: no WebSDR or rig to listen to	Αναζήτηση τρόπου: κανένα WebSDR ή πομποδέκτης για ακρόαση
 : waiting for a decoded message…	: αναμονή για αποκωδικοποιημένο μήνυμα…
@@ -630,16 +640,22 @@ Searching for the mode being heard ({0} s at most)…	Αναζήτηση του 
 Mode found: {0} ({1})	Βρέθηκε τρόπος: {0} ({1})
 BW:	ΕΖ:
 Mode:	Τρόπος:
+Preamp:	Προενισχυτής:
+(preamp unchanged)	(προενισχυτής αμετάβλητος)
+Rig preamp setting applied when this memory is recalled (after the frequency)	Ρύθμιση προενισχυτή του πομποδέκτη που εφαρμόζεται κατά την ανάκληση αυτής της μνήμης (μετά τη συχνότητα)
 (mode unchanged)	(τρόπος αμετάβλητος)
 Edit…	Επεξεργασία…
 Digital mode whose usual frequencies are shown	Ψηφιακός τρόπος λειτουργίας του οποίου εμφανίζονται οι συνήθεις συχνότητες
 Frequency (kHz)	Συχνότητα (kHz)
 Mode	Τρόπος
+Preamp	Προενισχυτής
 Digital modes	Ψηφιακοί τρόποι λειτουργίας
 Copy…	Αντιγραφή…
 Select a memory first.	Επιλέξτε πρώτα μια μνήμη.
 Edit memory	Επεξεργασία μνήμης
-Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Συνήθεις συχνότητες {0}, {1}. Κάντε κλικ για να συντονιστείτε (Αντιγραφή…: προσθήκη σε μία από τις λίστες σας).
+Preamp of the frequency	Προενισχυτής της συχνότητας
+ (here: {0})	 (εδώ: {0})
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Συνήθεις συχνότητες {0}, {1}. Κάντε κλικ για να συντονιστείτε (Επεξεργασία…: προενισχυτής, Αντιγραφή…: προσθήκη σε μία από τις λίστες σας).
 {0} memory(ies). Click a memory to go there.	{0} μνήμη(ες). Κάντε κλικ σε μια μνήμη για να μεταβείτε σε αυτή.
 Tuned to "{0}" ({1} kHz).	Συντονισμός στο «{0}» ({1} kHz).
 Remove the memory "{0}"?	Αφαίρεση της μνήμης «{0}»;
@@ -651,6 +667,9 @@ Your own colour:	Δικό σας χρώμα:
 Text	Κείμενο
 Preview: the chosen background with this mode's text	Προεπισκόπηση: το επιλεγμένο φόντο με το κείμενο αυτής της λειτουργίας
 Apply	Εφαρμογή
+No preamp (IPO)	Χωρίς προενισχυτή (IPO)
+Preamp 1 (AMP1)	Προενισχυτής 1 (AMP1)
+Preamp 2 (AMP2)	Προενισχυτής 2 (AMP2)
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	Το SDRLink απαιτεί Microsoft .NET Framework 4.6.2 ή νεότερο (συνιστάται το 4.8).\nΔεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή.\n\nΛήψη και εγκατάσταση του .NET Framework 4.8 τώρα;\n(ίσως απαιτηθεί επανεκκίνηση· στη συνέχεια ξεκινήστε ξανά το SDRLink)
 SDRLink - missing component	SDRLink - λείπει στοιχείο
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Το SDRLink απαιτεί το Microsoft Edge WebView2 Runtime για την εμφάνιση των WebSDR.\nΔεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή.\n\nΛήψη και εγκατάσταση του WebView2 τώρα; (δωρεάν, περίπου 2 MB)

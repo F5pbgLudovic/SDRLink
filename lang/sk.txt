@@ -237,11 +237,14 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Pravé tlačidlo: prijímače stlmené pri vysielaní
 Auto notch (DNF)	Automatický notch (DNF)
 Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Začiarkavacie políčko: automatický notch zap. / vyp. Kliknutie na tlačidlo: vypnutý v digitálnych druhoch prevádzky a FreeDV, úroveň 1 až 10 (pravé tlačidlo: farba tlačidla)
+Colour when the notch is off	Farba pri vypnutom notchi
+Colour when the notch is on	Farba pri zapnutom notchi
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Znovu spustí aktuálny WebSDR (napríklad zastavený po čase nečinnosti). Klik: znovu spustiť so zachovaním nastavení (frekvencia, režim, filter, zoom, hlasitosť). Pravý klik: automatické znovuspustenie pri strate zvuku (Auto) a jeho oneskorenie, úplný reset WebSDR, farby tlačidla
 Save: no known frequency (rig or WebSDR)	Uložiť: neznáma frekvencia (TRX ani WebSDR)
 Store the current frequency…	Uložiť aktuálny kmitočet…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: reč sa dekóduje, hneď ako sa prijme signál FreeDV (klik: zapnúť / vypnúť; pravé tlačidlo: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prepnúť zvuk na ďalší prijímač (pravé tlačidlo: prijímač, ktorý zostane stlmený)
+Button colour	Farba tlačidla
 Colour when connected	Farba pri pripojení
 Colour when disconnected	Farba pri odpojení
 Colour when the rig is not answering yet	Farba, kým transceiver ešte neodpovedá
@@ -270,7 +273,6 @@ The checked items will be set back as at first installation.	Zaškrtnuté polož
 SDRLink will restart. Continue?	SDRLink sa reštartuje. Pokračovať?
 Reset the program	Obnoviť pôvodný stav programu
 Cannot reset: 	Obnovenie nie je možné: 
-Button colour	Farba tlačidla
 RIG	transceiver
 Disconnected	Odpojené
 Connect	Pripojiť
@@ -333,6 +335,7 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Port TCI programu ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port servera TCI (ExpertSDR, Options > TCI):
 Add memory	Pridať pamäť
+; preamp cannot be set on this rig / interface	; predzosilňovač sa na tomto transceiveri / rozhraní nedá nastaviť
 Resume the scan	Pokračovať v prehľadávaní
 Current "Scan setup" setting	Aktuálne nastavenie v „Nastavenie prehľadávania“
 No scan while transmitting	Počas vysielania nie je možné prehľadávať
@@ -537,6 +540,9 @@ WebSDR → Rig	WebSDR → TRX
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Colour when decoding is off	Farba pri vypnutom dekódovaní
+Colour when decoding is on	Farba pri zapnutom dekódovaní
+Colour while a signal is being received	Farba počas príjmu signálu
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitálne režimy: dekódovanie sa zobrazuje v okne nad stránkou (klik: zapnúť / vypnúť; pravé tlačidlo: voľba režimu, pravé tlačidlo na režime: jeho nastavenia)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Dlhé stlačenie a ťahanie: presunúť okno; ťahanie za okraj alebo roh: zmeniť veľkosť (pravé tlačidlo: režimy a nastavenia)
 Reset the windows	Obnoviť okná
@@ -562,6 +568,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): riadok {2}
 {0}: {1}, could not save	{0}: {1}, uloženie sa nepodarilo
 Hell: picture saved: {0}	Hell: obrázok uložený: {0}
 SSTV	SSTV
+Colour when diversity is off	Farba pri vypnutej diverzite
+Colour while measuring the delay	Farba počas merania oneskorenia
+Colour when diversity is locked	Farba pri synchronizovanej diverzite
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diverzitný príposlech: WebSDR v jednom uchu, transceiver (alebo ExpertSDR, alebo HDSDR) v druhom, miestny zvuk je oneskorený podľa WebSDR. Klik: zap. / vyp. Pravé tlačidlo: príjem do druhého ucha, strana WebSDR, namerané oneskorenie
 In the other ear:	V druhom uchu:
 Rig: first choose its sound card (right-click REC)	Transceiver: najprv vyberte jeho zvukovú kartu (pravé tlačidlo na REC)
@@ -615,6 +624,7 @@ Default filter	Predvolený filter
 Other…	Iná…
 Bandwidth	Šírka pásma
 Invalid bandwidth (0.1 to 15 kHz)	Neplatná šírka pásma (0,1 až 15 kHz)
+Colour while searching	Farba počas hľadania
 Mode?	Mód?
 Mode search: no WebSDR or rig to listen to	Hľadanie druhu prevádzky: žiadny WebSDR ani transceiver na počúvanie
 : waiting for a decoded message…	: čaká sa na dekódovanú správu…
@@ -630,16 +640,22 @@ Searching for the mode being heard ({0} s at most)…	Hľadá sa počutý druh p
 Mode found: {0} ({1})	Nájdený druh prevádzky: {0} ({1})
 BW:	ŠP:
 Mode:	Druh prevádzky:
+Preamp:	Predzosilňovač:
+(preamp unchanged)	(predzosilňovač bez zmeny)
+Rig preamp setting applied when this memory is recalled (after the frequency)	Nastavenie predzosilňovača transceivera použité pri vyvolaní tejto pamäte (po frekvencii)
 (mode unchanged)	(druh prevádzky bez zmeny)
 Edit…	Upraviť…
 Digital mode whose usual frequencies are shown	Digitálny druh prevádzky, ktorého obvyklé frekvencie sa zobrazujú
 Frequency (kHz)	Kmitočet (kHz)
 Mode	Druh prevádzky
+Preamp	Predzosilňovač
 Digital modes	Digitálne druhy prevádzky
 Copy…	Kopírovať…
 Select a memory first.	Najprv vyberte pamäť.
 Edit memory	Upraviť pamäť
-Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Obvyklé frekvencie {0}, {1}. Kliknutím sa naladíte (Kopírovať…: pridať do jedného z vašich zoznamov).
+Preamp of the frequency	Predzosilňovač frekvencie
+ (here: {0})	 (tu: {0})
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Obvyklé frekvencie {0}, {1}. Kliknutím sa naladíte (Upraviť…: predzosilňovač; Kopírovať…: pridať do jedného z vašich zoznamov).
 {0} memory(ies). Click a memory to go there.	{0} pamätí. Kliknutím na pamäť sa na ňu preladíte.
 Tuned to "{0}" ({1} kHz).	Preladené na „{0}“ ({1} kHz).
 Remove the memory "{0}"?	Odstrániť pamäť „{0}“?
@@ -651,6 +667,9 @@ Your own colour:	Vlastná farba:
 Text	Text
 Preview: the chosen background with this mode's text	Náhľad: zvolené pozadie s textom tohto režimu
 Apply	Použiť
+No preamp (IPO)	Bez predzosilňovača (IPO)
+Preamp 1 (AMP1)	Predzosilňovač 1 (AMP1)
+Preamp 2 (AMP2)	Predzosilňovač 2 (AMP2)
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink vyžaduje Microsoft .NET Framework 4.6.2 alebo novší (odporúča sa 4.8).\nNa tomto počítači nie je nainštalovaný.\n\nStiahnuť a nainštalovať .NET Framework 4.8 teraz?\n(môže byť potrebný reštart, potom SDRLink spustite znova)
 SDRLink - missing component	SDRLink - chýbajúci komponent
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink potrebuje na zobrazenie WebSDR modul Microsoft Edge WebView2 Runtime.\nNa tomto počítači nie je nainštalovaný.\n\nStiahnuť a nainštalovať WebView2 teraz? (zadarmo, asi 2 MB)

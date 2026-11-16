@@ -169,6 +169,9 @@ namespace SDRLink
             lock (sync) return volumeDb == int.MinValue ? -1 : (int)Math.Round((Math.Max(-60, Math.Min(0, volumeDb)) + 60) * 100 / 60.0);
         }
 
+        public PreampSet Preamps { get { return null; } }
+        public void SetPreamp(int code) { }
+
         public void SetAfGain(int percent)
         {
             int db = (int)Math.Round(Math.Max(0, Math.Min(100, percent)) * 60 / 100.0) - 60;

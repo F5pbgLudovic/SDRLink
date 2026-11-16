@@ -60,6 +60,14 @@ namespace SDRLink
         public virtual int ReadAfGain() { return -1; }
         public virtual void SetAfGain(int percent) { }
 
+        // Dernière fréquence lue ou envoyée (préampli selon la bande : FTX-1, IC-705…).
+        protected long LastHz;
+
+        // Préampli (1.41) : réglages du modèle choisi (Preamps.ForModel, donnés à la création) ; null = pas de commande connue.
+        public PreampSet PreampChoices;
+        public PreampSet Preamps { get { return PreampChoices; } }
+        public virtual void SetPreamp(int code) { }
+
         protected static int ToPercent(long raw, int max) { return (int)Math.Round(raw * 100.0 / max); }
         protected static int FromPercent(int pct, int max) { return (int)Math.Round(Math.Max(0, Math.Min(100, pct)) * max / 100.0); }
         public abstract void SetFreq(long freqHz);
@@ -74,6 +82,13 @@ namespace SDRLink
         protected void Send(string cmd)
         {
             port.Write(cmd);
+        }
+
+        // Préampli : commande CAT du réglage (PA0n; Yaesu, PAn; Kenwood / Elecraft...), voir Preamps.ForModel.
+        public override void SetPreamp(int code)
+        {
+            string w = SDRLink.Preamps.AsciiWire(PreampChoices, code, LastHz);
+            if (w != null) Send(w);
         }
 
         // Envoie une requête et attend la réponse commençant par `prefix`, en ignorant les messages spontanés (AI).
@@ -121,6 +136,7 @@ namespace SDRLink
             freqHz = ParseDigits(Query("FA;", "FA"));
             mode = null;
             if (freqHz <= 0) return false;
+            LastHz = freqHz;
             string md = Query("MD0;", "MD0");
             if (!string.IsNullOrEmpty(md)) mode = CodeToMode(md[0]);
             return true;
@@ -154,6 +170,7 @@ namespace SDRLink
 
         public override void SetFreq(long freqHz)
         {
+            LastHz = freqHz;
             Send("FA" + freqHz.ToString(new string('0', digits), CultureInfo.InvariantCulture) + ";");
         }
 
@@ -621,6 +638,7 @@ namespace SDRLink
             // La longueur reçue fait foi : 5 octets en général, 4 sur les postes en « mode 731 ».
             if (f == null || f.Length < 4) return false;
             freqHz = FromBcd(f, 0, Math.Min(f.Length, 5));
+            lastHz = freqHz;
             byte[] m = Transact(new byte[] { 0x04 }, 0x04);
             if (m != null && m.Length >= 1) mode = CodeToMode(m[0]);
             return freqHz > 0;
@@ -656,10 +674,22 @@ namespace SDRLink
             Transact(new byte[] { 0x14, 0x01, hi, lo }, 0xFB);
         }
 
+        // Préampli : CI-V 16 02 nn. IC-705, IC-7100, IC-9100 : un seul préampli au-dessus de 60 MHz (P.AMP2 ramené à P.AMP).
+        long lastHz;
+        public override void SetPreamp(int code)
+        {
+            string w = PreampChoices != null ? PreampChoices.WireOf(code) : null;
+            if (w == null) return;
+            byte v = byte.Parse(w, CultureInfo.InvariantCulture);
+            if (v > 1 && lastHz > 60000000 && SDRLink.Preamps.OnePreampAbove60MHz(PreampChoices.Rig)) v = 1;
+            Transact(new byte[] { 0x16, 0x02, v }, 0xFB);
+        }
+
         public override void SetFreq(long freqHz)
         {
             byte[] cmd = new byte[1 + freqBytes];
             cmd[0] = 0x05;
+            lastHz = freqHz;
             ToBcd(freqHz, cmd, 1, freqBytes);
             Transact(cmd, 0xFB);
         }

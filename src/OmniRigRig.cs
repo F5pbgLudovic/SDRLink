@@ -31,6 +31,8 @@ namespace SDRLink
             rig = Get(omni, rigNumber == 2 ? "Rig2" : "Rig1");
             try { Log.Write("OmniRig " + Get(omni, "SoftwareVersion") + ", Rig" + rigNumber + " : " + Get(rig, "RigType")); }
             catch { }
+            try { model = SDRLink.Preamps.FindModel(Convert.ToString(Get(rig, "RigType"))); preamps = SDRLink.Preamps.ForModel(model); }
+            catch { model = null; preamps = null; }
         }
 
         public void Close()
@@ -57,6 +59,7 @@ namespace SDRLink
                 freqHz = Convert.ToInt64(Get(rig, "Freq"));
                 if (freqHz <= 0) freqHz = Convert.ToInt64(Get(rig, "FreqA"));
                 mode = FromOmni(Convert.ToInt32(Get(rig, "Mode")));
+                if (freqHz > 0) lastHz = freqHz;
                 return freqHz > 0;
             }
             catch (Exception ex)
@@ -78,6 +81,32 @@ namespace SDRLink
 
         // OmniRig n'expose pas le gain BF.
         public int ReadAfGain() { return -1; }
+        // Préampli (1.41) : OmniRig n'a pas de paramètre préampli ; si le poste choisi dans OmniRig est un modèle dont la
+        // commande est confirmée (Preamps.ForModel), elle est envoyée telle quelle par SendCustomCommand (Icom : adresse
+        // CI-V par défaut du modèle).
+        PreampSet preamps;
+        RigModel model;
+        long lastHz;
+        public PreampSet Preamps { get { return preamps; } }
+
+        public void SetPreamp(int code)
+        {
+            if (preamps == null) return;
+            string w = model.Protocol == RigProtocol.Icom ? preamps.WireOf(code) : SDRLink.Preamps.AsciiWire(preamps, code, lastHz);
+            if (w == null) return;
+            try
+            {
+                if (model.Protocol == RigProtocol.Icom)
+                {
+                    byte v = byte.Parse(w);
+                    if (v > 1 && lastHz > 60000000 && SDRLink.Preamps.OnePreampAbove60MHz(model.Name)) v = 1;
+                    Call(rig, "SendCustomCommand", new byte[] { 0xFE, 0xFE, model.CivAddress, 0xE0, 0x16, 0x02, v, 0xFD }, 0, "");
+                }
+                else Call(rig, "SendCustomCommand", w, 0, "");
+            }
+            catch (Exception ex) { LogError(ex); }
+        }
+
         public void SetAfGain(int percent) { }
 
         public void SetPtt(bool tx)
@@ -88,6 +117,7 @@ namespace SDRLink
 
         public void SetFreq(long freqHz)
         {
+            lastHz = freqHz;
             try
             {
                 int f = (int)freqHz;

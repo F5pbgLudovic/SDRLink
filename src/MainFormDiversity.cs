@@ -13,7 +13,7 @@ namespace SDRLink
     // sons dans les haut-parleurs ; Mute et Volume de chaque réception règlent son oreille. Tout revient à l'arrêt.
     public partial class MainForm
     {
-        CheckButton chkDiversity;
+        Button chkDiversity;
         DiversityMixer diversity;
         StereoOut divOut;
         AudioTap divTap;
@@ -22,21 +22,27 @@ namespace SDRLink
         System.Windows.Forms.Timer divTimer;
         bool divShownLocked;
         double divShownDelay = -1;
-        bool divSetting;
 
+        // Bouton simple (1.41) : clic = marche / arrêt, la couleur dit l'état (orange : recherche du retard, vert : calé).
         void CreateDiversityButton()
         {
-            chkDiversity = new CheckButton();
+            chkDiversity = new Button();
+            chkDiversity.AutoSize = true;
+            chkDiversity.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            chkDiversity.MinimumSize = new Size(30, 25);
+            chkDiversity.Tag = Theme.Custom;
             chkDiversity.Margin = new Padding(6, 3, 3, 3);
-            chkDiversity.CheckedChanged += delegate { if (!divSetting) SetDiversity(chkDiversity.Checked); };
-            chkDiversity.Click += delegate { chkDiversity.Checked = !chkDiversity.Checked; };
+            chkDiversity.Click += delegate { SetDiversity(diversity == null); };
             ContextMenuStrip m = new ContextMenuStrip();
             m.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillDiversityMenu(m); };
             m.Items.Add("-");
             chkDiversity.ContextMenuStrip = m;
+            AddColorMenu(chkDiversity, Slot("DiversityOff", () => Lang.T("Couleur diversité arrêtée", "Colour when diversity is off")),
+                Slot("DiversitySearch", () => Lang.T("Couleur pendant la recherche du retard", "Colour while measuring the delay")),
+                Slot("DiversityOn", () => Lang.T("Couleur diversité calée", "Colour when diversity is locked")));
             Tr(delegate
             {
-                UpdateDiversityButton();
+                UpdateDiversityButton(true);
                 tips.SetToolTip(chkDiversity, Lang.T("Écoute en diversité : le WebSDR dans une oreille, le poste (ou ExpertSDR, ou HDSDR) dans l'autre, le son local retardé pour tomber en même temps que le WebSDR. Clic : marche / arrêt. Clic droit : réception mise dans l'autre oreille, côté du WebSDR, retard mesuré",
                     "Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay"));
             });
@@ -201,14 +207,7 @@ namespace SDRLink
             if (message != null) ShowStatus(message);
         }
 
-        void SetDiversityChecked(bool on)
-        {
-            if (chkDiversity == null) return;
-            divSetting = true;
-            chkDiversity.Checked = on;
-            divSetting = false;
-            UpdateDiversityButton();
-        }
+        void SetDiversityChecked(bool on) { UpdateDiversityButton(); }
 
         // Sortie directe de la réception locale coupée (on) ou rendue (off), sans toucher à son Mute ni à son volume dans SDRLink.
         void SilenceDivSource(bool on)
@@ -310,13 +309,36 @@ namespace SDRLink
                 DivSourceName(divSource), d.DelaySec.ToString("0.00"));
         }
 
-        void UpdateDiversityButton()
+        string divButtonShown;   // état affiché (texte + couleur) : le bouton n'est retouché que s'il change
+
+        // Appelé toutes les 500 ms pendant la diversité : rien n'est retouché si l'état affiché n'a pas changé, et la largeur
+        // du bouton est fixée sur son texte le plus long. Avant la 1.41, chaque passage relançait la mise en page de la
+        // fenêtre (FlatStyle reposé), ce qui refermait aussitôt une liste déroulante ouverte (liste des favoris…).
+        void UpdateDiversityButton(bool force = false)
         {
             if (chkDiversity == null) return;
             DiversityMixer d = diversity;
-            string t = Lang.T("Diversité", "Diversity");
+            string word = Lang.T("Diversité", "Diversity");
+            string t = word;
             if (d != null) t += d.Locked ? " " + d.DelaySec.ToString("0.0") + " s" : " …";
+            string key = t + "|" + (d == null ? 0 : d.Locked ? 2 : 1) + "|" + Theme.Dark;
+            if (!force && key == divButtonShown) return;
+            bool resize = force || divButtonShown == null;
+            divButtonShown = key;
+            chkDiversity.SuspendLayout();
+            if (resize)
+            {
+                int w = 0;
+                chkDiversity.MinimumSize = new Size(30, 25);
+                foreach (string s in new[] { word, word + " …", word + " " + (8.8).ToString("0.0") + " s" })
+                {
+                    chkDiversity.Text = s;
+                    w = Math.Max(w, chkDiversity.GetPreferredSize(Size.Empty).Width);
+                }
+                chkDiversity.MinimumSize = new Size(w, 25);
+            }
             chkDiversity.Text = t;
+            chkDiversity.ResumeLayout();
             if (d != null)
             {
                 chkDiversity.FlatStyle = FlatStyle.Flat;
@@ -326,6 +348,9 @@ namespace SDRLink
                 chkDiversity.FlatAppearance.BorderColor = d.Locked ? Color.FromArgb(0, 150, 75) : Color.FromArgb(160, 90, 0);
             }
             else Theme.StyleButton(chkDiversity);
+            // Couleurs choisies au clic droit (1.41) : arrêt, recherche du retard, calé.
+            int custom = ColorOf(d == null ? "DiversityOff" : d.Locked ? "DiversityOn" : "DiversitySearch");
+            if (custom >= 0) PaintCustom(chkDiversity, custom);
         }
     }
 }

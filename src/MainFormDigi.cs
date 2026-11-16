@@ -65,6 +65,9 @@ namespace SDRLink
             m.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillSstvMenu(m); };
             m.Items.Add("-");
             btnSstv.ContextMenuStrip = m;
+            AddColorMenu(btnSstv, Slot("DigiOff", () => Lang.T("Couleur décodage arrêté", "Colour when decoding is off")),
+                Slot("DigiOn", () => Lang.T("Couleur décodage en marche", "Colour when decoding is on")),
+                Slot("DigiBusy", () => Lang.T("Couleur pendant la réception d'un signal", "Colour while a signal is being received")));
             Tr(delegate
             {
                 UpdateSstvButton();
@@ -172,6 +175,8 @@ namespace SDRLink
             if (busy) { btnSstv.BackColor = Color.FromArgb(255, 140, 0); btnSstv.ForeColor = Color.Black; btnSstv.FlatAppearance.BorderColor = Color.FromArgb(200, 100, 0); }
             else if (settings.SstvAuto) { btnSstv.BackColor = Color.FromArgb(0, 120, 60); btnSstv.ForeColor = Color.White; btnSstv.FlatAppearance.BorderColor = Color.FromArgb(0, 150, 75); }
             else { btnSstv.BackColor = Theme.ButtonBack; btnSstv.ForeColor = Theme.Fore; btnSstv.FlatAppearance.BorderColor = Theme.Border; }
+            int custom = ColorOf(busy ? "DigiBusy" : settings.SstvAuto ? "DigiOn" : "DigiOff");
+            if (custom >= 0) PaintCustom(btnSstv, custom);
         }
 
         // Clic droit sur le bouton ou sur la fenêtre : les modes, puis les commandes.
@@ -640,7 +645,7 @@ namespace SDRLink
         {
             long cur = CurrentFreq();
             if (cur <= 0) return;   // ni poste ni WebSDR : rien à accorder
-            List<Memory> l = DigitalFreqs.List(mode, settings.IaruRegion, DigiName(mode));
+            List<Memory> l = settings.Memories.WithDigiPreamps(DigitalFreqs.List(mode, settings.IaruRegion, DigiName(mode)));   // préampli choisi pour ces fréquences (1.41)
             if (l.Count == 0) return;
             Memory best = l[0];
             foreach (Memory m in l) if (Math.Abs(m.Hz - cur) < Math.Abs(best.Hz - cur)) best = m;

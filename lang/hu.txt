@@ -237,11 +237,14 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
 Auto notch (DNF)	Auto notch (DNF)
 Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Jelölőnégyzet: automatikus notch be / ki. Kattintás a gombra: kikapcsolva digitális üzemmódokban és FreeDV-ben, szint 1-től 10-ig (jobb kattintás: a gomb színe)
+Colour when the notch is off	Szín kikapcsolt notchnál
+Colour when the notch is on	Szín bekapcsolt notchnál
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Újraindítja az aktuális WebSDR-t (például ha tétlenség miatt leállt). Kattintás: újraindítás a beállítások megtartásával (frekvencia, üzemmód, szűrő, nagyítás, hangerő). Jobb kattintás: automatikus újraindítás a hang elvesztésekor (Auto) és annak késleltetése, a WebSDR teljes alaphelyzetbe állítása, a gomb színei
 Save: no known frequency (rig or WebSDR)	Mentés: nincs ismert frekvencia (rádió vagy WebSDR)
 Store the current frequency…	Az aktuális frekvencia tárolása…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: a beszéd dekódolása azonnal megtörténik, amint FreeDV-jel érkezik (kattintás: be / ki; jobb kattintás: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
+Button colour	Gomb színe
 Colour when connected	Szín csatlakoztatva
 Colour when disconnected	Szín bontott kapcsolatnál
 Colour when the rig is not answering yet	Szín, amíg a rádió még nem válaszol
@@ -270,7 +273,6 @@ The checked items will be set back as at first installation.	A bejelölt elemek 
 SDRLink will restart. Continue?	Az SDRLink újraindul. Folytatja?
 Reset the program	A program alaphelyzetbe állítása
 Cannot reset: 	Az alaphelyzetbe állítás nem lehetséges: 
-Button colour	Gomb színe
 RIG	rádió
 Disconnected	Nincs kapcsolat
 Connect	Csatlakozás
@@ -333,6 +335,7 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	ExpertSDR TCI-portja
 TCI server port (ExpertSDR, Options > TCI):	TCI-kiszolgáló portja (ExpertSDR, Options > TCI):
 Add memory	Memória hozzáadása
+; preamp cannot be set on this rig / interface	; az előerősítő ezen a rádión / interfészen nem állítható
 Resume the scan	Pásztázás folytatása
 Current "Scan setup" setting	A „Pásztázás beállítása” jelenlegi beállítása
 No scan while transmitting	Adás közben nincs pásztázás
@@ -537,6 +540,9 @@ WebSDR → Rig	WebSDR → Rádió
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Colour when decoding is off	Szín kikapcsolt dekódolásnál
+Colour when decoding is on	Szín bekapcsolt dekódolásnál
+Colour while a signal is being received	Szín jel vétele közben
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Digitális üzemmódok: a dekódolás egy, az oldal fölötti ablakban jelenik meg (kattintás: be / ki; jobb kattintás: üzemmód választása, jobb kattintás egy üzemmódon: annak beállításai)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Hosszú nyomás, majd húzás: az ablak áthelyezése; szél vagy sarok húzása: átméretezés (jobb kattintás: üzemmódok és beállítások)
 Reset the windows	Ablakok visszaállítása
@@ -562,6 +568,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): {2}. sor
 {0}: {1}, could not save	{0}: {1}, a mentés nem sikerült
 Hell: picture saved: {0}	Hell: kép mentve: {0}
 SSTV	SSTV
+Colour when diversity is off	Szín kikapcsolt diversitynél
+Colour while measuring the delay	Szín a késleltetés mérése közben
+Colour when diversity is locked	Szín szinkronizált diversitynél
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity hallgatás: a WebSDR az egyik fülben, a rádió (vagy ExpertSDR, vagy HDSDR) a másikban, a helyi hang a WebSDR-hez igazítva késleltetve. Kattintás: be / ki. Jobb kattintás: vétel a másik fülbe, WebSDR oldala, mért késleltetés
 In the other ear:	A másik fülben:
 Rig: first choose its sound card (right-click REC)	Rádió: először válassza ki a hangkártyáját (jobb kattintás a REC-en)
@@ -615,6 +624,7 @@ Default filter	Alapértelmezett szűrő
 Other…	Egyéb…
 Bandwidth	Sávszélesség
 Invalid bandwidth (0.1 to 15 kHz)	Érvénytelen sávszélesség (0,1–15 kHz)
+Colour while searching	Szín keresés közben
 Mode?	Mód?
 Mode search: no WebSDR or rig to listen to	Üzemmódkeresés: nincs hallgatható WebSDR vagy rádió
 : waiting for a decoded message…	: várakozás dekódolt üzenetre…
@@ -630,16 +640,22 @@ Searching for the mode being heard ({0} s at most)…	A hallott üzemmód keres�
 Mode found: {0} ({1})	Talált üzemmód: {0} ({1})
 BW:	Ssz:
 Mode:	Üzemmód:
+Preamp:	Előerősítő:
+(preamp unchanged)	(az előerősítő változatlan)
+Rig preamp setting applied when this memory is recalled (after the frequency)	A rádió előerősítő-beállítása, amely a memória előhívásakor érvényesül (a frekvencia után)
 (mode unchanged)	(üzemmód változatlan)
 Edit…	Szerkesztés…
 Digital mode whose usual frequencies are shown	Digitális üzemmód, amelynek szokásos frekvenciái láthatók
 Frequency (kHz)	Frekvencia (kHz)
 Mode	Üzemmód
+Preamp	Előerősítő
 Digital modes	Digitális üzemmódok
 Copy…	Másolás…
 Select a memory first.	Először válasszon memóriát.
 Edit memory	Memória szerkesztése
-Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	A(z) {0} szokásos frekvenciái, {1}. Kattintson a hangoláshoz (Másolás…: hozzáadás valamelyik listájához).
+Preamp of the frequency	A frekvencia előerősítője
+ (here: {0})	 (itt: {0})
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	A(z) {0} szokásos frekvenciái, {1}. Kattintson a hangoláshoz (Szerkesztés…: előerősítő; Másolás…: hozzáadás valamelyik listájához).
 {0} memory(ies). Click a memory to go there.	{0} memória. Kattintson egy memóriára, hogy oda hangoljon.
 Tuned to "{0}" ({1} kHz).	Hangolva: „{0}” ({1} kHz).
 Remove the memory "{0}"?	Eltávolítja a(z) „{0}” memóriát?
@@ -651,6 +667,9 @@ Your own colour:	Saját szín:
 Text	Szöveg
 Preview: the chosen background with this mode's text	Előnézet: a választott háttér ennek a módnak a szövegével
 Apply	Alkalmaz
+No preamp (IPO)	Előerősítő nélkül (IPO)
+Preamp 1 (AMP1)	1. előerősítő (AMP1)
+Preamp 2 (AMP2)	2. előerősítő (AMP2)
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	Az SDRLink működéséhez Microsoft .NET Framework 4.6.2 vagy újabb szükséges (4.8 ajánlott).\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a .NET Framework 4.8-at?\n(újraindításra lehet szükség, utána indítsa el újra az SDRLinket)
 SDRLink - missing component	SDRLink - hiányzó összetevő
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	Az SDRLinknek a WebSDR-ek megjelenítéséhez szüksége van a Microsoft Edge WebView2 Runtime összetevőre.\nEzen a számítógépen nincs telepítve.\n\nLetölti és telepíti most a WebView2-t? (ingyenes, kb. 2 MB)

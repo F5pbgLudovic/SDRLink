@@ -44,6 +44,7 @@ namespace SDRLink
             afUnsupported = false;
             string[] v = Command("_", 1);   // nom du poste (rigctld : commande "_" = get_info)
             Log.Write("Hamlib : connecté à rigctld " + host + ":" + port + (v != null ? " (" + v[0] + ")" : ""));
+            try { preamps = ReadPreamps(); } catch (Exception ex) { preamps = null; Log.Write("Hamlib : préampli non lu (" + ex.Message + ")"); }
         }
 
         public void Close()
@@ -88,6 +89,56 @@ namespace SDRLink
             }
             afFailures = 0;
             return (int)Math.Round(Math.Max(0, Math.Min(1, v)) * 100);
+        }
+
+        // Préampli (1.41) : « L PREAMP <dB> » (0 = sans). Les valeurs viennent de la ligne « Preamp: 10dB 20dB » de dump_caps ;
+        // seule leur place compte (1re = préampli 1, 2e = préampli 2). Proposé seulement si le poste est un modèle dont la
+        // commande est confirmée (Preamps.ForModel), limité au nombre de valeurs de Hamlib : ses listes sont parfois fausses
+        // (IC-9700 : la 2e valeur allume le préampli EXTERNE ; IC-905 ; FTdx5000 sans IPO2). Poste hors catalogue : sans / préampli 1.
+        PreampSet preamps;
+        public PreampSet Preamps { get { return preamps; } }
+
+        public void SetPreamp(int code)
+        {
+            string w = preamps != null ? preamps.WireOf(code) : null;
+            if (w != null) Command("L PREAMP " + w, 0);
+        }
+
+        PreampSet ReadPreamps()
+        {
+            if (stream == null) return null;
+            while (stream.DataAvailable) reader.ReadLine();
+            byte[] b = Encoding.ASCII.GetBytes("+\\dump_caps\n");
+            stream.Write(b, 0, b.Length);
+            string model = null, list = null;
+            bool settable = false;
+            for (int i = 0; i < 2000; i++)
+            {
+                string line = ReadLine();
+                if (line.StartsWith("RPRT", StringComparison.Ordinal)) break;
+                string s = line.Trim();
+                if (s.StartsWith("Model name:", StringComparison.Ordinal)) model = s.Substring(11).Trim();
+                else if (s.StartsWith("Preamp:", StringComparison.Ordinal)) list = s.Substring(7).Trim();
+                else if (s.StartsWith("Set level:", StringComparison.Ordinal)) settable = (" " + s.Substring(10) + " ").Contains(" PREAMP");
+            }
+            List<string> dbs = new List<string>();
+            foreach (string p in (list ?? "").Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                string d = p.Replace("dB", "");
+                int n;
+                if (int.TryParse(d, NumberStyles.Integer, CultureInfo.InvariantCulture, out n) && n > 0) dbs.Add(d);
+            }
+            Log.Write("Hamlib : poste « " + model + " », préampli " + (list ?? "?") + (settable ? "" : " (non réglable)"));
+            if (!settable || dbs.Count == 0) return null;
+            string[] wire = { "0", dbs[0], dbs.Count > 1 ? dbs[1] : dbs[0], "0" };
+            RigModel m = SDRLink.Preamps.FindModel(model);
+            if (m != null)
+            {
+                PreampSet known = SDRLink.Preamps.ForModel(m);
+                return known == null ? null : known.Limit(dbs.Count, wire);
+            }
+            return new PreampSet(model, new[] { SDRLink.Preamps.Off, SDRLink.Preamps.Amp1 },
+                new[] { SDRLink.Preamps.GenericLabel(SDRLink.Preamps.Off), SDRLink.Preamps.GenericLabel(SDRLink.Preamps.Amp1) }, new[] { "0", dbs[0] });
         }
 
         public void SetAfGain(int percent)

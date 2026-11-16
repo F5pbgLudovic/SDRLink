@@ -25,7 +25,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (case dans le bouton ; clic : options et niveau), **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
-6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et la case **Diversité** (depuis la 1.40).
+6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40).
 7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
 
 ## Tous les clics droits
@@ -35,7 +35,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Connecter | couleur quand connecté / déconnecté / poste qui ne répond pas encore |
 | Ouvrir le journal, Look, Panneau de commande, Taille du texte, Vérifier les mises à jour, Conf scan, QSY, Save, Aller, Retour, Recharger, Ajouter / Retirer / Gérer les favoris, Rechercher des WebSDR, Pseudo/Call | couleur du bouton |
 | FreeDV auto | pas de menu : le clic droit passe de RADE V1 à RADE V2 et inversement (depuis la 1.24) |
-| Modes numériques (bouton et fenêtre posée sur la page) | les 14 modes (clic gauche : choisir et lancer ; clic droit : choisir et ouvrir les réglages), **Réglages <mode>…**, **Effacer le texte reçu**, **Ouvrir le dossier des images**, **Réinitialiser la fenêtre <mode>**, **Réinitialiser les fenêtres** (depuis la 1.25), **Fenêtre séparée**, **Plein écran**, **Choix d'un mode : aller sur sa fréquence la plus proche** (depuis la 1.38) |
+| Modes numériques (bouton et fenêtre posée sur la page) | les 14 modes (clic gauche : choisir et lancer ; clic droit : choisir et ouvrir les réglages), **Réglages <mode>…**, **Effacer le texte reçu**, **Ouvrir le dossier des images**, **Réinitialiser la fenêtre <mode>**, **Réinitialiser les fenêtres** (depuis la 1.25), **Fenêtre séparée**, **Plein écran**, **Choix d'un mode : aller sur sa fréquence la plus proche** (depuis la 1.38), couleur arrêté / en marche / signal reçu (depuis la 1.41) |
 | Import/Export | **Réinitialiser le programme…** (depuis la 1.22), couleur du bouton |
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
@@ -46,15 +46,17 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Saisie kHz | supprimer la valeur de l'historique, tout supprimer |
 | Mémoires | mémoriser la fréquence actuelle, couleur du bouton |
 | Liste des favoris (à côté de l'adresse) | renommer la liste |
+| Notch auto (DNF) | couleur notch arrêté / en marche (depuis la 1.41) |
+| Mode ? | couleur du bouton, couleur pendant la recherche (depuis la 1.41) |
 | Couper le son du WebSDR en émission | réceptions dont le son est coupé en émission : WebSDR, poste, ExpertSDR, HDSDR (cases à cocher, toutes cochées au départ) |
-| ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus) |
+| ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus), couleur du bouton (depuis la 1.41) |
 | Mute WebSDR, Mute HDSDR | couleur son coupé / son actif |
 | Mute TX | **écouter aussi le poste sur le PC**, carte son du poste (depuis la 1.23), couleur son coupé / son actif |
 | Mute ExpertSDR | port TCI d'ExpertSDR, couleur son coupé / son actif |
 | « Volume WebSDR » | port TCI d'ExpertSDR |
 | REC | carte son du poste, couleur du bouton REC |
 | Réinit WebSDR | **Auto** (relance quand le son est perdu) et son délai, **réinitialisation totale** du WebSDR en cours, couleurs des deux états (depuis la 1.37) |
-| Diversité | réception mise dans l'autre oreille (poste, ExpertSDR, HDSDR sous Windows 11), **WebSDR dans l'oreille droite**, retard mesuré (depuis la 1.40) |
+| Diversité | réception mise dans l'autre oreille (poste, ExpertSDR, HDSDR sous Windows 11), **WebSDR dans l'oreille droite**, retard mesuré (depuis la 1.40), couleur arrêtée / recherche du retard / calée (depuis la 1.41) |
 | Barre d'état | 20 derniers messages, types de messages à ne plus afficher |
 
 ## Fichiers de SDRLink
@@ -176,6 +178,7 @@ Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donn
 ## Favoris
 
 - La liste déroulante de la barre WebSDR affiche les favoris par leur **nom**. En choisir un ouvre le WebSDR.
+- Le menu des **listes** de favoris (à droite) se rouvre s'il se referme tout seul moins de **0,5 s** après son ouverture, sans qu'un choix ait été fait (deux fois au plus ; **Échap** le ferme) : parade à une fermeture intempestive vue pendant la diversité (depuis la 1.41).
 - **Propositions pendant la frappe** (depuis la 1.19) : dès que tu tapes un mot (deux lettres au moins) dans la barre WebSDR, les WebSDR dont le **nom ou l'adresse contient ce mot** s'affichent juste dessous, comme dans un moteur de recherche. Il suffit qu'**un des mots** tapés corresponde (« twente », « kiwi », « bretagne »…), sans tenir compte des majuscules ni des accents ; les WebSDR qui correspondent le mieux sont en haut. Un **clic** sur une proposition ouvre le WebSDR ; au clavier, **↓ / ↑** pour choisir, **Entrée** pour ouvrir, **Échap** pour fermer. Seuls les WebSDR de la **liste choisie** dans le menu de droite sont proposés. La **flèche** de la liste déroulante affiche toujours **tous** les WebSDR de la liste, même si du texte est tapé. Une adresse tapée en entier puis **Entrée** (sans choisir de proposition) s'ouvre comme avant.
 - **Listes de favoris** : de 1 à **10 listes** (4 au départ : Liste 1 à Liste 4) pour trier les WebSDR.
   - Le menu juste à droite de la liste des WebSDR choisit la liste affichée.
@@ -355,7 +358,7 @@ La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'int
 ## Couleurs des boutons (clic droit)
 
 Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le bouton avait déjà un clic droit (PTT, Mémoires, Câble SDRLINK, Mute ExpertSDR…), ce menu est conservé et les couleurs sont ajoutées à la fin.
-- **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Look, Panneau de commande, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export, Notch auto, Mode ?.
+- **Un seul choix** (« Couleur du bouton ») : Ouvrir le journal, Look, Panneau de commande, Taille du texte, Conf scan, QSY, Save, Mémoires, Aller, Retour, Recharger, Ajouter aux favoris, Retirer des favoris, Gérer les favoris, Rechercher des WebSDR, Import/Export, ⇄.
 - **Deux choix, un pour chaque état** :
   - **Connecter** : quand connecté / quand déconnecté / quand le poste ne répond pas encore (orange par défaut) ;
   - **Câble SDRLINK** : quand activé / quand désactivé ;
@@ -365,6 +368,11 @@ Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le
   - **RADIO** et **WEBSDR** (fréquence et mode) : couleur du fond / couleur du texte (en émission, RADIO passe toujours en rouge) ;
   - **USB, LSB, AM, FM, DIGI, CW** : mode sélectionné / modes non sélectionnés (le choix vaut pour les six boutons) ;
   - **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR** (chacun le sien) : son coupé / son actif. Un Mute indisponible reste grisé.
+  - **Notch auto (DNF)** : notch arrêté / en marche (depuis la 1.41 ; l'ancienne couleur unique vaut pour les deux tant qu'elles ne sont pas choisies) ;
+  - **Mode ?** : au repos / pendant la recherche (depuis la 1.41) ;
+  - **Diversité** : arrêtée / recherche du retard / calée (depuis la 1.41) ;
+  - bouton des **modes numériques** (SSTV, FT8…) : décodage arrêté / en marche / signal en cours de réception (depuis la 1.41).
+- **FreeDV auto** n'a pas de couleur réglable : son clic droit passe directement de RADE V1 à V2, sans menu.
 - Couleurs proposées : **Par défaut** (couleur d'origine, qui suit le mode sombre et la palette), bleu marine, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, orange, blanc, ou **Autre couleur…** au choix.
 - Le texte passe en noir sur les couleurs claires et en blanc sur les foncées ; une bordure fait contour.
 - Les choix sont conservés, y compris en passant du mode clair au mode sombre.
@@ -607,14 +615,15 @@ Relance automatique du WebSDR quand son son est perdu (coupure du serveur, déla
 
 ## Écoute en diversité (depuis la 1.40)
 
-Case **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **WebSDR dans une oreille**, la **réception locale dans l'autre** (le poste, ExpertSDR ou HDSDR), comme deux récepteurs sur deux antennes éloignées. L'oreille combine les deux : un signal qui s'évanouit d'un côté reste lisible de l'autre (QSB), et le QRM ou le bruit local d'un côté gêne moins. Il faut un casque ou deux haut-parleurs.
+Bouton **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **WebSDR dans une oreille**, la **réception locale dans l'autre** (le poste, ExpertSDR ou HDSDR), comme deux récepteurs sur deux antennes éloignées. L'oreille combine les deux : un signal qui s'évanouit d'un côté reste lisible de l'autre (QSB), et le QRM ou le bruit local d'un côté gêne moins. Il faut un casque ou deux haut-parleurs.
 - Le son d'un WebSDR arrive toujours **en retard** (0,3 à 5 s selon le serveur). SDRLink **mesure ce retard en continu** en comparant les deux sons (rythme des syllabes, de la manipulation CW, des évanouissements) et **retarde le son local d'autant** : les deux oreilles entendent la même chose au même moment. Si le retard du WebSDR change, il est retrouvé tout seul (en 8 s environ).
 - Il faut **un signal entendu des deux côtés** (même fréquence, même mode) pour mesurer le retard. Tant qu'il n'est pas trouvé, le bouton est **orange** et affiche « Diversité … » ; ensuite il est **vert** et affiche le retard appliqué (« Diversité 1,8 s »), aussi donné dans la barre d'état. Sur du bruit seul, rien n'est calé : les deux sons sont joués sans alignement.
 - Les deux oreilles sont mises **au même niveau** automatiquement, quel que soit le volume de chaque réception.
-- **Clic** : marche / arrêt. **Clic droit** :
+- **Clic** : marche / arrêt (un simple bouton depuis la 1.41, sans case ; sa largeur ne change pas). **Clic droit** :
   - **Dans l'autre oreille** : **Poste (carte son de REC)**, **ExpertSDR (son par TCI)**, **HDSDR**. Seules les réceptions disponibles sont proposées : poste connecté avec sa carte son choisie (clic droit sur REC), ExpertSDR lancé, HDSDR lancé **sous Windows 11** ;
   - **WebSDR dans l'oreille droite** (à gauche sinon) ;
-  - en marche, l'état : retard mesuré, ou recherche.
+  - en marche, l'état : retard mesuré, ou recherche ;
+  - les couleurs des trois états : arrêtée, recherche du retard, calée (depuis la 1.41).
 - Pendant la diversité, SDRLink **fait taire la sortie habituelle** de chaque réception et joue les deux sons lui-même, sur la sortie son par défaut de Windows :
   - **WebSDR** : la page est mise à volume 0 (le son est pris dans la page avant le volume) ;
   - **poste** : son **gain BF est mis à 0** (le son reçu par la carte son du poste n'en dépend pas) et l'écoute du poste sur le PC est en sourdine. Il faut un poste dont SDRLink règle le volume (Volume TX affiché) ; sinon, baissez son volume à la main. Tourner le bouton de volume du poste règle son oreille, et le haut-parleur est refait taire ;
@@ -622,9 +631,9 @@ Case **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **WebS
   - **HDSDR** (Windows 11) : baissé à −60 dB dans le mélangeur ; son son est capté par Windows puis remonté.
 - **Mute** et **Volume** de chaque réception règlent **son oreille** (Mute WebSDR fait taire l'oreille du WebSDR, Volume TX celle du poste…), sans rien changer à la réception elle-même.
 - **En émission** : les oreilles des réceptions cochées au clic droit de « Couper le son du WebSDR en émission » se taisent dès le passage en émission et le restent après, pendant le retard appliqué plus le délai de rétablissement (« rétablir après (ms) ») : la fin de l'émission, jouée en retard, n'est pas entendue. L'oreille du poste se tait en émission dans tous les cas.
-- À l'arrêt (case décochée, poste déconnecté, logiciel fermé, ou fermeture de SDRLink), **chaque réception retrouve son son** : volume de la page, gain BF du poste, ExpertSDR et HDSDR comme avant.
-- Le notch automatique ne s'applique pas au son du WebSDR dans la diversité (le son est pris avant lui).
-- La réception choisie et le côté du WebSDR sont conservés ; la case, elle, est décochée à chaque démarrage.
+- À l'arrêt (nouveau clic, poste déconnecté, logiciel fermé, ou fermeture de SDRLink), **chaque réception retrouve son son** : volume de la page, gain BF du poste, ExpertSDR et HDSDR comme avant.
+- Le **notch automatique** s'applique aussi à l'oreille du WebSDR (depuis la 1.41 ; avant, le son était pris avant lui). Si le câble SDRLINK ou un décodeur écoute aussi le WebSDR, le son reste pris avant le notch (son brut pour eux).
+- La réception choisie et le côté du WebSDR sont conservés ; la diversité, elle, est arrêtée à chaque démarrage.
 
 ## Mémoires de fréquences
 
@@ -633,10 +642,103 @@ Case **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **WebS
   - **Cliquer sur une mémoire** change tout de suite la fréquence (poste et WebSDR) et le mode s'il est mémorisé ; la fenêtre reste ouverte pour passer à une autre. Entrée fait de même.
   - **Modifier…**, **Supprimer…** (ou touche Suppr).
   - Listes de mémoires comme pour les favoris : menu **Liste** (ou « Toutes les listes »), clic droit pour renommer, **Nouvelle liste** (10 au maximum), **Supprimer la liste…** (avec ses mémoires, après confirmation).
-  - Liste **Modes numériques** (dernière du menu **Liste**, depuis la 1.28, comme dans PhoneSDRLink) : les **fréquences habituelles** du mode numérique choisi, bandes radioamateurs de **1,8 à 440 MHz**, d'après les listes de WSJT-X et JS8Call, les plans de bande IARU et les usages courants (Olivia, Contestia, Hell, stations WEFAX). Elle suit le **mode utilisé** : quand un décodeur est en marche (bouton des modes numériques ou FreeDV auto), la fenêtre s'ouvre directement sur cette liste et ce mode. À droite : le **mode** (FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK, Olivia, Contestia, Hell, SSTV, WEFAX, FreeDV) pour voir les fréquences d'un autre mode, et la **région IARU** (1 Europe-Afrique au départ, 2 Amériques, 3 Asie-Pacifique ; retenue) : les fréquences propres à une région sont marquées (R1), (R2)… Un clic y va, avec le mode de la fréquence (USB, LSB, CW ou FM) ; **Copier…** l'ajoute à une de vos listes. Ces fréquences d'usage peuvent changer et ne remplacent pas le plan de bande de chaque pays.
+  - Liste **Modes numériques** (dernière du menu **Liste**, depuis la 1.28, comme dans PhoneSDRLink) : les **fréquences habituelles** du mode numérique choisi, bandes radioamateurs de **1,8 à 440 MHz**, d'après les listes de WSJT-X et JS8Call, les plans de bande IARU et les usages courants (Olivia, Contestia, Hell, stations WEFAX). Elle suit le **mode utilisé** : quand un décodeur est en marche (bouton des modes numériques ou FreeDV auto), la fenêtre s'ouvre directement sur cette liste et ce mode. À droite : le **mode** (FT8, FT4, FT2, WSPR, JT9, JS8, CW, RTTY, PSK, Olivia, Contestia, Hell, SSTV, WEFAX, FreeDV) pour voir les fréquences d'un autre mode, et la **région IARU** (1 Europe-Afrique au départ, 2 Amériques, 3 Asie-Pacifique ; retenue) : les fréquences propres à une région sont marquées (R1), (R2)… Un clic y va, avec le mode de la fréquence (USB, LSB, CW ou FM) ; **Modifier…** choisit son **préampli** (depuis la 1.41, seul ce champ se change ; gardé pour cette fréquence, ligne `MemDigiPre=` des réglages) ; **Copier…** (à la place de Supprimer…) l'ajoute à une de vos listes. Ces fréquences d'usage peuvent changer et ne remplacent pas le plan de bande de chaque pays.
 - **Clic droit** sur Mémoires : mémoriser la fréquence actuelle sans ouvrir la fenêtre.
 - Bouton **▾** à droite : les **20 dernières mémoires utilisées**, la plus récente en haut. Une mémoire qui a un nom (pseudo) est affichée par son nom, sinon par sa fréquence. Un clic y va. En bas : Mémoires… et Effacer cette liste.
 - Les mémoires sont gardées dans les réglages (`settings.ini`, lignes `Mem=`).
+
+### Préampli mémorisé (depuis la 1.41)
+
+- Dans la fenêtre d'une mémoire (Mémoriser la fréquence actuelle…, Modifier…), le choix **Préampli** : **(préampli inchangé)** au départ, ou un réglage du préampli du poste. Au rappel de la mémoire (clic, liste ▾, scan des mémoires), le poste passe sur ce réglage **juste après la fréquence** (la plupart des postes retiennent le préampli par bande). La barre d'état le rappelle (« Mémoire « 40 m » : 7074 kHz, AMP1 »). Colonne **Préampli** dans la liste des mémoires.
+- Les réglages proposés sont ceux du **poste synchronisé** : chez Yaesu **IPO** (sans préampli), **AMP1**, **AMP2** ; sur le **FTdx5000**, **IPO1**, **IPO2**, **AMP1**, **AMP2** (IPO2 : préampli contourné, attaque directe du premier mélangeur) ; chez Icom **OFF**, **P.AMP1**, **P.AMP2** ; chez Kenwood et Elecraft **OFF**, **PRE** (PRE 1 / PRE 2 sur le TS-890S, le K3 et le K4). Sans poste connecté : sans préampli, préampli 1, préampli 2.
+- IPO chez Yaesu équivaut à « pas de préampli » chez les autres marques. Une mémoire faite pour un autre poste est ramenée au réglage le plus proche : AMP2 devient AMP1 sur un poste à un seul préampli, IPO2 devient IPO (ou OFF) ailleurs que sur le FTdx5000.
+- Postes pilotés, réglages proposés et commande CAT exacte de chacun : voir le tableau « Préampli : par interface et par poste » ci-dessous.
+- Par les **autres interfaces** :
+  - **Hamlib** : `L PREAMP`, d'après la liste de préamplis donnée par rigctld, seulement pour un poste de la liste ci-dessus (IPO2 du FTdx5000 non disponible par Hamlib) ;
+  - **OmniRig** : la commande du modèle choisi dans OmniRig est envoyée telle quelle (Icom : adresse CI-V par défaut du modèle) ;
+  - **Ham Radio Deluxe** : HRD n'a pas de commande préampli ; SDRLink utilise la liste déroulante ou les boutons de préampli de la fenêtre HRD du poste (IPO, AMP 1, AMP 2, P.AMP… ; sur le **FT-2000**, les boutons **Pre 1** et **Pre 2** : IPO = les deux éteints, AMP1 = Pre 1, AMP2 = Pre 2), trouvés à la connexion et notés dans le journal. Pour aller en AMP1 ou AMP2, seul le bouton voulu est allumé, l'autre n'est **jamais** éteint (HRD peut le laisser affiché allumé ; l'éteindre renverrait le poste en IPO) : AMP1 ↔ AMP2 passe directement, sans IPO entre les deux. Seul le retour en IPO éteint le bouton allumé (correctif repris de WSJT-WWA, vérifié sur le FT-2000). L'état des boutons est lu avant d'écrire, puis relu à +0,5 s, +1,5 s et +3 s et renvoyé si le poste a rechargé sa mémoire de préampli par bande après le changement de fréquence ;
+  - **TCI** (ExpertSDR, Thetis…) : le protocole TCI (jusqu'à la version 2.1) ne contient pas de commande de préampli : rien n'est envoyé.
+- **Commandes relevées dans HRD 6.8** (tables internes du programme) et identiques aux manuels : FT-2000 « Pre 1 » = `PA01;`, « Pre 2 » = `PA02;`, les deux éteints = `PA00;` (IPO) ; FTdx5000 liste « IPO 1, Amp 1, Amp 2, IPO 2 » = `PA00;` `PA01;` `PA02;` `PA03;` (récepteur B : `PA10;`…`PA13;`) ; Kenwood « Pre » = `PA0;` / `PA1;` ; TS-990 « Pre (MAIN) » = `PA00;` / `PA01;`. Le serveur IP de HRD n'a pas de commande CAT brute : SDRLink passe par ces boutons et listes, reconnus par leur nom ou par leurs choix (IPO, Amp, P.AMP, Pre).
+- Si le poste ou l'interface ne permet pas de changer le préampli, la mémoire est rappelée sans lui et la barre d'état le dit.
+- Dans `settings.ini`, le préampli est le 6e champ de la ligne `Mem=` (absent = inchangé) ; les versions d'avant la 1.41 l'ignorent.
+
+### Préampli : par interface et par poste
+
+| Interface | Comment le préampli est commandé | Postes concernés |
+|---|---|---|
+| Port COM (CAT direct) | commande CAT du tableau ci-dessous, envoyée juste après la fréquence | les postes du tableau |
+| OmniRig | la même commande, envoyée telle quelle par OmniRig ; le poste est reconnu par le nom choisi dans OmniRig ; Icom : adresse CI-V par défaut du modèle | les postes du tableau |
+| Ham Radio Deluxe | boutons ou liste de préampli de la fenêtre HRD du poste (HRD n'accepte pas de commande CAT brute), trouvés à la connexion et notés dans le journal ; FT-2000 : boutons **Pre 1** / **Pre 2** | selon la définition du poste dans HRD |
+| Hamlib (rigctld) | `L PREAMP <dB>`, valeurs données par rigctld (1re = préampli 1, 2e = préampli 2) | les postes du tableau, limités aux réglages connus de Hamlib (pas d'IPO2 sur le FTdx5000) |
+| TCI (ExpertSDR, Thetis…) | aucune : le protocole TCI n'a pas de commande de préampli | aucun |
+
+Tous les postes de SDRLink (commandes relevées dans les manuels CAT des fabricants et recoupées avec Hamlib, flrig et HRD 6.8 ; « Hamlib » : d'après Hamlib seulement, une commande que le poste ne connaît pas est simplement refusée). Icom : trame CI-V `FE FE <adresse> E0 16 02 <valeur> FD`.
+
+| Marque | Modèle | Réglages proposés et commande CAT | Source |
+|---|---|---|---|
+| Yaesu | FT-450/450D | IPO `PA00;`, AMP `PA01;` | manuel |
+| Yaesu | FT-710 | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | Hamlib + flrig |
+| Yaesu | FT-891 | IPO `PA00;`, AMP `PA01;` | manuel |
+| Yaesu | FT-950 | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | manuel |
+| Yaesu | FT-991/991A | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | manuel |
+| Yaesu | FT-2000 | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | manuel |
+| Yaesu | FTdx10 | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | manuel |
+| Yaesu | FTdx101D/MP | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | manuel |
+| Yaesu | FTdx1200 | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | Hamlib + flrig |
+| Yaesu | FTdx3000 | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` | manuel |
+| Yaesu | FTdx5000 | IPO1 `PA00;`, IPO2 `PA03;`, AMP1 `PA01;`, AMP2 `PA02;` | manuel |
+| Yaesu | FTdx9000 | IPO `PA00;`, AMP `PA01;` | manuel |
+| Yaesu | FTX-1 | IPO `PA00;`, AMP1 `PA01;`, AMP2 `PA02;` ; 144 MHz `PA10;`/`PA11;`, 430 MHz `PA20;`/`PA21;` | Hamlib |
+| Icom | IC-78 | OFF `16 02 00`, P.AMP `16 02 01` | Hamlib |
+| Icom | IC-703 | OFF `16 02 00`, P.AMP `16 02 01` | manuel |
+| Icom | IC-705 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` (> 60 MHz : P.AMP1 max) | Hamlib |
+| Icom | IC-706MKIIG | OFF `16 02 00`, P.AMP `16 02 01` | Hamlib |
+| Icom | IC-718 | OFF `16 02 00`, P.AMP `16 02 01` | manuel |
+| Icom | IC-746 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-746PRO | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-756PRO | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-756PROII | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | Hamlib |
+| Icom | IC-756PROIII | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | Hamlib |
+| Icom | IC-905 | OFF `16 02 00`, P.AMP `16 02 01` | manuel |
+| Icom | IC-910H | OFF `16 02 00`, P.AMP `16 02 01` | manuel |
+| Icom | IC-7000 | OFF `16 02 00`, P.AMP `16 02 01` | manuel |
+| Icom | IC-7100 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` (> 60 MHz : P.AMP1 max) | Hamlib |
+| Icom | IC-7200 | OFF `16 02 00`, P.AMP `16 02 01` | manuel |
+| Icom | IC-7300 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-7300MK2 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-7400 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-7410 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-7600 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-7610 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | Hamlib |
+| Icom | IC-7700 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | Hamlib |
+| Icom | IC-7760 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | Hamlib |
+| Icom | IC-7800 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-7850 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-7851 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` | manuel |
+| Icom | IC-9100 | OFF `16 02 00`, P.AMP1 `16 02 01`, P.AMP2 `16 02 02` (> 60 MHz : P.AMP1 max) | manuel |
+| Icom | IC-9700 | OFF `16 02 00`, P.AMP `16 02 01` | manuel |
+| Kenwood | TS-480 | OFF `PA0;`, PRE `PA1;` | Hamlib + flrig |
+| Kenwood | TS-570 | OFF `PA0;`, PRE `PA1;` | manuel |
+| Kenwood | TS-590S/SG | OFF `PA0;`, PRE `PA1;` | manuel |
+| Kenwood | TS-890S | OFF `PA0;`, PRE 1 `PA1;`, PRE 2 `PA2;` | manuel |
+| Kenwood | TS-990S | OFF `PA00;`, PRE `PA01;` | manuel |
+| Kenwood | TS-2000 | OFF `PA0;`, PRE `PA1;` | manuel |
+| Kenwood | TS-B2000 | OFF `PA0;`, PRE `PA1;` | comme TS-2000 |
+| Elecraft | K2 | OFF `PA0;`, PRE `PA1;` | manuel |
+| Elecraft | K3/K3S | OFF `PA0;`, PRE `PA1;`, PRE 2 `PA2;` | manuel |
+| Elecraft | K4 | OFF `PA00;`, PRE 10 dB `PA11;`, PRE 2 `PA21;` | manuel |
+| Elecraft | KX2 | OFF `PA0;`, PRE `PA1;` | manuel |
+| Elecraft | KX3 | OFF `PA0;`, PRE `PA1;` | manuel |
+| Xiegu | G90 | OFF `16 02 00`, P.AMP `16 02 01` | Hamlib |
+| Xiegu | X108G | OFF `16 02 00`, P.AMP `16 02 01` | Hamlib |
+| Xiegu | X5105 | OFF `16 02 00`, P.AMP `16 02 01` | Hamlib |
+| Xiegu | X6100 | OFF `16 02 00`, P.AMP `16 02 01` | Hamlib |
+| Xiegu | X6200 | OFF `16 02 00`, P.AMP `16 02 01` | Hamlib |
+
+Sans commande CAT de préampli (le préampli s'y règle à la main) :
+- **Yaesu** : FT-100/100D, FT-600, FT-650, FT-736R, FT-747GX, FT-757GX, FT-757GXII, FT-767GX, FT-817, FT-817ND, FT-818, FT-818ND, FT-840, FT-847, FT-857, FT-857D, FT-890, FT-897, FT-897D, FT-900, FT-920, FT-990, FT-1000, FT-1000D, FT-1000MP, FT-1000MP Mark-V, FT-1000MP Mark-V Field
+- **Icom** : IC-271, IC-275, IC-375, IC-471, IC-475, IC-575, IC-706, IC-706MKII, IC-707, IC-725, IC-726, IC-728, IC-729, IC-735, IC-736, IC-737, IC-738, IC-751/751A, IC-756, IC-761, IC-765, IC-775, IC-781, IC-820H, IC-821H, IC-970, IC-1275
+- **Kenwood** : TS-50S, TS-60S, TS-140S, TS-440S, TS-450S, TS-680S, TS-690S, TS-711, TS-790, TS-811, TS-850S, TS-870S, TS-930S, TS-940S, TS-950S, TS-950SDX
 
 ## Barre d'état (messages en bas de la fenêtre)
 
@@ -712,6 +814,11 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.41**
+  - **Préampli mémorisé** avec chaque mémoire, et pour les fréquences de la liste **Modes numériques** (Modifier…), aussi au choix d'un mode numérique qui accorde sur sa fréquence (IPO / AMP1 / AMP2 chez Yaesu, IPO1 / IPO2 sur le FTdx5000, P.AMP chez Icom, PRE chez Kenwood et Elecraft), appliqué au rappel juste après la fréquence, en CAT direct, par Hamlib, OmniRig et HRD.
+  - **Diversité** : un simple bouton (clic = marche / arrêt), largeur fixe ; le **notch automatique** s'applique aussi à l'oreille du WebSDR.
+  - **Couleurs par état** au clic droit : Diversité, Notch auto, Mode ?, bouton des modes numériques ; couleur de ⇄.
+  - Menu des listes de favoris rouvert s'il se referme tout seul moins de 0,5 s après son ouverture.
 - **1.40**
   - Case **Diversité** (après Réinit WebSDR) : **écoute en diversité**, le WebSDR dans une oreille et le poste, ExpertSDR ou HDSDR dans l'autre, le son local **retardé automatiquement** pour tomber en même temps que le WebSDR.
   - Décodage d'**ExpertSDR** (FreeDV auto, modes numériques, Mode ?) par son **flux audio TCI** : sous Windows 10, la capture du son d'un programme ne rendait que du silence. **HDSDR** n'est plus décodé que sous **Windows 11**, pour la même raison.

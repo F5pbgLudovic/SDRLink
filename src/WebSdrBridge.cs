@@ -71,6 +71,7 @@ namespace SDRLink
         origConnect.call(input, out);
         for (var j = 0; j < NOTCHES; j++) release(ctx, n, j);
       }
+      retap(ctx);
     };
     var release = function (ctx, n, i) {
       n.slots[i].bin = -1;
@@ -164,7 +165,8 @@ namespace SDRLink
       sp.channelCount = 1;
       sp.channelCountMode = 'explicit';
       silent.gain.value = 0;
-      origConnect.call(ctx.__sdrlinkIn, sp);
+      ctx.__sdrlinkTapSrc = tapSrc(ctx);
+      origConnect.call(ctx.__sdrlinkTapSrc, sp);
       origConnect.call(sp, silent);
       origConnect.call(silent, ctx.destination);   // un ScriptProcessor ne tourne que s'il est relié à la sortie
       sp.onaudioprocess = function (e) {
@@ -181,9 +183,24 @@ namespace SDRLink
       };
       ctx.__sdrlinkTap = sp;
     };
-    L.setTap = function (on) {
+    // Point de prélèvement : son brut (câble, décodeurs), ou après le notch quand seule l'écoute en diversité le demande
+    // (post), pour que l'oreille du WebSDR reste filtrée comme le haut-parleur.
+    var tapSrc = function (ctx) {
+      var n = ctx.__sdrlinkNotch;
+      return L.tapPost && n && n.on ? n.f[NOTCHES - 1] : ctx.__sdrlinkIn;
+    };
+    var retap = function (ctx) {
+      var sp = ctx.__sdrlinkTap, s = tapSrc(ctx);
+      if (!sp || s === ctx.__sdrlinkTapSrc) return;
+      try { origDisconnect.call(ctx.__sdrlinkTapSrc, sp); } catch (e) { }
+      origConnect.call(s, sp);
+      ctx.__sdrlinkTapSrc = s;
+    };
+    L.tapPost = false;
+    L.setTap = function (on, post) {
       L.tapOn = !!on;
-      if (on) for (var i = 0; i < L.ctxs.length; i++) tap(L.ctxs[i]);
+      L.tapPost = !!post;
+      for (var i = 0; i < L.ctxs.length; i++) { if (on) tap(L.ctxs[i]); retap(L.ctxs[i]); }
     };
 
     // Surveillance du son (Réinit Auto WebSDR, comme PhoneSDRLink) : un analyseur sur l'entrée commune (avant volume,

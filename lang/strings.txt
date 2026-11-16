@@ -237,11 +237,14 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Clic droit : réceptions dont le son est coupé en émission
 Auto notch (DNF)	Notch auto (DNF)
 Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Case : notch automatique en marche / arrêté. Clic sur le bouton : coupure en mode numérique et en FreeDV, niveau de 1 à 10 (clic droit : couleur du bouton)
+Colour when the notch is off	Couleur notch arrêté
+Colour when the notch is on	Couleur notch en marche
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Relance le WebSDR en cours (par exemple arrêté après un temps d'inactivité). Clic : relance en gardant ses réglages (fréquence, mode, filtre, zoom, volume). Clic droit : relance automatique quand le son est perdu (Auto) et son délai, réinitialisation totale du WebSDR, couleurs du bouton
 Save: no known frequency (rig or WebSDR)	Save : aucune fréquence connue (poste ou WebSDR)
 Store the current frequency…	Mémoriser la fréquence actuelle…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE : la parole est décodée dès qu'un signal FreeDV est reçu (clic : marche / arrêt ; clic droit : RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Passer le son à la réception suivante (clic droit : réception à laisser coupée)
+Button colour	Couleur du bouton
 Colour when connected	Couleur quand connecté
 Colour when disconnected	Couleur quand déconnecté
 Colour when the rig is not answering yet	Couleur quand le poste ne répond pas encore
@@ -270,7 +273,6 @@ The checked items will be set back as at first installation.	Les éléments coch
 SDRLink will restart. Continue?	SDRLink va redémarrer. Continuer ?
 Reset the program	Réinitialiser le programme
 Cannot reset: 	Réinitialisation impossible : 
-Button colour	Couleur du bouton
 RIG	RADIO
 Disconnected	Déconnecté
 Connect	Connecter
@@ -333,6 +335,7 @@ HDSDR does not play through Windows sound (reception stopped, or audio through A
 ExpertSDR TCI port	Port TCI d'ExpertSDR
 TCI server port (ExpertSDR, Options > TCI):	Port du serveur TCI (ExpertSDR, Options > TCI) :
 Add memory	Ajouter une mémoire
+; preamp cannot be set on this rig / interface	 ; préampli non pilotable sur ce poste / cette interface
 Resume the scan	Reprendre le scan
 Current "Scan setup" setting	Réglage actuel de « Conf scan »
 No scan while transmitting	Scan impossible en émission
@@ -537,6 +540,9 @@ WebSDR → Rig	WebSDR → Radio
 2.5 kHz	2,5 kHz
 5 kHz	5 kHz
 10 kHz	10 kHz
+Colour when decoding is off	Couleur décodage arrêté
+Colour when decoding is on	Couleur décodage en marche
+Colour while a signal is being received	Couleur pendant la réception d'un signal
 Digital modes: decoding is shown in a window over the page (click: on / off; right-click: choose the mode, right-click on a mode: its settings)	Modes numériques : le décodage s'affiche dans une fenêtre sur la page (clic : marche / arrêt ; clic droit : choix du mode, clic droit sur un mode : ses réglages)
 Long press then drag: move the window; drag an edge or a corner: resize it (right-click: modes and settings)	Appui long puis glisser : déplacer la fenêtre ; tirer sur un bord ou un coin : l'agrandir (clic droit : modes et réglages)
 Reset the windows	Réinitialiser les fenêtres
@@ -562,6 +568,9 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}) : ligne {2}
 {0}: {1}, could not save	{0} : {1}, enregistrement impossible
 Hell: picture saved: {0}	Hell : image enregistrée : {0}
 SSTV	SSTV
+Colour when diversity is off	Couleur diversité arrêtée
+Colour while measuring the delay	Couleur pendant la recherche du retard
+Colour when diversity is locked	Couleur diversité calée
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Écoute en diversité : le WebSDR dans une oreille, le poste (ou ExpertSDR, ou HDSDR) dans l'autre, le son local retardé pour tomber en même temps que le WebSDR. Clic : marche / arrêt. Clic droit : réception mise dans l'autre oreille, côté du WebSDR, retard mesuré
 In the other ear:	Dans l'autre oreille :
 Rig: first choose its sound card (right-click REC)	Poste : choisissez d'abord sa carte son (clic droit sur REC)
@@ -615,6 +624,7 @@ Default filter	Filtre d'origine
 Other…	Autre…
 Bandwidth	Bande passante
 Invalid bandwidth (0.1 to 15 kHz)	Bande passante invalide (0,1 à 15 kHz)
+Colour while searching	Couleur pendant la recherche
 Mode?	Mode ?
 Mode search: no WebSDR or rig to listen to	Recherche du mode : ni WebSDR ni poste à écouter
 : waiting for a decoded message…	 : attente d'un message décodé…
@@ -630,16 +640,22 @@ Searching for the mode being heard ({0} s at most)…	Recherche du mode écouté
 Mode found: {0} ({1})	Mode trouvé : {0} ({1})
 BW:	BP :
 Mode:	Mode :
+Preamp:	Préampli :
+(preamp unchanged)	(préampli inchangé)
+Rig preamp setting applied when this memory is recalled (after the frequency)	Réglage du préampli du poste appliqué en rappelant cette mémoire (après la fréquence)
 (mode unchanged)	(mode inchangé)
 Edit…	Modifier…
 Digital mode whose usual frequencies are shown	Mode numérique dont on voit les fréquences habituelles
 Frequency (kHz)	Fréquence (kHz)
 Mode	Mode
+Preamp	Préampli
 Digital modes	Modes numériques
 Copy…	Copier…
 Select a memory first.	Sélectionnez d'abord une mémoire.
 Edit memory	Modifier la mémoire
-Usual {0} frequencies, {1}. Click to go there (Copy…: add it to one of your lists).	Fréquences habituelles de {0}, {1}. Cliquez pour y aller (Copier… : l'ajouter à une de vos listes).
+Preamp of the frequency	Préampli de la fréquence
+ (here: {0})	 (ici : {0})
+Usual {0} frequencies, {1}. Click to go there (Edit…: its preamp; Copy…: add it to one of your lists).	Fréquences habituelles de {0}, {1}. Cliquez pour y aller (Modifier… : son préampli ; Copier… : l'ajouter à une de vos listes).
 {0} memory(ies). Click a memory to go there.	{0} mémoire(s). Cliquez sur une mémoire pour y aller.
 Tuned to "{0}" ({1} kHz).	Accord sur « {0} » ({1} kHz).
 Remove the memory "{0}"?	Supprimer la mémoire « {0} » ?
@@ -651,6 +667,9 @@ Your own colour:	Couleur au choix :
 Text	Texte
 Preview: the chosen background with this mode's text	Aperçu : le fond choisi avec le texte de ce mode
 Apply	Appliquer
+No preamp (IPO)	Sans préampli (IPO)
+Preamp 1 (AMP1)	Préampli 1 (AMP1)
+Preamp 2 (AMP2)	Préampli 2 (AMP2)
 SDRLink needs Microsoft .NET Framework 4.6.2 or later (4.8 recommended).\nIt is not installed on this PC.\n\nDownload and install .NET Framework 4.8 now?\n(a restart may be required, then start SDRLink again)	SDRLink a besoin de Microsoft .NET Framework 4.6.2 ou plus récent (4.8 recommandé).\nIl n'est pas installé sur ce PC.\n\nTélécharger et installer .NET Framework 4.8 maintenant ?\n(un redémarrage du PC peut être demandé, relancez ensuite SDRLink)
 SDRLink - missing component	SDRLink - composant manquant
 SDRLink needs the Microsoft Edge WebView2 Runtime to display WebSDRs.\nIt is not installed on this PC.\n\nDownload and install WebView2 now? (free, about 2 MB)	SDRLink a besoin du composant Microsoft Edge WebView2 Runtime pour afficher les WebSDR.\nIl n'est pas installé sur ce PC.\n\nTélécharger et installer WebView2 maintenant ? (gratuit, environ 2 Mo à télécharger)

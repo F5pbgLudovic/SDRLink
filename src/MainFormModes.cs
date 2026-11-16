@@ -346,7 +346,8 @@ namespace SDRLink
                     "Search for the digital mode being heard: for {0} s at most, the sound is tried with FT8, FT4, FT2, JS8, SSTV, WEFAX, RTTY, PSK31, CW and Olivia; the recognised mode is chosen and its decoding started (without changing frequency). Click again: stop the search", ModeProbe.Seconds));
             });
             row.Controls.Add(btnFindMode);
-            AddColorMenu(btnFindMode, Slot("FindMode", () => Lang.T("Couleur du bouton", "Button colour")));
+            AddColorMenu(btnFindMode, Slot("FindMode", () => Lang.T("Couleur du bouton", "Button colour")),
+                Slot("FindModeBusy", () => Lang.T("Couleur pendant la recherche", "Colour while searching")));
         }
 
         void UpdateFindModeButton()
@@ -362,6 +363,8 @@ namespace SDRLink
                 int left = Math.Max(0, (int)Math.Ceiling((probeEnd - DateTime.UtcNow).TotalSeconds));
                 btnFindMode.Text = Lang.F("Recherche… {0} s", "Searching… {0} s", left);
                 btnFindMode.BackColor = Color.FromArgb(255, 140, 0); btnFindMode.ForeColor = Color.Black; btnFindMode.FlatAppearance.BorderColor = Color.FromArgb(200, 100, 0);
+                int cb = ColorOf("FindModeBusy");
+                if (cb >= 0) PaintCustom(btnFindMode, cb);
             }
             else
             {

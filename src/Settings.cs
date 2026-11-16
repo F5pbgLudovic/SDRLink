@@ -253,6 +253,14 @@ namespace SDRLink
                     case "CurrentList": s.CurrentList = Math.Max(0, Math.Min(Favorite.MaxLists - 1, Int(v, 0))); break;
                     case "Mem": { Memory m = Memory.FromSetting(v); if (m != null) s.Memories.Items.Add(m); } break;
                     case "MemRecent": { Memory m = Memory.FromSetting(v); if (m != null && s.Memories.Recent.Count < MemoryBook.RecentSize) s.Memories.Recent.Add(m); } break;
+                    case "MemDigiPre":
+                    {
+                        string[] q = v.Split('|');
+                        int pre;
+                        if (q.Length == 3 && int.TryParse(q[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out pre) && pre >= 0 && pre <= Preamps.MaxCode)
+                            s.Memories.DigiPreamps[q[0] + "|" + q[1]] = pre;
+                    }
+                    break;
                     case "MemListCount": s.Memories.ListCount = Math.Max(1, Math.Min(Memory.MaxLists, Int(v, 1))); break;
                     case "MemCurrentList": s.Memories.CurrentList = Math.Max(0, Math.Min(Memory.MaxLists - 1, Int(v, 0))); break;
                     case "FontScale": s.FontScale = Math.Max(FontScaleMin, Math.Min(FontScaleMax, Int(v, 100))); break;
@@ -410,6 +418,7 @@ namespace SDRLink
             for (int i = 0; i < Memories.ListCount; i++) Line(sb, "MemList" + (i + 1), Memories.ListNames[i]);
             foreach (Memory m in Memories.Items) Line(sb, "Mem", m.ToSetting());
             foreach (Memory m in Memories.Recent) Line(sb, "MemRecent", m.ToSetting());
+            foreach (KeyValuePair<string, int> p in Memories.DigiPreamps) Line(sb, "MemDigiPre", p.Key + "|" + p.Value.ToString(CultureInfo.InvariantCulture));
             Line(sb, "CurrentList", CurrentList);
             Line(sb, "PttTimeout", PttTimeoutSec);
             Line(sb, "CableDevice", CableDevice);
