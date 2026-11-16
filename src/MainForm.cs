@@ -176,10 +176,12 @@ namespace SDRLink
             Resize += delegate { if (compactPending && WindowState != FormWindowState.Minimized) ApplyView(); };
             FormClosing += delegate
             {
+                syncTimer.Stop();   // plus de surveillance pendant et après la fermeture (contrôles en cours de destruction)
                 // Enregistrement en cours : arrêté, et le fichier est proposé avant de quitter.
                 if (recorder != null) StopRecording(true);
                 // Affichage ptt : on revient d'abord à l'affichage d'avant, celui qui est enregistré.
                 if (pttView) SetPttView(false);
+                StopDiversity(null);   // sons rendus à chaque réception avant de fermer
                 Disconnect();
                 StopRigMonitor();
                 if (probe != null) StopProbe(null, null);
@@ -856,6 +858,7 @@ namespace SDRLink
             lblHdsdrVolume.Margin = new Padding(0, 7, 2, 0);
             lblHdsdrVolumeCaption = Lbl("Volume HDSDR :", "HDSDR volume:");
             lblHdsdrVolumeCaption.Visible = trkHdsdrVolume.Visible = lblHdsdrVolume.Visible = false;
+            CreateDiversityButton();
             // Ordre : ⇄, les quatre Mute, puis chaque volume (libellé, réglette, valeur), et REC.
             // Les volumes masqués ne prennent pas de place : REC suit toujours le dernier volume affiché.
             audioOrder = new Control[]
@@ -865,7 +868,7 @@ namespace SDRLink
                 lblRigVolumeCaption, trkRigVolume, lblRigVolume,
                 lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
                 lblHdsdrVolumeCaption, trkHdsdrVolume, lblHdsdrVolume,
-                btnRec, btnReinit,
+                btnRec, btnReinit, chkDiversity,
             };
             audio.Controls.AddRange(audioOrder);
 
@@ -1709,6 +1712,8 @@ namespace SDRLink
         void Disconnect()
         {
             if (worker == null) return;
+            // Diversité sur le poste : arrêtée d'abord (son du poste rendu tant que la liaison existe).
+            if (diversity != null && divSource == 1) StopDiversity(Lang.T("Diversité arrêtée : poste déconnecté", "Diversity off: rig disconnected"));
             RigWorker w = worker;
             // Son du poste coupé par SDRLink : on le rétablit avant de lâcher la liaison.
             if (rigMuted) w.SetAfGain(trkRigVolume.Value);
@@ -2088,6 +2093,7 @@ namespace SDRLink
         // après un délai, car le son du WebSDR arrive avec du retard et contiendrait encore la fin de notre propre émission.
         void ApplyMute()
         {
+            UpdateDiversityGains();   // diversité : oreilles coupées tout de suite en émission
             if (freedv != null) freedv.OutputMuted = Transmitting || DecodeSourceMuted;   // parole FreeDV muette en émission (ou réception coupée)
             if (chkMute.Checked && Transmitting)
             {
@@ -3018,7 +3024,7 @@ namespace SDRLink
         }
 
         // Recopie du son de la page : pour le câble SDRLINK, ou pour FreeDV et SSTV quand ils écoutent le WebSDR.
-        void UpdatePageTap() { SetPageTap(cableSink != null || (DecodingOn && fdvSource == 0)); }
+        void UpdatePageTap() { SetPageTap(cableSink != null || (DecodingOn && fdvSource == 0) || diversity != null); }
 
         void SetPageTap(bool on)
         {
@@ -3156,18 +3162,20 @@ namespace SDRLink
         void OnPcm(string msg)
         {
             bool toDec = DecodingOn && fdvSource == 0;
-            if (cableSink == null && !toDec) return;
+            DiversityMixer div = diversity;
+            if (cableSink == null && !toDec && div == null) return;
             int a = msg.IndexOf('|'), b = msg.IndexOf('|', a + 1);
             int rate;
             if (b < 0 || !int.TryParse(msg.Substring(a + 1, b - a - 1), out rate)) return;
             byte[] pcm;
             try { pcm = Convert.FromBase64String(msg.Substring(b + 1)); }
             catch (FormatException) { return; }
-            if (toDec)
+            if (toDec || div != null)
             {
                 float[] f = new float[pcm.Length / 2];
                 for (int i = 0; i < f.Length; i++) f[i] = (short)(pcm[2 * i] | pcm[2 * i + 1] << 8) / 32768f;
-                DecodeFeed(rate, f, f.Length);
+                if (toDec) DecodeFeed(rate, f, f.Length);
+                if (div != null) div.FeedA(rate, f, f.Length);
             }
             if (cableSink == null) return;
             cableSink.Write(rate, pcm);
@@ -3208,8 +3216,9 @@ namespace SDRLink
         void ApplyVolume()
         {
             lblVolume.Text = trkVolume.Value + " %";
+            UpdateDiversityGains();
             if (web.CoreWebView2 == null) return;
-            double v = sdrMuted || (fdvVoice && fdvSource == 0) ? 0 : trkVolume.Value / 100.0;   // parole FreeDV jouée : page muette
+            double v = sdrMuted || (fdvVoice && fdvSource == 0) || diversity != null ? 0 : trkVolume.Value / 100.0;   // parole FreeDV jouée, diversité : page muette
             web.CoreWebView2.ExecuteScriptAsync(string.Format(CultureInfo.InvariantCulture,
                 "window.__sdrlink && window.__sdrlink.setVolume({0});", v));
         }
@@ -3226,7 +3235,7 @@ namespace SDRLink
                 return;
             }
             rigMuted = !rigMuted;
-            worker.SetAfGain(rigMuted ? 0 : trkRigVolume.Value);
+            if (!divRigSilenced) worker.SetAfGain(rigMuted ? 0 : trkRigVolume.Value);   // diversité : seule l'oreille du poste change
             Log.Write(rigMuted ? "Son du poste coupé (gain BF à 0)" : "Son du poste rétabli à " + trkRigVolume.Value + " %");
             UpdateMuteButtons();
         }
@@ -3244,7 +3253,7 @@ namespace SDRLink
         bool fdvVoice;               // parole FreeDV en cours
         System.Windows.Forms.Timer fdvTimer;
 
-        bool RigMonitorMuted { get { return rigMuted || (fdvVoice && fdvSource == 1); } }
+        bool RigMonitorMuted { get { return rigMuted || (fdvVoice && fdvSource == 1) || (diversity != null && divSource == 1); } }
 
         string FreeDvName { get { return "RADE " + (settings.FreeDvV2 ? "V2" : "V1"); } }
 
@@ -3340,7 +3349,7 @@ namespace SDRLink
             if (worker != null && rigAfSupported == 1 && !rigMuted && settings.RecCardId.Length > 0) return 1;
             if (!sdrMuted && web.CoreWebView2 != null) return 0;
             if (EsdrAvailable && !esdrMuted && esdrPids.Count > 0) return 2;
-            if (hdsdrWin && !hdsdrMuted && hdsdrPids.Count > 0) return 3;
+            if (hdsdrWin && !hdsdrMuted && hdsdrPids.Count > 0 && AudioTap.ProcessCaptureWorks) return 3;   // Windows 11 seulement (muet sous Windows 10)
             // Toutes les réceptions coupées : le décodage continue sur le poste ou le WebSDR (le son reste coupé ; leur coupure
             // n'arrête pas le son capturé). ExpertSDR et HDSDR coupés ne donnent plus rien à capturer.
             if (fdvSource == 1 && worker != null && settings.RecCardId.Length > 0) return 1;
@@ -3363,9 +3372,11 @@ namespace SDRLink
             DigiReset();
             UpdatePageTap();
             if (src == 1) fdvTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, DecodeFeed);
-            else if (src >= 2)
+            // ExpertSDR : son de réception par TCI (la capture d'un programme ne rend que du silence sous Windows 10).
+            else if (src == 2) fdvTap = new AudioTap(settings.EsdrTciPort, FreeDvSourceName(src), DecodeFeed);
+            else if (src == 3)
             {
-                int pid = RootProcess(src == 2 ? esdrPids.Keys : hdsdrPids.Keys);
+                int pid = RootProcess(hdsdrPids.Keys);
                 if (pid != 0) fdvTap = new AudioTap(null, pid, FreeDvSourceName(src), DecodeFeed);
             }
             if (fdvTap != null)
@@ -3590,7 +3601,7 @@ namespace SDRLink
             if (rigVolumeLoading || worker == null || rigAfSupported != 1) return;
             // Bouger le curseur rétablit le son s'il était coupé.
             rigMuted = false;
-            worker.SetAfGain(trkRigVolume.Value);
+            if (!divRigSilenced) worker.SetAfGain(trkRigVolume.Value);
             UpdateMuteButtons();
         }
 
@@ -3599,6 +3610,21 @@ namespace SDRLink
         {
             if (worker == null) return;
             rigAfSupported = pct < 0 ? 0 : 1;
+            // Diversité : le 0 est celui que SDRLink a mis ; un autre volume vient du bouton du poste : il règle l'oreille du poste,
+            // et le haut-parleur est refait taire.
+            if (divRigSilenced)
+            {
+                if (pct > 0)
+                {
+                    rigVolumeLoading = true;
+                    trkRigVolume.Value = Math.Max(0, Math.Min(100, pct));
+                    rigVolumeLoading = false;
+                    rigMuted = false;
+                    worker.SetAfGain(0);
+                }
+                UpdateRigVolumeControls();
+                return;
+            }
             if (pct >= 0 && !(rigMuted && pct == 0))
             {
                 rigMuted = false;
@@ -3620,6 +3646,7 @@ namespace SDRLink
 
         void UpdateMuteButtons()
         {
+            UpdateDiversityGains();
             StyleToggle(btnMuteSdr, sdrMuted, true, "MuteSdr");
             StyleToggle(btnMuteRig, rigMuted, worker != null && rigAfSupported == 1, "MuteRig");
             btnMuteSwap.BackColor = Theme.ButtonBack;   // ⇄ n'est pas une coupure : couleurs ordinaires
@@ -3751,7 +3778,7 @@ namespace SDRLink
             if (hdsdrWin)
             {
                 hdsdrMuted = m.Value;
-                try { ShowHdsdrVolume(AudioEndpoints.ProcessVolume(IsHdsdr, null)); } catch { }
+                if (!divHdsdrSilenced) try { ShowHdsdrVolume(AudioEndpoints.ProcessVolume(IsHdsdr, null)); } catch { }   // diversité : -60 dB mis par SDRLink
             }
             else hdsdrMuted = false;
             if (!hdsdrRunning) hdsdrMutedByUs = false;
@@ -3778,6 +3805,7 @@ namespace SDRLink
         {
             lblHdsdrVolume.Text = hdsdrWin ? trkHdsdrVolume.Value + " %" : "—";
             if (hdsdrVolumeLoading || !hdsdrWin) return;
+            if (divHdsdrSilenced) { UpdateDiversityGains(); return; }   // diversité : le curseur règle l'oreille de HDSDR
             try { AudioEndpoints.ProcessVolume(IsHdsdr, trkHdsdrVolume.Value); } catch { }
         }
 
@@ -3849,7 +3877,7 @@ namespace SDRLink
             esdrWin = m.HasValue;
             if (esdrWin)
             {
-                esdrMuted = m.Value;
+                if (!divEsdrSilenced) esdrMuted = m.Value;   // diversité : la coupure dans le mélangeur est celle de SDRLink
                 try { ShowEsdrVolume(AudioEndpoints.ProcessVolume(IsExpertSdr, null)); } catch { }
             }
             else
@@ -3867,7 +3895,7 @@ namespace SDRLink
             if (esdrTci.Connected)
             {
                 bool? m = esdrTci.Mute;
-                if (m.HasValue) esdrMuted = m.Value;
+                if (m.HasValue && !divEsdrSilenced) esdrMuted = m.Value;
                 ShowEsdrVolume(esdrTci.VolumePercent);
             }
             UpdateEsdrControls();
@@ -3953,6 +3981,7 @@ namespace SDRLink
 
         void OnEsdrVolumeChanged()
         {
+            UpdateDiversityGains();
             lblEsdrVolume.Text = EsdrAvailable ? trkEsdrVolume.Value + " %" : "—";
             if (esdrVolumeLoading) return;
             if (esdrWin) { try { AudioEndpoints.ProcessVolume(IsExpertSdr, trkEsdrVolume.Value); } catch { } }
@@ -3988,6 +4017,7 @@ namespace SDRLink
         // Mélangeur de volume de Windows si ExpertSDR y joue, sinon commande TCI "mute". null si aucun des deux.
         bool? SetExpertSdrMute(bool mute)
         {
+            if (divEsdrSilenced) return mute;   // diversité : ExpertSDR reste coupé, seule son oreille change
             if (esdrWin)
             {
                 try { bool? r = AudioEndpoints.ProcessMute(IsExpertSdr, mute); if (r.HasValue) return r; }

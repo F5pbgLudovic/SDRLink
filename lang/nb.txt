@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Synkroniseringsterskel (signal
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Senterfrekvens: {0} Hz (svart {1} Hz, hvit {2} Hz)
 Slant correction: {0} ppm	Skråkorreksjon: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	lydformatet støttes ikke ({0} bit, {1} Hz)
 Name:	Navn:
 Address:	Adresse:
 Cancel	Avbryt
@@ -185,8 +186,10 @@ Checking… {0} left	Kontrollerer… {0} igjen
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontroll fullført: {1} duplikat(er) fjernet, {0} død(e) lenke(r) avkrysset. Klikk på «Fjern…» for å slette dem.
 {0} favorite(s) imported, {1} already present.	{0} favoritt(er) importert, {1} fantes fra før.
 {0} favorite(s) exported.	{0} favoritt(er) eksportert.
+ExpertSDR sends no audio over TCI	ExpertSDR sender ingen lyd over TCI
+TCI link closed by ExpertSDR	TCI-forbindelsen lukket av ExpertSDR
 program capture does not answer	opptak av programmet svarer ikke
-unsupported audio format ({0} bits, {1} Hz)	lydformatet støttes ikke ({0} bit, {1} Hz)
+no TCI server on port {0}	ingen TCI-server på port {0}
 Frequency (kHz):	Frekvens (kHz):
 The last 20 stored frequencies (click a line: go back to it)	De siste 20 lagrede frekvensene (klikk på en linje: gå tilbake til den)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Lagrer straks frekvensen, modusen og den aktive digitale modusen i Mem-listen
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Ugyldig CI-V-adresse (f.eks. 70 
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	Finner ikke rigctld.exe (Hamlib). Angi plasseringen med «…»-knappen, eller installer Hamlib (gratis).\n\nÅpne nedlastingssiden for Hamlib?
 Please choose the rig's COM port.	Velg riggens COM-port.
 Cannot start rigctld: 	Kan ikke starte rigctld: 
+Diversity off: rig disconnected	Diversity av: riggen er frakoblet
 TX safety timeout (PTT button)	TX-sikkerhetstid (PTT-knapp)
 Off	Av
 PTT: connect the rig first	PTT: koble til riggen først
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linje {2}
 {0}: {1}, could not save	{0}: {1}, kunne ikke lagres
 Hell: picture saved: {0}	Hell: bilde lagret: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity-lytting: WebSDR i det ene øret, riggen (eller ExpertSDR, eller HDSDR) i det andre, den lokale lyden forsinket så den passer til WebSDR. Klikk: på / av. Høyreklikk: mottak i det andre øret, WebSDR-side, målt forsinkelse
+In the other ear:	I det andre øret:
+Rig: first choose its sound card (right-click REC)	Rigg: velg først lydkortet (høyreklikk på REC)
+Rig (REC sound card)	Rigg (REC-lydkort)
+ExpertSDR (audio over TCI)	ExpertSDR (lyd over TCI)
+No local reception: connect the rig, or start ExpertSDR	Ingen lokalt mottak: koble til riggen, eller start ExpertSDR
+WebSDR in the right ear	WebSDR i høyre øre
+Diversity: WebSDR on the right	Diversity: WebSDR til høyre
+Diversity: WebSDR on the left	Diversity: WebSDR til venstre
+Diversity off: each reception gets its own audio back	Diversity av: hvert mottak får sin egen lyd tilbake
+Diversity: first choose the rig's sound card (right-click REC)	Diversity: velg først riggens lydkort (høyreklikk på REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: ingen lokalt mottak (koble til riggen, eller start ExpertSDR)
+Diversity: no WebSDR open	Diversity: ingen WebSDR åpen
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink kan ikke dempe høyttaleren på denne riggen: skru ned volumet for hånd
+Diversity: the WebSDR gives no audio	Diversity: WebSDR gir ingen lyd
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: måler WebSDR-forsinkelsen (et signal som høres på begge sider trengs)…
+Diversity	Diversity
+Diversity: {0} in the other ear	Diversity: {0} i det andre øret
+Diversity: audio output not available ({0})	Diversity: lydutgang ikke tilgjengelig ({0})
+Diversity: {0}: audio not available ({1})	Diversity: {0}: lyd ikke tilgjengelig ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR i det ene øret, {0} i det andre; måler WebSDR-forsinkelsen…
+Diversity off: {0} is no longer available	Diversity av: {0} er ikke lenger tilgjengelig
+Diversity: no audio from {0}	Diversity: ingen lyd fra {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: lyden fra {0} forsinket med {1} s så den passer til WebSDR
 The rig is still not answering: check that it is switched on and the link settings	Radioen svarer fortsatt ikke: kontroller at den er slått på, og forbindelsesinnstillingene
 SDRLink: no link with OmniRig	SDRLink: ingen forbindelse med OmniRig
 Last message: 	Siste melding: 

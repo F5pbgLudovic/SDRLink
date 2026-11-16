@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Prag sinkronizacije (signal / 
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Središnja frekvencija: {0} Hz (crna {1} Hz, bijela {2} Hz)
 Slant correction: {0} ppm	Korekcija nagiba: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	nepodržani audioformat ({0} bita, {1} Hz)
 Name:	Naziv:
 Address:	Adresa:
 Cancel	Odustani
@@ -185,8 +186,10 @@ Checking… {0} left	Provjera… preostalo: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Provjera završena. Uklonjeni duplikati: {1}, označene neispravne poveznice: {0}. Kliknite „Ukloni…” da ih izbrišete.
 {0} favorite(s) imported, {1} already present.	Uvezeni favoriti: {0}, već postojeći: {1}.
 {0} favorite(s) exported.	Izvezeni favoriti: {0}.
+ExpertSDR sends no audio over TCI	ExpertSDR ne šalje zvuk preko TCI-ja
+TCI link closed by ExpertSDR	ExpertSDR je zatvorio TCI vezu
 program capture does not answer	snimanje programa ne odgovara
-unsupported audio format ({0} bits, {1} Hz)	nepodržani audioformat ({0} bita, {1} Hz)
+no TCI server on port {0}	nema TCI poslužitelja na portu {0}
 Frequency (kHz):	Frekvencija (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Posljednjih 20 spremljenih frekvencija (klik na redak: povratak na nju)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Odmah sprema frekvenciju, način rada i pokrenuti digitalni način u popis Mem
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Nevažeća CI-V adresa (npr. 70 
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) nije pronađen. Postavite njegovu lokaciju gumbom „…” ili instalirajte Hamlib (besplatno).\n\nOtvoriti stranicu za preuzimanje Hamliba?
 Please choose the rig's COM port.	Odaberite COM priključak uređaja.
 Cannot start rigctld: 	Nije moguće pokrenuti rigctld: 
+Diversity off: rig disconnected	Diversity isklj.: uređaj odspojen
 TX safety timeout (PTT button)	Sigurnosno vremensko ograničenje TX (gumb PTT)
 Off	Isklj.
 PTT: connect the rig first	PTT: najprije spojite uređaj
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): redak {2}
 {0}: {1}, could not save	{0}: {1}, spremanje nije uspjelo
 Hell: picture saved: {0}	Hell: slika spremljena: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity slušanje: WebSDR u jednom uhu, uređaj (ili ExpertSDR, ili HDSDR) u drugom, lokalni zvuk kasni da se poklopi s WebSDR-om. Klik: uklj. / isklj. Desni klik: prijem u drugom uhu, strana WebSDR-a, izmjereno kašnjenje
+In the other ear:	U drugom uhu:
+Rig: first choose its sound card (right-click REC)	Uređaj: prvo odaberite njegovu zvučnu karticu (desni klik na REC)
+Rig (REC sound card)	Uređaj (zvučna kartica REC-a)
+ExpertSDR (audio over TCI)	ExpertSDR (zvuk preko TCI-ja)
+No local reception: connect the rig, or start ExpertSDR	Nema lokalnog prijema: spojite uređaj ili pokrenite ExpertSDR
+WebSDR in the right ear	WebSDR u desnom uhu
+Diversity: WebSDR on the right	Diversity: WebSDR desno
+Diversity: WebSDR on the left	Diversity: WebSDR lijevo
+Diversity off: each reception gets its own audio back	Diversity isklj.: svaki prijem dobiva svoj zvuk natrag
+Diversity: first choose the rig's sound card (right-click REC)	Diversity: prvo odaberite zvučnu karticu uređaja (desni klik na REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nema lokalnog prijema (spojite uređaj ili pokrenite ExpertSDR)
+Diversity: no WebSDR open	Diversity: nijedan WebSDR nije otvoren
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink ne može utišati zvučnik ovog uređaja: stišajte ga ručno
+Diversity: the WebSDR gives no audio	Diversity: WebSDR ne daje zvuk
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: mjerenje kašnjenja WebSDR-a (potreban je signal čujan na obje strane)…
+Diversity	Diversity
+Diversity: {0} in the other ear	Diversity: {0} u drugom uhu
+Diversity: audio output not available ({0})	Diversity: zvučni izlaz nije dostupan ({0})
+Diversity: {0}: audio not available ({1})	Diversity: {0}: zvuk nije dostupan ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR u jednom uhu, {0} u drugom; mjerenje kašnjenja WebSDR-a…
+Diversity off: {0} is no longer available	Diversity isklj.: {0} više nije dostupan
+Diversity: no audio from {0}	Diversity: nema zvuka iz {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: zvuk iz {0} kasni {1} s da se poklopi s WebSDR-om
 The rig is still not answering: check that it is switched on and the link settings	Uređaj i dalje ne odgovara: provjerite je li uključen i postavke veze
 SDRLink: no link with OmniRig	SDRLink: nema veze s OmniRigom
 Last message: 	Zadnja poruka: 

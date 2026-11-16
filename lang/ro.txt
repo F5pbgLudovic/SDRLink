@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Pragul de sincronizare (semnal
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Frecvența centrală: {0} Hz (negru {1} Hz, alb {2} Hz)
 Slant correction: {0} ppm	Corecția înclinării: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
 Name:	Nume:
 Address:	Adresă:
 Cancel	Anulare
@@ -185,8 +186,10 @@ Checking… {0} left	Verificare… mai rămân {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Verificare terminată: {1} duplicat(e) eliminat(e), {0} link(uri) inactiv(e) bifate. Faceți clic pe „Eliminare…” pentru a le șterge.
 {0} favorite(s) imported, {1} already present.	{0} favorit(e) importat(e), {1} deja existent(e).
 {0} favorite(s) exported.	{0} favorit(e) exportat(e).
+ExpertSDR sends no audio over TCI	ExpertSDR nu trimite sunet prin TCI
+TCI link closed by ExpertSDR	Legătura TCI a fost închisă de ExpertSDR
 program capture does not answer	captura programului nu răspunde
-unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
+no TCI server on port {0}	niciun server TCI pe portul {0}
 Frequency (kHz):	Frecvență (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Ultimele 20 de frecvențe memorate (clic pe un rând: revenire la ea)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Memorează imediat frecvența, modul și modul digital pornit în lista Mem
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Adresă CI-V nevalidă (de ex. 7
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) nu a fost găsit. Indicați locația cu butonul „…” sau instalați Hamlib (gratuit).\n\nDeschideți pagina de descărcare Hamlib?
 Please choose the rig's COM port.	Alegeți portul COM al stației.
 Cannot start rigctld: 	Nu se poate porni rigctld: 
+Diversity off: rig disconnected	Diversitate oprită: stație deconectată
 TX safety timeout (PTT button)	Limită de siguranță TX (buton PTT)
 Off	Dezactivat
 PTT: connect the rig first	PTT: conectați mai întâi stația
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): linia {2}
 {0}: {1}, could not save	{0}: {1}, salvare imposibilă
 Hell: picture saved: {0}	Hell: imagine salvată: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Ascultare în diversitate: WebSDR într-o ureche, stația (sau ExpertSDR, sau HDSDR) în cealaltă, sunetul local fiind întârziat pentru a se potrivi cu WebSDR. Clic: pornit / oprit. Clic dreapta: recepția în cealaltă ureche, partea WebSDR, întârzierea măsurată
+In the other ear:	În cealaltă ureche:
+Rig: first choose its sound card (right-click REC)	Stație: alegeți mai întâi placa ei de sunet (clic dreapta pe REC)
+Rig (REC sound card)	Stație (placa de sunet REC)
+ExpertSDR (audio over TCI)	ExpertSDR (sunet prin TCI)
+No local reception: connect the rig, or start ExpertSDR	Nicio recepție locală: conectați stația sau porniți ExpertSDR
+WebSDR in the right ear	WebSDR în urechea dreaptă
+Diversity: WebSDR on the right	Diversitate: WebSDR în dreapta
+Diversity: WebSDR on the left	Diversitate: WebSDR în stânga
+Diversity off: each reception gets its own audio back	Diversitate oprită: fiecare recepție își primește sunetul înapoi
+Diversity: first choose the rig's sound card (right-click REC)	Diversitate: alegeți mai întâi placa de sunet a stației (clic dreapta pe REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversitate: nicio recepție locală (conectați stația sau porniți ExpertSDR)
+Diversity: no WebSDR open	Diversitate: niciun WebSDR deschis
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink nu poate pune pe mut difuzorul acestei stații: reduceți volumul manual
+Diversity: the WebSDR gives no audio	Diversitate: WebSDR nu dă sunet
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversitate: se măsoară întârzierea WebSDR (e nevoie de un semnal auzit pe ambele părți)…
+Diversity	Diversitate
+Diversity: {0} in the other ear	Diversitate: {0} în cealaltă ureche
+Diversity: audio output not available ({0})	Diversitate: ieșirea audio nu este disponibilă ({0})
+Diversity: {0}: audio not available ({1})	Diversitate: {0}: sunet indisponibil ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversitate: WebSDR într-o ureche, {0} în cealaltă; se măsoară întârzierea WebSDR…
+Diversity off: {0} is no longer available	Diversitate oprită: {0} nu mai este disponibil
+Diversity: no audio from {0}	Diversitate: niciun sunet de la {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversitate: sunetul de la {0} întârziat cu {1} s pentru a se potrivi cu WebSDR
 The rig is still not answering: check that it is switched on and the link settings	Stația tot nu răspunde: verificați dacă este pornită și setările legăturii
 SDRLink: no link with OmniRig	SDRLink: nicio legătură cu OmniRig
 Last message: 	Ultimul mesaj: 

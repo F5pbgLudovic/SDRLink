@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Szinkronizálási küszöb (je
 Squelch: {0}	Zajzár: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Középfrekvencia: {0} Hz (fekete {1} Hz, fehér {2} Hz)
 Slant correction: {0} ppm	Ferdeségkorrekció: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
 Name:	Név:
 Address:	Cím:
 Cancel	Mégse
@@ -185,8 +186,10 @@ Checking… {0} left	Ellenőrzés… még {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Ellenőrzés kész: {1} ismétlődés eltávolítva, {0} halott link bejelölve. Az „Eltávolítás…” gombbal törölheti őket.
 {0} favorite(s) imported, {1} already present.	{0} kedvenc importálva, {1} már megvolt.
 {0} favorite(s) exported.	{0} kedvenc exportálva.
+ExpertSDR sends no audio over TCI	Az ExpertSDR nem küld hangot TCI-n át
+TCI link closed by ExpertSDR	Az ExpertSDR lezárta a TCI-kapcsolatot
 program capture does not answer	a program hangjának rögzítése nem válaszol
-unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
+no TCI server on port {0}	nincs TCI-kiszolgáló a(z) {0} porton
 Frequency (kHz):	Frekvencia (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Az utolsó 20 tárolt frekvencia (kattintás egy sorra: visszatérés oda)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Azonnal tárolja a frekvenciát, az üzemmódot és a futó digitális üzemmódot a Mem listában
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Érvénytelen CI-V cím (pl. 70 
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	A rigctld.exe (Hamlib) nem található. Adja meg a helyét a „…” gombbal, vagy telepítse a Hamlibet (ingyenes).\n\nMegnyitja a Hamlib letöltési oldalát?
 Please choose the rig's COM port.	Válassza ki a rádió COM portját.
 Cannot start rigctld: 	A rigctld nem indítható: 
+Diversity off: rig disconnected	Diversity ki: a rádió leválasztva
 TX safety timeout (PTT button)	TX biztonsági időkorlát (PTT gomb)
 Off	Ki
 PTT: connect the rig first	PTT: előbb csatlakoztassa a rádiót
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): {2}. sor
 {0}: {1}, could not save	{0}: {1}, a mentés nem sikerült
 Hell: picture saved: {0}	Hell: kép mentve: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity hallgatás: a WebSDR az egyik fülben, a rádió (vagy ExpertSDR, vagy HDSDR) a másikban, a helyi hang a WebSDR-hez igazítva késleltetve. Kattintás: be / ki. Jobb kattintás: vétel a másik fülbe, WebSDR oldala, mért késleltetés
+In the other ear:	A másik fülben:
+Rig: first choose its sound card (right-click REC)	Rádió: először válassza ki a hangkártyáját (jobb kattintás a REC-en)
+Rig (REC sound card)	Rádió (REC hangkártya)
+ExpertSDR (audio over TCI)	ExpertSDR (hang TCI-n át)
+No local reception: connect the rig, or start ExpertSDR	Nincs helyi vétel: csatlakoztassa a rádiót, vagy indítsa el az ExpertSDR-t
+WebSDR in the right ear	WebSDR a jobb fülben
+Diversity: WebSDR on the right	Diversity: WebSDR jobbra
+Diversity: WebSDR on the left	Diversity: WebSDR balra
+Diversity off: each reception gets its own audio back	Diversity ki: minden vétel visszakapja a saját hangját
+Diversity: first choose the rig's sound card (right-click REC)	Diversity: először válassza ki a rádió hangkártyáját (jobb kattintás a REC-en)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nincs helyi vétel (csatlakoztassa a rádiót, vagy indítsa el az ExpertSDR-t)
+Diversity: no WebSDR open	Diversity: nincs megnyitott WebSDR
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; Az SDRLink nem tudja némítani ennek a rádiónak a hangszóróját: halkítsa le kézzel
+Diversity: the WebSDR gives no audio	Diversity: a WebSDR nem ad hangot
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: a WebSDR késleltetésének mérése (mindkét oldalon hallható jel kell)…
+Diversity	Diversity
+Diversity: {0} in the other ear	Diversity: {0} a másik fülben
+Diversity: audio output not available ({0})	Diversity: a hangkimenet nem érhető el ({0})
+Diversity: {0}: audio not available ({1})	Diversity: {0}: a hang nem érhető el ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR az egyik fülben, {0} a másikban; a WebSDR késleltetésének mérése…
+Diversity off: {0} is no longer available	Diversity ki: {0} már nem érhető el
+Diversity: no audio from {0}	Diversity: nincs hang innen: {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: {0} hangja {1} s-mal késleltetve a WebSDR-hez igazítva
 The rig is still not answering: check that it is switched on and the link settings	A rádió még mindig nem válaszol: ellenőrizze, hogy be van-e kapcsolva, és a kapcsolat beállításait
 SDRLink: no link with OmniRig	SDRLink: nincs kapcsolat az OmniRiggel
 Last message: 	Utolsó üzenet: 

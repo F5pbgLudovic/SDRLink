@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Праг на синхрони
 Squelch: {0}	Шумоподтискане: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Централна честота: {0} Hz (черно {1} Hz, бяло {2} Hz)
 Slant correction: {0} ppm	Корекция на наклона: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоформат ({0} бита, {1} Hz)
 Name:	Име:
 Address:	Адрес:
 Cancel	Отказ
@@ -185,8 +186,10 @@ Checking… {0} left	Проверка… остават {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Проверката завърши: премахнати дубликати – {1}, отметнати мъртви връзки – {0}. Щракнете „Премахни…“, за да ги изтриете.
 {0} favorite(s) imported, {1} already present.	Импортирани записи: {0}, вече налични: {1}.
 {0} favorite(s) exported.	Експортирани записи: {0}.
+ExpertSDR sends no audio over TCI	ExpertSDR не изпраща звук през TCI
+TCI link closed by ExpertSDR	Връзката TCI е затворена от ExpertSDR
 program capture does not answer	прихващането на програмата не отговаря
-unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоформат ({0} бита, {1} Hz)
+no TCI server on port {0}	няма TCI сървър на порт {0}
 Frequency (kHz):	Честота (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Последните 20 запомнени честоти (щракване върху ред: връщане към нея)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Запомня веднага честотата, режима и работещия цифров режим в списъка Mem
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Невалиден CI-V адре
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) не е намерен. Задайте местоположението му с бутона „…“ или инсталирайте Hamlib (безплатно).\n\nДа се отвори ли страницата за изтегляне на Hamlib?
 Please choose the rig's COM port.	Изберете COM порта на трансивъра.
 Cannot start rigctld: 	rigctld не може да се стартира: 
+Diversity off: rig disconnected	Диверсити изкл.: трансиверът е изключен
 TX safety timeout (PTT button)	Предпазен таймер за TX (бутон PTT)
 Off	Изкл.
 PTT: connect the rig first	PTT: първо свържете трансивъра
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): ред {2}
 {0}: {1}, could not save	{0}: {1}, записът е невъзможен
 Hell: picture saved: {0}	Hell: изображението е записано: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Диверсити приемане: WebSDR в едното ухо, трансиверът (или ExpertSDR, или HDSDR) в другото, локалният звук е закъснен спрямо WebSDR. Клик: вкл. / изкл. Десен клик: приемане в другото ухо, страна на WebSDR, измерено закъснение
+In the other ear:	В другото ухо:
+Rig: first choose its sound card (right-click REC)	Трансивър: първо изберете неговата звукова карта (десен клик на REC)
+Rig (REC sound card)	Трансивър (звукова карта на REC)
+ExpertSDR (audio over TCI)	ExpertSDR (звук през TCI)
+No local reception: connect the rig, or start ExpertSDR	Няма локално приемане: свържете трансивъра или стартирайте ExpertSDR
+WebSDR in the right ear	WebSDR в дясното ухо
+Diversity: WebSDR on the right	Диверсити: WebSDR отдясно
+Diversity: WebSDR on the left	Диверсити: WebSDR отляво
+Diversity off: each reception gets its own audio back	Диверсити изкл.: всяко приемане си получава звука обратно
+Diversity: first choose the rig's sound card (right-click REC)	Диверсити: първо изберете звуковата карта на трансивъра (десен клик на REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Диверсити: няма локално приемане (свържете трансивъра или стартирайте ExpertSDR)
+Diversity: no WebSDR open	Диверсити: няма отворен WebSDR
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink не може да заглуши високоговорителя на този трансивър: намалете силата на звука на ръка
+Diversity: the WebSDR gives no audio	Диверсити: WebSDR не дава звук
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Диверсити: измерване на закъснението на WebSDR (нужен е сигнал, чут от двете страни)…
+Diversity	Диверсити
+Diversity: {0} in the other ear	Диверсити: {0} в другото ухо
+Diversity: audio output not available ({0})	Диверсити: звуковият изход не е наличен ({0})
+Diversity: {0}: audio not available ({1})	Диверсити: {0}: звукът не е наличен ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Диверсити: WebSDR в едното ухо, {0} в другото; измерване на закъснението на WebSDR…
+Diversity off: {0} is no longer available	Диверсити изкл.: {0} вече не е наличен
+Diversity: no audio from {0}	Диверсити: няма звук от {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Диверсити: звукът от {0} е закъснен с {1} s спрямо WebSDR
 The rig is still not answering: check that it is switched on and the link settings	Станцията все още не отговаря: проверете дали е включена и настройките на връзката
 SDRLink: no link with OmniRig	SDRLink: няма връзка с OmniRig
 Last message: 	Последно съобщение: 

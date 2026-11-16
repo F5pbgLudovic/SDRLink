@@ -25,7 +25,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (case dans le bouton ; clic : options et niveau), **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
-6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC** et **Réinit WebSDR** (depuis la 1.31).
+6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et la case **Diversité** (depuis la 1.40).
 7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
 
 ## Tous les clics droits
@@ -54,6 +54,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | « Volume WebSDR » | port TCI d'ExpertSDR |
 | REC | carte son du poste, couleur du bouton REC |
 | Réinit WebSDR | **Auto** (relance quand le son est perdu) et son délai, **réinitialisation totale** du WebSDR en cours, couleurs des deux états (depuis la 1.37) |
+| Diversité | réception mise dans l'autre oreille (poste, ExpertSDR, HDSDR sous Windows 11), **WebSDR dans l'oreille droite**, retard mesuré (depuis la 1.40) |
 | Barre d'état | 20 derniers messages, types de messages à ne plus afficher |
 
 ## Fichiers de SDRLink
@@ -247,7 +248,7 @@ Bouton **FreeDV auto V1** (barre WebSDR, après « Rechercher des WebSDR… », 
 - **Une seule réception** est décodée, dans cet ordre :
   1. **le poste** : si Mute TX n'est pas actif et qu'une carte son du poste est choisie (celle de REC, clic droit sur REC ou sur Mute TX) ; il faut donc que le volume du poste soit télécommandé. Pendant la parole, l'écoute du poste sur le PC est coupée ; le volume du poste lui-même n'est pas touché ;
   2. **le WebSDR**, si Mute WebSDR n'est pas actif : la page est mise à volume 0 pendant la parole (Mute WebSDR ne change pas) ;
-  3. **ExpertSDR**, puis **HDSDR** (capture du son du programme, Windows 10 version 2004 ou plus récente). Leur son brut **reste audible** sous la voix décodée : couper un programme dans le mélangeur de Windows couperait aussi ce que reçoit le décodeur.
+  3. **ExpertSDR**, par son **flux audio TCI** (depuis la 1.40 ; serveur TCI d'ExpertSDR activé, même port que pour Mute ExpertSDR), puis **HDSDR** (capture du son du programme, **Windows 11** seulement depuis la 1.40 : sous Windows 10, cette capture ne rend que du silence). Leur son brut **reste audible** sous la voix décodée : couper un programme dans le mélangeur de Windows couperait aussi ce que reçoit le décodeur.
 - La parole n'est jouée que si le SNR est d'au moins −5 dB : en dessous, le décodeur peut s'accrocher à tort (par exemple sur la mauvaise bande latérale) et ne sortirait que du charabia.
 - **Arrêté, FreeDV ne prend aucune ressource** : le décodeur n'est même pas chargé. En marche, il prend environ 7 à 10 % d'un cœur du processeur.
 - Le décodeur est celui de FreeDV (radae_nopy, de David Rowe et Peter B Marks, licence BSD ; vocodeur FARGAN d'Opus, licence BSD), le même que dans PhoneSDRLink. Il n'a pas encore été essayé sur un vrai signal reçu en direct : seulement sur l'enregistrement hors antenne du projet FreeDV.
@@ -604,6 +605,27 @@ Relance automatique du WebSDR quand son son est perdu (coupure du serveur, déla
 - En FM avec un squelch fermé, le silence compte comme une perte de son (3 relances au plus).
 - Les choix (Auto, délai) sont conservés.
 
+## Écoute en diversité (depuis la 1.40)
+
+Case **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **WebSDR dans une oreille**, la **réception locale dans l'autre** (le poste, ExpertSDR ou HDSDR), comme deux récepteurs sur deux antennes éloignées. L'oreille combine les deux : un signal qui s'évanouit d'un côté reste lisible de l'autre (QSB), et le QRM ou le bruit local d'un côté gêne moins. Il faut un casque ou deux haut-parleurs.
+- Le son d'un WebSDR arrive toujours **en retard** (0,3 à 5 s selon le serveur). SDRLink **mesure ce retard en continu** en comparant les deux sons (rythme des syllabes, de la manipulation CW, des évanouissements) et **retarde le son local d'autant** : les deux oreilles entendent la même chose au même moment. Si le retard du WebSDR change, il est retrouvé tout seul (en 8 s environ).
+- Il faut **un signal entendu des deux côtés** (même fréquence, même mode) pour mesurer le retard. Tant qu'il n'est pas trouvé, le bouton est **orange** et affiche « Diversité … » ; ensuite il est **vert** et affiche le retard appliqué (« Diversité 1,8 s »), aussi donné dans la barre d'état. Sur du bruit seul, rien n'est calé : les deux sons sont joués sans alignement.
+- Les deux oreilles sont mises **au même niveau** automatiquement, quel que soit le volume de chaque réception.
+- **Clic** : marche / arrêt. **Clic droit** :
+  - **Dans l'autre oreille** : **Poste (carte son de REC)**, **ExpertSDR (son par TCI)**, **HDSDR**. Seules les réceptions disponibles sont proposées : poste connecté avec sa carte son choisie (clic droit sur REC), ExpertSDR lancé, HDSDR lancé **sous Windows 11** ;
+  - **WebSDR dans l'oreille droite** (à gauche sinon) ;
+  - en marche, l'état : retard mesuré, ou recherche.
+- Pendant la diversité, SDRLink **fait taire la sortie habituelle** de chaque réception et joue les deux sons lui-même, sur la sortie son par défaut de Windows :
+  - **WebSDR** : la page est mise à volume 0 (le son est pris dans la page avant le volume) ;
+  - **poste** : son **gain BF est mis à 0** (le son reçu par la carte son du poste n'en dépend pas) et l'écoute du poste sur le PC est en sourdine. Il faut un poste dont SDRLink règle le volume (Volume TX affiché) ; sinon, baissez son volume à la main. Tourner le bouton de volume du poste règle son oreille, et le haut-parleur est refait taire ;
+  - **ExpertSDR** : son son arrive par le **flux audio TCI** (serveur TCI d'ExpertSDR activé, même port que pour Mute ExpertSDR) ; ExpertSDR est coupé dans le mélangeur de Windows s'il y joue, sinon par TCI. S'il ne joue pas par le son de Windows et qu'il coupe aussi son flux TCI quand il est coupé, son oreille reste muette : faites-le jouer par le son de Windows ;
+  - **HDSDR** (Windows 11) : baissé à −60 dB dans le mélangeur ; son son est capté par Windows puis remonté.
+- **Mute** et **Volume** de chaque réception règlent **son oreille** (Mute WebSDR fait taire l'oreille du WebSDR, Volume TX celle du poste…), sans rien changer à la réception elle-même.
+- **En émission** : les oreilles des réceptions cochées au clic droit de « Couper le son du WebSDR en émission » se taisent dès le passage en émission et le restent après, pendant le retard appliqué plus le délai de rétablissement (« rétablir après (ms) ») : la fin de l'émission, jouée en retard, n'est pas entendue. L'oreille du poste se tait en émission dans tous les cas.
+- À l'arrêt (case décochée, poste déconnecté, logiciel fermé, ou fermeture de SDRLink), **chaque réception retrouve son son** : volume de la page, gain BF du poste, ExpertSDR et HDSDR comme avant.
+- Le notch automatique ne s'applique pas au son du WebSDR dans la diversité (le son est pris avant lui).
+- La réception choisie et le côté du WebSDR sont conservés ; la case, elle, est décochée à chaque démarrage.
+
 ## Mémoires de fréquences
 
 - Bouton **Mémoires** (ligne des fréquences, après Save) : ouvre la fenêtre des mémoires.
@@ -690,6 +712,9 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.40**
+  - Case **Diversité** (après Réinit WebSDR) : **écoute en diversité**, le WebSDR dans une oreille et le poste, ExpertSDR ou HDSDR dans l'autre, le son local **retardé automatiquement** pour tomber en même temps que le WebSDR.
+  - Décodage d'**ExpertSDR** (FreeDV auto, modes numériques, Mode ?) par son **flux audio TCI** : sous Windows 10, la capture du son d'un programme ne rendait que du silence. **HDSDR** n'est plus décodé que sous **Windows 11**, pour la même raison.
 - **1.39**
   - Bouton **Mode ?** : plusieurs signaux dans la bande passante sont lus chacun par leurs propres décodeurs CW, PSK et RTTY ; le **rythme des tranches FT8 / FT4** est reconnu et donne le retard du son du WebSDR au décodeur.
 - **1.38**

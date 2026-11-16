@@ -420,6 +420,8 @@ namespace SDRLink
         float[] mono = new float[0];
         AutoResetEvent ready;
 
+        public readonly int TciPort;         // flux audio TCI d'ExpertSDR (0 sinon)
+
         public AudioTap(string captureId, int processId, string name, Action<int, float[], int> sink)
         {
             CaptureId = captureId;
@@ -432,10 +434,130 @@ namespace SDRLink
             thread.Start();
         }
 
+        // Son de réception d'ExpertSDR par TCI (port local) : indépendant du mélangeur de Windows (ExpertSDR coupé compris).
+        public AudioTap(int tciPort, string name, Action<int, float[], int> sink)
+        {
+            TciPort = tciPort;
+            Name = name;
+            this.sink = sink;
+            thread = new Thread(RunTci);
+            thread.IsBackground = true;
+            thread.Name = "TCI, son";
+            thread.Start();
+        }
+
+        // Capture du son d'un seul programme : Windows 11 seulement. Sous Windows 10 (jusqu'à 19045), elle ne rend que du
+        // silence (vérifié sur 19045 le 2026-11-16 : le mode « ce programme » est muet, seul « tout sauf ce programme » marche).
+        public static bool ProcessCaptureWorks { get { return WindowsBuild() >= 22000; } }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct OsVersionInfo { public int Size, Major, Minor, Build, Platform; [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)] public string Csd; }
+        [DllImport("ntdll.dll")] static extern int RtlGetVersion(ref OsVersionInfo v);
+        static int build = -1;
+        public static int WindowsBuild()
+        {
+            if (build >= 0) return build;
+            try { OsVersionInfo v = new OsVersionInfo(); v.Size = Marshal.SizeOf(v); build = RtlGetVersion(ref v) == 0 ? v.Build : 0; }
+            catch { build = 0; }
+            return build;
+        }
+
         public void Stop()
         {
             stopping = true;
+            System.Net.WebSockets.ClientWebSocket w = tci;
+            if (w != null) { try { w.Abort(); } catch { } }
             thread.Join(3000);
+        }
+
+        // ---------------------------------------------------------------- TCI
+        // Connexion à part (comme un logiciel numérique) : AUDIO_START:0 demande le son du récepteur 0 en trames binaires
+        // (en-tête de 16 mots de 32 bits : récepteur, fréquence, format, codec, crc, longueur, type, voies…, puis les
+        // échantillons). Réglages envoyés identiques à ceux de WSJT-X (48 kHz, float32, 2 voies) au cas où ExpertSDR les
+        // partagerait entre ses clients. Fermer la connexion arrête le flux pour ce seul client.
+        System.Net.WebSockets.ClientWebSocket tci;
+
+        void RunTci()
+        {
+            while (!stopping)
+            {
+                try { TciSession(); }
+                catch (Exception ex) { if (!stopping) Report(ex is AggregateException && ex.InnerException != null ? ex.InnerException.Message : ex.Message); }
+                System.Net.WebSockets.ClientWebSocket w = tci;
+                tci = null;
+                if (w != null) { try { w.Dispose(); } catch { } }
+                for (int i = 0; i < 40 && !stopping; i++) Thread.Sleep(50);
+            }
+        }
+
+        void TciSession()
+        {
+            var w = new System.Net.WebSockets.ClientWebSocket();
+            w.Options.Proxy = null;
+            tci = w;
+            Uri uri = new Uri("ws://127.0.0.1:" + TciPort + "/");
+            if (!System.Threading.Tasks.Task.Run(delegate { return w.ConnectAsync(uri, CancellationToken.None); }).Wait(2000) || w.State != System.Net.WebSockets.WebSocketState.Open)
+                throw new IOException(Lang.F("pas de serveur TCI sur le port {0}", "no TCI server on port {0}", TciPort));
+            foreach (string cmd in new[] { "audio_samplerate:48000;", "audio_stream_sample_type:float32;", "audio_stream_channels:2;", "audio_start:0;" })
+            {
+                byte[] b = System.Text.Encoding.UTF8.GetBytes(cmd);
+                w.SendAsync(new ArraySegment<byte>(b), System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None).Wait(2000);
+            }
+            Log.Write("Son TCI : connecté au port " + TciPort + " (" + Name + ")");
+            byte[] buf = new byte[1 << 16];
+            byte[] msg = new byte[1 << 16];
+            int len = 0;
+            DateTime lastAudio = DateTime.UtcNow;
+            bool reported = false;
+            while (!stopping && w.State == System.Net.WebSockets.WebSocketState.Open)
+            {
+                var task = w.ReceiveAsync(new ArraySegment<byte>(buf), CancellationToken.None);
+                while (!task.Wait(500))
+                {
+                    if (stopping) return;
+                    if (!reported && (DateTime.UtcNow - lastAudio).TotalSeconds > 4) { Report(Lang.T("ExpertSDR n'envoie pas de son par TCI", "ExpertSDR sends no audio over TCI")); reported = true; }
+                }
+                var r = task.Result;
+                if (r.MessageType == System.Net.WebSockets.WebSocketMessageType.Close) break;
+                if (len + r.Count > msg.Length) Array.Resize(ref msg, Math.Max(msg.Length * 2, len + r.Count));
+                Buffer.BlockCopy(buf, 0, msg, len, r.Count);
+                len += r.Count;
+                if (!r.EndOfMessage) continue;
+                if (r.MessageType == System.Net.WebSockets.WebSocketMessageType.Binary && TciFrame(msg, len))
+                {
+                    lastAudio = DateTime.UtcNow;
+                    if (reported || lastProblem.Length > 0) { Report(null); reported = false; }
+                }
+                len = 0;
+            }
+            if (!stopping) throw new IOException(Lang.T("liaison TCI fermée par ExpertSDR", "TCI link closed by ExpertSDR"));
+        }
+
+        // Trame binaire TCI : true si c'est du son de réception du récepteur 0 (donné aux décodeurs, en mono).
+        bool TciFrame(byte[] d, int len)
+        {
+            if (len < 64) return false;
+            uint receiver = BitConverter.ToUInt32(d, 0), rateHz = BitConverter.ToUInt32(d, 4), format = BitConverter.ToUInt32(d, 8);
+            uint type = BitConverter.ToUInt32(d, 24), ch = BitConverter.ToUInt32(d, 28);
+            if (type != 1 || receiver != 0 || rateHz < 8000 || rateHz > 384000) return false;
+            int chans = ch == 1 ? 1 : 2;
+            int bps = format == 0 ? 2 : format == 1 ? 3 : 4;
+            int frames = (len - 64) / (bps * chans);
+            if (frames <= 0) return false;
+            if (mono.Length < frames) mono = new float[frames];
+            for (int i = 0; i < frames; i++)
+            {
+                double s = 0;
+                for (int c = 0; c < chans; c++)
+                {
+                    int o = 64 + (i * chans + c) * bps;
+                    s += format == 3 ? BitConverter.ToSingle(d, o) : format == 0 ? BitConverter.ToInt16(d, o) / 32768.0
+                        : format == 1 ? ((d[o] << 8 | d[o + 1] << 16 | d[o + 2] << 24) >> 8) / 8388608.0 : BitConverter.ToInt32(d, o) / 2147483648.0;
+                }
+                mono[i] = (float)(s / chans);
+            }
+            sink((int)rateHz, mono, frames);
+            return true;
         }
 
         void Run()
@@ -485,17 +607,31 @@ namespace SDRLink
             else
             {
                 client = ProcessLoopback.Activate(ProcessId);
-                // Pas de format proposé par Windows en capture par processus : 16 bits stéréo 48 kHz, converti par Windows.
-                IntPtr wf = Marshal.AllocCoTaskMem(18);
-                try
+                // Pas de format proposé par Windows en capture par processus : flottant 32 bits stéréo 48 kHz, converti par
+                // Windows (le flottant garde toute la finesse d'un programme très baissé dans le mélangeur, cf. diversité) ;
+                // refusé : 16 bits, comme avant la 1.40.
+                int hr = 0;
+                foreach (bool fl in new[] { true, false })
                 {
-                    Marshal.WriteInt16(wf, 0, 1); Marshal.WriteInt16(wf, 2, 2); Marshal.WriteInt32(wf, 4, 48000);
-                    Marshal.WriteInt32(wf, 8, 48000 * 4); Marshal.WriteInt16(wf, 12, 4); Marshal.WriteInt16(wf, 14, 16); Marshal.WriteInt16(wf, 16, 0);
-                    ReadFormat(wf);
-                    Marshal.ThrowExceptionForHR(client.Initialize(0, AUDCLNT_STREAMFLAGS_LOOPBACK | AUDCLNT_STREAMFLAGS_EVENTCALLBACK |
-                        AUDCLNT_STREAMFLAGS_AUTOCONVERTPCM | AUDCLNT_STREAMFLAGS_SRC_DEFAULT_QUALITY, 2000000, 0, wf, IntPtr.Zero));
+                    if (!fl)
+                    {
+                        Marshal.ReleaseComObject(client);
+                        client = ProcessLoopback.Activate(ProcessId);
+                    }
+                    IntPtr wf = Marshal.AllocCoTaskMem(18);
+                    try
+                    {
+                        int bps = fl ? 4 : 2;
+                        Marshal.WriteInt16(wf, 0, (short)(fl ? 3 : 1)); Marshal.WriteInt16(wf, 2, 2); Marshal.WriteInt32(wf, 4, 48000);
+                        Marshal.WriteInt32(wf, 8, 48000 * 2 * bps); Marshal.WriteInt16(wf, 12, (short)(2 * bps)); Marshal.WriteInt16(wf, 14, (short)(8 * bps)); Marshal.WriteInt16(wf, 16, 0);
+                        ReadFormat(wf);
+                        hr = client.Initialize(0, AUDCLNT_STREAMFLAGS_LOOPBACK | AUDCLNT_STREAMFLAGS_EVENTCALLBACK |
+                            AUDCLNT_STREAMFLAGS_AUTOCONVERTPCM | AUDCLNT_STREAMFLAGS_SRC_DEFAULT_QUALITY, 2000000, 0, wf, IntPtr.Zero);
+                    }
+                    finally { Marshal.FreeCoTaskMem(wf); }
+                    if (hr == 0) break;
                 }
-                finally { Marshal.FreeCoTaskMem(wf); }
+                Marshal.ThrowExceptionForHR(hr);
                 ready = new AutoResetEvent(false);
                 Marshal.ThrowExceptionForHR(client.SetEventHandle(ready.SafeWaitHandle.DangerousGetHandle()));
             }

@@ -170,6 +170,12 @@ namespace SDRLink
 
         // Volume d'un logiciel dans le mélangeur (0 à 100 %) : percent = null le lit (le plus fort de ses sessions),
         // sinon l'applique à toutes ses sessions. Retourne -1 s'il n'a aucune session audio.
+        // Volume exact d'un logiciel dans le mélangeur (0 à 1, plus fin que le pour cent) : false s'il n'a aucune session.
+        public static bool ProcessLevel(Predicate<int> isProcess, float level)
+        {
+            return ForEachSession(isProcess, delegate(ISimpleAudioVolume vol) { vol.SetMasterVolume(Math.Max(0f, Math.Min(1f, level)), IntPtr.Zero); });
+        }
+
         public static int ProcessVolume(Predicate<int> isProcess, int? percent)
         {
             float max = -1;

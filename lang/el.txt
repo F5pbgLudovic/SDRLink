@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Κατώφλι συγχρον�
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Κεντρική συχνότητα: {0} Hz (μαύρο {1} Hz, λευκό {2} Hz)
 Slant correction: {0} ppm	Διόρθωση κλίσης: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	μη υποστηριζόμενη μορφή ήχου ({0} bit, {1} Hz)
 Name:	Όνομα:
 Address:	Διεύθυνση:
 Cancel	Άκυρο
@@ -185,8 +186,10 @@ Checking… {0} left	Έλεγχος… απομένουν {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Ο έλεγχος ολοκληρώθηκε: αφαιρέθηκαν {1} διπλότυπα, σημειώθηκαν {0} νεκροί σύνδεσμοι. Κάντε κλικ στο «Αφαίρεση…» για να διαγραφούν.
 {0} favorite(s) imported, {1} already present.	Εισήχθησαν {0} αγαπημένα, {1} υπήρχαν ήδη.
 {0} favorite(s) exported.	Εξήχθησαν {0} αγαπημένα.
+ExpertSDR sends no audio over TCI	Το ExpertSDR δεν στέλνει ήχο μέσω TCI
+TCI link closed by ExpertSDR	Η σύνδεση TCI έκλεισε από το ExpertSDR
 program capture does not answer	η καταγραφή του προγράμματος δεν αποκρίνεται
-unsupported audio format ({0} bits, {1} Hz)	μη υποστηριζόμενη μορφή ήχου ({0} bit, {1} Hz)
+no TCI server on port {0}	δεν υπάρχει διακομιστής TCI στη θύρα {0}
 Frequency (kHz):	Συχνότητα (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Οι τελευταίες 20 αποθηκευμένες συχνότητες (κλικ σε μια γραμμή: επιστροφή σε αυτή)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Αποθηκεύει αμέσως τη συχνότητα, τον τρόπο λειτουργίας και τον ενεργό ψηφιακό τρόπο στη λίστα Mem
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Μη έγκυρη διεύθυν
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	Το rigctld.exe (Hamlib) δεν βρέθηκε. Ορίστε τη θέση του με το κουμπί «…» ή εγκαταστήστε το Hamlib (δωρεάν).\n\nΆνοιγμα της σελίδας λήψης του Hamlib;
 Please choose the rig's COM port.	Επιλέξτε τη θύρα COM του πομποδέκτη.
 Cannot start rigctld: 	Αδυναμία εκκίνησης rigctld: 
+Diversity off: rig disconnected	Diversity ανενεργό: ο πομποδέκτης αποσυνδέθηκε
 TX safety timeout (PTT button)	Χρονικό όριο ασφαλείας TX (κουμπί PTT)
 Off	Ανενεργό
 PTT: connect the rig first	PTT: συνδέστε πρώτα τον πομποδέκτη
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): γραμμή {2}
 {0}: {1}, could not save	{0}: {1}, αδύνατη η αποθήκευση
 Hell: picture saved: {0}	Hell: η εικόνα αποθηκεύτηκε: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Ακρόαση Diversity: το WebSDR στο ένα αυτί, ο πομποδέκτης (ή το ExpertSDR ή το HDSDR) στο άλλο, ο τοπικός ήχος καθυστερεί ώστε να συμπίπτει με το WebSDR. Κλικ: ενεργό / ανενεργό. Δεξί κλικ: λήψη στο άλλο αυτί, πλευρά WebSDR, μετρημένη καθυστέρηση
+In the other ear:	Στο άλλο αυτί:
+Rig: first choose its sound card (right-click REC)	Πομποδέκτης: επιλέξτε πρώτα την κάρτα ήχου του (δεξί κλικ στο REC)
+Rig (REC sound card)	Πομποδέκτης (κάρτα ήχου REC)
+ExpertSDR (audio over TCI)	ExpertSDR (ήχος μέσω TCI)
+No local reception: connect the rig, or start ExpertSDR	Καμία τοπική λήψη: συνδέστε τον πομποδέκτη ή ξεκινήστε το ExpertSDR
+WebSDR in the right ear	WebSDR στο δεξί αυτί
+Diversity: WebSDR on the right	Diversity: WebSDR δεξιά
+Diversity: WebSDR on the left	Diversity: WebSDR αριστερά
+Diversity off: each reception gets its own audio back	Diversity ανενεργό: κάθε λήψη παίρνει πίσω τον δικό της ήχο
+Diversity: first choose the rig's sound card (right-click REC)	Diversity: επιλέξτε πρώτα την κάρτα ήχου του πομποδέκτη (δεξί κλικ στο REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: καμία τοπική λήψη (συνδέστε τον πομποδέκτη ή ξεκινήστε το ExpertSDR)
+Diversity: no WebSDR open	Diversity: κανένα WebSDR ανοιχτό
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; Το SDRLink δεν μπορεί να βάλει σε σίγαση το ηχείο αυτού του πομποδέκτη: χαμηλώστε την ένταση με το χέρι
+Diversity: the WebSDR gives no audio	Diversity: το WebSDR δεν δίνει ήχο
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: μέτρηση της καθυστέρησης του WebSDR (χρειάζεται σήμα που ακούγεται και στις δύο πλευρές)…
+Diversity	Diversity
+Diversity: {0} in the other ear	Diversity: {0} στο άλλο αυτί
+Diversity: audio output not available ({0})	Diversity: η έξοδος ήχου δεν είναι διαθέσιμη ({0})
+Diversity: {0}: audio not available ({1})	Diversity: {0}: ο ήχος δεν είναι διαθέσιμος ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR στο ένα αυτί, {0} στο άλλο· μέτρηση της καθυστέρησης του WebSDR…
+Diversity off: {0} is no longer available	Diversity ανενεργό: το {0} δεν είναι πλέον διαθέσιμο
+Diversity: no audio from {0}	Diversity: κανένας ήχος από το {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: ο ήχος του {0} καθυστερεί κατά {1} s ώστε να συμπίπτει με το WebSDR
 The rig is still not answering: check that it is switched on and the link settings	Ο πομποδέκτης εξακολουθεί να μην απαντά: ελέγξτε ότι είναι αναμμένος και τις ρυθμίσεις σύνδεσης
 SDRLink: no link with OmniRig	SDRLink: καμία σύνδεση με το OmniRig
 Last message: 	Τελευταίο μήνυμα: 

@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Sinchronizacijos slenkstis (si
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Centrinis dažnis: {0} Hz (juoda {1} Hz, balta {2} Hz)
 Slant correction: {0} ppm	Pasvirimo korekcija: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
 Name:	Pavadinimas:
 Address:	Adresas:
 Cancel	Atšaukti
@@ -185,8 +186,10 @@ Checking… {0} left	Tikrinama… liko {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Tikrinimas baigtas: pašalinta dublikatų – {1}, pažymėta neveikiančių nuorodų – {0}. Spustelėkite „Šalinti…“, kad jas ištrintumėte.
 {0} favorite(s) imported, {1} already present.	Importuota parankinių: {0}, jau buvo: {1}.
 {0} favorite(s) exported.	Eksportuota parankinių: {0}.
+ExpertSDR sends no audio over TCI	ExpertSDR nesiunčia garso per TCI
+TCI link closed by ExpertSDR	ExpertSDR uždarė TCI ryšį
 program capture does not answer	programos garso įrašymas neatsako
-unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
+no TCI server on port {0}	nėra TCI serverio prievade {0}
 Frequency (kHz):	Dažnis (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Paskutiniai 20 įrašytų dažnių (spustelėjus eilutę: grįžti į jį)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Iš karto įrašo dažnį, moduliaciją ir veikiančią skaitmeninę moduliaciją į sąrašą Mem
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Netinkamas CI-V adresas (pvz., 7
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) nerastas. Nurodykite jo vietą mygtuku „…“ arba įdiekite Hamlib (nemokamai).\n\nAtidaryti Hamlib atsisiuntimo puslapį?
 Please choose the rig's COM port.	Pasirinkite stoties COM prievadą.
 Cannot start rigctld: 	Nepavyksta paleisti rigctld: 
+Diversity off: rig disconnected	Diversity išjungta: stotis atjungta
 TX safety timeout (PTT button)	TX saugos laikmatis (mygtukas PTT)
 Off	Išjungta
 PTT: connect the rig first	PTT: pirmiausia prijunkite stotį
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): eilutė {2}
 {0}: {1}, could not save	{0}: {1}, įrašyti nepavyko
 Hell: picture saved: {0}	Hell: vaizdas įrašytas: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity klausymas: WebSDR vienoje ausyje, stotis (arba ExpertSDR, arba HDSDR) kitoje, vietinis garsas vėlinamas pagal WebSDR. Spustelėjimas: įjungti / išjungti. Dešinysis spustelėjimas: priėmimas į kitą ausį, WebSDR pusė, išmatuotas vėlinimas
+In the other ear:	Kitoje ausyje:
+Rig: first choose its sound card (right-click REC)	Stotis: pirmiausia pasirinkite jos garso plokštę (dešinysis spustelėjimas ant REC)
+Rig (REC sound card)	Stotis (REC garso plokštė)
+ExpertSDR (audio over TCI)	ExpertSDR (garsas per TCI)
+No local reception: connect the rig, or start ExpertSDR	Nėra vietinio priėmimo: prijunkite stotį arba paleiskite ExpertSDR
+WebSDR in the right ear	WebSDR dešinėje ausyje
+Diversity: WebSDR on the right	Diversity: WebSDR dešinėje
+Diversity: WebSDR on the left	Diversity: WebSDR kairėje
+Diversity off: each reception gets its own audio back	Diversity išjungta: kiekvienas priėmimas vėl gauna savo garsą
+Diversity: first choose the rig's sound card (right-click REC)	Diversity: pirmiausia pasirinkite stoties garso plokštę (dešinysis spustelėjimas ant REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nėra vietinio priėmimo (prijunkite stotį arba paleiskite ExpertSDR)
+Diversity: no WebSDR open	Diversity: neatidarytas joks WebSDR
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink negali nutildyti šios stoties garsiakalbio: sumažinkite garsą rankiniu būdu
+Diversity: the WebSDR gives no audio	Diversity: WebSDR neduoda garso
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: matuojamas WebSDR vėlinimas (reikia signalo, girdimo abiejose pusėse)…
+Diversity	Diversity
+Diversity: {0} in the other ear	Diversity: {0} kitoje ausyje
+Diversity: audio output not available ({0})	Diversity: garso išvestis nepasiekiama ({0})
+Diversity: {0}: audio not available ({1})	Diversity: {0}: garsas nepasiekiamas ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR vienoje ausyje, {0} kitoje; matuojamas WebSDR vėlinimas…
+Diversity off: {0} is no longer available	Diversity išjungta: {0} nebepasiekiamas
+Diversity: no audio from {0}	Diversity: nėra garso iš {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: {0} garsas vėlinamas {1} s pagal WebSDR
 The rig is still not answering: check that it is switched on and the link settings	Stotis vis dar neatsako: patikrinkite, ar ji įjungta, ir ryšio nustatymus
 SDRLink: no link with OmniRig	SDRLink: nėra ryšio su OmniRig
 Last message: 	Paskutinis pranešimas: 

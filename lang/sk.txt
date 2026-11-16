@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Prah synchronizácie (signál 
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Stredová frekvencia: {0} Hz (čierna {1} Hz, biela {2} Hz)
 Slant correction: {0} ppm	Korekcia sklonu: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitov, {1} Hz)
 Name:	Názov:
 Address:	Adresa:
 Cancel	Zrušiť
@@ -185,8 +186,10 @@ Checking… {0} left	Kontrola… zostáva: {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Kontrola dokončená. Odstránené duplikáty: {1}, začiarknuté nefunkčné odkazy: {0}. Vymažete ich tlačidlom „Odstrániť…“.
 {0} favorite(s) imported, {1} already present.	Importované obľúbené: {0}, už existujúce: {1}.
 {0} favorite(s) exported.	Exportované obľúbené: {0}.
+ExpertSDR sends no audio over TCI	ExpertSDR neposiela zvuk cez TCI
+TCI link closed by ExpertSDR	Spojenie TCI zatvorené programom ExpertSDR
 program capture does not answer	zachytávanie programu neodpovedá
-unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitov, {1} Hz)
+no TCI server on port {0}	žiadny server TCI na porte {0}
 Frequency (kHz):	Kmitočet (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Posledných 20 uložených frekvencií (kliknutie na riadok: návrat naň)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Okamžite uloží frekvenciu, druh prevádzky a bežiaci digitálny druh prevádzky do zoznamu Mem
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Neplatná adresa CI-V (napr. 70 
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) sa nenašiel. Nastavte jeho umiestnenie tlačidlom „…“ alebo nainštalujte Hamlib (zadarmo).\n\nOtvoriť stránku na stiahnutie Hamlib?
 Please choose the rig's COM port.	Vyberte COM port transceivera.
 Cannot start rigctld: 	Nedá sa spustiť rigctld: 
+Diversity off: rig disconnected	Diverzita vyp.: transceiver odpojený
 TX safety timeout (PTT button)	Bezpečnostný časový limit TX (tlačidlo PTT)
 Off	Vyp.
 PTT: connect the rig first	PTT: najprv pripojte transceiver
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): riadok {2}
 {0}: {1}, could not save	{0}: {1}, uloženie sa nepodarilo
 Hell: picture saved: {0}	Hell: obrázok uložený: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diverzitný príposlech: WebSDR v jednom uchu, transceiver (alebo ExpertSDR, alebo HDSDR) v druhom, miestny zvuk je oneskorený podľa WebSDR. Klik: zap. / vyp. Pravé tlačidlo: príjem do druhého ucha, strana WebSDR, namerané oneskorenie
+In the other ear:	V druhom uchu:
+Rig: first choose its sound card (right-click REC)	Transceiver: najprv vyberte jeho zvukovú kartu (pravé tlačidlo na REC)
+Rig (REC sound card)	Transceiver (zvuková karta REC)
+ExpertSDR (audio over TCI)	ExpertSDR (zvuk cez TCI)
+No local reception: connect the rig, or start ExpertSDR	Žiadny miestny príjem: pripojte transceiver alebo spustite ExpertSDR
+WebSDR in the right ear	WebSDR v pravom uchu
+Diversity: WebSDR on the right	Diverzita: WebSDR vpravo
+Diversity: WebSDR on the left	Diverzita: WebSDR vľavo
+Diversity off: each reception gets its own audio back	Diverzita vyp.: každý príjem dostane späť svoj zvuk
+Diversity: first choose the rig's sound card (right-click REC)	Diverzita: najprv vyberte zvukovú kartu transceivera (pravé tlačidlo na REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diverzita: žiadny miestny príjem (pripojte transceiver alebo spustite ExpertSDR)
+Diversity: no WebSDR open	Diverzita: nie je otvorený žiadny WebSDR
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink nemôže stlmiť reproduktor tohto transceivera: znížte jeho hlasitosť ručne
+Diversity: the WebSDR gives no audio	Diverzita: WebSDR nedáva žiadny zvuk
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diverzita: meranie oneskorenia WebSDR (treba signál počuteľný na oboch stranách)…
+Diversity	Diverzita
+Diversity: {0} in the other ear	Diverzita: {0} v druhom uchu
+Diversity: audio output not available ({0})	Diverzita: zvukový výstup nie je k dispozícii ({0})
+Diversity: {0}: audio not available ({1})	Diverzita: {0}: zvuk nie je k dispozícii ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diverzita: WebSDR v jednom uchu, {0} v druhom; meranie oneskorenia WebSDR…
+Diversity off: {0} is no longer available	Diverzita vyp.: {0} už nie je k dispozícii
+Diversity: no audio from {0}	Diverzita: žiadny zvuk z {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diverzita: zvuk {0} oneskorený o {1} s podľa WebSDR
 The rig is still not answering: check that it is switched on and the link settings	Transceiver stále neodpovedá: skontrolujte, či je zapnutý, a nastavenie spojenia
 SDRLink: no link with OmniRig	SDRLink: žiadne spojenie s OmniRig
 Last message: 	Posledná správa: 

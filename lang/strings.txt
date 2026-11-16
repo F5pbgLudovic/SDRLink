@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Seuil de synchro (signal / bru
 Squelch: {0}	Squelch : {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Fréquence du milieu : {0} Hz (noir {1} Hz, blanc {2} Hz)
 Slant correction: {0} ppm	Correction de pente : {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	format audio non pris en charge ({0} bits, {1} Hz)
 Name:	Nom :
 Address:	Adresse :
 Cancel	Annuler
@@ -185,8 +186,10 @@ Checking… {0} left	Vérification… encore {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Vérification terminée : {1} doublon(s) supprimé(s), {0} lien(s) mort(s) cochés. Cliquez sur « Supprimer… » pour les retirer.
 {0} favorite(s) imported, {1} already present.	{0} favori(s) importé(s), {1} déjà présent(s).
 {0} favorite(s) exported.	{0} favori(s) exporté(s).
+ExpertSDR sends no audio over TCI	ExpertSDR n'envoie pas de son par TCI
+TCI link closed by ExpertSDR	liaison TCI fermée par ExpertSDR
 program capture does not answer	capture du programme sans réponse
-unsupported audio format ({0} bits, {1} Hz)	format audio non pris en charge ({0} bits, {1} Hz)
+no TCI server on port {0}	pas de serveur TCI sur le port {0}
 Frequency (kHz):	Fréquence (kHz) :
 The last 20 stored frequencies (click a line: go back to it)	Les 20 dernières fréquences mémorisées (clic sur une ligne : y retourner)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Mémorise tout de suite la fréquence, le mode et le mode numérique en marche dans la liste Mem
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Adresse CI-V invalide (ex. 70 po
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) est introuvable. Indiquez son emplacement avec le bouton « … », ou installez Hamlib (gratuit).\n\nOuvrir la page de téléchargement de Hamlib ?
 Please choose the rig's COM port.	Choisissez le port COM du poste.
 Cannot start rigctld: 	Impossible de lancer rigctld : 
+Diversity off: rig disconnected	Diversité arrêtée : poste déconnecté
 TX safety timeout (PTT button)	Délai de sécurité TX (bouton PTT)
 Off	Désactivé
 PTT: connect the rig first	PTT : connectez d'abord le poste
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}) : ligne {2}
 {0}: {1}, could not save	{0} : {1}, enregistrement impossible
 Hell: picture saved: {0}	Hell : image enregistrée : {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Écoute en diversité : le WebSDR dans une oreille, le poste (ou ExpertSDR, ou HDSDR) dans l'autre, le son local retardé pour tomber en même temps que le WebSDR. Clic : marche / arrêt. Clic droit : réception mise dans l'autre oreille, côté du WebSDR, retard mesuré
+In the other ear:	Dans l'autre oreille :
+Rig: first choose its sound card (right-click REC)	Poste : choisissez d'abord sa carte son (clic droit sur REC)
+Rig (REC sound card)	Poste (carte son de REC)
+ExpertSDR (audio over TCI)	ExpertSDR (son par TCI)
+No local reception: connect the rig, or start ExpertSDR	Aucune réception locale : connectez le poste, ou lancez ExpertSDR
+WebSDR in the right ear	WebSDR dans l'oreille droite
+Diversity: WebSDR on the right	Diversité : WebSDR à droite
+Diversity: WebSDR on the left	Diversité : WebSDR à gauche
+Diversity off: each reception gets its own audio back	Diversité arrêtée : chaque réception retrouve son son
+Diversity: first choose the rig's sound card (right-click REC)	Diversité : choisissez d'abord la carte son du poste (clic droit sur REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversité : aucune réception locale (connectez le poste, ou lancez ExpertSDR)
+Diversity: no WebSDR open	Diversité : pas de WebSDR ouvert
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	 ; SDRLink ne peut pas couper le haut-parleur de ce poste : baissez son volume à la main
+Diversity: the WebSDR gives no audio	Diversité : le WebSDR ne donne pas de son
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversité : recherche du retard du WebSDR (il faut un signal entendu des deux côtés)…
+Diversity	Diversité
+Diversity: {0} in the other ear	Diversité : {0} dans l'autre oreille
+Diversity: audio output not available ({0})	Diversité : sortie son indisponible ({0})
+Diversity: {0}: audio not available ({1})	Diversité : {0} : son indisponible ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversité : WebSDR dans une oreille, {0} dans l'autre ; recherche du retard du WebSDR…
+Diversity off: {0} is no longer available	Diversité arrêtée : {0} n'est plus disponible
+Diversity: no audio from {0}	Diversité : pas de son de {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversité : son de {0} retardé de {1} s pour tomber avec le WebSDR
 The rig is still not answering: check that it is switched on and the link settings	Le poste ne répond toujours pas : vérifiez qu'il est allumé et le réglage de la liaison
 SDRLink: no link with OmniRig	SDRLink : pas de liaison avec OmniRig
 Last message: 	Dernier message : 

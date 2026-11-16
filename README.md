@@ -1,4 +1,4 @@
-# SDRLink V1.39 — @F5PBG 2026
+# SDRLink V1.40 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -15,6 +15,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - scan de fréquences (avec jusqu'à 10 zones non scannées) ou de mémoires, jusqu'à 10 profils de scan nommés, reprise du scan à la fréquence actuelle ;
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, même taille que Mute WebSDR, couleur réglable ;
   - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou automatiquement quand son son est perdu (Réinit Auto WebSDR, clic droit : Auto et délai de 10 à 60 s, jamais quand le son est coupé volontairement) ; réinitialisation totale au clic droit ;
+  - écoute en diversité (case Diversité) : le WebSDR dans une oreille, le poste, ExpertSDR ou HDSDR dans l'autre, le son local retardé automatiquement pour tomber en même temps que le WebSDR ;
   - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de votre position (ordinateur, locator ou coordonnées) ;
@@ -71,6 +72,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - frequency scan (with up to 10 skipped ranges) or memory scan, up to 10 named scan profiles, scan resumed from the current frequency;
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, same size as Mute WebSDR, adjustable colour;
   - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or automatically when its sound is lost (Auto Reset WebSDR, right-click: Auto and a time of 10 to 60 s, never when the sound is cut on purpose); full reset from the right-click menu;
+  - diversity listening (Diversity box): the WebSDR in one ear, the rig, ExpertSDR or HDSDR in the other, the local audio delayed automatically to match the WebSDR;
   - reduced, mini and PTT (PTT button only, with the Always on top box) views;
   - suggestions while typing in the WebSDR bar (name or address, chosen list);
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near your position (computer, locator or coordinates);

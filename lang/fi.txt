@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Synkronoinnin kynnys (signaali
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Keskitaajuus: {0} Hz (musta {1} Hz, valkoinen {2} Hz)
 Slant correction: {0} ppm	Vinouden korjaus: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, {1} Hz)
 Name:	Nimi:
 Address:	Osoite:
 Cancel	Peruuta
@@ -185,8 +186,10 @@ Checking… {0} left	Tarkistetaan… {0} jäljellä
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Tarkistus valmis: {1} kaksoiskappale(tta) poistettu, {0} kuollut(ta) linkki(ä) merkitty. Poista ne valitsemalla ”Poista…”.
 {0} favorite(s) imported, {1} already present.	{0} suosikki(a) tuotu, {1} oli jo olemassa.
 {0} favorite(s) exported.	{0} suosikki(a) viety.
+ExpertSDR sends no audio over TCI	ExpertSDR ei lähetä ääntä TCI:n kautta
+TCI link closed by ExpertSDR	ExpertSDR sulki TCI-yhteyden
 program capture does not answer	ohjelman äänen kaappaus ei vastaa
-unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, {1} Hz)
+no TCI server on port {0}	ei TCI-palvelinta portissa {0}
 Frequency (kHz):	Taajuus (kHz):
 The last 20 stored frequencies (click a line: go back to it)	Viimeiset 20 tallennettua taajuutta (napsautus riviin: palaa siihen)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Tallentaa heti taajuuden, lähetyslajin ja käynnissä olevan digitaalisen lähetyslajin Mem-luetteloon
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Virheellinen CI-V-osoite (esim. 
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	Tiedostoa rigctld.exe (Hamlib) ei löytynyt. Määritä sen sijainti ”…”-painikkeella tai asenna Hamlib (ilmainen).\n\nAvataanko Hamlibin lataussivu?
 Please choose the rig's COM port.	Valitse radion COM-portti.
 Cannot start rigctld: 	rigctld-ohjelmaa ei voi käynnistää: 
+Diversity off: rig disconnected	Diversity pois: radio on irrotettu
 TX safety timeout (PTT button)	TX-turva-aikakatkaisu (PTT-painike)
 Off	Pois
 PTT: connect the rig first	PTT: yhdistä ensin radio
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): rivi {2}
 {0}: {1}, could not save	{0}: {1}, tallennus ei onnistunut
 Hell: picture saved: {0}	Hell: kuva tallennettu: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity-kuuntelu: WebSDR toisessa korvassa, radio (tai ExpertSDR tai HDSDR) toisessa, paikallista ääntä viivästetään WebSDR:n mukaan. Napsautus: päällä / pois. Hiiren oikea painike: vastaanotto toiseen korvaan, WebSDR:n puoli, mitattu viive
+In the other ear:	Toisessa korvassa:
+Rig: first choose its sound card (right-click REC)	Radio: valitse ensin sen äänikortti (hiiren oikea painike REC:ssä)
+Rig (REC sound card)	Radio (REC-äänikortti)
+ExpertSDR (audio over TCI)	ExpertSDR (ääni TCI:n kautta)
+No local reception: connect the rig, or start ExpertSDR	Ei paikallista vastaanottoa: yhdistä radio tai käynnistä ExpertSDR
+WebSDR in the right ear	WebSDR oikeassa korvassa
+Diversity: WebSDR on the right	Diversity: WebSDR oikealla
+Diversity: WebSDR on the left	Diversity: WebSDR vasemmalla
+Diversity off: each reception gets its own audio back	Diversity pois: jokainen vastaanotto saa oman äänensä takaisin
+Diversity: first choose the rig's sound card (right-click REC)	Diversity: valitse ensin radion äänikortti (hiiren oikea painike REC:ssä)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: ei paikallista vastaanottoa (yhdistä radio tai käynnistä ExpertSDR)
+Diversity: no WebSDR open	Diversity: yhtään WebSDR:ää ei ole auki
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink ei voi mykistää tämän radion kaiutinta: laske sen äänenvoimakkuutta käsin
+Diversity: the WebSDR gives no audio	Diversity: WebSDR ei anna ääntä
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: mitataan WebSDR:n viivettä (tarvitaan molemmilla puolilla kuuluva signaali)…
+Diversity	Diversity
+Diversity: {0} in the other ear	Diversity: {0} toisessa korvassa
+Diversity: audio output not available ({0})	Diversity: äänilähtö ei ole käytettävissä ({0})
+Diversity: {0}: audio not available ({1})	Diversity: {0}: ääni ei ole käytettävissä ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR toisessa korvassa, {0} toisessa; mitataan WebSDR:n viivettä…
+Diversity off: {0} is no longer available	Diversity pois: {0} ei ole enää käytettävissä
+Diversity: no audio from {0}	Diversity: ei ääntä kohteesta {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: kohteen {0} ääntä viivästetään {1} s WebSDR:n mukaan
 The rig is still not answering: check that it is switched on and the link settings	Radio ei vieläkään vastaa: tarkista, että se on päällä, sekä yhteyden asetukset
 SDRLink: no link with OmniRig	SDRLink: ei yhteyttä OmniRigiin
 Last message: 	Viimeisin viesti: 

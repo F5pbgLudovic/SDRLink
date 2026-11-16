@@ -121,6 +121,7 @@ Synchronisation threshold (signal / noise): ×{0}	Synchronisatiedrempel (signaal
 Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Middenfrequentie: {0} Hz (zwart {1} Hz, wit {2} Hz)
 Slant correction: {0} ppm	Scheefstandcorrectie: {0} ppm
+unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0} bits, {1} Hz)
 Name:	Naam:
 Address:	Adres:
 Cancel	Annuleren
@@ -185,8 +186,10 @@ Checking… {0} left	Controleren… nog {0}
 Check done: {1} duplicate(s) removed, {0} dead link(s) checked. Click "Remove…" to delete them.	Controle klaar: {1} duplica(a)t(en) verwijderd, {0} dode link(s) aangevinkt. Klik op "Verwijderen…" om ze te wissen.
 {0} favorite(s) imported, {1} already present.	{0} favoriet(en) geïmporteerd, {1} al aanwezig.
 {0} favorite(s) exported.	{0} favoriet(en) geëxporteerd.
+ExpertSDR sends no audio over TCI	ExpertSDR stuurt geen geluid via TCI
+TCI link closed by ExpertSDR	TCI-verbinding gesloten door ExpertSDR
 program capture does not answer	opname van het programma reageert niet
-unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0} bits, {1} Hz)
+no TCI server on port {0}	geen TCI-server op poort {0}
 Frequency (kHz):	Frequentie (kHz):
 The last 20 stored frequencies (click a line: go back to it)	De laatste 20 opgeslagen frequenties (klik op een regel: ga ernaar terug)
 Stores the frequency, the mode and the running digital mode in the Mem list right away	Slaat de frequentie, de mode en de lopende digitale mode meteen op in de Mem-lijst
@@ -280,6 +283,7 @@ Invalid CI-V address (e.g. 70 for the IC-7000).	Ongeldig CI-V-adres (bijv. 70 vo
 rigctld.exe (Hamlib) was not found. Set its location with the "…" button, or install Hamlib (free).\n\nOpen the Hamlib download page?	rigctld.exe (Hamlib) is niet gevonden. Geef de locatie op met de knop "…", of installeer Hamlib (gratis).\n\nDe downloadpagina van Hamlib openen?
 Please choose the rig's COM port.	Kies de COM-poort van de transceiver.
 Cannot start rigctld: 	Kan rigctld niet starten: 
+Diversity off: rig disconnected	Diversity uit: transceiver losgekoppeld
 TX safety timeout (PTT button)	TX-veiligheidstijd (PTT-knop)
 Off	Uit
 PTT: connect the rig first	PTT: verbind eerst de transceiver
@@ -558,6 +562,30 @@ WEFAX {0} ({1}): line {2}	WEFAX {0} ({1}): lijn {2}
 {0}: {1}, could not save	{0}: {1}, opslaan niet gelukt
 Hell: picture saved: {0}	Hell: beeld opgeslagen: {0}
 SSTV	SSTV
+Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity-luisteren: de WebSDR in het ene oor, de transceiver (of ExpertSDR, of HDSDR) in het andere, het lokale geluid vertraagd zodat het gelijkloopt met de WebSDR. Klik: aan / uit. Rechtsklik: ontvangst in het andere oor, WebSDR-kant, gemeten vertraging
+In the other ear:	In het andere oor:
+Rig: first choose its sound card (right-click REC)	Transceiver: kies eerst de geluidskaart (rechtsklik op REC)
+Rig (REC sound card)	Transceiver (REC-geluidskaart)
+ExpertSDR (audio over TCI)	ExpertSDR (geluid via TCI)
+No local reception: connect the rig, or start ExpertSDR	Geen lokale ontvangst: sluit de transceiver aan, of start ExpertSDR
+WebSDR in the right ear	WebSDR in het rechteroor
+Diversity: WebSDR on the right	Diversity: WebSDR rechts
+Diversity: WebSDR on the left	Diversity: WebSDR links
+Diversity off: each reception gets its own audio back	Diversity uit: elke ontvangst krijgt zijn eigen geluid terug
+Diversity: first choose the rig's sound card (right-click REC)	Diversity: kies eerst de geluidskaart van de transceiver (rechtsklik op REC)
+Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: geen lokale ontvangst (sluit de transceiver aan, of start ExpertSDR)
+Diversity: no WebSDR open	Diversity: geen WebSDR geopend
+; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink kan de luidspreker van deze transceiver niet dempen: zet het volume handmatig lager
+Diversity: the WebSDR gives no audio	Diversity: de WebSDR geeft geen geluid
+Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: WebSDR-vertraging meten (een signaal dat aan beide kanten te horen is, is nodig)…
+Diversity	Diversity
+Diversity: {0} in the other ear	Diversity: {0} in het andere oor
+Diversity: audio output not available ({0})	Diversity: geluidsuitgang niet beschikbaar ({0})
+Diversity: {0}: audio not available ({1})	Diversity: {0}: geluid niet beschikbaar ({1})
+Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR in het ene oor, {0} in het andere; WebSDR-vertraging meten…
+Diversity off: {0} is no longer available	Diversity uit: {0} is niet meer beschikbaar
+Diversity: no audio from {0}	Diversity: geen geluid van {0}
+Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: geluid van {0} {1} s vertraagd om gelijk te lopen met de WebSDR
 The rig is still not answering: check that it is switched on and the link settings	De transceiver antwoordt nog steeds niet: controleer of hij aanstaat en de verbindingsinstellingen
 SDRLink: no link with OmniRig	SDRLink: geen verbinding met OmniRig
 Last message: 	Laatste melding: 

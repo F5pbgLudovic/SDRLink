@@ -26,7 +26,7 @@ Overview; each feature is detailed further down in its own section.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (box inside the button; click: options and level), **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
-6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC** and **Reset WebSDR** (since 1.31).
+6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** check box (since 1.40).
 7. **The WebSDR page**, then the **status bar** (messages, update link).
 
 ## All right-clicks
@@ -55,6 +55,7 @@ Overview; each feature is detailed further down in its own section.
 | "WebSDR volume" | ExpertSDR TCI port |
 | REC | rig sound card, REC button colour |
 | Reset WebSDR | **Auto** (restart when the sound is lost) and its time, **full reset** of the current WebSDR, colours of both states (since 1.37) |
+| Diversity | reception put in the other ear (rig, ExpertSDR, HDSDR on Windows 11), **WebSDR in the right ear**, measured delay (since 1.40) |
 | Status bar | last 20 messages, message types to hide |
 
 ## SDRLink files
@@ -248,7 +249,7 @@ Internet access is required. If a directory does not answer, the others are stil
 - **Only one receiver** is decoded, in this order:
   1. **the rig**: if Mute TRX is off and a rig sound card is chosen (REC's, right-click REC or Mute TRX); the rig volume must therefore be remotely controlled. During speech, listening to the rig on the PC is muted; the rig's own volume is not touched;
   2. **the WebSDR**, if Mute WebSDR is off: the page is set to volume 0 during speech (Mute WebSDR does not change);
-  3. **ExpertSDR**, then **HDSDR** (capture of the program's audio, Windows 10 version 2004 or later). Their raw audio **stays audible** under the decoded voice: muting a program in the Windows mixer would also mute what the decoder receives.
+  3. **ExpertSDR**, through its **TCI audio stream** (since 1.40; ExpertSDR's TCI server enabled, same port as for Mute ExpertSDR), then **HDSDR** (capture of the program's audio, **Windows 11** only since 1.40: on Windows 10 this capture only gives silence). Their raw audio **stays audible** under the decoded voice: muting a program in the Windows mixer would also mute what the decoder receives.
 - Speech is only played if the SNR is at least −5 dB: below that, the decoder can lock wrongly (for example on the wrong sideband) and would only output gibberish.
 - **When off, FreeDV uses no resources**: the decoder is not even loaded. When on, it takes about 7 to 10% of one processor core.
 - The decoder is FreeDV's (radae_nopy, by David Rowe and Peter B Marks, BSD licence; Opus FARGAN vocoder, BSD licence), the same as in PhoneSDRLink. It has not yet been tried on a real signal received live: only on the FreeDV project's off-air recording.
@@ -606,6 +607,27 @@ Automatic restart of the WebSDR when its sound is lost (server drop, idle timeou
 - In FM with a closed squelch, the silence counts as a loss of sound (3 restarts at most).
 - The choices (Auto, time) are kept.
 
+## Diversity listening (since 1.40)
+
+**Diversity** check box, on the audio row right after Reset WebSDR: the **WebSDR in one ear**, the **local receiver in the other** (the rig, ExpertSDR or HDSDR), like two receivers on two distant antennas. Your ears combine both: a signal fading on one side stays readable on the other (QSB), and QRM or local noise on one side is less disturbing. Use headphones or two speakers.
+- A WebSDR's audio always comes **late** (0.3 to 5 s depending on the server). SDRLink **measures this delay continuously** by comparing both sounds (rhythm of syllables, of CW keying, of fading) and **delays the local audio by the same amount**: both ears hear the same thing at the same moment. If the WebSDR's delay changes, it is found again by itself (in about 8 s).
+- **A signal heard on both sides** (same frequency, same mode) is needed to measure the delay. Until it is found, the button is **orange** and shows "Diversity …"; then it is **green** and shows the delay applied ("Diversity 1.8 s"), also given in the status bar. On noise alone nothing is locked: both sounds are played without alignment.
+- Both ears are brought **to the same level** automatically, whatever the volume of each receiver.
+- **Click**: on / off. **Right-click**:
+  - **In the other ear**: **Rig (REC sound card)**, **ExpertSDR (audio over TCI)**, **HDSDR**. Only the receivers available are offered: rig connected with its sound card chosen (right-click REC), ExpertSDR running, HDSDR running **on Windows 11**;
+  - **WebSDR in the right ear** (left otherwise);
+  - when on, the state: measured delay, or searching.
+- During diversity, SDRLink **silences the usual output** of each receiver and plays both sounds itself, on Windows' default audio output:
+  - **WebSDR**: the page is set to volume 0 (the audio is taken in the page before the volume);
+  - **rig**: its **AF gain is set to 0** (the audio received by the rig's sound card does not depend on it) and the rig on the PC is muted. This needs a rig whose volume SDRLink sets (TRX volume shown); otherwise, turn its volume down by hand. Turning the rig's volume knob sets its ear, and the speaker is silenced again;
+  - **ExpertSDR**: its audio comes through the **TCI audio stream** (ExpertSDR's TCI server enabled, same port as for Mute ExpertSDR); ExpertSDR is muted in the Windows mixer if it plays there, otherwise through TCI. If it does not play through Windows sound and also cuts its TCI stream when muted, its ear stays silent: make it play through Windows sound;
+  - **HDSDR** (Windows 11): turned down to −60 dB in the mixer; its audio is captured by Windows and brought back up.
+- **Mute** and **Volume** of each receiver set **its ear** (Mute WebSDR silences the WebSDR's ear, TRX volume the rig's…), without changing anything on the receiver itself.
+- **When transmitting**: the ears of the receivers ticked in the right-click menu of "Mute WebSDR while transmitting" are silenced as soon as you transmit, and stay silent afterwards for the delay applied plus the restore time ("restore after (ms)"): the end of your transmission, played late, is not heard. The rig's ear is silent while transmitting in all cases.
+- When it stops (box unchecked, rig disconnected, program closed, or SDRLink closed), **each receiver gets its own audio back**: page volume, rig AF gain, ExpertSDR and HDSDR as before.
+- The auto notch does not apply to the WebSDR's audio in diversity (the audio is taken before it).
+- The receiver chosen and the WebSDR's side are kept; the box itself is unchecked at each start.
+
 ## Frequency memories
 
 - **Memories** button (frequency row, after Save): opens the memories window.
@@ -692,6 +714,9 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.40**
+  - **Diversity** check box (after Reset WebSDR): **diversity listening**, the WebSDR in one ear and the rig, ExpertSDR or HDSDR in the other, the local audio **delayed automatically** to match the WebSDR.
+  - **ExpertSDR** decoded (FreeDV auto, digital modes, Mode ?) through its **TCI audio stream**: on Windows 10, capturing a program's audio only gave silence. **HDSDR** is now decoded on **Windows 11** only, for the same reason.
 - **1.39**
   - **Mode?** button: several signals in the passband are each read by their own CW, PSK and RTTY decoders; the **FT8 / FT4 slot rhythm** is recognised and gives the WebSDR's sound delay to the decoder.
 - **1.38**
