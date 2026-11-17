@@ -26,7 +26,7 @@ Overview; each feature is detailed further down in its own section.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (box inside the button; click: options and level), **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
-6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40).
+6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44).
 7. **The WebSDR page** with its **share**, **+** and **−** round buttons (since 1.43), then the **status bar** (messages, update link).
 
 ## All right-clicks
@@ -57,7 +57,7 @@ Overview; each feature is detailed further down in its own section.
 | "WebSDR volume" | ExpertSDR TCI port |
 | REC | rig sound card, REC button colour |
 | Reset WebSDR | **Auto** (restart when the sound is lost) and its time, **full reset** of the current WebSDR, colours of both states (since 1.37) |
-| Diversity | reception put in the other ear (rig, ExpertSDR, HDSDR on Windows 11), **WebSDR in the right ear**, measured delay (since 1.40), colour when off / measuring the delay / locked (since 1.41) |
+| Diversity | reception put in the other ear (rig, ExpertSDR, HDSDR on Windows 11, or **On two WebSDRs** since 1.44), **WebSDR in the right ear**, measured delay (since 1.40), colour when off / measuring the delay / locked (since 1.41) |
 | WebSDR page | **Hide the WebSDR address** at the top of the page menu (since 1.43) |
 | Share, +, − round buttons on the page | **position of the buttons** (6 places, vertical or horizontal), **Page zoom: automatic**, **Hide the WebSDR address** (since 1.43) |
 | Status bar | last 20 messages, message types to hide |
@@ -646,6 +646,19 @@ Automatic restart of the WebSDR when its sound is lost (server drop, idle timeou
 - The **auto notch** also applies to the WebSDR's ear (since 1.41; before, the audio was taken before it). If the SDRLINK cable or a decoder is also listening to the WebSDR, the audio is still taken before the notch (raw audio for them).
 - The receiver chosen and the WebSDR's side are kept; diversity itself is off at each start.
 
+### On two WebSDRs (since 1.44)
+
+With no rig or SDR at home, or to compare two distant stations: **two WebSDRs**, one in each ear (space diversity).
+- **Right-click Diversity**: **On two WebSDRs (the second one chosen in the box after Diversity)**. A **box** appears right after the Diversity button, with the same favorites list as the WebSDR box. Choose the **second WebSDR** there (or type its address, then Enter). It is remembered.
+- **Click Diversity**: the **WebSDR shown** in one ear, the **second one** in the other. The second one opens in a **hidden page** (it is not displayed) and only during diversity; it closes when diversity stops.
+- **All the controls stay on the WebSDR shown**: the second one takes its **frequency** and **mode** by itself (and the auto notch when it is on), at each change.
+- **WebSDR volume** and **Mute WebSDR** set **both ears**; "WebSDR in the right ear" puts the WebSDR shown on the right.
+- Either WebSDR may arrive first: SDRLink delays the one that is ahead (the second one may be up to 4 s behind the WebSDR shown, or about ten seconds ahead). Once locked, the button shows the **gap** between them ("Diversity 0.6 s") and the status bar says which one arrives first.
+- A signal **heard on both WebSDRs** is needed to find the delay; both must cover the frequency (for OpenWebRX, the band profile is chosen by itself).
+- Hidden address (right-click the page): the second WebSDR box shows stars too.
+- Going back to the rig, ExpertSDR or HDSDR (same right-click) hides the box; the second WebSDR chosen is kept.
+- Two WebSDRs at once means twice the data received; a full KiwiSDR may refuse the second connection.
+
 ## Frequency memories
 
 - **Memories** button (frequency row, after Save): opens the memories window.
@@ -914,6 +927,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.44**
+  - **Diversity on two WebSDRs**: right-click Diversity, **On two WebSDRs**; the second WebSDR is chosen in the box after the Diversity button. It is heard without being displayed, follows the frequency and mode of the WebSDR shown, and SDRLink aligns both sounds whichever arrives first.
 - **1.43**
   - **Share, + and − round buttons on the WebSDR page** (as in PhoneSDRLink), left click; right-click: 6 positions (corners, top centre, bottom centre), vertical or horizontal. + and −: page zoom kept per WebSDR (forgotten only by the full reset of the WebSDR). **Share**: PhoneSDRLink link copied to the clipboard.
   - **OpenWebRX**: page automatically reduced just enough to show the whole control panel (it went under the top banner on some screens).

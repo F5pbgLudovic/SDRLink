@@ -574,14 +574,17 @@ Colour when diversity is off	Farge når diversity er av
 Colour while measuring the delay	Farge under måling av forsinkelsen
 Colour when diversity is locked	Farge når diversity er låst
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity-lytting: WebSDR i det ene øret, riggen (eller ExpertSDR, eller HDSDR) i det andre, den lokale lyden forsinket så den passer til WebSDR. Klikk: på / av. Høyreklikk: mottak i det andre øret, WebSDR-side, målt forsinkelse
+second WebSDR	andre WebSDR
 In the other ear:	I det andre øret:
 Rig: first choose its sound card (right-click REC)	Rigg: velg først lydkortet (høyreklikk på REC)
 Rig (REC sound card)	Rigg (REC-lydkort)
 ExpertSDR (audio over TCI)	ExpertSDR (lyd over TCI)
 No local reception: connect the rig, or start ExpertSDR	Ingen lokalt mottak: koble til riggen, eller start ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	På to WebSDR (den andre velges i feltet etter Diversity)
 WebSDR in the right ear	WebSDR i høyre øre
 Diversity: WebSDR on the right	Diversity: WebSDR til høyre
 Diversity: WebSDR on the left	Diversity: WebSDR til venstre
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversity på to WebSDR: velg den andre i feltet etter Diversity
 Diversity off: each reception gets its own audio back	Diversity av: hvert mottak får sin egen lyd tilbake
 Diversity: first choose the rig's sound card (right-click REC)	Diversity: velg først riggens lydkort (høyreklikk på REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: ingen lokalt mottak (koble til riggen, eller start ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversity
 Diversity: {0} in the other ear	Diversity: {0} i det andre øret
 Diversity: audio output not available ({0})	Diversity: lydutgang ikke tilgjengelig ({0})
 Diversity: {0}: audio not available ({1})	Diversity: {0}: lyd ikke tilgjengelig ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversity: den viste WebSDR-en i det ene øret, «{0}» i det andre; måler forsinkelsen…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR i det ene øret, {0} i det andre; måler WebSDR-forsinkelsen…
 Diversity off: {0} is no longer available	Diversity av: {0} er ikke lenger tilgjengelig
 Diversity: no audio from {0}	Diversity: ingen lyd fra {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversity: to WebSDR låst, «{0}» kommer {1} s før den viste WebSDR-en
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversity: to WebSDR låst, «{0}» kommer {1} s etter den viste WebSDR-en
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: lyden fra {0} forsinket med {1} s så den passer til WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Andre WebSDR for diversity: bare lyden brukes, i det andre øret; den følger frekvensen og modusen til den viste WebSDR-en
+Diversity off: no second WebSDR	Diversity av: ingen andre WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: andre WebSDR «{0}»; måler forsinkelsen…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Andre WebSDR for diversity: «{0}» (knappen Diversity for å lytte)
+Diversity: cannot open the second WebSDR ({0})	Diversity: kan ikke åpne den andre WebSDR-en ({0})
 The rig is still not answering: check that it is switched on and the link settings	Radioen svarer fortsatt ikke: kontroller at den er slått på, og forbindelsesinnstillingene
 SDRLink: no link with OmniRig	SDRLink: ingen forbindelse med OmniRig
 Last message: 	Siste melding: 

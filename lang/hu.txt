@@ -574,14 +574,17 @@ Colour when diversity is off	Szín kikapcsolt diversitynél
 Colour while measuring the delay	Szín a késleltetés mérése közben
 Colour when diversity is locked	Szín szinkronizált diversitynél
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity hallgatás: a WebSDR az egyik fülben, a rádió (vagy ExpertSDR, vagy HDSDR) a másikban, a helyi hang a WebSDR-hez igazítva késleltetve. Kattintás: be / ki. Jobb kattintás: vétel a másik fülbe, WebSDR oldala, mért késleltetés
+second WebSDR	második WebSDR
 In the other ear:	A másik fülben:
 Rig: first choose its sound card (right-click REC)	Rádió: először válassza ki a hangkártyáját (jobb kattintás a REC-en)
 Rig (REC sound card)	Rádió (REC hangkártya)
 ExpertSDR (audio over TCI)	ExpertSDR (hang TCI-n át)
 No local reception: connect the rig, or start ExpertSDR	Nincs helyi vétel: csatlakoztassa a rádiót, vagy indítsa el az ExpertSDR-t
+On two WebSDRs (the second one chosen in the box after Diversity)	Két WebSDR-rel (a másodikat a Diversity utáni mezőben kell kiválasztani)
 WebSDR in the right ear	WebSDR a jobb fülben
 Diversity: WebSDR on the right	Diversity: WebSDR jobbra
 Diversity: WebSDR on the left	Diversity: WebSDR balra
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversity két WebSDR-rel: válassza ki a másodikat a Diversity utáni mezőben
 Diversity off: each reception gets its own audio back	Diversity ki: minden vétel visszakapja a saját hangját
 Diversity: first choose the rig's sound card (right-click REC)	Diversity: először válassza ki a rádió hangkártyáját (jobb kattintás a REC-en)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nincs helyi vétel (csatlakoztassa a rádiót, vagy indítsa el az ExpertSDR-t)
@@ -593,10 +596,18 @@ Diversity	Diversity
 Diversity: {0} in the other ear	Diversity: {0} a másik fülben
 Diversity: audio output not available ({0})	Diversity: a hangkimenet nem érhető el ({0})
 Diversity: {0}: audio not available ({1})	Diversity: {0}: a hang nem érhető el ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversity: a megjelenített WebSDR az egyik fülben, „{0}” a másikban; a késés mérése…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR az egyik fülben, {0} a másikban; a WebSDR késleltetésének mérése…
 Diversity off: {0} is no longer available	Diversity ki: {0} már nem érhető el
 Diversity: no audio from {0}	Diversity: nincs hang innen: {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversity: két WebSDR összehangolva, „{0}” {1} s-mal a megjelenített WebSDR előtt érkezik
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversity: két WebSDR összehangolva, „{0}” {1} s-mal a megjelenített WebSDR után érkezik
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: {0} hangja {1} s-mal késleltetve a WebSDR-hez igazítva
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Második WebSDR a diversityhez: csak a hangja kerül felhasználásra, a másik fülben; követi a megjelenített WebSDR frekvenciáját és üzemmódját
+Diversity off: no second WebSDR	Diversity ki: nincs második WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: második WebSDR „{0}”; a késés mérése…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Második WebSDR a diversityhez: „{0}” (hallgatás a Diversity gombbal)
+Diversity: cannot open the second WebSDR ({0})	Diversity: a második WebSDR nem nyitható meg ({0})
 The rig is still not answering: check that it is switched on and the link settings	A rádió még mindig nem válaszol: ellenőrizze, hogy be van-e kapcsolva, és a kapcsolat beállításait
 SDRLink: no link with OmniRig	SDRLink: nincs kapcsolat az OmniRiggel
 Last message: 	Utolsó üzenet: 

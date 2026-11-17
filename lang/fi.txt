@@ -574,14 +574,17 @@ Colour when diversity is off	Väri diversityn ollessa pois päältä
 Colour while measuring the delay	Väri viiveen mittauksen aikana
 Colour when diversity is locked	Väri diversityn ollessa lukittu
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity-kuuntelu: WebSDR toisessa korvassa, radio (tai ExpertSDR tai HDSDR) toisessa, paikallista ääntä viivästetään WebSDR:n mukaan. Napsautus: päällä / pois. Hiiren oikea painike: vastaanotto toiseen korvaan, WebSDR:n puoli, mitattu viive
+second WebSDR	toinen WebSDR
 In the other ear:	Toisessa korvassa:
 Rig: first choose its sound card (right-click REC)	Radio: valitse ensin sen äänikortti (hiiren oikea painike REC:ssä)
 Rig (REC sound card)	Radio (REC-äänikortti)
 ExpertSDR (audio over TCI)	ExpertSDR (ääni TCI:n kautta)
 No local reception: connect the rig, or start ExpertSDR	Ei paikallista vastaanottoa: yhdistä radio tai käynnistä ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Kahdella WebSDR:llä (toinen valitaan Diversity-painikkeen jälkeisestä kentästä)
 WebSDR in the right ear	WebSDR oikeassa korvassa
 Diversity: WebSDR on the right	Diversity: WebSDR oikealla
 Diversity: WebSDR on the left	Diversity: WebSDR vasemmalla
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversity kahdella WebSDR:llä: valitse toinen Diversity-painikkeen jälkeisestä kentästä
 Diversity off: each reception gets its own audio back	Diversity pois: jokainen vastaanotto saa oman äänensä takaisin
 Diversity: first choose the rig's sound card (right-click REC)	Diversity: valitse ensin radion äänikortti (hiiren oikea painike REC:ssä)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: ei paikallista vastaanottoa (yhdistä radio tai käynnistä ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversity
 Diversity: {0} in the other ear	Diversity: {0} toisessa korvassa
 Diversity: audio output not available ({0})	Diversity: äänilähtö ei ole käytettävissä ({0})
 Diversity: {0}: audio not available ({1})	Diversity: {0}: ääni ei ole käytettävissä ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversity: näytetty WebSDR toisessa korvassa, ”{0}” toisessa; viivettä mitataan…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR toisessa korvassa, {0} toisessa; mitataan WebSDR:n viivettä…
 Diversity off: {0} is no longer available	Diversity pois: {0} ei ole enää käytettävissä
 Diversity: no audio from {0}	Diversity: ei ääntä kohteesta {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversity: kaksi WebSDR:ää tahdistettu, ”{0}” saapuu {1} s ennen näytettyä WebSDR:ää
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversity: kaksi WebSDR:ää tahdistettu, ”{0}” saapuu {1} s näytetyn WebSDR:n jälkeen
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: kohteen {0} ääntä viivästetään {1} s WebSDR:n mukaan
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Toinen WebSDR diversityä varten: vain sen ääntä käytetään, toisessa korvassa; se seuraa näytetyn WebSDR:n taajuutta ja lähetemuotoa
+Diversity off: no second WebSDR	Diversity pois: ei toista WebSDR:ää
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: toinen WebSDR ”{0}”; viivettä mitataan…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Toinen WebSDR diversityä varten: ”{0}” (kuuntele Diversity-painikkeella)
+Diversity: cannot open the second WebSDR ({0})	Diversity: toista WebSDR:ää ei voi avata ({0})
 The rig is still not answering: check that it is switched on and the link settings	Radio ei vieläkään vastaa: tarkista, että se on päällä, sekä yhteyden asetukset
 SDRLink: no link with OmniRig	SDRLink: ei yhteyttä OmniRigiin
 Last message: 	Viimeisin viesti: 

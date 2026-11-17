@@ -574,14 +574,17 @@ Colour when diversity is off	Cor com a diversidade desativada
 Colour while measuring the delay	Cor durante a medição do atraso
 Colour when diversity is locked	Cor com a diversidade sincronizada
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Escuta em diversidade: o WebSDR num ouvido, o rádio (ou ExpertSDR, ou HDSDR) no outro, com o som local atrasado para coincidir com o WebSDR. Clique: ligar / desligar. Clique direito: receção no outro ouvido, lado do WebSDR, atraso medido
+second WebSDR	segundo WebSDR
 In the other ear:	No outro ouvido:
 Rig: first choose its sound card (right-click REC)	Rádio: escolha primeiro a sua placa de som (clique direito em REC)
 Rig (REC sound card)	Rádio (placa de som de REC)
 ExpertSDR (audio over TCI)	ExpertSDR (som por TCI)
 No local reception: connect the rig, or start ExpertSDR	Sem receção local: ligue o rádio ou inicie o ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Em dois WebSDR (o segundo escolhe-se na caixa a seguir a Diversidade)
 WebSDR in the right ear	WebSDR no ouvido direito
 Diversity: WebSDR on the right	Diversidade: WebSDR à direita
 Diversity: WebSDR on the left	Diversidade: WebSDR à esquerda
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversidade em dois WebSDR: escolha o segundo na caixa a seguir a Diversidade
 Diversity off: each reception gets its own audio back	Diversidade desligada: cada receção recupera o seu próprio som
 Diversity: first choose the rig's sound card (right-click REC)	Diversidade: escolha primeiro a placa de som do rádio (clique direito em REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversidade: sem receção local (ligue o rádio ou inicie o ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversidade
 Diversity: {0} in the other ear	Diversidade: {0} no outro ouvido
 Diversity: audio output not available ({0})	Diversidade: saída de som não disponível ({0})
 Diversity: {0}: audio not available ({1})	Diversidade: {0}: som não disponível ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversidade: o WebSDR apresentado num ouvido, «{0}» no outro; a medir o atraso…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversidade: WebSDR num ouvido, {0} no outro; a medir o atraso do WebSDR…
 Diversity off: {0} is no longer available	Diversidade desligada: {0} já não está disponível
 Diversity: no audio from {0}	Diversidade: sem som de {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversidade: dois WebSDR alinhados, «{0}» chega {1} s antes do WebSDR apresentado
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversidade: dois WebSDR alinhados, «{0}» chega {1} s depois do WebSDR apresentado
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversidade: som de {0} atrasado {1} s para coincidir com o WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Segundo WebSDR para a diversidade: só é usado o seu som, no outro ouvido; segue a frequência e o modo do WebSDR apresentado
+Diversity off: no second WebSDR	Diversidade desligada: sem segundo WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversidade: segundo WebSDR «{0}»; a medir o atraso…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Segundo WebSDR para a diversidade: «{0}» (botão Diversidade para ouvir)
+Diversity: cannot open the second WebSDR ({0})	Diversidade: não é possível abrir o segundo WebSDR ({0})
 The rig is still not answering: check that it is switched on and the link settings	O rádio continua sem responder: verifique se está ligado e as definições da ligação
 SDRLink: no link with OmniRig	SDRLink: sem ligação com o OmniRig
 Last message: 	Última mensagem: 

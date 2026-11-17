@@ -865,6 +865,7 @@ namespace SDRLink
             lblHdsdrVolumeCaption = Lbl("Volume HDSDR :", "HDSDR volume:");
             lblHdsdrVolumeCaption.Visible = trkHdsdrVolume.Visible = lblHdsdrVolume.Visible = false;
             CreateDiversityButton();
+            CreateDiv2Combo();   // second WebSDR de la diversité (1.44), juste après le bouton
             // Ordre : ⇄, les quatre Mute, puis chaque volume (libellé, réglette, valeur), et REC.
             // Les volumes masqués ne prennent pas de place : REC suit toujours le dernier volume affiché.
             audioOrder = new Control[]
@@ -874,7 +875,7 @@ namespace SDRLink
                 lblRigVolumeCaption, trkRigVolume, lblRigVolume,
                 lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
                 lblHdsdrVolumeCaption, trkHdsdrVolume, lblHdsdrVolume,
-                btnRec, btnReinit, chkDiversity,
+                btnRec, btnReinit, chkDiversity, cbUrl2,
             };
             audio.Controls.AddRange(audioOrder);
 
@@ -1587,6 +1588,7 @@ namespace SDRLink
             RefillUrlCombo();
             cbUrl.Text = settings.LastUrl;
             ApplyUrlMask();
+            UpdateDiv2Combo();
             PlacePageButtons();
             UpdateInterfacePanels();
             loading = false;
@@ -2517,6 +2519,7 @@ namespace SDRLink
             sdrF = f;
             sdrM = m;
             UpdateDisplays();
+            if (web2 != null) Div2Sync();   // second WebSDR de la diversité : même fréquence, même mode
             if (first && FitAllowed()) StartFit(3, 1500);   // OpenWebRX : panneau de commande vu en entier (1.43)
 
             string fam = Modes.SdrFamily(m);
@@ -4167,6 +4170,7 @@ namespace SDRLink
                 if (f.List == settings.CurrentList) cbUrl.Items.Add(f);
             cbUrl.EndUpdate();
             cbUrl.Text = text;
+            RefillDiv2Combo();
         }
 
         // Numéro de liste de chaque ligne du menu des listes (les listes vides n'y figurent pas).

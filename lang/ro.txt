@@ -574,14 +574,17 @@ Colour when diversity is off	Culoare cu diversitatea oprită
 Colour while measuring the delay	Culoare în timpul măsurării întârzierii
 Colour when diversity is locked	Culoare cu diversitatea sincronizată
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Ascultare în diversitate: WebSDR într-o ureche, stația (sau ExpertSDR, sau HDSDR) în cealaltă, sunetul local fiind întârziat pentru a se potrivi cu WebSDR. Clic: pornit / oprit. Clic dreapta: recepția în cealaltă ureche, partea WebSDR, întârzierea măsurată
+second WebSDR	al doilea WebSDR
 In the other ear:	În cealaltă ureche:
 Rig: first choose its sound card (right-click REC)	Stație: alegeți mai întâi placa ei de sunet (clic dreapta pe REC)
 Rig (REC sound card)	Stație (placa de sunet REC)
 ExpertSDR (audio over TCI)	ExpertSDR (sunet prin TCI)
 No local reception: connect the rig, or start ExpertSDR	Nicio recepție locală: conectați stația sau porniți ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Pe două WebSDR (al doilea se alege în caseta de după Diversitate)
 WebSDR in the right ear	WebSDR în urechea dreaptă
 Diversity: WebSDR on the right	Diversitate: WebSDR în dreapta
 Diversity: WebSDR on the left	Diversitate: WebSDR în stânga
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversitate pe două WebSDR: alegeți-l pe al doilea în caseta de după Diversitate
 Diversity off: each reception gets its own audio back	Diversitate oprită: fiecare recepție își primește sunetul înapoi
 Diversity: first choose the rig's sound card (right-click REC)	Diversitate: alegeți mai întâi placa de sunet a stației (clic dreapta pe REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversitate: nicio recepție locală (conectați stația sau porniți ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversitate
 Diversity: {0} in the other ear	Diversitate: {0} în cealaltă ureche
 Diversity: audio output not available ({0})	Diversitate: ieșirea audio nu este disponibilă ({0})
 Diversity: {0}: audio not available ({1})	Diversitate: {0}: sunet indisponibil ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversitate: WebSDR-ul afișat într-o ureche, „{0}” în cealaltă; se măsoară întârzierea…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversitate: WebSDR într-o ureche, {0} în cealaltă; se măsoară întârzierea WebSDR…
 Diversity off: {0} is no longer available	Diversitate oprită: {0} nu mai este disponibil
 Diversity: no audio from {0}	Diversitate: niciun sunet de la {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversitate: două WebSDR aliniate, „{0}” sosește cu {1} s înaintea WebSDR-ului afișat
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversitate: două WebSDR aliniate, „{0}” sosește cu {1} s după WebSDR-ul afișat
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversitate: sunetul de la {0} întârziat cu {1} s pentru a se potrivi cu WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Al doilea WebSDR pentru diversitate: se folosește doar sunetul lui, în cealaltă ureche; urmează frecvența și modul WebSDR-ului afișat
+Diversity off: no second WebSDR	Diversitate oprită: niciun al doilea WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversitate: al doilea WebSDR „{0}”; se măsoară întârzierea…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Al doilea WebSDR pentru diversitate: „{0}” (butonul Diversitate pentru ascultare)
+Diversity: cannot open the second WebSDR ({0})	Diversitate: al doilea WebSDR nu poate fi deschis ({0})
 The rig is still not answering: check that it is switched on and the link settings	Stația tot nu răspunde: verificați dacă este pornită și setările legăturii
 SDRLink: no link with OmniRig	SDRLink: nicio legătură cu OmniRig
 Last message: 	Ultimul mesaj: 

@@ -574,14 +574,17 @@ Colour when diversity is off	Värv, kui diversity on väljas
 Colour while measuring the delay	Värv viivituse mõõtmise ajal
 Colour when diversity is locked	Värv, kui diversity on lukustatud
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity-kuulamine: WebSDR ühes kõrvas, raadio (või ExpertSDR või HDSDR) teises, kohalik heli viivitatakse WebSDR-iga sobivaks. Klõps: sees / väljas. Paremklõps: vastuvõtt teise kõrva, WebSDR-i külg, mõõdetud viivitus
+second WebSDR	teine WebSDR
 In the other ear:	Teises kõrvas:
 Rig: first choose its sound card (right-click REC)	Raadio: valige esmalt selle helikaart (paremklõps REC-il)
 Rig (REC sound card)	Raadio (REC helikaart)
 ExpertSDR (audio over TCI)	ExpertSDR (heli TCI kaudu)
 No local reception: connect the rig, or start ExpertSDR	Kohalik vastuvõtt puudub: ühendage raadio või käivitage ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Kahe WebSDR-iga (teine valitakse väljal pärast nuppu Diversity)
 WebSDR in the right ear	WebSDR paremas kõrvas
 Diversity: WebSDR on the right	Diversity: WebSDR paremal
 Diversity: WebSDR on the left	Diversity: WebSDR vasakul
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversity kahe WebSDR-iga: valige teine väljal pärast nuppu Diversity
 Diversity off: each reception gets its own audio back	Diversity väljas: iga vastuvõtt saab oma heli tagasi
 Diversity: first choose the rig's sound card (right-click REC)	Diversity: valige esmalt raadio helikaart (paremklõps REC-il)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: kohalik vastuvõtt puudub (ühendage raadio või käivitage ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversity
 Diversity: {0} in the other ear	Diversity: {0} teises kõrvas
 Diversity: audio output not available ({0})	Diversity: heliväljund pole saadaval ({0})
 Diversity: {0}: audio not available ({1})	Diversity: {0}: heli pole saadaval ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversity: kuvatud WebSDR ühes kõrvas, „{0}“ teises; viivituse mõõtmine…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR ühes kõrvas, {0} teises; WebSDR-i viivituse mõõtmine…
 Diversity off: {0} is no longer available	Diversity väljas: {0} pole enam saadaval
 Diversity: no audio from {0}	Diversity: {0} ei anna heli
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversity: kaks WebSDR-i sünkroonis, „{0}“ saabub {1} s enne kuvatud WebSDR-i
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversity: kaks WebSDR-i sünkroonis, „{0}“ saabub {1} s pärast kuvatud WebSDR-i
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: {0} heli viivitatud {1} s, et see sobiks WebSDR-iga
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Teine WebSDR diversity jaoks: kasutatakse ainult selle heli, teises kõrvas; see järgib kuvatud WebSDR-i sagedust ja modulatsiooni
+Diversity off: no second WebSDR	Diversity väljas: teist WebSDR-i pole
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: teine WebSDR „{0}“; viivituse mõõtmine…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Teine WebSDR diversity jaoks: „{0}“ (kuulamiseks nupp Diversity)
+Diversity: cannot open the second WebSDR ({0})	Diversity: teist WebSDR-i ei saa avada ({0})
 The rig is still not answering: check that it is switched on and the link settings	Jaam ei vasta ikka veel: kontrollige, et see on sisse lülitatud, ja ühenduse seadeid
 SDRLink: no link with OmniRig	SDRLink: ühendus OmniRigiga puudub
 Last message: 	Viimane teade: 

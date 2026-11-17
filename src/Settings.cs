@@ -62,7 +62,8 @@ namespace SDRLink
         public void DigiSet(string k, int v) { Digi[k] = v; }
         public void DigiSet(string k, bool v) { Digi[k] = v ? 1 : 0; }
         public bool RigMonitor;            // clic droit sur Mute TX : carte son du poste rejouée sur le PC quand Mute TX n'est pas actif
-        public int DiversitySource = 1;   // Diversité : réception locale mise dans l'autre oreille (1 poste, 2 ExpertSDR par TCI, 3 HDSDR sous Windows 11)
+        public int DiversitySource = 1;   // Diversité : réception locale mise dans l'autre oreille (1 poste, 2 ExpertSDR par TCI, 3 HDSDR sous Windows 11, 4 second WebSDR)
+        public string Div2Url = "";        // Diversité sur deux WebSDR (1.44) : adresse du second WebSDR, écouté sans être affiché
         public bool DiversitySwap;         // Diversité : WebSDR à droite (à gauche sinon)
         public string DiversityOut = "";   // Diversité : sortie (identifiant Windows ; vide = sortie par défaut ; pas dans l'interface)
         // Couleurs choisies par clic droit sur les boutons (clé → RVB) ; clé absente = couleur par défaut.
@@ -314,7 +315,8 @@ namespace SDRLink
                     case "FirstSearch": s.FirstSearchDone = v != "0"; break;
                     case "CheckUpdates": s.CheckUpdates = v != "0"; break;
                     case "RigMonitor": s.RigMonitor = v == "1"; break;
-                    case "DiversitySource": s.DiversitySource = Math.Max(1, Math.Min(3, Int(v, 1))); break;
+                    case "DiversitySource": s.DiversitySource = Math.Max(1, Math.Min(4, Int(v, 1))); break;
+                    case "Div2Url": s.Div2Url = v; break;
                     case "DiversitySwap": s.DiversitySwap = v == "1"; break;
                     case "DiversityOut": s.DiversityOut = v; break;
                     case "FreeDvAuto": s.FreeDvAuto = v == "1"; break;
@@ -476,6 +478,7 @@ namespace SDRLink
             Line(sb, "RigMonitor", RigMonitor ? 1 : 0);
             Line(sb, "DiversitySource", DiversitySource);
             Line(sb, "DiversitySwap", DiversitySwap ? 1 : 0);
+            if (Div2Url.Length > 0) Line(sb, "Div2Url", Div2Url);
             if (DiversityOut.Length > 0) Line(sb, "DiversityOut", DiversityOut);
             Line(sb, "FreeDvAuto", FreeDvAuto ? 1 : 0);
             Line(sb, "FreeDvV2", FreeDvV2 ? 1 : 0);

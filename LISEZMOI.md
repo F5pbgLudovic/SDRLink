@@ -25,7 +25,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (case dans le bouton ; clic : options et niveau), **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
-6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40).
+6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40), suivi, quand la diversité est réglée **sur deux WebSDR**, de la case du **second WebSDR** (depuis la 1.44).
 7. **La page du WebSDR** avec ses ronds **partage**, **+** et **−** (depuis la 1.43), puis la **barre d'état** (messages, lien de mise à jour).
 
 ## Tous les clics droits
@@ -56,7 +56,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | « Volume WebSDR » | port TCI d'ExpertSDR |
 | REC | carte son du poste, couleur du bouton REC |
 | Réinit WebSDR | **Auto** (relance quand le son est perdu) et son délai, **réinitialisation totale** du WebSDR en cours, couleurs des deux états (depuis la 1.37) |
-| Diversité | réception mise dans l'autre oreille (poste, ExpertSDR, HDSDR sous Windows 11), **WebSDR dans l'oreille droite**, retard mesuré (depuis la 1.40), couleur arrêtée / recherche du retard / calée (depuis la 1.41) |
+| Diversité | réception mise dans l'autre oreille (poste, ExpertSDR, HDSDR sous Windows 11, ou **Sur deux WebSDR** depuis la 1.44), **WebSDR dans l'oreille droite**, retard mesuré (depuis la 1.40), couleur arrêtée / recherche du retard / calée (depuis la 1.41) |
 | Page du WebSDR | **Masquer l'adresse du WebSDR** en tête du menu de la page (depuis la 1.43) |
 | Ronds partage, +, − sur la page | **position des boutons** (6 places, verticale ou horizontale), **Zoom de la page : automatique**, **Masquer l'adresse du WebSDR** (depuis la 1.43) |
 | Barre d'état | 20 derniers messages, types de messages à ne plus afficher |
@@ -645,6 +645,19 @@ Bouton **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **We
 - Le **notch automatique** s'applique aussi à l'oreille du WebSDR (depuis la 1.41 ; avant, le son était pris avant lui). Si le câble SDRLINK ou un décodeur écoute aussi le WebSDR, le son reste pris avant le notch (son brut pour eux).
 - La réception choisie et le côté du WebSDR sont conservés ; la diversité, elle, est arrêtée à chaque démarrage.
 
+### Sur deux WebSDR (depuis la 1.44)
+
+Sans poste ni SDR à la maison, ou pour comparer deux stations éloignées : **deux WebSDR**, un dans chaque oreille (diversité d'emplacement).
+- **Clic droit sur Diversité** : **Sur deux WebSDR (le second choisi dans la case après Diversité)**. Une **case** apparaît juste après le bouton Diversité, avec la même liste de favoris que la case WebSDR. Choisissez-y le **second WebSDR** (ou tapez son adresse, puis Entrée). Il est retenu.
+- **Clic sur Diversité** : le **WebSDR affiché** dans une oreille, le **second** dans l'autre. Le second s'ouvre dans une **page cachée** (il n'est pas affiché) et seulement pendant la diversité ; il se ferme à l'arrêt.
+- **Toutes les commandes restent sur le WebSDR affiché** : le second prend tout seul sa **fréquence** et son **mode** (et le notch automatique s'il est en marche), à chaque changement.
+- **Volume WebSDR** et **Mute WebSDR** règlent les **deux oreilles** ; « WebSDR dans l'oreille droite » place le WebSDR affiché à droite.
+- L'un ou l'autre WebSDR peut arriver en premier : SDRLink retarde celui qui est en avance (le second peut avoir jusqu'à 4 s de retard sur le WebSDR affiché, ou une dizaine de secondes d'avance). Une fois calé, le bouton affiche l'**écart** entre les deux (« Diversité 0,6 s ») et la barre d'état dit lequel arrive avant.
+- Il faut un signal **entendu sur les deux WebSDR** pour trouver le retard ; les deux doivent couvrir la fréquence (pour OpenWebRX, le profil de la bande est choisi tout seul).
+- Adresse masquée (clic droit sur la page) : la case du second WebSDR passe aussi en étoiles.
+- Revenir au poste, à ExpertSDR ou à HDSDR (même clic droit) cache la case ; le second WebSDR choisi est gardé.
+- Deux WebSDR à la fois, c'est deux fois plus de données reçues ; un KiwiSDR plein peut refuser la connexion du second.
+
 ## Mémoires de fréquences
 
 - Bouton **Mémoires** (ligne des fréquences, après Save) : ouvre la fenêtre des mémoires.
@@ -913,6 +926,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.44**
+  - **Diversité sur deux WebSDR** : clic droit sur Diversité, **Sur deux WebSDR** ; le second WebSDR se choisit dans la case qui suit le bouton Diversité. Il est écouté sans être affiché, suit la fréquence et le mode du WebSDR affiché, et SDRLink cale les deux sons quel que soit celui qui arrive en premier.
 - **1.43**
   - **Ronds partage, + et − sur la page** du WebSDR (comme dans PhoneSDRLink), au clic gauche ; clic droit : 6 positions (coins, milieu haut, milieu bas), verticales ou horizontales. + et − : zoom de la page retenu par WebSDR (oublié seulement par la réinitialisation totale du WebSDR). **Partage** : lien de PhoneSDRLink copié dans le presse-papiers.
   - **OpenWebRX** : page réduite automatiquement juste assez pour voir tout le panneau de commande (il passait sous le bandeau du haut sur certains écrans).

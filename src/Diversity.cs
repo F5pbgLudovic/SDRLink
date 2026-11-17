@@ -19,7 +19,8 @@ namespace SDRLink
         const int EnvRate = 200, EnvDiv = Rate / EnvRate;      // enveloppe : une valeur toutes les 5 ms
         const int WinEnv = 8 * EnvRate;                         // fenêtre comparée : 8 s
         const int MaxLagEnv = 6 * EnvRate, MinLagEnv = -EnvRate * 3 / 10;   // retard cherché : -0,3 à 6 s
-        const int EnvCap = WinEnv + MaxLagEnv + EnvRate * 2;
+        const int EnvCap = WinEnv + MaxLagEnv + MaxLeadEnv + EnvRate * 2;
+        public const int MaxLeadEnv = 4 * EnvRate;              // deux WebSDR (1.44) : le second peut aussi arriver jusqu'à 4 s après le premier
         const int Margin = Rate * 12 / 100;                    // 120 ms de marge pour les paquets du WebSDR (blocs de 85 ms)
         const int JumpLimit = Rate * 3 / 100;                   // écart de plus de 30 ms : on recale
         const int Fade = Rate / 100;                            // fondu de 10 ms à chaque recalage
@@ -31,10 +32,17 @@ namespace SDRLink
         public volatile float GainA = 1, GainB = 1;
         public volatile bool Swap;
         public volatile float MaxGainB = 30;                    // HDSDR très baissé dans le mélangeur : jusqu'à 1000
+        // Deux WebSDR (1.44) : B n'est pas forcément en avance sur A. La fenêtre de A comparée est prise LeadEnv plus tôt,
+        // ce qui permet de trouver un B en retard sur A (jusqu'à LeadEnv) ; A est alors lu dans le passé, B joué tout de suite.
+        public volatile int LeadEnv;
 
         // État du calage (pour la barre d'état et le bouton).
         public bool Locked { get { lock (sync) return locked; } }
         public double DelaySec { get { lock (sync) return (bIdx - play) / (double)Rate; } }
+        // Retard appliqué au WebSDR (A) : dernier échantillon reçu moins celui qu'on joue.
+        public double DelayASec { get { lock (sync) return play < 0 || !locked ? 0 : Math.Max(0, (aIdx - (play + (long)Math.Round(m))) / (double)Rate); } }
+        // Écart entre les deux réceptions (B moins A, en secondes) : positif si B arrive avant A.
+        public double GapSec { get { return DelaySec - DelayASec; } }
         public double Quality { get { lock (sync) return quality; } }
         public bool HearsA { get { return Environment.TickCount - lastA < 1500; } }
         public bool HearsB { get { return Environment.TickCount - lastB < 1500; } }
@@ -134,16 +142,17 @@ namespace SDRLink
         // Toutes les 2 s : comparaison des enveloppes, retard le plus probable.
         void Look()
         {
-            if (aEnvN < WinEnv || bEnvN < WinEnv + MaxLagEnv / 4) return;
+            int lead = Math.Max(0, Math.Min(MaxLeadEnv, LeadEnv));
+            if (aEnvN < WinEnv + lead || bEnvN < WinEnv + MaxLagEnv / 4) return;
             int n = WinEnv;
             double[] a = new double[n];
             double ma = 0;
-            for (int i = 0; i < n; i++) { a[i] = aEnv[(aEnvN - n + i) % EnvCap]; ma += a[i]; }
+            for (int i = 0; i < n; i++) { a[i] = aEnv[(aEnvN - lead - n + i) % EnvCap]; ma += a[i]; }
             ma /= n;
             double va = 0;
             for (int i = 0; i < n; i++) { a[i] -= ma; va += a[i] * a[i]; }
             if (va < 1e-6) return;
-            int maxLag = (int)Math.Min(MaxLagEnv, bEnvN - n);
+            int maxLag = (int)Math.Min(MaxLagEnv + lead, bEnvN - n);
             int lags = maxLag - MinLagEnv + 1;
             double[] c = new double[lags];
             double best = -2;
@@ -178,7 +187,7 @@ namespace SDRLink
             }
             // Fin de la fenêtre A : échantillon aEnvN*EnvDiv ; il correspond à l'échantillon B (bEnvN - s)*EnvDiv.
             // Ce décalage ne dépend pas de l'arrivée en paquets du WebSDR (contrairement au retard s lui-même).
-            double mNew = (aEnvN - (bEnvN - (MinLagEnv + bestI + frac))) * EnvDiv;
+            double mNew = (aEnvN - lead - (bEnvN - (MinLagEnv + bestI + frac))) * EnvDiv;
             // Deux mesures d'accord de suite (à 15 ms près) avant de changer le calage ; un premier calage net suffit.
             if (Math.Abs(mNew - candidateM) <= Rate * 15 / 1000) candidateHits++; else { candidateM = mNew; candidateHits = 1; }
             if (candidateHits < 2 && (locked || best < 0.45)) return;

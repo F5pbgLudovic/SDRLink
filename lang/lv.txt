@@ -574,14 +574,17 @@ Colour when diversity is off	Krāsa, kad diversity izslēgta
 Colour while measuring the delay	Krāsa aizkaves mērīšanas laikā
 Colour when diversity is locked	Krāsa, kad diversity nofiksēta
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity klausīšanās: WebSDR vienā ausī, raiduztvērējs (vai ExpertSDR, vai HDSDR) otrā, vietējā skaņa tiek aizkavēta, lai sakristu ar WebSDR. Klikšķis: ieslēgt / izslēgt. Labais klikšķis: uztvērums otrā ausī, WebSDR puse, izmērītā aizkave
+second WebSDR	otrais WebSDR
 In the other ear:	Otrā ausī:
 Rig: first choose its sound card (right-click REC)	Raiduztvērējs: vispirms izvēlieties tā skaņas karti (labais klikšķis uz REC)
 Rig (REC sound card)	Raiduztvērējs (REC skaņas karte)
 ExpertSDR (audio over TCI)	ExpertSDR (skaņa pa TCI)
 No local reception: connect the rig, or start ExpertSDR	Nav vietējā uztvēruma: pievienojiet raiduztvērēju vai startējiet ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Ar diviem WebSDR (otro izvēlas laukā aiz Diversity)
 WebSDR in the right ear	WebSDR labajā ausī
 Diversity: WebSDR on the right	Diversity: WebSDR pa labi
 Diversity: WebSDR on the left	Diversity: WebSDR pa kreisi
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversity ar diviem WebSDR: izvēlieties otro laukā aiz Diversity
 Diversity off: each reception gets its own audio back	Diversity izslēgta: katrs uztvērums atgūst savu skaņu
 Diversity: first choose the rig's sound card (right-click REC)	Diversity: vispirms izvēlieties raiduztvērēja skaņas karti (labais klikšķis uz REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nav vietējā uztvēruma (pievienojiet raiduztvērēju vai startējiet ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversity
 Diversity: {0} in the other ear	Diversity: {0} otrā ausī
 Diversity: audio output not available ({0})	Diversity: skaņas izvade nav pieejama ({0})
 Diversity: {0}: audio not available ({1})	Diversity: {0}: skaņa nav pieejama ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversity: rādītais WebSDR vienā ausī, “{0}” otrā; mēra aizturi…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR vienā ausī, {0} otrā; mēra WebSDR aizkavi…
 Diversity off: {0} is no longer available	Diversity izslēgta: {0} vairs nav pieejams
 Diversity: no audio from {0}	Diversity: nav skaņas no {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversity: divi WebSDR saskaņoti, “{0}” pienāk {1} s pirms rādītā WebSDR
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversity: divi WebSDR saskaņoti, “{0}” pienāk {1} s pēc rādītā WebSDR
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: {0} skaņa aizkavēta par {1} s, lai sakristu ar WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Otrais WebSDR diversity režīmam: tiek izmantota tikai tā skaņa, otrā ausī; tas seko rādītā WebSDR frekvencei un modulācijai
+Diversity off: no second WebSDR	Diversity izslēgta: nav otrā WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: otrais WebSDR “{0}”; mēra aizturi…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Otrais WebSDR diversity režīmam: “{0}” (klausīties ar pogu Diversity)
+Diversity: cannot open the second WebSDR ({0})	Diversity: otro WebSDR nevar atvērt ({0})
 The rig is still not answering: check that it is switched on and the link settings	Raidītājs joprojām neatbild: pārbaudiet, vai tas ir ieslēgts, un savienojuma iestatījumus
 SDRLink: no link with OmniRig	SDRLink: nav savienojuma ar OmniRig
 Last message: 	Pēdējais ziņojums: 

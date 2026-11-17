@@ -574,14 +574,17 @@ Colour when diversity is off	Color con la diversidad desactivada
 Colour while measuring the delay	Color durante la medición del retardo
 Colour when diversity is locked	Color con la diversidad sincronizada
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Escucha en diversidad: el WebSDR en un oído, el equipo (o ExpertSDR, o HDSDR) en el otro, con el sonido local retardado para coincidir con el WebSDR. Clic: activar / desactivar. Clic derecho: recepción en el otro oído, lado del WebSDR, retardo medido
+second WebSDR	segundo WebSDR
 In the other ear:	En el otro oído:
 Rig: first choose its sound card (right-click REC)	Equipo: elija primero su tarjeta de sonido (clic derecho en REC)
 Rig (REC sound card)	Equipo (tarjeta de sonido de REC)
 ExpertSDR (audio over TCI)	ExpertSDR (sonido por TCI)
 No local reception: connect the rig, or start ExpertSDR	Sin recepción local: conecte el equipo, o inicie ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Con dos WebSDR (el segundo se elige en la casilla tras Diversidad)
 WebSDR in the right ear	WebSDR en el oído derecho
 Diversity: WebSDR on the right	Diversidad: WebSDR a la derecha
 Diversity: WebSDR on the left	Diversidad: WebSDR a la izquierda
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversidad con dos WebSDR: elija el segundo en la casilla tras Diversidad
 Diversity off: each reception gets its own audio back	Diversidad desactivada: cada recepción recupera su propio sonido
 Diversity: first choose the rig's sound card (right-click REC)	Diversidad: elija primero la tarjeta de sonido del equipo (clic derecho en REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversidad: sin recepción local (conecte el equipo, o inicie ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversidad
 Diversity: {0} in the other ear	Diversidad: {0} en el otro oído
 Diversity: audio output not available ({0})	Diversidad: salida de sonido no disponible ({0})
 Diversity: {0}: audio not available ({1})	Diversidad: {0}: sonido no disponible ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversidad: el WebSDR mostrado en un oído, «{0}» en el otro; midiendo el retardo…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversidad: WebSDR en un oído, {0} en el otro; midiendo el retardo del WebSDR…
 Diversity off: {0} is no longer available	Diversidad desactivada: {0} ya no está disponible
 Diversity: no audio from {0}	Diversidad: sin sonido de {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversidad: dos WebSDR sincronizados, «{0}» llega {1} s antes del WebSDR mostrado
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversidad: dos WebSDR sincronizados, «{0}» llega {1} s después del WebSDR mostrado
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversidad: sonido de {0} retardado {1} s para coincidir con el WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Segundo WebSDR para la diversidad: solo se usa su sonido, en el otro oído; sigue la frecuencia y el modo del WebSDR mostrado
+Diversity off: no second WebSDR	Diversidad desactivada: no hay segundo WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversidad: segundo WebSDR «{0}»; midiendo el retardo…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Segundo WebSDR para la diversidad: «{0}» (botón Diversidad para escuchar)
+Diversity: cannot open the second WebSDR ({0})	Diversidad: no se puede abrir el segundo WebSDR ({0})
 The rig is still not answering: check that it is switched on and the link settings	El equipo sigue sin responder: compruebe que está encendido y los ajustes del enlace
 SDRLink: no link with OmniRig	SDRLink: sin enlace con OmniRig
 Last message: 	Último mensaje: 

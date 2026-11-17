@@ -574,14 +574,17 @@ Colour when diversity is off	Couleur diversité arrêtée
 Colour while measuring the delay	Couleur pendant la recherche du retard
 Colour when diversity is locked	Couleur diversité calée
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Écoute en diversité : le WebSDR dans une oreille, le poste (ou ExpertSDR, ou HDSDR) dans l'autre, le son local retardé pour tomber en même temps que le WebSDR. Clic : marche / arrêt. Clic droit : réception mise dans l'autre oreille, côté du WebSDR, retard mesuré
+second WebSDR	second WebSDR
 In the other ear:	Dans l'autre oreille :
 Rig: first choose its sound card (right-click REC)	Poste : choisissez d'abord sa carte son (clic droit sur REC)
 Rig (REC sound card)	Poste (carte son de REC)
 ExpertSDR (audio over TCI)	ExpertSDR (son par TCI)
 No local reception: connect the rig, or start ExpertSDR	Aucune réception locale : connectez le poste, ou lancez ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Sur deux WebSDR (le second choisi dans la case après Diversité)
 WebSDR in the right ear	WebSDR dans l'oreille droite
 Diversity: WebSDR on the right	Diversité : WebSDR à droite
 Diversity: WebSDR on the left	Diversité : WebSDR à gauche
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversité sur deux WebSDR : choisissez le second dans la case après Diversité
 Diversity off: each reception gets its own audio back	Diversité arrêtée : chaque réception retrouve son son
 Diversity: first choose the rig's sound card (right-click REC)	Diversité : choisissez d'abord la carte son du poste (clic droit sur REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversité : aucune réception locale (connectez le poste, ou lancez ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversité
 Diversity: {0} in the other ear	Diversité : {0} dans l'autre oreille
 Diversity: audio output not available ({0})	Diversité : sortie son indisponible ({0})
 Diversity: {0}: audio not available ({1})	Diversité : {0} : son indisponible ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversité : WebSDR affiché dans une oreille, « {0} » dans l'autre ; recherche du retard…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversité : WebSDR dans une oreille, {0} dans l'autre ; recherche du retard du WebSDR…
 Diversity off: {0} is no longer available	Diversité arrêtée : {0} n'est plus disponible
 Diversity: no audio from {0}	Diversité : pas de son de {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversité : deux WebSDR calés, « {0} » arrive {1} s avant le WebSDR affiché
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversité : deux WebSDR calés, « {0} » arrive {1} s après le WebSDR affiché
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversité : son de {0} retardé de {1} s pour tomber avec le WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Second WebSDR de la diversité : on n'entend que son son, dans l'autre oreille ; il suit la fréquence et le mode du WebSDR affiché
+Diversity off: no second WebSDR	Diversité arrêtée : pas de second WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversité : second WebSDR « {0} » ; recherche du retard…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Second WebSDR de la diversité : « {0} » (bouton Diversité pour l'écouter)
+Diversity: cannot open the second WebSDR ({0})	Diversité : second WebSDR impossible à ouvrir ({0})
 The rig is still not answering: check that it is switched on and the link settings	Le poste ne répond toujours pas : vérifiez qu'il est allumé et le réglage de la liaison
 SDRLink: no link with OmniRig	SDRLink : pas de liaison avec OmniRig
 Last message: 	Dernier message : 

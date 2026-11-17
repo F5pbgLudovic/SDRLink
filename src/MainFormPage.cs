@@ -344,11 +344,14 @@ namespace SDRLink
                 cbUrl.HandleCreated += delegate { ApplyUrlMask(); };   // nouvelle zone de texte (thème, taille du texte…)
                 translators.Add(UrlMaskTip);
             }
-            if (!cbUrl.IsHandleCreated) return;
-            IntPtr edit = UrlEditHandle();
-            if (edit == IntPtr.Zero) return;
-            SendMessage(edit, EM_SETPASSWORDCHAR, settings.HideUrl ? (IntPtr)'*' : IntPtr.Zero, IntPtr.Zero);
-            InvalidateRect(edit, IntPtr.Zero, true);
+            foreach (ComboBox cb in new[] { cbUrl, cbUrl2 })   // la case du second WebSDR (1.44) est masquée de même
+            {
+                if (cb == null || !cb.IsHandleCreated) continue;
+                IntPtr edit = UrlEditHandle(cb);
+                if (edit == IntPtr.Zero) continue;
+                SendMessage(edit, EM_SETPASSWORDCHAR, settings.HideUrl ? (IntPtr)'*' : IntPtr.Zero, IntPtr.Zero);
+                InvalidateRect(edit, IntPtr.Zero, true);
+            }
             UrlMaskTip();
         }
 
@@ -357,11 +360,13 @@ namespace SDRLink
             tips.SetToolTip(cbUrl, settings.HideUrl ? Lang.T("Adresse masquée : la flèche ouvre toujours la liste (clic droit sur la page du WebSDR pour revoir l'adresse)", "Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)") : "");
         }
 
-        IntPtr UrlEditHandle()
+        IntPtr UrlEditHandle() { return UrlEditHandle(cbUrl); }
+
+        static IntPtr UrlEditHandle(ComboBox cb)
         {
             ComboInfo ci = new ComboInfo();
             ci.cbSize = Marshal.SizeOf(typeof(ComboInfo));
-            return GetComboBoxInfo(cbUrl.Handle, ref ci) ? ci.hwndItem : IntPtr.Zero;
+            return GetComboBoxInfo(cb.Handle, ref ci) ? ci.hwndItem : IntPtr.Zero;
         }
 
         const int EM_SETPASSWORDCHAR = 0xCC;

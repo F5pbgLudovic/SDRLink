@@ -48,7 +48,7 @@ namespace SDRLink
             });
         }
 
-        string DivSourceName(int s) { return s == 1 ? Lang.T("poste", "rig") : s == 2 ? "ExpertSDR" : s == 3 ? "HDSDR" : "—"; }
+        string DivSourceName(int s) { return s == 1 ? Lang.T("poste", "rig") : s == 2 ? "ExpertSDR" : s == 3 ? "HDSDR" : s == DivTwoWebSdr ? Lang.T("second WebSDR", "second WebSDR") : "—"; }
 
         // Réceptions possibles maintenant (le menu ne propose qu'elles).
         bool DivAvailable(int s)
@@ -56,6 +56,7 @@ namespace SDRLink
             if (s == 1) return worker != null && settings.RecCardId.Length > 0;
             if (s == 2) return esdrRunning;
             if (s == 3) return hdsdrRunning && AudioTap.ProcessCaptureWorks;
+            if (s == DivTwoWebSdr) return webEnv != null && settings.Div2Url.Length > 0;
             return false;
         }
 
@@ -84,12 +85,16 @@ namespace SDRLink
                 it.Click += delegate { SetDiversitySource(src); };
                 m.Items.Add(it);
             }
-            if (!any)
+            if (!any && settings.DiversitySource != DivTwoWebSdr)
             {
                 ToolStripMenuItem none = new ToolStripMenuItem(Lang.T("Aucune réception locale : connectez le poste, ou lancez ExpertSDR", "No local reception: connect the rig, or start ExpertSDR"));
                 none.Enabled = false;
                 m.Items.Add(none);
             }
+            ToolStripMenuItem two = new ToolStripMenuItem(Lang.T("Sur deux WebSDR (le second choisi dans la case après Diversité)", "On two WebSDRs (the second one chosen in the box after Diversity)"));
+            two.Checked = (diversity != null ? divSource : settings.DiversitySource) == DivTwoWebSdr;
+            two.Click += delegate { SetDiversitySource(DivTwoWebSdr); };
+            m.Items.Add(two);
             m.Items.Add(new ToolStripSeparator());
             ToolStripMenuItem swap = new ToolStripMenuItem(Lang.T("WebSDR dans l'oreille droite", "WebSDR in the right ear"));
             swap.Checked = settings.DiversitySwap;
@@ -113,7 +118,9 @@ namespace SDRLink
         {
             settings.DiversitySource = s;
             settings.Save();
+            UpdateDiv2Combo();
             if (diversity != null) { StopDiversity(null); StartDiversity(); }
+            else if (s == DivTwoWebSdr && settings.Div2Url == "") ShowStatus(Lang.T("Diversité sur deux WebSDR : choisissez le second dans la case après Diversité", "Diversity on two WebSDRs: choose the second one in the box after Diversity"));
             else ShowStatus(Lang.F("Diversité : {0} dans l'autre oreille", "Diversity: {0} in the other ear", DivSourceName(s)));
             UpdateDiversityButton();
         }
@@ -127,6 +134,14 @@ namespace SDRLink
 
         void StartDiversity()
         {
+            if (settings.DiversitySource == DivTwoWebSdr && !DivAvailable(DivTwoWebSdr))
+            {
+                ShowStatus(Lang.T("Diversité sur deux WebSDR : choisissez le second dans la case après Diversité", "Diversity on two WebSDRs: choose the second one in the box after Diversity"));
+                UpdateDiv2Combo();
+                if (cbUrl2 != null) cbUrl2.Focus();
+                SetDiversityChecked(false);
+                return;
+            }
             int src = DivAvailable(settings.DiversitySource) ? settings.DiversitySource : 0;
             for (int s = 1; s <= 3 && src == 0; s++) if (DivAvailable(s)) src = s;
             if (src == 0)
@@ -155,12 +170,14 @@ namespace SDRLink
             diversity = new DiversityMixer(o.Write);
             diversity.Swap = settings.DiversitySwap;
             diversity.MaxGainB = src == 3 ? 3000 : 30;
+            diversity.LeadEnv = src == DivTwoWebSdr ? DiversityMixer.MaxLeadEnv : 0;
             Action<int, float[], int> feed = diversity.FeedB;
-            if (src == 1) divTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, feed);
+            if (src == DivTwoWebSdr) OpenWeb2();
+            else if (src == 1) divTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, feed);
             else if (src == 2) divTap = new AudioTap(settings.EsdrTciPort, "ExpertSDR", feed);
             else divTap = new AudioTap(null, RootProcess(hdsdrPids.Keys), "HDSDR", feed);
             AudioTap t = divTap;
-            t.Problem += msg => BeginInvokeSafe(delegate
+            if (t != null) t.Problem += msg => BeginInvokeSafe(delegate
             {
                 if (divTap != t || msg == null) return;
                 Log.Write("Diversité : son de « " + t.Name + " » : " + msg);
@@ -183,7 +200,8 @@ namespace SDRLink
             Log.Write("Diversité : WebSDR + " + DivSourceName(src));
             string warn = src == 1 && rigAfSupported != 1
                 ? Lang.T(" ; SDRLink ne peut pas couper le haut-parleur de ce poste : baissez son volume à la main", "; SDRLink cannot mute this rig's speaker: turn its volume down by hand") : "";
-            ShowStatus(Lang.F("Diversité : WebSDR dans une oreille, {0} dans l'autre ; recherche du retard du WebSDR…", "Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…", DivSourceName(src)) + warn);
+            if (src == DivTwoWebSdr) ShowStatus(Lang.F("Diversité : WebSDR affiché dans une oreille, « {0} » dans l'autre ; recherche du retard…", "Diversity: WebSDR shown in one ear, \"{0}\" in the other; measuring the delay…", Div2Name()));
+            else ShowStatus(Lang.F("Diversité : WebSDR dans une oreille, {0} dans l'autre ; recherche du retard du WebSDR…", "Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…", DivSourceName(src)) + warn);
         }
 
         void StopDiversity(string message)
@@ -193,6 +211,7 @@ namespace SDRLink
             AudioTap t = divTap;
             divTap = null;
             if (t != null) t.Stop();
+            CloseWeb2();
             StereoOut o = divOut;
             divOut = null;
             if (o != null) o.Stop();
@@ -260,16 +279,18 @@ namespace SDRLink
             if (d == null) return;
             bool tx = Transmitting;
             if (tx) divLastTx = DateTime.UtcNow;
-            double hold = d.DelaySec + (double)numUnmute.Value / 1000.0;
+            double hold = Math.Max(d.DelaySec, d.DelayASec) + (double)numUnmute.Value / 1000.0;
             bool txHold = tx || (DateTime.UtcNow - divLastTx).TotalSeconds < hold;
             bool muteA = txHold && chkMute.Checked && MuteOnTxFor(0);
-            bool muteB = txHold && (divSource == 1 || (chkMute.Checked && MuteOnTxFor(divSource)));
+            int bOf = divSource == DivTwoWebSdr ? 0 : divSource;   // second WebSDR : réglé comme le WebSDR affiché
+            bool muteB = txHold && (divSource == 1 || (chkMute.Checked && MuteOnTxFor(bOf)));
             d.GainA = muteA || sdrMuted || (fdvVoice && fdvSource == 0) ? 0 : trkVolume.Value / 100f;
             float b;
             if (divSource == 1) b = rigMuted ? 0 : trkRigVolume.Value / 100f;
             else if (divSource == 2) b = esdrMuted ? 0 : trkEsdrVolume.Value / 100f;
-            else b = hdsdrMuted ? 0 : trkHdsdrVolume.Value / 100f;
-            if (muteB || (fdvVoice && fdvSource == divSource)) b = 0;
+            else if (divSource == 3) b = hdsdrMuted ? 0 : trkHdsdrVolume.Value / 100f;
+            else b = sdrMuted ? 0 : trkVolume.Value / 100f;
+            if (muteB || (fdvVoice && fdvSource == bOf)) b = 0;
             d.GainB = b;
         }
 
@@ -285,9 +306,10 @@ namespace SDRLink
             if (divSource == 2 && !divEsdrSilenced) SilenceDivSource(true);
             if (divSource == 3 && !divHdsdrSilenced) SilenceDivSource(true);
             if (divSource == 1 && !divRigSilenced && rigAfSupported == 1) SilenceDivSource(true);
+            if (divSource == DivTwoWebSdr) Div2Sync();
             UpdateDiversityGains();
             bool locked = diversity.Locked;
-            double delay = diversity.DelaySec;
+            double delay = divSource == DivTwoWebSdr ? diversity.GapSec : diversity.DelaySec;
             if (locked && (!divShownLocked || Math.Abs(delay - divShownDelay) > 0.15))
             {
                 Log.Write("Diversité : retard " + delay.ToString("0.00", CultureInfo.InvariantCulture) + " s (corrélation " + diversity.Quality.ToString("0.00", CultureInfo.InvariantCulture) + ")");
@@ -304,6 +326,10 @@ namespace SDRLink
             if (d == null) return "";
             if (!d.HearsA) return Lang.T("Diversité : le WebSDR ne donne pas de son", "Diversity: the WebSDR gives no audio");
             if (!d.HearsB) return Lang.F("Diversité : pas de son de {0}", "Diversity: no audio from {0}", DivSourceName(divSource));
+            if (divSource == DivTwoWebSdr && d.Locked)
+                return d.GapSec >= 0
+                    ? Lang.F("Diversité : deux WebSDR calés, « {0} » arrive {1} s avant le WebSDR affiché", "Diversity: two WebSDRs locked, \"{0}\" arrives {1} s before the WebSDR shown", Div2Name(), Math.Abs(d.GapSec).ToString("0.00"))
+                    : Lang.F("Diversité : deux WebSDR calés, « {0} » arrive {1} s après le WebSDR affiché", "Diversity: two WebSDRs locked, \"{0}\" arrives {1} s after the WebSDR shown", Div2Name(), Math.Abs(d.GapSec).ToString("0.00"));
             if (!d.Locked) return Lang.T("Diversité : recherche du retard du WebSDR (il faut un signal entendu des deux côtés)…", "Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…");
             return Lang.F("Diversité : son de {0} retardé de {1} s pour tomber avec le WebSDR", "Diversity: {0} audio delayed by {1} s to match the WebSDR",
                 DivSourceName(divSource), d.DelaySec.ToString("0.00"));
@@ -320,7 +346,7 @@ namespace SDRLink
             DiversityMixer d = diversity;
             string word = Lang.T("Diversité", "Diversity");
             string t = word;
-            if (d != null) t += d.Locked ? " " + d.DelaySec.ToString("0.0") + " s" : " …";
+            if (d != null) t += d.Locked ? " " + (divSource == DivTwoWebSdr ? Math.Abs(d.GapSec) : d.DelaySec).ToString("0.0") + " s" : " …";
             string key = t + "|" + (d == null ? 0 : d.Locked ? 2 : 1) + "|" + Theme.Dark;
             if (!force && key == divButtonShown) return;
             bool resize = force || divButtonShown == null;

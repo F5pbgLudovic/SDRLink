@@ -574,14 +574,17 @@ Colour when diversity is off	Barva při vypnuté diverzitě
 Colour while measuring the delay	Barva při měření zpoždění
 Colour when diversity is locked	Barva při synchronizované diverzitě
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diverzitní poslech: WebSDR v jednom uchu, transceiver (nebo ExpertSDR, nebo HDSDR) ve druhém, místní zvuk je zpožděn podle WebSDR. Klik: zap. / vyp. Pravé tlačítko: příjem do druhého ucha, strana WebSDR, změřené zpoždění
+second WebSDR	druhý WebSDR
 In the other ear:	Ve druhém uchu:
 Rig: first choose its sound card (right-click REC)	Transceiver: nejdřív vyberte jeho zvukovou kartu (pravé tlačítko na REC)
 Rig (REC sound card)	Transceiver (zvuková karta REC)
 ExpertSDR (audio over TCI)	ExpertSDR (zvuk přes TCI)
 No local reception: connect the rig, or start ExpertSDR	Žádný místní příjem: připojte transceiver nebo spusťte ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Na dvou WebSDR (druhý se vybírá v poli za tlačítkem Diverzita)
 WebSDR in the right ear	WebSDR v pravém uchu
 Diversity: WebSDR on the right	Diverzita: WebSDR vpravo
 Diversity: WebSDR on the left	Diverzita: WebSDR vlevo
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diverzita na dvou WebSDR: vyberte druhý v poli za tlačítkem Diverzita
 Diversity off: each reception gets its own audio back	Diverzita vyp.: každý příjem dostane zpět svůj zvuk
 Diversity: first choose the rig's sound card (right-click REC)	Diverzita: nejdřív vyberte zvukovou kartu transceiveru (pravé tlačítko na REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diverzita: žádný místní příjem (připojte transceiver nebo spusťte ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diverzita
 Diversity: {0} in the other ear	Diverzita: {0} ve druhém uchu
 Diversity: audio output not available ({0})	Diverzita: zvukový výstup není k dispozici ({0})
 Diversity: {0}: audio not available ({1})	Diverzita: {0}: zvuk není k dispozici ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diverzita: zobrazený WebSDR v jednom uchu, „{0}“ ve druhém; měření zpoždění…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diverzita: WebSDR v jednom uchu, {0} ve druhém; měření zpoždění WebSDR…
 Diversity off: {0} is no longer available	Diverzita vyp.: {0} už není k dispozici
 Diversity: no audio from {0}	Diverzita: žádný zvuk z {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diverzita: oba WebSDR sladěny, „{0}“ přichází {1} s před zobrazeným WebSDR
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diverzita: oba WebSDR sladěny, „{0}“ přichází {1} s po zobrazeném WebSDR
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diverzita: zvuk {0} zpožděn o {1} s podle WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Druhý WebSDR pro diverzitu: používá se jen jeho zvuk, ve druhém uchu; sleduje kmitočet a druh provozu zobrazeného WebSDR
+Diversity off: no second WebSDR	Diverzita vyp.: žádný druhý WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diverzita: druhý WebSDR „{0}“; měření zpoždění…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Druhý WebSDR pro diverzitu: „{0}“ (poslech tlačítkem Diverzita)
+Diversity: cannot open the second WebSDR ({0})	Diverzita: druhý WebSDR nelze otevřít ({0})
 The rig is still not answering: check that it is switched on and the link settings	Transceiver stále neodpovídá: zkontrolujte, zda je zapnutý, a nastavení spojení
 SDRLink: no link with OmniRig	SDRLink: žádné spojení s OmniRig
 Last message: 	Poslední zpráva: 

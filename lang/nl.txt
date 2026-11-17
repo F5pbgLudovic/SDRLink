@@ -574,14 +574,17 @@ Colour when diversity is off	Kleur bij uitgeschakelde diversity
 Colour while measuring the delay	Kleur tijdens meten van de vertraging
 Colour when diversity is locked	Kleur bij vergrendelde diversity
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Diversity-luisteren: de WebSDR in het ene oor, de transceiver (of ExpertSDR, of HDSDR) in het andere, het lokale geluid vertraagd zodat het gelijkloopt met de WebSDR. Klik: aan / uit. Rechtsklik: ontvangst in het andere oor, WebSDR-kant, gemeten vertraging
+second WebSDR	tweede WebSDR
 In the other ear:	In het andere oor:
 Rig: first choose its sound card (right-click REC)	Transceiver: kies eerst de geluidskaart (rechtsklik op REC)
 Rig (REC sound card)	Transceiver (REC-geluidskaart)
 ExpertSDR (audio over TCI)	ExpertSDR (geluid via TCI)
 No local reception: connect the rig, or start ExpertSDR	Geen lokale ontvangst: sluit de transceiver aan, of start ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Op twee WebSDR's (de tweede kiest u in het vak na Diversity)
 WebSDR in the right ear	WebSDR in het rechteroor
 Diversity: WebSDR on the right	Diversity: WebSDR rechts
 Diversity: WebSDR on the left	Diversity: WebSDR links
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversity op twee WebSDR's: kies de tweede in het vak na Diversity
 Diversity off: each reception gets its own audio back	Diversity uit: elke ontvangst krijgt zijn eigen geluid terug
 Diversity: first choose the rig's sound card (right-click REC)	Diversity: kies eerst de geluidskaart van de transceiver (rechtsklik op REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: geen lokale ontvangst (sluit de transceiver aan, of start ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversity
 Diversity: {0} in the other ear	Diversity: {0} in het andere oor
 Diversity: audio output not available ({0})	Diversity: geluidsuitgang niet beschikbaar ({0})
 Diversity: {0}: audio not available ({1})	Diversity: {0}: geluid niet beschikbaar ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversity: getoonde WebSDR in één oor, "{0}" in het andere; vertraging wordt gemeten…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR in het ene oor, {0} in het andere; WebSDR-vertraging meten…
 Diversity off: {0} is no longer available	Diversity uit: {0} is niet meer beschikbaar
 Diversity: no audio from {0}	Diversity: geen geluid van {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversity: twee WebSDR's gelijkgezet, "{0}" komt {1} s vóór de getoonde WebSDR
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversity: twee WebSDR's gelijkgezet, "{0}" komt {1} s na de getoonde WebSDR
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: geluid van {0} {1} s vertraagd om gelijk te lopen met de WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Tweede WebSDR voor diversity: alleen het geluid wordt gebruikt, in het andere oor; hij volgt de frequentie en mode van de getoonde WebSDR
+Diversity off: no second WebSDR	Diversity uit: geen tweede WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: tweede WebSDR "{0}"; vertraging wordt gemeten…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Tweede WebSDR voor diversity: "{0}" (knop Diversity om te luisteren)
+Diversity: cannot open the second WebSDR ({0})	Diversity: tweede WebSDR kan niet worden geopend ({0})
 The rig is still not answering: check that it is switched on and the link settings	De transceiver antwoordt nog steeds niet: controleer of hij aanstaat en de verbindingsinstellingen
 SDRLink: no link with OmniRig	SDRLink: geen verbinding met OmniRig
 Last message: 	Laatste melding: 

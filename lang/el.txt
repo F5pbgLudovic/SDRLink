@@ -574,14 +574,17 @@ Colour when diversity is off	Χρώμα όταν το diversity είναι αν�
 Colour while measuring the delay	Χρώμα κατά τη μέτρηση της καθυστέρησης
 Colour when diversity is locked	Χρώμα όταν το diversity είναι κλειδωμένο
 Diversity listening: the WebSDR in one ear, the rig (or ExpertSDR, or HDSDR) in the other, the local audio delayed to match the WebSDR. Click: on / off. Right-click: reception put in the other ear, WebSDR side, measured delay	Ακρόαση Diversity: το WebSDR στο ένα αυτί, ο πομποδέκτης (ή το ExpertSDR ή το HDSDR) στο άλλο, ο τοπικός ήχος καθυστερεί ώστε να συμπίπτει με το WebSDR. Κλικ: ενεργό / ανενεργό. Δεξί κλικ: λήψη στο άλλο αυτί, πλευρά WebSDR, μετρημένη καθυστέρηση
+second WebSDR	δεύτερος WebSDR
 In the other ear:	Στο άλλο αυτί:
 Rig: first choose its sound card (right-click REC)	Πομποδέκτης: επιλέξτε πρώτα την κάρτα ήχου του (δεξί κλικ στο REC)
 Rig (REC sound card)	Πομποδέκτης (κάρτα ήχου REC)
 ExpertSDR (audio over TCI)	ExpertSDR (ήχος μέσω TCI)
 No local reception: connect the rig, or start ExpertSDR	Καμία τοπική λήψη: συνδέστε τον πομποδέκτη ή ξεκινήστε το ExpertSDR
+On two WebSDRs (the second one chosen in the box after Diversity)	Με δύο WebSDR (ο δεύτερος επιλέγεται στο πεδίο μετά το Diversity)
 WebSDR in the right ear	WebSDR στο δεξί αυτί
 Diversity: WebSDR on the right	Diversity: WebSDR δεξιά
 Diversity: WebSDR on the left	Diversity: WebSDR αριστερά
+Diversity on two WebSDRs: choose the second one in the box after Diversity	Diversity με δύο WebSDR: επιλέξτε τον δεύτερο στο πεδίο μετά το Diversity
 Diversity off: each reception gets its own audio back	Diversity ανενεργό: κάθε λήψη παίρνει πίσω τον δικό της ήχο
 Diversity: first choose the rig's sound card (right-click REC)	Diversity: επιλέξτε πρώτα την κάρτα ήχου του πομποδέκτη (δεξί κλικ στο REC)
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: καμία τοπική λήψη (συνδέστε τον πομποδέκτη ή ξεκινήστε το ExpertSDR)
@@ -593,10 +596,18 @@ Diversity	Diversity
 Diversity: {0} in the other ear	Diversity: {0} στο άλλο αυτί
 Diversity: audio output not available ({0})	Diversity: η έξοδος ήχου δεν είναι διαθέσιμη ({0})
 Diversity: {0}: audio not available ({1})	Diversity: {0}: ο ήχος δεν είναι διαθέσιμος ({1})
+Diversity: WebSDR shown in one ear, "{0}" in the other; measuring the delay…	Diversity: ο εμφανιζόμενος WebSDR στο ένα αυτί, «{0}» στο άλλο· μέτρηση καθυστέρησης…
 Diversity: WebSDR in one ear, {0} in the other; measuring the WebSDR delay…	Diversity: WebSDR στο ένα αυτί, {0} στο άλλο· μέτρηση της καθυστέρησης του WebSDR…
 Diversity off: {0} is no longer available	Diversity ανενεργό: το {0} δεν είναι πλέον διαθέσιμο
 Diversity: no audio from {0}	Diversity: κανένας ήχος από το {0}
+Diversity: two WebSDRs locked, "{0}" arrives {1} s before the WebSDR shown	Diversity: οι δύο WebSDR συγχρονίστηκαν, ο «{0}» φτάνει {1} s πριν από τον εμφανιζόμενο WebSDR
+Diversity: two WebSDRs locked, "{0}" arrives {1} s after the WebSDR shown	Diversity: οι δύο WebSDR συγχρονίστηκαν, ο «{0}» φτάνει {1} s μετά τον εμφανιζόμενο WebSDR
 Diversity: {0} audio delayed by {1} s to match the WebSDR	Diversity: ο ήχος του {0} καθυστερεί κατά {1} s ώστε να συμπίπτει με το WebSDR
+Second WebSDR for diversity: only its audio is used, in the other ear; it follows the frequency and mode of the WebSDR shown	Δεύτερος WebSDR για diversity: χρησιμοποιείται μόνο ο ήχος του, στο άλλο αυτί· ακολουθεί τη συχνότητα και τον τρόπο του εμφανιζόμενου WebSDR
+Diversity off: no second WebSDR	Diversity ανενεργό: δεν υπάρχει δεύτερος WebSDR
+Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: δεύτερος WebSDR «{0}»· μέτρηση καθυστέρησης…
+Second WebSDR for diversity: "{0}" (Diversity button to listen)	Δεύτερος WebSDR για diversity: «{0}» (κουμπί Diversity για ακρόαση)
+Diversity: cannot open the second WebSDR ({0})	Diversity: δεν είναι δυνατό το άνοιγμα του δεύτερου WebSDR ({0})
 The rig is still not answering: check that it is switched on and the link settings	Ο πομποδέκτης εξακολουθεί να μην απαντά: ελέγξτε ότι είναι αναμμένος και τις ρυθμίσεις σύνδεσης
 SDRLink: no link with OmniRig	SDRLink: καμία σύνδεση με το OmniRig
 Last message: 	Τελευταίο μήνυμα: 
