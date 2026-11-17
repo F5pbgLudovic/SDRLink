@@ -245,6 +245,7 @@ Store the current frequency…	Spremi trenutačnu frekvenciju…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: govor se dekodira čim se primi FreeDV signal (klik: uključi / isključi; desni klik: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Prebaci zvuk na sljedeći prijemnik (desni klik: prijemnik koji ostaje utišan)
 Button colour	Boja gumba
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Glasnoća uređaja koji se sluša na računalu (ne utječe na REC, diversity ni dekodere)
 Colour when connected	Boja kad je spojeno
 Colour when disconnected	Boja kad nije spojeno
 Colour when the rig is not answering yet	Boja dok uređaj još ne odgovara
@@ -316,6 +317,10 @@ permission denied	pristup odbijen
 error	pogreška
 SDRLINK cable	SDRLINK kabel
  (off) ▾	 (isklj.) ▾
+FreeDV volume:	Glasnoća FreeDV:
+WebSDR volume:	Glasnoća WebSDR-a:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Glasnoća FreeDV govora (pamti se odvojeno od glasnoće WebSDR-a, podesiva samo dok se reproducira FreeDV govor)
+WebSDR volume (kept for each favorite)	Glasnoća WebSDR-a (pamti se za svaki favorit)
 Mute TRX: connect the rig first	Utišaj TRX: najprije spojite uređaj
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnoća uređaja nije dostupna s ovim uređajem ili sučeljem (OmniRig, HRD, FT-817/818…)
 rig	uređaj
@@ -480,8 +485,8 @@ restore after (ms):	vrati nakon (ms):
 kHz:	kHz:
 Step:	Korak:
 WebSDR:	WebSDR:
-WebSDR volume:	Glasnoća WebSDR-a:
 TRX volume:	Glasnoća TRX:
+TRX volume on PC:	Glasnoća TRX na PC-u:
 ExpertSDR volume:	Glasnoća ExpertSDR-a:
 HDSDR volume:	Glasnoća HDSDR-a:
 Open log	Otvori dnevnik
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: prvo o
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nema lokalnog prijema (spojite uređaj ili pokrenite ExpertSDR)
 Diversity: no WebSDR open	Diversity: nijedan WebSDR nije otvoren
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink ne može utišati zvučnik ovog uređaja: stišajte ga ručno
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: utišani ExpertSDR ne šalje zvuk preko TCI-ja; pokušava se umjesto toga s njegovom glasnoćom na minimumu…
 Diversity: the WebSDR gives no audio	Diversity: WebSDR ne daje zvuk
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: mjerenje kašnjenja WebSDR-a (potreban je signal čujan na obje strane)…
 Diversity	Diversity

@@ -49,6 +49,8 @@ namespace SDRLink
         public int RecWidth = 1;           // largeur du bouton REC : 1 étroit (2 fois la hauteur), 2 large (4 fois)
         public bool AutoReinit;            // Réinit Auto WebSDR : relance du WebSDR quand son son est perdu depuis AutoReinitSec secondes
         public int AutoReinitSec = 30;     // 10 à 60 s, par pas de 5 (comme PhoneSDRLink)
+        public int FreeDvVolume = 100;     // volume de la parole FreeDV : curseur « Volume WebSDR » pendant la parole FreeDV (1.45)
+        public int RigMonitorVolume = 100; // « Volume TX sur PC » : écoute du poste sur le PC (1.45)
         public bool FreeDvAuto, FreeDvV2;    // bouton FreeDV auto (décoché au départ) ; RADE V2 au lieu de V1 (clic droit)
         public bool SstvAuto;              // bouton SSTV (décoché au départ)
         public int SstvX = 0, SstvY = 1000; // position de la fenêtre SSTV sur la page, en millièmes de la place libre (0,1000 = en bas à gauche)
@@ -321,6 +323,8 @@ namespace SDRLink
                     case "DiversityOut": s.DiversityOut = v; break;
                     case "FreeDvAuto": s.FreeDvAuto = v == "1"; break;
                     case "FreeDvV2": s.FreeDvV2 = v == "1"; break;
+                    case "FreeDvVolume": s.FreeDvVolume = Math.Max(0, Math.Min(100, Int(v, 100))); break;
+                    case "RigMonitorVolume": s.RigMonitorVolume = Math.Max(0, Math.Min(100, Int(v, 100))); break;
                     case "SstvAuto": s.SstvAuto = v == "1"; break;
                     case "SstvX": s.SstvX = Math.Max(0, Math.Min(1000, Int(v, 0))); break;
                     case "SstvY": s.SstvY = Math.Max(0, Math.Min(1000, Int(v, 1000))); break;
@@ -482,6 +486,8 @@ namespace SDRLink
             if (DiversityOut.Length > 0) Line(sb, "DiversityOut", DiversityOut);
             Line(sb, "FreeDvAuto", FreeDvAuto ? 1 : 0);
             Line(sb, "FreeDvV2", FreeDvV2 ? 1 : 0);
+            Line(sb, "FreeDvVolume", FreeDvVolume);
+            Line(sb, "RigMonitorVolume", RigMonitorVolume);
             Line(sb, "SstvAuto", SstvAuto ? 1 : 0);
             Line(sb, "SstvX", SstvX);
             Line(sb, "SstvY", SstvY);

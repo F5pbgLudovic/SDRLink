@@ -97,6 +97,8 @@ namespace SDRLink
         const int VoiceHoldMs = 1500, InputHoldMs = 500;
         // Sous ce SNR (dB), la parole est ignorée : le décodeur peut s'accrocher à tort (par exemple à un signal FreeDV reçu
         // sur l'autre bande latérale) et ne sortir que du charabia, avec un SNR annoncé très bas (vers −15 dB).
+        // Volume de la parole jouée (0 à 1) : curseur « Volume WebSDR » pendant la parole FreeDV (1.45).
+        public volatile float Volume = 1f;
         const int MinSnr = -5;
         const int StartSamples = 9600;   // 0,6 s de parole à 16 kHz
         readonly Thread thread;
@@ -229,6 +231,7 @@ namespace SDRLink
                         Raise(false, snr);
                     }
                     if (OutputMuted) player.Clear();
+                    player.Gain = Volume;
                     player.Pump();
                 }
             }
@@ -274,6 +277,8 @@ namespace SDRLink
         DateTime retryAt;
         bool waiting = true;
 
+        public volatile float Gain = 1f;   // volume (1.45 : volume FreeDV)
+
         public PcmOut(int rate) { inRate = rate; }
 
         public void Write(short[] pcm, int n)
@@ -317,7 +322,7 @@ namespace SDRLink
                 int o = 0;
                 for (int i = 0; i < todo; i++)
                 {
-                    float v = ring[(head + i) % ring.Length];
+                    float v = ring[(head + i) % ring.Length] * Gain;
                     for (int c = 0; c < channels; c++)
                     {
                         if (isFloat) Buffer.BlockCopy(BitConverter.GetBytes(v), 0, bytes, o, 4);
@@ -498,24 +503,61 @@ namespace SDRLink
             Uri uri = new Uri("ws://127.0.0.1:" + TciPort + "/");
             if (!System.Threading.Tasks.Task.Run(delegate { return w.ConnectAsync(uri, CancellationToken.None); }).Wait(2000) || w.State != System.Net.WebSockets.WebSocketState.Open)
                 throw new IOException(Lang.F("pas de serveur TCI sur le port {0}", "no TCI server on port {0}", TciPort));
-            foreach (string cmd in new[] { "audio_samplerate:48000;", "audio_stream_sample_type:float32;", "audio_stream_channels:2;", "audio_start:0;" })
-            {
-                byte[] b = System.Text.Encoding.UTF8.GetBytes(cmd);
-                w.SendAsync(new ArraySegment<byte>(b), System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None).Wait(2000);
-            }
-            Log.Write("Son TCI : connecté au port " + TciPort + " (" + Name + ")");
             byte[] buf = new byte[1 << 16];
             byte[] msg = new byte[1 << 16];
             int len = 0;
+            System.Threading.Tasks.Task<System.Net.WebSockets.WebSocketReceiveResult> pending = null;
+            // 1.45 : on attend d'abord la fin de l'annonce du serveur (« ready; », 3 s au plus), comme WSJT-X : ExpertSDR peut
+            // ignorer les commandes reçues avant. Avant la 1.45, elles partaient dès la connexion, et chez F5PBG le vrai
+            // ExpertSDR n'envoyait alors aucun son.
+            string protocol = "?";
+            bool readySeen = false;
+            DateTime until = DateTime.UtcNow.AddSeconds(3);
+            while (!stopping && !readySeen && DateTime.UtcNow < until && w.State == System.Net.WebSockets.WebSocketState.Open)
+            {
+                if (pending == null) pending = w.ReceiveAsync(new ArraySegment<byte>(buf), CancellationToken.None);
+                if (!pending.Wait(200)) continue;
+                var r0 = pending.Result;
+                pending = null;
+                if (r0.MessageType == System.Net.WebSockets.WebSocketMessageType.Close) break;
+                if (len + r0.Count > msg.Length) Array.Resize(ref msg, Math.Max(msg.Length * 2, len + r0.Count));
+                Buffer.BlockCopy(buf, 0, msg, len, r0.Count);
+                len += r0.Count;
+                if (!r0.EndOfMessage) continue;
+                if (r0.MessageType == System.Net.WebSockets.WebSocketMessageType.Text)
+                    foreach (string c in System.Text.Encoding.UTF8.GetString(msg, 0, len).Split(';'))
+                    {
+                        string k = c.Trim().ToLowerInvariant();
+                        if (k.StartsWith("protocol:")) protocol = c.Trim().Substring(9);
+                        else if (k == "ready") readySeen = true;
+                    }
+                len = 0;
+            }
+            if (stopping) return;
+            foreach (string cmd in new[] { "audio_samplerate:48000;", "audio_stream_sample_type:float32;", "audio_stream_channels:2;", "audio_start:0;" })
+                TciSend(w, cmd);
+            Log.Write("Son TCI : connecté au port " + TciPort + " (" + Name + ", protocole " + protocol + (readySeen ? ", ready reçu" : ", pas de ready en 3 s") + ")");
             DateTime lastAudio = DateTime.UtcNow;
-            bool reported = false;
+            bool reported = false, restarted = false, heardOnce = false;
+            int binary = 0, texts = 0;
+            string rejected = "aucune";
             while (!stopping && w.State == System.Net.WebSockets.WebSocketState.Open)
             {
-                var task = w.ReceiveAsync(new ArraySegment<byte>(buf), CancellationToken.None);
+                var task = pending ?? w.ReceiveAsync(new ArraySegment<byte>(buf), CancellationToken.None);
+                pending = null;
                 while (!task.Wait(500))
                 {
                     if (stopping) return;
-                    if (!reported && (DateTime.UtcNow - lastAudio).TotalSeconds > 4) { Report(Lang.T("ExpertSDR n'envoie pas de son par TCI", "ExpertSDR sends no audio over TCI")); reported = true; }
+                    double quiet = (DateTime.UtcNow - lastAudio).TotalSeconds;
+                    if (!reported && quiet > 4)
+                    {
+                        // Diagnostic dans le journal (ce qu'ExpertSDR a envoyé), puis une seconde demande du son.
+                        Log.Write("Son TCI : aucun son depuis 4 s (" + Name + ", trames binaires " + binary + ", dernière refusée : " + rejected + ", messages texte " + texts + ")");
+                        TciNoAudio = true;
+                        Report(Lang.T("ExpertSDR n'envoie pas de son par TCI", "ExpertSDR sends no audio over TCI"));
+                        reported = true;
+                        if (!restarted) { restarted = true; TciSend(w, "audio_start:0;"); }
+                    }
                 }
                 var r = task.Result;
                 if (r.MessageType == System.Net.WebSockets.WebSocketMessageType.Close) break;
@@ -523,14 +565,35 @@ namespace SDRLink
                 Buffer.BlockCopy(buf, 0, msg, len, r.Count);
                 len += r.Count;
                 if (!r.EndOfMessage) continue;
-                if (r.MessageType == System.Net.WebSockets.WebSocketMessageType.Binary && TciFrame(msg, len))
+                if (r.MessageType == System.Net.WebSockets.WebSocketMessageType.Binary)
                 {
-                    lastAudio = DateTime.UtcNow;
-                    if (reported || lastProblem.Length > 0) { Report(null); reported = false; }
+                    binary++;
+                    if (TciFrame(msg, len))
+                    {
+                        lastAudio = DateTime.UtcNow;
+                        TciNoAudio = false;
+                        if (!heardOnce) { heardOnce = true; Log.Write("Son TCI : son reçu (" + Name + ", " + BitConverter.ToUInt32(msg, 4) + " Hz, format " + BitConverter.ToUInt32(msg, 8) + ")"); }
+                        if (reported || lastProblem.Length > 0) { Report(null); reported = false; }
+                    }
+                    else if (len >= 32)
+                        rejected = "récepteur " + BitConverter.ToUInt32(msg, 0) + ", " + BitConverter.ToUInt32(msg, 4) + " Hz, format " + BitConverter.ToUInt32(msg, 8)
+                            + ", type " + BitConverter.ToUInt32(msg, 24) + ", voies " + BitConverter.ToUInt32(msg, 28) + ", " + len + " octets";
+                    else rejected = len + " octets";
                 }
+                else texts++;
                 len = 0;
             }
             if (!stopping) throw new IOException(Lang.T("liaison TCI fermée par ExpertSDR", "TCI link closed by ExpertSDR"));
+        }
+
+        // TCI : liaison ouverte mais aucun son reçu depuis 4 s (la diversité essaie alors une autre façon de faire taire ExpertSDR).
+        public volatile bool TciNoAudio;
+
+        static void TciSend(System.Net.WebSockets.ClientWebSocket w, string cmd)
+        {
+            byte[] b = System.Text.Encoding.UTF8.GetBytes(cmd);
+            try { w.SendAsync(new ArraySegment<byte>(b), System.Net.WebSockets.WebSocketMessageType.Text, true, CancellationToken.None).Wait(2000); }
+            catch (Exception ex) { Log.Write("Son TCI : envoi de « " + cmd + " » impossible : " + ex.Message); }
         }
 
         // Trame binaire TCI : true si c'est du son de réception du récepteur 0 (donné aux décodeurs, en mono).

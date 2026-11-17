@@ -245,6 +245,7 @@ Store the current frequency…	Lagre gjeldende frekvens…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: talen dekodes så snart et FreeDV-signal mottas (klikk: på / av; høyreklikk: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Bytt lyden til neste mottaker (høyreklikk: mottaker som forblir dempet)
 Button colour	Knappefarge
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Volum for riggen hørt på PC-en (påvirker verken REC, diversity eller dekoderne)
 Colour when connected	Farge når tilkoblet
 Colour when disconnected	Farge når frakoblet
 Colour when the rig is not answering yet	Farge mens radioen ennå ikke svarer
@@ -316,6 +317,10 @@ permission denied	tilgang nektet
 error	feil
 SDRLINK cable	SDRLINK-kabel
  (off) ▾	 (av) ▾
+FreeDV volume:	FreeDV-volum:
+WebSDR volume:	WebSDR-volum:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Volum for FreeDV-tale (lagres atskilt fra WebSDR-volumet, kan bare justeres mens FreeDV-tale spilles)
+WebSDR volume (kept for each favorite)	WebSDR-volum (lagres for hver favoritt)
 Mute TRX: connect the rig first	Demp rigg: koble til riggen først
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolum er ikke tilgjengelig med denne riggen eller dette grensesnittet (OmniRig, HRD, FT-817/818…)
 rig	rigg
@@ -480,8 +485,8 @@ restore after (ms):	gjenopprett etter (ms):
 kHz:	kHz:
 Step:	Steg:
 WebSDR:	WebSDR:
-WebSDR volume:	WebSDR-volum:
 TRX volume:	Riggvolum:
+TRX volume on PC:	Riggvolum på PC:
 ExpertSDR volume:	ExpertSDR-volum:
 HDSDR volume:	HDSDR-volum:
 Open log	Åpne logg
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: velg f
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: ingen lokalt mottak (koble til riggen, eller start ExpertSDR)
 Diversity: no WebSDR open	Diversity: ingen WebSDR åpen
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink kan ikke dempe høyttaleren på denne riggen: skru ned volumet for hånd
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: dempet ExpertSDR sender ingen lyd over TCI; prøver i stedet med volumet på minimum…
 Diversity: the WebSDR gives no audio	Diversity: WebSDR gir ingen lyd
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: måler WebSDR-forsinkelsen (et signal som høres på begge sider trengs)…
 Diversity	Diversity

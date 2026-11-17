@@ -26,7 +26,7 @@ Overview; each feature is detailed further down in its own section.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (box inside the button; click: options and level), **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
-6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44).
+6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume** ("FreeDV volume" during FreeDV speech, since 1.45), **TRX volume on PC** (when "Also hear the rig on the PC" is ticked, since 1.45), **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44).
 7. **The WebSDR page** with its **share**, **+** and **−** round buttons (since 1.43), then the **status bar** (messages, update link).
 
 ## All right-clicks
@@ -263,6 +263,7 @@ Internet access is required. If a directory does not answer, the others are stil
   1. **the rig**: if Mute TRX is off and a rig sound card is chosen (REC's, right-click REC or Mute TRX); the rig volume must therefore be remotely controlled. During speech, listening to the rig on the PC is muted; the rig's own volume is not touched;
   2. **the WebSDR**, if Mute WebSDR is off: the page is set to volume 0 during speech (Mute WebSDR does not change);
   3. **ExpertSDR**, through its **TCI audio stream** (since 1.40; ExpertSDR's TCI server enabled, same port as for Mute ExpertSDR), then **HDSDR** (capture of the program's audio, **Windows 11** only since 1.40: on Windows 10 this capture only gives silence). Their raw audio **stays audible** under the decoded voice: muting a program in the Windows mixer would also mute what the decoder receives.
+- **Speech volume** (since 1.45): while decoded speech plays, the **WebSDR volume** slider becomes **FreeDV volume** and sets the volume of the decoded voice, whichever receiver is decoded (rig, WebSDR, ExpertSDR or HDSDR). When the speech ends, it becomes WebSDR volume again and gets the WebSDR's value back. The two values are **separate**: the FreeDV volume can only be set during FreeDV speech, the WebSDR volume the rest of the time. The FreeDV volume is kept after a restart and is part of settings export and import (Configuration part). Before 1.45, the decoded voice was played at a fixed level.
 - Speech is only played if the SNR is at least −5 dB: below that, the decoder can lock wrongly (for example on the wrong sideband) and would only output gibberish.
 - **When off, FreeDV uses no resources**: the decoder is not even loaded. When on, it takes about 7 to 10% of one processor core.
 - The decoder is FreeDV's (radae_nopy, by David Rowe and Peter B Marks, BSD licence; Opus FARGAN vocoder, BSD licence), the same as in PhoneSDRLink. It has not yet been tried on a real signal received live: only on the FreeDV project's off-air recording.
@@ -300,11 +301,24 @@ Internet access is required. If a directory does not answer, the others are stil
 
 ## WebSDR volume
 
-The audio row, always at the start of the row below the WebSDR bar, reads from left to right: the ⇄ button, Mute WebSDR, Mute TRX, Mute ExpertSDR, Mute HDSDR, then WebSDR volume, TRX volume, ExpertSDR volume and HDSDR volume, each with its slider and its value in %. Mute TRX and TRX volume only appear if the rig volume is remotely controlled, Mute ExpertSDR and ExpertSDR volume only if ExpertSDR is running and answers (Windows audio or TCI), Mute HDSDR and HDSDR volume only if HDSDR is running, and ⇄ only if there are at least two audio sources to switch between. Missing controls leave no gap: the row closes up to the left. The **WebSDR volume** slider only sets the WebSDR audio, not that of Windows or other programs.
+The audio row, always at the start of the row below the WebSDR bar, reads from left to right: the ⇄ button, Mute WebSDR, Mute TRX, Mute ExpertSDR, Mute HDSDR, then WebSDR volume, TRX volume on PC (since 1.45), TRX volume, ExpertSDR volume and HDSDR volume, each with its slider and its value in %. Mute TRX and TRX volume only appear if the rig volume is remotely controlled, Mute ExpertSDR and ExpertSDR volume only if ExpertSDR is running and answers (Windows audio or TCI), Mute HDSDR and HDSDR volume only if HDSDR is running, and ⇄ only if there are at least two audio sources to switch between. Missing controls leave no gap: the row closes up to the left. The **WebSDR volume** slider only sets the WebSDR audio, not that of Windows or other programs.
 - It works on all WebSDR types. The audio starts without a click, even on UberSDR ("Click to start") and PhantomSDR ("Tap to enable audio"), since 1.20.
 - The volume is **remembered for each favorite**: when you reopen a favorite, you get its volume back.
 - WebSDRs that are not in favorites share a common volume, which is also remembered.
 - An added favorite keeps the current volume. Export (HTML or CSV) includes the volume, and import restores it.
+- **During FreeDV speech** (FreeDV auto, since 1.45), the same slider is called **FreeDV volume** and sets the decoded voice; it has its own value, kept apart. As soon as the speech ends, it becomes WebSDR volume again with the WebSDR's value (see FreeDV auto).
+
+### The volumes at a glance (1.45)
+
+| Slider | What it sets | When it is shown | Kept |
+|---|---|---|---|
+| **WebSDR volume** | the WebSDR audio (and both ears in diversity on two WebSDRs) | always, except during FreeDV speech | per favorite; one common volume for WebSDRs that are not favorites |
+| **FreeDV volume** (same slider) | the decoded FreeDV voice | only during FreeDV speech | one value, in the settings |
+| **TRX volume on PC** | the rig audio played again in the PC speakers | when "Also hear the rig on the PC" is ticked and Mute TRX is shown | one value, in the settings |
+| **TRX volume** | the rig's own AF gain, over CAT | when the rig volume is remotely controlled | in the rig |
+| **ExpertSDR volume**, **HDSDR volume** | the program's volume (Windows mixer or TCI) | when the program is running | in the program |
+
+All the volumes kept by SDRLink are part of settings export and import.
 
 ## Muting and rig volume
 
@@ -319,7 +333,8 @@ To the right of the WebSDR volume:
 - **Mute TRX**: mutes the **transceiver** audio by setting its AF gain to zero over CAT, then restores the volume on the second click. The audio is also restored on disconnection.
   - **Also hear the rig on the PC** (since 1.23, right-click Mute TRX, unticked at the start): the audio coming from the rig on the **rig sound card** (the same as REC's, for example "USB AUDIO CODEC") is also played in the **PC speakers** (Windows default output), with a delay of a few hundredths of a second, **as long as Mute TRX is off**. Mute TRX on (by hand, by ⇄ or while transmitting): the PC goes silent too, and the audio comes back as soon as Mute TRX is released. Only works with the rig connected, when Mute TRX is shown; the choice is kept.
   - No card chosen, or card missing: ticking the option opens the **Rig sound card** window (list of the Windows inputs) instead of an error message; Cancel changes nothing. **Rig sound card…** (same right-click menu) opens this window at any time. A card unplugged meanwhile is reported in the status bar; the audio starts again on its own when it comes back.
-  - The volume is set with the Windows volume: the USB output of many rigs does not follow their volume knob (nor TRX volume). Do not make a rig's transmit input the Windows default output: this audio would go back into it (like the WebSDR audio).
+  - **TRX volume on PC** (since 1.45): slider placed between WebSDR volume and TRX volume, shown only when this option is ticked (and Mute TRX is shown). It sets the rig's level **in the PC speakers**, from 0 to 100 %; 100 % is the fixed level of earlier versions. It touches **neither the rig** (TRX volume sets the rig's AF gain) **nor what the other features capture**: REC, diversity and the decoders (FreeDV auto, digital modes) each take the audio of the rig sound card directly, before this volume. Even at 0 % they get the full audio. The value is kept after a restart and is part of settings export and import (Configuration part).
+  - The USB output of many rigs does not follow their volume knob (nor TRX volume): TRX volume on PC (or the Windows volume) sets what you hear on the PC. Do not make a rig's transmit input the Windows default output: this audio would go back into it (like the WebSDR audio).
 - **Mute ExpertSDR**: only appears when the **ExpertSDR** software (2 or 3) is running and answers. It mutes and restores ExpertSDR's audio without going into ExpertSDR:
   - through the **Windows volume mixer** if ExpertSDR plays through Windows audio;
   - otherwise (audio coming out of the rig itself, MB1, or through ASIO) through the **TCI** `mute` command: you must then enable the TCI server in ExpertSDR (Options > TCI). SDRLink keeps a TCI link with ExpertSDR as long as it is running, even if the rig is connected some other way (HRD…): a mute or a volume set in ExpertSDR is also shown in SDRLink. A message explains this if the TCI server does not answer.
@@ -638,7 +653,7 @@ Automatic restart of the WebSDR when its sound is lost (server drop, idle timeou
 - During diversity, SDRLink **silences the usual output** of each receiver and plays both sounds itself, on Windows' default audio output:
   - **WebSDR**: the page is set to volume 0 (the audio is taken in the page before the volume);
   - **rig**: its **AF gain is set to 0** (the audio received by the rig's sound card does not depend on it) and the rig on the PC is muted. This needs a rig whose volume SDRLink sets (TRX volume shown); otherwise, turn its volume down by hand. Turning the rig's volume knob sets its ear, and the speaker is silenced again;
-  - **ExpertSDR**: its audio comes through the **TCI audio stream** (ExpertSDR's TCI server enabled, same port as for Mute ExpertSDR); ExpertSDR is muted in the Windows mixer if it plays there, otherwise through TCI. If it does not play through Windows sound and also cuts its TCI stream when muted, its ear stays silent: make it play through Windows sound;
+  - **ExpertSDR**: its audio comes through the **TCI audio stream** (ExpertSDR's TCI server enabled, same port as for Mute ExpertSDR); ExpertSDR is muted in the Windows mixer if it plays there, otherwise through TCI. Since 1.45, SDRLink waits until ExpertSDR is ready (TCI `ready` message) before asking for its audio stream: before, the request could arrive too early and be ignored, and ExpertSDR's ear stayed silent. If, once muted through TCI, ExpertSDR still sends no audio after 4 s, SDRLink unmutes it and turns its **volume down to the minimum** (−60 dB) instead, then brings its ear back up; the previous volume is restored when diversity stops. The log (`sdrlink.log`, lines "Son TCI :" and "Diversité :") tells what ExpertSDR sent;
   - **HDSDR** (Windows 11): turned down to −60 dB in the mixer; its audio is captured by Windows and brought back up.
 - **Mute** and **Volume** of each receiver set **its ear** (Mute WebSDR silences the WebSDR's ear, TRX volume the rig's…), without changing anything on the receiver itself.
 - **When transmitting**: the ears of the receivers ticked in the right-click menu of "Mute WebSDR while transmitting" are silenced as soon as you transmit, and stay silent afterwards for the delay applied plus the restore time ("restore after (ms)"): the end of your transmission, played late, is not heard. The rig's ear is silent while transmitting in all cases.
@@ -875,6 +890,7 @@ No power command driven by SDRLink (the power is set by hand):
     - **keep them and add those of the file** (default, no duplicates: same address in the same list for a favorite, same name, frequency and mode for a memory, identical profile for the scan). Extra lists in the file are created with their name; a profile of the file with the name of another profile is renamed "name (2)"; 10 profiles at most. The current Scan setup setting does not change;
     - **delete them and replace them with those of the file**.
   - A ticked configuration is always replaced by the one in the file.
+  - **A setting the file does not mention does not change** (since 1.45): for example, a file exported by an older version, without the FreeDV and TRX-on-PC volumes, keeps the current volumes. Before, a setting missing from the file went back to its default value.
   - Then **Import**: SDRLink restarts with the resulting settings. The previous settings are kept in `settings.avant-import.ini` (same folder): to go back, import that file with everything ticked and "delete them" chosen. The log shows what was added.
 - A file that does not contain SDRLink settings is refused (message in the status bar).
 - On another computer, check what depends on the machine: rig COM port, sound cards (SDRLINK cable, rig sound card for REC), rigctld path, recordings folder. A missing rig sound card is shown as "not connected" in the REC menu; if the window position falls outside the screens, it is ignored.
@@ -927,6 +943,11 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.45**
+  - **TRX volume on PC**: new slider between WebSDR volume and TRX volume when "Also hear the rig on the PC" is ticked. It only sets the audio played again in the PC speakers; REC, diversity and the decoders keep the full audio.
+  - **FreeDV volume**: during FreeDV speech, the WebSDR volume slider becomes FreeDV volume and sets the decoded voice (before, a fixed level). It keeps its own value, separate from the WebSDR's.
+  - Both new volumes are kept after a restart and exported; on **import**, a setting missing from the file no longer changes.
+  - **Diversity with ExpertSDR** fixed: SDRLink waits until ExpertSDR is ready before asking for its audio over TCI; if it stays silent once muted, its volume is turned down to the minimum instead.
 - **1.44**
   - **Diversity on two WebSDRs**: right-click Diversity, **On two WebSDRs**; the second WebSDR is chosen in the box after the Diversity button. It is heard without being displayed, follows the frequency and mode of the WebSDR shown, and SDRLink aligns both sounds whichever arrives first.
 - **1.43**

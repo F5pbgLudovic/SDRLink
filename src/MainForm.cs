@@ -31,8 +31,12 @@ namespace SDRLink
         TextBox txtCiv, txtHost;
         NumericUpDown numNetPort, numOffset, numUnmute;
         CheckBox chkRts, chkDtr, chkMode, chkAuto, chkMute, chkMini, chkReduced, chkTop, chkDark, chkPttView;
-        TrackBar trkVolume, trkRigVolume;
-        Label lblVolume, lblRigVolume;
+        TrackBar trkVolume, trkRigVolume, trkMonVolume;
+        Label lblVolume, lblRigVolume, lblMonVolume, lblMonVolumeCaption, lblVolumeCaption;
+        // Curseur « Volume WebSDR » (1.45) : il règle le WebSDR (sdrVolume), sauf pendant la parole FreeDV où il règle le
+        // volume FreeDV (settings.FreeDvVolume) ; volumeShowsFdv dit lequel il montre.
+        int sdrVolume = 100;
+        bool volumeShowsFdv;
         PaletteButton btnPalette;
         ComboBox cbFavList;
         UrlSuggest urlSuggest;
@@ -67,7 +71,7 @@ namespace SDRLink
         TrackBar trkEsdrVolume;
         FlowLayoutPanel audioRow;
         Control[] audioOrder;
-        bool? audioShownRig, audioShownEsdr;   // ce qui est affiché sur la ligne de son (null : pas encore réglé)
+        bool? audioShownRig, audioShownEsdr, audioShownMon;   // ce qui est affiché sur la ligne de son (null : pas encore réglé)
         bool esdrUnreachableShown;             // message « ExpertSDR ne répond pas » déjà donné pour ce lancement
         readonly ToolTip tips = new ToolTip();
         int rigAfSupported = -1;    // -1 inconnu (pas connecté), 0 non pris en charge, 1 disponible
@@ -772,7 +776,10 @@ namespace SDRLink
             // Réglages de son regroupés : ils passent à la ligne d'un seul bloc si la fenêtre est étroite.
             FlowLayoutPanel audio = SubRow();
             audioRow = audio;
-            Label lblVolumeCaption = Lbl("Volume WebSDR :", "WebSDR volume:");
+            lblVolumeCaption = new Label();
+            lblVolumeCaption.AutoSize = true;
+            lblVolumeCaption.Margin = new Padding(8, 7, 2, 0);
+            Tr(delegate { ShowVolumeCaption(); });
             // La ligne de son commence toujours une nouvelle ligne, même quand elle tiendrait après les boutons.
             rowUrl.SetFlowBreak(rowUrl.Controls[rowUrl.Controls.Count - 1], true);
             rowUrl.Controls.Add(audio);
@@ -830,6 +837,25 @@ namespace SDRLink
             // Volume TX et Mute TX ne sont affichés que si le volume du poste est télécommandé.
             lblRigVolumeCaption = Lbl("Volume TX :", "TRX volume:");
             lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = false;
+            // « Volume TX sur PC » (1.45) : volume de l'écoute du poste sur le PC, affiché quand elle est cochée (clic droit
+            // sur Mute TX), entre Volume WebSDR et Volume TX.
+            trkMonVolume = new TrackBar();
+            trkMonVolume.Minimum = 0;
+            trkMonVolume.Maximum = 100;
+            trkMonVolume.TickStyle = TickStyle.None;
+            trkMonVolume.AutoSize = false;
+            trkMonVolume.Size = new Size(110, 28);
+            trkMonVolume.SmallChange = 5;
+            trkMonVolume.LargeChange = 10;
+            trkMonVolume.Margin = new Padding(2, 2, 0, 0);
+            trkMonVolume.ValueChanged += delegate { OnMonVolumeChanged(); };
+            lblMonVolume = new Label();
+            lblMonVolume.AutoSize = false;
+            lblMonVolume.Size = new Size(44, 20);
+            lblMonVolume.Margin = new Padding(0, 7, 2, 0);
+            lblMonVolumeCaption = Lbl("Volume TX sur PC :", "TRX volume on PC:");
+            lblMonVolumeCaption.Visible = trkMonVolume.Visible = lblMonVolume.Visible = false;
+            Tr(delegate { tips.SetToolTip(trkMonVolume, Lang.T("Volume du poste écouté sur le PC (n'agit ni sur REC, ni sur la diversité, ni sur les décodeurs)", "Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)")); });
             // Volume d'ExpertSDR (mélangeur de Windows ou TCI), affiché quand ExpertSDR tourne.
             trkEsdrVolume = new TrackBar();
             trkEsdrVolume.Minimum = 0;
@@ -872,6 +898,7 @@ namespace SDRLink
             {
                 btnMuteSwap, btnMuteSdr, btnMuteRig, btnMuteEsdr, btnMuteHdsdr,
                 lblVolumeCaption, trkVolume, lblVolume,
+                lblMonVolumeCaption, trkMonVolume, lblMonVolume,
                 lblRigVolumeCaption, trkRigVolume, lblRigVolume,
                 lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
                 lblHdsdrVolumeCaption, trkHdsdrVolume, lblHdsdrVolume,
@@ -1577,7 +1604,10 @@ namespace SDRLink
             chkDark.Checked = settings.DarkMode;
             chkUpdates.Checked = settings.CheckUpdates;
             UpdateCallsignButton();
+            sdrVolume = settings.DefaultVolume;
             trkVolume.Value = settings.DefaultVolume;
+            trkMonVolume.Value = settings.RigMonitorVolume;
+            lblMonVolume.Text = trkMonVolume.Value + " %";
             chkMute.Checked = settings.MuteOnTx;
             chkNotch.Checked = settings.AutoNotch;
             numUnmute.Value = Math.Max(0, Math.Min(10000, settings.UnmuteDelayMs));
@@ -2976,7 +3006,7 @@ namespace SDRLink
             if (!settings.AutoReinit || core == null || sdrKind == "" || reinitAsking) return;
             // Son coupé volontairement dans SDRLink (Mute WebSDR, volume à 0, parole FreeDV jouée à la place) : pas de relance.
             // (La mesure se fait avant ce volume, mais on ne relance jamais un WebSDR que l'opérateur a fait taire.)
-            if (sdrMuted || trkVolume.Value == 0 || (fdvVoice && fdvSource == 0)) return;
+            if (sdrMuted || sdrVolume == 0 || (fdvVoice && fdvSource == 0)) return;
             string v = null;
             reinitAsking = true;
             try { v = await core.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.silentMs ? window.__sdrlink.silentMs() + '|' + (window.__sdrlink.heard ? 1 : 0) : '-1|0'"); }
@@ -3277,19 +3307,51 @@ namespace SDRLink
             // Volume mémorisé : celui du favori de la liste affichée, sinon celui d'une autre liste.
             currentFav = FavoriteInCurrentList(url) ?? settings.Favorites.Find(delegate(Favorite f) { return f.Matches(url); });
             int v = currentFav != null && currentFav.Volume >= 0 ? currentFav.Volume : settings.DefaultVolume;
+            sdrVolume = Math.Max(0, Math.Min(100, v));
+            if (!volumeShowsFdv) ShowVolumeSlider(sdrVolume);   // pendant la parole FreeDV, le curseur garde le volume FreeDV
+            ApplyVolume();
+        }
+
+        void ShowVolumeSlider(int v)
+        {
             volumeLoading = true;
             trkVolume.Value = Math.Max(0, Math.Min(100, v));
             volumeLoading = false;
-            ApplyVolume();
+            lblVolume.Text = trkVolume.Value + " %";
         }
 
         void OnVolumeChanged()
         {
             lblVolume.Text = trkVolume.Value + " %";
             if (volumeLoading) return;
-            if (currentFav != null) currentFav.Volume = trkVolume.Value;
-            else settings.DefaultVolume = trkVolume.Value;
+            if (volumeShowsFdv)
+            {
+                // Parole FreeDV : le curseur règle le volume FreeDV (mémorisé à part), pas celui du WebSDR.
+                settings.FreeDvVolume = trkVolume.Value;
+                if (freedv != null) freedv.Volume = settings.FreeDvVolume / 100f;
+                return;
+            }
+            sdrVolume = trkVolume.Value;
+            if (currentFav != null) currentFav.Volume = sdrVolume;
+            else settings.DefaultVolume = sdrVolume;
             ApplyVolume();
+        }
+
+        // Le curseur passe au volume FreeDV au début de la parole FreeDV, et revient au volume du WebSDR à sa fin (1.45).
+        void ShowFreeDvVolume(bool fdv)
+        {
+            if (volumeShowsFdv == fdv) return;
+            volumeShowsFdv = fdv;
+            ShowVolumeSlider(fdv ? settings.FreeDvVolume : sdrVolume);
+            ShowVolumeCaption();
+        }
+
+        void ShowVolumeCaption()
+        {
+            lblVolumeCaption.Text = volumeShowsFdv ? Lang.T("Volume FreeDV :", "FreeDV volume:") : Lang.T("Volume WebSDR :", "WebSDR volume:");
+            tips.SetToolTip(trkVolume, volumeShowsFdv
+                ? Lang.T("Volume de la parole FreeDV (mémorisé à part du volume du WebSDR, réglable seulement pendant la parole FreeDV)", "Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)")
+                : Lang.T("Volume du WebSDR (mémorisé pour chaque favori)", "WebSDR volume (kept for each favorite)"));
         }
 
         void ApplyVolume()
@@ -3297,7 +3359,7 @@ namespace SDRLink
             lblVolume.Text = trkVolume.Value + " %";
             UpdateDiversityGains();
             if (web.CoreWebView2 == null) return;
-            double v = sdrMuted || (fdvVoice && fdvSource == 0) || diversity != null ? 0 : trkVolume.Value / 100.0;   // parole FreeDV jouée, diversité : page muette
+            double v = sdrMuted || (fdvVoice && fdvSource == 0) || diversity != null ? 0 : sdrVolume / 100.0;   // parole FreeDV jouée, diversité : page muette
             web.CoreWebView2.ExecuteScriptAsync(string.Format(CultureInfo.InvariantCulture,
                 "window.__sdrlink && window.__sdrlink.setVolume({0});", v));
         }
@@ -3391,6 +3453,7 @@ namespace SDRLink
                     else
                     {
                         FreeDvEngine e = new FreeDvEngine(settings.FreeDvV2);
+                        e.Volume = settings.FreeDvVolume / 100f;
                         e.VoiceChanged += delegate(bool on, int snr) { BeginInvokeSafe(delegate { if (freedv == e) OnFreeDvVoice(on, snr); }); };
                         freedv = e;
                         Log.Write("FreeDV : décodage démarré (" + FreeDvName + ")");
@@ -3509,6 +3572,7 @@ namespace SDRLink
         {
             if (!on) { EndFreeDvVoice(); ShowStatus(Lang.T("FreeDV : fin de la parole, retour au son normal", "FreeDV: end of speech, back to normal audio")); UpdateFreeDvButton(); return; }
             fdvVoice = true;
+            ShowFreeDvVolume(true);
             // Son brut coupé pour le WebSDR (volume de la page) et le poste (écoute sur le PC). Pas pour ExpertSDR ni HDSDR :
             // la capture par programme de Windows ne reçoit plus rien d'un programme coupé dans le mélangeur.
             if (fdvSource == 0) ApplyVolume();
@@ -3523,6 +3587,7 @@ namespace SDRLink
         {
             bool was = fdvVoice;
             fdvVoice = false;
+            ShowFreeDvVolume(false);
             if (was) { ApplyVolume(); UpdateRigMonitor(); }
         }
 
@@ -3579,6 +3644,14 @@ namespace SDRLink
             ToolStripMenuItem pick = new ToolStripMenuItem(Lang.T("Carte son du poste…", "Rig sound card…"));
             pick.Click += delegate { AskRigCard(); };
             m.Items.Add(pick);
+        }
+
+        // « Volume TX sur PC » (1.45) : seulement le son de l'écoute du poste rejoué dans les haut-parleurs.
+        void OnMonVolumeChanged()
+        {
+            lblMonVolume.Text = trkMonVolume.Value + " %";
+            settings.RigMonitorVolume = trkMonVolume.Value;
+            if (rigMonitor != null) rigMonitor.Gain = settings.RigMonitorVolume / 100f;
         }
 
         // Pas de carte choisie (ou carte débranchée) : la fenêtre de choix s'ouvre au lieu d'un message d'erreur.
@@ -3648,7 +3721,8 @@ namespace SDRLink
                 rigMonitor = mon;
                 rigMonitorTrouble = false;
             }
-            if (rigMonitor != null) rigMonitor.Muted = RigMonitorMuted;
+            if (rigMonitor != null) { rigMonitor.Muted = RigMonitorMuted; rigMonitor.Gain = settings.RigMonitorVolume / 100f; }
+            UpdateAudioRow();
         }
 
         // Carte débranchée ou sortie perdue : un message dans la barre d'état, la lecture reprend seule dès que possible.
@@ -4033,9 +4107,13 @@ namespace SDRLink
         // deux sons à permuter. Les commandes masquées ne laissent pas de place vide (la ligne se resserre à gauche).
         void UpdateAudioRow()
         {
+            if (audioRow == null || trkMonVolume == null) return;
             bool rig = worker != null && rigAfSupported == 1, esdr = EsdrAvailable, hdsdr = hdsdrRunning;
             bool swap = rig || esdr || hdsdrWin;
-            if (audioShownRig == rig && audioShownEsdr == esdr && audioShownHdsdr == hdsdr && audioShownSwap == swap) return;
+            bool mon = rig && settings.RigMonitor;   // « Volume TX sur PC » : écoute du poste sur le PC cochée
+            if (audioShownRig == rig && audioShownEsdr == esdr && audioShownHdsdr == hdsdr && audioShownSwap == swap && audioShownMon == mon) return;
+            audioShownMon = mon;
+            lblMonVolumeCaption.Visible = trkMonVolume.Visible = lblMonVolume.Visible = mon;
             audioShownRig = rig;
             audioShownEsdr = esdr;
             audioShownHdsdr = hdsdr;
@@ -4058,7 +4136,7 @@ namespace SDRLink
 
         void ShowEsdrVolume(int pct)
         {
-            if (pct < 0 || trkEsdrVolume.Capture || trkEsdrVolume.Value == pct) return;   // pas pendant que l'on fait glisser le curseur
+            if (pct < 0 || trkEsdrVolume.Capture || trkEsdrVolume.Value == pct || divEsdrByVolume) return;   // diversité : volume d'ExpertSDR baissé par SDRLink, le curseur règle l'oreille   // pas pendant que l'on fait glisser le curseur
             esdrVolumeLoading = true;
             trkEsdrVolume.Value = Math.Max(0, Math.Min(100, pct));
             esdrVolumeLoading = false;
@@ -4068,7 +4146,7 @@ namespace SDRLink
         {
             UpdateDiversityGains();
             lblEsdrVolume.Text = EsdrAvailable ? trkEsdrVolume.Value + " %" : "—";
-            if (esdrVolumeLoading) return;
+            if (esdrVolumeLoading || divEsdrByVolume) return;
             if (esdrWin) { try { AudioEndpoints.ProcessVolume(IsExpertSdr, trkEsdrVolume.Value); } catch { } }
             else if (esdrTci != null && esdrTci.Connected) esdrTci.SetVolumePercent(trkEsdrVolume.Value);
         }
@@ -4223,7 +4301,7 @@ namespace SDRLink
                 if (d.ShowDialog(this) != DialogResult.OK) return;
                 // Le nouveau favori garde le volume actuel ; s'il s'agit de la page affichée dans la liste affichée, il devient le favori courant.
                 Favorite f = new Favorite(d.FavName, d.FavUrl);
-                f.Volume = trkVolume.Value;
+                f.Volume = sdrVolume;
                 f.List = d.FavList;
                 settings.Favorites.Add(f);
                 if (f.List == settings.CurrentList && web.CoreWebView2 != null && f.Matches(web.CoreWebView2.Source)) currentFav = f;

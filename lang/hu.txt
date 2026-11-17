@@ -245,6 +245,7 @@ Store the current frequency…	Az aktuális frekvencia tárolása…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: a beszéd dekódolása azonnal megtörténik, amint FreeDV-jel érkezik (kattintás: be / ki; jobb kattintás: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Hang átváltása a következő vevőre (jobb klikk: némítva maradó vevő)
 Button colour	Gomb színe
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	A gépen hallgatott rádió hangereje (nem hat a REC-re, a diversityre és a dekóderekre)
 Colour when connected	Szín csatlakoztatva
 Colour when disconnected	Szín bontott kapcsolatnál
 Colour when the rig is not answering yet	Szín, amíg a rádió még nem válaszol
@@ -316,6 +317,10 @@ permission denied	hozzáférés megtagadva
 error	hiba
 SDRLINK cable	SDRLINK kábel
  (off) ▾	 (ki) ▾
+FreeDV volume:	FreeDV hangerő:
+WebSDR volume:	WebSDR hangerő:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	A FreeDV beszéd hangereje (a WebSDR hangerejétől külön tárolva, csak FreeDV beszéd lejátszása közben állítható)
+WebSDR volume (kept for each favorite)	WebSDR hangerő (minden kedvenchez tárolva)
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
 rig	rádió
@@ -480,8 +485,8 @@ restore after (ms):	visszaállítás (ms):
 kHz:	kHz:
 Step:	Lépés:
 WebSDR:	WebSDR:
-WebSDR volume:	WebSDR hangerő:
 TRX volume:	TRX hangerő:
+TRX volume on PC:	TRX hangerő a gépen:
 ExpertSDR volume:	ExpertSDR hangerő:
 HDSDR volume:	HDSDR hangerő:
 Open log	Napló megnyitása
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: elősz
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nincs helyi vétel (csatlakoztassa a rádiót, vagy indítsa el az ExpertSDR-t)
 Diversity: no WebSDR open	Diversity: nincs megnyitott WebSDR
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; Az SDRLink nem tudja némítani ennek a rádiónak a hangszóróját: halkítsa le kézzel
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: a némított ExpertSDR nem küld hangot TCI-n; helyette minimális hangerővel próbálkozás…
 Diversity: the WebSDR gives no audio	Diversity: a WebSDR nem ad hangot
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: a WebSDR késleltetésének mérése (mindkét oldalon hallható jel kell)…
 Diversity	Diversity

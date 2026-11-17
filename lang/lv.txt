@@ -245,6 +245,7 @@ Store the current frequency…	Saglabāt pašreizējo frekvenci…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: runa tiek dekodēta, tiklīdz tiek uztverts FreeDV signāls (klikšķis: ieslēgt / izslēgt; labais klikšķis: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Pārslēgt skaņu uz nākamo uztvērēju (labais klikšķis: uztvērējs, kas paliek apklusināts)
 Button colour	Pogas krāsa
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Datorā klausītā raiduztvērēja skaļums (neietekmē REC, diversity un dekoderus)
 Colour when connected	Krāsa, kad savienots
 Colour when disconnected	Krāsa, kad atvienots
 Colour when the rig is not answering yet	Krāsa, kamēr raidītājs vēl neatbild
@@ -316,6 +317,10 @@ permission denied	atļauja liegta
 error	kļūda
 SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (izsl.) ▾
+FreeDV volume:	FreeDV skaļums:
+WebSDR volume:	WebSDR skaļums:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	FreeDV runas skaļums (saglabāts atsevišķi no WebSDR skaļuma, regulējams tikai FreeDV runas laikā)
+WebSDR volume (kept for each favorite)	WebSDR skaļums (saglabāts katrai izlasei)
 Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
 rig	raiduztvērējs
@@ -480,8 +485,8 @@ restore after (ms):	atjaunot pēc (ms):
 kHz:	kHz:
 Step:	Solis:
 WebSDR:	WebSDR:
-WebSDR volume:	WebSDR skaļums:
 TRX volume:	TRX skaļums:
+TRX volume on PC:	TRX skaļums datorā:
 ExpertSDR volume:	ExpertSDR skaļums:
 HDSDR volume:	HDSDR skaļums:
 Open log	Atvērt žurnālu
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: vispir
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nav vietējā uztvēruma (pievienojiet raiduztvērēju vai startējiet ExpertSDR)
 Diversity: no WebSDR open	Diversity: nav atvērta neviena WebSDR
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink nevar izslēgt šī raiduztvērēja skaļruni: samaziniet skaļumu ar roku
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: apklusinātais ExpertSDR nesūta skaņu pa TCI; tā vietā mēģina ar minimālu skaļumu…
 Diversity: the WebSDR gives no audio	Diversity: WebSDR nedod skaņu
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: mēra WebSDR aizkavi (vajadzīgs signāls, ko dzird abās pusēs)…
 Diversity	Diversity

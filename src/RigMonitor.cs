@@ -17,6 +17,9 @@ namespace SDRLink
 
         public readonly string CaptureId;
         public volatile bool Muted;
+        // « Volume TX sur PC » (1.45) : seulement le son rejoué dans les haut-parleurs. REC, la diversité et les décodeurs
+        // ouvrent leur propre capture de la carte : ce volume, même à 0, ne leur enlève rien.
+        public volatile float Gain = 1f;
         // Problème d'ouverture ou de lecture (appelé depuis le fil audio, une fois par message différent) ; null = tout va bien.
         public event Action<string> Problem;
         public string CardName { get; private set; }
@@ -201,10 +204,11 @@ namespace SDRLink
             int size = todo * outFmt.Align;
             if (outBytes.Length < size) outBytes = new byte[size];
             int o = 0, bytes = outFmt.Bits / 8;
+            float g = Gain;
             for (int i = 0; i < todo; i++)
             {
                 int k = (head + i) % (ring.Length / 2) * 2;
-                float l = ring[k], r = ring[k + 1];
+                float l = ring[k] * g, r = ring[k + 1] * g;
                 for (int c = 0; c < outFmt.Channels; c++)
                 {
                     float v = outFmt.Channels == 1 ? (l + r) * 0.5f : c % 2 == 0 ? l : r;

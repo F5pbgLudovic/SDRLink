@@ -245,6 +245,7 @@ Store the current frequency…	Αποθήκευση της τρέχουσας σ
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: η ομιλία αποκωδικοποιείται μόλις ληφθεί σήμα FreeDV (κλικ: ενεργό / ανενεργό· δεξί κλικ: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Μεταφορά του ήχου στον επόμενο δέκτη (δεξί κλικ: δέκτης που μένει σε σίγαση)
 Button colour	Χρώμα κουμπιού
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Ένταση του πομποδέκτη που ακούγεται στον υπολογιστή (δεν επηρεάζει το REC, το diversity ή τους αποκωδικοποιητές)
 Colour when connected	Χρώμα όταν είναι συνδεδεμένο
 Colour when disconnected	Χρώμα όταν είναι αποσυνδεδεμένο
 Colour when the rig is not answering yet	Χρώμα όσο ο πομποδέκτης δεν απαντά ακόμη
@@ -316,6 +317,10 @@ permission denied	δεν επιτρέπεται η πρόσβαση
 error	σφάλμα
 SDRLINK cable	Καλώδιο SDRLINK
  (off) ▾	 (ανενεργό) ▾
+FreeDV volume:	Ένταση FreeDV:
+WebSDR volume:	Ένταση WebSDR:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Ένταση της ομιλίας FreeDV (αποθηκεύεται χωριστά από την ένταση του WebSDR, ρυθμίζεται μόνο όσο παίζει ομιλία FreeDV)
+WebSDR volume (kept for each favorite)	Ένταση WebSDR (αποθηκεύεται για κάθε αγαπημένο)
 Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
 rig	πομποδέκτης
@@ -480,8 +485,8 @@ restore after (ms):	επαναφορά μετά (ms):
 kHz:	kHz:
 Step:	Βήμα:
 WebSDR:	WebSDR:
-WebSDR volume:	Ένταση WebSDR:
 TRX volume:	Ένταση TRX:
+TRX volume on PC:	Ένταση TRX στον Η/Υ:
 ExpertSDR volume:	Ένταση ExpertSDR:
 HDSDR volume:	Ένταση HDSDR:
 Open log	Άνοιγμα ημερολογίου
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: επι
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: καμία τοπική λήψη (συνδέστε τον πομποδέκτη ή ξεκινήστε το ExpertSDR)
 Diversity: no WebSDR open	Diversity: κανένα WebSDR ανοιχτό
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; Το SDRLink δεν μπορεί να βάλει σε σίγαση το ηχείο αυτού του πομποδέκτη: χαμηλώστε την ένταση με το χέρι
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: το ExpertSDR σε σίγαση δεν στέλνει ήχο μέσω TCI· δοκιμή με την ένταση του στο ελάχιστο…
 Diversity: the WebSDR gives no audio	Diversity: το WebSDR δεν δίνει ήχο
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: μέτρηση της καθυστέρησης του WebSDR (χρειάζεται σήμα που ακούγεται και στις δύο πλευρές)…
 Diversity	Diversity

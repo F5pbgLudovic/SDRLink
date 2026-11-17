@@ -181,6 +181,8 @@ namespace SDRLink
             {
                 if (divTap != t || msg == null) return;
                 Log.Write("Diversité : son de « " + t.Name + " » : " + msg);
+                // ExpertSDR coupé par TCI et muet aussi sur son flux TCI : on le rétablit et on baisse plutôt son volume (1.45).
+                if (divSource == 2 && t.TciNoAudio && divEsdrSilenced && !divEsdrByVolume && EsdrSilenceByVolume()) return;
                 ShowStatus(Lang.F("Diversité : {0} : son indisponible ({1})", "Diversity: {0}: audio not available ({1})", DivSourceName(divSource), msg));
             });
             SilenceDivSource(true);
@@ -256,6 +258,12 @@ namespace SDRLink
             if (divEsdrSilenced)
             {
                 divEsdrSilenced = false;
+                if (divEsdrByVolume)
+                {
+                    divEsdrByVolume = false;
+                    if (esdrTci != null && esdrTci.Connected) esdrTci.SetVolumePercent(divEsdrVolumeBefore >= 0 ? divEsdrVolumeBefore : trkEsdrVolume.Value);
+                    Log.Write("Diversité : volume d'ExpertSDR rendu");
+                }
                 if (esdrWin) { try { AudioEndpoints.ProcessMute(IsExpertSdr, esdrMuted); } catch { } }
                 else if (esdrTci != null && esdrTci.Connected) esdrTci.SetMute(esdrMuted);
             }
@@ -264,6 +272,25 @@ namespace SDRLink
                 divHdsdrSilenced = false;
                 try { AudioEndpoints.ProcessVolume(IsHdsdr, trkHdsdrVolume.Value); } catch { }
             }
+        }
+
+        // 1.45 : ExpertSDR coupé par TCI (son par le poste ou ASIO) et aucun son sur son flux TCI : la coupure (mute) tait peut-être
+        // aussi ce flux. On rétablit le son d'ExpertSDR et on baisse son volume au minimum (-60 dB) ; l'oreille d'ExpertSDR
+        // est remontée par le mélangeur (MaxGainB). Le volume d'avant est rendu à l'arrêt de la diversité.
+        bool divEsdrByVolume;
+        int divEsdrVolumeBefore = -1;
+
+        bool EsdrSilenceByVolume()
+        {
+            if (esdrWin || esdrTci == null || !esdrTci.Connected || diversity == null) return false;
+            divEsdrVolumeBefore = esdrTci.VolumePercent >= 0 ? esdrTci.VolumePercent : trkEsdrVolume.Value;
+            divEsdrByVolume = true;
+            esdrTci.SetMute(false);
+            esdrTci.SetVolumePercent(0);
+            diversity.MaxGainB = 3000;
+            Log.Write("Diversité : pas de son TCI avec ExpertSDR coupé : son rétabli, volume d'ExpertSDR baissé au minimum (avant : " + divEsdrVolumeBefore + " %)");
+            ShowStatus(Lang.T("Diversité : ExpertSDR coupé n'envoie pas de son par TCI ; essai avec son volume au minimum à la place…", "Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…"));
+            return true;
         }
 
         DateTime divLastTx = DateTime.MinValue;
@@ -284,12 +311,12 @@ namespace SDRLink
             bool muteA = txHold && chkMute.Checked && MuteOnTxFor(0);
             int bOf = divSource == DivTwoWebSdr ? 0 : divSource;   // second WebSDR : réglé comme le WebSDR affiché
             bool muteB = txHold && (divSource == 1 || (chkMute.Checked && MuteOnTxFor(bOf)));
-            d.GainA = muteA || sdrMuted || (fdvVoice && fdvSource == 0) ? 0 : trkVolume.Value / 100f;
+            d.GainA = muteA || sdrMuted || (fdvVoice && fdvSource == 0) ? 0 : sdrVolume / 100f;
             float b;
             if (divSource == 1) b = rigMuted ? 0 : trkRigVolume.Value / 100f;
             else if (divSource == 2) b = esdrMuted ? 0 : trkEsdrVolume.Value / 100f;
             else if (divSource == 3) b = hdsdrMuted ? 0 : trkHdsdrVolume.Value / 100f;
-            else b = sdrMuted ? 0 : trkVolume.Value / 100f;
+            else b = sdrMuted ? 0 : sdrVolume / 100f;
             if (muteB || (fdvVoice && fdvSource == bOf)) b = 0;
             d.GainB = b;
         }

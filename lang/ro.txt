@@ -245,6 +245,7 @@ Store the current frequency…	Memorează frecvența actuală…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: vocea este decodată imediat ce se recepționează un semnal FreeDV (clic: pornit / oprit; clic dreapta: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Comută sunetul la receptorul următor (clic dreapta: receptor care rămâne fără sunet)
 Button colour	Culoarea butonului
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Volumul stației ascultate pe PC (nu afectează REC, diversitatea sau decodoarele)
 Colour when connected	Culoare când este conectat
 Colour when disconnected	Culoare când este deconectat
 Colour when the rig is not answering yet	Culoare cât timp stația nu răspunde încă
@@ -316,6 +317,10 @@ permission denied	permisiune refuzată
 error	eroare
 SDRLINK cable	Cablu SDRLINK
  (off) ▾	 (oprit) ▾
+FreeDV volume:	Volum FreeDV:
+WebSDR volume:	Volum WebSDR:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Volumul vocii FreeDV (memorat separat de volumul WebSDR, reglabil doar în timpul vocii FreeDV)
+WebSDR volume (kept for each favorite)	Volumul WebSDR (memorat pentru fiecare favorit)
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
 rig	stație
@@ -480,8 +485,8 @@ restore after (ms):	revenire după (ms):
 kHz:	kHz:
 Step:	Pas:
 WebSDR:	WebSDR:
-WebSDR volume:	Volum WebSDR:
 TRX volume:	Volum TRX:
+TRX volume on PC:	Volum TRX pe PC:
 ExpertSDR volume:	Volum ExpertSDR:
 HDSDR volume:	Volum HDSDR:
 Open log	Deschidere jurnal
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversitate: aleg
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversitate: nicio recepție locală (conectați stația sau porniți ExpertSDR)
 Diversity: no WebSDR open	Diversitate: niciun WebSDR deschis
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink nu poate pune pe mut difuzorul acestei stații: reduceți volumul manual
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversitate: ExpertSDR cu sunetul oprit nu trimite sunet prin TCI; se încearcă în schimb cu volumul la minim…
 Diversity: the WebSDR gives no audio	Diversitate: WebSDR nu dă sunet
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversitate: se măsoară întârzierea WebSDR (e nevoie de un semnal auzit pe ambele părți)…
 Diversity	Diversitate

@@ -79,7 +79,7 @@ namespace SDRLink
             for (int c = 0; c < Count; c++)
             {
                 if (!take[c]) outp.AddRange(Of(cur, c));
-                else if (c == Config || replace) { outp.AddRange(Of(imp, c)); report.Add(Name(c) + " : remplacé"); }
+                else if (c == Config || replace) { outp.AddRange(Of(imp, c)); outp.AddRange(Absent(Of(cur, c), imp)); report.Add(Name(c) + " : remplacé"); }
                 else if (c == WebSdr) outp.AddRange(AddFavorites(Of(cur, c), Of(imp, c), report));
                 else if (c == Mems) outp.AddRange(AddMemories(Of(cur, c), Of(imp, c), report));
                 else outp.AddRange(AddProfiles(Of(cur, c), Of(imp, c), report));
@@ -87,6 +87,15 @@ namespace SDRLink
             StringBuilder sb = new StringBuilder();
             foreach (KeyValuePair<string, string> l in outp) sb.Append(l.Key).Append('=').Append(l.Value).Append("\r\n");
             return sb.ToString();
+        }
+
+        // Réglages actuels dont le fichier importé ne parle pas du tout (1.45) : ils restent tels quels au lieu de revenir à
+        // leur valeur de départ (fichier d'une version plus ancienne, ou fichier raccourci à la main).
+        static List<KeyValuePair<string, string>> Absent(List<KeyValuePair<string, string>> cur, List<KeyValuePair<string, string>> imp)
+        {
+            HashSet<string> named = new HashSet<string>(StringComparer.Ordinal);
+            foreach (KeyValuePair<string, string> l in imp) named.Add(l.Key);
+            return cur.FindAll(l => !named.Contains(l.Key));
         }
 
         static string Name(int c)

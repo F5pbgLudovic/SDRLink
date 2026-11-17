@@ -245,6 +245,7 @@ Store the current frequency…	Įsiminti dabartinį dažnį…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: kalba dekoduojama, kai tik priimamas FreeDV signalas (spustelėjimas: įjungti / išjungti; dešinysis spustelėjimas: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Perjungti garsą į kitą imtuvą (dešinysis spustelėjimas: imtuvas, kuris lieka nutildytas)
 Button colour	Mygtuko spalva
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Kompiuteryje klausomos stoties garsumas (neveikia REC, diversity ir dekoderių)
 Colour when connected	Spalva prisijungus
 Colour when disconnected	Spalva atsijungus
 Colour when the rig is not answering yet	Spalva, kol stotis dar neatsako
@@ -316,6 +317,10 @@ permission denied	prieiga uždrausta
 error	klaida
 SDRLINK cable	SDRLINK kabelis
  (off) ▾	 (išj.) ▾
+FreeDV volume:	FreeDV garsumas:
+WebSDR volume:	WebSDR garsumas:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	FreeDV kalbos garsumas (įsimenamas atskirai nuo WebSDR garsumo, reguliuojamas tik grojant FreeDV kalbai)
+WebSDR volume (kept for each favorite)	WebSDR garsumas (įsimenamas kiekvienam mėgstamam)
 Mute TRX: connect the rig first	Nutildyti TRX: pirmiausia prijunkite stotį
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Stoties garsumas nepasiekiamas su šia stotimi ar sąsaja (OmniRig, HRD, FT-817/818…)
 rig	stotis
@@ -480,8 +485,8 @@ restore after (ms):	atkurti po (ms):
 kHz:	kHz:
 Step:	Žingsnis:
 WebSDR:	WebSDR:
-WebSDR volume:	WebSDR garsumas:
 TRX volume:	TRX garsumas:
+TRX volume on PC:	TRX garsumas PC:
 ExpertSDR volume:	ExpertSDR garsumas:
 HDSDR volume:	HDSDR garsumas:
 Open log	Atidaryti žurnalą
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: pirmia
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: nėra vietinio priėmimo (prijunkite stotį arba paleiskite ExpertSDR)
 Diversity: no WebSDR open	Diversity: neatidarytas joks WebSDR
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink negali nutildyti šios stoties garsiakalbio: sumažinkite garsą rankiniu būdu
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: nutildytas ExpertSDR nesiunčia garso per TCI; vietoj to bandoma su minimaliu jo garsumu…
 Diversity: the WebSDR gives no audio	Diversity: WebSDR neduoda garso
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: matuojamas WebSDR vėlinimas (reikia signalo, girdimo abiejose pusėse)…
 Diversity	Diversity

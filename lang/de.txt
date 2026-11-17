@@ -245,6 +245,7 @@ Store the current frequency…	Aktuelle Frequenz speichern…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: Sprache wird dekodiert, sobald ein FreeDV-Signal empfangen wird (Klick: ein / aus; Rechtsklick: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Ton zum nächsten Empfänger umschalten (Rechtsklick: Empfänger, der stumm bleibt)
 Button colour	Schaltflächenfarbe
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Lautstärke des am PC gehörten Funkgeräts (wirkt weder auf REC noch auf Diversity oder die Decoder)
 Colour when connected	Farbe wenn verbunden
 Colour when disconnected	Farbe wenn getrennt
 Colour when the rig is not answering yet	Farbe, solange das Funkgerät noch nicht antwortet
@@ -316,6 +317,10 @@ permission denied	Zugriff verweigert
 error	Fehler
 SDRLINK cable	SDRLINK-Kabel
  (off) ▾	 (aus) ▾
+FreeDV volume:	FreeDV-Lautst.:
+WebSDR volume:	WebSDR-Lautstärke:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Lautstärke der FreeDV-Sprache (getrennt von der WebSDR-Lautstärke gespeichert, nur während FreeDV-Sprache einstellbar)
+WebSDR volume (kept for each favorite)	WebSDR-Lautstärke (für jeden Favoriten gespeichert)
 Mute TRX: connect the rig first	TRX stumm: Bitte zuerst den TRX verbinden
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	TRX-Lautstärke mit diesem Gerät oder dieser Schnittstelle nicht verfügbar (OmniRig, HRD, FT-817/818…)
 rig	Funkgerät
@@ -480,8 +485,8 @@ restore after (ms):	zurück nach (ms):
 kHz:	kHz:
 Step:	Schritt:
 WebSDR:	WebSDR:
-WebSDR volume:	WebSDR-Lautstärke:
 TRX volume:	TRX-Lautst.:
+TRX volume on PC:	TRX-Lautst. am PC:
 ExpertSDR volume:	ExpertSDR-Lautstärke:
 HDSDR volume:	HDSDR-Lautstärke:
 Open log	Log öffnen
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: zuerst
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: kein lokaler Empfang (Funkgerät verbinden oder ExpertSDR starten)
 Diversity: no WebSDR open	Diversity: kein WebSDR geöffnet
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink kann den Lautsprecher dieses Funkgeräts nicht stummschalten: Lautstärke von Hand verringern
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: das stummgeschaltete ExpertSDR sendet keinen Ton über TCI; Versuch stattdessen mit minimaler Lautstärke…
 Diversity: the WebSDR gives no audio	Diversity: das WebSDR liefert keinen Ton
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: WebSDR-Verzögerung wird gemessen (ein auf beiden Seiten hörbares Signal ist nötig)…
 Diversity	Diversity

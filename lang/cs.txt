@@ -245,6 +245,7 @@ Store the current frequency…	Uložit aktuální kmitočet…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: řeč se dekóduje, jakmile je přijat signál FreeDV (klik: zapnout / vypnout; pravé tlačítko: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Přepnout zvuk na další přijímač (pravé tlačítko: přijímač, který zůstane ztlumený)
 Button colour	Barva tlačítka
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Hlasitost stanice poslouchané na PC (neovlivňuje REC, diverzitu ani dekodéry)
 Colour when connected	Barva při připojení
 Colour when disconnected	Barva při odpojení
 Colour when the rig is not answering yet	Barva, dokud transceiver ještě neodpovídá
@@ -316,6 +317,10 @@ permission denied	přístup odepřen
 error	chyba
 SDRLINK cable	Kabel SDRLINK
  (off) ▾	 (vyp.) ▾
+FreeDV volume:	Hlasitost FreeDV:
+WebSDR volume:	Hlasitost WebSDR:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Hlasitost řeči FreeDV (ukládá se zvlášť od hlasitosti WebSDR, nastavitelná jen během přehrávání řeči FreeDV)
+WebSDR volume (kept for each favorite)	Hlasitost WebSDR (ukládá se pro každý oblíbený)
 Mute TRX: connect the rig first	Ztlumit TRX: nejprve připojte transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitost transceiveru není u tohoto transceiveru nebo rozhraní dostupná (OmniRig, HRD, FT-817/818…)
 rig	transceiver
@@ -480,8 +485,8 @@ restore after (ms):	obnovit po (ms):
 kHz:	kHz:
 Step:	Krok:
 WebSDR:	WebSDR:
-WebSDR volume:	Hlasitost WebSDR:
 TRX volume:	Hlasitost TRX:
+TRX volume on PC:	Hlasitost TRX na PC:
 ExpertSDR volume:	Hlasitost ExpertSDR:
 HDSDR volume:	Hlasitost HDSDR:
 Open log	Otevřít deník
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diverzita: nejdř
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diverzita: žádný místní příjem (připojte transceiver nebo spusťte ExpertSDR)
 Diversity: no WebSDR open	Diverzita: žádný WebSDR není otevřen
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink nemůže ztlumit reproduktor tohoto transceiveru: snižte jeho hlasitost ručně
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diverzita: ztlumený ExpertSDR neposílá zvuk přes TCI; zkouším místo toho jeho hlasitost na minimu…
 Diversity: the WebSDR gives no audio	Diverzita: WebSDR nedává žádný zvuk
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diverzita: měření zpoždění WebSDR (je třeba signál slyšitelný na obou stranách)…
 Diversity	Diverzita

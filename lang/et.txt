@@ -245,6 +245,7 @@ Store the current frequency…	Salvesta praegune sagedus…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: kõne dekodeeritakse kohe, kui FreeDV signaal saabub (klõps: sisse / välja; paremklõps: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Lülita heli järgmisele vastuvõtjale (paremklõps: vastuvõtja, mis jääb vaigistatuks)
 Button colour	Nupu värv
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Arvutis kuulatava raadiojaama helitugevus (ei mõjuta REC-i, diversityt ega dekoodreid)
 Colour when connected	Värv ühendatuna
 Colour when disconnected	Värv ühenduseta
 Colour when the rig is not answering yet	Värv, kuni jaam veel ei vasta
@@ -316,6 +317,10 @@ permission denied	juurdepääs keelatud
 error	viga
 SDRLINK cable	SDRLINK kaabel
  (off) ▾	 (väljas) ▾
+FreeDV volume:	FreeDV helitugevus:
+WebSDR volume:	WebSDR-i helitugevus:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	FreeDV kõne helitugevus (salvestatakse WebSDR-i helitugevusest eraldi, reguleeritav ainult FreeDV kõne ajal)
+WebSDR volume (kept for each favorite)	WebSDR-i helitugevus (salvestatakse iga lemmiku jaoks)
 Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
 rig	raadio
@@ -480,8 +485,8 @@ restore after (ms):	taasta pärast (ms):
 kHz:	kHz:
 Step:	Samm:
 WebSDR:	WebSDR:
-WebSDR volume:	WebSDR-i helitugevus:
 TRX volume:	TRX helitugevus:
+TRX volume on PC:	TRX helitugevus arvutis:
 ExpertSDR volume:	ExpertSDR-i helitugevus:
 HDSDR volume:	HDSDR-i helitugevus:
 Open log	Ava logi
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: valige
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: kohalik vastuvõtt puudub (ühendage raadio või käivitage ExpertSDR)
 Diversity: no WebSDR open	Diversity: ühtegi WebSDR-i pole avatud
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink ei saa selle raadio kõlarit vaigistada: vähendage helitugevust käsitsi
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: vaigistatud ExpertSDR ei saada TCI kaudu heli; proovin selle asemel minimaalse helitugevusega…
 Diversity: the WebSDR gives no audio	Diversity: WebSDR ei anna heli
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: WebSDR-i viivituse mõõtmine (vaja on signaali, mida kuuleb mõlemal küljel)…
 Diversity	Diversity

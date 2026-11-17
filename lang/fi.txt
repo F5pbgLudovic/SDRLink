@@ -245,6 +245,7 @@ Store the current frequency…	Tallenna nykyinen taajuus…
 FreeDV RADE: speech is decoded as soon as a FreeDV signal is received (click: on / off; right-click: RADE V1 / V2)	FreeDV RADE: puhe puretaan heti, kun FreeDV-signaali vastaanotetaan (napsautus: päälle / pois; oikea napsautus: RADE V1 / V2)
 Switch the audio to the next receiver (right-click: receiver to keep muted)	Siirrä ääni seuraavaan vastaanottimeen (hiiren oikea painike: vastaanotin, joka pysyy mykistettynä)
 Button colour	Painikkeen väri
+Volume of the rig heard on the PC (does not affect REC, diversity or the decoders)	Tietokoneella kuunneltavan radion äänenvoimakkuus (ei vaikuta REC:iin, diversityyn eikä dekoodereihin)
 Colour when connected	Väri yhdistettynä
 Colour when disconnected	Väri ilman yhteyttä
 Colour when the rig is not answering yet	Väri, kun radio ei vielä vastaa
@@ -316,6 +317,10 @@ permission denied	käyttö estetty
 error	virhe
 SDRLINK cable	SDRLINK-kaapeli
  (off) ▾	 (pois) ▾
+FreeDV volume:	FreeDV-voimakkuus:
+WebSDR volume:	WebSDR:n äänenvoimakkuus:
+Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	FreeDV-puheen äänenvoimakkuus (tallennetaan erikseen WebSDR:n äänenvoimakkuudesta, säädettävissä vain FreeDV-puheen aikana)
+WebSDR volume (kept for each favorite)	WebSDR:n äänenvoimakkuus (tallennetaan jokaiselle suosikille)
 Mute TRX: connect the rig first	Mykistä TRX: yhdistä ensin radio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radion äänenvoimakkuutta ei voi säätää tällä radiolla tai liitännällä (OmniRig, HRD, FT-817/818…)
 rig	radio
@@ -480,8 +485,8 @@ restore after (ms):	palautusviive (ms):
 kHz:	kHz:
 Step:	Askel:
 WebSDR:	WebSDR:
-WebSDR volume:	WebSDR:n äänenvoimakkuus:
 TRX volume:	TRX-voimakkuus:
+TRX volume on PC:	TRX-voimakkuus PC:llä:
 ExpertSDR volume:	ExpertSDR:n äänenvoimakkuus:
 HDSDR volume:	HDSDR:n äänenvoimakkuus:
 Open log	Avaa loki
@@ -590,6 +595,7 @@ Diversity: first choose the rig's sound card (right-click REC)	Diversity: valits
 Diversity: no local reception (connect the rig, or start ExpertSDR)	Diversity: ei paikallista vastaanottoa (yhdistä radio tai käynnistä ExpertSDR)
 Diversity: no WebSDR open	Diversity: yhtään WebSDR:ää ei ole auki
 ; SDRLink cannot mute this rig's speaker: turn its volume down by hand	; SDRLink ei voi mykistää tämän radion kaiutinta: laske sen äänenvoimakkuutta käsin
+Diversity: muted ExpertSDR sends no audio over TCI; trying with its volume at minimum instead…	Diversity: mykistetty ExpertSDR ei lähetä ääntä TCI:n kautta; kokeillaan sen sijaan pienimmällä äänenvoimakkuudella…
 Diversity: the WebSDR gives no audio	Diversity: WebSDR ei anna ääntä
 Diversity: measuring the WebSDR delay (a signal heard on both sides is needed)…	Diversity: mitataan WebSDR:n viivettä (tarvitaan molemmilla puolilla kuuluva signaali)…
 Diversity	Diversity
