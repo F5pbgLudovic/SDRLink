@@ -641,6 +641,33 @@ Searching… {0} s	Otsin… {0} s
 Searching for the mode being heard ({0} s at most)…	Otsin kuuldavat režiimi (kuni {0} s)…
 Mode found: {0} ({1})	Leitud režiim: {0} ({1})
 BW:	RL:
+ (right-click: position of the buttons)	 (paremklõps: nuppude asukoht)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Jaga sagedust: kopeerib lõikelauale lingi sellele WebSDR-ile selle sageduse ja modulatsiooniga
+Zoom in the WebSDR page	Suurenda WebSDR-i lehte
+Zoom out the WebSDR page	Vähenda WebSDR-i lehte
+Bottom right	All paremal
+Bottom left	All vasakul
+Top right	Üleval paremal
+Top left	Üleval vasakul
+Top centre	Üleval keskel
+Bottom centre	All keskel
+Position of the buttons:	Nuppude asukoht:
+horizontal	horisontaalne
+vertical	vertikaalne
+(original position)	(algne asukoht)
+Hide the WebSDR address	Peida WebSDR-i aadress
+Page zoom: automatic	Lehe suum: automaatne
+No WebSDR to share	Pole ühtegi WebSDR-i, mida jagada
+Clipboard busy: link not copied	Lõikelaud on hõivatud: linki ei kopeeritud
+WebSDR address hidden (right-click the page to show it again)	WebSDR-i aadress on peidetud (uuesti kuvamiseks paremklõpsake lehel)
+WebSDR address shown	WebSDR-i aadress on nähtav
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Aadress on peidetud: nool avab endiselt loendi (aadressi uuesti kuvamiseks paremklõpsake WebSDR-i lehel)
+Page zoom: automatic (now {0})	Lehe suum: automaatne (praegu {0})
+WebSDR page: {0}	WebSDR-i leht: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-i leht: {0} (jäetud meelde selle WebSDR-i jaoks; paremklõps nupul: automaatne suum)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-i leht vähendati suuruseni {0}, et kogu juhtpaneel oleks nähtav (valimiseks + ja −)
+{0} kHz {1} on {2}	{0} kHz {1} aadressil {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jagamislink kopeeriti lõikelauale ({0} kHz {1}): kleepige see sõnumisse
 Mode:	Režiim:
 Preamp:	Eelvõimendi:
 (preamp unchanged)	(eelvõimendi muutmata)

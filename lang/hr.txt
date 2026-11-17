@@ -641,6 +641,33 @@ Searching… {0} s	Traženje… {0} s
 Searching for the mode being heard ({0} s at most)…	Traženje vrste rada koja se čuje (najviše {0} s)…
 Mode found: {0} ({1})	Pronađena vrsta rada: {0} ({1})
 BW:	ŠP:
+ (right-click: position of the buttons)	 (desni klik: položaj gumba)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Podijeli frekvenciju: kopira u međuspremnik poveznicu na ovaj WebSDR s ovom frekvencijom i načinom rada
+Zoom in the WebSDR page	Povećaj stranicu WebSDR-a
+Zoom out the WebSDR page	Smanji stranicu WebSDR-a
+Bottom right	Dolje desno
+Bottom left	Dolje lijevo
+Top right	Gore desno
+Top left	Gore lijevo
+Top centre	Gore u sredini
+Bottom centre	Dolje u sredini
+Position of the buttons:	Položaj gumba:
+horizontal	vodoravno
+vertical	okomito
+(original position)	(izvorni položaj)
+Hide the WebSDR address	Sakrij adresu WebSDR-a
+Page zoom: automatic	Zumiranje stranice: automatsko
+No WebSDR to share	Nema WebSDR-a za dijeljenje
+Clipboard busy: link not copied	Međuspremnik je zauzet: poveznica nije kopirana
+WebSDR address hidden (right-click the page to show it again)	Adresa WebSDR-a je skrivena (desni klik na stranicu za ponovni prikaz)
+WebSDR address shown	Adresa WebSDR-a je prikazana
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adresa je skrivena: strelica i dalje otvara popis (desni klik na stranicu WebSDR-a za ponovni prikaz adrese)
+Page zoom: automatic (now {0})	Zumiranje stranice: automatsko (sada {0})
+WebSDR page: {0}	Stranica WebSDR-a: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Stranica WebSDR-a: {0} (zapamćeno za ovaj WebSDR; desni klik na gumb: automatsko zumiranje)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stranica WebSDR-a smanjena na {0} kako bi se vidjela cijela upravljačka ploča (+ i − za odabir)
+{0} kHz {1} on {2}	{0} kHz {1} na {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Poveznica za dijeljenje kopirana u međuspremnik ({0} kHz {1}): zalijepite je u poruku
 Mode:	Način rada:
 Preamp:	Pretpojačalo:
 (preamp unchanged)	(pretpojačalo nepromijenjeno)

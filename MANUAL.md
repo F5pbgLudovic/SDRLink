@@ -27,7 +27,7 @@ Overview; each feature is detailed further down in its own section.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume**, **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40).
-7. **The WebSDR page**, then the **status bar** (messages, update link).
+7. **The WebSDR page** with its **share**, **+** and **−** round buttons (since 1.43), then the **status bar** (messages, update link).
 
 ## All right-clicks
 
@@ -58,6 +58,8 @@ Overview; each feature is detailed further down in its own section.
 | REC | rig sound card, REC button colour |
 | Reset WebSDR | **Auto** (restart when the sound is lost) and its time, **full reset** of the current WebSDR, colours of both states (since 1.37) |
 | Diversity | reception put in the other ear (rig, ExpertSDR, HDSDR on Windows 11), **WebSDR in the right ear**, measured delay (since 1.40), colour when off / measuring the delay / locked (since 1.41) |
+| WebSDR page | **Hide the WebSDR address** at the top of the page menu (since 1.43) |
+| Share, +, − round buttons on the page | **position of the buttons** (6 places, vertical or horizontal), **Page zoom: automatic**, **Hide the WebSDR address** (since 1.43) |
 | Status bar | last 20 messages, message types to hide |
 
 ## SDRLink files
@@ -175,6 +177,14 @@ The type is detected automatically (shown in brackets):
 - A name already typed directly on a site is **kept**; only the name SDRLink had put is replaced when the name changes. On KiwiSDR, a one-character name is doubled (KiwiSDR needs two).
 - 30 characters at most; the characters ; , = ' " are removed. Saved in `settings.ini` (`Callsign=` line).
 - Right-click: button colour.
+
+## On the WebSDR page: share, + and −, hidden address (since 1.43)
+
+- **Three round buttons on the page** (as in PhoneSDRLink): **share**, **+** and **−**. They work with a **left click**; a **right-click** on one of them chooses their **position**: **bottom right**, **bottom left**, **top right**, **top left**, **top centre** or **bottom centre**, each **vertical** (in a column) or **horizontal** (in a row). At first: bottom centre, horizontal. The position is kept (`PageBtnPos=` line of the settings).
+- **+ and −** zoom the **whole WebSDR page** in or out (25 % to 300 %), like a browser zoom; **Ctrl + mouse wheel** in the page does the same. The chosen zoom is **kept for this WebSDR** (`PageZoom=` lines of the settings) and comes back on each visit, even after restarting SDRLink; **Reset WebSDR** (click) keeps it, only the **full reset** of the WebSDR (right-click on Reset WebSDR) forgets it and brings back the original display. Other WebSDRs stay at 100 %.
+- **Automatic zoom for OpenWebRX**: on some screens, the OpenWebRX **control panel** (on the right: frequency, S-meter, profiles, modes, settings) partly goes **under the top banner** of the page. Without a zoom chosen by hand for this WebSDR, SDRLink reduces the page **just enough** to show it **whole** (the status bar says so), and does it again when the window changes size; never above 100 %, never below 50 %. The right-click on a button shows the current zoom; **Page zoom: automatic** forgets the zoom chosen by hand and goes back to this automatic setting.
+- **Share**: copies to the **clipboard** a text to paste into a message, for example "📻 7286 kHz USB on F4KKF" followed by a **link** to this WebSDR, this frequency and this mode. It is the PhoneSDRLink share link: on Android it opens PhoneSDRLink, elsewhere it offers to **listen in the browser**, on the right frequency for websdr.org, KiwiSDR and OpenWebRX.
+- **Hidden address**: **right-click the WebSDR page**, **Hide the WebSDR address** (at the top of the menu; also on the right-click of a round button). The address box stays in place but shows only **stars**; its arrow still opens the favourites list, and the address can no longer be copied. The same right-click (ticked item) brings it back. Handy for a screenshot or a video. Kept (`HideUrl=` line of the settings).
 
 ## Favorites
 
@@ -904,6 +914,10 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.43**
+  - **Share, + and − round buttons on the WebSDR page** (as in PhoneSDRLink), left click; right-click: 6 positions (corners, top centre, bottom centre), vertical or horizontal. + and −: page zoom kept per WebSDR (forgotten only by the full reset of the WebSDR). **Share**: PhoneSDRLink link copied to the clipboard.
+  - **OpenWebRX**: page automatically reduced just enough to show the whole control panel (it went under the top banner on some screens).
+  - **Hide the WebSDR address** (right-click the page): stars in the box, the list stays usable.
 - **1.42**
   - **Stored power** with each memory and for the frequencies of the **Digital modes** list (in watts, **set to** box; nothing by default), sent on recall just after the frequency, through direct CAT, OmniRig, Hamlib and TCI (not through HRD). **Ceiling** shared by every memory, **never while transmitting** (waits for the return to receive), when in doubt fewer watts, never more. 49 models driven: table in the manual.
 - **1.41**

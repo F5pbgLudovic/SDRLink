@@ -26,7 +26,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR**, **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40).
-7. **La page du WebSDR**, puis la **barre d'état** (messages, lien de mise à jour).
+7. **La page du WebSDR** avec ses ronds **partage**, **+** et **−** (depuis la 1.43), puis la **barre d'état** (messages, lien de mise à jour).
 
 ## Tous les clics droits
 
@@ -57,6 +57,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | REC | carte son du poste, couleur du bouton REC |
 | Réinit WebSDR | **Auto** (relance quand le son est perdu) et son délai, **réinitialisation totale** du WebSDR en cours, couleurs des deux états (depuis la 1.37) |
 | Diversité | réception mise dans l'autre oreille (poste, ExpertSDR, HDSDR sous Windows 11), **WebSDR dans l'oreille droite**, retard mesuré (depuis la 1.40), couleur arrêtée / recherche du retard / calée (depuis la 1.41) |
+| Page du WebSDR | **Masquer l'adresse du WebSDR** en tête du menu de la page (depuis la 1.43) |
+| Ronds partage, +, − sur la page | **position des boutons** (6 places, verticale ou horizontale), **Zoom de la page : automatique**, **Masquer l'adresse du WebSDR** (depuis la 1.43) |
 | Barre d'état | 20 derniers messages, types de messages à ne plus afficher |
 
 ## Fichiers de SDRLink
@@ -174,6 +176,14 @@ Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donn
 - Un nom déjà tapé directement sur un site est **gardé** ; seul le nom que SDRLink avait mis est remplacé quand le pseudo change. Sur KiwiSDR, un pseudo d'un seul caractère est doublé (KiwiSDR en demande deux).
 - 30 caractères au plus ; les caractères ; , = ' " sont retirés. Enregistré dans `settings.ini` (ligne `Callsign=`).
 - Clic droit : couleur du bouton.
+
+## Sur la page du WebSDR : partage, + et −, adresse masquée (depuis la 1.43)
+
+- **Trois ronds posés sur la page** (comme dans PhoneSDRLink) : **partage**, **+** et **−**. Ils fonctionnent au **clic gauche** ; le **clic droit** sur l'un d'eux choisit leur **position** : **bas à droite**, **bas à gauche**, **haut à droite**, **haut à gauche**, **milieu haut** ou **milieu bas**, chacune **verticale** (en colonne) ou **horizontale** (en ligne). Au départ : milieu bas, horizontal. Position retenue (ligne `PageBtnPos=` des réglages).
+- **+ et −** agrandissent ou réduisent **toute la page** du WebSDR (25 % à 300 %), comme le zoom d'un navigateur ; **Ctrl + molette** dans la page fait de même. Le zoom choisi est **retenu pour ce WebSDR** (lignes `PageZoom=` des réglages) et revient à chaque visite, même après un redémarrage de SDRLink ; **Réinit WebSDR** (clic) le garde, seule la **réinitialisation totale** du WebSDR (clic droit sur Réinit WebSDR) l'oublie et remet l'affichage d'origine. Les autres WebSDR restent à 100 %.
+- **Zoom automatique des OpenWebRX** : sur certains écrans, le **panneau de commande** d'OpenWebRX (à droite : fréquence, S-mètre, profils, modes, réglages) passe en partie **sous le bandeau du haut** de la page. Sans zoom choisi à la main pour ce WebSDR, SDRLink réduit la page **juste assez** pour le voir **en entier** (la barre d'état le dit), et recommence quand la fenêtre change de taille ; jamais au-dessus de 100 %, jamais sous 50 %. Le clic droit sur un rond montre le zoom actuel ; **Zoom de la page : automatique** oublie le zoom choisi à la main et revient à ce réglage automatique.
+- **Partage** : copie dans le **presse-papiers** un texte à coller dans un message, par exemple « 📻 7286 kHz USB sur F4KKF » suivi d'un **lien** vers ce WebSDR, cette fréquence et ce mode. C'est le lien de partage de PhoneSDRLink : sur Android il ouvre PhoneSDRLink, ailleurs il propose d'**écouter dans le navigateur**, sur la bonne fréquence pour les websdr.org, KiwiSDR et OpenWebRX.
+- **Adresse masquée** : **clic droit sur la page** du WebSDR, **Masquer l'adresse du WebSDR** (en tête du menu ; aussi au clic droit sur un rond). La case de l'adresse reste en place mais n'affiche que des **étoiles** ; sa flèche ouvre toujours la liste des favoris, et l'adresse ne peut plus être copiée. Le même clic droit (élément coché) la fait revenir. Pratique pour une capture d'écran ou une vidéo. Retenu (ligne `HideUrl=` des réglages).
 
 ## Favoris
 
@@ -903,6 +913,10 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.43**
+  - **Ronds partage, + et − sur la page** du WebSDR (comme dans PhoneSDRLink), au clic gauche ; clic droit : 6 positions (coins, milieu haut, milieu bas), verticales ou horizontales. + et − : zoom de la page retenu par WebSDR (oublié seulement par la réinitialisation totale du WebSDR). **Partage** : lien de PhoneSDRLink copié dans le presse-papiers.
+  - **OpenWebRX** : page réduite automatiquement juste assez pour voir tout le panneau de commande (il passait sous le bandeau du haut sur certains écrans).
+  - **Masquer l'adresse du WebSDR** (clic droit sur la page) : étoiles dans la case, la liste reste utilisable.
 - **1.42**
   - **Puissance mémorisée** avec chaque mémoire et pour les fréquences de la liste **Modes numériques** (en watts, case **régler à** ; rien par défaut), envoyée au rappel juste après la fréquence, en CAT direct, par OmniRig, Hamlib et TCI (pas par HRD). **Plafond** commun à toutes les mémoires, **jamais pendant l'émission** (attend le retour en réception), en cas de doute moins de watts, jamais plus. 49 modèles pilotés : tableau dans la notice.
 - **1.41**

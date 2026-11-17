@@ -641,6 +641,33 @@ Searching… {0} s	Haetaan… {0} s
 Searching for the mode being heard ({0} s at most)…	Haetaan kuultavaa lähetelajia (enintään {0} s)…
 Mode found: {0} ({1})	Lähetelaji löytyi: {0} ({1})
 BW:	KL:
+ (right-click: position of the buttons)	 (hiiren kakkospainike: painikkeiden sijainti)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Jaa taajuus: kopioi leikepöydälle linkin tähän WebSDR:ään tällä taajuudella ja moodilla
+Zoom in the WebSDR page	Suurenna WebSDR-sivua
+Zoom out the WebSDR page	Pienennä WebSDR-sivua
+Bottom right	Alhaalla oikealla
+Bottom left	Alhaalla vasemmalla
+Top right	Ylhäällä oikealla
+Top left	Ylhäällä vasemmalla
+Top centre	Ylhäällä keskellä
+Bottom centre	Alhaalla keskellä
+Position of the buttons:	Painikkeiden sijainti:
+horizontal	vaaka
+vertical	pysty
+(original position)	(alkuperäinen sijainti)
+Hide the WebSDR address	Piilota WebSDR-osoite
+Page zoom: automatic	Sivun zoomaus: automaattinen
+No WebSDR to share	Ei jaettavaa WebSDR:ää
+Clipboard busy: link not copied	Leikepöytä on varattu: linkkiä ei kopioitu
+WebSDR address hidden (right-click the page to show it again)	WebSDR-osoite piilotettu (näytä se uudelleen napsauttamalla sivua hiiren kakkospainikkeella)
+WebSDR address shown	WebSDR-osoite näytetään
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Osoite piilotettu: nuoli avaa edelleen luettelon (näytä osoite uudelleen napsauttamalla WebSDR-sivua hiiren kakkospainikkeella)
+Page zoom: automatic (now {0})	Sivun zoomaus: automaattinen (nyt {0})
+WebSDR page: {0}	WebSDR-sivu: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-sivu: {0} (muistettu tälle WebSDR:lle; hiiren kakkospainike painikkeella: automaattinen zoomaus)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sivu pienennetty kokoon {0}, jotta koko ohjauspaneeli näkyy (valitse + ja −)
+{0} kHz {1} on {2}	{0} kHz {1} kohteessa {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jakolinkki kopioitu leikepöydälle ({0} kHz {1}): liitä se viestiin
 Mode:	Lähetelaji:
 Preamp:	Esivahvistin:
 (preamp unchanged)	(esivahvistin ennallaan)

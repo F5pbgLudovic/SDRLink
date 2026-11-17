@@ -641,6 +641,33 @@ Searching… {0} s	Meklē… {0} s
 Searching for the mode being heard ({0} s at most)…	Meklē dzirdamo darba veidu (ne ilgāk kā {0} s)…
 Mode found: {0} ({1})	Atrasts darba veids: {0} ({1})
 BW:	JP:
+ (right-click: position of the buttons)	 (labais klikšķis: pogu novietojums)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Kopīgot frekvenci: starpliktuvē nokopē saiti uz šo WebSDR ar šo frekvenci un režīmu
+Zoom in the WebSDR page	Palielināt WebSDR lapu
+Zoom out the WebSDR page	Samazināt WebSDR lapu
+Bottom right	Apakšā pa labi
+Bottom left	Apakšā pa kreisi
+Top right	Augšā pa labi
+Top left	Augšā pa kreisi
+Top centre	Augšā centrā
+Bottom centre	Apakšā centrā
+Position of the buttons:	Pogu novietojums:
+horizontal	horizontāli
+vertical	vertikāli
+(original position)	(sākotnējais novietojums)
+Hide the WebSDR address	Paslēpt WebSDR adresi
+Page zoom: automatic	Lapas tālummaiņa: automātiska
+No WebSDR to share	Nav WebSDR, ko kopīgot
+Clipboard busy: link not copied	Starpliktuve ir aizņemta: saite nav nokopēta
+WebSDR address hidden (right-click the page to show it again)	WebSDR adrese ir paslēpta (lai to atkal parādītu, noklikšķiniet uz lapas ar labo peles pogu)
+WebSDR address shown	WebSDR adrese ir parādīta
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adrese ir paslēpta: bultiņa joprojām atver sarakstu (lai adresi atkal parādītu, noklikšķiniet uz WebSDR lapas ar labo peles pogu)
+Page zoom: automatic (now {0})	Lapas tālummaiņa: automātiska (tagad {0})
+WebSDR page: {0}	WebSDR lapa: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR lapa: {0} (iegaumēts šim WebSDR; labais klikšķis uz pogas: automātiska tālummaiņa)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR lapa samazināta līdz {0}, lai būtu redzams viss vadības panelis (+ un − izvēlei)
+{0} kHz {1} on {2}	{0} kHz {1} vietnē {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Kopīgošanas saite nokopēta starpliktuvē ({0} kHz {1}): ielīmējiet to ziņojumā
 Mode:	Režīms:
 Preamp:	Pirmspastiprinātājs:
 (preamp unchanged)	(pirmspastiprinātājs nemainīts)

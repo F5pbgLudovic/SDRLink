@@ -641,6 +641,33 @@ Searching… {0} s	Търсене… {0} s
 Searching for the mode being heard ({0} s at most)…	Търсене на чувания режим (най-много {0} s)…
 Mode found: {0} ({1})	Намерен режим: {0} ({1})
 BW:	ЧЛ:
+ (right-click: position of the buttons)	 (десен клик: позиция на бутоните)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Споделяне на честотата: копира в клипборда връзка към този WebSDR, на тази честота и режим
+Zoom in the WebSDR page	Увеличаване на страницата на WebSDR
+Zoom out the WebSDR page	Намаляване на страницата на WebSDR
+Bottom right	Долу вдясно
+Bottom left	Долу вляво
+Top right	Горе вдясно
+Top left	Горе вляво
+Top centre	Горе в средата
+Bottom centre	Долу в средата
+Position of the buttons:	Позиция на бутоните:
+horizontal	хоризонтално
+vertical	вертикално
+(original position)	(първоначална позиция)
+Hide the WebSDR address	Скриване на адреса на WebSDR
+Page zoom: automatic	Мащаб на страницата: автоматичен
+No WebSDR to share	Няма WebSDR за споделяне
+Clipboard busy: link not copied	Клипбордът е зает: връзката не е копирана
+WebSDR address hidden (right-click the page to show it again)	Адресът на WebSDR е скрит (десен клик върху страницата, за да се покаже отново)
+WebSDR address shown	Адресът на WebSDR е показан
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Адресът е скрит: стрелката все още отваря списъка (десен клик върху страницата на WebSDR, за да се покаже адресът отново)
+Page zoom: automatic (now {0})	Мащаб на страницата: автоматичен (сега {0})
+WebSDR page: {0}	Страница на WebSDR: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Страница на WebSDR: {0} (запомнен за този WebSDR; десен клик върху бутон: автоматичен мащаб)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Страницата на WebSDR е намалена до {0}, за да се вижда целият ѝ панел за управление (+ и − за избор)
+{0} kHz {1} on {2}	{0} kHz {1} на {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Връзката за споделяне е копирана в клипборда ({0} kHz {1}): поставете я в съобщение
 Mode:	Режим:
 Preamp:	Предусилвател:
 (preamp unchanged)	(предусилвателят не е променен)

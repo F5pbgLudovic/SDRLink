@@ -641,6 +641,33 @@ Searching… {0} s	A procurar… {0} s
 Searching for the mode being heard ({0} s at most)…	A procurar o modo que se ouve ({0} s no máximo)…
 Mode found: {0} ({1})	Modo encontrado: {0} ({1})
 BW:	LB:
+ (right-click: position of the buttons)	 (clique direito: posição dos botões)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Partilhar a frequência: copia para a área de transferência uma ligação para este WebSDR, com esta frequência e modo
+Zoom in the WebSDR page	Aumentar a página do WebSDR
+Zoom out the WebSDR page	Reduzir a página do WebSDR
+Bottom right	Em baixo à direita
+Bottom left	Em baixo à esquerda
+Top right	Em cima à direita
+Top left	Em cima à esquerda
+Top centre	Em cima ao centro
+Bottom centre	Em baixo ao centro
+Position of the buttons:	Posição dos botões:
+horizontal	horizontal
+vertical	vertical
+(original position)	(posição original)
+Hide the WebSDR address	Ocultar o endereço do WebSDR
+Page zoom: automatic	Zoom da página: automático
+No WebSDR to share	Nenhum WebSDR para partilhar
+Clipboard busy: link not copied	Área de transferência ocupada: ligação não copiada
+WebSDR address hidden (right-click the page to show it again)	Endereço do WebSDR oculto (clique direito na página para o mostrar de novo)
+WebSDR address shown	Endereço do WebSDR visível
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Endereço oculto: a seta continua a abrir a lista (clique direito na página do WebSDR para mostrar de novo o endereço)
+Page zoom: automatic (now {0})	Zoom da página: automático (agora {0})
+WebSDR page: {0}	Página do WebSDR: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Página do WebSDR: {0} (memorizado para este WebSDR; clique direito num botão: zoom automático)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Página do WebSDR reduzida para {0} para mostrar todo o painel de controlo (+ e − para escolher)
+{0} kHz {1} on {2}	{0} kHz {1} em {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Ligação de partilha copiada para a área de transferência ({0} kHz {1}): cole-a numa mensagem
 Mode:	Modo:
 Preamp:	Pré-amplificador:
 (preamp unchanged)	(pré-amplificador inalterado)

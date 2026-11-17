@@ -85,6 +85,9 @@ namespace SDRLink
         public MemoryBook Memories = new MemoryBook();   // mémoires de fréquences (bouton Mémoires)
         public List<MemHistEntry> MemHist = new List<MemHistEntry>();   // liste « Mem » du clavier de fréquence (20 au plus, la plus récente en tête)
         public int MemHistMin;                             // enregistrement automatique dans « Mem » après ce nombre de minutes sur la même fréquence (0 = jamais)
+        public bool HideUrl;                               // adresse du WebSDR masquée par des étoiles (1.43)
+        public int PageBtnPos = MainForm.PageBtnDefault;   // ronds partage, +, − sur la page (MainForm.PlacePageButtons)
+        public readonly Dictionary<string, double> PageZooms = new Dictionary<string, double>(StringComparer.Ordinal);   // zoom de la page choisi par WebSDR (hôte:port)
         public int FontScale = 100;                        // taille du texte de la fenêtre principale, en %
         public const int FontScaleMin = 70, FontScaleMax = 200;   // types de messages de la barre d'état masqués (clic droit)
 
@@ -269,6 +272,16 @@ namespace SDRLink
                             s.Memories.DigiPowers[q[0] + "|" + q[1]] = pw;
                     }
                     break;
+                    case "HideUrl": s.HideUrl = v == "1"; break;
+                    case "PageBtnPos": { int p = Int(v, MainForm.PageBtnDefault); s.PageBtnPos = (p & 7) < MainForm.PageBtnPlaces && p >= 0 && p < 16 ? p : MainForm.PageBtnDefault; } break;
+                    case "PageZoom":
+                    {
+                        int bar = v.LastIndexOf('|');
+                        double z;
+                        if (bar > 0 && double.TryParse(v.Substring(bar + 1), NumberStyles.Float, CultureInfo.InvariantCulture, out z) && z >= MainForm.ZoomMin && z <= MainForm.ZoomMax)
+                            s.PageZooms[v.Substring(0, bar).ToLowerInvariant()] = z;
+                    }
+                    break;
                     case "PowerLimit": Powers.Limit = Math.Max(1, Math.Min(Powers.LimitMax, Int(v, 100))); break;
                     case "MemListCount": s.Memories.ListCount = Math.Max(1, Math.Min(Memory.MaxLists, Int(v, 1))); break;
                     case "MemCurrentList": s.Memories.CurrentList = Math.Max(0, Math.Min(Memory.MaxLists - 1, Int(v, 0))); break;
@@ -430,6 +443,9 @@ namespace SDRLink
             foreach (KeyValuePair<string, int> p in Memories.DigiPreamps) Line(sb, "MemDigiPre", p.Key + "|" + p.Value.ToString(CultureInfo.InvariantCulture));
             foreach (KeyValuePair<string, int> p in Memories.DigiPowers) Line(sb, "MemDigiPwr", p.Key + "|" + p.Value.ToString(CultureInfo.InvariantCulture));
             Line(sb, "PowerLimit", Powers.Limit);
+            Line(sb, "HideUrl", HideUrl ? 1 : 0);
+            Line(sb, "PageBtnPos", PageBtnPos);
+            foreach (KeyValuePair<string, double> p in PageZooms) Line(sb, "PageZoom", p.Key + "|" + p.Value.ToString("0.###", CultureInfo.InvariantCulture));
             Line(sb, "CurrentList", CurrentList);
             Line(sb, "PttTimeout", PttTimeoutSec);
             Line(sb, "CableDevice", CableDevice);

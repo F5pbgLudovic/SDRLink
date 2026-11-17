@@ -641,6 +641,33 @@ Searching… {0} s	Søker… {0} s
 Searching for the mode being heard ({0} s at most)…	Søker etter modusen som høres (høyst {0} s)…
 Mode found: {0} ({1})	Modus funnet: {0} ({1})
 BW:	BB:
+ (right-click: position of the buttons)	 (høyreklikk: plassering av knappene)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Del frekvensen: kopierer en lenke til denne WebSDR-en, med denne frekvensen og modusen, til utklippstavlen
+Zoom in the WebSDR page	Zoom inn på WebSDR-siden
+Zoom out the WebSDR page	Zoom ut på WebSDR-siden
+Bottom right	Nederst til høyre
+Bottom left	Nederst til venstre
+Top right	Øverst til høyre
+Top left	Øverst til venstre
+Top centre	Øverst i midten
+Bottom centre	Nederst i midten
+Position of the buttons:	Plassering av knappene:
+horizontal	vannrett
+vertical	loddrett
+(original position)	(opprinnelig plassering)
+Hide the WebSDR address	Skjul WebSDR-adressen
+Page zoom: automatic	Sidezoom: automatisk
+No WebSDR to share	Ingen WebSDR å dele
+Clipboard busy: link not copied	Utklippstavlen er opptatt: lenken ble ikke kopiert
+WebSDR address hidden (right-click the page to show it again)	WebSDR-adressen er skjult (høyreklikk på siden for å vise den igjen)
+WebSDR address shown	WebSDR-adressen vises
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adressen er skjult: pilen åpner fortsatt listen (høyreklikk på WebSDR-siden for å vise adressen igjen)
+Page zoom: automatic (now {0})	Sidezoom: automatisk (nå {0})
+WebSDR page: {0}	WebSDR-side: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-side: {0} (husket for denne WebSDR-en; høyreklikk på en knapp: automatisk zoom)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-siden er redusert til {0} for å vise hele kontrollpanelet (+ og − for å velge)
+{0} kHz {1} on {2}	{0} kHz {1} på {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delingslenke kopiert til utklippstavlen ({0} kHz {1}): lim den inn i en melding
 Mode:	Modus:
 Preamp:	Forforsterker:
 (preamp unchanged)	(forforsterker uendret)

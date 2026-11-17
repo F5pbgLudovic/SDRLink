@@ -641,6 +641,33 @@ Searching… {0} s	Hledání… {0} s
 Searching for the mode being heard ({0} s at most)…	Hledání slyšeného druhu provozu (nejvýše {0} s)…
 Mode found: {0} ({1})	Nalezen druh provozu: {0} ({1})
 BW:	ŠP:
+ (right-click: position of the buttons)	 (pravé tlačítko: poloha tlačítek)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Sdílet frekvenci: zkopíruje do schránky odkaz na tento WebSDR s touto frekvencí a režimem
+Zoom in the WebSDR page	Zvětšit stránku WebSDR
+Zoom out the WebSDR page	Zmenšit stránku WebSDR
+Bottom right	Vpravo dole
+Bottom left	Vlevo dole
+Top right	Vpravo nahoře
+Top left	Vlevo nahoře
+Top centre	Nahoře uprostřed
+Bottom centre	Dole uprostřed
+Position of the buttons:	Poloha tlačítek:
+horizontal	vodorovně
+vertical	svisle
+(original position)	(původní poloha)
+Hide the WebSDR address	Skrýt adresu WebSDR
+Page zoom: automatic	Zoom stránky: automatický
+No WebSDR to share	Žádný WebSDR ke sdílení
+Clipboard busy: link not copied	Schránka je zaneprázdněná: odkaz nebyl zkopírován
+WebSDR address hidden (right-click the page to show it again)	Adresa WebSDR je skrytá (znovu ji zobrazíte pravým tlačítkem na stránce)
+WebSDR address shown	Adresa WebSDR je zobrazena
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adresa je skrytá: šipka stále otevírá seznam (adresu znovu zobrazíte pravým tlačítkem na stránce WebSDR)
+Page zoom: automatic (now {0})	Zoom stránky: automatický (nyní {0})
+WebSDR page: {0}	Stránka WebSDR: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Stránka WebSDR: {0} (zapamatováno pro tento WebSDR; pravé tlačítko na tlačítku: automatický zoom)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stránka WebSDR zmenšena na {0}, aby byl vidět celý její ovládací panel (volba pomocí + a −)
+{0} kHz {1} on {2}	{0} kHz {1} na {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Odkaz ke sdílení zkopírován do schránky ({0} kHz {1}): vložte ho do zprávy
 Mode:	Druh provozu:
 Preamp:	Předzesilovač:
 (preamp unchanged)	(předzesilovač beze změny)

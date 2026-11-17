@@ -641,6 +641,33 @@ Searching… {0} s	Zoeken… {0} s
 Searching for the mode being heard ({0} s at most)…	Zoeken naar de gehoorde mode (maximaal {0} s)…
 Mode found: {0} ({1})	Mode gevonden: {0} ({1})
 BW:	BB:
+ (right-click: position of the buttons)	 (rechtsklik: positie van de knoppen)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Frequentie delen: kopieert een link naar deze WebSDR met deze frequentie en modus naar het klembord
+Zoom in the WebSDR page	WebSDR-pagina vergroten
+Zoom out the WebSDR page	WebSDR-pagina verkleinen
+Bottom right	Rechtsonder
+Bottom left	Linksonder
+Top right	Rechtsboven
+Top left	Linksboven
+Top centre	Midden boven
+Bottom centre	Midden onder
+Position of the buttons:	Positie van de knoppen:
+horizontal	horizontaal
+vertical	verticaal
+(original position)	(oorspronkelijke positie)
+Hide the WebSDR address	WebSDR-adres verbergen
+Page zoom: automatic	Paginazoom: automatisch
+No WebSDR to share	Geen WebSDR om te delen
+Clipboard busy: link not copied	Klembord bezet: link niet gekopieerd
+WebSDR address hidden (right-click the page to show it again)	WebSDR-adres verborgen (rechtsklik op de pagina om het weer te tonen)
+WebSDR address shown	WebSDR-adres getoond
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adres verborgen: de pijl opent nog steeds de lijst (rechtsklik op de WebSDR-pagina om het adres weer te tonen)
+Page zoom: automatic (now {0})	Paginazoom: automatisch (nu {0})
+WebSDR page: {0}	WebSDR-pagina: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-pagina: {0} (onthouden voor deze WebSDR; rechtsklik op een knop: automatische zoom)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-pagina verkleind tot {0} om het hele bedieningspaneel te tonen (+ en − om te kiezen)
+{0} kHz {1} on {2}	{0} kHz {1} op {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Deellink gekopieerd naar het klembord ({0} kHz {1}): plak hem in een bericht
 Mode:	Mode:
 Preamp:	Voorversterker:
 (preamp unchanged)	(voorversterker ongewijzigd)

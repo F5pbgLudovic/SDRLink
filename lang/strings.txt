@@ -641,6 +641,33 @@ Searching… {0} s	Recherche… {0} s
 Searching for the mode being heard ({0} s at most)…	Recherche du mode écouté ({0} s au plus)…
 Mode found: {0} ({1})	Mode trouvé : {0} ({1})
 BW:	BP :
+ (right-click: position of the buttons)	 (clic droit : position des boutons)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Partager la fréquence : copie dans le presse-papiers un lien vers ce WebSDR, sur cette fréquence et ce mode
+Zoom in the WebSDR page	Agrandir la page du WebSDR
+Zoom out the WebSDR page	Réduire la page du WebSDR
+Bottom right	Bas à droite
+Bottom left	Bas à gauche
+Top right	Haut à droite
+Top left	Haut à gauche
+Top centre	Milieu haut
+Bottom centre	Milieu bas
+Position of the buttons:	Position des boutons :
+horizontal	horizontal
+vertical	vertical
+(original position)	(position d'origine)
+Hide the WebSDR address	Masquer l'adresse du WebSDR
+Page zoom: automatic	Zoom de la page : automatique
+No WebSDR to share	Aucun WebSDR à partager
+Clipboard busy: link not copied	Presse-papiers occupé : lien non copié
+WebSDR address hidden (right-click the page to show it again)	Adresse du WebSDR masquée (clic droit sur la page pour la revoir)
+WebSDR address shown	Adresse du WebSDR affichée
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adresse masquée : la flèche ouvre toujours la liste (clic droit sur la page du WebSDR pour revoir l'adresse)
+Page zoom: automatic (now {0})	Zoom de la page : automatique (maintenant {0})
+WebSDR page: {0}	Page du WebSDR : {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Page du WebSDR : {0} (retenu pour ce WebSDR ; clic droit sur un bouton : zoom automatique)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Page du WebSDR réduite à {0} pour voir tout son panneau de commande (+ et − pour choisir)
+{0} kHz {1} on {2}	{0} kHz {1} sur {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Lien de partage copié dans le presse-papiers ({0} kHz {1}) : à coller dans un message
 Mode:	Mode :
 Preamp:	Préampli :
 (preamp unchanged)	(préampli inchangé)

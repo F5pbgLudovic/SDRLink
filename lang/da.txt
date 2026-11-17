@@ -641,6 +641,33 @@ Searching… {0} s	Søger… {0} s
 Searching for the mode being heard ({0} s at most)…	Søger efter den mode, der høres (højst {0} s)…
 Mode found: {0} ({1})	Mode fundet: {0} ({1})
 BW:	BB:
+ (right-click: position of the buttons)	 (højreklik: knappernes placering)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Del frekvensen: kopierer et link til denne WebSDR på denne frekvens og i denne mode til udklipsholderen
+Zoom in the WebSDR page	Zoom ind på WebSDR-siden
+Zoom out the WebSDR page	Zoom ud på WebSDR-siden
+Bottom right	Nederst til højre
+Bottom left	Nederst til venstre
+Top right	Øverst til højre
+Top left	Øverst til venstre
+Top centre	Øverst i midten
+Bottom centre	Nederst i midten
+Position of the buttons:	Knappernes placering:
+horizontal	vandret
+vertical	lodret
+(original position)	(oprindelig placering)
+Hide the WebSDR address	Skjul WebSDR-adressen
+Page zoom: automatic	Sidezoom: automatisk
+No WebSDR to share	Ingen WebSDR at dele
+Clipboard busy: link not copied	Udklipsholderen er optaget: linket blev ikke kopieret
+WebSDR address hidden (right-click the page to show it again)	WebSDR-adressen er skjult (højreklik på siden for at vise den igen)
+WebSDR address shown	WebSDR-adressen vises
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adressen er skjult: pilen åbner stadig listen (højreklik på WebSDR-siden for at vise adressen igen)
+Page zoom: automatic (now {0})	Sidezoom: automatisk (nu {0})
+WebSDR page: {0}	WebSDR-side: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-side: {0} (husket for denne WebSDR; højreklik på en knap: automatisk zoom)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-siden er formindsket til {0} for at vise hele kontrolpanelet (+ og − for at vælge)
+{0} kHz {1} on {2}	{0} kHz {1} på {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delingslink kopieret til udklipsholderen ({0} kHz {1}): indsæt det i en besked
 Mode:	Mode:
 Preamp:	Forforstærker:
 (preamp unchanged)	(forforstærker uændret)

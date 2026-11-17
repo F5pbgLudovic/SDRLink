@@ -641,6 +641,33 @@ Searching… {0} s	Söker… {0} s
 Searching for the mode being heard ({0} s at most)…	Söker efter trafiksättet som hörs (högst {0} s)…
 Mode found: {0} ({1})	Trafiksätt hittat: {0} ({1})
 BW:	BB:
+ (right-click: position of the buttons)	 (högerklicka: knapparnas placering)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Dela frekvensen: kopierar en länk till denna WebSDR, med denna frekvens och mod, till urklipp
+Zoom in the WebSDR page	Zooma in WebSDR-sidan
+Zoom out the WebSDR page	Zooma ut WebSDR-sidan
+Bottom right	Nere till höger
+Bottom left	Nere till vänster
+Top right	Uppe till höger
+Top left	Uppe till vänster
+Top centre	Uppe i mitten
+Bottom centre	Nere i mitten
+Position of the buttons:	Knapparnas placering:
+horizontal	horisontell
+vertical	vertikal
+(original position)	(ursprunglig placering)
+Hide the WebSDR address	Dölj WebSDR-adressen
+Page zoom: automatic	Sidzoom: automatisk
+No WebSDR to share	Ingen WebSDR att dela
+Clipboard busy: link not copied	Urklipp är upptaget: länken kopierades inte
+WebSDR address hidden (right-click the page to show it again)	WebSDR-adressen är dold (högerklicka på sidan för att visa den igen)
+WebSDR address shown	WebSDR-adressen visas
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adressen är dold: pilen öppnar fortfarande listan (högerklicka på WebSDR-sidan för att visa adressen igen)
+Page zoom: automatic (now {0})	Sidzoom: automatisk (nu {0})
+WebSDR page: {0}	WebSDR-sida: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-sida: {0} (sparad för denna WebSDR; högerklicka på en knapp: automatisk zoom)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sidan har minskats till {0} för att visa hela kontrollpanelen (+ och − för att välja)
+{0} kHz {1} on {2}	{0} kHz {1} på {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delningslänk kopierad till urklipp ({0} kHz {1}): klistra in den i ett meddelande
 Mode:	Trafiksätt:
 Preamp:	Förförstärkare:
 (preamp unchanged)	(förförstärkare oförändrad)

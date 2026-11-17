@@ -641,6 +641,33 @@ Searching… {0} s	Keresés… {0} s
 Searching for the mode being heard ({0} s at most)…	A hallott üzemmód keresése (legfeljebb {0} s)…
 Mode found: {0} ({1})	Talált üzemmód: {0} ({1})
 BW:	Ssz:
+ (right-click: position of the buttons)	 (jobb kattintás: a gombok helye)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Frekvencia megosztása: a vágólapra másolja az erre a WebSDR-re mutató hivatkozást, ezzel a frekvenciával és üzemmóddal
+Zoom in the WebSDR page	A WebSDR-oldal nagyítása
+Zoom out the WebSDR page	A WebSDR-oldal kicsinyítése
+Bottom right	Jobbra lent
+Bottom left	Balra lent
+Top right	Jobbra fent
+Top left	Balra fent
+Top centre	Középen fent
+Bottom centre	Középen lent
+Position of the buttons:	A gombok helye:
+horizontal	vízszintes
+vertical	függőleges
+(original position)	(eredeti hely)
+Hide the WebSDR address	A WebSDR címének elrejtése
+Page zoom: automatic	Oldalnagyítás: automatikus
+No WebSDR to share	Nincs megosztható WebSDR
+Clipboard busy: link not copied	A vágólap foglalt: a hivatkozás nem lett átmásolva
+WebSDR address hidden (right-click the page to show it again)	A WebSDR címe el van rejtve (újbóli megjelenítéséhez kattintson jobb gombbal az oldalon)
+WebSDR address shown	A WebSDR címe megjelenik
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	A cím el van rejtve: a nyíl továbbra is megnyitja a listát (a cím újbóli megjelenítéséhez kattintson jobb gombbal a WebSDR-oldalon)
+Page zoom: automatic (now {0})	Oldalnagyítás: automatikus (jelenleg {0})
+WebSDR page: {0}	WebSDR-oldal: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-oldal: {0} (megjegyezve ehhez a WebSDR-hez; jobb kattintás egy gombon: automatikus nagyítás)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	A WebSDR-oldal {0}-ra kicsinyítve, hogy a teljes vezérlőpult látszódjon (+ és − a választáshoz)
+{0} kHz {1} on {2}	{0} kHz {1} itt: {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	A megosztási hivatkozás a vágólapra másolva ({0} kHz {1}): illessze be egy üzenetbe
 Mode:	Üzemmód:
 Preamp:	Előerősítő:
 (preamp unchanged)	(az előerősítő változatlan)

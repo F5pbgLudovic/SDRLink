@@ -641,6 +641,33 @@ Searching… {0} s	Szukanie… {0} s
 Searching for the mode being heard ({0} s at most)…	Szukanie słyszanej emisji (maks. {0} s)…
 Mode found: {0} ({1})	Znaleziono emisję: {0} ({1})
 BW:	SP:
+ (right-click: position of the buttons)	 (prawy klik: położenie przycisków)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Udostępnij częstotliwość: kopiuje do schowka link do tego WebSDR z tą częstotliwością i emisją
+Zoom in the WebSDR page	Powiększ stronę WebSDR
+Zoom out the WebSDR page	Pomniejsz stronę WebSDR
+Bottom right	Na dole po prawej
+Bottom left	Na dole po lewej
+Top right	U góry po prawej
+Top left	U góry po lewej
+Top centre	U góry pośrodku
+Bottom centre	Na dole pośrodku
+Position of the buttons:	Położenie przycisków:
+horizontal	poziomo
+vertical	pionowo
+(original position)	(położenie pierwotne)
+Hide the WebSDR address	Ukryj adres WebSDR
+Page zoom: automatic	Powiększenie strony: automatyczne
+No WebSDR to share	Brak WebSDR do udostępnienia
+Clipboard busy: link not copied	Schowek zajęty: link nie został skopiowany
+WebSDR address hidden (right-click the page to show it again)	Adres WebSDR ukryty (prawy klik na stronie, aby go ponownie pokazać)
+WebSDR address shown	Adres WebSDR wyświetlony
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adres ukryty: strzałka nadal otwiera listę (prawy klik na stronie WebSDR, aby ponownie pokazać adres)
+Page zoom: automatic (now {0})	Powiększenie strony: automatyczne (teraz {0})
+WebSDR page: {0}	Strona WebSDR: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Strona WebSDR: {0} (zapamiętane dla tego WebSDR; prawy klik na przycisku: automatyczne powiększenie)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Strona WebSDR pomniejszona do {0}, aby pokazać cały panel sterowania (+ i − do wyboru)
+{0} kHz {1} on {2}	{0} kHz {1} na {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Link do udostępnienia skopiowany do schowka ({0} kHz {1}): wklej go do wiadomości
 Mode:	Emisja:
 Preamp:	Przedwzmacniacz:
 (preamp unchanged)	(przedwzmacniacz bez zmian)

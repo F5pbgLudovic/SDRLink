@@ -641,6 +641,33 @@ Searching… {0} s	Ieškoma… {0} s
 Searching for the mode being heard ({0} s at most)…	Ieškoma girdimos darbo rūšies (ne ilgiau kaip {0} s)…
 Mode found: {0} ({1})	Rasta darbo rūšis: {0} ({1})
 BW:	JP:
+ (right-click: position of the buttons)	 (dešinysis spustelėjimas: mygtukų padėtis)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Bendrinti dažnį: nukopijuoja į iškarpinę nuorodą į šį WebSDR su šiuo dažniu ir režimu
+Zoom in the WebSDR page	Padidinti WebSDR puslapį
+Zoom out the WebSDR page	Sumažinti WebSDR puslapį
+Bottom right	Apačioje dešinėje
+Bottom left	Apačioje kairėje
+Top right	Viršuje dešinėje
+Top left	Viršuje kairėje
+Top centre	Viršuje centre
+Bottom centre	Apačioje centre
+Position of the buttons:	Mygtukų padėtis:
+horizontal	horizontaliai
+vertical	vertikaliai
+(original position)	(pradinė padėtis)
+Hide the WebSDR address	Slėpti WebSDR adresą
+Page zoom: automatic	Puslapio mastelis: automatinis
+No WebSDR to share	Nėra WebSDR, kurį galima bendrinti
+Clipboard busy: link not copied	Iškarpinė užimta: nuoroda nenukopijuota
+WebSDR address hidden (right-click the page to show it again)	WebSDR adresas paslėptas (norėdami jį vėl parodyti, spustelėkite puslapį dešiniuoju pelės mygtuku)
+WebSDR address shown	WebSDR adresas rodomas
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adresas paslėptas: rodyklė vis dar atveria sąrašą (norėdami vėl parodyti adresą, spustelėkite WebSDR puslapį dešiniuoju pelės mygtuku)
+Page zoom: automatic (now {0})	Puslapio mastelis: automatinis (dabar {0})
+WebSDR page: {0}	WebSDR puslapis: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR puslapis: {0} (įsimintas šiam WebSDR; dešinysis spustelėjimas ant mygtuko: automatinis mastelis)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR puslapis sumažintas iki {0}, kad būtų matomas visas valdymo skydelis (+ ir − pasirinkimui)
+{0} kHz {1} on {2}	{0} kHz {1} – {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Bendrinimo nuoroda nukopijuota į iškarpinę ({0} kHz {1}): įklijuokite ją į žinutę
 Mode:	Režimas:
 Preamp:	Išankstinis stiprintuvas:
 (preamp unchanged)	(išankstinis stiprintuvas nepakeistas)

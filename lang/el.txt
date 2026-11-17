@@ -641,6 +641,33 @@ Searching… {0} s	Αναζήτηση… {0} s
 Searching for the mode being heard ({0} s at most)…	Αναζήτηση του τρόπου που ακούγεται (το πολύ {0} s)…
 Mode found: {0} ({1})	Βρέθηκε τρόπος: {0} ({1})
 BW:	ΕΖ:
+ (right-click: position of the buttons)	 (δεξί κλικ: θέση των κουμπιών)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Κοινοποίηση συχνότητας: αντιγράφει στο πρόχειρο έναν σύνδεσμο προς αυτό το WebSDR, με αυτή τη συχνότητα και λειτουργία
+Zoom in the WebSDR page	Μεγέθυνση της σελίδας του WebSDR
+Zoom out the WebSDR page	Σμίκρυνση της σελίδας του WebSDR
+Bottom right	Κάτω δεξιά
+Bottom left	Κάτω αριστερά
+Top right	Πάνω δεξιά
+Top left	Πάνω αριστερά
+Top centre	Πάνω στο κέντρο
+Bottom centre	Κάτω στο κέντρο
+Position of the buttons:	Θέση των κουμπιών:
+horizontal	οριζόντια
+vertical	κάθετα
+(original position)	(αρχική θέση)
+Hide the WebSDR address	Απόκρυψη της διεύθυνσης του WebSDR
+Page zoom: automatic	Ζουμ σελίδας: αυτόματο
+No WebSDR to share	Κανένα WebSDR προς κοινοποίηση
+Clipboard busy: link not copied	Το πρόχειρο είναι απασχολημένο: ο σύνδεσμος δεν αντιγράφηκε
+WebSDR address hidden (right-click the page to show it again)	Η διεύθυνση του WebSDR είναι κρυμμένη (δεξί κλικ στη σελίδα για να εμφανιστεί ξανά)
+WebSDR address shown	Η διεύθυνση του WebSDR εμφανίζεται
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Η διεύθυνση είναι κρυμμένη: το βέλος ανοίγει ακόμα τη λίστα (δεξί κλικ στη σελίδα του WebSDR για να εμφανιστεί ξανά η διεύθυνση)
+Page zoom: automatic (now {0})	Ζουμ σελίδας: αυτόματο (τώρα {0})
+WebSDR page: {0}	Σελίδα WebSDR: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Σελίδα WebSDR: {0} (διατηρείται για αυτό το WebSDR· δεξί κλικ σε κουμπί: αυτόματο ζουμ)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Η σελίδα του WebSDR μειώθηκε στο {0} ώστε να φαίνεται ολόκληρος ο πίνακας ελέγχου (+ και − για επιλογή)
+{0} kHz {1} on {2}	{0} kHz {1} στο {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Ο σύνδεσμος κοινοποίησης αντιγράφηκε στο πρόχειρο ({0} kHz {1}): επικολλήστε τον σε ένα μήνυμα
 Mode:	Τρόπος:
 Preamp:	Προενισχυτής:
 (preamp unchanged)	(προενισχυτής αμετάβλητος)

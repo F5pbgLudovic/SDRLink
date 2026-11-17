@@ -641,6 +641,33 @@ Searching… {0} s	Iskanje… {0} s
 Searching for the mode being heard ({0} s at most)…	Iskanje slišanega načina (največ {0} s)…
 Mode found: {0} ({1})	Najden način: {0} ({1})
 BW:	PŠ:
+ (right-click: position of the buttons)	 (desni klik: položaj gumbov)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Deli frekvenco: v odložišče kopira povezavo do tega WebSDR s to frekvenco in načinom dela
+Zoom in the WebSDR page	Povečaj stran WebSDR
+Zoom out the WebSDR page	Pomanjšaj stran WebSDR
+Bottom right	Spodaj desno
+Bottom left	Spodaj levo
+Top right	Zgoraj desno
+Top left	Zgoraj levo
+Top centre	Zgoraj na sredini
+Bottom centre	Spodaj na sredini
+Position of the buttons:	Položaj gumbov:
+horizontal	vodoravno
+vertical	navpično
+(original position)	(izvirni položaj)
+Hide the WebSDR address	Skrij naslov WebSDR
+Page zoom: automatic	Povečava strani: samodejna
+No WebSDR to share	Ni WebSDR za deljenje
+Clipboard busy: link not copied	Odložišče je zasedeno: povezava ni kopirana
+WebSDR address hidden (right-click the page to show it again)	Naslov WebSDR je skrit (z desnim klikom na stran ga spet prikažete)
+WebSDR address shown	Naslov WebSDR je prikazan
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Naslov je skrit: puščica še vedno odpre seznam (z desnim klikom na stran WebSDR naslov spet prikažete)
+Page zoom: automatic (now {0})	Povečava strani: samodejna (zdaj {0})
+WebSDR page: {0}	Stran WebSDR: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Stran WebSDR: {0} (zapomnjeno za ta WebSDR; desni klik na gumb: samodejna povečava)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stran WebSDR zmanjšana na {0}, da se vidi celotna nadzorna plošča (+ in − za izbiro)
+{0} kHz {1} on {2}	{0} kHz {1} na {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Povezava za deljenje kopirana v odložišče ({0} kHz {1}): prilepite jo v sporočilo
 Mode:	Način:
 Preamp:	Predojačevalnik:
 (preamp unchanged)	(predojačevalnik nespremenjen)

@@ -641,6 +641,33 @@ Searching… {0} s	Se caută… {0} s
 Searching for the mode being heard ({0} s at most)…	Se caută modul auzit (cel mult {0} s)…
 Mode found: {0} ({1})	Mod găsit: {0} ({1})
 BW:	LB:
+ (right-click: position of the buttons)	 (clic dreapta: poziția butoanelor)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Partajează frecvența: copiază în clipboard un link către acest WebSDR, cu această frecvență și acest mod
+Zoom in the WebSDR page	Mărește pagina WebSDR
+Zoom out the WebSDR page	Micșorează pagina WebSDR
+Bottom right	Jos în dreapta
+Bottom left	Jos în stânga
+Top right	Sus în dreapta
+Top left	Sus în stânga
+Top centre	Sus la mijloc
+Bottom centre	Jos la mijloc
+Position of the buttons:	Poziția butoanelor:
+horizontal	orizontal
+vertical	vertical
+(original position)	(poziția inițială)
+Hide the WebSDR address	Ascunde adresa WebSDR
+Page zoom: automatic	Zoom pagină: automat
+No WebSDR to share	Niciun WebSDR de partajat
+Clipboard busy: link not copied	Clipboard ocupat: linkul nu a fost copiat
+WebSDR address hidden (right-click the page to show it again)	Adresa WebSDR este ascunsă (clic dreapta pe pagină pentru a o afișa din nou)
+WebSDR address shown	Adresa WebSDR este afișată
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adresă ascunsă: săgeata deschide în continuare lista (clic dreapta pe pagina WebSDR pentru a afișa din nou adresa)
+Page zoom: automatic (now {0})	Zoom pagină: automat (acum {0})
+WebSDR page: {0}	Pagina WebSDR: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pagina WebSDR: {0} (reținut pentru acest WebSDR; clic dreapta pe un buton: zoom automat)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Pagina WebSDR a fost redusă la {0} pentru a afișa tot panoul de comandă (+ și − pentru alegere)
+{0} kHz {1} on {2}	{0} kHz {1} pe {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Linkul de partajare a fost copiat în clipboard ({0} kHz {1}): lipiți-l într-un mesaj
 Mode:	Mod:
 Preamp:	Preamplificator:
 (preamp unchanged)	(preamplificator nemodificat)

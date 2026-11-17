@@ -886,6 +886,7 @@ namespace SDRLink
             webHost.Margin = web.Margin;
             webHost.Controls.Add(web);
             CreateDigiView(webHost);
+            CreatePageButtons(webHost);
 
             table.Controls.Add(row1, 0, 0);
             table.Controls.Add(row2, 0, 1);
@@ -1585,6 +1586,8 @@ namespace SDRLink
             FillFavListCombo();
             RefillUrlCombo();
             cbUrl.Text = settings.LastUrl;
+            ApplyUrlMask();
+            PlacePageButtons();
             UpdateInterfacePanels();
             loading = false;
             ApplyLanguage();
@@ -2514,6 +2517,7 @@ namespace SDRLink
             sdrF = f;
             sdrM = m;
             UpdateDisplays();
+            if (first && FitAllowed()) StartFit(3, 1500);   // OpenWebRX : panneau de commande vu en entier (1.43)
 
             string fam = Modes.SdrFamily(m);
             bool freqChanged = Math.Abs(f - lastSdrF) > Tolerance;
@@ -2739,6 +2743,7 @@ namespace SDRLink
                 CoreWebView2Environment env = await CoreWebView2Environment.CreateAsync(null, dataDir, opts);
                 await web.EnsureCoreWebView2Async(env);
                 CoreWebView2 core = web.CoreWebView2;
+                InitPageTools(env, core);
                 await core.AddScriptToExecuteOnDocumentCreatedAsync(WebSdrBridge.Script);
                 await ApplyCallsign();
                 core.WebMessageReceived += OnWebMessage;
@@ -2930,6 +2935,10 @@ namespace SDRLink
             }
             catch (Exception ex) { Log.Write("Réinit WebSDR : effacement incomplet pour " + origin + " : " + ex.Message); }
             Log.Write("Réinit WebSDR : réinitialisation totale de " + origin);
+            // Le zoom de la page retenu pour ce WebSDR (+ et −) est oublié aussi : affichage d'origine (1.43).
+            string zk = HostKey(u.AbsoluteUri);
+            if (zk != "" && settings.PageZooms.Remove(zk)) { settings.Save(); Log.Write("Réinit WebSDR : zoom de la page oublié pour " + zk); }
+            SetPageZoom(1.0);
             reinitPending = false;
             resetPending = true;
             Navigate(u.GetLeftPart(UriPartial.Query));

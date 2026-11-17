@@ -641,6 +641,33 @@ Searching… {0} s	Suche… {0} s
 Searching for the mode being heard ({0} s at most)…	Suche nach der gehörten Betriebsart (höchstens {0} s)…
 Mode found: {0} ({1})	Betriebsart gefunden: {0} ({1})
 BW:	BB:
+ (right-click: position of the buttons)	 (Rechtsklick: Position der Schaltflächen)
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Frequenz teilen: kopiert einen Link zu diesem WebSDR mit dieser Frequenz und Betriebsart in die Zwischenablage
+Zoom in the WebSDR page	WebSDR-Seite vergrößern
+Zoom out the WebSDR page	WebSDR-Seite verkleinern
+Bottom right	Unten rechts
+Bottom left	Unten links
+Top right	Oben rechts
+Top left	Oben links
+Top centre	Oben Mitte
+Bottom centre	Unten Mitte
+Position of the buttons:	Position der Schaltflächen:
+horizontal	waagerecht
+vertical	senkrecht
+(original position)	(ursprüngliche Position)
+Hide the WebSDR address	WebSDR-Adresse ausblenden
+Page zoom: automatic	Seitenzoom: automatisch
+No WebSDR to share	Kein WebSDR zum Teilen
+Clipboard busy: link not copied	Zwischenablage belegt: Link nicht kopiert
+WebSDR address hidden (right-click the page to show it again)	WebSDR-Adresse ausgeblendet (Rechtsklick auf die Seite, um sie wieder anzuzeigen)
+WebSDR address shown	WebSDR-Adresse angezeigt
+Address hidden: the arrow still opens the list (right-click the WebSDR page to show the address again)	Adresse ausgeblendet: der Pfeil öffnet weiterhin die Liste (Rechtsklick auf die WebSDR-Seite, um die Adresse wieder anzuzeigen)
+Page zoom: automatic (now {0})	Seitenzoom: automatisch (jetzt {0})
+WebSDR page: {0}	WebSDR-Seite: {0}
+WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-Seite: {0} (für dieses WebSDR gespeichert; Rechtsklick auf eine Schaltfläche: automatischer Zoom)
+WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-Seite auf {0} verkleinert, um das gesamte Bedienfeld zu zeigen (+ und − zum Auswählen)
+{0} kHz {1} on {2}	{0} kHz {1} auf {2}
+Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Freigabelink in die Zwischenablage kopiert ({0} kHz {1}): in eine Nachricht einfügen
 Mode:	Betriebsart:
 Preamp:	Vorverstärker:
 (preamp unchanged)	(Vorverstärker unverändert)
