@@ -13,6 +13,11 @@ namespace SDRLink
         bool isChecked, downOnBox, hotBox;
         public event EventHandler CheckedChanged;
 
+        // Sans case (1.48, bouton du notch) : pas de case dessinée, tout clic (souris, Entrée, Espace) change l'état ; l'état se voit
+        // à la couleur du bouton, posée par son propriétaire.
+        bool noBox;
+        public bool NoBox { get { return noBox; } set { noBox = value; UpdatePadding(); Invalidate(); } }
+
         public CheckButton()
         {
             AutoSize = true;
@@ -45,13 +50,13 @@ namespace SDRLink
         // Zone sensible de la case : la case et quelques pixels autour, sur toute la hauteur du bouton.
         public Rectangle BoxArea { get { return new Rectangle(0, 0, 8 + Glyph.Width + 4, Height); } }
 
-        void UpdatePadding() { Padding = new Padding(8 + Glyph.Width + 2, 0, 4, 0); }
+        void UpdatePadding() { Padding = noBox ? new Padding(4, 0, 4, 0) : new Padding(8 + Glyph.Width + 2, 0, 4, 0); }
 
         protected override void OnFontChanged(EventArgs e) { base.OnFontChanged(e); UpdatePadding(); }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            downOnBox = e.Button == MouseButtons.Left && BoxArea.Contains(e.Location);
+            downOnBox = e.Button == MouseButtons.Left && !noBox && BoxArea.Contains(e.Location);
             base.OnMouseDown(e);
         }
 
@@ -64,7 +69,7 @@ namespace SDRLink
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            bool hot = BoxArea.Contains(e.Location);
+            bool hot = !noBox && BoxArea.Contains(e.Location);
             if (hot != hotBox) { hotBox = hot; Invalidate(); }
             base.OnMouseMove(e);
         }
@@ -77,6 +82,7 @@ namespace SDRLink
 
         protected override void OnClick(EventArgs e)
         {
+            if (noBox) { Checked = !Checked; return; }
             if (downOnBox)
             {
                 downOnBox = false;
@@ -89,6 +95,7 @@ namespace SDRLink
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            if (noBox) return;
             Size g = Glyph;
             Point p = new Point(8, (Height - g.Height) / 2);
             CheckBoxState s = isChecked ? (hotBox ? CheckBoxState.CheckedHot : CheckBoxState.CheckedNormal)

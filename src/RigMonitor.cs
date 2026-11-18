@@ -42,6 +42,9 @@ namespace SDRLink
         double step, t, lastL, lastR;
         bool haveLast;
         byte[] inBytes = new byte[0], outBytes = new byte[0];
+        // DNR du poste (1.48) : même type et même niveau que celui du WebSDR, si la case du menu DNR le demande.
+        readonly NoiseReducer nr = new NoiseReducer();
+        float[] mono = new float[0];
 
         struct Fmt { public int Rate, Channels, Bits; public bool Float; public int Align { get { return Bits / 8 * Channels; } } }
 
@@ -245,6 +248,15 @@ namespace SDRLink
                 if (inBytes.Length < size) inBytes = new byte[size];
                 Marshal.Copy(data, inBytes, 0, size);
             }
+            // DNR : le son du poste (mono, moyenne des voies) passe par le réducteur de bruit, puis va dans les deux voies.
+            bool dnr = NoiseReducer.Active;
+            if (dnr)
+            {
+                if (mono.Length < frames) mono = new float[frames];
+                for (int i = 0; i < frames; i++)
+                    mono[i] = silent ? 0f : (float)(inFmt.Channels > 1 ? (Sample(i * align, bytes) + Sample(i * align + bytes, bytes)) * 0.5 : Sample(i * align, bytes));
+                nr.Process(inFmt.Rate, mono, frames);
+            }
             int cap = ring.Length / 2;
             for (int i = 0; i < frames; i++)
             {
@@ -254,6 +266,7 @@ namespace SDRLink
                     l = Sample(i * align, bytes);
                     r = inFmt.Channels > 1 ? Sample(i * align + bytes, bytes) : l;
                 }
+                if (dnr) { l = mono[i]; r = l; }
                 if (!haveLast) { lastL = l; lastR = r; haveLast = true; }
                 while (t < 1.0)
                 {

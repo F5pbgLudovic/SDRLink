@@ -23,7 +23,7 @@ Overview; each feature is detailed further down in its own section.
 
 1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Connecting... / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Look ▾**, **Control panel**, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
-3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (box inside the button; click: options and level), **DNR** (noise reduction, since 1.46; click: on / off, right-click: level), **Scan setup**, **▶ Scan**.
+3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (click: on / off, green button when on; right-click: options, level and colours), **DNR** (noise reduction, since 1.46; click: on / off, right-click: classic, improved or AI type and its level), **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume** ("FreeDV volume" during FreeDV speech, since 1.45), **TRX volume on PC** (when "Also hear the rig on the PC" is ticked, since 1.45), **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44).
@@ -47,8 +47,8 @@ Overview; each feature is detailed further down in its own section.
 | kHz entry | remove the value from the history, remove all |
 | Memories | store the current frequency, button colour |
 | Favorites list (next to the address) | rename the list |
-| Auto notch (DNF) | colour when the notch is off / on (since 1.41) |
-| DNR | **level** 1 to 10, **DNR off in digital modes**, **DNR off in FreeDV V1 and V2**, colour when DNR is off / on (since 1.46) |
+| Auto notch (DNF) | notch window: off in digital modes and FreeDV, level, explanation, **Button colours…** (notch off / on) (since 1.48; before, right-click only gave the colours) |
+| DNR | **type** (classic, improved, AI; since 1.48), with its **level** 1 to 10 in a submenu (right-click the type), **DNR off in digital modes**, **DNR off in FreeDV V1 and V2**, **DNR also on the rig audio** (1.48), colour when DNR is off / on (since 1.46) |
 | Mode? | button colour, colour while searching (since 1.41) |
 | Mute WebSDR while transmitting | receivers muted while transmitting: WebSDR, rig, ExpertSDR, HDSDR (check boxes, all ticked at the start) |
 | ⇄ | receivers that ⇄ keeps muted (check boxes, two at most), button colour (since 1.41) |
@@ -507,31 +507,37 @@ The WebSDR audio is copied **all the time, in every mode**, to a virtual audio c
 
 ## Automatic notch (DNF)
 
-**Auto notch (DNF)** button, at the end of the Sync row (since 1.38 the box is inside the button, like "Check for updates"): like the FT-2000's DNF, it automatically removes **steady carriers and whistles** from the WebSDR audio.
-- **The box** on the button turns the notch on or off. The choice is remembered.
-- **A click elsewhere on the button** opens the notch window (since 1.38):
-  - **Auto notch off in digital modes** (ticked at first): the notch is turned off, without unticking the box, while a digital mode decoder runs or **DIGI** is the mode;
+**Auto notch (DNF)** button, at the end of the Sync row : like the FT-2000's DNF, it automatically removes **steady carriers and whistles** from the WebSDR audio.
+- **Click** the button: notch on / off (since 1.48; before, a box inside the button). When on, the button is **green**; when off, it takes the colour of the other buttons. The choice is remembered.
+- **Right-click** the button: the notch window (since 1.48; before, it opened with a click on the button):
+  - **Auto notch off in digital modes** (ticked at first): the notch is paused, without turning the button off, while a digital mode decoder runs or **DIGI** is the mode;
   - **Auto notch off in FreeDV V1 and V2** (ticked at first): off while FreeDV auto runs;
   - **Notch level** from **1** (the notch of earlier versions) to **10**: the number of whistles handled goes from 4 to 8, they are detected faster and lower above the noise, and each cut is wider;
-  - the explanation, then **Close** (or a click elsewhere, or Esc). Everything applies at once and is remembered.
+  - the explanation, **Button colours…** (notch off / on), then **Close** (or a click elsewhere, or Esc). Everything applies at once and is remembered.
 - At level 1: up to 4 tones at a time, each detected in about 0.6 s then tracked if it drifts; the measured attenuation is about 48 dB, down to the noise level.
-- Speech moves too much to be caught (a high level can however affect a voice holding a note). A steady **CW** signal, however, is removed, as with the rig's DNF: untick it for CW.
+- Speech moves too much to be caught (a high level can however affect a voice holding a note). A steady **CW** signal, however, is removed, as with the rig's DNF: turn it off for CW.
 - Only the audio you hear is filtered; the SDRLINK cable and the decoders receive the raw audio.
 
-## Noise reduction (DNR) (since 1.46)
+## Noise reduction (DNR) (since 1.46; three types since 1.48)
 
 **DNR** button, right after **Auto notch (DNF)**: it reduces the **hiss** (background noise) of the WebSDR audio, like the DNR of a transceiver.
-- **Click**: on / off. When on, the button is **green** and shows its level ("DNR 3"); when off, it takes the colour of the other buttons. The choice is kept.
+- **Click**: on / off. When on, the button is **green** and shows the type and level: "DNR 3" (classic), "DNR+ 5" (improved), "DNR AI 5" (AI). When off, it takes the colour of the other buttons. The choice is kept.
 - **Right-click**:
-  - **DNR level**, from **1** (gentlest) to **10** (strongest); 3 at first. Choosing a level turns the DNR on;
-  - **DNR off in digital modes** (ticked at first): paused, without turning the button off, while a digital-mode decoder is running or **DIGI** is the mode;
-  - **DNR off in FreeDV V1 and V2** (ticked at first): paused while FreeDV auto is running;
+  - the **three types** of DNR, the one in use ticked. **Click** a type: it is chosen (the menu stays open). **Right-click** a type, or just hover over it: its **level** submenu, from **1** (gentlest) to **10** (strongest). Each type keeps its own level. Choosing a type or a level turns the DNR on;
+  - **DNR off in digital modes** (ticked at first): paused, without turning the button off, while a digital-mode decoder is running or **DIGI** is the mode. Applies to all three types;
+  - **DNR off in FreeDV V1 and V2** (ticked at first): paused while FreeDV auto is running. Applies to all three types;
+  - **DNR also on the rig audio played by SDRLink (listening on the PC, diversity)** (ticked at first, since 1.48): see below;
   - **Colour when DNR is off** and **Colour when DNR is on**.
-- **What it does**: the audio is cut into slices of 20 to 30 ms. For each audio frequency, SDRLink follows the **noise level**, that is the lowest level heard over about 1.6 s: speech always has gaps, hiss does not. Each frequency is then attenuated according to how much it rises above that noise. A voice or CW that stands out of the noise goes through; the hiss between words and around the voice drops. The attenuation follows the audio smoothly, which avoids the "chirping" of simple noise reducers.
-- **The level** sets the maximum noise attenuation and the margin taken above the noise. Measured on noise alone: about **12 dB** less at level 3, **33 dB** at level 10. Clean audio goes through almost untouched. High levels make the voice "drier" and can swallow a very weak signal: start low and raise it by ear.
-- **Delay**: the WebSDR audio gets about **20 to 30 ms** of extra delay on a WebSDR served over **https**, and a little more (up to about 0.1 s) on a WebSDR served over **http**, which is the case for most websdr.org and KiwiSDR sites. On those pages the browser only offers the older audio processing, which works in longer blocks.
-- It acts **before the volume**, after the auto notch when both are on. Like the notch, it only changes **the audio you hear**: the SDRLINK cable and the decoders receive the raw audio. In diversity, it also applies to the WebSDR's ear, and to both ears in diversity on two WebSDRs.
-- It acts on the **WebSDR** audio only, not on the rig, ExpertSDR or HDSDR (they have their own DNR).
+- **The three types**:
+  - **Classic (Wiener filter)**, the one from 1.46 (level 3 at first). The audio is cut into 20 to 30 ms slices; for each audio frequency, SDRLink follows the noise level (the lowest heard over about 1.6 s) and attenuates what does not rise above it. Good on steady hiss, but at high levels it also "eats" the voice, which sounds metallic or underwater.
+  - **Improved (MMSE-LSA)** (level 5 at first). Same slicing, but the noise is estimated from the **probability that speech is present** in each frequency (it follows changing noise faster), and the attenuation is computed on the ear's scale (Ephraim and Malah method), without over-estimating the noise. Result: for the same reduction, the **voice is much less distorted**, and raising the level lowers the noise without damaging the voice further. As light to compute as the classic one.
+  - **AI (RNNoise)** (level 5 at first). A **neural network** trained to separate speech from noise (RNNoise, by Jean-Marc Valin, Xiph.Org and Mozilla, BSD licence), built into SDRLink: **no external website**, nothing is sent over the Internet. It "recognises" the voice and can remove the noise almost completely between words. The level sets the attenuation floor (from -6 dB at level 1 to about -34 dB at level 9); at level **10**, RNNoise works without a floor and the silence between words becomes total. It was trained on **speech**: it suits SSB and AM, not CW or digital modes (hence the switch-offs above).
+- **Measurements** (real voice filtered as in SSB, with strong hiss, 12 kHz audio): noise lowered by 9 dB (level 3) to 16 dB (level 10) with the classic type, the voice degrading as the level rises; by 8 to 23 dB with the improved type and by 6 dB to nearly 50 dB with the AI type, the voice staying equally clear at all levels.
+- **Resources**: classic and improved, less than 1 % of one processor core. **AI**: about **4 to 5 % of one core** per WebSDR (twice that in diversity on two WebSDRs), and about a hundred KB more in the exe. The network is only loaded if this type is chosen.
+- **Delay**: the WebSDR audio gets about **20 to 30 ms** more delay on an **https** WebSDR, whatever the type, and a little more (up to about 0.1 s) on an **http** WebSDR, which is the case of most websdr.org and KiwiSDR receivers. On those pages, the browser only offers the old audio processing, which works in longer blocks.
+- It acts **before the volume**, after the auto notch when both are on. Like the notch, it only affects **the sound you hear**: the SDRLINK cable and the decoders get the raw audio. In diversity, it also applies to the WebSDR's ear, and to both ears in diversity on two WebSDRs.
+- **Rig audio** (since 1.48): when SDRLink itself plays the rig audio, that is **listening to the rig on the PC** (right-click Mute TRX, TRX volume on PC slider) and the **rig's ear in diversity** (source "rig (rec sound card)"), the same DNR applies: same on / off, same type, same level and same digital-mode and FreeDV switch-offs as for the WebSDR. Just leave the **DNR also on the rig audio played by SDRLink** box ticked. The audio goes through the DNR in mono (average of both channels), then to both ears. Added delay: about 20 to 30 ms; the AI type takes about 3 to 6 % more of one core. The sound heard **on the rig's own speaker** does not go through the computer: the DNR cannot process it. REC, the SDRLINK cable and the decoders keep the raw audio.
+- It does not touch the ExpertSDR or HDSDR audio (they have their own DNR).
 
 The buttons always keep the same place: the RIG and WEBSDR areas have a fixed width. The WebSDR mode is shown there in short form (USB, LSB, CW, AM, FM). Transmitting is shown by the RIG frequency in red and by the PTT button. FM becomes NBFM on KiwiSDR and NFM on UberSDR and OpenWebRX.
 
@@ -966,10 +972,14 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Licence
 
-Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICENSE` file in the GitHub repository). It comes with no warranty. You may use, study, modify and redistribute it, provided you give the source code under the same licence. Reason: the Olivia / Contestia decoders (Pawel Jalocha's library, taken from fldigi) and JS8 (JS8Call data) are GPL. The other components (FreeDV: BSD; ft8_lib: MIT; WebView2) are listed in `THIRD-PARTY-NOTICES.md`.
+Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICENSE` file in the GitHub repository). It comes with no warranty. You may use, study, modify and redistribute it, provided you give the source code under the same licence. Reason: the Olivia / Contestia decoders (Pawel Jalocha's library, taken from fldigi) and JS8 (JS8Call data) are GPL. The other components (FreeDV: BSD; ft8_lib: MIT; RNNoise: BSD; WebView2) are listed in `THIRD-PARTY-NOTICES.md`.
 
 ## Version history
 
+- **1.48**
+  - **Three DNR types**, chosen in the DNR button's right-click menu: **classic** (the one from 1.46), **improved** (MMSE-LSA: much less voice distortion for the same reduction) and **AI** (RNNoise, built-in neural network, no external website: the noise can disappear almost completely between words). Each type's level 1 to 10 is in its submenu (right-click the type). The digital-mode and FreeDV switch-offs apply to all three.
+  - **Auto notch (DNF) button**: the box is gone; **click** = on / off (green button when on), **right-click** = the notch window (switch-offs, level, explanation), which also gives the button colours.
+  - **DNR on the rig audio** played by SDRLink (listening to the rig on the PC, rig's ear in diversity): same type, same level and same switch-offs as for the WebSDR (right-click box, ticked at first).
 - **1.47**
   - **Volumes in 1 % steps**: wheel, arrow keys and click on every volume slider (WebSDR / FreeDV, TRX on PC, TRX, ExpertSDR, HDSDR). The wheel was too fast (6 % per notch with Windows set to 6 lines).
 - **1.46**

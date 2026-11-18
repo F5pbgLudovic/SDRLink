@@ -95,9 +95,12 @@ namespace SDRLink
             help.AutoSize = true;
             help.MaximumSize = new Size(width, 0);
             help.Margin = new Padding(0, 4, 0, 8);
-            help.Text = Lang.T("Le notch automatique repère les sifflements fixes (porteuses) dans le son du WebSDR et les atténue. La case du bouton le met en marche ou l'arrête. Le niveau, de 1 (réglage d'origine) à 10, augmente le nombre de sifflements traités (de 4 à 8) et la force de l'action ; un niveau élevé peut aussi toucher une voix qui tient une note. Il est coupé, sans décocher la case, pendant un mode numérique (décodeur en marche ou mode DIGI) et pendant FreeDV, si les choix ci-dessus sont cochés : il abîmerait les signaux à décoder. Le câble SDRLINK et les décodeurs reçoivent toujours le son sans notch.",
-                "The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.");
+            help.Text = Lang.T("Le notch automatique repère les sifflements fixes (porteuses) dans le son du WebSDR et les atténue. Un clic sur le bouton le met en marche ou l'arrête (bouton vert en marche, couleurs au choix ci-dessous) ; le clic droit ouvre cette fenêtre. Le niveau, de 1 (réglage d'origine) à 10, augmente le nombre de sifflements traités (de 4 à 8) et la force de l'action ; un niveau élevé peut aussi toucher une voix qui tient une note. Il est mis en pause, sans arrêter le bouton, pendant un mode numérique (décodeur en marche ou mode DIGI) et pendant FreeDV, si les choix ci-dessus sont cochés : il abîmerait les signaux à décoder. Le câble SDRLINK et les décodeurs reçoivent toujours le son sans notch.",
+                "The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.");
 
+            // Couleurs du bouton (1.48 : le clic droit du bouton ouvre cette fenêtre, plus le menu des couleurs).
+            Button colors = new Button { AutoSize = true, Text = Lang.T("Couleurs du bouton…", "Button colours…"), Margin = new Padding(0, 0, 0, 8) };
+            colors.Click += delegate { if (notchColorMenu != null) notchColorMenu.Show(chkNotch, new Point(0, chkNotch.Height)); f.Close(); };
             Button close = new Button { AutoSize = true, Text = Lang.T("Fermer", "Close"), Anchor = AnchorStyles.Right };
             close.Click += delegate { f.Close(); };
             f.CancelButton = close;
@@ -106,6 +109,7 @@ namespace SDRLink
             p.Controls.Add(fdv);
             p.Controls.Add(row);
             p.Controls.Add(help);
+            p.Controls.Add(colors);
             p.Controls.Add(close);
             f.Controls.Add(p);
             Theme.Apply(f);
@@ -132,10 +136,11 @@ namespace SDRLink
                 settings.NotchOffFdv ? Lang.T(", coupé en FreeDV", ", off in FreeDV") : ""));
         }
 
-        // ---- Réducteur de bruit (DNR, 1.46) : bouton après le notch ; clic = marche / arrêt, clic droit = niveau, coupures, couleurs.
+        // ---- Réducteur de bruit (DNR, 1.46 ; trois types en 1.48) : bouton après le notch ; clic = marche / arrêt, clic droit = type
+        // (classique, amélioré, IA) avec le niveau de chacun dans un sous-menu, coupures, couleurs.
 
         Button btnDnr;
-        string dnrSent;   // dernier état envoyé à la page (« marche|niveau »), null = à renvoyer
+        string dnrSent;   // dernier état envoyé à la page (« marche|type|niveau »), null = à renvoyer
 
         bool DnrWanted
         {
@@ -147,6 +152,11 @@ namespace SDRLink
                 return true;
             }
         }
+
+        // Niveau retenu pour chaque type : 0 = classique, 1 = amélioré (MMSE-LSA), 2 = IA (RNNoise).
+        int DnrLevelOf(int algo) { return algo == 2 ? settings.DnrLevelIa : algo == 1 ? settings.DnrLevelLsa : settings.DnrLevel; }
+        int DnrLevelNow { get { return DnrLevelOf(settings.DnrAlgo); } }
+        string DnrName(int algo) { return algo == 2 ? Lang.T("IA", "AI") : algo == 1 ? Lang.T("amélioré", "improved") : Lang.T("classique", "classic"); }
 
         void CreateDnrButton()
         {
@@ -166,25 +176,52 @@ namespace SDRLink
             Tr(delegate
             {
                 UpdateDnrButton();
-                tips.SetToolTip(btnDnr, Lang.T("Réducteur de bruit (DNR) sur le son du WebSDR. Clic : marche / arrêt. Clic droit : niveau de 1 à 10, coupure en mode numérique et en FreeDV, couleurs",
-                    "Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours"));
+                tips.SetToolTip(btnDnr, Lang.T("Réducteur de bruit (DNR) sur le son du WebSDR. Clic : marche / arrêt. Clic droit : type (classique, amélioré ou IA) et son niveau de 1 à 10, coupure en mode numérique et en FreeDV, couleurs",
+                    "Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours"));
             });
         }
 
+        // Menu du clic droit : les trois types (coché = celui en service) ; le niveau de chacun est dans son sous-menu, qui s'ouvre
+        // au survol ou par un clic droit sur le type. Choisir un type ou un niveau met le DNR en marche.
         void FillDnrMenu(ContextMenuStrip m)
         {
             m.Items.Clear();
-            ToolStripMenuItem head = new ToolStripMenuItem(Lang.T("Niveau du DNR :", "DNR level:"));
+            ToolStripMenuItem head = new ToolStripMenuItem(Lang.T("Type de DNR (clic droit sur un type : son niveau) :", "DNR type (right-click a type: its level):"));
             head.Enabled = false;
             m.Items.Add(head);
-            for (int i = 1; i <= 10; i++)
+            string[] names = {
+                Lang.T("Classique (filtre de Wiener)", "Classic (Wiener filter)"),
+                Lang.T("Amélioré (MMSE-LSA) : voix moins déformée", "Improved (MMSE-LSA): less voice distortion"),
+                Lang.T("IA (RNNoise) : le plus efficace, plus de calcul", "AI (RNNoise): most effective, more computing") };
+            ToolStripMenuItem[] types = new ToolStripMenuItem[3];
+            for (int a = 0; a < 3; a++)
             {
-                int lvl = i;
-                string text = i == 1 ? Lang.T("1 (le plus doux)", "1 (gentlest)") : i == 10 ? Lang.T("10 (le plus fort)", "10 (strongest)") : i.ToString(CultureInfo.InvariantCulture);
-                ToolStripMenuItem it = new ToolStripMenuItem(text);
-                it.Checked = settings.DnrLevel == i;
-                it.Click += delegate { SetDnrLevel(lvl); };
-                m.Items.Add(it);
+                int algo = a;
+                ToolStripMenuItem t = types[a] = new ToolStripMenuItem(names[a]);
+                t.Checked = settings.DnrAlgo == a;
+                ToolStripMenuItem[] levels = new ToolStripMenuItem[10];
+                for (int i = 1; i <= 10; i++)
+                {
+                    int lvl = i;
+                    string text = i == 1 ? Lang.T("1 (le plus doux)", "1 (gentlest)") : i == 10 ? Lang.T("10 (le plus fort)", "10 (strongest)") : i.ToString(CultureInfo.InvariantCulture);
+                    ToolStripMenuItem it = levels[i - 1] = new ToolStripMenuItem(text);
+                    it.Checked = DnrLevelOf(a) == i;
+                    it.Click += delegate { SetDnrType(algo, lvl); };
+                    t.DropDownItems.Add(it);
+                }
+                // Clic gauche (ou Entrée) : ce type ; clic droit : seulement ouvrir ses niveaux (Windows y ajoute un clic, ignoré ici).
+                MouseButtons down = MouseButtons.None;
+                t.MouseDown += delegate(object s, MouseEventArgs e) { down = e.Button; };
+                t.Click += delegate
+                {
+                    bool right = down == MouseButtons.Right;
+                    down = MouseButtons.None;
+                    if (right) return;
+                    SetDnrType(algo, DnrLevelOf(algo));
+                    foreach (ToolStripMenuItem x in types) x.Checked = x == t;   // le menu reste ouvert : les coches suivent
+                };
+                t.MouseUp += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Right) t.ShowDropDown(); };
+                m.Items.Add(t);
             }
             m.Items.Add(new ToolStripSeparator());
             ToolStripMenuItem digi = new ToolStripMenuItem(Lang.T("DNR coupé en mode numérique", "DNR off in digital modes"));
@@ -195,35 +232,52 @@ namespace SDRLink
             fdv.Checked = settings.DnrOffFdv;
             fdv.Click += delegate { settings.DnrOffFdv = !settings.DnrOffFdv; DnrChanged(); };
             m.Items.Add(fdv);
+            ToolStripMenuItem rig = new ToolStripMenuItem(Lang.T("DNR aussi sur le son du poste joué par SDRLink (écoute sur le PC, diversité)", "DNR also on the rig audio played by SDRLink (listening on the PC, diversity)"));
+            rig.Checked = settings.DnrRig;
+            rig.Click += delegate { settings.DnrRig = !settings.DnrRig; DnrChanged(); };
+            m.Items.Add(rig);
+        }
+
+        // DNR du son du poste (1.48) : même marche, type et niveau que le WebSDR (coupures comprises), si la case le demande.
+        void ConfigureRigDnr()
+        {
+            if (settings == null) return;
+            NoiseReducer.Configure(settings.DnrRig && DnrWanted, settings.DnrAlgo, DnrLevelNow);
         }
 
         void SetDnr(bool on)
         {
             settings.Dnr = on;
             settings.Save();
-            Log.Write("DNR : " + (on ? "en marche, niveau " + settings.DnrLevel : "arrêté"));
+            Log.Write("DNR : " + (on ? "en marche, type " + settings.DnrAlgo + ", niveau " + DnrLevelNow : "arrêté"));
             RefreshDnr();
             UpdateDnrButton();
             if (on && !DnrWanted)
-                ShowStatus(Lang.F("DNR en marche (niveau {0}), en pause pendant le mode numérique ou FreeDV (clic droit pour changer)", "DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)", settings.DnrLevel));
+                ShowStatus(Lang.F("DNR en marche ({0}, niveau {1}), en pause pendant le mode numérique ou FreeDV (clic droit pour changer)", "DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)", DnrName(settings.DnrAlgo), DnrLevelNow));
             else
-                ShowStatus(on ? Lang.F("DNR en marche, niveau {0}", "DNR on, level {0}", settings.DnrLevel) : Lang.T("DNR arrêté", "DNR off"));
+                ShowStatus(on ? Lang.F("DNR en marche : {0}, niveau {1}", "DNR on: {0}, level {1}", DnrName(settings.DnrAlgo), DnrLevelNow) : Lang.T("DNR arrêté", "DNR off"));
         }
 
-        void SetDnrLevel(int lvl)
+        // Choix d'un type et de son niveau (menu du clic droit) ; met le DNR en marche s'il était arrêté.
+        void SetDnrType(int algo, int lvl)
         {
-            settings.DnrLevel = Math.Max(1, Math.Min(10, lvl));
-            if (!settings.Dnr) { SetDnr(true); return; }   // choisir un niveau met le DNR en marche
+            algo = Math.Max(0, Math.Min(2, algo));
+            lvl = Math.Max(1, Math.Min(10, lvl));
+            settings.DnrAlgo = algo;
+            if (algo == 2) settings.DnrLevelIa = lvl;
+            else if (algo == 1) settings.DnrLevelLsa = lvl;
+            else settings.DnrLevel = lvl;
+            if (!settings.Dnr) { SetDnr(true); return; }
             DnrChanged();
         }
 
         void DnrChanged()
         {
             settings.Save();
-            Log.Write("DNR : niveau " + settings.DnrLevel + (settings.DnrOffDigi ? ", coupé en mode numérique" : "") + (settings.DnrOffFdv ? ", coupé en FreeDV" : ""));
+            Log.Write("DNR : type " + settings.DnrAlgo + ", niveau " + DnrLevelNow + (settings.DnrOffDigi ? ", coupé en mode numérique" : "") + (settings.DnrOffFdv ? ", coupé en FreeDV" : "") + (settings.DnrRig ? ", aussi sur le son du poste" : ""));
             RefreshDnr();
             UpdateDnrButton();
-            ShowStatus(Lang.F("DNR : niveau {0}{1}{2}", "DNR: level {0}{1}{2}", settings.DnrLevel,
+            ShowStatus(Lang.F("DNR : {0}, niveau {1}{2}{3}", "DNR: {0}, level {1}{2}{3}", DnrName(settings.DnrAlgo), DnrLevelNow,
                 settings.DnrOffDigi ? Lang.T(", coupé en mode numérique", ", off in digital modes") : "",
                 settings.DnrOffFdv ? Lang.T(", coupé en FreeDV", ", off in FreeDV") : ""));
         }
@@ -231,20 +285,22 @@ namespace SDRLink
         // Envoie à la page l'état voulu du DNR, s'il a changé (appelé avec RefreshNotch : mode, FreeDV, décodeur…).
         void RefreshDnr()
         {
+            ConfigureRigDnr();
             if (web == null || web.CoreWebView2 == null || settings == null) return;
             bool on = DnrWanted;
-            string s = (on ? "1" : "0") + "|" + settings.DnrLevel;
+            string s = (on ? "1" : "0") + "|" + settings.DnrAlgo + "|" + DnrLevelNow;
             if (s == dnrSent) return;
             dnrSent = s;
-            web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setDnr && window.__sdrlink.setDnr(" + (on ? "true" : "false") + "," + settings.DnrLevel + ");");
+            web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setDnr && window.__sdrlink.setDnr(" + (on ? "true" : "false") + "," + DnrLevelNow + "," + settings.DnrAlgo + ");");
             if (web2 != null) Div2Notch();
         }
 
-        // Couleur de l'état : en marche / arrêté (le niveau est écrit sur le bouton quand il marche).
+        // Couleur de l'état : en marche / arrêté ; en marche, le bouton dit le type (DNR, DNR+, DNR IA) et le niveau.
         void UpdateDnrButton()
         {
             if (btnDnr == null) return;
-            string text = settings.Dnr ? "DNR " + settings.DnrLevel : "DNR";
+            ConfigureRigDnr();
+            string text = !settings.Dnr ? "DNR" : (settings.DnrAlgo == 2 ? Lang.T("DNR IA", "DNR AI") : settings.DnrAlgo == 1 ? "DNR+" : "DNR") + " " + DnrLevelNow;
             if (btnDnr.Text != text) btnDnr.Text = text;
             int c = ColorOf(settings.Dnr ? "DnrOn" : "DnrOff");
             if (c < 0) c = settings.Dnr ? 0x00783C : -1;   // en marche : vert par défaut, comme la diversité calée

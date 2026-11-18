@@ -235,8 +235,9 @@ Reset the program…	Atiestatīt programmu…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportēt vai importēt visus iestatījumus tai pašai konfigurācijai citā datorā (labais klikšķis: atiestatīt programmu, pogas krāsa)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Vārds vai izsaukuma signāls, ko automātiski nodod WebSDR, kas to prasa pirms skaņas (KiwiSDR, websdr.org). Klikšķis: mainīt (labais klikšķis: pogas krāsa)
 Right-click: receivers muted while transmitting	Labais klikšķis: uztvērēji, kas raidīšanas laikā tiek klusināti
+Auto notch off	Automātiskais notch izslēgts
 Auto notch (DNF)	Autom. notch (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Izvēles rūtiņa: automātiskais notch iesl. / izsl. Klikšķis uz pogas: izslēgts digitālajos darba veidos un FreeDV, līmenis no 1 līdz 10 (labais klikšķis: pogas krāsa)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automātiskais notch (DNF). Klikšķis: ieslēgt / izslēgt (pogas krāsa). Labais klikšķis: izslēgts digitālajos režīmos un FreeDV, līmenis no 1 līdz 10, krāsas
 Colour when the notch is off	Krāsa, kad notch izslēgts
 Colour when the notch is on	Krāsa, kad notch ieslēgts
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Restartē pašreizējo WebSDR (piemēram, apturētu pēc dīkstāves laika). Klikšķis: restartēt, saglabājot iestatījumus (frekvence, režīms, filtrs, tālummaiņa, skaļums). Labais klikšķis: automātiska restartēšana, kad zūd skaņa (Auto), un tās aizture, pilnīga WebSDR atiestatīšana, pogas krāsas
@@ -408,6 +409,7 @@ Later	Vēlāk
 Open the update page	Atvērt atjauninājuma lapu
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink ir atjaunināts uz V{0}; vecā versija ir izdzēsta.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink ir atjaunināts uz V{0}; vecā versija tiks izdzēsta nākamajā palaišanas reizē.
+Auto notch on, level {0}	Automātiskais notch ieslēgts, līmenis {0}
 Last {0} memories used	Pēdējās {0} izmantotās atmiņas
 ExpertSDR TCI port: {0}…	ExpertSDR TCI ports: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Pieejams atjauninājums V{0}: noklikšķiniet, lai lejupielādētu
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Autom. notch izslēgts FreeDV V1 un V2
 Notch level:	Notch līmenis:
 1 (original setting)	1 (sākotnējais iestatījums)
 10 (strongest)	10 (spēcīgākais)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automātiskais notch atklāj pastāvīgus svilpienus (nesējus) WebSDR skaņā un tos vājina. Rūtiņa uz pogas to ieslēdz vai izslēdz. Līmenis, no 1 (sākotnējais iestatījums) līdz 10, palielina apstrādāto svilpienu skaitu (no 4 līdz 8) un darbības stiprumu; augsts līmenis var ietekmēt arī balsi, kas tur noti. Tas tiek izslēgts, nenoņemot atzīmi, digitālā darba veida laikā (darbojas dekoders vai DIGI režīms) un FreeDV laikā, ja augstāk esošās izvēles ir atzīmētas: tas bojātu dekodējamos signālus. SDRLINK kabelis un dekoderi vienmēr saņem skaņu bez notch.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automātiskais notch atrod WebSDR skaņā pastāvīgus svilpienus (nesējus) un tos vājina. Klikšķis uz pogas to ieslēdz vai izslēdz (zaļa poga, kad ieslēgts; krāsas var izvēlēties zemāk); labais klikšķis atver šo logu. Līmenis no 1 (sākotnējais iestatījums) līdz 10 palielina apstrādāto svilpienu skaitu (no 4 līdz 8) un darbības spēku; augsts līmenis var ietekmēt arī balsi, kas tur noti. Tas tiek apturēts, neizslēdzot pogu, digitālā režīma laikā (darbojas dekodētājs vai DIGI režīms) un FreeDV laikā, ja iepriekš minētās izvēles ir atzīmētas: tas sabojātu dekodējamos signālus. SDRLINK kabelis un dekodētāji vienmēr saņem skaņu bez notch.
+Button colours…	Pogas krāsas…
 , off in digital modes	, izslēgts digitālajos darba veidos
 , off in FreeDV	, izslēgts FreeDV
+AI	MI
+improved	uzlabots
+classic	klasisks
 Colour when DNR is off	Krāsa, kad DNR izslēgts
 Colour when DNR is on	Krāsa, kad DNR ieslēgts
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Trokšņu samazināšana (DNR) WebSDR skaņā. Klikšķis: ieslēgt / izslēgt. Labais klikšķis: līmenis no 1 līdz 10, izslēgšana digitālajos darba veidos un FreeDV, krāsas
-DNR level:	DNR līmenis:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Trokšņu samazināšana (DNR) WebSDR skaņai. Klikšķis: ieslēgt / izslēgt. Labais klikšķis: veids (klasisks, uzlabots vai MI) un tā līmenis no 1 līdz 10, izslēgts digitālajos režīmos un FreeDV, krāsas
+DNR type (right-click a type: its level):	DNR veids (labais klikšķis uz veida: tā līmenis):
+Classic (Wiener filter)	Klasisks (Vīnera filtrs)
+Improved (MMSE-LSA): less voice distortion	Uzlabots (MMSE-LSA): mazāk kropļota balss
+AI (RNNoise): most effective, more computing	MI (RNNoise): visefektīvākais, vairāk aprēķinu
 1 (gentlest)	1 (maigākais)
 DNR off in digital modes	DNR izslēgts digitālajos darba veidos
 DNR off in FreeDV V1 and V2	DNR izslēgts FreeDV V1 un V2
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR arī SDRLink atskaņotajai raidītāja skaņai (klausīšanās datorā, diversity)
 DNR off	DNR izslēgts
+DNR AI	DNR MI
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR uztveršanas joslas platums, saglabāts katram darba veidam (CW, USB/LSB, AM, FM, DIGI), katrā WebSDR un pēc restartēšanas. „Noklusējuma filtrs”: paša WebSDR filtrs.
 Default filter	Noklusējuma filtrs
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Darba veida meklēšana: nav WebSDR v
 Mode search stopped	Darba veida meklēšana apturēta
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Darba veida meklēšana: neviens darba veids nav atpazīts (pārāk vājš signāls, neatbalstīts darba veids vai WSPR / JT9 / Hell, kas ir pārāk lēni atpazīšanai)
 Auto notch: level {0}{1}{2}	Autom. notch: līmenis {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR ieslēgts ({0}. līmenis), pauzē digitālā darba veida vai FreeDV laikā (lai mainītu, labais klikšķis)
-DNR on, level {0}	DNR ieslēgts, līmenis {0}
-DNR: level {0}{1}{2}	DNR: līmenis {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR ieslēgts ({0}, līmenis {1}), pauzē digitālā režīma vai FreeDV laikā (labais klikšķis, lai mainītu)
+DNR on: {0}, level {1}	DNR ieslēgts: {0}, līmenis {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, līmenis {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Joslas platums kHz darba veidam {0} (no 0,1 līdz 15):
 {0} bandwidth: WebSDR default filter	{0} joslas platums: WebSDR noklusējuma filtrs
 {0} bandwidth: {1}	{0} joslas platums: {1}

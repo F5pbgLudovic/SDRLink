@@ -235,8 +235,9 @@ Reset the program…	Atstatyti programą…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Eksportuoti arba importuoti visus nustatymus, tai pačiai konfigūracijai kitame kompiuteryje (dešinysis spustelėjimas: atstatyti programą, mygtuko spalva)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Vardas arba šaukinys, automatiškai pateikiamas WebSDR imtuvams, kurie jo prašo prieš garsą (KiwiSDR, websdr.org). Spustelėjimas: pakeisti (dešinysis klavišas: mygtuko spalva)
 Right-click: receivers muted while transmitting	Dešinysis spustelėjimas: imtuvai, nutildomi siunčiant
+Auto notch off	Automatinis notch išjungtas
 Auto notch (DNF)	Autom. notch (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Žymimasis langelis: automatinis notch įj. / išj. Spustelėjus mygtuką: išjungtas skaitmeninėse darbo rūšyse ir FreeDV, lygis nuo 1 iki 10 (dešinysis spustelėjimas: mygtuko spalva)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automatinis notch (DNF). Spustelėjimas: įjungti / išjungti (mygtuko spalva). Dešinysis spustelėjimas: išjungimas skaitmeniniuose režimuose ir FreeDV, lygis nuo 1 iki 10, spalvos
 Colour when the notch is off	Spalva išjungus notch
 Colour when the notch is on	Spalva įjungus notch
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Iš naujo paleidžia dabartinį WebSDR (pavyzdžiui, sustojusį po neveiklumo laiko). Spustelėjimas: paleisti iš naujo išsaugant nustatymus (dažnis, režimas, filtras, mastelis, garsumas). Dešinysis spustelėjimas: automatinis paleidimas iš naujo dingus garsui (Auto) ir jo delsa, visiškas WebSDR atstatymas, mygtuko spalvos
@@ -408,6 +409,7 @@ Later	Vėliau
 Open the update page	Atverti atnaujinimo puslapį
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink atnaujintas į V{0}; senoji versija ištrinta.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink atnaujintas į V{0}; senoji versija bus ištrinta kito paleidimo metu.
+Auto notch on, level {0}	Automatinis notch įjungtas, lygis {0}
 Last {0} memories used	Paskutinės {0} naudotos atmintys
 ExpertSDR TCI port: {0}…	ExpertSDR TCI prievadas: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Yra atnaujinimas V{0}: spustelėkite, kad atsisiųstumėte
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Autom. notch išjungtas FreeDV V1 ir V2
 Notch level:	Notch lygis:
 1 (original setting)	1 (pradinis nustatymas)
 10 (strongest)	10 (stipriausias)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatinis notch aptinka pastovius švilpimus (nešlius) WebSDR garse ir juos susilpnina. Langelis ant mygtuko jį įjungia arba išjungia. Lygis, nuo 1 (pradinis nustatymas) iki 10, padidina apdorojamų švilpimų skaičių (nuo 4 iki 8) ir veikimo stiprumą; aukštas lygis gali paveikti ir balsą, laikantį natą. Jis išjungiamas nenuimant žymės skaitmeninės darbo rūšies metu (veikia dekoderis arba DIGI režimas) ir FreeDV metu, jei pažymėti aukščiau esantys pasirinkimai: jis pažeistų dekoduojamus signalus. SDRLINK kabelis ir dekoderiai visada gauna garsą be notch.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatinis notch randa pastovius švilpimus (nešlius) WebSDR garse ir juos susilpnina. Spustelėjus mygtuką jis įjungiamas arba išjungiamas (žalias mygtukas, kai įjungtas; spalvas galima pasirinkti žemiau); dešinysis spustelėjimas atveria šį langą. Lygis nuo 1 (pradinis nustatymas) iki 10 didina apdorojamų švilpimų skaičių (nuo 4 iki 8) ir veikimo stiprumą; aukštas lygis gali paveikti ir balsą, laikantį natą. Jis pristabdomas, neišjungiant mygtuko, skaitmeninio režimo metu (veikia dekoderis arba DIGI režimas) ir FreeDV metu, jei aukščiau esantys pasirinkimai pažymėti: jis sugadintų dekoduojamus signalus. SDRLINK kabelis ir dekoderiai visada gauna garsą be notch.
+Button colours…	Mygtuko spalvos…
 , off in digital modes	, išjungtas skaitmeninėse darbo rūšyse
 , off in FreeDV	, išjungtas FreeDV
+AI	DI
+improved	patobulintas
+classic	klasikinis
 Colour when DNR is off	Spalva išjungus DNR
 Colour when DNR is on	Spalva įjungus DNR
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Triukšmo mažinimas (DNR) WebSDR garse. Spustelėjimas: įjungti / išjungti. Dešinysis spustelėjimas: lygis nuo 1 iki 10, išjungimas skaitmeninėse darbo rūšyse ir FreeDV, spalvos
-DNR level:	DNR lygis:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Triukšmo mažinimas (DNR) WebSDR garse. Spustelėjimas: įjungti / išjungti. Dešinysis spustelėjimas: tipas (klasikinis, patobulintas arba DI) ir jo lygis nuo 1 iki 10, išjungimas skaitmeniniuose režimuose ir FreeDV, spalvos
+DNR type (right-click a type: its level):	DNR tipas (dešiniuoju spustelėkite tipą: jo lygis):
+Classic (Wiener filter)	Klasikinis (Wienerio filtras)
+Improved (MMSE-LSA): less voice distortion	Patobulintas (MMSE-LSA): mažiau iškraipytas balsas
+AI (RNNoise): most effective, more computing	DI (RNNoise): veiksmingiausias, daugiau skaičiavimų
 1 (gentlest)	1 (švelniausias)
 DNR off in digital modes	DNR išjungtas skaitmeninėse darbo rūšyse
 DNR off in FreeDV V1 and V2	DNR išjungtas FreeDV V1 ir V2
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR ir SDRLink grojamam radijo stoties garsui (klausymas kompiuteriu, diversity)
 DNR off	DNR išjungtas
+DNR AI	DNR DI
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR priėmimo juostos plotis, įsimenamas kiekvienai darbo rūšiai (CW, USB/LSB, AM, FM, DIGI), kiekviename WebSDR ir po paleidimo iš naujo. „Numatytasis filtras“: paties WebSDR filtras.
 Default filter	Numatytasis filtras
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Darbo rūšies paieška: nėra WebSDR
 Mode search stopped	Darbo rūšies paieška sustabdyta
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Darbo rūšies paieška: neatpažinta jokia darbo rūšis (per silpnas signalas, nepalaikoma darbo rūšis arba WSPR / JT9 / Hell, per lėtos atpažinti)
 Auto notch: level {0}{1}{2}	Autom. notch: lygis {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR įjungtas ({0} lygis), pristabdytas skaitmeninės darbo rūšies arba FreeDV metu (keisti dešiniuoju spustelėjimu)
-DNR on, level {0}	DNR įjungtas, lygis {0}
-DNR: level {0}{1}{2}	DNR: lygis {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR įjungtas ({0}, lygis {1}), pristabdytas skaitmeninio režimo ar FreeDV metu (pakeisti dešiniuoju spustelėjimu)
+DNR on: {0}, level {1}	DNR įjungtas: {0}, lygis {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, lygis {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Juostos plotis kHz, skirtas {0} (nuo 0,1 iki 15):
 {0} bandwidth: WebSDR default filter	{0} juostos plotis: WebSDR numatytasis filtras
 {0} bandwidth: {1}	{0} juostos plotis: {1}

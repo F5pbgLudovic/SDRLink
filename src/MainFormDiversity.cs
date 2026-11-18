@@ -173,7 +173,13 @@ namespace SDRLink
             diversity.LeadEnv = src == DivTwoWebSdr ? DiversityMixer.MaxLeadEnv : 0;
             Action<int, float[], int> feed = diversity.FeedB;
             if (src == DivTwoWebSdr) OpenWeb2();
-            else if (src == 1) divTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, feed);
+            else if (src == 1)
+            {
+                // Oreille du poste : DNR du poste (1.48), même type et même niveau que celui du WebSDR si la case du menu DNR le demande.
+                NoiseReducer nrB = new NoiseReducer();
+                DiversityMixer dm = diversity;
+                divTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, delegate(int rate, float[] x, int n) { nrB.Process(rate, x, n); dm.FeedB(rate, x, n); });
+            }
             else if (src == 2) divTap = new AudioTap(settings.EsdrTciPort, "ExpertSDR", feed);
             else divTap = new AudioTap(null, RootProcess(hdsdrPids.Keys), "HDSDR", feed);
             AudioTap t = divTap;

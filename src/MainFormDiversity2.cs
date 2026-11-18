@@ -169,13 +169,13 @@ namespace SDRLink
         {
             if (web2 == null || web2.CoreWebView2 == null) return;
             bool on = NotchWanted, dnrOn = DnrWanted;
-            string s = (on ? "1" : "0") + "|" + settings.NotchLevel + "|" + (dnrOn ? "1" : "0") + "|" + settings.DnrLevel;
+            string s = (on ? "1" : "0") + "|" + settings.NotchLevel + "|" + (dnrOn ? "1" : "0") + "|" + settings.DnrAlgo + "|" + DnrLevelNow;
             if (s == div2NotchSent) return;
             div2NotchSent = s;
             // Notch et DNR (1.46) comme sur le WebSDR affiché ; l'oreille est prise après eux (le prélèvement « post » rend le son brut
             // quand aucun des deux ne tourne).
             web2.CoreWebView2.ExecuteScriptAsync("if (window.__sdrlink) { window.__sdrlink.setNotch && window.__sdrlink.setNotch(" + (on ? "true" : "false") + "," + settings.NotchLevel
-                + "); window.__sdrlink.setDnr && window.__sdrlink.setDnr(" + (dnrOn ? "true" : "false") + "," + settings.DnrLevel
+                + "); window.__sdrlink.setDnr && window.__sdrlink.setDnr(" + (dnrOn ? "true" : "false") + "," + DnrLevelNow + "," + settings.DnrAlgo
                 + "); window.__sdrlink.setTap && window.__sdrlink.setTap(true,true); }");
         }
 

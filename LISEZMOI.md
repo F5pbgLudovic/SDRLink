@@ -22,7 +22,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 
 1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Connexion... / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Look ▾**, **Panneau de commande**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
-3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (case dans le bouton ; clic : options et niveau), **DNR** (réducteur de bruit, depuis la 1.46 ; clic : marche / arrêt, clic droit : niveau), **Conf scan**, **▶ Scan**.
+3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (clic : marche / arrêt, bouton vert en marche ; clic droit : options, niveau et couleurs), **DNR** (réducteur de bruit, depuis la 1.46 ; clic : marche / arrêt, clic droit : type classique, amélioré ou IA et son niveau), **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR** (« Volume FreeDV » pendant une parole FreeDV, depuis la 1.45), **Volume TX sur PC** (quand « Écouter aussi le poste sur le PC » est coché, depuis la 1.45), **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40), suivi, quand la diversité est réglée **sur deux WebSDR**, de la case du **second WebSDR** (depuis la 1.44).
@@ -46,8 +46,8 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Saisie kHz | supprimer la valeur de l'historique, tout supprimer |
 | Mémoires | mémoriser la fréquence actuelle, couleur du bouton |
 | Liste des favoris (à côté de l'adresse) | renommer la liste |
-| Notch auto (DNF) | couleur notch arrêté / en marche (depuis la 1.41) |
-| DNR | **niveau** de 1 à 10, **DNR coupé en mode numérique**, **DNR coupé en FreeDV V1 et V2**, couleur DNR arrêté / en marche (depuis la 1.46) |
+| Notch auto (DNF) | fenêtre du notch : coupure en mode numérique et en FreeDV, niveau, explication, **Couleurs du bouton…** (notch arrêté / en marche) (depuis la 1.48 ; avant, le clic droit ne donnait que les couleurs) |
+| DNR | **type** (classique, amélioré, IA ; depuis la 1.48), avec son **niveau** de 1 à 10 en sous-menu (clic droit sur le type), **DNR coupé en mode numérique**, **DNR coupé en FreeDV V1 et V2**, **DNR aussi sur le son du poste** (1.48), couleur DNR arrêté / en marche (depuis la 1.46) |
 | Mode ? | couleur du bouton, couleur pendant la recherche (depuis la 1.41) |
 | Couper le son du WebSDR en émission | réceptions dont le son est coupé en émission : WebSDR, poste, ExpertSDR, HDSDR (cases à cocher, toutes cochées au départ) |
 | ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus), couleur du bouton (depuis la 1.41) |
@@ -506,31 +506,37 @@ Le son du WebSDR est recopié **en permanence, dans tous les modes**, vers un c�
 
 ## Notch automatique (DNF)
 
-Bouton **Notch auto (DNF)**, au bout de la ligne Synchro (depuis la 1.38, la case est dans le bouton, comme « Vérifier les mises à jour ») : comme le DNF du FT-2000, il supprime automatiquement les **porteuses et sifflements stables** du son du WebSDR.
-- **La case** du bouton met le notch en marche ou l'arrête. Le choix est mémorisé.
-- **Un clic ailleurs sur le bouton** ouvre la fenêtre du notch (depuis la 1.38) :
-  - **Notch auto désactivé en mode numérique** (coché au départ) : le notch est coupé, sans décocher la case, quand un décodeur des modes numériques est en marche ou que **DIGI** est le mode ;
+Bouton **Notch auto (DNF)**, au bout de la ligne Synchro : comme le DNF du FT-2000, il supprime automatiquement les **porteuses et sifflements stables** du son du WebSDR.
+- **Clic** sur le bouton : marche / arrêt du notch (depuis la 1.48 ; avant, une case dans le bouton). En marche, le bouton est **vert** ; arrêté, il reprend la couleur des autres boutons. Le choix est mémorisé.
+- **Clic droit** sur le bouton : la fenêtre du notch (depuis la 1.48 ; avant, elle s'ouvrait au clic sur le bouton) :
+  - **Notch auto désactivé en mode numérique** (coché au départ) : le notch est mis en pause, sans arrêter le bouton, quand un décodeur des modes numériques est en marche ou que **DIGI** est le mode ;
   - **Notch auto désactivé en FreeDV V1 et V2** (coché au départ) : coupé tant que FreeDV auto est en marche ;
   - **Niveau du notch** de **1** (le notch des versions d'avant) à **10** : le nombre de sifflements traités passe de 4 à 8, ils sont repérés plus vite et plus bas au-dessus du bruit, et chaque coupure est plus large ;
-  - l'explication, puis **Fermer** (ou un clic ailleurs, ou Échap). Tout s'applique tout de suite et est retenu.
+  - l'explication, **Couleurs du bouton…** (notch arrêté / en marche), puis **Fermer** (ou un clic ailleurs, ou Échap). Tout s'applique tout de suite et est retenu.
 - Au niveau 1 : jusqu'à 4 raies à la fois, chacune repérée en environ 0,6 s puis suivie si elle glisse ; l'atténuation mesurée est d'environ 48 dB, jusqu'au niveau du bruit.
-- La parole bouge trop pour être retenue (un niveau élevé peut toutefois toucher une voix qui tient une note). Une **CW** stable est en revanche supprimée, comme avec le DNF du poste : décocher en CW.
+- La parole bouge trop pour être retenue (un niveau élevé peut toutefois toucher une voix qui tient une note). Une **CW** stable est en revanche supprimée, comme avec le DNF du poste : l'arrêter en CW.
 - Seul le son entendu est filtré, le câble SDRLINK et les décodeurs reçoivent le son brut.
 
-## Réducteur de bruit (DNR) (depuis la 1.46)
+## Réducteur de bruit (DNR) (depuis la 1.46 ; trois types depuis la 1.48)
 
 Bouton **DNR**, juste après **Notch auto (DNF)** : il réduit le **souffle** (bruit de fond) du son du WebSDR, comme le DNR d'un poste.
-- **Clic** : marche / arrêt. En marche, le bouton est **vert** et affiche son niveau (« DNR 3 ») ; arrêté, il reprend la couleur des autres boutons. Le choix est retenu.
+- **Clic** : marche / arrêt. En marche, le bouton est **vert** et affiche le type et le niveau : « DNR 3 » (classique), « DNR+ 5 » (amélioré), « DNR IA 5 » (IA). Arrêté, il reprend la couleur des autres boutons. Le choix est retenu.
 - **Clic droit** :
-  - **Niveau du DNR**, de **1** (le plus doux) à **10** (le plus fort) ; 3 au départ. Choisir un niveau met le DNR en marche ;
-  - **DNR coupé en mode numérique** (coché au départ) : en pause, sans éteindre le bouton, quand un décodeur des modes numériques est en marche ou que **DIGI** est le mode ;
-  - **DNR coupé en FreeDV V1 et V2** (coché au départ) : en pause tant que FreeDV auto est en marche ;
+  - les **trois types** de DNR, celui en service coché. **Clic** sur un type : il est choisi (le menu reste ouvert). **Clic droit** sur un type, ou simple survol : son sous-menu de **niveaux**, de **1** (le plus doux) à **10** (le plus fort). Chaque type garde son propre niveau. Choisir un type ou un niveau met le DNR en marche ;
+  - **DNR coupé en mode numérique** (coché au départ) : en pause, sans éteindre le bouton, quand un décodeur des modes numériques est en marche ou que **DIGI** est le mode. Vaut pour les trois types ;
+  - **DNR coupé en FreeDV V1 et V2** (coché au départ) : en pause tant que FreeDV auto est en marche. Vaut pour les trois types ;
+  - **DNR aussi sur le son du poste joué par SDRLink (écoute sur le PC, diversité)** (coché au départ, depuis la 1.48) : voir plus bas ;
   - **Couleur DNR arrêté** et **Couleur DNR en marche**.
-- **Ce qu'il fait** : le son est découpé en tranches de 20 à 30 ms. Pour chaque fréquence audio, SDRLink suit le **niveau du bruit**, c'est-à-dire le plus bas entendu sur environ 1,6 s : la parole a toujours des creux, pas le souffle. Chaque fréquence est ensuite atténuée selon ce qui dépasse ce bruit. Une voix ou une CW qui sort du bruit passe ; le souffle entre les mots et autour de la voix baisse. L'atténuation suit le son de façon progressive, ce qui évite le « gazouillis » des réducteurs simples.
-- **Le niveau** règle l'atténuation maximale du bruit et la marge prise au-dessus du bruit. Mesuré sur du bruit seul : environ **12 dB** de moins au niveau 3, **33 dB** au niveau 10. Un son propre passe presque intact. Les niveaux forts rendent la voix plus « sèche » et peuvent manger un signal très faible : commencer bas et monter à l'oreille.
-- **Retard** : le son du WebSDR prend environ **20 à 30 ms** de retard de plus sur un WebSDR en **https**, et un peu plus (jusqu'à environ 0,1 s) sur un WebSDR en **http**, le cas de la plupart des websdr.org et KiwiSDR. Sur ces pages, le navigateur n'offre que l'ancien traitement du son, qui travaille par blocs plus longs.
+- **Les trois types** :
+  - **Classique (filtre de Wiener)**, celui de la 1.46 (niveau 3 au départ). Le son est découpé en tranches de 20 à 30 ms ; pour chaque fréquence audio, SDRLink suit le niveau du bruit (le plus bas entendu sur environ 1,6 s) et atténue ce qui ne le dépasse pas. Efficace sur un souffle régulier, mais aux niveaux forts il « mange » aussi la voix, qui devient métallique ou sous l'eau.
+  - **Amélioré (MMSE-LSA)** (niveau 5 au départ). Même découpage, mais le bruit est estimé d'après la **probabilité que la voix soit présente** dans chaque fréquence (il suit plus vite un bruit qui change), et l'atténuation est calculée sur l'échelle de l'oreille (méthode d'Ephraim et Malah), sans sur-estimation du bruit. Résultat : à réduction égale, la **voix est beaucoup moins déformée**, et monter le niveau baisse le bruit sans abîmer davantage la voix. Calcul aussi léger que le classique.
+  - **IA (RNNoise)** (niveau 5 au départ). Un **réseau de neurones** entraîné à séparer la voix du bruit (RNNoise, de Jean-Marc Valin, Xiph.Org et Mozilla, licence BSD), intégré à SDRLink : **aucun site externe**, rien n'est envoyé sur Internet. Il « reconnaît » la voix et peut enlever le bruit presque entièrement entre les mots. Le niveau fixe le plancher d'atténuation (de -6 dB au niveau 1 à environ -34 dB au niveau 9) ; au niveau **10**, RNNoise travaille sans plancher, le silence entre les mots devient total. Il a été entraîné sur la **parole** : il convient à la BLU et à l'AM, pas à la CW ni aux modes numériques (d'où les coupures ci-dessus).
+- **Mesures** (voix réelle filtrée comme en BLU, avec un souffle fort, son à 12 kHz) : bruit baissé de 9 dB (niveau 3) à 16 dB (niveau 10) en classique, la voix se dégradant avec le niveau ; de 8 à 23 dB en amélioré et de 6 dB à près de 50 dB en IA, la voix restant aussi nette à tous les niveaux.
+- **Ressources** : classique et amélioré, moins de 1 % d'un cœur du processeur. **IA** : environ **4 à 5 % d'un cœur** pour un WebSDR (le double en diversité sur deux WebSDR), et une centaine de Ko de plus dans l'exe. Le réseau n'est chargé que si on choisit ce type.
+- **Retard** : le son du WebSDR prend environ **20 à 30 ms** de retard de plus sur un WebSDR en **https**, quel que soit le type, et un peu plus (jusqu'à environ 0,1 s) sur un WebSDR en **http**, le cas de la plupart des websdr.org et KiwiSDR. Sur ces pages, le navigateur n'offre que l'ancien traitement du son, qui travaille par blocs plus longs.
 - Il agit **avant le volume**, après le notch automatique quand les deux marchent. Comme le notch, il ne touche **que le son entendu** : le câble SDRLINK et les décodeurs reçoivent le son brut. En diversité, il s'applique aussi à l'oreille du WebSDR, et aux deux oreilles en diversité sur deux WebSDR.
-- Il agit sur le son du **WebSDR** seulement, pas sur celui du poste, d'ExpertSDR ou de HDSDR (ils ont leur propre DNR).
+- **Son du poste** (depuis la 1.48) : quand SDRLink joue lui-même le son du poste, c'est-à-dire l'**écoute du poste sur le PC** (clic droit sur Mute TX, curseur Volume TX sur PC) et l'**oreille du poste en diversité** (source « poste (carte son rec) »), le même DNR s'y applique : même marche / arrêt, même type, même niveau et mêmes coupures en mode numérique et en FreeDV que pour le WebSDR. Il suffit de laisser cochée la case **DNR aussi sur le son du poste joué par SDRLink**. Le son passe en mono (moyenne des deux voies) dans le DNR, puis dans les deux oreilles. Retard ajouté : environ 20 à 30 ms ; l'IA y prend environ 3 à 6 % d'un cœur en plus. Le son entendu **sur le haut-parleur du poste** ne passe pas par l'ordinateur : le DNR ne peut pas le traiter. REC, le câble SDRLINK et les décodeurs gardent le son brut.
+- Il ne touche pas le son d'ExpertSDR ni de HDSDR (ils ont leur propre DNR).
 
 Les boutons gardent toujours la même place : les zones RADIO et WEBSDR ont une largeur fixe. Le mode du WebSDR y est affiché en forme courte (USB, LSB, CW, AM, FM). L'émission est signalée par la fréquence RADIO en rouge et par le bouton PTT. La FM devient NBFM sur KiwiSDR et NFM sur UberSDR et OpenWebRX.
 
@@ -965,10 +971,14 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Licence
 
-Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (fichier `LICENSE` du dépôt GitHub). Il est fourni sans aucune garantie. Vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer, à condition de fournir les sources sous la même licence. Raison : les décodeurs Olivia / Contestia (bibliothèque de Pawel Jalocha, reprise de fldigi) et JS8 (données de JS8Call) sont sous GPL. Les autres composants (FreeDV : BSD ; ft8_lib : MIT ; WebView2) sont listés dans `THIRD-PARTY-NOTICES.md`.
+Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (fichier `LICENSE` du dépôt GitHub). Il est fourni sans aucune garantie. Vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer, à condition de fournir les sources sous la même licence. Raison : les décodeurs Olivia / Contestia (bibliothèque de Pawel Jalocha, reprise de fldigi) et JS8 (données de JS8Call) sont sous GPL. Les autres composants (FreeDV : BSD ; ft8_lib : MIT ; RNNoise : BSD ; WebView2) sont listés dans `THIRD-PARTY-NOTICES.md`.
 
 ## Historique des versions
 
+- **1.48**
+  - **Trois types de DNR**, au choix dans le clic droit du bouton DNR : **classique** (celui de la 1.46), **amélioré** (MMSE-LSA : voix beaucoup moins déformée à réduction égale) et **IA** (RNNoise, réseau de neurones intégré, sans site externe : le bruit peut disparaître presque entièrement entre les mots). Le niveau de 1 à 10 de chaque type est dans son sous-menu (clic droit sur le type). Les coupures en mode numérique et en FreeDV valent pour les trois.
+  - **Bouton Notch auto (DNF)** : la case disparaît ; **clic** = marche / arrêt (bouton vert en marche), **clic droit** = la fenêtre du notch (coupures, niveau, explication), qui donne aussi les couleurs du bouton.
+  - **DNR sur le son du poste** joué par SDRLink (écoute du poste sur le PC, oreille du poste en diversité) : même type, même niveau et mêmes coupures que pour le WebSDR (case du clic droit, cochée au départ).
 - **1.47**
   - **Volumes au pas de 1 %** : molette, flèches et clic sur tous les curseurs de volume (WebSDR / FreeDV, TX sur PC, TX, ExpertSDR, HDSDR). La molette allait trop vite (6 % par cran avec le réglage de Windows à 6 lignes).
 - **1.46**

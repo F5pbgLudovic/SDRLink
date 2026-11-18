@@ -109,9 +109,13 @@ namespace SDRLink
         public bool NotchOffFdv = true;    // notch coupé quand FreeDV auto (V1 ou V2) est en marche
         public int NotchLevel = 1;         // force du notch, 1 (celui d'avant la 1.38) à 10
         public bool Dnr;                   // réducteur de bruit (DNR, 1.46) sur le son du WebSDR
+        public int DnrAlgo;                // type de DNR (1.48) : 0 = classique, 1 = amélioré (MMSE-LSA), 2 = IA (RNNoise)
         public int DnrLevel = 3;           // force du DNR, 1 à 10
+        public int DnrLevelLsa = 5;        // niveau du DNR amélioré, 1 à 10
+        public int DnrLevelIa = 5;         // niveau du DNR IA, 1 à 10
         public bool DnrOffDigi = true;     // DNR coupé quand un mode numérique décode ou que DIGI est le mode
         public bool DnrOffFdv = true;      // DNR coupé quand FreeDV auto (V1 ou V2) est en marche
+        public bool DnrRig = true;         // DNR aussi sur le son du poste joué par SDRLink (écoute sur le PC, oreille du poste en diversité ; 1.48)
         // Pas de la molette et bande passante de réception retenus par mode (clés cw, ssb, am, fm, digi) ; bande passante 0 = filtre
         // d'origine du WebSDR. Les valeurs absentes prennent celles par défaut (ModeStep, ModeBw).
         public Dictionary<string, int> ModeSteps = new Dictionary<string, int>(StringComparer.Ordinal);
@@ -303,8 +307,12 @@ namespace SDRLink
                     case "NotchLevel": s.NotchLevel = Math.Max(1, Math.Min(10, Int(v, 1))); break;
                     case "Dnr": s.Dnr = v == "1"; break;
                     case "DnrLevel": s.DnrLevel = Math.Max(1, Math.Min(10, Int(v, 3))); break;
+                    case "DnrAlgo": s.DnrAlgo = Math.Max(0, Math.Min(2, Int(v, 0))); break;
+                    case "DnrLevelLsa": s.DnrLevelLsa = Math.Max(1, Math.Min(10, Int(v, 5))); break;
+                    case "DnrLevelIa": s.DnrLevelIa = Math.Max(1, Math.Min(10, Int(v, 5))); break;
                     case "DnrOffDigi": s.DnrOffDigi = v == "1"; break;
                     case "DnrOffFdv": s.DnrOffFdv = v == "1"; break;
+                    case "DnrRig": s.DnrRig = v == "1"; break;
                     case "ModeStep": { int c = v.IndexOf(':'); if (c > 0) s.ModeSteps[v.Substring(0, c)] = Math.Max(1, Int(v.Substring(c + 1), 500)); } break;
                     case "ModeBw": { int c = v.IndexOf(':'); if (c > 0) s.ModeBws[v.Substring(0, c)] = Math.Max(0, Math.Min(20000, Int(v.Substring(c + 1), 0))); } break;
                     case "DigiAutoQsy": s.DigiAutoQsy = v == "1"; break;
@@ -470,8 +478,12 @@ namespace SDRLink
             Line(sb, "NotchLevel", NotchLevel);
             Line(sb, "Dnr", Dnr ? 1 : 0);
             Line(sb, "DnrLevel", DnrLevel);
+            Line(sb, "DnrAlgo", DnrAlgo);
+            Line(sb, "DnrLevelLsa", DnrLevelLsa);
+            Line(sb, "DnrLevelIa", DnrLevelIa);
             Line(sb, "DnrOffDigi", DnrOffDigi ? 1 : 0);
             Line(sb, "DnrOffFdv", DnrOffFdv ? 1 : 0);
+            Line(sb, "DnrRig", DnrRig ? 1 : 0);
             foreach (KeyValuePair<string, int> p in ModeSteps) Line(sb, "ModeStep", p.Key + ":" + p.Value);
             foreach (KeyValuePair<string, int> p in ModeBws) Line(sb, "ModeBw", p.Key + ":" + p.Value);
             Line(sb, "DigiAutoQsy", DigiAutoQsy ? 1 : 0);

@@ -235,8 +235,9 @@ Reset the program…	Palauta ohjelman alkutila…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Vie tai tuo kaikki asetukset, samaa kokoonpanoa varten toisella tietokoneella (hiiren oikea painike: palauta ohjelman alkutila, painikkeen väri)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi tai kutsu, joka annetaan automaattisesti WebSDR-vastaanottimille, jotka kysyvät sitä ennen ääntä (KiwiSDR, websdr.org). Napsautus: vaihda (hiiren oikea: painikkeen väri)
 Right-click: receivers muted while transmitting	Hiiren oikea painike: lähetyksen ajaksi mykistettävät vastaanottimet
+Auto notch off	Automaattinen notch pois
 Auto notch (DNF)	Auto-notch (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Valintaruutu: automaattinen notch päälle / pois. Napsautus painikkeeseen: pois digitaalisissa lähetelajeissa ja FreeDV:ssä, taso 1–10 (hiiren oikea painike: painikkeen väri)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automaattinen notch (DNF). Napsautus: päälle / pois (painikkeen väri). Oikea painike: pois digitaalisissa lähetyslajeissa ja FreeDV:ssä, taso 1–10, värit
 Colour when the notch is off	Väri notchin ollessa pois päältä
 Colour when the notch is on	Väri notchin ollessa päällä
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Käynnistää nykyisen WebSDR:n uudelleen (esimerkiksi käyttämättömyyden jälkeen pysähtyneen). Napsautus: uudelleenkäynnistys asetukset säilyttäen (taajuus, toimintatapa, suodatin, zoomaus, äänenvoimakkuus). Oikea napsautus: automaattinen uudelleenkäynnistys äänen kadotessa (Auto) ja sen viive, WebSDR:n täydellinen nollaus, painikkeen värit
@@ -408,6 +409,7 @@ Later	Myöhemmin
 Open the update page	Avaa päivityksen sivu
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink on päivitetty versioon V{0}; vanha versio on poistettu.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink on päivitetty versioon V{0}; vanha versio poistetaan seuraavalla käynnistyskerralla.
+Auto notch on, level {0}	Automaattinen notch päällä, taso {0}
 Last {0} memories used	Viimeiset {0} käytettyä muistia
 ExpertSDR TCI port: {0}…	ExpertSDR:n TCI-portti: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Päivitys V{0} saatavilla: lataa napsauttamalla
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Auto-notch pois FreeDV V1:ssä ja V2:ssa
 Notch level:	Notchin taso:
 1 (original setting)	1 (alkuperäinen asetus)
 10 (strongest)	10 (voimakkain)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaattinen notch havaitsee WebSDR:n äänestä tasaiset vihellykset (kantoaallot) ja vaimentaa ne. Painikkeen valintaruutu kytkee sen päälle tai pois. Taso, 1:stä (alkuperäinen asetus) 10:een, lisää käsiteltävien vihellysten määrää (4–8) ja vaikutuksen voimakkuutta; korkea taso voi vaikuttaa myös ääneen, joka pitää säveltä. Se kytketään pois valintaruutua tyhjentämättä digitaalisen lähetelajin aikana (dekooderi käynnissä tai DIGI-tila) ja FreeDV:n aikana, jos yllä olevat valinnat on merkitty: se vahingoittaisi dekoodattavia signaaleja. SDRLINK-kaapeli ja dekooderit saavat äänen aina ilman notchia.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaattinen notch löytää WebSDR:n äänestä tasaiset vihellykset (kantoaallot) ja vaimentaa ne. Painikkeen napsautus kytkee sen päälle tai pois (vihreä painike, kun päällä; värit valittavissa alla); oikea painike avaa tämän ikkunan. Taso 1:stä (alkuperäinen asetus) 10:een lisää käsiteltävien vihellysten määrää (4–8) ja toiminnan voimakkuutta; korkea taso voi vaikuttaa myös ääneen, joka pitää säveltä. Se pysähtyy tauolle painiketta sammuttamatta digitaalisen lähetyslajin aikana (dekooderi käynnissä tai DIGI-tila) ja FreeDV:n aikana, jos yllä olevat valinnat on merkitty: se vahingoittaisi dekoodattavia signaaleja. SDRLINK-kaapeli ja dekooderit saavat äänen aina ilman notchia.
+Button colours…	Painikkeen värit…
 , off in digital modes	, pois digitaalisissa lähetelajeissa
 , off in FreeDV	, pois FreeDV:ssä
+AI	TA
+improved	parannettu
+classic	perinteinen
 Colour when DNR is off	Väri DNR:n ollessa pois
 Colour when DNR is on	Väri DNR:n ollessa päällä
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Kohinanvaimennus (DNR) WebSDR:n äänessä. Napsautus: päälle / pois. Oikea napsautus: taso 1–10, pois digitaalisissa lähetelajeissa ja FreeDV:ssä, värit
-DNR level:	DNR:n taso:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Kohinanvaimennus (DNR) WebSDR:n äänelle. Napsautus: päälle / pois. Oikea painike: tyyppi (perinteinen, parannettu tai TA) ja sen taso 1–10, pois digitaalisissa lähetyslajeissa ja FreeDV:ssä, värit
+DNR type (right-click a type: its level):	DNR-tyyppi (oikea painike tyypin kohdalla: sen taso):
+Classic (Wiener filter)	Perinteinen (Wiener-suodin)
+Improved (MMSE-LSA): less voice distortion	Parannettu (MMSE-LSA): vähemmän vääristynyt puhe
+AI (RNNoise): most effective, more computing	TA (RNNoise): tehokkain, enemmän laskentaa
 1 (gentlest)	1 (pehmein)
 DNR off in digital modes	DNR pois digitaalisissa lähetelajeissa
 DNR off in FreeDV V1 and V2	DNR pois FreeDV V1:ssä ja V2:ssa
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR myös SDRLinkin toistamaan radion ääneen (kuuntelu tietokoneella, diversiteetti)
 DNR off	DNR pois
+DNR AI	DNR TA
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR:n vastaanoton kaistanleveys, tallennetaan jokaiselle lähetelajille (CW, USB/LSB, AM, FM, DIGI), jokaisessa WebSDR:ssä ja uudelleenkäynnistyksen jälkeen. ”Oletussuodin”: WebSDR:n oma suodin.
 Default filter	Oletussuodin
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Lähetelajin haku: ei WebSDR:ää tai
 Mode search stopped	Lähetelajin haku pysäytetty
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Lähetelajin haku: lähetelajia ei tunnistettu (liian heikko signaali, ei-tuettu lähetelaji tai WSPR / JT9 / Hell, liian hitaita tunnistettaviksi)
 Auto notch: level {0}{1}{2}	Auto-notch: taso {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR päällä (taso {0}), tauolla digitaalisen lähetelajin tai FreeDV:n aikana (muuta oikealla napsautuksella)
-DNR on, level {0}	DNR päällä, taso {0}
-DNR: level {0}{1}{2}	DNR: taso {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR päällä ({0}, taso {1}), tauolla digitaalisen lähetyslajin tai FreeDV:n aikana (vaihda oikealla painikkeella)
+DNR on: {0}, level {1}	DNR päällä: {0}, taso {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, taso {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Kaistanleveys kHz:nä lähetelajille {0} (0,1–15):
 {0} bandwidth: WebSDR default filter	Kaistanleveys {0}: WebSDR:n oletussuodin
 {0} bandwidth: {1}	Kaistanleveys {0}: {1}

@@ -42,6 +42,7 @@ namespace SDRLink
         UrlSuggest urlSuggest;
         Button btnCable;
         CheckButton chkNotch;
+        ContextMenuStrip notchColorMenu;   // couleurs du bouton du notch, ouvertes depuis sa fenêtre (1.48)
         FlowLayoutPanel pnlHamlib;
         CheckBox chkHamlibLaunch;
         CheckButton chkUpdates;
@@ -523,22 +524,34 @@ namespace SDRLink
             row3.Controls.Add(chkMute);
             row3.Controls.Add(Lbl("rétablir après (ms) :", "restore after (ms):"));
             row3.Controls.Add(numUnmute);
-            // Notch auto (DNF) : case dans le bouton (marche / arrêt) ; clic ailleurs sur le bouton : options et niveau (depuis la 1.38).
+            // Notch auto (DNF) : clic = marche / arrêt, l'état se voit à la couleur du bouton ; clic droit = fenêtre des options, du niveau
+            // et des couleurs (1.48 ; de la 1.38 à la 1.47 : case dans le bouton, et la fenêtre au clic sur le reste du bouton).
             chkNotch = new CheckButton();
+            chkNotch.NoBox = true;
+            chkNotch.Tag = Theme.Custom;
             chkNotch.Margin = new Padding(8, 3, 3, 3);
-            chkNotch.CheckedChanged += delegate { settings.AutoNotch = chkNotch.Checked; RefreshNotch(); UpdateNotchButton(); };
-            chkNotch.Click += delegate { ShowNotchMenu(); };
+            chkNotch.CheckedChanged += delegate
+            {
+                settings.AutoNotch = chkNotch.Checked;
+                RefreshNotch();
+                UpdateNotchButton();
+                if (!loading) { settings.Save(); ShowStatus(chkNotch.Checked ? Lang.F("Notch auto en marche, niveau {0}", "Auto notch on, level {0}", settings.NotchLevel) : Lang.T("Notch auto arrêté", "Auto notch off")); }
+            };
+            chkNotch.MouseUp += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Right) ShowNotchMenu(); };
             Tr(delegate
             {
                 chkNotch.Text = Lang.T("Notch auto (DNF)", "Auto notch (DNF)");
-                tips.SetToolTip(chkNotch, Lang.T("Case : notch automatique en marche / arrêté. Clic sur le bouton : coupure en mode numérique et en FreeDV, niveau de 1 à 10 (clic droit : couleur du bouton)",
-                    "Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)"));
+                tips.SetToolTip(chkNotch, Lang.T("Notch automatique (DNF). Clic : marche / arrêt (couleur du bouton). Clic droit : coupure en mode numérique et en FreeDV, niveau de 1 à 10, couleurs",
+                    "Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours"));
             });
             row3.Controls.Add(chkNotch);
             // Couleurs au clic droit : notch arrêté / en marche (1.41 ; avant, une seule couleur « Notch », gardée pour les deux).
             AddColorMenu(chkNotch, Slot("NotchOff", () => Lang.T("Couleur notch arrêté", "Colour when the notch is off")),
                 Slot("NotchOn", () => Lang.T("Couleur notch en marche", "Colour when the notch is on")));
-            // DNR (1.46) : clic = marche / arrêt ; clic droit = niveau 1 à 10, coupures en numérique / FreeDV, couleurs.
+            // Le clic droit ouvre la fenêtre du notch (1.48) : le menu des couleurs n'est plus attaché au bouton, la fenêtre l'ouvre.
+            notchColorMenu = chkNotch.ContextMenuStrip;
+            chkNotch.ContextMenuStrip = null;
+            // DNR (1.46) : clic = marche / arrêt ; clic droit = type (classique, amélioré, IA) et niveau, coupures en numérique / FreeDV, couleurs.
             CreateDnrButton();
             row3.Controls.Add(btnDnr);
             // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
@@ -1250,6 +1263,7 @@ namespace SDRLink
         {
             if (chkNotch == null) return;
             int c = ColorOf(chkNotch.Checked ? "NotchOn" : "NotchOff");
+            if (c < 0 && chkNotch.Checked) c = 0x00783C;   // en marche : vert par défaut, comme le DNR (1.48 : plus de case pour voir l'état)
             if (c < 0) c = ColorOf("Notch");
             if (c < 0) Theme.StyleButton(chkNotch);
             else PaintCustom(chkNotch, c);

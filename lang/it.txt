@@ -235,8 +235,9 @@ Reset the program…	Ripristina il programma…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Esportare o importare tutte le impostazioni, per la stessa configurazione su un altro computer (clic destro: ripristina il programma, colore del pulsante)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nome o nominativo dato automaticamente ai WebSDR che lo chiedono prima dell'audio (KiwiSDR, websdr.org). Clic: cambiarlo (clic destro: colore del pulsante)
 Right-click: receivers muted while transmitting	Clic destro: ricevitori silenziati in trasmissione
+Auto notch off	Notch automatico spento
 Auto notch (DNF)	Notch auto (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Casella: notch automatico attivo / disattivo. Clic sul pulsante: disattivo nei modi digitali e in FreeDV, livello da 1 a 10 (clic destro: colore del pulsante)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Notch automatico (DNF). Clic: acceso / spento (colore del pulsante). Clic destro: disattivato nei modi digitali e in FreeDV, livello da 1 a 10, colori
 Colour when the notch is off	Colore con notch disattivato
 Colour when the notch is on	Colore con notch attivo
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Riavvia il WebSDR corrente (per esempio fermato dopo un periodo di inattività). Clic: riavvio mantenendo le sue impostazioni (frequenza, modo, filtro, zoom, volume). Clic destro: riavvio automatico quando il suono si perde (Auto) e il suo ritardo, reinizializzazione totale del WebSDR, colori del pulsante
@@ -408,6 +409,7 @@ Later	Più tardi
 Open the update page	Apri la pagina dell'aggiornamento
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink è stato aggiornato alla V{0}; la vecchia versione è stata eliminata.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink è stato aggiornato alla V{0}; la vecchia versione sarà eliminata al prossimo avvio.
+Auto notch on, level {0}	Notch automatico acceso, livello {0}
 Last {0} memories used	Ultime {0} memorie usate
 ExpertSDR TCI port: {0}…	Porta TCI di ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Aggiornamento V{0} disponibile: fare clic per scaricarlo
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Notch auto disattivo in FreeDV V1 e V2
 Notch level:	Livello notch:
 1 (original setting)	1 (impostazione originale)
 10 (strongest)	10 (il più forte)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Il notch automatico rileva i fischi costanti (portanti) nel suono del WebSDR e li attenua. La casella sul pulsante lo attiva o lo disattiva. Il livello, da 1 (impostazione originale) a 10, aumenta il numero di fischi trattati (da 4 a 8) e la forza dell'azione; un livello alto può influire anche su una voce che tiene una nota. Viene disattivato, senza togliere la spunta, durante un modo digitale (decodificatore in funzione o modo DIGI) e durante FreeDV, se le scelte qui sopra sono spuntate: danneggerebbe i segnali da decodificare. Il cavo SDRLINK e i decodificatori ricevono sempre il suono senza notch.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Il notch automatico individua i fischi fissi (portanti) nell'audio del WebSDR e li attenua. Un clic sul pulsante lo accende o lo spegne (pulsante verde quando è acceso, colori da scegliere sotto); il clic destro apre questa finestra. Il livello, da 1 (impostazione originale) a 10, aumenta il numero di fischi trattati (da 4 a 8) e la forza dell'azione; un livello alto può toccare anche una voce che tiene una nota. Viene messo in pausa, senza spegnere il pulsante, durante un modo digitale (decodificatore in funzione o modo DIGI) e durante FreeDV, se le scelte sopra sono spuntate: danneggerebbe i segnali da decodificare. Il cavo SDRLINK e i decodificatori ricevono sempre l'audio senza notch.
+Button colours…	Colori del pulsante…
 , off in digital modes	, disattivo nei modi digitali
 , off in FreeDV	, disattivo in FreeDV
+AI	IA
+improved	migliorato
+classic	classico
 Colour when DNR is off	Colore con DNR spento
 Colour when DNR is on	Colore con DNR attivo
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Riduzione del rumore (DNR) sull'audio del WebSDR. Clic: acceso / spento. Clic destro: livello da 1 a 10, spento nei modi digitali e in FreeDV, colori
-DNR level:	Livello DNR:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Riduzione del rumore (DNR) sull'audio del WebSDR. Clic: attiva / disattiva. Clic destro: tipo (classico, migliorato o IA) e il suo livello da 1 a 10, disattivato nei modi digitali e in FreeDV, colori
+DNR type (right-click a type: its level):	Tipo di DNR (clic destro su un tipo: il suo livello):
+Classic (Wiener filter)	Classico (filtro di Wiener)
+Improved (MMSE-LSA): less voice distortion	Migliorato (MMSE-LSA): voce meno distorta
+AI (RNNoise): most effective, more computing	IA (RNNoise): il più efficace, più calcolo
 1 (gentlest)	1 (il più delicato)
 DNR off in digital modes	DNR spento nei modi digitali
 DNR off in FreeDV V1 and V2	DNR spento in FreeDV V1 e V2
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR anche sull'audio della radio riprodotto da SDRLink (ascolto sul PC, diversity)
 DNR off	DNR spento
+DNR AI	DNR IA
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Larghezza di banda di ricezione del WebSDR, memorizzata per ogni modo (CW, USB/LSB, AM, FM, DIGI), su ogni WebSDR e dopo un riavvio. «Filtro predefinito»: quello proprio del WebSDR.
 Default filter	Filtro predefinito
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Ricerca del modo: nessun WebSDR o app
 Mode search stopped	Ricerca del modo interrotta
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Ricerca del modo: nessun modo riconosciuto (segnale troppo debole, modo non supportato, o WSPR / JT9 / Hell, troppo lenti da riconoscere)
 Auto notch: level {0}{1}{2}	Notch auto: livello {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR acceso (livello {0}), in pausa durante il modo digitale o FreeDV (clic destro per cambiare)
-DNR on, level {0}	DNR acceso, livello {0}
-DNR: level {0}{1}{2}	DNR: livello {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR attivo ({0}, livello {1}), in pausa durante il modo digitale o FreeDV (clic destro per cambiare)
+DNR on: {0}, level {1}	DNR attivo: {0}, livello {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, livello {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Larghezza di banda in kHz per {0} (da 0,1 a 15):
 {0} bandwidth: WebSDR default filter	Larghezza di banda {0}: filtro predefinito del WebSDR
 {0} bandwidth: {1}	Larghezza di banda {0}: {1}

@@ -235,8 +235,9 @@ Reset the program…	Lähtesta programm…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Ekspordi või impordi kõik seaded sama seadistuse jaoks teises arvutis (paremklõps: lähtesta programm, nupu värv)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Nimi või kutsung, mis antakse automaatselt WebSDR-idele, mis seda enne heli küsivad (KiwiSDR, websdr.org). Klõps: muuda (paremklõps: nupu värv)
 Right-click: receivers muted while transmitting	Paremklõps: saatmise ajal vaigistatavad vastuvõtjad
+Auto notch off	Automaatne notch väljas
 Auto notch (DNF)	Automaatne notch (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Märkeruut: automaatne notch sees / väljas. Klõps nupul: väljas digitaalsetes režiimides ja FreeDV-s, tase 1 kuni 10 (paremklõps: nupu värv)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automaatne notch (DNF). Klõps: sisse / välja (nupu värv). Paremklõps: väljas digirežiimides ja FreeDV-s, tase 1 kuni 10, värvid
 Colour when the notch is off	Värv, kui notch on väljas
 Colour when the notch is on	Värv, kui notch on sees
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Käivitab praeguse WebSDR-i uuesti (näiteks pärast jõudeaega peatunud). Klõps: taaskäivitus seadeid säilitades (sagedus, režiim, filter, suum, helitugevus). Paremklõps: automaatne taaskäivitus heli kadumisel (Auto) ja selle viivitus, WebSDR-i täielik lähtestamine, nupu värvid
@@ -408,6 +409,7 @@ Later	Hiljem
 Open the update page	Ava uuenduse leht
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink on uuendatud versioonile V{0}; vana versioon on kustutatud.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink on uuendatud versioonile V{0}; vana versioon kustutatakse järgmisel käivitamisel.
+Auto notch on, level {0}	Automaatne notch sees, tase {0}
 Last {0} memories used	Viimased {0} kasutatud mälu
 ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Saadaval on uuendus V{0}: klõpsake allalaadimiseks
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Automaatne notch väljas FreeDV V1 ja V2 korr
 Notch level:	Notchi tase:
 1 (original setting)	1 (algne seadistus)
 10 (strongest)	10 (tugevaim)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaatne notch tuvastab WebSDR-i helis püsivad viled (kandjad) ja summutab need. Nupul olev märkeruut lülitab selle sisse või välja. Tase, 1-st (algne seadistus) kuni 10-ni, suurendab töödeldavate vilede arvu (4 kuni 8) ja toime tugevust; kõrge tase võib mõjutada ka häält, mis hoiab nooti. See lülitatakse märget eemaldamata välja digitaalse režiimi ajal (dekooder töötab või DIGI-režiim) ja FreeDV ajal, kui ülaltoodud valikud on märgitud: see rikuks dekodeeritavaid signaale. SDRLINK-kaabel ja dekoodrid saavad heli alati ilma notchita.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaatne notch leiab WebSDR-i helist püsivad vilinad (kandjad) ja summutab need. Klõps nupul lülitab selle sisse või välja (roheline nupp, kui sees; värvid saab valida allpool); paremklõps avab selle akna. Tase 1-st (algne seadistus) kuni 10-ni suurendab käsitletavate vilinate arvu (4 kuni 8) ja toime tugevust; kõrge tase võib mõjutada ka häält, mis hoiab nooti. See peatatakse nuppu välja lülitamata digirežiimi ajal (dekooder töötab või DIGI-režiim) ja FreeDV ajal, kui ülaltoodud valikud on märgitud: see rikuks dekodeeritavaid signaale. SDRLINK-kaabel ja dekooderid saavad heli alati ilma notchita.
+Button colours…	Nupu värvid…
 , off in digital modes	, väljas digitaalsetes režiimides
 , off in FreeDV	, väljas FreeDV korral
+AI	TI
+improved	täiustatud
+classic	klassikaline
 Colour when DNR is off	Värv, kui DNR on väljas
 Colour when DNR is on	Värv, kui DNR on sees
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Mürasummutus (DNR) WebSDR-i helis. Klõps: sisse / välja. Paremklõps: tase 1 kuni 10, väljas digitaalsetes režiimides ja FreeDV-s, värvid
-DNR level:	DNR-i tase:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Mürasummutus (DNR) WebSDR-i helile. Klõps: sisse / välja. Paremklõps: tüüp (klassikaline, täiustatud või TI) ja selle tase 1 kuni 10, väljas digirežiimides ja FreeDV-s, värvid
+DNR type (right-click a type: its level):	DNR-i tüüp (paremklõps tüübil: selle tase):
+Classic (Wiener filter)	Klassikaline (Wieneri filter)
+Improved (MMSE-LSA): less voice distortion	Täiustatud (MMSE-LSA): vähem moonutatud hääl
+AI (RNNoise): most effective, more computing	TI (RNNoise): kõige tõhusam, rohkem arvutust
 1 (gentlest)	1 (pehmeim)
 DNR off in digital modes	DNR väljas digitaalsetes režiimides
 DNR off in FreeDV V1 and V2	DNR väljas FreeDV V1 ja V2 puhul
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR ka SDRLinki esitatud raadiojaama helile (kuulamine arvutis, diversity)
 DNR off	DNR väljas
+DNR AI	DNR TI
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR-i vastuvõtu ribalaius, salvestatud iga režiimi jaoks (CW, USB/LSB, AM, FM, DIGI), igal WebSDR-il ja pärast taaskäivitust. „Vaikefilter“: WebSDR-i enda filter.
 Default filter	Vaikefilter
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Režiimi otsing: pole WebSDR-i ega ra
 Mode search stopped	Režiimi otsing peatatud
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Režiimi otsing: ühtegi režiimi ei tuvastatud (liiga nõrk signaal, toetamata režiim või WSPR / JT9 / Hell, mis on tuvastamiseks liiga aeglased)
 Auto notch: level {0}{1}{2}	Automaatne notch: tase {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR sees (tase {0}), digitaalse režiimi või FreeDV ajal peatatud (muutmiseks paremklõps)
-DNR on, level {0}	DNR sees, tase {0}
-DNR: level {0}{1}{2}	DNR: tase {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR sees ({0}, tase {1}), peatatud digirežiimi või FreeDV ajal (muutmiseks paremklõps)
+DNR on: {0}, level {1}	DNR sees: {0}, tase {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, tase {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Ribalaius kHz-des režiimile {0} (0,1 kuni 15):
 {0} bandwidth: WebSDR default filter	{0} ribalaius: WebSDR-i vaikefilter
 {0} bandwidth: {1}	{0} ribalaius: {1}

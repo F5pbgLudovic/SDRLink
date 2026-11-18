@@ -235,8 +235,9 @@ Reset the program…	A program alaphelyzetbe állítása…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Az összes beállítás exportálása vagy importálása, ugyanahhoz a konfigurációhoz egy másik számítógépen (jobb kattintás: a program alaphelyzetbe állítása, gomb színe)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Név vagy hívójel, amelyet a hang előtt ezt kérő WebSDR-ek (KiwiSDR, websdr.org) automatikusan megkapnak. Kattintás: módosítás (jobb klikk: gomb színe)
 Right-click: receivers muted while transmitting	Jobb kattintás: adás közben némított vevők
+Auto notch off	Automatikus notch kikapcsolva
 Auto notch (DNF)	Auto notch (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Jelölőnégyzet: automatikus notch be / ki. Kattintás a gombra: kikapcsolva digitális üzemmódokban és FreeDV-ben, szint 1-től 10-ig (jobb kattintás: a gomb színe)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automatikus notch (DNF). Kattintás: be / ki (a gomb színe). Jobb klikk: kikapcsolás digitális üzemmódokban és FreeDV-ben, szint 1-től 10-ig, színek
 Colour when the notch is off	Szín kikapcsolt notchnál
 Colour when the notch is on	Szín bekapcsolt notchnál
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Újraindítja az aktuális WebSDR-t (például ha tétlenség miatt leállt). Kattintás: újraindítás a beállítások megtartásával (frekvencia, üzemmód, szűrő, nagyítás, hangerő). Jobb kattintás: automatikus újraindítás a hang elvesztésekor (Auto) és annak késleltetése, a WebSDR teljes alaphelyzetbe állítása, a gomb színei
@@ -408,6 +409,7 @@ Later	Később
 Open the update page	Frissítés oldalának megnyitása
 SDRLink has been updated to V{0}; the old version has been deleted.	Az SDRLink frissítve: V{0}; a régi verzió törölve.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	Az SDRLink frissítve: V{0}; a régi verzió a következő indításkor törlődik.
+Auto notch on, level {0}	Automatikus notch bekapcsolva, szint {0}
 Last {0} memories used	Utolsó {0} használt memória
 ExpertSDR TCI port: {0}…	ExpertSDR TCI-portja: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Elérhető a V{0} frissítés: kattintson a letöltéshez
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Auto notch kikapcsolva FreeDV V1 és V2 alatt
 Notch level:	Notch szint:
 1 (original setting)	1 (eredeti beállítás)
 10 (strongest)	10 (legerősebb)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Az automatikus notch érzékeli a WebSDR hangjában lévő állandó füttyöket (vivőket), és csillapítja őket. A gombon lévő jelölőnégyzet be- vagy kikapcsolja. A szint, 1-től (eredeti beállítás) 10-ig, növeli a kezelt füttyök számát (4–8) és a hatás erősségét; magas szint egy hangot kitartó emberi hangot is befolyásolhat. A jelölőnégyzet törlése nélkül kikapcsol digitális üzemmód alatt (futó dekóder vagy DIGI mód) és FreeDV alatt, ha a fenti lehetőségek be vannak jelölve: károsítaná a dekódolandó jeleket. Az SDRLINK kábel és a dekóderek mindig notch nélkül kapják a hangot.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Az automatikus notch felismeri a WebSDR hangjában az állandó sípolásokat (vivőket), és csillapítja őket. A gombra kattintás be- vagy kikapcsolja (zöld gomb bekapcsolva, a színek lent választhatók); a jobb klikk ezt az ablakot nyitja meg. A szint, 1-től (eredeti beállítás) 10-ig, növeli a kezelt sípolások számát (4–8) és a hatás erejét; magas szint egy hangot kitartó beszédhangot is érinthet. Szünetel, a gomb kikapcsolása nélkül, digitális üzemmód alatt (futó dekóder vagy DIGI mód) és FreeDV alatt, ha a fenti lehetőségek be vannak jelölve: károsítaná a dekódolandó jeleket. Az SDRLINK-kábel és a dekóderek mindig notch nélkül kapják a hangot.
+Button colours…	A gomb színei…
 , off in digital modes	, kikapcsolva digitális üzemmódokban
 , off in FreeDV	, kikapcsolva FreeDV alatt
+AI	MI
+improved	javított
+classic	klasszikus
 Colour when DNR is off	Szín kikapcsolt DNR-nél
 Colour when DNR is on	Szín bekapcsolt DNR-nél
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Zajcsökkentés (DNR) a WebSDR hangján. Kattintás: be / ki. Jobb klikk: szint 1-től 10-ig, kikapcsolás digitális üzemmódokban és FreeDV-nél, színek
-DNR level:	DNR szint:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Zajcsökkentés (DNR) a WebSDR hangján. Kattintás: be / ki. Jobb klikk: típus (klasszikus, javított vagy MI) és annak szintje 1-től 10-ig, kikapcsolás digitális üzemmódokban és FreeDV-ben, színek
+DNR type (right-click a type: its level):	DNR típusa (jobb klikk egy típuson: annak szintje):
+Classic (Wiener filter)	Klasszikus (Wiener-szűrő)
+Improved (MMSE-LSA): less voice distortion	Javított (MMSE-LSA): kevésbé torzított hang
+AI (RNNoise): most effective, more computing	MI (RNNoise): a leghatékonyabb, több számítás
 1 (gentlest)	1 (legenyhébb)
 DNR off in digital modes	DNR kikapcsolva digitális üzemmódokban
 DNR off in FreeDV V1 and V2	DNR kikapcsolva FreeDV V1 és V2 alatt
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR az SDRLink által lejátszott rádióhangon is (hallgatás a PC-n, diverziti)
 DNR off	DNR kikapcsolva
+DNR AI	DNR MI
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	A WebSDR vételi sávszélessége, üzemmódonként megjegyezve (CW, USB/LSB, AM, FM, DIGI), minden WebSDR-en és újraindítás után is. „Alapértelmezett szűrő”: a WebSDR saját szűrője.
 Default filter	Alapértelmezett szűrő
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Üzemmódkeresés: nincs hallgatható
 Mode search stopped	Üzemmódkeresés leállítva
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Üzemmódkeresés: nem ismerhető fel üzemmód (túl gyenge jel, nem támogatott üzemmód, vagy WSPR / JT9 / Hell, amelyek túl lassúak a felismeréshez)
 Auto notch: level {0}{1}{2}	Auto notch: szint {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR bekapcsolva ({0}. szint), szünetel a digitális üzemmód vagy a FreeDV alatt (jobb klikk a módosításhoz)
-DNR on, level {0}	DNR bekapcsolva, szint {0}
-DNR: level {0}{1}{2}	DNR: szint {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR bekapcsolva ({0}, szint {1}), szünetel digitális üzemmód vagy FreeDV alatt (jobb klikk a módosításhoz)
+DNR on: {0}, level {1}	DNR bekapcsolva: {0}, szint {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, szint {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Sávszélesség kHz-ben, {0} (0,1–15):
 {0} bandwidth: WebSDR default filter	{0} sávszélesség: a WebSDR alapértelmezett szűrője
 {0} bandwidth: {1}	{0} sávszélesség: {1}

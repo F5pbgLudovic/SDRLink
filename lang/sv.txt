@@ -235,8 +235,9 @@ Reset the program…	Återställ programmet…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Exportera eller importera alla inställningar, för samma konfiguration på en annan dator (högerklick: återställ programmet, knappens färg)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Namn eller anropssignal som automatiskt ges till WebSDR:er som ber om det före ljudet (KiwiSDR, websdr.org). Klick: ändra det (högerklick: knappens färg)
 Right-click: receivers muted while transmitting	Högerklick: mottagare som tystas vid sändning
+Auto notch off	Automatisk notch av
 Auto notch (DNF)	Auto-notch (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Ruta: automatisk notch på / av. Klick på knappen: av i digitala trafiksätt och FreeDV, nivå 1 till 10 (högerklick: knappens färg)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automatisk notch (DNF). Klick: på / av (knappens färg). Högerklick: av i digitala trafiksätt och FreeDV, nivå 1 till 10, färger
 Colour when the notch is off	Färg när notch är av
 Colour when the notch is on	Färg när notch är på
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Startar om den aktuella WebSDR (till exempel stoppad efter en tids inaktivitet). Klick: omstart med inställningarna kvar (frekvens, trafiksätt, filter, zoom, volym). Högerklick: automatisk omstart när ljudet försvinner (Auto) och dess fördröjning, fullständig återställning av WebSDR, knappens färger
@@ -408,6 +409,7 @@ Later	Senare
 Open the update page	Öppna uppdateringssidan
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink har uppdaterats till V{0}; den gamla versionen har tagits bort.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink har uppdaterats till V{0}; den gamla versionen tas bort vid nästa start.
+Auto notch on, level {0}	Automatisk notch på, nivå {0}
 Last {0} memories used	Senaste {0} använda minnen
 ExpertSDR TCI port: {0}…	TCI-port för ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Uppdatering V{0} tillgänglig: klicka för att ladda ner den
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Auto-notch av i FreeDV V1 och V2
 Notch level:	Notch-nivå:
 1 (original setting)	1 (ursprunglig inställning)
 10 (strongest)	10 (starkast)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Den automatiska notchen upptäcker jämna pipljud (bärvågor) i WebSDR-ljudet och dämpar dem. Rutan på knappen slår på eller av den. Nivån, från 1 (ursprunglig inställning) till 10, ökar antalet behandlade pipljud (4 till 8) och verkans styrka; en hög nivå kan också påverka en röst som håller en ton. Den stängs av, utan att rutan avmarkeras, under ett digitalt trafiksätt (avkodare igång eller DIGI-läge) och under FreeDV, om valen ovan är markerade: den skulle skada signalerna som ska avkodas. SDRLINK-kabeln och avkodarna får alltid ljudet utan notch.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Den automatiska notchen hittar fasta visseltoner (bärvågor) i WebSDR-ljudet och dämpar dem. Ett klick på knappen slår på eller av den (grön knapp när den är på, färger väljs nedan); högerklick öppnar detta fönster. Nivån, från 1 (ursprunglig inställning) till 10, ökar antalet behandlade visseltoner (4 till 8) och verkans styrka; en hög nivå kan också påverka en röst som håller en ton. Den pausas, utan att knappen stängs av, under ett digitalt trafiksätt (avkodare igång eller DIGI-läge) och under FreeDV, om valen ovan är markerade: den skulle skada signalerna som ska avkodas. SDRLINK-kabeln och avkodarna får alltid ljudet utan notch.
+Button colours…	Knappens färger…
 , off in digital modes	, av i digitala trafiksätt
 , off in FreeDV	, av i FreeDV
+AI	AI
+improved	förbättrad
+classic	klassisk
 Colour when DNR is off	Färg när DNR är av
 Colour when DNR is on	Färg när DNR är på
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Brusreducering (DNR) på WebSDR-ljudet. Klick: på / av. Högerklick: nivå 1 till 10, av i digitala trafiksätt och FreeDV, färger
-DNR level:	DNR-nivå:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Brusreducering (DNR) på WebSDR-ljudet. Klick: på / av. Högerklick: typ (klassisk, förbättrad eller AI) och dess nivå 1 till 10, av i digitala trafiksätt och FreeDV, färger
+DNR type (right-click a type: its level):	DNR-typ (högerklicka på en typ: dess nivå):
+Classic (Wiener filter)	Klassisk (Wiener-filter)
+Improved (MMSE-LSA): less voice distortion	Förbättrad (MMSE-LSA): mindre förvrängd röst
+AI (RNNoise): most effective, more computing	AI (RNNoise): mest effektiv, mer beräkning
 1 (gentlest)	1 (mildast)
 DNR off in digital modes	DNR av i digitala trafiksätt
 DNR off in FreeDV V1 and V2	DNR av i FreeDV V1 och V2
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR även på radions ljud som SDRLink spelar upp (lyssning på datorn, diversity)
 DNR off	DNR av
+DNR AI	DNR AI
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR:ens mottagningsbandbredd, sparad för varje trafiksätt (CW, USB/LSB, AM, FM, DIGI), på varje WebSDR och efter en omstart. ”Standardfilter”: WebSDR:ens eget.
 Default filter	Standardfilter
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Sökning av trafiksätt: ingen WebSDR
 Mode search stopped	Sökning av trafiksätt stoppad
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Sökning av trafiksätt: inget trafiksätt igenkänt (för svag signal, trafiksätt som inte stöds eller WSPR / JT9 / Hell, för långsamma för att kännas igen)
 Auto notch: level {0}{1}{2}	Auto-notch: nivå {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR på (nivå {0}), pausad under det digitala trafiksättet eller FreeDV (högerklicka för att ändra)
-DNR on, level {0}	DNR på, nivå {0}
-DNR: level {0}{1}{2}	DNR: nivå {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR på ({0}, nivå {1}), pausad under digitalt trafiksätt eller FreeDV (högerklicka för att ändra)
+DNR on: {0}, level {1}	DNR på: {0}, nivå {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, nivå {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Bandbredd i kHz för {0} (0,1 till 15):
 {0} bandwidth: WebSDR default filter	Bandbredd {0}: WebSDR:ens standardfilter
 {0} bandwidth: {1}	Bandbredd {0}: {1}

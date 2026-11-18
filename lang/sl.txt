@@ -235,8 +235,9 @@ Reset the program…	Ponastavi program…
 Export or import all settings, for the same configuration on another computer (right-click: reset the program, button colour)	Izvoz ali uvoz vseh nastavitev za enako konfiguracijo na drugem računalniku (desni klik: ponastavi program, barva gumba)
 Name or callsign given automatically to WebSDRs that ask for one before the audio (KiwiSDR, websdr.org). Click: change it (right-click: button colour)	Ime ali klicni znak, ki se samodejno poda sprejemnikom WebSDR, ki ga zahtevajo pred zvokom (KiwiSDR, websdr.org). Klik: sprememba (desni klik: barva gumba)
 Right-click: receivers muted while transmitting	Desni klik: sprejemniki, utišani med oddajanjem
+Auto notch off	Samodejni notch izklopljen
 Auto notch (DNF)	Samodejni notch (DNF)
-Box: automatic notch on / off. Click on the button: off in digital modes and FreeDV, level 1 to 10 (right-click: button colour)	Potrditveno polje: samodejni notch vklop / izklop. Klik na gumb: izklopljen pri digitalnih načinih dela in FreeDV, raven od 1 do 10 (desni klik: barva gumba)
+Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Samodejni notch (DNF). Klik: vklop / izklop (barva gumba). Desni klik: izklop v digitalnih načinih in FreeDV, raven od 1 do 10, barve
 Colour when the notch is off	Barva ob izklopljenem notchu
 Colour when the notch is on	Barva ob vklopljenem notchu
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Znova zažene trenutni WebSDR (na primer ustavljen po času nedejavnosti). Klik: ponovni zagon z ohranitvijo nastavitev (frekvenca, način, filter, povečava, glasnost). Desni klik: samodejni ponovni zagon ob izgubi zvoka (Auto) in njegova zakasnitev, popolna ponastavitev WebSDR, barve gumba
@@ -408,6 +409,7 @@ Later	Pozneje
 Open the update page	Odpri stran posodobitve
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink je posodobljen na V{0}; stara različica je izbrisana.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink je posodobljen na V{0}; stara različica bo izbrisana ob naslednjem zagonu.
+Auto notch on, level {0}	Samodejni notch vklopljen, raven {0}
 Last {0} memories used	Zadnjih {0} uporabljenih pomnilnikov
 ExpertSDR TCI port: {0}…	Vrata TCI programa ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Na voljo je posodobitev V{0}: kliknite za prenos
@@ -636,17 +638,26 @@ Auto notch off in FreeDV V1 and V2	Samodejni notch izklopljen pri FreeDV V1 in V
 Notch level:	Raven notcha:
 1 (original setting)	1 (izvirna nastavitev)
 10 (strongest)	10 (najmočnejši)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Samodejni notch zazna stalne piske (nosilce) v zvoku WebSDR in jih oslabi. Polje na gumbu ga vklopi ali izklopi. Raven, od 1 (izvirna nastavitev) do 10, poveča število obdelanih piskov (4 do 8) in moč delovanja; visoka raven lahko vpliva tudi na glas, ki drži noto. Brez odstranitve kljukice se izklopi med digitalnim načinom dela (dekoder deluje ali način DIGI) in med FreeDV, če so zgornje izbire označene: poškodoval bi signale za dekodiranje. Kabel SDRLINK in dekoderji vedno prejmejo zvok brez notcha.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Samodejni notch najde stalne piske (nosilce) v zvoku WebSDR in jih oslabi. Klik na gumb ga vklopi ali izklopi (zelen gumb, ko je vklopljen; barve izberete spodaj); desni klik odpre to okno. Raven, od 1 (prvotna nastavitev) do 10, poveča število obravnavanih piskov (od 4 do 8) in moč delovanja; visoka raven lahko prizadene tudi glas, ki drži ton. Začasno se ustavi, ne da bi se gumb izklopil, med digitalnim načinom (dekoder deluje ali način DIGI) in med FreeDV, če so zgornje izbire označene: poškodoval bi signale za dekodiranje. Kabel SDRLINK in dekoderji vedno dobijo zvok brez notcha.
+Button colours…	Barve gumba…
 , off in digital modes	, izklopljen pri digitalnih načinih dela
 , off in FreeDV	, izklopljen pri FreeDV
+AI	UI
+improved	izboljšan
+classic	klasičen
 Colour when DNR is off	Barva ob izklopljenem DNR
 Colour when DNR is on	Barva ob vklopljenem DNR
-Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Zmanjšanje šuma (DNR) v zvoku WebSDR. Klik: vklop / izklop. Desni klik: raven od 1 do 10, izklop pri digitalnih načinih dela in FreeDV, barve
-DNR level:	Raven DNR:
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: type (classic, improved or AI) and its level 1 to 10, off in digital modes and FreeDV, colours	Zmanjšanje šuma (DNR) na zvoku WebSDR. Klik: vklop / izklop. Desni klik: vrsta (klasičen, izboljšan ali UI) in njena raven od 1 do 10, izklop v digitalnih načinih in FreeDV, barve
+DNR type (right-click a type: its level):	Vrsta DNR (desni klik na vrsto: njena raven):
+Classic (Wiener filter)	Klasičen (Wienerjev filter)
+Improved (MMSE-LSA): less voice distortion	Izboljšan (MMSE-LSA): manj popačen glas
+AI (RNNoise): most effective, more computing	UI (RNNoise): najučinkovitejši, več računanja
 1 (gentlest)	1 (najnežnejši)
 DNR off in digital modes	DNR izklopljen pri digitalnih načinih dela
 DNR off in FreeDV V1 and V2	DNR izklopljen pri FreeDV V1 in V2
+DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR tudi na zvoku postaje, ki ga predvaja SDRLink (poslušanje na računalniku, diverziteta)
 DNR off	DNR izklopljen
+DNR AI	DNR UI
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Pasovna širina sprejema WebSDR, shranjena za vsak način (CW, USB/LSB, AM, FM, DIGI), na vsakem WebSDR in po ponovnem zagonu. »Privzeti filter«: lastni filter WebSDR.
 Default filter	Privzeti filter
@@ -660,9 +671,9 @@ Mode search: no WebSDR or rig to listen to	Iskanje načina: ni WebSDR ali postaj
 Mode search stopped	Iskanje načina ustavljeno
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Iskanje načina: noben način ni prepoznan (prešibak signal, nepodprt način ali WSPR / JT9 / Hell, prepočasni za prepoznavo)
 Auto notch: level {0}{1}{2}	Samodejni notch: raven {0}{1}{2}
-DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR vklopljen (raven {0}), začasno ustavljen med digitalnim načinom dela ali FreeDV (desni klik za spremembo)
-DNR on, level {0}	DNR vklopljen, raven {0}
-DNR: level {0}{1}{2}	DNR: raven {0}{1}{2}
+DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR vklopljen ({0}, raven {1}), začasno ustavljen med digitalnim načinom ali FreeDV (desni klik za spremembo)
+DNR on: {0}, level {1}	DNR vklopljen: {0}, raven {1}
+DNR: {0}, level {1}{2}{3}	DNR: {0}, raven {1}{2}{3}
 Bandwidth in kHz for {0} (0.1 to 15):	Pasovna širina v kHz za {0} (0,1 do 15):
 {0} bandwidth: WebSDR default filter	Pasovna širina {0}: privzeti filter WebSDR
 {0} bandwidth: {1}	Pasovna širina {0}: {1}
