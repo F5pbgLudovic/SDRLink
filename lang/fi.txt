@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	WebSDR:n äänenvoimakkuus (tallennetaan jokaiselle suosikille)
 Mute TRX: connect the rig first	Mykistä TRX: yhdistä ensin radio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radion äänenvoimakkuutta ei voi säätää tällä radiolla tai liitännällä (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Mykistä TRX: radio pysyy mykistettynä diversityn jälkeen; diversityn aikana sen ääni jää korvaan (TRX-voimakkuus säätää tason)
+Mute TRX released: the rig will get its volume back after diversity	TRX-mykistys poistettu: radio saa äänenvoimakkuutensa takaisin diversityn jälkeen
 rig	radio
 FreeDV auto off	FreeDV auto pois päältä
  (FreeDV 3, under development)	 (FreeDV 3, kehitteillä)
@@ -637,6 +639,14 @@ Notch level:	Notchin taso:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaattinen notch havaitsee WebSDR:n äänestä tasaiset vihellykset (kantoaallot) ja vaimentaa ne. Painikkeen valintaruutu kytkee sen päälle tai pois. Taso, 1:stä (alkuperäinen asetus) 10:een, lisää käsiteltävien vihellysten määrää (4–8) ja vaikutuksen voimakkuutta; korkea taso voi vaikuttaa myös ääneen, joka pitää säveltä. Se kytketään pois valintaruutua tyhjentämättä digitaalisen lähetelajin aikana (dekooderi käynnissä tai DIGI-tila) ja FreeDV:n aikana, jos yllä olevat valinnat on merkitty: se vahingoittaisi dekoodattavia signaaleja. SDRLINK-kaapeli ja dekooderit saavat äänen aina ilman notchia.
 , off in digital modes	, pois digitaalisissa lähetelajeissa
 , off in FreeDV	, pois FreeDV:ssä
+Colour when DNR is off	Väri DNR:n ollessa pois
+Colour when DNR is on	Väri DNR:n ollessa päällä
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Kohinanvaimennus (DNR) WebSDR:n äänessä. Napsautus: päälle / pois. Oikea napsautus: taso 1–10, pois digitaalisissa lähetelajeissa ja FreeDV:ssä, värit
+DNR level:	DNR:n taso:
+1 (gentlest)	1 (pehmein)
+DNR off in digital modes	DNR pois digitaalisissa lähetelajeissa
+DNR off in FreeDV V1 and V2	DNR pois FreeDV V1:ssä ja V2:ssa
+DNR off	DNR pois
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR:n vastaanoton kaistanleveys, tallennetaan jokaiselle lähetelajille (CW, USB/LSB, AM, FM, DIGI), jokaisessa WebSDR:ssä ja uudelleenkäynnistyksen jälkeen. ”Oletussuodin”: WebSDR:n oma suodin.
 Default filter	Oletussuodin
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Lähetelajin haku: ei WebSDR:ää tai
 Mode search stopped	Lähetelajin haku pysäytetty
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Lähetelajin haku: lähetelajia ei tunnistettu (liian heikko signaali, ei-tuettu lähetelaji tai WSPR / JT9 / Hell, liian hitaita tunnistettaviksi)
 Auto notch: level {0}{1}{2}	Auto-notch: taso {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR päällä (taso {0}), tauolla digitaalisen lähetelajin tai FreeDV:n aikana (muuta oikealla napsautuksella)
+DNR on, level {0}	DNR päällä, taso {0}
+DNR: level {0}{1}{2}	DNR: taso {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Kaistanleveys kHz:nä lähetelajille {0} (0,1–15):
 {0} bandwidth: WebSDR default filter	Kaistanleveys {0}: WebSDR:n oletussuodin
 {0} bandwidth: {1}	Kaistanleveys {0}: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Haetaan kuultavaa lähetel
 Mode found: {0} ({1})	Lähetelaji löytyi: {0} ({1})
 BW:	KL:
  (right-click: position of the buttons)	 (hiiren kakkospainike: painikkeiden sijainti)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Jaa taajuus: kopioi leikepöydälle linkin tähän WebSDR:ään tällä taajuudella ja moodilla
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Jaa taajuus: kopioi leikepöydälle linkin tähän WebSDR:ään tällä taajuudella ja moodilla. Linkki avaa SDRLinkin samaan kohtaan tai tarjoaa kuuntelun selaimessa tai SDRLinkin latauksen
 Zoom in the WebSDR page	Suurenna WebSDR-sivua
 Zoom out the WebSDR page	Pienennä WebSDR-sivua
 Bottom right	Alhaalla oikealla
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Sivun zoomaus: automaattinen (nyt {0})
 WebSDR page: {0}	WebSDR-sivu: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-sivu: {0} (muistettu tälle WebSDR:lle; hiiren kakkospainike painikkeella: automaattinen zoomaus)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sivu pienennetty kokoon {0}, jotta koko ohjauspaneeli näkyy (valitse + ja −)
-{0} kHz {1} on {2}	{0} kHz {1} kohteessa {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jakolinkki kopioitu leikepöydälle ({0} kHz {1}): liitä se viestiin
+Share link: {0} kHz {1} on {2}	Jakolinkki: {0} kHz {1} kohteessa {2}
 Mode:	Lähetelaji:
 Preamp:	Esivahvistin:
 (preamp unchanged)	(esivahvistin ennallaan)

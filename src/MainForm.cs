@@ -162,6 +162,7 @@ namespace SDRLink
             Load += delegate
             {
                 InitWebView();
+                ShareLink.Listen(delegate(string l) { BeginInvokeSafe(delegate { OpenShareText(l); }); });
                 if (settings.AutoConnect) Connect();
             };
             Shown += delegate
@@ -537,6 +538,9 @@ namespace SDRLink
             // Couleurs au clic droit : notch arrêté / en marche (1.41 ; avant, une seule couleur « Notch », gardée pour les deux).
             AddColorMenu(chkNotch, Slot("NotchOff", () => Lang.T("Couleur notch arrêté", "Colour when the notch is off")),
                 Slot("NotchOn", () => Lang.T("Couleur notch en marche", "Colour when the notch is on")));
+            // DNR (1.46) : clic = marche / arrêt ; clic droit = niveau 1 à 10, coupures en numérique / FreeDV, couleurs.
+            CreateDnrButton();
+            row3.Controls.Add(btnDnr);
             // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
             row3.Controls.Add(Colorable("ScanSetup", Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); })));
             btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else ShowScanMenu(); });
@@ -1200,6 +1204,7 @@ namespace SDRLink
             UpdateFindModeButton();
             UpdateDiversityButton(true);
             UpdateNotchButton();
+            UpdateDnrButton();
             UpdateSstvButton();
             UpdatePttButton();
             UpdateMuteButtons();
@@ -1438,6 +1443,7 @@ namespace SDRLink
             UpdateFindModeButton();
             UpdateDiversityButton(true);
             UpdateNotchButton();
+            UpdateDnrButton();
             UpdateSstvButton();
         }
 
@@ -1472,6 +1478,7 @@ namespace SDRLink
             UpdateFindModeButton();
             UpdateDiversityButton(true);
             UpdateNotchButton();
+            UpdateDnrButton();
             UpdateSstvButton();
             if (worker == null) ShowStatus(Lang.T("Déconnecté", "Disconnected"));
             UpdateDisplays();
@@ -2526,6 +2533,8 @@ namespace SDRLink
             bool changed = Math.Abs(f - lastRigF) > Tolerance || fam != lastRigFam;
             // Première relecture du poste (connexion) : le WebSDR se cale sur lui, sans retour vers le poste un moment.
             if (lastRigF == 0) syncSettleUntil = DateTime.UtcNow.AddMilliseconds(SettleMs);
+            // Lien de partage ouvert avant la connexion du poste (1.46) : c'est le poste qui prend la fréquence partagée.
+            if (lastRigF == 0 && TakeShareForRig()) { lastRigF = f; lastRigFam = fam; return; }
             lastRigF = f;
             lastRigFam = fam;
             // Pendant qu'on vient de commander le poste, on n'en renvoie pas l'écho vers le WebSDR.
@@ -2569,6 +2578,8 @@ namespace SDRLink
                 }
                 return;
             }
+            // Page ouverte par un lien de partage (1.46) : sa fréquence et son mode sont appliqués, poste compris (comme une mémoire).
+            if (first && ApplyPendingShare()) { firstPage = false; syncSettleUntil = DateTime.MinValue; return; }
             if (first)
             {
                 // Page qui vient de se charger : le poste impose sa fréquence s'il est connecté. Au démarrage de
@@ -2802,7 +2813,12 @@ namespace SDRLink
                 core.DOMContentLoaded += delegate { ApplyVolume(); if (tapShown) SetPageTap(true); SetPageNotch(); };
                 ApplyCable();
                 UpdateCableButton();
-                Navigate(settings.LastUrl);
+                // Lien de partage reçu au lancement (1.46) : ce WebSDR à la place du dernier ouvert.
+                string pend = Program.PendingShare;
+                Program.PendingShare = null;
+                if (pend != null && OpenShareText(pend)) { }
+                else if (shareTune != null) OpenShare(shareTune);
+                else Navigate(settings.LastUrl);
                 StartReinitWatch();
             }
             catch (Exception ex)
@@ -3097,6 +3113,7 @@ namespace SDRLink
         void NavigateFromBar()
         {
             string text = cbUrl.Text.Trim();
+            if (OpenShareText(text)) return;   // lien de partage de SDRLink ou de PhoneSDRLink collé (1.46)
             Favorite f = settings.Favorites.Find(delegate(Favorite x) { return x.Name == text; });
             Navigate(f != null ? f.Url : text);
         }
@@ -3376,9 +3393,14 @@ namespace SDRLink
                 return;
             }
             rigMuted = !rigMuted;
-            if (!divRigSilenced) worker.SetAfGain(rigMuted ? 0 : trkRigVolume.Value);   // diversité : seule l'oreille du poste change
+            if (!divRigSilenced) worker.SetAfGain(rigMuted ? 0 : trkRigVolume.Value);
             Log.Write(rigMuted ? "Son du poste coupé (gain BF à 0)" : "Son du poste rétabli à " + trkRigVolume.Value + " %");
             UpdateMuteButtons();
+            // Diversité sur le poste (1.46) : son haut-parleur est déjà coupé, son oreille continue ; Mute TX vaudra à l'arrêt.
+            if (divRigSilenced)
+                ShowStatus(rigMuted
+                    ? Lang.T("Mute TX : le poste restera muet après la diversité ; pendant la diversité, son son reste dans l'oreille (Volume TX règle son niveau)", "Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)")
+                    : Lang.T("Mute TX retiré : le poste reprendra son volume après la diversité", "Mute TRX released: the rig will get its volume back after diversity"));
         }
 
         // ---------------------------------------------------------------- FreeDV auto (bouton après « Rechercher des WebSDR »)

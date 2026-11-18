@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	WebSDR skaļums (saglabāts katrai izlasei)
 Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Klusināt TRX: raiduztvērējs pēc diversity paliks klusināts; diversity laikā tā skaņa paliek ausī (līmeni nosaka TRX skaļums)
+Mute TRX released: the rig will get its volume back after diversity	TRX klusināšana atcelta: raiduztvērējs pēc diversity atgūs savu skaļumu
 rig	raiduztvērējs
 FreeDV auto off	FreeDV auto izslēgts
  (FreeDV 3, under development)	 (FreeDV 3, izstrādē)
@@ -637,6 +639,14 @@ Notch level:	Notch līmenis:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automātiskais notch atklāj pastāvīgus svilpienus (nesējus) WebSDR skaņā un tos vājina. Rūtiņa uz pogas to ieslēdz vai izslēdz. Līmenis, no 1 (sākotnējais iestatījums) līdz 10, palielina apstrādāto svilpienu skaitu (no 4 līdz 8) un darbības stiprumu; augsts līmenis var ietekmēt arī balsi, kas tur noti. Tas tiek izslēgts, nenoņemot atzīmi, digitālā darba veida laikā (darbojas dekoders vai DIGI režīms) un FreeDV laikā, ja augstāk esošās izvēles ir atzīmētas: tas bojātu dekodējamos signālus. SDRLINK kabelis un dekoderi vienmēr saņem skaņu bez notch.
 , off in digital modes	, izslēgts digitālajos darba veidos
 , off in FreeDV	, izslēgts FreeDV
+Colour when DNR is off	Krāsa, kad DNR izslēgts
+Colour when DNR is on	Krāsa, kad DNR ieslēgts
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Trokšņu samazināšana (DNR) WebSDR skaņā. Klikšķis: ieslēgt / izslēgt. Labais klikšķis: līmenis no 1 līdz 10, izslēgšana digitālajos darba veidos un FreeDV, krāsas
+DNR level:	DNR līmenis:
+1 (gentlest)	1 (maigākais)
+DNR off in digital modes	DNR izslēgts digitālajos darba veidos
+DNR off in FreeDV V1 and V2	DNR izslēgts FreeDV V1 un V2
+DNR off	DNR izslēgts
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR uztveršanas joslas platums, saglabāts katram darba veidam (CW, USB/LSB, AM, FM, DIGI), katrā WebSDR un pēc restartēšanas. „Noklusējuma filtrs”: paša WebSDR filtrs.
 Default filter	Noklusējuma filtrs
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Darba veida meklēšana: nav WebSDR v
 Mode search stopped	Darba veida meklēšana apturēta
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Darba veida meklēšana: neviens darba veids nav atpazīts (pārāk vājš signāls, neatbalstīts darba veids vai WSPR / JT9 / Hell, kas ir pārāk lēni atpazīšanai)
 Auto notch: level {0}{1}{2}	Autom. notch: līmenis {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR ieslēgts ({0}. līmenis), pauzē digitālā darba veida vai FreeDV laikā (lai mainītu, labais klikšķis)
+DNR on, level {0}	DNR ieslēgts, līmenis {0}
+DNR: level {0}{1}{2}	DNR: līmenis {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Joslas platums kHz darba veidam {0} (no 0,1 līdz 15):
 {0} bandwidth: WebSDR default filter	{0} joslas platums: WebSDR noklusējuma filtrs
 {0} bandwidth: {1}	{0} joslas platums: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Meklē dzirdamo darba veid
 Mode found: {0} ({1})	Atrasts darba veids: {0} ({1})
 BW:	JP:
  (right-click: position of the buttons)	 (labais klikšķis: pogu novietojums)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Kopīgot frekvenci: starpliktuvē nokopē saiti uz šo WebSDR ar šo frekvenci un režīmu
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Kopīgot frekvenci: starpliktuvē nokopē saiti uz šo WebSDR ar šo frekvenci un režīmu. Saite atver SDRLink tajā pašā vietā vai piedāvā klausīties pārlūkā vai lejupielādēt SDRLink
 Zoom in the WebSDR page	Palielināt WebSDR lapu
 Zoom out the WebSDR page	Samazināt WebSDR lapu
 Bottom right	Apakšā pa labi
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Lapas tālummaiņa: automātiska (tagad {0})
 WebSDR page: {0}	WebSDR lapa: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR lapa: {0} (iegaumēts šim WebSDR; labais klikšķis uz pogas: automātiska tālummaiņa)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR lapa samazināta līdz {0}, lai būtu redzams viss vadības panelis (+ un − izvēlei)
-{0} kHz {1} on {2}	{0} kHz {1} vietnē {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Kopīgošanas saite nokopēta starpliktuvē ({0} kHz {1}): ielīmējiet to ziņojumā
+Share link: {0} kHz {1} on {2}	Kopīgošanas saite: {0} kHz {1} vietnē {2}
 Mode:	Režīms:
 Preamp:	Pirmspastiprinātājs:
 (preamp unchanged)	(pirmspastiprinātājs nemainīts)

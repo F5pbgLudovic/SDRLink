@@ -31,6 +31,7 @@ namespace SDRLink
         void SetPageNotch()
         {
             notchSent = null;
+            dnrSent = null;
             RefreshNotch();
         }
 
@@ -38,6 +39,7 @@ namespace SDRLink
         void RefreshNotch()
         {
             if (web == null || web.CoreWebView2 == null || settings == null) return;
+            RefreshDnr();
             bool on = NotchWanted;
             string s = (on ? "1" : "0") + "|" + settings.NotchLevel;
             if (s == notchSent) return;
@@ -128,6 +130,126 @@ namespace SDRLink
             ShowStatus(Lang.F("Notch auto : niveau {0}{1}{2}", "Auto notch: level {0}{1}{2}", settings.NotchLevel,
                 settings.NotchOffDigi ? Lang.T(", coupé en mode numérique", ", off in digital modes") : "",
                 settings.NotchOffFdv ? Lang.T(", coupé en FreeDV", ", off in FreeDV") : ""));
+        }
+
+        // ---- Réducteur de bruit (DNR, 1.46) : bouton après le notch ; clic = marche / arrêt, clic droit = niveau, coupures, couleurs.
+
+        Button btnDnr;
+        string dnrSent;   // dernier état envoyé à la page (« marche|niveau »), null = à renvoyer
+
+        bool DnrWanted
+        {
+            get
+            {
+                if (!settings.Dnr) return false;
+                if (settings.DnrOffDigi && DigiListening) return false;
+                if (settings.DnrOffFdv && settings.FreeDvAuto) return false;
+                return true;
+            }
+        }
+
+        void CreateDnrButton()
+        {
+            btnDnr = new Button();
+            btnDnr.AutoSize = true;
+            btnDnr.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnDnr.MinimumSize = new Size(30, 25);
+            btnDnr.Tag = Theme.Custom;
+            btnDnr.Margin = new Padding(3, 3, 3, 3);
+            btnDnr.Click += delegate { SetDnr(!settings.Dnr); };
+            ContextMenuStrip m = new ContextMenuStrip();
+            m.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillDnrMenu(m); };
+            m.Items.Add("-");
+            btnDnr.ContextMenuStrip = m;
+            AddColorMenu(btnDnr, Slot("DnrOff", () => Lang.T("Couleur DNR arrêté", "Colour when DNR is off")),
+                Slot("DnrOn", () => Lang.T("Couleur DNR en marche", "Colour when DNR is on")));
+            Tr(delegate
+            {
+                UpdateDnrButton();
+                tips.SetToolTip(btnDnr, Lang.T("Réducteur de bruit (DNR) sur le son du WebSDR. Clic : marche / arrêt. Clic droit : niveau de 1 à 10, coupure en mode numérique et en FreeDV, couleurs",
+                    "Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours"));
+            });
+        }
+
+        void FillDnrMenu(ContextMenuStrip m)
+        {
+            m.Items.Clear();
+            ToolStripMenuItem head = new ToolStripMenuItem(Lang.T("Niveau du DNR :", "DNR level:"));
+            head.Enabled = false;
+            m.Items.Add(head);
+            for (int i = 1; i <= 10; i++)
+            {
+                int lvl = i;
+                string text = i == 1 ? Lang.T("1 (le plus doux)", "1 (gentlest)") : i == 10 ? Lang.T("10 (le plus fort)", "10 (strongest)") : i.ToString(CultureInfo.InvariantCulture);
+                ToolStripMenuItem it = new ToolStripMenuItem(text);
+                it.Checked = settings.DnrLevel == i;
+                it.Click += delegate { SetDnrLevel(lvl); };
+                m.Items.Add(it);
+            }
+            m.Items.Add(new ToolStripSeparator());
+            ToolStripMenuItem digi = new ToolStripMenuItem(Lang.T("DNR coupé en mode numérique", "DNR off in digital modes"));
+            digi.Checked = settings.DnrOffDigi;
+            digi.Click += delegate { settings.DnrOffDigi = !settings.DnrOffDigi; DnrChanged(); };
+            m.Items.Add(digi);
+            ToolStripMenuItem fdv = new ToolStripMenuItem(Lang.T("DNR coupé en FreeDV V1 et V2", "DNR off in FreeDV V1 and V2"));
+            fdv.Checked = settings.DnrOffFdv;
+            fdv.Click += delegate { settings.DnrOffFdv = !settings.DnrOffFdv; DnrChanged(); };
+            m.Items.Add(fdv);
+        }
+
+        void SetDnr(bool on)
+        {
+            settings.Dnr = on;
+            settings.Save();
+            Log.Write("DNR : " + (on ? "en marche, niveau " + settings.DnrLevel : "arrêté"));
+            RefreshDnr();
+            UpdateDnrButton();
+            if (on && !DnrWanted)
+                ShowStatus(Lang.F("DNR en marche (niveau {0}), en pause pendant le mode numérique ou FreeDV (clic droit pour changer)", "DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)", settings.DnrLevel));
+            else
+                ShowStatus(on ? Lang.F("DNR en marche, niveau {0}", "DNR on, level {0}", settings.DnrLevel) : Lang.T("DNR arrêté", "DNR off"));
+        }
+
+        void SetDnrLevel(int lvl)
+        {
+            settings.DnrLevel = Math.Max(1, Math.Min(10, lvl));
+            if (!settings.Dnr) { SetDnr(true); return; }   // choisir un niveau met le DNR en marche
+            DnrChanged();
+        }
+
+        void DnrChanged()
+        {
+            settings.Save();
+            Log.Write("DNR : niveau " + settings.DnrLevel + (settings.DnrOffDigi ? ", coupé en mode numérique" : "") + (settings.DnrOffFdv ? ", coupé en FreeDV" : ""));
+            RefreshDnr();
+            UpdateDnrButton();
+            ShowStatus(Lang.F("DNR : niveau {0}{1}{2}", "DNR: level {0}{1}{2}", settings.DnrLevel,
+                settings.DnrOffDigi ? Lang.T(", coupé en mode numérique", ", off in digital modes") : "",
+                settings.DnrOffFdv ? Lang.T(", coupé en FreeDV", ", off in FreeDV") : ""));
+        }
+
+        // Envoie à la page l'état voulu du DNR, s'il a changé (appelé avec RefreshNotch : mode, FreeDV, décodeur…).
+        void RefreshDnr()
+        {
+            if (web == null || web.CoreWebView2 == null || settings == null) return;
+            bool on = DnrWanted;
+            string s = (on ? "1" : "0") + "|" + settings.DnrLevel;
+            if (s == dnrSent) return;
+            dnrSent = s;
+            web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setDnr && window.__sdrlink.setDnr(" + (on ? "true" : "false") + "," + settings.DnrLevel + ");");
+            if (web2 != null) Div2Notch();
+        }
+
+        // Couleur de l'état : en marche / arrêté (le niveau est écrit sur le bouton quand il marche).
+        void UpdateDnrButton()
+        {
+            if (btnDnr == null) return;
+            string text = settings.Dnr ? "DNR " + settings.DnrLevel : "DNR";
+            if (btnDnr.Text != text) btnDnr.Text = text;
+            int c = ColorOf(settings.Dnr ? "DnrOn" : "DnrOff");
+            if (c < 0) c = settings.Dnr ? 0x00783C : -1;   // en marche : vert par défaut, comme la diversité calée
+            if (c < 0) Theme.StyleButton(btnDnr);
+            else PaintCustom(btnDnr, c);
         }
 
         // ---- Pas de la molette et bande passante, retenus pour chaque mode (cw, ssb = USB et LSB, am, fm, digi).

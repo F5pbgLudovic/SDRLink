@@ -22,7 +22,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 
 1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Connexion... / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Look ▾**, **Panneau de commande**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
 2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
-3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (case dans le bouton ; clic : options et niveau), **Conf scan**, **▶ Scan**.
+3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (case dans le bouton ; clic : options et niveau), **DNR** (réducteur de bruit, depuis la 1.46 ; clic : marche / arrêt, clic droit : niveau), **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR** (« Volume FreeDV » pendant une parole FreeDV, depuis la 1.45), **Volume TX sur PC** (quand « Écouter aussi le poste sur le PC » est coché, depuis la 1.45), **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40), suivi, quand la diversité est réglée **sur deux WebSDR**, de la case du **second WebSDR** (depuis la 1.44).
@@ -47,6 +47,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Mémoires | mémoriser la fréquence actuelle, couleur du bouton |
 | Liste des favoris (à côté de l'adresse) | renommer la liste |
 | Notch auto (DNF) | couleur notch arrêté / en marche (depuis la 1.41) |
+| DNR | **niveau** de 1 à 10, **DNR coupé en mode numérique**, **DNR coupé en FreeDV V1 et V2**, couleur DNR arrêté / en marche (depuis la 1.46) |
 | Mode ? | couleur du bouton, couleur pendant la recherche (depuis la 1.41) |
 | Couper le son du WebSDR en émission | réceptions dont le son est coupé en émission : WebSDR, poste, ExpertSDR, HDSDR (cases à cocher, toutes cochées au départ) |
 | ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus), couleur du bouton (depuis la 1.41) |
@@ -73,6 +74,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 - `Musique\SDRLink` : dossier des enregistrements REC par défaut ; pendant un enregistrement, un fichier provisoire `SDRLink-REC-*.raw` est dans `%TEMP%`.
 - `Images\SDRLink` : images SSTV, WEFAX et Hell reçues, en PNG (`SSTV_<mode>_<date>_<heure>.png`, `WEFAX_<lignes>-<IOC>_<date>_<heure>.png`, `Hell_<date>_<heure>.png` ; `_partiel` si l'image n'est pas allée jusqu'au bout) (depuis la 1.25).
 - `%LOCALAPPDATA%\SDRLink\runtime\digi-…\sdrlink_digi.dll` : décodeurs FT8 / FT4 / FT2 et Olivia / Contestia, écrit seulement au premier usage de ces modes (depuis la 1.25).
+- Registre, `HKEY_CURRENT_USER\Software\Classes\sdrlink` (depuis la 1.46) : écrit à chaque lancement, sans droits d'administrateur, pour que les liens `sdrlink://` (bouton « Ouvrir dans SDRLink » de la page de partage) ouvrent ce SDRLink. Si SDRLink est retiré du PC, cette clé peut être effacée à la main ; laissée, elle ne gêne rien.
 
 ## Interfaces (menu « Interface »)
 
@@ -182,7 +184,14 @@ Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donn
 - **Trois ronds posés sur la page** (comme dans PhoneSDRLink) : **partage**, **+** et **−**. Ils fonctionnent au **clic gauche** ; le **clic droit** sur l'un d'eux choisit leur **position** : **bas à droite**, **bas à gauche**, **haut à droite**, **haut à gauche**, **milieu haut** ou **milieu bas**, chacune **verticale** (en colonne) ou **horizontale** (en ligne). Au départ : milieu bas, horizontal. Position retenue (ligne `PageBtnPos=` des réglages).
 - **+ et −** agrandissent ou réduisent **toute la page** du WebSDR (25 % à 300 %), comme le zoom d'un navigateur ; **Ctrl + molette** dans la page fait de même. Le zoom choisi est **retenu pour ce WebSDR** (lignes `PageZoom=` des réglages) et revient à chaque visite, même après un redémarrage de SDRLink ; **Réinit WebSDR** (clic) le garde, seule la **réinitialisation totale** du WebSDR (clic droit sur Réinit WebSDR) l'oublie et remet l'affichage d'origine. Les autres WebSDR restent à 100 %.
 - **Zoom automatique des OpenWebRX** : sur certains écrans, le **panneau de commande** d'OpenWebRX (à droite : fréquence, S-mètre, profils, modes, réglages) passe en partie **sous le bandeau du haut** de la page. Sans zoom choisi à la main pour ce WebSDR, SDRLink réduit la page **juste assez** pour le voir **en entier** (la barre d'état le dit), et recommence quand la fenêtre change de taille ; jamais au-dessus de 100 %, jamais sous 50 %. Le clic droit sur un rond montre le zoom actuel ; **Zoom de la page : automatique** oublie le zoom choisi à la main et revient à ce réglage automatique.
-- **Partage** : copie dans le **presse-papiers** un texte à coller dans un message, par exemple « 📻 7286 kHz USB sur F4KKF » suivi d'un **lien** vers ce WebSDR, cette fréquence et ce mode. C'est le lien de partage de PhoneSDRLink : sur Android il ouvre PhoneSDRLink, ailleurs il propose d'**écouter dans le navigateur**, sur la bonne fréquence pour les websdr.org, KiwiSDR et OpenWebRX.
+- **Partage** (lien de SDRLink depuis la 1.46 ; avant, celui de PhoneSDRLink) : copie dans le **presse-papiers** un **lien seul**, à coller dans un message, un courriel ou un forum. Il n'y a pas de texte autour : avec du texte collé devant, certaines messageries ne rendaient plus le lien cliquable. Le lien mène à la **page de partage de SDRLink**, qui montre la fréquence, le mode et le WebSDR, puis propose :
+  - sur un PC : **Ouvrir dans SDRLink**, qui ouvre ce WebSDR **au même endroit** (même fréquence, même mode) ; **Écouter dans le navigateur**, sur la bonne fréquence pour les websdr.org, KiwiSDR et OpenWebRX ; **Télécharger SDRLink**, qui mène à la dernière version ;
+  - sur Android : **Ouvrir dans PhoneSDRLink** (même format de lien), **Installer PhoneSDRLink**, ou écouter dans le navigateur.
+- **Ouvrir dans SDRLink** marche dès que SDRLink 1.46 (ou plus récent) a été **lancé une fois** sur le PC : il s'inscrit alors auprès de Windows pour les liens `sdrlink://`. Le navigateur demande d'abord la permission d'ouvrir SDRLink. Ensuite :
+  - si SDRLink est **déjà ouvert**, c'est lui qui reçoit le lien (pas de second SDRLink) et sa fenêtre passe devant ;
+  - sinon SDRLink démarre directement sur ce WebSDR, au lieu du dernier ouvert ;
+  - la fréquence et le mode sont appliqués **comme le rappel d'une mémoire** : le **poste** suit aussi, si la synchro va du WebSDR vers le poste (Synchro désactivée : le WebSDR seul). Si le poste se connecte après, c'est lui qui prend la fréquence partagée.
+- Un lien de partage (de SDRLink ou de PhoneSDRLink) **collé dans la case WebSDR**, puis Entrée ou Aller, fait la même chose.
 - **Adresse masquée** : **clic droit sur la page** du WebSDR, **Masquer l'adresse du WebSDR** (en tête du menu ; aussi au clic droit sur un rond). La case de l'adresse reste en place mais n'affiche que des **étoiles** ; sa flèche ouvre toujours la liste des favoris, et l'adresse ne peut plus être copiée. Le même clic droit (élément coché) la fait revenir. Pratique pour une capture d'écran ou une vidéo. Retenu (ligne `HideUrl=` des réglages).
 
 ## Favoris
@@ -506,6 +515,21 @@ Bouton **Notch auto (DNF)**, au bout de la ligne Synchro (depuis la 1.38, la cas
 - La parole bouge trop pour être retenue (un niveau élevé peut toutefois toucher une voix qui tient une note). Une **CW** stable est en revanche supprimée, comme avec le DNF du poste : décocher en CW.
 - Seul le son entendu est filtré, le câble SDRLINK et les décodeurs reçoivent le son brut.
 
+## Réducteur de bruit (DNR) (depuis la 1.46)
+
+Bouton **DNR**, juste après **Notch auto (DNF)** : il réduit le **souffle** (bruit de fond) du son du WebSDR, comme le DNR d'un poste.
+- **Clic** : marche / arrêt. En marche, le bouton est **vert** et affiche son niveau (« DNR 3 ») ; arrêté, il reprend la couleur des autres boutons. Le choix est retenu.
+- **Clic droit** :
+  - **Niveau du DNR**, de **1** (le plus doux) à **10** (le plus fort) ; 3 au départ. Choisir un niveau met le DNR en marche ;
+  - **DNR coupé en mode numérique** (coché au départ) : en pause, sans éteindre le bouton, quand un décodeur des modes numériques est en marche ou que **DIGI** est le mode ;
+  - **DNR coupé en FreeDV V1 et V2** (coché au départ) : en pause tant que FreeDV auto est en marche ;
+  - **Couleur DNR arrêté** et **Couleur DNR en marche**.
+- **Ce qu'il fait** : le son est découpé en tranches de 20 à 30 ms. Pour chaque fréquence audio, SDRLink suit le **niveau du bruit**, c'est-à-dire le plus bas entendu sur environ 1,6 s : la parole a toujours des creux, pas le souffle. Chaque fréquence est ensuite atténuée selon ce qui dépasse ce bruit. Une voix ou une CW qui sort du bruit passe ; le souffle entre les mots et autour de la voix baisse. L'atténuation suit le son de façon progressive, ce qui évite le « gazouillis » des réducteurs simples.
+- **Le niveau** règle l'atténuation maximale du bruit et la marge prise au-dessus du bruit. Mesuré sur du bruit seul : environ **12 dB** de moins au niveau 3, **33 dB** au niveau 10. Un son propre passe presque intact. Les niveaux forts rendent la voix plus « sèche » et peuvent manger un signal très faible : commencer bas et monter à l'oreille.
+- **Retard** : le son du WebSDR prend environ **20 à 30 ms** de retard de plus sur un WebSDR en **https**, et un peu plus (jusqu'à environ 0,1 s) sur un WebSDR en **http**, le cas de la plupart des websdr.org et KiwiSDR. Sur ces pages, le navigateur n'offre que l'ancien traitement du son, qui travaille par blocs plus longs.
+- Il agit **avant le volume**, après le notch automatique quand les deux marchent. Comme le notch, il ne touche **que le son entendu** : le câble SDRLINK et les décodeurs reçoivent le son brut. En diversité, il s'applique aussi à l'oreille du WebSDR, et aux deux oreilles en diversité sur deux WebSDR.
+- Il agit sur le son du **WebSDR** seulement, pas sur celui du poste, d'ExpertSDR ou de HDSDR (ils ont leur propre DNR).
+
 Les boutons gardent toujours la même place : les zones RADIO et WEBSDR ont une largeur fixe. Le mode du WebSDR y est affiché en forme courte (USB, LSB, CW, AM, FM). L'émission est signalée par la fréquence RADIO en rouge et par le bouton PTT. La FM devient NBFM sur KiwiSDR et NFM sur UberSDR et OpenWebRX.
 
 ## Saisie d'une fréquence
@@ -655,9 +679,10 @@ Bouton **Diversité**, sur la ligne de son juste après Réinit WebSDR : le **We
   - **ExpertSDR** : son son arrive par le **flux audio TCI** (serveur TCI d'ExpertSDR activé, même port que pour Mute ExpertSDR) ; ExpertSDR est coupé dans le mélangeur de Windows s'il y joue, sinon par TCI. Depuis la 1.45, SDRLink attend qu'ExpertSDR soit prêt (message `ready` du TCI) avant de demander son flux audio : avant, la demande pouvait arriver trop tôt et être ignorée, et l'oreille d'ExpertSDR restait muette. Si, une fois coupé par TCI, ExpertSDR n'envoie toujours aucun son au bout de 4 s, SDRLink lui rend le son et baisse plutôt son **volume au minimum** (−60 dB), puis remonte son oreille ; le volume d'avant est rendu à l'arrêt de la diversité. Le journal (`sdrlink.log`, lignes « Son TCI : » et « Diversité : ») dit ce qu'ExpertSDR a envoyé ;
   - **HDSDR** (Windows 11) : baissé à −60 dB dans le mélangeur ; son son est capté par Windows puis remonté.
 - **Mute** et **Volume** de chaque réception règlent **son oreille** (Mute WebSDR fait taire l'oreille du WebSDR, Volume TX celle du poste…), sans rien changer à la réception elle-même.
+- **Sauf Mute TX** (depuis la 1.46) : pendant la diversité, le haut-parleur du poste est **déjà muet** (gain BF à 0), et le son pris par la carte son de REC n'en dépend pas. Mute TX **ne coupe donc plus l'oreille du poste** : la diversité continue avec ses deux voies. Pour baisser l'oreille du poste, utiliser **Volume TX**. Mute TX appuyé pendant la diversité s'applique à son arrêt : le poste reste alors muet au lieu de reprendre son volume. Avant la 1.46, Mute TX faisait taire l'oreille du poste et l'on n'entendait plus qu'une voie.
 - **En émission** : les oreilles des réceptions cochées au clic droit de « Couper le son du WebSDR en émission » se taisent dès le passage en émission et le restent après, pendant le retard appliqué plus le délai de rétablissement (« rétablir après (ms) ») : la fin de l'émission, jouée en retard, n'est pas entendue. L'oreille du poste se tait en émission dans tous les cas.
 - À l'arrêt (nouveau clic, poste déconnecté, logiciel fermé, ou fermeture de SDRLink), **chaque réception retrouve son son** : volume de la page, gain BF du poste, ExpertSDR et HDSDR comme avant.
-- Le **notch automatique** s'applique aussi à l'oreille du WebSDR (depuis la 1.41 ; avant, le son était pris avant lui). Si le câble SDRLINK ou un décodeur écoute aussi le WebSDR, le son reste pris avant le notch (son brut pour eux).
+- Le **notch automatique** s'applique aussi à l'oreille du WebSDR (depuis la 1.41 ; avant, le son était pris avant lui), comme le **DNR** (depuis la 1.46). Si le câble SDRLINK ou un décodeur écoute aussi le WebSDR, le son reste pris avant eux (son brut pour eux).
 - La réception choisie et le côté du WebSDR sont conservés ; la diversité, elle, est arrêtée à chaque démarrage.
 
 ### Sur deux WebSDR (depuis la 1.44)
@@ -942,6 +967,10 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.46**
+  - **DNR** (réducteur de bruit) : nouveau bouton après Notch auto (DNF). Clic : marche / arrêt ; clic droit : niveau de 1 à 10, coupure en mode numérique et en FreeDV, couleurs. Il réduit le souffle du son du WebSDR, de 12 dB au niveau 3 à 33 dB au niveau 10.
+  - **Lien de partage de SDRLink** (rond partage) : le lien copié est seul, sans texte autour. Sa page propose d'ouvrir SDRLink au même endroit (même déjà ouvert), d'écouter dans le navigateur ou de télécharger SDRLink ; sur Android, PhoneSDRLink. Un lien de partage collé dans la case WebSDR est aussi compris.
+  - **Diversité sur le poste** : Mute TX ne coupe plus l'oreille du poste (son haut-parleur est déjà muet) ; les deux voies restent, Volume TX règle l'oreille du poste.
 - **1.45**
   - **Volume TX sur PC** : nouveau curseur entre Volume WebSDR et Volume TX quand « Écouter aussi le poste sur le PC » est coché. Il règle seulement le son rejoué dans les haut-parleurs du PC ; REC, la diversité et les décodeurs gardent le son complet.
   - **Volume FreeDV** : pendant une parole FreeDV, le curseur Volume WebSDR devient Volume FreeDV et règle la voix décodée (avant, niveau fixe). Il garde sa propre valeur, séparée de celle du WebSDR.

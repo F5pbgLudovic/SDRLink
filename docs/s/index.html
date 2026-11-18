@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SDRLink — fréquence partagée</title>
+<!--
+  Page des liens de partage de SDRLink : <cette page>?u=<WebSDR>&f=<Hz>&m=<mode>[&k=<type>] (format : src/ShareLink.cs).
+  Sur un PC : ouvrir SDRLink au même endroit (lien sdrlink://, inscrit par SDRLink à son lancement), écouter le WebSDR dans
+  le navigateur, ou télécharger SDRLink. Sur Android : ouvrir PhoneSDRLink (même format de lien) ou l'installer.
+-->
+<style>
+  :root {
+    --bg: #f4f5f7; --card: #ffffff; --text: #16181d; --muted: #5d6470; --line: #dfe2e7;
+    --accent: #1f6feb; --accent-text: #ffffff; --button: #e9ecf1; --error: #b42318;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115; --card: #181b21; --text: #eceef2; --muted: #9aa2ae; --line: #2a2f38;
+      --accent: #4c8dff; --accent-text: #0b0d10; --button: #242933; --error: #ff8a80;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+    font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 24px 16px;
+  }
+  main { width: 100%; max-width: 440px; }
+  .brand { font-size: 14px; font-weight: 600; letter-spacing: .02em; color: var(--muted); margin: 0 0 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px 20px; }
+  .freq { font-size: 34px; font-weight: 700; line-height: 1.15; margin: 0; font-variant-numeric: tabular-nums; }
+  .mode { font-size: 18px; font-weight: 600; margin: 4px 0 0; }
+  .sdr { color: var(--muted); margin: 12px 0 0; overflow-wrap: anywhere; }
+  .actions { display: grid; gap: 10px; margin-top: 24px; }
+  .btn {
+    display: block; text-align: center; text-decoration: none; font-weight: 600; font-size: 17px;
+    padding: 14px 16px; border-radius: 12px; background: var(--button); color: var(--text);
+  }
+  .btn.primary { background: var(--accent); color: var(--accent-text); }
+  .hint { color: var(--muted); font-size: 13px; margin: 18px 0 0; }
+  .error { color: var(--error); font-weight: 600; margin: 0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <p class="brand">📻 SDRLink</p>
+  <div class="card">
+    <div id="ok" hidden>
+      <p class="freq" id="freq"></p>
+      <p class="mode" id="mode"></p>
+      <p class="sdr" id="sdr"></p>
+      <div class="actions">
+        <a class="btn primary" id="open" hidden></a>
+        <a class="btn" id="listen" rel="noopener noreferrer"></a>
+        <a class="btn" id="install" hidden rel="noopener noreferrer"></a>
+      </div>
+      <p class="hint" id="hint"></p>
+    </div>
+    <p class="error" id="bad" hidden></p>
+  </div>
+</main>
+<script>
+(function () {
+  var SDRLINK_URL = "https://github.com/F5pbgLudovic/SDRLink/releases/latest";
+  var APK_URL = "https://github.com/F5pbgLudovic/PhoneSDRLink/releases/latest";
+  var PACKAGE = "fr.f5pbg.phonesdrlink";
+  var MODES = ["USB", "LSB", "AM", "FM", "DATAU", "CW"];
+  var MIN_HZ = 1000, MAX_HZ = 3000000000;
+  var PHONE_MIN_HZ = 1800000, PHONE_MAX_HZ = 440000000;   // plage acceptée par PhoneSDRLink
+
+  var fr = (navigator.language || "en").toLowerCase().indexOf("fr") === 0;
+  function t(f, e) { return fr ? f : e; }
+  document.documentElement.lang = fr ? "fr" : "en";
+
+  var q = new URLSearchParams(location.search);
+  var u = (q.get("u") || "").trim();
+  var hz = Number(q.get("f"));
+  var m = (q.get("m") || "").trim().toUpperCase();
+  var k = (q.get("k") || "").trim().toLowerCase();
+  if (["websdr", "kiwi", "owrx"].indexOf(k) < 0) k = "";
+  var valid = /^https?:\/\/[^\s]+$/i.test(u) && Number.isInteger(hz) && hz >= MIN_HZ && hz <= MAX_HZ && MODES.indexOf(m) >= 0;
+
+  if (!valid) {
+    document.title = "SDRLink";
+    var bad = document.getElementById("bad");
+    bad.textContent = t("Lien de partage invalide.", "Invalid share link.");
+    bad.hidden = false;
+    return;
+  }
+
+  function kHz(v) { return String(Number((v / 1000).toFixed(3))).replace(".", fr ? "," : "."); }
+  var modeText = m === "DATAU" ? "DATA" : m;
+  var host = new URL(u).host;
+
+  document.getElementById("freq").textContent = kHz(hz) + " kHz";
+  document.getElementById("mode").textContent = modeText;
+  document.getElementById("sdr").textContent = t("sur ", "on ") + host;
+  document.title = kHz(hz) + " kHz " + modeText + " — SDRLink";
+
+  // Paramètres refaits à partir des seules valeurs vérifiées (l'application les vérifie à nouveau).
+  var p = new URLSearchParams();
+  p.set("u", u); p.set("f", String(hz)); p.set("m", m);
+  if (k) p.set("k", k);
+  var query = "?" + p.toString();
+
+  var open = document.getElementById("open");
+  var install = document.getElementById("install");
+  var hint = document.getElementById("hint");
+  var android = /Android/i.test(navigator.userAgent);
+  var phoneOk = hz >= PHONE_MIN_HZ && hz <= PHONE_MAX_HZ;
+  if (android) {
+    if (phoneOk) {
+      // Chrome : intent:// ouvre PhoneSDRLink, ou la page d'installation s'il est absent.
+      open.href = "intent://tune" + query + "#Intent;scheme=phonesdrlink;package=" + PACKAGE +
+        ";S.browser_fallback_url=" + encodeURIComponent(APK_URL) + ";end";
+      open.textContent = t("Ouvrir dans PhoneSDRLink", "Open in PhoneSDRLink");
+      open.hidden = false;
+    }
+    install.href = APK_URL;
+    install.textContent = t("Installer PhoneSDRLink (Android)", "Install PhoneSDRLink (Android)");
+    install.hidden = false;
+    hint.textContent = t(
+      "SDRLink est un logiciel pour Windows ; sur un téléphone Android, PhoneSDRLink ouvre les mêmes liens.",
+      "SDRLink is a Windows program; on an Android phone, PhoneSDRLink opens the same links.");
+  } else {
+    // sdrlink:// est inscrit par SDRLink (1.46 et suivantes) dès son premier lancement sur ce PC.
+    open.href = "sdrlink://tune" + query;
+    open.textContent = t("Ouvrir dans SDRLink", "Open in SDRLink");
+    open.hidden = false;
+    install.href = SDRLINK_URL;
+    install.textContent = t("Télécharger SDRLink (Windows)", "Download SDRLink (Windows)");
+    install.hidden = false;
+    hint.textContent = t(
+      "« Ouvrir dans SDRLink » règle SDRLink sur ce WebSDR, cette fréquence et ce mode. Si rien ne s'ouvre, SDRLink n'est pas encore installé sur ce PC (ou est plus ancien que la 1.46) : téléchargez-le, lancez-le une fois, puis cliquez de nouveau.",
+      "\"Open in SDRLink\" tunes SDRLink to this WebSDR, frequency and mode. If nothing opens, SDRLink is not installed on this PC yet (or is older than 1.46): download it, start it once, then click again.");
+  }
+
+  // Adresse du WebSDR réglée sur la même fréquence et le même mode : websdr.org ?tune=14074usb ; KiwiSDR ?f=14074usb ;
+  // OpenWebRX #freq=14074000,mod=usb. Autre type ou k absent : adresse brute.
+  function tunedUrl() {
+    var kh = String(Number((hz / 1000).toFixed(3)));
+    var sub = { USB: "usb", LSB: "lsb", AM: "am", FM: "fm", CW: "cw", DATAU: "usb" }[m];
+    try {
+      var x = new URL(u);
+      if (k === "websdr") { x.searchParams.set("tune", kh + sub); return x.toString(); }
+      if (k === "kiwi") { x.searchParams.set("f", kh + (m === "FM" ? "nbfm" : sub)); return x.toString(); }
+      if (k === "owrx") { x.hash = "freq=" + hz + ",mod=" + (m === "FM" ? "nfm" : sub); return x.toString(); }
+    } catch (e) { }
+    return u;
+  }
+  var listen = document.getElementById("listen");
+  listen.href = tunedUrl();
+  listen.textContent = t("Écouter dans le navigateur", "Listen in the browser");
+
+  document.getElementById("ok").hidden = false;
+})();
+</script>
+</body>
+</html>

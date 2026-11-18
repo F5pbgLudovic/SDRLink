@@ -295,7 +295,7 @@ namespace SDRLink
 
         DateTime divLastTx = DateTime.MinValue;
 
-        // Mute et Volume de chaque réception règlent son oreille.
+        // Mute et Volume de chaque réception règlent son oreille (sauf Mute TX depuis la 1.46 : l'oreille du poste continue).
         // Émission : la coupure de la page (IsMuted) ne touche pas le son rejoué par la diversité, et les deux oreilles sont
         // jouées en retard (le son local est retardé, le WebSDR l'est par nature). Les oreilles choisies au clic droit de
         // « Couper le son du WebSDR en émission » se taisent donc dès le passage en émission et jusqu'à « retard appliqué +
@@ -313,7 +313,8 @@ namespace SDRLink
             bool muteB = txHold && (divSource == 1 || (chkMute.Checked && MuteOnTxFor(bOf)));
             d.GainA = muteA || sdrMuted || (fdvVoice && fdvSource == 0) ? 0 : sdrVolume / 100f;
             float b;
-            if (divSource == 1) b = rigMuted ? 0 : trkRigVolume.Value / 100f;
+            // Poste (1.46) : Mute TX ne coupe que son haut-parleur (déjà muet pendant la diversité) ; son oreille continue, réglée par Volume TX.
+            if (divSource == 1) b = trkRigVolume.Value / 100f;
             else if (divSource == 2) b = esdrMuted ? 0 : trkEsdrVolume.Value / 100f;
             else if (divSource == 3) b = hdsdrMuted ? 0 : trkHdsdrVolume.Value / 100f;
             else b = sdrMuted ? 0 : sdrVolume / 100f;

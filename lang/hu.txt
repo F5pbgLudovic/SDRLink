@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	WebSDR hangerő (minden kedvenchez tárolva)
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	TRX némítás: a rádió némítva marad a diversity után; diversity alatt a hangja a fülben marad (a szintet a TRX hangerő állítja)
+Mute TRX released: the rig will get its volume back after diversity	TRX némítás feloldva: a rádió a diversity után visszakapja a hangerejét
 rig	rádió
 FreeDV auto off	FreeDV auto kikapcsolva
  (FreeDV 3, under development)	 (FreeDV 3, fejlesztés alatt)
@@ -637,6 +639,14 @@ Notch level:	Notch szint:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Az automatikus notch érzékeli a WebSDR hangjában lévő állandó füttyöket (vivőket), és csillapítja őket. A gombon lévő jelölőnégyzet be- vagy kikapcsolja. A szint, 1-től (eredeti beállítás) 10-ig, növeli a kezelt füttyök számát (4–8) és a hatás erősségét; magas szint egy hangot kitartó emberi hangot is befolyásolhat. A jelölőnégyzet törlése nélkül kikapcsol digitális üzemmód alatt (futó dekóder vagy DIGI mód) és FreeDV alatt, ha a fenti lehetőségek be vannak jelölve: károsítaná a dekódolandó jeleket. Az SDRLINK kábel és a dekóderek mindig notch nélkül kapják a hangot.
 , off in digital modes	, kikapcsolva digitális üzemmódokban
 , off in FreeDV	, kikapcsolva FreeDV alatt
+Colour when DNR is off	Szín kikapcsolt DNR-nél
+Colour when DNR is on	Szín bekapcsolt DNR-nél
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Zajcsökkentés (DNR) a WebSDR hangján. Kattintás: be / ki. Jobb klikk: szint 1-től 10-ig, kikapcsolás digitális üzemmódokban és FreeDV-nél, színek
+DNR level:	DNR szint:
+1 (gentlest)	1 (legenyhébb)
+DNR off in digital modes	DNR kikapcsolva digitális üzemmódokban
+DNR off in FreeDV V1 and V2	DNR kikapcsolva FreeDV V1 és V2 alatt
+DNR off	DNR kikapcsolva
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	A WebSDR vételi sávszélessége, üzemmódonként megjegyezve (CW, USB/LSB, AM, FM, DIGI), minden WebSDR-en és újraindítás után is. „Alapértelmezett szűrő”: a WebSDR saját szűrője.
 Default filter	Alapértelmezett szűrő
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Üzemmódkeresés: nincs hallgatható
 Mode search stopped	Üzemmódkeresés leállítva
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Üzemmódkeresés: nem ismerhető fel üzemmód (túl gyenge jel, nem támogatott üzemmód, vagy WSPR / JT9 / Hell, amelyek túl lassúak a felismeréshez)
 Auto notch: level {0}{1}{2}	Auto notch: szint {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR bekapcsolva ({0}. szint), szünetel a digitális üzemmód vagy a FreeDV alatt (jobb klikk a módosításhoz)
+DNR on, level {0}	DNR bekapcsolva, szint {0}
+DNR: level {0}{1}{2}	DNR: szint {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Sávszélesség kHz-ben, {0} (0,1–15):
 {0} bandwidth: WebSDR default filter	{0} sávszélesség: a WebSDR alapértelmezett szűrője
 {0} bandwidth: {1}	{0} sávszélesség: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	A hallott üzemmód keres�
 Mode found: {0} ({1})	Talált üzemmód: {0} ({1})
 BW:	Ssz:
  (right-click: position of the buttons)	 (jobb kattintás: a gombok helye)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Frekvencia megosztása: a vágólapra másolja az erre a WebSDR-re mutató hivatkozást, ezzel a frekvenciával és üzemmóddal
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Frekvencia megosztása: a vágólapra másolja az erre a WebSDR-re mutató hivatkozást, ezzel a frekvenciával és üzemmóddal. A hivatkozás ugyanott nyitja meg az SDRLinket, vagy felajánlja a hallgatást a böngészőben vagy az SDRLink letöltését
 Zoom in the WebSDR page	A WebSDR-oldal nagyítása
 Zoom out the WebSDR page	A WebSDR-oldal kicsinyítése
 Bottom right	Jobbra lent
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Oldalnagyítás: automatikus (jelenleg {0})
 WebSDR page: {0}	WebSDR-oldal: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-oldal: {0} (megjegyezve ehhez a WebSDR-hez; jobb kattintás egy gombon: automatikus nagyítás)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	A WebSDR-oldal {0}-ra kicsinyítve, hogy a teljes vezérlőpult látszódjon (+ és − a választáshoz)
-{0} kHz {1} on {2}	{0} kHz {1} itt: {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	A megosztási hivatkozás a vágólapra másolva ({0} kHz {1}): illessze be egy üzenetbe
+Share link: {0} kHz {1} on {2}	Megosztási hivatkozás: {0} kHz {1} itt: {2}
 Mode:	Üzemmód:
 Preamp:	Előerősítő:
 (preamp unchanged)	(az előerősítő változatlan)

@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	Volumul WebSDR (memorat pentru fiecare favorit)
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Mut TRX: stația va rămâne fără sunet după diversitate; în timpul diversității sunetul ei rămâne în ureche (Volum TRX îi reglează nivelul)
+Mute TRX released: the rig will get its volume back after diversity	Mut TRX anulat: stația își va recăpăta volumul după diversitate
 rig	stație
 FreeDV auto off	FreeDV auto oprit
  (FreeDV 3, under development)	 (FreeDV 3, în dezvoltare)
@@ -637,6 +639,14 @@ Notch level:	Nivel notch:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Notch-ul automat detectează fluierăturile constante (purtătoare) din sunetul WebSDR și le atenuează. Caseta de pe buton îl pornește sau îl oprește. Nivelul, de la 1 (setarea inițială) la 10, crește numărul de fluierături tratate (4 până la 8) și puterea acțiunii; un nivel ridicat poate afecta și o voce care ține o notă. Este oprit, fără a debifa caseta, în timpul unui mod digital (decodor pornit sau mod DIGI) și în timpul FreeDV, dacă opțiunile de mai sus sunt bifate: ar deteriora semnalele de decodat. Cablul SDRLINK și decodoarele primesc întotdeauna sunetul fără notch.
 , off in digital modes	, oprit în modurile digitale
 , off in FreeDV	, oprit în FreeDV
+Colour when DNR is off	Culoare cu DNR oprit
+Colour when DNR is on	Culoare cu DNR pornit
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Reducerea zgomotului (DNR) pe sunetul WebSDR. Clic: pornit / oprit. Clic dreapta: nivel de la 1 la 10, oprit în modurile digitale și în FreeDV, culori
+DNR level:	Nivel DNR:
+1 (gentlest)	1 (cel mai blând)
+DNR off in digital modes	DNR oprit în modurile digitale
+DNR off in FreeDV V1 and V2	DNR oprit în FreeDV V1 și V2
+DNR off	DNR oprit
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Lățimea de bandă de recepție a WebSDR-ului, păstrată pentru fiecare mod (CW, USB/LSB, AM, FM, DIGI), pe fiecare WebSDR și după o repornire. „Filtru implicit”: filtrul propriu al WebSDR-ului.
 Default filter	Filtru implicit
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Căutare mod: niciun WebSDR sau staț
 Mode search stopped	Căutarea modului oprită
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Căutare mod: niciun mod recunoscut (semnal prea slab, mod neacceptat sau WSPR / JT9 / Hell, prea lente pentru a fi recunoscute)
 Auto notch: level {0}{1}{2}	Notch auto: nivel {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR pornit (nivel {0}), în pauză în timpul modului digital sau FreeDV (clic dreapta pentru a schimba)
+DNR on, level {0}	DNR pornit, nivel {0}
+DNR: level {0}{1}{2}	DNR: nivel {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Lățime de bandă în kHz pentru {0} (0,1 până la 15):
 {0} bandwidth: WebSDR default filter	Lățime de bandă {0}: filtrul implicit al WebSDR-ului
 {0} bandwidth: {1}	Lățime de bandă {0}: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Se caută modul auzit (cel
 Mode found: {0} ({1})	Mod găsit: {0} ({1})
 BW:	LB:
  (right-click: position of the buttons)	 (clic dreapta: poziția butoanelor)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Partajează frecvența: copiază în clipboard un link către acest WebSDR, cu această frecvență și acest mod
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Partajează frecvența: copiază în clipboard un link către acest WebSDR, cu această frecvență și acest mod. Linkul deschide SDRLink în același loc sau propune ascultarea în browser ori descărcarea SDRLink
 Zoom in the WebSDR page	Mărește pagina WebSDR
 Zoom out the WebSDR page	Micșorează pagina WebSDR
 Bottom right	Jos în dreapta
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Zoom pagină: automat (acum {0})
 WebSDR page: {0}	Pagina WebSDR: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pagina WebSDR: {0} (reținut pentru acest WebSDR; clic dreapta pe un buton: zoom automat)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Pagina WebSDR a fost redusă la {0} pentru a afișa tot panoul de comandă (+ și − pentru alegere)
-{0} kHz {1} on {2}	{0} kHz {1} pe {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Linkul de partajare a fost copiat în clipboard ({0} kHz {1}): lipiți-l într-un mesaj
+Share link: {0} kHz {1} on {2}	Link de partajare: {0} kHz {1} pe {2}
 Mode:	Mod:
 Preamp:	Preamplificator:
 (preamp unchanged)	(preamplificator nemodificat)

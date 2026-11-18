@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	Glasnost WebSDR (shranjena za vsak priljubljeni)
 Mute TRX: connect the rig first	Utišaj TRX: najprej povežite postajo
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnost postaje ni na voljo pri tej postaji ali vmesniku (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Utišaj TRX: postaja bo po diversityju ostala utišana; med diversityjem njen zvok ostane v ušesu (raven nastavlja Glasnost TRX)
+Mute TRX released: the rig will get its volume back after diversity	Utišanje TRX preklicano: postaja bo po diversityju dobila nazaj svojo glasnost
 rig	postaja
 FreeDV auto off	FreeDV auto izklopljen
  (FreeDV 3, under development)	 (FreeDV 3, v razvoju)
@@ -637,6 +639,14 @@ Notch level:	Raven notcha:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Samodejni notch zazna stalne piske (nosilce) v zvoku WebSDR in jih oslabi. Polje na gumbu ga vklopi ali izklopi. Raven, od 1 (izvirna nastavitev) do 10, poveča število obdelanih piskov (4 do 8) in moč delovanja; visoka raven lahko vpliva tudi na glas, ki drži noto. Brez odstranitve kljukice se izklopi med digitalnim načinom dela (dekoder deluje ali način DIGI) in med FreeDV, če so zgornje izbire označene: poškodoval bi signale za dekodiranje. Kabel SDRLINK in dekoderji vedno prejmejo zvok brez notcha.
 , off in digital modes	, izklopljen pri digitalnih načinih dela
 , off in FreeDV	, izklopljen pri FreeDV
+Colour when DNR is off	Barva ob izklopljenem DNR
+Colour when DNR is on	Barva ob vklopljenem DNR
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Zmanjšanje šuma (DNR) v zvoku WebSDR. Klik: vklop / izklop. Desni klik: raven od 1 do 10, izklop pri digitalnih načinih dela in FreeDV, barve
+DNR level:	Raven DNR:
+1 (gentlest)	1 (najnežnejši)
+DNR off in digital modes	DNR izklopljen pri digitalnih načinih dela
+DNR off in FreeDV V1 and V2	DNR izklopljen pri FreeDV V1 in V2
+DNR off	DNR izklopljen
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Pasovna širina sprejema WebSDR, shranjena za vsak način (CW, USB/LSB, AM, FM, DIGI), na vsakem WebSDR in po ponovnem zagonu. »Privzeti filter«: lastni filter WebSDR.
 Default filter	Privzeti filter
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Iskanje načina: ni WebSDR ali postaj
 Mode search stopped	Iskanje načina ustavljeno
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Iskanje načina: noben način ni prepoznan (prešibak signal, nepodprt način ali WSPR / JT9 / Hell, prepočasni za prepoznavo)
 Auto notch: level {0}{1}{2}	Samodejni notch: raven {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR vklopljen (raven {0}), začasno ustavljen med digitalnim načinom dela ali FreeDV (desni klik za spremembo)
+DNR on, level {0}	DNR vklopljen, raven {0}
+DNR: level {0}{1}{2}	DNR: raven {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Pasovna širina v kHz za {0} (0,1 do 15):
 {0} bandwidth: WebSDR default filter	Pasovna širina {0}: privzeti filter WebSDR
 {0} bandwidth: {1}	Pasovna širina {0}: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Iskanje slišanega načina
 Mode found: {0} ({1})	Najden način: {0} ({1})
 BW:	PŠ:
  (right-click: position of the buttons)	 (desni klik: položaj gumbov)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Deli frekvenco: v odložišče kopira povezavo do tega WebSDR s to frekvenco in načinom dela
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Deli frekvenco: v odložišče kopira povezavo do tega WebSDR s to frekvenco in načinom dela. Povezava odpre SDRLink na istem mestu ali ponudi poslušanje v brskalniku ali prenos SDRLink
 Zoom in the WebSDR page	Povečaj stran WebSDR
 Zoom out the WebSDR page	Pomanjšaj stran WebSDR
 Bottom right	Spodaj desno
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Povečava strani: samodejna (zdaj {0})
 WebSDR page: {0}	Stran WebSDR: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Stran WebSDR: {0} (zapomnjeno za ta WebSDR; desni klik na gumb: samodejna povečava)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stran WebSDR zmanjšana na {0}, da se vidi celotna nadzorna plošča (+ in − za izbiro)
-{0} kHz {1} on {2}	{0} kHz {1} na {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Povezava za deljenje kopirana v odložišče ({0} kHz {1}): prilepite jo v sporočilo
+Share link: {0} kHz {1} on {2}	Povezava za deljenje: {0} kHz {1} na {2}
 Mode:	Način:
 Preamp:	Predojačevalnik:
 (preamp unchanged)	(predojačevalnik nespremenjen)

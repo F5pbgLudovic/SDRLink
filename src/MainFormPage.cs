@@ -48,7 +48,7 @@ namespace SDRLink
             Tr(delegate
             {
                 string right = Lang.T(" (clic droit : position des boutons)", " (right-click: position of the buttons)");
-                tips.SetToolTip(btnShare, Lang.T("Partager la fréquence : copie dans le presse-papiers un lien vers ce WebSDR, sur cette fréquence et ce mode", "Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode") + right);
+                tips.SetToolTip(btnShare, Lang.T("Partager la fréquence : copie dans le presse-papiers un lien vers ce WebSDR, sur cette fréquence et ce mode. Ce lien ouvre SDRLink au même endroit, ou propose d'écouter dans le navigateur ou de télécharger SDRLink", "Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink") + right);
                 tips.SetToolTip(btnZoomIn, Lang.T("Agrandir la page du WebSDR", "Zoom in the WebSDR page") + right);
                 tips.SetToolTip(btnZoomOut, Lang.T("Réduire la page du WebSDR", "Zoom out the WebSDR page") + right);
             });
@@ -265,18 +265,9 @@ namespace SDRLink
 
         // ---------------------------------------------------------------- Partage
 
-        // Lien de partage de PhoneSDRLink (page GitHub Pages) : l'appli Android l'ouvre, un PC propose d'écouter dans le navigateur.
-        public const string ShareBase = "https://f5pbgludovic.github.io/PhoneSDRLink/s/";
-
-        public static string BuildShareLink(string url, long hz, string mode, string kind)
-        {
-            string k = kind.StartsWith("owrx", StringComparison.Ordinal) ? "owrx" : kind == "websdr" || kind == "kiwi" ? kind : "";
-            if (k == "owrx") { int hash = url.IndexOf('#'); if (hash >= 0) url = url.Substring(0, hash); }
-            string s = ShareBase + "?u=" + Uri.EscapeDataString(url) + "&f=" + hz.ToString(CultureInfo.InvariantCulture) + "&m=" + mode;
-            if (k != "") s += "&k=" + k;
-            return s;
-        }
-
+        // Lien de partage de SDRLink (1.46 ; avant : lien PhoneSDRLink) : sa page propose d'ouvrir SDRLink au même endroit,
+        // d'écouter dans le navigateur ou de télécharger SDRLink (sur Android : PhoneSDRLink). Seul le lien est copié : avec un
+        // texte autour, certaines messageries ne le rendent plus cliquable.
         public static string ShareMode(string sdrMode)
         {
             string fam = Modes.SdrFamily(sdrMode);
@@ -289,10 +280,8 @@ namespace SDRLink
             string url = core != null ? core.Source : "";
             if (sdrKind == "" || sdrF <= 0 || HostKey(url) == "") { ShowStatus(Lang.T("Aucun WebSDR à partager", "No WebSDR to share")); return; }
             string mode = ShareMode(sdrM);
-            string title = (core.DocumentTitle ?? "").Trim();
-            if (title == "") title = new Uri(url).Host;
             string khz = (sdrF / 1000.0).ToString("0.###", CultureInfo.InvariantCulture);
-            string text = "📻 " + Lang.F("{0} kHz {1} sur {2}", "{0} kHz {1} on {2}", khz, mode, title) + "\r\n" + BuildShareLink(url, sdrF, mode, sdrKind);
+            string text = ShareLink.Build(url, sdrF, mode, sdrKind);
             for (int i = 0; ; i++)
             {
                 try { Clipboard.SetText(text); break; }
@@ -304,6 +293,72 @@ namespace SDRLink
             }
             Log.Write("Lien de partage copié : " + khz + " kHz " + mode);
             ShowStatus(Lang.F("Lien de partage copié dans le presse-papiers ({0} kHz {1}) : à coller dans un message", "Share link copied to the clipboard ({0} kHz {1}): paste it into a message", khz, mode));
+        }
+
+        // Lien de partage reçu (lancement par sdrlink://, second lancement, ou lien collé dans la barre d'adresse) : le WebSDR
+        // est ouvert déjà réglé, puis fréquence et mode sont appliqués comme une mémoire dès que la page répond (poste compris si la
+        // synchro le permet).
+        ShareLink shareTune;
+        DateTime shareUntil;
+
+        bool OpenShareText(string text)
+        {
+            ShareLink s = ShareLink.Parse(text);
+            if (s == null) return false;
+            OpenShare(s);
+            return true;
+        }
+
+        void OpenShare(ShareLink s)
+        {
+            if (WindowState == FormWindowState.Minimized) WindowState = FormWindowState.Normal;
+            Activate();
+            string khz = Memory.KHz(s.Hz);
+            Log.Write("Lien de partage reçu : " + s.Url + " " + khz + " kHz " + s.Mode);
+            shareTune = s;
+            shareUntil = DateTime.UtcNow.AddSeconds(45);
+            if (web.CoreWebView2 == null) return;   // ouvert par InitWebView
+            Navigate(s.TunedUrl());
+            ShowStatus(Lang.F("Lien de partage : {0} kHz {1} sur {2}", "Share link: {0} kHz {1} on {2}", khz, s.ModeText, HostOf(s.Url)));
+        }
+
+        static string HostOf(string url)
+        {
+            Uri u;
+            return Uri.TryCreate(url, UriKind.Absolute, out u) ? u.Host : url;
+        }
+
+        // Première annonce de la page ouverte par un lien : vrai si le lien a été appliqué (la reprise habituelle est alors sautée).
+        bool ApplyPendingShare()
+        {
+            ShareLink s = shareTune;
+            if (s == null) return false;
+            shareTune = null;
+            if (DateTime.UtcNow > shareUntil) return false;
+            long rigHz = s.Hz - Offset;
+            if (rigHz <= 0) return false;
+            Log.Write("Lien de partage appliqué : " + Memory.KHz(s.Hz) + " kHz " + s.Mode);
+            ApplyMemory(new Memory("", rigHz, s.Mode));
+            AddToHistory(rigHz);
+            // Poste pas encore relu (connexion en cours ou à venir) : il prendra la fréquence à sa première relecture.
+            shareForRig = !SdrAlone && (worker == null || !rigOnline || rigF <= 0) ? new Memory("", rigHz, s.Mode) : null;
+            shareForRigUntil = DateTime.UtcNow.AddSeconds(60);
+            return true;
+        }
+
+        Memory shareForRig;
+        DateTime shareForRigUntil;
+
+        bool TakeShareForRig()
+        {
+            Memory m = shareForRig;
+            shareForRig = null;
+            if (m == null || worker == null || SdrAlone || DateTime.UtcNow > shareForRigUntil) return false;
+            Log.Write("Lien de partage : poste réglé à sa connexion sur " + Memory.KHz(m.Hz) + " kHz " + m.Mode);
+            ignoreRigUntil = DateTime.UtcNow.AddMilliseconds(EchoIgnoreMs);
+            if (m.Mode != "") worker.SetMode(m.Mode);
+            worker.SetFreq(m.Hz);
+            return true;
         }
 
         // ---------------------------------------------------------------- Adresse masquée

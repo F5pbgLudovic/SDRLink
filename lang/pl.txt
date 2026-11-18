@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	Głośność WebSDR (zapamiętywana dla każdego ulubionego)
 Mute TRX: connect the rig first	Wycisz TRX: najpierw połącz radiostację
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Głośność radiostacji niedostępna dla tej radiostacji lub interfejsu (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Wycisz TRX: radiostacja pozostanie wyciszona po diversity; podczas diversity jej dźwięk zostaje w uchu (poziom ustawia Głośność TRX)
+Mute TRX released: the rig will get its volume back after diversity	Wyciszenie TRX zniesione: radiostacja odzyska swoją głośność po diversity
 rig	radiostacja
 FreeDV auto off	FreeDV auto wyłączone
  (FreeDV 3, under development)	 (FreeDV 3, w trakcie rozwoju)
@@ -637,6 +639,14 @@ Notch level:	Poziom notcha:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatyczny notch wykrywa stałe gwizdy (nośne) w dźwięku WebSDR i je tłumi. Pole na przycisku włącza go lub wyłącza. Poziom, od 1 (ustawienie pierwotne) do 10, zwiększa liczbę obsługiwanych gwizdów (od 4 do 8) i siłę działania; wysoki poziom może też wpływać na głos trzymający nutę. Jest wyłączany, bez odznaczania pola, podczas emisji cyfrowej (działający dekoder lub tryb DIGI) i podczas FreeDV, jeśli powyższe opcje są zaznaczone: uszkodziłby sygnały do dekodowania. Kabel SDRLINK i dekodery zawsze otrzymują dźwięk bez notcha.
 , off in digital modes	, wyłączony w emisjach cyfrowych
 , off in FreeDV	, wyłączony w FreeDV
+Colour when DNR is off	Kolor przy wyłączonym DNR
+Colour when DNR is on	Kolor przy włączonym DNR
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Redukcja szumu (DNR) w dźwięku WebSDR. Kliknięcie: włącz / wyłącz. Prawy przycisk: poziom od 1 do 10, wyłączenie w emisjach cyfrowych i FreeDV, kolory
+DNR level:	Poziom DNR:
+1 (gentlest)	1 (najłagodniejszy)
+DNR off in digital modes	DNR wyłączony w emisjach cyfrowych
+DNR off in FreeDV V1 and V2	DNR wyłączony w FreeDV V1 i V2
+DNR off	DNR wyłączony
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Szerokość pasma odbioru WebSDR, zapamiętana dla każdej emisji (CW, USB/LSB, AM, FM, DIGI), na każdym WebSDR i po ponownym uruchomieniu. „Filtr domyślny”: własny filtr WebSDR.
 Default filter	Filtr domyślny
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Szukanie emisji: brak WebSDR lub radi
 Mode search stopped	Szukanie emisji zatrzymane
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Szukanie emisji: nie rozpoznano emisji (zbyt słaby sygnał, nieobsługiwana emisja lub WSPR / JT9 / Hell, zbyt wolne do rozpoznania)
 Auto notch: level {0}{1}{2}	Autom. notch: poziom {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR włączony (poziom {0}), wstrzymany podczas emisji cyfrowej lub FreeDV (zmiana prawym przyciskiem)
+DNR on, level {0}	DNR włączony, poziom {0}
+DNR: level {0}{1}{2}	DNR: poziom {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Szerokość pasma w kHz dla {0} (od 0,1 do 15):
 {0} bandwidth: WebSDR default filter	Szerokość pasma {0}: filtr domyślny WebSDR
 {0} bandwidth: {1}	Szerokość pasma {0}: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Szukanie słyszanej emisji
 Mode found: {0} ({1})	Znaleziono emisję: {0} ({1})
 BW:	SP:
  (right-click: position of the buttons)	 (prawy klik: położenie przycisków)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Udostępnij częstotliwość: kopiuje do schowka link do tego WebSDR z tą częstotliwością i emisją
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Udostępnij częstotliwość: kopiuje do schowka link do tego WebSDR z tą częstotliwością i emisją. Link otwiera SDRLink w tym samym miejscu albo proponuje słuchanie w przeglądarce lub pobranie SDRLink
 Zoom in the WebSDR page	Powiększ stronę WebSDR
 Zoom out the WebSDR page	Pomniejsz stronę WebSDR
 Bottom right	Na dole po prawej
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Powiększenie strony: automatyczne (teraz {0})
 WebSDR page: {0}	Strona WebSDR: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Strona WebSDR: {0} (zapamiętane dla tego WebSDR; prawy klik na przycisku: automatyczne powiększenie)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Strona WebSDR pomniejszona do {0}, aby pokazać cały panel sterowania (+ i − do wyboru)
-{0} kHz {1} on {2}	{0} kHz {1} na {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Link do udostępnienia skopiowany do schowka ({0} kHz {1}): wklej go do wiadomości
+Share link: {0} kHz {1} on {2}	Link do udostępnienia: {0} kHz {1} na {2}
 Mode:	Emisja:
 Preamp:	Przedwzmacniacz:
 (preamp unchanged)	(przedwzmacniacz bez zmian)

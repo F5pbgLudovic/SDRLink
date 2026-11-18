@@ -23,7 +23,7 @@ Overview; each feature is detailed further down in its own section.
 
 1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Connecting... / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Look ▾**, **Control panel**, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
 2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
-3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (box inside the button; click: options and level), **Scan setup**, **▶ Scan**.
+3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (box inside the button; click: options and level), **DNR** (noise reduction, since 1.46; click: on / off, right-click: level), **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume** ("FreeDV volume" during FreeDV speech, since 1.45), **TRX volume on PC** (when "Also hear the rig on the PC" is ticked, since 1.45), **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44).
@@ -48,6 +48,7 @@ Overview; each feature is detailed further down in its own section.
 | Memories | store the current frequency, button colour |
 | Favorites list (next to the address) | rename the list |
 | Auto notch (DNF) | colour when the notch is off / on (since 1.41) |
+| DNR | **level** 1 to 10, **DNR off in digital modes**, **DNR off in FreeDV V1 and V2**, colour when DNR is off / on (since 1.46) |
 | Mode? | button colour, colour while searching (since 1.41) |
 | Mute WebSDR while transmitting | receivers muted while transmitting: WebSDR, rig, ExpertSDR, HDSDR (check boxes, all ticked at the start) |
 | ⇄ | receivers that ⇄ keeps muted (check boxes, two at most), button colour (since 1.41) |
@@ -74,6 +75,7 @@ Overview; each feature is detailed further down in its own section.
 - `Music\SDRLink`: default REC recordings folder; while recording, a temporary file `SDRLink-REC-*.raw` is in `%TEMP%`.
 - `Pictures\SDRLink`: received SSTV, WEFAX and Hell pictures, as PNG (`SSTV_<mode>_<date>_<time>.png`, `WEFAX_<lines>-<IOC>_<date>_<time>.png`, `Hell_<date>_<time>.png`; `_partiel` if the picture did not reach the end) (since 1.25).
 - `%LOCALAPPDATA%\SDRLink\runtime\digi-…\sdrlink_digi.dll`: FT8 / FT4 / FT2 and Olivia / Contestia decoders, written only when these modes are first used (since 1.25).
+- Registry, `HKEY_CURRENT_USER\Software\Classes\sdrlink` (since 1.46): written at each start, without administrator rights, so that `sdrlink://` links (the "Open in SDRLink" button of the share page) open this SDRLink. If SDRLink is removed from the PC, this key can be deleted by hand; left there, it does no harm.
 
 ## Interfaces ("Interface" menu)
 
@@ -183,7 +185,14 @@ The type is detected automatically (shown in brackets):
 - **Three round buttons on the page** (as in PhoneSDRLink): **share**, **+** and **−**. They work with a **left click**; a **right-click** on one of them chooses their **position**: **bottom right**, **bottom left**, **top right**, **top left**, **top centre** or **bottom centre**, each **vertical** (in a column) or **horizontal** (in a row). At first: bottom centre, horizontal. The position is kept (`PageBtnPos=` line of the settings).
 - **+ and −** zoom the **whole WebSDR page** in or out (25 % to 300 %), like a browser zoom; **Ctrl + mouse wheel** in the page does the same. The chosen zoom is **kept for this WebSDR** (`PageZoom=` lines of the settings) and comes back on each visit, even after restarting SDRLink; **Reset WebSDR** (click) keeps it, only the **full reset** of the WebSDR (right-click on Reset WebSDR) forgets it and brings back the original display. Other WebSDRs stay at 100 %.
 - **Automatic zoom for OpenWebRX**: on some screens, the OpenWebRX **control panel** (on the right: frequency, S-meter, profiles, modes, settings) partly goes **under the top banner** of the page. Without a zoom chosen by hand for this WebSDR, SDRLink reduces the page **just enough** to show it **whole** (the status bar says so), and does it again when the window changes size; never above 100 %, never below 50 %. The right-click on a button shows the current zoom; **Page zoom: automatic** forgets the zoom chosen by hand and goes back to this automatic setting.
-- **Share**: copies to the **clipboard** a text to paste into a message, for example "📻 7286 kHz USB on F4KKF" followed by a **link** to this WebSDR, this frequency and this mode. It is the PhoneSDRLink share link: on Android it opens PhoneSDRLink, elsewhere it offers to **listen in the browser**, on the right frequency for websdr.org, KiwiSDR and OpenWebRX.
+- **Share** (SDRLink link since 1.46; before, the PhoneSDRLink one): copies to the **clipboard** a **link on its own**, to paste into a message, an e-mail or a forum. There is no text around it: with text pasted in front, some messaging apps no longer made the link clickable. The link leads to the **SDRLink share page**, which shows the frequency, the mode and the WebSDR, then offers:
+  - on a PC: **Open in SDRLink**, which opens this WebSDR **at the same spot** (same frequency, same mode); **Listen in the browser**, on the right frequency for websdr.org, KiwiSDR and OpenWebRX; **Download SDRLink**, which leads to the latest version;
+  - on Android: **Open in PhoneSDRLink** (same link format), **Install PhoneSDRLink**, or listen in the browser.
+- **Open in SDRLink** works once SDRLink 1.46 (or newer) has been **started once** on the PC: it then registers with Windows for `sdrlink://` links. The browser first asks for permission to open SDRLink. Then:
+  - if SDRLink is **already open**, it receives the link (no second SDRLink) and its window comes to the front;
+  - otherwise SDRLink starts straight on this WebSDR, instead of the last one opened;
+  - the frequency and mode are applied **like recalling a memory**: the **rig** follows too, if sync goes from the WebSDR to the rig (Sync off: the WebSDR only). If the rig connects afterwards, the rig takes the shared frequency.
+- A share link (from SDRLink or PhoneSDRLink) **pasted into the WebSDR box**, then Enter or Go, does the same.
 - **Hidden address**: **right-click the WebSDR page**, **Hide the WebSDR address** (at the top of the menu; also on the right-click of a round button). The address box stays in place but shows only **stars**; its arrow still opens the favourites list, and the address can no longer be copied. The same right-click (ticked item) brings it back. Handy for a screenshot or a video. Kept (`HideUrl=` line of the settings).
 
 ## Favorites
@@ -507,6 +516,21 @@ The WebSDR audio is copied **all the time, in every mode**, to a virtual audio c
 - Speech moves too much to be caught (a high level can however affect a voice holding a note). A steady **CW** signal, however, is removed, as with the rig's DNF: untick it for CW.
 - Only the audio you hear is filtered; the SDRLINK cable and the decoders receive the raw audio.
 
+## Noise reduction (DNR) (since 1.46)
+
+**DNR** button, right after **Auto notch (DNF)**: it reduces the **hiss** (background noise) of the WebSDR audio, like the DNR of a transceiver.
+- **Click**: on / off. When on, the button is **green** and shows its level ("DNR 3"); when off, it takes the colour of the other buttons. The choice is kept.
+- **Right-click**:
+  - **DNR level**, from **1** (gentlest) to **10** (strongest); 3 at first. Choosing a level turns the DNR on;
+  - **DNR off in digital modes** (ticked at first): paused, without turning the button off, while a digital-mode decoder is running or **DIGI** is the mode;
+  - **DNR off in FreeDV V1 and V2** (ticked at first): paused while FreeDV auto is running;
+  - **Colour when DNR is off** and **Colour when DNR is on**.
+- **What it does**: the audio is cut into slices of 20 to 30 ms. For each audio frequency, SDRLink follows the **noise level**, that is the lowest level heard over about 1.6 s: speech always has gaps, hiss does not. Each frequency is then attenuated according to how much it rises above that noise. A voice or CW that stands out of the noise goes through; the hiss between words and around the voice drops. The attenuation follows the audio smoothly, which avoids the "chirping" of simple noise reducers.
+- **The level** sets the maximum noise attenuation and the margin taken above the noise. Measured on noise alone: about **12 dB** less at level 3, **33 dB** at level 10. Clean audio goes through almost untouched. High levels make the voice "drier" and can swallow a very weak signal: start low and raise it by ear.
+- **Delay**: the WebSDR audio gets about **20 to 30 ms** of extra delay on a WebSDR served over **https**, and a little more (up to about 0.1 s) on a WebSDR served over **http**, which is the case for most websdr.org and KiwiSDR sites. On those pages the browser only offers the older audio processing, which works in longer blocks.
+- It acts **before the volume**, after the auto notch when both are on. Like the notch, it only changes **the audio you hear**: the SDRLINK cable and the decoders receive the raw audio. In diversity, it also applies to the WebSDR's ear, and to both ears in diversity on two WebSDRs.
+- It acts on the **WebSDR** audio only, not on the rig, ExpertSDR or HDSDR (they have their own DNR).
+
 The buttons always keep the same place: the RIG and WEBSDR areas have a fixed width. The WebSDR mode is shown there in short form (USB, LSB, CW, AM, FM). Transmitting is shown by the RIG frequency in red and by the PTT button. FM becomes NBFM on KiwiSDR and NFM on UberSDR and OpenWebRX.
 
 ## Entering a frequency
@@ -656,9 +680,10 @@ Automatic restart of the WebSDR when its sound is lost (server drop, idle timeou
   - **ExpertSDR**: its audio comes through the **TCI audio stream** (ExpertSDR's TCI server enabled, same port as for Mute ExpertSDR); ExpertSDR is muted in the Windows mixer if it plays there, otherwise through TCI. Since 1.45, SDRLink waits until ExpertSDR is ready (TCI `ready` message) before asking for its audio stream: before, the request could arrive too early and be ignored, and ExpertSDR's ear stayed silent. If, once muted through TCI, ExpertSDR still sends no audio after 4 s, SDRLink unmutes it and turns its **volume down to the minimum** (−60 dB) instead, then brings its ear back up; the previous volume is restored when diversity stops. The log (`sdrlink.log`, lines "Son TCI :" and "Diversité :") tells what ExpertSDR sent;
   - **HDSDR** (Windows 11): turned down to −60 dB in the mixer; its audio is captured by Windows and brought back up.
 - **Mute** and **Volume** of each receiver set **its ear** (Mute WebSDR silences the WebSDR's ear, TRX volume the rig's…), without changing anything on the receiver itself.
+- **Except Mute TRX** (since 1.46): during diversity the rig's loudspeaker is **already silent** (AF gain at 0), and the audio taken from the REC sound card does not depend on it. Mute TRX therefore **no longer silences the rig's ear**: diversity goes on with both channels. To lower the rig's ear, use **TRX volume**. Mute TRX pressed during diversity takes effect when it stops: the rig then stays muted instead of getting its volume back. Before 1.46, Mute TRX silenced the rig's ear and only one channel was heard.
 - **When transmitting**: the ears of the receivers ticked in the right-click menu of "Mute WebSDR while transmitting" are silenced as soon as you transmit, and stay silent afterwards for the delay applied plus the restore time ("restore after (ms)"): the end of your transmission, played late, is not heard. The rig's ear is silent while transmitting in all cases.
 - When it stops (box unchecked, rig disconnected, program closed, or SDRLink closed), **each receiver gets its own audio back**: page volume, rig AF gain, ExpertSDR and HDSDR as before.
-- The **auto notch** also applies to the WebSDR's ear (since 1.41; before, the audio was taken before it). If the SDRLINK cable or a decoder is also listening to the WebSDR, the audio is still taken before the notch (raw audio for them).
+- The **auto notch** also applies to the WebSDR's ear (since 1.41; before, the audio was taken before it), and so does the **DNR** (since 1.46). If the SDRLINK cable or a decoder is also listening to the WebSDR, the audio is still taken before them (raw audio for them).
 - The receiver chosen and the WebSDR's side are kept; diversity itself is off at each start.
 
 ### On two WebSDRs (since 1.44)
@@ -943,6 +968,10 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.46**
+  - **DNR** (noise reduction): new button after Auto notch (DNF). Click: on / off; right-click: level 1 to 10, off in digital modes and FreeDV, colours. It reduces the hiss of the WebSDR audio, from 12 dB at level 3 to 33 dB at level 10.
+  - **SDRLink share link** (share round button): the copied link is on its own, with no text around it. Its page offers to open SDRLink at the same spot (even when it is already open), to listen in the browser or to download SDRLink; on Android, PhoneSDRLink. A share link pasted into the WebSDR box is understood too.
+  - **Diversity on the rig**: Mute TRX no longer silences the rig's ear (its loudspeaker is already silent); both channels stay, TRX volume sets the rig's ear.
 - **1.45**
   - **TRX volume on PC**: new slider between WebSDR volume and TRX volume when "Also hear the rig on the PC" is ticked. It only sets the audio played again in the PC speakers; REC, diversity and the decoders keep the full audio.
   - **FreeDV volume**: during FreeDV speech, the WebSDR volume slider becomes FreeDV volume and sets the decoded voice (before, a fixed level). It keeps its own value, separate from the WebSDR's.

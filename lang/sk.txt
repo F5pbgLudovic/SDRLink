@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	Hlasitosť WebSDR (ukladá sa pre každý obľúbený)
 Mute TRX: connect the rig first	Stlmiť TRX: najprv pripojte transceiver
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Stlmiť TRX: stanica zostane po diverzite stlmená; počas diverzity zostáva jej zvuk v uchu (úroveň nastavuje Hlasitosť TRX)
+Mute TRX released: the rig will get its volume back after diversity	Stlmenie TRX zrušené: stanica po diverzite získa späť svoju hlasitosť
 rig	transceiver
 FreeDV auto off	FreeDV auto vypnuté
  (FreeDV 3, under development)	 (FreeDV 3, vo vývoji)
@@ -637,6 +639,14 @@ Notch level:	Úroveň notchu:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatický notch zisťuje stále pískanie (nosné) vo zvuku WebSDR a tlmí ho. Políčko na tlačidle ho zapína a vypína. Úroveň, od 1 (pôvodné nastavenie) do 10, zvyšuje počet spracovaných pískaní (4 až 8) a silu zásahu; vysoká úroveň môže ovplyvniť aj hlas, ktorý drží tón. Bez zrušenia začiarknutia sa vypína počas digitálneho druhu prevádzky (bežiaci dekodér alebo režim DIGI) a počas FreeDV, ak sú vyššie uvedené voľby začiarknuté: poškodil by signály na dekódovanie. Kábel SDRLINK a dekodéry vždy dostávajú zvuk bez notchu.
 , off in digital modes	, vypnutý v digitálnych druhoch prevádzky
 , off in FreeDV	, vypnutý vo FreeDV
+Colour when DNR is off	Farba pri vypnutom DNR
+Colour when DNR is on	Farba pri zapnutom DNR
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Potlačenie šumu (DNR) vo zvuku WebSDR. Klik: zapnúť / vypnúť. Pravý klik: úroveň 1 až 10, vypnutie v digitálnych druhoch prevádzky a FreeDV, farby
+DNR level:	Úroveň DNR:
+1 (gentlest)	1 (najjemnejšia)
+DNR off in digital modes	DNR vypnutý v digitálnych druhoch prevádzky
+DNR off in FreeDV V1 and V2	DNR vypnutý vo FreeDV V1 a V2
+DNR off	DNR vypnutý
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	Šírka pásma príjmu WebSDR, uložená pre každý druh prevádzky (CW, USB/LSB, AM, FM, DIGI), na každom WebSDR aj po reštarte. „Predvolený filter“: vlastný filter WebSDR.
 Default filter	Predvolený filter
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Hľadanie druhu prevádzky: žiadny W
 Mode search stopped	Hľadanie druhu prevádzky zastavené
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Hľadanie druhu prevádzky: nerozpoznaný žiadny druh prevádzky (príliš slabý signál, nepodporovaný druh prevádzky alebo WSPR / JT9 / Hell, príliš pomalé na rozpoznanie)
 Auto notch: level {0}{1}{2}	Automatický notch: úroveň {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR zapnutý (úroveň {0}), pozastavený počas digitálnej prevádzky alebo FreeDV (pravým klikom zmeníte)
+DNR on, level {0}	DNR zapnutý, úroveň {0}
+DNR: level {0}{1}{2}	DNR: úroveň {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Šírka pásma v kHz pre {0} (0,1 až 15):
 {0} bandwidth: WebSDR default filter	Šírka pásma {0}: predvolený filter WebSDR
 {0} bandwidth: {1}	Šírka pásma {0}: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Hľadá sa počutý druh p
 Mode found: {0} ({1})	Nájdený druh prevádzky: {0} ({1})
 BW:	ŠP:
  (right-click: position of the buttons)	 (pravé tlačidlo: poloha tlačidiel)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Zdieľať frekvenciu: skopíruje do schránky odkaz na tento WebSDR s touto frekvenciou a režimom
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Zdieľať frekvenciu: skopíruje do schránky odkaz na tento WebSDR s touto frekvenciou a režimom. Odkaz otvorí SDRLink na rovnakom mieste, alebo ponúkne počúvanie v prehliadači či stiahnutie SDRLink
 Zoom in the WebSDR page	Zväčšiť stránku WebSDR
 Zoom out the WebSDR page	Zmenšiť stránku WebSDR
 Bottom right	Vpravo dole
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Zväčšenie stránky: automatické (teraz {0})
 WebSDR page: {0}	Stránka WebSDR: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Stránka WebSDR: {0} (zapamätané pre tento WebSDR; pravé tlačidlo na tlačidle: automatické zväčšenie)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stránka WebSDR zmenšená na {0}, aby bol vidieť celý jej ovládací panel (voľba pomocou + a −)
-{0} kHz {1} on {2}	{0} kHz {1} na {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Odkaz na zdieľanie skopírovaný do schránky ({0} kHz {1}): vložte ho do správy
+Share link: {0} kHz {1} on {2}	Odkaz na zdieľanie: {0} kHz {1} na {2}
 Mode:	Druh prevádzky:
 Preamp:	Predzosilňovač:
 (preamp unchanged)	(predzosilňovač bez zmeny)

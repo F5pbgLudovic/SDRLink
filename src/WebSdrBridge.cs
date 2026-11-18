@@ -22,12 +22,14 @@ namespace SDRLink
         g.gain.value = L.volume;
         origConnect.call(input, g);
         origConnect.call(g, ctx.destination);
+        ctx.__sdrlinkLinks = [[input, g]];
         ctx.__sdrlinkIn = input;
         ctx.__sdrlinkOut = g;
         L.gains.push(g);
         L.ctxs.push(ctx);
         if (L.tapOn) tap(ctx);
         if (L.notchOn) notch(ctx, true);
+        if (L.dnrOn) dnr(ctx, true);
         watch(ctx);
       }
       return ctx.__sdrlinkIn;
@@ -61,17 +63,179 @@ namespace SDRLink
       }
       if (on === n.on) return;
       n.on = on;
-      if (on) {
-        origDisconnect.call(input, out);
-        origConnect.call(input, n.f[0]);
-        origConnect.call(n.f[NOTCHES - 1], out);
-      } else {
-        origDisconnect.call(input, n.f[0]);
-        origDisconnect.call(n.f[NOTCHES - 1], out);
-        origConnect.call(input, out);
-        for (var j = 0; j < NOTCHES; j++) release(ctx, n, j);
-      }
+      if (!on) for (var j = 0; j < NOTCHES; j++) release(ctx, n, j);
+      rewire(ctx);
+    };
+    // Chaîne du haut-parleur (1.46) : entrée → [notch] → [réducteur de bruit] → gain de sortie ; liens refaits à chaque changement.
+    var chainEnd = function (ctx) {
+      var n = ctx.__sdrlinkNotch, d = ctx.__sdrlinkDnr, end = ctx.__sdrlinkIn;
+      if (n && n.on) end = n.f[NOTCHES - 1];
+      if (d && d.on && d.node) end = d.node;
+      return end;
+    };
+    var rewire = function (ctx) {
+      var input = ctx.__sdrlinkIn, out = ctx.__sdrlinkOut, n = ctx.__sdrlinkNotch, d = ctx.__sdrlinkDnr;
+      if (!input) return;
+      var links = ctx.__sdrlinkLinks || [];
+      for (var i = 0; i < links.length; i++) { try { origDisconnect.call(links[i][0], links[i][1]); } catch (e) { } }
+      links = ctx.__sdrlinkLinks = [];
+      var prev = input;
+      var link = function (a, b) { origConnect.call(a, b); links.push([a, b]); };
+      if (n && n.on) { link(prev, n.f[0]); prev = n.f[NOTCHES - 1]; }
+      if (d && d.on && d.node) { link(prev, d.node); prev = d.node; }
+      link(prev, out);
       retap(ctx);
+    };
+
+    // Réducteur de bruit (DNR, 1.46) : filtre spectral de Wiener. Le son est découpé en tranches de 21 à 32 ms qui se recouvrent
+    // de moitié ; dans chaque tranche, le plancher de bruit de chaque fréquence est le minimum de son niveau lissé sur 1,6 s
+    // environ (il suit un bruit qui change, mais pas la parole, qui a toujours des creux), et chaque fréquence est atténuée selon
+    // son rapport signal sur bruit (estimé « décision dirigée », ce qui évite les gazouillis du bruit musical). Niveau 1 à 10 :
+    // plancher d'atténuation de -6 à -33 dB et sur-estimation du bruit de 1 à 3. Retard ajouté : une tranche (21 à 32 ms).
+    // La même fonction sert dans un AudioWorklet (fil audio ; pages https seulement) ou sinon dans un ScriptProcessor (pages http,
+    // la plupart des WebSDR : quelques dizaines de ms de retard en plus).
+    function SdrlinkDnr(sr) {
+      var N = sr <= 16000 ? 256 : sr <= 32000 ? 512 : 1024, H = N >> 1, K = H + 1, U = 8, BIAS = 2.0, i, b;
+      var V = Math.max(4, Math.round(1.6 * sr / H / U));
+      var win = new Float32Array(N), inb = new Float32Array(N), ola = new Float32Array(N), outq = new Float32Array(H);
+      var re = new Float32Array(N), im = new Float32Array(N), cs = new Float32Array(H), sn = new Float32Array(H), rev = new Uint16Array(N);
+      var psm = new Float32Array(K), cmin = new Float32Array(K), mins = new Float32Array(K * U), pmin = new Float32Array(K), spow = new Float32Array(K);
+      var fill, opos, frames, sub, slot, floorG = 0.5, beta = 1;
+      for (i = 0; i < N; i++) win[i] = Math.sqrt(0.5 - 0.5 * Math.cos(2 * Math.PI * i / N));
+      for (i = 0; i < H; i++) { cs[i] = Math.cos(2 * Math.PI * i / N); sn[i] = -Math.sin(2 * Math.PI * i / N); }
+      var bits = Math.round(Math.log(N) / Math.LN2);
+      for (i = 0; i < N; i++) { var r = 0; for (b = 0; b < bits; b++) r |= ((i >> b) & 1) << (bits - 1 - b); rev[i] = r; }
+      var fft = function (inv) {
+        var j, k, t, len, half, step;
+        for (j = 0; j < N; j++) { k = rev[j]; if (k > j) { t = re[j]; re[j] = re[k]; re[k] = t; t = im[j]; im[j] = im[k]; im[k] = t; } }
+        for (len = 2; len <= N; len <<= 1) {
+          half = len >> 1; step = N / len;
+          for (j = 0; j < N; j += len) for (k = 0; k < half; k++) {
+            var wr = cs[k * step], wi = inv ? -sn[k * step] : sn[k * step], p = j + k, q = p + half;
+            var tr = re[q] * wr - im[q] * wi, ti = re[q] * wi + im[q] * wr;
+            re[q] = re[p] - tr; im[q] = im[p] - ti; re[p] += tr; im[p] += ti;
+          }
+        }
+      };
+      var reset = this.reset = function () {
+        inb.fill(0); ola.fill(0); outq.fill(0); spow.fill(0);
+        fill = N - H; opos = 0; frames = 0; sub = 0; slot = 0;
+      };
+      this.setLevel = function (l) {
+        l = Math.max(1, Math.min(10, l | 0 || 1)) - 1;
+        floorG = Math.pow(10, -(6 + 3 * l) / 20);
+        beta = 1 + 0.22 * l;
+      };
+      this.frameLen = N;
+      var frame = function () {
+        var j, k, m;
+        for (j = 0; j < N; j++) { re[j] = inb[j] * win[j]; im[j] = 0; }
+        fft(false);
+        var turn = ++sub >= V;
+        for (k = 0; k < K; k++) {
+          var P = re[k] * re[k] + im[k] * im[k];
+          if (frames === 0) {
+            psm[k] = P; cmin[k] = P; pmin[k] = P;
+            for (j = 0; j < U; j++) mins[k * U + j] = P;
+          } else {
+            psm[k] = 0.8 * psm[k] + 0.2 * P;
+            if (psm[k] < cmin[k]) cmin[k] = psm[k];
+            if (psm[k] < pmin[k]) pmin[k] = psm[k];
+            if (turn) {
+              mins[k * U + slot] = cmin[k];
+              m = cmin[k];
+              for (j = 0; j < U; j++) if (mins[k * U + j] < m) m = mins[k * U + j];
+              pmin[k] = m;
+              cmin[k] = psm[k];
+            }
+          }
+          var nz = pmin[k] * BIAS * beta + 1e-20, post = P / nz;
+          var xi = 0.98 * spow[k] / nz + 0.02 * (post > 1 ? post - 1 : 0);
+          var g = xi / (1 + xi);
+          if (!(g >= floorG)) g = floorG;
+          spow[k] = g * g * P;
+          re[k] *= g; im[k] *= g;
+          if (k > 0 && k < H) { re[N - k] *= g; im[N - k] *= g; }
+        }
+        if (turn) { sub = 0; slot = (slot + 1) % U; }
+        frames++;
+        fft(true);
+        for (j = 0; j < N; j++) ola[j] += re[j] * win[j] / N;
+        for (j = 0; j < H; j++) outq[j] = ola[j];
+        if (!(outq[0] === outq[0])) reset();   // jamais de NaN qui resterait pour toujours
+        ola.copyWithin(0, H); ola.fill(0, N - H);
+        inb.copyWithin(0, H);
+      };
+      this.process = function (x, y) {
+        for (var s = 0; s < x.length; s++) {
+          inb[fill++] = x[s];
+          if (y) y[s] = outq[opos];
+          opos++;
+          if (fill === N) { frame(); fill = N - H; opos = 0; }
+        }
+      };
+      reset();
+    }
+    L.DnrCore = SdrlinkDnr;   // pour les essais
+    var dnrUrl = null;
+    var dnrModule = function () {
+      if (!dnrUrl) {
+        var src = SdrlinkDnr.toString() + '\nregisterProcessor(\'sdrlink-dnr\', class extends AudioWorkletProcessor {\n' +
+          ' constructor() { super(); var c = this.c = new SdrlinkDnr(sampleRate); this.port.onmessage = function (e) { if (e.data && e.data.lvl) c.setLevel(e.data.lvl); if (e.data && e.data.reset) c.reset(); }; }\n' +
+          ' process(inp, out) { var x = inp[0] && inp[0][0], y = out[0] && out[0][0]; if (!x) { if (y) y.fill(0); return true; } this.c.process(x, y); return true; }\n});\n';
+        dnrUrl = URL.createObjectURL(new Blob([src], { type: 'application/javascript' }));
+      }
+      return dnrUrl;
+    };
+    L.dnrLevel = 1;
+    var dnrScript = function (ctx, d) {
+      // Tampon d'environ 20 à 45 ms (le ScriptProcessor ajoute environ deux tampons de retard).
+      var bs = 256;
+      while (bs * 2 <= ctx.sampleRate * 0.045 && bs < 4096) bs *= 2;
+      var sp = ctx.createScriptProcessor(bs, 1, 1), core = new SdrlinkDnr(ctx.sampleRate);
+      sp.channelCount = 1;
+      sp.channelCountMode = 'explicit';
+      core.setLevel(L.dnrLevel);
+      sp.onaudioprocess = function (e) { core.process(e.inputBuffer.getChannelData(0), e.outputBuffer.getChannelData(0)); };
+      d.core = core; d.kind = 'script';
+      return sp;
+    };
+    var dnr = function (ctx, on) {
+      var d = ctx.__sdrlinkDnr;
+      if (!ctx.__sdrlinkIn) return;
+      if (!d) {
+        if (!on) return;
+        d = ctx.__sdrlinkDnr = { on: false, node: null, kind: '' };
+        var ready = function (node) { d.node = node; if (d.on) rewire(ctx); };
+        var fallback = function (why) { L.dnrWhy = String(why && why.message || why); try { if (ctx.createScriptProcessor) ready(dnrScript(ctx, d)); } catch (e) { } };
+        try {
+          if (!ctx.audioWorklet || !window.AudioWorkletNode) throw new Error('no AudioWorklet (page not secure)');
+          ctx.audioWorklet.addModule(dnrModule()).then(function () {
+            var node = new AudioWorkletNode(ctx, 'sdrlink-dnr', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1], channelCount: 1, channelCountMode: 'explicit' });
+            d.kind = 'worklet';
+            node.port.postMessage({ lvl: L.dnrLevel });
+            ready(node);
+          }).catch(fallback);
+        } catch (e) { fallback(e); }
+      }
+      if (on === d.on) return;
+      d.on = on;
+      if (on && d.node) { if (d.kind === 'worklet') d.node.port.postMessage({ reset: 1 }); else if (d.core) d.core.reset(); }
+      rewire(ctx);
+    };
+    L.dnrOn = false;
+    L.setDnr = function (on, lvl) {
+      L.dnrLevel = Math.max(1, Math.min(10, lvl | 0 || 1));
+      L.dnrOn = !!on;
+      for (var i = 0; i < L.ctxs.length; i++) {
+        var d = L.ctxs[i].__sdrlinkDnr;
+        if (d && d.node) { if (d.kind === 'worklet') d.node.port.postMessage({ lvl: L.dnrLevel }); else if (d.core) d.core.setLevel(L.dnrLevel); }
+        dnr(L.ctxs[i], L.dnrOn);
+      }
+    };
+    L.dnrKind = function () {
+      for (var i = 0; i < L.ctxs.length; i++) { var d = L.ctxs[i].__sdrlinkDnr; if (d && d.on && d.node) return d.kind; }
+      return '';
     };
     var release = function (ctx, n, i) {
       n.slots[i].bin = -1;
@@ -183,11 +347,10 @@ namespace SDRLink
       };
       ctx.__sdrlinkTap = sp;
     };
-    // Point de prélèvement : son brut (câble, décodeurs), ou après le notch quand seule l'écoute en diversité le demande
-    // (post), pour que l'oreille du WebSDR reste filtrée comme le haut-parleur.
+    // Point de prélèvement : son brut (câble, décodeurs), ou après le notch et le réducteur de bruit quand seule l'écoute en
+    // diversité le demande (post), pour que l'oreille du WebSDR reste filtrée comme le haut-parleur.
     var tapSrc = function (ctx) {
-      var n = ctx.__sdrlinkNotch;
-      return L.tapPost && n && n.on ? n.f[NOTCHES - 1] : ctx.__sdrlinkIn;
+      return L.tapPost ? chainEnd(ctx) : ctx.__sdrlinkIn;
     };
     var retap = function (ctx) {
       var sp = ctx.__sdrlinkTap, s = tapSrc(ctx);

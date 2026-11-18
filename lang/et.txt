@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	WebSDR-i helitugevus (salvestatakse iga lemmiku jaoks)
 Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Vaigista TRX: raadiojaam jääb pärast diversityt vaigistatuks; diversity ajal jääb selle heli kõrva (taset määrab TRX helitugevus)
+Mute TRX released: the rig will get its volume back after diversity	TRX vaigistus maas: raadiojaam saab pärast diversityt oma helitugevuse tagasi
 rig	raadio
 FreeDV auto off	FreeDV auto välja lülitatud
  (FreeDV 3, under development)	 (FreeDV 3, arendamisel)
@@ -637,6 +639,14 @@ Notch level:	Notchi tase:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaatne notch tuvastab WebSDR-i helis püsivad viled (kandjad) ja summutab need. Nupul olev märkeruut lülitab selle sisse või välja. Tase, 1-st (algne seadistus) kuni 10-ni, suurendab töödeldavate vilede arvu (4 kuni 8) ja toime tugevust; kõrge tase võib mõjutada ka häält, mis hoiab nooti. See lülitatakse märget eemaldamata välja digitaalse režiimi ajal (dekooder töötab või DIGI-režiim) ja FreeDV ajal, kui ülaltoodud valikud on märgitud: see rikuks dekodeeritavaid signaale. SDRLINK-kaabel ja dekoodrid saavad heli alati ilma notchita.
 , off in digital modes	, väljas digitaalsetes režiimides
 , off in FreeDV	, väljas FreeDV korral
+Colour when DNR is off	Värv, kui DNR on väljas
+Colour when DNR is on	Värv, kui DNR on sees
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Mürasummutus (DNR) WebSDR-i helis. Klõps: sisse / välja. Paremklõps: tase 1 kuni 10, väljas digitaalsetes režiimides ja FreeDV-s, värvid
+DNR level:	DNR-i tase:
+1 (gentlest)	1 (pehmeim)
+DNR off in digital modes	DNR väljas digitaalsetes režiimides
+DNR off in FreeDV V1 and V2	DNR väljas FreeDV V1 ja V2 puhul
+DNR off	DNR väljas
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR-i vastuvõtu ribalaius, salvestatud iga režiimi jaoks (CW, USB/LSB, AM, FM, DIGI), igal WebSDR-il ja pärast taaskäivitust. „Vaikefilter“: WebSDR-i enda filter.
 Default filter	Vaikefilter
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Režiimi otsing: pole WebSDR-i ega ra
 Mode search stopped	Režiimi otsing peatatud
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Režiimi otsing: ühtegi režiimi ei tuvastatud (liiga nõrk signaal, toetamata režiim või WSPR / JT9 / Hell, mis on tuvastamiseks liiga aeglased)
 Auto notch: level {0}{1}{2}	Automaatne notch: tase {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR sees (tase {0}), digitaalse režiimi või FreeDV ajal peatatud (muutmiseks paremklõps)
+DNR on, level {0}	DNR sees, tase {0}
+DNR: level {0}{1}{2}	DNR: tase {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Ribalaius kHz-des režiimile {0} (0,1 kuni 15):
 {0} bandwidth: WebSDR default filter	{0} ribalaius: WebSDR-i vaikefilter
 {0} bandwidth: {1}	{0} ribalaius: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Otsin kuuldavat režiimi (
 Mode found: {0} ({1})	Leitud režiim: {0} ({1})
 BW:	RL:
  (right-click: position of the buttons)	 (paremklõps: nuppude asukoht)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Jaga sagedust: kopeerib lõikelauale lingi sellele WebSDR-ile selle sageduse ja modulatsiooniga
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Jaga sagedust: kopeerib lõikelauale lingi sellele WebSDR-ile selle sageduse ja modulatsiooniga. Link avab SDRLinki samas kohas või pakub kuulata brauseris või SDRLink alla laadida
 Zoom in the WebSDR page	Suurenda WebSDR-i lehte
 Zoom out the WebSDR page	Vähenda WebSDR-i lehte
 Bottom right	All paremal
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Lehe suum: automaatne (praegu {0})
 WebSDR page: {0}	WebSDR-i leht: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-i leht: {0} (jäetud meelde selle WebSDR-i jaoks; paremklõps nupul: automaatne suum)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-i leht vähendati suuruseni {0}, et kogu juhtpaneel oleks nähtav (valimiseks + ja −)
-{0} kHz {1} on {2}	{0} kHz {1} aadressil {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jagamislink kopeeriti lõikelauale ({0} kHz {1}): kleepige see sõnumisse
+Share link: {0} kHz {1} on {2}	Jagamislink: {0} kHz {1} aadressil {2}
 Mode:	Režiim:
 Preamp:	Eelvõimendi:
 (preamp unchanged)	(eelvõimendi muutmata)

@@ -7,10 +7,13 @@ namespace SDRLink
     static class Program
     {
         // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
-        public const string Version = "1.45";
+        public const string Version = "1.46";
 
         // Vrai quand cette version vient d'être installée par la mise à jour automatique.
         public static bool JustUpdated;
+
+        // Lien de partage reçu au lancement, ouvert dès que la page est prête (null : aucun).
+        public static string PendingShare;
 
         [STAThread]
         static int Main(string[] args)
@@ -20,6 +23,14 @@ namespace SDRLink
             // Lancé par la mise à jour automatique : on attend que l'ancienne version ait fini de se fermer
             // (réglages enregistrés, ports et WebView2 libérés).
             JustUpdated = Updater.AfterUpdate(args);
+            // Lien de partage (sdrlink://… ou page de partage) : donné au SDRLink déjà ouvert, sinon ouvert par celui-ci (1.46).
+            foreach (string a in args)
+            {
+                if (ShareLink.Parse(a) == null) continue;
+                if (ShareLink.SendToRunning(a)) return 0;
+                PendingShare = a;
+                break;
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Langue lue dès le départ pour que les messages de vérification soient dans la bonne langue.
@@ -45,6 +56,7 @@ namespace SDRLink
                 if (form != null) form.ShowError(e.Exception.Message);
             };
             AppDomain.CurrentDomain.UnhandledException += delegate(object s, UnhandledExceptionEventArgs e) { Log.Write("Erreur fatale : " + e.ExceptionObject); };
+            ShareLink.RegisterProtocol(Application.ExecutablePath);
             form = new MainForm();
             Application.Run(form);
         }

@@ -323,6 +323,8 @@ Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only 
 WebSDR volume (kept for each favorite)	WebSDR-volym (sparas för varje favorit)
 Mute TRX: connect the rig first	Tysta rigg: anslut riggen först
 Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolym är inte tillgänglig med denna rigg eller detta gränssnitt (OmniRig, HRD, FT-817/818…)
+Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Tysta rigg: riggen förblir tystad efter diversity; under diversity stannar dess ljud i örat (Riggvolym ställer nivån)
+Mute TRX released: the rig will get its volume back after diversity	Tysta rigg upphävd: riggen får tillbaka sin volym efter diversity
 rig	rigg
 FreeDV auto off	FreeDV auto avstängt
  (FreeDV 3, under development)	 (FreeDV 3, under utveckling)
@@ -637,6 +639,14 @@ Notch level:	Notch-nivå:
 The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. The box on the button turns it on or off. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is turned off, without unticking the box, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Den automatiska notchen upptäcker jämna pipljud (bärvågor) i WebSDR-ljudet och dämpar dem. Rutan på knappen slår på eller av den. Nivån, från 1 (ursprunglig inställning) till 10, ökar antalet behandlade pipljud (4 till 8) och verkans styrka; en hög nivå kan också påverka en röst som håller en ton. Den stängs av, utan att rutan avmarkeras, under ett digitalt trafiksätt (avkodare igång eller DIGI-läge) och under FreeDV, om valen ovan är markerade: den skulle skada signalerna som ska avkodas. SDRLINK-kabeln och avkodarna får alltid ljudet utan notch.
 , off in digital modes	, av i digitala trafiksätt
 , off in FreeDV	, av i FreeDV
+Colour when DNR is off	Färg när DNR är av
+Colour when DNR is on	Färg när DNR är på
+Noise reduction (DNR) on the WebSDR sound. Click: on / off. Right-click: level 1 to 10, off in digital modes and FreeDV, colours	Brusreducering (DNR) på WebSDR-ljudet. Klick: på / av. Högerklick: nivå 1 till 10, av i digitala trafiksätt och FreeDV, färger
+DNR level:	DNR-nivå:
+1 (gentlest)	1 (mildast)
+DNR off in digital modes	DNR av i digitala trafiksätt
+DNR off in FreeDV V1 and V2	DNR av i FreeDV V1 och V2
+DNR off	DNR av
 .	,
 WebSDR receive bandwidth, kept for each mode (CW, USB/LSB, AM, FM, DIGI), on every WebSDR and after a restart. "Default filter": the WebSDR's own.	WebSDR:ens mottagningsbandbredd, sparad för varje trafiksätt (CW, USB/LSB, AM, FM, DIGI), på varje WebSDR och efter en omstart. ”Standardfilter”: WebSDR:ens eget.
 Default filter	Standardfilter
@@ -650,6 +660,9 @@ Mode search: no WebSDR or rig to listen to	Sökning av trafiksätt: ingen WebSDR
 Mode search stopped	Sökning av trafiksätt stoppad
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Sökning av trafiksätt: inget trafiksätt igenkänt (för svag signal, trafiksätt som inte stöds eller WSPR / JT9 / Hell, för långsamma för att kännas igen)
 Auto notch: level {0}{1}{2}	Auto-notch: nivå {0}{1}{2}
+DNR on (level {0}), paused during the digital mode or FreeDV (right-click to change)	DNR på (nivå {0}), pausad under det digitala trafiksättet eller FreeDV (högerklicka för att ändra)
+DNR on, level {0}	DNR på, nivå {0}
+DNR: level {0}{1}{2}	DNR: nivå {0}{1}{2}
 Bandwidth in kHz for {0} (0.1 to 15):	Bandbredd i kHz för {0} (0,1 till 15):
 {0} bandwidth: WebSDR default filter	Bandbredd {0}: WebSDR:ens standardfilter
 {0} bandwidth: {1}	Bandbredd {0}: {1}
@@ -659,7 +672,7 @@ Searching for the mode being heard ({0} s at most)…	Söker efter trafiksättet
 Mode found: {0} ({1})	Trafiksätt hittat: {0} ({1})
 BW:	BB:
  (right-click: position of the buttons)	 (högerklicka: knapparnas placering)
-Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode	Dela frekvensen: kopierar en länk till denna WebSDR, med denna frekvens och mod, till urklipp
+Share the frequency: copies to the clipboard a link to this WebSDR, on this frequency and mode. The link opens SDRLink at the same spot, or offers to listen in the browser or to download SDRLink	Dela frekvensen: kopierar en länk till denna WebSDR, med denna frekvens och mod, till urklipp. Länken öppnar SDRLink på samma ställe, eller erbjuder att lyssna i webbläsaren eller ladda ner SDRLink
 Zoom in the WebSDR page	Zooma in WebSDR-sidan
 Zoom out the WebSDR page	Zooma ut WebSDR-sidan
 Bottom right	Nere till höger
@@ -683,8 +696,8 @@ Page zoom: automatic (now {0})	Sidzoom: automatisk (nu {0})
 WebSDR page: {0}	WebSDR-sida: {0}
 WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	WebSDR-sida: {0} (sparad för denna WebSDR; högerklicka på en knapp: automatisk zoom)
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sidan har minskats till {0} för att visa hela kontrollpanelen (+ och − för att välja)
-{0} kHz {1} on {2}	{0} kHz {1} på {2}
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delningslänk kopierad till urklipp ({0} kHz {1}): klistra in den i ett meddelande
+Share link: {0} kHz {1} on {2}	Delningslänk: {0} kHz {1} på {2}
 Mode:	Trafiksätt:
 Preamp:	Förförstärkare:
 (preamp unchanged)	(förförstärkare oförändrad)
