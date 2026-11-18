@@ -769,8 +769,9 @@ namespace SDRLink
             trkVolume.TickStyle = TickStyle.None;
             trkVolume.AutoSize = false;
             trkVolume.Size = new Size(130, 28);
-            trkVolume.SmallChange = 5;
-            trkVolume.LargeChange = 10;
+            trkVolume.SmallChange = 1;   // pas de 1 au clavier, au clic et à la molette (1.47)
+            trkVolume.LargeChange = 1;
+            VolumeWheel(trkVolume);
             trkVolume.Margin = new Padding(2, 2, 0, 0);
             trkVolume.ValueChanged += delegate { OnVolumeChanged(); };
             lblVolume = new Label();
@@ -830,8 +831,9 @@ namespace SDRLink
             trkRigVolume.TickStyle = TickStyle.None;
             trkRigVolume.AutoSize = false;
             trkRigVolume.Size = new Size(110, 28);
-            trkRigVolume.SmallChange = 5;
-            trkRigVolume.LargeChange = 10;
+            trkRigVolume.SmallChange = 1;   // pas de 1 au clavier, au clic et à la molette (1.47)
+            trkRigVolume.LargeChange = 1;
+            VolumeWheel(trkRigVolume);
             trkRigVolume.Margin = new Padding(2, 2, 0, 0);
             trkRigVolume.ValueChanged += delegate { OnRigVolumeChanged(); };
             lblRigVolume = new Label();
@@ -849,8 +851,9 @@ namespace SDRLink
             trkMonVolume.TickStyle = TickStyle.None;
             trkMonVolume.AutoSize = false;
             trkMonVolume.Size = new Size(110, 28);
-            trkMonVolume.SmallChange = 5;
-            trkMonVolume.LargeChange = 10;
+            trkMonVolume.SmallChange = 1;   // pas de 1 au clavier, au clic et à la molette (1.47)
+            trkMonVolume.LargeChange = 1;
+            VolumeWheel(trkMonVolume);
             trkMonVolume.Margin = new Padding(2, 2, 0, 0);
             trkMonVolume.ValueChanged += delegate { OnMonVolumeChanged(); };
             lblMonVolume = new Label();
@@ -867,8 +870,9 @@ namespace SDRLink
             trkEsdrVolume.TickStyle = TickStyle.None;
             trkEsdrVolume.AutoSize = false;
             trkEsdrVolume.Size = new Size(110, 28);
-            trkEsdrVolume.SmallChange = 5;
-            trkEsdrVolume.LargeChange = 10;
+            trkEsdrVolume.SmallChange = 1;   // pas de 1 au clavier, au clic et à la molette (1.47)
+            trkEsdrVolume.LargeChange = 1;
+            VolumeWheel(trkEsdrVolume);
             trkEsdrVolume.Margin = new Padding(2, 2, 0, 0);
             trkEsdrVolume.ValueChanged += delegate { OnEsdrVolumeChanged(); };
             lblEsdrVolume = new Label();
@@ -884,8 +888,9 @@ namespace SDRLink
             trkHdsdrVolume.TickStyle = TickStyle.None;
             trkHdsdrVolume.AutoSize = false;
             trkHdsdrVolume.Size = new Size(110, 28);
-            trkHdsdrVolume.SmallChange = 5;
-            trkHdsdrVolume.LargeChange = 10;
+            trkHdsdrVolume.SmallChange = 1;   // pas de 1 au clavier, au clic et à la molette (1.47)
+            trkHdsdrVolume.LargeChange = 1;
+            VolumeWheel(trkHdsdrVolume);
             trkHdsdrVolume.Margin = new Padding(2, 2, 0, 0);
             trkHdsdrVolume.ValueChanged += delegate { OnHdsdrVolumeChanged(); };
             lblHdsdrVolume = new Label();
@@ -1365,6 +1370,23 @@ namespace SDRLink
             c.Margin = new Padding(8, 6, 2, 0);
             Tr(delegate { c.Text = Lang.T(fr, en); });
             return c;
+        }
+
+        // Molette sur un curseur de volume : 1 % par cran (1.47). Sans cela, la molette d'un TrackBar avance du nombre de lignes
+        // réglé dans Windows (3, 6…) quel que soit SmallChange. Les petits pas des pavés tactiles sont cumulés.
+        static void VolumeWheel(TrackBar t)
+        {
+            int acc = 0;
+            t.MouseWheel += delegate(object s, MouseEventArgs e)
+            {
+                HandledMouseEventArgs h = e as HandledMouseEventArgs;
+                if (h != null) h.Handled = true;   // TrackBar.OnMouseWheel ne bouge plus le curseur lui-même
+                acc += e.Delta;
+                int steps = acc / 120;
+                if (steps == 0) return;
+                acc -= steps * 120;
+                t.Value = Math.Max(t.Minimum, Math.Min(t.Maximum, t.Value + steps));
+            };
         }
 
         Button Btn(string fr, string en, EventHandler click)

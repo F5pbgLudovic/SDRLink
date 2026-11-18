@@ -328,6 +328,8 @@ La ligne de son, toujours en début de ligne sous la barre WebSDR, se lit de gau
 
 Tous les volumes gardés par SDRLink font partie de l'export et de l'import des réglages.
 
+**Pas de 1 %** (depuis la 1.47) : sur tous ces curseurs (Volume WebSDR / FreeDV, Volume TX sur PC, Volume TX, Volume ExpertSDR, Volume HDSDR), un cran de **molette**, une **flèche du clavier** ou un **clic** à côté du curseur change le volume de **1 %**. Avant, la molette avançait du nombre de lignes réglé dans Windows (souvent 3 ou 6), et le clic de 10 %. Le curseur se tire toujours à la souris pour aller vite.
+
 ## Coupure du son et volume du poste
 
 À droite du volume du WebSDR :
@@ -967,6 +969,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.47**
+  - **Volumes au pas de 1 %** : molette, flèches et clic sur tous les curseurs de volume (WebSDR / FreeDV, TX sur PC, TX, ExpertSDR, HDSDR). La molette allait trop vite (6 % par cran avec le réglage de Windows à 6 lignes).
 - **1.46**
   - **DNR** (réducteur de bruit) : nouveau bouton après Notch auto (DNF). Clic : marche / arrêt ; clic droit : niveau de 1 à 10, coupure en mode numérique et en FreeDV, couleurs. Il réduit le souffle du son du WebSDR, de 12 dB au niveau 3 à 33 dB au niveau 10.
   - **Lien de partage de SDRLink** (rond partage) : le lien copié est seul, sans texte autour. Sa page propose d'ouvrir SDRLink au même endroit (même déjà ouvert), d'écouter dans le navigateur ou de télécharger SDRLink ; sur Android, PhoneSDRLink. Un lien de partage collé dans la case WebSDR est aussi compris.

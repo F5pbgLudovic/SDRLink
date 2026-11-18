@@ -1,4 +1,4 @@
-# SDRLink V1.46 — @F5PBG 2026
+# SDRLink V1.47 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -19,7 +19,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de votre position (ordinateur, locator ou coordonnées) ;
-  - volume du WebSDR, du poste, d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) et de HDSDR (Mute HDSDR, par Windows), son du poste aussi sur le PC au choix (clic droit sur Mute TX) avec son propre curseur « Volume TX sur PC » ;
+  - volume du WebSDR, du poste, d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) et de HDSDR (Mute HDSDR, par Windows), son du poste aussi sur le PC au choix (clic droit sur Mute TX) avec son propre curseur « Volume TX sur PC » ; tous les volumes au pas de 1 % (molette, flèches, clic) ;
   - câble audio SDRLINK pour WSJT-X, notch automatique et réducteur de bruit **DNR**, chacun de niveau 1 à 10 (coupés au choix en mode numérique et en FreeDV) ;
   - bande passante de réception et pas de la molette (dès 10 Hz) retenus pour chaque mode ;
   - décodage automatique de la voix numérique FreeDV RADE (V1 ou V2) dès qu'un signal est reçu (bouton FreeDV auto), avec son propre volume (le curseur Volume WebSDR devient « Volume FreeDV » pendant la parole) ;
@@ -76,7 +76,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - reduced, mini and PTT (PTT button only, with the Always on top box) views;
   - suggestions while typing in the WebSDR bar (name or address, chosen list);
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near your position (computer, locator or coordinates);
-  - WebSDR, rig, ExpertSDR (Mute ExpertSDR, through Windows or TCI) and HDSDR volume (Mute HDSDR, through Windows), rig audio also on the PC if wanted (right-click Mute TRX) with its own "TRX volume on PC" slider;
+  - WebSDR, rig, ExpertSDR (Mute ExpertSDR, through Windows or TCI) and HDSDR volume (Mute HDSDR, through Windows), rig audio also on the PC if wanted (right-click Mute TRX) with its own "TRX volume on PC" slider; every volume in 1 % steps (wheel, arrows, click);
   - SDRLINK audio cable for WSJT-X, automatic notch and **DNR** noise reduction, each with level 1 to 10 (optionally off in digital modes and FreeDV);
   - receive bandwidth and wheel step (from 10 Hz) kept for each mode;
   - automatic decoding of FreeDV RADE digital voice (V1 or V2) as soon as a signal is received (FreeDV auto button), with its own volume (the WebSDR volume slider becomes "FreeDV volume" during speech);

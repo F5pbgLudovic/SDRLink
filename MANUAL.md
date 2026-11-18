@@ -329,6 +329,8 @@ The audio row, always at the start of the row below the WebSDR bar, reads from l
 
 All the volumes kept by SDRLink are part of settings export and import.
 
+**1 % steps** (since 1.47): on all these sliders (WebSDR / FreeDV volume, TRX volume on PC, TRX volume, ExpertSDR volume, HDSDR volume), one **wheel** notch, one **arrow key** or one **click** beside the thumb changes the volume by **1 %**. Before, the wheel moved by the number of lines set in Windows (often 3 or 6), and a click by 10 %. The thumb can still be dragged with the mouse to go fast.
+
 ## Muting and rig volume
 
 To the right of the WebSDR volume:
@@ -968,6 +970,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.47**
+  - **Volumes in 1 % steps**: wheel, arrow keys and click on every volume slider (WebSDR / FreeDV, TRX on PC, TRX, ExpertSDR, HDSDR). The wheel was too fast (6 % per notch with Windows set to 6 lines).
 - **1.46**
   - **DNR** (noise reduction): new button after Auto notch (DNF). Click: on / off; right-click: level 1 to 10, off in digital modes and FreeDV, colours. It reduces the hiss of the WebSDR audio, from 12 dB at level 3 to 33 dB at level 10.
   - **SDRLink share link** (share round button): the copied link is on its own, with no text around it. Its page offers to open SDRLink at the same spot (even when it is already open), to listen in the browser or to download SDRLink; on Android, PhoneSDRLink. A share link pasted into the WebSDR box is understood too.
