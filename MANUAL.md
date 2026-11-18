@@ -22,9 +22,9 @@ To rebuild after a change: `powershell -ExecutionPolicy Bypass -File build.ps1` 
 Overview; each feature is detailed further down in its own section.
 
 1. **1st row (connection and general settings)**: **Interface** (COM port, OmniRig, TCI, HRD, Hamlib), **Brand** and **Model** (direct CAT), **Connect / Connecting... / Disconnect**, **Auto-connect at startup** box, **Open log** (sdrlink.log in Notepad), **Dark mode** box, **Palette** square, **Look ▾**, **Control panel**, **Text size…**, **Check for updates** button with its box, **Import/Export ▾**, **Pseudo/Call**.
-2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**; or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
+2. **2nd row (interface settings)**: depending on the interface, COM **Port** (with ↻ to reread the list), **Baud rate**, **Stop bits**, **CI-V address** (Icom), **RTS** / **DTR**, **Virtual COM port…** (rig sharing, since 1.49); or **OmniRig rig**; or **Host** / **Port** (TCI, HRD, Hamlib); **TX detection (HRD)**. Then **Language** and **SDRLINK cable ▾**. With Hamlib, an extra row: **Start rigctld**, rigctld path, **Hamlib model no.**, **Download Hamlib…**.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (click: on / off, green button when on; right-click: options, level and colours), **DNR** (noise reduction, since 1.46; click: on / off, right-click: classic, improved or AI type and its level), **Scan setup**, **▶ Scan**.
-4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes.
+4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes, then the **TUNE** button (since 1.49), same shape as PTT and aligned with it.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
 6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume** ("FreeDV volume" during FreeDV speech, since 1.45), **TRX volume on PC** (when "Also hear the rig on the PC" is ticked, since 1.45), **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44).
 7. **The WebSDR page** with its **share**, **+** and **−** round buttons (since 1.43), then the **status bar** (messages, update link).
@@ -41,7 +41,9 @@ Overview; each feature is detailed further down in its own section.
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | colour when stopped / while scanning |
 | PTT | TX safety timeout, colour when receiving / transmitting |
-| RIG, WEBSDR | background colour, text colour (left-click opens the frequency keypad) |
+| TUNE | **rig transmit sound card**, **tone level** (1 to 100 %, slider and box, steps of 1), **duration** (5 s to 1 min), **keying: PTT on or rig VOX**, colour when idle / during Tune, **Close** as the last line (since 1.49) |
+| RIG | **VFO A / VFO B** controlled (since 1.49), background colour, text colour (left-click opens the frequency keypad) |
+| WEBSDR | background colour, text colour (left-click opens the frequency keypad) |
 | Line of the **Mem** list (frequency keypad; also with a long press) | **Store in "Memories"** ▸ chosen list, **Delete from the "Mem" list** (since 1.26) |
 | USB, LSB, AM, FM, DIGI, CW | colour of the selected mode / of the others |
 | kHz entry | remove the value from the history, remove all |
@@ -81,7 +83,7 @@ Overview; each feature is detailed further down in its own section.
 
 | Interface | Settings | Notes |
 |---|---|---|
-| COM port (direct CAT) | Brand, model, port, baud rate, stop bits, RTS/DTR, CI-V address (Icom) | The port must not be open in another program |
+| COM port (direct CAT) | Brand, model, port, baud rate, stop bits, RTS/DTR, CI-V address (Icom) | The port must not be open in another program; to share it, **Virtual COM port…** (see below) |
 | OmniRig | Rig 1 / Rig 2 | The rig is configured in OmniRig; lets you share the rig with other programs. **If OmniRig does not work, use OmniRig version 1, run as administrator** (see Troubleshooting) |
 | TCI | Host / port (40001 by default) | ExpertSDR (SunSDR), Thetis… enable the TCI server |
 | Ham Radio Deluxe | Host / port (7809 by default) | Enable the IP server in HRD Rig Control |
@@ -94,6 +96,22 @@ Overview; each feature is detailed further down in its own section.
 - **Disconnect**: the rig really answers; a click closes the link.
 - The link is checked **15 s after "Connect", then every minute**. If the rig does not answer, the status bar says so with the last error message. A frozen link (OmniRig or a COM port that no longer answers) is seen as lost: "Link lost: the rig has not answered for X s", the button goes back to "Connecting..." and returns to "Disconnect" by itself when the rig answers again. Each problem is written to the log.
 - **With OmniRig**, if the rig does not answer, a **help window** opens on top (once per connection, without blocking SDRLink): use **OmniRig version 1**, start **both OmniRig and SDRLink as administrator** (it says whether SDRLink already is), check the model, COM port and baud rate in OmniRig; with the link to the OmniRig page.
+
+### VFO A or B (since 1.49)
+
+**Right-clicking the RIG frequency** chooses the rig VFO controlled by SDRLink: **VFO A** or **VFO B** (rigs with two VFOs), before the colours. With VFO B, the display shows "RIG B". Changed while connected, the link is restarted at once.
+- Recent **Yaesu**, **Kenwood**, **Elecraft**, **OmniRig**, **TCI**, **HRD**: VFO B's frequency is read and set directly (`FB`, `FreqB`, channel 1 over TCI…), without changing the VFO shown by the rig.
+- VFO B mode: `MD1` on dual-receiver Yaesus (FT-2000, FTdx9000, FTdx5000, FTdx101, FTX-1), `MD$` on Elecrafts; on the others, the mode read and set stays the one of the VFO in use.
+- **Icom** and **Hamlib**: the rig is switched to VFO B on connection (CI-V `07 01`, `V VFOB`), then controlled normally; going back to A switches it back to VFO A once.
+- Old binary-protocol Yaesus (FT-817, FT-1000MP…): VFO A only (noted in the log).
+
+### Virtual COM port: sharing the rig with another program (since 1.49)
+
+In direct CAT, SDRLink holds the rig's COM port: another program (WSJT-X, logging program…) can no longer open it. The **Virtual COM port…** button (2nd row) sets up sharing through a **com0com virtual COM port pair**:
+- SDRLink opens one of the two ports of the pair; the other program opens the **other port**, with the **same rig model** (the baud rate does not matter on a virtual port), as if it were connected to the rig.
+- Its commands are passed to the rig unchanged, between SDRLink's own, and it receives the rig's answers (Yaesu / Kenwood / Elecraft text, Icom / Xiegu CI-V, old binary Yaesus).
+- **com0com** (free driver, GPL licence): if it is not on the PC, the window installs it (**Install com0com…** button, signed installer shipped with SDRLink; Windows asks for administrator permission). **Create a new pair COMx ↔ COMy…** adds one (free numbers from COM30). Existing pairs are offered. **Remove the chosen pair…** deletes one, after confirmation (Windows asks for permission; never the one SDRLink is using right now).
+- Sharing starts when the rig connects (chosen while connected: the link is restarted at once). The button turns **green** while the virtual COM port is active (colours by right-click); the status bar shows the port to choose in the other program. With OmniRig, TCI, HRD or Hamlib it is not needed: they already share the rig.
 
 ## Hamlib
 
@@ -449,6 +467,13 @@ The large **PTT** button, to the left of "RIG", puts the rig into transmit over 
   - When it expires, SDRLink returns to receive and says so at the bottom of the window.
   - This timeout applies to transmissions started with SDRLink's PTT button, not the footswitch or the microphone.
 - **Transmitting without modulation** (seen on an FTdx10): CAT PTT does put the rig into transmit, but the transmitted audio depends on the rig's **modulation source**. If it is set to the rear connector or USB ("REAR", often the case for FT8), the microphone is not transmitted. On the FTdx10, check in the transmit settings menus (TX AUDIO) the SSB modulation source (MOD SOURCE: MIC) and the mic gain. Other programs that key the rig over CAT, such as WSJT-X, behave in the same way.
+
+## TUNE button (since 1.49)
+
+The **TUNE** button, at the end of the PTT row (after the Always on top / PTT view boxes), same shape as PTT and aligned with it, transmits a **1500 Hz tone** to adjust an antenna tuner or an amplifier.
+- **Click**: transmit over CAT (like PTT) and tone sent to the **rig transmit sound card**; the button turns red and counts the seconds ("● TUNE 8"). Second click, click on PTT, or end of the duration: the tone stops (without a click) and the rig returns to receive. If PTT was already transmitting before Tune, it stays so. With **Rig VOX** (right-click), SDRLink sends no PTT: only the tone goes out, and the rig's VOX keys the transmitter (no CAT link needed).
+- **Right-click**: the **rig transmit sound card** (PC output connected to the rig's modulation / USB input), the **tone level** (small window always in front, to the left of the Tune menu which stays open, OK goes back to the menu: slider and box from 1 to 100 %, in steps of 1: wheel, arrows or typed value; applied at once, even while transmitting; 5 % at first), the **duration** (5, 10, 15, 20, 30, 45 s or 1 min; 10 s at first) and the colours.
+- The rig must take its modulation from USB / the rear (DATA, "REAR") to transmit the tone; set the power on the rig before tuning.
 
 ## Muting while transmitting
 
@@ -972,10 +997,14 @@ Message "Unhandled exception… 0x8007139F" when clicking a `.html` file in the 
 
 ## Licence
 
-Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICENSE` file in the GitHub repository). It comes with no warranty. You may use, study, modify and redistribute it, provided you give the source code under the same licence. Reason: the Olivia / Contestia decoders (Pawel Jalocha's library, taken from fldigi) and JS8 (JS8Call data) are GPL. The other components (FreeDV: BSD; ft8_lib: MIT; RNNoise: BSD; WebView2) are listed in `THIRD-PARTY-NOTICES.md`.
+Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICENSE` file in the GitHub repository). It comes with no warranty. You may use, study, modify and redistribute it, provided you give the source code under the same licence. Reason: the Olivia / Contestia decoders (Pawel Jalocha's library, taken from fldigi) and JS8 (JS8Call data) are GPL. The other components (FreeDV: BSD; ft8_lib: MIT; RNNoise: BSD; com0com: GPL; WebView2) are listed in `THIRD-PARTY-NOTICES.md`.
 
 ## Version history
 
+- **1.49**
+  - **TUNE button** at the end of the PTT row, same shape and aligned with it: 1500 Hz tone on the rig transmit sound card, for 5 s to 1 min. Right-click: sound card, **level from 1 to 100 %** (small window with slider and box, to the left of the menu which stays open; OK goes back to it), duration, **PTT on by CAT or rig VOX**, colours, **Close**.
+  - **VFO A or B**: by right-clicking the **RIG** frequency (shown "RIG B"), to control VFO B on rigs that have two (all interfaces except old binary Yaesus).
+  - **Virtual COM port**: the rig in direct CAT can be shared with another program (WSJT-X, log…) through a com0com pair; com0com installation, pair creation and **removal** from the window; **green** button while the virtual port is active, also settable while connected.
 - **1.48**
   - **Three DNR types**, chosen in the DNR button's right-click menu: **classic** (the one from 1.46), **improved** (MMSE-LSA: much less voice distortion for the same reduction) and **AI** (RNNoise, built-in neural network, no external website: the noise can disappear almost completely between words). Each type's level 1 to 10 is in its submenu (right-click the type). The digital-mode and FreeDV switch-offs apply to all three.
   - **Auto notch (DNF) button**: the box is gone; **click** = on / off (green button when on), **right-click** = the notch window (switch-offs, level, explanation), which also gives the button colours.

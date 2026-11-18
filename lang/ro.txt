@@ -3,6 +3,18 @@ sound card unplugged or disabled	placa de sunet deconectată sau dezactivată
 output not found	ieșire negăsită
 output already used in exclusive mode by another program	ieșire deja folosită în mod exclusiv de alt program
 cannot open, error 	nu se poate deschide, eroare 
+   (in use by another program)	   (folosit de alt program)
+com0com installer missing from this version	Programul de instalare com0com lipsește din această versiune
+com0com installer altered (different fingerprint)	Programul de instalare com0com a fost modificat (amprentă diferită)
+the installation did not complete (setupc.exe not found)	instalarea nu s-a terminat (setupc.exe negăsit)
+com0com is not installed	com0com nu este instalat
+invalid port names	nume de porturi invalide
+the pair did not appear (permission refused or driver not confirmed?)	perechea nu a apărut (permisiune refuzată sau driver neconfirmat?)
+the pair is still there (permission refused, or port still open in a program?)	perechea încă există (permisiune refuzată sau portul este încă deschis într-un program?)
+cannot start	nu poate porni
+timed out	timp depășit
+administrator permission refused	permisiunea de administrator a fost refuzată
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  programul dvs.: {1}
 WEFAX: waiting for the start tone	WEFAX: se așteaptă tonul de început
 WEFAX: listening	WEFAX: ascultare
 WEFAX: stop tone	WEFAX: ton de sfârșit
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Culoare cu scanarea oprită
 Colour while scanning	Culoare în timpul scanării
 Colour when receiving	Culoare la recepție
 Colour when transmitting (PTT on)	Culoare la emisie (PTT activat)
+Colour when sharing is off	Culoare când partajarea este dezactivată
+Colour when the virtual COM port is active (green at first)	Culoare când portul COM virtual este activ (inițial verde)
+Colour when idle	Culoare în repaus
+Colour during Tune (transmitting)	Culoare în timpul Tune (emisie)
 Background colour	Culoarea fundalului
 Text colour	Culoarea textului
 Colour of the selected mode	Culoarea modului selectat
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Elementele bifate v
 SDRLink will restart. Continue?	SDRLink va reporni. Continuați?
 Reset the program	Resetare program
 Cannot reset: 	Resetare imposibilă: 
-RIG	stație
 Disconnected	Deconectat
 Connect	Conectare
 Disconnect	Deconectare
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversitate oprită: stație deconectată
 TX safety timeout (PTT button)	Limită de siguranță TX (buton PTT)
 Off	Dezactivat
 PTT: connect the rig first	PTT: conectați mai întâi stația
+Tune stopped	Tune oprit
 transmitting	emisie
 Receivers muted while transmitting:	Receptoare puse pe mut în emisie:
 Rig (Mute TRX)	Stație (Mut TRX)
 Remove this value (pick it in the list first)	Eliminare valoare (alegeți-o mai întâi din listă)
-RIG 	STAȚIE 
 Cannot start WebView2 (Edge):\n	Nu se poate porni WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nume sau indicativ pentru receptoarele WebSDR care îl cer (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Numele nu poate fi gol.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pa
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Pagina WebSDR a fost redusă la {0} pentru a afișa tot panoul de comandă (+ și − pentru alegere)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Linkul de partajare a fost copiat în clipboard ({0} kHz {1}): lipiți-l într-un mesaj
 Share link: {0} kHz {1} on {2}	Link de partajare: {0} kHz {1} pe {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: emite un ton de 1500 Hz pentru reglarea cuplorului de antenă sau a amplificatorului (PTT prin CAT, sunet trimis la placa de sunet de emisie a stației). Clic: pornit / oprit. Clic dreapta: placa de sunet de emisie a stației, nivelul tonului, durata (5 s până la 1 min), culori
+Rig transmit sound card (PC output connected to the rig):	Placa de sunet de emisie a stației (ieșirea PC conectată la stație):
+Keying during Tune:	Manipularea în timpul Tune:
+PTT on (transmit by CAT)	PTT activ (emisie prin CAT)
+Rig VOX (tone only, no PTT)	VOX al stației (doar ton, fără PTT)
+Tune tone level (1500 Hz)	Nivelul tonului (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: doar ton, VOX-ul stației comandă emițătorul
+Tune: PTT on by CAT during the tone	Tune: PTT activ prin CAT în timpul tonului
+Tune: connect the rig first	Tune: conectați mai întâi stația
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: alegeți mai întâi placa de sunet de emisie a stației (clic dreapta pe Tune)
+Rig VFO controlled by SDRLink:	VFO al stației controlat de SDRLink:
+VFO B (rigs with two VFOs)	VFO B (stații cu două VFO)
+RIG	stație
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Partajează stația cu alt program (WSJT-X, program de jurnal…) printr-un port COM virtual (pereche com0com): SDRLink păstrează portul real al stației și transmite comenzile celuilalt program. Instalarea com0com și crearea perechii din fereastră
+Virtual COM port…	Port COM virtual…
+Virtual COM port (rig sharing)	Port COM virtual (partajarea stației)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink păstrează portul COM al stației și deschide unul dintre cele două porturi ale unei perechi com0com; celălalt program al dvs. (WSJT-X, program de jurnal…) deschide celălalt port, cu același model de stație, ca și cum ar fi conectat la stație. Comenzile lui sunt transmise stației între cele ale SDRLink. Doar cu interfața "Port COM (CAT direct)".
+Install com0com…	Instalează com0com…
+Share the rig on the port pair:	Partajează stația pe perechea de porturi:
+Remove the chosen pair…	Elimină perechea aleasă…
+com0com: installed	com0com: instalat
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com nu este instalat pe acest PC (driver de port COM virtual, gratuit, licență GPL).
+No COM port pair: create one.	Nicio pereche de porturi COM: creați una.
+com0com could not be installed: 	com0com nu a putut fi instalat: 
+Install com0com first.	Instalați mai întâi com0com.
+The pair could not be created: 	Perechea nu a putut fi creată: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Această pereche este folosită chiar acum de SDRLink: deconectați mai întâi stația.
+The pair could not be removed: 	Perechea nu a putut fi eliminată: 
+Rig sharing off (at the next connection)	Partajarea stației oprită (la următoarea conectare)
+Tune: tone sent to "{0}"	Tune: ton trimis către "{0}"
+Tone level (1500 Hz): {0} %…	Nivelul tonului (1500 Hz): {0} %…
+Transmit time: {0} s	Durata emisiei: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: placa de sunet de emisie indisponibilă ({0})
+Tune finished ({0} s)	Tune terminat ({0} s)
+VFO {0} controlled	VFO {0} controlat
+Virtual COM port: {0}	Port COM virtual: {0}
+Create a new pair COM{0} ↔ COM{1}…	Creează o pereche nouă COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	În celălalt program al dvs.: portul {0}, același model de stație ca în SDRLink (viteza nu contează pe un port virtual). Aplicat la următoarea conectare a stației.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Eliminați perechea de porturi {0} ↔ {1}?\n\nUn program care folosește {1} nu îl va mai putea deschide. Windows cere permisiunea administratorului.
+Rig sharing on {0}: at the next rig connection	Partajarea stației pe {0}: la următoarea conectare a stației
 Mode:	Mod:
 Preamp:	Preamplificator:
 (preamp unchanged)	(preamplificator nemodificat)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Datele
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Merită încercat dacă paginile WebSDR nu se mai afișează (fereastră goală, ca fără internet).
 Reset	Resetare
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink va reporni apoi. Setările actuale sunt păstrate în {0} (Import/Export le poate reîncărca). Actualizările SDRLink nu resetează niciodată nimic.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Port COM virtual: doar cu interfața "Port COM (CAT direct)"
 Connected, waiting for the rig...	Conectat, se așteaptă stația...
 Rig online	Stație online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stația nu răspunde (verificați portul, viteza, adresa CI-V, meniul CAT)
 Error: 	Eroare: 
+Rig shared: your other program can open {0}	Stație partajată: celălalt program al dvs. poate deschide {0}
+Rig shared on {0}	Stație partajată pe {0}
+Virtual COM port {0} cannot be opened: {1}	Portul COM virtual {0} nu poate fi deschis: {1}
 Profile:	Profil:
 Rename	Redenumire
 Scan type:	Tip de scanare:

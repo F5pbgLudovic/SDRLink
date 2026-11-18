@@ -73,6 +73,28 @@ namespace SDRLink
         public PowerRange Power { get { return PowerChoices; } }
         public virtual void SetPower(int watts) { }
 
+        // VFO commandé (1.49) : voir IRig.Vfo. Par défaut (anciens Yaesu à protocole binaire) : VFO A seulement.
+        public int Vfo { get; set; }
+        public virtual bool CanVfoB { get { return false; } }
+        protected bool OnB { get { return Vfo == 1 && CanVfoB; } }
+
+        // Partage sur un port COM virtuel (1.49) : découpage des commandes de ce protocole, et passage d'une commande d'un
+        // autre logiciel au poste avec sa réponse (appelé par le fil du poste, entre deux interrogations : jamais mélangé).
+        public virtual ShareFraming Framing { get { return ShareFraming.Binary; } }
+        public byte[] Passthrough(byte[] cmd)
+        {
+            port.DiscardInBuffer();
+            return CatShare.Exchange(Framing, cmd,
+                delegate(byte[] b) { port.Write(b, 0, b.Length); },
+                delegate(int ms)
+                {
+                    port.ReadTimeout = Math.Max(1, ms);
+                    try { return port.ReadByte(); }
+                    catch (TimeoutException) { return -1; }
+                    finally { port.ReadTimeout = 400; }
+                });
+        }
+
         protected static int ToPercent(long raw, int max) { return (int)Math.Round(raw * 100.0 / max); }
         protected static int FromPercent(int pct, int max) { return (int)Math.Round(Math.Max(0, Math.Min(100, pct)) * max / 100.0); }
         public abstract void SetFreq(long freqHz);
@@ -83,6 +105,11 @@ namespace SDRLink
     public abstract class AsciiCatRig : SerialRig
     {
         protected AsciiCatRig(SerialSettings s) : base(s) { }
+
+        public override ShareFraming Framing { get { return ShareFraming.Text; } }
+        // VFO B (1.49) : FB au lieu de FA (Yaesu, Kenwood, Elecraft), sans changer le VFO affiché par le poste.
+        public override bool CanVfoB { get { return true; } }
+        protected string F { get { return OnB ? "FB" : "FA"; } }
 
         protected void Send(string cmd)
         {
@@ -142,13 +169,17 @@ namespace SDRLink
 
         public YaesuRig(SerialSettings s, int freqDigits) : base(s) { digits = freqDigits; }
 
+        // Postes à deux récepteurs (FT-2000, FTdx9000, FTdx5000, FTdx101, FTX-1) : mode du VFO B / sub par MD1.
+        public bool SubMode;
+        string Md { get { return OnB && SubMode ? "MD1" : "MD0"; } }
+
         public override bool Read(out long freqHz, out string mode)
         {
-            freqHz = ParseDigits(Query("FA;", "FA"));
+            freqHz = ParseDigits(Query(F + ";", F));
             mode = null;
             if (freqHz <= 0) return false;
             LastHz = freqHz;
-            string md = Query("MD0;", "MD0");
+            string md = Query(Md + ";", Md);
             if (!string.IsNullOrEmpty(md)) mode = CodeToMode(md[0]);
             return true;
         }
@@ -182,13 +213,13 @@ namespace SDRLink
         public override void SetFreq(long freqHz)
         {
             LastHz = freqHz;
-            Send("FA" + freqHz.ToString(new string('0', digits), CultureInfo.InvariantCulture) + ";");
+            Send(F + freqHz.ToString(new string('0', digits), CultureInfo.InvariantCulture) + ";");
         }
 
         public override void SetMode(string mode)
         {
             char c = ModeToCode(mode);
-            if (c != '\0') Send("MD0" + c + ";");
+            if (c != '\0') Send(Md + c + ";");
         }
 
         static string CodeToMode(char c)
@@ -240,9 +271,16 @@ namespace SDRLink
 
         public override bool Read(out long freqHz, out string mode)
         {
-            freqHz = ParseDigits(Query("FA;", "FA"));
+            freqHz = ParseDigits(Query(F + ";", F));
             mode = null;
             if (freqHz <= 0) return false;
+            // Elecraft : mode du VFO B par MD$ ; Kenwood : le mode lu et réglé reste celui du VFO en service.
+            if (OnB && elecraft)
+            {
+                string mb = Query("MD$;", "MD$");
+                if (!string.IsNullOrEmpty(mb)) mode = CodeToMode(mb[mb.Length - 1]);
+                return true;
+            }
             if (!mdUnsupported)
             {
                 string md = Query("MD;", "MD");
@@ -305,13 +343,13 @@ namespace SDRLink
 
         public override void SetFreq(long freqHz)
         {
-            Send("FA" + freqHz.ToString("00000000000", CultureInfo.InvariantCulture) + ";");
+            Send(F + freqHz.ToString("00000000000", CultureInfo.InvariantCulture) + ";");
         }
 
         public override void SetMode(string mode)
         {
             char c = ModeToCode(mode);
-            if (c != '\0') Send("MD" + c + ";");
+            if (c != '\0') Send((OnB && elecraft ? "MD$" : "MD") + c + ";");
         }
 
         string CodeToMode(char c)
@@ -639,6 +677,20 @@ namespace SDRLink
         {
             address = civAddress;
             freqBytes = frequencyBytes;
+        }
+
+        public override ShareFraming Framing { get { return ShareFraming.Civ; } }
+        // VFO B (1.49) : le poste est mis sur le VFO B (CI-V 07 01) à la connexion, puis piloté normalement ;
+        // retour au VFO A (07 00) seulement s'il avait été mis sur B par SDRLink (Vfo = 2).
+        public override bool CanVfoB { get { return true; } }
+        public override void Open()
+        {
+            base.Open();
+            if (Vfo == 1 || Vfo == 2)
+            {
+                byte[] r = Transact(new byte[] { 0x07, (byte)(Vfo == 1 ? 0x01 : 0x00) }, 0xFB);
+                Log.Write("Icom : poste mis sur le VFO " + (Vfo == 1 ? "B" : "A") + (r == null ? " (pas de confirmation)" : ""));
+            }
         }
 
         public override bool Read(out long freqHz, out string mode)

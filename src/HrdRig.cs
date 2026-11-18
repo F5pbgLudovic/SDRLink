@@ -113,9 +113,14 @@ namespace SDRLink
                 }
             }
             PreampCheck();
-            string f = Command("get frequency");
-            if (!long.TryParse((f ?? "").Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out freqHz) || freqHz <= 0)
-                return false;
+            long fa;
+            if (Vfo == 1) { if (!ReadAB(out fa, out freqHz)) return false; }
+            else
+            {
+                string f = Command("get frequency");
+                if (!long.TryParse((f ?? "").Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out freqHz) || freqHz <= 0)
+                    return false;
+            }
             string m = Command("get dropdown-text {" + modeDropdown + "}");
             if (m != null)
             {
@@ -216,6 +221,19 @@ namespace SDRLink
         // Puissance (1.42) : non pilotée par HRD : l'échelle de son curseur (« RF power percentage », 0-255 sur le FT-2000) n'est pas
         // documentée, et une erreur pourrait donner plus de watts que demandé.
         public PowerRange Power { get { return null; } }
+
+        // VFO commandé (1.49) : voir IRig.Vfo.
+        public int Vfo { get; set; }
+        public bool CanVfoB { get { return true; } }
+
+        // « get frequencies » : « A-B » en Hz (VFO B, 1.49).
+        bool ReadAB(out long a, out long b)
+        {
+            a = b = 0;
+            string[] p = (Command("get frequencies") ?? "").Trim().Split('-');
+            return p.Length == 2 && long.TryParse(p[0], NumberStyles.Integer, CultureInfo.InvariantCulture, out a) &&
+                   long.TryParse(p[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out b) && b > 0;
+        }
         public void SetPower(int watts) { }
 
         static string Norm(string s)
@@ -391,6 +409,12 @@ namespace SDRLink
 
         public void SetFreq(long freqHz)
         {
+            long a, b;
+            if (Vfo == 1 && ReadAB(out a, out b))
+            {
+                Command("set frequencies-hz " + a.ToString(CultureInfo.InvariantCulture) + " " + freqHz.ToString(CultureInfo.InvariantCulture));
+                return;
+            }
             Command("set frequency-hz " + freqHz.ToString(CultureInfo.InvariantCulture));
         }
 

@@ -3,6 +3,18 @@ sound card unplugged or disabled	zvuková karta odpojená alebo vypnutá
 output not found	výstup sa nenašiel
 output already used in exclusive mode by another program	výstup už používa iný program vo výhradnom režime
 cannot open, error 	nedá sa otvoriť, chyba 
+   (in use by another program)	   (používa ho iný program)
+com0com installer missing from this version	Inštalátor com0com v tejto verzii chýba
+com0com installer altered (different fingerprint)	Inštalátor com0com bol zmenený (iný odtlačok)
+the installation did not complete (setupc.exe not found)	inštalácia sa nedokončila (setupc.exe sa nenašiel)
+com0com is not installed	com0com nie je nainštalovaný
+invalid port names	neplatné názvy portov
+the pair did not appear (permission refused or driver not confirmed?)	dvojica sa neobjavila (povolenie odmietnuté alebo ovládač nepotvrdený?)
+the pair is still there (permission refused, or port still open in a program?)	dvojica tam stále je (povolenie zamietnuté alebo je port stále otvorený v programe?)
+cannot start	nemožno spustiť
+timed out	časový limit vypršal
+administrator permission refused	povolenie správcu bolo odmietnuté
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  váš program: {1}
 WEFAX: waiting for the start tone	WEFAX: čaká sa na úvodný tón
 WEFAX: listening	WEFAX: počúva
 WEFAX: stop tone	WEFAX: ukončovací tón
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Farba pri zastavenom skenovaní
 Colour while scanning	Farba počas skenovania
 Colour when receiving	Farba pri príjme
 Colour when transmitting (PTT on)	Farba pri vysielaní (PTT zapnuté)
+Colour when sharing is off	Farba pri vypnutom zdieľaní
+Colour when the virtual COM port is active (green at first)	Farba pri aktívnom virtuálnom porte COM (spočiatku zelená)
+Colour when idle	Farba v pokoji
+Colour during Tune (transmitting)	Farba počas Tune (vysielanie)
 Background colour	Farba pozadia
 Text colour	Farba textu
 Colour of the selected mode	Farba zvoleného druhu prevádzky
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Zaškrtnuté polož
 SDRLink will restart. Continue?	SDRLink sa reštartuje. Pokračovať?
 Reset the program	Obnoviť pôvodný stav programu
 Cannot reset: 	Obnovenie nie je možné: 
-RIG	transceiver
 Disconnected	Odpojené
 Connect	Pripojiť
 Disconnect	Odpojiť
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diverzita vyp.: transceiver odpojený
 TX safety timeout (PTT button)	Bezpečnostný časový limit TX (tlačidlo PTT)
 Off	Vyp.
 PTT: connect the rig first	PTT: najprv pripojte transceiver
+Tune stopped	Tune zastavený
 transmitting	vysielanie
 Receivers muted while transmitting:	Prijímače stlmené pri vysielaní:
 Rig (Mute TRX)	Transceiver (Stlmiť TRX)
 Remove this value (pick it in the list first)	Odstrániť túto hodnotu (najprv ju vyberte v zozname)
-RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Nedá sa spustiť WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Meno alebo volacia značka pre prijímače WebSDR, ktoré ju vyžadujú (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Meno nemôže byť prázdne.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stránka WebSDR zmenšená na {0}, aby bol vidieť celý jej ovládací panel (voľba pomocou + a −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Odkaz na zdieľanie skopírovaný do schránky ({0} kHz {1}): vložte ho do správy
 Share link: {0} kHz {1} on {2}	Odkaz na zdieľanie: {0} kHz {1} na {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: vysiela tón 1500 Hz na ladenie anténneho tunera alebo zosilňovača (PTT cez CAT, zvuk sa posiela na zvukovú kartu vysielania rádia). Klik: zap. / vyp. Pravý klik: zvuková karta vysielania rádia, úroveň tónu, trvanie (5 s až 1 min), farby
+Rig transmit sound card (PC output connected to the rig):	Zvuková karta vysielania rádia (výstup PC pripojený k rádiu):
+Keying during Tune:	Kľúčovanie počas Tune:
+PTT on (transmit by CAT)	PTT zapnuté (vysielanie cez CAT)
+Rig VOX (tone only, no PTT)	VOX transceivera (iba tón, bez PTT)
+Tune tone level (1500 Hz)	Úroveň tónu (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: iba tón, VOX transceivera zakľúčuje vysielač
+Tune: PTT on by CAT during the tone	Tune: PTT zapnuté cez CAT počas tónu
+Tune: connect the rig first	Tune: najprv pripojte rádio
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: najprv vyberte zvukovú kartu vysielania rádia (pravý klik na Tune)
+Rig VFO controlled by SDRLink:	VFO transceivera riadené programom SDRLink:
+VFO B (rigs with two VFOs)	VFO B (transceivery s dvoma VFO)
+RIG	transceiver
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Zdieľa rádio s iným programom (WSJT-X, denník…) cez virtuálny port COM (dvojica com0com): SDRLink si ponecháva skutočný port rádia a odovzdáva príkazy druhého programu. Inštalácia com0com a vytvorenie dvojice z okna
+Virtual COM port…	Virtuálny port COM…
+Virtual COM port (rig sharing)	Virtuálny port COM (zdieľanie rádia)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink si ponecháva port COM rádia a otvára jeden z dvoch portov dvojice com0com; váš druhý program (WSJT-X, denník…) otvára druhý port, s rovnakým modelom rádia, akoby bol pripojený k rádiu. Jeho príkazy sa odovzdávajú rádiu medzi príkazmi samotného SDRLink. Iba s rozhraním "Port COM (priame CAT)".
+Install com0com…	Nainštalovať com0com…
+Share the rig on the port pair:	Zdieľať rádio na dvojici portov:
+Remove the chosen pair…	Odstrániť vybranú dvojicu…
+com0com: installed	com0com: nainštalovaný
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com nie je nainštalovaný v tomto PC (ovládač virtuálneho portu COM, zadarmo, licencia GPL).
+No COM port pair: create one.	Žiadna dvojica portov COM: vytvorte ju.
+com0com could not be installed: 	com0com sa nepodarilo nainštalovať: 
+Install com0com first.	Najprv nainštalujte com0com.
+The pair could not be created: 	Dvojicu sa nepodarilo vytvoriť: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Túto dvojicu práve používa SDRLink: najprv odpojte transceiver.
+The pair could not be removed: 	Dvojicu sa nepodarilo odstrániť: 
+Rig sharing off (at the next connection)	Zdieľanie rádia vypnuté (pri ďalšom pripojení)
+Tune: tone sent to "{0}"	Tune: tón odoslaný na "{0}"
+Tone level (1500 Hz): {0} %…	Úroveň tónu (1500 Hz): {0} %…
+Transmit time: {0} s	Čas vysielania: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: zvuková karta vysielania nie je dostupná ({0})
+Tune finished ({0} s)	Tune ukončený ({0} s)
+VFO {0} controlled	VFO {0} ovládané
+Virtual COM port: {0}	Virtuálny port COM: {0}
+Create a new pair COM{0} ↔ COM{1}…	Vytvoriť novú dvojicu COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	Vo vašom druhom programe: port {0}, rovnaký model rádia ako v SDRLink (prenosová rýchlosť na virtuálnom porte nehrá rolu). Použije sa pri ďalšom pripojení rádia.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Odstrániť dvojicu portov {0} ↔ {1}?\n\nProgram používajúci {1} ho už nebude môcť otvoriť. Windows požiada o povolenie správcu.
+Rig sharing on {0}: at the next rig connection	Zdieľanie rádia na {0}: pri ďalšom pripojení rádia
 Mode:	Druh prevádzky:
 Preamp:	Predzosilňovač:
 (preamp unchanged)	(predzosilňovač bez zmeny)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Údaje
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Skúste, ak sa stránky WebSDR už nezobrazujú (prázdne okno, ako bez internetu).
 Reset	Obnoviť predvolené
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink sa potom reštartuje. Súčasné nastavenia sa uložia do {0} (Import/Export ich môže znova načítať). Aktualizácie SDRLink nikdy nič neobnovujú.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtuálny port COM: iba s rozhraním "Port COM (priame CAT)"
 Connected, waiting for the rig...	Pripojené, čaká sa na transceiver...
 Rig online	Transceiver online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Transceiver neodpovedá (skontrolujte port, rýchlosť, adresu CI-V, menu CAT)
 Error: 	Chyba: 
+Rig shared: your other program can open {0}	Rádio zdieľané: váš druhý program môže otvoriť {0}
+Rig shared on {0}	Rádio zdieľané na {0}
+Virtual COM port {0} cannot be opened: {1}	Virtuálny port COM {0} sa nedá otvoriť: {1}
 Profile:	Profil:
 Rename	Premenovať
 Scan type:	Druh prehľadávania:

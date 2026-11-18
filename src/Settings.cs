@@ -116,6 +116,15 @@ namespace SDRLink
         public bool DnrOffDigi = true;     // DNR coupé quand un mode numérique décode ou que DIGI est le mode
         public bool DnrOffFdv = true;      // DNR coupé quand FreeDV auto (V1 ou V2) est en marche
         public bool DnrRig = true;         // DNR aussi sur le son du poste joué par SDRLink (écoute sur le PC, oreille du poste en diversité ; 1.48)
+        // 1.49 : VFO commandé (0 = A, 1 = B) ; RigVfoOnB = le poste a été mis sur le VFO B par SDRLink (Icom, Hamlib : remis sur A au retour à A).
+        public int RigVfo;
+        public bool RigVfoOnB;
+        // 1.49 : partage du poste (CAT direct) sur un port COM virtuel (bout d'une paire com0com tenu par SDRLink) ; vide = pas de partage.
+        public string ShareCom = "";
+        // 1.49 : bouton Tune : carte son d'émission du poste (sortie Windows), niveau (%) et durée (s) de la tonalité de 1500 Hz.
+        public string TuneCardId = "", TuneCardName = "";
+        public int TuneLevel = 5, TuneSeconds = 10;
+        public bool TuneVox;               // Tune : passage en émission par le VOX du poste (tonalité seule) au lieu du PTT par CAT (1.49)
         // Pas de la molette et bande passante de réception retenus par mode (clés cw, ssb, am, fm, digi) ; bande passante 0 = filtre
         // d'origine du WebSDR. Les valeurs absentes prennent celles par défaut (ModeStep, ModeBw).
         public Dictionary<string, int> ModeSteps = new Dictionary<string, int>(StringComparer.Ordinal);
@@ -313,6 +322,14 @@ namespace SDRLink
                     case "DnrOffDigi": s.DnrOffDigi = v == "1"; break;
                     case "DnrOffFdv": s.DnrOffFdv = v == "1"; break;
                     case "DnrRig": s.DnrRig = v == "1"; break;
+                    case "RigVfo": s.RigVfo = Int(v, 0) == 1 ? 1 : 0; break;
+                    case "RigVfoOnB": s.RigVfoOnB = v == "1"; break;
+                    case "ShareCom": s.ShareCom = v; break;
+                    case "TuneCardId": s.TuneCardId = v; break;
+                    case "TuneCardName": s.TuneCardName = v; break;
+                    case "TuneLevel": s.TuneLevel = Math.Max(1, Math.Min(100, Int(v, 5))); break;
+                    case "TuneSeconds": s.TuneSeconds = Math.Max(5, Math.Min(60, Int(v, 10))); break;
+                    case "TuneVox": s.TuneVox = v == "1"; break;
                     case "ModeStep": { int c = v.IndexOf(':'); if (c > 0) s.ModeSteps[v.Substring(0, c)] = Math.Max(1, Int(v.Substring(c + 1), 500)); } break;
                     case "ModeBw": { int c = v.IndexOf(':'); if (c > 0) s.ModeBws[v.Substring(0, c)] = Math.Max(0, Math.Min(20000, Int(v.Substring(c + 1), 0))); } break;
                     case "DigiAutoQsy": s.DigiAutoQsy = v == "1"; break;
@@ -484,6 +501,14 @@ namespace SDRLink
             Line(sb, "DnrOffDigi", DnrOffDigi ? 1 : 0);
             Line(sb, "DnrOffFdv", DnrOffFdv ? 1 : 0);
             Line(sb, "DnrRig", DnrRig ? 1 : 0);
+            Line(sb, "RigVfo", RigVfo);
+            Line(sb, "RigVfoOnB", RigVfoOnB ? 1 : 0);
+            Line(sb, "ShareCom", ShareCom);
+            Line(sb, "TuneCardId", TuneCardId);
+            Line(sb, "TuneCardName", TuneCardName);
+            Line(sb, "TuneLevel", TuneLevel);
+            Line(sb, "TuneSeconds", TuneSeconds);
+            Line(sb, "TuneVox", TuneVox ? 1 : 0);
             foreach (KeyValuePair<string, int> p in ModeSteps) Line(sb, "ModeStep", p.Key + ":" + p.Value);
             foreach (KeyValuePair<string, int> p in ModeBws) Line(sb, "ModeBw", p.Key + ":" + p.Value);
             Line(sb, "DigiAutoQsy", DigiAutoQsy ? 1 : 0);

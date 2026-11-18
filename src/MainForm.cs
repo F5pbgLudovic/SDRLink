@@ -408,6 +408,7 @@ namespace SDRLink
             pnlCom.Controls.Add(txtCiv);
             pnlCom.Controls.Add(chkRts);
             pnlCom.Controls.Add(chkDtr);
+            BuildShareButton(pnlCom);   // port COM virtuel (1.49)
             row2.Controls.Add(pnlCom);
 
             pnlOmni = SubRow();
@@ -705,6 +706,8 @@ namespace SDRLink
             chkPttView.CheckedChanged += delegate { if (!loading) SetPttView(chkPttView.Checked); };
             views2.Controls.Add(chkPttView);
             rowDisplay.Controls.Add(views2);
+            // Tune (1.49) : même forme que PTT, au bout de la ligne, aligné sur lui.
+            BuildTuneButton(rowDisplay);
 
             // Ligne 5 : barre d'adresse WebSDR et favoris
             rowUrl = Row();
@@ -978,6 +981,12 @@ namespace SDRLink
                 Slot("ScanOn", () => Lang.T("Couleur scan en marche", "Colour while scanning")));
             AddColorMenu(btnPtt, Slot("PttRx", () => Lang.T("Couleur en réception", "Colour when receiving")),
                 Slot("PttTx", () => Lang.T("Couleur en émission (PTT activé)", "Colour when transmitting (PTT on)")));
+            AddColorMenu(btnVcom, Slot("VcomOff", () => Lang.T("Couleur partage arrêté", "Colour when sharing is off")),
+                Slot("VcomOn", () => Lang.T("Couleur port COM virtuel en service (vert au départ)", "Colour when the virtual COM port is active (green at first)")));
+            AddColorMenu(btnTune, Slot("TuneOff", () => Lang.T("Couleur au repos", "Colour when idle")),
+                Slot("TuneOn", () => Lang.T("Couleur pendant Tune (émission)", "Colour during Tune (transmitting)")));
+            AddTuneCloseItem();   // ligne « Fermer » à la fin du menu de Tune, après les couleurs
+            BuildVfoMenu();   // VFO A / B (1.49) au clic droit sur RADIO, avant les couleurs
             AddColorMenu(lblRig, Slot("RigBack", () => Lang.T("Couleur du fond", "Background colour")), Slot("RigText", () => Lang.T("Couleur du texte", "Text colour")));
             AddColorMenu(lblSdr, Slot("SdrBack", () => Lang.T("Couleur du fond", "Background colour")), Slot("SdrText", () => Lang.T("Couleur du texte", "Text colour")));
             foreach (Button b in modeButtons)
@@ -1487,7 +1496,7 @@ namespace SDRLink
         // ne bougent plus quand le mode change (USB, AM...). Une fréquence plus longue (VHF, GHz) élargit la zone une fois.
         void SizeFreqLabels()
         {
-            FitWidth(lblRig, Lang.T("RADIO", "RIG") + " 14.074.000 RTTY-R", true);
+            FitWidth(lblRig, RigCaption() + " 14.074.000 RTTY-R", true);
             FitWidth(lblSdr, "WEBSDR 14.074.000 USB", true);
         }
 
@@ -1772,6 +1781,20 @@ namespace SDRLink
                 }
             }
 
+            // VFO commandé (1.49) et mode du VFO B par MD1 sur les Yaesu à deux récepteurs.
+            {
+                Func<IRig> make = factory;
+                int vfo = VfoForConnect();
+                bool sub = settings.Interface == 0 && HasSubMode(cbModel.SelectedItem as RigModel);
+                factory = delegate
+                {
+                    IRig r = make();
+                    r.Vfo = vfo;
+                    YaesuRig y = r as YaesuRig;
+                    if (y != null) y.SubMode = sub;
+                    return r;
+                };
+            }
             lastRigF = 0; lastRigFam = null; rigF = 0; rigM = null;
             // HRD tourne sur le même PC : on peut l'interroger plus souvent pour réagir plus vite au PTT.
             worker = new RigWorker(factory, settings.Interface == 3 ? 100 : 200);
@@ -1784,6 +1807,11 @@ namespace SDRLink
             worker.PowerKnown += delegate(PowerRange pr) { BeginInvokeSafe(delegate { rigPower = pr; }); };
             rigPower = null;
             worker.PollTx = chkMute.Checked;
+            // Port COM virtuel (1.49) : seulement en CAT direct.
+            worker.ShareCom = settings.Interface == 0 ? settings.ShareCom : "";
+            worker.ShareBaud = settings.Baud;
+            worker.ShareStatus += delegate(string msg) { BeginInvokeSafe(delegate { ShowStatus(msg); }); };
+            worker.ShareChanged += delegate(bool on) { BeginInvokeSafe(delegate { UpdateShareButton(); }); };
             rigAfSupported = -1;
             rigMuted = false;
             worker.Start();
@@ -1846,6 +1874,7 @@ namespace SDRLink
         void Disconnect()
         {
             if (worker == null) return;
+            StopTune(null);
             // Diversité sur le poste : arrêtée d'abord (son du poste rendu tant que la liaison existe).
             if (diversity != null && divSource == 1) StopDiversity(Lang.T("Diversité arrêtée : poste déconnecté", "Diversity off: rig disconnected"));
             RigWorker w = worker;
@@ -1878,7 +1907,7 @@ namespace SDRLink
             cbInterface.Enabled = on;
             foreach (FlowLayoutPanel p in new[] { pnlModel, pnlCom, pnlOmni, pnlNet })
                 foreach (Control c in p.Controls)
-                    if (!(c is Label)) c.Enabled = on;
+                    if (!(c is Label) && c != btnVcom) c.Enabled = on;   // port COM virtuel : réglable connecté (reconnexion)
         }
 
         void BeginInvokeSafe(Action a)
@@ -2177,6 +2206,8 @@ namespace SDRLink
         void SetPttButton(bool on)
         {
             if (on && (worker == null || !rigOnline)) { ShowStatus(Lang.T("PTT : connectez d'abord le poste", "PTT: connect the rig first")); return; }
+            // Retour en réception pendant Tune : la tonalité s'arrête aussi.
+            if (!on && tuneTone != null) { tunePttOwned = false; StopTune(Lang.T("Tune arrêté", "Tune stopped")); }
             if (on) pttSince = DateTime.UtcNow;
             if (on && scanning) StopScan(Lang.T("émission", "transmitting"));
             pttActive = on;
@@ -2213,6 +2244,7 @@ namespace SDRLink
                 btnPtt.FlatAppearance.BorderColor = Outline(back);
             }
             // Toujours actif : désactivé, Windows grise le texte (illisible). Sans poste, un clic affiche un message.
+            UpdateTuneButton();
         }
 
         bool Transmitting { get { return rigTx || pttActive; } }
@@ -2711,7 +2743,7 @@ namespace SDRLink
             bool wheel = WheelActive;
             long shownRig = wheel ? wheelTarget : rigF;
             long shownSdr = SdrWheelActive ? sdrWheelTarget : wheel && !rigOnlyWheel ? wheelTarget + Offset : sdrF;
-            SetFreqText(lblRig, Lang.T("RADIO ", "RIG ") + (worker != null && rigF > 0 ? FormatFreq(shownRig) + " " + Modes.Display(rigM) : "---"));
+            SetFreqText(lblRig, RigCaption() + " " + (worker != null && rigF > 0 ? FormatFreq(shownRig) + " " + Modes.Display(rigM) : "---"));
             // L'émission est signalée par la couleur (et le bouton PTT) : la largeur du texte ne change pas.
             Color c = RigFore();
             if (lblRig.ForeColor != c) lblRig.ForeColor = c;

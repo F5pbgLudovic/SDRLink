@@ -3,6 +3,18 @@ sound card unplugged or disabled	garso plokštė atjungta arba išjungta
 output not found	išvestis nerasta
 output already used in exclusive mode by another program	išvestį išskirtiniu režimu jau naudoja kita programa
 cannot open, error 	nepavyksta atidaryti, klaida 
+   (in use by another program)	   (naudoja kita programa)
+com0com installer missing from this version	com0com diegimo programos šioje versijoje nėra
+com0com installer altered (different fingerprint)	com0com diegimo programa pakeista (kitoks kontrolinis kodas)
+the installation did not complete (setupc.exe not found)	diegimas nebaigtas (nerastas setupc.exe)
+com0com is not installed	com0com neįdiegta
+invalid port names	netinkami prievadų pavadinimai
+the pair did not appear (permission refused or driver not confirmed?)	pora nepasirodė (leidimas atmestas arba tvarkyklė nepatvirtinta?)
+the pair is still there (permission refused, or port still open in a program?)	pora vis dar yra (leidimas atmestas arba prievadas vis dar atidarytas programoje?)
+cannot start	nepavyksta paleisti
+timed out	baigėsi laukimo laikas
+administrator permission refused	administratoriaus leidimas atmestas
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  jūsų programa: {1}
 WEFAX: waiting for the start tone	WEFAX: laukiama pradžios tono
 WEFAX: listening	WEFAX: klausomasi
 WEFAX: stop tone	WEFAX: pabaigos tonas
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Spalva sustabdžius skenavimą
 Colour while scanning	Spalva skenuojant
 Colour when receiving	Spalva priimant
 Colour when transmitting (PTT on)	Spalva siunčiant (PTT įjungtas)
+Colour when sharing is off	Spalva, kai bendrinimas išjungtas
+Colour when the virtual COM port is active (green at first)	Spalva, kai virtualus COM prievadas aktyvus (iš pradžių žalia)
+Colour when idle	Spalva laukiant
+Colour during Tune (transmitting)	Spalva Tune metu (perdavimas)
 Background colour	Fono spalva
 Text colour	Teksto spalva
 Colour of the selected mode	Pasirinktos darbo rūšies spalva
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Pažymėti elementa
 SDRLink will restart. Continue?	SDRLink bus paleista iš naujo. Tęsti?
 Reset the program	Atstatyti programą
 Cannot reset: 	Atstatyti neįmanoma: 
-RIG	stotis
 Disconnected	Atsijungta
 Connect	Prisijungti
 Disconnect	Atsijungti
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity išjungta: stotis atjungta
 TX safety timeout (PTT button)	TX saugos laikmatis (mygtukas PTT)
 Off	Išjungta
 PTT: connect the rig first	PTT: pirmiausia prijunkite stotį
+Tune stopped	Tune sustabdytas
 transmitting	siuntimas
 Receivers muted while transmitting:	Imtuvai, nutildomi siunčiant:
 Rig (Mute TRX)	Stotis (Nutildyti TRX)
 Remove this value (pick it in the list first)	Šalinti šią reikšmę (pirmiausia pasirinkite ją sąraše)
-RIG 	STOTIS 
 Cannot start WebView2 (Edge):\n	Nepavyksta paleisti WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Vardas arba šaukinys WebSDR imtuvams, kurie jo prašo (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Vardas negali būti tuščias.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR puslapis sumažintas iki {0}, kad būtų matomas visas valdymo skydelis (+ ir − pasirinkimui)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Bendrinimo nuoroda nukopijuota į iškarpinę ({0} kHz {1}): įklijuokite ją į žinutę
 Share link: {0} kHz {1} on {2}	Bendrinimo nuoroda: {0} kHz {1} – {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: perduoda 1500 Hz toną antenos derintuvui ar stiprintuvui sureguliuoti (PTT per CAT, garsas siunčiamas į radijo stoties perdavimo garso plokštę). Spustelėjimas: įjungti / išjungti. Spustelėjimas dešiniuoju klavišu: radijo stoties perdavimo garso plokštė, tono lygis, trukmė (nuo 5 s iki 1 min.), spalvos
+Rig transmit sound card (PC output connected to the rig):	Radijo stoties perdavimo garso plokštė (kompiuterio išvestis, prijungta prie radijo stoties):
+Keying during Tune:	Perjungimas į siuntimą per Tune:
+PTT on (transmit by CAT)	PTT įjungtas (siuntimas per CAT)
+Rig VOX (tone only, no PTT)	Radijo stoties VOX (tik tonas, be PTT)
+Tune tone level (1500 Hz)	Tono lygis (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: tik tonas, radijo stoties VOX įjungia siųstuvą
+Tune: PTT on by CAT during the tone	Tune: PTT įjungtas per CAT tono metu
+Tune: connect the rig first	Tune: pirmiausia prijunkite radijo stotį
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: pirmiausia pasirinkite radijo stoties perdavimo garso plokštę (dešinysis spustelėjimas ant Tune)
+Rig VFO controlled by SDRLink:	SDRLink valdomas radijo stoties VFO:
+VFO B (rigs with two VFOs)	VFO B (radijo stotys su dviem VFO)
+RIG	stotis
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Dalijasi radijo stotimi su kita programa (WSJT-X, žurnalo programa…) per virtualų COM prievadą (com0com pora): SDRLink pasilieka tikrąjį radijo stoties prievadą ir perduoda kitos programos komandas. com0com diegimas ir poros sukūrimas iš lango
+Virtual COM port…	Virtualus COM prievadas…
+Virtual COM port (rig sharing)	Virtualus COM prievadas (radijo stoties dalijimasis)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink pasilieka radijo stoties COM prievadą ir atidaro vieną iš dviejų com0com poros prievadų; jūsų kita programa (WSJT-X, žurnalo programa…) atidaro kitą prievadą su tuo pačiu radijo stoties modeliu, tarsi būtų prijungta prie radijo stoties. Jos komandos perduodamos radijo stočiai tarp paties SDRLink komandų. Tik su sąsaja „COM prievadas (tiesioginis CAT)“.
+Install com0com…	Įdiegti com0com…
+Share the rig on the port pair:	Dalytis radijo stotimi prievadų poroje:
+Remove the chosen pair…	Pašalinti pasirinktą porą…
+com0com: installed	com0com: įdiegta
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com neįdiegta šiame kompiuteryje (virtualaus COM prievado tvarkyklė, nemokama, GPL licencija).
+No COM port pair: create one.	Nėra COM prievadų poros: sukurkite ją.
+com0com could not be installed: 	Nepavyko įdiegti com0com: 
+Install com0com first.	Pirmiausia įdiekite com0com.
+The pair could not be created: 	Nepavyko sukurti poros: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Šią porą šiuo metu naudoja SDRLink: pirmiausia atjunkite radijo stotį.
+The pair could not be removed: 	Nepavyko pašalinti poros: 
+Rig sharing off (at the next connection)	Dalijimasis radijo stotimi išjungtas (kito prisijungimo metu)
+Tune: tone sent to "{0}"	Tune: tonas išsiųstas į „{0}“
+Tone level (1500 Hz): {0} %…	Tono lygis (1500 Hz): {0} %…
+Transmit time: {0} s	Perdavimo trukmė: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: perdavimo garso plokštė nepasiekiama ({0})
+Tune finished ({0} s)	Tune baigtas ({0} s)
+VFO {0} controlled	VFO {0} valdomas
+Virtual COM port: {0}	Virtualus COM prievadas: {0}
+Create a new pair COM{0} ↔ COM{1}…	Sukurti naują porą COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	Jūsų kitoje programoje: prievadas {0}, tas pats radijo stoties modelis kaip SDRLink (virtualiame prievade sparta nesvarbi). Taikoma kito radijo stoties prijungimo metu.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Pašalinti prievadų porą {0} ↔ {1}?\n\nProgama, naudojanti {1}, nebegalės jo atidaryti. Windows prašo administratoriaus leidimo.
+Rig sharing on {0}: at the next rig connection	Dalijimasis radijo stotimi per {0}: kito radijo stoties prijungimo metu
 Mode:	Režimas:
 Preamp:	Išankstinis stiprintuvas:
 (preamp unchanged)	(išankstinis stiprintuvas nepakeistas)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Įtais
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Verta pabandyti, jei WebSDR puslapiai nebesirodo (tuščias langas, lyg nebūtų interneto).
 Reset	Atkurti
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Po to SDRLink bus paleista iš naujo. Dabartiniai nustatymai išsaugomi faile {0} (Importas/eksportas gali juos vėl įkelti). SDRLink atnaujinimai niekada nieko neatstato.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtualus COM prievadas: tik su sąsaja „COM prievadas (tiesioginis CAT)“
 Connected, waiting for the rig...	Prisijungta, laukiama stoties...
 Rig online	Stotis prisijungusi
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Stotis neatsako (patikrinkite prievadą, spartą, CI-V adresą, CAT meniu)
 Error: 	Klaida: 
+Rig shared: your other program can open {0}	Radijo stotis bendrinama: jūsų kita programa gali atidaryti {0}
+Rig shared on {0}	Radijo stotis bendrinama per {0}
+Virtual COM port {0} cannot be opened: {1}	Virtualaus COM prievado {0} nepavyksta atidaryti: {1}
 Profile:	Profilis:
 Rename	Pervardyti
 Scan type:	Skenavimo tipas:

@@ -27,6 +27,10 @@ namespace SDRLink
         PowerRange Power { get; }
         // watts déjà ramenés dans les bornes (Powers.Clamp) ; jamais appelé pendant l'émission.
         void SetPower(int watts);
+        // VFO commandé (1.49), donné avant Open() : 0 = A, 1 = B, 2 = A en remettant le poste sur A (il avait été mis sur B).
+        int Vfo { get; set; }
+        // Le VFO B est-il pilotable par ce poste / cette interface ? (sinon le VFO A reste commandé)
+        bool CanVfoB { get; }
     }
 
     public enum RigProtocol { Yaesu, Yaesu817, YaesuOld, YaesuLegacy, Yaesu767, YaesuWriteOnly, Icom, Kenwood, Elecraft }

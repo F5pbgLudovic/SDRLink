@@ -3,6 +3,18 @@ sound card unplugged or disabled	äänikortti irrotettu tai poistettu käytöst�
 output not found	lähtöä ei löydy
 output already used in exclusive mode by another program	toinen ohjelma käyttää lähtöä jo yksinoikeustilassa
 cannot open, error 	ei voi avata, virhe 
+   (in use by another program)	   (toisen ohjelman käytössä)
+com0com installer missing from this version	com0com-asennusohjelma puuttuu tästä versiosta
+com0com installer altered (different fingerprint)	com0com-asennusohjelmaa on muutettu (eri sormenjälki)
+the installation did not complete (setupc.exe not found)	asennus ei valmistunut (setupc.exe puuttuu)
+com0com is not installed	com0com ei ole asennettu
+invalid port names	virheelliset porttien nimet
+the pair did not appear (permission refused or driver not confirmed?)	paria ei ilmestynyt (lupa evätty tai ohjainta ei vahvistettu?)
+the pair is still there (permission refused, or port still open in a program?)	pari on yhä olemassa (lupa evätty tai portti käytetään vielä ohjelmassa?)
+cannot start	ei voi käynnistää
+timed out	aikakatkaisu
+administrator permission refused	järjestelmänvalvojan lupa evätty
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  ohjelmasi: {1}
 WEFAX: waiting for the start tone	WEFAX: odotetaan aloitusääntä
 WEFAX: listening	WEFAX: kuuntelee
 WEFAX: stop tone	WEFAX: lopetusääni
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Väri skannauksen ollessa pysäytetty
 Colour while scanning	Väri skannauksen aikana
 Colour when receiving	Väri vastaanotossa
 Colour when transmitting (PTT on)	Väri lähetyksessä (PTT päällä)
+Colour when sharing is off	Väri, kun jako on pois päältä
+Colour when the virtual COM port is active (green at first)	Väri, kun virtuaalinen COM-portti on aktiivinen (aluksi vihreä)
+Colour when idle	Väri lepotilassa
+Colour during Tune (transmitting)	Väri Tune-toiminnon aikana (lähetys)
 Background colour	Taustaväri
 Text colour	Tekstin väri
 Colour of the selected mode	Valitun lähetelajin väri
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Valitut kohteet pal
 SDRLink will restart. Continue?	SDRLink käynnistyy uudelleen. Jatketaanko?
 Reset the program	Palauta ohjelman alkutila
 Cannot reset: 	Palautus ei onnistu: 
-RIG	radio
 Disconnected	Ei yhteyttä
 Connect	Yhdistä
 Disconnect	Katkaise
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity pois: radio on irrotettu
 TX safety timeout (PTT button)	TX-turva-aikakatkaisu (PTT-painike)
 Off	Pois
 PTT: connect the rig first	PTT: yhdistä ensin radio
+Tune stopped	Tune pysäytetty
 transmitting	lähetys
 Receivers muted while transmitting:	Lähetyksen ajaksi mykistettävät vastaanottimet:
 Rig (Mute TRX)	Radio (Mykistä TRX)
 Remove this value (pick it in the list first)	Poista tämä arvo (valitse se ensin luettelosta)
-RIG 	RADIO 
 Cannot start WebView2 (Edge):\n	WebView2:ta (Edge) ei voi käynnistää:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nimi tai kutsu WebSDR-vastaanottimille, jotka kysyvät sitä (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Nimi ei voi olla tyhjä.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sivu pienennetty kokoon {0}, jotta koko ohjauspaneeli näkyy (valitse + ja −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jakolinkki kopioitu leikepöydälle ({0} kHz {1}): liitä se viestiin
 Share link: {0} kHz {1} on {2}	Jakolinkki: {0} kHz {1} kohteessa {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: lähettää 1500 Hz:n äänen antennisovittimen tai vahvistimen säätöä varten (PTT CAT:n kautta, ääni lähetetään radion lähetysäänikortille). Napsautus: päälle / pois. Hiiren oikea painike: radion lähetysäänikortti, äänen taso, kesto (5 s - 1 min), värit
+Rig transmit sound card (PC output connected to the rig):	Radion lähetysäänikortti (radioon kytketty PC:n äänilähtö):
+Keying during Tune:	Avainnus Tune:-toiminnon aikana
+PTT on (transmit by CAT)	PTT päällä (lähetys CAT:lla)
+Rig VOX (tone only, no PTT)	Radion VOX (vain ääni, ei PTT:tä)
+Tune tone level (1500 Hz)	Äänen taso (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: vain ääni, radion VOX avaa lähettimen
+Tune: PTT on by CAT during the tone	Tune: PTT päällä CAT:lla äänen aikana
+Tune: connect the rig first	Tune: yhdistä ensin radio
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: valitse ensin radion lähetysäänikortti (napsauta Tunea hiiren oikealla)
+Rig VFO controlled by SDRLink:	SDRLinkin ohjaama radion VFO:
+VFO B (rigs with two VFOs)	VFO B (radiot, joissa on kaksi VFO:ta)
+RIG	radio
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Jakaa radion toisen ohjelman (WSJT-X, lokiohjelma…) kanssa virtuaalisen COM-portin (com0com-pari) kautta: SDRLink pitää radion oikean portin ja välittää toisen ohjelman komennot. com0com-asennus ja parin luonti ikkunasta
+Virtual COM port…	Virtuaalinen COM-portti…
+Virtual COM port (rig sharing)	Virtuaalinen COM-portti (radion jako)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink pitää radion COM-portin ja avaa toisen com0com-parin kahdesta portista; toinen ohjelmasi (WSJT-X, lokiohjelma…) avaa toisen portin samalla radiomallilla, ikään kuin se olisi yhdistetty radioon. Sen komennot välitetään radiolle SDRLinkin omien komentojen välissä. Vain ”COM-portti (suora CAT)” -liitännällä.
+Install com0com…	Asenna com0com…
+Share the rig on the port pair:	Jaa radio porttiparilla:
+Remove the chosen pair…	Poista valittu pari…
+com0com: installed	com0com: asennettu
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com ei ole asennettu tähän tietokoneeseen (virtuaalinen COM-porttiohjain, ilmainen, GPL-lisenssi).
+No COM port pair: create one.	Ei COM-porttiparia: luo sellainen.
+com0com could not be installed: 	com0comia ei voitu asentaa: 
+Install com0com first.	Asenna ensin com0com.
+The pair could not be created: 	Paria ei voitu luoda: 
+This pair is in use by SDRLink right now: disconnect the rig first.	SDRLink käyttää tätä paria juuri nyt: katkaise ensin yhteys radioon.
+The pair could not be removed: 	Paria ei voitu poistaa: 
+Rig sharing off (at the next connection)	Radion jako pois (seuraavassa yhteydessä)
+Tune: tone sent to "{0}"	Tune: ääni lähetetty kohteeseen ”{0}”
+Tone level (1500 Hz): {0} %…	Äänen taso (1500 Hz): {0} %…
+Transmit time: {0} s	Lähetysaika: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: lähetysäänikortti ei ole käytettävissä ({0})
+Tune finished ({0} s)	Tune valmis ({0} s)
+VFO {0} controlled	VFO {0} ohjattu
+Virtual COM port: {0}	Virtuaalinen COM-portti: {0}
+Create a new pair COM{0} ↔ COM{1}…	Luo uusi pari COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	Toisessa ohjelmassasi: portti {0}, sama radiomalli kuin SDRLinkissä (siirtonopeudella ei ole väliä virtuaaliportissa). Otetaan käyttöön seuraavassa radioyhteydessä.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Poistetaanko porttipari {0} ↔ {1}?\n\nOhjelma, joka käyttää porttia {1}, ei enää voi avata sitä. Windows pyytää järjestelmänvalvojan lupaa.
+Rig sharing on {0}: at the next rig connection	Radion jako portissa {0}: seuraavassa radioyhteydessä
 Mode:	Lähetelaji:
 Preamp:	Esivahvistin:
 (preamp unchanged)	(esivahvistin ennallaan)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Sisä�
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Kokeile, jos WebSDR-sivut eivät enää näy (tyhjä ikkuna, kuin ilman internetiä).
 Reset	Palauta
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink käynnistyy sen jälkeen uudelleen. Nykyiset asetukset säilytetään tiedostossa {0} (Tuonti/vienti voi ladata ne takaisin). SDRLinkin päivitykset eivät koskaan palauta mitään.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtuaalinen COM-portti: vain ”COM-portti (suora CAT)” -liitännällä
 Connected, waiting for the rig...	Yhdistetty, odotetaan radiota...
 Rig online	Radio yhteydessä
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Radio ei vastaa (tarkista portti, nopeus, CI-V-osoite, CAT-valikko)
 Error: 	Virhe: 
+Rig shared: your other program can open {0}	Radio jaettu: toinen ohjelmasi voi avata portin {0}
+Rig shared on {0}	Radio jaettu portissa {0}
+Virtual COM port {0} cannot be opened: {1}	Virtuaalista COM-porttia {0} ei voi avata: {1}
 Profile:	Profiili:
 Rename	Nimeä uudelleen
 Scan type:	Pyyhkäisyn tyyppi:

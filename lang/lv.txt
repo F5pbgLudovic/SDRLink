@@ -3,6 +3,18 @@ sound card unplugged or disabled	skaņas karte atvienota vai atspējota
 output not found	izeja nav atrasta
 output already used in exclusive mode by another program	izeju ekskluzīvajā režīmā jau izmanto cita programma
 cannot open, error 	nevar atvērt, kļūda 
+   (in use by another program)	   (izmanto cita programma)
+com0com installer missing from this version	com0com instalētāja šajā versijā nav
+com0com installer altered (different fingerprint)	com0com instalētājs ir mainīts (cits pirkstu nospiedums)
+the installation did not complete (setupc.exe not found)	instalēšana netika pabeigta (setupc.exe nav atrasts)
+com0com is not installed	com0com nav instalēts
+invalid port names	nederīgi portu nosaukumi
+the pair did not appear (permission refused or driver not confirmed?)	pāris neparādījās (atļauja atteikta vai draiveris nav apstiprināts?)
+the pair is still there (permission refused, or port still open in a program?)	pāris joprojām pastāv (atļauja liegta vai ports vēl ir atvērts kādā programmā?)
+cannot start	nevar startēt
+timed out	iestājusies noildze
+administrator permission refused	administratora atļauja atteikta
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  jūsu programma: {1}
 WEFAX: waiting for the start tone	WEFAX: gaida sākuma toni
 WEFAX: listening	WEFAX: klausās
 WEFAX: stop tone	WEFAX: beigu tonis
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Krāsa, kad skenēšana apturēta
 Colour while scanning	Krāsa skenēšanas laikā
 Colour when receiving	Krāsa uztveršanā
 Colour when transmitting (PTT on)	Krāsa raidīšanā (PTT ieslēgts)
+Colour when sharing is off	Krāsa, kad kopīgošana ir izslēgta
+Colour when the virtual COM port is active (green at first)	Krāsa, kad virtuālais COM ports ir aktīvs (sākumā zaļa)
+Colour when idle	Krāsa gaidīšanas režīmā
+Colour during Tune (transmitting)	Krāsa Tune laikā (raidīšana)
 Background colour	Fona krāsa
 Text colour	Teksta krāsa
 Colour of the selected mode	Izvēlētā darba veida krāsa
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Atzīmētie element
 SDRLink will restart. Continue?	SDRLink tiks restartēta. Turpināt?
 Reset the program	Atiestatīt programmu
 Cannot reset: 	Atiestatīt nav iespējams: 
-RIG	raiduztvērējs
 Disconnected	Atvienots
 Connect	Savienot
 Disconnect	Atvienot
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity izslēgta: raiduztvērējs atvienots
 TX safety timeout (PTT button)	TX drošības taimauts (poga PTT)
 Off	Izslēgts
 PTT: connect the rig first	PTT: vispirms pievienojiet raiduztvērēju
+Tune stopped	Tune apturēts
 transmitting	raidīšana
 Receivers muted while transmitting:	Uztvērēji, kas raidīšanas laikā tiek klusināti:
 Rig (Mute TRX)	Raiduztvērējs (Klusināt TRX)
 Remove this value (pick it in the list first)	Noņemt šo vērtību (vispirms izvēlieties to sarakstā)
-RIG 	RADIO 
 Cannot start WebView2 (Edge):\n	Nevar palaist WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Vārds vai izsaukuma signāls WebSDR, kas to prasa (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Vārds nevar būt tukšs.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR lapa samazināta līdz {0}, lai būtu redzams viss vadības panelis (+ un − izvēlei)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Kopīgošanas saite nokopēta starpliktuvē ({0} kHz {1}): ielīmējiet to ziņojumā
 Share link: {0} kHz {1} on {2}	Kopīgošanas saite: {0} kHz {1} vietnē {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: raida 1500 Hz toni, lai noregulētu antenas tjūneri vai pastiprinātāju (PTT caur CAT, skaņa tiek sūtīta uz radiostacijas raidīšanas skaņas karti). Klikšķis: ieslēgt / izslēgt. Labais klikšķis: radiostacijas raidīšanas skaņas karte, toņa līmenis, ilgums (no 5 s līdz 1 min), krāsas
+Rig transmit sound card (PC output connected to the rig):	Radiostacijas raidīšanas skaņas karte (datora izeja, kas pievienota radiostacijai):
+Keying during Tune:	Raidīšanas ieslēgšana Tune: laikā
+PTT on (transmit by CAT)	PTT ieslēgts (raidīšana ar CAT)
+Rig VOX (tone only, no PTT)	Radiostacijas VOX (tikai signāls, bez PTT)
+Tune tone level (1500 Hz)	Toņa līmenis (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: tikai signāls, radiostacijas VOX ieslēdz raidītāju
+Tune: PTT on by CAT during the tone	Tune: PTT ieslēgts ar CAT signāla laikā
+Tune: connect the rig first	Tune: vispirms pievienojiet radiostaciju
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: vispirms izvēlieties radiostacijas raidīšanas skaņas karti (labais klikšķis uz Tune)
+Rig VFO controlled by SDRLink:	Radiostacijas VFO, ko vada SDRLink:
+VFO B (rigs with two VFOs)	VFO B (radiostacijas ar diviem VFO)
+RIG	raiduztvērējs
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Koplieto radiostaciju ar citu programmu (WSJT-X, žurnāla programma…) caur virtuālo COM portu (com0com pāris): SDRLink patur radiostacijas īsto portu un pārsūta otras programmas komandas. com0com instalēšana un pāra izveide no loga
+Virtual COM port…	Virtuālais COM ports…
+Virtual COM port (rig sharing)	Virtuālais COM ports (radiostacijas koplietošana)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink patur radiostacijas COM portu un atver vienu no diviem com0com pāra portiem; jūsu otra programma (WSJT-X, žurnāla programma…) atver otru portu ar to pašu radiostacijas modeli, it kā tā būtu pievienota radiostacijai. Tās komandas tiek pārsūtītas radiostacijai starp paša SDRLink komandām. Tikai ar saskarni „COM ports (tiešais CAT)“.
+Install com0com…	Instalēt com0com…
+Share the rig on the port pair:	Koplietot radiostaciju uz portu pāra:
+Remove the chosen pair…	Noņemt izvēlēto pāri…
+com0com: installed	com0com: instalēts
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com nav instalēts šajā datorā (virtuālā COM porta draiveris, bezmaksas, GPL licence).
+No COM port pair: create one.	Nav COM portu pāra: izveidojiet to.
+com0com could not be installed: 	Nevarēja instalēt com0com: 
+Install com0com first.	Vispirms instalējiet com0com.
+The pair could not be created: 	Nevarēja izveidot pāri: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Šo pāri šobrīd izmanto SDRLink: vispirms atvienojiet radiostaciju.
+The pair could not be removed: 	Pāri neizdevās noņemt: 
+Rig sharing off (at the next connection)	Radiostacijas koplietošana izslēgta (nākamajā savienojumā)
+Tune: tone sent to "{0}"	Tune: tonis nosūtīts uz „{0}“
+Tone level (1500 Hz): {0} %…	Toņa līmenis (1500 Hz): {0} %…
+Transmit time: {0} s	Raidīšanas laiks: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: raidīšanas skaņas karte nav pieejama ({0})
+Tune finished ({0} s)	Tune pabeigts ({0} s)
+VFO {0} controlled	VFO {0} vadīts
+Virtual COM port: {0}	Virtuālais COM ports: {0}
+Create a new pair COM{0} ↔ COM{1}…	Izveidot jaunu pāri COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	Jūsu otrā programmā: ports {0}, tas pats radiostacijas modelis kā SDRLink (virtuālajam portam pārraides ātrums nav svarīgs). Stājas spēkā nākamajā radiostacijas savienojumā.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Vai noņemt portu pāri {0} ↔ {1}?\n\nProgramma, kas izmanto {1}, to vairs nevarēs atvērt. Windows pieprasa administratora atļauju.
+Rig sharing on {0}: at the next rig connection	Radiostacijas koplietošana uz {0}: nākamajā radiostacijas savienojumā
 Mode:	Režīms:
 Preamp:	Pirmspastiprinātājs:
 (preamp unchanged)	(pirmspastiprinātājs nemainīts)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Iebūv
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Vērts mēģināt, ja WebSDR lapas vairs netiek rādītas (tukšs logs, it kā nebūtu interneta).
 Reset	Atiestatīt
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Pēc tam SDRLink tiks restartēta. Pašreizējie iestatījumi tiek saglabāti failā {0} (Imports/eksports var tos ielādēt atkal). SDRLink atjauninājumi nekad neko neatiestata.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtuālais COM ports: tikai ar saskarni „COM ports (tiešais CAT)“
 Connected, waiting for the rig...	Savienots, gaida raiduztvērēju...
 Rig online	Raiduztvērējs tiešsaistē
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raiduztvērējs neatbild (pārbaudiet portu, bodu ātrumu, CI-V adresi, CAT izvēlni)
 Error: 	Kļūda: 
+Rig shared: your other program can open {0}	Radiostacija koplietota: jūsu otra programma var atvērt {0}
+Rig shared on {0}	Radiostacija koplietota uz {0}
+Virtual COM port {0} cannot be opened: {1}	Virtuālo COM portu {0} nevar atvērt: {1}
 Profile:	Profils:
 Rename	Pārdēvēt
 Scan type:	Skenēšanas veids:

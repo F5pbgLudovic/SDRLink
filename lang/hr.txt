@@ -3,6 +3,18 @@ sound card unplugged or disabled	zvučna kartica isključena ili onemogućena
 output not found	izlaz nije pronađen
 output already used in exclusive mode by another program	izlaz već koristi drugi program u isključivom načinu
 cannot open, error 	nije moguće otvoriti, pogreška 
+   (in use by another program)	   (koristi ga drugi program)
+com0com installer missing from this version	Instalacijski program com0com nedostaje u ovoj verziji
+com0com installer altered (different fingerprint)	Instalacijski program com0com je izmijenjen (drukčiji otisak)
+the installation did not complete (setupc.exe not found)	instalacija nije dovršena (setupc.exe nije pronađen)
+com0com is not installed	com0com nije instaliran
+invalid port names	neispravni nazivi portova
+the pair did not appear (permission refused or driver not confirmed?)	par se nije pojavio (dozvola odbijena ili upravljački program nije potvrđen?)
+the pair is still there (permission refused, or port still open in a program?)	par je još uvijek tu (dozvola odbijena ili je priključak još otvoren u nekom programu?)
+cannot start	ne može se pokrenuti
+timed out	isteklo vrijeme
+administrator permission refused	dozvola administratora odbijena
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  vaš program: {1}
 WEFAX: waiting for the start tone	WEFAX: čekanje početnog tona
 WEFAX: listening	WEFAX: slušanje
 WEFAX: stop tone	WEFAX: završni ton
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Boja kad je pretraživanje zaustavljeno
 Colour while scanning	Boja tijekom pretraživanja
 Colour when receiving	Boja pri prijemu
 Colour when transmitting (PTT on)	Boja pri predaji (PTT uključen)
+Colour when sharing is off	Boja kada je dijeljenje isključeno
+Colour when the virtual COM port is active (green at first)	Boja kada je virtualni COM priključak aktivan (isprva zelena)
+Colour when idle	Boja u mirovanju
+Colour during Tune (transmitting)	Boja tijekom Tune (odašiljanje)
 Background colour	Boja pozadine
 Text colour	Boja teksta
 Colour of the selected mode	Boja odabranog načina rada
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Označene stavke vr
 SDRLink will restart. Continue?	SDRLink će se ponovno pokrenuti. Nastaviti?
 Reset the program	Vrati program na početne postavke
 Cannot reset: 	Vraćanje nije moguće: 
-RIG	uređaj
 Disconnected	Odspojeno
 Connect	Spoji
 Disconnect	Odspoji
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity isklj.: uređaj odspojen
 TX safety timeout (PTT button)	Sigurnosno vremensko ograničenje TX (gumb PTT)
 Off	Isklj.
 PTT: connect the rig first	PTT: najprije spojite uređaj
+Tune stopped	Tune zaustavljen
 transmitting	odašiljanje
 Receivers muted while transmitting:	Prijemnici utišani tijekom odašiljanja:
 Rig (Mute TRX)	Uređaj (Utišaj TRX)
 Remove this value (pick it in the list first)	Ukloni ovu vrijednost (najprije je odaberite na popisu)
-RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Nije moguće pokrenuti WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Ime ili pozivni znak za WebSDR-ove koji ga traže (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Ime ne može biti prazno.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stranica WebSDR-a smanjena na {0} kako bi se vidjela cijela upravljačka ploča (+ i − za odabir)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Poveznica za dijeljenje kopirana u međuspremnik ({0} kHz {1}): zalijepite je u poruku
 Share link: {0} kHz {1} on {2}	Poveznica za dijeljenje: {0} kHz {1} na {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: odašilje ton od 1500 Hz za podešavanje antenskog tunera ili pojačala (PTT putem CAT-a, zvuk se šalje na odašiljačku zvučnu karticu radija). Klik: uključi / isključi. Desni klik: odašiljačka zvučna kartica radija, razina tona, trajanje (5 s do 1 min), boje
+Rig transmit sound card (PC output connected to the rig):	Odašiljačka zvučna kartica radija (izlaz računala spojen na radio):
+Keying during Tune:	Tipkanje tijekom Tune:
+PTT on (transmit by CAT)	PTT uključen (odašiljanje putem CAT)
+Rig VOX (tone only, no PTT)	VOX uređaja (samo ton, bez PTT)
+Tune tone level (1500 Hz)	Razina tona (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: samo ton, VOX uređaja uključuje odašiljač
+Tune: PTT on by CAT during the tone	Tune: PTT uključen putem CAT tijekom tona
+Tune: connect the rig first	Tune: prvo spojite radio
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: prvo odaberite odašiljačku zvučnu karticu radija (desni klik na Tune)
+Rig VFO controlled by SDRLink:	VFO uređaja kojim upravlja SDRLink:
+VFO B (rigs with two VFOs)	VFO B (uređaji s dva VFO-a)
+RIG	uređaj
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Dijeli radio s drugim programom (WSJT-X, program za dnevnik…) preko virtualnog COM porta (par com0com): SDRLink zadržava stvarni port radija i prosljeđuje naredbe drugog programa. Instalacija com0com i izrada para iz prozora
+Virtual COM port…	Virtualni COM port…
+Virtual COM port (rig sharing)	Virtualni COM port (dijeljenje radija)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink zadržava COM port radija i otvara jedan od dva porta para com0com; vaš drugi program (WSJT-X, program za dnevnik…) otvara drugi port, s istim modelom radija, kao da je spojen na radio. Njegove se naredbe prosljeđuju radiju između naredbi samog SDRLinka. Samo sa sučeljem „COM port (izravni CAT)“.
+Install com0com…	Instaliraj com0com…
+Share the rig on the port pair:	Dijeli radio na paru portova:
+Remove the chosen pair…	Ukloni odabrani par…
+com0com: installed	com0com: instaliran
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com nije instaliran na ovom računalu (upravljački program virtualnog COM porta, besplatan, GPL licenca).
+No COM port pair: create one.	Nema para COM portova: izradite ga.
+com0com could not be installed: 	com0com se nije mogao instalirati: 
+Install com0com first.	Prvo instalirajte com0com.
+The pair could not be created: 	Par se nije mogao izraditi: 
+This pair is in use by SDRLink right now: disconnect the rig first.	SDRLink trenutačno koristi ovaj par: najprije odspojite uređaj.
+The pair could not be removed: 	Par nije bilo moguće ukloniti: 
+Rig sharing off (at the next connection)	Dijeljenje radija isključeno (pri sljedećem spajanju)
+Tune: tone sent to "{0}"	Tune: ton poslan na „{0}“
+Tone level (1500 Hz): {0} %…	Razina tona (1500 Hz): {0} %…
+Transmit time: {0} s	Vrijeme odašiljanja: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: odašiljačka zvučna kartica nedostupna ({0})
+Tune finished ({0} s)	Tune završen ({0} s)
+VFO {0} controlled	VFO {0} pod kontrolom
+Virtual COM port: {0}	Virtualni COM port: {0}
+Create a new pair COM{0} ↔ COM{1}…	Izradi novi par COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	U vašem drugom programu: port {0}, isti model radija kao u SDRLinku (brzina prijenosa nije bitna na virtualnom portu). Primjenjuje se pri sljedećem spajanju radija.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Ukloniti par priključaka {0} ↔ {1}?\n\nProgram koji koristi {1} više ga neće moći otvoriti. Windows traži administratorsko dopuštenje.
+Rig sharing on {0}: at the next rig connection	Dijeljenje radija na {0}: pri sljedećem spajanju radija
 Mode:	Način rada:
 Preamp:	Pretpojačalo:
 (preamp unchanged)	(pretpojačalo nepromijenjeno)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Podaci
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Vrijedi pokušati ako se stranice WebSDR više ne prikazuju (prazan prozor, kao bez interneta).
 Reset	Vrati početno
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink će se zatim ponovno pokrenuti. Trenutne postavke čuvaju se u {0} (Uvoz/Izvoz ih može ponovno učitati). Ažuriranja SDRLinka nikad ništa ne vraćaju na početno.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtualni COM port: samo sa sučeljem „COM port (izravni CAT)“
 Connected, waiting for the rig...	Spojeno, čekanje na uređaj...
 Rig online	Uređaj spojen
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Uređaj ne odgovara (provjerite priključak, brzinu, CI-V adresu, CAT izbornik)
 Error: 	Pogreška: 
+Rig shared: your other program can open {0}	Radio je podijeljen: vaš drugi program može otvoriti {0}
+Rig shared on {0}	Radio podijeljen na {0}
+Virtual COM port {0} cannot be opened: {1}	Virtualni COM port {0} ne može se otvoriti: {1}
 Profile:	Profil:
 Rename	Preimenuj
 Scan type:	Vrsta pretraživanja:

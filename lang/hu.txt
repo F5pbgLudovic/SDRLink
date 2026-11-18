@@ -3,6 +3,18 @@ sound card unplugged or disabled	a hangkártya leválasztva vagy letiltva
 output not found	a kimenet nem található
 output already used in exclusive mode by another program	a kimenetet egy másik program már kizárólagos módban használja
 cannot open, error 	nem nyitható meg, hiba 
+   (in use by another program)	   (másik program használja)
+com0com installer missing from this version	A com0com telepítője hiányzik ebből a verzióból
+com0com installer altered (different fingerprint)	A com0com telepítője módosítva lett (eltérő ujjlenyomat)
+the installation did not complete (setupc.exe not found)	a telepítés nem fejeződött be (a setupc.exe nem található)
+com0com is not installed	a com0com nincs telepítve
+invalid port names	érvénytelen portnevek
+the pair did not appear (permission refused or driver not confirmed?)	a pár nem jelent meg (megtagadott engedély vagy meg nem erősített illesztőprogram?)
+the pair is still there (permission refused, or port still open in a program?)	a pár még mindig megvan (megtagadott engedély, vagy a port még meg van nyitva egy programban?)
+cannot start	nem indítható
+timed out	időtúllépés
+administrator permission refused	a rendszergazdai engedélyt megtagadták
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  az Ön programja: {1}
 WEFAX: waiting for the start tone	WEFAX: várakozás a kezdőhangra
 WEFAX: listening	WEFAX: figyel
 WEFAX: stop tone	WEFAX: záróhang
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Szín leállított pásztázásnál
 Colour while scanning	Szín pásztázás közben
 Colour when receiving	Szín vételkor
 Colour when transmitting (PTT on)	Szín adáskor (PTT be)
+Colour when sharing is off	Szín kikapcsolt megosztásnál
+Colour when the virtual COM port is active (green at first)	Szín aktív virtuális COM-portnál (először zöld)
+Colour when idle	Szín üresjáratban
+Colour during Tune (transmitting)	Szín Tune közben (adás)
 Background colour	Háttérszín
 Text colour	Szövegszín
 Colour of the selected mode	A kiválasztott üzemmód színe
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	A bejelölt elemek 
 SDRLink will restart. Continue?	Az SDRLink újraindul. Folytatja?
 Reset the program	A program alaphelyzetbe állítása
 Cannot reset: 	Az alaphelyzetbe állítás nem lehetséges: 
-RIG	rádió
 Disconnected	Nincs kapcsolat
 Connect	Csatlakozás
 Disconnect	Bontás
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity ki: a rádió leválasztva
 TX safety timeout (PTT button)	TX biztonsági időkorlát (PTT gomb)
 Off	Ki
 PTT: connect the rig first	PTT: előbb csatlakoztassa a rádiót
+Tune stopped	Tune leállítva
 transmitting	adás
 Receivers muted while transmitting:	Adás közben némított vevők:
 Rig (Mute TRX)	Rádió (TRX némítás)
 Remove this value (pick it in the list first)	Érték eltávolítása (előbb válassza ki a listában)
-RIG 	RÁDIÓ 
 Cannot start WebView2 (Edge):\n	A WebView2 (Edge) nem indítható:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Név vagy hívójel az ezt kérő WebSDR-eknek (KiwiSDR, websdr.org):
 The callsign cannot be empty.	A név nem lehet üres.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	A WebSDR-oldal {0}-ra kicsinyítve, hogy a teljes vezérlőpult látszódjon (+ és − a választáshoz)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	A megosztási hivatkozás a vágólapra másolva ({0} kHz {1}): illessze be egy üzenetbe
 Share link: {0} kHz {1} on {2}	Megosztási hivatkozás: {0} kHz {1} itt: {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: 1500 Hz-es hangot ad az antennahangoló vagy a végfok beállításához (PTT CAT-on keresztül, a hang a rádió adási hangkártyájára megy). Kattintás: be / ki. Jobb kattintás: a rádió adási hangkártyája, hangszint, időtartam (5 s – 1 perc), színek
+Rig transmit sound card (PC output connected to the rig):	A rádió adási hangkártyája (a rádióhoz csatlakoztatott PC-kimenet):
+Keying during Tune:	Kulcsolás Tune: alatt
+PTT on (transmit by CAT)	PTT be (adás CAT-tal)
+Rig VOX (tone only, no PTT)	Rádió VOX (csak hang, PTT nélkül)
+Tune tone level (1500 Hz)	Hangszint (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: csak hang, a rádió VOX-a kulcsolja az adót
+Tune: PTT on by CAT during the tone	Tune: PTT be CAT-tal a hang alatt
+Tune: connect the rig first	Tune: előbb csatlakoztassa a rádiót
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: előbb válassza ki a rádió adási hangkártyáját (jobb kattintás a Tune-on)
+Rig VFO controlled by SDRLink:	SDRLink által vezérelt rádió VFO:
+VFO B (rigs with two VFOs)	VFO B (két VFO-s rádiók)
+RIG	rádió
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Megosztja a rádiót egy másik programmal (WSJT-X, naplózó program…) virtuális COM porton (com0com pár) keresztül: az SDRLink megtartja a rádió valódi portját, és továbbítja a másik program parancsait. A com0com telepítése és a pár létrehozása az ablakból
+Virtual COM port…	Virtuális COM port…
+Virtual COM port (rig sharing)	Virtuális COM port (rádiómegosztás)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	Az SDRLink megtartja a rádió COM portját, és megnyitja a com0com pár két portjának egyikét; a másik programja (WSJT-X, naplózó program…) a másik portot nyitja meg, ugyanazzal a rádiótípussal, mintha a rádióhoz lenne csatlakoztatva. Parancsait az SDRLink saját parancsai között továbbítja a rádiónak. Csak a „COM port (közvetlen CAT)” felülettel.
+Install com0com…	A com0com telepítése…
+Share the rig on the port pair:	Rádió megosztása a portpáron:
+Remove the chosen pair…	A kiválasztott pár eltávolítása…
+com0com: installed	com0com: telepítve
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	A com0com nincs telepítve ezen a számítógépen (virtuális COM port illesztőprogram, ingyenes, GPL licenc).
+No COM port pair: create one.	Nincs COM portpár: hozzon létre egyet.
+com0com could not be installed: 	A com0com telepítése nem sikerült: 
+Install com0com first.	Előbb telepítse a com0com-ot.
+The pair could not be created: 	A párt nem sikerült létrehozni: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Ezt a párt éppen az SDRLink használja: előbb válassza le a rádiót.
+The pair could not be removed: 	A párt nem sikerült eltávolítani: 
+Rig sharing off (at the next connection)	Rádiómegosztás kikapcsolva (a következő csatlakozáskor)
+Tune: tone sent to "{0}"	Tune: hang elküldve ide: „{0}”
+Tone level (1500 Hz): {0} %…	Hangszint (1500 Hz): {0} %…
+Transmit time: {0} s	Adási idő: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: az adási hangkártya nem érhető el ({0})
+Tune finished ({0} s)	Tune befejeződött ({0} s)
+VFO {0} controlled	VFO {0} vezérelve
+Virtual COM port: {0}	Virtuális COM port: {0}
+Create a new pair COM{0} ↔ COM{1}…	Új pár létrehozása: COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	A másik programban: {0} port, ugyanaz a rádiótípus, mint az SDRLinkben (az átviteli sebesség mindegy virtuális porton). A rádió következő csatlakozásakor lép érvénybe.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Eltávolítja a {0} ↔ {1} portpárt?\n\nA {1} portot használó program többé nem tudja megnyitni. A Windows rendszergazdai engedélyt kér.
+Rig sharing on {0}: at the next rig connection	Rádiómegosztás itt: {0}: a rádió következő csatlakozásakor
 Mode:	Üzemmód:
 Preamp:	Előerősítő:
 (preamp unchanged)	(az előerősítő változatlan)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	A beé
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Érdemes kipróbálni, ha a WebSDR-oldalak már nem jelennek meg (üres ablak, mintha nem lenne internet).
 Reset	Alaphelyzet
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Az SDRLink ezután újraindul. A jelenlegi beállítások a(z) {0} fájlban maradnak meg (az Import/Export vissza tudja tölteni őket). Az SDRLink frissítései soha semmit nem állítanak alaphelyzetbe.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtuális COM port: csak a „COM port (közvetlen CAT)” felülettel
 Connected, waiting for the rig...	Csatlakozva, várakozás a rádióra...
 Rig online	Rádió online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	A rádió nem válaszol (ellenőrizze a portot, a sebességet, a CI-V címet, a CAT menüt)
 Error: 	Hiba: 
+Rig shared: your other program can open {0}	A rádió megosztva: a másik program megnyithatja a(z) {0} portot
+Rig shared on {0}	Rádió megosztva itt: {0}
+Virtual COM port {0} cannot be opened: {1}	A(z) {0} virtuális COM port nem nyitható meg: {1}
 Profile:	Profil:
 Rename	Átnevezés
 Scan type:	Pásztázás típusa:

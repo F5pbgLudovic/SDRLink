@@ -3,6 +3,18 @@ sound card unplugged or disabled	ljudkortet frånkopplat eller inaktiverat
 output not found	utgången hittades inte
 output already used in exclusive mode by another program	utgången används redan i exklusivt läge av ett annat program
 cannot open, error 	kan inte öppnas, fel 
+   (in use by another program)	   (används av ett annat program)
+com0com installer missing from this version	Installationsprogrammet för com0com saknas i den här versionen
+com0com installer altered (different fingerprint)	Installationsprogrammet för com0com har ändrats (annat fingeravtryck)
+the installation did not complete (setupc.exe not found)	installationen slutfördes inte (setupc.exe hittades inte)
+com0com is not installed	com0com är inte installerat
+invalid port names	ogiltiga portnamn
+the pair did not appear (permission refused or driver not confirmed?)	paret dök inte upp (behörighet nekad eller drivrutin obekräftad?)
+the pair is still there (permission refused, or port still open in a program?)	paret finns kvar (behörighet nekad, eller porten är fortfarande öppen i ett program?)
+cannot start	kan inte starta
+timed out	tidsgränsen överskreds
+administrator permission refused	administratörsbehörighet nekad
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  ditt program: {1}
 WEFAX: waiting for the start tone	WEFAX: väntar på starttonen
 WEFAX: listening	WEFAX: lyssnar
 WEFAX: stop tone	WEFAX: stoppton
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Färg när skanningen är stoppad
 Colour while scanning	Färg under skanning
 Colour when receiving	Färg vid mottagning
 Colour when transmitting (PTT on)	Färg vid sändning (PTT på)
+Colour when sharing is off	Färg när delning är avstängd
+Colour when the virtual COM port is active (green at first)	Färg när den virtuella COM-porten är aktiv (först grön)
+Colour when idle	Färg i viloläge
+Colour during Tune (transmitting)	Färg under Tune (sändning)
 Background colour	Bakgrundsfärg
 Text colour	Textfärg
 Colour of the selected mode	Färg för valt trafiksätt
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	De markerade delarn
 SDRLink will restart. Continue?	SDRLink startar om. Fortsätta?
 Reset the program	Återställ programmet
 Cannot reset: 	Återställning inte möjlig: 
-RIG	rigg
 Disconnected	Frånkopplad
 Connect	Anslut
 Disconnect	Koppla från
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity av: riggen frånkopplad
 TX safety timeout (PTT button)	TX-säkerhetstid (PTT-knapp)
 Off	Av
 PTT: connect the rig first	PTT: anslut riggen först
+Tune stopped	Tune stoppad
 transmitting	sändning
 Receivers muted while transmitting:	Mottagare som tystas vid sändning:
 Rig (Mute TRX)	Rigg (Tysta rigg)
 Remove this value (pick it in the list first)	Ta bort detta värde (välj det i listan först)
-RIG 	RIGG 
 Cannot start WebView2 (Edge):\n	Kan inte starta WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Namn eller anropssignal till WebSDR:er som ber om det (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Namnet får inte vara tomt.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sidan har minskats till {0} för att visa hela kontrollpanelen (+ och − för att välja)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delningslänk kopierad till urklipp ({0} kHz {1}): klistra in den i ett meddelande
 Share link: {0} kHz {1} on {2}	Delningslänk: {0} kHz {1} på {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: sänder en 1500 Hz-ton för att ställa in antennstämaren eller slutsteget (PTT via CAT, ljud skickas till radions sändningsljudkort). Klick: på / av. Högerklick: radions sändningsljudkort, tonnivå, längd (5 s till 1 min), färger
+Rig transmit sound card (PC output connected to the rig):	Radions sändningsljudkort (PC-utgång ansluten till radion):
+Keying during Tune:	Tangering under Tune:
+PTT on (transmit by CAT)	PTT på (sänd via CAT)
+Rig VOX (tone only, no PTT)	Riggens VOX (endast ton, ingen PTT)
+Tune tone level (1500 Hz)	Tonnivå (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: endast ton, riggens VOX tangerar sändaren
+Tune: PTT on by CAT during the tone	Tune: PTT på via CAT under tonen
+Tune: connect the rig first	Tune: anslut radion först
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: välj först radions sändningsljudkort (högerklicka på Tune)
+Rig VFO controlled by SDRLink:	Riggens VFO styrd av SDRLink:
+VFO B (rigs with two VFOs)	VFO B (riggar med två VFO:er)
+RIG	rigg
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Delar radion med ett annat program (WSJT-X, loggprogram…) via en virtuell COM-port (com0com-par): SDRLink behåller radions riktiga port och vidarebefordrar det andra programmets kommandon. Installation av com0com och skapande av paret från fönstret
+Virtual COM port…	Virtuell COM-port…
+Virtual COM port (rig sharing)	Virtuell COM-port (dela radion)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink behåller radions COM-port och öppnar en av de två portarna i ett com0com-par; ditt andra program (WSJT-X, loggprogram…) öppnar den andra porten, med samma radiomodell, som om det vore anslutet till radion. Dess kommandon skickas till radion mellan SDRLinks egna. Endast med gränssnittet "COM-port (direkt CAT)".
+Install com0com…	Installera com0com…
+Share the rig on the port pair:	Dela radion på portparet:
+Remove the chosen pair…	Ta bort det valda paret…
+com0com: installed	com0com: installerat
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com är inte installerat på den här datorn (drivrutin för virtuell COM-port, gratis, GPL-licens).
+No COM port pair: create one.	Inget COM-portpar: skapa ett.
+com0com could not be installed: 	com0com kunde inte installeras: 
+Install com0com first.	Installera com0com först.
+The pair could not be created: 	Paret kunde inte skapas: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Det här paret används av SDRLink just nu: koppla först från riggen.
+The pair could not be removed: 	Paret kunde inte tas bort: 
+Rig sharing off (at the next connection)	Radiodelning av (vid nästa anslutning)
+Tune: tone sent to "{0}"	Tune: ton skickad till "{0}"
+Tone level (1500 Hz): {0} %…	Tonnivå (1500 Hz): {0} %…
+Transmit time: {0} s	Sändningstid: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: sändningsljudkortet är inte tillgängligt ({0})
+Tune finished ({0} s)	Tune avslutad ({0} s)
+VFO {0} controlled	VFO {0} styrd
+Virtual COM port: {0}	Virtuell COM-port: {0}
+Create a new pair COM{0} ↔ COM{1}…	Skapa ett nytt par COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	I ditt andra program: port {0}, samma radiomodell som i SDRLink (överföringshastigheten spelar ingen roll på en virtuell port). Tillämpas vid nästa radioanslutning.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Ta bort portparet {0} ↔ {1}?\n\nEtt program som använder {1} kan inte längre öppna den. Windows ber om administratörsbehörighet.
+Rig sharing on {0}: at the next rig connection	Radiodelning på {0}: vid nästa radioanslutning
 Mode:	Trafiksätt:
 Preamp:	Förförstärkare:
 (preamp unchanged)	(förförstärkare oförändrad)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Data i
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Värt att prova om WebSDR-sidorna inte längre visas (tomt fönster, som utan internet).
 Reset	Återställ
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink startar sedan om. De nuvarande inställningarna sparas i {0} (Import/Export kan läsa in dem igen). Uppdateringar av SDRLink återställer aldrig något.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtuell COM-port: endast med gränssnittet "COM-port (direkt CAT)"
 Connected, waiting for the rig...	Ansluten, väntar på riggen...
 Rig online	Riggen online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Riggen svarar inte (kontrollera port, baudhastighet, CI-V-adress, CAT-meny)
 Error: 	Fel: 
+Rig shared: your other program can open {0}	Radion delas: ditt andra program kan öppna {0}
+Rig shared on {0}	Radion delas på {0}
+Virtual COM port {0} cannot be opened: {1}	Virtuell COM-port {0} kan inte öppnas: {1}
 Profile:	Profil:
 Rename	Byt namn
 Scan type:	Typ av avsökning:

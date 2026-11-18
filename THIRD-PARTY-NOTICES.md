@@ -11,6 +11,7 @@ SDRLink est distribué sous la licence **GNU GPL v3** (fichier [LICENSE](LICENSE
 | **JS8Call** (Jordan Sherer KN4CRD et contributeurs) | données du décodeur JS8 : code LDPC (174,87), CRC 12 bits, synchros de Costas, Varicode, Huffman, dictionnaire JSC | GNU GPL v3 | `data/js8jsc.bin.gz`, `src/DigiJs8.cs` |
 | **fldigi** (feld.cxx) | paramètres de modulation Hell (cadence, filtres, écarts de tonalité) | GNU GPL v3 | `src/DigiHell.cs` |
 | **RNNoise** 0.1.1 (Jean-Marc Valin, Mozilla, Xiph.Org) | DNR IA : réseau de neurones de réduction de bruit, porté en JavaScript avec ses poids d'origine (depuis la 1.48) | BSD 3 clauses (texte ci-dessous) | `src/WebSdrBridge.cs`, `src/RnnoiseWeights.cs` |
+| **com0com** 3.0.0.0 (Vyacheslav Frolov), installateurs signés non modifiés | port COM virtuel : paires de ports COM reliés, installées seulement si l'utilisateur le demande (depuis la 1.49) | GNU GPL (source : https://sourceforge.net/projects/com0com/) | `vendor/com0com/` |
 | **Microsoft Edge WebView2 SDK** | navigateur intégré (téléchargé par `build.ps1` depuis NuGet, embarqué dans l'exe) | licence du SDK WebView2 (redistribution autorisée) | `packages/` (non versionné) |
 
 Les décodeurs SSTV, CW, RTTY, PSK, Hell, WSPR, JT9, JS8 sont repris de PhoneSDRLink (même auteur, GPL v3) ; WSPR et JT9 sont écrits d'après les descriptions publiées des protocoles (K1JT et al., WSJT-X). Le décodeur WEFAX est écrit pour SDRLink. FT2 : aucun code de Decodium ni de WSJT-X ; le moteur FT4 de ft8_lib est utilisé avec des symboles de 24 ms, d'après les paramètres publiés.
@@ -19,7 +20,7 @@ Sources : https://github.com/drowe67/radae_nopy · https://github.com/xiph/rnnoi
 
 ---
 
-SDRLink is released under the **GNU GPL v3** (see [LICENSE](LICENSE)). It includes the components listed above, whose licences are compatible with the GPL v3: radae_nopy / rade_c (2-clause BSD) and Opus (3-clause BSD) for FreeDV; ft8_lib (MIT, slightly modified for FT2) for FT8 / FT4 / FT2; Pawel Jalocha's MFSK library (taken from fldigi, GNU GPL) for Olivia and Contestia; RNNoise 0.1.1 (3-clause BSD, ported to JavaScript with its original weights, since 1.48) for the AI DNR; JS8Call data (GNU GPL v3) for JS8; Hell modulation parameters from fldigi (GPL v3); the Microsoft Edge WebView2 SDK (redistributable). The SSTV, CW, RTTY, PSK, Hell, WSPR, JT9 and JS8 decoders come from PhoneSDRLink (same author, GPL v3); the WEFAX decoder is written for SDRLink.
+SDRLink is released under the **GNU GPL v3** (see [LICENSE](LICENSE)). It includes the components listed above, whose licences are compatible with the GPL v3: radae_nopy / rade_c (2-clause BSD) and Opus (3-clause BSD) for FreeDV; ft8_lib (MIT, slightly modified for FT2) for FT8 / FT4 / FT2; Pawel Jalocha's MFSK library (taken from fldigi, GNU GPL) for Olivia and Contestia; RNNoise 0.1.1 (3-clause BSD, ported to JavaScript with its original weights, since 1.48) for the AI DNR; com0com 3.0.0.0 (GNU GPL, unmodified signed installers, installed only on the user's request, since 1.49) for the virtual COM port; JS8Call data (GNU GPL v3) for JS8; Hell modulation parameters from fldigi (GPL v3); the Microsoft Edge WebView2 SDK (redistributable). The SSTV, CW, RTTY, PSK, Hell, WSPR, JT9 and JS8 decoders come from PhoneSDRLink (same author, GPL v3); the WEFAX decoder is written for SDRLink.
 
 ---
 

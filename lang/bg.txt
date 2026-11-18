@@ -3,6 +3,18 @@ sound card unplugged or disabled	звуковата карта е изключе
 output not found	изходът не е намерен
 output already used in exclusive mode by another program	изходът вече се използва в монополен режим от друга програма
 cannot open, error 	не може да се отвори, грешка 
+   (in use by another program)	   (използва се от друга програма)
+com0com installer missing from this version	инсталаторът на com0com липсва в тази версия
+com0com installer altered (different fingerprint)	инсталаторът на com0com е променен (различен отпечатък)
+the installation did not complete (setupc.exe not found)	инсталацията не завърши (setupc.exe не е намерен)
+com0com is not installed	com0com не е инсталиран
+invalid port names	невалидни имена на портове
+the pair did not appear (permission refused or driver not confirmed?)	двойката не се появи (отказано разрешение или драйверът не е потвърден?)
+the pair is still there (permission refused, or port still open in a program?)	двойката все още съществува (отказан достъп или портът е още отворен в програма?)
+cannot start	не може да се стартира
+timed out	времето изтече
+administrator permission refused	отказано разрешение на администратор
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  вашата програма: {1}
 WEFAX: waiting for the start tone	WEFAX: изчакване на началния тон
 WEFAX: listening	WEFAX: слушане
 WEFAX: stop tone	WEFAX: спиращ тон
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Цвят при спряно сканиране
 Colour while scanning	Цвят по време на сканиране
 Colour when receiving	Цвят при приемане
 Colour when transmitting (PTT on)	Цвят при предаване (PTT включен)
+Colour when sharing is off	Цвят при изключено споделяне
+Colour when the virtual COM port is active (green at first)	Цвят при активен виртуален COM порт (първоначално зелен)
+Colour when idle	Цвят в покой
+Colour during Tune (transmitting)	Цвят по време на Tune (предаване)
 Background colour	Цвят на фона
 Text colour	Цвят на текста
 Colour of the selected mode	Цвят на избрания вид работа
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Отметнати�
 SDRLink will restart. Continue?	SDRLink ще се рестартира. Продължаване?
 Reset the program	Нулиране на програмата
 Cannot reset: 	Нулирането е невъзможно: 
-RIG	трансивър
 Disconnected	Няма връзка
 Connect	Свържи
 Disconnect	Прекъсни
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Диверсити изкл.: трансивер
 TX safety timeout (PTT button)	Предпазен таймер за TX (бутон PTT)
 Off	Изкл.
 PTT: connect the rig first	PTT: първо свържете трансивъра
+Tune stopped	Tune е спрян
 transmitting	предаване
 Receivers muted while transmitting:	Приемници без звук при предаване:
 Rig (Mute TRX)	Трансивър (Без звук TRX)
 Remove this value (pick it in the list first)	Премахни тази стойност (първо я изберете от списъка)
-RIG 	РАДИО 
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) не може да се стартира:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Име или позивна, давани на WebSDR, които ги искат (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Името не може да бъде празно.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	С
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Страницата на WebSDR е намалена до {0}, за да се вижда целият ѝ панел за управление (+ и − за избор)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Връзката за споделяне е копирана в клипборда ({0} kHz {1}): поставете я в съобщение
 Share link: {0} kHz {1} on {2}	Връзка за споделяне: {0} kHz {1} на {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: предава тон 1500 Hz за настройка на антенния тунер или усилвателя (PTT по CAT, звукът се изпраща към звуковата карта за предаване на трансивъра). Щракване: вкл. / изкл. Десен бутон: звукова карта за предаване на трансивъра, ниво на тона, продължителност (от 5 s до 1 мин), цветове
+Rig transmit sound card (PC output connected to the rig):	Звукова карта за предаване на трансивъра (изход на PC към трансивъра):
+Keying during Tune:	Превключване на предаване при Tune:
+PTT on (transmit by CAT)	PTT включен (предаване чрез CAT)
+Rig VOX (tone only, no PTT)	VOX на трансивъра (само тон, без PTT)
+Tune tone level (1500 Hz)	Ниво на тона (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: само тон, VOX на трансивъра включва предавателя
+Tune: PTT on by CAT during the tone	Tune: PTT включен чрез CAT по време на тона
+Tune: connect the rig first	Tune: първо свържете трансивъра
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: първо изберете звуковата карта за предаване на трансивъра (десен бутон върху Tune)
+Rig VFO controlled by SDRLink:	VFO на трансивъра, управляван от SDRLink:
+VFO B (rigs with two VFOs)	VFO B (трансивъри с две VFO)
+RIG	трансивър
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Споделя трансивъра с друга програма (WSJT-X, дневник…) чрез виртуален COM порт (двойка com0com): SDRLink държи реалния порт на трансивъра и препраща командите на другата програма. Инсталиране на com0com и създаване на двойка от прозореца
+Virtual COM port…	Виртуален COM порт…
+Virtual COM port (rig sharing)	Виртуален COM порт (споделяне на трансивъра)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink държи COM порта на трансивъра и отваря един от двата порта на двойка com0com; другата ви програма (WSJT-X, дневник…) отваря другия порт, със същия модел трансивър, сякаш е свързана към трансивъра. Командите ѝ се препращат към трансивъра между собствените на SDRLink. Само с интерфейс "COM порт (директен CAT)".
+Install com0com…	Инсталиране на com0com…
+Share the rig on the port pair:	Споделяне на трансивъра на двойката портове:
+Remove the chosen pair…	Премахване на избраната двойка…
+com0com: installed	com0com: инсталиран
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com не е инсталиран на този PC (драйвер за виртуален COM порт, безплатен, лиценз GPL).
+No COM port pair: create one.	Няма двойка COM портове: създайте една.
+com0com could not be installed: 	com0com не можа да бъде инсталиран: 
+Install com0com first.	Първо инсталирайте com0com.
+The pair could not be created: 	Двойката не можа да бъде създадена: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Тази двойка в момента се използва от SDRLink: първо изключете трансивъра.
+The pair could not be removed: 	Двойката не можа да бъде премахната: 
+Rig sharing off (at the next connection)	Споделянето на трансивъра е изключено (при следващото свързване)
+Tune: tone sent to "{0}"	Tune: тонът е изпратен към "{0}"
+Tone level (1500 Hz): {0} %…	Ниво на тона (1500 Hz): {0} %…
+Transmit time: {0} s	Време на предаване: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: звуковата карта за предаване не е налична ({0})
+Tune finished ({0} s)	Tune приключи ({0} s)
+VFO {0} controlled	VFO {0} се управлява
+Virtual COM port: {0}	Виртуален COM порт: {0}
+Create a new pair COM{0} ↔ COM{1}…	Създаване на нова двойка COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	В другата ви програма: порт {0}, същият модел трансивър като в SDRLink (скоростта не е от значение на виртуален порт). Прилага се при следващото свързване с трансивъра.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Да се премахне ли двойката портове {0} ↔ {1}?\n\nПрограма, която използва {1}, вече няма да може да го отвори. Windows иска администраторско разрешение.
+Rig sharing on {0}: at the next rig connection	Споделяне на трансивъра на {0}: при следващото свързване с трансивъра
 Mode:	Режим:
 Preamp:	Предусилвател:
 (preamp unchanged)	(предусилвателят не е променен)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Дан
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Опитайте, ако страниците на WebSDR вече не се показват (празен прозорец, сякаш няма интернет).
 Reset	Нулиране
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	След това SDRLink ще се рестартира. Текущите настройки се пазят в {0} (Импорт/Експорт може да ги зареди отново). Обновяванията на SDRLink никога не нулират нищо.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Виртуален COM порт: само с интерфейс "COM порт (директен CAT)"
 Connected, waiting for the rig...	Свързан, изчакване на трансивъра...
 Rig online	Трансивърът е на линия
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Трансивърът не отговаря (проверете порта, скоростта, CI-V адреса, менюто CAT)
 Error: 	Грешка: 
+Rig shared: your other program can open {0}	Трансивърът е споделен: другата ви програма може да отвори {0}
+Rig shared on {0}	Трансивърът е споделен на {0}
+Virtual COM port {0} cannot be opened: {1}	Виртуалният COM порт {0} не може да бъде отворен: {1}
 Profile:	Профил:
 Rename	Преименувай
 Scan type:	Вид сканиране:

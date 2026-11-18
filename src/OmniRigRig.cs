@@ -10,7 +10,7 @@ namespace SDRLink
     // de reconnexion : elles sont journalisées et le poste est simplement vu « hors ligne ».
     public class OmniRigRig : IRig
     {
-        const int PM_FREQ = 0x2, PM_FREQA = 0x4, PM_RX = 0x200000, PM_TX = 0x400000;
+        const int PM_FREQ = 0x2, PM_FREQA = 0x4, PM_FREQB = 0x8, PM_RX = 0x200000, PM_TX = 0x400000;
         const int PM_CW_U = 0x800000, PM_CW_L = 0x1000000, PM_SSB_U = 0x2000000, PM_SSB_L = 0x4000000,
             PM_DIG_U = 0x8000000, PM_DIG_L = 0x10000000, PM_AM = 0x20000000, PM_FM = 0x40000000;
         const int ST_ONLINE = 4;
@@ -57,8 +57,13 @@ namespace SDRLink
                     return false;
                 }
                 LogStatus("en ligne");
-                freqHz = Convert.ToInt64(Get(rig, "Freq"));
-                if (freqHz <= 0) freqHz = Convert.ToInt64(Get(rig, "FreqA"));
+                // VFO B (1.49) : FreqB ; sinon Freq (VFO en service), ou FreqA.
+                if (Vfo == 1) freqHz = Convert.ToInt64(Get(rig, "FreqB"));
+                else
+                {
+                    freqHz = Convert.ToInt64(Get(rig, "Freq"));
+                    if (freqHz <= 0) freqHz = Convert.ToInt64(Get(rig, "FreqA"));
+                }
                 mode = FromOmni(Convert.ToInt32(Get(rig, "Mode")));
                 if (freqHz > 0) lastHz = freqHz;
                 return freqHz > 0;
@@ -112,6 +117,10 @@ namespace SDRLink
         PowerRange power;
         public PowerRange Power { get { return power; } }
 
+        // VFO commandé (1.49) : voir IRig.Vfo.
+        public int Vfo { get; set; }
+        public bool CanVfoB { get { return true; } }
+
         public void SetPower(int watts)
         {
             if (power == null || model == null) return;
@@ -143,7 +152,8 @@ namespace SDRLink
             try
             {
                 int f = (int)freqHz;
-                if (Writeable(PM_FREQ)) Set(rig, "Freq", f);
+                if (Vfo == 1) { if (Writeable(PM_FREQB)) Set(rig, "FreqB", f); else LogError(new Exception("FreqB non modifiable")); }
+                else if (Writeable(PM_FREQ)) Set(rig, "Freq", f);
                 else if (Writeable(PM_FREQA)) Set(rig, "FreqA", f);
                 else Call(rig, "SetSimplexMode", f);
             }

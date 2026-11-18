@@ -3,6 +3,18 @@ sound card unplugged or disabled	helikaart on lahti ühendatud või keelatud
 output not found	väljundit ei leitud
 output already used in exclusive mode by another program	väljundit kasutab juba teine programm ainurežiimis
 cannot open, error 	ei saa avada, viga 
+   (in use by another program)	   (kasutusel teises programmis)
+com0com installer missing from this version	com0com paigaldaja puudub sellest versioonist
+com0com installer altered (different fingerprint)	com0com paigaldajat on muudetud (erinev sõrmejälg)
+the installation did not complete (setupc.exe not found)	paigaldus ei lõppenud (setupc.exe ei leitud)
+com0com is not installed	com0com ei ole paigaldatud
+invalid port names	vigased pordinimed
+the pair did not appear (permission refused or driver not confirmed?)	paari ei ilmunud (luba keelatud või draiverit ei kinnitatud?)
+the pair is still there (permission refused, or port still open in a program?)	paar on endiselt olemas (luba keelatud või port on veel programmis avatud?)
+cannot start	ei saa käivitada
+timed out	aeg sai otsa
+administrator permission refused	administraatori luba keelati
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  teie programm: {1}
 WEFAX: waiting for the start tone	WEFAX: ootan algustooni
 WEFAX: listening	WEFAX: kuulab
 WEFAX: stop tone	WEFAX: lõputoon
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Värv peatatud skaneerimisel
 Colour while scanning	Värv skaneerimise ajal
 Colour when receiving	Värv vastuvõtul
 Colour when transmitting (PTT on)	Värv saatmisel (PTT sees)
+Colour when sharing is off	Värv, kui jagamine on välja lülitatud
+Colour when the virtual COM port is active (green at first)	Värv, kui virtuaalne COM-port on aktiivne (algul roheline)
+Colour when idle	Värv ooterežiimis
+Colour during Tune (transmitting)	Värv Tune ajal (saatmine)
 Background colour	Taustavärv
 Text colour	Teksti värv
 Colour of the selected mode	Valitud töörežiimi värv
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Märgitud osad taas
 SDRLink will restart. Continue?	SDRLink taaskäivitub. Jätkata?
 Reset the program	Lähtesta programm
 Cannot reset: 	Lähtestamine pole võimalik: 
-RIG	raadio
 Disconnected	Ühendus puudub
 Connect	Ühenda
 Disconnect	Katkesta
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity väljas: raadio on lahti ühendatud
 TX safety timeout (PTT button)	TX ohutuse ajalõpp (PTT nupp)
 Off	Väljas
 PTT: connect the rig first	PTT: ühendage esmalt raadio
+Tune stopped	Tune peatatud
 transmitting	saade
 Receivers muted while transmitting:	Saatmise ajal vaigistatavad vastuvõtjad:
 Rig (Mute TRX)	Raadio (Vaigista TRX)
 Remove this value (pick it in the list first)	Eemalda see väärtus (valige see esmalt loendist)
-RIG 	RAADIO 
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) ei saa käivitada:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Nimi või kutsung WebSDR-idele, mis seda küsivad (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Nimi ei saa olla tühi.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-i leht vähendati suuruseni {0}, et kogu juhtpaneel oleks nähtav (valimiseks + ja −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jagamislink kopeeriti lõikelauale ({0} kHz {1}): kleepige see sõnumisse
 Share link: {0} kHz {1} on {2}	Jagamislink: {0} kHz {1} aadressil {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: saadab 1500 Hz tooni antennituuneri või võimendi häälestamiseks (PTT CAT kaudu, heli saadetakse seadme saate-helikaardile). Klõps: sees / väljas. Parem klõps: seadme saate-helikaart, tooni tase, kestus (5 s kuni 1 min), värvid
+Rig transmit sound card (PC output connected to the rig):	Seadme saate-helikaart (arvuti väljund, mis on ühendatud seadmega):
+Keying during Tune:	Võtmine Tune: ajal
+PTT on (transmit by CAT)	PTT sees (saatmine CAT kaudu)
+Rig VOX (tone only, no PTT)	Seadme VOX (ainult toon, ilma PTT-ta)
+Tune tone level (1500 Hz)	Tooni tase (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: ainult toon, seadme VOX lülitab saatja sisse
+Tune: PTT on by CAT during the tone	Tune: PTT sees CAT kaudu tooni ajal
+Tune: connect the rig first	Tune: ühendage kõigepealt seade
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: valige kõigepealt seadme saate-helikaart (parem klõps Tune peal)
+Rig VFO controlled by SDRLink:	SDRLinki juhitav seadme VFO:
+VFO B (rigs with two VFOs)	VFO B (kahe VFO-ga seadmed)
+RIG	raadio
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Jagab seadet teise programmiga (WSJT-X, logiprogramm…) virtuaalse COM-pordi (com0com paar) kaudu: SDRLink hoiab seadme päris porti ja edastab teise programmi käske. com0com paigaldus ja paari loomine aknast
+Virtual COM port…	Virtuaalne COM-port…
+Virtual COM port (rig sharing)	Virtuaalne COM-port (seadme jagamine)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink hoiab seadme COM-porti ja avab ühe com0com paari kahest pordist; teie teine programm (WSJT-X, logiprogramm…) avab teise pordi sama seadmemudeliga, nagu oleks see seadmega ühendatud. Selle käsud edastatakse seadmele SDRLinki enda käskude vahel. Ainult liidesega "COM-port (otsene CAT)".
+Install com0com…	Paigalda com0com…
+Share the rig on the port pair:	Jaga seadet pordipaaril:
+Remove the chosen pair…	Eemalda valitud paar…
+com0com: installed	com0com: paigaldatud
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com ei ole sellesse arvutisse paigaldatud (virtuaalse COM-pordi draiver, tasuta, GPL-litsents).
+No COM port pair: create one.	COM-pordipaari pole: looge see.
+com0com could not be installed: 	com0com paigaldamine ebaõnnestus: 
+Install com0com first.	Paigaldage kõigepealt com0com.
+The pair could not be created: 	Paari loomine ebaõnnestus: 
+This pair is in use by SDRLink right now: disconnect the rig first.	SDRLink kasutab seda paari praegu: ühenda seade esmalt lahti.
+The pair could not be removed: 	Paari ei õnnestunud eemaldada: 
+Rig sharing off (at the next connection)	Seadme jagamine väljas (järgmisel ühendamisel)
+Tune: tone sent to "{0}"	Tune: toon saadetud porti "{0}"
+Tone level (1500 Hz): {0} %…	Tooni tase (1500 Hz): {0} %…
+Transmit time: {0} s	Saatmisaeg: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: saate-helikaart pole saadaval ({0})
+Tune finished ({0} s)	Tune lõpetatud ({0} s)
+VFO {0} controlled	VFO {0} juhitud
+Virtual COM port: {0}	Virtuaalne COM-port: {0}
+Create a new pair COM{0} ↔ COM{1}…	Loo uus paar COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	Teie teises programmis: port {0}, sama seadmemudel mis SDRLinkis (baudikiirus ei oma virtuaalpordil tähtsust). Rakendub seadme järgmisel ühendamisel.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Kas eemaldada pordipaar {0} ↔ {1}?\n\nPrograms, mis kasutab porti {1}, ei saa seda enam avada. Windows küsib administraatori luba.
+Rig sharing on {0}: at the next rig connection	Seadme jagamine pordil {0}: seadme järgmisel ühendamisel
 Mode:	Režiim:
 Preamp:	Eelvõimendi:
 (preamp unchanged)	(eelvõimendi muutmata)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Sissee
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Proovige, kui WebSDR-i lehti enam ei kuvata (tühi aken, nagu interneti puudumisel).
 Reset	Lähtesta
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Seejärel SDRLink taaskäivitub. Praegused seaded säilitatakse failis {0} (Import/eksport saab need uuesti laadida). SDRLinki uuendused ei lähtesta kunagi midagi.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtuaalne COM-port: ainult liidesega "COM-port (otsene CAT)"
 Connected, waiting for the rig...	Ühendatud, raadio ootamine...
 Rig online	Raadio võrgus
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Raadio ei vasta (kontrollige porti, bodikiirust, CI-V aadressi, CAT menüüd)
 Error: 	Viga: 
+Rig shared: your other program can open {0}	Seade jagatud: teie teine programm saab avada pordi {0}
+Rig shared on {0}	Seade jagatud pordil {0}
+Virtual COM port {0} cannot be opened: {1}	Virtuaalset COM-porti {0} ei saa avada: {1}
 Profile:	Profiil:
 Rename	Nimeta ümber
 Scan type:	Skaneerimise tüüp:

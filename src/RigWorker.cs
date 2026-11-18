@@ -70,7 +70,75 @@ namespace SDRLink
         // Réglages de préampli du poste connecté (null : non pilotable), annoncés après chaque connexion.
         public event Action<PreampSet> PreampsKnown;
 
+        // Partage sur un port COM virtuel (1.49) : port tenu par SDRLink (vide = aucun) ; seulement en CAT direct.
+        public string ShareCom = "";
+        public int ShareBaud = 9600;
+        public event Action<string> ShareStatus;   // message pour la barre d'état (port ouvert, impossible…)
+        CatShare share;
+        // Port COM virtuel ouvert (bouton vert) ; ShareChanged annonce chaque ouverture / fermeture.
+        public bool ShareOpen { get { return share != null; } }
+        public event Action<bool> ShareChanged;
+        void RaiseShare(bool on) { Action<bool> h = ShareChanged; if (h != null) h(on); }
+
         int pendingAf = -1, pendingPreamp = -1, pendingPower = -1;
+
+        void OpenShare(IRig rig)
+        {
+            CloseShare();
+            if (string.IsNullOrEmpty(ShareCom)) return;
+            SerialRig sr = rig as SerialRig;
+            string msg;
+            if (sr == null) msg = Lang.T("Port COM virtuel : seulement avec l'interface « Port COM (CAT direct) »", "Virtual COM port: only with the \"COM port (direct CAT)\" interface");
+            else
+            {
+                CatShare s = new CatShare(ShareCom, ShareBaud, sr.Framing);
+                try
+                {
+                    s.Open();
+                    share = s;
+                    RaiseShare(true);
+                    string other = Com0Com.OtherEnd(ShareCom);
+                    msg = other != null
+                        ? Lang.F("Poste partagé : votre autre logiciel peut ouvrir {0}", "Rig shared: your other program can open {0}", other)
+                        : Lang.F("Poste partagé sur {0}", "Rig shared on {0}", ShareCom);
+                }
+                catch (Exception ex)
+                {
+                    msg = Lang.F("Port COM virtuel {0} impossible à ouvrir : {1}", "Virtual COM port {0} cannot be opened: {1}", ShareCom, ex.Message);
+                    Log.Write("Partage : " + msg);
+                }
+            }
+            Action<string> h = ShareStatus;
+            if (h != null) h(msg);
+        }
+
+        void CloseShare()
+        {
+            if (share != null) { share.Close(); share = null; RaiseShare(false); }
+        }
+
+        // Attente entre deux interrogations, en servant tout de suite les commandes de l'autre logiciel (port COM virtuel).
+        void WaitServing(IRig rig, int ms)
+        {
+            int end = Environment.TickCount + ms;
+            while (running)
+            {
+                CatShare s = share;
+                SerialRig sr = rig as SerialRig;
+                if (s != null && sr != null)
+                {
+                    byte[] c;
+                    while ((c = s.Next()) != null && running)
+                    {
+                        s.Reply(sr.Passthrough(c));
+                        s.Commands++;
+                    }
+                }
+                int left = end - Environment.TickCount;
+                if (left <= 0) return;
+                if (s != null) s.Signal.WaitOne(left); else Thread.Sleep(left);
+            }
+        }
         const int AfReadEvery = 10;     // relecture du volume du poste tous les 10 tours (bouton tourné sur le poste)
 
         void Run()
@@ -99,6 +167,8 @@ namespace SDRLink
                         lastAf = -2;
                         afCountdown = 0;
                         Status(Lang.T("Connecté, en attente du poste...", "Connected, waiting for the rig..."), false);
+                        if (rig.Vfo == 1) Log.Write(rig.CanVfoB ? "VFO B commandé" : "VFO B non pilotable avec ce poste / cette interface : VFO A commandé");
+                        OpenShare(rig);
                         PreampSet ps = null;
                         try { ps = rig.Preamps; } catch { }
                         Log.Write("Préampli : " + (ps == null ? "non pilotable sur ce poste / cette interface" : ps.Describe()));
@@ -223,12 +293,22 @@ namespace SDRLink
                     if (lastTx != -1) RaiseTx(lastTx = -1);
                     // Les appels asynchrones (TCI) enveloppent la vraie cause dans une AggregateException.
                     Status(Lang.T("Erreur : ", "Error: ") + ex.GetBaseException().Message, false);
+                    CloseShare();
                     if (rig != null) { try { rig.Close(); } catch { } rig = null; }
                     for (int i = 0; i < 30 && running; i++) Thread.Sleep(100);
                     continue;
                 }
-                Thread.Sleep(pollMs);
+                try { WaitServing(rig, pollMs); }
+                catch (Exception ex)
+                {
+                    // Port du poste perdu pendant une commande de l'autre logiciel : même reprise qu'une erreur d'interrogation.
+                    Status(Lang.T("Erreur : ", "Error: ") + ex.GetBaseException().Message, false);
+                    CloseShare();
+                    if (rig != null) { try { rig.Close(); } catch { } rig = null; }
+                    for (int i = 0; i < 30 && running; i++) Thread.Sleep(100);
+                }
             }
+            CloseShare();
             if (rig != null)
             {
                 // Dernier réglage de volume demandé juste avant l'arrêt (rétablissement après "Mute TX").

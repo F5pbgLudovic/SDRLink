@@ -3,6 +3,18 @@ sound card unplugged or disabled	Soundkarte getrennt oder deaktiviert
 output not found	Ausgabegerät nicht gefunden
 output already used in exclusive mode by another program	Ausgabegerät wird bereits von einem anderen Programm im exklusiven Modus verwendet
 cannot open, error 	Öffnen nicht möglich, Fehler 
+   (in use by another program)	   (von einem anderen Programm belegt)
+com0com installer missing from this version	Das com0com-Installationsprogramm fehlt in dieser Version
+com0com installer altered (different fingerprint)	Das com0com-Installationsprogramm wurde verändert (anderer Fingerabdruck)
+the installation did not complete (setupc.exe not found)	Die Installation wurde nicht abgeschlossen (setupc.exe nicht gefunden)
+com0com is not installed	com0com ist nicht installiert
+invalid port names	ungültige Portnamen
+the pair did not appear (permission refused or driver not confirmed?)	Das Paar ist nicht erschienen (Berechtigung verweigert oder Treiber nicht bestätigt?)
+the pair is still there (permission refused, or port still open in a program?)	das Paar ist noch vorhanden (Berechtigung verweigert oder Port noch in einem Programm geöffnet?)
+cannot start	kann nicht gestartet werden
+timed out	Zeitüberschreitung
+administrator permission refused	Administratorberechtigung verweigert
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  Ihr Programm: {1}
 WEFAX: waiting for the start tone	WEFAX: warte auf den Startton
 WEFAX: listening	WEFAX: hört zu
 WEFAX: stop tone	WEFAX: Stoppton
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Farbe bei gestopptem Scan
 Colour while scanning	Farbe während des Scans
 Colour when receiving	Farbe bei Empfang
 Colour when transmitting (PTT on)	Farbe beim Senden (PTT ein)
+Colour when sharing is off	Farbe bei deaktivierter Freigabe
+Colour when the virtual COM port is active (green at first)	Farbe bei aktivem virtuellem COM-Port (zunächst grün)
+Colour when idle	Farbe im Ruhezustand
+Colour during Tune (transmitting)	Farbe während Tune (Senden)
 Background colour	Hintergrundfarbe
 Text colour	Textfarbe
 Colour of the selected mode	Farbe der gewählten Betriebsart
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Die angekreuzten El
 SDRLink will restart. Continue?	SDRLink startet neu. Fortfahren?
 Reset the program	Programm zurücksetzen
 Cannot reset: 	Zurücksetzen nicht möglich: 
-RIG	Funkgerät
 Disconnected	Getrennt
 Connect	Verbinden
 Disconnect	Trennen
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity aus: Funkgerät getrennt
 TX safety timeout (PTT button)	TX-Sicherheitszeit (PTT-Taste)
 Off	Aus
 PTT: connect the rig first	PTT: Bitte zuerst den TRX verbinden
+Tune stopped	Tune gestoppt
 transmitting	Senden
 Receivers muted while transmitting:	Beim Senden stummgeschaltete Empfänger:
 Rig (Mute TRX)	TRX (TRX stumm)
 Remove this value (pick it in the list first)	Diesen Wert entfernen (zuerst in der Liste auswählen)
-RIG 	TRX 
 Cannot start WebView2 (Edge):\n	WebView2 (Edge) kann nicht gestartet werden:\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Name oder Rufzeichen für WebSDRs, die danach fragen (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Der Name darf nicht leer sein.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-Seite auf {0} verkleinert, um das gesamte Bedienfeld zu zeigen (+ und − zum Auswählen)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Freigabelink in die Zwischenablage kopiert ({0} kHz {1}): in eine Nachricht einfügen
 Share link: {0} kHz {1} on {2}	Link zum Teilen: {0} kHz {1} auf {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: sendet einen 1500-Hz-Ton zum Abstimmen des Antennentuners oder der Endstufe (PTT per CAT, Ton an die Sende-Soundkarte des Transceivers). Klick: ein / aus. Rechtsklick: Sende-Soundkarte des Transceivers, Tonpegel, Dauer (5 s bis 1 Min.), Farben
+Rig transmit sound card (PC output connected to the rig):	Sende-Soundkarte des Transceivers (PC-Ausgang, mit dem Transceiver verbunden):
+Keying during Tune:	Tastung während Tune:
+PTT on (transmit by CAT)	PTT ein (Senden per CAT)
+Rig VOX (tone only, no PTT)	Rig-VOX (nur Ton, kein PTT)
+Tune tone level (1500 Hz)	Tonpegel (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: nur Ton, das VOX des Rigs tastet den Sender
+Tune: PTT on by CAT during the tone	Tune: PTT per CAT während des Tons ein
+Tune: connect the rig first	Tune: zuerst den Transceiver verbinden
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: zuerst die Sende-Soundkarte des Transceivers wählen (Rechtsklick auf Tune)
+Rig VFO controlled by SDRLink:	Rig-VFO, gesteuert von SDRLink:
+VFO B (rigs with two VFOs)	VFO B (Rigs mit zwei VFOs)
+RIG	Funkgerät
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Teilt den Transceiver mit einem anderen Programm (WSJT-X, Logprogramm…) über einen virtuellen COM-Port (com0com-Paar): SDRLink behält den echten Port des Transceivers und leitet die Befehle des anderen Programms weiter. Installation von com0com und Erstellung des Paars im Fenster
+Virtual COM port…	Virtueller COM-Port…
+Virtual COM port (rig sharing)	Virtueller COM-Port (Transceiver teilen)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	SDRLink behält den COM-Port des Transceivers und öffnet einen der beiden Ports eines com0com-Paars; Ihr anderes Programm (WSJT-X, Logprogramm…) öffnet den anderen Port mit demselben Transceivermodell, als wäre es mit dem Transceiver verbunden. Seine Befehle werden zwischen den eigenen Befehlen von SDRLink an den Transceiver weitergegeben. Nur mit der Schnittstelle "COM-Port (direktes CAT)".
+Install com0com…	com0com installieren…
+Share the rig on the port pair:	Transceiver auf dem Portpaar teilen:
+Remove the chosen pair…	Ausgewähltes Paar entfernen…
+com0com: installed	com0com: installiert
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	com0com ist auf diesem PC nicht installiert (Treiber für virtuelle COM-Ports, kostenlos, GPL-Lizenz).
+No COM port pair: create one.	Kein COM-Portpaar: Erstellen Sie eines.
+com0com could not be installed: 	com0com konnte nicht installiert werden: 
+Install com0com first.	Installieren Sie zuerst com0com.
+The pair could not be created: 	Das Paar konnte nicht erstellt werden: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Dieses Paar wird gerade von SDRLink verwendet: Trennen Sie zuerst das Rig.
+The pair could not be removed: 	Das Paar konnte nicht entfernt werden: 
+Rig sharing off (at the next connection)	Transceiver-Freigabe aus (bei der nächsten Verbindung)
+Tune: tone sent to "{0}"	Tune: Ton an "{0}" gesendet
+Tone level (1500 Hz): {0} %…	Tonpegel (1500 Hz): {0} %…
+Transmit time: {0} s	Sendedauer: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: Sende-Soundkarte nicht verfügbar ({0})
+Tune finished ({0} s)	Tune beendet ({0} s)
+VFO {0} controlled	VFO {0} gesteuert
+Virtual COM port: {0}	Virtueller COM-Port: {0}
+Create a new pair COM{0} ↔ COM{1}…	Neues Paar COM{0} ↔ COM{1} erstellen…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	In Ihrem anderen Programm: Port {0}, dasselbe Transceivermodell wie in SDRLink (die Baudrate spielt auf einem virtuellen Port keine Rolle). Wird bei der nächsten Transceiververbindung angewendet.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Portpaar {0} ↔ {1} entfernen?\n\nEin Programm, das {1} verwendet, kann ihn nicht mehr öffnen. Windows fragt nach Administratorrechten.
+Rig sharing on {0}: at the next rig connection	Transceiver-Freigabe auf {0}: bei der nächsten Transceiververbindung
 Mode:	Betriebsart:
 Preamp:	Vorverstärker:
 (preamp unchanged)	(Vorverstärker unverändert)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Daten 
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Einen Versuch wert, wenn die WebSDR-Seiten nicht mehr angezeigt werden (leeres Fenster, wie ohne Internet).
 Reset	Zurücksetzen
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	SDRLink startet danach neu. Die aktuellen Einstellungen werden in {0} aufbewahrt (Import/Export kann sie wieder laden). Updates von SDRLink setzen nie etwas zurück.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Virtueller COM-Port: nur mit der Schnittstelle "COM-Port (direktes CAT)"
 Connected, waiting for the rig...	Verbunden, warte auf den TRX...
 Rig online	TRX online
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Der TRX antwortet nicht (Port, Baudrate, CI-V-Adresse, CAT-Menü prüfen)
 Error: 	Fehler: 
+Rig shared: your other program can open {0}	Transceiver geteilt: Ihr anderes Programm kann {0} öffnen
+Rig shared on {0}	Transceiver geteilt auf {0}
+Virtual COM port {0} cannot be opened: {1}	Virtueller COM-Port {0} kann nicht geöffnet werden: {1}
 Profile:	Profil:
 Rename	Umbenennen
 Scan type:	Art des Suchlaufs:

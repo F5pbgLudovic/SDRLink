@@ -3,6 +3,18 @@ sound card unplugged or disabled	η κάρτα ήχου αποσυνδέθηκε
 output not found	η έξοδος δεν βρέθηκε
 output already used in exclusive mode by another program	η έξοδος χρησιμοποιείται ήδη σε αποκλειστική λειτουργία από άλλο πρόγραμμα
 cannot open, error 	αδυναμία ανοίγματος, σφάλμα 
+   (in use by another program)	   (σε χρήση από άλλο πρόγραμμα)
+com0com installer missing from this version	το πρόγραμμα εγκατάστασης com0com λείπει από αυτή την έκδοση
+com0com installer altered (different fingerprint)	το πρόγραμμα εγκατάστασης com0com έχει τροποποιηθεί (διαφορετικό αποτύπωμα)
+the installation did not complete (setupc.exe not found)	η εγκατάσταση δεν ολοκληρώθηκε (το setupc.exe δεν βρέθηκε)
+com0com is not installed	το com0com δεν είναι εγκατεστημένο
+invalid port names	μη έγκυρα ονόματα θυρών
+the pair did not appear (permission refused or driver not confirmed?)	το ζεύγος δεν εμφανίστηκε (άρνηση άδειας ή μη επιβεβαιωμένο πρόγραμμα οδήγησης;)
+the pair is still there (permission refused, or port still open in a program?)	το ζεύγος υπάρχει ακόμη (άρνηση άδειας ή η θύρα είναι ακόμη ανοιχτή σε πρόγραμμα;)
+cannot start	δεν είναι δυνατή η εκκίνηση
+timed out	λήξη χρονικού ορίου
+administrator permission refused	άρνηση άδειας διαχειριστή
+SDRLink: {0}  ↔  your program: {1}	SDRLink: {0}  ↔  το πρόγραμμά σας: {1}
 WEFAX: waiting for the start tone	WEFAX: αναμονή για τον τόνο έναρξης
 WEFAX: listening	WEFAX: σε ακρόαση
 WEFAX: stop tone	WEFAX: τόνος λήξης
@@ -258,6 +270,10 @@ Colour when the scan is stopped	Χρώμα με τη σάρωση σταματη
 Colour while scanning	Χρώμα κατά τη σάρωση
 Colour when receiving	Χρώμα στη λήψη
 Colour when transmitting (PTT on)	Χρώμα στην εκπομπή (PTT ενεργό)
+Colour when sharing is off	Χρώμα όταν η κοινή χρήση είναι ανενεργή
+Colour when the virtual COM port is active (green at first)	Χρώμα όταν η εικονική θύρα COM είναι ενεργή (αρχικά πράσινο)
+Colour when idle	Χρώμα σε αδράνεια
+Colour during Tune (transmitting)	Χρώμα κατά το Tune (εκπομπή)
 Background colour	Χρώμα φόντου
 Text colour	Χρώμα κειμένου
 Colour of the selected mode	Χρώμα του επιλεγμένου τρόπου
@@ -275,7 +291,6 @@ The checked items will be set back as at first installation.	Τα επιλεγμ
 SDRLink will restart. Continue?	Το SDRLink θα επανεκκινηθεί. Συνέχεια;
 Reset the program	Επαναφορά του προγράμματος
 Cannot reset: 	Η επαναφορά δεν είναι δυνατή: 
-RIG	πομποδέκτης
 Disconnected	Αποσυνδέθηκε
 Connect	Σύνδεση
 Disconnect	Αποσύνδεση
@@ -291,11 +306,11 @@ Diversity off: rig disconnected	Diversity ανενεργό: ο πομποδέκ�
 TX safety timeout (PTT button)	Χρονικό όριο ασφαλείας TX (κουμπί PTT)
 Off	Ανενεργό
 PTT: connect the rig first	PTT: συνδέστε πρώτα τον πομποδέκτη
+Tune stopped	Το Tune σταμάτησε
 transmitting	εκπομπή
 Receivers muted while transmitting:	Δέκτες σε σίγαση κατά την εκπομπή:
 Rig (Mute TRX)	Πομποδέκτης (Σίγαση TRX)
 Remove this value (pick it in the list first)	Αφαίρεση αυτής της τιμής (επιλέξτε την πρώτα στη λίστα)
-RIG 	TRX 
 Cannot start WebView2 (Edge):\n	Αδυναμία εκκίνησης WebView2 (Edge):\n
 Name or callsign given to WebSDRs that ask for one (KiwiSDR, websdr.org):	Όνομα ή χαρακτηριστικό για τα WebSDR που το ζητούν (KiwiSDR, websdr.org):
 The callsign cannot be empty.	Το όνομα δεν μπορεί να είναι κενό.
@@ -709,6 +724,46 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Σ
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Η σελίδα του WebSDR μειώθηκε στο {0} ώστε να φαίνεται ολόκληρος ο πίνακας ελέγχου (+ και − για επιλογή)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Ο σύνδεσμος κοινοποίησης αντιγράφηκε στο πρόχειρο ({0} kHz {1}): επικολλήστε τον σε ένα μήνυμα
 Share link: {0} kHz {1} on {2}	Σύνδεσμος κοινοποίησης: {0} kHz {1} στο {2}
+Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: εκπέμπει τόνο 1500 Hz για τη ρύθμιση του tuner κεραίας ή του ενισχυτή (PTT μέσω CAT, ήχος προς την κάρτα ήχου εκπομπής του πομποδέκτη). Κλικ: ενεργό / ανενεργό. Δεξί κλικ: κάρτα ήχου εκπομπής του πομποδέκτη, στάθμη τόνου, διάρκεια (5 s έως 1 λεπτό), χρώματα
+Rig transmit sound card (PC output connected to the rig):	Κάρτα ήχου εκπομπής του πομποδέκτη (έξοδος PC συνδεδεμένη στον πομποδέκτη):
+Keying during Tune:	Πλήκτρευση κατά το Tune:
+PTT on (transmit by CAT)	PTT ενεργό (εκπομπή μέσω CAT)
+Rig VOX (tone only, no PTT)	VOX του πομποδέκτη (μόνο τόνος, χωρίς PTT)
+Tune tone level (1500 Hz)	Στάθμη τόνου (1500 Hz) — Tune
+Tune: tone only, the rig's VOX keys the transmitter	Tune: μόνο τόνος, το VOX του πομποδέκτη πληκτρολογεί τον πομπό
+Tune: PTT on by CAT during the tone	Tune: PTT ενεργό μέσω CAT κατά τη διάρκεια του τόνου
+Tune: connect the rig first	Tune: συνδέστε πρώτα τον πομποδέκτη
+Tune: first choose the rig's transmit sound card (right-click Tune)	Tune: επιλέξτε πρώτα την κάρτα ήχου εκπομπής του πομποδέκτη (δεξί κλικ στο Tune)
+Rig VFO controlled by SDRLink:	VFO του πομποδέκτη που ελέγχεται από το SDRLink:
+VFO B (rigs with two VFOs)	VFO B (πομποδέκτες με δύο VFO)
+RIG	πομποδέκτης
+Shares the rig with another program (WSJT-X, logging program…) through a virtual COM port (com0com pair): SDRLink keeps the rig's real port and passes on the other program's commands. com0com installation and pair creation from the window	Μοιράζεται τον πομποδέκτη με άλλο πρόγραμμα (WSJT-X, πρόγραμμα ημερολογίου…) μέσω εικονικής θύρας COM (ζεύγος com0com): το SDRLink κρατά την πραγματική θύρα του πομποδέκτη και προωθεί τις εντολές του άλλου προγράμματος. Εγκατάσταση com0com και δημιουργία ζεύγους από το παράθυρο
+Virtual COM port…	Εικονική θύρα COM…
+Virtual COM port (rig sharing)	Εικονική θύρα COM (κοινή χρήση πομποδέκτη)
+SDRLink keeps the rig's COM port and opens one of the two ports of a com0com pair; your other program (WSJT-X, logging program…) opens the other port, with the same rig model, as if it were connected to the rig. Its commands are passed to the rig between SDRLink's own. Only with the "COM port (direct CAT)" interface.	Το SDRLink κρατά τη θύρα COM του πομποδέκτη και ανοίγει μία από τις δύο θύρες ενός ζεύγους com0com· το άλλο σας πρόγραμμα (WSJT-X, πρόγραμμα ημερολογίου…) ανοίγει την άλλη θύρα, με το ίδιο μοντέλο πομποδέκτη, σαν να ήταν συνδεδεμένο στον πομποδέκτη. Οι εντολές του προωθούνται στον πομποδέκτη ανάμεσα στις δικές του εντολές του SDRLink. Μόνο με τη διεπαφή "θύρα COM (άμεσο CAT)".
+Install com0com…	Εγκατάσταση com0com…
+Share the rig on the port pair:	Κοινή χρήση του πομποδέκτη στο ζεύγος θυρών:
+Remove the chosen pair…	Κατάργηση του επιλεγμένου ζεύγους…
+com0com: installed	com0com: εγκατεστημένο
+com0com is not installed on this PC (virtual COM port driver, free, GPL licence).	Το com0com δεν είναι εγκατεστημένο σε αυτόν τον υπολογιστή (πρόγραμμα οδήγησης εικονικής θύρας COM, δωρεάν, άδεια GPL).
+No COM port pair: create one.	Κανένα ζεύγος θυρών COM: δημιουργήστε ένα.
+com0com could not be installed: 	Το com0com δεν μπόρεσε να εγκατασταθεί: 
+Install com0com first.	Εγκαταστήστε πρώτα το com0com.
+The pair could not be created: 	Το ζεύγος δεν μπόρεσε να δημιουργηθεί: 
+This pair is in use by SDRLink right now: disconnect the rig first.	Αυτό το ζεύγος χρησιμοποιείται τώρα από το SDRLink: αποσυνδέστε πρώτα τον πομποδέκτη.
+The pair could not be removed: 	Το ζεύγος δεν ήταν δυνατό να καταργηθεί: 
+Rig sharing off (at the next connection)	Κοινή χρήση πομποδέκτη ανενεργή (στην επόμενη σύνδεση)
+Tune: tone sent to "{0}"	Tune: ο τόνος στάλθηκε στο "{0}"
+Tone level (1500 Hz): {0} %…	Στάθμη τόνου (1500 Hz): {0} %…
+Transmit time: {0} s	Χρόνος εκπομπής: {0} s
+Tune: transmit sound card unavailable ({0})	Tune: η κάρτα ήχου εκπομπής δεν είναι διαθέσιμη ({0})
+Tune finished ({0} s)	Το Tune ολοκληρώθηκε ({0} s)
+VFO {0} controlled	VFO {0} υπό έλεγχο
+Virtual COM port: {0}	Εικονική θύρα COM: {0}
+Create a new pair COM{0} ↔ COM{1}…	Δημιουργία νέου ζεύγους COM{0} ↔ COM{1}…
+In your other program: port {0}, same rig model as in SDRLink (the baud rate does not matter on a virtual port). Applied at the next rig connection.	Στο άλλο σας πρόγραμμα: θύρα {0}, ίδιο μοντέλο πομποδέκτη όπως στο SDRLink (ο ρυθμός baud δεν έχει σημασία σε εικονική θύρα). Εφαρμόζεται στην επόμενη σύνδεση του πομποδέκτη.
+Remove the port pair {0} ↔ {1}?\n\nA program that uses {1} will no longer be able to open it. Windows asks for administrator permission.	Κατάργηση του ζεύγους θυρών {0} ↔ {1};\n\nΈνα πρόγραμμα που χρησιμοποιεί τη {1} δεν θα μπορεί πλέον να την ανοίξει. Τα Windows ζητούν άδεια διαχειριστή.
+Rig sharing on {0}: at the next rig connection	Κοινή χρήση πομποδέκτη στο {0}: στην επόμενη σύνδεση του πομποδέκτη
 Mode:	Τρόπος:
 Preamp:	Προενισχυτής:
 (preamp unchanged)	(προενισχυτής αμετάβλητος)
@@ -781,10 +836,14 @@ Built-in browser data (cache, cookies, settings kept by the WebSDR sites)	Δεδ
 Worth trying if the WebSDR pages no longer show (empty window, as if there were no Internet).	Αξίζει να το δοκιμάσετε αν οι σελίδες των WebSDR δεν εμφανίζονται πια (κενό παράθυρο, σαν χωρίς Internet).
 Reset	Επαναφορά
 SDRLink will then restart. The current settings are kept in {0} (Import/Export can load them back). SDRLink updates never reset anything.	Στη συνέχεια το SDRLink θα επανεκκινηθεί. Οι τρέχουσες ρυθμίσεις φυλάσσονται στο {0} (η Εισαγωγή/Εξαγωγή μπορεί να τις φορτώσει ξανά). Οι ενημερώσεις του SDRLink δεν επαναφέρουν ποτέ τίποτα.
+Virtual COM port: only with the "COM port (direct CAT)" interface	Εικονική θύρα COM: μόνο με τη διεπαφή "θύρα COM (άμεσο CAT)"
 Connected, waiting for the rig...	Συνδέθηκε, αναμονή για τον πομποδέκτη...
 Rig online	Πομποδέκτης σε σύνδεση
 The rig does not answer (check port, baud rate, CI-V address, CAT menu)	Ο πομποδέκτης δεν απαντά (ελέγξτε θύρα, ταχύτητα, διεύθυνση CI-V, μενού CAT)
 Error: 	Σφάλμα: 
+Rig shared: your other program can open {0}	Κοινή χρήση πομποδέκτη: το άλλο σας πρόγραμμα μπορεί να ανοίξει το {0}
+Rig shared on {0}	Κοινή χρήση πομποδέκτη στο {0}
+Virtual COM port {0} cannot be opened: {1}	Η εικονική θύρα COM {0} δεν μπορεί να ανοιχθεί: {1}
 Profile:	Προφίλ:
 Rename	Μετονομασία
 Scan type:	Τύπος σάρωσης:

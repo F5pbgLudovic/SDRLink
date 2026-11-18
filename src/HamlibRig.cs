@@ -44,6 +44,8 @@ namespace SDRLink
             afUnsupported = false;
             string[] v = Command("_", 1);   // nom du poste (rigctld : commande "_" = get_info)
             Log.Write("Hamlib : connecté à rigctld " + host + ":" + port + (v != null ? " (" + v[0] + ")" : ""));
+            // VFO B (1.49) : le poste est mis sur le VFO B ; retour sur A seulement s'il y avait été mis par SDRLink (Vfo = 2).
+            if (Vfo == 1 || Vfo == 2) Log.Write("Hamlib : VFO " + (Vfo == 1 ? "B" : "A") + (Command(Vfo == 1 ? "V VFOB" : "V VFOA", 0) == null ? " refusé" : " choisi"));
             rfpowerSettable = false; hamlibModel = null; lastMode = null; lastHz = 0;
             try { preamps = ReadPreamps(); } catch (Exception ex) { preamps = null; Log.Write("Hamlib : préampli non lu (" + ex.Message + ")"); }
             power = null;
@@ -118,6 +120,10 @@ namespace SDRLink
         // moins de watts, jamais plus). Seulement pour un poste du catalogue dont Hamlib sait régler RFPOWER.
         PowerRange power;
         public PowerRange Power { get { return power; } }
+
+        // VFO commandé (1.49) : voir IRig.Vfo.
+        public int Vfo { get; set; }
+        public bool CanVfoB { get { return true; } }
         bool rfpowerSettable;
         string hamlibModel, lastMode;
         long lastHz;

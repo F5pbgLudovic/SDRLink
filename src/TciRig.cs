@@ -131,7 +131,7 @@ namespace SDRLink
             receiver = new Thread(ReceiveLoop);
             receiver.IsBackground = true;
             receiver.Start();
-            Send("vfo:0,0;");
+            Send("vfo:0," + Ch + ";");
             Send("modulation:0;");
             Send("trx:0;");
             Send("volume;");
@@ -177,6 +177,11 @@ namespace SDRLink
         // seulement après que le serveur a annoncé son drive, dont la forme donne celle de la commande (« drive:0,50; » ExpertSDR3,
         // « drive:50; » anciens serveurs).
         int driveArgs;   // 0 : drive pas encore annoncé
+        // VFO commandé (1.49) : voir IRig.Vfo.
+        public int Vfo { get; set; }
+        public bool CanVfoB { get { return true; } }
+        string Ch { get { return Vfo == 1 ? "1" : "0"; } }
+
         public PowerRange Power { get { lock (sync) return driveArgs > 0 ? new PowerRange("TCI", PowerKind.Tci, 0, 100) : null; } }
 
         public void SetPower(int watts)
@@ -208,7 +213,7 @@ namespace SDRLink
 
         public void SetFreq(long freqHz)
         {
-            Send("vfo:0,0," + freqHz.ToString(CultureInfo.InvariantCulture) + ";");
+            Send("vfo:0," + Ch + "," + freqHz.ToString(CultureInfo.InvariantCulture) + ";");
         }
 
         public void SetMode(string m)
@@ -249,7 +254,7 @@ namespace SDRLink
             if (colon < 0) return;
             string name = cmd.Substring(0, colon).ToLowerInvariant();
             string[] a = cmd.Substring(colon + 1).Split(',');
-            if (name == "vfo" && a.Length >= 3 && a[0] == "0" && a[1] == "0")
+            if (name == "vfo" && a.Length >= 3 && a[0] == "0" && a[1] == Ch)
             {
                 long f;
                 if (long.TryParse(a[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out f))

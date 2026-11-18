@@ -21,9 +21,9 @@ Pour recompiler après une modification : `powershell -ExecutionPolicy Bypass -F
 Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section.
 
 1. **1re ligne (connexion et réglages généraux)** : **Interface** (port COM, OmniRig, TCI, HRD, Hamlib), **Marque** et **Modèle** (CAT direct), **Connecter / Connexion... / Déconnecter**, case **Connexion auto au démarrage**, **Ouvrir le journal** (sdrlink.log dans le Bloc-notes), case **Mode sombre**, carré **Palette**, **Look ▾**, **Panneau de commande**, **Taille du texte…**, bouton **Vérifier les mises à jour** avec sa case, **Import/Export ▾**, **Pseudo/Call**.
-2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR** ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
+2. **2e ligne (paramètres de l'interface)** : selon l'interface, **Port** COM (avec ↻ pour relire la liste), **Vitesse**, **Bits de stop**, **Adresse CI-V** (Icom), **RTS** / **DTR**, **Port COM virtuel…** (partage du poste, depuis la 1.49) ; ou **Poste OmniRig** ; ou **Hôte** / **Port** (TCI, HRD, Hamlib) ; **Détection TX (HRD)**. Puis **Langue** et **Câble SDRLINK ▾**. Avec Hamlib, une ligne en plus : **Lancer rigctld**, chemin de rigctld, **N° de modèle Hamlib**, **Télécharger Hamlib…**.
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (clic : marche / arrêt, bouton vert en marche ; clic droit : options, niveau et couleurs), **DNR** (réducteur de bruit, depuis la 1.46 ; clic : marche / arrêt, clic droit : type classique, amélioré ou IA et son niveau), **Conf scan**, **▶ Scan**.
-4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**.
+4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**, puis le bouton **TUNE** (depuis la 1.49), de même forme que PTT et aligné sur lui.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
 6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR** (« Volume FreeDV » pendant une parole FreeDV, depuis la 1.45), **Volume TX sur PC** (quand « Écouter aussi le poste sur le PC » est coché, depuis la 1.45), **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40), suivi, quand la diversité est réglée **sur deux WebSDR**, de la case du **second WebSDR** (depuis la 1.44).
 7. **La page du WebSDR** avec ses ronds **partage**, **+** et **−** (depuis la 1.43), puis la **barre d'état** (messages, lien de mise à jour).
@@ -40,7 +40,9 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
 | PTT | délai de sécurité TX, couleur en réception / en émission |
-| RADIO, WEBSDR | couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
+| TUNE | **carte son d'émission du poste**, **niveau de la tonalité** (1 à 100 %, curseur et case, pas de 1), **durée** (5 s à 1 min), **passage en émission : PTT actif ou VOX du poste**, couleur au repos / pendant Tune, **Fermer** en dernière ligne (depuis la 1.49) |
+| RADIO | **VFO A / VFO B** commandé (depuis la 1.49), couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
+| WEBSDR | couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
 | Ligne de la liste **Mem** (clavier de fréquence ; aussi par un appui long) | **Mémoriser dans « Mémoires »** ▸ liste choisie, **Supprimer de la liste « Mem »** (depuis la 1.26) |
 | USB, LSB, AM, FM, DIGI, CW | couleur du mode sélectionné / des autres |
 | Saisie kHz | supprimer la valeur de l'historique, tout supprimer |
@@ -80,7 +82,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 
 | Interface | Réglages | Remarque |
 |---|---|---|
-| Port COM (CAT direct) | Marque, modèle, port, vitesse, bits de stop, RTS/DTR, adresse CI-V (Icom) | Le port ne doit pas être ouvert par un autre logiciel |
+| Port COM (CAT direct) | Marque, modèle, port, vitesse, bits de stop, RTS/DTR, adresse CI-V (Icom) | Le port ne doit pas être ouvert par un autre logiciel ; pour le partager, **Port COM virtuel…** (voir plus bas) |
 | OmniRig | Rig 1 / Rig 2 | Le poste se configure dans OmniRig ; permet de partager le poste avec d'autres logiciels. **Si OmniRig ne fonctionne pas, utiliser OmniRig version 1, en mode administrateur** (voir Dépannage) |
 | TCI | Hôte / port (40001 par défaut) | ExpertSDR (SunSDR), Thetis… activer le serveur TCI |
 | Ham Radio Deluxe | Hôte / port (7809 par défaut) | Activer le serveur IP dans HRD Rig Control |
@@ -93,6 +95,22 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 - **Déconnecter** : le poste répond vraiment ; un clic coupe la liaison.
 - La liaison est contrôlée **15 s après « Connecter », puis chaque minute**. Si le poste ne répond pas, la barre d'état le dit avec le dernier message d'erreur. Une liaison figée (OmniRig ou port COM qui ne répond plus) est vue perdue : « Liaison perdue : le poste ne répond plus depuis X s », le bouton repasse à « Connexion... » puis revient seul à « Déconnecter » quand le poste répond de nouveau. Chaque problème est noté dans le journal.
 - **Avec OmniRig**, si le poste ne répond pas, une **fenêtre d'aide** s'ouvre au premier plan (une fois par connexion, sans bloquer SDRLink) : utiliser **OmniRig version 1**, relancer **OmniRig et SDRLink en mode administrateur** (elle indique si SDRLink l'est déjà), vérifier dans OmniRig le modèle, le port COM et la vitesse ; avec le lien vers la page d'OmniRig.
+
+### VFO A ou B (depuis la 1.49)
+
+Le **clic droit sur la fréquence RADIO** choisit le VFO du poste piloté par SDRLink : **VFO A** ou **VFO B** (postes à deux VFO), avant les couleurs. Avec le VFO B, l'affichage devient « RADIO B ». Changée pendant la connexion, la liaison est refaite tout de suite.
+- **Yaesu** récents, **Kenwood**, **Elecraft**, **OmniRig**, **TCI**, **HRD** : la fréquence du VFO B est lue et réglée directement (`FB`, `FreqB`, canal 1 en TCI…), sans changer le VFO affiché par le poste.
+- Mode du VFO B : `MD1` sur les Yaesu à deux récepteurs (FT-2000, FTdx9000, FTdx5000, FTdx101, FTX-1), `MD$` sur les Elecraft ; sur les autres, le mode lu et réglé reste celui du VFO en service.
+- **Icom** et **Hamlib** : le poste est mis sur le VFO B à la connexion (CI-V `07 01`, `V VFOB`), puis piloté normalement ; en revenant à A, il est remis une fois sur le VFO A.
+- Anciens Yaesu à protocole binaire (FT-817, FT-1000MP…) : VFO A seulement (noté dans le journal).
+
+### Port COM virtuel : partager le poste avec un autre logiciel (depuis la 1.49)
+
+En CAT direct, SDRLink tient le port COM du poste : un autre logiciel (WSJT-X, logiciel de journal…) ne peut plus l'ouvrir. Le bouton **Port COM virtuel…** (2e ligne) règle un partage par une **paire de ports COM virtuels com0com** :
+- SDRLink ouvre l'un des deux ports de la paire ; l'autre logiciel ouvre l'**autre port**, avec le **même modèle de poste** (la vitesse n'a pas d'importance sur un port virtuel), comme s'il était branché sur le poste.
+- Ses commandes sont passées au poste telles quelles, entre celles de SDRLink, et il reçoit les réponses du poste (texte Yaesu / Kenwood / Elecraft, CI-V Icom / Xiegu, anciens Yaesu binaires).
+- **com0com** (pilote gratuit, licence GPL) : s'il n'est pas sur le PC, la fenêtre l'installe (bouton **Installer com0com…**, installateur signé fourni avec SDRLink ; Windows demande l'autorisation d'administrateur). **Créer une nouvelle paire COMx ↔ COMy…** en ajoute une (numéros libres à partir de COM30). Les paires déjà présentes sont proposées. **Supprimer la paire choisie…** en enlève une, après confirmation (Windows demande l'autorisation ; jamais celle que SDRLink utilise en ce moment).
+- Le partage démarre à la connexion du poste (choisi pendant la connexion : la liaison est refaite tout de suite). Le bouton passe au **vert** quand le port COM virtuel est en service (couleurs au clic droit) ; la barre d'état indique le port à choisir dans l'autre logiciel. Avec OmniRig, TCI, HRD ou Hamlib, inutile : ils se partagent déjà.
 
 ## Hamlib
 
@@ -448,6 +466,13 @@ Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émiss
   - À l'échéance, SDRLink repasse en réception et l'indique en bas de la fenêtre.
   - Ce délai concerne l'émission lancée par le bouton PTT de SDRLink, pas la pédale ni le micro.
 - **Émission sans modulation** (constaté sur un FTdx10) : le PTT par CAT met bien le poste en émission, mais le son émis dépend de la **source de modulation** du poste. Si elle est réglée sur l'arrière ou l'USB (« REAR », souvent le cas pour le FT8), le micro n'est pas transmis. Sur le FTdx10, vérifier dans les menus de réglage de l'émission (TX AUDIO) la source de modulation SSB (MOD SOURCE : MIC) et le gain micro. Les autres logiciels qui passent en émission par CAT, comme WSJT-X, rencontrent le même comportement.
+
+## Bouton TUNE (depuis la 1.49)
+
+Le bouton **TUNE**, au bout de la ligne du PTT (après les cases Avant plan / Affichage ptt), de même forme et aligné sur lui, émet une **tonalité de 1500 Hz** pour régler une boîte d'accord ou un amplificateur.
+- **Clic** : passage en émission par CAT (comme PTT) et tonalité envoyée sur la **carte son d'émission du poste** ; le bouton devient rouge et compte les secondes (« ● TUNE 8 »). Second clic, clic sur PTT, ou fin de la durée : la tonalité s'arrête (sans claquement) et le poste repasse en réception. Si le PTT était déjà en émission avant Tune, il y reste. Avec **VOX du poste** (clic droit), SDRLink n'envoie aucun PTT : seule la tonalité part, et le VOX du poste passe en émission (aucune liaison CAT nécessaire).
+- **Clic droit** : la **carte son d'émission du poste** (sortie du PC reliée à l'entrée modulation / USB du poste), le **niveau de la tonalité** (petite fenêtre toujours devant, à gauche du menu de Tune qui reste ouvert, OK ramène au menu : curseur et case de 1 à 100 %, par pas de 1 : molette, flèches ou valeur tapée ; pris tout de suite, même pendant l'émission ; 5 % au départ), la **durée** (5, 10, 15, 20, 30, 45 s ou 1 min ; 10 s au départ) et les couleurs.
+- Le poste doit prendre sa modulation sur l'USB / l'arrière (DATA, « REAR ») pour émettre la tonalité ; régler la puissance sur le poste avant d'accorder.
 
 ## Coupure du son en émission
 
@@ -971,10 +996,14 @@ Message « Unhandled exception… 0x8007139F » en cliquant sur un fichier `.htm
 
 ## Licence
 
-Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (fichier `LICENSE` du dépôt GitHub). Il est fourni sans aucune garantie. Vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer, à condition de fournir les sources sous la même licence. Raison : les décodeurs Olivia / Contestia (bibliothèque de Pawel Jalocha, reprise de fldigi) et JS8 (données de JS8Call) sont sous GPL. Les autres composants (FreeDV : BSD ; ft8_lib : MIT ; RNNoise : BSD ; WebView2) sont listés dans `THIRD-PARTY-NOTICES.md`.
+Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (fichier `LICENSE` du dépôt GitHub). Il est fourni sans aucune garantie. Vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer, à condition de fournir les sources sous la même licence. Raison : les décodeurs Olivia / Contestia (bibliothèque de Pawel Jalocha, reprise de fldigi) et JS8 (données de JS8Call) sont sous GPL. Les autres composants (FreeDV : BSD ; ft8_lib : MIT ; RNNoise : BSD ; com0com : GPL ; WebView2) sont listés dans `THIRD-PARTY-NOTICES.md`.
 
 ## Historique des versions
 
+- **1.49**
+  - **Bouton TUNE** au bout de la ligne du PTT, de même forme et aligné sur lui : tonalité de 1500 Hz sur la carte son d'émission du poste, pendant 5 s à 1 min. Clic droit : carte son, **niveau de 1 à 100 %** (petite fenêtre à réglette et case, à gauche du menu resté ouvert ; OK y ramène), durée, **PTT actif par CAT ou VOX du poste**, couleurs, **Fermer**.
+  - **VFO A ou B** : au clic droit sur la fréquence **RADIO** (affichée « RADIO B »), pour piloter le VFO B des postes qui en ont deux (toutes les interfaces, sauf les anciens Yaesu binaires).
+  - **Port COM virtuel** : le poste en CAT direct peut être partagé avec un autre logiciel (WSJT-X, journal…) par une paire com0com ; installation de com0com, création et **suppression** de paires depuis la fenêtre ; bouton **vert** quand le port virtuel est en service, réglable aussi poste connecté.
 - **1.48**
   - **Trois types de DNR**, au choix dans le clic droit du bouton DNR : **classique** (celui de la 1.46), **amélioré** (MMSE-LSA : voix beaucoup moins déformée à réduction égale) et **IA** (RNNoise, réseau de neurones intégré, sans site externe : le bruit peut disparaître presque entièrement entre les mots). Le niveau de 1 à 10 de chaque type est dans son sous-menu (clic droit sur le type). Les coupures en mode numérique et en FreeDV valent pour les trois.
   - **Bouton Notch auto (DNF)** : la case disparaît ; **clic** = marche / arrêt (bouton vert en marche), **clic droit** = la fenêtre du notch (coupures, niveau, explication), qui donne aussi les couleurs du bouton.
