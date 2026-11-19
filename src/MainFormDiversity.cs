@@ -176,9 +176,11 @@ namespace SDRLink
             else if (src == 1)
             {
                 // Oreille du poste : DNR du poste (1.48), même type et même niveau que celui du WebSDR si la case du menu DNR le demande.
+                // Notch du poste (1.50) avant le DNR, de même.
                 NoiseReducer nrB = new NoiseReducer();
+                RigNotch nfB = new RigNotch();
                 DiversityMixer dm = diversity;
-                divTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, delegate(int rate, float[] x, int n) { nrB.Process(rate, x, n); dm.FeedB(rate, x, n); });
+                divTap = new AudioTap(settings.RecCardId, 0, settings.RecCardName, delegate(int rate, float[] x, int n) { nfB.Process(rate, x, n); nrB.Process(rate, x, n); dm.FeedB(rate, x, n); });
             }
             else if (src == 2) divTap = new AudioTap(settings.EsdrTciPort, "ExpertSDR", feed);
             else divTap = new AudioTap(null, RootProcess(hdsdrPids.Keys), "HDSDR", feed);

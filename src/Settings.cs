@@ -108,6 +108,10 @@ namespace SDRLink
         public bool NotchOffDigi = true;   // notch coupé quand un mode numérique décode ou que DIGI est le mode
         public bool NotchOffFdv = true;    // notch coupé quand FreeDV auto (V1 ou V2) est en marche
         public int NotchLevel = 1;         // force du notch, 1 (celui d'avant la 1.38) à 10
+        public int NotchAlgo;              // type de notch (1.50) : 0 = d'origine, 1 = adaptatif (NLMS), 2 = spectral (FFT)
+        public int NotchLevelAnf = 5;      // niveau du notch adaptatif, 1 à 10
+        public int NotchLevelSpf = 5;      // niveau du notch spectral, 1 à 10
+        public bool NotchRig = true;       // notch aussi sur le son du poste joué par SDRLink (écoute sur le PC, diversité ; 1.50)
         public bool Dnr;                   // réducteur de bruit (DNR, 1.46) sur le son du WebSDR
         public int DnrAlgo;                // type de DNR (1.48) : 0 = classique, 1 = amélioré (MMSE-LSA), 2 = IA (RNNoise)
         public int DnrLevel = 3;           // force du DNR, 1 à 10
@@ -314,6 +318,10 @@ namespace SDRLink
                     case "NotchOffDigi": s.NotchOffDigi = v == "1"; break;
                     case "NotchOffFdv": s.NotchOffFdv = v == "1"; break;
                     case "NotchLevel": s.NotchLevel = Math.Max(1, Math.Min(10, Int(v, 1))); break;
+                    case "NotchAlgo": s.NotchAlgo = Math.Max(0, Math.Min(2, Int(v, 0))); break;
+                    case "NotchLevelAnf": s.NotchLevelAnf = Math.Max(1, Math.Min(10, Int(v, 5))); break;
+                    case "NotchLevelSpf": s.NotchLevelSpf = Math.Max(1, Math.Min(10, Int(v, 5))); break;
+                    case "NotchRig": s.NotchRig = v == "1"; break;
                     case "Dnr": s.Dnr = v == "1"; break;
                     case "DnrLevel": s.DnrLevel = Math.Max(1, Math.Min(10, Int(v, 3))); break;
                     case "DnrAlgo": s.DnrAlgo = Math.Max(0, Math.Min(2, Int(v, 0))); break;
@@ -493,6 +501,10 @@ namespace SDRLink
             Line(sb, "NotchOffDigi", NotchOffDigi ? 1 : 0);
             Line(sb, "NotchOffFdv", NotchOffFdv ? 1 : 0);
             Line(sb, "NotchLevel", NotchLevel);
+            Line(sb, "NotchAlgo", NotchAlgo);
+            Line(sb, "NotchLevelAnf", NotchLevelAnf);
+            Line(sb, "NotchLevelSpf", NotchLevelSpf);
+            Line(sb, "NotchRig", NotchRig ? 1 : 0);
             Line(sb, "Dnr", Dnr ? 1 : 0);
             Line(sb, "DnrLevel", DnrLevel);
             Line(sb, "DnrAlgo", DnrAlgo);

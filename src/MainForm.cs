@@ -536,14 +536,14 @@ namespace SDRLink
                 settings.AutoNotch = chkNotch.Checked;
                 RefreshNotch();
                 UpdateNotchButton();
-                if (!loading) { settings.Save(); ShowStatus(chkNotch.Checked ? Lang.F("Notch auto en marche, niveau {0}", "Auto notch on, level {0}", settings.NotchLevel) : Lang.T("Notch auto arrêté", "Auto notch off")); }
+                if (!loading) { settings.Save(); ShowStatus(chkNotch.Checked ? Lang.F("Notch auto en marche : {0}, niveau {1}", "Auto notch on: {0}, level {1}", NotchName(settings.NotchAlgo), NotchLevelNow) : Lang.T("Notch auto arrêté", "Auto notch off")); }
             };
             chkNotch.MouseUp += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Right) ShowNotchMenu(); };
             Tr(delegate
             {
                 chkNotch.Text = Lang.T("Notch auto (DNF)", "Auto notch (DNF)");
-                tips.SetToolTip(chkNotch, Lang.T("Notch automatique (DNF). Clic : marche / arrêt (couleur du bouton). Clic droit : coupure en mode numérique et en FreeDV, niveau de 1 à 10, couleurs",
-                    "Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours"));
+                tips.SetToolTip(chkNotch, Lang.T("Notch automatique (DNF). Clic : marche / arrêt (couleur du bouton). Clic droit : type (d'origine, adaptatif ou spectral) et son niveau de 1 à 10, coupure en mode numérique et en FreeDV, couleurs",
+                    "Automatic notch (DNF). Click: on / off (button colour). Right-click: type (original, adaptive or spectral) and its level 1 to 10, off in digital modes and FreeDV, colours"));
             });
             row3.Controls.Add(chkNotch);
             // Couleurs au clic droit : notch arrêté / en marche (1.41 ; avant, une seule couleur « Notch », gardée pour les deux).
@@ -1271,6 +1271,7 @@ namespace SDRLink
         void UpdateNotchButton()
         {
             if (chkNotch == null) return;
+            ConfigureRigNotch();
             int c = ColorOf(chkNotch.Checked ? "NotchOn" : "NotchOff");
             if (c < 0 && chkNotch.Checked) c = 0x00783C;   // en marche : vert par défaut, comme le DNR (1.48 : plus de case pour voir l'état)
             if (c < 0) c = ColorOf("Notch");

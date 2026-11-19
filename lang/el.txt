@@ -249,7 +249,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Δεξί κλικ: δέκτες σε σίγαση κατά την εκπομπή
 Auto notch off	Αυτόματο notch ανενεργό
 Auto notch (DNF)	Αυτόματο notch (DNF)
-Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Αυτόματο notch (DNF). Κλικ: ενεργό / ανενεργό (χρώμα κουμπιού). Δεξί κλικ: απενεργοποίηση σε ψηφιακές λειτουργίες και FreeDV, επίπεδο 1 έως 10, χρώματα
+Automatic notch (DNF). Click: on / off (button colour). Right-click: type (original, adaptive or spectral) and its level 1 to 10, off in digital modes and FreeDV, colours	Αυτόματο notch (DNF). Κλικ: ενεργό / ανενεργό (χρώμα κουμπιού). Δεξί κλικ: τύπος (αρχικός, προσαρμοστικός ή φασματικός) και επίπεδο 1 έως 10, απενεργοποίηση σε ψηφιακές λειτουργίες και FreeDV, χρώματα
 Colour when the notch is off	Χρώμα όταν το notch είναι ανενεργό
 Colour when the notch is on	Χρώμα όταν το notch είναι ενεργό
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Επανεκκινεί το τρέχον WebSDR (για παράδειγμα σταματημένο μετά από χρόνο αδράνειας). Κλικ: επανεκκίνηση με διατήρηση των ρυθμίσεων (συχνότητα, τρόπος, φίλτρο, ζουμ, ένταση). Δεξί κλικ: αυτόματη επανεκκίνηση όταν χάνεται ο ήχος (Auto) και η καθυστέρησή της, πλήρης επαναφορά του WebSDR, χρώματα του κουμπιού
@@ -424,7 +424,7 @@ Later	Αργότερα
 Open the update page	Άνοιγμα της σελίδας ενημέρωσης
 SDRLink has been updated to V{0}; the old version has been deleted.	Το SDRLink ενημερώθηκε στην V{0}· η παλιά έκδοση διαγράφηκε.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	Το SDRLink ενημερώθηκε στην V{0}· η παλιά έκδοση θα διαγραφεί στην επόμενη εκκίνηση.
-Auto notch on, level {0}	Αυτόματο notch ενεργό, επίπεδο {0}
+Auto notch on: {0}, level {1}	Αυτόματο notch ενεργό: {0}, επίπεδο {1}
 Last {0} memories used	Τελευταίες {0} μνήμες που χρησιμοποιήθηκαν
 ExpertSDR TCI port: {0}…	Θύρα TCI του ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Διαθέσιμη ενημέρωση V{0}: κάντε κλικ για λήψη
@@ -648,12 +648,21 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	Το SDRLink δεν μ
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Κλικ: πληκτρολόγιο συχνότητας και λίστα Mem με τις τελευταίες συχνότητες· ροδέλα: αλλαγή συχνότητας (δεξί κλικ: χρώματα)
 No frequency to store (no rig, no WebSDR).	Καμία συχνότητα για αποθήκευση (ούτε πομποδέκτης ούτε WebSDR).
 Stored: {0} kHz	Αποθηκεύτηκε: {0} kHz
+spectral	φασματικός
+adaptive	προσαρμοστικός
+original	αρχικός
 Auto notch off in digital modes	Αυτόματο notch ανενεργό στους ψηφιακούς τρόπους
 Auto notch off in FreeDV V1 and V2	Αυτόματο notch ανενεργό στο FreeDV V1 και V2
+Notch also on the rig audio played by SDRLink (listening on the PC, diversity)	Notch και στον ήχο του πομποδέκτη που αναπαράγει το SDRLink (ακρόαση στον υπολογιστή, diversity)
+Notch type:	Τύπος notch:
+Original: filters following the whistles (4 to 8)	Αρχικός: φίλτρα που ακολουθούν τους σφυριγμούς (4 έως 8)
+Adaptive (NLMS): follows drifting whistles, handles as many as there are	Προσαρμοστικός (NLMS): ακολουθεί σφυριγμούς που μετακινούνται, χειρίζεται όσους υπάρχουν
+Spectral (FFT): the cleanest, only touches steady lines	Φασματικός (FFT): ο πιο καθαρός, επηρεάζει μόνο τις σταθερές γραμμές
 Notch level:	Επίπεδο notch:
 1 (original setting)	1 (αρχική ρύθμιση)
+1 (gentlest)	1 (ηπιότερο)
 10 (strongest)	10 (ισχυρότερο)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Το αυτόματο notch εντοπίζει σταθερά σφυρίγματα (φέροντα) στον ήχο του WebSDR και τα εξασθενεί. Ένα κλικ στο κουμπί το ενεργοποιεί ή το απενεργοποιεί (πράσινο κουμπί όταν είναι ενεργό, χρώματα επιλέξιμα παρακάτω)· το δεξί κλικ ανοίγει αυτό το παράθυρο. Το επίπεδο, από 1 (αρχική ρύθμιση) έως 10, αυξάνει τον αριθμό των σφυριγμάτων που αντιμετωπίζονται (4 έως 8) και την ένταση της δράσης· ένα υψηλό επίπεδο μπορεί να επηρεάσει και μια φωνή που κρατά μια νότα. Μπαίνει σε παύση, χωρίς να απενεργοποιηθεί το κουμπί, κατά τη διάρκεια ψηφιακής λειτουργίας (αποκωδικοποιητής σε λειτουργία ή λειτουργία DIGI) και κατά τη διάρκεια του FreeDV, αν οι επιλογές παραπάνω είναι επιλεγμένες: θα αλλοίωνε τα σήματα προς αποκωδικοποίηση. Το καλώδιο SDRLINK και οι αποκωδικοποιητές λαμβάνουν πάντα τον ήχο χωρίς notch.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. Three types: original (4 to 8 narrow filters following the whistles; the level increases their number and width), adaptive (a filter removing everything that repeats, even a drifting whistle; the level sets its speed, a high level can affect the voice) and spectral (each frequency clearly above its neighbours for a while is brought down to their level; the cleanest, the level sets the threshold and the strength). Each type keeps its own level, 1 to 10. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Το αυτόματο notch εντοπίζει σταθερούς σφυριγμούς (φέροντα) στον ήχο του WebSDR και τους εξασθενεί. Ένα κλικ στο κουμπί το ενεργοποιεί ή το απενεργοποιεί (πράσινο κουμπί όταν είναι ενεργό, τα χρώματα επιλέγονται παρακάτω)· το δεξί κλικ ανοίγει αυτό το παράθυρο. Τρεις τύποι: αρχικός (4 έως 8 στενά φίλτρα που ακολουθούν τους σφυριγμούς· το επίπεδο αυξάνει τον αριθμό και το πλάτος τους), προσαρμοστικός (ένα φίλτρο που αφαιρεί ό,τι επαναλαμβάνεται, ακόμη και έναν σφυριγμό που μετακινείται· το επίπεδο ορίζει την ταχύτητά του, ένα υψηλό επίπεδο μπορεί να επηρεάσει τη φωνή) και φασματικός (κάθε συχνότητα που βρίσκεται σαφώς πάνω από τις γειτονικές της για κάποιο διάστημα κατεβαίνει στο επίπεδό τους· ο πιο καθαρός, το επίπεδο ορίζει το όριο και την ένταση). Κάθε τύπος κρατά το δικό του επίπεδο, 1 έως 10. Τίθεται σε παύση, χωρίς να απενεργοποιηθεί το κουμπί, κατά τη διάρκεια ψηφιακής λειτουργίας (αποκωδικοποιητής σε λειτουργία ή λειτουργία DIGI) και κατά το FreeDV, αν είναι επιλεγμένες οι παραπάνω επιλογές: θα κατέστρεφε τα σήματα προς αποκωδικοποίηση. Το καλώδιο SDRLINK και οι αποκωδικοποιητές λαμβάνουν πάντα τον ήχο χωρίς notch.
 Button colours…	Χρώματα κουμπιού…
 , off in digital modes	, ανενεργό στους ψηφιακούς τρόπους
 , off in FreeDV	, ανενεργό στο FreeDV
@@ -667,7 +676,6 @@ DNR type (right-click a type: its level):	Τύπος DNR (δεξί κλικ σε
 Classic (Wiener filter)	Κλασικό (φίλτρο Wiener)
 Improved (MMSE-LSA): less voice distortion	Βελτιωμένο (MMSE-LSA): λιγότερο παραμορφωμένη φωνή
 AI (RNNoise): most effective, more computing	ΤΝ (RNNoise): το πιο αποτελεσματικό, περισσότεροι υπολογισμοί
-1 (gentlest)	1 (ηπιότερο)
 DNR off in digital modes	DNR ανενεργό στους ψηφιακούς τρόπους
 DNR off in FreeDV V1 and V2	DNR ανενεργό στο FreeDV V1 και V2
 DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR και στον ήχο του πομποδέκτη που αναπαράγει το SDRLink (ακρόαση στον υπολογιστή, diversity)
@@ -685,7 +693,7 @@ Mode search: no WebSDR or rig to listen to	Αναζήτηση τρόπου: κα
 : waiting for a decoded message…	: αναμονή για αποκωδικοποιημένο μήνυμα…
 Mode search stopped	Η αναζήτηση τρόπου σταμάτησε
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Αναζήτηση τρόπου: δεν αναγνωρίστηκε κανένας τρόπος (πολύ ασθενές σήμα, μη υποστηριζόμενος τρόπος ή WSPR / JT9 / Hell, πολύ αργοί για αναγνώριση)
-Auto notch: level {0}{1}{2}	Αυτόματο notch: επίπεδο {0}{1}{2}
+Auto notch: {0}, level {1}{2}{3}	Αυτόματο notch: {0}, επίπεδο {1}{2}{3}
 DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR ενεργό ({0}, επίπεδο {1}), σε παύση κατά την ψηφιακή λειτουργία ή το FreeDV (δεξί κλικ για αλλαγή)
 DNR on: {0}, level {1}	DNR ενεργό: {0}, επίπεδο {1}
 DNR: {0}, level {1}{2}{3}	DNR: {0}, επίπεδο {1}{2}{3}

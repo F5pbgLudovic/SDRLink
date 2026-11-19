@@ -38,14 +38,29 @@ namespace SDRLink
         // Envoie à la page l'état voulu du notch, s'il a changé (appelé souvent : changement de mode, FreeDV, décodeur…).
         void RefreshNotch()
         {
+            ConfigureRigNotch();
             if (web == null || web.CoreWebView2 == null || settings == null) return;
             RefreshDnr();
             bool on = NotchWanted;
-            string s = (on ? "1" : "0") + "|" + settings.NotchLevel;
+            string s = (on ? "1" : "0") + "|" + settings.NotchAlgo + "|" + NotchLevelNow;
             if (s == notchSent) return;
             notchSent = s;
-            web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setNotch && window.__sdrlink.setNotch(" + (on ? "true" : "false") + "," + settings.NotchLevel + ");");
+            web.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setNotch && window.__sdrlink.setNotch(" + (on ? "true" : "false") + "," + NotchLevelNow + "," + settings.NotchAlgo + ");");
+            if (web2 != null) Div2Notch();
         }
+
+        // Types de notch (1.50, repris de PhoneSDRLink 1.30) : 0 = d'origine (filtres qui suivent les raies), 1 = adaptatif (NLMS),
+        // 2 = spectral (FFT). Chaque type garde son niveau.
+        int NotchLevelOf(int algo) { return algo == 2 ? settings.NotchLevelSpf : algo == 1 ? settings.NotchLevelAnf : settings.NotchLevel; }
+        int NotchLevelNow { get { return NotchLevelOf(settings.NotchAlgo); } }
+
+        // Notch du son du poste (1.50) : même marche, type et niveau que le WebSDR (pauses comprises), si la case le demande.
+        void ConfigureRigNotch()
+        {
+            if (settings == null) return;
+            RigNotch.Configure(settings.NotchRig && NotchWanted, settings.NotchAlgo, NotchLevelNow);
+        }
+        string NotchName(int algo) { return algo == 2 ? Lang.T("spectral", "spectral") : algo == 1 ? Lang.T("adaptatif", "adaptive") : Lang.T("d'origine", "original"); }
 
         Form notchWin;
 
@@ -77,17 +92,59 @@ namespace SDRLink
             digi.CheckedChanged += delegate { settings.NotchOffDigi = digi.Checked; NotchChanged(); };
             CheckBox fdv = new CheckBox { AutoSize = true, Text = Lang.T("Notch auto désactivé en FreeDV V1 et V2", "Auto notch off in FreeDV V1 and V2"), Checked = settings.NotchOffFdv };
             fdv.CheckedChanged += delegate { settings.NotchOffFdv = fdv.Checked; NotchChanged(); };
+            CheckBox rig = new CheckBox { AutoSize = true, Text = Lang.T("Notch aussi sur le son du poste joué par SDRLink (écoute sur le PC, diversité)", "Notch also on the rig audio played by SDRLink (listening on the PC, diversity)"), Checked = settings.NotchRig };
+            rig.CheckedChanged += delegate { settings.NotchRig = rig.Checked; NotchChanged(); };
+
+            // Type de notch (1.50) : choisir un type le met en marche ; le niveau ci-dessous est celui du type choisi.
+            Label tl = new Label { AutoSize = true, Text = Lang.T("Type de notch :", "Notch type:"), Margin = new Padding(0, 8, 0, 2) };
+            string[] names = {
+                Lang.T("D'origine : filtres qui suivent les sifflements (4 à 8)", "Original: filters following the whistles (4 to 8)"),
+                Lang.T("Adaptatif (NLMS) : suit les sifflements qui glissent, en traite autant qu'il y en a", "Adaptive (NLMS): follows drifting whistles, handles as many as there are"),
+                Lang.T("Spectral (FFT) : le plus propre, ne touche que les raies stables", "Spectral (FFT): the cleanest, only touches steady lines") };
+            RadioButton[] types = new RadioButton[3];
+            for (int a = 0; a < 3; a++)
+                types[a] = new RadioButton { AutoSize = true, Text = names[a], Checked = settings.NotchAlgo == a, Margin = new Padding(12, 0, 0, 0) };
 
             FlowLayoutPanel row = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = new Padding(0, 6, 0, 6) };
             Label ll = new Label { AutoSize = true, Text = Lang.T("Niveau du notch :", "Notch level:"), Margin = new Padding(0, 6, 6, 0) };
             ComboBox lvl = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList };
-            for (int i = 1; i <= 10; i++)
-                lvl.Items.Add(i == 1 ? Lang.T("1 (réglage d'origine)", "1 (original setting)") : i == 10 ? Lang.T("10 (le plus fort)", "10 (strongest)") : i.ToString(CultureInfo.InvariantCulture));
-            int lw = 0;
-            foreach (object o in lvl.Items) lw = Math.Max(lw, TextRenderer.MeasureText(o.ToString(), Font).Width);
+            bool filling = false;
+            Action fillLevels = delegate
+            {
+                filling = true;
+                lvl.Items.Clear();
+                for (int i = 1; i <= 10; i++)
+                    lvl.Items.Add(i == 1 ? (settings.NotchAlgo == 0 ? Lang.T("1 (réglage d'origine)", "1 (original setting)") : Lang.T("1 (le plus doux)", "1 (gentlest)"))
+                        : i == 10 ? Lang.T("10 (le plus fort)", "10 (strongest)") : i.ToString(CultureInfo.InvariantCulture));
+                lvl.SelectedIndex = Math.Max(0, Math.Min(9, NotchLevelNow - 1));
+                filling = false;
+            };
+            fillLevels();
+            int lw = TextRenderer.MeasureText(Lang.T("1 (réglage d'origine)", "1 (original setting)"), Font).Width;
+            lw = Math.Max(lw, TextRenderer.MeasureText(Lang.T("1 (le plus doux)", "1 (gentlest)"), Font).Width);
+            lw = Math.Max(lw, TextRenderer.MeasureText(Lang.T("10 (le plus fort)", "10 (strongest)"), Font).Width);
             lvl.Width = lw + SystemInformation.VerticalScrollBarWidth + 12;
-            lvl.SelectedIndex = Math.Max(0, Math.Min(9, settings.NotchLevel - 1));
-            lvl.SelectedIndexChanged += delegate { settings.NotchLevel = lvl.SelectedIndex + 1; NotchChanged(); };
+            lvl.SelectedIndexChanged += delegate
+            {
+                if (filling) return;
+                int v = lvl.SelectedIndex + 1;
+                if (settings.NotchAlgo == 2) settings.NotchLevelSpf = v;
+                else if (settings.NotchAlgo == 1) settings.NotchLevelAnf = v;
+                else settings.NotchLevel = v;
+                NotchChanged();
+            };
+            for (int a = 0; a < 3; a++)
+            {
+                int algo = a;
+                types[a].CheckedChanged += delegate
+                {
+                    if (!types[algo].Checked || settings.NotchAlgo == algo) return;
+                    settings.NotchAlgo = algo;
+                    fillLevels();
+                    if (!chkNotch.Checked) chkNotch.Checked = true;   // choisir un type met le notch en marche (comme le DNR)
+                    NotchChanged();
+                };
+            }
             row.Controls.Add(ll);
             row.Controls.Add(lvl);
 
@@ -95,8 +152,8 @@ namespace SDRLink
             help.AutoSize = true;
             help.MaximumSize = new Size(width, 0);
             help.Margin = new Padding(0, 4, 0, 8);
-            help.Text = Lang.T("Le notch automatique repère les sifflements fixes (porteuses) dans le son du WebSDR et les atténue. Un clic sur le bouton le met en marche ou l'arrête (bouton vert en marche, couleurs au choix ci-dessous) ; le clic droit ouvre cette fenêtre. Le niveau, de 1 (réglage d'origine) à 10, augmente le nombre de sifflements traités (de 4 à 8) et la force de l'action ; un niveau élevé peut aussi toucher une voix qui tient une note. Il est mis en pause, sans arrêter le bouton, pendant un mode numérique (décodeur en marche ou mode DIGI) et pendant FreeDV, si les choix ci-dessus sont cochés : il abîmerait les signaux à décoder. Le câble SDRLINK et les décodeurs reçoivent toujours le son sans notch.",
-                "The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.");
+            help.Text = Lang.T("Le notch automatique repère les sifflements fixes (porteuses) dans le son du WebSDR et les atténue. Un clic sur le bouton le met en marche ou l'arrête (bouton vert en marche, couleurs au choix ci-dessous) ; le clic droit ouvre cette fenêtre. Trois types : d'origine (de 4 à 8 filtres étroits qui suivent les sifflements ; le niveau augmente leur nombre et leur largeur), adaptatif (un filtre qui retire tout ce qui se répète, même un sifflement qui glisse ; le niveau règle sa vitesse, un niveau élevé peut entamer la voix) et spectral (chaque fréquence qui dépasse nettement ses voisines pendant un moment est ramenée à leur niveau ; le plus propre, le niveau règle le seuil et la force). Chaque type garde son niveau, de 1 à 10. Il est mis en pause, sans arrêter le bouton, pendant un mode numérique (décodeur en marche ou mode DIGI) et pendant FreeDV, si les choix ci-dessus sont cochés : il abîmerait les signaux à décoder. Le câble SDRLINK et les décodeurs reçoivent toujours le son sans notch.",
+                "The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. Three types: original (4 to 8 narrow filters following the whistles; the level increases their number and width), adaptive (a filter removing everything that repeats, even a drifting whistle; the level sets its speed, a high level can affect the voice) and spectral (each frequency clearly above its neighbours for a while is brought down to their level; the cleanest, the level sets the threshold and the strength). Each type keeps its own level, 1 to 10. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.");
 
             // Couleurs du bouton (1.48 : le clic droit du bouton ouvre cette fenêtre, plus le menu des couleurs).
             Button colors = new Button { AutoSize = true, Text = Lang.T("Couleurs du bouton…", "Button colours…"), Margin = new Padding(0, 0, 0, 8) };
@@ -107,6 +164,9 @@ namespace SDRLink
 
             p.Controls.Add(digi);
             p.Controls.Add(fdv);
+            p.Controls.Add(rig);
+            p.Controls.Add(tl);
+            foreach (RadioButton r in types) p.Controls.Add(r);
             p.Controls.Add(row);
             p.Controls.Add(help);
             p.Controls.Add(colors);
@@ -129,9 +189,9 @@ namespace SDRLink
         void NotchChanged()
         {
             settings.Save();
-            Log.Write("Notch auto : niveau " + settings.NotchLevel + (settings.NotchOffDigi ? ", coupé en mode numérique" : "") + (settings.NotchOffFdv ? ", coupé en FreeDV" : ""));
+            Log.Write("Notch auto : type " + settings.NotchAlgo + ", niveau " + NotchLevelNow + (settings.NotchOffDigi ? ", coupé en mode numérique" : "") + (settings.NotchOffFdv ? ", coupé en FreeDV" : "") + (settings.NotchRig ? ", aussi sur le son du poste" : ""));
             RefreshNotch();
-            ShowStatus(Lang.F("Notch auto : niveau {0}{1}{2}", "Auto notch: level {0}{1}{2}", settings.NotchLevel,
+            ShowStatus(Lang.F("Notch auto : {0}, niveau {1}{2}{3}", "Auto notch: {0}, level {1}{2}{3}", NotchName(settings.NotchAlgo), NotchLevelNow,
                 settings.NotchOffDigi ? Lang.T(", coupé en mode numérique", ", off in digital modes") : "",
                 settings.NotchOffFdv ? Lang.T(", coupé en FreeDV", ", off in FreeDV") : ""));
         }

@@ -249,7 +249,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Paremklõps: saatmise ajal vaigistatavad vastuvõtjad
 Auto notch off	Automaatne notch väljas
 Auto notch (DNF)	Automaatne notch (DNF)
-Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automaatne notch (DNF). Klõps: sisse / välja (nupu värv). Paremklõps: väljas digirežiimides ja FreeDV-s, tase 1 kuni 10, värvid
+Automatic notch (DNF). Click: on / off (button colour). Right-click: type (original, adaptive or spectral) and its level 1 to 10, off in digital modes and FreeDV, colours	Automaatne notch (DNF). Klõps: sisse / välja (nupu värv). Paremklõps: tüüp (originaal, adaptiivne või spektraalne) ja selle tase 1 kuni 10, väljas digirežiimides ja FreeDV-s, värvid
 Colour when the notch is off	Värv, kui notch on väljas
 Colour when the notch is on	Värv, kui notch on sees
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Käivitab praeguse WebSDR-i uuesti (näiteks pärast jõudeaega peatunud). Klõps: taaskäivitus seadeid säilitades (sagedus, režiim, filter, suum, helitugevus). Paremklõps: automaatne taaskäivitus heli kadumisel (Auto) ja selle viivitus, WebSDR-i täielik lähtestamine, nupu värvid
@@ -424,7 +424,7 @@ Later	Hiljem
 Open the update page	Ava uuenduse leht
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink on uuendatud versioonile V{0}; vana versioon on kustutatud.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink on uuendatud versioonile V{0}; vana versioon kustutatakse järgmisel käivitamisel.
-Auto notch on, level {0}	Automaatne notch sees, tase {0}
+Auto notch on: {0}, level {1}	Automaatne notch sees: {0}, tase {1}
 Last {0} memories used	Viimased {0} kasutatud mälu
 ExpertSDR TCI port: {0}…	ExpertSDR-i TCI-port: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Saadaval on uuendus V{0}: klõpsake allalaadimiseks
@@ -648,12 +648,21 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink ei saa OmniRig
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klõps: sageduse klahvistik ja viimaste sageduste Mem-loend; ratas: muuda sagedust (paremklõps: värvid)
 No frequency to store (no rig, no WebSDR).	Pole sagedust, mida salvestada (ei raadiojaama ega WebSDR-i).
 Stored: {0} kHz	Salvestatud: {0} kHz
+spectral	spektraalne
+adaptive	adaptiivne
+original	originaal
 Auto notch off in digital modes	Automaatne notch väljas digitaalsetes režiimides
 Auto notch off in FreeDV V1 and V2	Automaatne notch väljas FreeDV V1 ja V2 korral
+Notch also on the rig audio played by SDRLink (listening on the PC, diversity)	Notch ka SDRLinki esitatud raadiojaama helile (kuulamine arvutis, diversity)
+Notch type:	Notchi tüüp:
+Original: filters following the whistles (4 to 8)	Originaal: filtrid, mis jälgivad vilesid (4 kuni 8)
+Adaptive (NLMS): follows drifting whistles, handles as many as there are	Adaptiivne (NLMS): jälgib triivivaid vilesid, tuleb toime nii paljudega, kui neid on
+Spectral (FFT): the cleanest, only touches steady lines	Spektraalne (FFT): kõige puhtam, puudutab ainult püsivaid jooni
 Notch level:	Notchi tase:
 1 (original setting)	1 (algne seadistus)
+1 (gentlest)	1 (pehmeim)
 10 (strongest)	10 (tugevaim)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaatne notch leiab WebSDR-i helist püsivad vilinad (kandjad) ja summutab need. Klõps nupul lülitab selle sisse või välja (roheline nupp, kui sees; värvid saab valida allpool); paremklõps avab selle akna. Tase 1-st (algne seadistus) kuni 10-ni suurendab käsitletavate vilinate arvu (4 kuni 8) ja toime tugevust; kõrge tase võib mõjutada ka häält, mis hoiab nooti. See peatatakse nuppu välja lülitamata digirežiimi ajal (dekooder töötab või DIGI-režiim) ja FreeDV ajal, kui ülaltoodud valikud on märgitud: see rikuks dekodeeritavaid signaale. SDRLINK-kaabel ja dekooderid saavad heli alati ilma notchita.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. Three types: original (4 to 8 narrow filters following the whistles; the level increases their number and width), adaptive (a filter removing everything that repeats, even a drifting whistle; the level sets its speed, a high level can affect the voice) and spectral (each frequency clearly above its neighbours for a while is brought down to their level; the cleanest, the level sets the threshold and the strength). Each type keeps its own level, 1 to 10. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automaatne notch tuvastab WebSDR-i helis püsivad vilesid (kandjad) ja summutab need. Nupul klõpsamine lülitab selle sisse või välja (roheline nupp, kui sees, värvid valitakse allpool); paremklõps avab selle akna. Kolm tüüpi: originaal (4 kuni 8 kitsast filtrit, mis jälgivad vilesid; tase suurendab nende arvu ja laiust), adaptiivne (filter, mis eemaldab kõik korduva, ka triiviva vile; tase määrab selle kiiruse, kõrge tase võib mõjutada häält) ja spektraalne (iga sagedus, mis on mõnda aega naabritest selgelt kõrgemal, viiakse nende tasemele; kõige puhtam, tase määrab läve ja tugevuse). Iga tüüp säilitab oma taseme, 1 kuni 10. See peatatakse nuppu välja lülitamata digirežiimi ajal (dekooder töötab või DIGI-režiim) ja FreeDV ajal, kui ülaltoodud valikud on märgitud: see rikuks dekodeeritavad signaalid. SDRLINK-kaabel ja dekooderid saavad heli alati ilma notchita.
 Button colours…	Nupu värvid…
 , off in digital modes	, väljas digitaalsetes režiimides
 , off in FreeDV	, väljas FreeDV korral
@@ -667,7 +676,6 @@ DNR type (right-click a type: its level):	DNR-i tüüp (paremklõps tüübil: se
 Classic (Wiener filter)	Klassikaline (Wieneri filter)
 Improved (MMSE-LSA): less voice distortion	Täiustatud (MMSE-LSA): vähem moonutatud hääl
 AI (RNNoise): most effective, more computing	TI (RNNoise): kõige tõhusam, rohkem arvutust
-1 (gentlest)	1 (pehmeim)
 DNR off in digital modes	DNR väljas digitaalsetes režiimides
 DNR off in FreeDV V1 and V2	DNR väljas FreeDV V1 ja V2 puhul
 DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR ka SDRLinki esitatud raadiojaama helile (kuulamine arvutis, diversity)
@@ -685,7 +693,7 @@ Mode search: no WebSDR or rig to listen to	Režiimi otsing: pole WebSDR-i ega ra
 : waiting for a decoded message…	: ootan dekodeeritud sõnumit…
 Mode search stopped	Režiimi otsing peatatud
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Režiimi otsing: ühtegi režiimi ei tuvastatud (liiga nõrk signaal, toetamata režiim või WSPR / JT9 / Hell, mis on tuvastamiseks liiga aeglased)
-Auto notch: level {0}{1}{2}	Automaatne notch: tase {0}{1}{2}
+Auto notch: {0}, level {1}{2}{3}	Auto-notch: {0}, tase {1}{2}{3}
 DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR sees ({0}, tase {1}), peatatud digirežiimi või FreeDV ajal (muutmiseks paremklõps)
 DNR on: {0}, level {1}	DNR sees: {0}, tase {1}
 DNR: {0}, level {1}{2}{3}	DNR: {0}, tase {1}{2}{3}

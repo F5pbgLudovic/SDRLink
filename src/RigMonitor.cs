@@ -44,6 +44,7 @@ namespace SDRLink
         byte[] inBytes = new byte[0], outBytes = new byte[0];
         // DNR du poste (1.48) : même type et même niveau que celui du WebSDR, si la case du menu DNR le demande.
         readonly NoiseReducer nr = new NoiseReducer();
+        readonly RigNotch nf = new RigNotch();   // notch du poste (1.50), avant le DNR comme sur la page
         float[] mono = new float[0];
 
         struct Fmt { public int Rate, Channels, Bits; public bool Float; public int Align { get { return Bits / 8 * Channels; } } }
@@ -248,13 +249,15 @@ namespace SDRLink
                 if (inBytes.Length < size) inBytes = new byte[size];
                 Marshal.Copy(data, inBytes, 0, size);
             }
-            // DNR : le son du poste (mono, moyenne des voies) passe par le réducteur de bruit, puis va dans les deux voies.
-            bool dnr = NoiseReducer.Active;
+            // Notch (1.50) et DNR : le son du poste (mono, moyenne des voies) passe par le notch puis le réducteur de bruit, puis va
+            // dans les deux voies.
+            bool notchOn = RigNotch.Active, dnr = NoiseReducer.Active || notchOn;
             if (dnr)
             {
                 if (mono.Length < frames) mono = new float[frames];
                 for (int i = 0; i < frames; i++)
                     mono[i] = silent ? 0f : (float)(inFmt.Channels > 1 ? (Sample(i * align, bytes) + Sample(i * align + bytes, bytes)) * 0.5 : Sample(i * align, bytes));
+                nf.Process(inFmt.Rate, mono, frames);
                 nr.Process(inFmt.Rate, mono, frames);
             }
             int cap = ring.Length / 2;

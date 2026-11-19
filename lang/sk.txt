@@ -249,7 +249,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Pravé tlačidlo: prijímače stlmené pri vysielaní
 Auto notch off	Automatický notch vypnutý
 Auto notch (DNF)	Automatický notch (DNF)
-Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automatický notch (DNF). Klik: zapnúť / vypnúť (farba tlačidla). Pravé tlačidlo: vypnutie v digitálnych režimoch a FreeDV, úroveň 1 až 10, farby
+Automatic notch (DNF). Click: on / off (button colour). Right-click: type (original, adaptive or spectral) and its level 1 to 10, off in digital modes and FreeDV, colours	Automatický notch (DNF). Klik: zapnúť / vypnúť (farba tlačidla). Pravé tlačidlo: typ (pôvodný, adaptívny alebo spektrálny) a jeho úroveň 1 až 10, vypnutie v digitálnych režimoch a FreeDV, farby
 Colour when the notch is off	Farba pri vypnutom notchi
 Colour when the notch is on	Farba pri zapnutom notchi
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Znovu spustí aktuálny WebSDR (napríklad zastavený po čase nečinnosti). Klik: znovu spustiť so zachovaním nastavení (frekvencia, režim, filter, zoom, hlasitosť). Pravý klik: automatické znovuspustenie pri strate zvuku (Auto) a jeho oneskorenie, úplný reset WebSDR, farby tlačidla
@@ -424,7 +424,7 @@ Later	Neskôr
 Open the update page	Otvoriť stránku aktualizácie
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink bol aktualizovaný na V{0}; stará verzia bola odstránená.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink bol aktualizovaný na V{0}; stará verzia bude odstránená pri ďalšom spustení.
-Auto notch on, level {0}	Automatický notch zapnutý, úroveň {0}
+Auto notch on: {0}, level {1}	Automatický notch zapnutý: {0}, úroveň {1}
 Last {0} memories used	Posledných {0} použitých pamätí
 ExpertSDR TCI port: {0}…	Port TCI programu ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ K dispozícii je aktualizácia V{0}: kliknite na stiahnutie
@@ -648,12 +648,21 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nedokáže kom
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Kliknutie: klávesnica frekvencie a zoznam Mem posledných frekvencií; koliesko: zmena frekvencie (pravé tlačidlo: farby)
 No frequency to store (no rig, no WebSDR).	Žiadna frekvencia na uloženie (ani rádiostanica, ani WebSDR).
 Stored: {0} kHz	Uložené: {0} kHz
+spectral	spektrálny
+adaptive	adaptívny
+original	pôvodný
 Auto notch off in digital modes	Automatický notch vypnutý v digitálnych druhoch prevádzky
 Auto notch off in FreeDV V1 and V2	Automatický notch vypnutý vo FreeDV V1 a V2
+Notch also on the rig audio played by SDRLink (listening on the PC, diversity)	Notch aj na zvuk TRX prehrávaný SDRLinkom (počúvanie na PC, diverzita)
+Notch type:	Typ notchu:
+Original: filters following the whistles (4 to 8)	Pôvodný: filtre sledujúce pískanie (4 až 8)
+Adaptive (NLMS): follows drifting whistles, handles as many as there are	Adaptívny (NLMS): sleduje unikajúce pískanie, zvláda ich toľko, koľko je
+Spectral (FFT): the cleanest, only touches steady lines	Spektrálny (FFT): najčistejší, dotýka sa len stálych čiar
 Notch level:	Úroveň notchu:
 1 (original setting)	1 (pôvodné nastavenie)
+1 (gentlest)	1 (najjemnejšia)
 10 (strongest)	10 (najsilnejší)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatický notch nájde stále pískanie (nosné) vo zvuku WebSDR a utlmí ho. Klik na tlačidlo ho zapne alebo vypne (zelené tlačidlo pri zapnutí, farby si zvolíte nižšie); pravé tlačidlo otvorí toto okno. Úroveň od 1 (pôvodné nastavenie) do 10 zvyšuje počet spracovaných pískaní (4 až 8) a silu zásahu; vysoká úroveň môže zasiahnuť aj hlas, ktorý drží tón. Pozastaví sa bez vypnutia tlačidla počas digitálneho režimu (bežiaci dekodér alebo režim DIGI) a počas FreeDV, ak sú voľby vyššie zaškrtnuté: poškodil by dekódované signály. Kábel SDRLINK a dekodéry dostávajú zvuk vždy bez notchu.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. Three types: original (4 to 8 narrow filters following the whistles; the level increases their number and width), adaptive (a filter removing everything that repeats, even a drifting whistle; the level sets its speed, a high level can affect the voice) and spectral (each frequency clearly above its neighbours for a while is brought down to their level; the cleanest, the level sets the threshold and the strength). Each type keeps its own level, 1 to 10. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Automatický notch deteguje stále pískanie (nosné) v zvuku WebSDR a tlmí ho. Kliknutím na tlačidlo sa zapne alebo vypne (zelené tlačidlo, keď je zapnutý, farby si možno vybrať nižšie); pravé tlačidlo otvorí toto okno. Tri typy: pôvodný (4 až 8 úzkych filtrov sledujúcich pískanie; úroveň zvyšuje ich počet a šírku), adaptívny (filter odstraňujúci všetko, čo sa opakuje, aj unikajúce pískanie; úroveň určuje jeho rýchlosť, vysoká úroveň môže ovplyvniť hlas) a spektrálny (každá frekvencia, ktorá je nejaký čas zreteľne nad susednými, sa zníži na ich úroveň; najčistejší, úroveň určuje prah a silu). Každý typ si drží vlastnú úroveň, 1 až 10. Pozastaví sa, bez vypnutia tlačidla, počas digitálneho režimu (beží dekodér alebo režim DIGI) a počas FreeDV, ak sú vyššie uvedené voľby zaškrtnuté: poškodil by signály na dekódovanie. Kábel SDRLINK a dekodéry vždy dostávajú zvuk bez notchu.
 Button colours…	Farby tlačidla…
 , off in digital modes	, vypnutý v digitálnych druhoch prevádzky
 , off in FreeDV	, vypnutý vo FreeDV
@@ -667,7 +676,6 @@ DNR type (right-click a type: its level):	Typ DNR (pravé tlačidlo na type: jeh
 Classic (Wiener filter)	Klasický (Wienerov filter)
 Improved (MMSE-LSA): less voice distortion	Vylepšený (MMSE-LSA): menej skreslený hlas
 AI (RNNoise): most effective, more computing	AI (RNNoise): najúčinnejší, viac výpočtov
-1 (gentlest)	1 (najjemnejšia)
 DNR off in digital modes	DNR vypnutý v digitálnych druhoch prevádzky
 DNR off in FreeDV V1 and V2	DNR vypnutý vo FreeDV V1 a V2
 DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR aj na zvuk TRX prehrávaný SDRLinkom (počúvanie na PC, diverzita)
@@ -685,7 +693,7 @@ Mode search: no WebSDR or rig to listen to	Hľadanie druhu prevádzky: žiadny W
 : waiting for a decoded message…	: čaká sa na dekódovanú správu…
 Mode search stopped	Hľadanie druhu prevádzky zastavené
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Hľadanie druhu prevádzky: nerozpoznaný žiadny druh prevádzky (príliš slabý signál, nepodporovaný druh prevádzky alebo WSPR / JT9 / Hell, príliš pomalé na rozpoznanie)
-Auto notch: level {0}{1}{2}	Automatický notch: úroveň {0}{1}{2}
+Auto notch: {0}, level {1}{2}{3}	Automatický notch: {0}, úroveň {1}{2}{3}
 DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR zapnutý ({0}, úroveň {1}), pozastavený počas digitálneho režimu alebo FreeDV (zmena pravým tlačidlom)
 DNR on: {0}, level {1}	DNR zapnutý: {0}, úroveň {1}
 DNR: {0}, level {1}{2}{3}	DNR: {0}, úroveň {1}{2}{3}

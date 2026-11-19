@@ -249,7 +249,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Rechtsklik: ontvangers die tijdens zenden gedempt worden
 Auto notch off	Automatische notch uit
 Auto notch (DNF)	Auto-notch (DNF)
-Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Automatische notch (DNF). Klik: aan / uit (kleur van de knop). Rechtsklik: uit in digitale modes en FreeDV, niveau 1 tot 10, kleuren
+Automatic notch (DNF). Click: on / off (button colour). Right-click: type (original, adaptive or spectral) and its level 1 to 10, off in digital modes and FreeDV, colours	Automatische notch (DNF). Klik: aan / uit (kleur van de knop). Rechtsklik: type (origineel, adaptief of spectraal) en niveau 1 tot 10, uit in digitale modes en FreeDV, kleuren
 Colour when the notch is off	Kleur bij uitgeschakelde notch
 Colour when the notch is on	Kleur bij ingeschakelde notch
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Herstart de huidige WebSDR (bijvoorbeeld gestopt na een periode van inactiviteit). Klik: herstart met behoud van de instellingen (frequentie, mode, filter, zoom, volume). Rechtsklik: automatische herstart bij geluidsverlies (Auto) en de wachttijd, volledige reset van de WebSDR, kleuren van de knop
@@ -424,7 +424,7 @@ Later	Later
 Open the update page	Updatepagina openen
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink is bijgewerkt naar V{0}; de oude versie is verwijderd.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink is bijgewerkt naar V{0}; de oude versie wordt bij de volgende start verwijderd.
-Auto notch on, level {0}	Automatische notch aan, niveau {0}
+Auto notch on: {0}, level {1}	Automatische notch aan: {0}, niveau {1}
 Last {0} memories used	Laatste {0} gebruikte geheugens
 ExpertSDR TCI port: {0}…	TCI-poort van ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Update V{0} beschikbaar: klik om te downloaden
@@ -648,12 +648,21 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink kan niet met d
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: frequentietoetsenbord en Mem-lijst van de laatste frequenties; wieltje: frequentie wijzigen (rechtsklik: kleuren)
 No frequency to store (no rig, no WebSDR).	Geen frequentie om op te slaan (geen transceiver, geen WebSDR).
 Stored: {0} kHz	Opgeslagen: {0} kHz
+spectral	spectraal
+adaptive	adaptief
+original	origineel
 Auto notch off in digital modes	Auto-notch uit bij digitale modes
 Auto notch off in FreeDV V1 and V2	Auto-notch uit bij FreeDV V1 en V2
+Notch also on the rig audio played by SDRLink (listening on the PC, diversity)	Notch ook op het geluid van de transceiver dat SDRLink afspeelt (luisteren op de pc, diversity)
+Notch type:	Notch-type:
+Original: filters following the whistles (4 to 8)	Origineel: filters die de fluittonen volgen (4 tot 8)
+Adaptive (NLMS): follows drifting whistles, handles as many as there are	Adaptief (NLMS): volgt wegdrijvende fluittonen, verwerkt er zoveel als er zijn
+Spectral (FFT): the cleanest, only touches steady lines	Spectraal (FFT): de schoonste, raakt alleen stabiele lijnen
 Notch level:	Notch-niveau:
 1 (original setting)	1 (oorspronkelijke instelling)
+1 (gentlest)	1 (zachtst)
 10 (strongest)	10 (sterkst)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	De automatische notch vindt vaste fluittonen (draaggolven) in het WebSDR-geluid en verzwakt ze. Een klik op de knop zet hem aan of uit (groene knop wanneer aan, kleuren hieronder te kiezen); rechtsklik opent dit venster. Het niveau, van 1 (oorspronkelijke instelling) tot 10, verhoogt het aantal behandelde fluittonen (4 tot 8) en de kracht van de werking; een hoog niveau kan ook een stem raken die een toon aanhoudt. Hij wordt gepauzeerd, zonder de knop uit te zetten, tijdens een digitale mode (decoder actief of DIGI-mode) en tijdens FreeDV, als de keuzes hierboven aangevinkt zijn: hij zou de te decoderen signalen beschadigen. De SDRLINK-kabel en de decoders krijgen het geluid altijd zonder notch.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. Three types: original (4 to 8 narrow filters following the whistles; the level increases their number and width), adaptive (a filter removing everything that repeats, even a drifting whistle; the level sets its speed, a high level can affect the voice) and spectral (each frequency clearly above its neighbours for a while is brought down to their level; the cleanest, the level sets the threshold and the strength). Each type keeps its own level, 1 to 10. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	De automatische notch detecteert stabiele fluittonen (dragers) in het WebSDR-geluid en dempt ze. Een klik op de knop zet hem aan of uit (groene knop als hij aan staat, kleuren hieronder te kiezen); rechtsklik opent dit venster. Drie types: origineel (4 tot 8 smalle filters die de fluittonen volgen; het niveau verhoogt hun aantal en breedte), adaptief (een filter dat alles verwijdert wat zich herhaalt, zelfs een wegdrijvende fluittoon; het niveau bepaalt de snelheid, een hoog niveau kan de stem aantasten) en spectraal (elke frequentie die een tijdlang duidelijk boven zijn buren uitsteekt, wordt tot hun niveau teruggebracht; de schoonste, het niveau bepaalt de drempel en de sterkte). Elk type houdt zijn eigen niveau, 1 tot 10. Hij wordt gepauzeerd, zonder de knop uit te zetten, tijdens een digitale mode (decoder actief of DIGI-mode) en tijdens FreeDV, als de keuzes hierboven zijn aangevinkt: hij zou de te decoderen signalen beschadigen. De SDRLINK-kabel en de decoders ontvangen het geluid altijd zonder notch.
 Button colours…	Kleuren van de knop…
 , off in digital modes	, uit bij digitale modes
 , off in FreeDV	, uit bij FreeDV
@@ -667,7 +676,6 @@ DNR type (right-click a type: its level):	DNR-type (rechtsklik op een type: het 
 Classic (Wiener filter)	Klassiek (Wiener-filter)
 Improved (MMSE-LSA): less voice distortion	Verbeterd (MMSE-LSA): minder vervormde stem
 AI (RNNoise): most effective, more computing	AI (RNNoise): het meest effectief, meer rekenwerk
-1 (gentlest)	1 (zachtst)
 DNR off in digital modes	DNR uit bij digitale modes
 DNR off in FreeDV V1 and V2	DNR uit bij FreeDV V1 en V2
 DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR ook op het geluid van de transceiver dat SDRLink afspeelt (luisteren op de pc, diversity)
@@ -685,7 +693,7 @@ Mode search: no WebSDR or rig to listen to	Mode zoeken: geen WebSDR of transceiv
 : waiting for a decoded message…	: wachten op een gedecodeerd bericht…
 Mode search stopped	Mode zoeken gestopt
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Mode zoeken: geen mode herkend (signaal te zwak, mode niet ondersteund, of WSPR / JT9 / Hell, te traag om te herkennen)
-Auto notch: level {0}{1}{2}	Auto-notch: niveau {0}{1}{2}
+Auto notch: {0}, level {1}{2}{3}	Automatische notch: {0}, niveau {1}{2}{3}
 DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR aan ({0}, niveau {1}), gepauzeerd tijdens digitale mode of FreeDV (rechtsklik om te wijzigen)
 DNR on: {0}, level {1}	DNR aan: {0}, niveau {1}
 DNR: {0}, level {1}{2}{3}	DNR: {0}, niveau {1}{2}{3}

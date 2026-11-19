@@ -249,7 +249,7 @@ Name or callsign given automatically to WebSDRs that ask for one before the audi
 Right-click: receivers muted while transmitting	Clic dreapta: receptoare puse pe mut în emisie
 Auto notch off	Notch automat oprit
 Auto notch (DNF)	Notch auto (DNF)
-Automatic notch (DNF). Click: on / off (button colour). Right-click: off in digital modes and FreeDV, level 1 to 10, colours	Notch automat (DNF). Clic: pornit / oprit (culoarea butonului). Clic dreapta: oprit în modurile digitale și în FreeDV, nivel de la 1 la 10, culori
+Automatic notch (DNF). Click: on / off (button colour). Right-click: type (original, adaptive or spectral) and its level 1 to 10, off in digital modes and FreeDV, colours	Notch automat (DNF). Clic: pornit / oprit (culoarea butonului). Clic dreapta: tip (original, adaptiv sau spectral) și nivelul său de la 1 la 10, oprit în modurile digitale și în FreeDV, culori
 Colour when the notch is off	Culoare cu notch oprit
 Colour when the notch is on	Culoare cu notch pornit
 Restarts the current WebSDR (for example stopped after an idle time). Click: restart keeping its settings (frequency, mode, filter, zoom, volume). Right-click: automatic restart when the sound is lost (Auto) and its delay, full reset of the WebSDR, button colours	Repornește WebSDR-ul curent (de exemplu oprit după o perioadă de inactivitate). Clic: repornire păstrând setările (frecvență, mod, filtru, zoom, volum). Clic dreapta: repornire automată când sunetul se pierde (Auto) și întârzierea ei, reinițializare totală a WebSDR-ului, culorile butonului
@@ -424,7 +424,7 @@ Later	Mai târziu
 Open the update page	Deschide pagina actualizării
 SDRLink has been updated to V{0}; the old version has been deleted.	SDRLink a fost actualizat la V{0}; versiunea veche a fost ștearsă.
 SDRLink has been updated to V{0}; the old version will be deleted at the next start.	SDRLink a fost actualizat la V{0}; versiunea veche va fi ștearsă la următoarea pornire.
-Auto notch on, level {0}	Notch automat pornit, nivel {0}
+Auto notch on: {0}, level {1}	Notch automat pornit: {0}, nivel {1}
 Last {0} memories used	Ultimele {0} memorii folosite
 ExpertSDR TCI port: {0}…	Portul TCI al ExpertSDR: {0}…
 ⚠ Update V{0} available: click to download it	⚠ Actualizarea V{0} este disponibilă: faceți clic pentru a o descărca
@@ -648,12 +648,21 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink nu poate comun
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clic: tastatură de frecvență și lista Mem a ultimelor frecvențe; rotiță: schimbarea frecvenței (clic dreapta: culori)
 No frequency to store (no rig, no WebSDR).	Nicio frecvență de memorat (nici stație, nici WebSDR).
 Stored: {0} kHz	Memorat: {0} kHz
+spectral	spectral
+adaptive	adaptiv
+original	original
 Auto notch off in digital modes	Notch auto oprit în modurile digitale
 Auto notch off in FreeDV V1 and V2	Notch auto oprit în FreeDV V1 și V2
+Notch also on the rig audio played by SDRLink (listening on the PC, diversity)	Notch și pe sunetul stației redat de SDRLink (ascultare pe PC, diversitate)
+Notch type:	Tip de notch:
+Original: filters following the whistles (4 to 8)	Original: filtre care urmăresc fluierăturile (4 până la 8)
+Adaptive (NLMS): follows drifting whistles, handles as many as there are	Adaptiv (NLMS): urmărește fluierăturile care derivă, tratează oricâte sunt
+Spectral (FFT): the cleanest, only touches steady lines	Spectral (FFT): cel mai curat, atinge doar liniile stabile
 Notch level:	Nivel notch:
 1 (original setting)	1 (setarea inițială)
+1 (gentlest)	1 (cel mai blând)
 10 (strongest)	10 (cel mai puternic)
-The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. The level, from 1 (original setting) to 10, increases the number of whistles handled (4 to 8) and the strength of the action; a high level can also affect a voice holding a note. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Notch-ul automat găsește fluierăturile constante (purtătoare) din sunetul WebSDR și le atenuează. Un clic pe buton îl pornește sau îl oprește (buton verde când este pornit, culori de ales mai jos); clicul dreapta deschide această fereastră. Nivelul, de la 1 (setarea inițială) la 10, mărește numărul de fluierături tratate (de la 4 la 8) și forța acțiunii; un nivel ridicat poate afecta și o voce care ține o notă. Este pus pe pauză, fără a opri butonul, în timpul unui mod digital (decodor pornit sau mod DIGI) și în timpul FreeDV, dacă opțiunile de mai sus sunt bifate: ar deteriora semnalele de decodat. Cablul SDRLINK și decodoarele primesc mereu sunetul fără notch.
+The automatic notch detects steady whistles (carriers) in the WebSDR sound and attenuates them. A click on the button turns it on or off (green button when on, colours to choose below); right-click opens this window. Three types: original (4 to 8 narrow filters following the whistles; the level increases their number and width), adaptive (a filter removing everything that repeats, even a drifting whistle; the level sets its speed, a high level can affect the voice) and spectral (each frequency clearly above its neighbours for a while is brought down to their level; the cleanest, the level sets the threshold and the strength). Each type keeps its own level, 1 to 10. It is paused, without turning the button off, during a digital mode (decoder running or DIGI mode) and during FreeDV, if the choices above are ticked: it would damage the signals to decode. The SDRLINK cable and the decoders always receive the sound without notch.	Notch-ul automat detectează fluierăturile stabile (purtătoarele) din sunetul WebSDR și le atenuează. Un clic pe buton îl pornește sau îl oprește (buton verde când este pornit, culorile se aleg mai jos); clic dreapta deschide această fereastră. Trei tipuri: original (4 până la 8 filtre înguste care urmăresc fluierăturile; nivelul le crește numărul și lățimea), adaptiv (un filtru care elimină tot ce se repetă, chiar și o fluierătură în derivă; nivelul îi stabilește viteza, un nivel mare poate afecta vocea) și spectral (fiecare frecvență clar peste vecinele sale o perioadă este coborâtă la nivelul acestora; cel mai curat, nivelul stabilește pragul și intensitatea). Fiecare tip își păstrează propriul nivel, de la 1 la 10. Este pus în pauză, fără a opri butonul, în timpul unui mod digital (decodor în funcțiune sau mod DIGI) și în timpul FreeDV, dacă opțiunile de mai sus sunt bifate: ar deteriora semnalele de decodat. Cablul SDRLINK și decodoarele primesc întotdeauna sunetul fără notch.
 Button colours…	Culorile butonului…
 , off in digital modes	, oprit în modurile digitale
 , off in FreeDV	, oprit în FreeDV
@@ -667,7 +676,6 @@ DNR type (right-click a type: its level):	Tip DNR (clic dreapta pe un tip: nivel
 Classic (Wiener filter)	Clasic (filtru Wiener)
 Improved (MMSE-LSA): less voice distortion	Îmbunătățit (MMSE-LSA): voce mai puțin deformată
 AI (RNNoise): most effective, more computing	IA (RNNoise): cel mai eficient, mai multe calcule
-1 (gentlest)	1 (cel mai blând)
 DNR off in digital modes	DNR oprit în modurile digitale
 DNR off in FreeDV V1 and V2	DNR oprit în FreeDV V1 și V2
 DNR also on the rig audio played by SDRLink (listening on the PC, diversity)	DNR și pe sunetul stației redat de SDRLink (ascultare pe PC, diversitate)
@@ -685,7 +693,7 @@ Mode search: no WebSDR or rig to listen to	Căutare mod: niciun WebSDR sau staț
 : waiting for a decoded message…	: se așteaptă un mesaj decodat…
 Mode search stopped	Căutarea modului oprită
 Mode search: no mode recognised (signal too weak, unsupported mode, or WSPR / JT9 / Hell, too slow to recognise)	Căutare mod: niciun mod recunoscut (semnal prea slab, mod neacceptat sau WSPR / JT9 / Hell, prea lente pentru a fi recunoscute)
-Auto notch: level {0}{1}{2}	Notch auto: nivel {0}{1}{2}
+Auto notch: {0}, level {1}{2}{3}	Notch automat: {0}, nivel {1}{2}{3}
 DNR on ({0}, level {1}), paused during the digital mode or FreeDV (right-click to change)	DNR pornit ({0}, nivel {1}), în pauză în timpul modului digital sau FreeDV (clic dreapta pentru a schimba)
 DNR on: {0}, level {1}	DNR pornit: {0}, nivel {1}
 DNR: {0}, level {1}{2}{3}	DNR: {0}, nivel {1}{2}{3}
