@@ -648,6 +648,18 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink ne more komuni
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: tipkovnica frekvence in seznam Mem zadnjih frekvenc; kolesce: sprememba frekvence (desni klik: barve)
 No frequency to store (no rig, no WebSDR).	Ni frekvence za shranjevanje (ne postaje ne WebSDR).
 Stored: {0} kHz	Shranjeno: {0} kHz
+microphone to choose	izberite mikrofon
+PC microphone	Mikrofon računalnika
+Rig transmit sound card (PC output connected to the rig)	Zvočna kartica za oddajo postaje (izhod računalnika, povezan s postajo)
+No sound output found in Windows	V Windows ni bil najden noben zvočni izhod
+Microphone to the rig: first choose the microphone and the rig transmit sound card (right-click PTT)	Mikrofon v postajo: najprej izberite mikrofon in zvočno kartico za oddajo postaje (desni klik na PTT)
+PC microphone to the rig turned off	Mikrofon računalnika v postajo izklopljen
+PC microphone to the rig back	Mikrofon računalnika v postajo spet deluje
+PC microphone to the rig ("{0}" → "{1}")	Mikrofon računalnika v postajo (»{0}« → »{1}«)
+PC microphone: "{0}"	Mikrofon računalnika: »{0}«
+Rig transmit sound card: "{0}" (also for Tune)	Zvočna kartica za oddajo postaje: »{0}« (tudi za Tune)
+PC microphone sent to the rig: "{0}" → "{1}"	Mikrofon računalnika se pošilja v postajo: »{0}« → »{1}«
+Microphone to the rig: sound card not available ({0})	Mikrofon v postajo: zvočna kartica ni na voljo ({0})
 spectral	spektralna
 adaptive	prilagodljiva
 original	izvirna

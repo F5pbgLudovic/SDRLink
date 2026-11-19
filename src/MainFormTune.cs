@@ -74,6 +74,7 @@ namespace SDRLink
                         settings.Save();
                         Log.Write("Tune : carte son d'émission « " + name + " »");
                         ShowStatus(Lang.F("Tune : tonalité envoyée sur « {0} »", "Tune: tone sent to \"{0}\"", name));
+                        UpdateMicRoute();
                     };
                     m.Items.Add(it);
                 }
@@ -331,6 +332,7 @@ namespace SDRLink
             }
             tuneTone = new TuneTone(settings.TuneCardId, TuneHz, settings.TuneLevel / 100f);
             tuneTone.Start();
+            UpdateMicRoute();   // micro du PC muet pendant la tonalité
             tuneStart = DateTime.UtcNow;
             tuneUntil = tuneStart.AddSeconds(settings.TuneSeconds);
             tuneTimer.Start();
@@ -346,6 +348,7 @@ namespace SDRLink
             tuneTone = null;
             tuneTimer.Stop();
             t.Stop();
+            UpdateMicRoute();
             if (tunePttOwned && pttActive) SetPttButton(false);
             tunePttOwned = false;
             if (why != null) { ShowStatus(why); Log.Write("Tune : " + why); }

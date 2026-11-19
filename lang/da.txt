@@ -648,6 +648,18 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	SDRLink kan ikke kommu
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Klik: frekvenstastatur og Mem-liste over de sidste frekvenser; hjul: skift frekvens (højreklik: farver)
 No frequency to store (no rig, no WebSDR).	Ingen frekvens at gemme (hverken radio eller WebSDR).
 Stored: {0} kHz	Gemt: {0} kHz
+microphone to choose	mikrofon skal vælges
+PC microphone	PC-mikrofon
+Rig transmit sound card (PC output connected to the rig)	Radioens lydkort til sending (PC-udgang forbundet til radioen)
+No sound output found in Windows	Ingen lydudgang fundet i Windows
+Microphone to the rig: first choose the microphone and the rig transmit sound card (right-click PTT)	Mikrofon til radioen: vælg først mikrofonen og radioens lydkort til sending (højreklik på PTT)
+PC microphone to the rig turned off	PC-mikrofon til radioen slået fra
+PC microphone to the rig back	PC-mikrofon til radioen virker igen
+PC microphone to the rig ("{0}" → "{1}")	PC-mikrofon til radioen ("{0}" → "{1}")
+PC microphone: "{0}"	PC-mikrofon: "{0}"
+Rig transmit sound card: "{0}" (also for Tune)	Radioens lydkort til sending: "{0}" (også til Tune)
+PC microphone sent to the rig: "{0}" → "{1}"	PC-mikrofon sendes til radioen: "{0}" → "{1}"
+Microphone to the rig: sound card not available ({0})	Mikrofon til radioen: lydkort ikke tilgængeligt ({0})
 spectral	spektral
 adaptive	adaptiv
 original	original

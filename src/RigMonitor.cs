@@ -16,6 +16,11 @@ namespace SDRLink
         static readonly Guid FloatFormat = new Guid("00000003-0000-0010-8000-00aa00389b71");
 
         public readonly string CaptureId;
+        // Micro du PC vers le poste (1.51) : sortie choisie (carte son d'émission du poste) au lieu de la sortie par défaut,
+        // son brut (ni notch ni DNR) et retard plus court.
+        public readonly string OutputId;
+        readonly bool raw;
+        readonly string label;
         public volatile bool Muted;
         // « Volume TX sur PC » (1.45) : seulement le son rejoué dans les haut-parleurs. REC, la diversité et les décodeurs
         // ouvrent leur propre capture de la carte : ce volume, même à 0, ne leur enlève rien.
@@ -49,13 +54,18 @@ namespace SDRLink
 
         struct Fmt { public int Rate, Channels, Bits; public bool Float; public int Align { get { return Bits / 8 * Channels; } } }
 
-        public RigMonitor(string captureId, bool muted)
+        public RigMonitor(string captureId, bool muted) : this(captureId, null, muted, false, "Écoute du poste") { }
+
+        public RigMonitor(string captureId, string outputId, bool muted, bool raw, string label)
         {
             CaptureId = captureId;
+            OutputId = outputId;
+            this.raw = raw;
+            this.label = label;
             Muted = muted;
             thread = new Thread(Run);
             thread.IsBackground = true;
-            thread.Name = "Écoute du poste";
+            thread.Name = label;
             thread.Start();
         }
 
@@ -141,7 +151,7 @@ namespace SDRLink
             CardName = name ?? "?";
             inFmt = Init(inClient);
             capture = Service<AudioRecorder.IAudioCaptureClient>(inClient);
-            outClient = Activate(null, out name);
+            outClient = Activate(OutputId, out name);
             OutputName = name ?? "?";
             outFmt = Init(outClient);
             render = Service<IAudioRenderClient>(outClient);
@@ -154,7 +164,7 @@ namespace SDRLink
             haveLast = false;
             Marshal.ThrowExceptionForHR(inClient.Start());
             Marshal.ThrowExceptionForHR(outClient.Start());
-            Log.Write("Écoute du poste : « " + CardName + " » (" + inFmt.Rate + " Hz) rejouée sur « " + OutputName + " » (" + outFmt.Rate + " Hz, " + outFmt.Channels + " voies)");
+            Log.Write(label + " : « " + CardName + " » (" + inFmt.Rate + " Hz) rejouée sur « " + OutputName + " » (" + outFmt.Rate + " Hz, " + outFmt.Channels + " voies)");
         }
 
         void Close()
@@ -189,15 +199,16 @@ namespace SDRLink
         // Sortie : le son en attente est donné aux haut-parleurs, autant qu'ils en acceptent.
         void Play()
         {
-            // Retard limité : au-delà de 120 ms en attente, on saute pour revenir à 50 ms.
+            // Retard limité : au-delà de 120 ms en attente, on saute pour revenir à 50 ms (micro : 60 ms, retour à 25 ms).
             int rate = outFmt.Rate;
-            if (count > rate * 12 / 100) Drop(count - rate * 5 / 100);
+            if (raw) { if (count > rate * 6 / 100) Drop(count - rate * 25 / 1000); }
+            else if (count > rate * 12 / 100) Drop(count - rate * 5 / 100);
 
             int padding;
             Marshal.ThrowExceptionForHR(outClient.GetCurrentPadding(out padding));
             if (waiting)
             {
-                if (count < rate * 3 / 100) return;   // matelas de 30 ms avant de (re)commencer
+                if (count < rate * (raw ? 15 : 30) / 1000) return;   // matelas de 30 ms (micro : 15 ms) avant de (re)commencer
                 waiting = false;
             }
             int free = outBuffer - padding, todo = Math.Min(free, count);
@@ -251,7 +262,7 @@ namespace SDRLink
             }
             // Notch (1.50) et DNR : le son du poste (mono, moyenne des voies) passe par le notch puis le réducteur de bruit, puis va
             // dans les deux voies.
-            bool notchOn = RigNotch.Active, dnr = NoiseReducer.Active || notchOn;
+            bool notchOn = !raw && RigNotch.Active, dnr = !raw && NoiseReducer.Active || notchOn;
             if (dnr)
             {
                 if (mono.Length < frames) mono = new float[frames];

@@ -40,7 +40,7 @@ Overview; each feature is detailed further down in its own section.
 | Import/Export | **Reset the program…** (since 1.22), button colour |
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | colour when stopped / while scanning |
-| PTT | TX safety timeout, colour when receiving / transmitting |
+| PTT | TX safety timeout, **PC microphone to the rig** (box, microphone, rig transmit sound card; since 1.51), colour when receiving / transmitting |
 | TUNE | **rig transmit sound card**, **tone level** (1 to 100 %, slider and box, steps of 1), **duration** (5 s to 1 min), **keying: PTT on or rig VOX**, colour when idle / during Tune, **Close** as the last line (since 1.49) |
 | RIG | **VFO A / VFO B** controlled (since 1.49), background colour, text colour (left-click opens the frequency keypad) |
 | WEBSDR | background colour, text colour (left-click opens the frequency keypad) |
@@ -466,13 +466,19 @@ The large **PTT** button, to the left of "RIG", puts the rig into transmit over 
   - While transmitting, the button shows the time remaining ("● TX 1:45").
   - When it expires, SDRLink returns to receive and says so at the bottom of the window.
   - This timeout applies to transmissions started with SDRLink's PTT button, not the footswitch or the microphone.
+- **PC microphone to the rig** (since 1.51, right-click PTT): the PC microphone is sent to the **rig transmit sound card**, with no window and nothing played back on the PC.
+  - **PC microphone**: the microphone to use (Windows inputs). **Rig transmit sound card**: the PC output connected to the rig's modulation / USB input, **the same as Tune's** (changing it on one side changes it on the other). The box **PC microphone to the rig ("microphone" → "card")** turns it on or off; it is not ticked at first, and the choice is kept after a restart.
+  - The microphone stays available to other programs: Windows shares it, SDRLink does not take it for itself.
+  - The audio goes out continuously, as is (no notch or DNR), with about 20 to 40 ms of delay. The rig only transmits it when transmitting (SDRLink's PTT, footswitch, mic PTT, VOX), and only if its **modulation source** is USB / rear (DATA, "REAR"). With the rig's VOX set on USB, room noise may trigger it.
+  - During **Tune**, the microphone is silent: only the tone goes out.
+  - The level is set in Windows (microphone level) and on the rig (USB / DATA input gain).
 - **Transmitting without modulation** (seen on an FTdx10): CAT PTT does put the rig into transmit, but the transmitted audio depends on the rig's **modulation source**. If it is set to the rear connector or USB ("REAR", often the case for FT8), the microphone is not transmitted. On the FTdx10, check in the transmit settings menus (TX AUDIO) the SSB modulation source (MOD SOURCE: MIC) and the mic gain. Other programs that key the rig over CAT, such as WSJT-X, behave in the same way.
 
 ## TUNE button (since 1.49)
 
 The **TUNE** button, at the end of the PTT row (after the Always on top / PTT view boxes), same shape as PTT and aligned with it, transmits a **1500 Hz tone** to adjust an antenna tuner or an amplifier.
 - **Click**: transmit over CAT (like PTT) and tone sent to the **rig transmit sound card**; the button turns red and counts the seconds ("● TUNE 8"). Second click, click on PTT, or end of the duration: the tone stops (without a click) and the rig returns to receive. If PTT was already transmitting before Tune, it stays so. With **Rig VOX** (right-click), SDRLink sends no PTT: only the tone goes out, and the rig's VOX keys the transmitter (no CAT link needed).
-- **Right-click**: the **rig transmit sound card** (PC output connected to the rig's modulation / USB input), the **tone level** (small window always in front, to the left of the Tune menu which stays open, OK goes back to the menu: slider and box from 1 to 100 %, in steps of 1: wheel, arrows or typed value; applied at once, even while transmitting; 5 % at first), the **duration** (5, 10, 15, 20, 30, 45 s or 1 min; 10 s at first) and the colours.
+- **Right-click**: the **rig transmit sound card** (PC output connected to the rig's modulation / USB input; the same as for the PC microphone to the rig, since 1.51), the **tone level** (small window always in front, to the left of the Tune menu which stays open, OK goes back to the menu: slider and box from 1 to 100 %, in steps of 1: wheel, arrows or typed value; applied at once, even while transmitting; 5 % at first), the **duration** (5, 10, 15, 20, 30, 45 s or 1 min; 10 s at first) and the colours.
 - The rig must take its modulation from USB / the rear (DATA, "REAR") to transmit the tone; set the power on the rig before tuning.
 
 ## Muting while transmitting
@@ -1009,6 +1015,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.51**
+  - **PC microphone to the rig** (right-click PTT): the chosen microphone is sent continuously to the rig transmit sound card (the same as Tune), with no window, no monitoring, about 20 to 40 ms of delay; other programs keep the microphone. Silent during Tune.
 - **1.50**
   - **Three types of automatic notch (DNF)**, to choose in the button's right-click window: **original** (the previous one), **adaptive (NLMS)** (follows drifting whistles, handles as many as there are) and **spectral (FFT)** (the cleanest, only touches steady tones). Each type keeps its own level, 1 to 10.
   - **Notch on the rig audio** played by SDRLink (listening to the rig on the PC, rig ear in diversity): same type, same level and same switch-offs as for the WebSDR (box in the notch window, ticked at first).

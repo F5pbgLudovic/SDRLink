@@ -648,6 +648,18 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	Az SDRLink nem tud kom
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Kattintás: frekvencia-billentyűzet és a legutóbbi frekvenciák Mem listája; görgő: frekvencia váltása (jobb kattintás: színek)
 No frequency to store (no rig, no WebSDR).	Nincs tárolható frekvencia (sem rádió, sem WebSDR).
 Stored: {0} kHz	Tárolva: {0} kHz
+microphone to choose	válasszon mikrofont
+PC microphone	PC mikrofon
+Rig transmit sound card (PC output connected to the rig)	A rádió adási hangkártyája (a rádióhoz kötött PC-kimenet)
+No sound output found in Windows	Nem található hangkimenet a Windowsban
+Microphone to the rig: first choose the microphone and the rig transmit sound card (right-click PTT)	Mikrofon a rádióra: először válassza ki a mikrofont és a rádió adási hangkártyáját (jobb kattintás a PTT-n)
+PC microphone to the rig turned off	PC mikrofon a rádióra kikapcsolva
+PC microphone to the rig back	PC mikrofon a rádióra újra működik
+PC microphone to the rig ("{0}" → "{1}")	PC mikrofon a rádióra („{0}” → „{1}”)
+PC microphone: "{0}"	PC mikrofon: „{0}”
+Rig transmit sound card: "{0}" (also for Tune)	A rádió adási hangkártyája: „{0}” (a Tune-hoz is)
+PC microphone sent to the rig: "{0}" → "{1}"	A PC mikrofon a rádióra megy: „{0}” → „{1}”
+Microphone to the rig: sound card not available ({0})	Mikrofon a rádióra: a hangkártya nem érhető el ({0})
 spectral	spektrális
 adaptive	adaptív
 original	eredeti

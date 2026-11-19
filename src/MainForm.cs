@@ -168,7 +168,7 @@ namespace SDRLink
             };
             Shown += delegate
             {
-                ApplyView(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); UpdateFreeDv();
+                ApplyView(); UpdateMicRoute(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); UpdateFreeDv();
                 if (Program.JustUpdated)
                 {
                     Log.Write("Mise à jour automatique : V" + Program.Version + " démarrée");
@@ -190,6 +190,7 @@ namespace SDRLink
                 StopDiversity(null);   // sons rendus à chaque réception avant de fermer
                 Disconnect();
                 StopRigMonitor();
+                StopMicRoute();
                 if (probe != null) StopProbe(null, null);
                 StopDecoders();
                 CloseDigiWin();
@@ -2177,6 +2178,7 @@ namespace SDRLink
                     };
                     m.Items.Add(it);
                 }
+                AddMicRouteItems(m);   // 1.51 : micro du PC vers le poste
             };
             m.Items.Add("-");   // contenu construit à l'ouverture (langue et choix en cours)
             return m;

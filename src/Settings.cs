@@ -128,6 +128,9 @@ namespace SDRLink
         // 1.49 : bouton Tune : carte son d'émission du poste (sortie Windows), niveau (%) et durée (s) de la tonalité de 1500 Hz.
         public string TuneCardId = "", TuneCardName = "";
         public int TuneLevel = 5, TuneSeconds = 10;
+        // 1.51 : micro du PC envoyé sur la carte son d'émission du poste (la même que Tune), réglé au clic droit sur PTT.
+        public bool MicRoute;
+        public string MicRouteId = "", MicRouteName = "";
         public bool TuneVox;               // Tune : passage en émission par le VOX du poste (tonalité seule) au lieu du PTT par CAT (1.49)
         // Pas de la molette et bande passante de réception retenus par mode (clés cw, ssb, am, fm, digi) ; bande passante 0 = filtre
         // d'origine du WebSDR. Les valeurs absentes prennent celles par défaut (ModeStep, ModeBw).
@@ -338,6 +341,9 @@ namespace SDRLink
                     case "TuneLevel": s.TuneLevel = Math.Max(1, Math.Min(100, Int(v, 5))); break;
                     case "TuneSeconds": s.TuneSeconds = Math.Max(5, Math.Min(60, Int(v, 10))); break;
                     case "TuneVox": s.TuneVox = v == "1"; break;
+                    case "MicRoute": s.MicRoute = v == "1"; break;
+                    case "MicRouteId": s.MicRouteId = v; break;
+                    case "MicRouteName": s.MicRouteName = v; break;
                     case "ModeStep": { int c = v.IndexOf(':'); if (c > 0) s.ModeSteps[v.Substring(0, c)] = Math.Max(1, Int(v.Substring(c + 1), 500)); } break;
                     case "ModeBw": { int c = v.IndexOf(':'); if (c > 0) s.ModeBws[v.Substring(0, c)] = Math.Max(0, Math.Min(20000, Int(v.Substring(c + 1), 0))); } break;
                     case "DigiAutoQsy": s.DigiAutoQsy = v == "1"; break;
@@ -521,6 +527,9 @@ namespace SDRLink
             Line(sb, "TuneLevel", TuneLevel);
             Line(sb, "TuneSeconds", TuneSeconds);
             Line(sb, "TuneVox", TuneVox ? 1 : 0);
+            Line(sb, "MicRoute", MicRoute ? 1 : 0);
+            Line(sb, "MicRouteId", MicRouteId);
+            Line(sb, "MicRouteName", MicRouteName);
             foreach (KeyValuePair<string, int> p in ModeSteps) Line(sb, "ModeStep", p.Key + ":" + p.Value);
             foreach (KeyValuePair<string, int> p in ModeBws) Line(sb, "ModeBw", p.Key + ":" + p.Value);
             Line(sb, "DigiAutoQsy", DigiAutoQsy ? 1 : 0);

@@ -39,7 +39,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Import/Export | **Réinitialiser le programme…** (depuis la 1.22), couleur du bouton |
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | couleur scan arrêté / en marche |
-| PTT | délai de sécurité TX, couleur en réception / en émission |
+| PTT | délai de sécurité TX, **micro du PC vers le poste** (case, micro, carte son d'émission du poste ; depuis la 1.51), couleur en réception / en émission |
 | TUNE | **carte son d'émission du poste**, **niveau de la tonalité** (1 à 100 %, curseur et case, pas de 1), **durée** (5 s à 1 min), **passage en émission : PTT actif ou VOX du poste**, couleur au repos / pendant Tune, **Fermer** en dernière ligne (depuis la 1.49) |
 | RADIO | **VFO A / VFO B** commandé (depuis la 1.49), couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
 | WEBSDR | couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
@@ -465,13 +465,19 @@ Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émiss
   - Pendant l'émission, le bouton affiche le temps restant (« ● TX 1:45 »).
   - À l'échéance, SDRLink repasse en réception et l'indique en bas de la fenêtre.
   - Ce délai concerne l'émission lancée par le bouton PTT de SDRLink, pas la pédale ni le micro.
+- **Micro du PC vers le poste** (depuis la 1.51, clic droit sur PTT) : le micro du PC est envoyé sur la **carte son d'émission du poste**, sans fenêtre et sans rien rejouer sur le PC.
+  - **Micro du PC** : le micro à prendre (entrées de Windows). **Carte son d'émission du poste** : la sortie du PC reliée à l'entrée modulation / USB du poste, **la même que celle de Tune** (la changer d'un côté la change de l'autre). La case **Micro du PC vers le poste (« micro » → « carte »)** met l'envoi en marche ou l'arrête ; elle n'est pas cochée au départ, et le choix est gardé après redémarrage.
+  - Le micro reste disponible pour les autres logiciels : Windows le partage, SDRLink ne le prend pas pour lui seul.
+  - Le son part en continu, tel quel (sans notch ni DNR), avec environ 20 à 40 ms de retard. Le poste ne l'émet qu'en émission (PTT de SDRLink, pédale, PTT du micro, VOX), et seulement si sa **source de modulation** est l'USB / l'arrière (DATA, « REAR »). Avec le VOX du poste réglé sur l'USB, le bruit de la pièce peut le déclencher.
+  - Pendant **Tune**, le micro se tait : seule la tonalité part.
+  - Le niveau se règle dans Windows (niveau du micro) et sur le poste (gain de l'entrée USB / DATA).
 - **Émission sans modulation** (constaté sur un FTdx10) : le PTT par CAT met bien le poste en émission, mais le son émis dépend de la **source de modulation** du poste. Si elle est réglée sur l'arrière ou l'USB (« REAR », souvent le cas pour le FT8), le micro n'est pas transmis. Sur le FTdx10, vérifier dans les menus de réglage de l'émission (TX AUDIO) la source de modulation SSB (MOD SOURCE : MIC) et le gain micro. Les autres logiciels qui passent en émission par CAT, comme WSJT-X, rencontrent le même comportement.
 
 ## Bouton TUNE (depuis la 1.49)
 
 Le bouton **TUNE**, au bout de la ligne du PTT (après les cases Avant plan / Affichage ptt), de même forme et aligné sur lui, émet une **tonalité de 1500 Hz** pour régler une boîte d'accord ou un amplificateur.
 - **Clic** : passage en émission par CAT (comme PTT) et tonalité envoyée sur la **carte son d'émission du poste** ; le bouton devient rouge et compte les secondes (« ● TUNE 8 »). Second clic, clic sur PTT, ou fin de la durée : la tonalité s'arrête (sans claquement) et le poste repasse en réception. Si le PTT était déjà en émission avant Tune, il y reste. Avec **VOX du poste** (clic droit), SDRLink n'envoie aucun PTT : seule la tonalité part, et le VOX du poste passe en émission (aucune liaison CAT nécessaire).
-- **Clic droit** : la **carte son d'émission du poste** (sortie du PC reliée à l'entrée modulation / USB du poste), le **niveau de la tonalité** (petite fenêtre toujours devant, à gauche du menu de Tune qui reste ouvert, OK ramène au menu : curseur et case de 1 à 100 %, par pas de 1 : molette, flèches ou valeur tapée ; pris tout de suite, même pendant l'émission ; 5 % au départ), la **durée** (5, 10, 15, 20, 30, 45 s ou 1 min ; 10 s au départ) et les couleurs.
+- **Clic droit** : la **carte son d'émission du poste** (sortie du PC reliée à l'entrée modulation / USB du poste ; la même que pour le micro du PC vers le poste, depuis la 1.51), le **niveau de la tonalité** (petite fenêtre toujours devant, à gauche du menu de Tune qui reste ouvert, OK ramène au menu : curseur et case de 1 à 100 %, par pas de 1 : molette, flèches ou valeur tapée ; pris tout de suite, même pendant l'émission ; 5 % au départ), la **durée** (5, 10, 15, 20, 30, 45 s ou 1 min ; 10 s au départ) et les couleurs.
 - Le poste doit prendre sa modulation sur l'USB / l'arrière (DATA, « REAR ») pour émettre la tonalité ; régler la puissance sur le poste avant d'accorder.
 
 ## Coupure du son en émission
@@ -1008,6 +1014,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.51**
+  - **Micro du PC vers le poste** (clic droit sur PTT) : le micro choisi est envoyé en continu sur la carte son d'émission du poste (la même que Tune), sans fenêtre, sans écoute en retour, avec environ 20 à 40 ms de retard ; les autres logiciels gardent le micro. Muet pendant Tune.
 - **1.50**
   - **Trois types de notch automatique (DNF)**, au choix dans la fenêtre du clic droit du bouton : **d'origine** (celui d'avant), **adaptatif (NLMS)** (suit les sifflements qui glissent, en traite autant qu'il y en a) et **spectral (FFT)** (le plus propre, ne touche que les raies stables). Chaque type garde son niveau de 1 à 10.
   - **Notch sur le son du poste** joué par SDRLink (écoute du poste sur le PC, oreille du poste en diversité) : même type, même niveau et mêmes coupures que pour le WebSDR (case de la fenêtre du notch, cochée au départ).

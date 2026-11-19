@@ -1,4 +1,4 @@
-# SDRLink V1.50 — @F5PBG 2026
+# SDRLink V1.51 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -7,7 +7,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. Le son démarre sans clic, un pseudo (bouton Pseudo/Call, « SDRLink » par défaut) est donné d'office aux KiwiSDR et websdr.org qui en demandent un, un KiwiSDR complet met en file d'attente, le squelch est ouvert (sauf FM VHF), et un clic dans la page fait suivre le poste dès l'arrivée. Le zoom de la cascade reste celui choisi sur la page quand SDRLink change la fréquence. Ronds **partage**, **+** et **−** sur la page (lien de partage qui ouvre SDRLink au même endroit, écoute dans le navigateur ou téléchargement de SDRLink, zoom de la page retenu par WebSDR, OpenWebRX ajusté pour voir tout son panneau), adresse masquable par des étoiles (clic droit sur la page).
 - **Fonctions** :
   - bouton PTT avec délai de sécurité jusqu'à 55 min, et coupure du son en émission (WebSDR, poste, ExpertSDR, HDSDR, au choix par clic droit) ;
-  - bouton **TUNE** (tonalité de 1500 Hz sur la carte son d'émission du poste, niveau et durée au clic droit), choix du **VFO A ou B**, partage du poste en CAT direct avec un autre logiciel par un **port COM virtuel** (com0com installé depuis SDRLink) ;
+  - bouton **TUNE** (tonalité de 1500 Hz sur la carte son d'émission du poste, niveau et durée au clic droit), **micro du PC envoyé au poste** sur cette même carte, sans fenêtre (clic droit sur PTT), choix du **VFO A ou B**, partage du poste en CAT direct avec un autre logiciel par un **port COM virtuel** (com0com installé depuis SDRLink) ;
   - synchro désactivée : la case kHz, les mémoires, le scan et les modes ne règlent que le WebSDR, l'émetteur ne bouge pas ;
   - bouton ⇄ qui passe le son d'une réception à l'autre (WebSDR, poste, ExpertSDR, HDSDR), deux réceptions pouvant être laissées de côté ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
@@ -65,7 +65,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
 - **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. The audio starts without a click, a name (Pseudo/Call button, "SDRLink" by default) is given automatically to KiwiSDRs and websdr.org receivers that ask for one, a full KiwiSDR puts you in the queue, the squelch is opened (except VHF FM), and a click in the page makes the rig follow right after arriving. The waterfall zoom stays as chosen on the page when SDRLink changes the frequency. **Share**, **+** and **−** round buttons on the page (share link that opens SDRLink at the same spot, listens in the browser or downloads SDRLink, page zoom kept per WebSDR, OpenWebRX fitted to show its whole panel), address can be hidden by stars (right-click the page).
 - **Features**:
   - PTT button with a safety timeout of up to 55 min, audio muted while transmitting (WebSDR, rig, ExpertSDR, HDSDR, chosen by right-click);
-  - **TUNE** button (1500 Hz tone on the rig transmit sound card, level and duration by right-click), **VFO A or B** choice, sharing of the direct-CAT rig with another program through a **virtual COM port** (com0com installed from SDRLink);
+  - **TUNE** button (1500 Hz tone on the rig transmit sound card, level and duration by right-click), **PC microphone sent to the rig** on that same card, with no window (right-click PTT), **VFO A or B** choice, sharing of the direct-CAT rig with another program through a **virtual COM port** (com0com installed from SDRLink);
   - sync Off: the kHz box, memories, scan and modes only tune the WebSDR, the transmitter does not move;
   - ⇄ button that switches the audio from one receiver to the next (WebSDR, rig, ExpertSDR, HDSDR), with up to two receivers left aside;
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;

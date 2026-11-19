@@ -648,6 +648,18 @@ SDRLink cannot talk to the rig through OmniRig (Rig {0}).	O SDRLink não consegu
 Click: frequency keypad and Mem list of the last frequencies; wheel: change the frequency (right-click: colours)	Clique: teclado de frequência e lista Mem das últimas frequências; roda: mudar a frequência (clique direito: cores)
 No frequency to store (no rig, no WebSDR).	Nenhuma frequência para guardar (nem rádio nem WebSDR).
 Stored: {0} kHz	Guardado: {0} kHz
+microphone to choose	microfone a escolher
+PC microphone	Microfone do PC
+Rig transmit sound card (PC output connected to the rig)	Placa de som de transmissão do rádio (saída do PC ligada ao rádio)
+No sound output found in Windows	Nenhuma saída de som encontrada no Windows
+Microphone to the rig: first choose the microphone and the rig transmit sound card (right-click PTT)	Microfone para o rádio: escolha primeiro o microfone e a placa de som de transmissão do rádio (clique direito em PTT)
+PC microphone to the rig turned off	Microfone do PC para o rádio desativado
+PC microphone to the rig back	Microfone do PC para o rádio restabelecido
+PC microphone to the rig ("{0}" → "{1}")	Microfone do PC para o rádio («{0}» → «{1}»)
+PC microphone: "{0}"	Microfone do PC: «{0}»
+Rig transmit sound card: "{0}" (also for Tune)	Placa de som de transmissão do rádio: «{0}» (também para Tune)
+PC microphone sent to the rig: "{0}" → "{1}"	Microfone do PC enviado ao rádio: «{0}» → «{1}»
+Microphone to the rig: sound card not available ({0})	Microfone para o rádio: placa de som indisponível ({0})
 spectral	espectral
 adaptive	adaptativo
 original	original
