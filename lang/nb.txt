@@ -361,17 +361,6 @@ Add memory	Legg til minne
 ; preamp cannot be set on this rig / interface	; forforsterkeren kan ikke styres på denne radioen / dette grensesnittet
 ; power cannot be set on this rig / interface	; effekten kan ikke styres på denne radioen / dette grensesnittet
  (on return to receive)	 (ved retur til mottak)
-Resume the scan	Fortsett skanningen
-Current "Scan setup" setting	Gjeldende innstilling i «Skanneoppsett»
-No scan while transmitting	Ingen skanning under sending
-Scan: set the start and end frequencies in "Scan setup"	Skanning: angi start- og sluttfrekvens i «Skanneoppsett»
-Scan: all frequencies are in skipped ranges ("Scan setup")	Skanning: alle frekvenser ligger i områder som hoppes over («Skanneoppsett»)
-Scan: check memories in "Scan setup"	Skanning: kryss av minner i «Skanneoppsett»
-frequencies not set	frekvenser ikke angitt
-all frequencies are in skipped ranges	alle frekvenser ligger i områder som hoppes over
-no memory checked	ingen minner krysset av
-Scan stopped	Skanning stoppet
-■ Stop scan	■ Stopp skanning
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radioens lydkort, tas opp når Mute WebSDR, Mute ExpertSDR og Mute HDSDR er på:
 None (always the speakers)	Ingen (alltid høyttalerne)
 REC button colour	Farge på REC-knappen
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Fjerne «{0}» fra «{1}»?
 Unexpected error, written to the log: {0}	Uventet feil, skrevet i loggen: {0}
 Memory "{0}" added to "{1}".	Minnet «{0}» lagt til i «{1}».
 Memory "{0}": {1} kHz	Minne «{0}»: {1} kHz
-at {0} kHz	fra {0} kHz
-from the start ({0} kHz): current frequency out of range	fra starten ({0} kHz): gjeldende frekvens utenfor området
-at memory {0}	fra minne {0}
-from the start ({0}): current frequency not in the memories	fra starten ({0}): gjeldende frekvens finnes ikke i minnene
-click in the page, stopped on {0} kHz	klikk på siden, stoppet på {0} kHz
-Scan stopped: {0}	Skanning stoppet: {0}
-Scan: {0}	Skanning: {0}
 Cannot record: {0}	Kan ikke ta opp: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Radioens lydkort «{0}» er ikke tilgjengelig ({1}): tar opp høyttalerne
 Recording the sound of "{0}" (click REC to stop)	Tar opp lyden fra «{0}» (klikk på REC for å stoppe)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-siden er redusert til {0} for å vise hele kontrollpanelet (+ og − for å velge)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delingslenke kopiert til utklippstavlen ({0} kHz {1}): lim den inn i en melding
 Share link: {0} kHz {1} on {2}	Delingslenke: {0} kHz {1} på {2}
+Scan of the extended 27 MHz band	Skanning av det utvidede 27 MHz-båndet
+Scan of the 70 cm band	Skanning av 70 cm-båndet
+Resume the scan	Fortsett skanningen
+Current "Scan setup" setting	Gjeldende innstilling i «Skanneoppsett»
+Scan setup…	Skanneoppsett…
+Media keys (headset, keyboard): stop / resume the scan	Medietaster (hodetelefoner, tastatur): stopp / fortsett skanningen
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Spill av/Pause: stopper eller fortsetter skanningen. Neste / Forrige: ett steg tilbake når disse tastene har stoppet skanningen. Så lenge det er avkrysset, får ikke andre programmer disse tastene.
+Scan voice command ("stop", "start", "plus one", "minus one")	Talestyring av skanningen («stop», «start», «plus one», «minus one»)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Windows talegjenkjenning, uten nett, med Windows' standardmikrofon; lytter bare under skanningen og i 5 minutter etter at den stopper.
+Scan voice command: the microphone will listen during the scan	Talestyring av skanningen: mikrofonen lytter under skanningen
+Scan voice command off	Talestyring av skanningen slått av
+No scan while transmitting	Ingen skanning under sending
+Scan: set the start and end frequencies in "Scan setup"	Skanning: angi start- og sluttfrekvens i «Skanneoppsett»
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skanning: alle frekvenser ligger i områder som hoppes over («Skanneoppsett»)
+Scan: check memories in "Scan setup"	Skanning: kryss av minner i «Skanneoppsett»
+frequencies not set	frekvenser ikke angitt
+all frequencies are in skipped ranges	alle frekvenser ligger i områder som hoppes over
+no memory checked	ingen minner krysset av
+Scan stopped	Skanning stoppet
+■ Stop scan	■ Stopp skanning
+Media keys: Play/Pause stops or resumes the scan	Medietaster: Spill av/Pause stopper eller fortsetter skanningen
+Media keys: already taken by another program	Medietaster: allerede i bruk av et annet program
+Media keys given back to Windows	Medietaster gitt tilbake til Windows
+media key	medietast
+voice command	stemmekommando
+Scan of the {0} m band	Skanning av {0} m-båndet
+at {0} kHz	fra {0} kHz
+from the start ({0} kHz): current frequency out of range	fra starten ({0} kHz): gjeldende frekvens utenfor området
+at memory {0}	fra minne {0}
+from the start ({0}): current frequency not in the memories	fra starten ({0}): gjeldende frekvens finnes ikke i minnene
+click in the page, stopped on {0} kHz	klikk på siden, stoppet på {0} kHz
+Scan stopped: {0}	Skanning stoppet: {0}
+Scan: {0}	Skanning: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skanning satt på pause på {0}: signal {1} dB, fortsetter om {2}
+Back one step: {0}	Ett steg tilbake: {0}
+Voice command unavailable: {0}	Talestyring ikke tilgjengelig: {0}
+Voice command: "{0}"	Stemmekommando: «{0}»
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: sender en 1500 Hz-tone for å justere antennetuneren eller forsterkeren (PTT via CAT, lyd sendt til radioens sendelydkort). Klikk: på / av. Høyreklikk: radioens sendelydkort, tonenivå, varighet (5 s til 1 min), farger
 Rig transmit sound card (PC output connected to the rig):	Radioens sendelydkort (PC-utgang koblet til radioen):
 Keying during Tune:	Tasting under Tune:
@@ -873,6 +892,9 @@ End (kHz):	Slutt (kHz):
 Time on each frequency:	Tid på hver frekvens:
 Skipped ranges (from … to … kHz):	Områder som hoppes over (fra … til … kHz):
 + Skipped range	+ Område som hoppes over
+Pause on signal	Pause ved signal
+Signal threshold (S/N):	Signalgrense (S/N):
+Steps back:	Trinn tilbake:
 Memories to scan:	Minner som skal skannes:
 Time on each memory:	Tid på hvert minne:
 (no memory: Memories button)	(ingen minner: knappen Minner)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Velg profilen som skal slettes, i list
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Angi ulike start- og sluttfrekvenser i kHz (f.eks. 7000 og 7200).
 All frequencies from start to end are in skipped ranges.	Alle frekvenser fra start til slutt ligger i områder som hoppes over.
 Check at least one memory to scan.	Kryss av minst ett minne som skal skannes.
+pause on signal {0}	pause ved signal {0}
 memories: {0}, {1}	minner: {0}, {1}
 skipped ranges: {0}	områder som hoppes over: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	kan ikke gi nytt navn til {0} ({1})
 cannot put the new version in place ({0})	kan ikke sette den nye versjonen på plass ({0})
 SDRLink: update V{0}	SDRLink: oppdatering V{0}
 Downloading SDRLink V{0}…	Laster ned SDRLink V{0}…
+no Windows speech recognition in a supported language	ingen Windows talegjenkjenning på et støttet språk
 unavailable	utilgjengelig
 unexpected format	uventet format
 Find WebSDRs near your position	Finn WebSDR-er nær din posisjon

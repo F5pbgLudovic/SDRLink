@@ -361,17 +361,6 @@ Add memory	Ajouter une mémoire
 ; preamp cannot be set on this rig / interface	 ; préampli non pilotable sur ce poste / cette interface
 ; power cannot be set on this rig / interface	 ; puissance non pilotable sur ce poste / cette interface
  (on return to receive)	 (au retour en réception)
-Resume the scan	Reprendre le scan
-Current "Scan setup" setting	Réglage actuel de « Conf scan »
-No scan while transmitting	Scan impossible en émission
-Scan: set the start and end frequencies in "Scan setup"	Scan : indiquez les fréquences de début et de fin dans « Conf scan »
-Scan: all frequencies are in skipped ranges ("Scan setup")	Scan : toutes les fréquences sont dans des zones non scannées (« Conf scan »)
-Scan: check memories in "Scan setup"	Scan : cochez des mémoires dans « Conf scan »
-frequencies not set	fréquences non réglées
-all frequencies are in skipped ranges	toutes les fréquences sont dans des zones non scannées
-no memory checked	aucune mémoire cochée
-Scan stopped	Scan arrêté
-■ Stop scan	■ Arrêter le scan
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Carte son du poste, enregistrée quand Mute WebSDR, Mute ExpertSDR et Mute HDSDR sont actifs :
 None (always the speakers)	Aucune (toujours les haut-parleurs)
 REC button colour	Couleur du bouton REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Retirer « {0} » de « {1} » ?
 Unexpected error, written to the log: {0}	Erreur inattendue, notée dans le journal : {0}
 Memory "{0}" added to "{1}".	Mémoire « {0} » ajoutée à « {1} ».
 Memory "{0}": {1} kHz	Mémoire « {0} » : {1} kHz
-at {0} kHz	à {0} kHz
-from the start ({0} kHz): current frequency out of range	au début ({0} kHz) : fréquence actuelle hors de la plage
-at memory {0}	à la mémoire {0}
-from the start ({0}): current frequency not in the memories	au début ({0}) : fréquence actuelle hors des mémoires
-click in the page, stopped on {0} kHz	clic dans la page, arrêt sur {0} kHz
-Scan stopped: {0}	Scan arrêté : {0}
-Scan: {0}	Scan : {0}
 Cannot record: {0}	Enregistrement impossible : {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Carte son du poste « {0} » indisponible ({1}) : enregistrement des haut-parleurs
 Recording the sound of "{0}" (click REC to stop)	Enregistrement en cours : son de « {0} » (cliquez sur REC pour l'arrêter)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pa
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Page du WebSDR réduite à {0} pour voir tout son panneau de commande (+ et − pour choisir)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Lien de partage copié dans le presse-papiers ({0} kHz {1}) : à coller dans un message
 Share link: {0} kHz {1} on {2}	Lien de partage : {0} kHz {1} sur {2}
+Scan of the extended 27 MHz band	Scan de la bande étendue des 27 MHz
+Scan of the 70 cm band	Scan de la bande des 70 cm
+Resume the scan	Reprendre le scan
+Current "Scan setup" setting	Réglage actuel de « Conf scan »
+Scan setup…	Conf scan…
+Media keys (headset, keyboard): stop / resume the scan	Touches multimédia (casque, clavier) : arrêter / reprendre le scan
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Lecture/Pause : arrête ou reprend le scan. Suivant / Précédent : recule d'un pas quand ces touches ont arrêté le scan. Les autres logiciels ne reçoivent plus ces touches tant que la case est cochée.
+Scan voice command ("stop", "start", "plus one", "minus one")	Commande vocale du scan (« stop », « start », « plus un » ou « avance », « moins un » ou « recule »)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Reconnaissance vocale de Windows, hors ligne, avec le micro par défaut de Windows ; le micro n'écoute que pendant le scan et 5 minutes après son arrêt.
+Scan voice command: the microphone will listen during the scan	Commande vocale du scan : le micro écoutera pendant le scan
+Scan voice command off	Commande vocale du scan coupée
+No scan while transmitting	Scan impossible en émission
+Scan: set the start and end frequencies in "Scan setup"	Scan : indiquez les fréquences de début et de fin dans « Conf scan »
+Scan: all frequencies are in skipped ranges ("Scan setup")	Scan : toutes les fréquences sont dans des zones non scannées (« Conf scan »)
+Scan: check memories in "Scan setup"	Scan : cochez des mémoires dans « Conf scan »
+frequencies not set	fréquences non réglées
+all frequencies are in skipped ranges	toutes les fréquences sont dans des zones non scannées
+no memory checked	aucune mémoire cochée
+Scan stopped	Scan arrêté
+■ Stop scan	■ Arrêter le scan
+Media keys: Play/Pause stops or resumes the scan	Touches multimédia : Lecture/Pause arrête ou reprend le scan
+Media keys: already taken by another program	Touches multimédia : déjà prises par un autre logiciel
+Media keys given back to Windows	Touches multimédia rendues à Windows
+media key	touche multimédia
+voice command	commande vocale
+Scan of the {0} m band	Scan de la bande des {0} m
+at {0} kHz	à {0} kHz
+from the start ({0} kHz): current frequency out of range	au début ({0} kHz) : fréquence actuelle hors de la plage
+at memory {0}	à la mémoire {0}
+from the start ({0}): current frequency not in the memories	au début ({0}) : fréquence actuelle hors des mémoires
+click in the page, stopped on {0} kHz	clic dans la page, arrêt sur {0} kHz
+Scan stopped: {0}	Scan arrêté : {0}
+Scan: {0}	Scan : {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Scan en pause sur {0} : signal {1} dB, reprise dans {2}
+Back one step: {0}	Retour d'un pas : {0}
+Voice command unavailable: {0}	Commande vocale impossible : {0}
+Voice command: "{0}"	Commande vocale : « {0} »
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune : émission d'une tonalité de 1500 Hz pour accorder la boîte d'accord ou l'amplificateur (PTT par CAT, son envoyé sur la carte son d'émission du poste). Clic : marche / arrêt. Clic droit : carte son d'émission du poste, niveau de la tonalité, durée (5 s à 1 min), couleurs
 Rig transmit sound card (PC output connected to the rig):	Carte son d'émission du poste (sortie du PC reliée au poste) :
 Keying during Tune:	Passage en émission pendant Tune :
@@ -873,6 +892,9 @@ End (kHz):	Fin (kHz) :
 Time on each frequency:	Durée sur chaque fréquence :
 Skipped ranges (from … to … kHz):	Zones non scannées (de … à … kHz) :
 + Skipped range	+ Zone non scannée
+Pause on signal	Pause sur signal
+Signal threshold (S/N):	Seuil du signal (S/N) :
+Steps back:	Pas en arrière :
 Memories to scan:	Mémoires à parcourir :
 Time on each memory:	Durée sur chaque mémoire :
 (no memory: Memories button)	(aucune mémoire : bouton Mémoires)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Choisissez dans la liste le profil à 
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Indiquez une fréquence de début et une fréquence de fin différentes, en kHz (par ex. 7000 et 7200).
 All frequencies from start to end are in skipped ranges.	Toutes les fréquences de début à fin sont dans des zones non scannées.
 Check at least one memory to scan.	Cochez au moins une mémoire à parcourir.
+pause on signal {0}	pause sur signal {0}
 memories: {0}, {1}	mémoires : {0}, {1}
 skipped ranges: {0}	zones non scannées : {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	impossible de renommer {0} ({1})
 cannot put the new version in place ({0})	impossible de mettre la nouvelle version à la place ({0})
 SDRLink: update V{0}	SDRLink : mise à jour V{0}
 Downloading SDRLink V{0}…	Téléchargement de SDRLink V{0}…
+no Windows speech recognition in a supported language	aucune reconnaissance vocale de Windows dans une langue prise en charge
 unavailable	indisponible
 unexpected format	format inattendu
 Find WebSDRs near your position	Rechercher des WebSDR proches de votre position

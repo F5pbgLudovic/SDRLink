@@ -361,17 +361,6 @@ Add memory	Lisää muisti
 ; preamp cannot be set on this rig / interface	; esivahvistinta ei voi ohjata tällä radiolla / liitännällä
 ; power cannot be set on this rig / interface	; tehoa ei voi ohjata tällä radiolla / liitännällä
  (on return to receive)	 (kun palataan vastaanottoon)
-Resume the scan	Jatka pyyhkäisyä
-Current "Scan setup" setting	Nykyinen asetus ikkunassa "Pyyhkäisyn asetukset"
-No scan while transmitting	Ei pyyhkäisyä lähetyksen aikana
-Scan: set the start and end frequencies in "Scan setup"	Pyyhkäisy: anna alku- ja lopputaajuus kohdassa ”Pyyhkäisyn asetukset”
-Scan: all frequencies are in skipped ranges ("Scan setup")	Pyyhkäisy: kaikki taajuudet ovat ohitettavilla alueilla ("Pyyhkäisyn asetukset")
-Scan: check memories in "Scan setup"	Pyyhkäisy: valitse muistit kohdassa ”Pyyhkäisyn asetukset”
-frequencies not set	taajuuksia ei asetettu
-all frequencies are in skipped ranges	kaikki taajuudet ovat ohitettavilla alueilla
-no memory checked	ei valittuja muisteja
-Scan stopped	Pyyhkäisy pysäytetty
-■ Stop scan	■ Pysäytä pyyhkäisy
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radion äänikortti, tallennetaan kun Mute WebSDR, Mute ExpertSDR ja Mute HDSDR ovat päällä:
 None (always the speakers)	Ei mitään (aina kaiuttimet)
 REC button colour	REC-painikkeen väri
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Poistetaanko ”{0}” luettelosta ”{1}”?
 Unexpected error, written to the log: {0}	Odottamaton virhe, kirjattu lokiin: {0}
 Memory "{0}" added to "{1}".	Muisti ”{0}” lisätty luetteloon ”{1}”.
 Memory "{0}": {1} kHz	Muisti ”{0}”: {1} kHz
-at {0} kHz	taajuudelta {0} kHz
-from the start ({0} kHz): current frequency out of range	alusta ({0} kHz): nykyinen taajuus alueen ulkopuolella
-at memory {0}	muistista {0}
-from the start ({0}): current frequency not in the memories	alusta ({0}): nykyinen taajuus ei ole muisteissa
-click in the page, stopped on {0} kHz	napsautus sivulla, pysäytetty taajuudelle {0} kHz
-Scan stopped: {0}	Pyyhkäisy pysäytetty: {0}
-Scan: {0}	Pyyhkäisy: {0}
 Cannot record: {0}	Tallennus ei onnistu: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Radion äänikortti ”{0}” ei ole käytettävissä ({1}): tallennetaan kaiuttimet
 Recording the sound of "{0}" (click REC to stop)	Tallennetaan laitteen ”{0}” ääntä (lopeta napsauttamalla REC)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sivu pienennetty kokoon {0}, jotta koko ohjauspaneeli näkyy (valitse + ja −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jakolinkki kopioitu leikepöydälle ({0} kHz {1}): liitä se viestiin
 Share link: {0} kHz {1} on {2}	Jakolinkki: {0} kHz {1} kohteessa {2}
+Scan of the extended 27 MHz band	Laajennetun 27 MHz:n kaistan skannaus
+Scan of the 70 cm band	70 cm:n kaistan skannaus
+Resume the scan	Jatka pyyhkäisyä
+Current "Scan setup" setting	Nykyinen asetus ikkunassa "Pyyhkäisyn asetukset"
+Scan setup…	Pyyhkäisyn asetukset…
+Media keys (headset, keyboard): stop / resume the scan	Medianäppäimet (kuulokkeet, näppäimistö): pyyhkäisyn pysäytys / jatkaminen
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Toista/Tauko: pysäyttää tai jatkaa pyyhkäisyä. Seuraava / Edellinen: yksi askel taaksepäin, kun nämä näppäimet ovat pysäyttäneet pyyhkäisyn. Kun valinta on päällä, muut ohjelmat eivät saa näitä näppäimiä.
+Scan voice command ("stop", "start", "plus one", "minus one")	Pyyhkäisyn puheohjaus (”stop”, ”start”, ”plus one”, ”minus one”)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Windowsin puheentunnistus, ilman verkkoa, Windowsin oletusmikrofonilla; kuuntelee vain pyyhkäisyn aikana ja 5 minuuttia sen pysähtymisen jälkeen.
+Scan voice command: the microphone will listen during the scan	Pyyhkäisyn puheohjaus: mikrofoni kuuntelee pyyhkäisyn aikana
+Scan voice command off	Pyyhkäisyn puheohjaus pois
+No scan while transmitting	Ei pyyhkäisyä lähetyksen aikana
+Scan: set the start and end frequencies in "Scan setup"	Pyyhkäisy: anna alku- ja lopputaajuus kohdassa ”Pyyhkäisyn asetukset”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Pyyhkäisy: kaikki taajuudet ovat ohitettavilla alueilla ("Pyyhkäisyn asetukset")
+Scan: check memories in "Scan setup"	Pyyhkäisy: valitse muistit kohdassa ”Pyyhkäisyn asetukset”
+frequencies not set	taajuuksia ei asetettu
+all frequencies are in skipped ranges	kaikki taajuudet ovat ohitettavilla alueilla
+no memory checked	ei valittuja muisteja
+Scan stopped	Pyyhkäisy pysäytetty
+■ Stop scan	■ Pysäytä pyyhkäisy
+Media keys: Play/Pause stops or resumes the scan	Medianäppäimet: Toista/Tauko pysäyttää tai jatkaa pyyhkäisyä
+Media keys: already taken by another program	Medianäppäimet: jo toisen ohjelman käytössä
+Media keys given back to Windows	Medianäppäimet palautettu Windowsille
+media key	medianäppäin
+voice command	äänikomento
+Scan of the {0} m band	{0} m:n kaistan skannaus
+at {0} kHz	taajuudelta {0} kHz
+from the start ({0} kHz): current frequency out of range	alusta ({0} kHz): nykyinen taajuus alueen ulkopuolella
+at memory {0}	muistista {0}
+from the start ({0}): current frequency not in the memories	alusta ({0}): nykyinen taajuus ei ole muisteissa
+click in the page, stopped on {0} kHz	napsautus sivulla, pysäytetty taajuudelle {0} kHz
+Scan stopped: {0}	Pyyhkäisy pysäytetty: {0}
+Scan: {0}	Pyyhkäisy: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skannaus tauolla taajuudella {0}: signaali {1} dB, jatkuu {2} kuluttua
+Back one step: {0}	Yksi askel taaksepäin: {0}
+Voice command unavailable: {0}	Puheohjaus ei käytettävissä: {0}
+Voice command: "{0}"	Äänikomento: ”{0}”
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: lähettää 1500 Hz:n äänen antennisovittimen tai vahvistimen säätöä varten (PTT CAT:n kautta, ääni lähetetään radion lähetysäänikortille). Napsautus: päälle / pois. Hiiren oikea painike: radion lähetysäänikortti, äänen taso, kesto (5 s - 1 min), värit
 Rig transmit sound card (PC output connected to the rig):	Radion lähetysäänikortti (radioon kytketty PC:n äänilähtö):
 Keying during Tune:	Avainnus Tune:-toiminnon aikana
@@ -873,6 +892,9 @@ End (kHz):	Loppu (kHz):
 Time on each frequency:	Aika kullakin taajuudella:
 Skipped ranges (from … to … kHz):	Ohitettavat alueet (… – … kHz):
 + Skipped range	+ Ohitettava alue
+Pause on signal	Tauko signaalin kohdalla
+Signal threshold (S/N):	Signaalin kynnys (S/N):
+Steps back:	Askelta taakse:
 Memories to scan:	Pyyhkäistävät muistit:
 Time on each memory:	Aika kussakin muistissa:
 (no memory: Memories button)	(ei muisteja: Muistit-painike)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Valitse luettelosta poistettava profii
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Anna eri alku- ja lopputaajuus kHz:inä (esim. 7000 ja 7200).
 All frequencies from start to end are in skipped ranges.	Kaikki taajuudet alusta loppuun ovat ohitettavilla alueilla.
 Check at least one memory to scan.	Valitse vähintään yksi pyyhkäistävä muisti.
+pause on signal {0}	tauko signaalin kohdalla {0}
 memories: {0}, {1}	muistit: {0}, {1}
 skipped ranges: {0}	ohitettavat alueet: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	tiedostoa {0} ei voi nimetä uudelleen ({1})
 cannot put the new version in place ({0})	uutta versiota ei voi asettaa paikalleen ({0})
 SDRLink: update V{0}	SDRLink: päivitys V{0}
 Downloading SDRLink V{0}…	Ladataan SDRLink V{0}…
+no Windows speech recognition in a supported language	ei Windowsin puheentunnistusta tuetulla kielellä
 unavailable	ei käytettävissä
 unexpected format	odottamaton muoto
 Find WebSDRs near your position	Etsi WebSDR:iä sijaintisi läheltä

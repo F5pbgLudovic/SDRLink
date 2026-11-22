@@ -361,17 +361,6 @@ Add memory	Adaugă memorie
 ; preamp cannot be set on this rig / interface	; preamplificatorul nu poate fi comandat pe această stație / interfață
 ; power cannot be set on this rig / interface	; puterea nu poate fi comandată pe această stație / interfață
  (on return to receive)	 (la revenirea pe recepție)
-Resume the scan	Reluare scanare
-Current "Scan setup" setting	Setarea actuală din „Configurare scanare”
-No scan while transmitting	Nu se poate scana în timpul emisiei
-Scan: set the start and end frequencies in "Scan setup"	Scanare: indicați frecvențele de început și de sfârșit în „Configurare scanare”
-Scan: all frequencies are in skipped ranges ("Scan setup")	Scanare: toate frecvențele sunt în intervale omise („Configurare scanare”)
-Scan: check memories in "Scan setup"	Scanare: bifați memorii în „Configurare scanare”
-frequencies not set	frecvențe nesetate
-all frequencies are in skipped ranges	toate frecvențele sunt în intervale omise
-no memory checked	nicio memorie bifată
-Scan stopped	Scanare oprită
-■ Stop scan	■ Oprește scanarea
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Placa de sunet a stației, înregistrată când Mute WebSDR, Mute ExpertSDR și Mute HDSDR sunt active:
 None (always the speakers)	Niciuna (întotdeauna difuzoarele)
 REC button colour	Culoarea butonului REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Eliminați „{0}” din „{1}”?
 Unexpected error, written to the log: {0}	Eroare neașteptată, notată în jurnal: {0}
 Memory "{0}" added to "{1}".	Memoria „{0}” a fost adăugată la „{1}”.
 Memory "{0}": {1} kHz	Memoria „{0}”: {1} kHz
-at {0} kHz	de la {0} kHz
-from the start ({0} kHz): current frequency out of range	de la început ({0} kHz): frecvența curentă este în afara intervalului
-at memory {0}	de la memoria {0}
-from the start ({0}): current frequency not in the memories	de la început ({0}): frecvența curentă nu este în memorii
-click in the page, stopped on {0} kHz	clic în pagină, oprit pe {0} kHz
-Scan stopped: {0}	Scanare oprită: {0}
-Scan: {0}	Scanare: {0}
 Cannot record: {0}	Înregistrare imposibilă: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Placa de sunet a stației „{0}” nu este disponibilă ({1}): înregistrarea difuzoarelor
 Recording the sound of "{0}" (click REC to stop)	Se înregistrează sunetul de la „{0}” (clic pe REC pentru a opri)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pa
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Pagina WebSDR a fost redusă la {0} pentru a afișa tot panoul de comandă (+ și − pentru alegere)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Linkul de partajare a fost copiat în clipboard ({0} kHz {1}): lipiți-l într-un mesaj
 Share link: {0} kHz {1} on {2}	Link de partajare: {0} kHz {1} pe {2}
+Scan of the extended 27 MHz band	Scanarea benzii extinse de 27 MHz
+Scan of the 70 cm band	Scanarea benzii de 70 cm
+Resume the scan	Reluare scanare
+Current "Scan setup" setting	Setarea actuală din „Configurare scanare”
+Scan setup…	Configurare scanare…
+Media keys (headset, keyboard): stop / resume the scan	Taste multimedia (căști, tastatură): oprește / reia scanarea
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Redare/Pauză: oprește sau reia scanarea. Următorul / Anteriorul: un pas înapoi când aceste taste au oprit scanarea. Cât timp este bifat, celelalte programe nu primesc aceste taste.
+Scan voice command ("stop", "start", "plus one", "minus one")	Comandă vocală a scanării („stop”, „start”, „plus one”, „minus one”)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Recunoașterea vocală Windows, fără internet, cu microfonul implicit Windows; ascultă doar în timpul scanării și 5 minute după oprirea ei.
+Scan voice command: the microphone will listen during the scan	Comandă vocală a scanării: microfonul va asculta în timpul scanării
+Scan voice command off	Comandă vocală a scanării oprită
+No scan while transmitting	Nu se poate scana în timpul emisiei
+Scan: set the start and end frequencies in "Scan setup"	Scanare: indicați frecvențele de început și de sfârșit în „Configurare scanare”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Scanare: toate frecvențele sunt în intervale omise („Configurare scanare”)
+Scan: check memories in "Scan setup"	Scanare: bifați memorii în „Configurare scanare”
+frequencies not set	frecvențe nesetate
+all frequencies are in skipped ranges	toate frecvențele sunt în intervale omise
+no memory checked	nicio memorie bifată
+Scan stopped	Scanare oprită
+■ Stop scan	■ Oprește scanarea
+Media keys: Play/Pause stops or resumes the scan	Taste multimedia: Redare/Pauză oprește sau reia scanarea
+Media keys: already taken by another program	Taste multimedia: deja ocupate de alt program
+Media keys given back to Windows	Taste multimedia redate către Windows
+media key	tastă multimedia
+voice command	comandă vocală
+Scan of the {0} m band	Scanarea benzii de {0} m
+at {0} kHz	de la {0} kHz
+from the start ({0} kHz): current frequency out of range	de la început ({0} kHz): frecvența curentă este în afara intervalului
+at memory {0}	de la memoria {0}
+from the start ({0}): current frequency not in the memories	de la început ({0}): frecvența curentă nu este în memorii
+click in the page, stopped on {0} kHz	clic în pagină, oprit pe {0} kHz
+Scan stopped: {0}	Scanare oprită: {0}
+Scan: {0}	Scanare: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Scanare în pauză pe {0}: semnal {1} dB, reia în {2}
+Back one step: {0}	Înapoi cu un pas: {0}
+Voice command unavailable: {0}	Comanda vocală nu este disponibilă: {0}
+Voice command: "{0}"	Comandă vocală: „{0}”
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: emite un ton de 1500 Hz pentru reglarea cuplorului de antenă sau a amplificatorului (PTT prin CAT, sunet trimis la placa de sunet de emisie a stației). Clic: pornit / oprit. Clic dreapta: placa de sunet de emisie a stației, nivelul tonului, durata (5 s până la 1 min), culori
 Rig transmit sound card (PC output connected to the rig):	Placa de sunet de emisie a stației (ieșirea PC conectată la stație):
 Keying during Tune:	Manipularea în timpul Tune:
@@ -873,6 +892,9 @@ End (kHz):	Sfârșit (kHz):
 Time on each frequency:	Timp pe fiecare frecvență:
 Skipped ranges (from … to … kHz):	Intervale omise (de la … la … kHz):
 + Skipped range	+ Interval omis
+Pause on signal	Pauză la semnal
+Signal threshold (S/N):	Prag semnal (S/N):
+Steps back:	Pași înapoi:
 Memories to scan:	Memorii de scanat:
 Time on each memory:	Timp pe fiecare memorie:
 (no memory: Memories button)	(nicio memorie: butonul Memorii)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Alegeți din listă profilul de șters
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Indicați frecvențe de început și de sfârșit diferite, în kHz (de ex. 7000 și 7200).
 All frequencies from start to end are in skipped ranges.	Toate frecvențele de la început la sfârșit sunt în intervale omise.
 Check at least one memory to scan.	Bifați cel puțin o memorie de scanat.
+pause on signal {0}	pauză la semnal {0}
 memories: {0}, {1}	memorii: {0}, {1}
 skipped ranges: {0}	intervale omise: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	{0} nu poate fi redenumit ({1})
 cannot put the new version in place ({0})	noua versiune nu poate fi pusă în loc ({0})
 SDRLink: update V{0}	SDRLink: actualizare V{0}
 Downloading SDRLink V{0}…	Se descarcă SDRLink V{0}…
+no Windows speech recognition in a supported language	nicio recunoaștere vocală Windows într-o limbă acceptată
 unavailable	indisponibil
 unexpected format	format neașteptat
 Find WebSDRs near your position	Caută WebSDR-uri lângă poziția dvs.

@@ -361,17 +361,6 @@ Add memory	Pridėti atmintį
 ; preamp cannot be set on this rig / interface	; išankstinio stiprintuvo šioje stotyje / sąsajoje valdyti negalima
 ; power cannot be set on this rig / interface	; galios šioje stotyje / sąsajoje valdyti negalima
  (on return to receive)	 (grįžus į priėmimą)
-Resume the scan	Tęsti skenavimą
-Current "Scan setup" setting	Dabartinis nustatymas lange „Skenavimo nustatymai“
-No scan while transmitting	Siunčiant skenuoti negalima
-Scan: set the start and end frequencies in "Scan setup"	Skenavimas: nurodykite pradžios ir pabaigos dažnius lange „Skenavimo nustatymai“
-Scan: all frequencies are in skipped ranges ("Scan setup")	Skenavimas: visi dažniai yra praleidžiamuose ruožuose („Skenavimo nustatymai“)
-Scan: check memories in "Scan setup"	Skenavimas: pažymėkite atmintis lange „Skenavimo nustatymai“
-frequencies not set	dažniai nenustatyti
-all frequencies are in skipped ranges	visi dažniai yra praleidžiamuose ruožuose
-no memory checked	nepažymėta jokia atmintis
-Scan stopped	Skenavimas sustabdytas
-■ Stop scan	■ Stabdyti skenavimą
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radijo stoties garso plokštė, įrašoma kai įjungti Mute WebSDR, Mute ExpertSDR ir Mute HDSDR:
 None (always the speakers)	Jokia (visada garsiakalbiai)
 REC button colour	REC mygtuko spalva
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Šalinti „{0}“ iš „{1}“?
 Unexpected error, written to the log: {0}	Netikėta klaida, įrašyta į žurnalą: {0}
 Memory "{0}" added to "{1}".	Atmintis „{0}“ pridėta prie „{1}“.
 Memory "{0}": {1} kHz	Atmintis „{0}“: {1} kHz
-at {0} kHz	nuo {0} kHz
-from the start ({0} kHz): current frequency out of range	nuo pradžios ({0} kHz): dabartinis dažnis už ruožo ribų
-at memory {0}	nuo atminties {0}
-from the start ({0}): current frequency not in the memories	nuo pradžios ({0}): dabartinio dažnio nėra atmintyse
-click in the page, stopped on {0} kHz	spustelėjimas puslapyje, sustabdyta ties {0} kHz
-Scan stopped: {0}	Skenavimas sustabdytas: {0}
-Scan: {0}	Skenavimas: {0}
 Cannot record: {0}	Įrašyti neįmanoma: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Radijo stoties garso plokštė „{0}“ nepasiekiama ({1}): įrašomi garsiakalbiai
 Recording the sound of "{0}" (click REC to stop)	Įrašomas „{0}“ garsas (norėdami sustabdyti, spustelėkite REC)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR puslapis sumažintas iki {0}, kad būtų matomas visas valdymo skydelis (+ ir − pasirinkimui)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Bendrinimo nuoroda nukopijuota į iškarpinę ({0} kHz {1}): įklijuokite ją į žinutę
 Share link: {0} kHz {1} on {2}	Bendrinimo nuoroda: {0} kHz {1} – {2}
+Scan of the extended 27 MHz band	Išplėstinės 27 MHz juostos skenavimas
+Scan of the 70 cm band	70 cm juostos skenavimas
+Resume the scan	Tęsti skenavimą
+Current "Scan setup" setting	Dabartinis nustatymas lange „Skenavimo nustatymai“
+Scan setup…	Skenavimo nustatymai…
+Media keys (headset, keyboard): stop / resume the scan	Daugialypės terpės klavišai (ausinės, klaviatūra): sustabdyti / tęsti skenavimą
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Leisti/Pauzė: sustabdo arba tęsia skenavimą. Kitas / Ankstesnis: vienas žingsnis atgal, kai šie klavišai sustabdė skenavimą. Kol pažymėta, kitos programos šių klavišų negauna.
+Scan voice command ("stop", "start", "plus one", "minus one")	Skenavimo balso komanda („stop“, „start“, „plus one“, „minus one“)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	„Windows“ kalbos atpažinimas, be interneto, su numatytuoju „Windows“ mikrofonu; klausosi tik skenavimo metu ir 5 minutes po jo sustabdymo.
+Scan voice command: the microphone will listen during the scan	Skenavimo balso komanda: mikrofonas klausysis skenavimo metu
+Scan voice command off	Skenavimo balso komanda išjungta
+No scan while transmitting	Siunčiant skenuoti negalima
+Scan: set the start and end frequencies in "Scan setup"	Skenavimas: nurodykite pradžios ir pabaigos dažnius lange „Skenavimo nustatymai“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skenavimas: visi dažniai yra praleidžiamuose ruožuose („Skenavimo nustatymai“)
+Scan: check memories in "Scan setup"	Skenavimas: pažymėkite atmintis lange „Skenavimo nustatymai“
+frequencies not set	dažniai nenustatyti
+all frequencies are in skipped ranges	visi dažniai yra praleidžiamuose ruožuose
+no memory checked	nepažymėta jokia atmintis
+Scan stopped	Skenavimas sustabdytas
+■ Stop scan	■ Stabdyti skenavimą
+Media keys: Play/Pause stops or resumes the scan	Daugialypės terpės klavišai: Leisti/Pauzė sustabdo arba tęsia skenavimą
+Media keys: already taken by another program	Daugialypės terpės klavišai: jau užimti kitos programos
+Media keys given back to Windows	Daugialypės terpės klavišai grąžinti „Windows“
+media key	daugialypės terpės klavišas
+voice command	balso komanda
+Scan of the {0} m band	{0} m juostos skenavimas
+at {0} kHz	nuo {0} kHz
+from the start ({0} kHz): current frequency out of range	nuo pradžios ({0} kHz): dabartinis dažnis už ruožo ribų
+at memory {0}	nuo atminties {0}
+from the start ({0}): current frequency not in the memories	nuo pradžios ({0}): dabartinio dažnio nėra atmintyse
+click in the page, stopped on {0} kHz	spustelėjimas puslapyje, sustabdyta ties {0} kHz
+Scan stopped: {0}	Skenavimas sustabdytas: {0}
+Scan: {0}	Skenavimas: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skenavimas pristabdytas ties {0}: signalas {1} dB, tęsiama po {2}
+Back one step: {0}	Vienas žingsnis atgal: {0}
+Voice command unavailable: {0}	Balso komanda negalima: {0}
+Voice command: "{0}"	Balso komanda: „{0}“
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: perduoda 1500 Hz toną antenos derintuvui ar stiprintuvui sureguliuoti (PTT per CAT, garsas siunčiamas į radijo stoties perdavimo garso plokštę). Spustelėjimas: įjungti / išjungti. Spustelėjimas dešiniuoju klavišu: radijo stoties perdavimo garso plokštė, tono lygis, trukmė (nuo 5 s iki 1 min.), spalvos
 Rig transmit sound card (PC output connected to the rig):	Radijo stoties perdavimo garso plokštė (kompiuterio išvestis, prijungta prie radijo stoties):
 Keying during Tune:	Perjungimas į siuntimą per Tune:
@@ -873,6 +892,9 @@ End (kHz):	Pabaiga (kHz):
 Time on each frequency:	Laikas kiekviename dažnyje:
 Skipped ranges (from … to … kHz):	Praleidžiami ruožai (nuo … iki … kHz):
 + Skipped range	+ Praleidžiamas ruožas
+Pause on signal	Pauzė esant signalui
+Signal threshold (S/N):	Signalo slenkstis (S/N):
+Steps back:	Žingsnių atgal:
 Memories to scan:	Skenuojamos atmintys:
 Time on each memory:	Laikas kiekvienoje atmintyje:
 (no memory: Memories button)	(atminčių nėra: mygtukas Atmintys)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Sąraše pasirinkite profilį, kurį n
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Nurodykite skirtingus pradžios ir pabaigos dažnius kHz (pvz., 7000 ir 7200).
 All frequencies from start to end are in skipped ranges.	Visi dažniai nuo pradžios iki pabaigos yra praleidžiamuose ruožuose.
 Check at least one memory to scan.	Pažymėkite bent vieną skenuojamą atmintį.
+pause on signal {0}	pauzė esant signalui {0}
 memories: {0}, {1}	atmintys: {0}, {1}
 skipped ranges: {0}	praleidžiami ruožai: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	negalima pervadinti {0} ({1})
 cannot put the new version in place ({0})	negalima padėti naujos versijos į vietą ({0})
 SDRLink: update V{0}	SDRLink: naujinimas V{0}
 Downloading SDRLink V{0}…	Atsisiunčiama SDRLink V{0}…
+no Windows speech recognition in a supported language	nėra „Windows“ kalbos atpažinimo palaikoma kalba
 unavailable	nepasiekiama
 unexpected format	netikėtas formatas
 Find WebSDRs near your position	Ieškoti WebSDR netoli jūsų vietos

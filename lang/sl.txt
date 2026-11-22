@@ -361,17 +361,6 @@ Add memory	Dodaj pomnilnik
 ; preamp cannot be set on this rig / interface	; predojačevalnika na tej postaji / vmesniku ni mogoče nastaviti
 ; power cannot be set on this rig / interface	; moči na tej postaji / vmesniku ni mogoče nastaviti
  (on return to receive)	 (ob vrnitvi na sprejem)
-Resume the scan	Nadaljuj iskanje
-Current "Scan setup" setting	Trenutna nastavitev v »Nastavitve iskanja«
-No scan while transmitting	Med oddajanjem iskanje ni mogoče
-Scan: set the start and end frequencies in "Scan setup"	Iskanje: vnesite začetno in končno frekvenco v »Nastavitve iskanja«
-Scan: all frequencies are in skipped ranges ("Scan setup")	Iskanje: vse frekvence so v izpuščenih območjih (»Nastavitve iskanja«)
-Scan: check memories in "Scan setup"	Iskanje: označite pomnilnike v »Nastavitve iskanja«
-frequencies not set	frekvence niso nastavljene
-all frequencies are in skipped ranges	vse frekvence so v izpuščenih območjih
-no memory checked	noben pomnilnik ni označen
-Scan stopped	Iskanje ustavljeno
-■ Stop scan	■ Ustavi iskanje
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvočna kartica postaje, posneta ko so vklopljeni Mute WebSDR, Mute ExpertSDR in Mute HDSDR:
 None (always the speakers)	Nobena (vedno zvočniki)
 REC button colour	Barva gumba REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Odstranim »{0}« iz »{1}«?
 Unexpected error, written to the log: {0}	Nepričakovana napaka, zapisana v dnevnik: {0}
 Memory "{0}" added to "{1}".	Pomnilnik »{0}« dodan v »{1}«.
 Memory "{0}": {1} kHz	Pomnilnik »{0}«: {1} kHz
-at {0} kHz	od {0} kHz
-from the start ({0} kHz): current frequency out of range	od začetka ({0} kHz): trenutna frekvenca je zunaj območja
-at memory {0}	od pomnilnika {0}
-from the start ({0}): current frequency not in the memories	od začetka ({0}): trenutne frekvence ni v pomnilnikih
-click in the page, stopped on {0} kHz	klik na stran, ustavljeno na {0} kHz
-Scan stopped: {0}	Iskanje ustavljeno: {0}
-Scan: {0}	Iskanje: {0}
 Cannot record: {0}	Snemanje ni mogoče: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Zvočna kartica postaje »{0}« ni na voljo ({1}): snemanje zvočnikov
 Recording the sound of "{0}" (click REC to stop)	Snemanje zvoka iz »{0}« (za ustavitev kliknite REC)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stran WebSDR zmanjšana na {0}, da se vidi celotna nadzorna plošča (+ in − za izbiro)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Povezava za deljenje kopirana v odložišče ({0} kHz {1}): prilepite jo v sporočilo
 Share link: {0} kHz {1} on {2}	Povezava za deljenje: {0} kHz {1} na {2}
+Scan of the extended 27 MHz band	Skeniranje razširjenega pasu 27 MHz
+Scan of the 70 cm band	Skeniranje pasu 70 cm
+Resume the scan	Nadaljuj iskanje
+Current "Scan setup" setting	Trenutna nastavitev v »Nastavitve iskanja«
+Scan setup…	Nastavitve iskanja…
+Media keys (headset, keyboard): stop / resume the scan	Večpredstavnostne tipke (slušalke, tipkovnica): ustavi / nadaljuj iskanje
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Predvajaj/Premor: ustavi ali nadaljuje iskanje. Naslednji / Prejšnji: en korak nazaj, ko so te tipke ustavile iskanje. Dokler je označeno, drugi programi teh tipk ne prejmejo.
+Scan voice command ("stop", "start", "plus one", "minus one")	Glasovni ukaz iskanja (»stop«, »start«, »plus one«, »minus one«)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Prepoznavanje govora Windows, brez interneta, s privzetim mikrofonom Windows; posluša samo med iskanjem in 5 minut po njegovi ustavitvi.
+Scan voice command: the microphone will listen during the scan	Glasovni ukaz iskanja: mikrofon bo poslušal med iskanjem
+Scan voice command off	Glasovni ukaz iskanja izklopljen
+No scan while transmitting	Med oddajanjem iskanje ni mogoče
+Scan: set the start and end frequencies in "Scan setup"	Iskanje: vnesite začetno in končno frekvenco v »Nastavitve iskanja«
+Scan: all frequencies are in skipped ranges ("Scan setup")	Iskanje: vse frekvence so v izpuščenih območjih (»Nastavitve iskanja«)
+Scan: check memories in "Scan setup"	Iskanje: označite pomnilnike v »Nastavitve iskanja«
+frequencies not set	frekvence niso nastavljene
+all frequencies are in skipped ranges	vse frekvence so v izpuščenih območjih
+no memory checked	noben pomnilnik ni označen
+Scan stopped	Iskanje ustavljeno
+■ Stop scan	■ Ustavi iskanje
+Media keys: Play/Pause stops or resumes the scan	Večpredstavnostne tipke: Predvajaj/Premor ustavi ali nadaljuje iskanje
+Media keys: already taken by another program	Večpredstavnostne tipke: že zasedene z drugim programom
+Media keys given back to Windows	Večpredstavnostne tipke vrnjene sistemu Windows
+media key	večpredstavnostna tipka
+voice command	glasovni ukaz
+Scan of the {0} m band	Skeniranje pasu {0} m
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od začetka ({0} kHz): trenutna frekvenca je zunaj območja
+at memory {0}	od pomnilnika {0}
+from the start ({0}): current frequency not in the memories	od začetka ({0}): trenutne frekvence ni v pomnilnikih
+click in the page, stopped on {0} kHz	klik na stran, ustavljeno na {0} kHz
+Scan stopped: {0}	Iskanje ustavljeno: {0}
+Scan: {0}	Iskanje: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Iskanje v premoru na {0}: signal {1} dB, nadaljuje čez {2}
+Back one step: {0}	Korak nazaj: {0}
+Voice command unavailable: {0}	Glasovni ukaz ni na voljo: {0}
+Voice command: "{0}"	Glasovni ukaz: „{0}“
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: oddaja ton 1500 Hz za nastavitev antenskega uglaševalnika ali ojačevalnika (PTT prek CAT, zvok se pošilja na zvočno kartico za oddajanje radia). Klik: vklop / izklop. Desni klik: zvočna kartica za oddajanje radia, raven tona, trajanje (5 s do 1 min), barve
 Rig transmit sound card (PC output connected to the rig):	Zvočna kartica za oddajanje radia (izhod PC, povezan z radiem):
 Keying during Tune:	Tipkanje med Tune:
@@ -873,6 +892,9 @@ End (kHz):	Konec (kHz):
 Time on each frequency:	Čas na vsaki frekvenci:
 Skipped ranges (from … to … kHz):	Izpuščena območja (od … do … kHz):
 + Skipped range	+ Izpuščeno območje
+Pause on signal	Premor ob signalu
+Signal threshold (S/N):	Prag signala (S/N):
+Steps back:	Korakov nazaj:
 Memories to scan:	Pomnilniki za iskanje:
 Time on each memory:	Čas na vsakem pomnilniku:
 (no memory: Memories button)	(ni pomnilnikov: gumb Pomnilniki)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Na seznamu izberite profil, ki ga žel
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Vnesite različni začetno in končno frekvenco v kHz (npr. 7000 in 7200).
 All frequencies from start to end are in skipped ranges.	Vse frekvence od začetka do konca so v izpuščenih območjih.
 Check at least one memory to scan.	Označite vsaj en pomnilnik za iskanje.
+pause on signal {0}	premor ob signalu {0}
 memories: {0}, {1}	pomnilniki: {0}, {1}
 skipped ranges: {0}	izpuščena območja: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	{0} ni mogoče preimenovati ({1})
 cannot put the new version in place ({0})	nove različice ni mogoče postaviti na mesto ({0})
 SDRLink: update V{0}	SDRLink: posodobitev V{0}
 Downloading SDRLink V{0}…	Prenašanje SDRLink V{0}…
+no Windows speech recognition in a supported language	ni prepoznavanja govora Windows v podprtem jeziku
 unavailable	ni na voljo
 unexpected format	nepričakovana oblika
 Find WebSDRs near your position	Iskanje WebSDR blizu vašega položaja

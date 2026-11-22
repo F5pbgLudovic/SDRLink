@@ -361,17 +361,6 @@ Add memory	Speicher hinzufügen
 ; preamp cannot be set on this rig / interface	; der Vorverstärker kann an diesem Funkgerät / dieser Schnittstelle nicht gesteuert werden
 ; power cannot be set on this rig / interface	; die Leistung kann an diesem Funkgerät / dieser Schnittstelle nicht gesteuert werden
  (on return to receive)	 (bei Rückkehr auf Empfang)
-Resume the scan	Suchlauf fortsetzen
-Current "Scan setup" setting	Aktuelle Einstellung von „Suchlauf einrichten“
-No scan while transmitting	Kein Suchlauf beim Senden
-Scan: set the start and end frequencies in "Scan setup"	Suchlauf: Start- und Endfrequenz unter „Suchlauf einrichten“ angeben
-Scan: all frequencies are in skipped ranges ("Scan setup")	Suchlauf: Alle Frequenzen liegen in ausgelassenen Bereichen („Suchlauf einrichten“)
-Scan: check memories in "Scan setup"	Suchlauf: Speicher unter „Suchlauf einrichten“ ankreuzen
-frequencies not set	Frequenzen nicht eingestellt
-all frequencies are in skipped ranges	alle Frequenzen liegen in ausgelassenen Bereichen
-no memory checked	kein Speicher angekreuzt
-Scan stopped	Suchlauf beendet
-■ Stop scan	■ Suchlauf beenden
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Soundkarte des Funkgeräts, aufgenommen wenn Mute WebSDR, Mute ExpertSDR und Mute HDSDR aktiv sind:
 None (always the speakers)	Keine (immer die Lautsprecher)
 REC button colour	Farbe der REC-Taste
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	„{0}“ aus „{1}“ entfernen?
 Unexpected error, written to the log: {0}	Unerwarteter Fehler, im Protokoll vermerkt: {0}
 Memory "{0}" added to "{1}".	Speicher „{0}“ zu „{1}“ hinzugefügt.
 Memory "{0}": {1} kHz	Speicher „{0}“: {1} kHz
-at {0} kHz	ab {0} kHz
-from the start ({0} kHz): current frequency out of range	von vorn ({0} kHz): aktuelle Frequenz außerhalb des Bereichs
-at memory {0}	ab Speicher {0}
-from the start ({0}): current frequency not in the memories	von vorn ({0}): aktuelle Frequenz nicht in den Speichern
-click in the page, stopped on {0} kHz	Klick in die Seite, angehalten auf {0} kHz
-Scan stopped: {0}	Suchlauf beendet: {0}
-Scan: {0}	Suchlauf: {0}
 Cannot record: {0}	Aufnahme nicht möglich: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Soundkarte des Funkgeräts „{0}“ nicht verfügbar ({1}): Aufnahme der Lautsprecher
 Recording the sound of "{0}" (click REC to stop)	Ton von „{0}“ wird aufgenommen (zum Beenden auf REC klicken)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-Seite auf {0} verkleinert, um das gesamte Bedienfeld zu zeigen (+ und − zum Auswählen)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Freigabelink in die Zwischenablage kopiert ({0} kHz {1}): in eine Nachricht einfügen
 Share link: {0} kHz {1} on {2}	Link zum Teilen: {0} kHz {1} auf {2}
+Scan of the extended 27 MHz band	Scan des erweiterten 27-MHz-Bandes
+Scan of the 70 cm band	Scan des 70-cm-Bandes
+Resume the scan	Suchlauf fortsetzen
+Current "Scan setup" setting	Aktuelle Einstellung von „Suchlauf einrichten“
+Scan setup…	Suchlauf einrichten…
+Media keys (headset, keyboard): stop / resume the scan	Medientasten (Headset, Tastatur): Suchlauf anhalten / fortsetzen
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Wiedergabe/Pause: hält den Suchlauf an oder setzt ihn fort. Weiter / Zurück: einen Schritt zurück, wenn diese Tasten den Suchlauf angehalten haben. Solange das Häkchen gesetzt ist, erhalten andere Programme diese Tasten nicht.
+Scan voice command ("stop", "start", "plus one", "minus one")	Sprachsteuerung des Suchlaufs („stop“, „start“, „plus eins“, „minus eins“)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Windows-Spracherkennung, offline, mit dem Standardmikrofon von Windows; hört nur während des Suchlaufs und 5 Minuten nach dessen Ende zu.
+Scan voice command: the microphone will listen during the scan	Sprachsteuerung des Suchlaufs: das Mikrofon hört während des Suchlaufs zu
+Scan voice command off	Sprachsteuerung des Suchlaufs aus
+No scan while transmitting	Kein Suchlauf beim Senden
+Scan: set the start and end frequencies in "Scan setup"	Suchlauf: Start- und Endfrequenz unter „Suchlauf einrichten“ angeben
+Scan: all frequencies are in skipped ranges ("Scan setup")	Suchlauf: Alle Frequenzen liegen in ausgelassenen Bereichen („Suchlauf einrichten“)
+Scan: check memories in "Scan setup"	Suchlauf: Speicher unter „Suchlauf einrichten“ ankreuzen
+frequencies not set	Frequenzen nicht eingestellt
+all frequencies are in skipped ranges	alle Frequenzen liegen in ausgelassenen Bereichen
+no memory checked	kein Speicher angekreuzt
+Scan stopped	Suchlauf beendet
+■ Stop scan	■ Suchlauf beenden
+Media keys: Play/Pause stops or resumes the scan	Medientasten: Wiedergabe/Pause hält den Suchlauf an oder setzt ihn fort
+Media keys: already taken by another program	Medientasten: bereits von einem anderen Programm belegt
+Media keys given back to Windows	Medientasten an Windows zurückgegeben
+media key	Medientaste
+voice command	Sprachbefehl
+Scan of the {0} m band	Scan des {0}-m-Bandes
+at {0} kHz	ab {0} kHz
+from the start ({0} kHz): current frequency out of range	von vorn ({0} kHz): aktuelle Frequenz außerhalb des Bereichs
+at memory {0}	ab Speicher {0}
+from the start ({0}): current frequency not in the memories	von vorn ({0}): aktuelle Frequenz nicht in den Speichern
+click in the page, stopped on {0} kHz	Klick in die Seite, angehalten auf {0} kHz
+Scan stopped: {0}	Suchlauf beendet: {0}
+Scan: {0}	Suchlauf: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Scan pausiert auf {0}: Signal {1} dB, weiter in {2}
+Back one step: {0}	Einen Schritt zurück: {0}
+Voice command unavailable: {0}	Sprachsteuerung nicht verfügbar: {0}
+Voice command: "{0}"	Sprachbefehl: „{0}“
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: sendet einen 1500-Hz-Ton zum Abstimmen des Antennentuners oder der Endstufe (PTT per CAT, Ton an die Sende-Soundkarte des Transceivers). Klick: ein / aus. Rechtsklick: Sende-Soundkarte des Transceivers, Tonpegel, Dauer (5 s bis 1 Min.), Farben
 Rig transmit sound card (PC output connected to the rig):	Sende-Soundkarte des Transceivers (PC-Ausgang, mit dem Transceiver verbunden):
 Keying during Tune:	Tastung während Tune:
@@ -873,6 +892,9 @@ End (kHz):	Ende (kHz):
 Time on each frequency:	Dauer je Frequenz:
 Skipped ranges (from … to … kHz):	Ausgelassene Bereiche (von … bis … kHz):
 + Skipped range	+ Ausgelassener Bereich
+Pause on signal	Pause bei Signal
+Signal threshold (S/N):	Signalschwelle (S/N):
+Steps back:	Schritte zurück:
 Memories to scan:	Zu durchlaufende Speicher:
 Time on each memory:	Dauer je Speicher:
 (no memory: Memories button)	(keine Speicher: Schaltfläche Speicher)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Wählen Sie in der Liste das zu lösch
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Geben Sie unterschiedliche Start- und Endfrequenzen in kHz ein (z. B. 7000 und 7200).
 All frequencies from start to end are in skipped ranges.	Alle Frequenzen von Anfang bis Ende liegen in ausgelassenen Bereichen.
 Check at least one memory to scan.	Kreuzen Sie mindestens einen Speicher an.
+pause on signal {0}	Pause bei Signal {0}
 memories: {0}, {1}	Speicher: {0}, {1}
 skipped ranges: {0}	ausgelassene Bereiche: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	{0} kann nicht umbenannt werden ({1})
 cannot put the new version in place ({0})	die neue Version kann nicht an ihre Stelle gesetzt werden ({0})
 SDRLink: update V{0}	SDRLink: Aktualisierung V{0}
 Downloading SDRLink V{0}…	SDRLink V{0} wird heruntergeladen…
+no Windows speech recognition in a supported language	keine Windows-Spracherkennung in einer unterstützten Sprache
 unavailable	nicht verfügbar
 unexpected format	unerwartetes Format
 Find WebSDRs near your position	WebSDRs in der Nähe Ihres Standorts suchen

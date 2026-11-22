@@ -361,17 +361,6 @@ Add memory	Lägg till minne
 ; preamp cannot be set on this rig / interface	; förförstärkaren kan inte styras på den här radion / det här gränssnittet
 ; power cannot be set on this rig / interface	; uteffekten kan inte styras på den här radion / det här gränssnittet
  (on return to receive)	 (vid återgång till mottagning)
-Resume the scan	Återuppta avsökningen
-Current "Scan setup" setting	Aktuell inställning i ”Avsökningsinställningar”
-No scan while transmitting	Ingen avsökning under sändning
-Scan: set the start and end frequencies in "Scan setup"	Avsökning: ange start- och slutfrekvens i ”Avsökningsinställningar”
-Scan: all frequencies are in skipped ranges ("Scan setup")	Avsökning: alla frekvenser ligger i överhoppade områden (”Avsökningsinställningar”)
-Scan: check memories in "Scan setup"	Avsökning: markera minnen i ”Avsökningsinställningar”
-frequencies not set	frekvenser inte inställda
-all frequencies are in skipped ranges	alla frekvenser ligger i överhoppade områden
-no memory checked	inga minnen markerade
-Scan stopped	Avsökning stoppad
-■ Stop scan	■ Stoppa avsökning
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Radions ljudkort, spelas in när Mute WebSDR, Mute ExpertSDR och Mute HDSDR är på:
 None (always the speakers)	Inget (alltid högtalarna)
 REC button colour	Färg på REC-knappen
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Ta bort ”{0}” från ”{1}”?
 Unexpected error, written to the log: {0}	Oväntat fel, skrivet i loggen: {0}
 Memory "{0}" added to "{1}".	Minnet ”{0}” har lagts till i ”{1}”.
 Memory "{0}": {1} kHz	Minne ”{0}”: {1} kHz
-at {0} kHz	från {0} kHz
-from the start ({0} kHz): current frequency out of range	från början ({0} kHz): aktuell frekvens utanför området
-at memory {0}	från minne {0}
-from the start ({0}): current frequency not in the memories	från början ({0}): aktuell frekvens finns inte i minnena
-click in the page, stopped on {0} kHz	klick på sidan, stoppad på {0} kHz
-Scan stopped: {0}	Avsökning stoppad: {0}
-Scan: {0}	Avsökning: {0}
 Cannot record: {0}	Kan inte spela in: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Radions ljudkort "{0}" är inte tillgängligt ({1}): spelar in högtalarna
 Recording the sound of "{0}" (click REC to stop)	Spelar in ljudet från "{0}" (klicka på REC för att stoppa)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-sidan har minskats till {0} för att visa hela kontrollpanelen (+ och − för att välja)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delningslänk kopierad till urklipp ({0} kHz {1}): klistra in den i ett meddelande
 Share link: {0} kHz {1} on {2}	Delningslänk: {0} kHz {1} på {2}
+Scan of the extended 27 MHz band	Skanning av det utökade 27 MHz-bandet
+Scan of the 70 cm band	Skanning av 70 cm-bandet
+Resume the scan	Återuppta avsökningen
+Current "Scan setup" setting	Aktuell inställning i ”Avsökningsinställningar”
+Scan setup…	Avsökningsinställningar…
+Media keys (headset, keyboard): stop / resume the scan	Medietangenter (headset, tangentbord): stoppa / återuppta avsökningen
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Spela upp/Paus: stoppar eller återupptar avsökningen. Nästa / Föregående: ett steg tillbaka när dessa tangenter har stoppat avsökningen. Så länge rutan är markerad får andra program inte dessa tangenter.
+Scan voice command ("stop", "start", "plus one", "minus one")	Röststyrning av avsökningen (”stop”, ”start”, ”plus one”, ”minus one”)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Windows taligenkänning, offline, med Windows standardmikrofon; lyssnar bara under avsökningen och i 5 minuter efter att den stoppats.
+Scan voice command: the microphone will listen during the scan	Röststyrning av avsökningen: mikrofonen lyssnar under avsökningen
+Scan voice command off	Röststyrning av avsökningen av
+No scan while transmitting	Ingen avsökning under sändning
+Scan: set the start and end frequencies in "Scan setup"	Avsökning: ange start- och slutfrekvens i ”Avsökningsinställningar”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Avsökning: alla frekvenser ligger i överhoppade områden (”Avsökningsinställningar”)
+Scan: check memories in "Scan setup"	Avsökning: markera minnen i ”Avsökningsinställningar”
+frequencies not set	frekvenser inte inställda
+all frequencies are in skipped ranges	alla frekvenser ligger i överhoppade områden
+no memory checked	inga minnen markerade
+Scan stopped	Avsökning stoppad
+■ Stop scan	■ Stoppa avsökning
+Media keys: Play/Pause stops or resumes the scan	Medietangenter: Spela upp/Paus stoppar eller återupptar avsökningen
+Media keys: already taken by another program	Medietangenter: redan upptagna av ett annat program
+Media keys given back to Windows	Medietangenter återlämnade till Windows
+media key	medietangent
+voice command	röstkommando
+Scan of the {0} m band	Skanning av {0} m-bandet
+at {0} kHz	från {0} kHz
+from the start ({0} kHz): current frequency out of range	från början ({0} kHz): aktuell frekvens utanför området
+at memory {0}	från minne {0}
+from the start ({0}): current frequency not in the memories	från början ({0}): aktuell frekvens finns inte i minnena
+click in the page, stopped on {0} kHz	klick på sidan, stoppad på {0} kHz
+Scan stopped: {0}	Avsökning stoppad: {0}
+Scan: {0}	Avsökning: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skanning pausad på {0}: signal {1} dB, återupptas om {2}
+Back one step: {0}	Ett steg tillbaka: {0}
+Voice command unavailable: {0}	Röststyrning inte tillgänglig: {0}
+Voice command: "{0}"	Röstkommando: ”{0}”
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: sänder en 1500 Hz-ton för att ställa in antennstämaren eller slutsteget (PTT via CAT, ljud skickas till radions sändningsljudkort). Klick: på / av. Högerklick: radions sändningsljudkort, tonnivå, längd (5 s till 1 min), färger
 Rig transmit sound card (PC output connected to the rig):	Radions sändningsljudkort (PC-utgång ansluten till radion):
 Keying during Tune:	Tangering under Tune:
@@ -873,6 +892,9 @@ End (kHz):	Slut (kHz):
 Time on each frequency:	Tid på varje frekvens:
 Skipped ranges (from … to … kHz):	Överhoppade områden (från … till … kHz):
 + Skipped range	+ Överhoppat område
+Pause on signal	Paus vid signal
+Signal threshold (S/N):	Signaltröskel (S/N):
+Steps back:	Steg tillbaka:
 Memories to scan:	Minnen att söka av:
 Time on each memory:	Tid på varje minne:
 (no memory: Memories button)	(inga minnen: knappen Minnen)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Välj i listan den profil som ska tas 
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Ange olika start- och slutfrekvenser i kHz (t.ex. 7000 och 7200).
 All frequencies from start to end are in skipped ranges.	Alla frekvenser från start till slut ligger i överhoppade områden.
 Check at least one memory to scan.	Markera minst ett minne att söka av.
+pause on signal {0}	paus vid signal {0}
 memories: {0}, {1}	minnen: {0}, {1}
 skipped ranges: {0}	överhoppade områden: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	kan inte byta namn på {0} ({1})
 cannot put the new version in place ({0})	kan inte lägga den nya versionen på plats ({0})
 SDRLink: update V{0}	SDRLink: uppdatering V{0}
 Downloading SDRLink V{0}…	Hämtar SDRLink V{0}…
+no Windows speech recognition in a supported language	ingen Windows taligenkänning på ett språk som stöds
 unavailable	ej tillgänglig
 unexpected format	oväntat format
 Find WebSDRs near your position	Sök WebSDR nära din position

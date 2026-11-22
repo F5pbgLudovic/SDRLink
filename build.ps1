@@ -23,6 +23,8 @@ $digi   = Join-Path $root 'native\sdrlink_digi.dll.gz'     # FT8/FT4/FT2 (ft8_li
 $jsc    = Join-Path $root 'data\js8jsc.bin.gz'               # dictionnaire de compression du texte JS8 (repris de PhoneSDRLink)
 $c0c64  = Join-Path $root 'vendor\com0com\Setup_com0com_v3.0.0.0_W7_x64_signed.exe'   # com0com (port COM virtuel, 1.49), installateurs signés non modifiés
 $c0c86  = Join-Path $root 'vendor\com0com\Setup_com0com_v3.0.0.0_W7_x86_signed.exe'
+# Reconnaissance vocale de Windows (commande vocale du scan, 1.52) : dans le GAC de .NET 4, présente sur tout Windows.
+$speech = Join-Path $env:WINDIR 'Microsoft.NET\assembly\GAC_MSIL\System.Speech\v4.0_4.0.0.0__31bf3856ad364e35\System.Speech.dll'
 
 New-Item -ItemType Directory -Force $bin | Out-Null
 # Anciennes DLL posées à côté de l'exe : plus nécessaires.
@@ -31,7 +33,7 @@ Remove-Item (Join-Path $bin '*.dll') -ErrorAction SilentlyContinue
 $sources = Get-ChildItem (Join-Path $root 'src') -Filter *.cs | ForEach-Object { $_.FullName }
 & $csc /nologo /target:winexe /platform:x86 /optimize+ /codepage:65001 `
     "/out:$bin\SDRLink.exe" `
-    /r:System.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll /r:System.Web.Extensions.dll /r:System.Device.dll "/r:$core" "/r:$wf" `
+    /r:System.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll /r:System.Web.Extensions.dll /r:System.Device.dll "/r:$speech" "/r:$core" "/r:$wf" `
     "/resource:$core,Microsoft.Web.WebView2.Core.dll" `
     "/resource:$wf,Microsoft.Web.WebView2.WinForms.dll" `
     "/resource:$loader,WebView2Loader.dll" `

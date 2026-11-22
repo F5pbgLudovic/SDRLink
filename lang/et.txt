@@ -361,17 +361,6 @@ Add memory	Lisa mälu
 ; preamp cannot be set on this rig / interface	; eelvõimendit ei saa sellel jaamal / liidesel juhtida
 ; power cannot be set on this rig / interface	; võimsust ei saa sellel jaamal / liidesel juhtida
  (on return to receive)	 (vastuvõtule naasmisel)
-Resume the scan	Jätka skaneerimist
-Current "Scan setup" setting	Praegune seadistus aknas „Skaneerimise seaded“
-No scan while transmitting	Saate ajal ei saa skaneerida
-Scan: set the start and end frequencies in "Scan setup"	Skaneerimine: määrake alg- ja lõppsagedus jaotises „Skaneerimise seaded“
-Scan: all frequencies are in skipped ranges ("Scan setup")	Skaneerimine: kõik sagedused on vahelejäetavates vahemikes („Skaneerimise seaded“)
-Scan: check memories in "Scan setup"	Skaneerimine: märkige mälud jaotises „Skaneerimise seaded“
-frequencies not set	sagedused määramata
-all frequencies are in skipped ranges	kõik sagedused on vahelejäetavates vahemikes
-no memory checked	ühtegi mälu pole märgitud
-Scan stopped	Skaneerimine peatatud
-■ Stop scan	■ Peata skaneerimine
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Raadiojaama helikaart, salvestatakse kui Mute WebSDR, Mute ExpertSDR ja Mute HDSDR on sees:
 None (always the speakers)	Puudub (alati kõlarid)
 REC button colour	REC-nupu värv
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Kas eemaldada „{0}“ loendist „{1}“?
 Unexpected error, written to the log: {0}	Ootamatu viga, kirjutatud logisse: {0}
 Memory "{0}" added to "{1}".	Mälu „{0}“ lisatud loendisse „{1}“.
 Memory "{0}": {1} kHz	Mälu „{0}“: {1} kHz
-at {0} kHz	alates {0} kHz
-from the start ({0} kHz): current frequency out of range	algusest ({0} kHz): praegune sagedus on vahemikust väljas
-at memory {0}	alates mälust {0}
-from the start ({0}): current frequency not in the memories	algusest ({0}): praegust sagedust pole mäludes
-click in the page, stopped on {0} kHz	klõps lehel, peatatud sagedusel {0} kHz
-Scan stopped: {0}	Skaneerimine peatatud: {0}
-Scan: {0}	Skaneerimine: {0}
 Cannot record: {0}	Salvestamine pole võimalik: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Raadiojaama helikaart „{0}“ pole saadaval ({1}): salvestatakse kõlarid
 Recording the sound of "{0}" (click REC to stop)	Salvestatakse seadme „{0}“ heli (peatamiseks klõpsake REC)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-i leht vähendati suuruseni {0}, et kogu juhtpaneel oleks nähtav (valimiseks + ja −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jagamislink kopeeriti lõikelauale ({0} kHz {1}): kleepige see sõnumisse
 Share link: {0} kHz {1} on {2}	Jagamislink: {0} kHz {1} aadressil {2}
+Scan of the extended 27 MHz band	27 MHz laiendatud ala skannimine
+Scan of the 70 cm band	70 cm ala skaneerimine
+Resume the scan	Jätka skaneerimist
+Current "Scan setup" setting	Praegune seadistus aknas „Skaneerimise seaded“
+Scan setup…	Skaneerimise seaded…
+Media keys (headset, keyboard): stop / resume the scan	Meediaklahvid (peakomplekt, klaviatuur): skaneerimise peatamine / jätkamine
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Esita/Paus: peatab või jätkab skaneerimist. Järgmine / Eelmine: üks samm tagasi, kui need klahvid peatasid skaneerimise. Kuni see on märgitud, ei saa teised programmid neid klahve.
+Scan voice command ("stop", "start", "plus one", "minus one")	Skaneerimise häälkäsklus („stop“, „start“, „plus one“, „minus one“)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Windowsi kõnetuvastus, võrguühenduseta, Windowsi vaikemikrofoniga; kuulab ainult skaneerimise ajal ja 5 minutit pärast selle peatamist.
+Scan voice command: the microphone will listen during the scan	Skaneerimise häälkäsklus: mikrofon kuulab skaneerimise ajal
+Scan voice command off	Skaneerimise häälkäsklus väljas
+No scan while transmitting	Saate ajal ei saa skaneerida
+Scan: set the start and end frequencies in "Scan setup"	Skaneerimine: määrake alg- ja lõppsagedus jaotises „Skaneerimise seaded“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skaneerimine: kõik sagedused on vahelejäetavates vahemikes („Skaneerimise seaded“)
+Scan: check memories in "Scan setup"	Skaneerimine: märkige mälud jaotises „Skaneerimise seaded“
+frequencies not set	sagedused määramata
+all frequencies are in skipped ranges	kõik sagedused on vahelejäetavates vahemikes
+no memory checked	ühtegi mälu pole märgitud
+Scan stopped	Skaneerimine peatatud
+■ Stop scan	■ Peata skaneerimine
+Media keys: Play/Pause stops or resumes the scan	Meediaklahvid: Esita/Paus peatab või jätkab skaneerimist
+Media keys: already taken by another program	Meediaklahvid: juba teise programmi kasutuses
+Media keys given back to Windows	Meediaklahvid anti Windowsile tagasi
+media key	meediaklahv
+voice command	häälkäsk
+Scan of the {0} m band	{0} m ala skaneerimine
+at {0} kHz	alates {0} kHz
+from the start ({0} kHz): current frequency out of range	algusest ({0} kHz): praegune sagedus on vahemikust väljas
+at memory {0}	alates mälust {0}
+from the start ({0}): current frequency not in the memories	algusest ({0}): praegust sagedust pole mäludes
+click in the page, stopped on {0} kHz	klõps lehel, peatatud sagedusel {0} kHz
+Scan stopped: {0}	Skaneerimine peatatud: {0}
+Scan: {0}	Skaneerimine: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skannimine peatatud sagedusel {0}: signaal {1} dB, jätkub {2} pärast
+Back one step: {0}	Üks samm tagasi: {0}
+Voice command unavailable: {0}	Häälkäsklus pole saadaval: {0}
+Voice command: "{0}"	Häälkäsk: „{0}“
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: saadab 1500 Hz tooni antennituuneri või võimendi häälestamiseks (PTT CAT kaudu, heli saadetakse seadme saate-helikaardile). Klõps: sees / väljas. Parem klõps: seadme saate-helikaart, tooni tase, kestus (5 s kuni 1 min), värvid
 Rig transmit sound card (PC output connected to the rig):	Seadme saate-helikaart (arvuti väljund, mis on ühendatud seadmega):
 Keying during Tune:	Võtmine Tune: ajal
@@ -873,6 +892,9 @@ End (kHz):	Lõpp (kHz):
 Time on each frequency:	Aeg igal sagedusel:
 Skipped ranges (from … to … kHz):	Vahelejäetavad vahemikud (… kuni … kHz):
 + Skipped range	+ Vahelejäetav vahemik
+Pause on signal	Paus signaali korral
+Signal threshold (S/N):	Signaali lävi (S/N):
+Steps back:	Samme tagasi:
 Memories to scan:	Skaneeritavad mälud:
 Time on each memory:	Aeg igal mälul:
 (no memory: Memories button)	(mälusid pole: nupp Mälud)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Valige loendist kustutatav profiil.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Sisestage erinevad alg- ja lõppsagedused kHz-des (nt 7000 ja 7200).
 All frequencies from start to end are in skipped ranges.	Kõik sagedused algusest lõpuni on vahelejäetavates vahemikes.
 Check at least one memory to scan.	Märkige vähemalt üks skaneeritav mälu.
+pause on signal {0}	paus signaali korral {0}
 memories: {0}, {1}	mälud: {0}, {1}
 skipped ranges: {0}	vahelejäetavad vahemikud: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	faili {0} ei saa ümber nimetada ({1})
 cannot put the new version in place ({0})	uut versiooni ei saa õigesse kohta panna ({0})
 SDRLink: update V{0}	SDRLink: uuendus V{0}
 Downloading SDRLink V{0}…	SDRLink V{0} allalaadimine…
+no Windows speech recognition in a supported language	toetatud keeles Windowsi kõnetuvastust pole
 unavailable	pole saadaval
 unexpected format	ootamatu vorming
 Find WebSDRs near your position	Otsi WebSDR-e teie asukoha lähedal

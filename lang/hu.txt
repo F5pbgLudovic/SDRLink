@@ -361,17 +361,6 @@ Add memory	Memória hozzáadása
 ; preamp cannot be set on this rig / interface	; az előerősítő ezen a rádión / interfészen nem állítható
 ; power cannot be set on this rig / interface	; a teljesítmény ezen a rádión / interfészen nem állítható
  (on return to receive)	 (a vételre való visszatéréskor)
-Resume the scan	Pásztázás folytatása
-Current "Scan setup" setting	A „Pásztázás beállítása” jelenlegi beállítása
-No scan while transmitting	Adás közben nincs pásztázás
-Scan: set the start and end frequencies in "Scan setup"	Pásztázás: adja meg a kezdő és záró frekvenciát a „Pásztázás beállítása” ablakban
-Scan: all frequencies are in skipped ranges ("Scan setup")	Pásztázás: minden frekvencia kihagyott tartományban van („Pásztázás beállítása”)
-Scan: check memories in "Scan setup"	Pásztázás: jelöljön be memóriákat a „Pásztázás beállítása” ablakban
-frequencies not set	frekvenciák nincsenek beállítva
-all frequencies are in skipped ranges	minden frekvencia kihagyott tartományban van
-no memory checked	nincs bejelölt memória
-Scan stopped	Pásztázás leállítva
-■ Stop scan	■ Pásztázás leállítása
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	A rádió hangkártyája, felvétel ha a Mute WebSDR, a Mute ExpertSDR és a Mute HDSDR be van kapcsolva:
 None (always the speakers)	Nincs (mindig a hangszórók)
 REC button colour	A REC gomb színe
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Eltávolítja a(z) „{0}” elemet a(z) „{1}” list
 Unexpected error, written to the log: {0}	Váratlan hiba, a naplóba írva: {0}
 Memory "{0}" added to "{1}".	A(z) „{0}” memória hozzáadva ide: „{1}”.
 Memory "{0}": {1} kHz	Memória: „{0}”: {1} kHz
-at {0} kHz	{0} kHz-től
-from the start ({0} kHz): current frequency out of range	az elejéről ({0} kHz): a jelenlegi frekvencia a tartományon kívül esik
-at memory {0}	a(z) {0} memóriától
-from the start ({0}): current frequency not in the memories	az elejéről ({0}): a jelenlegi frekvencia nincs a memóriák között
-click in the page, stopped on {0} kHz	kattintás az oldalon, megállítva: {0} kHz
-Scan stopped: {0}	Pásztázás leállítva: {0}
-Scan: {0}	Pásztázás: {0}
 Cannot record: {0}	A felvétel nem lehetséges: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	A rádió „{0}” hangkártyája nem érhető el ({1}): a hangszórók felvétele
 Recording the sound of "{0}" (click REC to stop)	Felvétel: „{0}” hangja (leállítás: kattintson a REC gombra)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	A WebSDR-oldal {0}-ra kicsinyítve, hogy a teljes vezérlőpult látszódjon (+ és − a választáshoz)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	A megosztási hivatkozás a vágólapra másolva ({0} kHz {1}): illessze be egy üzenetbe
 Share link: {0} kHz {1} on {2}	Megosztási hivatkozás: {0} kHz {1} itt: {2}
+Scan of the extended 27 MHz band	A kiterjesztett 27 MHz-es sáv pásztázása
+Scan of the 70 cm band	A 70 cm-es sáv pásztázása
+Resume the scan	Pásztázás folytatása
+Current "Scan setup" setting	A „Pásztázás beállítása” jelenlegi beállítása
+Scan setup…	Pásztázás beállítása…
+Media keys (headset, keyboard): stop / resume the scan	Médiabillentyűk (fejhallgató, billentyűzet): pásztázás leállítása / folytatása
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Lejátszás/Szünet: leállítja vagy folytatja a pásztázást. Következő / Előző: egy lépés vissza, ha ezek a billentyűk állították le a pásztázást. Amíg be van jelölve, más programok nem kapják meg ezeket a billentyűket.
+Scan voice command ("stop", "start", "plus one", "minus one")	A pásztázás hangvezérlése („stop”, „start”, „plus one”, „minus one”)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Windows beszédfelismerés, internet nélkül, a Windows alapértelmezett mikrofonjával; csak pásztázás közben és a leállítás után 5 percig figyel.
+Scan voice command: the microphone will listen during the scan	A pásztázás hangvezérlése: a mikrofon pásztázás közben figyel
+Scan voice command off	A pásztázás hangvezérlése kikapcsolva
+No scan while transmitting	Adás közben nincs pásztázás
+Scan: set the start and end frequencies in "Scan setup"	Pásztázás: adja meg a kezdő és záró frekvenciát a „Pásztázás beállítása” ablakban
+Scan: all frequencies are in skipped ranges ("Scan setup")	Pásztázás: minden frekvencia kihagyott tartományban van („Pásztázás beállítása”)
+Scan: check memories in "Scan setup"	Pásztázás: jelöljön be memóriákat a „Pásztázás beállítása” ablakban
+frequencies not set	frekvenciák nincsenek beállítva
+all frequencies are in skipped ranges	minden frekvencia kihagyott tartományban van
+no memory checked	nincs bejelölt memória
+Scan stopped	Pásztázás leállítva
+■ Stop scan	■ Pásztázás leállítása
+Media keys: Play/Pause stops or resumes the scan	Médiabillentyűk: a Lejátszás/Szünet leállítja vagy folytatja a pásztázást
+Media keys: already taken by another program	Médiabillentyűk: már egy másik program használja
+Media keys given back to Windows	Médiabillentyűk visszaadva a Windowsnak
+media key	médiabillentyű
+voice command	hangparancs
+Scan of the {0} m band	A {0} m-es sáv pásztázása
+at {0} kHz	{0} kHz-től
+from the start ({0} kHz): current frequency out of range	az elejéről ({0} kHz): a jelenlegi frekvencia a tartományon kívül esik
+at memory {0}	a(z) {0} memóriától
+from the start ({0}): current frequency not in the memories	az elejéről ({0}): a jelenlegi frekvencia nincs a memóriák között
+click in the page, stopped on {0} kHz	kattintás az oldalon, megállítva: {0} kHz
+Scan stopped: {0}	Pásztázás leállítva: {0}
+Scan: {0}	Pásztázás: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Pásztázás szünetel itt: {0}: jel {1} dB, folytatás ennyi múlva: {2}
+Back one step: {0}	Egy lépés vissza: {0}
+Voice command unavailable: {0}	A hangvezérlés nem érhető el: {0}
+Voice command: "{0}"	Hangparancs: „{0}”
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: 1500 Hz-es hangot ad az antennahangoló vagy a végfok beállításához (PTT CAT-on keresztül, a hang a rádió adási hangkártyájára megy). Kattintás: be / ki. Jobb kattintás: a rádió adási hangkártyája, hangszint, időtartam (5 s – 1 perc), színek
 Rig transmit sound card (PC output connected to the rig):	A rádió adási hangkártyája (a rádióhoz csatlakoztatott PC-kimenet):
 Keying during Tune:	Kulcsolás Tune: alatt
@@ -873,6 +892,9 @@ End (kHz):	Vége (kHz):
 Time on each frequency:	Idő minden frekvencián:
 Skipped ranges (from … to … kHz):	Kihagyott tartományok (… és … kHz között):
 + Skipped range	+ Kihagyott tartomány
+Pause on signal	Szünet jelnél
+Signal threshold (S/N):	Jelküszöb (S/N):
+Steps back:	Lépés vissza:
 Memories to scan:	Pásztázandó memóriák:
 Time on each memory:	Idő minden memórián:
 (no memory: Memories button)	(nincs memória: Memóriák gomb)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Válassza ki a listában a törlendő 
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Adjon meg eltérő kezdő és záró frekvenciát kHz-ben (pl. 7000 és 7200).
 All frequencies from start to end are in skipped ranges.	A kezdettől a végéig minden frekvencia kihagyott tartományba esik.
 Check at least one memory to scan.	Jelöljön be legalább egy pásztázandó memóriát.
+pause on signal {0}	szünet jelnél {0}
 memories: {0}, {1}	memóriák: {0}, {1}
 skipped ranges: {0}	kihagyott tartományok: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	{0} nem nevezhető át ({1})
 cannot put the new version in place ({0})	az új verzió nem tehető a helyére ({0})
 SDRLink: update V{0}	SDRLink: frissítés V{0}
 Downloading SDRLink V{0}…	A SDRLink V{0} letöltése…
+no Windows speech recognition in a supported language	nincs Windows beszédfelismerés támogatott nyelven
 unavailable	nem elérhető
 unexpected format	váratlan formátum
 Find WebSDRs near your position	WebSDR-ek keresése az Ön helyzetének közelében

@@ -361,17 +361,6 @@ Add memory	Adicionar memória
 ; preamp cannot be set on this rig / interface	; o pré-amplificador não pode ser comandado neste rádio / interface
 ; power cannot be set on this rig / interface	; a potência não pode ser comandada neste rádio / interface
  (on return to receive)	 (ao voltar à receção)
-Resume the scan	Retomar o varrimento
-Current "Scan setup" setting	Definição atual de «Configurar varrimento»
-No scan while transmitting	Sem varrimento durante a emissão
-Scan: set the start and end frequencies in "Scan setup"	Varrimento: indique as frequências de início e fim em «Configurar varrimento»
-Scan: all frequencies are in skipped ranges ("Scan setup")	Varrimento: todas as frequências estão em gamas excluídas («Configurar varrimento»)
-Scan: check memories in "Scan setup"	Varrimento: marque memórias em «Configurar varrimento»
-frequencies not set	frequências não definidas
-all frequencies are in skipped ranges	todas as frequências estão em gamas excluídas
-no memory checked	nenhuma memória marcada
-Scan stopped	Varrimento parado
-■ Stop scan	■ Parar o varrimento
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Placa de som do rádio, gravada quando Mute WebSDR, Mute ExpertSDR e Mute HDSDR estão ativos:
 None (always the speakers)	Nenhuma (sempre os altifalantes)
 REC button colour	Cor do botão REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Remover «{0}» de «{1}»?
 Unexpected error, written to the log: {0}	Erro inesperado, registado no diário: {0}
 Memory "{0}" added to "{1}".	Memória «{0}» adicionada a «{1}».
 Memory "{0}": {1} kHz	Memória «{0}»: {1} kHz
-at {0} kHz	a partir de {0} kHz
-from the start ({0} kHz): current frequency out of range	desde o início ({0} kHz): frequência atual fora da gama
-at memory {0}	a partir da memória {0}
-from the start ({0}): current frequency not in the memories	desde o início ({0}): frequência atual não está nas memórias
-click in the page, stopped on {0} kHz	clique na página, parado em {0} kHz
-Scan stopped: {0}	Varrimento parado: {0}
-Scan: {0}	Varrimento: {0}
 Cannot record: {0}	Impossível gravar: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Placa de som do rádio «{0}» indisponível ({1}): gravação dos altifalantes
 Recording the sound of "{0}" (click REC to stop)	A gravar o som de «{0}» (clique em REC para parar)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	P�
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Página do WebSDR reduzida para {0} para mostrar todo o painel de controlo (+ e − para escolher)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Ligação de partilha copiada para a área de transferência ({0} kHz {1}): cole-a numa mensagem
 Share link: {0} kHz {1} on {2}	Ligação de partilha: {0} kHz {1} em {2}
+Scan of the extended 27 MHz band	Varrimento da banda alargada dos 27 MHz
+Scan of the 70 cm band	Varrimento da banda dos 70 cm
+Resume the scan	Retomar o varrimento
+Current "Scan setup" setting	Definição atual de «Configurar varrimento»
+Scan setup…	Configurar varrimento…
+Media keys (headset, keyboard): stop / resume the scan	Teclas multimédia (auscultadores, teclado): parar / retomar o varrimento
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Reproduzir/Pausa: para ou retoma o varrimento. Seguinte / Anterior: um passo atrás quando estas teclas pararam o varrimento. Enquanto estiver marcada, os outros programas não recebem estas teclas.
+Scan voice command ("stop", "start", "plus one", "minus one")	Comando de voz do varrimento («stop», «start», «plus one», «minus one»)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Reconhecimento de voz do Windows, sem ligação, com o microfone predefinido do Windows; só escuta durante o varrimento e 5 minutos depois de parar.
+Scan voice command: the microphone will listen during the scan	Comando de voz do varrimento: o microfone vai escutar durante o varrimento
+Scan voice command off	Comando de voz do varrimento desligado
+No scan while transmitting	Sem varrimento durante a emissão
+Scan: set the start and end frequencies in "Scan setup"	Varrimento: indique as frequências de início e fim em «Configurar varrimento»
+Scan: all frequencies are in skipped ranges ("Scan setup")	Varrimento: todas as frequências estão em gamas excluídas («Configurar varrimento»)
+Scan: check memories in "Scan setup"	Varrimento: marque memórias em «Configurar varrimento»
+frequencies not set	frequências não definidas
+all frequencies are in skipped ranges	todas as frequências estão em gamas excluídas
+no memory checked	nenhuma memória marcada
+Scan stopped	Varrimento parado
+■ Stop scan	■ Parar o varrimento
+Media keys: Play/Pause stops or resumes the scan	Teclas multimédia: Reproduzir/Pausa para ou retoma o varrimento
+Media keys: already taken by another program	Teclas multimédia: já ocupadas por outro programa
+Media keys given back to Windows	Teclas multimédia devolvidas ao Windows
+media key	tecla multimédia
+voice command	comando de voz
+Scan of the {0} m band	Varrimento da banda dos {0} m
+at {0} kHz	a partir de {0} kHz
+from the start ({0} kHz): current frequency out of range	desde o início ({0} kHz): frequência atual fora da gama
+at memory {0}	a partir da memória {0}
+from the start ({0}): current frequency not in the memories	desde o início ({0}): frequência atual não está nas memórias
+click in the page, stopped on {0} kHz	clique na página, parado em {0} kHz
+Scan stopped: {0}	Varrimento parado: {0}
+Scan: {0}	Varrimento: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Varrimento em pausa em {0}: sinal {1} dB, retoma em {2}
+Back one step: {0}	Recuar um passo: {0}
+Voice command unavailable: {0}	Comando de voz indisponível: {0}
+Voice command: "{0}"	Comando de voz: «{0}»
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: transmite um tom de 1500 Hz para ajustar o acoplador de antena ou o amplificador (PTT por CAT, som enviado para a placa de som de transmissão do rádio). Clique: ligar / desligar. Clique direito: placa de som de transmissão do rádio, nível do tom, duração (5 s a 1 min), cores
 Rig transmit sound card (PC output connected to the rig):	Placa de som de transmissão do rádio (saída do PC ligada ao rádio):
 Keying during Tune:	Manipulação durante Tune:
@@ -873,6 +892,9 @@ End (kHz):	Fim (kHz):
 Time on each frequency:	Tempo em cada frequência:
 Skipped ranges (from … to … kHz):	Gamas excluídas (de … a … kHz):
 + Skipped range	+ Gama excluída
+Pause on signal	Pausa com sinal
+Signal threshold (S/N):	Limiar do sinal (S/N):
+Steps back:	Passos atrás:
 Memories to scan:	Memórias a percorrer:
 Time on each memory:	Tempo em cada memória:
 (no memory: Memories button)	(nenhuma memória: botão Memórias)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Escolha na lista o perfil a eliminar.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Indique frequências de início e fim diferentes, em kHz (p. ex. 7000 e 7200).
 All frequencies from start to end are in skipped ranges.	Todas as frequências do início ao fim estão em gamas excluídas.
 Check at least one memory to scan.	Marque pelo menos uma memória a percorrer.
+pause on signal {0}	pausa com sinal {0}
 memories: {0}, {1}	memórias: {0}, {1}
 skipped ranges: {0}	gamas excluídas: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	não é possível mudar o nome de {0} ({1})
 cannot put the new version in place ({0})	não é possível colocar a nova versão no lugar ({0})
 SDRLink: update V{0}	SDRLink: atualização V{0}
 Downloading SDRLink V{0}…	A transferir o SDRLink V{0}…
+no Windows speech recognition in a supported language	nenhum reconhecimento de voz do Windows num idioma suportado
 unavailable	indisponível
 unexpected format	formato inesperado
 Find WebSDRs near your position	Procurar WebSDR perto da sua posição

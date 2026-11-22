@@ -191,6 +191,7 @@ namespace SDRLink
                 Disconnect();
                 StopRigMonitor();
                 StopMicRoute();
+                CloseScan();
                 if (probe != null) StopProbe(null, null);
                 StopDecoders();
                 CloseDigiWin();
@@ -556,11 +557,15 @@ namespace SDRLink
             // DNR (1.46) : clic = marche / arrêt ; clic droit = type (classique, amélioré, IA) et niveau, coupures en numérique / FreeDV, couleurs.
             CreateDnrButton();
             row3.Controls.Add(btnDnr);
-            // Scan : réglages (fréquences ou mémoires) et marche / arrêt.
+            // Scan : réglages (fréquences ou mémoires) et marche / arrêt. Clic = reprendre le scan (ou l'arrêter) ;
+            // clic droit = scan de la bande, profils, options (MainFormScan.cs), puis couleurs.
             row3.Controls.Add(Colorable("ScanSetup", Btn("Conf scan", "Scan setup", delegate { ConfigureScan(); })));
-            btnScan = Btn("▶ Scan", "▶ Scan", delegate { if (scanning) StopScan(null); else ShowScanMenu(); });
+            btnScan = Btn("▶ Scan", "▶ Scan", delegate { OnScanClick(); });
             btnScan.Tag = Theme.Custom;
             btnScan.FlatStyle = FlatStyle.Flat;
+            ContextMenuStrip scanMenu = new ContextMenuStrip();
+            scanMenu.Opening += delegate { FillScanMenu(scanMenu); };   // avant les couleurs (AddColorMenu)
+            btnScan.ContextMenuStrip = scanMenu;
             row3.Controls.Add(btnScan);
             // REC : enregistre le son entendu dans les haut-parleurs ; à l'arrêt, fenêtre pour sauvegarder le fichier.
             // Même allure que les boutons Mute : même police, même hauteur (30), mêmes marges, bordure qui fait contour.
@@ -2438,9 +2443,10 @@ namespace SDRLink
         void TuneSdrOnly(long sdrHz)
         {
             if (sdrHz <= 0) return;
+            if (SdrAlone) BandAutoMode(sdrHz - Offset, CurrentFreq(), "réglage du WebSDR");
             sdrWheelTarget = sdrHz;
             sdrWheelUntil = DateTime.UtcNow.AddMilliseconds(1000);
-            SetSdr(sdrHz, "");
+            SetSdr(sdrHz, TakeBandSdrMode());
             UpdateDisplays();
         }
 
@@ -2475,6 +2481,7 @@ namespace SDRLink
         void TuneBoth(long rigHz)
         {
             if (rigHz <= 0) return;
+            BandAutoMode(rigHz, CurrentFreq(), "réglage");   // autre bande : son mode (PhoneSDRLink 1.31)
             if (SdrAlone) { if (rigHz + Offset > 0) TuneSdrOnly(rigHz + Offset); return; }
             DateTime now = DateTime.UtcNow;
             wheelTarget = rigHz;
@@ -2485,7 +2492,7 @@ namespace SDRLink
                 ignoreRigUntil = now.AddMilliseconds(EchoIgnoreMs);
                 worker.SetFreq(rigHz);
             }
-            SetSdr(rigHz + Offset, "");
+            SetSdr(rigHz + Offset, TakeBandSdrMode());
             UpdateDisplays();
         }
 
@@ -2596,6 +2603,8 @@ namespace SDRLink
         void OnRigState(long f, string m)
         {
             if (worker == null) return;
+            long prevRigF = lastRigF;
+            string prevRigFam = lastRigFam;
             rigF = f;
             if (m != null) rigM = m;
             UpdateDisplays();
@@ -2610,12 +2619,28 @@ namespace SDRLink
             lastRigFam = fam;
             // Pendant qu'on vient de commander le poste, on n'en renvoie pas l'écho vers le WebSDR.
             if (DateTime.UtcNow < ignoreRigUntil) return;
+            // Opérateur qui change de bande sur le poste (1.52, PhoneSDRLink 1.31) : mode de la nouvelle bande, poste et WebSDR ;
+            // mode changé sur le poste dans une même bande (hors modes numériques) : retenu pour elle.
+            if (changed && !SdrAlone && prevRigF > 0)
+            {
+                if (Bands.Near(f) != Bands.Near(prevRigF))
+                {
+                    if (BandAutoMode(f, prevRigF, "poste"))
+                    {
+                        string bm = TakeBandSdrMode();
+                        if (RigToSdr) SetSdr(f + Offset, bm);
+                        return;
+                    }
+                }
+                else if (fam != prevRigFam && rigM != Modes.DATAU && rigM != Modes.DATAL) NoteBandMode(rigM);
+            }
             if (changed && RigToSdr) PushToSdr();
         }
 
         // user : le changement suit un geste réel de l'utilisateur dans la page (clic, touche, molette).
         void OnSdrState(string kind, long f, string m, bool user)
         {
+            long prevSdrF = sdrF;
             bool first = sdrKind == "";
             if (first)
             {
@@ -2625,6 +2650,9 @@ namespace SDRLink
                 SetPageNotch();
                 PushBwLater(3500);   // page chargée : bande passante du mode remise une fois la page en place
             }
+            // Mode vide un instant (page en train de changer de fréquence) : on garde le mode d'avant, sans quoi le mode
+            // affiché et le bouton de mode clignotent.
+            if (string.IsNullOrEmpty(m) && kind == sdrKind && !string.IsNullOrEmpty(sdrM)) m = sdrM;
             sdrKind = kind;
             sdrF = f;
             sdrM = m;
@@ -2676,6 +2704,16 @@ namespace SDRLink
             }
             if (user) syncSettleUntil = DateTime.MinValue;
             else if (DateTime.UtcNow < ignoreSdrUntil) return;
+            // Geste de l'opérateur dans la page (1.52, PhoneSDRLink 1.31) : passage dans une autre bande = mode de cette bande ;
+            // mode changé dans une même bande = retenu pour elle.
+            if (user && freqChanged && Bands.Near(f - Offset) != Bands.Near(prevSdrF - Offset))
+            {
+                BandAutoMode(f - Offset, prevSdrF - Offset, "page du WebSDR");
+                TakeBandSdrMode();   // mode déjà envoyé à la page par ApplyMode
+                if (SdrToRig) PushToRig(true, false);
+                return;
+            }
+            if (user && modeChanged && fam != "") NoteBandMode(Modes.FromSdrFamily(fam));
             if ((freqChanged || modeChanged) && SdrToRig) PushToRig(freqChanged, modeChanged);
         }
 
@@ -2754,6 +2792,7 @@ namespace SDRLink
             string fam = Modes.SdrFamily(sdrM);
             string sdrMode = fam != "" ? fam.ToUpperInvariant() : (sdrM ?? "").ToUpperInvariant();
             SetFreqText(lblSdr, "WEBSDR " + (sdrKind != "" ? FormatFreq(shownSdr) + " " + sdrMode : "---"));
+            ScanBandFollow();
 
             // Bouton de mode en surbrillance : mode du poste s'il est connecté, sinon celui du WebSDR.
             string active = ActiveModeKey(fam);
@@ -2831,6 +2870,7 @@ namespace SDRLink
             modeClickUntil = DateTime.UtcNow.AddSeconds(2);
             clickedMode = mode;
             SetModeBoth(mode);
+            NoteBandMode(mode);   // choix de l'opérateur : retenu pour la bande (PhoneSDRLink 1.31)
             shownModeFamily = null;
             UpdateDisplays();
         }
@@ -4547,17 +4587,8 @@ namespace SDRLink
         {
             // Mode d'abord, fréquence ensuite : websdr.org décale la fréquence de 750 Hz en passant d'USB à CW (corrigé dans la 1.38 ;
             // une mémoire CW rappelée depuis USB tombait 750 Hz à côté).
-            if (m.Mode != "")
-            {
-                if (ModeKey(m.Mode) == "digi") digiMode = m.Mode;
-                else if (m.Mode == Modes.CW || m.Mode == Modes.CWR) cwMode = m.Mode;
-                digiActive = ModeKey(m.Mode) == "digi";
-                modeClickUntil = DateTime.UtcNow.AddSeconds(2);
-                clickedMode = m.Mode;
-                SetModeBoth(m.Mode);
-                shownModeFamily = null;
-                UpdateDisplays();
-            }
+            bandModeQuietUntil = DateTime.UtcNow.AddSeconds(3);   // la mémoire garde son mode (ou le mode en cours), pas celui de la bande
+            if (m.Mode != "") ApplyMode(m.Mode);
             TuneBoth(m.Hz);
             // Préampli mémorisé (1.41) : envoyé avec la fréquence, appliqué par le poste juste après elle (RigWorker).
             if (m.Preamp >= 0 && worker != null && rigOnline && !SdrAlone)
@@ -4566,6 +4597,19 @@ namespace SDRLink
             }
             // Puissance mémorisée (1.42) : ramenée sous le plafond ; le poste la reçoit après la fréquence, jamais pendant l'émission.
             if (m.Power >= 0 && worker != null && rigOnline && !SdrAlone && rigPower != null) worker.SetPower(Math.Min(m.Power, Powers.Limit));
+        }
+
+        // Mode (poste et WebSDR) d'une mémoire ou d'un scan, comme un clic sur son bouton de mode.
+        void ApplyMode(string mode)
+        {
+            if (ModeKey(mode) == "digi") digiMode = mode;
+            else if (mode == Modes.CW || mode == Modes.CWR) cwMode = mode;
+            digiActive = ModeKey(mode) == "digi";
+            modeClickUntil = DateTime.UtcNow.AddSeconds(2);
+            clickedMode = mode;
+            SetModeBoth(mode);
+            shownModeFamily = null;
+            UpdateDisplays();
         }
 
         PreampSet rigPreamps;   // réglages de préampli annoncés par le poste connecté (null : non pilotable ou pas connecté)
@@ -4597,183 +4641,6 @@ namespace SDRLink
             if (rigPower == null) return Lang.T(" ; puissance non pilotable sur ce poste / cette interface", "; power cannot be set on this rig / interface");
             int w = Powers.Clamp(m.Power, rigPower);
             return ", " + w + " W" + (rigTx ? Lang.T(" (au retour en réception)", " (on return to receive)") : "");
-        }
-
-        // ---------------------------------------------------------------- Scan
-
-        readonly Timer scanTimer = new Timer();
-        bool scanning;
-        long scanHz;
-        ScanProfile scanRun;   // réglage du scan de fréquences en cours (zones non scannées comprises)
-        int scanIndex;
-        List<Memory> scanMems;
-
-        void ConfigureScan()
-        {
-            DialogResult r;
-            using (ScanDialog d = new ScanDialog(settings)) r = d.ShowDialog(this);
-            settings.Save();   // les profils enregistrés dans la fenêtre restent, même après Annuler
-            if (r == DialogResult.Yes) { if (scanning) StopScan(null); StartScan(); }
-        }
-
-        // Clic sur Scan : reprendre le scan du réglage du moment à la fréquence actuelle, le lancer depuis le début, ou
-        // un profil, qui devient le réglage du moment.
-        void ShowScanMenu()
-        {
-            ContextMenuStrip m = new ContextMenuStrip();
-            ToolStripMenuItem resume = new ToolStripMenuItem(Lang.T("Reprendre le scan", "Resume the scan") + "  —  " + ResumeText());
-            resume.Click += delegate { StartScan(true); };
-            m.Items.Add(resume);
-            ToolStripMenuItem now = new ToolStripMenuItem(Lang.T("Réglage actuel de « Conf scan »", "Current \"Scan setup\" setting") + "  —  " + settings.CurrentScan("").Summary());
-            now.Font = new Font(now.Font, FontStyle.Bold);
-            now.Click += delegate { StartScan(); };
-            m.Items.Add(now);
-            if (settings.ScanProfiles.Count > 0) m.Items.Add(new ToolStripSeparator());
-            foreach (ScanProfile p in settings.ScanProfiles)
-            {
-                ScanProfile pp = p;
-                ToolStripMenuItem it = new ToolStripMenuItem(p.Name + "  —  " + p.Summary());
-                it.Click += delegate
-                {
-                    settings.UseScan(pp);
-                    settings.Save();
-                    Log.Write("Scan : profil « " + pp.Name + " »");
-                    StartScan();
-                };
-                m.Items.Add(it);
-            }
-            m.Closed += delegate { BeginInvoke(new Action(m.Dispose)); };
-            m.Show(btnScan, new Point(0, btnScan.Height));
-        }
-
-        // Fréquences : de la plus basse à la plus haute, par pas, en sautant les zones non scannées, puis on recommence.
-        // Mémoires : les cochées, dans l'ordre. Chaque fréquence ou mémoire est gardée la durée choisie. L'émission arrête le scan.
-        // Reprendre (resume) : le scan part de la fréquence actuelle si elle est dans la plage (la suivante si elle est
-        // dans une zone non scannée), de la mémoire cochée sur la fréquence actuelle ; sinon du début, comme Scan.
-        void StartScan(bool resume = false)
-        {
-            if (Transmitting) { ShowStatus(Lang.T("Scan impossible en émission", "No scan while transmitting")); return; }
-            long cur = resume ? CurrentFreq() : -1;
-            if (settings.ScanType == 0)
-            {
-                scanRun = settings.CurrentScan("");
-                if (scanRun.Lo <= 0 || scanRun.Lo == scanRun.Hi) { ShowStatus(Lang.T("Scan : indiquez les fréquences de début et de fin dans « Conf scan »", "Scan: set the start and end frequencies in \"Scan setup\"")); return; }
-                scanHz = ResumeFreq(scanRun, cur);
-                if (scanHz < 0) { ShowStatus(Lang.T("Scan : toutes les fréquences sont dans des zones non scannées (« Conf scan »)", "Scan: all frequencies are in skipped ranges (\"Scan setup\")")); return; }
-                scanTimer.Interval = Math.Max(1, settings.ScanFreqDwell) * 1000;
-            }
-            else
-            {
-                scanMems = ScanMemories();
-                if (scanMems.Count == 0) { ShowStatus(Lang.T("Scan : cochez des mémoires dans « Conf scan »", "Scan: check memories in \"Scan setup\"")); return; }
-                scanIndex = Math.Max(0, scanMems.FindIndex(m => m.Hz == cur));
-                scanTimer.Interval = Math.Max(1, settings.ScanMemDwell) * 1000;
-            }
-            scanning = true;
-            Log.Write("Scan : " + (resume ? "reprise à " + (settings.ScanType == 0 ? FormatFreq(scanHz) : scanMems[scanIndex].Label) + " " : "départ ") + "(" +(settings.ScanType == 0 ? FormatFreq(scanRun.Lo) + " à " + FormatFreq(scanRun.Hi) + ", pas " + settings.ScanStepHz + " Hz"
-                    + (scanRun.Skips.Count > 0 ? ", sans " + string.Join(", ", scanRun.Skips.ConvertAll(z => Memory.KHz(z[0]) + "-" + Memory.KHz(z[1]) + " kHz").ToArray()) : "")
-                    : scanMems.Count + " mémoire(s)")
-                + ", " + scanTimer.Interval / 1000 + " s)");
-            ScanTune();
-            scanTimer.Start();
-            UpdateScanButton();
-        }
-
-        // Fréquence de départ : la fréquence actuelle (cur) si elle est dans la plage, la suivante si elle est dans une zone
-        // non scannée, sinon la première du scan (aussi pour cur < 0).
-        static long ResumeFreq(ScanProfile p, long cur)
-        {
-            if (cur < p.Lo || cur > p.Hi) return p.NextFreq(-1);
-            return p.Skipped(cur) ? p.NextFreq(cur) : cur;
-        }
-
-        List<Memory> ScanMemories()
-        {
-            return settings.Memories.Items.FindAll(delegate(Memory m) { return m.Scan; });
-        }
-
-        // Où « Reprendre le scan » repartira, pour le menu du bouton Scan.
-        string ResumeText()
-        {
-            long cur = CurrentFreq();
-            if (settings.ScanType == 0)
-            {
-                ScanProfile p = settings.CurrentScan("");
-                if (p.Lo <= 0 || p.Lo == p.Hi) return Lang.T("fréquences non réglées", "frequencies not set");
-                long f = ResumeFreq(p, cur);
-                if (f < 0) return Lang.T("toutes les fréquences sont dans des zones non scannées", "all frequencies are in skipped ranges");
-                if (cur >= p.Lo && cur <= p.Hi) return Lang.F("à {0} kHz", "at {0} kHz", Memory.KHz(f));
-                return Lang.F("au début ({0} kHz) : fréquence actuelle hors de la plage", "from the start ({0} kHz): current frequency out of range", Memory.KHz(f));
-            }
-            List<Memory> mems = ScanMemories();
-            if (mems.Count == 0) return Lang.T("aucune mémoire cochée", "no memory checked");
-            int i = mems.FindIndex(m => m.Hz == cur);
-            if (i >= 0) return Lang.F("à la mémoire {0}", "at memory {0}", mems[i].Label);
-            return Lang.F("au début ({0}) : fréquence actuelle hors des mémoires", "from the start ({0}): current frequency not in the memories", mems[0].Label);
-        }
-
-        // Clic dans la page du WebSDR pendant un scan : le scan s'arrête et reste sur la fréquence scannée à ce
-        // moment-là ; pendant ScanHoldMs, le changement de fréquence que le clic fait dans la cascade est annulé
-        // (OnSdrState). Le clic suivant, même dans ces 2 s, règle la fréquence normalement.
-        const int ScanHoldMs = 2000;
-        long scanHoldHz;
-        DateTime scanHoldUntil;
-
-        void OnPageClick()
-        {
-            if (!scanning) { scanHoldUntil = DateTime.MinValue; return; }   // clic suivant : réglage normal
-            long hz = settings.ScanType == 0 ? scanHz : scanMems[scanIndex].Hz;
-            StopScan(Lang.F("clic dans la page, arrêt sur {0} kHz", "click in the page, stopped on {0} kHz", Memory.KHz(hz)));
-            scanHoldHz = hz;
-            scanHoldUntil = DateTime.UtcNow.AddMilliseconds(ScanHoldMs);
-            // Le changement a pu arriver avant ce message : on revient tout de suite sur la fréquence scannée.
-            if (Math.Abs(CurrentFreq() - hz) > Tolerance) TuneBoth(hz);
-        }
-
-        void StopScan(string reason)
-        {
-            if (!scanning) return;
-            scanning = false;
-            scanTimer.Stop();
-            Log.Write("Scan : arrêt" + (reason != null ? " (" + reason + ")" : ""));
-            ShowStatus(reason != null ? Lang.F("Scan arrêté : {0}", "Scan stopped: {0}", reason) : Lang.T("Scan arrêté", "Scan stopped"));
-            UpdateScanButton();
-        }
-
-        void ScanNext()
-        {
-            if (!scanning) return;
-            if (Transmitting) { StopScan(Lang.T("émission", "transmitting")); return; }
-            if (settings.ScanType == 0)
-            {
-                scanHz = scanRun.NextFreq(scanHz);
-            }
-            else scanIndex = (scanIndex + 1) % scanMems.Count;
-            ScanTune();
-        }
-
-        // Le texte du scan va directement dans la barre d'état, sans remplir l'historique des messages.
-        void ScanTune()
-        {
-            string what;
-            if (settings.ScanType == 0) { TuneBoth(scanHz); what = Memory.KHz(scanHz) + " kHz"; }
-            else
-            {
-                Memory m = scanMems[scanIndex];
-                ApplyMemory(m);
-                what = m.Label + (m.Name.Length > 0 ? " (" + Memory.KHz(m.Hz) + " kHz)" : "");
-            }
-            status.Text = Lang.F("Scan : {0}", "Scan: {0}", what);
-        }
-
-        void UpdateScanButton()
-        {
-            btnScan.Text = scanning ? Lang.T("■ Arrêter le scan", "■ Stop scan") : "▶ Scan";
-            btnScan.BackColor = scanning ? Color.FromArgb(200, 0, 0) : Theme.ButtonBack;
-            btnScan.ForeColor = scanning ? Color.White : Theme.Fore;
-            btnScan.FlatAppearance.BorderColor = scanning ? Color.FromArgb(150, 0, 0) : Theme.Border;
-            int custom = ColorOf(scanning ? "ScanOn" : "ScanOff");
-            if (custom >= 0) PaintCustom(btnScan, custom);
         }
 
         // ---------------------------------------------------------------- Enregistrement (REC)

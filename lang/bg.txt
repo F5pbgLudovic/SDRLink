@@ -361,17 +361,6 @@ Add memory	Добавяне на памет
 ; preamp cannot be set on this rig / interface	; предусилвателят не може да се задава на този трансивър / интерфейс
 ; power cannot be set on this rig / interface	; мощността не може да се задава на този трансивър / интерфейс
  (on return to receive)	 (при връщане на приемане)
-Resume the scan	Продължаване на сканирането
-Current "Scan setup" setting	Текуща настройка в „Настройка на сканирането“
-No scan while transmitting	Не може да се сканира по време на предаване
-Scan: set the start and end frequencies in "Scan setup"	Сканиране: задайте началната и крайната честота в „Настройка на сканирането“
-Scan: all frequencies are in skipped ranges ("Scan setup")	Сканиране: всички честоти са в пропуснати обхвати („Настройка на сканирането“)
-Scan: check memories in "Scan setup"	Сканиране: отметнете памети в „Настройка на сканирането“
-frequencies not set	честотите не са зададени
-all frequencies are in skipped ranges	всички честоти са в пропуснати обхвати
-no memory checked	няма отметнати памети
-Scan stopped	Сканирането е спряно
-■ Stop scan	■ Спиране на сканирането
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Звукова карта на радиостанцията, записвана при включени Mute WebSDR, Mute ExpertSDR и Mute HDSDR:
 None (always the speakers)	Няма (винаги високоговорителите)
 REC button colour	Цвят на бутона REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Да се премахне ли „{0}“ от „{1}�
 Unexpected error, written to the log: {0}	Неочаквана грешка, записана в дневника: {0}
 Memory "{0}" added to "{1}".	Паметта „{0}“ е добавена към „{1}“.
 Memory "{0}": {1} kHz	Памет „{0}“: {1} kHz
-at {0} kHz	от {0} kHz
-from the start ({0} kHz): current frequency out of range	от началото ({0} kHz): текущата честота е извън обхвата
-at memory {0}	от паметта {0}
-from the start ({0}): current frequency not in the memories	от началото ({0}): текущата честота не е в паметите
-click in the page, stopped on {0} kHz	клик в страницата, спряно на {0} kHz
-Scan stopped: {0}	Сканирането е спряно: {0}
-Scan: {0}	Сканиране: {0}
 Cannot record: {0}	Записът е невъзможен: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Звуковата карта на радиостанцията „{0}“ не е налична ({1}): запис на високоговорителите
 Recording the sound of "{0}" (click REC to stop)	Записва се звукът от „{0}“ (щракнете REC за спиране)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	С
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Страницата на WebSDR е намалена до {0}, за да се вижда целият ѝ панел за управление (+ и − за избор)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Връзката за споделяне е копирана в клипборда ({0} kHz {1}): поставете я в съобщение
 Share link: {0} kHz {1} on {2}	Връзка за споделяне: {0} kHz {1} на {2}
+Scan of the extended 27 MHz band	Сканиране на разширения обхват 27 MHz
+Scan of the 70 cm band	Сканиране на обхвата 70 cm
+Resume the scan	Продължаване на сканирането
+Current "Scan setup" setting	Текуща настройка в „Настройка на сканирането“
+Scan setup…	Настройка на сканирането…
+Media keys (headset, keyboard): stop / resume the scan	Мултимедийни клавиши (слушалки, клавиатура): спиране / продължаване на сканирането
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Възпроизвеждане/Пауза: спира или продължава сканирането. Следваща / Предишна: една стъпка назад, когато тези клавиши са спрели сканирането. Докато е отметнато, другите програми не получават тези клавиши.
+Scan voice command ("stop", "start", "plus one", "minus one")	Гласова команда за сканирането („stop“, „start“, „plus one“, „minus one“)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Разпознаване на говор на Windows, без интернет, с микрофона по подразбиране на Windows; слуша само по време на сканирането и 5 минути след спирането му.
+Scan voice command: the microphone will listen during the scan	Гласова команда за сканирането: микрофонът ще слуша по време на сканирането
+Scan voice command off	Гласовата команда за сканирането е изключена
+No scan while transmitting	Не може да се сканира по време на предаване
+Scan: set the start and end frequencies in "Scan setup"	Сканиране: задайте началната и крайната честота в „Настройка на сканирането“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Сканиране: всички честоти са в пропуснати обхвати („Настройка на сканирането“)
+Scan: check memories in "Scan setup"	Сканиране: отметнете памети в „Настройка на сканирането“
+frequencies not set	честотите не са зададени
+all frequencies are in skipped ranges	всички честоти са в пропуснати обхвати
+no memory checked	няма отметнати памети
+Scan stopped	Сканирането е спряно
+■ Stop scan	■ Спиране на сканирането
+Media keys: Play/Pause stops or resumes the scan	Мултимедийни клавиши: Възпроизвеждане/Пауза спира или продължава сканирането
+Media keys: already taken by another program	Мултимедийни клавиши: вече заети от друга програма
+Media keys given back to Windows	Мултимедийните клавиши са върнати на Windows
+media key	мултимедиен клавиш
+voice command	гласова команда
+Scan of the {0} m band	Сканиране на обхвата {0} m
+at {0} kHz	от {0} kHz
+from the start ({0} kHz): current frequency out of range	от началото ({0} kHz): текущата честота е извън обхвата
+at memory {0}	от паметта {0}
+from the start ({0}): current frequency not in the memories	от началото ({0}): текущата честота не е в паметите
+click in the page, stopped on {0} kHz	клик в страницата, спряно на {0} kHz
+Scan stopped: {0}	Сканирането е спряно: {0}
+Scan: {0}	Сканиране: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Сканиране на пауза на {0}: сигнал {1} dB, продължава след {2}
+Back one step: {0}	Назад с една стъпка: {0}
+Voice command unavailable: {0}	Гласовата команда е недостъпна: {0}
+Voice command: "{0}"	Гласова команда: „{0}“
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: предава тон 1500 Hz за настройка на антенния тунер или усилвателя (PTT по CAT, звукът се изпраща към звуковата карта за предаване на трансивъра). Щракване: вкл. / изкл. Десен бутон: звукова карта за предаване на трансивъра, ниво на тона, продължителност (от 5 s до 1 мин), цветове
 Rig transmit sound card (PC output connected to the rig):	Звукова карта за предаване на трансивъра (изход на PC към трансивъра):
 Keying during Tune:	Превключване на предаване при Tune:
@@ -873,6 +892,9 @@ End (kHz):	Край (kHz):
 Time on each frequency:	Време на всяка честота:
 Skipped ranges (from … to … kHz):	Пропуснати обхвати (от … до … kHz):
 + Skipped range	+ Пропуснат обхват
+Pause on signal	Пауза при сигнал
+Signal threshold (S/N):	Праг на сигнала (S/N):
+Steps back:	Стъпки назад:
 Memories to scan:	Памети за сканиране:
 Time on each memory:	Време на всяка памет:
 (no memory: Memories button)	(няма памети: бутон Памети)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Изберете от списъка �
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Въведете различни начална и крайна честота в kHz (напр. 7000 и 7200).
 All frequencies from start to end are in skipped ranges.	Всички честоти от началото до края са в пропуснати обхвати.
 Check at least one memory to scan.	Отметнете поне една памет за сканиране.
+pause on signal {0}	пауза при сигнал {0}
 memories: {0}, {1}	памети: {0}, {1}
 skipped ranges: {0}	пропуснати обхвати: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	{0} не може да бъде преименуван (
 cannot put the new version in place ({0})	новата версия не може да бъде поставена на мястото ({0})
 SDRLink: update V{0}	SDRLink: обновяване V{0}
 Downloading SDRLink V{0}…	Изтегляне на SDRLink V{0}…
+no Windows speech recognition in a supported language	няма разпознаване на говор на Windows на поддържан език
 unavailable	недостъпно
 unexpected format	неочакван формат
 Find WebSDRs near your position	Търсене на WebSDR близо до вашето местоположение

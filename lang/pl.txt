@@ -361,17 +361,6 @@ Add memory	Dodaj pamięć
 ; preamp cannot be set on this rig / interface	; przedwzmacniacza nie można ustawić w tej radiostacji / tym interfejsie
 ; power cannot be set on this rig / interface	; mocy nie można ustawić w tej radiostacji / tym interfejsie
  (on return to receive)	 (po powrocie do odbioru)
-Resume the scan	Wznów skanowanie
-Current "Scan setup" setting	Bieżące ustawienie w „Ustawienia skanowania”
-No scan while transmitting	Skanowanie niemożliwe podczas nadawania
-Scan: set the start and end frequencies in "Scan setup"	Skanowanie: podaj częstotliwość początkową i końcową w „Ustawienia skanowania”
-Scan: all frequencies are in skipped ranges ("Scan setup")	Skanowanie: wszystkie częstotliwości leżą w pomijanych zakresach („Ustawienia skanowania”)
-Scan: check memories in "Scan setup"	Skanowanie: zaznacz pamięci w „Ustawienia skanowania”
-frequencies not set	częstotliwości nieustawione
-all frequencies are in skipped ranges	wszystkie częstotliwości leżą w pomijanych zakresach
-no memory checked	nie zaznaczono żadnej pamięci
-Scan stopped	Skanowanie zatrzymane
-■ Stop scan	■ Zatrzymaj skanowanie
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Karta dźwiękowa radiostacji, nagrywana gdy Mute WebSDR, Mute ExpertSDR i Mute HDSDR są włączone:
 None (always the speakers)	Brak (zawsze głośniki)
 REC button colour	Kolor przycisku REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Usunąć „{0}” z „{1}”?
 Unexpected error, written to the log: {0}	Nieoczekiwany błąd, zapisany w dzienniku: {0}
 Memory "{0}" added to "{1}".	Pamięć „{0}” dodana do „{1}”.
 Memory "{0}": {1} kHz	Pamięć „{0}”: {1} kHz
-at {0} kHz	od {0} kHz
-from the start ({0} kHz): current frequency out of range	od początku ({0} kHz): bieżąca częstotliwość poza zakresem
-at memory {0}	od pamięci {0}
-from the start ({0}): current frequency not in the memories	od początku ({0}): bieżącej częstotliwości nie ma w pamięciach
-click in the page, stopped on {0} kHz	kliknięcie na stronie, zatrzymano na {0} kHz
-Scan stopped: {0}	Skanowanie zatrzymane: {0}
-Scan: {0}	Skanowanie: {0}
 Cannot record: {0}	Nie można nagrywać: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Karta dźwiękowa radiostacji „{0}” niedostępna ({1}): nagrywanie głośników
 Recording the sound of "{0}" (click REC to stop)	Nagrywanie dźwięku z „{0}” (kliknij REC, aby zatrzymać)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Strona WebSDR pomniejszona do {0}, aby pokazać cały panel sterowania (+ i − do wyboru)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Link do udostępnienia skopiowany do schowka ({0} kHz {1}): wklej go do wiadomości
 Share link: {0} kHz {1} on {2}	Link do udostępnienia: {0} kHz {1} na {2}
+Scan of the extended 27 MHz band	Skanowanie rozszerzonego pasma 27 MHz
+Scan of the 70 cm band	Skanowanie pasma 70 cm
+Resume the scan	Wznów skanowanie
+Current "Scan setup" setting	Bieżące ustawienie w „Ustawienia skanowania”
+Scan setup…	Ustawienia skanowania…
+Media keys (headset, keyboard): stop / resume the scan	Klawisze multimedialne (słuchawki, klawiatura): zatrzymanie / wznowienie skanowania
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Odtwórz/Pauza: zatrzymuje lub wznawia skanowanie. Następny / Poprzedni: jeden krok wstecz, gdy te klawisze zatrzymały skanowanie. Dopóki pole jest zaznaczone, inne programy nie otrzymują tych klawiszy.
+Scan voice command ("stop", "start", "plus one", "minus one")	Sterowanie głosowe skanowaniem („stop”, „start”, „plus one”, „minus one”)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Rozpoznawanie mowy Windows, offline, z domyślnym mikrofonem Windows; słucha tylko podczas skanowania i przez 5 minut po jego zatrzymaniu.
+Scan voice command: the microphone will listen during the scan	Sterowanie głosowe skanowaniem: mikrofon będzie słuchał podczas skanowania
+Scan voice command off	Sterowanie głosowe skanowaniem wyłączone
+No scan while transmitting	Skanowanie niemożliwe podczas nadawania
+Scan: set the start and end frequencies in "Scan setup"	Skanowanie: podaj częstotliwość początkową i końcową w „Ustawienia skanowania”
+Scan: all frequencies are in skipped ranges ("Scan setup")	Skanowanie: wszystkie częstotliwości leżą w pomijanych zakresach („Ustawienia skanowania”)
+Scan: check memories in "Scan setup"	Skanowanie: zaznacz pamięci w „Ustawienia skanowania”
+frequencies not set	częstotliwości nieustawione
+all frequencies are in skipped ranges	wszystkie częstotliwości leżą w pomijanych zakresach
+no memory checked	nie zaznaczono żadnej pamięci
+Scan stopped	Skanowanie zatrzymane
+■ Stop scan	■ Zatrzymaj skanowanie
+Media keys: Play/Pause stops or resumes the scan	Klawisze multimedialne: Odtwórz/Pauza zatrzymuje lub wznawia skanowanie
+Media keys: already taken by another program	Klawisze multimedialne: już zajęte przez inny program
+Media keys given back to Windows	Klawisze multimedialne oddane systemowi Windows
+media key	klawisz multimedialny
+voice command	komenda głosowa
+Scan of the {0} m band	Skanowanie pasma {0} m
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od początku ({0} kHz): bieżąca częstotliwość poza zakresem
+at memory {0}	od pamięci {0}
+from the start ({0}): current frequency not in the memories	od początku ({0}): bieżącej częstotliwości nie ma w pamięciach
+click in the page, stopped on {0} kHz	kliknięcie na stronie, zatrzymano na {0} kHz
+Scan stopped: {0}	Skanowanie zatrzymane: {0}
+Scan: {0}	Skanowanie: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skanowanie wstrzymane na {0}: sygnał {1} dB, wznowienie za {2}
+Back one step: {0}	Wstecz o jeden krok: {0}
+Voice command unavailable: {0}	Sterowanie głosowe niedostępne: {0}
+Voice command: "{0}"	Komenda głosowa: „{0}”
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: nadaje ton 1500 Hz do strojenia tunera antenowego lub wzmacniacza (PTT przez CAT, dźwięk wysyłany na kartę dźwiękową nadawania transceivera). Klik: wł. / wył. Prawy klik: karta dźwiękowa nadawania, poziom tonu, czas (5 s do 1 min), kolory
 Rig transmit sound card (PC output connected to the rig):	Karta dźwiękowa nadawania transceivera (wyjście PC połączone z transceiverem):
 Keying during Tune:	Kluczowanie podczas Tune:
@@ -873,6 +892,9 @@ End (kHz):	Koniec (kHz):
 Time on each frequency:	Czas na każdej częstotliwości:
 Skipped ranges (from … to … kHz):	Pomijane zakresy (od … do … kHz):
 + Skipped range	+ Pomijany zakres
+Pause on signal	Pauza przy sygnale
+Signal threshold (S/N):	Próg sygnału (S/N):
+Steps back:	Kroki wstecz:
 Memories to scan:	Pamięci do skanowania:
 Time on each memory:	Czas na każdej pamięci:
 (no memory: Memories button)	(brak pamięci: przycisk Pamięci)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Wybierz z listy profil do usunięcia.
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Podaj różne częstotliwości początkową i końcową w kHz (np. 7000 i 7200).
 All frequencies from start to end are in skipped ranges.	Wszystkie częstotliwości od początku do końca leżą w pomijanych zakresach.
 Check at least one memory to scan.	Zaznacz co najmniej jedną pamięć do skanowania.
+pause on signal {0}	pauza przy sygnale {0}
 memories: {0}, {1}	pamięci: {0}, {1}
 skipped ranges: {0}	pomijane zakresy: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	nie można zmienić nazwy {0} ({1})
 cannot put the new version in place ({0})	nie można umieścić nowej wersji na miejscu ({0})
 SDRLink: update V{0}	SDRLink: aktualizacja V{0}
 Downloading SDRLink V{0}…	Pobieranie SDRLink V{0}…
+no Windows speech recognition in a supported language	brak rozpoznawania mowy Windows w obsługiwanym języku
 unavailable	niedostępne
 unexpected format	nieoczekiwany format
 Find WebSDRs near your position	Szukaj WebSDR w pobliżu Twojej pozycji

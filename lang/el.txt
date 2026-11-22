@@ -361,17 +361,6 @@ Add memory	Προσθήκη μνήμης
 ; preamp cannot be set on this rig / interface	; ο προενισχυτής δεν μπορεί να ρυθμιστεί σε αυτόν τον πομποδέκτη / αυτή τη διεπαφή
 ; power cannot be set on this rig / interface	; η ισχύς δεν μπορεί να ρυθμιστεί σε αυτόν τον πομποδέκτη / αυτή τη διεπαφή
  (on return to receive)	 (κατά την επιστροφή σε λήψη)
-Resume the scan	Συνέχιση σάρωσης
-Current "Scan setup" setting	Τρέχουσα ρύθμιση της «Ρύθμιση σάρωσης»
-No scan while transmitting	Δεν γίνεται σάρωση κατά την εκπομπή
-Scan: set the start and end frequencies in "Scan setup"	Σάρωση: ορίστε αρχική και τελική συχνότητα στη «Ρύθμιση σάρωσης»
-Scan: all frequencies are in skipped ranges ("Scan setup")	Σάρωση: όλες οι συχνότητες βρίσκονται σε περιοχές που παραλείπονται («Ρύθμιση σάρωσης»)
-Scan: check memories in "Scan setup"	Σάρωση: επιλέξτε μνήμες στη «Ρύθμιση σάρωσης»
-frequencies not set	δεν έχουν οριστεί συχνότητες
-all frequencies are in skipped ranges	όλες οι συχνότητες βρίσκονται σε περιοχές που παραλείπονται
-no memory checked	δεν έχουν επιλεγεί μνήμες
-Scan stopped	Η σάρωση σταμάτησε
-■ Stop scan	■ Διακοπή σάρωσης
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Κάρτα ήχου του πομποδέκτη, εγγράφεται όταν είναι ενεργά τα Mute WebSDR, Mute ExpertSDR και Mute HDSDR:
 None (always the speakers)	Καμία (πάντα τα ηχεία)
 REC button colour	Χρώμα του κουμπιού REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Αφαίρεση του «{0}» από το «{1}»;
 Unexpected error, written to the log: {0}	Απρόσμενο σφάλμα, καταγράφηκε στο αρχείο καταγραφής: {0}
 Memory "{0}" added to "{1}".	Η μνήμη «{0}» προστέθηκε στο «{1}».
 Memory "{0}": {1} kHz	Μνήμη «{0}»: {1} kHz
-at {0} kHz	από {0} kHz
-from the start ({0} kHz): current frequency out of range	από την αρχή ({0} kHz): η τρέχουσα συχνότητα είναι εκτός περιοχής
-at memory {0}	από τη μνήμη {0}
-from the start ({0}): current frequency not in the memories	από την αρχή ({0}): η τρέχουσα συχνότητα δεν είναι στις μνήμες
-click in the page, stopped on {0} kHz	κλικ στη σελίδα, διακοπή στα {0} kHz
-Scan stopped: {0}	Η σάρωση σταμάτησε: {0}
-Scan: {0}	Σάρωση: {0}
 Cannot record: {0}	Αδύνατη η εγγραφή: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Η κάρτα ήχου του πομποδέκτη «{0}» δεν είναι διαθέσιμη ({1}): εγγραφή των ηχείων
 Recording the sound of "{0}" (click REC to stop)	Εγγραφή του ήχου από «{0}» (κλικ στο REC για διακοπή)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Σ
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Η σελίδα του WebSDR μειώθηκε στο {0} ώστε να φαίνεται ολόκληρος ο πίνακας ελέγχου (+ και − για επιλογή)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Ο σύνδεσμος κοινοποίησης αντιγράφηκε στο πρόχειρο ({0} kHz {1}): επικολλήστε τον σε ένα μήνυμα
 Share link: {0} kHz {1} on {2}	Σύνδεσμος κοινοποίησης: {0} kHz {1} στο {2}
+Scan of the extended 27 MHz band	Σάρωση της εκτεταμένης ζώνης 27 MHz
+Scan of the 70 cm band	Σάρωση της ζώνης των 70 cm
+Resume the scan	Συνέχιση σάρωσης
+Current "Scan setup" setting	Τρέχουσα ρύθμιση της «Ρύθμιση σάρωσης»
+Scan setup…	Ρύθμιση σάρωσης…
+Media keys (headset, keyboard): stop / resume the scan	Πλήκτρα πολυμέσων (ακουστικά, πληκτρολόγιο): διακοπή / συνέχιση της σάρωσης
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Αναπαραγωγή/Παύση: σταματά ή συνεχίζει τη σάρωση. Επόμενο / Προηγούμενο: ένα βήμα πίσω, όταν αυτά τα πλήκτρα σταμάτησαν τη σάρωση. Όσο είναι επιλεγμένο, τα άλλα προγράμματα δεν λαμβάνουν αυτά τα πλήκτρα.
+Scan voice command ("stop", "start", "plus one", "minus one")	Φωνητική εντολή σάρωσης («stop», «start», «plus one», «minus one»)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Αναγνώριση ομιλίας των Windows, χωρίς σύνδεση, με το προεπιλεγμένο μικρόφωνο των Windows· ακούει μόνο κατά τη σάρωση και για 5 λεπτά μετά τη διακοπή της.
+Scan voice command: the microphone will listen during the scan	Φωνητική εντολή σάρωσης: το μικρόφωνο θα ακούει κατά τη σάρωση
+Scan voice command off	Φωνητική εντολή σάρωσης απενεργοποιημένη
+No scan while transmitting	Δεν γίνεται σάρωση κατά την εκπομπή
+Scan: set the start and end frequencies in "Scan setup"	Σάρωση: ορίστε αρχική και τελική συχνότητα στη «Ρύθμιση σάρωσης»
+Scan: all frequencies are in skipped ranges ("Scan setup")	Σάρωση: όλες οι συχνότητες βρίσκονται σε περιοχές που παραλείπονται («Ρύθμιση σάρωσης»)
+Scan: check memories in "Scan setup"	Σάρωση: επιλέξτε μνήμες στη «Ρύθμιση σάρωσης»
+frequencies not set	δεν έχουν οριστεί συχνότητες
+all frequencies are in skipped ranges	όλες οι συχνότητες βρίσκονται σε περιοχές που παραλείπονται
+no memory checked	δεν έχουν επιλεγεί μνήμες
+Scan stopped	Η σάρωση σταμάτησε
+■ Stop scan	■ Διακοπή σάρωσης
+Media keys: Play/Pause stops or resumes the scan	Πλήκτρα πολυμέσων: η Αναπαραγωγή/Παύση σταματά ή συνεχίζει τη σάρωση
+Media keys: already taken by another program	Πλήκτρα πολυμέσων: ήδη σε χρήση από άλλο πρόγραμμα
+Media keys given back to Windows	Τα πλήκτρα πολυμέσων επιστράφηκαν στα Windows
+media key	πλήκτρο πολυμέσων
+voice command	φωνητική εντολή
+Scan of the {0} m band	Σάρωση της ζώνης των {0} m
+at {0} kHz	από {0} kHz
+from the start ({0} kHz): current frequency out of range	από την αρχή ({0} kHz): η τρέχουσα συχνότητα είναι εκτός περιοχής
+at memory {0}	από τη μνήμη {0}
+from the start ({0}): current frequency not in the memories	από την αρχή ({0}): η τρέχουσα συχνότητα δεν είναι στις μνήμες
+click in the page, stopped on {0} kHz	κλικ στη σελίδα, διακοπή στα {0} kHz
+Scan stopped: {0}	Η σάρωση σταμάτησε: {0}
+Scan: {0}	Σάρωση: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Η σάρωση σε παύση στο {0}: σήμα {1} dB, συνέχεια σε {2}
+Back one step: {0}	Πίσω κατά ένα βήμα: {0}
+Voice command unavailable: {0}	Η φωνητική εντολή δεν είναι διαθέσιμη: {0}
+Voice command: "{0}"	Φωνητική εντολή: «{0}»
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: εκπέμπει τόνο 1500 Hz για τη ρύθμιση του tuner κεραίας ή του ενισχυτή (PTT μέσω CAT, ήχος προς την κάρτα ήχου εκπομπής του πομποδέκτη). Κλικ: ενεργό / ανενεργό. Δεξί κλικ: κάρτα ήχου εκπομπής του πομποδέκτη, στάθμη τόνου, διάρκεια (5 s έως 1 λεπτό), χρώματα
 Rig transmit sound card (PC output connected to the rig):	Κάρτα ήχου εκπομπής του πομποδέκτη (έξοδος PC συνδεδεμένη στον πομποδέκτη):
 Keying during Tune:	Πλήκτρευση κατά το Tune:
@@ -873,6 +892,9 @@ End (kHz):	Τέλος (kHz):
 Time on each frequency:	Χρόνος σε κάθε συχνότητα:
 Skipped ranges (from … to … kHz):	Περιοχές που παραλείπονται (από … έως … kHz):
 + Skipped range	+ Περιοχή που παραλείπεται
+Pause on signal	Παύση σε σήμα
+Signal threshold (S/N):	Όριο σήματος (S/N):
+Steps back:	Βήματα πίσω:
 Memories to scan:	Μνήμες για σάρωση:
 Time on each memory:	Χρόνος σε κάθε μνήμη:
 (no memory: Memories button)	(καμία μνήμη: κουμπί Μνήμες)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Επιλέξτε από τη λίστ�
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Δώστε διαφορετική αρχική και τελική συχνότητα σε kHz (π.χ. 7000 και 7200).
 All frequencies from start to end are in skipped ranges.	Όλες οι συχνότητες από την αρχή ως το τέλος βρίσκονται σε περιοχές που παραλείπονται.
 Check at least one memory to scan.	Επιλέξτε τουλάχιστον μία μνήμη για σάρωση.
+pause on signal {0}	παύση σε σήμα {0}
 memories: {0}, {1}	μνήμες: {0}, {1}
 skipped ranges: {0}	περιοχές που παραλείπονται: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	δεν είναι δυνατή η μετονομασία
 cannot put the new version in place ({0})	δεν είναι δυνατή η τοποθέτηση της νέας έκδοσης ({0})
 SDRLink: update V{0}	SDRLink: ενημέρωση V{0}
 Downloading SDRLink V{0}…	Λήψη του SDRLink V{0}…
+no Windows speech recognition in a supported language	καμία αναγνώριση ομιλίας των Windows σε υποστηριζόμενη γλώσσα
 unavailable	μη διαθέσιμο
 unexpected format	μη αναμενόμενη μορφή
 Find WebSDRs near your position	Αναζήτηση WebSDR κοντά στη θέση σας

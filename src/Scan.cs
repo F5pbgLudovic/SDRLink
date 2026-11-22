@@ -14,7 +14,11 @@ namespace SDRLink
         public string Name = "";
         public int Type;                    // 0 fréquences, 1 mémoires
         public long StartHz, EndHz, StepHz = 1000;
-        public int FreqDwell = 5, MemDwell = 5;
+        public int FreqDwell = 5000, MemDwell = 5000;   // millisecondes
+        public int PauseSec;                // 0 = scan classique ; sinon pause sur signal de tant de secondes
+        public int SnrDb = 12;              // seuil du signal (S/N en dB) pour la pause
+        public int Back = 1;                // pas en arrière avant la pause sur signal (1 à 99, PhoneSDRLink 1.33)
+        public string Mode = "";            // mode du scan de fréquences ("" = mode en cours)
         public List<long[]> Skips = new List<long[]>();   // zones non scannées { début, fin } en Hz, début <= fin
         public List<string> Mems = new List<string>();    // mémoires cochées (MemKey)
 
@@ -48,6 +52,20 @@ namespace SDRLink
             return -1;
         }
 
+        // Fréquence précédente, en sautant les zones non scannées ; la dernière si hz <= début ; -1 si tout est sauté.
+        public long PrevFreq(long hz)
+        {
+            long lo = Lo, step = Math.Max(1, StepHz), n = (Hi - lo) / step + 1;
+            long pos = hz <= lo ? n : (hz - lo + step - 1) / step;
+            for (long i = 0; i < n; i++)
+            {
+                pos = (pos - 1 + n) % n;
+                long f = lo + pos * step;
+                if (!Skipped(f)) return f;
+            }
+            return -1;
+        }
+
         public static string SkipText(long[] z)
         {
             return z[0].ToString(CultureInfo.InvariantCulture) + "-" + z[1].ToString(CultureInfo.InvariantCulture);
@@ -62,13 +80,14 @@ namespace SDRLink
             return new long[] { Math.Min(a, b), Math.Max(a, b) };
         }
 
-        // Nom|type|début|fin|pas|durée fréquences|durée mémoires|zones (début-fin;…)|mémoires (clé;…)
+        // Nom|type|début|fin|pas|durée fréquences|durée mémoires|zones (début-fin;…)|mémoires (clé;…)|mode|pause (s)|ms|seuil S/N
+        // (même format que PhoneSDRLink ; « ms » marque des durées en millisecondes, un ancien profil sans elle est en secondes)
         public string ToSetting()
         {
             List<string> z = Skips.ConvertAll(SkipText);
             return Name.Replace("|", "/") + "|" + Type + "|" + StartHz.ToString(CultureInfo.InvariantCulture) + "|" + EndHz.ToString(CultureInfo.InvariantCulture)
                 + "|" + StepHz.ToString(CultureInfo.InvariantCulture) + "|" + FreqDwell + "|" + MemDwell
-                + "|" + string.Join(";", z.ToArray()) + "|" + string.Join(";", Mems.ToArray());
+                + "|" + string.Join(";", z.ToArray()) + "|" + string.Join(";", Mems.ToArray()) + "|" + Mode + "|" + PauseSec + "|ms|" + SnrDb + "|" + Back;
         }
 
         public static ScanProfile FromSetting(string v)
@@ -81,8 +100,9 @@ namespace SDRLink
             if (long.TryParse(p[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out l) && l > 0) s.StartHz = l;
             if (long.TryParse(p[3], NumberStyles.Integer, CultureInfo.InvariantCulture, out l) && l > 0) s.EndHz = l;
             if (long.TryParse(p[4], NumberStyles.Integer, CultureInfo.InvariantCulture, out l) && l > 0) s.StepHz = l;
-            if (int.TryParse(p[5], NumberStyles.Integer, CultureInfo.InvariantCulture, out i) && i > 0) s.FreqDwell = i;
-            if (int.TryParse(p[6], NumberStyles.Integer, CultureInfo.InvariantCulture, out i) && i > 0) s.MemDwell = i;
+            bool ms = p.Length > 11 && p[11] == "ms";
+            if (int.TryParse(p[5], NumberStyles.Integer, CultureInfo.InvariantCulture, out i) && i > 0) s.FreqDwell = ms ? i : i * 1000;
+            if (int.TryParse(p[6], NumberStyles.Integer, CultureInfo.InvariantCulture, out i) && i > 0) s.MemDwell = ms ? i : i * 1000;
             if (p.Length > 7)
                 foreach (string z in p[7].Split(';'))
                 {
@@ -91,15 +111,21 @@ namespace SDRLink
                 }
             if (p.Length > 8)
                 foreach (string m in p[8].Split(';')) if (m.Length > 0) s.Mems.Add(m);
+            if (p.Length > 9 && Array.IndexOf(ScanDialog.ModeList, p[9].Trim()) >= 0) s.Mode = p[9].Trim();
+            if (p.Length > 10 && int.TryParse(p[10], NumberStyles.Integer, CultureInfo.InvariantCulture, out i) && i > 0) s.PauseSec = i;
+            if (p.Length > 12 && int.TryParse(p[12], NumberStyles.Integer, CultureInfo.InvariantCulture, out i) && i >= 3 && i <= 40) s.SnrDb = i;
+            if (p.Length > 13 && int.TryParse(p[13], NumberStyles.Integer, CultureInfo.InvariantCulture, out i) && i >= 1 && i <= 99) s.Back = i;
             return s;
         }
 
         // Résumé affiché dans le menu du bouton Scan.
         public string Summary()
         {
-            if (Type == 1) return Lang.F("mémoires : {0}, {1}", "memories: {0}, {1}", Mems.Count, ScanDialog.DwellText(MemDwell));
+            string pause = PauseSec > 0 ? ", " + Lang.F("pause sur signal {0}", "pause on signal {0}", ScanDialog.DwellText(PauseSec * 1000)) : "";
+            if (Type == 1) return Lang.F("mémoires : {0}, {1}", "memories: {0}, {1}", Mems.Count, ScanDialog.DwellText(MemDwell)) + pause;
             if (Lo <= 0 || Lo == Hi) return Lang.T("fréquences non réglées", "frequencies not set");
-            string s = Memory.KHz(Lo) + " – " + Memory.KHz(Hi) + " kHz, " + ScanDialog.StepText(StepHz) + ", " + ScanDialog.DwellText(FreqDwell);
+            string s = Memory.KHz(Lo) + " – " + Memory.KHz(Hi) + " kHz, " + ScanDialog.StepText(StepHz) + ", " + ScanDialog.DwellText(FreqDwell)
+                + (Mode != "" ? ", " + Modes.Display(Mode) : "") + pause;
             if (Skips.Count > 0) s += ", " + Lang.F("zones non scannées : {0}", "skipped ranges: {0}", Skips.Count);
             return s;
         }
@@ -111,19 +137,27 @@ namespace SDRLink
     // sous le nom tapé (10 profils au plus). OK enregistre ; « Lancer le scan » enregistre et démarre.
     public class ScanDialog : Form
     {
-        // Durées proposées, en secondes : 1 s, 2 s, 5 s, 10 s, 30 s, 1 min, 2 min, 5 min, 10 min.
-        public static readonly int[] Dwells = { 1, 2, 5, 10, 30, 60, 120, 300, 600 };
+        // Durées proposées, en millisecondes : 0,05 s à 10 min (comme PhoneSDRLink).
+        public static readonly int[] Dwells = { 50, 100, 250, 500, 1000, 2000, 5000, 10000, 30000, 60000, 120000, 300000, 600000 };
+        // Pause sur signal, en secondes : 1 s à 30 min ; seuil du signal : S/N de 3 à 40 dB.
+        public static readonly int[] Pauses = { 1, 2, 3, 4, 5, 10, 15, 30, 60, 300, 600, 900, 1800 };
+        // Modes proposés pour un scan de fréquences (mêmes noms que PhoneSDRLink).
+        public static readonly string[] ModeList = { Modes.USB, Modes.LSB, Modes.AM, Modes.FM, Modes.DATAU, Modes.CW };
         public static readonly long[] Steps = { 100, 250, 500, 1000, 2500, 5000, 6250, 9000, 10000, 12500, 25000, 100000 };
-        const int DefaultDwell = 5;
+        const int DefaultDwell = 5000, DefaultPause = 10;
         const long DefaultStep = 1000;
-        const int W = 540, PanelTop = 84, MemPanelH = 330, ZoneTop = 176, ZoneH = 30;
+        const int W = 540, PanelTop = 84, MemPanelH = 330, ZoneTop = 210, ZoneH = 30, PauseH = 70;
 
         readonly Settings settings;
         readonly ComboBox cbProfile = new ComboBox();
         readonly RadioButton rbFreq = new RadioButton(), rbMem = new RadioButton();
         readonly Panel pnlFreq = new Panel(), pnlMem = new Panel();
         readonly TextBox txtStart = new TextBox(), txtEnd = new TextBox();
-        readonly ComboBox cbStep = new ComboBox(), cbDwellF = new ComboBox(), cbDwellM = new ComboBox();
+        readonly ComboBox cbStep = new ComboBox(), cbDwellF = new ComboBox(), cbDwellM = new ComboBox(), cbMode = new ComboBox();
+        readonly Panel pnlPause = new Panel();
+        readonly CheckBox chkPause = new CheckBox();
+        readonly ComboBox cbPause = new ComboBox(), cbSnr = new ComboBox(), cbBack = new ComboBox();
+        bool modeTouched;   // l'opérateur a choisi le mode lui-même (sinon le mode suit la bande du début, pour un nouveau scan)
         readonly CheckedListBox clbMem = new CheckedListBox();
         readonly Label lblZones = new Label();
         readonly Button btnAddZone = new Button();
@@ -133,8 +167,10 @@ namespace SDRLink
         bool filling;
         int lastLoaded = -1;   // profil choisi en dernier dans la liste (Renommer, après avoir changé le nom dans la case)
 
-        public static string DwellText(int sec)
+        public static string DwellText(int ms)
         {
+            if (ms < 1000) return Lang.F("{0} s", "{0} s", (ms / 1000.0).ToString("0.##", CultureInfo.CurrentCulture));
+            int sec = ms / 1000;
             return sec < 60 ? Lang.F("{0} s", "{0} s", sec) : Lang.F("{0} min", "{0} min", sec / 60);
         }
 
@@ -188,19 +224,43 @@ namespace SDRLink
             pnlFreq.Controls.Add(new Label { Text = Lang.T("Fin (kHz) :", "End (kHz):"), Location = new Point(12, 48), AutoSize = true });
             pnlFreq.Controls.Add(new Label { Text = Lang.T("Pas :", "Step:"), Location = new Point(12, 82), AutoSize = true });
             pnlFreq.Controls.Add(new Label { Text = Lang.T("Durée sur chaque fréquence :", "Time on each frequency:"), Location = new Point(12, 116), AutoSize = true });
+            pnlFreq.Controls.Add(new Label { Text = Lang.T("Mode :", "Mode:"), Location = new Point(12, 150), AutoSize = true });
             txtStart.SetBounds(210, 10, 120, 23);
             txtEnd.SetBounds(210, 44, 120, 23);
-            cbStep.DropDownStyle = cbDwellF.DropDownStyle = cbDwellM.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbStep.DropDownStyle = cbDwellF.DropDownStyle = cbDwellM.DropDownStyle = cbMode.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbMode.SetBounds(210, 146, 160, 23);
+            cbMode.Items.Add(Lang.T("(mode inchangé)", "(mode unchanged)"));
+            foreach (string md in ModeList) cbMode.Items.Add(Modes.Display(md));
+            cbMode.SelectionChangeCommitted += delegate { modeTouched = true; };
+            txtStart.TextChanged += delegate { ProposeMode(); };
             cbStep.SetBounds(210, 78, 120, 23);
             cbDwellF.SetBounds(210, 112, 120, 23);
             foreach (long s in Steps) cbStep.Items.Add(StepText(s));
             foreach (int d in Dwells) { cbDwellF.Items.Add(DwellText(d)); cbDwellM.Items.Add(DwellText(d)); }
             lblZones.Text = Lang.T("Zones non scannées (de … à … kHz) :", "Skipped ranges (from … to … kHz):");
-            lblZones.Location = new Point(12, 152);
+            lblZones.Location = new Point(12, 186);
             lblZones.AutoSize = true;
             btnAddZone.Text = Lang.T("+ Zone non scannée", "+ Skipped range");
             btnAddZone.Click += delegate { AddZone("", ""); LayoutZones(); zoneRows[zoneRows.Count - 1].Controls[1].Focus(); };
-            pnlFreq.Controls.AddRange(new Control[] { txtStart, txtEnd, cbStep, cbDwellF, lblZones, btnAddZone });
+            pnlFreq.Controls.AddRange(new Control[] { txtStart, txtEnd, cbStep, cbDwellF, cbMode, lblZones, btnAddZone });
+
+            // Pause sur signal (les deux types) : quand le son du WebSDR dépasse le seuil, le scan revient d'un pas et reste
+            // sur cette fréquence la durée choisie, puis repart après elle.
+            pnlPause.Size = new Size(W, PauseH);
+            chkPause.Text = Lang.T("Pause sur signal", "Pause on signal");
+            chkPause.SetBounds(12, 6, 190, 24);
+            cbPause.DropDownStyle = cbSnr.DropDownStyle = cbBack.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbPause.SetBounds(210, 6, 120, 23);
+            foreach (int ps in Pauses) cbPause.Items.Add(DwellText(ps * 1000));
+            Label lSnr = new Label { Text = Lang.T("Seuil du signal (S/N) :", "Signal threshold (S/N):"), Location = new Point(30, 42), AutoSize = true };
+            cbSnr.SetBounds(210, 38, 120, 23);
+            for (int db = 3; db <= 40; db++) cbSnr.Items.Add(db + " dB");
+            // Pas en arrière (1 à 99) : le scan recule de tant de pas avant la pause (PhoneSDRLink 1.33).
+            Label lBack = new Label { Text = Lang.T("Pas en arrière :", "Steps back:"), Location = new Point(345, 42), AutoSize = true };
+            cbBack.SetBounds(455, 38, 60, 23);
+            for (int n = 1; n <= 99; n++) cbBack.Items.Add(n.ToString(CultureInfo.InvariantCulture));
+            chkPause.CheckedChanged += delegate { cbPause.Enabled = cbSnr.Enabled = cbBack.Enabled = chkPause.Checked; };
+            pnlPause.Controls.AddRange(new Control[] { chkPause, cbPause, lSnr, cbSnr, lBack, cbBack });
 
             // Mémoires : liste à cocher, durée sur chaque mémoire.
             pnlMem.SetBounds(0, PanelTop, W, MemPanelH);
@@ -226,7 +286,7 @@ namespace SDRLink
             cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
             AcceptButton = ok;
             CancelButton = cancel;
-            Controls.AddRange(new Control[] { lProfile, cbProfile, save, rename, delete, lType, rbFreq, rbMem, pnlFreq, pnlMem, reset, start, ok, cancel });
+            Controls.AddRange(new Control[] { lProfile, cbProfile, save, rename, delete, lType, rbFreq, rbMem, pnlFreq, pnlMem, pnlPause, reset, start, ok, cancel });
 
             // Réglages enregistrés.
             LoadProfile(settings.CurrentScan(""));
@@ -242,10 +302,21 @@ namespace SDRLink
             };
         }
 
-        static int DwellIndex(int sec)
+        static int DwellIndex(int ms)
         {
-            int i = Array.IndexOf(Dwells, sec);
+            int i = Array.IndexOf(Dwells, ms);
             return i >= 0 ? i : Array.IndexOf(Dwells, DefaultDwell);
+        }
+
+        // Nouveau scan (aucun profil chargé) : le mode proposé est le mode usuel de la bande du début, tant que l'opérateur
+        // n'a pas choisi (LSB en 160, 80 et 40 m ; USB ailleurs) ; hors des bandes radioamateurs, rien ne change.
+        void ProposeMode()
+        {
+            if (filling || modeTouched || lastLoaded >= 0) return;
+            int b = Bands.At(MemoryEditDialog.ParseKHz(txtStart.Text));
+            if (b < 0) return;
+            int i = Array.IndexOf(ModeList, Bands.ModeOf(b));
+            if (i >= 0) cbMode.SelectedIndex = i + 1;
         }
 
         static Button Make(string text, int x, int y, int w, int h, EventHandler click)
@@ -300,14 +371,16 @@ namespace SDRLink
         void LayoutZones()
         {
             lblZones.Visible = zoneRows.Count > 0;
-            int y = zoneRows.Count > 0 ? ZoneTop : 150;
+            int y = zoneRows.Count > 0 ? ZoneTop : 184;
             foreach (Panel r in zoneRows) { r.Location = new Point(12, y); y += ZoneH; }
             bool canAdd = zoneRows.Count < ScanProfile.MaxSkips;   // (Visible reste faux tant que la fenêtre n'est pas affichée)
             btnAddZone.Visible = canAdd;
             btnAddZone.SetBounds(12, y + 4, 200, 28);
             int freqH = y + (canAdd ? 40 : 8);
             pnlFreq.Height = freqH;
-            int bottom = PanelTop + (rbFreq.Checked ? freqH : MemPanelH) + 14;
+            int pauseTop = PanelTop + (rbFreq.Checked ? freqH : MemPanelH) + 4;
+            pnlPause.Location = new Point(0, pauseTop);
+            int bottom = pauseTop + PauseH + 10;
             reset.Top = start.Top = bottom;
             ok.SetBounds(W - 182, bottom, 80, 30);
             cancel.SetBounds(W - 94, bottom, 80, 30);
@@ -339,6 +412,16 @@ namespace SDRLink
             cbStep.SelectedIndex = si >= 0 ? si : Array.IndexOf(Steps, DefaultStep);
             cbDwellF.SelectedIndex = DwellIndex(p.FreqDwell);
             cbDwellM.SelectedIndex = DwellIndex(p.MemDwell);
+            filling = true;
+            cbMode.SelectedIndex = Array.IndexOf(ModeList, p.Mode) + 1;
+            filling = false;
+            modeTouched = false;
+            chkPause.Checked = p.PauseSec > 0;
+            int pi = Array.IndexOf(Pauses, p.PauseSec);
+            cbPause.SelectedIndex = pi >= 0 ? pi : Array.IndexOf(Pauses, DefaultPause);
+            cbSnr.SelectedIndex = Math.Max(3, Math.Min(40, p.SnrDb)) - 3;
+            cbBack.SelectedIndex = Math.Max(1, Math.Min(99, p.Back)) - 1;
+            cbPause.Enabled = cbSnr.Enabled = cbBack.Enabled = chkPause.Checked;
             for (int i = 0; i < mems.Count; i++) clbMem.SetItemChecked(i, p.Mems.Contains(ScanProfile.MemKey(mems[i])));
             ClearZones();
             foreach (long[] z in p.Skips) AddZone(Memory.KHz(z[0]), Memory.KHz(z[1]));
@@ -410,6 +493,8 @@ namespace SDRLink
                 txtStart.Text = txtEnd.Text = "";
                 cbStep.SelectedIndex = Array.IndexOf(Steps, DefaultStep);
                 cbDwellF.SelectedIndex = DwellIndex(DefaultDwell);
+                cbMode.SelectedIndex = 0;
+                modeTouched = false;
                 ClearZones();
                 LayoutZones();
             }
@@ -435,6 +520,10 @@ namespace SDRLink
             p.StepHz = Steps[Math.Max(0, cbStep.SelectedIndex)];
             p.FreqDwell = Dwells[Math.Max(0, cbDwellF.SelectedIndex)];
             p.MemDwell = Dwells[Math.Max(0, cbDwellM.SelectedIndex)];
+            p.Mode = cbMode.SelectedIndex > 0 ? ModeList[cbMode.SelectedIndex - 1] : "";
+            p.PauseSec = chkPause.Checked ? Pauses[Math.Max(0, cbPause.SelectedIndex)] : 0;
+            p.SnrDb = cbSnr.SelectedIndex + 3;
+            p.Back = Math.Max(0, cbBack.SelectedIndex) + 1;
             // Zones non scannées : une ligne vide est ignorée, une ligne à moitié remplie est une erreur.
             for (int i = 0; i < zoneRows.Count; i++)
             {

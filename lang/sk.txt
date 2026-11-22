@@ -361,17 +361,6 @@ Add memory	Pridať pamäť
 ; preamp cannot be set on this rig / interface	; predzosilňovač sa na tomto transceiveri / rozhraní nedá nastaviť
 ; power cannot be set on this rig / interface	; výkon sa na tomto transceiveri / rozhraní nedá nastaviť
  (on return to receive)	 (po návrate na príjem)
-Resume the scan	Pokračovať v prehľadávaní
-Current "Scan setup" setting	Aktuálne nastavenie v „Nastavenie prehľadávania“
-No scan while transmitting	Počas vysielania nie je možné prehľadávať
-Scan: set the start and end frequencies in "Scan setup"	Prehľadávanie: nastavte počiatočný a koncový kmitočet v „Nastavenie prehľadávania“
-Scan: all frequencies are in skipped ranges ("Scan setup")	Prehľadávanie: všetky kmitočty sú vo vynechaných úsekoch („Nastavenie prehľadávania“)
-Scan: check memories in "Scan setup"	Prehľadávanie: zaškrtnite pamäte v „Nastavenie prehľadávania“
-frequencies not set	kmitočty nenastavené
-all frequencies are in skipped ranges	všetky kmitočty sú vo vynechaných úsekoch
-no memory checked	žiadna zaškrtnutá pamäť
-Scan stopped	Prehľadávanie zastavené
-■ Stop scan	■ Zastaviť prehľadávanie
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvuková karta stanice, nahrávaná pri zapnutom Mute WebSDR, Mute ExpertSDR a Mute HDSDR:
 None (always the speakers)	Žiadna (vždy reproduktory)
 REC button colour	Farba tlačidla REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Odstrániť „{0}“ z „{1}“?
 Unexpected error, written to the log: {0}	Neočakávaná chyba, zapísaná do protokolu: {0}
 Memory "{0}" added to "{1}".	Pamäť „{0}“ pridaná do „{1}“.
 Memory "{0}": {1} kHz	Pamäť „{0}“: {1} kHz
-at {0} kHz	od {0} kHz
-from the start ({0} kHz): current frequency out of range	od začiatku ({0} kHz): aktuálny kmitočet je mimo rozsahu
-at memory {0}	od pamäte {0}
-from the start ({0}): current frequency not in the memories	od začiatku ({0}): aktuálny kmitočet nie je v pamätiach
-click in the page, stopped on {0} kHz	kliknutie na stránku, zastavené na {0} kHz
-Scan stopped: {0}	Prehľadávanie zastavené: {0}
-Scan: {0}	Prehľadávanie: {0}
 Cannot record: {0}	Nahrávanie nie je možné: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Zvuková karta stanice „{0}“ nie je dostupná ({1}): nahrávajú sa reproduktory
 Recording the sound of "{0}" (click REC to stop)	Nahráva sa zvuk z „{0}“ (zastavíte kliknutím na REC)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stránka WebSDR zmenšená na {0}, aby bol vidieť celý jej ovládací panel (voľba pomocou + a −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Odkaz na zdieľanie skopírovaný do schránky ({0} kHz {1}): vložte ho do správy
 Share link: {0} kHz {1} on {2}	Odkaz na zdieľanie: {0} kHz {1} na {2}
+Scan of the extended 27 MHz band	Skenovanie rozšíreného pásma 27 MHz
+Scan of the 70 cm band	Skenovanie pásma 70 cm
+Resume the scan	Pokračovať v prehľadávaní
+Current "Scan setup" setting	Aktuálne nastavenie v „Nastavenie prehľadávania“
+Scan setup…	Nastavenie prehľadávania…
+Media keys (headset, keyboard): stop / resume the scan	Multimediálne klávesy (slúchadlá, klávesnica): zastaviť / obnoviť prehľadávanie
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Prehrať/Pozastaviť: zastaví alebo obnoví prehľadávanie. Ďalej / Späť: o krok späť, keď tieto klávesy prehľadávanie zastavili. Kým je začiarknuté, ostatné programy tieto klávesy nedostávajú.
+Scan voice command ("stop", "start", "plus one", "minus one")	Hlasové ovládanie prehľadávania („stop“, „start“, „plus one“, „minus one“)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Rozpoznávanie reči Windows, bez internetu, s predvoleným mikrofónom Windows; počúva len počas prehľadávania a 5 minút po jeho zastavení.
+Scan voice command: the microphone will listen during the scan	Hlasové ovládanie prehľadávania: mikrofón bude počúvať počas prehľadávania
+Scan voice command off	Hlasové ovládanie prehľadávania vypnuté
+No scan while transmitting	Počas vysielania nie je možné prehľadávať
+Scan: set the start and end frequencies in "Scan setup"	Prehľadávanie: nastavte počiatočný a koncový kmitočet v „Nastavenie prehľadávania“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Prehľadávanie: všetky kmitočty sú vo vynechaných úsekoch („Nastavenie prehľadávania“)
+Scan: check memories in "Scan setup"	Prehľadávanie: zaškrtnite pamäte v „Nastavenie prehľadávania“
+frequencies not set	kmitočty nenastavené
+all frequencies are in skipped ranges	všetky kmitočty sú vo vynechaných úsekoch
+no memory checked	žiadna zaškrtnutá pamäť
+Scan stopped	Prehľadávanie zastavené
+■ Stop scan	■ Zastaviť prehľadávanie
+Media keys: Play/Pause stops or resumes the scan	Multimediálne klávesy: Prehrať/Pozastaviť zastaví alebo obnoví prehľadávanie
+Media keys: already taken by another program	Multimediálne klávesy: už ich používa iný program
+Media keys given back to Windows	Multimediálne klávesy vrátené Windows
+media key	multimediálny kláves
+voice command	hlasový príkaz
+Scan of the {0} m band	Skenovanie pásma {0} m
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od začiatku ({0} kHz): aktuálny kmitočet je mimo rozsahu
+at memory {0}	od pamäte {0}
+from the start ({0}): current frequency not in the memories	od začiatku ({0}): aktuálny kmitočet nie je v pamätiach
+click in the page, stopped on {0} kHz	kliknutie na stránku, zastavené na {0} kHz
+Scan stopped: {0}	Prehľadávanie zastavené: {0}
+Scan: {0}	Prehľadávanie: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skenovanie pozastavené na {0}: signál {1} dB, pokračuje o {2}
+Back one step: {0}	O krok späť: {0}
+Voice command unavailable: {0}	Hlasové ovládanie nie je k dispozícii: {0}
+Voice command: "{0}"	Hlasový príkaz: „{0}“
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: vysiela tón 1500 Hz na ladenie anténneho tunera alebo zosilňovača (PTT cez CAT, zvuk sa posiela na zvukovú kartu vysielania rádia). Klik: zap. / vyp. Pravý klik: zvuková karta vysielania rádia, úroveň tónu, trvanie (5 s až 1 min), farby
 Rig transmit sound card (PC output connected to the rig):	Zvuková karta vysielania rádia (výstup PC pripojený k rádiu):
 Keying during Tune:	Kľúčovanie počas Tune:
@@ -873,6 +892,9 @@ End (kHz):	Koniec (kHz):
 Time on each frequency:	Čas na každom kmitočte:
 Skipped ranges (from … to … kHz):	Vynechané úseky (od … do … kHz):
 + Skipped range	+ Vynechaný úsek
+Pause on signal	Pauza pri signáli
+Signal threshold (S/N):	Prah signálu (S/N):
+Steps back:	Kroky späť:
 Memories to scan:	Pamäte na prehľadanie:
 Time on each memory:	Čas na každej pamäti:
 (no memory: Memories button)	(žiadne pamäte: tlačidlo Pamäte)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	V zozname vyberte profil, ktorý chcet
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Zadajte rozdielny počiatočný a koncový kmitočet v kHz (napr. 7000 a 7200).
 All frequencies from start to end are in skipped ranges.	Všetky kmitočty od začiatku po koniec sú vo vynechaných úsekoch.
 Check at least one memory to scan.	Zaškrtnite aspoň jednu pamäť na prehľadanie.
+pause on signal {0}	pauza pri signáli {0}
 memories: {0}, {1}	pamäte: {0}, {1}
 skipped ranges: {0}	vynechané úseky: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	nedá sa premenovať {0} ({1})
 cannot put the new version in place ({0})	novú verziu nemožno umiestniť na miesto ({0})
 SDRLink: update V{0}	SDRLink: aktualizácia V{0}
 Downloading SDRLink V{0}…	Sťahovanie SDRLink V{0}…
+no Windows speech recognition in a supported language	žiadne rozpoznávanie reči Windows v podporovanom jazyku
 unavailable	nedostupné
 unexpected format	neočakávaný formát
 Find WebSDRs near your position	Hľadať WebSDR blízko vašej polohy

@@ -361,17 +361,6 @@ Add memory	Přidat paměť
 ; preamp cannot be set on this rig / interface	; předzesilovač nelze na tomto transceiveru / rozhraní nastavit
 ; power cannot be set on this rig / interface	; výkon nelze na tomto transceiveru / rozhraní nastavit
  (on return to receive)	 (po návratu na příjem)
-Resume the scan	Pokračovat v prohledávání
-Current "Scan setup" setting	Aktuální nastavení v „Nastavení prohledávání“
-No scan while transmitting	Při vysílání nelze prohledávat
-Scan: set the start and end frequencies in "Scan setup"	Prohledávání: nastavte počáteční a koncový kmitočet v „Nastavení prohledávání“
-Scan: all frequencies are in skipped ranges ("Scan setup")	Prohledávání: všechny kmitočty jsou ve vynechaných úsecích („Nastavení prohledávání“)
-Scan: check memories in "Scan setup"	Prohledávání: zaškrtněte paměti v „Nastavení prohledávání“
-frequencies not set	kmitočty nenastaveny
-all frequencies are in skipped ranges	všechny kmitočty jsou ve vynechaných úsecích
-no memory checked	žádná zaškrtnutá paměť
-Scan stopped	Prohledávání zastaveno
-■ Stop scan	■ Zastavit prohledávání
 Rig sound card, recorded when Mute WebSDR, Mute ExpertSDR and Mute HDSDR are on:	Zvuková karta stanice, nahrávaná při zapnutém Mute WebSDR, Mute ExpertSDR a Mute HDSDR:
 None (always the speakers)	Žádná (vždy reproduktory)
 REC button colour	Barva tlačítka REC
@@ -462,13 +451,6 @@ Remove "{0}" from "{1}"?	Odebrat „{0}“ z „{1}“?
 Unexpected error, written to the log: {0}	Neočekávaná chyba, zapsaná do protokolu: {0}
 Memory "{0}" added to "{1}".	Paměť „{0}“ přidána do „{1}“.
 Memory "{0}": {1} kHz	Paměť „{0}“: {1} kHz
-at {0} kHz	od {0} kHz
-from the start ({0} kHz): current frequency out of range	od začátku ({0} kHz): aktuální kmitočet je mimo rozsah
-at memory {0}	od paměti {0}
-from the start ({0}): current frequency not in the memories	od začátku ({0}): aktuální kmitočet není v pamětech
-click in the page, stopped on {0} kHz	kliknutí na stránku, zastaveno na {0} kHz
-Scan stopped: {0}	Prohledávání zastaveno: {0}
-Scan: {0}	Prohledávání: {0}
 Cannot record: {0}	Nelze nahrávat: {0}
 Rig sound card "{0}" not available ({1}): recording the speakers	Zvuková karta stanice „{0}“ není dostupná ({1}): nahrávají se reproduktory
 Recording the sound of "{0}" (click REC to stop)	Nahrává se zvuk z „{0}“ (zastavíte kliknutím na REC)
@@ -744,6 +726,43 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stránka WebSDR zmenšena na {0}, aby byl vidět celý její ovládací panel (volba pomocí + a −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Odkaz ke sdílení zkopírován do schránky ({0} kHz {1}): vložte ho do zprávy
 Share link: {0} kHz {1} on {2}	Odkaz ke sdílení: {0} kHz {1} na {2}
+Scan of the extended 27 MHz band	Skenování rozšířeného pásma 27 MHz
+Scan of the 70 cm band	Skenování pásma 70 cm
+Resume the scan	Pokračovat v prohledávání
+Current "Scan setup" setting	Aktuální nastavení v „Nastavení prohledávání“
+Scan setup…	Nastavení prohledávání…
+Media keys (headset, keyboard): stop / resume the scan	Multimediální klávesy (sluchátka, klávesnice): zastavit / obnovit prohledávání
+Play/Pause: stops or resumes the scan. Next / Previous: back one step when these keys stopped the scan. Other programs no longer get these keys while this is checked.	Přehrát/Pozastavit: zastaví nebo obnoví prohledávání. Další / Předchozí: o krok zpět, když tyto klávesy prohledávání zastavily. Dokud je zaškrtnuto, ostatní programy tyto klávesy nedostávají.
+Scan voice command ("stop", "start", "plus one", "minus one")	Hlasové ovládání prohledávání („stop“, „start“, „plus one“, „minus one“)
+Windows speech recognition, offline, with the Windows default microphone; it only listens during the scan and for 5 minutes after it stops.	Rozpoznávání řeči Windows, bez internetu, s výchozím mikrofonem Windows; poslouchá jen během prohledávání a 5 minut po jeho zastavení.
+Scan voice command: the microphone will listen during the scan	Hlasové ovládání prohledávání: mikrofon bude poslouchat během prohledávání
+Scan voice command off	Hlasové ovládání prohledávání vypnuto
+No scan while transmitting	Při vysílání nelze prohledávat
+Scan: set the start and end frequencies in "Scan setup"	Prohledávání: nastavte počáteční a koncový kmitočet v „Nastavení prohledávání“
+Scan: all frequencies are in skipped ranges ("Scan setup")	Prohledávání: všechny kmitočty jsou ve vynechaných úsecích („Nastavení prohledávání“)
+Scan: check memories in "Scan setup"	Prohledávání: zaškrtněte paměti v „Nastavení prohledávání“
+frequencies not set	kmitočty nenastaveny
+all frequencies are in skipped ranges	všechny kmitočty jsou ve vynechaných úsecích
+no memory checked	žádná zaškrtnutá paměť
+Scan stopped	Prohledávání zastaveno
+■ Stop scan	■ Zastavit prohledávání
+Media keys: Play/Pause stops or resumes the scan	Multimediální klávesy: Přehrát/Pozastavit zastaví nebo obnoví prohledávání
+Media keys: already taken by another program	Multimediální klávesy: již je používá jiný program
+Media keys given back to Windows	Multimediální klávesy vráceny Windows
+media key	multimediální klávesa
+voice command	hlasový příkaz
+Scan of the {0} m band	Skenování pásma {0} m
+at {0} kHz	od {0} kHz
+from the start ({0} kHz): current frequency out of range	od začátku ({0} kHz): aktuální kmitočet je mimo rozsah
+at memory {0}	od paměti {0}
+from the start ({0}): current frequency not in the memories	od začátku ({0}): aktuální kmitočet není v pamětech
+click in the page, stopped on {0} kHz	kliknutí na stránku, zastaveno na {0} kHz
+Scan stopped: {0}	Prohledávání zastaveno: {0}
+Scan: {0}	Prohledávání: {0}
+Scan paused on {0}: signal {1} dB, resumes in {2}	Skenování pozastaveno na {0}: signál {1} dB, pokračuje za {2}
+Back one step: {0}	Zpět o krok: {0}
+Voice command unavailable: {0}	Hlasové ovládání není k dispozici: {0}
+Voice command: "{0}"	Hlasový příkaz: „{0}“
 Tune: transmits a 1500 Hz tone to adjust the antenna tuner or the amplifier (PTT by CAT, sound sent to the rig's transmit sound card). Click: on / off. Right-click: rig transmit sound card, tone level, duration (5 s to 1 min), colours	Tune: vysílá tón 1500 Hz pro naladění anténního tuneru nebo zesilovače (PTT přes CAT, zvuk se posílá na vysílací zvukovou kartu transceiveru). Klik: zap / vyp. Pravé tlačítko: vysílací zvuková karta transceiveru, úroveň tónu, doba (5 s až 1 min), barvy
 Rig transmit sound card (PC output connected to the rig):	Vysílací zvuková karta transceiveru (výstup PC připojený k transceiveru):
 Keying during Tune:	Klíčování během Tune:
@@ -873,6 +892,9 @@ End (kHz):	Konec (kHz):
 Time on each frequency:	Doba na každém kmitočtu:
 Skipped ranges (from … to … kHz):	Vynechané úseky (od … do … kHz):
 + Skipped range	+ Vynechaný úsek
+Pause on signal	Pauza při signálu
+Signal threshold (S/N):	Práh signálu (S/N):
+Steps back:	Kroky zpět:
 Memories to scan:	Paměti k prohledání:
 Time on each memory:	Doba na každé paměti:
 (no memory: Memories button)	(žádné paměti: tlačítko Paměti)
@@ -885,6 +907,7 @@ Choose in the list the profile to delete.	Vyberte v seznamu profil, který chcet
 Enter different start and end frequencies, in kHz (e.g. 7000 and 7200).	Zadejte rozdílný počáteční a koncový kmitočet v kHz (např. 7000 a 7200).
 All frequencies from start to end are in skipped ranges.	Všechny kmitočty od začátku do konce jsou ve vynechaných úsecích.
 Check at least one memory to scan.	Zaškrtněte alespoň jednu paměť k prohledání.
+pause on signal {0}	pauza při signálu {0}
 memories: {0}, {1}	paměti: {0}, {1}
 skipped ranges: {0}	vynechané úseky: {0}
 {0} s	{0} s
@@ -911,6 +934,7 @@ cannot rename {0} ({1})	nelze přejmenovat {0} ({1})
 cannot put the new version in place ({0})	novou verzi nelze umístit na místo ({0})
 SDRLink: update V{0}	SDRLink: aktualizace V{0}
 Downloading SDRLink V{0}…	Stahování SDRLink V{0}…
+no Windows speech recognition in a supported language	žádné rozpoznávání řeči Windows v podporovaném jazyce
 unavailable	nedostupné
 unexpected format	neočekávaný formát
 Find WebSDRs near your position	Hledat WebSDR blízko vaší polohy

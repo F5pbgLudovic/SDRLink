@@ -31,6 +31,7 @@ namespace SDRLink
         if (L.notchOn) { if (L.notchAlgo === 0) notch(ctx, true); nf(ctx, L.notchAlgo > 0); }
         if (L.dnrOn) dnr(ctx, true);
         watch(ctx);
+        if (L.snrOn) snrNode(ctx);
       }
       return ctx.__sdrlinkIn;
     };
@@ -1114,6 +1115,46 @@ namespace SDRLink
       origConnect.call(ctx.__sdrlinkIn, a);
       a.buf = new Float32Array(a.fftSize);
     };
+    // Rapport signal sur bruit pour « Pause sur signal » du scan (comme PhoneSDRLink) : un analyseur léger (FFT de 1024,
+    // lu seulement pendant un scan avec pause) sur l'entrée commune. S/N = moyenne du dixième le plus fort des raies de
+    // 250 à 2800 Hz moins le niveau médian (le plancher de bruit). Aucun calcul tant que L.snrOn est faux.
+    L.snrOn = false;
+    var snrNode = function (ctx) {
+      if (ctx.__sdrlinkSnr || !ctx.__sdrlinkIn || !ctx.createAnalyser) return;
+      var a = ctx.__sdrlinkSnr = ctx.createAnalyser();
+      a.fftSize = 1024;
+      a.smoothingTimeConstant = 0.85;
+      origConnect.call(ctx.__sdrlinkIn, a);
+      a.buf = new Float32Array(a.frequencyBinCount);
+    };
+    L.setSnr = function (on) {
+      L.snrOn = !!on;
+      for (var i = 0; i < L.ctxs.length; i++) {
+        var c = L.ctxs[i];
+        if (L.snrOn) snrNode(c);
+        else if (c.__sdrlinkSnr) { try { origDisconnect.call(c.__sdrlinkIn, c.__sdrlinkSnr); } catch (e) { } c.__sdrlinkSnr = null; }
+      }
+    };
+    // dB, ou -99 s'il n'y a pas de son qui tourne.
+    L.snr = function () {
+      var best = -99;
+      for (var i = 0; i < L.ctxs.length; i++) {
+        var c = L.ctxs[i], a = c.__sdrlinkSnr;
+        if (!a || c.state !== 'running') continue;
+        try {
+          a.getFloatFrequencyData(a.buf);
+          var hz = c.sampleRate / a.fftSize, lo = Math.max(1, Math.round(250 / hz)), hi = Math.min(a.buf.length - 1, Math.round(2800 / hz)), v = [];
+          for (var k = lo; k <= hi; k++) if (a.buf[k] > -200) v.push(a.buf[k]);
+          if (v.length < 8) continue;
+          v.sort(function (x, y) { return x - y; });
+          var n = Math.max(2, Math.round(v.length / 10)), s = 0;
+          for (var j = 0; j < n; j++) s += v[v.length - 1 - j];
+          var r = s / n - v[v.length >> 1];
+          if (r > best) best = r;
+        } catch (e) { }
+      }
+      return Math.round(best * 10) / 10;
+    };
     setInterval(function () {
       var running = false, now = Date.now();
       for (var i = 0; i < L.ctxs.length; i++) {
@@ -1253,7 +1294,9 @@ namespace SDRLink
   L.get = function () {
     var k = detect();
     try {
-      if (k === 'ubersdr') { var t = uberTuning(); if (t && t.frequency) return { k: k, f: t.frequency, m: t.mode }; return null; }
+      // Mode gardé s'il manque un instant : UberSDR efface son mode quand on lui donne une fréquence seule, jusqu'à la
+      // réponse du serveur (en scan, le mode affiché et le bouton de mode clignotaient à chaque pas).
+      if (k === 'ubersdr') { var t = uberTuning(); if (t && t.frequency) { if (t.mode && !(L.uberModeAt && Date.now() - L.uberModeAt < 1500 && t.mode !== L.uberMode)) L.uberMode = t.mode; return { k: k, f: t.frequency, m: t.mode || L.uberMode || '' }; } return null; }
       if (k === 'phantom') {
         // Fréquence réellement écoutée : position de la porteuse dans la bande reçue (audioM, en points). Elle suit tous
         // les réglages, y compris un clic dans le spectre ou la cascade, qui ne met pas à jour __catsync_state.
@@ -1288,7 +1331,10 @@ namespace SDRLink
       } else if (k === 'ubersdr') {
         var args = { ensureVisible: true };
         if (hz) args.frequency = hz;
-        if (mode) args.mode = mode === 'fm' ? 'nfm' : mode === 'cw' ? 'cwu' : mode;
+        // Mode demandé : retenu tout de suite (sinon la fréquence envoyée juste après repartait avec l'ancien mode, que la page
+        // n'avait pas encore annoncé : au changement de bande, le mode de la bande était aussitôt annulé).
+        if (mode) { args.mode = mode === 'fm' ? 'nfm' : mode === 'cw' ? 'cwu' : mode; L.uberMode = args.mode; L.uberModeAt = Date.now(); }
+        else if (L.uberMode) args.mode = L.uberMode;   // fréquence seule : mode actuel redonné, sinon la page l'efface un instant
         UberSDR.command('tune', args).catch(function () { });
       } else if (k === 'kiwi') {
         var km = mode === 'fm' ? 'nbfm' : mode;

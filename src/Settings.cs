@@ -35,11 +35,17 @@ namespace SDRLink
         public List<string> FreqHistory = new List<string>();   // kHz, la plus récente en premier
         public int ViewMode;               // affichage : 0 normal, 1 réduit, 2 mini
         public int RedW, RedH;             // taille de la fenêtre en affichage réduit
-        // Scan : 0 fréquences, 1 mémoires (mémoires à parcourir : Memory.Scan) ; durées en secondes.
+        // Scan : 0 fréquences, 1 mémoires (mémoires à parcourir : Memory.Scan) ; durées en millisecondes (1.52 ; avant : secondes).
         public int ScanType;
         public long ScanStartHz, ScanEndHz;
         public long ScanStepHz = 1000;
-        public int ScanFreqDwell = 5, ScanMemDwell = 5;
+        public int ScanFreqDwell = 5000, ScanMemDwell = 5000;
+        public int ScanPause;          // pause sur signal, en secondes (0 = scan classique)
+        public int ScanSnr = 12;       // seuil du signal pour la pause (S/N en dB, 3 à 40)
+        public int ScanBack = 1;       // pas en arrière avant la pause sur signal (1 à 99)
+        public string ScanMode = "";   // mode du scan de fréquences ("" = mode en cours)
+        public bool ScanMediaKeys;     // touches multimédia (casque, clavier) : arrêt / reprise du scan, retour d'un pas
+        public bool ScanVoice;         // commande vocale du scan (« stop », « start », « plus un », « moins un »)
         public List<long[]> ScanSkips = new List<long[]>();              // zones non scannées du scan de fréquences (10 au plus)
         public List<ScanProfile> ScanProfiles = new List<ScanProfile>(); // profils de scan nommés (10 au plus)
         public string RecFolder = "";      // dossier des enregistrements (bouton REC), vide = Musique\SDRLink
@@ -209,7 +215,13 @@ namespace SDRLink
             }
             Settings s = new Settings();
             Favorite.ListCount = 4;
-            if (!File.Exists(FilePath)) return s;
+            Bands.Remembered.Clear();
+            if (!File.Exists(FilePath))
+            {
+                // Première installation : profils de scan d'exemple.
+                foreach (string d in DefaultScans) { ScanProfile p = ScanProfile.FromSetting(d); if (p != null) s.ScanProfiles.Add(p); }
+                return s;
+            }
             int listCount = 4;
             s.FirstSearchDone = true;   // réglages déjà présents : l'application a déjà démarré
             List<Favorite> favs = new List<Favorite>();
@@ -251,8 +263,17 @@ namespace SDRLink
                     case "ScanStart": long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out s.ScanStartHz); break;
                     case "ScanEnd": long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out s.ScanEndHz); break;
                     case "ScanStep": { long st; if (long.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out st) && st > 0) s.ScanStepHz = st; } break;
-                    case "ScanFreqDwell": s.ScanFreqDwell = Math.Max(1, Int(v, 5)); break;
-                    case "ScanMemDwell": s.ScanMemDwell = Math.Max(1, Int(v, 5)); break;
+                    case "ScanFreqDwell": s.ScanFreqDwell = Math.Max(1, Int(v, 5)) * 1000; break;   // anciennes versions : secondes
+                    case "ScanMemDwell": s.ScanMemDwell = Math.Max(1, Int(v, 5)) * 1000; break;
+                    case "ScanFreqDwellMs": s.ScanFreqDwell = Math.Max(50, Int(v, 5000)); break;
+                    case "ScanMemDwellMs": s.ScanMemDwell = Math.Max(50, Int(v, 5000)); break;
+                    case "ScanPause": s.ScanPause = Math.Max(0, Int(v, 0)); break;
+                    case "ScanSnr": { int d = Int(v, 12); if (d >= 3 && d <= 40) s.ScanSnr = d; } break;
+                    case "ScanBack": { int d = Int(v, 1); if (d >= 1 && d <= 99) s.ScanBack = d; } break;
+                    case "BandModes": case "PhoneBandModes": ReadBandModes(v); break;
+                    case "ScanMode": s.ScanMode = Array.IndexOf(ScanDialog.ModeList, v.Trim()) >= 0 ? v.Trim() : ""; break;
+                    case "ScanMediaKeys": s.ScanMediaKeys = v == "1"; break;
+                    case "ScanVoice": s.ScanVoice = v == "1"; break;
                     case "ScanSkip": { long[] z = ScanProfile.ParseSkip(v); if (z != null && s.ScanSkips.Count < ScanProfile.MaxSkips) s.ScanSkips.Add(z); } break;
                     case "ScanProfile": { ScanProfile p = ScanProfile.FromSetting(v); if (p != null && s.ScanProfiles.Count < ScanProfile.MaxProfiles) s.ScanProfiles.Add(p); } break;
                     case "RecFolder": s.RecFolder = v; break;
@@ -463,8 +484,15 @@ namespace SDRLink
             Line(sb, "ScanStart", ScanStartHz);
             Line(sb, "ScanEnd", ScanEndHz);
             Line(sb, "ScanStep", ScanStepHz);
-            Line(sb, "ScanFreqDwell", ScanFreqDwell);
-            Line(sb, "ScanMemDwell", ScanMemDwell);
+            Line(sb, "ScanFreqDwellMs", ScanFreqDwell);
+            Line(sb, "ScanMemDwellMs", ScanMemDwell);
+            Line(sb, "ScanPause", ScanPause);
+            Line(sb, "ScanSnr", ScanSnr);
+            Line(sb, "ScanBack", ScanBack);
+            Line(sb, "BandModes", BandModesText());
+            Line(sb, "ScanMode", ScanMode);
+            Line(sb, "ScanMediaKeys", ScanMediaKeys ? 1 : 0);
+            Line(sb, "ScanVoice", ScanVoice ? 1 : 0);
             foreach (long[] z in ScanSkips) Line(sb, "ScanSkip", ScanProfile.SkipText(z));
             foreach (ScanProfile p in ScanProfiles) Line(sb, "ScanProfile", p.ToSetting());
             Line(sb, "RecFolder", RecFolder);
@@ -580,7 +608,7 @@ namespace SDRLink
         public ScanProfile CurrentScan(string name)
         {
             ScanProfile p = new ScanProfile { Name = name, Type = ScanType, StartHz = ScanStartHz, EndHz = ScanEndHz, StepHz = ScanStepHz,
-                                              FreqDwell = ScanFreqDwell, MemDwell = ScanMemDwell };
+                                              FreqDwell = ScanFreqDwell, MemDwell = ScanMemDwell, PauseSec = ScanPause, SnrDb = ScanSnr, Back = ScanBack, Mode = ScanMode };
             foreach (long[] z in ScanSkips) p.Skips.Add(new long[] { z[0], z[1] });
             foreach (Memory m in Memories.Items) if (m.Scan) p.Mems.Add(ScanProfile.MemKey(m));
             return p;
@@ -595,10 +623,43 @@ namespace SDRLink
             ScanStepHz = p.StepHz;
             ScanFreqDwell = p.FreqDwell;
             ScanMemDwell = p.MemDwell;
+            ScanPause = p.PauseSec;
+            ScanSnr = p.SnrDb;
+            ScanBack = p.Back;
+            ScanMode = p.Mode;
             ScanSkips.Clear();
             foreach (long[] z in p.Skips) ScanSkips.Add(new long[] { z[0], z[1] });
             foreach (Memory m in Memories.Items) m.Scan = p.Mems.Contains(ScanProfile.MemKey(m));
         }
+
+        // Mode retenu par bande (« 40:LSB,20:USB », même texte que PhoneBandModes de PhoneSDRLink).
+        static void ReadBandModes(string v)
+        {
+            Bands.Remembered.Clear();
+            foreach (string e in v.Split(','))
+            {
+                string[] q = e.Split(':');
+                if (q.Length == 2 && q[0].Trim().Length > 0 && Array.IndexOf(BandModeList, q[1].Trim()) >= 0) Bands.Remembered[q[0].Trim()] = q[1].Trim();
+            }
+        }
+
+        public static readonly string[] BandModeList = { Modes.USB, Modes.LSB, Modes.AM, Modes.FM, Modes.DATAU, Modes.CW };
+
+        static string BandModesText()
+        {
+            StringBuilder b = new StringBuilder();
+            foreach (KeyValuePair<string, string> e in Bands.Remembered) { if (b.Length > 0) b.Append(','); b.Append(e.Key).Append(':').Append(e.Value); }
+            return b.ToString();
+        }
+
+        // Profils de scan d'exemple donnés à la première installation (comme default-scans.txt de PhoneSDRLink 1.33).
+        static readonly string[] DefaultScans =
+        {
+            "40m|0|7050000|7200000|1000|100|5000|7074000-7080000||LSB|2|ms|6",
+            "20m|0|14110000|14350000|1000|50|5000||||2|ms|4",
+            "80m|0|3590000|3800000|1000|50|5000||||2|ms|5",
+            "40m total|0|7050000|7200000|1000|1000|5000|7074000-7080000||LSB|0|ms|12",
+        };
 
         static void Line(StringBuilder sb, string k, object v)
         {

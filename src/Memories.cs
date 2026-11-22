@@ -169,6 +169,21 @@ namespace SDRLink
             txtFreq.Text = m.Hz > 0 ? Memory.KHz(m.Hz) : "";
             foreach (string mode in ModeValues) cbMode.Items.Add(mode == "" ? Lang.T("(mode inchangé)", "(mode unchanged)") : Modes.Display(mode));
             cbMode.SelectedIndex = Math.Max(0, Array.IndexOf(ModeValues, m.Mode));
+            // Nouvelle mémoire (1.52, PhoneSDRLink 1.31) : quand on tape une fréquence d'une bande radioamateur, le mode proposé
+            // est celui de la bande (retenu par l'opérateur, sinon LSB / USB / AM), tant qu'on n'a pas choisi le mode soi-même.
+            if (title == Lang.T("Ajouter une mémoire", "Add memory"))
+            {
+                bool modeTouched = false;
+                cbMode.SelectionChangeCommitted += delegate { modeTouched = true; };
+                txtFreq.TextChanged += delegate
+                {
+                    if (modeTouched) return;
+                    int b = Bands.Near(ParseKHz(txtFreq.Text));
+                    if (b < 0) return;
+                    int i = Array.IndexOf(ModeValues, Bands.ModeOf(b));
+                    if (i >= 0) cbMode.SelectedIndex = i;
+                };
+            }
             for (int i = 0; i < book.ListCount; i++) cbList.Items.Add(FavoritesDialog.ListLabel(book.ListNames, i));
             cbList.SelectedIndex = Math.Max(0, Math.Min(book.ListCount - 1, m.List));
             // Puissance (1.42) : rien par défaut ; plafond commun à toutes les mémoires ; envoyée seulement en réception (RigWorker).
