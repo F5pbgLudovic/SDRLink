@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	no sākuma ({0} kHz): p
 at memory {0}	no atmiņas {0}
 from the start ({0}): current frequency not in the memories	no sākuma ({0}): pašreizējās frekvences nav atmiņās
 click in the page, stopped on {0} kHz	klikšķis lapā, apturēts uz {0} kHz
+frequency changed on the rig, stopped on {0} kHz	frekvence mainīta raidītājā, apturēts uz {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	frekvence mainīta WebSDR, apturēts uz {0} kHz
 Scan stopped: {0}	Skenēšana apturēta: {0}
 Scan: {0}	Skenēšana: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Skenēšana apturēta uz {0}: signāls {1} dB, turpinās pēc {2}

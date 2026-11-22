@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	fra starten ({0} kHz): 
 at memory {0}	fra minne {0}
 from the start ({0}): current frequency not in the memories	fra starten ({0}): gjeldende frekvens finnes ikke i minnene
 click in the page, stopped on {0} kHz	klikk på siden, stoppet på {0} kHz
+frequency changed on the rig, stopped on {0} kHz	frekvens endret på radioen, stoppet på {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	frekvens endret i WebSDR, stoppet på {0} kHz
 Scan stopped: {0}	Skanning stoppet: {0}
 Scan: {0}	Skanning: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Skanning satt på pause på {0}: signal {1} dB, fortsetter om {2}

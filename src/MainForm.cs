@@ -2413,6 +2413,7 @@ namespace SDRLink
             int notches = wheelRemainder / 120;
             if (notches == 0) return;
             wheelRemainder -= notches * 120;
+            if (scanning) StopScan(null);   // molette de SDRLink pendant le scan : il s'arrête (1.52)
 
             DateTime now = DateTime.UtcNow;
             double msPerNotch = (now - wheelLast).TotalMilliseconds / Math.Abs(notches);
@@ -2545,6 +2546,7 @@ namespace SDRLink
                                      "Invalid frequency: type a value in kHz, e.g. 7074 or 14074.5"));
                 return;
             }
+            if (scanning) StopScan(null);   // fréquence tapée pendant le scan : il s'arrête (1.52)
             TuneBoth(hz);
             AddToHistory(hz);
         }
@@ -2617,6 +2619,13 @@ namespace SDRLink
             if (lastRigF == 0 && TakeShareForRig()) { lastRigF = f; lastRigFam = fam; return; }
             lastRigF = f;
             lastRigFam = fam;
+            // VFO du poste tourné pendant le scan (1.52) : le scan s'arrête, le WebSDR suit la nouvelle fréquence. Avant le test
+            // de l'écho : aux durées courtes, le scan commande le poste sans arrêt.
+            if (scanning && prevRigF > 0 && Math.Abs(f - prevRigF) > Tolerance && ScanOperatorTuned(f, true))
+            {
+                if (RigToSdr) PushToSdr();
+                return;
+            }
             // Pendant qu'on vient de commander le poste, on n'en renvoie pas l'écho vers le WebSDR.
             if (DateTime.UtcNow < ignoreRigUntil) return;
             // Opérateur qui change de bande sur le poste (1.52, PhoneSDRLink 1.31) : mode de la nouvelle bande, poste et WebSDR ;
@@ -2704,6 +2713,12 @@ namespace SDRLink
             }
             if (user) syncSettleUntil = DateTime.MinValue;
             else if (DateTime.UtcNow < ignoreSdrUntil) return;
+            // Fréquence changée dans la page pendant le scan (molette, touches ; 1.52) : le scan s'arrête, le poste suit.
+            if (user && freqChanged && scanning && ScanOperatorTuned(f - Offset, false))
+            {
+                if (SdrToRig) PushToRig(true, false);
+                return;
+            }
             // Geste de l'opérateur dans la page (1.52, PhoneSDRLink 1.31) : passage dans une autre bande = mode de cette bande ;
             // mode changé dans une même bande = retenu pour elle.
             if (user && freqChanged && Bands.Near(f - Offset) != Bands.Near(prevSdrF - Offset))

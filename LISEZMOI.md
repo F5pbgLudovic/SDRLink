@@ -683,6 +683,7 @@ Sur la ligne « Synchro », après « Notch auto (DNF) » :
 - **Commande vocale du scan** (depuis la 1.52, case du clic droit sur Scan, décochée au départ ; comme PhoneSDRLink) : la **reconnaissance vocale de Windows**, hors ligne, sans rien à télécharger, avec le **micro par défaut de Windows**. Elle ne comprend que quatre ordres : « **stop** » (arrête le scan), « **start** » (le reprend), « **plus un** » ou « **avance** » et « **moins un** » ou « **recule** » (un pas de la molette plus haut ou plus bas, scan arrêté). Le micro n'écoute que **pendant le scan et 5 minutes après son arrêt** : pendant ce temps, le bouton Scan est **vert** ; un clic sur le bouton vert coupe le micro. Langue : celle de SDRLink si Windows a sa reconnaissance vocale (français, anglais, allemand, espagnol), sinon l'anglais (« stop », « start », « plus one », « minus one »).
 - Le scan règle le poste et le WebSDR, comme une saisie de fréquence. Il s'arrête dès que le poste passe en **émission** (PTT de SDRLink ou du poste) ; il ne peut pas démarrer en émission. Aux durées très courtes (0,05 à 0,25 s), certains postes en CAT ne suivent pas : le WebSDR, lui, suit.
 - **Clic dans la page pendant un scan** (depuis la 1.22) : un clic n'importe où dans la page du WebSDR (cascade, boutons de la page…) **arrête le scan** sur la fréquence (ou la mémoire) en cours. Si le clic a déplacé la fréquence de la page (clic dans la cascade), elle est **remise aussitôt** sur la fréquence scannée, et le poste n'en bouge pas. La barre d'état indique « Scan arrêté : clic dans la page, arrêt sur 7001 kHz ». Le clic suivant règle normalement la fréquence. Les boutons et réglages de SDRLink (volumes…) n'arrêtent pas le scan ; le bouton ■ Arrêter le scan l'arrête comme avant.
+- **Fréquence changée pendant un scan** (depuis la 1.53) : tourner le **VFO du poste**, changer la fréquence **dans la page du WebSDR** (molette, touches), tourner la **molette de SDRLink** ou taper une fréquence **arrête le scan**, et l'on reste sur la nouvelle fréquence (l'autre côté la suit, selon le sens de synchronisation). La barre d'état indique « Scan arrêté : fréquence changée sur le poste, arrêt sur 7123 kHz » (ou « sur le WebSDR »). Les relectures du poste ou de la page en retard sur le scan (fréquences que le scan vient de régler) ne l'arrêtent pas.
 
 ## Enregistrement (REC)
 
@@ -1024,6 +1025,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.53**
+  - **Fréquence changée pendant un scan** sur le poste (VFO), dans la page du WebSDR (molette, touches), à la molette de SDRLink ou en tapant une fréquence : le scan s'arrête et l'on reste sur la nouvelle fréquence.
 - **1.52**
   - **Scan repris de PhoneSDRLink** : **clic** sur ▶ Scan = reprise immédiate du scan réglé (sinon du premier profil, sinon Conf scan) ; **clic droit** = menu avec **Scan de la bande** où l'on se trouve (160 à 6 m, région IARU) et ses profils en tête, reprise, réglage actuel, autres profils.
   - **Pause sur signal** dans Conf scan : quand le S/N du son du WebSDR dépasse le seuil (3 à 40 dB), le scan revient d'un pas, s'arrête la durée choisie (1 s à 30 min) puis repart après le signal.

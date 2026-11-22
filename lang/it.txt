@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	dall'inizio ({0} kHz): 
 at memory {0}	dalla memoria {0}
 from the start ({0}): current frequency not in the memories	dall'inizio ({0}): frequenza attuale non presente nelle memorie
 click in the page, stopped on {0} kHz	clic nella pagina, fermata su {0} kHz
+frequency changed on the rig, stopped on {0} kHz	frequenza cambiata sulla radio, fermata su {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	frequenza cambiata sul WebSDR, fermata su {0} kHz
 Scan stopped: {0}	Scansione arrestata: {0}
 Scan: {0}	Scansione: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Scansione in pausa su {0}: segnale {1} dB, riprende tra {2}

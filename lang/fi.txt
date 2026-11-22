@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	alusta ({0} kHz): nykyi
 at memory {0}	muistista {0}
 from the start ({0}): current frequency not in the memories	alusta ({0}): nykyinen taajuus ei ole muisteissa
 click in the page, stopped on {0} kHz	napsautus sivulla, pysäytetty taajuudelle {0} kHz
+frequency changed on the rig, stopped on {0} kHz	taajuutta muutettiin radiossa, pysäytetty taajuudelle {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	taajuutta muutettiin WebSDR:ssä, pysäytetty taajuudelle {0} kHz
 Scan stopped: {0}	Pyyhkäisy pysäytetty: {0}
 Scan: {0}	Pyyhkäisy: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Skannaus tauolla taajuudella {0}: signaali {1} dB, jatkuu {2} kuluttua

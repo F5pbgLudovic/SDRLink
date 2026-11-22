@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	az elejéről ({0} kHz)
 at memory {0}	a(z) {0} memóriától
 from the start ({0}): current frequency not in the memories	az elejéről ({0}): a jelenlegi frekvencia nincs a memóriák között
 click in the page, stopped on {0} kHz	kattintás az oldalon, megállítva: {0} kHz
+frequency changed on the rig, stopped on {0} kHz	frekvencia módosítva a rádión, megállítva: {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	frekvencia módosítva a WebSDR-en, megállítva: {0} kHz
 Scan stopped: {0}	Pásztázás leállítva: {0}
 Scan: {0}	Pásztázás: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Pásztázás szünetel itt: {0}: jel {1} dB, folytatás ennyi múlva: {2}

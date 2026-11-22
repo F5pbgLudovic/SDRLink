@@ -158,6 +158,8 @@ namespace SDRLink
                 scanIndex = Math.Max(0, scanMems.FindIndex(m => m.Hz == cur));
                 scanDwellMs = Math.Max(50, settings.ScanMemDwell);
             }
+            scanRecent.Clear();
+            NoteScanTarget(CurrentFreq());   // fréquence d'avant le scan : encore relue un instant
             scanning = true;
             stoppedByKeys = false;
             if (settings.ScanType == 0 && scanRun.Mode != "") ApplyMode(scanRun.Mode);   // mode choisi pour ce scan
@@ -229,6 +231,27 @@ namespace SDRLink
             if (Math.Abs(CurrentFreq() - hz) > Tolerance) TuneBoth(hz);
         }
 
+        // Fréquences (côté poste) que le scan vient de régler : une relecture du poste ou de la page qui tombe sur l'une
+        // d'elles est l'écho du scan (même en retard de plusieurs pas aux durées courtes), pas un geste de l'opérateur.
+        readonly Queue<long> scanRecent = new Queue<long>();
+
+        void NoteScanTarget(long rigHz)
+        {
+            scanRecent.Enqueue(rigHz);
+            while (scanRecent.Count > 100) scanRecent.Dequeue();
+        }
+
+        // Fréquence changée pendant le scan sur le poste (VFO) ou dans la page du WebSDR (molette, touches) : le scan s'arrête
+        // et l'on reste sur la nouvelle fréquence (1.52). Vrai si le scan a été arrêté.
+        bool ScanOperatorTuned(long rigHz, bool onRig)
+        {
+            if (!scanning || rigHz <= 0) return false;
+            foreach (long x in scanRecent) if (Math.Abs(x - rigHz) <= Tolerance) return false;
+            StopScan(onRig ? Lang.F("fréquence changée sur le poste, arrêt sur {0} kHz", "frequency changed on the rig, stopped on {0} kHz", Memory.KHz(rigHz))
+                           : Lang.F("fréquence changée sur le WebSDR, arrêt sur {0} kHz", "frequency changed on the WebSDR, stopped on {0} kHz", Memory.KHz(rigHz)));
+            return true;
+        }
+
         void StopScan(string reason)
         {
             if (!scanning) return;
@@ -256,10 +279,11 @@ namespace SDRLink
         void ScanTune()
         {
             string what;
-            if (settings.ScanType == 0) { TuneBoth(scanHz); what = Memory.KHz(scanHz) + " kHz"; }
+            if (settings.ScanType == 0) { NoteScanTarget(scanHz); TuneBoth(scanHz); what = Memory.KHz(scanHz) + " kHz"; }
             else
             {
                 Memory m = scanMems[scanIndex];
+                NoteScanTarget(m.Hz);
                 ApplyMemory(m);
                 what = m.Label + (m.Name.Length > 0 ? " (" + Memory.KHz(m.Hz) + " kHz)" : "");
             }

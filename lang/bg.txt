@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	от началото (
 at memory {0}	от паметта {0}
 from the start ({0}): current frequency not in the memories	от началото ({0}): текущата честота не е в паметите
 click in the page, stopped on {0} kHz	клик в страницата, спряно на {0} kHz
+frequency changed on the rig, stopped on {0} kHz	честотата е сменена на радиостанцията, спряно на {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	честотата е сменена в WebSDR, спряно на {0} kHz
 Scan stopped: {0}	Сканирането е спряно: {0}
 Scan: {0}	Сканиране: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Сканиране на пауза на {0}: сигнал {1} dB, продължава след {2}

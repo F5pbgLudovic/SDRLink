@@ -684,6 +684,7 @@ On the "Sync" row, after "Auto notch (DNF)":
 - **Scan voice command** (since 1.52, tick in the right-click menu of Scan, unticked at first; like PhoneSDRLink): **Windows speech recognition**, offline, with nothing to download, using the **Windows default microphone**. It only understands four orders: "**stop**" (stops the scan), "**start**" (resumes it), "**plus one**" and "**minus one**" (one wheel step up or down, scan stopped). The microphone only listens **during the scan and for 5 minutes after it stops**: during that time the Scan button is **green**; a click on the green button turns the microphone off. Language: SDRLink's if Windows has speech recognition for it (French, English, German, Spanish), otherwise English. In French, the orders are « stop », « start », « plus un » or « avance », « moins un » or « recule ».
 - The scan sets the rig and the WebSDR, like entering a frequency. It stops as soon as the rig goes into **transmit** (SDRLink's PTT or the rig's); it cannot start while transmitting. With very short times (0.05 to 0.25 s), some rigs on CAT cannot keep up: the WebSDR does.
 - **Click in the page during a scan** (since 1.22): a click anywhere in the WebSDR page (waterfall, the page's buttons…) **stops the scan** on the current frequency (or memory). If the click moved the page's frequency (click in the waterfall), it is **put back at once** on the scanned frequency, and the rig does not move. The status bar shows "Scan stopped: click in the page, stopped on 7001 kHz". The next click tunes normally. SDRLink's buttons and controls (volumes…) do not stop the scan; the ■ Stop scan button stops it as before.
+- **Frequency changed during a scan** (since 1.53): turning the **rig's VFO**, changing the frequency **in the WebSDR page** (wheel, keys), turning **SDRLink's wheel** or typing a frequency **stops the scan**, and you stay on the new frequency (the other side follows it, depending on the sync direction). The status bar shows "Scan stopped: frequency changed on the rig, stopped on 7123 kHz" (or "on the WebSDR"). Rig or page readings lagging behind the scan (frequencies the scan has just set) do not stop it.
 
 ## Recording (REC)
 
@@ -1025,6 +1026,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.53**
+  - **Frequency changed during a scan** on the rig (VFO), in the WebSDR page (wheel, keys), with SDRLink's wheel or by typing a frequency: the scan stops and you stay on the new frequency.
 - **1.52**
   - **Scan taken from PhoneSDRLink**: **click** on ▶ Scan = the scan that is set resumes at once (otherwise the first profile, otherwise Scan setup); **right-click** = menu with **Scan of the band** you are in (160 to 6 m, IARU region) and its profiles first, resume, current setting, other profiles.
   - **Pause on signal** in Scan setup: when the S/N of the WebSDR audio goes over the threshold (3 to 40 dB), the scan goes back one step, stops for the chosen time (1 s to 30 min), then goes on after the signal.

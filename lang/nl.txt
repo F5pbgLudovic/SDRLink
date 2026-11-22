@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	vanaf het begin ({0} kH
 at memory {0}	vanaf geheugen {0}
 from the start ({0}): current frequency not in the memories	vanaf het begin ({0}): huidige frequentie staat niet in de geheugens
 click in the page, stopped on {0} kHz	klik in de pagina, gestopt op {0} kHz
+frequency changed on the rig, stopped on {0} kHz	frequentie gewijzigd op de transceiver, gestopt op {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	frequentie gewijzigd in de WebSDR, gestopt op {0} kHz
 Scan stopped: {0}	Scannen gestopt: {0}
 Scan: {0}	Scannen: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Scan gepauzeerd op {0}: signaal {1} dB, hervat over {2}

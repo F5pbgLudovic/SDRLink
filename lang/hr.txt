@@ -757,6 +757,8 @@ from the start ({0} kHz): current frequency out of range	od početka ({0} kHz): 
 at memory {0}	od memorije {0}
 from the start ({0}): current frequency not in the memories	od početka ({0}): trenutna frekvencija nije u memorijama
 click in the page, stopped on {0} kHz	klik na stranicu, zaustavljeno na {0} kHz
+frequency changed on the rig, stopped on {0} kHz	frekvencija promijenjena na uređaju, zaustavljeno na {0} kHz
+frequency changed on the WebSDR, stopped on {0} kHz	frekvencija promijenjena u WebSDR-u, zaustavljeno na {0} kHz
 Scan stopped: {0}	Pretraživanje zaustavljeno: {0}
 Scan: {0}	Pretraživanje: {0}
 Scan paused on {0}: signal {1} dB, resumes in {2}	Skeniranje pauzirano na {0}: signal {1} dB, nastavlja se za {2}
