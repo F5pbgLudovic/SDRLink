@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Keskitaajuus: {0} Hz (musta {1} Hz, valkoinen {2} Hz)
 Slant correction: {0} ppm	Vinouden korjaus: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	äänimuotoa ei tueta ({0} bittiä, {1} Hz)
+Flat	Tasainen
+Clear voice (presence)	Selkeä ääni (läsnäolo)
+Bass cut	Bassoleikkaus
+Warm	Lämmin
+Softened treble	Pehmennetyt diskantit
+DX (boosted midrange)	DX (korostetut keskitaajuudet)
+10-band equalizer — SDRLink	10-kaistainen taajuuskorjain — SDRLink
+Receive (WebSDR and rig heard on the PC)	Vastaanotto (WebSDR ja radio PC:llä)
+Transmit (PC microphone to the rig)	Lähetys (tietokoneen mikrofoni radiolle)
+Equalizer on	Taajuuskorjain päällä
+Preset…	Esiasetus…
+Noise gate on (mutes the microphone below the threshold)	Kohinaportti päällä (mykistää mikrofonin kynnyksen alapuolella)
+Threshold (dB)	Kynnys (dB)
+Close time (ms)	Sulkeutumisaika (ms)
+Compressor / limiter on	Kompressori / rajoitin päällä
+Ratio (:1)	Suhde (:1)
+Output gain (dB)	Lähtövahvistus (dB)
+Limiter ceiling (dB)	Rajoittimen katto (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Sulje
+Gate: open	Portti: auki
+Gate: closed	Portti: kiinni
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Käytetään radiolle lähetettävään tietokoneen mikrofoniin: aktiivinen, kun ”Tietokoneen mikrofoni radiolle” on valittu (PTT:n hiiren kakkospainike). Järjestys: kohinaportti, taajuuskorjain, kompressori, rajoitin. Liukusäätimen hiiren kakkospainike = takaisin arvoon 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Käytetään WebSDR-ääneen (kaiutin ja WebSDR-korva diversity-tilassa) ja PC:llä kuultavaan radioon (hiiren kakkospainike Mykistä TRX), heti kun se on päällä; dekooderien kaapeli säilyttää raa'an äänen. Liukusäätimen hiiren kakkospainike = takaisin arvoon 0.
+Gain reduction: {0} dB	Vahvistuksen vaimennus: {0} dB
 Name:	Nimi:
 Address:	Osoite:
 Cancel	Peruuta
@@ -164,7 +190,6 @@ Status	Tila
 List	Luettelo
 Listen to selection	Kuuntele valittua
 Open	Avaa
-Close	Sulje
 All lists	Kaikki luettelot
 Please select a favorite in the list first.	Valitse ensin suosikki luettelosta.
 Add favorite	Lisää suosikki
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity pois: ei toista WebSDR:ää
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: toinen WebSDR ”{0}”; viivettä mitataan…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Toinen WebSDR diversityä varten: ”{0}” (kuuntele Diversity-painikkeella)
 Diversity: cannot open the second WebSDR ({0})	Diversity: toista WebSDR:ää ei voi avata ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-kaistainen taajuuskorjain: vastaanotto (WebSDR ja radio PC:llä)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-kaistainen taajuuskorjain, kohinaportti, kompressori / rajoitin: lähetys (tietokoneen mikrofoni)…
+Colour when the equalizer is off	Väri, kun taajuuskorjain on pois
+Colour when the equalizer is on	Väri, kun taajuuskorjain on päällä
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-kaistainen taajuuskorjain. Napsautus: vastaanotto (WebSDR ja radio, joka kuuluu PC:llä). Hiiren kakkospainike: vastaanotto tai lähetys (tietokoneen mikrofoni radiolle, kohinaportilla ja kompressorilla / rajoittimella), painikkeen värit
 The rig is still not answering: check that it is switched on and the link settings	Radio ei vieläkään vastaa: tarkista, että se on päällä, sekä yhteyden asetukset
 SDRLink: no link with OmniRig	SDRLink: ei yhteyttä OmniRigiin
 Last message: 	Viimeisin viesti: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Ei tallennettavaa taajuutta (ei radiota eikä WebSDR:ää).
 Stored: {0} kHz	Tallennettu: {0} kHz
 microphone to choose	valitse mikrofoni
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofonin 10-kaistainen taajuuskorjain, kohinaportti, kompressori / rajoitin…
 PC microphone	Tietokoneen mikrofoni
 Rig transmit sound card (PC output connected to the rig)	Radion lähetysäänikortti (tietokoneen lähtö, joka on kytketty radioon)
 No sound output found in Windows	Windowsista ei löytynyt äänilähtöä

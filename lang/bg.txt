@@ -134,6 +134,32 @@ Squelch: {0}	Шумоподтискане: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Централна честота: {0} Hz (черно {1} Hz, бяло {2} Hz)
 Slant correction: {0} ppm	Корекция на наклона: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	неподдържан аудиоформат ({0} бита, {1} Hz)
+Flat	Плоска
+Clear voice (presence)	Ясен глас (присъствие)
+Bass cut	Срязване на баса
+Warm	Топъл
+Softened treble	Смекчени високи
+DX (boosted midrange)	DX (подсилена средна област)
+10-band equalizer — SDRLink	10-лентов еквалайзер — SDRLink
+Receive (WebSDR and rig heard on the PC)	Приемане (WebSDR и трансивър, чут на PC)
+Transmit (PC microphone to the rig)	Предаване (микрофон на компютъра към трансивъра)
+Equalizer on	Еквалайзер включен
+Preset…	Предварителна настройка…
+Noise gate on (mutes the microphone below the threshold)	Шумова врата включена (заглушава микрофона под прага)
+Threshold (dB)	Праг (dB)
+Close time (ms)	Време на затваряне (ms)
+Compressor / limiter on	Компресор / лимитер включен
+Ratio (:1)	Съотношение (:1)
+Output gain (dB)	Изходно усилване (dB)
+Limiter ceiling (dB)	Таван на лимитера (dB)
+Attack (ms)	Атака (ms)
+Release (ms)	Освобождаване (ms)
+Close	Затвори
+Gate: open	Врата: отворена
+Gate: closed	Врата: затворена
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Прилага се към микрофона на компютъра, изпращан към трансивъра: действа, когато е отметнато „Микрофон на компютъра към трансивъра“ (десен бутон върху PTT). Ред: шумова врата, еквалайзер, компресор, лимитер. Десен бутон върху плъзгач = връщане на 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Прилага се към звука от WebSDR (високоговорител и ухо WebSDR при diversity) и към трансивъра, чут на PC (десен бутон върху Без звук TRX), щом е включен; кабелът на декодерите запазва суровия звук. Десен бутон върху плъзгач = връщане на 0.
+Gain reduction: {0} dB	Намаление на усилването: {0} dB
 Name:	Име:
 Address:	Адрес:
 Cancel	Отказ
@@ -164,7 +190,6 @@ Status	Състояние
 List	Списък
 Listen to selection	Слушай избрания
 Open	Отвори
-Close	Затвори
 All lists	Всички списъци
 Please select a favorite in the list first.	Първо изберете запис от списъка.
 Add favorite	Добавяне в предпочитани
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Диверсити изкл.: няма втор�
 Diversity: second WebSDR "{0}"; measuring the delay…	Диверсити: втори WebSDR „{0}“; измерване на закъснението…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Втори WebSDR за диверсити: „{0}“ (бутон Диверсити за слушане)
 Diversity: cannot open the second WebSDR ({0})	Диверсити: вторият WebSDR не може да се отвори ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-лентов еквалайзер: приемане (WebSDR и трансивър, чут на PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-лентов еквалайзер, шумова врата, компресор / лимитер: предаване (микрофон на компютъра)…
+Colour when the equalizer is off	Цвят при изключен еквалайзер
+Colour when the equalizer is on	Цвят при включен еквалайзер
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-лентов еквалайзер. Щракване: приемане (WebSDR и трансивър, чут на PC). Щракване с десния бутон: приемане или предаване (микрофон на компютъра към трансивъра, с шумова врата и компресор / лимитер), цветове на бутона
 The rig is still not answering: check that it is switched on and the link settings	Станцията все още не отговаря: проверете дали е включена и настройките на връзката
 SDRLink: no link with OmniRig	SDRLink: няма връзка с OmniRig
 Last message: 	Последно съобщение: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Няма честота за запомняне (нито радиостанция, нито WebSDR).
 Stored: {0} kHz	Запомнено: {0} kHz
 microphone to choose	микрофон за избор
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Микрофонен 10-лентов еквалайзер, шумова врата, компресор / лимитер…
 PC microphone	Микрофон на компютъра
 Rig transmit sound card (PC output connected to the rig)	Звукова карта за предаване на радиостанцията (изход на компютъра, свързан с радиостанцията)
 No sound output found in Windows	Не е намерен звуков изход в Windows

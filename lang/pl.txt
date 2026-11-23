@@ -134,6 +134,32 @@ Squelch: {0}	Blokada szumów: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Częstotliwość środkowa: {0} Hz (czarny {1} Hz, biały {2} Hz)
 Slant correction: {0} ppm	Korekcja pochylenia: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	nieobsługiwany format dźwięku ({0} bitów, {1} Hz)
+Flat	Płaski
+Clear voice (presence)	Czysty głos (presence)
+Bass cut	Obcięcie basu
+Warm	Ciepły
+Softened treble	Złagodzone wysokie
+DX (boosted midrange)	DX (podbite środki)
+10-band equalizer — SDRLink	10-pasmowy korektor — SDRLink
+Receive (WebSDR and rig heard on the PC)	Odbiór (WebSDR i transceiver na PC)
+Transmit (PC microphone to the rig)	Nadawanie (mikrofon komputera do transceivera)
+Equalizer on	Korektor włączony
+Preset…	Ustawienie wstępne…
+Noise gate on (mutes the microphone below the threshold)	Bramka szumów włączona (wycisza mikrofon poniżej progu)
+Threshold (dB)	Próg (dB)
+Close time (ms)	Czas zamykania (ms)
+Compressor / limiter on	Kompresor / limiter włączony
+Ratio (:1)	Stosunek (:1)
+Output gain (dB)	Wzmocnienie wyjścia (dB)
+Limiter ceiling (dB)	Pułap limitera (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Zamknij
+Gate: open	Bramka: otwarta
+Gate: closed	Bramka: zamknięta
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Stosowany do mikrofonu komputera wysyłanego do transceivera: aktywny, gdy zaznaczono „Mikrofon komputera do transceivera” (prawy przycisk na PTT). Kolejność: bramka szumów, korektor, kompresor, limiter. Prawy przycisk na suwaku = powrót do 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Stosowany do dźwięku z WebSDR (głośnik i ucho WebSDR w diversity) oraz do transceivera słyszanego na PC (prawy przycisk na Wycisz TRX), gdy tylko jest włączony; kabel dekoderów zachowuje surowy dźwięk. Prawy przycisk na suwaku = powrót do 0.
+Gain reduction: {0} dB	Redukcja wzmocnienia: {0} dB
 Name:	Nazwa:
 Address:	Adres:
 Cancel	Anuluj
@@ -164,7 +190,6 @@ Status	Stan
 List	Lista
 Listen to selection	Słuchaj wybranego
 Open	Otwórz
-Close	Zamknij
 All lists	Wszystkie listy
 Please select a favorite in the list first.	Najpierw wybierz ulubiony z listy.
 Add favorite	Dodaj ulubiony
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity wył.: brak drugiego WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: drugi WebSDR „{0}”; pomiar opóźnienia…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Drugi WebSDR do diversity: „{0}” (przycisk Diversity, aby słuchać)
 Diversity: cannot open the second WebSDR ({0})	Diversity: nie można otworzyć drugiego WebSDR ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-pasmowy korektor: odbiór (WebSDR i transceiver słyszany na PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-pasmowy korektor, bramka szumów, kompresor / limiter: nadawanie (mikrofon komputera)…
+Colour when the equalizer is off	Kolor przy wyłączonym korektorze
+Colour when the equalizer is on	Kolor przy włączonym korektorze
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-pasmowy korektor. Kliknięcie: odbiór (WebSDR i transceiver słyszany na PC). Kliknięcie prawym przyciskiem: odbiór lub nadawanie (mikrofon komputera do transceivera, z bramką szumów i kompresorem / limiterem), kolory przycisku
 The rig is still not answering: check that it is switched on and the link settings	Radio nadal nie odpowiada: sprawdź, czy jest włączone, oraz ustawienia połączenia
 SDRLink: no link with OmniRig	SDRLink: brak połączenia z OmniRig
 Last message: 	Ostatni komunikat: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Brak częstotliwości do zapisania (ani radiostacji, ani WebSDR).
 Stored: {0} kHz	Zapisano: {0} kHz
 microphone to choose	mikrofon do wyboru
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofonowy 10-pasmowy korektor, bramka szumów, kompresor / limiter…
 PC microphone	Mikrofon komputera
 Rig transmit sound card (PC output connected to the rig)	Karta dźwiękowa nadawania radiostacji (wyjście komputera podłączone do radiostacji)
 No sound output found in Windows	Nie znaleziono wyjścia dźwięku w Windows

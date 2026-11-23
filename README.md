@@ -1,4 +1,4 @@
-# SDRLink V1.53 — @F5PBG 2026
+# SDRLink V1.54 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -7,7 +7,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
 - **WebSDR** : websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. Le son démarre sans clic, un pseudo (bouton Pseudo/Call, « SDRLink » par défaut) est donné d'office aux KiwiSDR et websdr.org qui en demandent un, un KiwiSDR complet met en file d'attente, le squelch est ouvert (sauf FM VHF), et un clic dans la page fait suivre le poste dès l'arrivée. Le zoom de la cascade reste celui choisi sur la page quand SDRLink change la fréquence. Ronds **partage**, **+** et **−** sur la page (lien de partage qui ouvre SDRLink au même endroit, écoute dans le navigateur ou téléchargement de SDRLink, zoom de la page retenu par WebSDR, OpenWebRX ajusté pour voir tout son panneau), adresse masquable par des étoiles (clic droit sur la page).
 - **Fonctions** :
   - bouton PTT avec délai de sécurité jusqu'à 55 min, et coupure du son en émission (WebSDR, poste, ExpertSDR, HDSDR, au choix par clic droit) ;
-  - bouton **TUNE** (tonalité de 1500 Hz sur la carte son d'émission du poste, niveau et durée au clic droit), **micro du PC envoyé au poste** sur cette même carte, sans fenêtre (clic droit sur PTT), choix du **VFO A ou B**, partage du poste en CAT direct avec un autre logiciel par un **port COM virtuel** (com0com installé depuis SDRLink) ;
+  - bouton **TUNE** (tonalité de 1500 Hz sur la carte son d'émission du poste, niveau et durée au clic droit), **micro du PC envoyé au poste** sur cette même carte, sans fenêtre (clic droit sur PTT), avec **égaliseur 10 bandes, noise gate et compresseur / limiteur**, choix du **VFO A ou B**, partage du poste en CAT direct avec un autre logiciel par un **port COM virtuel** (com0com installé depuis SDRLink) ;
   - synchro désactivée : la case kHz, les mémoires, le scan et les modes ne règlent que le WebSDR, l'émetteur ne bouge pas ;
   - bouton ⇄ qui passe le son d'une réception à l'autre (WebSDR, poste, ExpertSDR, HDSDR), deux réceptions pouvant être laissées de côté ;
   - molette sur les fréquences, saisie en kHz avec historique, boutons de mode ;
@@ -17,6 +17,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - **mode par bande** : en changeant de bande (160 m à 70 cm, 27 MHz, et jusqu'à 0,5 MHz d'une bande), le poste et le WebSDR prennent le mode retenu pour la bande, sinon LSB / USB / AM ;
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, même taille que Mute WebSDR, couleur réglable ;
   - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou automatiquement quand son son est perdu (Réinit Auto WebSDR, clic droit : Auto et délai de 10 à 60 s, jamais quand le son est coupé volontairement) ; réinitialisation totale au clic droit ;
+  - **égaliseur 10 bandes** du son du WebSDR et du poste écouté sur le PC (bouton EQ, préréglages, courbe de réponse) ;
   - écoute en diversité (bouton Diversité, notch auto et DNR compris) : le WebSDR dans une oreille, le poste, ExpertSDR ou HDSDR dans l'autre, le son local retardé automatiquement pour tomber en même temps que le WebSDR ; ou **deux WebSDR**, un dans chaque oreille (le second écouté sans être affiché, calé tout seul) ;
   - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
@@ -66,7 +67,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
 - **WebSDR**: websdr.org, KiwiSDR, OpenWebRX / OpenWebRX+, UberSDR, PhantomSDR. The audio starts without a click, a name (Pseudo/Call button, "SDRLink" by default) is given automatically to KiwiSDRs and websdr.org receivers that ask for one, a full KiwiSDR puts you in the queue, the squelch is opened (except VHF FM), and a click in the page makes the rig follow right after arriving. The waterfall zoom stays as chosen on the page when SDRLink changes the frequency. **Share**, **+** and **−** round buttons on the page (share link that opens SDRLink at the same spot, listens in the browser or downloads SDRLink, page zoom kept per WebSDR, OpenWebRX fitted to show its whole panel), address can be hidden by stars (right-click the page).
 - **Features**:
   - PTT button with a safety timeout of up to 55 min, audio muted while transmitting (WebSDR, rig, ExpertSDR, HDSDR, chosen by right-click);
-  - **TUNE** button (1500 Hz tone on the rig transmit sound card, level and duration by right-click), **PC microphone sent to the rig** on that same card, with no window (right-click PTT), **VFO A or B** choice, sharing of the direct-CAT rig with another program through a **virtual COM port** (com0com installed from SDRLink);
+  - **TUNE** button (1500 Hz tone on the rig transmit sound card, level and duration by right-click), **PC microphone sent to the rig** on that same card, with no window (right-click PTT), with a **10-band equalizer, noise gate and compressor / limiter**, **VFO A or B** choice, sharing of the direct-CAT rig with another program through a **virtual COM port** (com0com installed from SDRLink);
   - sync Off: the kHz box, memories, scan and modes only tune the WebSDR, the transmitter does not move;
   - ⇄ button that switches the audio from one receiver to the next (WebSDR, rig, ExpertSDR, HDSDR), with up to two receivers left aside;
   - mouse wheel on the frequencies, kHz entry with history, mode buttons;
@@ -76,6 +77,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - **mode per band**: when changing band (160 m to 70 cm, 27 MHz, and up to 0.5 MHz from a band), the rig and the WebSDR take the mode kept for the band, otherwise LSB / USB / AM;
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, same size as Mute WebSDR, adjustable colour;
   - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or automatically when its sound is lost (Auto Reset WebSDR, right-click: Auto and a time of 10 to 60 s, never when the sound is cut on purpose); full reset from the right-click menu;
+  - **10-band equalizer** for the WebSDR audio and the rig heard on the PC (EQ button, presets, response curve);
   - diversity listening (Diversity button, auto notch and DNR included): the WebSDR in one ear, the rig, ExpertSDR or HDSDR in the other, the local audio delayed automatically to match the WebSDR; or **two WebSDRs**, one in each ear (the second one heard without being displayed, aligned by itself);
   - reduced, mini and PTT (PTT button only, with the Always on top box) views;
   - suggestions while typing in the WebSDR bar (name or address, chosen list);

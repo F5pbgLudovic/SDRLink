@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Keskmine sagedus: {0} Hz (must {1} Hz, valge {2} Hz)
 Slant correction: {0} ppm	Kaldeparandus: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	toetamata helivorming ({0} bitti, {1} Hz)
+Flat	Lame
+Clear voice (presence)	Selge hääl (presents)
+Bass cut	Bassi lõige
+Warm	Soe
+Softened treble	Pehmendatud kõrged
+DX (boosted midrange)	DX (võimendatud keskmikud)
+10-band equalizer — SDRLink	10-ribaline ekvalaiser — SDRLink
+Receive (WebSDR and rig heard on the PC)	Vastuvõtt (WebSDR ja raadiosaatja PC-l)
+Transmit (PC microphone to the rig)	Saatmine (arvuti mikrofon raadiosaatjale)
+Equalizer on	Ekvalaiser sees
+Preset…	Eelseadistus…
+Noise gate on (mutes the microphone below the threshold)	Müravärav sees (vaigistab mikrofoni all läve)
+Threshold (dB)	Lävi (dB)
+Close time (ms)	Sulgumisaeg (ms)
+Compressor / limiter on	Kompressor / limiteerija sees
+Ratio (:1)	Suhe (:1)
+Output gain (dB)	Väljundvõimendus (dB)
+Limiter ceiling (dB)	Limiteerija lagi (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Sulge
+Gate: open	Värav: avatud
+Gate: closed	Värav: suletud
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Rakendub raadiosaatjale saadetavale arvuti mikrofonile: aktiivne, kui „Arvuti mikrofon raadiosaatjale“ on märgitud (PTT parempoolne klõps). Järjekord: müravärav, ekvalaiser, kompressor, limiteerija. Liuguri parempoolne klõps = tagasi 0-le.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Rakendub WebSDR-i helile (kõlar ja WebSDR-i kõrv diversity režiimis) ja PC-l kuulatavale raadiosaatjale (parempoolne klõps nupul Vaigista TRX), niipea kui see on sisse lülitatud; dekooderite kaabel säilitab töötlemata heli. Liuguri parempoolne klõps = tagasi 0-le.
+Gain reduction: {0} dB	Võimenduse vähendus: {0} dB
 Name:	Nimi:
 Address:	Aadress:
 Cancel	Loobu
@@ -164,7 +190,6 @@ Status	Olek
 List	Loend
 Listen to selection	Kuula valitut
 Open	Ava
-Close	Sulge
 All lists	Kõik loendid
 Please select a favorite in the list first.	Valige esmalt loendist lemmik.
 Add favorite	Lisa lemmik
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity väljas: teist WebSDR-i pole
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: teine WebSDR „{0}“; viivituse mõõtmine…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Teine WebSDR diversity jaoks: „{0}“ (kuulamiseks nupp Diversity)
 Diversity: cannot open the second WebSDR ({0})	Diversity: teist WebSDR-i ei saa avada ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-ribaline ekvalaiser: vastuvõtt (WebSDR ja raadiosaatja PC-l)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-ribaline ekvalaiser, müravärav, kompressor / limiteerija: saatmine (arvuti mikrofon)…
+Colour when the equalizer is off	Värv, kui ekvalaiser on väljas
+Colour when the equalizer is on	Värv, kui ekvalaiser on sees
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-ribaline ekvalaiser. Klõps: vastuvõtt (WebSDR ja raadiosaatja, mida kuuleb arvutis PC). Parempoolne klõps: vastuvõtt või saatmine (arvuti mikrofon raadiosaatjale, müraväravaga ning kompressori / limiteerijaga), nupu värvid
 The rig is still not answering: check that it is switched on and the link settings	Jaam ei vasta ikka veel: kontrollige, et see on sisse lülitatud, ja ühenduse seadeid
 SDRLink: no link with OmniRig	SDRLink: ühendus OmniRigiga puudub
 Last message: 	Viimane teade: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Pole sagedust, mida salvestada (ei raadiojaama ega WebSDR-i).
 Stored: {0} kHz	Salvestatud: {0} kHz
 microphone to choose	mikrofon valimata
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofoni 10-ribaline ekvalaiser, müravärav, kompressor / limiteerija…
 PC microphone	Arvuti mikrofon
 Rig transmit sound card (PC output connected to the rig)	Raadiojaama saate-helikaart (arvuti väljund, mis on ühendatud raadiojaamaga)
 No sound output found in Windows	Windowsist ei leitud ühtegi heliväljundit

@@ -134,6 +134,32 @@ Squelch: {0}	Zajzár: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Középfrekvencia: {0} Hz (fekete {1} Hz, fehér {2} Hz)
 Slant correction: {0} ppm	Ferdeségkorrekció: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	nem támogatott hangformátum ({0} bit, {1} Hz)
+Flat	Lapos
+Clear voice (presence)	Tiszta hang (prezencia)
+Bass cut	Mélyvágás
+Warm	Meleg
+Softened treble	Lágyított magasak
+DX (boosted midrange)	DX (kiemelt közepek)
+10-band equalizer — SDRLink	10 sávos ekvalizer — SDRLink
+Receive (WebSDR and rig heard on the PC)	Vétel (WebSDR és a PC-n hallott rádió)
+Transmit (PC microphone to the rig)	Adás (a számítógép mikrofonja a rádióhoz)
+Equalizer on	Ekvalizer be
+Preset…	Előbeállítás…
+Noise gate on (mutes the microphone below the threshold)	Zajzár be (a küszöb alatt elnémítja a mikrofont)
+Threshold (dB)	Küszöb (dB)
+Close time (ms)	Zárási idő (ms)
+Compressor / limiter on	Kompresszor / limiter be
+Ratio (:1)	Arány (:1)
+Output gain (dB)	Kimeneti erősítés (dB)
+Limiter ceiling (dB)	Limiter plafon (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Bezárás
+Gate: open	Zajzár: nyitva
+Gate: closed	Zajzár: zárva
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	A rádiónak küldött számítógépmikrofonra érvényes: akkor aktív, ha a „Számítógép mikrofonja a rádióhoz” be van jelölve (jobb kattintás a PTT-n). Sorrend: zajzár, ekvalizer, kompresszor, limiter. Jobb kattintás egy csúszkán = vissza 0-ra.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	A WebSDR-hangra (hangszóró és WebSDR-fül diversity módban) és a PC-n hallott rádióra érvényes (jobb kattintás a TRX némítás gombon), amint be van kapcsolva; a dekóderek kábele a nyers hangot kapja. Jobb kattintás egy csúszkán = vissza 0-ra.
+Gain reduction: {0} dB	Erősítéscsökkentés: {0} dB
 Name:	Név:
 Address:	Cím:
 Cancel	Mégse
@@ -164,7 +190,6 @@ Status	Állapot
 List	Lista
 Listen to selection	Kijelölt hallgatása
 Open	Megnyitás
-Close	Bezárás
 All lists	Összes lista
 Please select a favorite in the list first.	Először válasszon ki egy kedvencet a listában.
 Add favorite	Kedvenc hozzáadása
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity ki: nincs második WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: második WebSDR „{0}”; a késés mérése…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Második WebSDR a diversityhez: „{0}” (hallgatás a Diversity gombbal)
 Diversity: cannot open the second WebSDR ({0})	Diversity: a második WebSDR nem nyitható meg ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10 sávos ekvalizer: vétel (WebSDR és a PC-n hallott rádió)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10 sávos ekvalizer, zajzár, kompresszor / limiter: adás (a számítógép mikrofonja)…
+Colour when the equalizer is off	Szín kikapcsolt ekvalizernél
+Colour when the equalizer is on	Szín bekapcsolt ekvalizernél
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10 sávos ekvalizer. Kattintás: vétel (WebSDR és a PC-n hallott rádió). Jobb kattintás: vétel vagy adás (a számítógép mikrofonja a rádióhoz, zajzárral és kompresszorral / limiterrel), a gomb színei
 The rig is still not answering: check that it is switched on and the link settings	A rádió még mindig nem válaszol: ellenőrizze, hogy be van-e kapcsolva, és a kapcsolat beállításait
 SDRLink: no link with OmniRig	SDRLink: nincs kapcsolat az OmniRiggel
 Last message: 	Utolsó üzenet: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Nincs tárolható frekvencia (sem rádió, sem WebSDR).
 Stored: {0} kHz	Tárolva: {0} kHz
 microphone to choose	válasszon mikrofont
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofon 10 sávos ekvalizer, zajzár, kompresszor / limiter…
 PC microphone	PC mikrofon
 Rig transmit sound card (PC output connected to the rig)	A rádió adási hangkártyája (a rádióhoz kötött PC-kimenet)
 No sound output found in Windows	Nem található hangkimenet a Windowsban

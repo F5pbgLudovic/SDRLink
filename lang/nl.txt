@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Middenfrequentie: {0} Hz (zwart {1} Hz, wit {2} Hz)
 Slant correction: {0} ppm	Scheefstandcorrectie: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	niet-ondersteunde audio-indeling ({0} bits, {1} Hz)
+Flat	Vlak
+Clear voice (presence)	Heldere stem (presence)
+Bass cut	Basafsnijding
+Warm	Warm
+Softened treble	Verzachte hoge tonen
+DX (boosted midrange)	DX (versterkte middentonen)
+10-band equalizer — SDRLink	10-bands equalizer — SDRLink
+Receive (WebSDR and rig heard on the PC)	Ontvangst (WebSDR en zendontv. op PC)
+Transmit (PC microphone to the rig)	Zenden (pc-microfoon naar de zendontvanger)
+Equalizer on	Equalizer aan
+Preset…	Voorinstelling…
+Noise gate on (mutes the microphone below the threshold)	Noisegate aan (dempt de microfoon onder de drempel)
+Threshold (dB)	Drempel (dB)
+Close time (ms)	Sluittijd (ms)
+Compressor / limiter on	Compressor / limiter aan
+Ratio (:1)	Verhouding (:1)
+Output gain (dB)	Uitgangsversterking (dB)
+Limiter ceiling (dB)	Limiterplafond (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Sluiten
+Gate: open	Gate: open
+Gate: closed	Gate: dicht
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Toegepast op de pc-microfoon die naar de zendontvanger wordt gestuurd: actief wanneer „Pc-microfoon naar de zendontvanger” is aangevinkt (rechtsklik op PTT). Volgorde: noisegate, equalizer, compressor, limiter. Rechtsklik op een schuifregelaar = terug naar 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Toegepast op het WebSDR-geluid (luidspreker en WebSDR-oor in diversity) en op de zendontvanger gehoord op de PC (rechtsklik op TRX dempen), zodra die aan staat; de kabel van de decoders houdt het ruwe geluid. Rechtsklik op een schuifregelaar = terug naar 0.
+Gain reduction: {0} dB	Versterkingsreductie: {0} dB
 Name:	Naam:
 Address:	Adres:
 Cancel	Annuleren
@@ -164,7 +190,6 @@ Status	Status
 List	Lijst
 Listen to selection	Selectie beluisteren
 Open	Openen
-Close	Sluiten
 All lists	Alle lijsten
 Please select a favorite in the list first.	Selecteer eerst een favoriet in de lijst.
 Add favorite	Favoriet toevoegen
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity uit: geen tweede WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: tweede WebSDR "{0}"; vertraging wordt gemeten…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Tweede WebSDR voor diversity: "{0}" (knop Diversity om te luisteren)
 Diversity: cannot open the second WebSDR ({0})	Diversity: tweede WebSDR kan niet worden geopend ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-bands equalizer: ontvangst (WebSDR en zendontvanger, gehoord op de PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-bands equalizer, noisegate, compressor / limiter: zenden (pc-microfoon)…
+Colour when the equalizer is off	Kleur als de equalizer uit staat
+Colour when the equalizer is on	Kleur als de equalizer aan staat
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-bands equalizer. Klik: ontvangst (WebSDR en zendontvanger, gehoord op de PC). Rechtsklik: ontvangst of zenden (pc-microfoon naar de zendontvanger, met noisegate en compressor / limiter), knopkleuren
 The rig is still not answering: check that it is switched on and the link settings	De transceiver antwoordt nog steeds niet: controleer of hij aanstaat en de verbindingsinstellingen
 SDRLink: no link with OmniRig	SDRLink: geen verbinding met OmniRig
 Last message: 	Laatste melding: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Geen frequentie om op te slaan (geen transceiver, geen WebSDR).
 Stored: {0} kHz	Opgeslagen: {0} kHz
 microphone to choose	microfoon kiezen
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Microfoon 10-bands equalizer, noisegate, compressor / limiter…
 PC microphone	PC-microfoon
 Rig transmit sound card (PC output connected to the rig)	Zendgeluidskaart van de transceiver (pc-uitgang verbonden met de transceiver)
 No sound output found in Windows	Geen geluidsuitgang gevonden in Windows

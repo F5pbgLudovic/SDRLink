@@ -25,7 +25,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 3. **3e ligne (synchronisation)** : **Synchro** (Bidirectionnelle, Radio → WebSDR, WebSDR → Radio, Désactivée), **Synchroniser le mode**, **Décalage WebSDR (Hz)**, **Couper le son du WebSDR en émission** (clic droit : réceptions concernées) et **rétablir après (ms)**, **Notch auto (DNF)** (clic : marche / arrêt, bouton vert en marche ; clic droit : options, type d'origine, adaptatif ou spectral et son niveau, couleurs), **DNR** (réducteur de bruit, depuis la 1.46 ; clic : marche / arrêt, clic droit : type classique, amélioré ou IA et son niveau), **Conf scan**, **▶ Scan**.
 4. **4e ligne (affichage et accord)** : bouton **PTT**, fréquence et mode **RADIO**, fréquence et mode **WEBSDR** (clic sur l'une ou l'autre : **clavier de fréquence** et liste **Mem**, depuis la 1.26), boutons **USB, LSB, AM, FM, DIGI, CW**, saisie **kHz** (avec historique), **QSY**, **Save**, **Mémoires** et **▾** (20 dernières), **Pas** de la molette, **BP** (bande passante, depuis la 1.38), cases **Affichage réduit**, **Affichage mini**, **Avant plan**, **Affichage ptt**, puis le bouton **TUNE** (depuis la 1.49), de même forme que PTT et aligné sur lui.
 5. **5e ligne (WebSDR)** : adresse **WebSDR** (liste des favoris, propositions pendant la frappe), **liste** de favoris affichée, **Aller**, **◀ Retour**, **Recharger**, **★ Ajouter aux favoris**, **Retirer des favoris**, **Gérer les favoris…**, **Rechercher des WebSDR…**, **FreeDV auto V1 / V2** (depuis la 1.24), bouton des **modes numériques** (SSTV, FT8, CW, WEFAX…, depuis la 1.25), **Mode ?** (recherche du mode écouté, depuis la 1.38).
-6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR** (« Volume FreeDV » pendant une parole FreeDV, depuis la 1.45), **Volume TX sur PC** (quand « Écouter aussi le poste sur le PC » est coché, depuis la 1.45), **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40), suivi, quand la diversité est réglée **sur deux WebSDR**, de la case du **second WebSDR** (depuis la 1.44).
+6. **Ligne de son** : **⇄**, **Mute WebSDR**, **Mute TX**, **Mute ExpertSDR**, **Mute HDSDR**, **Volume WebSDR** (« Volume FreeDV » pendant une parole FreeDV, depuis la 1.45), **Volume TX sur PC** (quand « Écouter aussi le poste sur le PC » est coché, depuis la 1.45), **Volume TX**, **Volume ExpertSDR**, **Volume HDSDR** (seulement les sons disponibles), puis **REC**, **Réinit WebSDR** (depuis la 1.31) et le bouton **Diversité** (depuis la 1.40), suivi, quand la diversité est réglée **sur deux WebSDR**, de la case du **second WebSDR** (depuis la 1.44), puis le bouton **EQ** (égaliseur 10 bandes, depuis la 1.54).
 7. **La page du WebSDR** avec ses ronds **partage**, **+** et **−** (depuis la 1.43), puis la **barre d'état** (messages, lien de mise à jour).
 
 ## Tous les clics droits
@@ -39,7 +39,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Import/Export | **Réinitialiser le programme…** (depuis la 1.22), couleur du bouton |
 | Câble SDRLINK (aussi au clic gauche) | sortie qui reçoit le son du WebSDR, nom SDRLINK, téléchargement de VB-CABLE, couleur activé / désactivé |
 | Scan | **Scan de la bande** où l'on se trouve et ses profils, **Reprendre le scan**, réglage actuel, autres profils, **Conf scan…**, **Touches multimédia**, **Commande vocale du scan** (depuis la 1.52 ; le clic gauche reprend le scan), couleur scan arrêté / en marche |
-| PTT | délai de sécurité TX, **micro du PC vers le poste** (case, micro, carte son d'émission du poste ; depuis la 1.51), couleur en réception / en émission |
+| PTT | délai de sécurité TX, **micro du PC vers le poste** (case, micro, carte son d'émission du poste ; depuis la 1.51), **égaliseur 10 bandes, noise gate, compresseur / limiteur du micro** (depuis la 1.54), couleur en réception / en émission |
 | TUNE | **carte son d'émission du poste**, **niveau de la tonalité** (1 à 100 %, curseur et case, pas de 1), **durée** (5 s à 1 min), **passage en émission : PTT actif ou VOX du poste**, couleur au repos / pendant Tune, **Fermer** en dernière ligne (depuis la 1.49) |
 | RADIO | **VFO A / VFO B** commandé (depuis la 1.49), couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
 | WEBSDR | couleur du fond, couleur du texte (le clic gauche ouvre le clavier de fréquence) |
@@ -60,6 +60,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | REC | carte son du poste, couleur du bouton REC |
 | Réinit WebSDR | **Auto** (relance quand le son est perdu) et son délai, **réinitialisation totale** du WebSDR en cours, couleurs des deux états (depuis la 1.37) |
 | Diversité | réception mise dans l'autre oreille (poste, ExpertSDR, HDSDR sous Windows 11, ou **Sur deux WebSDR** depuis la 1.44), **WebSDR dans l'oreille droite**, retard mesuré (depuis la 1.40), couleur arrêtée / recherche du retard / calée (depuis la 1.41) |
+| EQ | égaliseur de la **réception** (WebSDR et poste écouté sur le PC) ou de l'**émission** (micro du PC), couleur arrêté / en marche (depuis la 1.54) |
 | Page du WebSDR | **Masquer l'adresse du WebSDR** en tête du menu de la page (depuis la 1.43) |
 | Ronds partage, +, − sur la page | **position des boutons** (6 places, verticale ou horizontale), **Zoom de la page : automatique**, **Masquer l'adresse du WebSDR** (depuis la 1.43) |
 | Barre d'état | 20 derniers messages, types de messages à ne plus afficher |
@@ -425,6 +426,7 @@ Un clic droit sur la plupart des boutons propose leur **couleur de fond**. Si le
   - **Notch auto (DNF)** : notch arrêté / en marche (depuis la 1.41 ; l'ancienne couleur unique vaut pour les deux tant qu'elles ne sont pas choisies) ;
   - **Mode ?** : au repos / pendant la recherche (depuis la 1.41) ;
   - **Diversité** : arrêtée / recherche du retard / calée (depuis la 1.41) ;
+  - **EQ** : égaliseur arrêté / en marche (depuis la 1.54 ; vert par défaut en marche) ;
   - bouton des **modes numériques** (SSTV, FT8…) : décodage arrêté / en marche / signal en cours de réception (depuis la 1.41).
 - **FreeDV auto** n'a pas de couleur réglable : son clic droit passe directement de RADE V1 à V2, sans menu.
 - Couleurs proposées : **Par défaut** (couleur d'origine, qui suit le mode sombre et la palette), bleu marine, bleu, bleu ciel, bleu canard, vert, rouge, bordeaux, violet, rose, marron, gris, noir, jaune, orange, blanc, ou **Autre couleur…** au choix.
@@ -471,6 +473,7 @@ Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émiss
   - Le son part en continu, tel quel (sans notch ni DNR), avec environ 20 à 40 ms de retard. Le poste ne l'émet qu'en émission (PTT de SDRLink, pédale, PTT du micro, VOX), et seulement si sa **source de modulation** est l'USB / l'arrière (DATA, « REAR »). Avec le VOX du poste réglé sur l'USB, le bruit de la pièce peut le déclencher.
   - Pendant **Tune**, le micro se tait : seule la tonalité part.
   - Le niveau se règle dans Windows (niveau du micro) et sur le poste (gain de l'entrée USB / DATA).
+  - **Égaliseur 10 bandes, noise gate, compresseur / limiteur du micro…** (depuis la 1.54, même clic droit) : voir « Égaliseur 10 bandes » plus bas.
 - **Émission sans modulation** (constaté sur un FTdx10) : le PTT par CAT met bien le poste en émission, mais le son émis dépend de la **source de modulation** du poste. Si elle est réglée sur l'arrière ou l'USB (« REAR », souvent le cas pour le FT8), le micro n'est pas transmis. Sur le FTdx10, vérifier dans les menus de réglage de l'émission (TX AUDIO) la source de modulation SSB (MOD SOURCE : MIC) et le gain micro. Les autres logiciels qui passent en émission par CAT, comme WSJT-X, rencontrent le même comportement.
 
 ## Bouton TUNE (depuis la 1.49)
@@ -756,6 +759,21 @@ Sans poste ni SDR à la maison, ou pour comparer deux stations éloignées : **d
 - Revenir au poste, à ExpertSDR ou à HDSDR (même clic droit) cache la case ; le second WebSDR choisi est gardé.
 - Deux WebSDR à la fois, c'est deux fois plus de données reçues ; un KiwiSDR plein peut refuser la connexion du second.
 
+## Égaliseur 10 bandes (depuis la 1.54)
+
+Bouton **EQ**, sur la ligne de son juste après Diversité. Une même fenêtre règle deux égaliseurs, repris de HamRadioLink :
+
+- **Réception (WebSDR et poste écouté sur le PC)** : **clic sur EQ**. Le son du WebSDR passe par 10 filtres en cloche (31 Hz à 10 kHz, ±12 dB ; curseur vers le haut = gain), après le notch et le DNR, avant le volume. L'oreille du WebSDR en diversité (et le second WebSDR) est égalisée aussi. Le **son du poste écouté sur le PC** (« Écouter aussi le poste sur le PC », clic droit sur Mute TX) passe par le même égaliseur dès qu'on le met. Le **câble SDRLINK** et les décodeurs gardent le son brut.
+- **Émission (micro du PC vers le poste)** : **clic droit sur PTT** (ou clic droit sur EQ). Le micro envoyé au poste passe, dans cet ordre, par le **noise gate**, l'**égaliseur**, le **compresseur** puis le **limiteur**. Il n'agit que quand **Micro du PC vers le poste** est coché.
+
+Dans la fenêtre :
+
+- **Égaliseur actif** : marche / arrêt ; les curseurs restent réglés quand il est arrêté. **Préréglage…** : À plat, Voix claire (présence), Graves coupés, Chaleureux, Aigus adoucis, DX (médium renforcé). **Clic droit sur un curseur** : remise à 0 dB. La courbe montre la réponse obtenue.
+- **Noise gate** (émission) : coupe le micro quand son niveau reste sous le **seuil** (-80 à -10 dB, -50 au départ) ; il s'ouvre en 2 ms, reste ouvert 100 ms après le dernier son, puis se ferme en **Fermeture** ms (150 au départ). « Gate : ouvert / fermé » indique son état.
+- **Compresseur / limiteur** (émission) : **seuil** (-40 à 0 dB), **rapport** (1:1 à 20:1), **gain de sortie** (0 à 24 dB), **attaque** et **relâche** (ms) ; le **limiteur** ne laisse jamais la crête dépasser son **plafond** (-12 à 0 dB). « Réduction » montre la compression en cours.
+- Chaque réglage agit tout de suite et il est gardé après redémarrage (et dans l'export des réglages).
+- Le bouton affiche ce qui est en marche : **EQ RX** (réception), **EQ TX** (émission, micro envoyé au poste), **EQ RX+TX** ; il est vert quand l'un des deux tourne (couleurs au choix, clic droit).
+
 ## Mémoires de fréquences
 
 - Bouton **Mémoires** (ligne des fréquences, après Save) : ouvre la fenêtre des mémoires.
@@ -1025,6 +1043,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.54**
+  - **Égaliseur 10 bandes** (bouton **EQ** après Diversité) pour le son du WebSDR et du poste écouté sur le PC, et pour le micro du PC envoyé au poste avec **noise gate**, **compresseur** et **limiteur** (clic droit sur PTT) ; repris de HamRadioLink.
 - **1.53**
   - **Fréquence changée pendant un scan** sur le poste (VFO), dans la page du WebSDR (molette, touches), à la molette de SDRLink ou en tapant une fréquence : le scan s'arrête et l'on reste sur la nouvelle fréquence.
 - **1.52**

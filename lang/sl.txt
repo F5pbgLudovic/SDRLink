@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Srednja frekvenca: {0} Hz (črna {1} Hz, bela {2} Hz)
 Slant correction: {0} ppm	Popravek nagiba: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	nepodprta oblika zvoka ({0} bitov, {1} Hz)
+Flat	Raven
+Clear voice (presence)	Jasen glas (prisotnost)
+Bass cut	Rez basov
+Warm	Topel
+Softened treble	Omiljeni visoki toni
+DX (boosted midrange)	DX (poudarjene sredine)
+10-band equalizer — SDRLink	10-pasovni izenačevalnik — SDRLink
+Receive (WebSDR and rig heard on the PC)	Sprejem (WebSDR in postaja na PC)
+Transmit (PC microphone to the rig)	Oddajanje (mikrofon računalnika v postajo)
+Equalizer on	Izenačevalnik vklopljen
+Preset…	Prednastavitev…
+Noise gate on (mutes the microphone below the threshold)	Šumna vrata vklopljena (utiša mikrofon pod pragom)
+Threshold (dB)	Prag (dB)
+Close time (ms)	Čas zapiranja (ms)
+Compressor / limiter on	Kompresor / omejevalnik vklopljen
+Ratio (:1)	Razmerje (:1)
+Output gain (dB)	Izhodno ojačenje (dB)
+Limiter ceiling (dB)	Strop omejevalnika (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Zapri
+Gate: open	Vrata: odprta
+Gate: closed	Vrata: zaprta
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Uporabi se za mikrofon računalnika, poslan v postajo: aktivno, ko je označeno „Mikrofon računalnika v postajo“ (desni klik na PTT). Vrstni red: šumna vrata, izenačevalnik, kompresor, omejevalnik. Desni klik na drsnik = vrnitev na 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Uporabi se za zvok WebSDR (zvočnik in uho WebSDR v diversity) in za postajo, slišano na PC (desni klik na Utišaj TRX), takoj ko je vklopljena; kabel dekoderjev ohrani surov zvok. Desni klik na drsnik = vrnitev na 0.
+Gain reduction: {0} dB	Zmanjšanje ojačenja: {0} dB
 Name:	Ime:
 Address:	Naslov:
 Cancel	Prekliči
@@ -164,7 +190,6 @@ Status	Stanje
 List	Seznam
 Listen to selection	Poslušaj izbrano
 Open	Odpri
-Close	Zapri
 All lists	Vsi seznami
 Please select a favorite in the list first.	Najprej izberite priljubljeno na seznamu.
 Add favorite	Dodaj priljubljeno
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity izklopljen: ni drugega WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: drugi WebSDR »{0}«; merjenje zakasnitve …
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Drugi WebSDR za diversity: »{0}« (gumb Diversity za poslušanje)
 Diversity: cannot open the second WebSDR ({0})	Diversity: drugega WebSDR ni mogoče odpreti ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-pasovni izenačevalnik: sprejem (WebSDR in postaja, slišana na PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-pasovni izenačevalnik, šumna vrata, kompresor / omejevalnik: oddajanje (mikrofon računalnika)…
+Colour when the equalizer is off	Barva pri izklopljenem izenačevalniku
+Colour when the equalizer is on	Barva pri vklopljenem izenačevalniku
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-pasovni izenačevalnik. Klik: sprejem (WebSDR in postaja, slišana na PC). Desni klik: sprejem ali oddajanje (mikrofon računalnika v postajo, s šumnimi vrati ter kompresorjem / omejevalnikom), barve gumba
 The rig is still not answering: check that it is switched on and the link settings	Postaja še vedno ne odgovarja: preverite, ali je vklopljena, in nastavitve povezave
 SDRLink: no link with OmniRig	SDRLink: ni povezave z OmniRig
 Last message: 	Zadnje sporočilo: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Ni frekvence za shranjevanje (ne postaje ne WebSDR).
 Stored: {0} kHz	Shranjeno: {0} kHz
 microphone to choose	izberite mikrofon
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofonski 10-pasovni izenačevalnik, šumna vrata, kompresor / omejevalnik…
 PC microphone	Mikrofon računalnika
 Rig transmit sound card (PC output connected to the rig)	Zvočna kartica za oddajo postaje (izhod računalnika, povezan s postajo)
 No sound output found in Windows	V Windows ni bil najden noben zvočni izhod

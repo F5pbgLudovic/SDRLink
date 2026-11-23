@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Mittfrekvens: {0} Hz (svart {1} Hz, vitt {2} Hz)
 Slant correction: {0} ppm	Lutningskorrigering: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	ljudformatet stöds inte ({0} bitar, {1} Hz)
+Flat	Platt
+Clear voice (presence)	Klar röst (presence)
+Bass cut	Basavskärning
+Warm	Varm
+Softened treble	Dämpade diskanter
+DX (boosted midrange)	DX (förstärkta mellanregister)
+10-band equalizer — SDRLink	10-bands equalizer — SDRLink
+Receive (WebSDR and rig heard on the PC)	Mottagning (WebSDR och rigg på PC:n)
+Transmit (PC microphone to the rig)	Sändning (datorns mikrofon till radion)
+Equalizer on	Equalizer på
+Preset…	Förinställning…
+Noise gate on (mutes the microphone below the threshold)	Brusgrind på (tystar mikrofonen under tröskeln)
+Threshold (dB)	Tröskel (dB)
+Close time (ms)	Stängningstid (ms)
+Compressor / limiter on	Kompressor / limiter på
+Ratio (:1)	Förhållande (:1)
+Output gain (dB)	Utgångsförstärkning (dB)
+Limiter ceiling (dB)	Limitertak (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Stäng
+Gate: open	Grind: öppen
+Gate: closed	Grind: stängd
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Tillämpas på datorns mikrofon som skickas till radion: aktiv när ”Datorns mikrofon till radion” är ikryssad (högerklicka på PTT). Ordning: brusgrind, equalizer, kompressor, limiter. Högerklick på ett skjutreglage = tillbaka till 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Tillämpas på WebSDR-ljudet (högtalare och WebSDR-öra i diversity) och på riggen hörd på PC:n (högerklick på Tysta rigg), så snart den är på; avkodarnas kabel behåller det råa ljudet. Högerklick på ett skjutreglage = tillbaka till 0.
+Gain reduction: {0} dB	Förstärkningsreduktion: {0} dB
 Name:	Namn:
 Address:	Adress:
 Cancel	Avbryt
@@ -164,7 +190,6 @@ Status	Status
 List	Lista
 Listen to selection	Lyssna på markerad
 Open	Öppna
-Close	Stäng
 All lists	Alla listor
 Please select a favorite in the list first.	Välj först en favorit i listan.
 Add favorite	Lägg till favorit
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity av: ingen andra WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: andra WebSDR ”{0}”; mäter fördröjningen…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Andra WebSDR för diversity: ”{0}” (knappen Diversity för att lyssna)
 Diversity: cannot open the second WebSDR ({0})	Diversity: kan inte öppna den andra WebSDR:en ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-bands equalizer: mottagning (WebSDR och rigg hörda på PC:n)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-bands equalizer, brusgrind, kompressor / limiter: sändning (datorns mikrofon)…
+Colour when the equalizer is off	Färg när equalizern är av
+Colour when the equalizer is on	Färg när equalizern är på
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-bands equalizer. Klick: mottagning (WebSDR och rigg hörda på PC:n). Högerklick: mottagning eller sändning (datorns mikrofon till radion, med brusgrind och kompressor / limiter), knappfärger
 The rig is still not answering: check that it is switched on and the link settings	Radion svarar fortfarande inte: kontrollera att den är påslagen och förbindelsens inställningar
 SDRLink: no link with OmniRig	SDRLink: ingen förbindelse med OmniRig
 Last message: 	Senaste meddelande: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Ingen frekvens att spara (varken radio eller WebSDR).
 Stored: {0} kHz	Sparat: {0} kHz
 microphone to choose	mikrofon att välja
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofonens 10-bands equalizer, brusgrind, kompressor / limiter…
 PC microphone	PC-mikrofon
 Rig transmit sound card (PC output connected to the rig)	Radions ljudkort för sändning (PC-utgång ansluten till radion)
 No sound output found in Windows	Ingen ljudutgång hittades i Windows

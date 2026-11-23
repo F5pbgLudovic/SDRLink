@@ -137,6 +137,7 @@ namespace SDRLink
         // 1.51 : micro du PC envoyé sur la carte son d'émission du poste (la même que Tune), réglé au clic droit sur PTT.
         public bool MicRoute;
         public string MicRouteId = "", MicRouteName = "";
+        public string FxRx = "", FxTx = "";   // égaliseur 10 bandes : réception du WebSDR, micro du PC vers le poste (1.54 ; FxSet)
         public bool TuneVox;               // Tune : passage en émission par le VOX du poste (tonalité seule) au lieu du PTT par CAT (1.49)
         // Pas de la molette et bande passante de réception retenus par mode (clés cw, ssb, am, fm, digi) ; bande passante 0 = filtre
         // d'origine du WebSDR. Les valeurs absentes prennent celles par défaut (ModeStep, ModeBw).
@@ -365,6 +366,8 @@ namespace SDRLink
                     case "MicRoute": s.MicRoute = v == "1"; break;
                     case "MicRouteId": s.MicRouteId = v; break;
                     case "MicRouteName": s.MicRouteName = v; break;
+                    case "FxRx": s.FxRx = v; break;
+                    case "FxTx": s.FxTx = v; break;
                     case "ModeStep": { int c = v.IndexOf(':'); if (c > 0) s.ModeSteps[v.Substring(0, c)] = Math.Max(1, Int(v.Substring(c + 1), 500)); } break;
                     case "ModeBw": { int c = v.IndexOf(':'); if (c > 0) s.ModeBws[v.Substring(0, c)] = Math.Max(0, Math.Min(20000, Int(v.Substring(c + 1), 0))); } break;
                     case "DigiAutoQsy": s.DigiAutoQsy = v == "1"; break;
@@ -558,6 +561,8 @@ namespace SDRLink
             Line(sb, "MicRoute", MicRoute ? 1 : 0);
             Line(sb, "MicRouteId", MicRouteId);
             Line(sb, "MicRouteName", MicRouteName);
+            Line(sb, "FxRx", FxRx);
+            Line(sb, "FxTx", FxTx);
             foreach (KeyValuePair<string, int> p in ModeSteps) Line(sb, "ModeStep", p.Key + ":" + p.Value);
             foreach (KeyValuePair<string, int> p in ModeBws) Line(sb, "ModeBw", p.Key + ":" + p.Value);
             Line(sb, "DigiAutoQsy", DigiAutoQsy ? 1 : 0);

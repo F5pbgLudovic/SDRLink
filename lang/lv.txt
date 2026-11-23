@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Centrālā frekvence: {0} Hz (melns {1} Hz, balts {2} Hz)
 Slant correction: {0} ppm	Slīpuma korekcija: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	neatbalstīts audio formāts ({0} biti, {1} Hz)
+Flat	Plakans
+Clear voice (presence)	Skaidra balss (presence)
+Bass cut	Basu nogriešana
+Warm	Silts
+Softened treble	Mīkstināti augstie
+DX (boosted midrange)	DX (pastiprināti vidējie)
+10-band equalizer — SDRLink	10 joslu ekvalaizers — SDRLink
+Receive (WebSDR and rig heard on the PC)	Uztveršana (WebSDR un raiduztvērējs PC)
+Transmit (PC microphone to the rig)	Raidīšana (datora mikrofons uz raiduztvērēju)
+Equalizer on	Ekvalaizers ieslēgts
+Preset…	Sagatave…
+Noise gate on (mutes the microphone below the threshold)	Trokšņu vārti ieslēgti (izslēdz mikrofona skaņu zem sliekšņa)
+Threshold (dB)	Slieksnis (dB)
+Close time (ms)	Aizvēršanās laiks (ms)
+Compressor / limiter on	Kompresors / limitētājs ieslēgts
+Ratio (:1)	Attiecība (:1)
+Output gain (dB)	Izejas pastiprinājums (dB)
+Limiter ceiling (dB)	Limitētāja griesti (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Aizvērt
+Gate: open	Vārti: atvērti
+Gate: closed	Vārti: aizvērti
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Tiek lietots datora mikrofonam, ko sūta uz raiduztvērēju: darbojas, kad atzīmēts „Datora mikrofons uz raiduztvērēju“ (labais klikšķis uz PTT). Secība: trokšņu vārti, ekvalaizers, kompresors, limitētājs. Labais klikšķis uz slīdņa = atgriešana uz 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Tiek lietots WebSDR skaņai (skaļrunis un WebSDR auss diversity režīmā) un PC dzirdamajam raiduztvērējam (labais klikšķis uz Klusināt TRX), tiklīdz tas ir ieslēgts; dekoderu kabelis saglabā neapstrādāto skaņu. Labais klikšķis uz slīdņa = atgriešana uz 0.
+Gain reduction: {0} dB	Pastiprinājuma samazinājums: {0} dB
 Name:	Nosaukums:
 Address:	Adrese:
 Cancel	Atcelt
@@ -164,7 +190,6 @@ Status	Statuss
 List	Saraksts
 Listen to selection	Klausīties atlasīto
 Open	Atvērt
-Close	Aizvērt
 All lists	Visi saraksti
 Please select a favorite in the list first.	Vispirms sarakstā atlasiet izlases vienumu.
 Add favorite	Pievienot izlasei
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity izslēgta: nav otrā WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: otrais WebSDR “{0}”; mēra aizturi…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Otrais WebSDR diversity režīmam: “{0}” (klausīties ar pogu Diversity)
 Diversity: cannot open the second WebSDR ({0})	Diversity: otro WebSDR nevar atvērt ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10 joslu ekvalaizers: uztveršana (WebSDR un raiduztvērējs PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10 joslu ekvalaizers, trokšņu vārti, kompresors / limitētājs: raidīšana (datora mikrofons)…
+Colour when the equalizer is off	Krāsa, kad ekvalaizers izslēgts
+Colour when the equalizer is on	Krāsa, kad ekvalaizers ieslēgts
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10 joslu ekvalaizers. Klikšķis: uztveršana (WebSDR un raiduztvērējs, kas dzirdams datorā PC). Labais klikšķis: uztveršana vai raidīšana (datora mikrofons uz raiduztvērēju, ar trokšņu vārtiem un kompresoru / limitētāju), pogas krāsas
 The rig is still not answering: check that it is switched on and the link settings	Raidītājs joprojām neatbild: pārbaudiet, vai tas ir ieslēgts, un savienojuma iestatījumus
 SDRLink: no link with OmniRig	SDRLink: nav savienojuma ar OmniRig
 Last message: 	Pēdējais ziņojums: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Nav frekvences, ko saglabāt (nav ne raidītāja, ne WebSDR).
 Stored: {0} kHz	Saglabāts: {0} kHz
 microphone to choose	izvēlieties mikrofonu
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofona 10 joslu ekvalaizers, trokšņu vārti, kompresors / limitētājs…
 PC microphone	Datora mikrofons
 Rig transmit sound card (PC output connected to the rig)	Raidītāja raidīšanas skaņas karte (datora izeja, kas savienota ar raidītāju)
 No sound output found in Windows	Windows nav atrasta neviena skaņas izeja

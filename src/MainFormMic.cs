@@ -21,6 +21,10 @@ namespace SDRLink
             on.Checked = settings.MicRoute;
             on.Click += delegate { SetMicRoute(!settings.MicRoute); };
             m.Items.Add(on);
+            ToolStripMenuItem eq = new ToolStripMenuItem(Lang.T("Égaliseur 10 bandes, noise gate, compresseur / limiteur du micro…", "Microphone 10-band equalizer, noise gate, compressor / limiter…"));
+            eq.Checked = FxCfg.Active(true);
+            eq.Click += delegate { EqForm.Open(this, true); };   // 1.54
+            m.Items.Add(eq);
 
             ToolStripMenuItem mics = new ToolStripMenuItem(Lang.T("Micro du PC", "PC microphone"));
             ToolStripMenuItem cards = new ToolStripMenuItem(Lang.T("Carte son d'émission du poste (sortie du PC reliée au poste)", "Rig transmit sound card (PC output connected to the rig)"));
@@ -82,6 +86,7 @@ namespace SDRLink
                 ? Lang.F("Micro du PC envoyé au poste : « {0} » → « {1} »", "PC microphone sent to the rig: \"{0}\" → \"{1}\"", settings.MicRouteName, settings.TuneCardName)
                 : Lang.T("Micro du PC vers le poste désactivé", "PC microphone to the rig turned off"));
             UpdateMicRoute();
+            UpdateEqButton();
         }
 
         // Démarre, arrête ou rouvre l'aiguillage selon le réglage ; muet pendant Tune (la tonalité passe seule).

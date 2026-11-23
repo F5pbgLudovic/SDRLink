@@ -50,6 +50,7 @@ namespace SDRLink
         // DNR du poste (1.48) : même type et même niveau que celui du WebSDR, si la case du menu DNR le demande.
         readonly NoiseReducer nr = new NoiseReducer();
         readonly RigNotch nf = new RigNotch();   // notch du poste (1.50), avant le DNR comme sur la page
+        readonly FxChain fx;   // 1.54 : micro vers le poste = noise gate, égaliseur, compresseur, limiteur (réglages émission) ; écoute du poste = égaliseur de réception, comme le WebSDR
         float[] mono = new float[0];
 
         struct Fmt { public int Rate, Channels, Bits; public bool Float; public int Align { get { return Bits / 8 * Channels; } } }
@@ -61,6 +62,7 @@ namespace SDRLink
             CaptureId = captureId;
             OutputId = outputId;
             this.raw = raw;
+            fx = new FxChain(raw);   // micro : chaîne d'émission ; écoute du poste : égaliseur de réception (1.54)
             this.label = label;
             Muted = muted;
             thread = new Thread(Run);
@@ -281,6 +283,7 @@ namespace SDRLink
                     r = inFmt.Channels > 1 ? Sample(i * align + bytes, bytes) : l;
                 }
                 if (dnr) { l = mono[i]; r = l; }
+                if (fx != null) fx.Process(inFmt.Rate, ref l, ref r);
                 if (!haveLast) { lastL = l; lastR = r; haveLast = true; }
                 while (t < 1.0)
                 {

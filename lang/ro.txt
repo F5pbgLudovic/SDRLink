@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Frecvența centrală: {0} Hz (negru {1} Hz, alb {2} Hz)
 Slant correction: {0} ppm	Corecția înclinării: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	format audio neacceptat ({0} biți, {1} Hz)
+Flat	Plat
+Clear voice (presence)	Voce clară (prezență)
+Bass cut	Tăiere de bas
+Warm	Cald
+Softened treble	Acuți atenuați
+DX (boosted midrange)	DX (medii accentuate)
+10-band equalizer — SDRLink	Egalizor cu 10 benzi — SDRLink
+Receive (WebSDR and rig heard on the PC)	Recepție (WebSDR și stația radio pe PC)
+Transmit (PC microphone to the rig)	Emisie (microfonul PC-ului către stația radio)
+Equalizer on	Egalizor pornit
+Preset…	Presetare…
+Noise gate on (mutes the microphone below the threshold)	Poartă de zgomot pornită (amuțește microfonul sub prag)
+Threshold (dB)	Prag (dB)
+Close time (ms)	Timp de închidere (ms)
+Compressor / limiter on	Compresor / limitator pornit
+Ratio (:1)	Raport (:1)
+Output gain (dB)	Amplificare de ieșire (dB)
+Limiter ceiling (dB)	Plafon limitator (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Închidere
+Gate: open	Poartă: deschisă
+Gate: closed	Poartă: închisă
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Se aplică microfonului PC-ului trimis către stația radio: activ când „Microfonul PC-ului către stația radio” este bifat (clic dreapta pe PTT). Ordine: poartă de zgomot, egalizor, compresor, limitator. Clic dreapta pe un cursor = revenire la 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Se aplică sunetului WebSDR (difuzor și urechea WebSDR în diversity) și stației radio auzite pe PC (clic dreapta pe Mut TRX), imediat ce este pornită; cablul decodoarelor păstrează sunetul brut. Clic dreapta pe un cursor = revenire la 0.
+Gain reduction: {0} dB	Reducerea amplificării: {0} dB
 Name:	Nume:
 Address:	Adresă:
 Cancel	Anulare
@@ -164,7 +190,6 @@ Status	Stare
 List	Listă
 Listen to selection	Ascultare selecție
 Open	Deschidere
-Close	Închidere
 All lists	Toate listele
 Please select a favorite in the list first.	Selectați mai întâi un favorit din listă.
 Add favorite	Adăugare favorit
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversitate oprită: niciun al doilea WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversitate: al doilea WebSDR „{0}”; se măsoară întârzierea…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Al doilea WebSDR pentru diversitate: „{0}” (butonul Diversitate pentru ascultare)
 Diversity: cannot open the second WebSDR ({0})	Diversitate: al doilea WebSDR nu poate fi deschis ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	Egalizor cu 10 benzi: recepție (WebSDR și stația radio auzită pe PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	Egalizor cu 10 benzi, poartă de zgomot, compresor / limitator: emisie (microfonul PC-ului)…
+Colour when the equalizer is off	Culoare cu egalizorul oprit
+Colour when the equalizer is on	Culoare cu egalizorul pornit
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	Egalizor cu 10 benzi. Clic: recepție (WebSDR și stația radio auzită pe PC). Clic dreapta: recepție sau emisie (microfonul PC-ului către stația radio, cu poartă de zgomot și compresor / limitator), culorile butonului
 The rig is still not answering: check that it is switched on and the link settings	Stația tot nu răspunde: verificați dacă este pornită și setările legăturii
 SDRLink: no link with OmniRig	SDRLink: nicio legătură cu OmniRig
 Last message: 	Ultimul mesaj: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Nicio frecvență de memorat (nici stație, nici WebSDR).
 Stored: {0} kHz	Memorat: {0} kHz
 microphone to choose	microfon de ales
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Egalizor cu 10 benzi pentru microfon, poartă de zgomot, compresor / limitator…
 PC microphone	Microfonul PC-ului
 Rig transmit sound card (PC output connected to the rig)	Placa de sunet de emisie a stației (ieșirea PC-ului conectată la stație)
 No sound output found in Windows	Nu s-a găsit nicio ieșire de sunet în Windows

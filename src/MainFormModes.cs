@@ -33,6 +33,7 @@ namespace SDRLink
             notchSent = null;
             dnrSent = null;
             RefreshNotch();
+            SendPageEq();
         }
 
         // Envoie à la page l'état voulu du notch, s'il a changé (appelé souvent : changement de mode, FreeDV, décodeur…).

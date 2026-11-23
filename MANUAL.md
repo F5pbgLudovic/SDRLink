@@ -26,7 +26,7 @@ Overview; each feature is detailed further down in its own section.
 3. **3rd row (synchronisation)**: **Sync** (Both ways, Rig → WebSDR, WebSDR → Rig, Off), **Sync mode**, **WebSDR offset (Hz)**, **Mute WebSDR while transmitting** (right-click: receivers concerned) and **restore after (ms)**, **Auto notch (DNF)** (click: on / off, green button when on; right-click: options, original, adaptive or spectral type and its level, colours), **DNR** (noise reduction, since 1.46; click: on / off, right-click: classic, improved or AI type and its level), **Scan setup**, **▶ Scan**.
 4. **4th row (display and tuning)**: **PTT** button, **RIG** frequency and mode, **WEBSDR** frequency and mode (click either one: **frequency keypad** and **Mem** list, since 1.26), **USB, LSB, AM, FM, DIGI, CW** buttons, **kHz** entry (with history), **QSY**, **Save**, **Memories** and **▾** (last 20), wheel **Step**, **BW** (bandwidth, since 1.38), **Reduced view**, **Mini view**, **Always on top**, **PTT view** boxes, then the **TUNE** button (since 1.49), same shape as PTT and aligned with it.
 5. **5th row (WebSDR)**: **WebSDR** address (favorites list, suggestions while typing), favorites **list** shown, **Go**, **◀ Back**, **Reload**, **★ Add to favorites**, **Remove from favorites**, **Manage favorites…**, **Find WebSDRs…**, **FreeDV auto V1 / V2** (since 1.24), **digital modes** button (SSTV, FT8, CW, WEFAX…, since 1.25), **Mode?** (search for the mode being heard, since 1.38).
-6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume** ("FreeDV volume" during FreeDV speech, since 1.45), **TRX volume on PC** (when "Also hear the rig on the PC" is ticked, since 1.45), **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44).
+6. **Audio row**: **⇄**, **Mute WebSDR**, **Mute TRX**, **Mute ExpertSDR**, **Mute HDSDR**, **WebSDR volume** ("FreeDV volume" during FreeDV speech, since 1.45), **TRX volume on PC** (when "Also hear the rig on the PC" is ticked, since 1.45), **TRX volume**, **ExpertSDR volume**, **HDSDR volume** (only the sounds available), then **REC**, **Reset WebSDR** (since 1.31) and the **Diversity** button (since 1.40), followed, when diversity is set **on two WebSDRs**, by the **second WebSDR** box (since 1.44), then the **EQ** button (10-band equalizer, since 1.54).
 7. **The WebSDR page** with its **share**, **+** and **−** round buttons (since 1.43), then the **status bar** (messages, update link).
 
 ## All right-clicks
@@ -40,7 +40,7 @@ Overview; each feature is detailed further down in its own section.
 | Import/Export | **Reset the program…** (since 1.22), button colour |
 | SDRLINK cable (also on left-click) | output receiving the WebSDR audio, SDRLINK name, VB-CABLE download, colour when on / off |
 | Scan | **Scan of the band** you are in and its profiles, **Resume the scan**, current setting, other profiles, **Scan setup…**, **Media keys**, **Scan voice command** (since 1.52; the left click resumes the scan), colour when stopped / while scanning |
-| PTT | TX safety timeout, **PC microphone to the rig** (box, microphone, rig transmit sound card; since 1.51), colour when receiving / transmitting |
+| PTT | TX safety timeout, **PC microphone to the rig** (box, microphone, rig transmit sound card; since 1.51), **microphone 10-band equalizer, noise gate, compressor / limiter** (since 1.54), colour when receiving / transmitting |
 | TUNE | **rig transmit sound card**, **tone level** (1 to 100 %, slider and box, steps of 1), **duration** (5 s to 1 min), **keying: PTT on or rig VOX**, colour when idle / during Tune, **Close** as the last line (since 1.49) |
 | RIG | **VFO A / VFO B** controlled (since 1.49), background colour, text colour (left-click opens the frequency keypad) |
 | WEBSDR | background colour, text colour (left-click opens the frequency keypad) |
@@ -61,6 +61,7 @@ Overview; each feature is detailed further down in its own section.
 | REC | rig sound card, REC button colour |
 | Reset WebSDR | **Auto** (restart when the sound is lost) and its time, **full reset** of the current WebSDR, colours of both states (since 1.37) |
 | Diversity | reception put in the other ear (rig, ExpertSDR, HDSDR on Windows 11, or **On two WebSDRs** since 1.44), **WebSDR in the right ear**, measured delay (since 1.40), colour when off / measuring the delay / locked (since 1.41) |
+| EQ | **receive** equalizer (WebSDR and rig heard on the PC) or **transmit** equalizer (PC microphone), colour when off / on (since 1.54) |
 | WebSDR page | **Hide the WebSDR address** at the top of the page menu (since 1.43) |
 | Share, +, − round buttons on the page | **position of the buttons** (6 places, vertical or horizontal), **Page zoom: automatic**, **Hide the WebSDR address** (since 1.43) |
 | Status bar | last 20 messages, message types to hide |
@@ -426,6 +427,7 @@ Right-clicking most buttons offers their **background colour**. If the button al
   - **Auto notch (DNF)**: notch off / on (since 1.41; the former single colour applies to both until they are chosen);
   - **Mode?**: idle / while searching (since 1.41);
   - **Diversity**: off / measuring the delay / locked (since 1.41);
+  - **EQ**: equalizer off / on (since 1.54; green by default when on);
   - **digital modes** button (SSTV, FT8…): decoding off / on / signal being received (since 1.41).
 - **FreeDV auto** has no colour setting: its right-click switches straight between RADE V1 and V2, without a menu.
 - Colours offered: **Default** (the original colour, which follows dark mode and the palette), navy blue, blue, sky blue, teal, green, red, burgundy, purple, pink, brown, grey, black, yellow, orange, white, or any colour with **Other colour…**.
@@ -472,6 +474,7 @@ The large **PTT** button, to the left of "RIG", puts the rig into transmit over 
   - The audio goes out continuously, as is (no notch or DNR), with about 20 to 40 ms of delay. The rig only transmits it when transmitting (SDRLink's PTT, footswitch, mic PTT, VOX), and only if its **modulation source** is USB / rear (DATA, "REAR"). With the rig's VOX set on USB, room noise may trigger it.
   - During **Tune**, the microphone is silent: only the tone goes out.
   - The level is set in Windows (microphone level) and on the rig (USB / DATA input gain).
+  - **Microphone 10-band equalizer, noise gate, compressor / limiter…** (since 1.54, same right-click): see "10-band equalizer" below.
 - **Transmitting without modulation** (seen on an FTdx10): CAT PTT does put the rig into transmit, but the transmitted audio depends on the rig's **modulation source**. If it is set to the rear connector or USB ("REAR", often the case for FT8), the microphone is not transmitted. On the FTdx10, check in the transmit settings menus (TX AUDIO) the SSB modulation source (MOD SOURCE: MIC) and the mic gain. Other programs that key the rig over CAT, such as WSJT-X, behave in the same way.
 
 ## TUNE button (since 1.49)
@@ -757,6 +760,21 @@ With no rig or SDR at home, or to compare two distant stations: **two WebSDRs**,
 - Going back to the rig, ExpertSDR or HDSDR (same right-click) hides the box; the second WebSDR chosen is kept.
 - Two WebSDRs at once means twice the data received; a full KiwiSDR may refuse the second connection.
 
+## 10-band equalizer (since 1.54)
+
+**EQ** button, on the audio row just after Diversity. One window sets two equalizers, taken from HamRadioLink:
+
+- **Receive (WebSDR and rig heard on the PC)**: **click EQ**. The WebSDR audio goes through 10 peaking filters (31 Hz to 10 kHz, ±12 dB; slider up = gain), after the notch and the DNR, before the volume. The WebSDR ear in diversity (and the second WebSDR) is equalized too. The **rig heard on the PC** ("Also hear the rig on the PC", right-click Mute TRX) goes through the same equalizer as soon as it is on. The **SDRLINK cable** and the decoders keep the raw audio.
+- **Transmit (PC microphone to the rig)**: **right-click PTT** (or right-click EQ). The microphone sent to the rig goes, in this order, through the **noise gate**, the **equalizer**, the **compressor** and the **limiter**. It only works when **PC microphone to the rig** is ticked.
+
+In the window:
+
+- **Equalizer on**: on / off; the sliders keep their settings when it is off. **Preset…**: Flat, Clear voice (presence), Bass cut, Warm, Softened treble, DX (boosted midrange). **Right-click a slider**: back to 0 dB. The curve shows the resulting response.
+- **Noise gate** (transmit): mutes the microphone while its level stays below the **threshold** (-80 to -10 dB, -50 at first); it opens in 2 ms, stays open 100 ms after the last sound, then closes in **Close time** ms (150 at first). "Gate: open / closed" shows its state.
+- **Compressor / limiter** (transmit): **threshold** (-40 to 0 dB), **ratio** (1:1 to 20:1), **output gain** (0 to 24 dB), **attack** and **release** (ms); the **limiter** never lets the peak go above its **ceiling** (-12 to 0 dB). "Gain reduction" shows the current compression.
+- Each setting applies at once and is kept after a restart (and in the settings export).
+- The button shows what is on: **EQ RX** (receive), **EQ TX** (transmit, microphone sent to the rig), **EQ RX+TX**; it is green when either one runs (colours of your choice, right-click).
+
 ## Frequency memories
 
 - **Memories** button (frequency row, after Save): opens the memories window.
@@ -1026,6 +1044,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.54**
+  - **10-band equalizer** (**EQ** button after Diversity) for the WebSDR audio and the rig heard on the PC, and for the PC microphone sent to the rig with **noise gate**, **compressor** and **limiter** (right-click PTT); taken from HamRadioLink.
 - **1.53**
   - **Frequency changed during a scan** on the rig (VFO), in the WebSDR page (wheel, keys), with SDRLink's wheel or by typing a frequency: the scan stops and you stay on the new frequency.
 - **1.52**

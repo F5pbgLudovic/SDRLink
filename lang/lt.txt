@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Centrinis dažnis: {0} Hz (juoda {1} Hz, balta {2} Hz)
 Slant correction: {0} ppm	Pasvirimo korekcija: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	nepalaikomas garso formatas ({0} bitų, {1} Hz)
+Flat	Plokščias
+Clear voice (presence)	Aiškus balsas (presence)
+Bass cut	Žemų dažnių nukirpimas
+Warm	Šiltas
+Softened treble	Švelnesni aukštieji
+DX (boosted midrange)	DX (sustiprinti vidutiniai)
+10-band equalizer — SDRLink	10 juostų glaudintuvas — SDRLink
+Receive (WebSDR and rig heard on the PC)	Priėmimas (WebSDR ir stotis per PC)
+Transmit (PC microphone to the rig)	Siuntimas (kompiuterio mikrofonas į radijo stotį)
+Equalizer on	Glaudintuvas įjungtas
+Preset…	Išankstinė nuostata…
+Noise gate on (mutes the microphone below the threshold)	Triukšmo vartai įjungti (nutildo mikrofoną žemiau slenksčio)
+Threshold (dB)	Slenkstis (dB)
+Close time (ms)	Užsidarymo laikas (ms)
+Compressor / limiter on	Kompresorius / ribotuvas įjungtas
+Ratio (:1)	Santykis (:1)
+Output gain (dB)	Išėjimo stiprinimas (dB)
+Limiter ceiling (dB)	Ribotuvo lubos (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Uždaryti
+Gate: open	Vartai: atidaryti
+Gate: closed	Vartai: uždaryti
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Taikoma į radijo stotį siunčiamam kompiuterio mikrofonui: aktyvu, kai pažymėta „Kompiuterio mikrofonas į radijo stotį“ (spustelėkite PTT dešiniuoju pelės klavišu). Eilė: triukšmo vartai, glaudintuvas, kompresorius, ribotuvas. Spustelėjus slankiklį dešiniuoju klavišu = grįžta į 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Taikoma WebSDR garsui (garsiakalbis ir WebSDR ausis diversity režimu) ir per PC girdimai radijo stočiai (dešinysis klavišas ant Nutildyti TRX), vos ji įjungta; dekoderių kabelis išlaiko neapdorotą garsą. Spustelėjus slankiklį dešiniuoju klavišu = grįžta į 0.
+Gain reduction: {0} dB	Stiprinimo mažinimas: {0} dB
 Name:	Pavadinimas:
 Address:	Adresas:
 Cancel	Atšaukti
@@ -164,7 +190,6 @@ Status	Būsena
 List	Sąrašas
 Listen to selection	Klausyti pasirinkto
 Open	Atidaryti
-Close	Uždaryti
 All lists	Visi sąrašai
 Please select a favorite in the list first.	Pirmiausia sąraše pasirinkite parankinį.
 Add favorite	Įtraukti į parankinius
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity išjungta: nėra antrojo WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: antrasis WebSDR „{0}“; matuojamas vėlavimas…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Antrasis WebSDR diversity: „{0}“ (klausytis mygtuku Diversity)
 Diversity: cannot open the second WebSDR ({0})	Diversity: nepavyksta atverti antrojo WebSDR ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10 juostų glaudintuvas: priėmimas (WebSDR ir radijo stotis, girdima per PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10 juostų glaudintuvas, triukšmo vartai, kompresorius / ribotuvas: siuntimas (kompiuterio mikrofonas)…
+Colour when the equalizer is off	Spalva, kai glaudintuvas išjungtas
+Colour when the equalizer is on	Spalva, kai glaudintuvas įjungtas
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10 juostų glaudintuvas. Spustelėjimas: priėmimas (WebSDR ir radijo stotis, girdima per PC). Spustelėjimas dešiniuoju pelės klavišu: priėmimas arba siuntimas (kompiuterio mikrofonas į radijo stotį, su triukšmo vartais ir kompresoriumi / ribotuvu), mygtuko spalvos
 The rig is still not answering: check that it is switched on and the link settings	Stotis vis dar neatsako: patikrinkite, ar ji įjungta, ir ryšio nustatymus
 SDRLink: no link with OmniRig	SDRLink: nėra ryšio su OmniRig
 Last message: 	Paskutinis pranešimas: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Nėra dažnio įrašymui (nei radijo stoties, nei WebSDR).
 Stored: {0} kHz	Įrašyta: {0} kHz
 microphone to choose	pasirinkite mikrofoną
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofono 10 juostų glaudintuvas, triukšmo vartai, kompresorius / ribotuvas…
 PC microphone	Kompiuterio mikrofonas
 Rig transmit sound card (PC output connected to the rig)	Radijo stoties siuntimo garso plokštė (kompiuterio išvestis, prijungta prie stoties)
 No sound output found in Windows	Windows nerasta jokios garso išvesties

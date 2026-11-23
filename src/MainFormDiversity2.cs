@@ -163,6 +163,7 @@ namespace SDRLink
             web2.CoreWebView2.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.setVolume(0);");
             div2NotchSent = null;
             Div2Notch();
+            SendPageEq();
         }
 
         void Div2Notch()

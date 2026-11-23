@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Frecuencia central: {0} Hz (negro {1} Hz, blanco {2} Hz)
 Slant correction: {0} ppm	Corrección de inclinación: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	formato de audio no compatible ({0} bits, {1} Hz)
+Flat	Plano
+Clear voice (presence)	Voz clara (presencia)
+Bass cut	Corte de graves
+Warm	Cálido
+Softened treble	Agudos suavizados
+DX (boosted midrange)	DX (medios realzados)
+10-band equalizer — SDRLink	Ecualizador de 10 bandas — SDRLink
+Receive (WebSDR and rig heard on the PC)	Recepción (WebSDR y equipo en el PC)
+Transmit (PC microphone to the rig)	Transmisión (micrófono del PC al equipo)
+Equalizer on	Ecualizador activado
+Preset…	Preajuste…
+Noise gate on (mutes the microphone below the threshold)	Puerta de ruido activada (silencia el micrófono bajo el umbral)
+Threshold (dB)	Umbral (dB)
+Close time (ms)	Tiempo de cierre (ms)
+Compressor / limiter on	Compresor / limitador activado
+Ratio (:1)	Relación (:1)
+Output gain (dB)	Ganancia de salida (dB)
+Limiter ceiling (dB)	Techo del limitador (dB)
+Attack (ms)	Ataque (ms)
+Release (ms)	Liberación (ms)
+Close	Cerrar
+Gate: open	Puerta: abierta
+Gate: closed	Puerta: cerrada
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Se aplica al micrófono del PC enviado al equipo: activo cuando «Micrófono del PC al equipo» está marcado (clic derecho en PTT). Orden: puerta de ruido, ecualizador, compresor, limitador. Clic derecho en un deslizador = volver a 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Se aplica al audio del WebSDR (altavoz y oído WebSDR en diversity) y al equipo escuchado en el PC (clic derecho en Silenciar TRX), en cuanto está encendido; el cable de los decodificadores conserva el audio en bruto. Clic derecho en un deslizador = volver a 0.
+Gain reduction: {0} dB	Reducción de ganancia: {0} dB
 Name:	Nombre:
 Address:	Dirección:
 Cancel	Cancelar
@@ -164,7 +190,6 @@ Status	Estado
 List	Lista
 Listen to selection	Escuchar selección
 Open	Abrir
-Close	Cerrar
 All lists	Todas las listas
 Please select a favorite in the list first.	Seleccione primero un favorito en la lista.
 Add favorite	Añadir favorito
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversidad desactivada: no hay segundo WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversidad: segundo WebSDR «{0}»; midiendo el retardo…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Segundo WebSDR para la diversidad: «{0}» (botón Diversidad para escuchar)
 Diversity: cannot open the second WebSDR ({0})	Diversidad: no se puede abrir el segundo WebSDR ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	Ecualizador de 10 bandas: recepción (WebSDR y equipo escuchados en el PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	Ecualizador de 10 bandas, puerta de ruido, compresor / limitador: transmisión (micrófono del PC)…
+Colour when the equalizer is off	Color con el ecualizador apagado
+Colour when the equalizer is on	Color con el ecualizador encendido
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	Ecualizador de 10 bandas. Clic: recepción (WebSDR y equipo escuchados en el PC). Clic derecho: recepción o transmisión (micrófono del PC al equipo, con puerta de ruido y compresor / limitador), colores del botón
 The rig is still not answering: check that it is switched on and the link settings	El equipo sigue sin responder: compruebe que está encendido y los ajustes del enlace
 SDRLink: no link with OmniRig	SDRLink: sin enlace con OmniRig
 Last message: 	Último mensaje: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	No hay frecuencia que guardar (ni equipo ni WebSDR).
 Stored: {0} kHz	Guardado: {0} kHz
 microphone to choose	micrófono por elegir
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Ecualizador de 10 bandas del micrófono, puerta de ruido, compresor / limitador…
 PC microphone	Micrófono del PC
 Rig transmit sound card (PC output connected to the rig)	Tarjeta de sonido de transmisión del equipo (salida del PC conectada al equipo)
 No sound output found in Windows	No se ha encontrado ninguna salida de sonido en Windows

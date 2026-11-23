@@ -923,6 +923,7 @@ namespace SDRLink
             lblHdsdrVolumeCaption.Visible = trkHdsdrVolume.Visible = lblHdsdrVolume.Visible = false;
             CreateDiversityButton();
             CreateDiv2Combo();   // second WebSDR de la diversité (1.44), juste après le bouton
+            CreateEqButton();    // égaliseur 10 bandes (1.54), après la diversité
             // Ordre : ⇄, les quatre Mute, puis chaque volume (libellé, réglette, valeur), et REC.
             // Les volumes masqués ne prennent pas de place : REC suit toujours le dernier volume affiché.
             audioOrder = new Control[]
@@ -933,7 +934,7 @@ namespace SDRLink
                 lblRigVolumeCaption, trkRigVolume, lblRigVolume,
                 lblEsdrVolumeCaption, trkEsdrVolume, lblEsdrVolume,
                 lblHdsdrVolumeCaption, trkHdsdrVolume, lblHdsdrVolume,
-                btnRec, btnReinit, chkDiversity, cbUrl2,
+                btnRec, btnReinit, chkDiversity, cbUrl2, btnEq,
             };
             audio.Controls.AddRange(audioOrder);
 
@@ -1237,6 +1238,7 @@ namespace SDRLink
             UpdateFindModeButton();
             UpdateDiversityButton(true);
             UpdateNotchButton();
+            UpdateEqButton();
             UpdateDnrButton();
             UpdateSstvButton();
             UpdatePttButton();

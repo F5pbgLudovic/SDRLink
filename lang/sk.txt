@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Stredová frekvencia: {0} Hz (čierna {1} Hz, biela {2} Hz)
 Slant correction: {0} ppm	Korekcia sklonu: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	nepodporovaný zvukový formát ({0} bitov, {1} Hz)
+Flat	Plochý
+Clear voice (presence)	Čistý hlas (prítomnosť)
+Bass cut	Orezanie basov
+Warm	Teplý
+Softened treble	Zjemnené výšky
+DX (boosted midrange)	DX (zvýraznené stredy)
+10-band equalizer — SDRLink	10-pásmový ekvalizér — SDRLink
+Receive (WebSDR and rig heard on the PC)	Príjem (WebSDR a transceiver na PC)
+Transmit (PC microphone to the rig)	Vysielanie (mikrofón počítača k transceiveru)
+Equalizer on	Ekvalizér zapnutý
+Preset…	Predvoľba…
+Noise gate on (mutes the microphone below the threshold)	Šumová brána zapnutá (stlmí mikrofón pod prahom)
+Threshold (dB)	Prah (dB)
+Close time (ms)	Čas zatvorenia (ms)
+Compressor / limiter on	Kompresor / limiter zapnutý
+Ratio (:1)	Pomer (:1)
+Output gain (dB)	Výstupné zosilnenie (dB)
+Limiter ceiling (dB)	Strop limitera (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Zavrieť
+Gate: open	Brána: otvorená
+Gate: closed	Brána: zatvorená
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Použije sa na mikrofón počítača posielaný do transceivera: je aktívny, keď je začiarknuté „Mikrofón počítača k transceiveru“ (pravé tlačidlo na PTT). Poradie: šumová brána, ekvalizér, kompresor, limiter. Pravé tlačidlo na posuvníku = návrat na 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Použije sa na zvuk z WebSDR (reproduktor a ucho WebSDR v diversity) a na transceiver počuteľný na PC (pravé tlačidlo na Stlmiť TRX), hneď ako je zapnutý; kábel dekodérov zachováva nespracovaný zvuk. Pravé tlačidlo na posuvníku = návrat na 0.
+Gain reduction: {0} dB	Zníženie zosilnenia: {0} dB
 Name:	Názov:
 Address:	Adresa:
 Cancel	Zrušiť
@@ -164,7 +190,6 @@ Status	Stav
 List	Zoznam
 Listen to selection	Počúvať výber
 Open	Otvoriť
-Close	Zavrieť
 All lists	Všetky zoznamy
 Please select a favorite in the list first.	Najprv vyberte obľúbenú položku v zozname.
 Add favorite	Pridať obľúbené
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diverzita vyp.: žiadny druhý WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diverzita: druhý WebSDR „{0}“; meranie oneskorenia…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Druhý WebSDR pre diverzitu: „{0}“ (počúvanie tlačidlom Diverzita)
 Diversity: cannot open the second WebSDR ({0})	Diverzita: druhý WebSDR sa nedá otvoriť ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-pásmový ekvalizér: príjem (WebSDR a transceiver počuteľný na PC)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-pásmový ekvalizér, šumová brána, kompresor / limiter: vysielanie (mikrofón počítača)…
+Colour when the equalizer is off	Farba pri vypnutom ekvalizéri
+Colour when the equalizer is on	Farba pri zapnutom ekvalizéri
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-pásmový ekvalizér. Kliknutie: príjem (WebSDR a transceiver počuteľný na PC). Pravé tlačidlo: príjem alebo vysielanie (mikrofón počítača k transceiveru, so šumovou bránou a kompresorom / limiterom), farby tlačidla
 The rig is still not answering: check that it is switched on and the link settings	Transceiver stále neodpovedá: skontrolujte, či je zapnutý, a nastavenie spojenia
 SDRLink: no link with OmniRig	SDRLink: žiadne spojenie s OmniRig
 Last message: 	Posledná správa: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Žiadna frekvencia na uloženie (ani rádiostanica, ani WebSDR).
 Stored: {0} kHz	Uložené: {0} kHz
 microphone to choose	mikrofón na výber
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofónový 10-pásmový ekvalizér, šumová brána, kompresor / limiter…
 PC microphone	Mikrofón PC
 Rig transmit sound card (PC output connected to the rig)	Zvuková karta na vysielanie transceivera (výstup PC pripojený k transceiveru)
 No sound output found in Windows	Vo Windows sa nenašiel žiadny zvukový výstup

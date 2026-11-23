@@ -30,6 +30,7 @@ namespace SDRLink
         if (L.tapOn) tap(ctx);
         if (L.notchOn) { if (L.notchAlgo === 0) notch(ctx, true); nf(ctx, L.notchAlgo > 0); }
         if (L.dnrOn) dnr(ctx, true);
+        if (L.eqOn) eq(ctx);
         watch(ctx);
         if (L.snrOn) snrNode(ctx);
       }
@@ -74,6 +75,7 @@ namespace SDRLink
       if (n && n.on) end = n.f[NOTCHES - 1];
       if (q && q.on && q.node) end = q.node;
       if (d && d.on && d.node) end = d.node;
+      if (ctx.__sdrlinkEq && ctx.__sdrlinkEq.on) end = ctx.__sdrlinkEq.f[9];
       return end;
     };
     var rewire = function (ctx) {
@@ -87,6 +89,8 @@ namespace SDRLink
       if (n && n.on) { link(prev, n.f[0]); prev = n.f[NOTCHES - 1]; }
       if (q && q.on && q.node) { link(prev, q.node); prev = q.node; }
       if (d && d.on && d.node) { link(prev, d.node); prev = d.node; }
+      var e = ctx.__sdrlinkEq;
+      if (e && e.on) { link(prev, e.f[0]); prev = e.f[9]; }
       link(prev, out);
       retap(ctx);
     };
@@ -1023,6 +1027,30 @@ namespace SDRLink
       n.f[s].frequency.setTargetAtTime(f, ctx.currentTime, n.slots[s].placed ? 0.05 : 0.005);
       n.f[s].Q.value = Math.max(5, f / nWidth);
       n.slots[s].placed = true;
+    };
+    // Égaliseur 10 bandes (1.54, comme HamRadioLink) : 10 filtres en cloche du navigateur, en fin de chaîne (après notch et DNR),
+    // avant le volume ; une bande au-dessus de 45 % de la fréquence d'échantillonnage reste à 0 dB.
+    var EQF = [31, 60, 115, 220, 420, 800, 1500, 2800, 5300, 10000];
+    L.eqOn = false; L.eqG = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var eq = function (ctx) {
+      var e = ctx.__sdrlinkEq;
+      if (!e) {
+        if (!L.eqOn || !ctx.__sdrlinkIn || !ctx.createBiquadFilter) return;
+        e = ctx.__sdrlinkEq = { on: false, f: [] };
+        for (var i = 0; i < 10; i++) {
+          var b = ctx.createBiquadFilter();
+          b.type = 'peaking'; b.frequency.value = EQF[i]; b.Q.value = 1.41; b.gain.value = 0;
+          if (i > 0) origConnect.call(e.f[i - 1], b);
+          e.f.push(b);
+        }
+      }
+      for (var j = 0; j < 10; j++) e.f[j].gain.value = EQF[j] < ctx.sampleRate * 0.45 ? +L.eqG[j] || 0 : 0;
+      if (e.on !== L.eqOn) { e.on = L.eqOn; rewire(ctx); }
+    };
+    L.setEq = function (on, g) {
+      L.eqOn = !!on;
+      if (g && g.length === 10) L.eqG = g.slice();
+      for (var i = 0; i < L.ctxs.length; i++) eq(L.ctxs[i]);
     };
     L.notchOn = false;
     // algo : 0 = d'origine, 1 = adaptatif, 2 = spectral (1.50) ; absent = d'origine (appel d'avant la 1.50). Le niveau est celui

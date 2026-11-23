@@ -134,6 +134,32 @@ Squelch: {0}	Squelch: {0}
 Centre frequency: {0} Hz (black {1} Hz, white {2} Hz)	Mittenfrequenz: {0} Hz (Schwarz {1} Hz, Weiß {2} Hz)
 Slant correction: {0} ppm	Schräglagenkorrektur: {0} ppm
 unsupported audio format ({0} bits, {1} Hz)	Audioformat nicht unterstützt ({0} Bit, {1} Hz)
+Flat	Linear
+Clear voice (presence)	Klare Stimme (Präsenz)
+Bass cut	Bassabsenkung
+Warm	Warm
+Softened treble	Abgeschwächte Höhen
+DX (boosted midrange)	DX (angehobene Mitten)
+10-band equalizer — SDRLink	10-Band-Equalizer — SDRLink
+Receive (WebSDR and rig heard on the PC)	Empfang (WebSDR und Funkgerät am PC)
+Transmit (PC microphone to the rig)	Senden (PC-Mikrofon zum Funkgerät)
+Equalizer on	Equalizer ein
+Preset…	Voreinstellung…
+Noise gate on (mutes the microphone below the threshold)	Noise-Gate ein (schaltet das Mikrofon unter der Schwelle stumm)
+Threshold (dB)	Schwelle (dB)
+Close time (ms)	Schließzeit (ms)
+Compressor / limiter on	Kompressor / Limiter ein
+Ratio (:1)	Verhältnis (:1)
+Output gain (dB)	Ausgangsverstärkung (dB)
+Limiter ceiling (dB)	Limiter-Grenze (dB)
+Attack (ms)	Attack (ms)
+Release (ms)	Release (ms)
+Close	Schließen
+Gate: open	Gate: offen
+Gate: closed	Gate: geschlossen
+Applied to the PC microphone sent to the rig: active when "PC microphone to the rig" is ticked (right-click PTT). Order: noise gate, equalizer, compressor, limiter. Right-click a slider = back to 0.	Wird auf das an das Funkgerät gesendete PC-Mikrofon angewendet: aktiv, wenn „PC-Mikrofon zum Funkgerät“ angehakt ist (Rechtsklick auf PTT). Reihenfolge: Noise-Gate, Equalizer, Kompressor, Limiter. Rechtsklick auf einen Schieberegler = zurück auf 0.
+Applied to the WebSDR audio (speaker and WebSDR ear in diversity) and to the rig heard on the PC (right-click Mute TRX), as soon as it is on; the decoders' cable keeps the raw audio. Right-click a slider = back to 0.	Wird auf den WebSDR-Ton angewendet (Lautsprecher und WebSDR-Ohr im Diversity) und auf das am PC gehörte Funkgerät (Rechtsklick auf TRX stumm), sobald es eingeschaltet ist; das Kabel der Decoder behält den Rohton. Rechtsklick auf einen Schieberegler = zurück auf 0.
+Gain reduction: {0} dB	Verstärkungsreduktion: {0} dB
 Name:	Name:
 Address:	Adresse:
 Cancel	Abbrechen
@@ -164,7 +190,6 @@ Status	Status
 List	Liste
 Listen to selection	Auswahl anhören
 Open	Öffnen
-Close	Schließen
 All lists	Alle Listen
 Please select a favorite in the list first.	Bitte wählen Sie zuerst einen Favoriten in der Liste aus.
 Add favorite	Favorit hinzufügen
@@ -615,6 +640,11 @@ Diversity off: no second WebSDR	Diversity aus: kein zweiter WebSDR
 Diversity: second WebSDR "{0}"; measuring the delay…	Diversity: zweiter WebSDR „{0}“; Verzögerung wird gemessen…
 Second WebSDR for diversity: "{0}" (Diversity button to listen)	Zweiter WebSDR für Diversity: „{0}“ (zum Hören die Taste Diversity)
 Diversity: cannot open the second WebSDR ({0})	Diversity: zweiter WebSDR lässt sich nicht öffnen ({0})
+10-band equalizer: receive (WebSDR and rig heard on the PC)…	10-Band-Equalizer: Empfang (WebSDR und Funkgerät, am PC gehört)…
+10-band equalizer, noise gate, compressor / limiter: transmit (PC microphone)…	10-Band-Equalizer, Noise-Gate, Kompressor / Limiter: Senden (PC-Mikrofon)…
+Colour when the equalizer is off	Farbe bei ausgeschaltetem Equalizer
+Colour when the equalizer is on	Farbe bei eingeschaltetem Equalizer
+10-band equalizer. Click: receive (WebSDR and rig heard on the PC). Right-click: receive or transmit (PC microphone to the rig, with noise gate and compressor / limiter), button colours	10-Band-Equalizer. Klick: Empfang (WebSDR und Funkgerät, am PC gehört). Rechtsklick: Empfang oder Senden (PC-Mikrofon zum Funkgerät, mit Noise-Gate und Kompressor / Limiter), Farben der Schaltfläche
 The rig is still not answering: check that it is switched on and the link settings	Das Funkgerät antwortet immer noch nicht: prüfen Sie, ob es eingeschaltet ist, und die Verbindungseinstellungen
 SDRLink: no link with OmniRig	SDRLink: keine Verbindung mit OmniRig
 Last message: 	Letzte Meldung: 
@@ -631,6 +661,7 @@ Click: frequency keypad and Mem list of the last frequencies; wheel: change the 
 No frequency to store (no rig, no WebSDR).	Keine Frequenz zum Speichern (weder Funkgerät noch WebSDR).
 Stored: {0} kHz	Gespeichert: {0} kHz
 microphone to choose	Mikrofon auswählen
+Microphone 10-band equalizer, noise gate, compressor / limiter…	Mikrofon-10-Band-Equalizer, Noise-Gate, Kompressor / Limiter…
 PC microphone	PC-Mikrofon
 Rig transmit sound card (PC output connected to the rig)	Sende-Soundkarte des Funkgeräts (PC-Ausgang, mit dem Funkgerät verbunden)
 No sound output found in Windows	Kein Audioausgang in Windows gefunden
