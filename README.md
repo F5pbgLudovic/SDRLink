@@ -1,4 +1,4 @@
-# SDRLink V1.54 — @F5PBG 2026
+# SDRLink V1.55 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -16,7 +16,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - scan de fréquences (avec jusqu'à 10 zones non scannées) ou de mémoires, jusqu'à 10 profils de scan nommés (même format que PhoneSDRLink), clic = reprise immédiate à la fréquence actuelle, clic droit = scan de la bande où l'on se trouve (160 m à 70 cm, 27 MHz) et ses profils, **pause sur signal** (seuil S/N, durée, pas en arrière), durées dès 0,05 s, mode par scan, **touches multimédia** et **commande vocale** du scan, scan arrêté si l'on change la fréquence sur le poste ou le WebSDR ;
   - **mode par bande** : en changeant de bande (160 m à 70 cm, 27 MHz, et jusqu'à 0,5 MHz d'une bande), le poste et le WebSDR prennent le mode retenu pour la bande, sinon LSB / USB / AM ;
   - bouton REC sur la ligne de son : enregistrement du son des haut-parleurs (ou de la carte son du poste) en MP3, WAV ou FLAC, même taille que Mute WebSDR, couleur réglable ;
-  - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou automatiquement quand son son est perdu (Réinit Auto WebSDR, clic droit : Auto et délai de 10 à 60 s, jamais quand le son est coupé volontairement) ; réinitialisation totale au clic droit ;
+  - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou automatiquement quand son son est perdu (Réinit Auto WebSDR, clic droit : Auto et délai de 10 à 60 s, jamais quand le son est coupé dans la page, même avec Mute WebSDR ou le volume de SDRLink à 0) ; réinitialisation totale au clic droit ;
   - **égaliseur 10 bandes** du son du WebSDR et du poste écouté sur le PC (bouton EQ, préréglages, courbe de réponse) ;
   - écoute en diversité (bouton Diversité, notch auto et DNR compris) : le WebSDR dans une oreille, le poste, ExpertSDR ou HDSDR dans l'autre, le son local retardé automatiquement pour tomber en même temps que le WebSDR ; ou **deux WebSDR**, un dans chaque oreille (le second écouté sans être affiché, calé tout seul) ;
   - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
@@ -76,7 +76,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - frequency scan (with up to 10 skipped ranges) or memory scan, up to 10 named scan profiles (same format as PhoneSDRLink), click = resume at once from the current frequency, right-click = scan of the band you are in (160 m to 70 cm, 27 MHz) and its profiles, **pause on signal** (S/N threshold, time, steps back), times from 0.05 s, mode per scan, **media keys** and **voice command** for the scan, scan stopped when you change the frequency on the rig or the WebSDR;
   - **mode per band**: when changing band (160 m to 70 cm, 27 MHz, and up to 0.5 MHz from a band), the rig and the WebSDR take the mode kept for the band, otherwise LSB / USB / AM;
   - REC button on the audio row: records the speaker sound (or the rig sound card) to MP3, WAV or FLAC, same size as Mute WebSDR, adjustable colour;
-  - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or automatically when its sound is lost (Auto Reset WebSDR, right-click: Auto and a time of 10 to 60 s, never when the sound is cut on purpose); full reset from the right-click menu;
+  - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or automatically when its sound is lost (Auto Reset WebSDR, right-click: Auto and a time of 10 to 60 s, never when the sound is cut in the page, even with Mute WebSDR or SDRLink's volume at 0); full reset from the right-click menu;
   - **10-band equalizer** for the WebSDR audio and the rig heard on the PC (EQ button, presets, response curve);
   - diversity listening (Diversity button, auto notch and DNR included): the WebSDR in one ear, the rig, ExpertSDR or HDSDR in the other, the local audio delayed automatically to match the WebSDR; or **two WebSDRs**, one in each ear (the second one heard without being displayed, aligned by itself);
   - reduced, mini and PTT (PTT button only, with the Always on top box) views;

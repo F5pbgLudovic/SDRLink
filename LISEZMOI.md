@@ -717,7 +717,8 @@ Bouton **Réinit WebSDR**, sur la ligne de son, juste après REC : il relance le
 Relance automatique du WebSDR quand son son est perdu (coupure du serveur, délai d'inactivité, « session timed out »…), comme la « Réinitialisation automatique WEBSDR » de PhoneSDRLink.
 - Cochez **Auto** au clic droit : le bouton devient **Réinit Auto WebSDR** et change de couleur. Il garde **la même largeur** dans les deux états (celle du plus long des deux textes dans la langue choisie).
 - Toutes les **10 secondes**, SDRLink regarde depuis combien de temps la page du WebSDR ne produit plus de son. Au-delà du délai choisi, la page est relancée **en gardant ses réglages**, comme un clic sur le bouton ; la barre d'état l'indique (« Plus de son depuis 30 s : WebSDR relancé automatiquement »). La relance a donc lieu entre le délai choisi et 10 s de plus.
-- **Pas de relance quand le son est coupé volontairement** : **Mute WebSDR** enclenché, **Volume WebSDR** à 0, parole FreeDV jouée à la place du WebSDR, **curseur de volume de la page** à zéro, ou **bouton « mute » de la page** enfoncé (websdr.org, KiwiSDR…). Quand le son est remis, le décompte repart de zéro.
+- **Pas de relance quand le son est coupé dans la page** : **curseur de volume de la page** à zéro, ou **bouton « mute » de la page** enfoncé (websdr.org, KiwiSDR…). Quand le son est remis, le décompte repart de zéro.
+- **Mute WebSDR**, **Volume WebSDR** à 0, parole FreeDV ou diversité de SDRLink ne coupent que le son du PC : **depuis la 1.55, le WebSDR est relancé quand même** (il sert toujours au câble SDRLINK, aux décodeurs et au S-mètre ; un KiwiSDR arrêté après ses 15 minutes d'inactivité ne repartait pas avec le volume à 0).
 - Une page dont le son n'a jamais démarré n'est pas relancée.
 - **3 essais de suite au plus** : si le son ne revient pas après 3 relances, SDRLink attend. Le compteur repart quand le son revient vraiment, quand on change de WebSDR ou quand on clique sur le bouton.
 - En FM avec un squelch fermé, le silence compte comme une perte de son (3 relances au plus).
@@ -1043,6 +1044,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.55**
+  - **Réinit Auto WebSDR** : le WebSDR est relancé quand son son est perdu **même avec Mute WebSDR ou Volume WebSDR à 0** (ils ne coupent que le son du PC) ; un KiwiSDR arrêté après ses 15 minutes d'inactivité ne repartait pas.
 - **1.54**
   - **Égaliseur 10 bandes** (bouton **EQ** après Diversité) pour le son du WebSDR et du poste écouté sur le PC, et pour le micro du PC envoyé au poste avec **noise gate**, **compresseur** et **limiteur** (clic droit sur PTT) ; repris de HamRadioLink.
 - **1.53**

@@ -3129,7 +3129,8 @@ namespace SDRLink
         // toutes les 10 s, SDRLink demande à la page depuis combien de temps elle ne produit plus de son (mesuré avant le volume
         // et Mute WebSDR, qui ne comptent donc pas comme une perte). Au-delà du délai choisi, la page est rechargée en gardant
         // ses réglages, comme au clic. 3 essais de suite au plus : le compteur repart quand le son revient, quand on change de
-        // WebSDR ou qu'on relance à la main. Volume de la page à zéro ou son bouton « mute » enfoncé : pas de relance.
+        // WebSDR ou qu'on relance à la main. Volume de la page à zéro ou son bouton « mute » enfoncé : pas de relance
+        // (Mute WebSDR et Volume WebSDR de SDRLink, eux, n'empêchent plus la relance depuis la 1.55).
         const int AutoReinitMaxTries = 3;
         static readonly int[] AutoReinitDelays = { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60 };
         System.Windows.Forms.Timer reinitWatch;
@@ -3148,9 +3149,9 @@ namespace SDRLink
         {
             CoreWebView2 core = web.CoreWebView2;
             if (!settings.AutoReinit || core == null || sdrKind == "" || reinitAsking) return;
-            // Son coupé volontairement dans SDRLink (Mute WebSDR, volume à 0, parole FreeDV jouée à la place) : pas de relance.
-            // (La mesure se fait avant ce volume, mais on ne relance jamais un WebSDR que l'opérateur a fait taire.)
-            if (sdrMuted || sdrVolume == 0 || (fdvVoice && fdvSource == 0)) return;
+            // Mute WebSDR, Volume WebSDR à 0, parole FreeDV ou diversité ne coupent que le son du PC : la mesure se fait avant,
+            // et le WebSDR sert toujours (câble SDRLINK, décodeurs, S-mètre). Il est donc relancé quand même (1.55 : un KiwiSDR
+            // arrêté après 15 min d'inactivité ne repartait pas avec le volume à 0). Seuls le volume ou le mute de la page l'empêchent.
             string v = null;
             reinitAsking = true;
             try { v = await core.ExecuteScriptAsync("window.__sdrlink && window.__sdrlink.silentMs ? window.__sdrlink.silentMs() + '|' + (window.__sdrlink.heard ? 1 : 0) : '-1|0'"); }

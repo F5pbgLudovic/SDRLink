@@ -719,7 +719,8 @@ On the "Sync" row, after "Auto notch (DNF)":
 Automatic restart of the WebSDR when its sound is lost (server drop, idle timeout, "session timed out"…), like PhoneSDRLink's "Automatic WebSDR reset".
 - Tick **Auto** in the right-click menu: the button becomes **Auto Reset WebSDR** and changes colour. It keeps **the same width** in both states (that of the longer of the two texts in the chosen language).
 - Every **10 seconds**, SDRLink checks how long the WebSDR page has produced no sound. Beyond the chosen time, the page is restarted **keeping its settings**, like a click on the button; the status bar says so ("No sound for 30 s: WebSDR restarted automatically"). The restart therefore happens between the chosen time and 10 s more.
-- **No restart when the sound is cut on purpose**: **Mute WebSDR** on, **WebSDR volume** at 0, FreeDV speech played instead of the WebSDR, **page volume slider** at zero, or **page "mute" button** pressed (websdr.org, KiwiSDR…). When the sound is back on, the count starts again from zero.
+- **No restart when the sound is cut in the page**: **page volume slider** at zero, or **page "mute" button** pressed (websdr.org, KiwiSDR…). When the sound is back on, the count starts again from zero.
+- SDRLink's **Mute WebSDR**, **WebSDR volume** at 0, FreeDV speech or diversity only cut the PC sound: **since 1.55 the WebSDR is restarted anyway** (it still feeds the SDRLINK cable, the decoders and the S-meter; a KiwiSDR stopped after its 15-minute idle timeout did not come back with the volume at 0).
 - A page whose sound never started is not restarted.
 - **3 attempts in a row at most**: if the sound does not come back after 3 restarts, SDRLink waits. The count starts again when the sound really comes back, when you change WebSDR or when you click the button.
 - In FM with a closed squelch, the silence counts as a loss of sound (3 restarts at most).
@@ -1044,6 +1045,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.55**
+  - **Auto Reset WebSDR**: the WebSDR is restarted when its sound is lost **even with Mute WebSDR on or the WebSDR volume at 0** (they only cut the PC sound); a KiwiSDR stopped after its 15-minute idle timeout did not come back.
 - **1.54**
   - **10-band equalizer** (**EQ** button after Diversity) for the WebSDR audio and the rig heard on the PC, and for the PC microphone sent to the rig with **noise gate**, **compressor** and **limiter** (right-click PTT); taken from HamRadioLink.
 - **1.53**
