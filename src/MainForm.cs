@@ -511,7 +511,7 @@ namespace SDRLink
             row3.Controls.Add(Lbl("Décalage WebSDR (Hz) :", "WebSDR offset (Hz):"));
             row3.Controls.Add(numOffset);
             chkMute = Check("Couper le son du WebSDR en émission", "Mute WebSDR while transmitting");
-            chkMute.CheckedChanged += delegate { if (worker != null) worker.PollTx = chkMute.Checked; ApplyMute(); };
+            chkMute.CheckedChanged += delegate { ApplyMute(); };   // 1.56 : l'état d'émission est lu même sans cette case
             // Clic droit : réceptions coupées en émission (toutes par défaut) ; le menu reste ouvert pour en cocher plusieurs.
             ContextMenuStrip muteTxMenu = new ContextMenuStrip();
             muteTxMenu.Opening += delegate(object s, System.ComponentModel.CancelEventArgs e) { e.Cancel = false; FillMuteTxMenu(muteTxMenu); };
@@ -721,6 +721,8 @@ namespace SDRLink
             cbUrl.Width = 380;
             cbUrl.MaxDropDownItems = 30;
             cbUrl.DropDownStyle = ComboBoxStyle.DropDown;
+            cbUrl.Name = "des WebSDR";
+            GuardDropDown(cbUrl);   // ne se referme que sur un geste de l'utilisateur (1.56)
             cbUrl.SelectionChangeCommitted += delegate
             {
                 Favorite f = cbUrl.SelectedItem as Favorite;
@@ -1248,32 +1250,9 @@ namespace SDRLink
             UpdateDisplays();
         }
 
-        // Liste déroulante refermée toute seule moins de 0,5 s après son ouverture, sans choix ni Échap : rouverte (2 fois au
-        // plus par ouverture). Parade à une fermeture vue pendant la diversité, dont la cause n'a pas été trouvée (1.41).
-        void GuardDropDown(ComboBox cb)
-        {
-            DateTime opened = DateTime.MinValue;
-            int selAtOpen = -1, reopens = 0;
-            bool escape = false, reopening = false;
-            cb.DropDown += delegate
-            {
-                if (reopening) { reopening = false; opened = DateTime.UtcNow; return; }
-                opened = DateTime.UtcNow; selAtOpen = cb.SelectedIndex; reopens = 0; escape = false;
-            };
-            cb.KeyDown += delegate(object s, KeyEventArgs e) { if (e.KeyCode == Keys.Escape) escape = true; };
-            cb.DropDownClosed += delegate
-            {
-                if (escape || reopens >= 2 || cb.SelectedIndex != selAtOpen || (DateTime.UtcNow - opened).TotalMilliseconds >= 500) return;
-                reopens++;
-                Log.Write("Liste " + cb.Name + " refermée après " + (int)(DateTime.UtcNow - opened).TotalMilliseconds + " ms sans choix : rouverte");
-                BeginInvoke((Action)delegate
-                {
-                    if (cb.IsDisposed || !cb.Visible || cb.SelectedIndex != selAtOpen) return;
-                    reopening = true;
-                    cb.DroppedDown = true;
-                });
-            };
-        }
+        // Liste déroulante qui reste ouverte jusqu'à un nouveau clic, avec anti-rebond (1.56, voir StickyDropDown ;
+        // remplace la parade de la 1.41 : réouverture si fermée moins de 0,5 s après l'ouverture).
+        void GuardDropDown(ComboBox cb) { StickyDropDown.Attach(cb); }
 
         // Notch auto : couleur de l'état (marche / arrêt), sinon l'ancienne couleur unique « Notch », sinon le thème.
         void UpdateNotchButton()
@@ -1815,7 +1794,7 @@ namespace SDRLink
             rigPreamps = null;
             worker.PowerKnown += delegate(PowerRange pr) { BeginInvokeSafe(delegate { rigPower = pr; }); };
             rigPower = null;
-            worker.PollTx = chkMute.Checked;
+            worker.PollTx = true;   // 1.56 : toujours (avant : seulement avec « Couper le son du WebSDR en émission »)
             // Port COM virtuel (1.49) : seulement en CAT direct.
             worker.ShareCom = settings.Interface == 0 ? settings.ShareCom : "";
             worker.ShareBaud = settings.Baud;
@@ -2230,27 +2209,29 @@ namespace SDRLink
         void UpdatePttButton()
         {
             // Au repos : jaune clair sur fond sombre, bien visible sur tous les écrans et dans les deux thèmes.
+            // Rouge aussi quand le poste émet de lui-même (VOX, FreeDV, micro, autre logiciel) : état lu par CAT (1.56).
+            bool tx = pttActive || rigTx;
             string text = "PTT";
-            if (pttActive)
+            if (tx)
             {
                 text = "● TX";
-                if (settings.PttTimeoutSec > 0)
+                if (pttActive && settings.PttTimeoutSec > 0)
                 {
                     int left = Math.Max(0, settings.PttTimeoutSec - (int)(DateTime.UtcNow - pttSince).TotalSeconds);
                     text += " " + (left / 60) + ":" + (left % 60).ToString("00");
                 }
             }
             if (btnPtt.Text != text) btnPtt.Text = text;
-            btnPtt.BackColor = pttActive ? Color.FromArgb(210, 0, 0) : Color.FromArgb(55, 55, 60);
-            btnPtt.ForeColor = pttActive ? Color.White : Color.FromArgb(255, 235, 110);
+            btnPtt.BackColor = tx ? Color.FromArgb(210, 0, 0) : Color.FromArgb(55, 55, 60);
+            btnPtt.ForeColor = tx ? Color.White : Color.FromArgb(255, 235, 110);
             btnPtt.FlatAppearance.BorderColor = Color.FromArgb(180, 0, 0);
             // Couleur choisie au clic droit : texte noir sur fond clair ; sur fond sombre, jaune au repos, blanc en émission.
-            int custom = ColorOf(pttActive ? "PttTx" : "PttRx");
+            int custom = ColorOf(tx ? "PttTx" : "PttRx");
             if (custom >= 0)
             {
                 Color back = Opaque(custom);
                 btnPtt.BackColor = back;
-                btnPtt.ForeColor = IsLight(back) ? Color.Black : pttActive ? Color.White : Color.FromArgb(255, 235, 110);
+                btnPtt.ForeColor = IsLight(back) ? Color.Black : tx ? Color.White : Color.FromArgb(255, 235, 110);
                 btnPtt.FlatAppearance.BorderColor = Outline(back);
             }
             // Toujours actif : désactivé, Windows grise le texte (illisible). Sans poste, un clic affiche un message.
@@ -2265,6 +2246,7 @@ namespace SDRLink
             rigTx = tx == 1;
             UpdateDisplays();
             ApplyMute();
+            UpdatePttButton();   // émission par VOX / FreeDV / micro visible sur le bouton PTT (1.56)
         }
 
         // Coupe tout de suite au passage en émission les réceptions choisies (clic droit sur la case) ; les rétablit
@@ -2934,7 +2916,7 @@ namespace SDRLink
                 };
                 core.SourceChanged += delegate
                 {
-                    if (!cbUrl.Focused) cbUrl.Text = core.Source;
+                    if (!cbUrl.Focused && !StickyDropDown.IsOpen(cbUrl)) cbUrl.Text = core.Source;   // liste ouverte : pas touchée (1.56)
                     OnPageChanged(core.Source);
                 };
                 // Dès que la page est chargée : son volume (les gains audio créés plus tard le reprennent aussi).
@@ -3728,7 +3710,7 @@ namespace SDRLink
             // la capture par programme de Windows ne reçoit plus rien d'un programme coupé dans le mélangeur.
             if (fdvSource == 0) ApplyVolume();
             else if (fdvSource == 1) UpdateRigMonitor();
-            Log.Write("FreeDV : parole décodée (" + FreeDvName + ", " + FreeDvSourceName(fdvSource) + ", SNR " + snr + " dB)");
+            Log.Write("FreeDV : parole décodée (" + FreeDvName + ", " + FreeDvSourceName(fdvSource) + ", SNR " + snr + " dB" + ")");
             ShowStatus(VoiceText(snr));
             UpdateFreeDvButton();
         }

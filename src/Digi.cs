@@ -115,6 +115,8 @@ namespace SDRLink
     {
         const int HIST = 2048, HMASK = HIST - 1;
         readonly int outRate;
+        readonly double cut;      // coupure, en fraction de outRate
+        readonly int taps;        // longueur du filtre, en échantillons de sortie
         int inRate;
         double[] lp;
         readonly double[] hist = new double[HIST];
@@ -122,7 +124,11 @@ namespace SDRLink
         double tNext;
         float[] outBuf = new float[1024];
 
-        public Resampler(int outRate) { this.outRate = outRate; }
+        public Resampler(int outRate) : this(outRate, 0.375, 32) { }
+
+        // FreeDV (1.56) : coupure 0,45 × 8000 = 3600 Hz et filtre deux fois plus long, plat sur toute la bande RADE (750-2200 Hz)
+        // et au-delà, comme le rééchantillonneur sinc de FreeDV 2.4.1 (libsamplerate).
+        public Resampler(int outRate, double cut, int taps) { this.outRate = outRate; this.cut = cut; this.taps = taps; }
 
         public void Reset() { inRate = 0; }
 
@@ -133,10 +139,10 @@ namespace SDRLink
             tNext = 0;
             Array.Clear(hist, 0, HIST);
             if (rate == outRate) { lp = null; return; }
-            int n = (int)Math.Round(rate / (double)outRate * 32) | 1;
+            int n = (int)Math.Round(rate / (double)outRate * taps) | 1;
             if (n > 511) n = 511;
             lp = new double[n];
-            double fc = Math.Min(0.375 * outRate, 0.375 * rate) / rate, sum = 0;
+            double fc = Math.Min(cut * outRate, 0.375 * rate) / rate, sum = 0;
             for (int i = 0; i < n; i++)
             {
                 double x = i - (n - 1) / 2.0;

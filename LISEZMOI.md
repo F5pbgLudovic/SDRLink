@@ -72,7 +72,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 - `%APPDATA%\SDRLink\settings.avant-reinitialisation.ini` : les réglages d'avant la dernière réinitialisation (depuis la 1.22).
 - `%APPDATA%\SDRLink\settings.reset.txt` : réinitialisation demandée, faite au redémarrage puis effacée (il n'existe que quelques secondes).
 - `%APPDATA%\SDRLink\sdrlink.log` : le journal (remis à zéro à chaque lancement).
-- `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache ; le pseudo donné aux KiwiSDR et websdr.org y est aussi) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll ; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<taille>\sdrlink_freedv.dll` : décodeur FreeDV, écrit seulement au premier usage de FreeDV auto (depuis la 1.24).
+- `%LOCALAPPDATA%\SDRLink\WebView2` : données des pages WebSDR (cookies, cache ; le pseudo donné aux KiwiSDR et websdr.org y est aussi) ; `%LOCALAPPDATA%\SDRLink\runtime` : WebView2Loader.dll ; `%LOCALAPPDATA%\SDRLink\runtime\freedv-<taille>-<empreinte>\sdrlink_freedv.dll` : décodeur FreeDV, écrit seulement au premier usage de FreeDV auto (depuis la 1.24).
 - À côté de `SDRLink.exe`, pendant une mise à jour automatique seulement : `SDRLink.exe.download` (le téléchargement) et `SDRLink.previous.exe` (l'ancienne version, supprimée dès que la nouvelle a démarré, depuis la 1.30).
 - `Musique\SDRLink` : dossier des enregistrements REC par défaut ; pendant un enregistrement, un fichier provisoire `SDRLink-REC-*.raw` est dans `%TEMP%`.
 - `Images\SDRLink` : images SSTV, WEFAX et Hell reçues, en PNG (`SSTV_<mode>_<date>_<heure>.png`, `WEFAX_<lignes>-<IOC>_<date>_<heure>.png`, `Hell_<date>_<heure>.png` ; `_partiel` si l'image n'est pas allée jusqu'au bout) (depuis la 1.25).
@@ -216,7 +216,7 @@ Bouton **Pseudo/Call** (1re ligne, après Import/Export) : nom ou indicatif donn
 ## Favoris
 
 - La liste déroulante de la barre WebSDR affiche les favoris par leur **nom**. En choisir un ouvre le WebSDR.
-- Le menu des **listes** de favoris (à droite) se rouvre s'il se referme tout seul moins de **0,5 s** après son ouverture, sans qu'un choix ait été fait (deux fois au plus ; **Échap** le ferme) : parade à une fermeture intempestive vue pendant la diversité (depuis la 1.41).
+- **Listes qui restent ouvertes** (depuis la 1.56) : la liste des **WebSDR**, le menu des **listes** de favoris et la case du **second WebSDR** (diversité) ne se ferment plus tout seuls (sous Windows 11 surtout, ils se refermaient aussitôt ouverts et il fallait cliquer plusieurs fois). La liste ouverte ne se ferme que par un **nouveau clic** sur la flèche, le **choix** d'une ligne (clic, ou ↓ / ↑ puis **Entrée**), **Échap**, **F4** ou **Alt+↑**. **Anti-rebond** : un second clic moins de 0,35 s après l'ouverture est ignoré. Ni la page du WebSDR, ni un clic ailleurs, ni une autre fenêtre ne la ferment ; elle suit la fenêtre si on la déplace, et la molette la fait défiler. Avant, seul le menu des listes était rouvert s'il se refermait moins de 0,5 s après son ouverture (1.41).
 - **Propositions pendant la frappe** (depuis la 1.19) : dès que tu tapes un mot (deux lettres au moins) dans la barre WebSDR, les WebSDR dont le **nom ou l'adresse contient ce mot** s'affichent juste dessous, comme dans un moteur de recherche. Il suffit qu'**un des mots** tapés corresponde (« twente », « kiwi », « bretagne »…), sans tenir compte des majuscules ni des accents ; les WebSDR qui correspondent le mieux sont en haut. Un **clic** sur une proposition ouvre le WebSDR ; au clavier, **↓ / ↑** pour choisir, **Entrée** pour ouvrir, **Échap** pour fermer. Seuls les WebSDR de la **liste choisie** dans le menu de droite sont proposés. La **flèche** de la liste déroulante affiche toujours **tous** les WebSDR de la liste, même si du texte est tapé. Une adresse tapée en entier puis **Entrée** (sans choisir de proposition) s'ouvre comme avant.
 - **Listes de favoris** : de 1 à **10 listes** (4 au départ : Liste 1 à Liste 4) pour trier les WebSDR.
   - Le menu juste à droite de la liste des WebSDR choisit la liste affichée.
@@ -284,16 +284,17 @@ Il faut un accès Internet. Si un annuaire ne répond pas, les autres sont quand
 Bouton **FreeDV auto V1** (barre WebSDR, après « Rechercher des WebSDR… », depuis la 1.24) : décodage automatique de la voix numérique **FreeDV RADE**.
 - **Clic** : marche / arrêt (arrêt au départ). **Clic droit** : **RADE V1** (FreeDV 2, le mode actuel) ou **RADE V2** (FreeDV 3, encore en développement) ; le bouton affiche « FreeDV auto V1 » ou « V2 ».
 - Couleurs : normales à l'arrêt, **vert** en écoute, **orange** pendant une parole décodée.
-- En marche, le son écouté est décodé en permanence. Dès qu'un signal FreeDV est reçu (après 0,6 s de décodage continu), le **son brut est coupé** et la **voix décodée** est jouée dans les haut-parleurs du PC. La barre d'état indique par exemple « FreeDV RADE V1 : parole décodée (WebSDR, SNR 15 dB) », SNR tenu à jour. 1,5 s après la fin du signal, le son normal revient. En émission, la voix décodée est muette.
+- En marche, le son écouté est décodé en permanence. Dès qu'un signal FreeDV est reçu (après 0,3 s de décodage continu ; 0,6 s avant la 1.56), le **son brut est coupé** et la **voix décodée** est jouée dans les haut-parleurs du PC. La barre d'état indique par exemple « FreeDV RADE V1 : parole décodée (WebSDR, SNR 15 dB) », SNR tenu à jour. 1,5 s après la fin du signal, le son normal revient. En émission, la voix décodée est muette.
 - Le son est décodé **tel qu'il est reçu**, dans le mode choisi par l'opérateur : en USB si le poste ou le WebSDR est en USB, en LSB s'il est en LSB. Un signal FreeDV écouté sur la mauvaise bande latérale n'est pas décodé (on entend le son brut).
+- **Décodage amélioré** (1.56), pour faire aussi bien que FreeDV 2.4.1 (dont le récepteur RADE est le même, ligne pour ligne) : le son est ramené à 8 kHz par un vrai filtre (avant : une simple moyenne, qui déformait le signal à 44,1 kHz), le vocodeur démarre comme dans FreeDV 2.4.1 et n'est plus remis à zéro à chaque resynchronisation, et la parole jouée garde 250 ms d'avance au départ (avant : 60 ms, et tout retard au-delà de 300 ms était jeté : la voix était **saccadée**). Le journal note à chaque fin de parole « FreeDV : fin de parole (trous N, sauts M) ».
 - **Une seule réception** est décodée, dans cet ordre :
   1. **le poste** : si Mute TX n'est pas actif et qu'une carte son du poste est choisie (celle de REC, clic droit sur REC ou sur Mute TX) ; il faut donc que le volume du poste soit télécommandé. Pendant la parole, l'écoute du poste sur le PC est coupée ; le volume du poste lui-même n'est pas touché ;
   2. **le WebSDR**, si Mute WebSDR n'est pas actif : la page est mise à volume 0 pendant la parole (Mute WebSDR ne change pas) ;
   3. **ExpertSDR**, par son **flux audio TCI** (depuis la 1.40 ; serveur TCI d'ExpertSDR activé, même port que pour Mute ExpertSDR), puis **HDSDR** (capture du son du programme, **Windows 11** seulement depuis la 1.40 : sous Windows 10, cette capture ne rend que du silence). Leur son brut **reste audible** sous la voix décodée : couper un programme dans le mélangeur de Windows couperait aussi ce que reçoit le décodeur.
 - **Volume de la parole** (depuis la 1.45) : pendant une parole décodée, le curseur **Volume WebSDR** devient **Volume FreeDV** et règle le volume de la voix décodée, quelle que soit la réception décodée (poste, WebSDR, ExpertSDR ou HDSDR). À la fin de la parole, il redevient Volume WebSDR et reprend la valeur du WebSDR. Les deux valeurs sont **séparées** : le volume FreeDV ne se règle que pendant une parole FreeDV, le volume du WebSDR le reste du temps. Le volume FreeDV est gardé après redémarrage et fait partie de l'export et de l'import (partie Configuration). Avant la 1.45, la voix décodée était jouée à niveau fixe.
-- La parole n'est jouée que si le SNR est d'au moins −5 dB : en dessous, le décodeur peut s'accrocher à tort (par exemple sur la mauvaise bande latérale) et ne sortirait que du charabia.
-- **Arrêté, FreeDV ne prend aucune ressource** : le décodeur n'est même pas chargé. En marche, il prend environ 7 à 10 % d'un cœur du processeur.
-- Le décodeur est celui de FreeDV (radae_nopy, de David Rowe et Peter B Marks, licence BSD ; vocodeur FARGAN d'Opus, licence BSD), le même que dans PhoneSDRLink. Il n'a pas encore été essayé sur un vrai signal reçu en direct : seulement sur l'enregistrement hors antenne du projet FreeDV.
+- La parole n'est jouée que si le SNR est d'au moins −8 dB (−5 dB avant la 1.56 : les creux de fading hachaient la voix) : en dessous, le décodeur peut s'accrocher à tort et ne sortirait que du charabia.
+- **Arrêté, FreeDV ne prend aucune ressource** : le décodeur n'est même pas chargé. En marche, il prend environ 10 à 15 % d'un cœur du processeur.
+- Le décodeur est celui de FreeDV (radae_nopy, de David Rowe et Peter B Marks, licence BSD ; vocodeur FARGAN d'Opus, licence BSD), le même que dans FreeDV 2.4.1 et PhoneSDRLink. Essayé en direct sur 7 MHz en LSB (1.56).
 
 ## Modes numériques : SSTV, FT8, CW, WEFAX… (réception)
 
@@ -461,6 +462,7 @@ Le menu **Langue**, sur la 2ᵉ ligne, change la langue de toute l'interface, im
 Le gros bouton **PTT**, à gauche de « RADIO », fait passer le poste en émission par CAT : un clic pour émettre (le bouton devient rouge « ● TX »), un second clic pour revenir en réception. C'est l'équivalent du bouton MOX de HRD.
 - Il envoie `TX1;`/`TX0;` aux Yaesu, `TX;`/`RX;` aux Kenwood et Elecraft, `1C 00` aux Icom, `trx` en TCI.
 - Avec OmniRig, il agit sur la propriété `Tx` ; avec HRD, sur le bouton MOX.
+- **Émission vue quelle qu'en soit l'origine** (depuis la 1.56) : le bouton devient aussi rouge « ● TX » quand le poste émet par le **VOX** (par exemple avec FreeDV), la pédale, le micro ou un autre logiciel ; la fréquence RADIO passe au rouge. SDRLink lit l'état d'émission du poste en permanence (avant la 1.56 : seulement si « Couper le son du WebSDR en émission » était cochée). Le temps restant du délai de sécurité ne s'affiche que pour une émission lancée par ce bouton. Si le poste ne répond plus au CAT pendant l'émission (HF dans le câble, autre logiciel sur le même port), SDRLink ne peut pas la voir.
 - Le son des réceptions choisies (le WebSDR, et selon le clic droit le poste, ExpertSDR, HDSDR) est coupé dès le clic, même si le poste ne signale pas son état d'émission (si « Couper le son du WebSDR en émission » est cochée).
 - Par sécurité, si on se déconnecte ou si on ferme SDRLink pendant une émission lancée par ce bouton, le poste repasse en réception.
 - **Délai de sécurité TX** (clic droit sur PTT) : Désactivé, 30 s, 1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 ou 55 min.
@@ -1044,6 +1046,10 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.56**
+  - **FreeDV mieux décodé**, comme FreeDV 2.4.1 : vrai filtre pour passer à 8 kHz, vocodeur démarré comme dans FreeDV 2.4.1, parole jouée **sans saccades** (250 ms d'avance), seuil de SNR à −8 dB, parole annoncée après 0,3 s. Le son est toujours décodé dans la bande latérale choisie (LSB → LSB, USB → USB).
+  - **Listes WebSDR, favoris et second WebSDR** : elles **restent ouvertes** jusqu'à un nouveau clic, avec **anti-rebond** (elles se refermaient seules, surtout sous Windows 11).
+  - **Émission par VOX** (FreeDV, pédale, micro) **visible** : bouton PTT rouge « ● TX » et fréquence RADIO rouge, l'état d'émission étant lu en permanence.
 - **1.55**
   - **Réinit Auto WebSDR** : le WebSDR est relancé quand son son est perdu **même avec Mute WebSDR ou Volume WebSDR à 0** (ils ne coupent que le son du PC) ; un KiwiSDR arrêté après ses 15 minutes d'inactivité ne repartait pas.
 - **1.54**

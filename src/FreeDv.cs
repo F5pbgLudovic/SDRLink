@@ -16,7 +16,7 @@ namespace SDRLink
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)] static extern IntPtr LoadLibrary(string path);
         [DllImport("kernel32.dll", CharSet = CharSet.Ansi)] static extern IntPtr GetProcAddress(IntPtr h, string name);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)] public delegate IntPtr NewFn(int v2);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)] public delegate IntPtr NewFn(int v2, int mirror);
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)] public delegate void FreeFn(IntPtr s);
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int ProcessFn(IntPtr s, float[] input, int n, short[] output, int outMax, out int sync, out int snr, out float foff);
@@ -48,7 +48,7 @@ namespace SDRLink
                         }
                     }
                     string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        "SDRLink", "runtime", "freedv-" + dll.Length);
+                        "SDRLink", "runtime", "freedv-" + dll.Length + "-" + Hash8(dll));
                     string path = Path.Combine(dir, "sdrlink_freedv.dll");
                     if (!File.Exists(path) || new FileInfo(path).Length != dll.Length)
                     {
@@ -57,7 +57,7 @@ namespace SDRLink
                     }
                     IntPtr h = LoadLibrary(path);
                     if (h == IntPtr.Zero) throw new IOException("LoadLibrary : " + Marshal.GetLastWin32Error());
-                    New = Get<NewFn>(h, "sdrdec_rade_new_v");
+                    New = Get<NewFn>(h, "sdrdec_rade_new_m");
                     Free = Get<FreeFn>(h, "sdrdec_rade_free");
                     Process = Get<ProcessFn>(h, "sdrdec_rade_process");
                     Log.Write("FreeDV : décodeur chargé (" + path + ")");
@@ -70,6 +70,13 @@ namespace SDRLink
                     return error;
                 }
             }
+        }
+
+        // Empreinte du contenu (1.56) : une DLL refaite de même taille ne doit pas reprendre l'ancienne copie sur le disque.
+        static string Hash8(byte[] b)
+        {
+            using (System.Security.Cryptography.SHA1 sha = System.Security.Cryptography.SHA1.Create())
+                return BitConverter.ToString(sha.ComputeHash(b), 0, 4).Replace("-", "").ToLowerInvariant();
         }
 
         static T Get<T>(IntPtr h, string name) where T : class
@@ -95,12 +102,13 @@ namespace SDRLink
         public int Snr { get { return snrNow; } }   // SNR de la parole en cours (dB)
 
         const int VoiceHoldMs = 1500, InputHoldMs = 500;
-        // Sous ce SNR (dB), la parole est ignorée : le décodeur peut s'accrocher à tort (par exemple à un signal FreeDV reçu
-        // sur l'autre bande latérale) et ne sortir que du charabia, avec un SNR annoncé très bas (vers −15 dB).
+        // Sous ce SNR (dB), la parole est ignorée : le décodeur peut s'accrocher à tort et ne sortir que du charabia, avec un
+        // SNR annoncé très bas (vers −15 dB). 1.56 : −8 au lieu de −5 (FreeDV 2.4.1 n'a aucun seuil en RADE ; un signal à
+        // −2 dB réels est annoncé vers −4 dB, et les creux de fading descendaient sous −5 : la parole était hachée).
         // Volume de la parole jouée (0 à 1) : curseur « Volume WebSDR » pendant la parole FreeDV (1.45).
         public volatile float Volume = 1f;
-        const int MinSnr = -5;
-        const int StartSamples = 9600;   // 0,6 s de parole à 16 kHz
+        const int MinSnr = -8;
+        const int StartSamples = 4800;   // 0,3 s de parole à 16 kHz (0,6 s avant la 1.56)
         readonly Thread thread;
         volatile bool stopping;
         readonly object qlock = new object();
@@ -109,10 +117,10 @@ namespace SDRLink
         int queued;
         volatile bool resetPending;
 
-        // Passage à 8 kHz (moyenne sur chaque intervalle de 1/8000 s).
-        int inRate;
-        double pos, acc;
-        int accN;
+        // Passage à 8 kHz (1.56) : vrai filtre passe-bas puis interpolation, comme FreeDV 2.4.1 (libsamplerate). Avant, une
+        // moyenne sur chaque intervalle de 1/8000 s : à 44,1 kHz (et 12 kHz) l'instant des échantillons sautait d'un
+        // échantillon d'entrée à l'autre, et le signal était un peu déformé (SNR plafonné vers 27 dB).
+        readonly Resampler rs = new Resampler(8000, 0.45, 64);
         float[] blk = new float[400];
         int blkN;
 
@@ -135,7 +143,7 @@ namespace SDRLink
         // Nouvelle source : décodeur remis à zéro.
         public void Reset()
         {
-            lock (qlock) { queue.Clear(); queued = 0; blkN = 0; acc = 0; accN = 0; pos = 0; }
+            lock (qlock) { queue.Clear(); queued = 0; blkN = 0; rs.Reset(); }
             resetPending = true;
             wake.Set();
         }
@@ -153,18 +161,10 @@ namespace SDRLink
             if (rate < 8000) return;
             lock (qlock)
             {
-                if (rate != inRate) { inRate = rate; pos = 0; acc = 0; accN = 0; }
-                double step = 8000.0 / rate;
-                for (int i = 0; i < n; i++)
+                float[] y = rs.Process(rate, x, n);
+                for (int i = 0; i < y.Length; i++)
                 {
-                    acc += x[i];
-                    accN++;
-                    pos += step;
-                    if (pos < 1.0) continue;
-                    pos -= 1.0;
-                    blk[blkN++] = (float)(acc / accN);
-                    acc = 0;
-                    accN = 0;
+                    blk[blkN++] = y[i];
                     if (blkN == blk.Length)
                     {
                         if (queued < 40) { queue.Enqueue(blk); queued++; }   // 2 s au plus en attente
@@ -178,6 +178,8 @@ namespace SDRLink
 
         void Run()
         {
+            // Un seul récepteur : le son tel que reçu, dans la bande latérale choisie sur le poste ou le WebSDR (LSB → LSB,
+            // USB → USB), comme FreeDV 2.4.1.
             IntPtr dec = IntPtr.Zero;
             PcmOut player = null;
             short[] speech = new short[16000];
@@ -206,26 +208,28 @@ namespace SDRLink
                         lastInput = DateTime.UtcNow;
                         int sync, s;
                         float foff;
-                        int got = FreeDvNative.Process(dec, b, b.Length, speech, speech.Length, out sync, out s, out foff);
-                        if (got == 0 || s < MinSnr) continue;
+                        int g = FreeDvNative.Process(dec, b, b.Length, speech, speech.Length, out sync, out s, out foff);
+                        if (g == 0 || s < MinSnr) continue;
                         DateTime t = DateTime.UtcNow;
                         if (!voice)
                         {
-                            // Parole annoncée seulement après 0,6 s de décodage continu (pas sur un éclair isolé).
-                            pending = (t - lastSpeech).TotalMilliseconds > 500 ? got : pending + got;
+                            // Parole annoncée seulement après 0,3 s de décodage continu (pas sur un éclair isolé).
+                            pending = (t - lastSpeech).TotalMilliseconds > 500 ? g : pending + g;
                             lastSpeech = t;
                             if (pending < StartSamples) continue;
                             voice = true;
                             Raise(true, s);
                         }
                         lastSpeech = t;
-                        Interlocked.Add(ref speechSamples, got);
+                        Interlocked.Add(ref speechSamples, g);
                         snr = snrNow = s;
-                        if (!OutputMuted && !Silent) player.Write(speech, got);
+                        if (!OutputMuted && !Silent) player.Write(speech, g);
                     }
                     DateTime now = DateTime.UtcNow;
                     if (voice && ((now - lastSpeech).TotalMilliseconds > VoiceHoldMs || (now - lastInput).TotalMilliseconds > InputHoldMs))
                     {
+                        Log.Write("FreeDV : fin de parole (trous " + Math.Max(0, player.Gaps - 1) + ", sauts " + player.Skips + ")");
+                        player.Gaps = player.Skips = 0;
                         voice = false;
                         player.Clear();
                         Raise(false, snr);
@@ -246,8 +250,8 @@ namespace SDRLink
 
         IntPtr NewDecoder()
         {
-            IntPtr d = FreeDvNative.New(V2 ? 1 : 0);
-            if (d == IntPtr.Zero) throw new IOException("sdrdec_rade_new_v");
+            IntPtr d = FreeDvNative.New(V2 ? 1 : 0, 0);
+            if (d == IntPtr.Zero) throw new IOException("sdrdec_rade_new_m");
             return d;
         }
 
@@ -278,6 +282,7 @@ namespace SDRLink
         bool waiting = true;
 
         public volatile float Gain = 1f;   // volume (1.45 : volume FreeDV)
+        public int Gaps, Skips;            // 1.56 : trous (sortie vide, parole en attente) et sauts (retard > 1 s jeté), pour le journal
 
         public PcmOut(int rate) { inRate = rate; }
 
@@ -308,11 +313,12 @@ namespace SDRLink
             if (client == null) return;
             try
             {
-                if (count > outRate * 3 / 10) { int drop = count - outRate / 10; head = (head + drop) % ring.Length; count -= drop; }
+                if (count > outRate) { Skips++; int drop = count - outRate * 4 / 10;   // 1.56 : plus de 1 s de retard → ramené à 0,4 s (avant : 0,3 → 0,1 s, la parole sautait)
+                    head = (head + drop) % ring.Length; count -= drop; }
                 int padding;
                 Marshal.ThrowExceptionForHR(client.GetCurrentPadding(out padding));
-                if (waiting) { if (count < outRate * 6 / 100) return; waiting = false; }
-                if (count == 0) { if (padding == 0) waiting = true; return; }
+                if (waiting) { if (count < outRate / 4) return; waiting = false; }   // 1.56 : 250 ms d'avance au départ (avant 60 ms : trous)
+                if (count == 0) { if (padding == 0) { waiting = true; Gaps++; } return; }
                 int todo = Math.Min(bufferFrames - padding, count);
                 if (todo <= 0) return;
                 IntPtr buf;

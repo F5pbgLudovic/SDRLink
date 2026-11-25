@@ -33,6 +33,8 @@ namespace SDRLink
             cbUrl2.DropDownStyle = ComboBoxStyle.DropDown;
             cbUrl2.Margin = new Padding(3, 4, 3, 3);
             cbUrl2.Visible = false;
+            cbUrl2.Name = "du second WebSDR";
+            GuardDropDown(cbUrl2);   // ne se referme que sur un geste de l'utilisateur (1.56)
             cbUrl2.SelectionChangeCommitted += delegate
             {
                 Favorite f = cbUrl2.SelectedItem as Favorite;
@@ -60,7 +62,7 @@ namespace SDRLink
             if (cbUrl2 == null || settings == null) return;
             bool show = settings.DiversitySource == DivTwoWebSdr;
             if (cbUrl2.Visible != show) cbUrl2.Visible = show;
-            if (!cbUrl2.Focused) cbUrl2.Text = Div2Name();
+            if (!cbUrl2.Focused && !StickyDropDown.IsOpen(cbUrl2)) cbUrl2.Text = Div2Name();
         }
 
         string Div2Name()

@@ -1,7 +1,11 @@
-/* Récepteur FreeDV RADE V1 de PhoneSDRLink : enveloppe autour de radae_nopy (David Rowe et Peter B Marks, BSD 2 clauses,
+/* Récepteur FreeDV RADE de SDRLink : enveloppe autour de radae_nopy / rade_c (David Rowe et Peter B Marks, BSD 2 clauses,
  * voir rade/LICENSE) et du vocodeur FARGAN d'Opus (BSD, voir opus/COPYING).
- * Chaîne : audio réel 8 kHz → signal analytique (filtre de Hilbert) → récepteur RADE → traits du vocodeur (36 flottants par
- * trame de 10 ms) → FARGAN → parole 16 kHz. */
+ * Chaîne, comme FreeDV 2.4.1 (freedv-backend RADEReceiveStep) : audio réel 8 kHz → complexe (imag = 0) → récepteur RADE
+ * (bottleneck 3, données auxiliaires, filtre passe-bande) → traits du vocodeur (36 flottants par trame de 10 ms) → FARGAN
+ * (amorcé une fois avec des zéros, jamais remis à zéro) → parole 16 kHz.
+ * Possibilité gardée mais NON UTILISÉE par SDRLink (1.56 : il écoute la bande latérale choisie, LSB → LSB, USB → USB) : un récepteur « miroir » décode le signal reçu sur l'autre bande latérale (poste en LSB alors que
+ * FreeDV émet toujours en USB) : x[n]·e^{jωn}, ω = 2π·fm/8000, ramène la composante −f en fm − f, c'est-à-dire le spectre
+ * retourné autour du centre des porteuses (fm = 2950 Hz en V1 : porteuses 750-2200 Hz ; 2937,5 Hz en V2 : 1062,5-1875 Hz). */
 #include "sdrdec_rade.h"
 #include <stdlib.h>
 #include <string.h>
@@ -16,26 +20,17 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-/* Entrée du récepteur : 1 = signal réel (partie imaginaire nulle), comme FreeDV 2.4.1 (RADEReceiveStep : int16 / 32767, imag = 0) ;
-   0 = signal analytique (filtre de Hilbert), ancienne méthode de PhoneSDRLink 1.9 à 1.11. */
-#ifndef RADE_REAL_INPUT
-#define RADE_REAL_INPUT 1
-#endif
-
-#define HILBERT_NTAPS 127
-#define HILBERT_DELAY ((HILBERT_NTAPS - 1) / 2)
 #define IQ_CAP 8192
+#define MIX_N 160          /* période du mélangeur : 2950/8000 = 59/160 (V1) ; 2937,5/8000 = 47/128 (V2) */
 
 struct sdrdec_rade {
     rade_rx_state rx;
     rade_rx_v2_state rx2;          /* récepteur RADE V2 (FreeDV 3.0, en développement) */
-    int v2;
+    int v2, mirror, mix_i, mix_n;
+    RADE_COMP mix[MIX_N];
     float features2[RADE_V2_FEATURES_OUT];
     FARGANState fargan;
-    int fargan_primed, prime_n, was_sync;
-    float prime[5 * NB_FEATURES];
-    float hil[HILBERT_NTAPS];
-    float hist[HILBERT_NTAPS];   /* dernières entrées (la plus récente en [0]) */
+    int was_sync;
     RADE_COMP iq[IQ_CAP];
     int iq_n;
     float features[RADE_NZMF * RADE_FRAMES_PER_STEP * RADE_NB_TOTAL_FEATURES];
@@ -44,10 +39,11 @@ struct sdrdec_rade {
     RADE_COMP *rx_in;
 };
 
-sdrdec_rade *sdrdec_rade_new_v(int v2) {
+sdrdec_rade *sdrdec_rade_new_m(int v2, int mirror) {
     sdrdec_rade *s = (sdrdec_rade *)calloc(1, sizeof(*s));
     if (!s) return NULL;
     s->v2 = v2 ? 1 : 0;
+    s->mirror = mirror ? 1 : 0;
     if (s->v2) {
         if (rade_rx_v2_init(&s->rx2, 1) != 0) { free(s); return NULL; }
         s->rx2.verbose = 0;
@@ -55,19 +51,28 @@ sdrdec_rade *sdrdec_rade_new_v(int v2) {
         if (rade_rx_init(&s->rx, NULL, 3, 1, 1) != 0) { free(s); return NULL; }
         s->rx.verbose = 0;
     }
+    /* FARGAN amorcé une fois avec des traits nuls, comme FreeDV 2.4.1 (RADEReceiveStep) */
     fargan_init(&s->fargan);
+    {
+        float zeros[320] = { 0 };
+        float in_features[5 * NB_TOTAL_FEATURES] = { 0 };
+        fargan_cont(&s->fargan, zeros, in_features);
+    }
+    int k = s->v2 ? 47 : 59;   /* fm = k × 8000 / mix_n */
+    s->mix_n = s->v2 ? 128 : 160;
+    for (int i = 0; i < s->mix_n; i++) {
+        double ph = 2.0 * M_PI * k * i / s->mix_n;
+        s->mix[i].real = (float)cos(ph);
+        s->mix[i].imag = (float)sin(ph);
+    }
     s->nin_max = s->v2 ? rade_rx_v2_nin_max() : rade_rx_nin_max(&s->rx);
     s->rx_in = (RADE_COMP *)malloc(sizeof(RADE_COMP) * (size_t)s->nin_max);
     if (!s->rx_in) { free(s); return NULL; }
-    for (int i = 0; i < HILBERT_NTAPS; i++) {
-        int n = i - HILBERT_DELAY;
-        if (n == 0 || n % 2 == 0) s->hil[i] = 0.0f;
-        else s->hil[i] = (2.0f / ((float)M_PI * n)) * (0.54f - 0.46f * cosf(2.0f * (float)M_PI * i / (HILBERT_NTAPS - 1)));
-    }
     return s;
 }
 
-sdrdec_rade *sdrdec_rade_new(void) { return sdrdec_rade_new_v(0); }
+sdrdec_rade *sdrdec_rade_new_v(int v2) { return sdrdec_rade_new_m(v2, 0); }
+sdrdec_rade *sdrdec_rade_new(void) { return sdrdec_rade_new_m(0, 0); }
 
 void sdrdec_rade_free(sdrdec_rade *s) {
     if (!s) return;
@@ -78,17 +83,18 @@ void sdrdec_rade_free(sdrdec_rade *s) {
 int sdrdec_rade_process(sdrdec_rade *s, const float *in, int n, short *out, int out_max, int *sync, int *snr_db, float *foff) {
     int written = 0;
     for (int k = 0; k < n; k++) {
-        /* signal analytique : I = entrée retardée, Q = sortie du filtre de Hilbert */
-        memmove(&s->hist[1], &s->hist[0], sizeof(float) * (HILBERT_NTAPS - 1));
-        s->hist[0] = in[k];
-#if RADE_REAL_INPUT
-        if (s->iq_n < IQ_CAP) { s->iq[s->iq_n].real = in[k]; s->iq[s->iq_n].imag = 0.0f; s->iq_n++; }
-#else
-        float q = 0.0f;
-
-        for (int j = 0; j < HILBERT_NTAPS; j++) q += s->hil[j] * s->hist[j];
-        if (s->iq_n < IQ_CAP) { s->iq[s->iq_n].real = s->hist[HILBERT_DELAY]; s->iq[s->iq_n].imag = q; s->iq_n++; }
-#endif
+        if (s->iq_n < IQ_CAP) {
+            if (s->mirror) {
+                RADE_COMP m = s->mix[s->mix_i];
+                s->iq[s->iq_n].real = in[k] * m.real;
+                s->iq[s->iq_n].imag = in[k] * m.imag;
+            } else {
+                s->iq[s->iq_n].real = in[k];
+                s->iq[s->iq_n].imag = 0.0f;
+            }
+            s->iq_n++;
+        }
+        if (++s->mix_i == s->mix_n) s->mix_i = 0;
 
         int nin = s->v2 ? rade_rx_v2_nin(&s->rx2) : rade_rx_nin(&s->rx);
         while (s->iq_n >= nin) {
@@ -106,26 +112,16 @@ int sdrdec_rade_process(sdrdec_rade *s, const float *in, int n, short *out, int 
                 sy = rade_rx_sync(&s->rx);
                 base = s->features; nf = RADE_NZMF * RADE_FRAMES_PER_STEP; stride = RADE_NB_TOTAL_FEATURES;
             }
-            if (sy && !s->was_sync) { s->fargan_primed = 0; s->prime_n = 0; }   /* nouvelle synchronisation : le vocodeur repart */
             s->was_sync = sy;
             if (r & 1) {
                 for (int f = 0; f < nf; f++) {
-                    const float *ft = &base[f * stride];
-                    if (!s->fargan_primed) {
-                        memcpy(&s->prime[s->prime_n * NB_FEATURES], ft, sizeof(float) * NB_FEATURES);
-                        if (++s->prime_n == 5) {
-                            float zeros[320] = { 0 };
-                            fargan_cont(&s->fargan, zeros, s->prime);
-                            s->fargan_primed = 1;
-                        }
-                    } else if (written + LPCNET_FRAME_SIZE <= out_max) {
-                        float fpcm[LPCNET_FRAME_SIZE], feat[NB_FEATURES];
-                        memcpy(feat, ft, sizeof(float) * NB_FEATURES);
-                        fargan_synthesize(&s->fargan, fpcm, feat);
-                        for (int i = 0; i < LPCNET_FRAME_SIZE; i++) {
-                            float v = floorf(0.5f + 32768.0f * fpcm[i]);
-                            out[written++] = (short)(v > 32767.0f ? 32767 : (v < -32767.0f ? -32767 : v));
-                        }
+                    if (written + LPCNET_FRAME_SIZE > out_max) break;
+                    float fpcm[LPCNET_FRAME_SIZE], feat[NB_FEATURES];
+                    memcpy(feat, &base[f * stride], sizeof(float) * NB_FEATURES);
+                    fargan_synthesize(&s->fargan, fpcm, feat);
+                    for (int i = 0; i < LPCNET_FRAME_SIZE; i++) {
+                        float v = floorf(0.5f + 32768.0f * fpcm[i]);
+                        out[written++] = (short)(v > 32767.0f ? 32767 : (v < -32767.0f ? -32767 : v));
                     }
                 }
             }
