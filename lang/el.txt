@@ -363,7 +363,7 @@ WebSDR volume:	Ένταση WebSDR:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Ένταση της ομιλίας FreeDV (αποθηκεύεται χωριστά από την ένταση του WebSDR, ρυθμίζεται μόνο όσο παίζει ομιλία FreeDV)
 WebSDR volume (kept for each favorite)	Ένταση WebSDR (αποθηκεύεται για κάθε αγαπημένο)
 Mute TRX: connect the rig first	Σίγαση TRX: συνδέστε πρώτα τον πομποδέκτη
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Η ένταση του πομποδέκτη δεν είναι διαθέσιμη με αυτόν τον πομποδέκτη ή τη διασύνδεση· πομποδέκτης ελεγχόμενος μέσω TCI (Brick SDR, Thetis…): δεξί κλικ στη Σίγαση TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Σίγαση TRX: ο πομποδέκτης θα μείνει σε σίγαση μετά το diversity· κατά το diversity ο ήχος του μένει στο αυτί (η Ένταση TRX ρυθμίζει τη στάθμη)
 Mute TRX released: the rig will get its volume back after diversity	Η σίγαση TRX καταργήθηκε: ο πομποδέκτης θα πάρει πίσω την ένταση του μετά το diversity
 rig	πομποδέκτης
@@ -372,6 +372,10 @@ FreeDV auto off	Το FreeDV auto απενεργοποιήθηκε
 FreeDV: end of speech, back to normal audio	FreeDV: τέλος ομιλίας, επιστροφή στον κανονικό ήχο
 sound card to choose	επιλέξτε κάρτα ήχου
 Rig sound card…	Κάρτα ήχου του πομποδέκτη…
+Transceiver TCI port…	Θύρα TCI του πομποδέκτη…
+Transceiver TCI port	Θύρα TCI του πομποδέκτη
+TCI server port (Thetis, ExpertSDR…):	Θύρα διακομιστή TCI (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Σίγαση TRX και Ένταση TRX μέσω της διασύνδεσης του πομποδέκτη
 Rig on the PC turned off	Η ακρόαση του πομποδέκτη στον υπολογιστή απενεργοποιήθηκε
 Rig sound card	Κάρτα ήχου του πομποδέκτη
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Είσοδος των Windows που λαμβάνει τον ήχο του πομποδέκτη (για παράδειγμα «USB AUDIO CODEC»)· είναι και η κάρτα ήχου του πομποδέκτη για το REC:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: αποκωδικοποιημένη ομιλία ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: ο ήχος δεν είναι διαθέσιμος ({2})
 Also hear the rig on the PC ({0})	Ακρόαση του πομποδέκτη και στον υπολογιστή ({0})
+Transceiver controlled by TCI (port {0})	Πομποδέκτης ελεγχόμενος μέσω TCI (θύρα {0})
+Mute TRX and TRX volume over TCI (port {0})	Σίγαση TRX και Ένταση TRX μέσω TCI (θύρα {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Πομποδέκτης στον υπολογιστή: το «{0}» παίζει στα ηχεία όταν η Σίγαση TRX δεν είναι ενεργή
 Rig on the PC: sound card "{0}" not available ({1})	Πομποδέκτης στον υπολογιστή: η κάρτα ήχου «{0}» δεν είναι διαθέσιμη ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	Το ExpertSDR εκτελείται αλλά δεν απαντά στη θύρα TCI {0}: δεξί κλικ στο «Ένταση WebSDR» για αλλαγή της θύρας.

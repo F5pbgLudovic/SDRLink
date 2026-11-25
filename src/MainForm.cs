@@ -72,7 +72,7 @@ namespace SDRLink
         TrackBar trkEsdrVolume;
         FlowLayoutPanel audioRow;
         Control[] audioOrder;
-        bool? audioShownRig, audioShownEsdr, audioShownMon;   // ce qui est affiché sur la ligne de son (null : pas encore réglé)
+        bool? audioShownRig, audioShownRigBtn, audioShownEsdr, audioShownMon;   // ce qui est affiché sur la ligne de son (null : pas encore réglé)
         bool esdrUnreachableShown;             // message « ExpertSDR ne répond pas » déjà donné pour ce lancement
         readonly ToolTip tips = new ToolTip();
         int rigAfSupported = -1;    // -1 inconnu (pas connecté), 0 non pris en charge, 1 disponible
@@ -1795,6 +1795,7 @@ namespace SDRLink
             worker.PowerKnown += delegate(PowerRange pr) { BeginInvokeSafe(delegate { rigPower = pr; }); };
             rigPower = null;
             worker.PollTx = true;   // 1.56 : toujours (avant : seulement avec « Couper le son du WebSDR en émission »)
+            worker.AfTciPort = settings.RigAfTci ? settings.RigAfTciPort : 0;   // Mute TX / Volume TX par TCI (1.56)
             // Port COM virtuel (1.49) : seulement en CAT direct.
             worker.ShareCom = settings.Interface == 0 ? settings.ShareCom : "";
             worker.ShareBaud = settings.Baud;
@@ -3499,8 +3500,8 @@ namespace SDRLink
             if (worker == null) { ShowStatus(Lang.T("Mute TX : connectez d'abord le poste", "Mute TRX: connect the rig first")); return; }
             if (rigAfSupported != 1)
             {
-                ShowStatus(Lang.T("Volume du poste non disponible avec ce poste ou cette interface (OmniRig, HRD, FT-817/818…)",
-                                     "Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)"));
+                ShowStatus(Lang.T("Volume du poste non disponible avec ce poste ou cette interface ; émetteur commandé en TCI (Brick SDR, Thetis…) : clic droit sur Mute TX",
+                                     "Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX"));
                 return;
             }
             rigMuted = !rigMuted;
@@ -3777,6 +3778,72 @@ namespace SDRLink
             ToolStripMenuItem pick = new ToolStripMenuItem(Lang.T("Carte son du poste…", "Rig sound card…"));
             pick.Click += delegate { AskRigCard(); };
             m.Items.Add(pick);
+            // Mute TX et Volume TX par une liaison TCI à part (1.56) : commandes TCI standard, pour tout émetteur commandé en TCI
+            // (Thetis pour un Brick SDR ou un Hermes-Lite, ExpertSDR…), quelle que soit l'interface choisie pour le poste.
+            m.Items.Add(new ToolStripSeparator());
+            ToolStripMenuItem tci = new ToolStripMenuItem(Lang.F("Émetteur commandé par TCI (port {0})", "Transceiver controlled by TCI (port {0})", settings.RigAfTciPort));
+            tci.Checked = settings.RigAfTci;
+            tci.Click += delegate { SetRigAfTci(!settings.RigAfTci); };
+            m.Items.Add(tci);
+            ToolStripMenuItem tciPort = new ToolStripMenuItem(Lang.T("Port TCI de l'émetteur…", "Transceiver TCI port…"));
+            tciPort.Click += delegate
+            {
+                int p = AskTciPort(Lang.T("Port TCI de l'émetteur", "Transceiver TCI port"),
+                    Lang.T("Port du serveur TCI (Thetis, ExpertSDR…) :", "TCI server port (Thetis, ExpertSDR…):"), settings.RigAfTciPort);
+                if (p < 0 || p == settings.RigAfTciPort) return;
+                settings.RigAfTciPort = p;
+                settings.Save();
+                Log.Write("Volume du poste par TCI : port changé en " + p);
+                ApplyRigAfTci();
+            };
+            m.Items.Add(tciPort);
+        }
+
+        // Clic droit sur Mute TX > « Émetteur commandé par TCI » (1.56) : Mute TX et Volume TX par le serveur TCI (commandes
+        // standard « volume »), quelle que soit l'interface du poste. Pour un Brick SDR ou un Hermes-Lite piloté par Thetis.
+        void SetRigAfTci(bool on)
+        {
+            settings.RigAfTci = on;
+            settings.Save();
+            Log.Write("Volume du poste par TCI : " + (on ? "activé (port " + settings.RigAfTciPort + ")" : "désactivé (interface du poste)"));
+            ShowStatus(on
+                ? Lang.F("Mute TX et Volume TX par TCI (port {0})", "Mute TRX and TRX volume over TCI (port {0})", settings.RigAfTciPort)
+                : Lang.T("Mute TX et Volume TX par l'interface du poste", "Mute TRX and TRX volume through the rig interface"));
+            ApplyRigAfTci();
+        }
+
+        // Le volume est relu tout de suite par la nouvelle voie (Mute TX et Volume TX apparaissent ou se grisent selon la réponse).
+        void ApplyRigAfTci()
+        {
+            if (worker == null) return;
+            worker.AfTciPort = settings.RigAfTci ? settings.RigAfTciPort : 0;
+            worker.RereadAf();
+        }
+
+        // Fenêtre du numéro de port d'un serveur TCI ; -1 si annulée.
+        int AskTciPort(string title, string label, int current)
+        {
+            using (Form f = new Form())
+            {
+                f.Text = title;
+                f.FormBorderStyle = FormBorderStyle.FixedDialog;
+                f.MaximizeBox = f.MinimizeBox = false;
+                f.ShowInTaskbar = false;
+                f.StartPosition = FormStartPosition.CenterParent;
+                f.Font = Font;
+                f.ClientSize = new Size(360, 92);
+                Label l = new Label { Text = label, Location = new Point(12, 18), AutoSize = true };
+                NumericUpDown n = new NumericUpDown { Minimum = 1, Maximum = 65535, Value = Math.Max(1, Math.Min(65535, current)), Location = new Point(270, 14), Width = 76 };
+                Button ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
+                Button cancel = new Button { Text = Lang.T("Annuler", "Cancel"), DialogResult = DialogResult.Cancel };
+                ok.SetBounds(180, 52, 80, 28);
+                cancel.SetBounds(266, 52, 80, 28);
+                f.AcceptButton = ok;
+                f.CancelButton = cancel;
+                f.Controls.AddRange(new Control[] { l, n, ok, cancel });
+                Theme.Apply(f);
+                return f.ShowDialog(this) == DialogResult.OK ? (int)n.Value : -1;
+            }
         }
 
         // « Volume TX sur PC » (1.45) : seulement le son de l'écoute du poste rejoué dans les haut-parleurs.
@@ -4242,16 +4309,21 @@ namespace SDRLink
         {
             if (audioRow == null || trkMonVolume == null) return;
             bool rig = worker != null && rigAfSupported == 1, esdr = EsdrAvailable, hdsdr = hdsdrRunning;
+            // 1.56 : Mute TX reste affiché (grisé) dès que le poste est connecté, même sans volume télécommandé, pour garder son clic
+            // droit (« Émetteur commandé par TCI » : Brick SDR, Hermes-Lite… pilotés par Thetis).
+            bool rigBtn = worker != null && rigAfSupported >= 0;
             bool swap = rig || esdr || hdsdrWin;
             bool mon = rig && settings.RigMonitor;   // « Volume TX sur PC » : écoute du poste sur le PC cochée
-            if (audioShownRig == rig && audioShownEsdr == esdr && audioShownHdsdr == hdsdr && audioShownSwap == swap && audioShownMon == mon) return;
+            if (audioShownRigBtn == rigBtn && audioShownRig == rig && audioShownEsdr == esdr && audioShownHdsdr == hdsdr && audioShownSwap == swap && audioShownMon == mon) return;
             audioShownMon = mon;
             lblMonVolumeCaption.Visible = trkMonVolume.Visible = lblMonVolume.Visible = mon;
             audioShownRig = rig;
+            audioShownRigBtn = rigBtn;
             audioShownEsdr = esdr;
             audioShownHdsdr = hdsdr;
             audioShownSwap = swap;
-            lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = btnMuteRig.Visible = rig;
+            lblRigVolumeCaption.Visible = trkRigVolume.Visible = lblRigVolume.Visible = rig;
+            btnMuteRig.Visible = rigBtn;
             btnMuteEsdr.Visible = lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = esdr;
             btnMuteHdsdr.Visible = lblHdsdrVolumeCaption.Visible = trkHdsdrVolume.Visible = lblHdsdrVolume.Visible = hdsdr;
             btnMuteSwap.Visible = swap;

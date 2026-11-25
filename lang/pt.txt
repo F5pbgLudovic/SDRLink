@@ -363,7 +363,7 @@ WebSDR volume:	Volume WebSDR:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Volume da voz FreeDV (guardado à parte do volume do WebSDR, ajustável apenas durante a voz FreeDV)
 WebSDR volume (kept for each favorite)	Volume do WebSDR (guardado para cada favorito)
 Mute TRX: connect the rig first	Silenciar TRX: ligue primeiro o rádio
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume do rádio indisponível com este rádio ou interface (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Volume do rádio indisponível com este rádio ou interface; rádio comandado por TCI (Brick SDR, Thetis…): clique direito em Silenciar TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Silenciar TRX: o rádio ficará silenciado depois da diversidade; durante a diversidade o seu áudio fica no ouvido (o Volume TRX regula o nível)
 Mute TRX released: the rig will get its volume back after diversity	Silenciar TRX retirado: o rádio recupera o volume depois da diversidade
 rig	rádio
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto desligado
 FreeDV: end of speech, back to normal audio	FreeDV: fim da voz, regresso ao som normal
 sound card to choose	placa de som por escolher
 Rig sound card…	Placa de som do rádio…
+Transceiver TCI port…	Porta TCI do rádio…
+Transceiver TCI port	Porta TCI do rádio
+TCI server port (Thetis, ExpertSDR…):	Porta do servidor TCI (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Silenciar TRX e Volume TRX pela interface do rádio
 Rig on the PC turned off	Escuta do rádio no PC desativada
 Rig sound card	Placa de som do rádio
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Entrada do Windows que recebe o som do rádio (por exemplo «USB AUDIO CODEC»); é também a placa de som do rádio para REC:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: voz descodificada ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: som indisponível ({2})
 Also hear the rig on the PC ({0})	Ouvir também o rádio no PC ({0})
+Transceiver controlled by TCI (port {0})	Rádio comandado por TCI (porta {0})
+Mute TRX and TRX volume over TCI (port {0})	Silenciar TRX e Volume TRX por TCI (porta {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Rádio no PC: «{0}» toca nos altifalantes quando Silenciar TRX não está ativo
 Rig on the PC: sound card "{0}" not available ({1})	Rádio no PC: placa de som «{0}» indisponível ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	O ExpertSDR está em execução mas não responde na porta TCI {0}: clique com o botão direito em «Volume WebSDR» para mudar a porta.

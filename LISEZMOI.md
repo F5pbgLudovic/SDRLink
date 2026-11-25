@@ -54,7 +54,7 @@ Vue d'ensemble ; chaque fonction est détaillée plus bas dans sa propre section
 | Couper le son du WebSDR en émission | réceptions dont le son est coupé en émission : WebSDR, poste, ExpertSDR, HDSDR (cases à cocher, toutes cochées au départ) |
 | ⇄ | réceptions que ⇄ laisse coupées (cases à cocher, deux au plus), couleur du bouton (depuis la 1.41) |
 | Mute WebSDR, Mute HDSDR | couleur son coupé / son actif |
-| Mute TX | **écouter aussi le poste sur le PC**, carte son du poste (depuis la 1.23), couleur son coupé / son actif |
+| Mute TX | **écouter aussi le poste sur le PC**, carte son du poste (depuis la 1.23), **émetteur commandé par TCI** et son port (depuis la 1.57), couleur son coupé / son actif |
 | Mute ExpertSDR | port TCI d'ExpertSDR, couleur son coupé / son actif |
 | « Volume WebSDR » | port TCI d'ExpertSDR |
 | REC | carte son du poste, couleur du bouton REC |
@@ -361,6 +361,8 @@ Tous les volumes gardés par SDRLink font partie de l'export et de l'import des 
 - Couleurs des boutons Mute : **vert, écriture blanche** quand le son passe (comme le bouton de mode choisi), **rouge, écriture blanche** quand il est coupé, gris quand la coupure n'est pas disponible.
 - **Mute WebSDR** : coupe le son du WebSDR (bouton rouge), un second clic le rétablit au volume réglé.
 - **Mute TX** : coupe le son du **transceiver** en mettant son gain BF à zéro par CAT, puis rétablit le volume au second clic. Le son est aussi rétabli à la déconnexion.
+  - **Émetteur commandé par TCI** (depuis la 1.57, clic droit sur Mute TX, non coché au départ) : Mute TX et Volume TX passent par le **serveur TCI** de l'émetteur au lieu de l'interface du poste (CAT, OmniRig, HRD, Hamlib…). Pour un **Brick SDR** ou un **Hermes-Lite** piloté par **Thetis** (serveur TCI activé dans Thetis, version 2.10.2.2 ou plus récente), pour ExpertSDR, ou pour tout émetteur qui a un serveur TCI. SDRLink utilise les commandes TCI standard, communes à tous ces logiciels : `volume:` en dB, de −60 dB (muet, Mute TX) à 0 dB (100 %), et `volume;` pour lire le volume. **Port TCI de l'émetteur…** (même clic droit) : port du serveur, 40001 au départ. Le serveur doit tourner sur le même PC. Le journal indique « Volume du poste par TCI : liaison établie » ou « pas de serveur TCI ».
+  - Depuis la 1.57, le bouton **Mute TX** reste affiché (grisé) dès que le poste est connecté, même si son volume n'est pas télécommandé : son clic droit reste accessible. Un clic sur Mute TX grisé rappelle cette option.
   - **Écouter aussi le poste sur le PC** (depuis la 1.23, clic droit sur Mute TX, non coché au départ) : le son qui arrive du poste sur la **carte son du poste** (la même que celle de REC, par exemple « USB AUDIO CODEC ») est aussi joué dans les **haut-parleurs du PC** (sortie par défaut de Windows), avec un retard de quelques centièmes de seconde, **tant que Mute TX n'est pas actif**. Mute TX actif (à la main, par ⇄ ou pendant l'émission) : le PC se tait aussi, et le son revient dès que Mute TX est relâché. Ne marche que poste connecté, quand Mute TX est affiché ; le choix est gardé.
   - Pas de carte choisie, ou carte absente : cocher l'option ouvre la fenêtre **Carte son du poste** (liste des entrées de Windows) au lieu d'un message d'erreur ; Annuler ne change rien. **Carte son du poste…** (même clic droit) ouvre cette fenêtre à tout moment. Une carte débranchée en cours de route est signalée dans la barre d'état ; le son repart seul quand elle revient.
   - **Volume TX sur PC** (depuis la 1.45) : curseur placé entre Volume WebSDR et Volume TX, visible seulement quand cette option est cochée (et Mute TX affiché). Il règle le niveau du poste **dans les haut-parleurs du PC**, de 0 à 100 % ; 100 % est le niveau fixe des versions d'avant. Il ne touche **ni au poste** (Volume TX règle le gain BF du poste), **ni à ce que captent les autres fonctions** : REC, la diversité et les décodeurs (FreeDV auto, modes numériques) prennent chacun le son de la carte son du poste directement, avant ce volume. Même à 0 %, ils reçoivent donc le son complet. La valeur est gardée après redémarrage et fait partie de l'export et de l'import (partie Configuration).
@@ -1046,6 +1048,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.57**
+  - **Émetteur commandé par TCI** (clic droit sur Mute TX) : Mute TX et Volume TX par le serveur TCI de l'émetteur (Brick SDR ou Hermes-Lite avec Thetis, ExpertSDR…), quelle que soit l'interface du poste ; port réglable. Mute TX reste affiché (grisé) même sans volume télécommandé, pour garder son clic droit.
 - **1.56**
   - **FreeDV mieux décodé**, comme FreeDV 2.4.1 : vrai filtre pour passer à 8 kHz, vocodeur démarré comme dans FreeDV 2.4.1, parole jouée **sans saccades** (250 ms d'avance), seuil de SNR à −8 dB, parole annoncée après 0,3 s. Le son est toujours décodé dans la bande latérale choisie (LSB → LSB, USB → USB).
   - **Listes WebSDR, favoris et second WebSDR** : elles **restent ouvertes** jusqu'à un nouveau clic, avec **anti-rebond** (elles se refermaient seules, surtout sous Windows 11).

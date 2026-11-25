@@ -363,7 +363,7 @@ WebSDR volume:	WebSDR-volym:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Volym för FreeDV-tal (sparas separat från WebSDR-volymen, kan bara justeras medan FreeDV-tal spelas)
 WebSDR volume (kept for each favorite)	WebSDR-volym (sparas för varje favorit)
 Mute TRX: connect the rig first	Tysta rigg: anslut riggen först
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Riggvolym är inte tillgänglig med denna rigg eller detta gränssnitt (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Riggvolym är inte tillgänglig med denna rigg eller detta gränssnitt; rigg som styrs via TCI (Brick SDR, Thetis…): högerklicka på Tysta rigg
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Tysta rigg: riggen förblir tystad efter diversity; under diversity stannar dess ljud i örat (Riggvolym ställer nivån)
 Mute TRX released: the rig will get its volume back after diversity	Tysta rigg upphävd: riggen får tillbaka sin volym efter diversity
 rig	rigg
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto avstängt
 FreeDV: end of speech, back to normal audio	FreeDV: slut på talet, tillbaka till vanligt ljud
 sound card to choose	ljudkort att välja
 Rig sound card…	Riggens ljudkort…
+Transceiver TCI port…	Riggens TCI-port…
+Transceiver TCI port	Riggens TCI-port
+TCI server port (Thetis, ExpertSDR…):	TCI-serverns port (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Tysta rigg och Riggvolym via riggens gränssnitt
 Rig on the PC turned off	Riggen i datorn avstängd
 Rig sound card	Riggens ljudkort
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Windows-ingång som tar emot riggens ljud (till exempel "USB AUDIO CODEC"); det är också riggens ljudkort för REC:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: tal avkodat ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: ljud inte tillgängligt ({2})
 Also hear the rig on the PC ({0})	Hör riggen även i datorn ({0})
+Transceiver controlled by TCI (port {0})	Rigg som styrs via TCI (port {0})
+Mute TRX and TRX volume over TCI (port {0})	Tysta rigg och Riggvolym via TCI (port {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Riggen i datorn: "{0}" spelas i högtalarna när Tysta rigg är av
 Rig on the PC: sound card "{0}" not available ({1})	Riggen i datorn: ljudkortet "{0}" är inte tillgängligt ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR körs men svarar inte på TCI-port {0}: högerklicka på "WebSDR-volym" för att ändra porten.

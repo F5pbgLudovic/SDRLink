@@ -363,7 +363,7 @@ WebSDR volume:	Glasnost WebSDR:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Glasnost govora FreeDV (shranjena ločeno od glasnosti WebSDR, nastavljiva samo med predvajanjem govora FreeDV)
 WebSDR volume (kept for each favorite)	Glasnost WebSDR (shranjena za vsak priljubljeni)
 Mute TRX: connect the rig first	Utišaj TRX: najprej povežite postajo
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Glasnost postaje ni na voljo pri tej postaji ali vmesniku (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Glasnost postaje ni na voljo pri tej postaji ali vmesniku; postaja, vodena prek TCI (Brick SDR, Thetis…): desni klik na Utišaj TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Utišaj TRX: postaja bo po diversityju ostala utišana; med diversityjem njen zvok ostane v ušesu (raven nastavlja Glasnost TRX)
 Mute TRX released: the rig will get its volume back after diversity	Utišanje TRX preklicano: postaja bo po diversityju dobila nazaj svojo glasnost
 rig	postaja
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto izklopljen
 FreeDV: end of speech, back to normal audio	FreeDV: konec govora, vrnitev na običajni zvok
 sound card to choose	zvočno kartico je treba izbrati
 Rig sound card…	Zvočna kartica postaje…
+Transceiver TCI port…	Vrata TCI postaje…
+Transceiver TCI port	Vrata TCI postaje
+TCI server port (Thetis, ExpertSDR…):	Vrata strežnika TCI (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Utišaj TRX in Glasnost TRX prek vmesnika postaje
 Rig on the PC turned off	Poslušanje postaje na računalniku izklopljeno
 Rig sound card	Zvočna kartica postaje
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Vhod sistema Windows, ki sprejema zvok postaje (na primer »USB AUDIO CODEC«); to je tudi zvočna kartica postaje za REC:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekodiran govor ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: zvok ni na voljo ({2})
 Also hear the rig on the PC ({0})	Poslušaj postajo tudi na računalniku ({0})
+Transceiver controlled by TCI (port {0})	Postaja, vodena prek TCI (vrata {0})
+Mute TRX and TRX volume over TCI (port {0})	Utišaj TRX in Glasnost TRX prek TCI (vrata {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Postaja na računalniku: »{0}« se predvaja v zvočnikih, ko Utišaj TRX ni vklopljen
 Rig on the PC: sound card "{0}" not available ({1})	Postaja na računalniku: zvočna kartica »{0}« ni na voljo ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR teče, vendar se ne odziva na vratih TCI {0}: za spremembo vrat desno kliknite »Glasnost WebSDR«.

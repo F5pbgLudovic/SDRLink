@@ -363,7 +363,7 @@ WebSDR volume:	WebSDR-i helitugevus:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	FreeDV kõne helitugevus (salvestatakse WebSDR-i helitugevusest eraldi, reguleeritav ainult FreeDV kõne ajal)
 WebSDR volume (kept for each favorite)	WebSDR-i helitugevus (salvestatakse iga lemmiku jaoks)
 Mute TRX: connect the rig first	TRX vaigistus: ühendage esmalt raadio
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raadio helitugevus pole selle raadio või liidesega saadaval (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Raadio helitugevus pole selle raadio või liidesega saadaval; TCI kaudu juhitav raadio (Brick SDR, Thetis…): paremklõps nupul Vaigista TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Vaigista TRX: raadiojaam jääb pärast diversityt vaigistatuks; diversity ajal jääb selle heli kõrva (taset määrab TRX helitugevus)
 Mute TRX released: the rig will get its volume back after diversity	TRX vaigistus maas: raadiojaam saab pärast diversityt oma helitugevuse tagasi
 rig	raadio
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto välja lülitatud
 FreeDV: end of speech, back to normal audio	FreeDV: kõne lõpp, tagasi tavalise heli juurde
 sound card to choose	helikaart tuleb valida
 Rig sound card…	Raadiojaama helikaart…
+Transceiver TCI port…	Raadio TCI-port…
+Transceiver TCI port	Raadio TCI-port
+TCI server port (Thetis, ExpertSDR…):	TCI-serveri port (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Vaigista TRX ja TRX helitugevus raadio liidese kaudu
 Rig on the PC turned off	Raadiojaama kuulamine arvutis välja lülitatud
 Rig sound card	Raadiojaama helikaart
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Windowsi sisend, mis saab raadiojaama heli (näiteks „USB AUDIO CODEC“); see on ka REC-i raadiojaama helikaart:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: kõne dekodeeritud ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: heli pole saadaval ({2})
 Also hear the rig on the PC ({0})	Kuula raadiojaama ka arvutis ({0})
+Transceiver controlled by TCI (port {0})	TCI kaudu juhitav raadio (port {0})
+Mute TRX and TRX volume over TCI (port {0})	Vaigista TRX ja TRX helitugevus TCI kaudu (port {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Raadiojaam arvutis: „{0}“ mängib kõlarites, kui Vaigista TRX pole sees
 Rig on the PC: sound card "{0}" not available ({1})	Raadiojaam arvutis: helikaart „{0}“ pole saadaval ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR töötab, kuid ei vasta TCI-pordil {0}: pordi muutmiseks paremklõpsake „WebSDR-i helitugevus“.

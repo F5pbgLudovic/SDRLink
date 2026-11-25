@@ -59,6 +59,47 @@ namespace SDRLink
         public void SetMode(string mode) { lock (pendingLock) pendingMode = mode; }
         public void SetPtt(bool tx) { lock (pendingLock) pendingPtt = tx ? 1 : 0; }
         public void SetAfGain(int pct) { lock (pendingLock) pendingAf = pct; }
+
+        // Mute TX et Volume TX par une liaison TCI à part (1.56, clic droit sur Mute TX > « Émetteur commandé par TCI ») :
+        // port du serveur TCI (Thetis pour un Brick SDR ou un Hermes-Lite, ExpertSDR…), 0 = par l'interface du poste.
+        // Commandes TCI standard « volume:dB; » (-60 à 0, en dB entiers : Thetis lit le nombre avec la langue de Windows) et
+        // « volume; » pour le lire ; Mute TX = volume à -60 dB, comme avec l'interface du poste.
+        public volatile int AfTciPort;
+        volatile bool afReread;
+        public void RereadAf() { afReread = true; }
+        ExpertSdrTci afTci;
+        int afTciPortUsed;
+        DateTime afTciRetry = DateTime.MinValue;
+
+        ExpertSdrTci AfTciLink()
+        {
+            int p = AfTciPort;
+            if (afTci != null && (!afTci.Connected || afTciPortUsed != p)) { afTci.Dispose(); afTci = null; }
+            if (afTci == null && p > 0 && DateTime.UtcNow >= afTciRetry)
+            {
+                afTciRetry = DateTime.UtcNow.AddSeconds(10);
+                afTci = ExpertSdrTci.TryConnect("127.0.0.1", p);
+                afTciPortUsed = p;
+                Log.Write("Volume du poste par TCI : " + (afTci != null ? "liaison établie sur le port " + p : "pas de serveur TCI sur le port " + p));
+                // Le serveur répond à « volume; » un peu après : on lui laisse 0,5 s.
+                for (int i = 0; i < 10 && afTci != null && afTci.VolumePercent < 0; i++) Thread.Sleep(50);
+            }
+            return afTci;
+        }
+
+        int ReadAf(IRig rig)
+        {
+            if (AfTciPort <= 0) { if (afTci != null) { afTci.Dispose(); afTci = null; } return rig.ReadAfGain(); }
+            ExpertSdrTci t = AfTciLink();
+            return t == null ? -1 : t.VolumePercent;
+        }
+
+        void WriteAf(IRig rig, int pct)
+        {
+            if (AfTciPort <= 0) { rig.SetAfGain(pct); return; }
+            ExpertSdrTci t = AfTciLink();
+            if (t != null) t.SetVolumePercent(pct);
+        }
         public void SetPreamp(int code) { lock (pendingLock) pendingPreamp = code; }
         // Puissance en watts (1.42), déjà ramenée sous le plafond général ; envoyée seulement en réception.
         public void SetPower(int watts) { lock (pendingLock) pendingPower = watts; }
@@ -184,9 +225,10 @@ namespace SDRLink
                         pwr = pendingPower;
                         pendingFreq = 0; pendingMode = null; pendingPtt = -1; pendingAf = -1; pendingPreamp = -1; pendingPower = -1;
                     }
+                    if (afReread) { afReread = false; afCountdown = 0; afQuietUntil = DateTime.MinValue; lastAf = -2; }
                     if (af >= 0)
                     {
-                        rig.SetAfGain(af);
+                        WriteAf(rig, af);
                         lastAf = af;
                         // Pas de relecture juste après un réglage : le poste n'a peut-être pas encore pris la valeur.
                         afQuietUntil = DateTime.UtcNow.AddMilliseconds(1500);
@@ -272,7 +314,7 @@ namespace SDRLink
                         // Non pris en charge : on réessaie beaucoup plus rarement (TCI annonce parfois son volume un peu après).
                         if (--afCountdown <= 0 && DateTime.UtcNow >= afQuietUntil)
                         {
-                            int a = rig.ReadAfGain();
+                            int a = ReadAf(rig);
                             afCountdown = a < 0 ? AfReadEvery * 5 : AfReadEvery;
                             if (a != lastAf)
                             {
@@ -314,13 +356,14 @@ namespace SDRLink
                 // Dernier réglage de volume demandé juste avant l'arrêt (rétablissement après "Mute TX").
                 int lastAfRequest;
                 lock (pendingLock) { lastAfRequest = pendingAf; pendingAf = -1; }
-                if (lastAfRequest >= 0) { try { rig.SetAfGain(lastAfRequest); Thread.Sleep(100); } catch { } }
+                if (lastAfRequest >= 0) { try { WriteAf(rig, lastAfRequest); Thread.Sleep(100); } catch { } }
                 if (pttCommandedOn)
                 {
                     try { rig.SetPtt(false); Log.Write("Bouton PTT : retour en réception avant déconnexion"); Thread.Sleep(100); } catch { }
                 }
                 try { rig.Close(); } catch { }
             }
+            if (afTci != null) { afTci.Dispose(); afTci = null; }
             Status(Lang.T("Déconnecté", "Disconnected"), false);
         }
 

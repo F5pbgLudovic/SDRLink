@@ -363,7 +363,7 @@ WebSDR volume:	Volumen WebSDR:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Volumen de la voz FreeDV (guardado aparte del volumen del WebSDR, ajustable solo mientras se reproduce voz FreeDV)
 WebSDR volume (kept for each favorite)	Volumen del WebSDR (guardado para cada favorito)
 Mute TRX: connect the rig first	Silenciar TRX: conecte primero el equipo
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumen del equipo no disponible con este equipo o interfaz (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Volumen del equipo no disponible con este equipo o interfaz; equipo controlado por TCI (Brick SDR, Thetis…): clic derecho en Silenciar TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Silenciar TRX: el equipo seguirá silenciado después de la diversidad; durante la diversidad su audio sigue en el oído (Volumen TRX ajusta su nivel)
 Mute TRX released: the rig will get its volume back after diversity	Silenciar TRX quitado: el equipo recuperará su volumen después de la diversidad
 rig	equipo
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto desactivado
 FreeDV: end of speech, back to normal audio	FreeDV: fin de la voz, vuelta al sonido normal
 sound card to choose	tarjeta de sonido por elegir
 Rig sound card…	Tarjeta de sonido del equipo…
+Transceiver TCI port…	Puerto TCI del equipo…
+Transceiver TCI port	Puerto TCI del equipo
+TCI server port (Thetis, ExpertSDR…):	Puerto del servidor TCI (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Silenciar TRX y Volumen TRX por la interfaz del equipo
 Rig on the PC turned off	Escucha del equipo en el PC desactivada
 Rig sound card	Tarjeta de sonido del equipo
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Entrada de Windows que recibe el sonido del equipo (por ejemplo «USB AUDIO CODEC»); es también la tarjeta de sonido del equipo para REC:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: voz decodificada ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: sonido no disponible ({2})
 Also hear the rig on the PC ({0})	Escuchar también el equipo en el PC ({0})
+Transceiver controlled by TCI (port {0})	Equipo controlado por TCI (puerto {0})
+Mute TRX and TRX volume over TCI (port {0})	Silenciar TRX y Volumen TRX por TCI (puerto {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Equipo en el PC: «{0}» suena en los altavoces cuando Silenciar TRX no está activo
 Rig on the PC: sound card "{0}" not available ({1})	Equipo en el PC: tarjeta de sonido «{0}» no disponible ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR está en marcha pero no responde en el puerto TCI {0}: clic derecho en «Volumen WebSDR» para cambiar el puerto.

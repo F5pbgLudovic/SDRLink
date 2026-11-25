@@ -363,7 +363,7 @@ WebSDR volume:	Volume WebSDR :
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Volume de la parole FreeDV (mémorisé à part du volume du WebSDR, réglable seulement pendant la parole FreeDV)
 WebSDR volume (kept for each favorite)	Volume du WebSDR (mémorisé pour chaque favori)
 Mute TRX: connect the rig first	Mute TX : connectez d'abord le poste
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volume du poste non disponible avec ce poste ou cette interface (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Volume du poste non disponible avec ce poste ou cette interface ; émetteur commandé en TCI (Brick SDR, Thetis…) : clic droit sur Mute TX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Mute TX : le poste restera muet après la diversité ; pendant la diversité, son son reste dans l'oreille (Volume TX règle son niveau)
 Mute TRX released: the rig will get its volume back after diversity	Mute TX retiré : le poste reprendra son volume après la diversité
 rig	poste
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto arrêté
 FreeDV: end of speech, back to normal audio	FreeDV : fin de la parole, retour au son normal
 sound card to choose	carte son à choisir
 Rig sound card…	Carte son du poste…
+Transceiver TCI port…	Port TCI de l'émetteur…
+Transceiver TCI port	Port TCI de l'émetteur
+TCI server port (Thetis, ExpertSDR…):	Port du serveur TCI (Thetis, ExpertSDR…) :
+Mute TRX and TRX volume through the rig interface	Mute TX et Volume TX par l'interface du poste
 Rig on the PC turned off	Écoute du poste sur le PC désactivée
 Rig sound card	Carte son du poste
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Entrée de Windows qui reçoit le son du poste (par exemple « USB AUDIO CODEC ») ; c'est aussi la carte son du poste de REC :
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV : {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0} : parole décodée ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0} : {1} : son indisponible ({2})
 Also hear the rig on the PC ({0})	Écouter aussi le poste sur le PC ({0})
+Transceiver controlled by TCI (port {0})	Émetteur commandé par TCI (port {0})
+Mute TRX and TRX volume over TCI (port {0})	Mute TX et Volume TX par TCI (port {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Écoute du poste sur le PC : « {0} » est joué dans les haut-parleurs quand Mute TX n'est pas actif
 Rig on the PC: sound card "{0}" not available ({1})	Écoute du poste : carte son « {0} » indisponible ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR est lancé mais ne répond pas sur le port TCI {0} : clic droit sur « Volume WebSDR » pour changer le port.

@@ -363,7 +363,7 @@ WebSDR volume:	WebSDR:n äänenvoimakkuus:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	FreeDV-puheen äänenvoimakkuus (tallennetaan erikseen WebSDR:n äänenvoimakkuudesta, säädettävissä vain FreeDV-puheen aikana)
 WebSDR volume (kept for each favorite)	WebSDR:n äänenvoimakkuus (tallennetaan jokaiselle suosikille)
 Mute TRX: connect the rig first	Mykistä TRX: yhdistä ensin radio
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Radion äänenvoimakkuutta ei voi säätää tällä radiolla tai liitännällä (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Radion äänenvoimakkuutta ei voi säätää tällä radiolla tai liitännällä; TCI:llä ohjattu radio (Brick SDR, Thetis…): napsauta hiiren oikealla Mykistä TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Mykistä TRX: radio pysyy mykistettynä diversityn jälkeen; diversityn aikana sen ääni jää korvaan (TRX-voimakkuus säätää tason)
 Mute TRX released: the rig will get its volume back after diversity	TRX-mykistys poistettu: radio saa äänenvoimakkuutensa takaisin diversityn jälkeen
 rig	radio
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto pois päältä
 FreeDV: end of speech, back to normal audio	FreeDV: puhe päättyi, paluu tavalliseen ääneen
 sound card to choose	äänikortti valittava
 Rig sound card…	Radion äänikortti…
+Transceiver TCI port…	Radion TCI-portti…
+Transceiver TCI port	Radion TCI-portti
+TCI server port (Thetis, ExpertSDR…):	TCI-palvelimen portti (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Mykistä TRX ja TRX-voimakkuus radion liitännän kautta
 Rig on the PC turned off	Radion kuuntelu tietokoneella pois päältä
 Rig sound card	Radion äänikortti
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Windowsin tulo, joka saa radion äänen (esimerkiksi ”USB AUDIO CODEC”); se on myös REC-toiminnon radion äänikortti:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: puhe purettu ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: ääni ei ole käytettävissä ({2})
 Also hear the rig on the PC ({0})	Kuuntele radiota myös tietokoneella ({0})
+Transceiver controlled by TCI (port {0})	TCI:llä ohjattu radio (portti {0})
+Mute TRX and TRX volume over TCI (port {0})	Mykistä TRX ja TRX-voimakkuus TCI:n kautta (portti {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Radio tietokoneella: ”{0}” soi kaiuttimissa, kun Mykistä TRX ei ole päällä
 Rig on the PC: sound card "{0}" not available ({1})	Radio tietokoneella: äänikortti ”{0}” ei ole käytettävissä ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR on käynnissä, mutta ei vastaa TCI-portissa {0}: vaihda portti napsauttamalla hiiren oikealla kohtaa ”WebSDR:n äänenvoimakkuus”.

@@ -363,7 +363,7 @@ WebSDR volume:	Hlasitosť WebSDR:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Hlasitosť reči FreeDV (ukladá sa zvlášť od hlasitosti WebSDR, nastaviteľná len počas prehrávania reči FreeDV)
 WebSDR volume (kept for each favorite)	Hlasitosť WebSDR (ukladá sa pre každý obľúbený)
 Mute TRX: connect the rig first	Stlmiť TRX: najprv pripojte transceiver
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Hlasitosť transceivera nie je dostupná s týmto transceiverom alebo rozhraním; transceiver riadený cez TCI (Brick SDR, Thetis…): pravé tlačidlo na Stlmiť TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Stlmiť TRX: stanica zostane po diverzite stlmená; počas diverzity zostáva jej zvuk v uchu (úroveň nastavuje Hlasitosť TRX)
 Mute TRX released: the rig will get its volume back after diversity	Stlmenie TRX zrušené: stanica po diverzite získa späť svoju hlasitosť
 rig	transceiver
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto vypnuté
 FreeDV: end of speech, back to normal audio	FreeDV: koniec reči, návrat k normálnemu zvuku
 sound card to choose	zvukovú kartu treba vybrať
 Rig sound card…	Zvuková karta stanice…
+Transceiver TCI port…	Port TCI transceivera…
+Transceiver TCI port	Port TCI transceivera
+TCI server port (Thetis, ExpertSDR…):	Port servera TCI (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Stlmiť TRX a Hlasitosť TRX cez rozhranie stanice
 Rig on the PC turned off	Počúvanie stanice na PC vypnuté
 Rig sound card	Zvuková karta stanice
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Vstup Windows, do ktorého ide zvuk stanice (napríklad „USB AUDIO CODEC“); je to aj zvuková karta stanice pre REC:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekódovaná reč ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: zvuk nie je dostupný ({2})
 Also hear the rig on the PC ({0})	Počúvať stanicu aj na PC ({0})
+Transceiver controlled by TCI (port {0})	Transceiver riadený cez TCI (port {0})
+Mute TRX and TRX volume over TCI (port {0})	Stlmiť TRX a Hlasitosť TRX cez TCI (port {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stanica na PC: „{0}“ hrá v reproduktoroch, keď nie je zapnuté Stlmiť TRX
 Rig on the PC: sound card "{0}" not available ({1})	Stanica na PC: zvuková karta „{0}“ nie je dostupná ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR beží, ale neodpovedá na porte TCI {0}: port zmeníte kliknutím pravým tlačidlom na „Hlasitosť WebSDR“.

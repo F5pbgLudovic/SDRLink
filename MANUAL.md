@@ -55,7 +55,7 @@ Overview; each feature is detailed further down in its own section.
 | Mute WebSDR while transmitting | receivers muted while transmitting: WebSDR, rig, ExpertSDR, HDSDR (check boxes, all ticked at the start) |
 | ⇄ | receivers that ⇄ keeps muted (check boxes, two at most), button colour (since 1.41) |
 | Mute WebSDR, Mute HDSDR | colour when muted / sound on |
-| Mute TRX | **also hear the rig on the PC**, rig sound card (since 1.23), colour when muted / sound on |
+| Mute TRX | **also hear the rig on the PC**, rig sound card (since 1.23), **transceiver controlled by TCI** and its port (since 1.57), colour when muted / sound on |
 | Mute ExpertSDR | ExpertSDR TCI port, colour when muted / sound on |
 | "WebSDR volume" | ExpertSDR TCI port |
 | REC | rig sound card, REC button colour |
@@ -362,6 +362,8 @@ To the right of the WebSDR volume:
 - Mute button colours: **green with white text** when the audio is passing (like the selected mode button), **red with white text** when it is muted, grey when muting is not available.
 - **Mute WebSDR**: mutes the WebSDR audio (red button); a second click restores it at the set volume.
 - **Mute TRX**: mutes the **transceiver** audio by setting its AF gain to zero over CAT, then restores the volume on the second click. The audio is also restored on disconnection.
+  - **Transceiver controlled by TCI** (since 1.57, right-click Mute TRX, unticked at first): Mute TRX and TRX volume go through the transceiver's **TCI server** instead of the rig interface (CAT, OmniRig, HRD, Hamlib…). For a **Brick SDR** or a **Hermes-Lite** run by **Thetis** (TCI server enabled in Thetis, version 2.10.2.2 or later), for ExpertSDR, or for any transceiver with a TCI server. SDRLink uses the standard TCI commands, common to all these programs: `volume:` in dB, from −60 dB (muted, Mute TRX) to 0 dB (100 %), and `volume;` to read the volume. **Transceiver TCI port…** (same right-click): server port, 40001 at first. The server must run on the same PC. The log says "Volume du poste par TCI : liaison établie" (link up) or "pas de serveur TCI" (no TCI server).
+  - Since 1.57, the **Mute TRX** button stays shown (greyed out) as soon as the rig is connected, even if its volume is not remotely controlled: its right-click stays available. A click on the greyed Mute TRX points to this option.
   - **Also hear the rig on the PC** (since 1.23, right-click Mute TRX, unticked at the start): the audio coming from the rig on the **rig sound card** (the same as REC's, for example "USB AUDIO CODEC") is also played in the **PC speakers** (Windows default output), with a delay of a few hundredths of a second, **as long as Mute TRX is off**. Mute TRX on (by hand, by ⇄ or while transmitting): the PC goes silent too, and the audio comes back as soon as Mute TRX is released. Only works with the rig connected, when Mute TRX is shown; the choice is kept.
   - No card chosen, or card missing: ticking the option opens the **Rig sound card** window (list of the Windows inputs) instead of an error message; Cancel changes nothing. **Rig sound card…** (same right-click menu) opens this window at any time. A card unplugged meanwhile is reported in the status bar; the audio starts again on its own when it comes back.
   - **TRX volume on PC** (since 1.45): slider placed between WebSDR volume and TRX volume, shown only when this option is ticked (and Mute TRX is shown). It sets the rig's level **in the PC speakers**, from 0 to 100 %; 100 % is the fixed level of earlier versions. It touches **neither the rig** (TRX volume sets the rig's AF gain) **nor what the other features capture**: REC, diversity and the decoders (FreeDV auto, digital modes) each take the audio of the rig sound card directly, before this volume. Even at 0 % they get the full audio. The value is kept after a restart and is part of settings export and import (Configuration part).
@@ -1047,6 +1049,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.57**
+  - **Transceiver controlled by TCI** (right-click Mute TRX): Mute TRX and TRX volume through the transceiver's TCI server (Brick SDR or Hermes-Lite with Thetis, ExpertSDR…), whatever the rig interface; adjustable port. Mute TRX stays shown (greyed out) even without remote volume, to keep its right-click.
 - **1.56**
   - **Better FreeDV decoding**, like FreeDV 2.4.1: real filter to go to 8 kHz, vocoder started as in FreeDV 2.4.1, speech played **without choppiness** (250 ms ahead), SNR threshold at −8 dB, speech announced after 0.3 s. The audio is still decoded in the chosen sideband (LSB → LSB, USB → USB).
   - **WebSDR, favorites and second WebSDR lists** **stay open** until a new click, with **debounce** (they closed by themselves, especially on Windows 11).

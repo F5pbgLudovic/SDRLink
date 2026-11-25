@@ -363,7 +363,7 @@ WebSDR volume:	WebSDR hangerő:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	A FreeDV beszéd hangereje (a WebSDR hangerejétől külön tárolva, csak FreeDV beszéd lejátszása közben állítható)
 WebSDR volume (kept for each favorite)	WebSDR hangerő (minden kedvenchez tárolva)
 Mute TRX: connect the rig first	TRX némítás: előbb csatlakoztassa a rádiót
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	A rádió hangereje nem érhető el ezzel a rádióval vagy interfésszel; TCI-n vezérelt rádió (Brick SDR, Thetis…): jobb klikk a TRX némítás gombra
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	TRX némítás: a rádió némítva marad a diversity után; diversity alatt a hangja a fülben marad (a szintet a TRX hangerő állítja)
 Mute TRX released: the rig will get its volume back after diversity	TRX némítás feloldva: a rádió a diversity után visszakapja a hangerejét
 rig	rádió
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto kikapcsolva
 FreeDV: end of speech, back to normal audio	FreeDV: a beszéd vége, vissza a normál hanghoz
 sound card to choose	hangkártyát kell választani
 Rig sound card…	A rádió hangkártyája…
+Transceiver TCI port…	A rádió TCI-portja…
+Transceiver TCI port	A rádió TCI-portja
+TCI server port (Thetis, ExpertSDR…):	TCI-kiszolgáló portja (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	TRX némítás és TRX hangerő a rádió interfészén át
 Rig on the PC turned off	A rádió hallgatása a gépen kikapcsolva
 Rig sound card	A rádió hangkártyája
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	A Windows bemenete, amely a rádió hangját kapja (például „USB AUDIO CODEC”); ez a REC rádióhangkártyája is:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: dekódolt beszéd ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: a hang nem érhető el ({2})
 Also hear the rig on the PC ({0})	A rádió hallgatása a gépen is ({0})
+Transceiver controlled by TCI (port {0})	TCI-n vezérelt rádió ({0}. port)
+Mute TRX and TRX volume over TCI (port {0})	TRX némítás és TRX hangerő TCI-n át ({0}. port)
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Rádió a gépen: a(z) „{0}” a hangszórókon szól, ha a TRX némítás nincs bekapcsolva
 Rig on the PC: sound card "{0}" not available ({1})	Rádió a gépen: a(z) „{0}” hangkártya nem érhető el ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	Az ExpertSDR fut, de nem válaszol a(z) {0} TCI-porton: a port módosításához kattintson jobb gombbal a „WebSDR hangerő” feliratra.

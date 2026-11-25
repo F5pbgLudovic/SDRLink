@@ -363,7 +363,7 @@ WebSDR volume:	Volum WebSDR:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	Volumul vocii FreeDV (memorat separat de volumul WebSDR, reglabil doar în timpul vocii FreeDV)
 WebSDR volume (kept for each favorite)	Volumul WebSDR (memorat pentru fiecare favorit)
 Mute TRX: connect the rig first	Mut TRX: conectați mai întâi stația
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Volumul stației nu este disponibil cu această stație sau interfață (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Volumul stației nu este disponibil cu această stație sau interfață; stație comandată prin TCI (Brick SDR, Thetis…): clic dreapta pe Mut TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Mut TRX: stația va rămâne fără sunet după diversitate; în timpul diversității sunetul ei rămâne în ureche (Volum TRX îi reglează nivelul)
 Mute TRX released: the rig will get its volume back after diversity	Mut TRX anulat: stația își va recăpăta volumul după diversitate
 rig	stație
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto oprit
 FreeDV: end of speech, back to normal audio	FreeDV: sfârșitul vocii, revenire la sunetul normal
 sound card to choose	placă de sunet de ales
 Rig sound card…	Placa de sunet a stației…
+Transceiver TCI port…	Portul TCI al stației…
+Transceiver TCI port	Portul TCI al stației
+TCI server port (Thetis, ExpertSDR…):	Portul serverului TCI (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Mut TRX și Volum TRX prin interfața stației
 Rig on the PC turned off	Ascultarea stației pe PC dezactivată
 Rig sound card	Placa de sunet a stației
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Intrarea Windows care primește sunetul stației (de exemplu „USB AUDIO CODEC”); este și placa de sunet a stației pentru REC:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: voce decodată ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: sunet indisponibil ({2})
 Also hear the rig on the PC ({0})	Ascultă stația și pe PC ({0})
+Transceiver controlled by TCI (port {0})	Stație comandată prin TCI (port {0})
+Mute TRX and TRX volume over TCI (port {0})	Mut TRX și Volum TRX prin TCI (port {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Stația pe PC: „{0}” se aude în difuzoare când Mut TRX nu este activ
 Rig on the PC: sound card "{0}" not available ({1})	Stația pe PC: placa de sunet „{0}” nu este disponibilă ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR rulează, dar nu răspunde pe portul TCI {0}: clic dreapta pe „Volum WebSDR” pentru a schimba portul.

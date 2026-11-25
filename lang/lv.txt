@@ -363,7 +363,7 @@ WebSDR volume:	WebSDR skaļums:
 Volume of the FreeDV speech (kept apart from the WebSDR volume, adjustable only while FreeDV speech is played)	FreeDV runas skaļums (saglabāts atsevišķi no WebSDR skaļuma, regulējams tikai FreeDV runas laikā)
 WebSDR volume (kept for each favorite)	WebSDR skaļums (saglabāts katrai izlasei)
 Mute TRX: connect the rig first	Klusināt TRX: vispirms pievienojiet raiduztvērēju
-Rig volume not available with this rig or interface (OmniRig, HRD, FT-817/818…)	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni (OmniRig, HRD, FT-817/818…)
+Rig volume not available with this rig or interface; transceiver controlled by TCI (Brick SDR, Thetis…): right-click Mute TRX	Raiduztvērēja skaļums nav pieejams ar šo raiduztvērēju vai saskarni; caur TCI vadīts raiduztvērējs (Brick SDR, Thetis…): ar labo pogu uz Klusināt TRX
 Mute TRX: the rig will stay muted after diversity; during diversity its audio stays in the ear (TRX volume sets its level)	Klusināt TRX: raiduztvērējs pēc diversity paliks klusināts; diversity laikā tā skaņa paliek ausī (līmeni nosaka TRX skaļums)
 Mute TRX released: the rig will get its volume back after diversity	TRX klusināšana atcelta: raiduztvērējs pēc diversity atgūs savu skaļumu
 rig	raiduztvērējs
@@ -372,6 +372,10 @@ FreeDV auto off	FreeDV auto izslēgts
 FreeDV: end of speech, back to normal audio	FreeDV: runas beigas, atpakaļ pie parastās skaņas
 sound card to choose	jāizvēlas skaņas karte
 Rig sound card…	Raiduztvērēja skaņas karte…
+Transceiver TCI port…	Raiduztvērēja TCI ports…
+Transceiver TCI port	Raiduztvērēja TCI ports
+TCI server port (Thetis, ExpertSDR…):	TCI servera ports (Thetis, ExpertSDR…):
+Mute TRX and TRX volume through the rig interface	Klusināt TRX un TRX skaļums caur raiduztvērēja saskarni
 Rig on the PC turned off	Raiduztvērēja klausīšanās datorā izslēgta
 Rig sound card	Raiduztvērēja skaņas karte
 Windows input that receives the rig's audio (for example "USB AUDIO CODEC"); it is also REC's rig sound card:	Windows ieeja, kas saņem raiduztvērēja skaņu (piemēram, “USB AUDIO CODEC”); tā ir arī REC raiduztvērēja skaņas karte:
@@ -466,6 +470,8 @@ FreeDV: {0}	FreeDV: {0}
 FreeDV {0}: speech decoded ({1}, SNR {2} dB)	FreeDV {0}: runa dekodēta ({1}, SNR {2} dB)
 {0}: {1}: audio not available ({2})	{0}: {1}: skaņa nav pieejama ({2})
 Also hear the rig on the PC ({0})	Klausīties raiduztvērēju arī datorā ({0})
+Transceiver controlled by TCI (port {0})	Caur TCI vadīts raiduztvērējs (ports {0})
+Mute TRX and TRX volume over TCI (port {0})	Klusināt TRX un TRX skaļums caur TCI (ports {0})
 Rig on the PC: "{0}" is played in the speakers when Mute TRX is off	Raiduztvērējs datorā: “{0}” skan skaļruņos, kad Klusināt TRX nav ieslēgts
 Rig on the PC: sound card "{0}" not available ({1})	Raiduztvērējs datorā: skaņas karte “{0}” nav pieejama ({1})
 ExpertSDR is running but does not answer on TCI port {0}: right-click "WebSDR volume" to change the port.	ExpertSDR darbojas, bet neatbild TCI portā {0}: lai mainītu portu, ar peles labo pogu noklikšķiniet uz “WebSDR skaļums”.
