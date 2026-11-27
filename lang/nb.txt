@@ -262,6 +262,7 @@ Metal	Metall
 Classic	Klassisk
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Koble til: starter forbindelsen med radioen. «Kobler til...»: radioen svarer ikke ennå (klikk: stopp). «Koble fra»: radioen svarer; forbindelsen kontrolleres hvert minutt (høyreklikk: knappens farger)
 Cannot open the log: 	Kan ikke åpne loggen: 
+Resize keeping the proportions	Endre størrelse med bevarte proporsjoner
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Knappenes stil: Klassisk, Win3.11, AI-neon, Moderne, Glass, Terminal eller Metall (høyreklikk: knappens farge)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Plasserer kontrollpanelet (fra linjen Grensesnitt til Mute-linjen) øverst i vinduet eller under WebSDR-siden; statuslinjen blir nederst (høyreklikk: knappens farge)
 Check for updates	Se etter oppdateringer
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-siden er redusert til {0} for å vise hele kontrollpanelet (+ og − for å velge)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delingslenke kopiert til utklippstavlen ({0} kHz {1}): lim den inn i en melding
 Share link: {0} kHz {1} on {2}	Delingslenke: {0} kHz {1} på {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporsjoner bevart: vinduet beholder skjermens forhold, og hele innholdet følger størrelsen
+Free proportions: original content size	Frie proporsjoner: innholdets opprinnelige størrelse
 Scan of the extended 27 MHz band	Skanning av det utvidede 27 MHz-båndet
 Scan of the 70 cm band	Skanning av 70 cm-båndet
 Resume the scan	Fortsett skanningen

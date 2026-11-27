@@ -1,4 +1,4 @@
-# SDRLink V1.57 — @F5PBG 2026
+# SDRLink V1.58 — @F5PBG 2026
 
 SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le VFO du poste et le poste suit la cascade du WebSDR. Le mode est synchronisé aussi.
 
@@ -19,7 +19,7 @@ SDRLink garde un **WebSDR** calé sur votre **transceiver**. Le WebSDR suit le V
   - bouton Réinit WebSDR : relance un WebSDR arrêté (délai d'inactivité) en gardant ses réglages (fréquence, mode, filtre, zoom), ou automatiquement quand son son est perdu (Réinit Auto WebSDR, clic droit : Auto et délai de 10 à 60 s, jamais quand le son est coupé dans la page, même avec Mute WebSDR ou le volume de SDRLink à 0) ; réinitialisation totale au clic droit ;
   - **égaliseur 10 bandes** du son du WebSDR et du poste écouté sur le PC (bouton EQ, préréglages, courbe de réponse) ;
   - écoute en diversité (bouton Diversité, notch auto et DNR compris) : le WebSDR dans une oreille, le poste, ExpertSDR ou HDSDR dans l'autre, le son local retardé automatiquement pour tomber en même temps que le WebSDR ; ou **deux WebSDR**, un dans chaque oreille (le second écouté sans être affiché, calé tout seul) ;
-  - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ;
+  - affichages réduit, mini et ptt (bouton PTT seul, avec la case Avant plan) ; fenêtre redimensionnable en conservant les proportions (tout suit sa taille, comme le plein écran en plus petit) ;
   - propositions pendant la frappe dans la barre WebSDR (nom ou adresse, liste choisie) ;
   - favoris en 10 listes maximum avec vérification des liens et des doublons, export/import compatible Firefox par listes, recherche des WebSDR proches de votre position (ordinateur, locator ou coordonnées), listes déroulantes qui restent ouvertes jusqu'à un nouveau clic ;
   - volume du WebSDR, du poste, d'ExpertSDR (Mute ExpertSDR, par Windows ou TCI) et de HDSDR (Mute HDSDR, par Windows), son du poste aussi sur le PC au choix (clic droit sur Mute TX) avec son propre curseur « Volume TX sur PC » ; tous les volumes au pas de 1 % (molette, flèches, clic) ;
@@ -79,7 +79,7 @@ SDRLink keeps a **WebSDR** locked to your **transceiver**. The WebSDR follows th
   - Reset WebSDR button: restarts a stopped WebSDR (idle timeout) keeping its settings (frequency, mode, filter, zoom), or automatically when its sound is lost (Auto Reset WebSDR, right-click: Auto and a time of 10 to 60 s, never when the sound is cut in the page, even with Mute WebSDR or SDRLink's volume at 0); full reset from the right-click menu;
   - **10-band equalizer** for the WebSDR audio and the rig heard on the PC (EQ button, presets, response curve);
   - diversity listening (Diversity button, auto notch and DNR included): the WebSDR in one ear, the rig, ExpertSDR or HDSDR in the other, the local audio delayed automatically to match the WebSDR; or **two WebSDRs**, one in each ear (the second one heard without being displayed, aligned by itself);
-  - reduced, mini and PTT (PTT button only, with the Always on top box) views;
+  - reduced, mini and PTT (PTT button only, with the Always on top box) views; window resizable keeping the proportions (everything follows its size, like the full-screen view, only smaller);
   - suggestions while typing in the WebSDR bar (name or address, chosen list);
   - favorites in up to 10 lists with dead-link and duplicate checks, Firefox-compatible export/import by list, search for WebSDRs near your position (computer, locator or coordinates), drop-down lists that stay open until a new click;
   - WebSDR, rig, ExpertSDR (Mute ExpertSDR, through Windows or TCI) and HDSDR volume (Mute HDSDR, through Windows), rig audio also on the PC if wanted (right-click Mute TRX) with its own "TRX volume on PC" slider; every volume in 1 % steps (wheel, arrows, click);

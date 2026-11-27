@@ -596,7 +596,7 @@ namespace SDRLink
             string idle = Lang.T("Mode ?", "Mode?"), busy = Lang.F("Recherche… {0} s", "Searching… {0} s", ModeProbe.Seconds);
             int w = 0;
             foreach (string t in new[] { idle, busy }) w = Math.Max(w, TextRenderer.MeasureText(t, btnFindMode.Font).Width + 18);
-            if (btnFindMode.MinimumSize.Width != w) btnFindMode.MinimumSize = new Size(w, 25);
+            if (btnFindMode.MinimumSize.Width != w || btnFindMode.MinimumSize.Height != Mh) btnFindMode.MinimumSize = new Size(w, Mh);
             if (probe != null)
             {
                 int left = Math.Max(0, (int)Math.Ceiling((probeEnd - DateTime.UtcNow).TotalSeconds));

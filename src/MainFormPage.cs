@@ -115,7 +115,7 @@ namespace SDRLink
             m.Items.Add(new ToolStripSeparator());
             double stored;
             bool manual = zoomHost != "" && settings.PageZooms.TryGetValue(zoomHost, out stored);
-            ToolStripMenuItem auto = new ToolStripMenuItem(Lang.F("Zoom de la page : automatique (maintenant {0})", "Page zoom: automatic (now {0})", ZoomText(web.ZoomFactor)));
+            ToolStripMenuItem auto = new ToolStripMenuItem(Lang.F("Zoom de la page : automatique (maintenant {0})", "Page zoom: automatic (now {0})", ZoomText(PageZoom)));
             auto.Checked = !manual;
             auto.Enabled = zoomHost != "";
             auto.Click += delegate { ResetPageZoom(); };
@@ -150,7 +150,7 @@ namespace SDRLink
             {
                 // Ctrl + molette dans la page : zoom choisi à la main, retenu pour ce WebSDR comme avec + et −.
                 if (pageZoomSetting || pageZoomNav || zoomHost == "") return;
-                double z = Math.Max(ZoomMin, Math.Min(ZoomMax, web.ZoomFactor));
+                double z = Math.Max(ZoomMin, Math.Min(ZoomMax, PageZoom));
                 double old;
                 if (settings.PageZooms.TryGetValue(zoomHost, out old) && Math.Abs(old - z) < 0.005) return;
                 settings.PageZooms[zoomHost] = z;
@@ -170,7 +170,8 @@ namespace SDRLink
 
         void SetPageZoom(double z)
         {
-            z = Math.Max(ZoomMin, Math.Min(ZoomMax, z));
+            // Proportions conservées (Look) : la page suit la taille de la fenêtre, en plus du zoom choisi.
+            z = Math.Max(0.25, Math.Min(5.0, Math.Max(ZoomMin, Math.Min(ZoomMax, z)) * propK));
             if (Math.Abs(web.ZoomFactor - z) < 0.001) return;
             pageZoomSetting = true;
             try { web.ZoomFactor = z; }
@@ -192,14 +193,14 @@ namespace SDRLink
         void StepPageZoom(int dir)
         {
             if (web.CoreWebView2 == null || zoomHost == "") return;
-            double z = web.ZoomFactor, next = z;
+            double z = PageZoom, next = z;
             if (dir > 0) { foreach (double s in ZoomSteps) if (s > z + 0.005) { next = s; break; } }
             else for (int i = ZoomSteps.Length - 1; i >= 0; i--) if (ZoomSteps[i] < z - 0.005) { next = ZoomSteps[i]; break; }
             SetPageZoom(next);
-            settings.PageZooms[zoomHost] = web.ZoomFactor;
+            settings.PageZooms[zoomHost] = PageZoom;
             settings.Save();
             fitTimer.Stop();
-            ShowStatus(Lang.F("Page du WebSDR : {0} (retenu pour ce WebSDR ; clic droit sur un bouton : zoom automatique)", "WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)", ZoomText(web.ZoomFactor)));
+            ShowStatus(Lang.F("Page du WebSDR : {0} (retenu pour ce WebSDR ; clic droit sur un bouton : zoom automatique)", "WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)", ZoomText(PageZoom)));
         }
 
         void ResetPageZoom()
@@ -246,7 +247,7 @@ namespace SDRLink
                 double z = web.ZoomFactor, fit = FitZoom(z, top, h, inner);
                 if (Math.Abs(fit - z) >= 0.02)
                 {
-                    SetPageZoom(fit);
+                    SetPageZoom(fit / propK);
                     Log.Write("Page OpenWebRX ajustée : " + ZoomText(fit) + " (bandeau " + top + ", panneau " + h + ", hauteur " + inner + ")");
                     if (fit < z) ShowStatus(Lang.F("Page du WebSDR réduite à {0} pour voir tout son panneau de commande (+ et − pour choisir)", "WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)", ZoomText(fit)));
                 }

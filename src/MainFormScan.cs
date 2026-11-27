@@ -457,6 +457,7 @@ namespace SDRLink
 
         protected override void WndProc(ref Message msg)
         {
+            ProportionSizing(ref msg);
             if (msg.Msg == WM_HOTKEY)
             {
                 int i = msg.WParam.ToInt32() - HotKeyBase;

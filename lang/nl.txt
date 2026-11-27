@@ -262,6 +262,7 @@ Metal	Metaal
 Classic	Klassiek
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Verbinden: start de verbinding met de transceiver. "Verbinden...": de transceiver antwoordt nog niet (klik: stoppen). "Verbreken": de transceiver antwoordt; de verbinding wordt elke minuut gecontroleerd (rechtsklik: kleuren van de knop)
 Cannot open the log: 	Kan het logboek niet openen: 
+Resize keeping the proportions	Formaat wijzigen met behoud van verhoudingen
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Stijl van de knoppen: Klassiek, Win3.11, AI-neon, Modern, Glas, Terminal of Metaal (rechtsklik: kleur van de knop)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Zet het bedieningspaneel (van de regel Interface tot de Mute-regel) bovenaan het venster of onder de WebSDR-pagina; de statusbalk blijft onderaan (rechtsklik: kleur van de knop)
 Check for updates	Controleren op updates
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-pagina verkleind tot {0} om het hele bedieningspaneel te tonen (+ en − om te kiezen)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Deellink gekopieerd naar het klembord ({0} kHz {1}): plak hem in een bericht
 Share link: {0} kHz {1} on {2}	Deellink: {0} kHz {1} op {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Verhoudingen behouden: het venster houdt de verhouding van het scherm en de hele inhoud volgt de grootte
+Free proportions: original content size	Vrije verhoudingen: oorspronkelijke grootte van de inhoud
 Scan of the extended 27 MHz band	Scan van de uitgebreide 27 MHz-band
 Scan of the 70 cm band	Scan van de 70-cm-band
 Resume the scan	Scan hervatten

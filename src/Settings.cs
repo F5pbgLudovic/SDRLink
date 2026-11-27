@@ -96,6 +96,7 @@ namespace SDRLink
         public MemoryBook Memories = new MemoryBook();   // mémoires de fréquences (bouton Mémoires)
         public List<MemHistEntry> MemHist = new List<MemHistEntry>();   // liste « Mem » du clavier de fréquence (20 au plus, la plus récente en tête)
         public int MemHistMin;                             // enregistrement automatique dans « Mem » après ce nombre de minutes sur la même fréquence (0 = jamais)
+        public bool KeepProportions;                       // Look > redimensionner en conservant les proportions (1.58)
         public bool HideUrl;                               // adresse du WebSDR masquée par des étoiles (1.43)
         public int PageBtnPos = MainForm.PageBtnDefault;   // ronds partage, +, − sur la page (MainForm.PlacePageButtons)
         public readonly Dictionary<string, double> PageZooms = new Dictionary<string, double>(StringComparer.Ordinal);   // zoom de la page choisi par WebSDR (hôte:port)
@@ -324,6 +325,7 @@ namespace SDRLink
                     }
                     break;
                     case "HideUrl": s.HideUrl = v == "1"; break;
+                    case "KeepProportions": s.KeepProportions = v == "1"; break;
                     case "PageBtnPos": { int p = Int(v, MainForm.PageBtnDefault); s.PageBtnPos = (p & 7) < MainForm.PageBtnPlaces && p >= 0 && p < 16 ? p : MainForm.PageBtnDefault; } break;
                     case "PageZoom":
                     {
@@ -532,6 +534,7 @@ namespace SDRLink
             foreach (KeyValuePair<string, int> p in Memories.DigiPowers) Line(sb, "MemDigiPwr", p.Key + "|" + p.Value.ToString(CultureInfo.InvariantCulture));
             Line(sb, "PowerLimit", Powers.Limit);
             Line(sb, "HideUrl", HideUrl ? 1 : 0);
+            Line(sb, "KeepProportions", KeepProportions ? 1 : 0);
             Line(sb, "PageBtnPos", PageBtnPos);
             foreach (KeyValuePair<string, double> p in PageZooms) Line(sb, "PageZoom", p.Key + "|" + p.Value.ToString("0.###", CultureInfo.InvariantCulture));
             Line(sb, "CurrentList", CurrentList);

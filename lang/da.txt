@@ -262,6 +262,7 @@ Metal	Metal
 Classic	Klassisk
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Forbind: starter forbindelsen med radioen. "Forbinder...": radioen svarer ikke endnu (klik: stop). "Afbryd": radioen svarer; forbindelsen kontrolleres hvert minut (højreklik: knappens farver)
 Cannot open the log: 	Kan ikke åbne loggen: 
+Resize keeping the proportions	Skift størrelse med bevarede proportioner
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Knappernes stil: Klassisk, Win3.11, AI-neon, Moderne, Glas, Terminal eller Metal (højreklik: knappens farve)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Placerer kontrolpanelet (fra linjen Grænseflade til Mute-linjen) øverst i vinduet eller under WebSDR-siden; statuslinjen bliver nederst (højreklik: knappens farve)
 Check for updates	Søg efter opdateringer
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-siden er formindsket til {0} for at vise hele kontrolpanelet (+ og − for at vælge)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Delingslink kopieret til udklipsholderen ({0} kHz {1}): indsæt det i en besked
 Share link: {0} kHz {1} on {2}	Delingslink: {0} kHz {1} på {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proportioner bevaret: vinduet bevarer skærmens forhold, og hele indholdet følger dets størrelse
+Free proportions: original content size	Frie proportioner: indholdets oprindelige størrelse
 Scan of the extended 27 MHz band	Scanning af det udvidede 27 MHz-bånd
 Scan of the 70 cm band	Scanning af 70 cm-båndet
 Resume the scan	Genoptag scanningen

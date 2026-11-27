@@ -262,6 +262,7 @@ Metal	Kovina
 Classic	Klasičen
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Poveži: zažene povezavo z radijsko postajo. »Povezovanje...«: postaja še ne odgovarja (klik: ustavi). »Prekini«: postaja odgovarja; povezava se preverja vsako minuto (desni klik: barve gumba)
 Cannot open the log: 	Dnevnika ni mogoče odpreti: 
+Resize keeping the proportions	Spreminjaj velikost z ohranjanjem razmerij
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Videz gumbov: Klasičen, Win3.11, Neon UI, Sodoben, Steklo, Terminal ali Kovina (desni klik: barva gumba)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Postavi nadzorno ploščo (od vrstice Vmesnik do vrstice Mute) na vrh okna ali pod stran WebSDR; vrstica stanja ostane spodaj (desni klik: barva gumba)
 Check for updates	Preveri posodobitve
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stran WebSDR zmanjšana na {0}, da se vidi celotna nadzorna plošča (+ in − za izbiro)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Povezava za deljenje kopirana v odložišče ({0} kHz {1}): prilepite jo v sporočilo
 Share link: {0} kHz {1} on {2}	Povezava za deljenje: {0} kHz {1} na {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Razmerja ohranjena: okno ohrani razmerje zaslona in vsa njegova vsebina sledi njegovi velikosti
+Free proportions: original content size	Prosta razmerja: izvirna velikost vsebine
 Scan of the extended 27 MHz band	Skeniranje razširjenega pasu 27 MHz
 Scan of the 70 cm band	Skeniranje pasu 70 cm
 Resume the scan	Nadaljuj iskanje

@@ -262,6 +262,7 @@ Metal	Metal
 Classic	Clasic
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Conectare: pornește legătura cu stația. „Conectare...”: stația nu răspunde încă (clic: oprire). „Deconectare”: stația răspunde; legătura este verificată în fiecare minut (clic dreapta: culorile butonului)
 Cannot open the log: 	Nu se poate deschide jurnalul: 
+Resize keeping the proportions	Redimensionare cu păstrarea proporțiilor
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Aspectul butoanelor: Clasic, Win3.11, Neon IA, Modern, Sticlă, Terminal sau Metal (clic dreapta: culoarea butonului)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Pune panoul de comandă (de la rândul Interfață la rândul Mute) în partea de sus a ferestrei sau sub pagina WebSDR; bara de stare rămâne jos (clic dreapta: culoarea butonului)
 Check for updates	Caută actualizări
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pa
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Pagina WebSDR a fost redusă la {0} pentru a afișa tot panoul de comandă (+ și − pentru alegere)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Linkul de partajare a fost copiat în clipboard ({0} kHz {1}): lipiți-l într-un mesaj
 Share link: {0} kHz {1} on {2}	Link de partajare: {0} kHz {1} pe {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporții păstrate: fereastra păstrează raportul ecranului și tot conținutul ei îi urmează dimensiunea
+Free proportions: original content size	Proporții libere: dimensiunea originală a conținutului
 Scan of the extended 27 MHz band	Scanarea benzii extinse de 27 MHz
 Scan of the 70 cm band	Scanarea benzii de 70 cm
 Resume the scan	Reluare scanare

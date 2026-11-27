@@ -262,6 +262,7 @@ Metal	Metall
 Classic	Klassikaline
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Ühenda: käivitab ühenduse raadiojaamaga. „Ühendamine...“: jaam ei vasta veel (klõps: peata). „Katkesta“: jaam vastab; ühendust kontrollitakse iga minut (paremklõps: nupu värvid)
 Cannot open the log: 	Logi ei saa avada: 
+Resize keeping the proportions	Muuda suurust proportsioone säilitades
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Nuppude stiil: Klassikaline, Win3.11, TI neoon, Moodne, Klaas, Terminal või Metall (paremklõps: nupu värv)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Paigutab juhtpaneeli (reast Liides kuni Mute-reani) akna ülaossa või WebSDR-i lehe alla; olekuriba jääb alla (paremklõps: nupu värv)
 Check for updates	Kontrolli uuendusi
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR-i leht vähendati suuruseni {0}, et kogu juhtpaneel oleks nähtav (valimiseks + ja −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Jagamislink kopeeriti lõikelauale ({0} kHz {1}): kleepige see sõnumisse
 Share link: {0} kHz {1} on {2}	Jagamislink: {0} kHz {1} aadressil {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proportsioonid säilitatud: aken hoiab ekraani kuvasuhet ja kogu sisu järgib selle suurust
+Free proportions: original content size	Vabad proportsioonid: sisu algne suurus
 Scan of the extended 27 MHz band	27 MHz laiendatud ala skannimine
 Scan of the 70 cm band	70 cm ala skaneerimine
 Resume the scan	Jätka skaneerimist

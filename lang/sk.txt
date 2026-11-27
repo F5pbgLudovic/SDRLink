@@ -262,6 +262,7 @@ Metal	Kov
 Classic	Klasický
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Pripojiť: spustí spojenie s transceiverom. „Pripája sa...“: transceiver zatiaľ neodpovedá (klik: zastaviť). „Odpojiť“: transceiver odpovedá; spojenie sa kontroluje každú minútu (pravé tlačidlo: farby tlačidla)
 Cannot open the log: 	Nedá sa otvoriť denník: 
+Resize keeping the proportions	Meniť veľkosť so zachovaním proporcií
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Vzhľad tlačidiel: Klasický, Win3.11, Neón AI, Moderný, Sklo, Terminal alebo Kov (pravé tlačidlo: farba tlačidla)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Umiestni ovládací panel (od riadku Rozhranie po riadok Mute) hore do okna alebo pod stránku WebSDR; stavový riadok zostáva dole (pravé tlačidlo: farba tlačidla)
 Check for updates	Kontrolovať aktualizácie
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Stránka WebSDR zmenšená na {0}, aby bol vidieť celý jej ovládací panel (voľba pomocou + a −)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Odkaz na zdieľanie skopírovaný do schránky ({0} kHz {1}): vložte ho do správy
 Share link: {0} kHz {1} on {2}	Odkaz na zdieľanie: {0} kHz {1} na {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporcie zachované: okno drží pomer strán obrazovky a celý jeho obsah sleduje jeho veľkosť
+Free proportions: original content size	Voľné proporcie: pôvodná veľkosť obsahu
 Scan of the extended 27 MHz band	Skenovanie rozšíreného pásma 27 MHz
 Scan of the 70 cm band	Skenovanie pásma 70 cm
 Resume the scan	Pokračovať v prehľadávaní

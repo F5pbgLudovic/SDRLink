@@ -168,7 +168,7 @@ namespace SDRLink
             };
             Shown += delegate
             {
-                ApplyView(); UpdateMicRoute(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); UpdateFreeDv();
+                ApplyView(); InitProportions(); UpdateMicRoute(); FirstRunSearch(); if (settings.CheckUpdates) CheckForUpdate(); UpdateFreeDv();
                 if (Program.JustUpdated)
                 {
                     Log.Write("Mise à jour automatique : V" + Program.Version + " démarrée");
@@ -315,8 +315,14 @@ namespace SDRLink
                 it.Click += delegate { SetLook(look); };
                 lookMenu.Items.Add(it);
             }
+            lookMenu.Items.Add(new ToolStripSeparator());
+            ToolStripMenuItem propItem = new ToolStripMenuItem();
+            propItem.Click += delegate { SetKeepProportions(!settings.KeepProportions); };
+            lookMenu.Items.Add(propItem);
             lookMenu.Opening += delegate
             {
+                propItem.Text = Lang.T("Redimensionner en conservant les proportions", "Resize keeping the proportions");
+                propItem.Checked = settings.KeepProportions;
                 for (int i = 0; i < Looks.Count; i++)
                 {
                     ToolStripMenuItem it = (ToolStripMenuItem)lookMenu.Items[i];
@@ -3158,13 +3164,13 @@ namespace SDRLink
             string plain = Lang.T("Réinit WebSDR", "Reset WebSDR"), auto = Lang.T("Réinit Auto WebSDR", "Auto Reset WebSDR");
             int w = 0;
             btnReinit.SuspendLayout();
-            btnReinit.MinimumSize = new Size(30, 25);
+            btnReinit.MinimumSize = MinSz(30);
             foreach (string t in new[] { plain, auto })
             {
                 btnReinit.Text = t;
                 w = Math.Max(w, btnReinit.GetPreferredSize(Size.Empty).Width);
             }
-            btnReinit.MinimumSize = new Size(w, 25);
+            btnReinit.MinimumSize = new Size(w, Mh);
             btnReinit.Text = settings.AutoReinit ? auto : plain;
             btnReinit.ResumeLayout();
             Theme.StyleButton(btnReinit);
@@ -4808,8 +4814,8 @@ namespace SDRLink
 
         void ResizeRecButton()
         {
-            if (btnMuteRig != null && btnMuteSdr != null && btnMuteSdr.Width > 0 && btnMuteRig.MinimumSize.Width != btnMuteSdr.Width)
-                btnMuteRig.MinimumSize = new Size(btnMuteSdr.Width, 25);
+            if (btnMuteRig != null && btnMuteSdr != null && btnMuteSdr.Width > 0 && (btnMuteRig.MinimumSize.Width != btnMuteSdr.Width || btnMuteRig.MinimumSize.Height != Mh))
+                btnMuteRig.MinimumSize = new Size(btnMuteSdr.Width, Mh);
             Size s = RecSize();
             if (btnRec.Size == s && btnRec.Image != null) return;
             btnRec.MinimumSize = Size.Empty;   // d'abord le minimum, sinon il empêche de rétrécir
@@ -5090,6 +5096,71 @@ namespace SDRLink
         readonly Dictionary<Control, int> baseWidths = new Dictionary<Control, int>();
         readonly Dictionary<ToolStripItem, Font> baseItemFonts = new Dictionary<ToolStripItem, Font>();
         Font baseFormFont;
+        readonly Dictionary<Control, Size> baseMins = new Dictionary<Control, Size>(), lastMins = new Dictionary<Control, Size>();
+        readonly Dictionary<Control, Padding> baseMargins = new Dictionary<Control, Padding>(), lastMargins = new Dictionary<Control, Padding>();
+        readonly Dictionary<Control, Padding> basePads = new Dictionary<Control, Padding>(), lastPads = new Dictionary<Control, Padding>();
+
+        readonly Dictionary<Control, int> baseFlowW = new Dictionary<Control, int>();
+
+        // Proportions conservées : une ligne qui tient sur une seule rangée en plein écran ne se replie plus quand la fenêtre
+        // est réduite (le texte réduit prend un peu plus de place, elle se replierait plus tôt). Sa largeur en plein écran est
+        // calculée d'après la largeur de départ de chacun de ses éléments affichés. Tout est rétabli à l'échelle 1.
+        readonly List<FlowLayoutPanel> unwrapped = new List<FlowLayoutPanel>();
+        void SetRowWrapping(Control parent, double fp)
+        {
+            if (parent == this)
+            {
+                foreach (FlowLayoutPanel r in unwrapped) r.WrapContents = true;
+                unwrapped.Clear();
+                if (propK >= 0.999) return;
+            }
+            int full = WorkArea.Width - 24;
+            foreach (Control c in parent.Controls)
+            {
+                if (c is WebView2) continue;
+                FlowLayoutPanel r = c as FlowLayoutPanel;
+                if (r != null && r.WrapContents && r.Dock == DockStyle.Fill)
+                {
+                    double w = FullRowWidth(r, fp);
+                    if (w > 0 && w <= full) { r.WrapContents = false; unwrapped.Add(r); }
+                    continue;
+                }
+                if (c.Controls.Count > 0) SetRowWrapping(c, fp);
+            }
+        }
+
+        // Largeur d'une ligne sur une seule rangée, à l'échelle 1 (fp = taille du texte) ; -1 si un élément est inconnu.
+        double FullRowWidth(FlowLayoutPanel r, double fp)
+        {
+            Padding p;
+            double w = basePads.TryGetValue(r, out p) ? p.Horizontal : r.Padding.Horizontal;
+            foreach (Control k in r.Controls)
+            {
+                if (!k.Visible) continue;
+                int bw;
+                if (!baseFlowW.TryGetValue(k, out bw)) return -1;
+                Padding m;
+                w += bw * fp + (baseMargins.TryGetValue(k, out m) ? m.Horizontal : k.Margin.Horizontal);
+            }
+            return w;
+        }
+
+        // Ligne qui ne se replie plus la plus à l'étroit : largeur sur une rangée / largeur disponible (plus de 1 : elle dépasse).
+        double WorstClip()
+        {
+            double worst = 0;
+            // Largeur disponible prise sur la fenêtre : une ligne qui ne se replie plus peut élargir sa colonne au-delà.
+            int avail = ClientSize.Width - 8;
+            if (avail < 50) return 0;
+            foreach (FlowLayoutPanel r in unwrapped)
+                if (r.Visible) worst = Math.Max(worst, (double)(r.GetPreferredSize(new Size(100000, 0)).Width + r.Margin.Horizontal) / avail);
+            return worst;
+        }
+
+        Padding ScalePad(Padding p)
+        {
+            return new Padding((int)Math.Round(p.Left * propK), (int)Math.Round(p.Top * propK), (int)Math.Round(p.Right * propK), (int)Math.Round(p.Bottom * propK));
+        }
 
         void CaptureBaseSizes(Control parent)
         {
@@ -5100,6 +5171,13 @@ namespace SDRLink
                 // Zones de saisie et listes : la hauteur suit la police, seule la largeur est agrandie.
                 if (c is TextBoxBase || c is ComboBox || c is UpDownBase) baseWidths[c] = c.Width;
                 else if (!c.AutoSize && c.Dock == DockStyle.None && !(c is FlowLayoutPanel) && !(c is TableLayoutPanel)) baseSizes[c] = c.Size;
+                // Tailles minimales des boutons (30 × 25…) : elles suivent les proportions (Look), pas la taille du texte.
+                if (!baseSizes.ContainsKey(c) && !c.MinimumSize.IsEmpty && !(c is Form)) baseMins[c] = lastMins[c] = c.MinimumSize;
+                // Marges et retraits : eux aussi suivent les proportions, pour que les lignes se replient comme en plein écran.
+                baseMargins[c] = lastMargins[c] = c.Margin;
+                // Largeur de départ de chaque élément d'une ligne : sert à vérifier qu'une ligne réduite se replie comme en grand.
+                if (parent is FlowLayoutPanel) baseFlowW[c] = c.AutoSize ? c.GetPreferredSize(Size.Empty).Width : c.Width;
+                basePads[c] = lastPads[c] = c.Padding;
                 ToolStrip ts = c as ToolStrip;
                 if (ts != null) foreach (ToolStripItem i in ts.Items) baseItemFonts[i] = i.Font;
                 CaptureBaseSizes(c);
@@ -5110,11 +5188,34 @@ namespace SDRLink
         void ApplyFontScale(int percent)
         {
             if (baseFormFont == null) { baseFormFont = Font; CaptureBaseSizes(this); }
-            float f = percent / 100f;
+            float f = (float)(percent / 100.0 * propK);
+            // Mise en page et dessin suspendus partout (pas seulement sur la fenêtre) : sinon chaque police changée relance
+            // la mise en page de sa ligne, et le tout prend plusieurs secondes.
+            List<Control> boxes = new List<Control>();
+            CollectContainers(this, boxes);
+            SetRedraw(false);
+            foreach (Control c in boxes) c.SuspendLayout();
             SuspendLayout();
-            Font = new Font(baseFormFont.FontFamily, baseFormFont.Size * f, baseFormFont.Style);
-            foreach (KeyValuePair<Control, Font> kv in baseFonts) kv.Key.Font = new Font(kv.Value.FontFamily, kv.Value.Size * f, kv.Value.Style);
-            foreach (KeyValuePair<ToolStripItem, Font> kv in baseItemFonts) kv.Key.Font = new Font(kv.Value.FontFamily, kv.Value.Size * f, kv.Value.Style);
+            // Minimum laissé tel quel par le code qui le recalcule (largeur sur le texte) : celui-ci le repose plus bas.
+            foreach (KeyValuePair<Control, Size> kv in baseMins)
+            {
+                Size last;
+                if (!lastMins.TryGetValue(kv.Key, out last) || kv.Key.MinimumSize != last) continue;
+                Size s = new Size(Math.Max(8, (int)Math.Round(kv.Value.Width * propK)), Math.Max(8, (int)Math.Round(kv.Value.Height * propK)));
+                kv.Key.MinimumSize = lastMins[kv.Key] = s;
+            }
+            // Marge ou retrait reposé entre-temps par un autre code (affichage ptt…) : laissé tel quel.
+            foreach (KeyValuePair<Control, Padding> kv in baseMargins)
+                if (kv.Key.Margin == lastMargins[kv.Key]) kv.Key.Margin = lastMargins[kv.Key] = ScalePad(kv.Value);
+            foreach (KeyValuePair<Control, Padding> kv in basePads)
+                if (kv.Key.Padding == lastPads[kv.Key]) kv.Key.Padding = lastPads[kv.Key] = ScalePad(kv.Value);
+            Action<float> setFonts = delegate(float g)
+            {
+                Font = new Font(baseFormFont.FontFamily, baseFormFont.Size * g, baseFormFont.Style);
+                foreach (KeyValuePair<Control, Font> kv in baseFonts) kv.Key.Font = new Font(kv.Value.FontFamily, kv.Value.Size * g, kv.Value.Style);
+                foreach (KeyValuePair<ToolStripItem, Font> kv in baseItemFonts) kv.Key.Font = new Font(kv.Value.FontFamily, kv.Value.Size * g, kv.Value.Style);
+            };
+            setFonts(f);
             foreach (KeyValuePair<Control, Size> kv in baseSizes)
             {
                 // Taille minimale égale à la taille (bouton ⇄) : levée le temps du changement, sinon il ne rapetisserait pas.
@@ -5124,13 +5225,67 @@ namespace SDRLink
                 if (fixedMin) kv.Key.MinimumSize = kv.Key.Size;
             }
             foreach (KeyValuePair<Control, int> kv in baseWidths) kv.Key.Width = (int)Math.Round(kv.Value * f);
-            ResumeLayout(true);
+            // Proportions conservées : les lignes gardent leurs rangées du plein écran ; texte un peu plus petit (15 % au plus)
+            // si l'une d'elles dépasse alors à droite.
+            SetRowWrapping(this, percent / 100.0);
+            if (propK < 0.999 && unwrapped.Count > 0)
+            {
+                float g = f;
+                for (int i = 0; i < 6 && g > f * 0.85f; i++)
+                {
+                    double m = WorstClip();
+                    if (m <= 1.0) break;
+                    g = Math.Max(f * 0.85f, (float)(g / (m * 1.01)));
+                    setFonts(g);
+                }
+                // Ligne qui dépasse encore (très petite fenêtre : les bords fixes des boutons) : elle se replie, rien n'est caché.
+                int avail = ClientSize.Width - 8;
+                for (int i = unwrapped.Count - 1; i >= 0; i--)
+                    if (unwrapped[i].Visible && unwrapped[i].GetPreferredSize(new Size(100000, 0)).Width + unwrapped[i].Margin.Horizontal > avail)
+                    { unwrapped[i].WrapContents = true; unwrapped.RemoveAt(i); }
+            }
+            // Boutons de taille fixe (USB, LSB…) : en réduit, leurs bords ne rétrécissent pas ; le texte est réduit juste assez pour tenir.
+            if (propK < 0.999)
+                foreach (KeyValuePair<Control, Size> kv in baseSizes)
+                {
+                    Button b = kv.Key as Button;
+                    if (b == null || string.IsNullOrEmpty(b.Text)) continue;
+                    for (int i = 0; i < 5 && b.Width > 10 && b.Font.Size > 3f; i++)
+                    {
+                        int need = TextRenderer.MeasureText(b.Text, b.Font, Size.Empty, TextFormatFlags.NoPadding).Width + 12;   // bords et retraits fixes d'un bouton plat
+                        if (need <= b.Width) break;
+                        b.Font = new Font(b.Font.FontFamily, Math.Max(3f, b.Font.Size * b.Width / need * 0.97f), b.Font.Style);
+                    }
+                }
             ResizeRecButton();   // REC et Mute TX reprennent la largeur de Mute WebSDR à la nouvelle taille
             SizeFreqLabels();
+            UpdateReinitButton();
+            UpdateFindModeButton();
+            UpdateDiversityButton(true);
+            for (int i = boxes.Count - 1; i >= 0; i--) boxes[i].ResumeLayout(true);
+            ResumeLayout(true);
+            SetRedraw(true);
             // Affichages réduit et mini : la ligne PTT reste entière ; en mini, la hauteur de la fenêtre suit celle des lignes.
             if (viewShown != 0) KeepRowWhole();
             if (viewShown == 2) FitMiniHeight();
             if (viewShown != 0) FitOnScreen();
+        }
+
+        static void CollectContainers(Control parent, List<Control> into)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c.Controls.Count == 0 || c is WebView2) continue;
+                into.Add(c);
+                CollectContainers(c, into);
+            }
+        }
+
+        void SetRedraw(bool on)
+        {
+            if (!IsHandleCreated) return;
+            SendMessage(Handle, 0x000B, (IntPtr)(on ? 1 : 0), IntPtr.Zero);   // WM_SETREDRAW
+            if (on) Invalidate(true);
         }
 
         // Petite fenêtre « Taille du texte » : 70 à 200 %, appliquée en direct ; Annuler revient à la taille d'avant.

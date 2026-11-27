@@ -262,6 +262,7 @@ Metal	Metal
 Classic	Klasyczny
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Połącz: uruchamia połączenie z radiem. „Łączenie...”: radio jeszcze nie odpowiada (klik: zatrzymaj). „Rozłącz”: radio odpowiada; połączenie jest sprawdzane co minutę (prawy klik: kolory przycisku)
 Cannot open the log: 	Nie można otworzyć dziennika: 
+Resize keeping the proportions	Zmieniaj rozmiar z zachowaniem proporcji
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Wygląd przycisków: Klasyczny, Win3.11, Neon AI, Nowoczesny, Szkło, Terminal lub Metal (prawy klik: kolor przycisku)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Umieszcza panel sterowania (od wiersza Interfejs do wiersza Mute) na górze okna lub pod stroną WebSDR; pasek stanu zostaje na dole (prawy klik: kolor przycisku)
 Check for updates	Sprawdzaj aktualizacje
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	St
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Strona WebSDR pomniejszona do {0}, aby pokazać cały panel sterowania (+ i − do wyboru)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Link do udostępnienia skopiowany do schowka ({0} kHz {1}): wklej go do wiadomości
 Share link: {0} kHz {1} on {2}	Link do udostępnienia: {0} kHz {1} na {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporcje zachowane: okno zachowuje proporcje ekranu, a cała jego zawartość podąża za jego rozmiarem
+Free proportions: original content size	Dowolne proporcje: oryginalny rozmiar zawartości
 Scan of the extended 27 MHz band	Skanowanie rozszerzonego pasma 27 MHz
 Scan of the 70 cm band	Skanowanie pasma 70 cm
 Resume the scan	Wznów skanowanie

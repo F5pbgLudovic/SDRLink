@@ -262,6 +262,7 @@ Metal	Metallo
 Classic	Classico
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Connetti: avvia il collegamento con la radio. «Connessione...»: la radio non risponde ancora (clic: interrompi). «Disconnetti»: la radio risponde; il collegamento viene controllato ogni minuto (clic destro: colori del pulsante)
 Cannot open the log: 	Impossibile aprire il log: 
+Resize keeping the proportions	Ridimensiona mantenendo le proporzioni
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Stile dei pulsanti: Classico, Win3.11, Neon IA, Moderno, Vetro, Terminal o Metallo (clic destro: colore del pulsante)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Mette il pannello di controllo (dalla riga Interfaccia alla riga dei Mute) in alto nella finestra o sotto la pagina del WebSDR; la barra di stato resta in basso (clic destro: colore del pulsante)
 Check for updates	Controlla aggiornamenti
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pa
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Pagina del WebSDR ridotta a {0} per mostrare tutto il pannello di controllo (+ e − per scegliere)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Link di condivisione copiato negli appunti ({0} kHz {1}): incollalo in un messaggio
 Share link: {0} kHz {1} on {2}	Link di condivisione: {0} kHz {1} su {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporzioni mantenute: la finestra conserva il rapporto dello schermo e tutto il suo contenuto ne segue la dimensione
+Free proportions: original content size	Proporzioni libere: dimensione originale del contenuto
 Scan of the extended 27 MHz band	Scansione della banda estesa dei 27 MHz
 Scan of the 70 cm band	Scansione della banda dei 70 cm
 Resume the scan	Riprendi la scansione

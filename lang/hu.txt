@@ -262,6 +262,7 @@ Metal	Fém
 Classic	Klasszikus
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Csatlakozás: elindítja a kapcsolatot a rádióval. „Csatlakozás...”: a rádió még nem válaszol (kattintás: leállítás). „Bontás”: a rádió válaszol; a kapcsolat ellenőrzése percenként történik (jobb kattintás: a gomb színei)
 Cannot open the log: 	A napló nem nyitható meg: 
+Resize keeping the proportions	Átméretezés az arányok megtartásával
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Gombok megjelenése: Klasszikus, Win3.11, MI neon, Modern, Üveg, Terminal vagy Fém (jobb kattintás: gomb színe)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	A vezérlőpultot (az Interfész sortól a Mute sorig) az ablak tetejére vagy a WebSDR oldal alá teszi; az állapotsor lent marad (jobb kattintás: gomb színe)
 Check for updates	Frissítések keresése
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	A WebSDR-oldal {0}-ra kicsinyítve, hogy a teljes vezérlőpult látszódjon (+ és − a választáshoz)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	A megosztási hivatkozás a vágólapra másolva ({0} kHz {1}): illessze be egy üzenetbe
 Share link: {0} kHz {1} on {2}	Megosztási hivatkozás: {0} kHz {1} itt: {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Arányok megtartva: az ablak megtartja a képernyő arányát, és teljes tartalma követi a méretét
+Free proportions: original content size	Szabad arányok: a tartalom eredeti mérete
 Scan of the extended 27 MHz band	A kiterjesztett 27 MHz-es sáv pásztázása
 Scan of the 70 cm band	A 70 cm-es sáv pásztázása
 Resume the scan	Pásztázás folytatása

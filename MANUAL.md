@@ -411,6 +411,7 @@ The **Dark mode** box, to the right of "Open log", switches the whole interface 
   - **Glass**: shiny blue buttons with a highlight.
   - **Terminal**: black background, phosphor-green text, inverted when pressed.
   - **Metal**: brushed aluminium with a slight bevel.
+  - **Resize keeping the proportions** (since 1.58, at the bottom of the menu, unticked at first): the window keeps the **width / height ratio of the screen** when you drag an edge or a corner, and **all its content follows its size**: text, buttons, lists, spacing and the WebSDR page. You get the full-screen view, only smaller, with the rows of buttons wrapped at the same places. In full screen, everything is back to 100%. The window does not go below 30% of the screen. The option only works in the normal view (not reduced, mini or PTT); "Text size…" and the zoom chosen for each WebSDR add to it. At about 50% of the screen or less, the text becomes very small (Windows button borders and check boxes do not shrink) and a row may wrap rather than be cut. Unticked: same behaviour as before.
   - Meaningful colours stay visible in every look (PTT while transmitting, active mode, Scan, REC, colours chosen by right-click); the look follows dark or light mode and the palette. The choice is kept at the next start and is included in the settings export.
 - **Control panel** (since 1.35), right after Look: each click moves the **control panel** (from the "Interface:" row down to and including the Mute row) from the **top of the window** to **below the WebSDR page**, and back. The button always keeps the same name. The **status bar stays at the very bottom**. The page is not reloaded (the audio goes on). The reduced and mini views also work with the panel at the bottom (reduced: the page at the top, then Sync, PTT and WebSDR/Mute). The position is kept at the next start and is included in the settings export.
 
@@ -1049,6 +1050,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.58**
+  - **Look > Resize keeping the proportions**: the window keeps the screen ratio and all its content (text, buttons, WebSDR page) follows its size, like the full-screen view, only smaller. Unticked at first.
 - **1.57**
   - **Transceiver controlled by TCI** (right-click Mute TRX): Mute TRX and TRX volume through the transceiver's TCI server (Brick SDR or Hermes-Lite with Thetis, ExpertSDR…), whatever the rig interface; adjustable port. Mute TRX stays shown (greyed out) even without remote volume, to keep its right-click.
 - **1.56**

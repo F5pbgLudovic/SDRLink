@@ -262,6 +262,7 @@ Metal	Metalas
 Classic	Klasikinis
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Prisijungti: pradeda ryšį su radijo stotimi. „Jungiamasi...“: stotis dar neatsako (spustelėjimas: sustabdyti). „Atsijungti“: stotis atsako; ryšys tikrinamas kas minutę (dešinysis spustelėjimas: mygtuko spalvos)
 Cannot open the log: 	Nepavyksta atidaryti žurnalo: 
+Resize keeping the proportions	Keisti dydį išlaikant proporcijas
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Mygtukų stilius: Klasikinis, Win3.11, DI neonas, Modernus, Stiklas, Terminal arba Metalas (dešinysis spustelėjimas: mygtuko spalva)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Perkelia valdymo skydelį (nuo eilutės Sąsaja iki Mute eilutės) į lango viršų arba po WebSDR puslapiu; būsenos juosta lieka apačioje (dešinysis spustelėjimas: mygtuko spalva)
 Check for updates	Tikrinti atnaujinimus
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR puslapis sumažintas iki {0}, kad būtų matomas visas valdymo skydelis (+ ir − pasirinkimui)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Bendrinimo nuoroda nukopijuota į iškarpinę ({0} kHz {1}): įklijuokite ją į žinutę
 Share link: {0} kHz {1} on {2}	Bendrinimo nuoroda: {0} kHz {1} – {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporcijos išlaikomos: langas išlaiko ekrano kraštinių santykį, o visas jo turinys seka jo dydį
+Free proportions: original content size	Laisvos proporcijos: pradinis turinio dydis
 Scan of the extended 27 MHz band	Išplėstinės 27 MHz juostos skenavimas
 Scan of the 70 cm band	70 cm juostos skenavimas
 Resume the scan	Tęsti skenavimą

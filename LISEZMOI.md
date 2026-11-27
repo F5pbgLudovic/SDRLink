@@ -411,6 +411,7 @@ La case **Mode sombre**, à droite de « Ouvrir le journal », passe toute l'int
   - **Terminal** : fond noir, texte vert phosphore, inversé quand on appuie.
   - **Métal** : alu brossé en léger relief.
   - Les couleurs qui ont un sens restent visibles dans tous les looks (PTT en émission, mode actif, Scan, REC, couleurs choisies au clic droit) ; le look suit le mode sombre ou clair et la palette. Le choix est retenu au prochain lancement et suit l'export des réglages.
+  - **Redimensionner en conservant les proportions** (depuis la 1.58, en bas du menu, non coché au départ) : la fenêtre garde le **rapport largeur / hauteur de l'écran** quand on tire un bord ou un coin, et **tout son contenu suit sa taille** : texte, boutons, listes, espacements et page du WebSDR. On obtient l'affichage plein écran en plus petit, avec les lignes de boutons repliées aux mêmes endroits. En plein écran, tout revient à 100 %. La fenêtre ne descend pas sous 30 % de l'écran. L'option ne joue qu'en affichage normal (pas en réduit, mini ou ptt) ; « Taille du texte… » et le zoom choisi pour chaque WebSDR s'y ajoutent. Vers 50 % de l'écran ou moins, le texte devient très petit (les bords des boutons et les cases à cocher de Windows ne rétrécissent pas) et une ligne peut se replier plutôt que d'être coupée. Décochée : comportement d'avant.
 - **Panneau de commande** (depuis la 1.35), juste après Look : chaque clic fait passer le **panneau de commande** (de la ligne « Interface : » jusqu'à la ligne des Mute comprise) du **haut de la fenêtre** à **sous la page du WebSDR**, et inversement. Le bouton garde toujours le même nom. La **barre d'état reste tout en bas**. La page n'est pas rechargée (le son continue). Les affichages réduit et mini fonctionnent aussi avec le panneau en bas (réduit : la page en haut, puis Synchro, PTT et WebSDR/Mute). La position est retenue au prochain lancement et suit l'export des réglages.
 
 ## Couleurs des boutons (clic droit)
@@ -1048,6 +1049,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.58**
+  - **Look > Redimensionner en conservant les proportions** : la fenêtre garde le rapport de l'écran et tout son contenu (texte, boutons, page du WebSDR) suit sa taille, comme le plein écran en plus petit. Non coché au départ.
 - **1.57**
   - **Émetteur commandé par TCI** (clic droit sur Mute TX) : Mute TX et Volume TX par le serveur TCI de l'émetteur (Brick SDR ou Hermes-Lite avec Thetis, ExpertSDR…), quelle que soit l'interface du poste ; port réglable. Mute TX reste affiché (grisé) même sans volume télécommandé, pour garder son clic droit.
 - **1.56**

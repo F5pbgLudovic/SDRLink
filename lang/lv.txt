@@ -262,6 +262,7 @@ Metal	Metāls
 Classic	Klasisks
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Savienot: sāk savienojumu ar raidītāju. “Savieno...”: raidītājs vēl neatbild (klikšķis: apturēt). “Atvienot”: raidītājs atbild; savienojums tiek pārbaudīts katru minūti (labais klikšķis: pogas krāsas)
 Cannot open the log: 	Nevar atvērt žurnālu: 
+Resize keeping the proportions	Mainīt izmēru, saglabājot proporcijas
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Pogu stils: Klasisks, Win3.11, MI neons, Moderns, Stikls, Terminal vai Metāls (labais klikšķis: pogas krāsa)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Novieto vadības paneli (no rindas Saskarne līdz Mute rindai) loga augšā vai zem WebSDR lapas; statusa josla paliek apakšā (labais klikšķis: pogas krāsa)
 Check for updates	Pārbaudīt atjauninājumus
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	We
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	WebSDR lapa samazināta līdz {0}, lai būtu redzams viss vadības panelis (+ un − izvēlei)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Kopīgošanas saite nokopēta starpliktuvē ({0} kHz {1}): ielīmējiet to ziņojumā
 Share link: {0} kHz {1} on {2}	Kopīgošanas saite: {0} kHz {1} vietnē {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporcijas saglabātas: logs saglabā ekrāna malu attiecību, un viss tā saturs seko tā izmēram
+Free proportions: original content size	Brīvas proporcijas: satura sākotnējais izmērs
 Scan of the extended 27 MHz band	Paplašinātās 27 MHz joslas skenēšana
 Scan of the 70 cm band	70 cm joslas skenēšana
 Resume the scan	Turpināt skenēšanu

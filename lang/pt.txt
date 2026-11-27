@@ -262,6 +262,7 @@ Metal	Metal
 Classic	Clássico
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Ligar: inicia a ligação com o rádio. «A ligar...»: o rádio ainda não responde (clique: parar). «Desligar»: o rádio responde; a ligação é verificada a cada minuto (clique direito: cores do botão)
 Cannot open the log: 	Não é possível abrir o log: 
+Resize keeping the proportions	Redimensionar mantendo as proporções
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Estilo dos botões: Clássico, Win3.11, Néon IA, Moderno, Vidro, Terminal ou Metal (clique direito: cor do botão)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Coloca o painel de comando (da linha Interface à linha dos Mute) no topo da janela ou por baixo da página do WebSDR; a barra de estado fica em baixo (clique direito: cor do botão)
 Check for updates	Procurar atualizações
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	P�
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Página do WebSDR reduzida para {0} para mostrar todo o painel de controlo (+ e − para escolher)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Ligação de partilha copiada para a área de transferência ({0} kHz {1}): cole-a numa mensagem
 Share link: {0} kHz {1} on {2}	Ligação de partilha: {0} kHz {1} em {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proporções mantidas: a janela guarda a proporção do ecrã e todo o seu conteúdo segue o seu tamanho
+Free proportions: original content size	Proporções livres: tamanho original do conteúdo
 Scan of the extended 27 MHz band	Varrimento da banda alargada dos 27 MHz
 Scan of the 70 cm band	Varrimento da banda dos 70 cm
 Resume the scan	Retomar o varrimento

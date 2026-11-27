@@ -391,13 +391,13 @@ namespace SDRLink
             if (resize)
             {
                 int w = 0;
-                chkDiversity.MinimumSize = new Size(30, 25);
+                chkDiversity.MinimumSize = MinSz(30);
                 foreach (string s in new[] { word, word + " …", word + " " + (8.8).ToString("0.0") + " s" })
                 {
                     chkDiversity.Text = s;
                     w = Math.Max(w, chkDiversity.GetPreferredSize(Size.Empty).Width);
                 }
-                chkDiversity.MinimumSize = new Size(w, 25);
+                chkDiversity.MinimumSize = new Size(w, Mh);
             }
             chkDiversity.Text = t;
             chkDiversity.ResumeLayout();

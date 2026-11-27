@@ -262,6 +262,7 @@ Metal	Μέταλλο
 Classic	Κλασικό
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Σύνδεση: ξεκινά τη σύνδεση με τον πομποδέκτη. «Σύνδεση...»: ο πομποδέκτης δεν απαντά ακόμη (κλικ: διακοπή). «Αποσύνδεση»: ο πομποδέκτης απαντά· η σύνδεση ελέγχεται κάθε λεπτό (δεξί κλικ: χρώματα κουμπιού)
 Cannot open the log: 	Αδυναμία ανοίγματος ημερολογίου: 
+Resize keeping the proportions	Αλλαγή μεγέθους με διατήρηση των αναλογιών
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Εμφάνιση κουμπιών: Κλασικό, Win3.11, Νέον ΤΝ, Μοντέρνο, Γυαλί, Terminal ή Μέταλλο (δεξί κλικ: χρώμα κουμπιού)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Τοποθετεί τον πίνακα ελέγχου (από τη γραμμή Διασύνδεση έως τη γραμμή Mute) στο πάνω μέρος του παραθύρου ή κάτω από τη σελίδα του WebSDR· η γραμμή κατάστασης μένει κάτω (δεξί κλικ: χρώμα κουμπιού)
 Check for updates	Έλεγχος για ενημερώσεις
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Σ
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Η σελίδα του WebSDR μειώθηκε στο {0} ώστε να φαίνεται ολόκληρος ο πίνακας ελέγχου (+ και − για επιλογή)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Ο σύνδεσμος κοινοποίησης αντιγράφηκε στο πρόχειρο ({0} kHz {1}): επικολλήστε τον σε ένα μήνυμα
 Share link: {0} kHz {1} on {2}	Σύνδεσμος κοινοποίησης: {0} kHz {1} στο {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Αναλογίες διατηρημένες: το παράθυρο κρατά την αναλογία της οθόνης και όλο το περιεχόμενό του ακολουθεί το μέγεθός του
+Free proportions: original content size	Ελεύθερες αναλογίες: αρχικό μέγεθος του περιεχομένου
 Scan of the extended 27 MHz band	Σάρωση της εκτεταμένης ζώνης 27 MHz
 Scan of the 70 cm band	Σάρωση της ζώνης των 70 cm
 Resume the scan	Συνέχιση σάρωσης

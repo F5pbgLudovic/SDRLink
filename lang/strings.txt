@@ -262,6 +262,7 @@ Metal	Métal
 Classic	Classique
 Connect: starts the link with the rig. “Connecting...”: the rig is not answering yet (click: stop). “Disconnect”: the rig answers; the link is checked every minute (right-click: button colours)	Connecter : lance la liaison avec le poste. « Connexion... » : le poste ne répond pas encore (clic : arrêter). « Déconnecter » : le poste répond ; la liaison est contrôlée chaque minute (clic droit : couleurs du bouton)
 Cannot open the log: 	Impossible d'ouvrir le journal : 
+Resize keeping the proportions	Redimensionner en conservant les proportions
 Button style: Classic, Win3.11, AI Neon, Modern, Glass, Terminal or Metal (right-click: button colour)	Allure des boutons : Classique, Win3.11, Néon IA, Moderne, Verre, Terminal ou Métal (clic droit : couleur du bouton)
 Puts the control panel (from the Interface row to the Mute row) at the top of the window or below the WebSDR page; the status bar stays at the bottom (right-click: button colour)	Place le panneau de commande (de la ligne Interface à la ligne des Mute) en haut de la fenêtre ou sous la page du WebSDR ; la barre d'état reste en bas (clic droit : couleur du bouton)
 Check for updates	Vérifier les mises à jour
@@ -763,6 +764,8 @@ WebSDR page: {0} (kept for this WebSDR; right-click a button: automatic zoom)	Pa
 WebSDR page reduced to {0} to show its whole control panel (+ and − to choose)	Page du WebSDR réduite à {0} pour voir tout son panneau de commande (+ et − pour choisir)
 Share link copied to the clipboard ({0} kHz {1}): paste it into a message	Lien de partage copié dans le presse-papiers ({0} kHz {1}) : à coller dans un message
 Share link: {0} kHz {1} on {2}	Lien de partage : {0} kHz {1} sur {2}
+Proportions kept: the window keeps the screen ratio and all its content follows its size	Proportions conservées : la fenêtre garde le rapport de l'écran et tout son contenu suit sa taille
+Free proportions: original content size	Proportions libres : taille d'origine du contenu
 Scan of the extended 27 MHz band	Scan de la bande étendue des 27 MHz
 Scan of the 70 cm band	Scan de la bande des 70 cm
 Resume the scan	Reprendre le scan
