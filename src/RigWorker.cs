@@ -64,6 +64,8 @@ namespace SDRLink
         // port du serveur TCI (Thetis pour un Brick SDR ou un Hermes-Lite, ExpertSDR…), 0 = par l'interface du poste.
         // Commandes TCI standard « volume:dB; » (-60 à 0, en dB entiers : Thetis lit le nombre avec la langue de Windows) et
         // « volume; » pour le lire ; Mute TX = volume à -60 dB, comme avec l'interface du poste.
+        // 1.60 : de préférence « rx_volume:0,0,dB; » (volume du récepteur 1) : chez Thetis, « volume » est le Master AF, sans effet
+        // sur le son du VAC (cas du Brick SDR écouté par le VAC1) ; repli sur « volume » si le serveur ne répond pas à rx_volume.
         public volatile int AfTciPort;
         volatile bool afReread;
         public void RereadAf() { afReread = true; }
@@ -78,11 +80,12 @@ namespace SDRLink
             if (afTci == null && p > 0 && DateTime.UtcNow >= afTciRetry)
             {
                 afTciRetry = DateTime.UtcNow.AddSeconds(10);
-                afTci = ExpertSdrTci.TryConnect("127.0.0.1", p);
+                afTci = ExpertSdrTci.TryConnect("127.0.0.1", p, true);
                 afTciPortUsed = p;
                 Log.Write("Volume du poste par TCI : " + (afTci != null ? "liaison établie sur le port " + p : "pas de serveur TCI sur le port " + p));
-                // Le serveur répond à « volume; » un peu après : on lui laisse 0,5 s.
-                for (int i = 0; i < 10 && afTci != null && afTci.VolumePercent < 0; i++) Thread.Sleep(50);
+                // Le serveur répond à « volume; » et « rx_volume:0,0; » un peu après : on lui laisse 0,5 s.
+                for (int i = 0; i < 10 && afTci != null && (afTci.VolumePercent < 0 || !afTci.RxVolumeKnown); i++) Thread.Sleep(50);
+                if (afTci != null) Log.Write("Volume du poste par TCI : " + (afTci.RxVolumeKnown ? "volume du récepteur 1 (rx_volume, agit aussi sur le VAC de Thetis)" : "volume général (volume)"));
             }
             return afTci;
         }

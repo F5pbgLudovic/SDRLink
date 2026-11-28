@@ -16,11 +16,19 @@ namespace SDRLink
         readonly object sendLock = new object(), sync = new object();
         bool? mute;
         int volumeDb = int.MinValue;
+        // 1.60 : liaison du poste émetteur (Mute TX / Volume TX) : on règle de préférence le volume du récepteur 1
+        // (« rx_volume:0,0,dB; »), seul à agir aussi sur le son envoyé au VAC de Thetis ; « volume » (Master AF de Thetis)
+        // ne touche pas au VAC. Repli sur « volume » si le serveur ne connaît pas rx_volume.
+        bool rxMode;
+        int rxVolumeDb = int.MinValue;
 
         // null si le serveur TCI ne répond pas.
-        public static ExpertSdrTci TryConnect(string host, int port)
+        public static ExpertSdrTci TryConnect(string host, int port) { return TryConnect(host, port, false); }
+
+        public static ExpertSdrTci TryConnect(string host, int port, bool rxVolume)
         {
             ExpertSdrTci t = new ExpertSdrTci();
+            t.rxMode = rxVolume;
             t.ws = new ClientWebSocket();
             t.ws.Options.Proxy = null;   // liaison locale : pas de recherche de proxy (WPAD), qui peut prendre plusieurs secondes
             try
@@ -35,6 +43,7 @@ namespace SDRLink
             new Thread(t.ReceiveLoop) { IsBackground = true }.Start();
             t.Send("mute;");
             t.Send("volume;");
+            if (t.rxMode) t.Send("rx_volume:0,0;");
             return t;
         }
 
@@ -46,8 +55,11 @@ namespace SDRLink
         // Volume en % (même échelle que la liaison TCI du poste), -1 s'il n'est pas encore connu.
         public int VolumePercent
         {
-            get { lock (sync) return volumeDb == int.MinValue ? -1 : (int)Math.Round((Math.Max(-60, Math.Min(0, volumeDb)) + 60) * 100 / 60.0); }
+            get { lock (sync) { int d = rxVolumeDb != int.MinValue ? rxVolumeDb : volumeDb; return d == int.MinValue ? -1 : (int)Math.Round((Math.Max(-60, Math.Min(0, d)) + 60) * 100 / 60.0); } }
         }
+
+        // Le serveur a donné le volume du récepteur 1 (mode rx_volume seulement).
+        public bool RxVolumeKnown { get { lock (sync) return rxVolumeDb != int.MinValue; } }
 
         public void SetMute(bool on)
         {
@@ -58,8 +70,9 @@ namespace SDRLink
         public void SetVolumePercent(int percent)
         {
             int db = (int)Math.Round(Math.Max(0, Math.Min(100, percent)) * 60 / 100.0) - 60;
-            lock (sync) volumeDb = db;
-            Send("volume:" + db.ToString(CultureInfo.InvariantCulture) + ";");
+            bool rx;
+            lock (sync) { rx = rxVolumeDb != int.MinValue; if (rx) rxVolumeDb = db; else volumeDb = db; }
+            Send((rx ? "rx_volume:0,0," : "volume:") + db.ToString(CultureInfo.InvariantCulture) + ";");
         }
 
         void Send(string text)
@@ -89,6 +102,13 @@ namespace SDRLink
                         if (c.StartsWith("mute:")) lock (sync) mute = c.Substring(5).Trim() == "true";
                         else if (c.StartsWith("volume:") && double.TryParse(c.Substring(7), NumberStyles.Float, CultureInfo.InvariantCulture, out db))
                             lock (sync) volumeDb = (int)Math.Round(db);
+                        else if (rxMode && c.StartsWith("rx_volume:"))
+                        {
+                            string[] a = c.Substring(10).Split(',');
+                            if (a.Length >= 3 && a[0].Trim() == "0" && a[1].Trim() == "0"
+                                && double.TryParse(a[2], NumberStyles.Float, CultureInfo.InvariantCulture, out db))
+                                lock (sync) rxVolumeDb = (int)Math.Round(db);
+                        }
                     }
                     msg.Length = 0;
                 }

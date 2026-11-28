@@ -7,7 +7,7 @@ namespace SDRLink
     static class Program
     {
         // Version affichée dans le titre ; à garder identique à AssemblyInfo.cs.
-        public const string Version = "1.59";
+        public const string Version = "1.60";
 
         // Vrai quand cette version vient d'être installée par la mise à jour automatique.
         public static bool JustUpdated;
