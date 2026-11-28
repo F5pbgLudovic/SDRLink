@@ -373,6 +373,7 @@ To the right of the WebSDR volume:
   - otherwise (audio coming out of the rig itself, MB1, or through ASIO) through the **TCI** `mute` command: you must then enable the TCI server in ExpertSDR (Options > TCI). SDRLink keeps a TCI link with ExpertSDR as long as it is running, even if the rig is connected some other way (HRD…): a mute or a volume set in ExpertSDR is also shown in SDRLink. A message explains this if the TCI server does not answer.
   - **Right-click** Mute ExpertSDR, or "WebSDR volume": ExpertSDR TCI server port (**40001** by default), to be set as in ExpertSDR. As long as ExpertSDR does not answer, Mute ExpertSDR and ExpertSDR volume are hidden and the status bar says to use "WebSDR volume".
   - If SDRLink muted ExpertSDR, the audio is restored when SDRLink closes.
+  - **ColibrinanoLink** (since 1.59): when it runs on the same PC, it is handled like ExpertSDR: the buttons become **Mute ColibrinanoLink** and **ColibrinanoLink volume**, with the same actions (mute, volume, ⇄, mute while transmitting). They only go through the **Windows volume mixer** (ColibrinanoLink has no TCI server): if ColibrinanoLink is in **exclusive mode** (minimum latency), it is not in the mixer and the controls stay hidden. If ExpertSDR runs at the same time, the buttons keep the ExpertSDR name and control both. ColibrinanoLink is not offered as a reception for FreeDV or diversity (ExpertSDR TCI audio only).
 - **Mute HDSDR**: only appears when the **HDSDR** software is running (on the same PC), whether it is connected to the rig through HRD, OmniRig or otherwise. It mutes and restores HDSDR's audio in the **Windows volume mixer**, without touching HDSDR or its CAT link, and without any extra COM port. ExpertSDR and HDSDR can run at the same time: each has its own Mute and volume.
   - HDSDR must play through Windows audio (MME or WDM output, the usual setting). If its reception is stopped or its audio goes out through ASIO, Mute HDSDR stays grey, HDSDR volume shows "—" and clicking Mute HDSDR explains this in the status bar.
   - A mute or a volume set in the Windows mixer is also shown in SDRLink (read again every 3 seconds).
@@ -1050,6 +1051,8 @@ Since 1.25, SDRLink is **free software** under the **GNU GPL v3 licence** (`LICE
 
 ## Version history
 
+- **1.59**
+  - **ColibrinanoLink detected like ExpertSDR**: Mute ColibrinanoLink and ColibrinanoLink volume, through the Windows mixer (not in exclusive mode).
 - **1.58**
   - **Look > Resize keeping the proportions**: the window keeps the screen ratio and all its content (text, buttons, WebSDR page) follows its size, like the full-screen view, only smaller. Unticked at first.
 - **1.57**

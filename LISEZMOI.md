@@ -372,6 +372,7 @@ Tous les volumes gardés par SDRLink font partie de l'export et de l'import des 
   - sinon (son sorti par le poste lui-même, MB1, ou par ASIO) par la commande **TCI** `mute` : il faut alors activer le serveur TCI dans ExpertSDR (Options > TCI). SDRLink garde une liaison TCI avec ExpertSDR tant qu'il tourne, même si le poste est relié autrement (HRD…) : une coupure ou un volume réglé dans ExpertSDR s'affiche aussi dans SDRLink. Un message l'explique si le serveur TCI ne répond pas.
   - **Clic droit** sur Mute ExpertSDR, ou sur « Volume WebSDR » : port du serveur TCI d'ExpertSDR (**40001** par défaut), à régler comme dans ExpertSDR. Tant qu'ExpertSDR ne répond pas, Mute et Volume ExpertSDR sont masqués et la barre d'état indique de passer par « Volume WebSDR ».
   - Si SDRLink a coupé ExpertSDR, le son est rétabli à la fermeture de SDRLink.
+  - **ColibrinanoLink** (depuis la 1.59) : quand il tourne sur le même PC, il est traité comme ExpertSDR : les boutons deviennent **Mute ColibrinanoLink** et **Volume ColibrinanoLink**, avec les mêmes actions (coupure, volume, ⇄, coupure en émission). Ils passent par le **mélangeur de volume de Windows** seulement (ColibrinanoLink n'a pas de serveur TCI) : si ColibrinanoLink est en **mode exclusif** (latence minimale), il n'est pas dans le mélangeur et les commandes restent masquées. Si ExpertSDR tourne en même temps, les boutons gardent le nom ExpertSDR et règlent les deux. ColibrinanoLink n'est pas proposé comme réception pour FreeDV ni pour la diversité (son par TCI d'ExpertSDR seulement).
 - **Mute HDSDR** : n'apparaît que lorsque le logiciel **HDSDR** tourne (sur le même PC), qu'il soit relié au poste par HRD, OmniRig ou autrement. Il coupe et rétablit le son de HDSDR dans le **mélangeur de volume de Windows**, sans toucher à HDSDR ni à sa liaison CAT, et sans port COM supplémentaire. ExpertSDR et HDSDR peuvent tourner en même temps : chacun a son Mute et son volume.
   - HDSDR doit jouer par le son de Windows (sortie MME ou WDM, réglage habituel). Si sa réception est arrêtée ou si son son sort par ASIO, Mute HDSDR reste gris, Volume HDSDR affiche « — » et un clic sur Mute HDSDR l'explique dans la barre d'état.
   - Une coupure ou un volume réglé dans le mélangeur de Windows s'affiche aussi dans SDRLink (relu toutes les 3 secondes).
@@ -1049,6 +1050,8 @@ Depuis la 1.25, SDRLink est un **logiciel libre** sous **licence GNU GPL v3** (f
 
 ## Historique des versions
 
+- **1.59**
+  - **ColibrinanoLink détecté comme ExpertSDR** : Mute ColibrinanoLink et Volume ColibrinanoLink, par le mélangeur de Windows (pas en mode exclusif).
 - **1.58**
   - **Look > Redimensionner en conservant les proportions** : la fenêtre garde le rapport de l'écran et tout son contenu (texte, boutons, page du WebSDR) suit sa taille, comme le plein écran en plus petit. Non coché au départ.
 - **1.57**

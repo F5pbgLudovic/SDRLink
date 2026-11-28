@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -54,7 +54,7 @@ namespace SDRLink
         bool DivAvailable(int s)
         {
             if (s == 1) return worker != null && settings.RecCardId.Length > 0;
-            if (s == 2) return esdrRunning;
+            if (s == 2) return esdrPids.Count > 0;   // son par TCI : ExpertSDR seulement (pas ColibrinanoLink)
             if (s == 3) return hdsdrRunning && AudioTap.ProcessCaptureWorks;
             if (s == DivTwoWebSdr) return webEnv != null && settings.Div2Url.Length > 0;
             return false;

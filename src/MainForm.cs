@@ -911,6 +911,7 @@ namespace SDRLink
             lblEsdrVolume.Margin = new Padding(0, 7, 2, 0);
             lblEsdrVolumeCaption = Lbl("Volume ExpertSDR :", "ExpertSDR volume:");
             lblEsdrVolumeCaption.Visible = trkEsdrVolume.Visible = lblEsdrVolume.Visible = false;
+            Tr(delegate { RenameEsdrControls(); });   // ColibrinanoLink à la place d'ExpertSDR s'il tourne seul (1.59)
             // Volume de HDSDR (mélangeur de Windows), affiché quand HDSDR tourne.
             trkHdsdrVolume = new TrackBar();
             trkHdsdrVolume.Minimum = 0;
@@ -2326,7 +2327,7 @@ namespace SDRLink
             ToolStripMenuItem title = new ToolStripMenuItem(Lang.T("Réceptions dont le son est coupé en émission :", "Receivers muted while transmitting:"));
             title.Enabled = false;
             menu.Items.Add(title);
-            string[] names = { "WebSDR", Lang.T("Poste (Mute TX)", "Rig (Mute TRX)"), "ExpertSDR", "HDSDR" };
+            string[] names = { "WebSDR", Lang.T("Poste (Mute TX)", "Rig (Mute TRX)"), EsdrName, "HDSDR" };
             for (int i = 0; i < SwapCount; i++)
             {
                 int idx = i;
@@ -4047,7 +4048,7 @@ namespace SDRLink
                 bool? r = SetExpertSdrMute(mute);
                 if (!r.HasValue) return;
                 esdrMuted = esdrMutedByUs = r.Value;
-                Log.Write((esdrMuted ? "Son d'ExpertSDR coupé" : "Son d'ExpertSDR rétabli") + (esdrWin ? " (mélangeur Windows)" : " (TCI)"));
+                Log.Write((esdrMuted ? "Son coupé : " : "Son rétabli : ") + EsdrName + (esdrWin ? " (mélangeur Windows)" : " (TCI)"));
             }
             else SetHdsdrMute(mute);
         }
@@ -4095,7 +4096,7 @@ namespace SDRLink
             for (int i = 0; i < SwapCount; i++)
             {
                 int idx = i;
-                ToolStripMenuItem it = new ToolStripMenuItem(Lang.T(SwapNamesFr[i], SwapNamesEn[i]));
+                ToolStripMenuItem it = new ToolStripMenuItem(Lang.T(SwapNamesFr[i], SwapNamesEn[i]).Replace("ExpertSDR", EsdrName));
                 it.Checked = settings.SwapIgnore.Contains(i);
                 it.Enabled = it.Checked || settings.SwapIgnore.Count < Settings.MaxSwapIgnore;
                 it.Click += delegate { SetSwapIgnore(idx); };
@@ -4198,7 +4199,26 @@ namespace SDRLink
         // Processus ExpertSDR2, ExpertSDR3… (identifiants relevés à chaque surveillance).
         readonly Dictionary<int, bool> esdrPids = new Dictionary<int, bool>();
 
-        bool IsExpertSdr(int pid) { return esdrPids.ContainsKey(pid); }
+        // 1.59 : ColibrinanoLink est traité comme ExpertSDR (mêmes Mute et Volume, par le mélangeur de Windows seulement :
+        // il n'a pas de serveur TCI ; en mode exclusif il n'a pas de session dans le mélangeur et les commandes restent masquées).
+        readonly Dictionary<int, bool> colibriPids = new Dictionary<int, bool>();
+
+        bool IsExpertSdr(int pid) { return esdrPids.ContainsKey(pid) || colibriPids.ContainsKey(pid); }
+
+        // Nom affiché sur Mute et Volume : ExpertSDR s'il tourne, sinon ColibrinanoLink s'il tourne seul.
+        string EsdrName { get { return esdrPids.Count == 0 && colibriPids.Count > 0 ? "ColibrinanoLink" : "ExpertSDR"; } }
+
+        string shownEsdrName;
+
+        // Libellés de Mute et Volume ExpertSDR selon le logiciel lancé (aussi après un changement de langue).
+        void RenameEsdrControls()
+        {
+            if (btnMuteEsdr == null || lblEsdrVolumeCaption == null) return;
+            string n = EsdrName;
+            btnMuteEsdr.Text = Lang.T("Mute ExpertSDR", "Mute ExpertSDR").Replace("ExpertSDR", n);
+            lblEsdrVolumeCaption.Text = Lang.T("Volume ExpertSDR :", "ExpertSDR volume:").Replace("ExpertSDR", n);
+            shownEsdrName = n;
+        }
 
         bool EsdrAvailable { get { return esdrWin || (esdrTci != null && esdrTci.Connected); } }
 
@@ -4206,10 +4226,13 @@ namespace SDRLink
         // Essais seulement : SDRLINK_TEST_ESDR = nom exact du faux ExpertSDR ; tout autre ExpertSDR ou HDSDR est alors ignoré
         // (la copie d'essai ne touche jamais au vrai logiciel qui tournerait sur la station).
         static readonly string testEsdrName = Environment.GetEnvironmentVariable("SDRLINK_TEST_ESDR");
+        // Même chose pour ColibrinanoLink : SDRLINK_TEST_COLIBRI = nom exact du faux ColibrinanoLink.
+        static readonly string testColibriName = Environment.GetEnvironmentVariable("SDRLINK_TEST_COLIBRI");
 
         void FindSoundPrograms()
         {
             esdrPids.Clear();
+            colibriPids.Clear();
             hdsdrPids.Clear();
             foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses())
             {
@@ -4217,6 +4240,8 @@ namespace SDRLink
                 {
                     string name = p.ProcessName;
                     if (!string.IsNullOrEmpty(testEsdrName)) { if (name == testEsdrName) esdrPids[p.Id] = true; }
+                    else if (!string.IsNullOrEmpty(testColibriName)) { if (name == testColibriName) colibriPids[p.Id] = true; }
+                    else if (name.StartsWith("ColibrinanoLink", StringComparison.OrdinalIgnoreCase)) colibriPids[p.Id] = true;
                     else if (name.StartsWith("ExpertSDR", StringComparison.OrdinalIgnoreCase)) esdrPids[p.Id] = true;
                     else if (name.StartsWith("HDSDR", StringComparison.OrdinalIgnoreCase)) hdsdrPids[p.Id] = true;
                 }
@@ -4229,7 +4254,8 @@ namespace SDRLink
         // dans le mélangeur ; sinon liaison TCI (tentée en arrière-plan toutes les 10 s tant qu'elle ne répond pas).
         void CheckExpertSdr()
         {
-            esdrRunning = esdrPids.Count > 0;
+            esdrRunning = esdrPids.Count > 0 || colibriPids.Count > 0;
+            if (esdrPids.Count == 0 && esdrTci != null) { esdrTci.Dispose(); esdrTci = null; }   // TCI : ExpertSDR seulement
             if (!esdrRunning)
             {
                 if (esdrTci != null) { esdrTci.Dispose(); esdrTci = null; }
@@ -4238,14 +4264,14 @@ namespace SDRLink
                 return;
             }
             bool? m = null;
-            try { m = AudioEndpoints.ProcessMute(IsExpertSdr, null); } catch (Exception ex) { Log.Write("ExpertSDR, lecture du son : " + ex.Message); }
+            try { m = AudioEndpoints.ProcessMute(IsExpertSdr, null); } catch (Exception ex) { Log.Write(EsdrName + ", lecture du son : " + ex.Message); }
             esdrWin = m.HasValue;
             if (esdrWin)
             {
                 if (!divEsdrSilenced) esdrMuted = m.Value;   // diversité : la coupure dans le mélangeur est celle de SDRLink
                 try { ShowEsdrVolume(AudioEndpoints.ProcessVolume(IsExpertSdr, null)); } catch { }
             }
-            else
+            else if (esdrPids.Count > 0)
             {
                 ConnectExpertSdrTci();
                 RefreshExpertSdr();
@@ -4338,6 +4364,7 @@ namespace SDRLink
 
         void UpdateEsdrControls()
         {
+            if (shownEsdrName != EsdrName) RenameEsdrControls();
             UpdateAudioRow();
             bool avail = EsdrAvailable;
             trkEsdrVolume.Enabled = avail;
@@ -4365,7 +4392,7 @@ namespace SDRLink
         void ToggleExpertSdrMute()
         {
             // Pas encore de liaison TCI : on la tente tout de suite.
-            if (!EsdrAvailable)
+            if (!EsdrAvailable && esdrPids.Count > 0)
             {
                 Cursor = Cursors.WaitCursor;
                 if (esdrTci != null) esdrTci.Dispose();
@@ -4373,6 +4400,12 @@ namespace SDRLink
                 Cursor = Cursors.Default;
             }
             bool? r = SetExpertSdrMute(!esdrMuted);
+            if (!r.HasValue && esdrPids.Count == 0)
+            {
+                Log.Write("ColibrinanoLink : pas de son dans le mélangeur de Windows (mode exclusif ?)");
+                UpdateEsdrControls();
+                return;
+            }
             if (!r.HasValue)
             {
                 Log.Write("ExpertSDR : ni son Windows ni serveur TCI sur le port " + settings.EsdrTciPort);
@@ -4384,7 +4417,7 @@ namespace SDRLink
             }
             esdrMuted = r.Value;
             esdrMutedByUs = esdrMuted;
-            Log.Write((esdrMuted ? "Son d'ExpertSDR coupé" : "Son d'ExpertSDR rétabli") + (esdrWin ? " (mélangeur Windows)" : " (TCI)"));
+            Log.Write((esdrMuted ? "Son coupé : " : "Son rétabli : ") + EsdrName + (esdrWin ? " (mélangeur Windows)" : " (TCI)"));
             UpdateEsdrControls();
         }
 
